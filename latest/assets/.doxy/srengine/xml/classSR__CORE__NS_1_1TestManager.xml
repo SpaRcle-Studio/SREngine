@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__NS_1_1TestManager" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_NS::TestManager</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; TestManager &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1TestManager_1a77548d70a673e543b3ac33404c497a57" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; bool()&gt;</type>
+        <definition>using SR_CORE_NS::TestManager::TestFn =  SR_HTYPES_NS::Function&lt;bool()&gt;</definition>
+        <argsstring></argsstring>
+        <name>TestFn</name>
+        <qualifiedname>SR_CORE_NS::TestManager::TestFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="15" column="9" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1TestManager_1a57253f102a53d5f29974dc4427ea0c10" prot="private" static="no">
+        <type>std::pair&lt; std::string, TestFn &gt;</type>
+        <definition>using SR_CORE_NS::TestManager::Test =  std::pair&lt;std::string, TestFn&gt;</definition>
+        <argsstring></argsstring>
+        <name>Test</name>
+        <qualifiedname>SR_CORE_NS::TestManager::Test</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="16" column="9" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1aef373849a7f747ed444dff592d671aa9" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, TestFn &gt;</type>
+        <definition>std::map&lt;std::string, TestFn&gt; SR_CORE_NS::TestManager::m_engineTests</definition>
+        <argsstring></argsstring>
+        <name>m_engineTests</name>
+        <qualifiedname>SR_CORE_NS::TestManager::m_engineTests</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="30" column="18" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1aac2c17a7fd3baecf7db336eaadbc79f0" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, TestFn &gt;</type>
+        <definition>std::map&lt;std::string, TestFn&gt; SR_CORE_NS::TestManager::m_tests</definition>
+        <argsstring></argsstring>
+        <name>m_tests</name>
+        <qualifiedname>SR_CORE_NS::TestManager::m_tests</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="31" column="18" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1a21df4a1602477d79d16e13ccf1c24f43" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int SR_CORE_NS::TestManager::m_argc</definition>
+        <argsstring></argsstring>
+        <name>m_argc</name>
+        <qualifiedname>SR_CORE_NS::TestManager::m_argc</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="33" column="13" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1aea58b220a3f143d2032c6772468ae44a" prot="private" static="no" mutable="no">
+        <type>char **</type>
+        <definition>char** SR_CORE_NS::TestManager::m_argv</definition>
+        <argsstring></argsstring>
+        <name>m_argv</name>
+        <qualifiedname>SR_CORE_NS::TestManager::m_argv</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="34" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::TestManager::AddTest</definition>
+        <argsstring>(const TestFn &amp;test, const std::string &amp;name)</argsstring>
+        <name>AddTest</name>
+        <qualifiedname>SR_CORE_NS::TestManager::AddTest</qualifiedname>
+        <param>
+          <type>const TestFn &amp;</type>
+          <declname>test</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="18" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::TestManager::AddEngineTest</definition>
+        <argsstring>(const TestFn &amp;test, const std::string &amp;name)</argsstring>
+        <name>AddEngineTest</name>
+        <qualifiedname>SR_CORE_NS::TestManager::AddEngineTest</qualifiedname>
+        <param>
+          <type>const TestFn &amp;</type>
+          <declname>test</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="19" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1ad400a776427dc881f45a5ff4ad1cb499" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::TestManager::RunAll</definition>
+        <argsstring>(int argc, char **argv)</argsstring>
+        <name>RunAll</name>
+        <qualifiedname>SR_CORE_NS::TestManager::RunAll</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>argv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a0b2d7272e354b1ec660416287dc9baea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::TestManager::IsSingletonCanBeDestroyed</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsSingletonCanBeDestroyed</name>
+        <qualifiedname>SR_CORE_NS::TestManager::IsSingletonCanBeDestroyed</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc">IsSingletonCanBeDestroyed</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="23" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1aaa23d0a0f816d028825c6088dde8a40b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::TestManager::RunTest</definition>
+        <argsstring>(const Test &amp;test)</argsstring>
+        <name>RunTest</name>
+        <qualifiedname>SR_CORE_NS::TestManager::RunTest</qualifiedname>
+        <param>
+          <type>const Test &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a6ae9a713d1579b05b4f011a694adc806" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::TestManager::RunEngineTest</definition>
+        <argsstring>(const Test &amp;test)</argsstring>
+        <name>RunEngineTest</name>
+        <qualifiedname>SR_CORE_NS::TestManager::RunEngineTest</qualifiedname>
+        <param>
+          <type>const Test &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="27" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_NS::TestManager</label>
+        <link refid="classSR__CORE__NS_1_1TestManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; TestManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_NS::TestManager</label>
+        <link refid="classSR__CORE__NS_1_1TestManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; TestManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="13" bodyend="35"/>
+    <listofallmembers>
+      <member refid="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddEngineTest</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddTest</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_CORE_NS::TestManager</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Instance</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a0b2d7272e354b1ec660416287dc9baea" prot="public" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a21df4a1602477d79d16e13ccf1c24f43" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_argc</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1aea58b220a3f143d2032c6772468ae44a" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_argv</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1aef373849a7f747ed444dff592d671aa9" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_engineTests</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1aac2c17a7fd3baecf7db336eaadbc79f0" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_tests</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>operator=</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1ad400a776427dc881f45a5ff4ad1cb499" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunAll</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a6ae9a713d1579b05b4f011a694adc806" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunEngineTest</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1aaa23d0a0f816d028825c6088dde8a40b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunTest</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a57253f102a53d5f29974dc4427ea0c10" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Test</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a77548d70a673e543b3ac33404c497a57" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>TestFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

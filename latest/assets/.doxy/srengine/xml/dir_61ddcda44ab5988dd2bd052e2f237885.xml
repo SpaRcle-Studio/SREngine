@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_61ddcda44ab5988dd2bd052e2f237885" kind="dir">
+    <compoundname>Engine/Core/inc/Core/World</compoundname>
+    <innerfile refid="EngineScene_8h">EngineScene.h</innerfile>
+    <innerfile refid="VisualChunk_8h">VisualChunk.h</innerfile>
+    <innerfile refid="VisualRegion_8h">VisualRegion.h</innerfile>
+    <innerfile refid="World_8h">World.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/World/"/>
+  </compounddef>
+</doxygen>

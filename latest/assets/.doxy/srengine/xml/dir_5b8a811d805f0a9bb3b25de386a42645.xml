@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_5b8a811d805f0a9bb3b25de386a42645" kind="dir">
+    <compoundname>Engine/Core/libs/Graphics/inc/Graphics/Pipeline</compoundname>
+    <innerdir refid="dir_8e9bc433d1305450ae178a7c83320a15">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan</innerdir>
+    <innerfile refid="Device_8h">Device.h</innerfile>
+    <innerfile refid="EmptyPipeline_8h">EmptyPipeline.h</innerfile>
+    <innerfile refid="FrameBufferFeatures_8h">FrameBufferFeatures.h</innerfile>
+    <innerfile refid="FrameBufferQueue_8h">FrameBufferQueue.h</innerfile>
+    <innerfile refid="IShaderProgram_8h">IShaderProgram.h</innerfile>
+    <innerfile refid="Pipeline_8h">Pipeline.h</innerfile>
+    <innerfile refid="PipelineState_8h">PipelineState.h</innerfile>
+    <innerfile refid="PipelineType_8h">PipelineType.h</innerfile>
+    <innerfile refid="TextureHelper_8h">TextureHelper.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/"/>
+  </compounddef>
+</doxygen>

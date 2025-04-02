@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::Memory::TextureConfigs</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</basecompoundref>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a401e4fd53904b2c980633d14426887f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</definition>
+        <argsstring></argsstring>
+        <name>SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::Singleton&lt; TextureConfigs &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">SR_UTILS_NS::Singleton</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs" kindref="compound">TextureConfigs</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="62" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a324638116fc2603f7eb1af320bad98af" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_GRAPH_NS::Memory::TextureConfigs::m_loaded</definition>
+        <argsstring></argsstring>
+        <name>m_loaded</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::m_loaded</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="78" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a8c93875dc7242adc43527b9502fe1420" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref> &gt;</type>
+        <definition>std::unordered_map&lt;std::string, TextureConfig&gt; SR_GRAPH_NS::Memory::TextureConfigs::m_configs</definition>
+        <argsstring></argsstring>
+        <name>m_configs</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::m_configs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="79" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a3fcaf4d9e23cc7602f70911f6efd2218" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::Memory::TextureConfigs::~TextureConfigs</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~TextureConfigs</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::~TextureConfigs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="70" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1ad783d291209934a24dd958617f743fea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::TextureConfigs::Reload</definition>
+        <argsstring>()</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::Reload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1aa282779a33cad510f71f74767288c859" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref> &gt;</type>
+        <definition>std::optional&lt; TextureConfig &gt; SR_GRAPH_NS::Memory::TextureConfigs::Find</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::Find</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="74" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a8816321592b06cb0a0ea19a108e08267" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref></type>
+        <definition>TextureConfig SR_GRAPH_NS::Memory::TextureConfigs::FindOrDefault</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>FindOrDefault</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfigs::FindOrDefault</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="75" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::Memory::TextureConfigs</label>
+        <link refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::Memory::TextureConfigs</label>
+        <link refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="67" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="67" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1aa282779a33cad510f71f74767288c859" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>Find</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a8816321592b06cb0a0ea19a108e08267" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>FindOrDefault</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>LockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a8c93875dc7242adc43527b9502fe1420" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>m_configs</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a324638116fc2603f7eb1af320bad98af" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>m_loaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1ad783d291209934a24dd958617f743fea" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>SingletonBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a401e4fd53904b2c980633d14426887f4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>SR_UTILS_NS::Singleton&lt; TextureConfigs &gt;</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs_1a3fcaf4d9e23cc7602f70911f6efd2218" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfigs</scope><name>~TextureConfigs</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

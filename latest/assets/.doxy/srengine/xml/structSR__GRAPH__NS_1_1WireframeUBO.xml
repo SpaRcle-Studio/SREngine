@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1WireframeUBO" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::WireframeUBO</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1WireframeUBO_1a6be4303077efbefd824b87d6d88cd190" prot="public" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 SR_GRAPH_NS::WireframeUBO::model</definition>
+        <argsstring></argsstring>
+        <name>model</name>
+        <qualifiedname>SR_GRAPH_NS::WireframeUBO::model</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="30" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1WireframeUBO_1ad0c5c1918cc90d61fdb8c1ff93acfcd8" prot="public" static="no" mutable="no">
+        <type>glm::vec4</type>
+        <definition>glm::vec4 SR_GRAPH_NS::WireframeUBO::color</definition>
+        <argsstring></argsstring>
+        <name>color</name>
+        <qualifiedname>SR_GRAPH_NS::WireframeUBO::color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="31" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="29" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="29" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1WireframeUBO_1ad0c5c1918cc90d61fdb8c1ff93acfcd8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::WireframeUBO</scope><name>color</name></member>
+      <member refid="structSR__GRAPH__NS_1_1WireframeUBO_1a6be4303077efbefd824b87d6d88cd190" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::WireframeUBO</scope><name>model</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

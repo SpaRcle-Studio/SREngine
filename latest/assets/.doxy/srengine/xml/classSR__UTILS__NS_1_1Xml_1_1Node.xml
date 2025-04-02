@@ -1,0 +1,626 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Xml_1_1Node" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Xml::Node</compoundname>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a883538034e58fc5c0de7d4e4cab3cef7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Document</definition>
+        <argsstring></argsstring>
+        <name>Document</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::Document</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Document" kindref="compound">Document</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="80" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Xml_1_1Node_1af63980aac726e1fa23a16f139aef6d30" prot="private" static="no" mutable="no">
+        <type>pugi::xml_node</type>
+        <definition>pugi::xml_node SR_UTILS_NS::Xml::Node::m_node</definition>
+        <argsstring></argsstring>
+        <name>m_node</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::m_node</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="476" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="476" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a9b21c41f9324cf8ee3e882c4771f3962" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Xml::Node::m_valid</definition>
+        <argsstring></argsstring>
+        <name>m_valid</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::m_valid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="477" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="477" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a3482afd28e0d1bc22d630229dcb64a57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Xml::Node::Node</definition>
+        <argsstring>()</argsstring>
+        <name>Node</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::Node</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="83" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aa55fde4e37a44fcd265fdc28a1e07bfa" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Xml::Node::Node</definition>
+        <argsstring>(pugi::xml_node node)</argsstring>
+        <name>Node</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::Node</qualifiedname>
+        <param>
+          <type>pugi::xml_node</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="85" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="85" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a9c8d652e42bea275d1f69c87b41f8057" prot="public" static="no" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Xml::Node::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="96" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="96" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a230019dfc3c959717fe94a86cd93ec52" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Xml::Node::Valid</definition>
+        <argsstring>() const</argsstring>
+        <name>Valid</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::Valid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="101" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="101" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a70f70418d956470dc665975163f8892c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Xml::Node::Name</definition>
+        <argsstring>() const</argsstring>
+        <name>Name</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::Name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="105" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="105" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac1ed1afa838a7c85a8e05a0cf5125ac4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Xml::Node::NameView</definition>
+        <argsstring>() const</argsstring>
+        <name>NameView</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::NameView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="115" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="115" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ae0fb4ed2f39e3fe4ba688194425c131d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Document" kindref="compound">Document</ref></type>
+        <definition>SR_NODISCARD Document SR_UTILS_NS::Xml::Node::ToDocument</definition>
+        <argsstring>() const</argsstring>
+        <name>ToDocument</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::ToDocument</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="125" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac4efc726d1989b6549767daaf357cc65" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Attribute" kindref="compound">Attribute</ref></type>
+        <definition>SR_NODISCARD Attribute SR_UTILS_NS::Xml::Node::GetAttribute</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>GetAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::GetAttribute</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="126" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="126" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1adf20a103e4b5618be7743a2a6de08b59" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Attribute" kindref="compound">Attribute</ref></type>
+        <definition>SR_NODISCARD Attribute SR_UTILS_NS::Xml::Node::TryGetAttribute</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>TryGetAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::TryGetAttribute</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="136" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="136" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aeced429f2897948188e763991662cfaa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_UTILS_NS::Xml::Node::TryGetAttribute</definition>
+        <argsstring>(const T &amp;def) const</argsstring>
+        <name>TryGetAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::TryGetAttribute</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="140" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="140" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a1317d655d6e2f6671c77de40fe166a99" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Xml::Node::HasAttribute</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>HasAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::HasAttribute</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="144" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aeb8e3835a38790d8b609ae3d0555ce78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; Node &gt; SR_UTILS_NS::Xml::Node::TryGetNodes</definition>
+        <argsstring>() const</argsstring>
+        <name>TryGetNodes</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::TryGetNodes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="148" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a992a60d30831d26105887d115e6526e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; Node &gt; SR_UTILS_NS::Xml::Node::TryGetNodes</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>TryGetNodes</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::TryGetNodes</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="149" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac7f982ab547499634d3b38cf33d19b98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; Node &gt; SR_UTILS_NS::Xml::Node::GetNodes</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>GetNodes</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::GetNodes</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="150" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1adab8dacdcfebfda641af435d14bc0c2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; Node &gt; SR_UTILS_NS::Xml::Node::GetNodes</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNodes</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::GetNodes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="151" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ae817205bcee89ec02f2643c0b9ad2ba3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Xml::Node</ref></type>
+        <definition>Xml::Node SR_UTILS_NS::Xml::Node::NAppendAttribute</definition>
+        <argsstring>(const std::string &amp;name, const T &amp;value)</argsstring>
+        <name>NAppendAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::NAppendAttribute</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="153" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="153" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac569ad8d96579c7eebc5337abab38b66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Xml::Node</ref></type>
+        <definition>Xml::Node SR_UTILS_NS::Xml::Node::NAppendAttributeDef</definition>
+        <argsstring>(const std::string &amp;name, const T &amp;value, const U &amp;def)</argsstring>
+        <name>NAppendAttributeDef</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::NAppendAttributeDef</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="174" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="174" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a2abc1563466066648f1348509389c0e4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_UTILS_NS::Xml::Node::GetAttribute</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::GetAttribute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="196" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="196" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1aa72ebb25985830cd4de5bdf5d6b38567" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Xml::Node::AppendAttribute</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>AppendAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendAttribute</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="311" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="311" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ac65989b3c8d319477c30412c5e0c4b65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Xml::Node::AppendAttribute</definition>
+        <argsstring>(const std::string &amp;name, const T &amp;value)</argsstring>
+        <name>AppendAttribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendAttribute</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="406" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="406" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1ab3ec37d0ff609bf0331bd4ba1da8dad5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Xml::Node::AppendAttributeDef</definition>
+        <argsstring>(const std::string &amp;name, const T &amp;value, const U &amp;def)</argsstring>
+        <name>AppendAttributeDef</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendAttributeDef</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="433" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="433" bodyend="453"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a82a8f5a7542c973916e3b7d696aa6dda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>Node SR_UTILS_NS::Xml::Node::AppendChild</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>AppendChild</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendChild</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="455" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a6b6dacbeba9842b657d7062ad0ee3ab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>Node SR_UTILS_NS::Xml::Node::AppendChild</definition>
+        <argsstring>(const Node &amp;node)</argsstring>
+        <name>AppendChild</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendChild</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="456" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a6f4727e17e9f099b40006946a785275c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>Node SR_UTILS_NS::Xml::Node::AppendNode</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>AppendNode</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendNode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="458" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="458" bodyend="458"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a8ba56685209a6d5631d028183c7e8f2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>Node SR_UTILS_NS::Xml::Node::AppendNode</definition>
+        <argsstring>(const Node &amp;node)</argsstring>
+        <name>AppendNode</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::AppendNode</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="459" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="459" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a3bd51bfbee2218f55dbafd731e4966b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>SR_NODISCARD Node SR_UTILS_NS::Xml::Node::TryGetNode</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>TryGetNode</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::TryGetNode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="461" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="461" bodyend="463"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a206d9138710abda8bcce8c26915dd423" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>SR_NODISCARD Node SR_UTILS_NS::Xml::Node::GetNode</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>GetNode</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::GetNode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="465" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="465" bodyend="473"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Node_1a4e11a7593820b8b647c56513dc63240f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Xml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>static Node SR_UTILS_NS::Xml::Node::Empty</definition>
+        <argsstring>()</argsstring>
+        <name>Empty</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Node::Empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="91" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="91" bodyend="93"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="79" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="79" bodyend="479"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1aa72ebb25985830cd4de5bdf5d6b38567" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ac65989b3c8d319477c30412c5e0c4b65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ab3ec37d0ff609bf0331bd4ba1da8dad5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendAttributeDef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a82a8f5a7542c973916e3b7d696aa6dda" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendChild</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a6b6dacbeba9842b657d7062ad0ee3ab5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendChild</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a6f4727e17e9f099b40006946a785275c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a8ba56685209a6d5631d028183c7e8f2a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>AppendNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a883538034e58fc5c0de7d4e4cab3cef7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>Document</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a4e11a7593820b8b647c56513dc63240f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>Empty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ac4efc726d1989b6549767daaf357cc65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>GetAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a2abc1563466066648f1348509389c0e4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>GetAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a206d9138710abda8bcce8c26915dd423" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>GetNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ac7f982ab547499634d3b38cf33d19b98" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>GetNodes</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1adab8dacdcfebfda641af435d14bc0c2f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>GetNodes</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a1317d655d6e2f6671c77de40fe166a99" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>HasAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1af63980aac726e1fa23a16f139aef6d30" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>m_node</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a9b21c41f9324cf8ee3e882c4771f3962" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>m_valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a70f70418d956470dc665975163f8892c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>Name</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ac1ed1afa838a7c85a8e05a0cf5125ac4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>NameView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ae817205bcee89ec02f2643c0b9ad2ba3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>NAppendAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ac569ad8d96579c7eebc5337abab38b66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>NAppendAttributeDef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a3482afd28e0d1bc22d630229dcb64a57" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>Node</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1aa55fde4e37a44fcd265fdc28a1e07bfa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>Node</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a9c8d652e42bea275d1f69c87b41f8057" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>operator bool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1ae0fb4ed2f39e3fe4ba688194425c131d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>ToDocument</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1adf20a103e4b5618be7743a2a6de08b59" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>TryGetAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1aeced429f2897948188e763991662cfaa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>TryGetAttribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a3bd51bfbee2218f55dbafd731e4966b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>TryGetNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1aeb8e3835a38790d8b609ae3d0555ce78" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>TryGetNodes</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a992a60d30831d26105887d115e6526e3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>TryGetNodes</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Node_1a230019dfc3c959717fe94a86cd93ec52" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Node</scope><name>Valid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

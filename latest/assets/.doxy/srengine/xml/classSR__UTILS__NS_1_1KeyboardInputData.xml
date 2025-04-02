@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1KeyboardInputData" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::KeyboardInputData</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1InputDeviceData" prot="public" virt="non-virtual">SR_UTILS_NS::InputDeviceData</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1KeyboardInputData_1a668ac344b0715f365a0b989b1bdaf1e0" prot="public" static="no" mutable="no">
+        <type>KeyCode</type>
+        <definition>KeyCode SR_UTILS_NS::KeyboardInputData::m_code</definition>
+        <argsstring></argsstring>
+        <name>m_code</name>
+        <qualifiedname>SR_UTILS_NS::KeyboardInputData::m_code</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="81" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1KeyboardInputData_1af9a787a0d703bc1359692a296111b5a7" prot="public" static="no" mutable="no">
+        <type>KeyState</type>
+        <definition>KeyState SR_UTILS_NS::KeyboardInputData::m_state</definition>
+        <argsstring></argsstring>
+        <name>m_state</name>
+        <qualifiedname>SR_UTILS_NS::KeyboardInputData::m_state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="82" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1a673cf9bc4ac8cf60603d353ce1b41f53" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::KeyboardInputData::KeyboardInputData</definition>
+        <argsstring>(KeyCode code, KeyState state)</argsstring>
+        <name>KeyboardInputData</name>
+        <qualifiedname>SR_UTILS_NS::KeyboardInputData::KeyboardInputData</qualifiedname>
+        <param>
+          <type>KeyCode</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>KeyState</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="67" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="67" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1acc4c3966cae835e6518cd8a201c9e8a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::KeyboardInputData::KeyboardInputData</definition>
+        <argsstring>()</argsstring>
+        <name>KeyboardInputData</name>
+        <qualifiedname>SR_UTILS_NS::KeyboardInputData::KeyboardInputData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="72" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="72" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1a47b9f51b4de7bc1a7ce68b5f256b099b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>InputDeviceType</type>
+        <definition>InputDeviceType SR_UTILS_NS::KeyboardInputData::GetType</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetType</name>
+        <qualifiedname>SR_UTILS_NS::KeyboardInputData::GetType</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1InputDeviceData_1a41a1c4d90aa7bdc13354a05fd7c95829">GetType</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="77" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1KeyboardInputData_1a38fa775ff4a7a478da03b57bacb7271c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD KeyCode</type>
+        <definition>SR_NODISCARD KeyCode SR_UTILS_NS::KeyboardInputData::GetKeyCode</definition>
+        <argsstring>() const</argsstring>
+        <name>GetKeyCode</name>
+        <qualifiedname>SR_UTILS_NS::KeyboardInputData::GetKeyCode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="78" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::InputDeviceData</label>
+        <link refid="classSR__UTILS__NS_1_1InputDeviceData"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::KeyboardInputData</label>
+        <link refid="classSR__UTILS__NS_1_1KeyboardInputData"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_UTILS_NS::InputDeviceData</label>
+        <link refid="classSR__UTILS__NS_1_1InputDeviceData"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::KeyboardInputData</label>
+        <link refid="classSR__UTILS__NS_1_1KeyboardInputData"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" line="65" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputDevice.h" bodystart="65" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a38fa775ff4a7a478da03b57bacb7271c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>GetKeyCode</name></member>
+      <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a47b9f51b4de7bc1a7ce68b5f256b099b" prot="public" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>GetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a673cf9bc4ac8cf60603d353ce1b41f53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>KeyboardInputData</name></member>
+      <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1acc4c3966cae835e6518cd8a201c9e8a4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>KeyboardInputData</name></member>
+      <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a668ac344b0715f365a0b989b1bdaf1e0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>m_code</name></member>
+      <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1af9a787a0d703bc1359692a296111b5a7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>m_state</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputDeviceData_1a8aece90496fec8d190ab95a206a1ef8c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>~InputDeviceData</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

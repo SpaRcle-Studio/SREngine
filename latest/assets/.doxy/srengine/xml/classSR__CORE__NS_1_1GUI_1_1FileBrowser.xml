@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__NS_1_1GUI_1_1FileBrowser" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_NS::GUI::FileBrowser</compoundname>
+    <basecompoundref refid="classSR__GRAPH__GUI__NS_1_1Widget" prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::Widget</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a960bf968aa1b7a70e8a0e70eaa00cb3c" prot="private" static="no">
+        <type>std::size_t</type>
+        <definition>using SR_CORE_NS::GUI::FileBrowser::Hash =  std::size_t</definition>
+        <argsstring></argsstring>
+        <name>Hash</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::Hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="27" column="9" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a1cc48d6a6b3c37a41e5b83603fe90d49" prot="private" static="no">
+        <type>std::function&lt; void(const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;path)&gt;</type>
+        <definition>using SR_CORE_NS::GUI::FileBrowser::CallbackFn =  std::function&lt;void(const SR_UTILS_NS::Path&amp; path)&gt;</definition>
+        <argsstring></argsstring>
+        <name>CallbackFn</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::CallbackFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="28" column="9" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00beae1763e0f21b666d32fdde39a46b" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_CORE_NS::GUI::FileBrowser::m_defaultRoot</definition>
+        <argsstring></argsstring>
+        <name>m_defaultRoot</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_defaultRoot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="53" column="27" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ad27398f51795f6b2607dafed04a6d9a7" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_CORE_NS::GUI::FileBrowser::m_selectedDir</definition>
+        <argsstring></argsstring>
+        <name>m_selectedDir</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_selectedDir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="54" column="27" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6a3040f6984eef2ec05026baa6ea8d65" prot="private" static="no" mutable="no">
+        <type>CallbackFn</type>
+        <definition>CallbackFn SR_CORE_NS::GUI::FileBrowser::m_callbackFunction</definition>
+        <argsstring></argsstring>
+        <name>m_callbackFunction</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_callbackFunction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="56" column="20" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a32644bf20d277dd2d6527c9e29893e30" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_NS::GUI::FileBrowser::m_assetWidth</definition>
+        <argsstring></argsstring>
+        <name>m_assetWidth</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_assetWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="58" column="17" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aad487b99c15300826345a61b6235f381" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__CORE__NS_1_1GUI_1_1FBFolder" kindref="compound">FBFolder</ref></type>
+        <definition>FBFolder SR_CORE_NS::GUI::FileBrowser::m_foldersTree</definition>
+        <argsstring></argsstring>
+        <name>m_foldersTree</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_foldersTree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="60" column="18" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a4039d5c88790b5ed6ec707ed6d8a621f" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::GUI::FileBrowser::m_dirtySelectedDir</definition>
+        <argsstring></argsstring>
+        <name>m_dirtySelectedDir</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_dirtySelectedDir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="62" column="21" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a2dea14df3b860a439dd8aeba87571314" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::GUI::FileBrowser::m_dirtyFoldersTree</definition>
+        <argsstring></argsstring>
+        <name>m_dirtyFoldersTree</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_dirtyFoldersTree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="63" column="21" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac21726c25521bb52894c513e4a9c5f58" prot="private" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="structSR__CORE__NS_1_1GUI_1_1FBElement" kindref="compound">FBElement</ref> &gt;</type>
+        <definition>std::list&lt;FBElement&gt; SR_CORE_NS::GUI::FileBrowser::m_elements</definition>
+        <argsstring></argsstring>
+        <name>m_elements</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::m_elements</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="65" column="19" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00d951f45b1a0d65fc0cce57949f46d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::GUI::FileBrowser::FileBrowser</definition>
+        <argsstring>()</argsstring>
+        <name>FileBrowser</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::FileBrowser</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="30" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aebda9399b6acb709ab62873ed0c28392" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::GUI::FileBrowser::~FileBrowser</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~FileBrowser</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::~FileBrowser</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="31" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a199fe655e9d01a3b85db25031f89ed85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::SetFolder</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SetFolder</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::SetFolder</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a7465e18614ac04e1da609024e9ce177c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::SetCallback</definition>
+        <argsstring>(CallbackFn callbackFn)</argsstring>
+        <name>SetCallback</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::SetCallback</qualifiedname>
+        <param>
+          <type>CallbackFn</type>
+          <declname>callbackFn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="35" column="14" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a33f127d23f628f8b0f3c5f2d4a38ab29" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::Draw</definition>
+        <argsstring>() override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::Draw</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1af99c84543427d4895a4e70a156da5997">Draw</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a48f904bbbbd4a3d3915962b9e4d34fe3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::FileContextMenu</definition>
+        <argsstring>(const std::string &amp;element)</argsstring>
+        <name>FileContextMenu</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::FileContextMenu</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1af05ebff01f2883da79171d95a40b827d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::CurrentDirectoryContextMenu</definition>
+        <argsstring>()</argsstring>
+        <name>CurrentDirectoryContextMenu</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::CurrentDirectoryContextMenu</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac1e0cb4d3fb3d46c0a94ec0695080c7a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::CurrentDirectoryPanel</definition>
+        <argsstring>(const float_t height)</argsstring>
+        <name>CurrentDirectoryPanel</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::CurrentDirectoryPanel</qualifiedname>
+        <param>
+          <type>const float_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a026915e321de53030e2a1e596e67811a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::ItemViewPanel</definition>
+        <argsstring>()</argsstring>
+        <name>ItemViewPanel</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::ItemViewPanel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae113fee515821b70b3615274e510a77e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::FileCatalogPanel</definition>
+        <argsstring>(const float_t &amp;leftWidth)</argsstring>
+        <name>FileCatalogPanel</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::FileCatalogPanel</qualifiedname>
+        <param>
+          <type>const float_t &amp;</type>
+          <declname>leftWidth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3ac3c1cc6bf5f1d7c207212a36b3fd0e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::CacheElements</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;root)</argsstring>
+        <name>CacheElements</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::CacheElements</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a36a1b14d310ff8a14c499e9ff37b4bac" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::DrawFoldersTree</definition>
+        <argsstring>(const FBFolder &amp;parentFolder)</argsstring>
+        <name>DrawFoldersTree</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::DrawFoldersTree</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__CORE__NS_1_1GUI_1_1FBFolder" kindref="compound">FBFolder</ref> &amp;</type>
+          <declname>parentFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a214227a288095ebc4b081d51143c6708" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::FileBrowser::LoadFoldersTree</definition>
+        <argsstring>(FBFolder &amp;parentFolder)</argsstring>
+        <name>LoadFoldersTree</name>
+        <qualifiedname>SR_CORE_NS::GUI::FileBrowser::LoadFoldersTree</qualifiedname>
+        <param>
+          <type><ref refid="structSR__CORE__NS_1_1GUI_1_1FBFolder" kindref="compound">FBFolder</ref> &amp;</type>
+          <declname>parentFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="50" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_NS::GUI::FileBrowser</label>
+        <link refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_NS::GUI::FileBrowser</label>
+        <link refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/FileBrowser.h" line="26" column="5" bodyfile="Engine/Core/inc/Core/GUI/FileBrowser.h" bodystart="26" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>AddFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>AddSubWidget</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a3ac3c1cc6bf5f1d7c207212a36b3fd0e" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>CacheElements</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a1cc48d6a6b3c37a41e5b83603fe90d49" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>CallbackFn</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abe2d33de27ab9ac621ec9a1c215a09be" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>CheckFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a354cc7474ff0b80508a170aaa7cdd842" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>CheckHovered</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1c39213178a2434ac3088d4b1dc2c14f" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Close</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aba6d1657b1057318338eb150c404a4de" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>ContextPtr</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1af05ebff01f2883da79171d95a40b827d" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>CurrentDirectoryContextMenu</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac1e0cb4d3fb3d46c0a94ec0695080c7a" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>CurrentDirectoryPanel</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a33f127d23f628f8b0f3c5f2d4a38ab29" prot="private" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Draw</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a60366ac8c85837e5c043d9ba80ea2a5a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>DrawAsSubWindow</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a36a1b14d310ff8a14c499e9ff37b4bac" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>DrawFoldersTree</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Event</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00d951f45b1a0d65fc0cce57949f46d3" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>FileBrowser</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ae113fee515821b70b3615274e510a77e" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>FileCatalogPanel</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a48f904bbbbd4a3d3915962b9e4d34fe3" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>FileContextMenu</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1d31a548d7f29f92191c4e3c8da0745a" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1afe5e46c56d62178290ebe24ce4d87026" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa413cba2094f8133d1b3cbd5243d4525" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>GetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6cd4f0b58e82722cb159f403aac45b36" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3209e5899cda24a44d5d034ad4bbd408" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>GetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>GetWeakStorage</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a960bf968aa1b7a70e8a0e70eaa00cb3c" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Hash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>IEvent</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1a44342ba62f3a35d4c4dfa2c4b16aab" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Init</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>InputHandler</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ab9dde2f2f151ebf9d0a532437509e809" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>IsFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2284c33f97d1fc8b93f2065328507f40" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>IsHovered</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>IsKeyPressed</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa7b9cc737b77f148ddaf23a2c687681b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>IsOpen</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a026915e321de53030e2a1e596e67811a" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>ItemViewPanel</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a214227a288095ebc4b081d51143c6708" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>LoadFoldersTree</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a32644bf20d277dd2d6527c9e29893e30" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_assetWidth</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a6a3040f6984eef2ec05026baa6ea8d65" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_callbackFunction</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a00beae1763e0f21b666d32fdde39a46b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_defaultRoot</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a2dea14df3b860a439dd8aeba87571314" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_dirtyFoldersTree</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a4039d5c88790b5ed6ec707ed6d8a621f" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_dirtySelectedDir</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ac21726c25521bb52894c513e4a9c5f58" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_elements</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aad487b99c15300826345a61b6235f381" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_foldersTree</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1ad27398f51795f6b2607dafed04a6d9a7" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_selectedDir</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_subWidgets</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>m_widgetFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa49560b82a3fbb6982fb725e70b92ea8" prot="protected" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnClose</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aced28345faf97a190e126802d65b856b" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnKeyPress</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad6bba161a4fb2edb8fa157443709b8cb" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a047cdbebece4c4baa00673a647f9a686" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnMouseDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a103723382b77ab83ae6468436fb41088" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnMouseMove</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnMousePress</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnMouseUp</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aed9b7c656b3efa34f342fbcd1d20a26f" prot="protected" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OnOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a214c10395b43d1ae11dd7cfdd0104db0" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Open</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3d3dd7631795048741ca59e6d1666a3c" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>OpenFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9d49df74f8eae10ecc78e5886044b38c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a5362809b84a8df38cd96ed91c4fa32c9" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>ResetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3926681db7399eebd88b303addf9e106" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>ResetWeakStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad5871dbdbb8862c1a21a7600e6bc872c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>ScenePtr</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a7465e18614ac04e1da609024e9ce177c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetCallback</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6344cd24337dddf086e04093a7f7b279" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetCenter</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6221bbe02c9c66ce324814da3ae8377c" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetFlags</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a199fe655e9d01a3b85db25031f89ed85" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetFolder</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a628d6e08d267e2bab19fa6a0247f2de6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9f93023aaad7df8c9f5572fcd3eec64e" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a7c848e9633f66f96a935090bfb450bcd" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a206de2fe59b705c189cfb792fa6584de" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>SetSize</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abb58557f3a79bc2790d525791aedb7ac" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>TextCenter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Trigger</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9670d827380936251bb9f0af5f305ee4" prot="public" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Update</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Widget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>Widget</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>~Event</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1aebda9399b6acb709ab62873ed0c28392" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>~FileBrowser</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::FileBrowser</scope><name>~Widget</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

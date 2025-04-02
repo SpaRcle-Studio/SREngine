@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::Memory::TextureConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a25b4f08682c431079b8c2da57aad1bc1" prot="public" static="no" mutable="no">
+        <type>ImageFormat</type>
+        <definition>ImageFormat SR_GRAPH_NS::Memory::TextureConfig::m_format</definition>
+        <argsstring></argsstring>
+        <name>m_format</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::m_format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="39" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ab44d5d82fa76f7cf2da5f4c92999ea87" prot="public" static="no" mutable="no">
+        <type>TextureFilter</type>
+        <definition>TextureFilter SR_GRAPH_NS::Memory::TextureConfig::m_filter</definition>
+        <argsstring></argsstring>
+        <name>m_filter</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::m_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="40" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a703a53f2c59dc2e25800b15ddde53f23" prot="public" static="no" mutable="no">
+        <type>TextureCompression</type>
+        <definition>TextureCompression SR_GRAPH_NS::Memory::TextureConfig::m_compression</definition>
+        <argsstring></argsstring>
+        <name>m_compression</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::m_compression</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="41" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ab74993e882288e57dfa7a903cfa1e1df" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::Memory::TextureConfig::m_mipLevels</definition>
+        <argsstring></argsstring>
+        <name>m_mipLevels</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::m_mipLevels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="42" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ac6c3d1747e9957281736739d599a1f28" prot="public" static="no" mutable="no">
+        <type>SR_UTILS_NS::BoolExt</type>
+        <definition>SR_UTILS_NS::BoolExt SR_GRAPH_NS::Memory::TextureConfig::m_alpha</definition>
+        <argsstring></argsstring>
+        <name>m_alpha</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::m_alpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="43" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a7885d5885475f3faf01c025b10f3e54f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::TextureConfig::m_cpuUsage</definition>
+        <argsstring></argsstring>
+        <name>m_cpuUsage</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::m_cpuUsage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="44" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a47c4e1e8f17587bff9d2e851e2e156c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::Memory::TextureConfig::TextureConfig</definition>
+        <argsstring>(ImageFormat format, TextureFilter filter, TextureCompression compression, uint32_t mipLevels, SR_UTILS_NS::BoolExt alpha, bool cpuUsage)</argsstring>
+        <name>TextureConfig</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::TextureConfig</qualifiedname>
+        <param>
+          <type>ImageFormat</type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type>TextureFilter</type>
+          <declname>filter</declname>
+        </param>
+        <param>
+          <type>TextureCompression</type>
+          <declname>compression</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mipLevels</declname>
+        </param>
+        <param>
+          <type>SR_UTILS_NS::BoolExt</type>
+          <declname>alpha</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>cpuUsage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="14" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a2a82df7c070c8db09d66d28dea79d649" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::Memory::TextureConfig::TextureConfig</definition>
+        <argsstring>()</argsstring>
+        <name>TextureConfig</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::TextureConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="30" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ab44707fbefa21fab74e4bc5e5a77c7ba" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD ImageFormat</type>
+        <definition>SR_NODISCARD ImageFormat SR_GRAPH_NS::Memory::TextureConfig::GetFormat</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFormat</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::GetFormat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="46" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a4bf1842a2cb37024e553c08562c93b2b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD TextureFilter</type>
+        <definition>SR_NODISCARD TextureFilter SR_GRAPH_NS::Memory::TextureConfig::GetFilter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFilter</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::GetFilter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="47" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ac9eaeb50bd5a9e5c4a35b2e3fa1521fd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD TextureCompression</type>
+        <definition>SR_NODISCARD TextureCompression SR_GRAPH_NS::Memory::TextureConfig::GetCompression</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetCompression</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::GetCompression</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="48" column="41" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1aa19da91f4ac7c81f81d77c37f239b62c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GRAPH_NS::Memory::TextureConfig::GetMipLevels</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetMipLevels</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::GetMipLevels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="49" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a05f34ec1ca161ff8d085b75299b05ef7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_UTILS_NS::BoolExt</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::BoolExt SR_GRAPH_NS::Memory::TextureConfig::GetAlpha</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetAlpha</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::GetAlpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="50" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a3f17b16f92e68a769ad418db19132a10" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::Memory::TextureConfig::GetCpuUsage</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetCpuUsage</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::GetCpuUsage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="51" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a17066b15e1f5bdf9b34a8b9175b1b4e1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::TextureConfig::operator==</definition>
+        <argsstring>(const TextureConfig &amp;lrs) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref> &amp;</type>
+          <declname>lrs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="53" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="53" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a16adf77097750249883bc29d5c3ad63f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::TextureConfig::operator!=</definition>
+        <argsstring>(const TextureConfig &amp;lrs) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::TextureConfig::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" kindref="compound">TextureConfig</ref> &amp;</type>
+          <declname>lrs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="62" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="62" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/TextureConfigs.h" bodystart="13" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a05f34ec1ca161ff8d085b75299b05ef7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>GetAlpha</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ac9eaeb50bd5a9e5c4a35b2e3fa1521fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>GetCompression</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a3f17b16f92e68a769ad418db19132a10" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>GetCpuUsage</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a4bf1842a2cb37024e553c08562c93b2b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>GetFilter</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ab44707fbefa21fab74e4bc5e5a77c7ba" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>GetFormat</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1aa19da91f4ac7c81f81d77c37f239b62c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>GetMipLevels</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ac6c3d1747e9957281736739d599a1f28" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>m_alpha</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a703a53f2c59dc2e25800b15ddde53f23" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>m_compression</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a7885d5885475f3faf01c025b10f3e54f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>m_cpuUsage</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ab44d5d82fa76f7cf2da5f4c92999ea87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>m_filter</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a25b4f08682c431079b8c2da57aad1bc1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>m_format</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1ab74993e882288e57dfa7a903cfa1e1df" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>m_mipLevels</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a16adf77097750249883bc29d5c3ad63f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>operator!=</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a17066b15e1f5bdf9b34a8b9175b1b4e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>operator==</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a47c4e1e8f17587bff9d2e851e2e156c5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>TextureConfig</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig_1a2a82df7c070c8db09d66d28dea79d649" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::TextureConfig</scope><name>TextureConfig</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

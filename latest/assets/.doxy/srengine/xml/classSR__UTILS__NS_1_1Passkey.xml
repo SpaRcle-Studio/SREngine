@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Passkey" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Passkey</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>AllowSuccessor</declname>
+        <defname>AllowSuccessor</defname>
+        <defval>false</defval>
+      </param>
+      <param>
+        <type>typename ...</type>
+        <declname>Others</declname>
+        <defname>Others</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Passkey_1ac2a0de0ec26eff7c3d68eded59246b95" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::T</definition>
+        <argsstring></argsstring>
+        <name>T</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::T</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="28" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a0486d5621d45d5b02f2ec37321667128" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>typename std::enable_if&lt;AllowSuccessor &amp;&amp; std::is_base_of&lt;T, U&gt;::value &amp;&amp; !std::is_same&lt;U, T&gt;::value, T&gt;::type</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>(Passkey&lt; U &gt; &amp;&amp;)</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref>&lt; U &gt; &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1aa3d6b29dea402bc99d3a368f6014a9de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>U</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>typename std::enable_if&lt;std::is_base_of&lt;<ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref>&lt;U&gt;, <ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref>&lt;T, AllowSuccessor, Others...&gt;&gt;::value, U&gt;::type</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>(Passkey&lt; U &gt; &amp;&amp;)</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref>&lt; U &gt; &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a282811bdb3d06d356e6ab3b093788408" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>U</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>U</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>typename std::enable_if&lt;(AllowSuccessor || (sizeof...(Others) &gt; 0)) &amp;&amp; std::is_same&lt;U, T&gt;::value, T&gt;::type</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>(Passkey&lt; U, AllowSuccessor, Others... &gt; &amp;&amp;)</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref>&lt; U, AllowSuccessor, Others... &gt; &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1ab1828c8e594a28679fd84c7e3fe04896" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a4903c2303a4caf194e683a0093ff1027" prot="protected" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>(const T *) noexcept</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <param>
+          <type>const T *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="25" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a631a1856cdcee754c09c37cf4b12c67e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>(Passkey&lt; T, false &gt; &amp;&amp;)</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref>&lt; T, false &gt; &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="30" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a38942e14379d71aeb4e3452c7317bb24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::Passkey</definition>
+        <argsstring>(const Passkey &amp;)=delete</argsstring>
+        <name>Passkey</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::Passkey</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="32" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a0cee30aa7e5568419d58da7f28d1de36" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref> &amp;</type>
+        <definition>Passkey &amp; SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::operator=</definition>
+        <argsstring>(const Passkey &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="33" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Passkey_1a00f8cc561ab593dbae268bafe059aea6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref> &amp;</type>
+        <definition>Passkey &amp; SR_UTILS_NS::Passkey&lt; T, AllowSuccessor, Others &gt;::operator=</definition>
+        <argsstring>(Passkey &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Passkey::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Passkey" kindref="compound">Passkey</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="34" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/PassKey.h" bodystart="12" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a0cee30aa7e5568419d58da7f28d1de36" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a00f8cc561ab593dbae268bafe059aea6" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a0486d5621d45d5b02f2ec37321667128" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1aa3d6b29dea402bc99d3a368f6014a9de" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a282811bdb3d06d356e6ab3b093788408" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1ab1828c8e594a28679fd84c7e3fe04896" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a4903c2303a4caf194e683a0093ff1027" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a631a1856cdcee754c09c37cf4b12c67e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1a38942e14379d71aeb4e3452c7317bb24" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>Passkey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Passkey_1ac2a0de0ec26eff7c3d68eded59246b95" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Passkey</scope><name>T</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

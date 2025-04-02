@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kind="class" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::AnimationStateTransition</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a54f36c6405e2a07e3ca1dd4bf3d848e0" prot="public" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_ANIMATIONS_NS::AnimationStateTransition::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a488c2ffc90c05b4f01b9fd0e9e3673d9" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::AnimationStateTransition::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::m_isActive</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="43" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a916f08077cc6fec3ea34a09726d73471" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition" kindref="compound">AnimationStateCondition</ref> *</type>
+        <definition>AnimationStateCondition* SR_ANIMATIONS_NS::AnimationStateTransition::m_condition</definition>
+        <argsstring></argsstring>
+        <name>m_condition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::m_condition</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="44" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a04b7c6cbba5899d340469f6f00e3608e" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+        <definition>AnimationState* SR_ANIMATIONS_NS::AnimationStateTransition::m_sourceState</definition>
+        <argsstring></argsstring>
+        <name>m_sourceState</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::m_sourceState</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="45" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a74902f97b1c2cc5dddbba7cba8677e62" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+        <definition>AnimationState* SR_ANIMATIONS_NS::AnimationStateTransition::m_destinationState</definition>
+        <argsstring></argsstring>
+        <name>m_destinationState</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::m_destinationState</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="46" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a212bf28cbde5c16188267544da0b3469" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kindref="compound">AnimationStateTransition</ref> *</type>
+        <definition>static SR_NODISCARD AnimationStateTransition * SR_ANIMATIONS_NS::AnimationStateTransition::Load</definition>
+        <argsstring>(AnimationState *pSource, AnimationState *pDestination, const SR_XML_NS::Node &amp;nodeXml)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::Load</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+          <declname>pSource</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+          <declname>pDestination</declname>
+        </param>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>nodeXml</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="19" column="54"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a9bf35baca952fb84aa716a5efea7b0f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationStateTransition::AnimationStateTransition</definition>
+        <argsstring>(AnimationState *pSource, AnimationState *pDestination, AnimationStateCondition *pCondition)</argsstring>
+        <name>AnimationStateTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::AnimationStateTransition</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+          <declname>pSource</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+          <declname>pDestination</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition" kindref="compound">AnimationStateCondition</ref> *</type>
+          <declname>pCondition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="21" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a9041682e449d0c9552f60673021f1902" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationStateTransition::AnimationStateTransition</definition>
+        <argsstring>(AnimationState *pSource, AnimationState *pDestination)</argsstring>
+        <name>AnimationStateTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::AnimationStateTransition</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+          <declname>pSource</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+          <declname>pDestination</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a4d741e53af8edc334e9fbffdbea400a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationStateTransition::~AnimationStateTransition</definition>
+        <argsstring>() override</argsstring>
+        <name>~AnimationStateTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::~AnimationStateTransition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a28a050f4d42acee0adfcbae49f6c578d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationStateTransition::IsSuitable</definition>
+        <argsstring>(const StateConditionContext &amp;context) const noexcept</argsstring>
+        <name>IsSuitable</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::IsSuitable</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="27" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1af882b78e846f20f33d654585801845ec" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationStateTransition::IsFinished</definition>
+        <argsstring>(const StateConditionContext &amp;context) const noexcept</argsstring>
+        <name>IsFinished</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::IsFinished</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="28" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a25407aa294c49a2576751771c54d638b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationStateTransition::OnTransitionBegin</definition>
+        <argsstring>(const StateConditionContext &amp;context)</argsstring>
+        <name>OnTransitionBegin</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::OnTransitionBegin</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1ac150882d5c6d9086c8483c82319c4f1c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+        <definition>SR_NODISCARD AnimationState * SR_ANIMATIONS_NS::AnimationStateTransition::GetDestination</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetDestination</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::GetDestination</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="32" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a3c6679d8424719c97e9705a963812615" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+        <definition>SR_NODISCARD AnimationState * SR_ANIMATIONS_NS::AnimationStateTransition::GetSource</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetSource</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::GetSource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="33" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a2c383044487a709b584a58c28eb20758" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationStateTransition::IsActive</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsActive</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::IsActive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="35" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a2738ef0715d65cb5fce152d9b2b0bec3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_ANIMATIONS_NS::AnimationStateTransition::GetProgress</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetProgress</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::GetProgress</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="37" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a18a9760a050f336a740cc8f0191fbeb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationStateTransition::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::Reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="39" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1aad63ad4651e5792d004857d3c30314af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationStateTransition::Update</definition>
+        <argsstring>(const StateConditionContext &amp;context)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateTransition::Update</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="40" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationStateTransition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::AnimationState</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationState"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>m_activeTransition</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_ANIMATIONS_NS::AnimationStateCondition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::AnimationStateMachine</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationStateTransition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_condition</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_destinationState</edgelabel>
+          <edgelabel>m_sourceState</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_ANIMATIONS_NS::IAnimationDataSet</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateTransition.h" bodystart="14" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a9bf35baca952fb84aa716a5efea7b0f7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>AnimationStateTransition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a9041682e449d0c9552f60673021f1902" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>AnimationStateTransition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1ac150882d5c6d9086c8483c82319c4f1c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>GetDestination</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a2738ef0715d65cb5fce152d9b2b0bec3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>GetProgress</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a3c6679d8424719c97e9705a963812615" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>GetSource</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a2c383044487a709b584a58c28eb20758" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>IsActive</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1af882b78e846f20f33d654585801845ec" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>IsFinished</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a28a050f4d42acee0adfcbae49f6c578d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>IsSuitable</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a212bf28cbde5c16188267544da0b3469" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>Load</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a916f08077cc6fec3ea34a09726d73471" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_condition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a74902f97b1c2cc5dddbba7cba8677e62" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_destinationState</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a488c2ffc90c05b4f01b9fd0e9e3673d9" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_isActive</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a04b7c6cbba5899d340469f6f00e3608e" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_sourceState</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>NonCopyable</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a25407aa294c49a2576751771c54d638b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>OnTransitionBegin</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>operator=</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a18a9760a050f336a740cc8f0191fbeb6" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>Reset</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a54f36c6405e2a07e3ca1dd4bf3d848e0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>Super</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1aad63ad4651e5792d004857d3c30314af" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>Update</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a4d741e53af8edc334e9fbffdbea400a5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>~AnimationStateTransition</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

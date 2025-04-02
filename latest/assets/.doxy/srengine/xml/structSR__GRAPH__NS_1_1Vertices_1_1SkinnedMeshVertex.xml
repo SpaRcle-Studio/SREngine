@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a6a48132ecd895a4ae460f1a88d58c0f9" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 SR_GRAPH_NS::Vertices::SkinnedMeshVertex::pos</definition>
+        <argsstring></argsstring>
+        <name>pos</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::pos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="97" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a24a13d0c4131776f3f9f7c42a3dc63cb" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 SR_GRAPH_NS::Vertices::SkinnedMeshVertex::uv</definition>
+        <argsstring></argsstring>
+        <name>uv</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::uv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="98" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a9c7c7cc63955c1c7cb7958352b76dee8" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 SR_GRAPH_NS::Vertices::SkinnedMeshVertex::norm</definition>
+        <argsstring></argsstring>
+        <name>norm</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::norm</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="99" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ac64864da2b6e9c02dfd690f2af736110" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 SR_GRAPH_NS::Vertices::SkinnedMeshVertex::tang</definition>
+        <argsstring></argsstring>
+        <name>tang</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::tang</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="100" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a36ddfba3412597c43114afbb66239444" prot="public" static="no" mutable="no">
+        <type>glm::vec3</type>
+        <definition>glm::vec3 SR_GRAPH_NS::Vertices::SkinnedMeshVertex::bitang</definition>
+        <argsstring></argsstring>
+        <name>bitang</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::bitang</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="101" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ab9cd63365445990924273f2c2ab01b2c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::Vertices::SkinnedMeshVertex::weightsCount</definition>
+        <argsstring></argsstring>
+        <name>weightsCount</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::weightsCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="103" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1af741129a0b7da587381ea7f94aa0d7d2" prot="public" static="no" mutable="no">
+        <type>glm::vec2</type>
+        <definition>glm::vec2 SR_GRAPH_NS::Vertices::SkinnedMeshVertex::weights[SR_MAX_BONES_ON_VERTEX]</definition>
+        <argsstring>[SR_MAX_BONES_ON_VERTEX]</argsstring>
+        <name>weights</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::weights</qualifiedname>
+        <briefdescription>
+<para>x - bone id, y - weight </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="106" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a3ca67635fa67094958549e941a712043" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::vector&lt; std::string &gt;</type>
+        <definition>static SR_FORCE_INLINE std::vector&lt; std::string &gt; SR_GRAPH_NS::Vertices::SkinnedMeshVertex::GetNames</definition>
+        <argsstring>()</argsstring>
+        <name>GetNames</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::GetNames</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="108" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="108" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a8952ce5d65bf1eb91dad2b91ba3bf080" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE SR_VERTEX_DESCRIPTION</type>
+        <definition>static constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION SR_GRAPH_NS::Vertices::SkinnedMeshVertex::GetDescription</definition>
+        <argsstring>()</argsstring>
+        <name>GetDescription</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::GetDescription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="119" column="64" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="119" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1adedb64e8fe15a94a50b542f0d469060b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::vector&lt; std::pair&lt; Attribute, size_t &gt; &gt;</type>
+        <definition>static SR_FORCE_INLINE std::vector&lt; std::pair&lt; Attribute, size_t &gt; &gt; SR_GRAPH_NS::Vertices::SkinnedMeshVertex::GetAttributes</definition>
+        <argsstring>(bool asTypes)</argsstring>
+        <name>GetAttributes</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::GetAttributes</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>asTypes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="123" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="123" bodyend="149"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ad86daa188c8e19be344af08513e54c1b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Vertices::SkinnedMeshVertex::operator==</definition>
+        <argsstring>(const SkinnedMeshVertex &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex" kindref="compound">SkinnedMeshVertex</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="151" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="151" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a5635239a7c49963cc03d3c78ea0fdaf8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_GRAPH_NS::Vertices::SkinnedMeshVertex::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_GRAPH_NS::Vertices::SkinnedMeshVertex::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="162" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="162" bodyend="170"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="96" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="96" bodyend="171"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a36ddfba3412597c43114afbb66239444" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>bitang</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1adedb64e8fe15a94a50b542f0d469060b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>GetAttributes</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a8952ce5d65bf1eb91dad2b91ba3bf080" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>GetDescription</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a3ca67635fa67094958549e941a712043" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>GetNames</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a9c7c7cc63955c1c7cb7958352b76dee8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>norm</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ad86daa188c8e19be344af08513e54c1b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>operator==</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a6a48132ecd895a4ae460f1a88d58c0f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>pos</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ac64864da2b6e9c02dfd690f2af736110" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>tang</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a5635239a7c49963cc03d3c78ea0fdaf8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>ToString</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1a24a13d0c4131776f3f9f7c42a3dc63cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>uv</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1af741129a0b7da587381ea7f94aa0d7d2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>weights</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Vertices_1_1SkinnedMeshVertex_1ab9cd63365445990924273f2c2ab01b2c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::SkinnedMeshVertex</scope><name>weightsCount</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

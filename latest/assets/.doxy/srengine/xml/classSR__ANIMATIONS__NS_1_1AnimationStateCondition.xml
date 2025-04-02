@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_ANIMATIONS_NS::AnimationStateCondition</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationStateConditionAnd</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationStateConditionBool</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationStateConditionExitTime</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationStateConditionNot</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationStateConditionOr</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionTrue" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationStateConditionTrue</derivedcompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1abb62f640d70df5f9c82a3ea838e9ffe7" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_ANIMATIONS_NS::AnimationStateCondition::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a6d2683429660743a8a3056f77c3a68b3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition" kindref="compound">AnimationStateCondition</ref> *</type>
+        <definition>static SR_NODISCARD AnimationStateCondition * SR_ANIMATIONS_NS::AnimationStateCondition::Load</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;nodeXml)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::Load</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>nodeXml</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="17" column="53"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1ab0db2d8cc70236d20cfcaba363e26475" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationStateCondition::IsSuitable</definition>
+        <argsstring>(const StateConditionContext &amp;context) const noexcept=0</argsstring>
+        <name>IsSuitable</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::IsSuitable</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd_1a9292d5188200292712f29c5a62a1273b">IsSuitable</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a553c53c48457d421c51f05f9f2fa1458">IsSuitable</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a17a4f1243ad169e818894dad762b4118">IsSuitable</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot_1a1229848bff1c19992006bd6c1444a4f0">IsSuitable</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a5e8fef2d8e3e4246408b307594fe44e9">IsSuitable</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionTrue_1a9125b5e16832fd168013833427bf32bf">IsSuitable</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="19" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a2c720e0460a312cbf9064858b711a904" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationStateCondition::IsFinished</definition>
+        <argsstring>(const StateConditionContext &amp;context) const noexcept</argsstring>
+        <name>IsFinished</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::IsFinished</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd_1a0f6bf99d32b1ad508176d069daec5652">IsFinished</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a3d1d0e5c227ed120fc6cdc746426147d">IsFinished</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot_1ae71f2d7e71584a0bbb2817fea95c6133">IsFinished</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1af2d00009c6e47f542dd0314f5131735d">IsFinished</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="20" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1aa1f3b909e6e14ab5e85b152a2d9746ba" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationStateCondition::IsNeedBreakUpdate</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsNeedBreakUpdate</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::IsNeedBreakUpdate</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd_1a5e62af9877c95986a61e1ed3bb8148f1">IsNeedBreakUpdate</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1ade9fa0c8de3d47307cdae64ecade0eb6">IsNeedBreakUpdate</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot_1a11a16495e54466d337f6fa802bc40a35">IsNeedBreakUpdate</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a01aba7b9b8ee5b2896d0e36fa8f4055b">IsNeedBreakUpdate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="24" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a1b6e5d530463dd877b7effc10c91bae1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD std::optional&lt; float_t &gt;</type>
+        <definition>virtual SR_NODISCARD std::optional&lt; float_t &gt; SR_ANIMATIONS_NS::AnimationStateCondition::GetProgress</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetProgress</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::GetProgress</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd_1a34a745dc48f49ae0bb5044584419fd9f">GetProgress</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a22018ede6a62cd65a5ab14e07701297e">GetProgress</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot_1ac6ca9a601ac5e44833ad84f2d3a56438">GetProgress</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1ab6f044099348970dd566339226a175dc">GetProgress</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="26" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a6cb702ec49cca220d6eb0e9c7912b86c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationStateCondition::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::Reset</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd_1a3400daf1c494b277ccd970c166330a70">Reset</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a0ff921ace18cec903742582652e261cb">Reset</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1a6ba18bb4953570f90716defbaecc7b76">Reset</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot_1abb66b8b3ca7f88671071732d0b7cef19">Reset</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a42498b30339e2ff87699e1b323d800d1">Reset</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="28" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1ab86dde34a9e1b38837f33f52cbd9b75a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationStateCondition::Update</definition>
+        <argsstring>(const StateConditionContext &amp;context)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationStateCondition::Update</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd_1a9c25542fa7c5175c375ecc16a8ebff1b">Update</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool_1a199135246a65892850a22370c8cfb677">Update</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime_1ae7b2b1f657a9232e19eaf40a1b3bab55">Update</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot_1a6584d8e298dc8b1e39b7118623cbbe81">Update</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1StateConditionContext" kindref="compound">StateConditionContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="29" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationStateCondition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_ANIMATIONS_NS::AnimationStateConditionAnd</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionAnd"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::AnimationStateConditionBool</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionBool"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::AnimationStateConditionExitTime</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionExitTime"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_ANIMATIONS_NS::AnimationStateConditionNot</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionNot"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_ANIMATIONS_NS::AnimationStateConditionOr</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_ANIMATIONS_NS::AnimationStateConditionTrue</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionTrue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationStateCondition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationStateCondition.h" bodystart="14" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a1b6e5d530463dd877b7effc10c91bae1" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>GetProgress</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a2c720e0460a312cbf9064858b711a904" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>IsFinished</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1aa1f3b909e6e14ab5e85b152a2d9746ba" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>IsNeedBreakUpdate</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1ab0db2d8cc70236d20cfcaba363e26475" prot="public" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>IsSuitable</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a6d2683429660743a8a3056f77c3a68b3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>operator=</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a6cb702ec49cca220d6eb0e9c7912b86c" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>Reset</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1abb62f640d70df5f9c82a3ea838e9ffe7" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>Super</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1ab86dde34a9e1b38837f33f52cbd9b75a" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateCondition</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Compression" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Compression</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Compression_1ad14f13da5e93a3ef3c57f5eedf2a8863" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Compression::Compression</definition>
+        <argsstring>()=delete</argsstring>
+        <name>Compression</name>
+        <qualifiedname>SR_UTILS_NS::Compression::Compression</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Compression.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Compression_1ab86528e3ba0b51a22a6c0642d6199ff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Compression::~Compression</definition>
+        <argsstring>()=delete</argsstring>
+        <name>~Compression</name>
+        <qualifiedname>SR_UTILS_NS::Compression::~Compression</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Compression.h" line="19" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/Compression.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Compression.h" bodystart="16" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Compression_1ad14f13da5e93a3ef3c57f5eedf2a8863" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Compression</scope><name>Compression</name></member>
+      <member refid="classSR__UTILS__NS_1_1Compression_1ab86528e3ba0b51a22a6c0642d6199ff7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Compression</scope><name>~Compression</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

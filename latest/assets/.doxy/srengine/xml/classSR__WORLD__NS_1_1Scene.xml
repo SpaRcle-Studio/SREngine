@@ -1,0 +1,1267 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__WORLD__NS_1_1Scene" kind="class" language="C++" prot="public">
+    <compoundname>SR_WORLD_NS::Scene</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IComponentable" prot="public" virt="non-virtual">SR_UTILS_NS::IComponentable</basecompoundref>
+    <derivedcompoundref refid="classSR__CORE__NS_1_1World" prot="public" virt="non-virtual">SR_CORE_NS::World</derivedcompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Scene_1af9bc1b518dc4994d356c9d59df9adedd" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">Scene</ref> &gt;</type>
+        <definition>using SR_WORLD_NS::Scene::Ptr =  SR_HTYPES_NS::SharedPtr&lt;Scene&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="37" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Scene_1ae4ed90b22a62cf21ecacaebee7cf34fd" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1SceneLogic" kindref="compound">SceneLogic</ref> &gt;</type>
+        <definition>using SR_WORLD_NS::Scene::SceneLogicPtr =  SR_HTYPES_NS::SharedPtr&lt;SceneLogic&gt;</definition>
+        <argsstring></argsstring>
+        <name>SceneLogicPtr</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SceneLogicPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="38" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Scene_1ad848fcf83f89ebf0457b7602354348a4" prot="public" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">SR_UTILS_NS::IComponentable</ref></type>
+        <definition>using SR_WORLD_NS::Scene::Super =  SR_UTILS_NS::IComponentable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Scene_1af8e3633376d39698ceb5c0abbdb5bdae" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; SceneObject &gt;</type>
+        <definition>using SR_WORLD_NS::Scene::SceneObjectPtr =  SR_HTYPES_NS::SharedPtr&lt;SceneObject&gt;</definition>
+        <argsstring></argsstring>
+        <name>SceneObjectPtr</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SceneObjectPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="40" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Scene_1a3f26321b9211e9b403d4e8aefba86c0c" prot="public" static="no">
+        <type>std::vector&lt; SceneObjectPtr &gt;</type>
+        <definition>using SR_WORLD_NS::Scene::SceneObjects =  std::vector&lt;SceneObjectPtr&gt;</definition>
+        <argsstring></argsstring>
+        <name>SceneObjects</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SceneObjects</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="41" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Scene_1a6d3e423212bdc5c7128d0077e2348ae1" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; GameObject &gt;</type>
+        <definition>using SR_WORLD_NS::Scene::GameObjectPtr =  SR_HTYPES_NS::SharedPtr&lt;GameObject&gt;</definition>
+        <argsstring></argsstring>
+        <name>GameObjectPtr</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GameObjectPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="42" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a91402c4cdbfad8d390a763814543c9d0" prot="public" static="no" mutable="no">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC const Path</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::RuntimeScenePath</definition>
+        <argsstring></argsstring>
+        <name>RuntimeScenePath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::RuntimeScenePath</qualifiedname>
+        <initializer>= &quot;Scenes/Runtime-cache-scene&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="44" column="53" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1aee6b527e908d326361c6f132d6a65a47" prot="public" static="no" mutable="no">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC const Path</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::NewScenePath</definition>
+        <argsstring></argsstring>
+        <name>NewScenePath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::NewScenePath</qualifiedname>
+        <initializer>= &quot;Scenes/New-cache-scene&quot;</initializer>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="45" column="53" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1abbb8a9c46b3e7b7784b925efd9f736c0" prot="public" static="no" mutable="no">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC const Path</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC const Path SR_WORLD_NS::Scene::NewPrefabPath</definition>
+        <argsstring></argsstring>
+        <name>NewPrefabPath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::NewPrefabPath</qualifiedname>
+        <initializer>= &quot;Scenes/New-cache-prefab&quot;</initializer>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="46" column="53" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1abab8ba3414566c3d7c92f08a689479db" prot="private" static="no" mutable="yes">
+        <type>std::map&lt; EntityId, EntityId &gt;</type>
+        <definition>std::map&lt;EntityId, EntityId&gt; SR_WORLD_NS::Scene::m_registerEntityIdReplaceCache</definition>
+        <argsstring></argsstring>
+        <name>m_registerEntityIdReplaceCache</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_registerEntityIdReplaceCache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="118" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a7d42e2892e9b41f5ac00141399174293" prot="private" static="no" mutable="yes">
+        <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1Prefab" kindref="compound">SR_UTILS_NS::Prefab</ref> *, std::vector&lt; Entity * &gt; &gt;</type>
+        <definition>std::map&lt;SR_UTILS_NS::Prefab*, std::vector&lt;Entity*&gt; &gt; SR_WORLD_NS::Scene::m_registerEntityCache</definition>
+        <argsstring></argsstring>
+        <name>m_registerEntityCache</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_registerEntityCache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="119" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a53ac2d2d4e1da221ab0cc3c3ea140d51" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__WORLD__NS_1_1SceneUpdater" kindref="compound">SceneUpdater</ref> *</type>
+        <definition>SceneUpdater* SR_WORLD_NS::Scene::m_sceneUpdater</definition>
+        <argsstring></argsstring>
+        <name>m_sceneUpdater</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_sceneUpdater</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="121" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a601b5821f74c61cdea6ae12d181a316b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::m_isInitialized</definition>
+        <argsstring></argsstring>
+        <name>m_isInitialized</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_isInitialized</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="123" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1adc7e897533c3aa61e62ffffc0ed4af15" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::m_isPreDestroyed</definition>
+        <argsstring></argsstring>
+        <name>m_isPreDestroyed</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_isPreDestroyed</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="124" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a2a1702b4f2e4e4bc62fe191263e56f09" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::m_isDestroyed</definition>
+        <argsstring></argsstring>
+        <name>m_isDestroyed</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_isDestroyed</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="125" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a390f29f1eebd2d88c60d54a332b8527b" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_WORLD_NS::Scene::m_isHierarchyChanged</definition>
+        <argsstring></argsstring>
+        <name>m_isHierarchyChanged</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_isHierarchyChanged</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="127" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a3d7fd020091866286b316b9a15212593" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref></type>
+        <definition>SR_HTYPES_NS::DataStorage SR_WORLD_NS::Scene::m_dataStorage</definition>
+        <argsstring></argsstring>
+        <name>m_dataStorage</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_dataStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="129" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a02b51cf7671620efbea7e64d5ae2ae41" prot="private" static="no" mutable="no">
+        <type>std::list&lt; uint64_t &gt;</type>
+        <definition>std::list&lt;uint64_t&gt; SR_WORLD_NS::Scene::m_freeObjIndices</definition>
+        <argsstring></argsstring>
+        <name>m_freeObjIndices</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_freeObjIndices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="131" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a58764a001ec44bdd721da64c7121c834" prot="private" static="no" mutable="no">
+        <type>std::list&lt; SceneObjectPtr &gt;</type>
+        <definition>std::list&lt;SceneObjectPtr&gt; SR_WORLD_NS::Scene::m_newQueue</definition>
+        <argsstring></argsstring>
+        <name>m_newQueue</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_newQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="132" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1af5498060c7894be11dfcc71a304ece1e" prot="private" static="no" mutable="no">
+        <type>std::list&lt; SceneObjectPtr &gt;</type>
+        <definition>std::list&lt;SceneObjectPtr&gt; SR_WORLD_NS::Scene::m_deleteQueue</definition>
+        <argsstring></argsstring>
+        <name>m_deleteQueue</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_deleteQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="133" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a55d25d650caa1f18190b70ae119b0970" prot="private" static="no" mutable="no">
+        <type>std::list&lt; Component::Ptr &gt;</type>
+        <definition>std::list&lt;Component::Ptr&gt; SR_WORLD_NS::Scene::m_destroyedComponents</definition>
+        <argsstring></argsstring>
+        <name>m_destroyedComponents</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_destroyedComponents</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="135" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a15efb7f302d2f67092a400ecc7800a04" prot="private" static="no" mutable="no">
+        <type>Path</type>
+        <definition>Path SR_WORLD_NS::Scene::m_path</definition>
+        <argsstring></argsstring>
+        <name>m_path</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="137" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a7fbd9c2d41470bb2229571aa623532e0" prot="private" static="no" mutable="no">
+        <type>Path</type>
+        <definition>Path SR_WORLD_NS::Scene::m_absPath</definition>
+        <argsstring></argsstring>
+        <name>m_absPath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_absPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="138" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a1241a5667e3bb9364d8c3182823c8387" prot="private" static="no" mutable="no">
+        <type>SceneObjects</type>
+        <definition>SceneObjects SR_WORLD_NS::Scene::m_sceneObjects</definition>
+        <argsstring></argsstring>
+        <name>m_sceneObjects</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_sceneObjects</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="140" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1abdcf52c05a9519e339fa3a8463080381" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::EntityController::Ptr</type>
+        <definition>SR_UTILS_NS::EntityController::Ptr SR_WORLD_NS::Scene::m_pEntityController</definition>
+        <argsstring></argsstring>
+        <name>m_pEntityController</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_pEntityController</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="142" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a3d4456c6d31d896cc569c7419a39fa86" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1SceneLogic" kindref="compound">SceneLogic</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;SceneLogic&gt; SR_WORLD_NS::Scene::m_logic</definition>
+        <argsstring></argsstring>
+        <name>m_logic</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_logic</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="146" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Scene_1a34253adca0797db4f6fa949e8aaa714d" prot="private" static="no" mutable="no">
+        <type>SceneObjects</type>
+        <definition>SceneObjects SR_WORLD_NS::Scene::m_root</definition>
+        <argsstring></argsstring>
+        <name>m_root</name>
+        <qualifiedname>SR_WORLD_NS::Scene::m_root</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="149" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a971faf16e3907f4dd3d23445592088cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_WORLD_NS::Scene::Scene</definition>
+        <argsstring>()</argsstring>
+        <name>Scene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Scene</qualifiedname>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="49" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a0b6c834bc788590a0af407e7d4e514ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_WORLD_NS::Scene::~Scene</definition>
+        <argsstring>() override</argsstring>
+        <name>~Scene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::~Scene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="50" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1acb4d6e0610a449246b7c2511b81c6909" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a46af9277cd40385e5b529bf470f43e51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::Prepare</definition>
+        <argsstring>()</argsstring>
+        <name>Prepare</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Prepare</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="60" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ae626b0f19b8887af9ab9d0a88ee83b17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::SaveScene</definition>
+        <argsstring>()</argsstring>
+        <name>SaveScene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SaveScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="62" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a46c89658812fb483e18877503fd05654" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::SaveSceneAt</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>SaveSceneAt</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SaveSceneAt</qualifiedname>
+        <param>
+          <type>const Path &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="63" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a7dcb2985dfceac42aadc4dd0b6ea7db2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::Destroy</definition>
+        <argsstring>()</argsstring>
+        <name>Destroy</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Destroy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a4838639815df6d836a020e02556ba671" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::SetDirty</definition>
+        <argsstring>(bool dirty) override</argsstring>
+        <name>SetDirty</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SetDirty</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IComponentable_1a33139248be9fd09bf03ed27dc485c2a0">SetDirty</reimplements>
+        <param>
+          <type>bool</type>
+          <declname>dirty</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a2beb7d65c297dcc0c2424862740a0f1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::SetPath</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>SetPath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::SetPath</qualifiedname>
+        <param>
+          <type>const Path &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a9c5cc12471b9d569014a8564e8b2dbd0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_WORLD_NS::Scene::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="70" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6612f1f43b862b1ac7d036da6647b260" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Path</type>
+        <definition>SR_NODISCARD Path SR_WORLD_NS::Scene::GetPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="71" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a71eed1105c099e29bc2aa50e679b23de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD Path</type>
+        <definition>SR_NODISCARD Path SR_WORLD_NS::Scene::GetAbsPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAbsPath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetAbsPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="72" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ad18a8478999a6f2cfe27f7bf5add3f42" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_WORLD_NS::Scene::IsPrefab</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>IsPrefab</name>
+        <qualifiedname>SR_WORLD_NS::Scene::IsPrefab</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IComponentable_1a97cf19f07ba85868e91bdb14de07bb5c">IsPrefab</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="73" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a77a71524af38f4e43270dbfc61d1a244" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::DataStorage &amp; SR_WORLD_NS::Scene::GetDataStorage</definition>
+        <argsstring>()</argsstring>
+        <name>GetDataStorage</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetDataStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="74" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6555eae70f319b82ffef8cb7e51400c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::DataStorage &amp; SR_WORLD_NS::Scene::GetDataStorage</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDataStorage</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetDataStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="75" column="54" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a4b96699a74cdd9024381a51ca08b24c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE <ref refid="classSR__WORLD__NS_1_1SceneUpdater" kindref="compound">SceneUpdater</ref> *</type>
+        <definition>SR_NODISCARD SR_INLINE SceneUpdater * SR_WORLD_NS::Scene::GetSceneUpdater</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSceneUpdater</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetSceneUpdater</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="76" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a9a6556db9473835d477b3f9b9f530b25" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE SceneLogicPtr</type>
+        <definition>SR_NODISCARD SR_INLINE SceneLogicPtr SR_WORLD_NS::Scene::GetLogicBase</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLogicBase</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetLogicBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="77" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6aa9017791362d7645e43c6ba5015f6a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const SR_UTILS_NS::EntityController::Ptr &amp;</type>
+        <definition>SR_NODISCARD const SR_UTILS_NS::EntityController::Ptr &amp; SR_WORLD_NS::Scene::GetEntityController</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEntityController</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetEntityController</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="78" column="63" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a64dbda3f8845f0b7e8a583d75a0e3237" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_WORLD_NS::Scene::IsPlayingMode</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPlayingMode</name>
+        <qualifiedname>SR_WORLD_NS::Scene::IsPlayingMode</qualifiedname>
+        <briefdescription>
+<para>Запущена ли сцена </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="81" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a9c2abe1b4870ee4d74bf99b7b3bef437" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_WORLD_NS::Scene::IsPausedMode</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPausedMode</name>
+        <qualifiedname>SR_WORLD_NS::Scene::IsPausedMode</qualifiedname>
+        <briefdescription>
+<para>На паузе ли сцена (если запущена) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="83" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6a182511b96bde6575af4263623d740f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SceneObjects &amp;</type>
+        <definition>SceneObjects &amp; SR_WORLD_NS::Scene::GetRootSceneObjects</definition>
+        <argsstring>()</argsstring>
+        <name>GetRootSceneObjects</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetRootSceneObjects</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="85" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ac5662e72a42f50e047acc48b7a0a9a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SceneObjectPtr</type>
+        <definition>SceneObjectPtr SR_WORLD_NS::Scene::FindByComponent</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>FindByComponent</name>
+        <qualifiedname>SR_WORLD_NS::Scene::FindByComponent</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="87" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ab5fd0a872233d88556ca94ecefda29d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SceneObjectPtr</type>
+        <definition>SceneObjectPtr SR_WORLD_NS::Scene::Find</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Find</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="88" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a5a89cdea6af6d83347fb9834158bbf23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SceneObjectPtr</type>
+        <definition>SceneObjectPtr SR_WORLD_NS::Scene::Find</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Find</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="89" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1abe33f18ffee00cad0af0f488a4f8bf11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SceneObjectPtr</type>
+        <definition>SceneObjectPtr SR_WORLD_NS::Scene::Find</definition>
+        <argsstring>(uint64_t hashName)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Find</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="90" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a327b129c4b53b6a140095c7074293113" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SceneObjectPtr</type>
+        <definition>SceneObjectPtr SR_WORLD_NS::Scene::Find</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Find</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="91" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a03ae01c837a263229e2cda1fafcd8955" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::RegisterSceneObject</definition>
+        <argsstring>(const SceneObjectPtr &amp;pSO)</argsstring>
+        <name>RegisterSceneObject</name>
+        <qualifiedname>SR_WORLD_NS::Scene::RegisterSceneObject</qualifiedname>
+        <param>
+          <type>const SceneObjectPtr &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="93" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ab8fa24da1cf2182889ec2596341069b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SceneObjectPtr</type>
+        <definition>virtual SceneObjectPtr SR_WORLD_NS::Scene::InstanceFromFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>InstanceFromFile</name>
+        <qualifiedname>SR_WORLD_NS::Scene::InstanceFromFile</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="95" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1af839836d0d6587fa8515470de4b37c12" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SceneObjectPtr</type>
+        <definition>virtual SceneObjectPtr SR_WORLD_NS::Scene::Instance</definition>
+        <argsstring>(const Types::RawMesh *rawMesh)</argsstring>
+        <name>Instance</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Instance</qualifiedname>
+        <param>
+          <type>const Types::RawMesh *</type>
+          <declname>rawMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="96" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a24d92f695345d1ab7f1a4ae77342bca9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>GameObjectPtr</type>
+        <definition>virtual GameObjectPtr SR_WORLD_NS::Scene::FindOrInstanceGameObject</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>FindOrInstanceGameObject</name>
+        <qualifiedname>SR_WORLD_NS::Scene::FindOrInstanceGameObject</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="98" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ace5e130b6e2138ef237e607613919724" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>GameObjectPtr</type>
+        <definition>virtual GameObjectPtr SR_WORLD_NS::Scene::InstanceGameObject</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>InstanceGameObject</name>
+        <qualifiedname>SR_WORLD_NS::Scene::InstanceGameObject</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="99" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1aa6b496705c31af2eede3634e27ac6952" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>IComponentable::ScenePtr</type>
+        <definition>IComponentable::ScenePtr SR_WORLD_NS::Scene::GetScene</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetScene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetScene</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IComponentable_1ad609b52897182000186bf3ee3f15cbaf">GetScene</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="101" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1acb49b9b4dc35f25583857a99ebad755c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::Remove</definition>
+        <argsstring>(const SceneObjectPtr &amp;gameObject)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Remove</qualifiedname>
+        <param>
+          <type>const SceneObjectPtr &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1ae9ac3d06d8f3ef97eb4f543e2db380bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::Remove</definition>
+        <argsstring>(const Component::Ptr &amp;pComponent)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Remove</qualifiedname>
+        <param>
+          <type>const Component::Ptr &amp;</type>
+          <declname>pComponent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="105" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a0473e4980984e10e9dbf54384b1c633e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::OnChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnChanged</name>
+        <qualifiedname>SR_WORLD_NS::Scene::OnChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="107" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a941cfd17ce80f7b6c4711f34e87db252" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::Scene::Reload</definition>
+        <argsstring>()</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_WORLD_NS::Scene::Reload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="109" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a080482d7b710cd1f05da8280bde1f2ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::OnPostLoad</definition>
+        <argsstring>() override</argsstring>
+        <name>OnPostLoad</name>
+        <qualifiedname>SR_WORLD_NS::Scene::OnPostLoad</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="111" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a9e28f0c2500dfb009a7f72f73cf3777f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Scene::Ptr</type>
+        <definition>static Scene::Ptr SR_WORLD_NS::Scene::CreateEmptyScene</definition>
+        <argsstring>()</argsstring>
+        <name>CreateEmptyScene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::CreateEmptyScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="53" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a08bf553e541c0ca3da941a1b2e0040d3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Scene::Ptr</type>
+        <definition>static Scene::Ptr SR_WORLD_NS::Scene::NewScene</definition>
+        <argsstring>(const Path &amp;path, SceneLogicType type)</argsstring>
+        <name>NewScene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::NewScene</qualifiedname>
+        <param>
+          <type>const Path &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>SceneLogicType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="54" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a157b2ce56f18afe2ad12e45667fa0164" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Scene::Ptr</type>
+        <definition>static Scene::Ptr SR_WORLD_NS::Scene::LoadScene</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>LoadScene</name>
+        <qualifiedname>SR_WORLD_NS::Scene::LoadScene</qualifiedname>
+        <param>
+          <type>const Path &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="55" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a46624fa47167d15985caaa97c1e645eb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_WORLD_NS::Scene::IsExists</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>IsExists</name>
+        <qualifiedname>SR_WORLD_NS::Scene::IsExists</qualifiedname>
+        <param>
+          <type>const Path &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="56" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6b281207b2747c409e093d8b60b2b0d1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Path</type>
+        <definition>static Path SR_WORLD_NS::Scene::GetAbsPath</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>GetAbsPath</name>
+        <qualifiedname>SR_WORLD_NS::Scene::GetAbsPath</qualifiedname>
+        <param>
+          <type>const Path &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="57" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a7d8af2c087fc3a3756220746d62419db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::RegisterSceneObjectImpl</definition>
+        <argsstring>(const SceneObjectPtr &amp;pSO)</argsstring>
+        <name>RegisterSceneObjectImpl</name>
+        <qualifiedname>SR_WORLD_NS::Scene::RegisterSceneObjectImpl</qualifiedname>
+        <param>
+          <type>const SceneObjectPtr &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a48ed2046f50e5185a630480d8c967ece" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_WORLD_NS::Scene::ProcessNewSO</definition>
+        <argsstring>(const SceneObjectPtr &amp;pSO)</argsstring>
+        <name>ProcessNewSO</name>
+        <qualifiedname>SR_WORLD_NS::Scene::ProcessNewSO</qualifiedname>
+        <param>
+          <type>const SceneObjectPtr &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="115" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Entity</label>
+      </node>
+      <node id="4">
+        <label>SR_CORE_NS::World</label>
+        <link refid="classSR__CORE__NS_1_1World"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Entity</label>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="34" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="34" bodyend="151"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ae35fb0df155f53c85555ba954c56aa75" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>AddComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ad01a80b3546df658202d432bd6994c25" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>AddComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a669c7585ff6436b989dd01c8f5b0c2c8" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1abe335ee2e09aebe4d47244adb523e184" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a1b5d40b01248c5e1fcdc544854d03ae0" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>ContainsComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a9e28f0c2500dfb009a7f72f73cf3777f" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>CreateEmptyScene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a7dcb2985dfceac42aadc4dd0b6ea7db2" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Destroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a20f9c12ed3eb79950758df507d5ae6ec" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>DestroyComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ab5fd0a872233d88556ca94ecefda29d4" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Find</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a5a89cdea6af6d83347fb9834158bbf23" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Find</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1abe33f18ffee00cad0af0f488a4f8bf11" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Find</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a327b129c4b53b6a140095c7074293113" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Find</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ac5662e72a42f50e047acc48b7a0a9a42" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>FindByComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a24d92f695345d1ab7f1a4ae77342bca9" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>FindOrInstanceGameObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a313e6ad308c7daf22f63022d31077e34" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>ForEachComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a58123acc71d0dfdafd44206699ab8a70" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>ForEachComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a6d3e423212bdc5c7128d0077e2348ae1" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a6b281207b2747c409e093d8b60b2b0d1" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetAbsPath</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a71eed1105c099e29bc2aa50e679b23de" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetAbsPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1aa61e5a4b3ebdae8af7091c6e677624e6" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a522d0a7ca81ad1cc7b9d869271b7eacb" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ab6cb5e51cade5bdbfd24f293218c671e" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1afb05818099e50470df3fb9781fe29726" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetComponentIndex</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ad4a814f3df9a1448b3860bdb09698e42" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetComponents</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a45518f12f65774d4c57dafbb5b0a3102" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetComponentsCount</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a77a71524af38f4e43270dbfc61d1a244" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetDataStorage</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a6555eae70f319b82ffef8cb7e51400c2" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetDataStorage</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a6aa9017791362d7645e43c6ba5015f6a" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetEntityController</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a9a6556db9473835d477b3f9b9f530b25" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetLogicBase</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a9c5cc12471b9d569014a8564e8b2dbd0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a213ac205606cbc0ff0ed66ba2238f357" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetOrCreateComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a96d8cf98278e875d28450aada24c4e46" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetOrCreateComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a6612f1f43b862b1ac7d036da6647b260" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetPath</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a6a182511b96bde6575af4263623d740f" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetRootSceneObjects</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1aa6b496705c31af2eede3634e27ac6952" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetScene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a4b96699a74cdd9024381a51ca08b24c2" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1aeea19c294fe07e4f320334a15b0a81b5" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>HasComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1acb4d6e0610a449246b7c2511b81c6909" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Init</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1af839836d0d6587fa8515470de4b37c12" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>Instance</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ab8fa24da1cf2182889ec2596341069b3" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>InstanceFromFile</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ace5e130b6e2138ef237e607613919724" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>InstanceGameObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a44a51766ea071204eafe913039419251" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a195b390d15d3ba67b868c93040a90dda" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a98c049c3e64fa32fbe3822fe7b702ff1" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsDirty</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a46624fa47167d15985caaa97c1e645eb" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsExists</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a9c2abe1b4870ee4d74bf99b7b3bef437" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a64dbda3f8845f0b7e8a583d75a0e3237" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ad18a8478999a6f2cfe27f7bf5add3f42" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>IsPrefab</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a157b2ce56f18afe2ad12e45667fa0164" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>LoadScene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a7fbd9c2d41470bb2229571aa623532e0" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_absPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a76042c540496749a5a02749199037d63" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_components</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a3d7fd020091866286b316b9a15212593" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_dataStorage</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1af5498060c7894be11dfcc71a304ece1e" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_deleteQueue</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a55d25d650caa1f18190b70ae119b0970" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_destroyedComponents</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a02b51cf7671620efbea7e64d5ae2ae41" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_freeObjIndices</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a2a1702b4f2e4e4bc62fe191263e56f09" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_isDestroyed</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a390f29f1eebd2d88c60d54a332b8527b" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_isHierarchyChanged</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a601b5821f74c61cdea6ae12d181a316b" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_isInitialized</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1adc7e897533c3aa61e62ffffc0ed4af15" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_isPreDestroyed</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a3d4456c6d31d896cc569c7419a39fa86" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_logic</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a58764a001ec44bdd721da64c7121c834" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_newQueue</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a15efb7f302d2f67092a400ecc7800a04" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_path</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1abdcf52c05a9519e339fa3a8463080381" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_pEntityController</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a7d42e2892e9b41f5ac00141399174293" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_registerEntityCache</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1abab8ba3414566c3d7c92f08a689479db" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_registerEntityIdReplaceCache</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a34253adca0797db4f6fa949e8aaa714d" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_root</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a1241a5667e3bb9364d8c3182823c8387" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_sceneObjects</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a53ac2d2d4e1da221ab0cc3c3ea140d51" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>m_sceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ab3f1833b432e0e56baa9b41570d70a18" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>MoveComponent</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1abbb8a9c46b3e7b7784b925efd9f736c0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>NewPrefabPath</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a08bf553e541c0ca3da941a1b2e0040d3" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>NewScene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1aee6b527e908d326361c6f132d6a65a47" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>NewScenePath</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a0473e4980984e10e9dbf54384b1c633e" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>OnChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a7ff4e1e74755db1bbb5369212d17698b" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a080482d7b710cd1f05da8280bde1f2ae" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a4a262fde588f59c76ae3343e74b49918" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a56f03c38e25da17b09c4f0c3df9762da" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>OriginType</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a20802bdf40bd79aa69847a0b4b62d9cf" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>PostLoad</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a46af9277cd40385e5b529bf470f43e51" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Prepare</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a48ed2046f50e5185a630480d8c967ece" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>ProcessNewSO</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1af9bc1b518dc4994d356c9d59df9adedd" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Ptr</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a03ae01c837a263229e2cda1fafcd8955" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>RegisterSceneObject</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a7d8af2c087fc3a3756220746d62419db" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>RegisterSceneObjectImpl</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a941cfd17ce80f7b6c4711f34e87db252" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Reload</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1acb49b9b4dc35f25583857a99ebad755c" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Remove</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ae9ac3d06d8f3ef97eb4f543e2db380bf" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Remove</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a34e59c939961077ffe67e725f03ae899" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>RemoveComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1a9c34d51144cb0644ade645c87ceb37de" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>RemoveComponents</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a91402c4cdbfad8d390a763814543c9d0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>RuntimeScenePath</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ae626b0f19b8887af9ab9d0a88ee83b17" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>SaveScene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a46c89658812fb483e18877503fd05654" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>SaveSceneAt</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a971faf16e3907f4dd3d23445592088cd" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Scene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ae4ed90b22a62cf21ecacaebee7cf34fd" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>SceneLogicPtr</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1af8e3633376d39698ceb5c0abbdb5bdae" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a3f26321b9211e9b403d4e8aefba86c0c" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>SceneObjects</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ab2e4a5ecd74802ea355a47da7f52e779" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>ScenePtr</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a4838639815df6d836a020e02556ba671" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>SetDirty</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a2beb7d65c297dcc0c2424862740a0f1a" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>SetPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ac734a48925eb4351b4b9da801c1f518a" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>Start</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1ad848fcf83f89ebf0457b7602354348a4" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Super</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1afaa14bf26317df3a48747dd9e5fb54f4" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>~IComponentable</name></member>
+      <member refid="classSR__WORLD__NS_1_1Scene_1a0b6c834bc788590a0af407e7d4e514ff" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>~Scene</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

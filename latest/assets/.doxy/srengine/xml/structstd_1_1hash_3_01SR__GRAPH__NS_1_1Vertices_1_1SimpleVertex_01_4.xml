@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>std::hash&lt; SR_GRAPH_NS::Vertices::SimpleVertex &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_01_4_1a4b00fcbce9026118393bea9f82c57102" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t std::hash&lt; SR_GRAPH_NS::Vertices::SimpleVertex &gt;::operator()</definition>
+        <argsstring>(SR_GRAPH_NS::Vertices::SimpleVertex const &amp;vertex) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>std::hash&lt; SR_GRAPH_NS::Vertices::SimpleVertex &gt;::operator()</qualifiedname>
+        <param>
+          <type><ref refid="structSR__GRAPH__NS_1_1Vertices_1_1SimpleVertex" kindref="compound">SR_GRAPH_NS::Vertices::SimpleVertex</ref> const &amp;</type>
+          <declname>vertex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="440" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="440" bodyend="446"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="439" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="439" bodyend="447"/>
+    <listofallmembers>
+      <member refid="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_01_4_1a4b00fcbce9026118393bea9f82c57102" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_GRAPH_NS::Vertices::SimpleVertex &gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

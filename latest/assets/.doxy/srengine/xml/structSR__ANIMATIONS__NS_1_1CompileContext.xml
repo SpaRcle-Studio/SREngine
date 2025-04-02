@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__ANIMATIONS__NS_1_1CompileContext" kind="struct" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::CompileContext</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1CompileContext_1afb89a2312ac8d221955e1f570091d0ac" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">Skeleton</ref> *</type>
+        <definition>Skeleton* SR_ANIMATIONS_NS::CompileContext::pSkeleton</definition>
+        <argsstring></argsstring>
+        <name>pSkeleton</name>
+        <qualifiedname>SR_ANIMATIONS_NS::CompileContext::pSkeleton</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="55" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1CompileContext_1a4797bd61ec61bceea62322a4d6c25d63" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; SR_UTILS_NS::GameObject::Ptr &gt; &amp;</type>
+        <definition>std::vector&lt;SR_UTILS_NS::GameObject::Ptr&gt;&amp; SR_ANIMATIONS_NS::CompileContext::gameObjects</definition>
+        <argsstring></argsstring>
+        <name>gameObjects</name>
+        <qualifiedname>SR_ANIMATIONS_NS::CompileContext::gameObjects</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="57" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1CompileContext_1a8229004710f2c2a09abc24ed4f053ff0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::CompileContext::CompileContext</definition>
+        <argsstring>(std::vector&lt; SR_UTILS_NS::GameObject::Ptr &gt; &amp;gameObjects)</argsstring>
+        <name>CompileContext</name>
+        <qualifiedname>SR_ANIMATIONS_NS::CompileContext::CompileContext</qualifiedname>
+        <param>
+          <type>std::vector&lt; SR_UTILS_NS::GameObject::Ptr &gt; &amp;</type>
+          <declname>gameObjects</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="51" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="51" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::CompileContext</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1CompileContext"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pSkeleton</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_ANIMATIONS_NS::Skeleton</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1Skeleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="50" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="50" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structSR__ANIMATIONS__NS_1_1CompileContext_1a8229004710f2c2a09abc24ed4f053ff0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::CompileContext</scope><name>CompileContext</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1CompileContext_1a4797bd61ec61bceea62322a4d6c25d63" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::CompileContext</scope><name>gameObjects</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1CompileContext_1afb89a2312ac8d221955e1f570091d0ac" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::CompileContext</scope><name>pSkeleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

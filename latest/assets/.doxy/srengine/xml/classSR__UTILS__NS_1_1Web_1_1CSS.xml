@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Web_1_1CSS" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Web::CSS</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; CSS &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a43f639170a04d9c696da772ac8dd3e8e" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Web_1_1CSS" kindref="compound">CSS</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::Web::CSS::Super =  SR_HTYPES_NS::SharedPtr&lt;CSS&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="63" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Web_1_1CSS_1adfb1d46f13ae24a263d8b1a7b7457d12" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Web_1_1CSS" kindref="compound">CSS</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::Web::CSS::Ptr =  SR_HTYPES_NS::SharedPtr&lt;CSS&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="65" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a3d36616591ff8f7a46ece6425d41a57b" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref></type>
+        <definition>CSSStyle SR_UTILS_NS::Web::CSS::m_globalStyle</definition>
+        <argsstring></argsstring>
+        <name>m_globalStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::m_globalStyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="112" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a1ed10e41924b2c8c7d2697b2e0f65f18" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::pair&lt; std::string, bool &gt;, <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> &gt;</type>
+        <definition>std::map&lt;std::pair&lt;std::string, bool &gt;, CSSStyle&gt; SR_UTILS_NS::Web::CSS::m_styles</definition>
+        <argsstring></argsstring>
+        <name>m_styles</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::m_styles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="113" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a178e343f130c3e09f93615608945f9da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Web::CSS::CSS</definition>
+        <argsstring>()</argsstring>
+        <name>CSS</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::CSS</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="68" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a0c0e626d88c96f050122e75d2c377a7b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Web::CSS::ToString</definition>
+        <argsstring>(uint16_t depth=0) const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::ToString</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>depth</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="71" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1aaa82c41a257ba975a8d0f0924a81ee65" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> *</type>
+        <definition>SR_NODISCARD const CSSStyle * SR_UTILS_NS::Web::CSS::GetClassStyle</definition>
+        <argsstring>(const std::string &amp;token) const</argsstring>
+        <name>GetClassStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::GetClassStyle</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="73" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="73" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1aced8e0eded320312212e73e62cf9baf1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> *</type>
+        <definition>SR_NODISCARD const CSSStyle * SR_UTILS_NS::Web::CSS::GetTagStyle</definition>
+        <argsstring>(const std::string &amp;token) const</argsstring>
+        <name>GetTagStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::GetTagStyle</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="79" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="79" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a5b02e35a6c82fa86792367241caf220c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Web::CSS::AddClassStyle</definition>
+        <argsstring>(std::string &amp;&amp;token, const CSSStyle &amp;style)</argsstring>
+        <name>AddClassStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::AddClassStyle</qualifiedname>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="85" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="85" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1a84acb7ab50bd5454cbb4eb9c4feab58d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Web::CSS::AddTagStyle</definition>
+        <argsstring>(std::string &amp;&amp;token, const CSSStyle &amp;style)</argsstring>
+        <name>AddTagStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::AddTagStyle</qualifiedname>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="90" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1af99aedc9c15504e9f69ed3b6d568994f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> *</type>
+        <definition>SR_NODISCARD const CSSStyle * SR_UTILS_NS::Web::CSS::GetGlobalStyle</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGlobalStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::GetGlobalStyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="95" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1CSS_1ab2eb42084f8966109c8e54babb1e1f7c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref> *</type>
+        <definition>SR_NODISCARD CSSStyle * SR_UTILS_NS::Web::CSS::GetOrCreateStyle</definition>
+        <argsstring>(std::string_view token, bool isClass)</argsstring>
+        <name>GetOrCreateStyle</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSS::GetOrCreateStyle</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isClass</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="99" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="99" bodyend="109"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; CSS &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::Web::CSS</label>
+        <link refid="classSR__UTILS__NS_1_1Web_1_1CSS"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; CSS &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::Web::CSS</label>
+        <link refid="classSR__UTILS__NS_1_1Web_1_1CSS"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="62" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" bodystart="62" bodyend="115"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a5b02e35a6c82fa86792367241caf220c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>AddClassStyle</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a84acb7ab50bd5454cbb4eb9c4feab58d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>AddTagStyle</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>AutoFree</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a178e343f130c3e09f93615608945f9da" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>CSS</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1aaa82c41a257ba975a8d0f0924a81ee65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetClassStyle</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1af99aedc9c15504e9f69ed3b6d568994f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetGlobalStyle</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1ab2eb42084f8966109c8e54babb1e1f7c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetOrCreateStyle</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetSRClass</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1aced8e0eded320312212e73e62cf9baf1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetTagStyle</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>m_basicManually</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>m_data</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a3d36616591ff8f7a46ece6425d41a57b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>m_globalStyle</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a1ed10e41924b2c8c7d2697b2e0f65f18" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>m_styles</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1adfb1d46f13ae24a263d8b1a7b7457d12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>StaticCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a43f639170a04d9c696da772ac8dd3e8e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Super</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSS_1a0c0e626d88c96f050122e75d2c377a7b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>ToString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::CSS</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

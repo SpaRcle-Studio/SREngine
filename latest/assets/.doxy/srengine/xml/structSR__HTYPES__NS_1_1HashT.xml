@@ -1,0 +1,519 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__HTYPES__NS_1_1HashT" kind="struct" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::HashT</compoundname>
+    <includes refid="MerkleTree_8h" local="no">MerkleTree.h</includes>
+    <templateparamlist>
+      <param>
+        <type>size_t</type>
+        <declname>SIZE</declname>
+        <defname>SIZE</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__HTYPES__NS_1_1HashT_1ac0a13164423fef272deb9eb3fd038d50" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_HTYPES_NS::HashT&lt; SIZE &gt;::bytes[SIZE]</definition>
+        <argsstring>[SIZE]</argsstring>
+        <name>bytes</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::bytes</qualifiedname>
+        <briefdescription>
+<para>Holds the hash bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="111" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a9ac93fd8420d5eab468c41202d8ed31d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::HashT</definition>
+        <argsstring>()</argsstring>
+        <name>HashT</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::HashT</qualifiedname>
+        <briefdescription>
+<para>Constructs a MerkleHash with all bytes set to zero. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="114" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="114" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1af3a5ce22e8bad8086f3a039bb1e2103d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::HashT</definition>
+        <argsstring>(const uint8_t *bytes)</argsstring>
+        <name>HashT</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::HashT</qualifiedname>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a MerkleHash from a byte buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer with hash value </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="121" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="121" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1ad5fcccc54c2e68603bf9b6e0b02e8e45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::HashT</definition>
+        <argsstring>(const std::string &amp;s)</argsstring>
+        <name>HashT</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::HashT</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a MerkleHash from a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String to read the hash value from </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="128" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="128" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a5bf08bd714ff7411d3dc234bf3d077e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::HashT</definition>
+        <argsstring>(const std::vector&lt; uint8_t &gt; &amp;bytes)</argsstring>
+        <name>HashT</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::HashT</qualifiedname>
+        <param>
+          <type>const std::vector&lt; uint8_t &gt; &amp;</type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>Deserialises a MerkleHash from a vector of bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector to read the hash value from </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="142" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="142" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a88346c492e104449887ec74fe14f7f5b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::HashT</definition>
+        <argsstring>(const std::vector&lt; uint8_t &gt; &amp;bytes, size_t &amp;position)</argsstring>
+        <name>HashT</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::HashT</qualifiedname>
+        <param>
+          <type>const std::vector&lt; uint8_t &gt; &amp;</type>
+          <declname>bytes</declname>
+        </param>
+        <param>
+          <type>size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Deserialises a MerkleHash from a vector of bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector to read the hash value from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position of the first byte in <computeroutput>bytes</computeroutput> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="152" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="152" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a6ebb9490b1b03828493ed03f9f6135c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::HashT</definition>
+        <argsstring>(const std::array&lt; uint8_t, SIZE &gt; &amp;bytes)</argsstring>
+        <name>HashT</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::HashT</qualifiedname>
+        <param>
+          <type>const std::array&lt; uint8_t, SIZE &gt; &amp;</type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>Deserialises a MerkleHash from an array of bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array to read the hash value from </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="161" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1addf6c8e1d54eb28ce7a3e6b51db4b64e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t SR_HTYPES_NS::HashT&lt; SIZE &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::size</qualifiedname>
+        <briefdescription>
+<para>The size of the hash (in number of bytes) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="167" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a838edb82359fa3705b7ceb3426bbe192" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::HashT&lt; SIZE &gt;::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::zero</qualifiedname>
+        <briefdescription>
+<para>zeros out all bytes in the hash </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="173" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="173" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a9a26533cacc7c89a97ae17f866e80465" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t SR_HTYPES_NS::HashT&lt; SIZE &gt;::serialised_size</definition>
+        <argsstring>() const</argsstring>
+        <name>serialised_size</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::serialised_size</qualifiedname>
+        <briefdescription>
+<para>The size of the serialisation of the hash (in number of bytes) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="179" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="179" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1accb0f937b0948b4b39838809c19667bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string SR_HTYPES_NS::HashT&lt; SIZE &gt;::to_string</definition>
+        <argsstring>(size_t num_bytes=SIZE, bool lower_case=true) const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::to_string</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>num_bytes</declname>
+          <defval>SIZE</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>lower_case</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Convert a hash to a hex-encoded string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num_bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of bytes to convert </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lower_case</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Enables lower-case hex characters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="187" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="187" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a27dbf1b66585491989d5efdebd094101" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structSR__HTYPES__NS_1_1HashT" kindref="compound">HashT</ref>&lt; SIZE &gt;</type>
+        <definition>HashT&lt; SIZE &gt; SR_HTYPES_NS::HashT&lt; SIZE &gt;::operator=</definition>
+        <argsstring>(const HashT&lt; SIZE &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__HTYPES__NS_1_1HashT" kindref="compound">HashT</ref>&lt; SIZE &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>MerkleHash assignment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="201" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="201" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1aebfaf56d77058fa0f86c6ade0e54005b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::HashT&lt; SIZE &gt;::operator==</definition>
+        <argsstring>(const HashT&lt; SIZE &gt; &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__HTYPES__NS_1_1HashT" kindref="compound">HashT</ref>&lt; SIZE &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>MerkleHash equality operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="208" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="208" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a65c01c975a0828ae8fb8eb9082c12c09" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::HashT&lt; SIZE &gt;::operator==</definition>
+        <argsstring>(const std::string &amp;rawHash) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::operator==</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>rawHash</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="213" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="213" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1ac7d1ff4da0a272388bbf2aa9003c4fd8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::HashT&lt; SIZE &gt;::operator!=</definition>
+        <argsstring>(const HashT&lt; SIZE &gt; &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__HTYPES__NS_1_1HashT" kindref="compound">HashT</ref>&lt; SIZE &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>MerkleHash inequality operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="219" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="219" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1aca0531fc800b74ea58af1638dcc42b80" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::HashT&lt; SIZE &gt;::serialise</definition>
+        <argsstring>(std::vector&lt; uint8_t &gt; &amp;buffer) const</argsstring>
+        <name>serialise</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::serialise</qualifiedname>
+        <param>
+          <type>std::vector&lt; uint8_t &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Serialises a hash. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to serialise to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="227" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="227" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a8e89fe8495b4bb451a58284b38e8e7c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::HashT&lt; SIZE &gt;::deserialise</definition>
+        <argsstring>(const std::vector&lt; uint8_t &gt; &amp;buffer, size_t &amp;position)</argsstring>
+        <name>deserialise</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::deserialise</qualifiedname>
+        <param>
+          <type>const std::vector&lt; uint8_t &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Deserialises a hash. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to read the hash from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position of the first byte in <computeroutput>bytes</computeroutput> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="237" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="237" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a61cc97df98b355fd8d7328881790c744" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::HashT&lt; SIZE &gt;::deserialise</definition>
+        <argsstring>(const std::vector&lt; uint8_t &gt; &amp;buffer)</argsstring>
+        <name>deserialise</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::deserialise</qualifiedname>
+        <param>
+          <type>const std::vector&lt; uint8_t &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Deserialises a hash. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to read the hash from </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="248" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="248" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__HTYPES__NS_1_1HashT_1a1914dc9eaa500cd3e20ff2c543f456ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::HashT&lt; SIZE &gt;::operator std::vector&lt; uint8_t &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator std::vector&lt; uint8_t &gt;</name>
+        <qualifiedname>SR_HTYPES_NS::HashT::vector&lt; uint8_t &gt;</qualifiedname>
+        <briefdescription>
+<para>Conversion operator to vector of bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="255" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="255" bodyend="260"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Template for fixed-size hashes. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>SIZE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the hash in number of bytes </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" line="108" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/MerkleTree.h" bodystart="109" bodyend="261"/>
+    <listofallmembers>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1ac0a13164423fef272deb9eb3fd038d50" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>bytes</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a8e89fe8495b4bb451a58284b38e8e7c1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>deserialise</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a61cc97df98b355fd8d7328881790c744" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>deserialise</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a9ac93fd8420d5eab468c41202d8ed31d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>HashT</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1af3a5ce22e8bad8086f3a039bb1e2103d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>HashT</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1ad5fcccc54c2e68603bf9b6e0b02e8e45" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>HashT</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a5bf08bd714ff7411d3dc234bf3d077e6" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>HashT</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a88346c492e104449887ec74fe14f7f5b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>HashT</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a6ebb9490b1b03828493ed03f9f6135c2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>HashT</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a1914dc9eaa500cd3e20ff2c543f456ac" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>operator std::vector&lt; uint8_t &gt;</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1ac7d1ff4da0a272388bbf2aa9003c4fd8" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>operator!=</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a27dbf1b66585491989d5efdebd094101" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>operator=</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1aebfaf56d77058fa0f86c6ade0e54005b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>operator==</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a65c01c975a0828ae8fb8eb9082c12c09" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>operator==</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1aca0531fc800b74ea58af1638dcc42b80" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>serialise</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a9a26533cacc7c89a97ae17f866e80465" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>serialised_size</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1addf6c8e1d54eb28ce7a3e6b51db4b64e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>size</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1accb0f937b0948b4b39838809c19667bf" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>to_string</name></member>
+      <member refid="structSR__HTYPES__NS_1_1HashT_1a838edb82359fa3705b7ceb3426bbe192" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::HashT</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

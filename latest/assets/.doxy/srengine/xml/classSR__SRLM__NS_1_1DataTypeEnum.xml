@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRLM__NS_1_1DataTypeEnum" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRLM_NS::DataTypeEnum</compoundname>
+    <basecompoundref refid="classSR__SRLM__NS_1_1DataTypeInt64" prot="public" virt="non-virtual">SR_SRLM_NS::DataTypeInt64</basecompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataTypeFlow" prot="public" virt="non-virtual">SR_SRLM_NS::DataTypeFlow</derivedcompoundref>
+    <includes refid="DataType_8h" local="no">DataType.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1DataTypeEnum_1a06586d2add201892f0a44cbfdc5d0bb6" prot="private" static="no" mutable="no">
+        <type>EnumReflector *</type>
+        <definition>EnumReflector* SR_SRLM_NS::DataTypeEnum::m_reflector</definition>
+        <argsstring></argsstring>
+        <name>m_reflector</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::m_reflector</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="185" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1aca4211fa8e756c917d2f3653fff6517e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRLM_NS::DataTypeEnum::DataTypeEnum</definition>
+        <argsstring>()=default</argsstring>
+        <name>DataTypeEnum</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::DataTypeEnum</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="161" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a965f7ceedf6498f4a56a311d93563949" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRLM_NS::DataTypeEnum::DataTypeEnum</definition>
+        <argsstring>(int64_t value, EnumReflector *pReflector)</argsstring>
+        <name>DataTypeEnum</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::DataTypeEnum</qualifiedname>
+        <param>
+          <type>int64_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>EnumReflector *</type>
+          <declname>pReflector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="163" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1acdba5647917b2cdecf041885dd404b69" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRLM_NS::DataTypeEnum::DataTypeEnum</definition>
+        <argsstring>(EnumReflector *pReflector)</argsstring>
+        <name>DataTypeEnum</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::DataTypeEnum</qualifiedname>
+        <param>
+          <type>EnumReflector *</type>
+          <declname>pReflector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="168" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="168" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1ab1ee37a4b4e2894ca14941ae6947bf53" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD Hash</type>
+        <definition>SR_NODISCARD Hash SR_SRLM_NS::DataTypeEnum::GetHashName</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetHashName</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::GetHashName</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1DataType_1a0f6f52b7a1716aa5a81d1a7c2491cd8a">GetHashName</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="174" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a40ed83f07157f40ccbeeb5d31f0aee2a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRLM_NS::DataTypeEnum::GetName</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::GetName</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1DataType_1ad3d9ccd2dee08237715d422336aaa779">GetName</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="175" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a9a01e201d47260d556cfeb0b0efb54e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD EnumReflector *</type>
+        <definition>SR_NODISCARD EnumReflector * SR_SRLM_NS::DataTypeEnum::GetReflector</definition>
+        <argsstring>() const</argsstring>
+        <name>GetReflector</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::GetReflector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="176" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1a4c5b7d58d576fa51dbe96927ed0a6064" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+        <definition>SR_NODISCARD DataType * SR_SRLM_NS::DataTypeEnum::Copy</definition>
+        <argsstring>() const override</argsstring>
+        <name>Copy</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::Copy</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1DataType_1adb1141d084ecc8c4c76a68b1fb25f433">Copy</reimplements>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataTypeFlow_1aaadd50a063d3d3d4b983d934fb9f71b9">Copy</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="178" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="178" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeEnum_1adc31f7a6b872d580c9a65b77fb6b7e58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::DataTypeEnum::SetReflector</definition>
+        <argsstring>(EnumReflector *pReflector)</argsstring>
+        <name>SetReflector</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeEnum::SetReflector</qualifiedname>
+        <param>
+          <type>EnumReflector *</type>
+          <declname>pReflector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="182" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="182" bodyend="182"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>SR_SRLM_NS::DataType</label>
+        <link refid="classSR__SRLM__NS_1_1DataType"/>
+        <childnode refid="4" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRLM_NS::DataTypeEnum</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeEnum"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_SRLM_NS::DataTypeFlow</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeFlow"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRLM_NS::DataTypeInt64</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeInt64"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>SR_SRLM_NS::DataType</label>
+        <link refid="classSR__SRLM__NS_1_1DataType"/>
+        <childnode refid="4" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRLM_NS::DataTypeEnum</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeEnum"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRLM_NS::DataTypeInt64</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeInt64"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" line="158" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataType.h" bodystart="158" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a4c5b7d58d576fa51dbe96927ed0a6064" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>Copy</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1aba8f7bb2e8b7dd6fe69d578cf9ffce5f" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>CopyTo</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1aca4211fa8e756c917d2f3653fff6517e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>DataTypeEnum</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a965f7ceedf6498f4a56a311d93563949" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>DataTypeEnum</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1acdba5647917b2cdecf041885dd404b69" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>DataTypeEnum</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a9b1e5139bd85a1bdefdabc863490a475" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetBool</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a1efa84d4845a52aacc81437779276030" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetClass</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a8400aad3026b462c114c4f64729dbab4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetDouble</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1aa367ad5151aa59c207d2914fd865b982" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetEnum</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a86d08113d31e6890d30db359b185c642" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetFloat</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1ab1ee37a4b4e2894ca14941ae6947bf53" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a2960bbcbe5c65814eb6ec25ec129569e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetInt16</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1afcdf7742a029fd98dc4f4aa96631688f" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetInt32</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a1111f8982ceae2be7063fd71dd46d49a" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetInt64</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a56897e03bec49b01ce1d7bd473d8336e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetInt8</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1ae88b2ce6e06a6379396ac4c9a9a44dca" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetMeta</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1ae80891d607d5b6070759fee3c5946c48" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetMetaData</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a40ed83f07157f40ccbeeb5d31f0aee2a" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetName</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a9e46ccdc1d37794832c0f51b7378e682" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetRawValue</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a9a01e201d47260d556cfeb0b0efb54e6" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetReflector</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a2d530924dcde9b0bd15d43035fe0d0de" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetString</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1ada5adce1f16587be5e8855032ab809cb" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetUInt16</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a73116d1aec22c4cb39db9b9d2bc3a0e1" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetUInt32</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a8f2750a7be76e22e17823dd0697b9ccc" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetUInt64</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a73208dfbe82afcb520f30542160b4e29" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>GetUInt8</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1ab8e8d6a9d04f82fb91d4276acb429628" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>Hash</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a52ab4813b55f3b17d4af99868822370d" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>LoadXml</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1a06586d2add201892f0a44cbfdc5d0bb6" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>m_reflector</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1ae6ffdccabe2eb6570e6ba796409935b4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>Meta</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1ace610d2cb1500653cb2bbcf334f80ed9" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>Reset</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a62e5a9082e649e038a29c72019c1fecf" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>SaveXml</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a1e5afd866562d18c2a5a9dfb2f04c47e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>SetCustomValue</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataType_1a2fc5c71d797908ae4331ccbd8fb32668" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>SetRawValue</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeEnum_1adc31f7a6b872d580c9a65b77fb6b7e58" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeEnum</scope><name>SetReflector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

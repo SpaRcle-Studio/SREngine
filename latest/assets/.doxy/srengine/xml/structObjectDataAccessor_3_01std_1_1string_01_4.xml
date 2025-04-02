@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structObjectDataAccessor_3_01std_1_1string_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>ObjectDataAccessor&lt; std::string &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1string_01_4_1a754e202f4e45d29b58e88817774835ee" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; std::string &gt;::Save</definition>
+        <argsstring>(ISerializer &amp;serializer, const std::string &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Save</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::string &gt;::Save</qualifiedname>
+        <param>
+          <type>ISerializer &amp;</type>
+          <declname>serializer</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="6" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="6" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="structObjectDataAccessor_3_01std_1_1string_01_4_1a18fa46eaca6d34468a6ad53ccc9e9ba6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; std::string &gt;::Load</definition>
+        <argsstring>(IDeserializer &amp;deserializer, std::string &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Load</name>
+        <qualifiedname>ObjectDataAccessor&lt; std::string &gt;::Load</qualifiedname>
+        <param>
+          <type>IDeserializer &amp;</type>
+          <declname>deserializer</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="10" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="10" bodyend="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="5" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="5" bodyend="13"/>
+    <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01std_1_1string_01_4_1a18fa46eaca6d34468a6ad53ccc9e9ba6" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::string &gt;</scope><name>Load</name></member>
+      <member refid="structObjectDataAccessor_3_01std_1_1string_01_4_1a754e202f4e45d29b58e88817774835ee" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; std::string &gt;</scope><name>Save</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

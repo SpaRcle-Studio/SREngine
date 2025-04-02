@@ -1,0 +1,595 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__ANIMATIONS__NS_1_1AnimationState" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_ANIMATIONS_NS::AnimationState</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationClipState" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationClipState</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationEntryPointState" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationEntryPointState</derivedcompoundref>
+    <derivedcompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationNoneState" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationNoneState</derivedcompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a1af0be2e22ca704dd945d90c7a33718f" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_ANIMATIONS_NS::AnimationState::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a92f26f594d6ce6c3820b7b9f59a83924" prot="private" static="no">
+        <type>std::vector&lt; <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kindref="compound">AnimationStateTransition</ref> * &gt;</type>
+        <definition>using SR_ANIMATIONS_NS::AnimationState::Transitions =  std::vector&lt;AnimationStateTransition*&gt;</definition>
+        <argsstring></argsstring>
+        <name>Transitions</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Transitions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationState_1afdcbf607196407427dc5798af317e2c3" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::AnimationState::m_resetOnPlay</definition>
+        <argsstring></argsstring>
+        <name>m_resetOnPlay</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::m_resetOnPlay</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="63" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a49a254852db604e5a6a7bd0612c31833" prot="protected" static="no" mutable="no">
+        <type>Transitions</type>
+        <definition>Transitions SR_ANIMATIONS_NS::AnimationState::m_transitions</definition>
+        <argsstring></argsstring>
+        <name>m_transitions</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::m_transitions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="64" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationState_1af143be9a3c2b041e9d3053ae9d33f678" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kindref="compound">AnimationStateTransition</ref> *</type>
+        <definition>AnimationStateTransition* SR_ANIMATIONS_NS::AnimationState::m_activeTransition</definition>
+        <argsstring></argsstring>
+        <name>m_activeTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::m_activeTransition</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="65" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a0efbc302634e13a25213ae11f0ad2fcc" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
+        <definition>AnimationStateMachine* SR_ANIMATIONS_NS::AnimationState::m_machine</definition>
+        <argsstring></argsstring>
+        <name>m_machine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::m_machine</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="66" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ab8221a707e930f08ac7955ed1d4d10b5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationState::AnimationState</definition>
+        <argsstring>()</argsstring>
+        <name>AnimationState</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::AnimationState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="19" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ad1cc1be65c4e770955e87b7ac1db581b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationState::~AnimationState</definition>
+        <argsstring>() override</argsstring>
+        <name>~AnimationState</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::~AnimationState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ab5ffdaba88c9fb47a622db37f9eb1d0f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
+        <definition>SR_NODISCARD AnimationStateMachine * SR_ANIMATIONS_NS::AnimationState::GetMachine</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetMachine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="28" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ab6634b9645c2ee5c293702e61c87c07d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_ANIMATIONS_NS::AnimationState::GetName</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetName</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1a7cec043be5353260bda150058740bf54">GetName</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationEntryPointState_1a38dd38df300a74fa680256452a86906c">GetName</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationNoneState_1a7ad8d9f98b89b894998311ed3b36f262">GetName</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="30" column="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1aa360dd390d8689a8ffc2b6abb80987bf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>virtual SR_NODISCARD float_t SR_ANIMATIONS_NS::AnimationState::GetProgress</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetProgress</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetProgress</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1ae9366586d94a66baaffde731e009d33f">GetProgress</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="31" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a9b38804c68fdf0217e452e6e9ec9a1bb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>virtual SR_NODISCARD float_t SR_ANIMATIONS_NS::AnimationState::GetDuration</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetDuration</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetDuration</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1aa315edc4ba3e7e19288608043c2823f5">GetDuration</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="32" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1af54cae6966df6d4bfb335dbb76cf9a26" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>virtual SR_NODISCARD float_t SR_ANIMATIONS_NS::AnimationState::GetTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetTime</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetTime</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1a1a90b6f7aa32ddb2479b658fe1a09851">GetTime</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="33" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a36bf924f55cfa1e15d3121fe2dfdee8f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kindref="compound">AnimationStateTransition</ref> *</type>
+        <definition>SR_NODISCARD AnimationStateTransition * SR_ANIMATIONS_NS::AnimationState::GetActiveTransition</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetActiveTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetActiveTransition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="35" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a942f50706d1db7ab94fe6bb3fff9ae83" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Transitions &amp;</type>
+        <definition>SR_NODISCARD Transitions &amp; SR_ANIMATIONS_NS::AnimationState::GetTransitions</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetTransitions</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetTransitions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="37" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a729c062d886971786fb1c4bbb831ae1b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const Transitions &amp;</type>
+        <definition>SR_NODISCARD const Transitions &amp; SR_ANIMATIONS_NS::AnimationState::GetTransitions</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetTransitions</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::GetTransitions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="38" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a01201254bf8c4ab8548af3e57c7324b7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationState::IsResetOnPlay</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsResetOnPlay</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::IsResetOnPlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="39" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ac8afe7ca1b61dfb4b974bdb298051294" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationState::OnTransitionBegin</definition>
+        <argsstring>(AnimationStateTransition *pTransition)</argsstring>
+        <name>OnTransitionBegin</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::OnTransitionBegin</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kindref="compound">AnimationStateTransition</ref> *</type>
+          <declname>pTransition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a197e22e9ab8b7f571072a6a6e9d0857d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationState::OnTransitionDone</definition>
+        <argsstring>()</argsstring>
+        <name>OnTransitionDone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::OnTransitionDone</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a0aaf8d5fb8284842957272fbffcb0ff0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationState::Update</definition>
+        <argsstring>(const UpdateContext &amp;context)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Update</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="43" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a3ae6b1be23823f63d1ea83234b6e1ae7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationState::SetMachine</definition>
+        <argsstring>(AnimationStateMachine *pMachine)</argsstring>
+        <name>SetMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::SetMachine</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
+          <declname>pMachine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="45" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a3a9b77c8275ba3ea3f8826f70d61c5aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationState::SetResetOnPlay</definition>
+        <argsstring>(bool reset)</argsstring>
+        <name>SetResetOnPlay</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::SetResetOnPlay</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>reset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="46" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ac5ee4993f86a5962660a12052b5fa5db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationState::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Reset</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1a63fe9b4d2e867f2c91f3b8421c5a20e1">Reset</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="48" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1ab092ef046ae599eabb090f11efd40f76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_ANIMATIONS_NS::AnimationState::Update</definition>
+        <argsstring>(UpdateContext &amp;context)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Update</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1afd0153fa7ea66e05269169ae2263c0dc">Update</reimplementedby>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="50" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a321fab4824562245f9a8c010a8eebefc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_ANIMATIONS_NS::AnimationState::Compile</definition>
+        <argsstring>(CompileContext &amp;context)</argsstring>
+        <name>Compile</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Compile</qualifiedname>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClipState_1afb86e705f32fe869d1cae25f09393f5c">Compile</reimplementedby>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1CompileContext" kindref="compound">CompileContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="51" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a0f27692ae98e9821ceaabb3af1c13ef7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+            <defval><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition" kindref="compound">AnimationStateTransition</ref></defval>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_ANIMATIONS_NS::AnimationState::AddTransition</definition>
+        <argsstring>(Args &amp;&amp;...args)</argsstring>
+        <name>AddTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::AddTransition</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="53" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="53" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1aeff14017f570b9e9286fad18d9c48f07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_ANIMATIONS_NS::AnimationState::AddTransition</definition>
+        <argsstring>(T *pTransition)</argsstring>
+        <name>AddTransition</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::AddTransition</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>pTransition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="57" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="57" bodyend="60"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationState_1a99157c35abc47e5302b2eeb4cc8ee89d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationState" kindref="compound">AnimationState</ref> *</type>
+        <definition>static SR_NODISCARD AnimationState * SR_ANIMATIONS_NS::AnimationState::Load</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;nodeXml)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationState::Load</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>nodeXml</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="26" column="44"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>SR_ANIMATIONS_NS::AnimationClipState</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationClipState"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::AnimationEntryPointState</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationEntryPointState"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::AnimationNoneState</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationNoneState"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationState</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationState"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationState</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationState"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_activeTransition</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::AnimationStateCondition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::AnimationStateMachine</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_ANIMATIONS_NS::AnimationStateTransition</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_condition</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>m_destinationState</edgelabel>
+          <edgelabel>m_sourceState</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_ANIMATIONS_NS::IAnimationDataSet</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationState.h" bodystart="15" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a0f27692ae98e9821ceaabb3af1c13ef7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>AddTransition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1aeff14017f570b9e9286fad18d9c48f07" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>AddTransition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ab8221a707e930f08ac7955ed1d4d10b5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>AnimationState</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a321fab4824562245f9a8c010a8eebefc" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Compile</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a36bf924f55cfa1e15d3121fe2dfdee8f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetActiveTransition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a9b38804c68fdf0217e452e6e9ec9a1bb" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetDuration</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ab5ffdaba88c9fb47a622db37f9eb1d0f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetMachine</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ab6634b9645c2ee5c293702e61c87c07d" prot="public" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetName</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1aa360dd390d8689a8ffc2b6abb80987bf" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetProgress</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1af54cae6966df6d4bfb335dbb76cf9a26" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetTime</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a942f50706d1db7ab94fe6bb3fff9ae83" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetTransitions</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a729c062d886971786fb1c4bbb831ae1b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>GetTransitions</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a01201254bf8c4ab8548af3e57c7324b7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>IsResetOnPlay</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a99157c35abc47e5302b2eeb4cc8ee89d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Load</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1af143be9a3c2b041e9d3053ae9d33f678" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>m_activeTransition</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a0efbc302634e13a25213ae11f0ad2fcc" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>m_machine</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1afdcbf607196407427dc5798af317e2c3" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>m_resetOnPlay</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a49a254852db604e5a6a7bd0612c31833" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>m_transitions</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>NonCopyable</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ac8afe7ca1b61dfb4b974bdb298051294" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>OnTransitionBegin</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a197e22e9ab8b7f571072a6a6e9d0857d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>OnTransitionDone</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>operator=</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ac5ee4993f86a5962660a12052b5fa5db" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Reset</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a3ae6b1be23823f63d1ea83234b6e1ae7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>SetMachine</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a3a9b77c8275ba3ea3f8826f70d61c5aa" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>SetResetOnPlay</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a1af0be2e22ca704dd945d90c7a33718f" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Super</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a92f26f594d6ce6c3820b7b9f59a83924" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Transitions</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1a0aaf8d5fb8284842957272fbffcb0ff0" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Update</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ab092ef046ae599eabb090f11efd40f76" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>Update</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationState_1ad1cc1be65c4e770955e87b7ac1db581b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>~AnimationState</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationState</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

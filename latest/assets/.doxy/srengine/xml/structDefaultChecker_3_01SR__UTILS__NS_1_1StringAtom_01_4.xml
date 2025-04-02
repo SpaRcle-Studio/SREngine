@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structDefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structDefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a57c4db8580f22221dfc561766c76d60e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;::IsDefault</definition>
+        <argsstring>(const SR_UTILS_NS::StringAtom &amp;value)</argsstring>
+        <name>IsDefault</name>
+        <qualifiedname>DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;::IsDefault</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" line="12" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" bodystart="12" bodyend="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" line="11" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/DefaultCheckers.inl.h" bodystart="11" bodyend="15"/>
+    <listofallmembers>
+      <member refid="structDefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a57c4db8580f22221dfc561766c76d60e" prot="public" virt="non-virtual"><scope>DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;</scope><name>IsDefault</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

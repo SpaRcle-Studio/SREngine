@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_TYPES_NS::detail::fixed_static_array</compoundname>
+    <basecompoundref refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array" prot="public" virt="non-virtual">SR_TYPES_NS::detail::array_detail::array&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename MyType</type>
+      </param>
+      <param>
+        <type>const size_t</type>
+        <declname>MySize</declname>
+        <defname>MySize</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a693b136e4bc8cc6fc4781b8a0d89f329" prot="private" static="no">
+        <type><ref refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array" kindref="compound">detail::array_detail::array</ref>&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;</type>
+        <definition>using SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::base_class_type =  detail::array_detail::array&lt;MyType, static_cast&lt;std::size_t&gt;(MySize)&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_class_type</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::base_class_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1718" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1718" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a4917f75a6e50d21eba398c44968ea702" prot="public" static="no">
+        <type>size_t</type>
+        <definition>using SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::size_type =  size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::size_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1721" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1721" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1ae23be8532b4029ecc2c1730f49bdb9fe" prot="public" static="no">
+        <type>typename base_class_type::value_type</type>
+        <definition>using SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::value_type =  typename base_class_type::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1722" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1722" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aeccd33c71cff1a974e782309324346c2" prot="public" static="no">
+        <type><ref refid="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe" kindref="compound">allocator_dummy_unsafe</ref></type>
+        <definition>using SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::allocator_type =  allocator_dummy_unsafe</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::allocator_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1723" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1723" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a8b4edda771b44988e560dacb5edb186c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_type</type>
+        <definition>static constexpr size_type SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::static_size</definition>
+        <argsstring>()</argsstring>
+        <name>static_size</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::static_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1725" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1725" bodyend="1725"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1acc09d3b62607ca8b22a347c8e666e3f0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::fixed_static_array</definition>
+        <argsstring>()=default</argsstring>
+        <name>fixed_static_array</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::fixed_static_array</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1727" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1acf6b9401ecf9c4987356ba689eac3955" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::fixed_static_array</definition>
+        <argsstring>(const size_type size_in, const value_type &amp;value_in=value_type(), allocator_type alloc_in=allocator_type())</argsstring>
+        <name>fixed_static_array</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::fixed_static_array</qualifiedname>
+        <param>
+          <type>const size_type</type>
+          <declname>size_in</declname>
+        </param>
+        <param>
+          <type>const value_type &amp;</type>
+          <declname>value_in</declname>
+          <defval>value_type()</defval>
+        </param>
+        <param>
+          <type><ref refid="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe" kindref="compound">allocator_type</ref></type>
+          <declname>alloc_in</declname>
+          <defval><ref refid="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe" kindref="compound">allocator_type</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1729" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1729" bodyend="1747"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aac8394e4116cf8a581cff0ad6f18a006" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::fixed_static_array</definition>
+        <argsstring>(const fixed_static_array &amp;)=default</argsstring>
+        <name>fixed_static_array</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::fixed_static_array</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">fixed_static_array</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1749" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a3b3cccbfe4c69c5ec73684895c4f00e1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::fixed_static_array</definition>
+        <argsstring>(fixed_static_array &amp;&amp;) noexcept=default</argsstring>
+        <name>fixed_static_array</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::fixed_static_array</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">fixed_static_array</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1750" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a7214d891b379bb9c6db4c19ba2b2d883" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::fixed_static_array</definition>
+        <argsstring>(std::initializer_list&lt; typename base_class_type::value_type &gt; lst)</argsstring>
+        <name>fixed_static_array</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::fixed_static_array</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; typename base_class_type::value_type &gt;</type>
+          <declname>lst</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1752" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1752" bodyend="1773"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aee60b8ab626976aece11723b0d2e7a6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::~fixed_static_array</definition>
+        <argsstring>()=default</argsstring>
+        <name>~fixed_static_array</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::~fixed_static_array</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1776" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a7650576c362874906a3cf14aa0a527ae" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">fixed_static_array</ref> &amp;=default</type>
+        <definition>fixed_static_array &amp;=default SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::operator=</definition>
+        <argsstring>(const fixed_static_array &amp;other_array)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">fixed_static_array</ref> &amp;</type>
+          <declname>other_array</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1778" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aa88c13ff9869e6e19ef55b3963b98efe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">fixed_static_array</ref> &amp;=default</type>
+        <definition>fixed_static_array &amp;=default SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::operator=</definition>
+        <argsstring>(fixed_static_array &amp;&amp;other_array) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">fixed_static_array</ref> &amp;&amp;</type>
+          <declname>other_array</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1779" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1abbc91fba4d06e263e550892212d8134d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>typename base_class_type::reference</type>
+        <definition>typename base_class_type::reference SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::operator[]</definition>
+        <argsstring>(const size_type i)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::operator[]</qualifiedname>
+        <param>
+          <type>const size_type</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1781" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1781" bodyend="1781"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1ae2bc47ffa562d2235692d91fd0481373" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>typename base_class_type::const_reference</type>
+        <definition>typename base_class_type::const_reference SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;::operator[]</definition>
+        <argsstring>(const size_type i) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_TYPES_NS::detail::fixed_static_array::operator[]</qualifiedname>
+        <param>
+          <type>const size_type</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1782" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1782" bodyend="1782"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_TYPES_NS::detail::array_detail::array&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;</label>
+        <link refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array"/>
+      </node>
+      <node id="1">
+        <label>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;</label>
+        <link refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_TYPES_NS::detail::array_detail::array&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;</label>
+        <link refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array"/>
+      </node>
+      <node id="1">
+        <label>SR_TYPES_NS::detail::fixed_static_array&lt; MyType, MySize &gt;</label>
+        <link refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1715" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1716" bodyend="1783"/>
+    <listofallmembers>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aeccd33c71cff1a974e782309324346c2" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>allocator_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab7c61eaabb31d0a9319788805c8620e5" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>assign</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab7c61eaabb31d0a9319788805c8620e5" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>assign</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab845c464d0bc013bea574045241f4f20" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>at</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab82a8a4fc313f1dd4695e86e84da69b7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>at</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab845c464d0bc013bea574045241f4f20" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>at</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab82a8a4fc313f1dd4695e86e84da69b7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>at</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a3e7424ab220bdb425aa91dee7e0be8b9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>back</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a001c6921f2c36fa857b5e27cb8d667ab" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>back</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a3e7424ab220bdb425aa91dee7e0be8b9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>back</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a001c6921f2c36fa857b5e27cb8d667ab" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>back</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a693b136e4bc8cc6fc4781b8a0d89f329" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>base_class_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a26a10c1398204e15a754d0afe2a21d92" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>begin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ac61b05d08640b14ede3762f6989412d7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>begin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a26a10c1398204e15a754d0afe2a21d92" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>begin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ac61b05d08640b14ede3762f6989412d7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>begin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a68f0836471ab21cb4fe86c78711cc8bb" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>c_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a68f0836471ab21cb4fe86c78711cc8bb" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>c_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a4e684ccf9f3ad58bdea3d17def2c6169" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>cbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a4e684ccf9f3ad58bdea3d17def2c6169" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>cbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a947dc8a9db45cfb192e8788ac726c1de" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>cend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a947dc8a9db45cfb192e8788ac726c1de" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>cend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1abb45e4f47a3ee5c915e64323f7020242" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>const_iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a094b37cfcc9b984b85f32cd64045028b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>const_pointer</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1abd910af6b5acedf2aa1499a2d941f134" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>const_reference</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ad6eb4d6f4d39ba544a993fda557b09f1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>const_reverse_iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a20646fe104389bc63087773a0a52c57f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>crbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a20646fe104389bc63087773a0a52c57f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>crbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ada2350e85118b43b9323c7d74baa41d7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>crend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ada2350e85118b43b9323c7d74baa41d7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>crend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a6dc52a340d31439d5163413a99fd74d6" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>data</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a83db81759db811f3f92ea8ea03949929" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>data</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a6dc52a340d31439d5163413a99fd74d6" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>data</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a83db81759db811f3f92ea8ea03949929" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>data</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a2edfdd7df2bd3a90b2c4036a1e2639a2" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>difference_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1afdb9ffcf190113a8fb018e9003715071" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>elems</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1afdb9ffcf190113a8fb018e9003715071" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>elems</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a4e1bfdb0d9bcc80a64d1bb56951aedb8" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>empty</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a4e1bfdb0d9bcc80a64d1bb56951aedb8" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>empty</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a3f5546bc6ef163bd458059c1cd3a650f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>end</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a8d0d8d2676af1d2e4572061e795281e9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>end</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a3f5546bc6ef163bd458059c1cd3a650f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>end</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a8d0d8d2676af1d2e4572061e795281e9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>end</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a97c52ecc5799c546d8cac4e5845bd461" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fill</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a97c52ecc5799c546d8cac4e5845bd461" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fill</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1acc09d3b62607ca8b22a347c8e666e3f0" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fixed_static_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1acf6b9401ecf9c4987356ba689eac3955" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fixed_static_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aac8394e4116cf8a581cff0ad6f18a006" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fixed_static_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a3b3cccbfe4c69c5ec73684895c4f00e1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fixed_static_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a7214d891b379bb9c6db4c19ba2b2d883" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>fixed_static_array</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ae3c3997b4fb3c266f23bdf1840efe0ac" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>front</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a6b6e06470f9c6b41e136d580475fb9e1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>front</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ae3c3997b4fb3c266f23bdf1840efe0ac" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>front</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a6b6e06470f9c6b41e136d580475fb9e1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>front</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a38bc100ed0621bca4c167f042b47ab9d" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a2db3b6309ce1892ae9d36dec35730e0a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>max_size</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a2db3b6309ce1892ae9d36dec35730e0a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>max_size</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a7650576c362874906a3cf14aa0a527ae" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aa88c13ff9869e6e19ef55b3963b98efe" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a91a81edb28a25b009d9afc99d696dfe4" prot="public" virt="non-virtual" ambiguityscope="SR_TYPES_NS::detail::array_detail::array&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;::"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1abbc91fba4d06e263e550892212d8134d" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator[]</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1ae2bc47ffa562d2235692d91fd0481373" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator[]</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ac50b60581cb8108191f14bd13a15e25e" prot="public" virt="non-virtual" ambiguityscope="SR_TYPES_NS::detail::array_detail::array&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;::"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator[]</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a843c46af8141d2076dcd90b996f1869f" prot="public" virt="non-virtual" ambiguityscope="SR_TYPES_NS::detail::array_detail::array&lt; MyType, static_cast&lt; std::size_t &gt;(MySize)&gt;::"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>operator[]</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ad6b74f95c45e2d3c1cb383e0a91895a8" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>pointer</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a7702db51ae04e62a7d10dc187edaeb0b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a347328edc300b868081b7ebd66f9a211" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a7702db51ae04e62a7d10dc187edaeb0b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a347328edc300b868081b7ebd66f9a211" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rbegin</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1af085250a321b037106fe10dcadbd395e" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>reference</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab9561ec1d851a64be5fe61157ebcc039" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a9afb47df1a1c6cd5fc365408b64fecd7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1ab9561ec1d851a64be5fe61157ebcc039" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a9afb47df1a1c6cd5fc365408b64fecd7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>rend</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1aabb267d0823a1cfcb27b3630d7e1a0bc" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>reverse_iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1af7cacc4170f2007fb3026df6db4be79b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>size</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1af7cacc4170f2007fb3026df6db4be79b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>size</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a4917f75a6e50d21eba398c44968ea702" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>size_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1a8b4edda771b44988e560dacb5edb186c" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>static_size</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a5a388c74edf064d4f145f3eb728251d1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>swap</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array_1a5a388c74edf064d4f145f3eb728251d1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>swap</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1ae23be8532b4029ecc2c1730f49bdb9fe" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>value_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array_1aee60b8ab626976aece11723b0d2e7a6b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::fixed_static_array</scope><name>~fixed_static_array</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

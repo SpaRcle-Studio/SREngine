@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Localization::LocalizationManager</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a4b4c603423409dc82d62864cbee5addd" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, <ref refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile" kindref="compound">LocalizationFile</ref> &gt;</type>
+        <definition>std::unordered_map&lt;StringAtom, LocalizationFile&gt; SR_UTILS_NS::Localization::LocalizationManager::m_localizationFiles</definition>
+        <argsstring></argsstring>
+        <name>m_localizationFiles</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::m_localizationFiles</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+<para>std::set&lt;LocalizedTextComponent&gt; m_textComponents = { }; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="77" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a1b5f8c0731598e63627dbc1bd4eca32f" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile" kindref="compound">LocalizationFile</ref> * &gt; &gt;</type>
+        <definition>std::unordered_map&lt;StringAtom, std::vector&lt;LocalizationFile*&gt; &gt; SR_UTILS_NS::Localization::LocalizationManager::m_localizationGroups</definition>
+        <argsstring></argsstring>
+        <name>m_localizationGroups</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::m_localizationGroups</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="78" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1ac13a105b48c94ffab2dc47e87a19c05c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>StringAtom SR_UTILS_NS::Localization::LocalizationManager::MakeLocFile</definition>
+        <argsstring>(const std::unordered_map&lt; Locale, Path &gt; &amp;localePaths, const Locale &amp;languageToLoad, StringAtom fileId)</argsstring>
+        <name>MakeLocFile</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::MakeLocFile</qualifiedname>
+        <param>
+          <type>const std::unordered_map&lt; Locale, <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt; &amp;</type>
+          <declname>localePaths</declname>
+        </param>
+        <param>
+          <type>const Locale &amp;</type>
+          <declname>languageToLoad</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>fileId</declname>
+        </param>
+        <briefdescription>
+<para>using LocalizedTextComponent = SR_GTYPES_NS::ITextComponent*; </para>
+        </briefdescription>
+        <detaileddescription>
+<para>void RegisterTextComponent(std::string&amp; id, SR_GTYPES_NS::ITextComponent* textComponent); </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="63" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a5f91d77710dafed0827438fe5d9fdf4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::MakeLocGroup</definition>
+        <argsstring>(std::unordered_map&lt; StringAtom, LocalizationFile &gt; &amp;locFiles, const StringAtom &amp;groupId)</argsstring>
+        <name>MakeLocGroup</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::MakeLocGroup</qualifiedname>
+        <param>
+          <type>std::unordered_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, <ref refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile" kindref="compound">LocalizationFile</ref> &gt; &amp;</type>
+          <declname>locFiles</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>groupId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1ab4f5c4dd8526a3367a40c0d7d7cae585" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::RegisterLocGroup</definition>
+        <argsstring>(const std::vector&lt; StringAtom &gt; &amp;locFileIds, const StringAtom &amp;groupId)</argsstring>
+        <name>RegisterLocGroup</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::RegisterLocGroup</qualifiedname>
+        <param>
+          <type>const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt; &amp;</type>
+          <declname>locFileIds</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>groupId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a2b2feed157041f3449026b1f69cce2d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::RemoveLocGroup</definition>
+        <argsstring>(const StringAtom &amp;groupId)</argsstring>
+        <name>RemoveLocGroup</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::RemoveLocGroup</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>groupId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a59b8a8e2fb92fddcf17d0c2aede288b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::RemoveLocFileFromGroup</definition>
+        <argsstring>(const StringAtom &amp;fileId, const StringAtom &amp;groupId)</argsstring>
+        <name>RemoveLocFileFromGroup</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::RemoveLocFileFromGroup</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>fileId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>groupId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1ad2126ebecaac858378ce95e25da4d77d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::AddLocFileIntoGroup</definition>
+        <argsstring>(const StringAtom &amp;fileId, const StringAtom &amp;groupId)</argsstring>
+        <name>AddLocFileIntoGroup</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::AddLocFileIntoGroup</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>fileId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>groupId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1add927e4398dfd62f010c79a5301074e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::ChangeLocGroupLocale</definition>
+        <argsstring>(const StringAtom &amp;id, const Locale &amp;newLocale)</argsstring>
+        <name>ChangeLocGroupLocale</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::ChangeLocGroupLocale</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const Locale &amp;</type>
+          <declname>newLocale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a6d8194513f94658ac502794854bcce93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &gt;</type>
+        <definition>std::vector&lt; StringAtom &gt; SR_UTILS_NS::Localization::LocalizationManager::GetLocGroupsIds</definition>
+        <argsstring>()</argsstring>
+        <name>GetLocGroupsIds</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::GetLocGroupsIds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="70" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a537b2e81f5dc034ad047905c2c9e2775" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::SaveInfoAsConfigFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;filePath)</argsstring>
+        <name>SaveInfoAsConfigFile</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::SaveInfoAsConfigFile</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="72" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1aa02bf1e7857e2ef504197bf56be19e51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Localization::LocalizationManager::LoadInfoAsConfigFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;filePath)</argsstring>
+        <name>LoadInfoAsConfigFile</name>
+        <qualifiedname>SR_UTILS_NS::Localization::LocalizationManager::LoadInfoAsConfigFile</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="73" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" line="59" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/LocalizationManager.h" bodystart="59" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1ad2126ebecaac858378ce95e25da4d77d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>AddLocFileIntoGroup</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1add927e4398dfd62f010c79a5301074e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>ChangeLocGroupLocale</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a6d8194513f94658ac502794854bcce93" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>GetLocGroupsIds</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1aa02bf1e7857e2ef504197bf56be19e51" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>LoadInfoAsConfigFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a4b4c603423409dc82d62864cbee5addd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>m_localizationFiles</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a1b5f8c0731598e63627dbc1bd4eca32f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>m_localizationGroups</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1ac13a105b48c94ffab2dc47e87a19c05c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>MakeLocFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a5f91d77710dafed0827438fe5d9fdf4d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>MakeLocGroup</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1ab4f5c4dd8526a3367a40c0d7d7cae585" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>RegisterLocGroup</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a59b8a8e2fb92fddcf17d0c2aede288b2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>RemoveLocFileFromGroup</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a2b2feed157041f3449026b1f69cce2d7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>RemoveLocGroup</name></member>
+      <member refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager_1a537b2e81f5dc034ad047905c2c9e2775" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::LocalizationManager</scope><name>SaveInfoAsConfigFile</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

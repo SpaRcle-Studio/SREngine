@@ -1,0 +1,529 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__NETWORK__NS_1_1AsioTCPSocket" kind="class" language="C++" prot="public">
+    <compoundname>SR_NETWORK_NS::AsioTCPSocket</compoundname>
+    <basecompoundref refid="classSR__NETWORK__NS_1_1Socket" prot="public" virt="non-virtual">SR_NETWORK_NS::Socket</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1abdd389619fce72e6c001fc27f2c699cf" prot="private" static="no">
+        <type><ref refid="classSR__NETWORK__NS_1_1Socket" kindref="compound">Socket</ref></type>
+        <definition>using SR_NETWORK_NS::AsioTCPSocket::Super =  Socket</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a48d710d24ea88054a224119cee555bcf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class AsioContext</definition>
+        <argsstring></argsstring>
+        <name>AsioContext</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::AsioContext</qualifiedname>
+        <param>
+          <type><ref refid="classSR__NETWORK__NS_1_1AsioContext" kindref="compound">AsioContext</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="19" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1aab9302c91b0c86fe7086ba46d5e21a9b" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; asio::ip::tcp::socket &gt;</type>
+        <definition>std::optional&lt;asio::ip::tcp::socket&gt; SR_NETWORK_NS::AsioTCPSocket::m_socket</definition>
+        <argsstring></argsstring>
+        <name>m_socket</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::m_socket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="49" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a93f466593cfd6857259e5d5cc79c8877" prot="private" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_NETWORK_NS::AsioTCPSocket::AsioTCPSocket</definition>
+        <argsstring>(Context::Ptr pContext)</argsstring>
+        <name>AsioTCPSocket</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::AsioTCPSocket</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref></type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="21" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a05e323416e2af7005a6cef7678b4cd6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_NETWORK_NS::AsioTCPSocket::~AsioTCPSocket</definition>
+        <argsstring>() override</argsstring>
+        <name>~AsioTCPSocket</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::~AsioTCPSocket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1ad3f28227af510528b69da419e99efed0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::AsioTCPSocket::Connect</definition>
+        <argsstring>(const std::string &amp;address, uint16_t port) override</argsstring>
+        <name>Connect</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::Connect</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1ace31b82af40f8134115b7c53da5d207a">Connect</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a71ba8b6702f75b476efb75bf823c57b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::AsioTCPSocket::Send</definition>
+        <argsstring>(const void *data, size_t size) override</argsstring>
+        <name>Send</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::Send</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a5a1d274e57d9bd7b202196bc1317af1f">Send</reimplements>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a9ecdf7139cf74b440c2ce79c6c5d81b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::AsioTCPSocket::SendTo</definition>
+        <argsstring>(const void *data, uint64_t size, const std::string &amp;address, uint16_t port) override</argsstring>
+        <name>SendTo</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::SendTo</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1ae7206a3be6593f45e62bc582b1c92a05">SendTo</reimplements>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a1396b457f4a9d66ac5d0e7be38abba7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::AsioTCPSocket::Close</definition>
+        <argsstring>() override</argsstring>
+        <name>Close</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::Close</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a03e1452766f04459496526bfd033545c">Close</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1ad42bd88e8bd8104dc11f2c77892f6198" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_NETWORK_NS::AsioTCPSocket::Receive</definition>
+        <argsstring>(void *data, size_t size) override</argsstring>
+        <name>Receive</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::Receive</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1ae3ccd8c56515ecd9fba6c686db169d96">Receive</reimplements>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="32" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a639dbaefd98d92079982eea15eb3961f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_NETWORK_NS::AsioTCPSocket::AsyncReceive</definition>
+        <argsstring>(void *data, std::function&lt; void(uint64_t bytesReceived)&gt; callback) override</argsstring>
+        <name>AsyncReceive</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::AsyncReceive</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a60af01df7b0c8ebad0ed6d055c88874b">AsyncReceive</reimplements>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(uint64_t bytesReceived)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="33" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1acab77bde5a703f388e43f677f2a058e7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_NETWORK_NS::AsioTCPSocket::IsOpen</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsOpen</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::IsOpen</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1af5f0c27ddf66ee54874f9ea1bb526f46">IsOpen</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="35" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a60c6f0be4838db23861b833fc45502e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_NETWORK_NS::AsioTCPSocket::GetLocalAddress</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetLocalAddress</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::GetLocalAddress</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a9acb7d23ab906b0701393bc94ff1615b">GetLocalAddress</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="37" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a892601e72c490f543cfbeebff689a25c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_NETWORK_NS::AsioTCPSocket::GetRemoteAddress</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetRemoteAddress</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::GetRemoteAddress</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a043cc9d754e50c5a4eb43c97582aae6a">GetRemoteAddress</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="38" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1aaef1f5579abd1d48f696ce5da3891fb2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD uint16_t</type>
+        <definition>SR_NODISCARD uint16_t SR_NETWORK_NS::AsioTCPSocket::GetLocalPort</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetLocalPort</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::GetLocalPort</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a097340f1f608ec8e3262c6de6f63790b">GetLocalPort</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="40" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a993458955d743b674dc20b2c6bc04d9e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD uint16_t</type>
+        <definition>SR_NODISCARD uint16_t SR_NETWORK_NS::AsioTCPSocket::GetRemotePort</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetRemotePort</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::GetRemotePort</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1a54a824bac7a1f38e9559a5a5c93db16e">GetRemotePort</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="41" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1a7d2e63601130ce9ad3e6c17dfdacf5d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::AsioTCPSocket::SetSocket</definition>
+        <argsstring>(asio::ip::tcp::socket &amp;&amp;socket)</argsstring>
+        <name>SetSocket</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::SetSocket</qualifiedname>
+        <param>
+          <type>asio::ip::tcp::socket &amp;&amp;</type>
+          <declname>socket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="43" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1AsioTCPSocket_1ae7f6f00ed1577130021427201338e946" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::AsioTCPSocket::ReceiveAsyncInternal</definition>
+        <argsstring>() override</argsstring>
+        <name>ReceiveAsyncInternal</name>
+        <qualifiedname>SR_NETWORK_NS::AsioTCPSocket::ReceiveAsyncInternal</qualifiedname>
+        <reimplements refid="classSR__NETWORK__NS_1_1Socket_1af0a80993b5ed9e0777202b7c69402550">ReceiveAsyncInternal</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="46" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Socket &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_NETWORK_NS::AsioTCPSocket</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioTCPSocket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_NETWORK_NS::Socket</label>
+        <link refid="classSR__NETWORK__NS_1_1Socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="6">
+        <label>SR_HTYPES_NS::Function&lt; void(const Socket::Ptr &amp;, const DataPackage::Ptr &amp;, uint64_t size)&gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1Function"/>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Socket &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_NETWORK_NS::AsioTCPSocket</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioTCPSocket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_NETWORK_NS::Socket</label>
+        <link refid="classSR__NETWORK__NS_1_1Socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_receiveCallback</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" line="17" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Asio/AsioTCPSocket.h" bodystart="17" bodyend="51"/>
+    <listofallmembers>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a48d710d24ea88054a224119cee555bcf" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AsioContext</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a93f466593cfd6857259e5d5cc79c8877" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AsioTCPSocket</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a639dbaefd98d92079982eea15eb3961f" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AsyncReceive</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a2f8cc368aa3672dccffbc3f7387fb1a6" prot="public" virt="non-virtual" ambiguityscope="SR_NETWORK_NS::Socket::"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AsyncReceive</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>AutoFree</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a1396b457f4a9d66ac5d0e7be38abba7b" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Close</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1ad3f28227af510528b69da419e99efed0" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Connect</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Get</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1abd2a2384e44ec0f12503b03ead52d1da" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetContext</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a60c6f0be4838db23861b833fc45502e8" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetLocalAddress</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1aaef1f5579abd1d48f696ce5da3891fb2" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetLocalPort</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a6fa83f1bb23616396833f965e7c58751" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetReceiveCallback</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1ad4190b116c70015bac83ffe014e47d40" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetReceivedAsyncData</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1ad34c929025d8ed37ac57ded4ef9c8e36" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetReceivedData</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a892601e72c490f543cfbeebff689a25c" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetRemoteAddress</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a993458955d743b674dc20b2c6bc04d9e" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetRemotePort</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetThis</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1ae14cb0800b4213d9bf1b0b2c0f6ea994" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1acab77bde5a703f388e43f677f2a058e7" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>IsOpen</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a856b84796c861b03e9808171be3d00f8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>IsReceiveRepeated</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_basicManually</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1af5c559c1192f8bd8a47cff4d72ad6683" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_data</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a7ba07eb77e7508724d3f5dd210e5f445" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_isReceiveRepeated</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1acfa358ce7f027380f0609efb5c300f98" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_isWaitingReceive</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a9ecc078bc50c75a545447434dd2bf0d0" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_receiveCallback</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a9efaea9e53782823dfc8a71f90b2605f" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_receivedAsyncData</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1ac3258ef9dd4a4c4616f9ba038a1606b5" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_receivedData</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1aab9302c91b0c86fe7086ba46d5e21a9b" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_socket</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1ad6de7da758316ab83f8b00c43472da5a" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>m_type</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Ptr</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1ad42bd88e8bd8104dc11f2c77892f6198" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Receive</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1ac4776196cc18c651534d5c943eaf8c8f" prot="public" virt="non-virtual" ambiguityscope="SR_NETWORK_NS::Socket::"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Receive</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1ae7f6f00ed1577130021427201338e946" prot="protected" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>ReceiveAsyncInternal</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Reset</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a71ba8b6702f75b476efb75bf823c57b1" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Send</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a9ecdf7139cf74b440c2ce79c6c5d81b2" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SendTo</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a5bc9d3ab9096438ce3aef141ed2b4440" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SetReceiveCallback</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a7d2e63601130ce9ad3e6c17dfdacf5d9" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SetSocket</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1aaeaf2f7b4efc8fce6a294673279e936b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SetWaitingReceive</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a55e6b26a43d61ce395dbfa08b04e06bb" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Socket</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>StaticCast</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1abdd389619fce72e6c001fc27f2c699cf" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>Valid</name></member>
+      <member refid="classSR__NETWORK__NS_1_1AsioTCPSocket_1a05e323416e2af7005a6cef7678b4cd6c" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>~AsioTCPSocket</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Socket_1a905725f102756695a727036015d81972" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPSocket</scope><name>~Socket</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

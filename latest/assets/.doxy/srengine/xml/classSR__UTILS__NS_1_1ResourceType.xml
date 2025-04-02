@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1ResourceType" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::ResourceType</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a5825e80ff795b5c8c9e0d4f98ccfea41" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>using SR_UTILS_NS::ResourceType::ResourceId =  SR_UTILS_NS::StringAtom</definition>
+        <argsstring></argsstring>
+        <name>ResourceId</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::ResourceId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="47" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a08c0d327282f72a48f5f568a3374d33e" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>using SR_UTILS_NS::ResourceType::ResourcePath =  SR_UTILS_NS::StringAtom</definition>
+        <argsstring></argsstring>
+        <name>ResourcePath</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::ResourcePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="48" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a8957d45722526f2f5390e415bd278042" prot="private" static="no">
+        <type>std::unordered_map&lt; ResourceId, std::unordered_set&lt; <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> * &gt; &gt;</type>
+        <definition>using SR_UTILS_NS::ResourceType::CopiesMap =  std::unordered_map&lt;ResourceId, std::unordered_set&lt;IResource*&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>CopiesMap</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::CopiesMap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="49" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" prot="private" static="no">
+        <type>std::unordered_map&lt; ResourcePath, ResourceInfo::HardPtr &gt;</type>
+        <definition>using SR_UTILS_NS::ResourceType::Info =  std::unordered_map&lt;ResourcePath, ResourceInfo::HardPtr&gt;</definition>
+        <argsstring></argsstring>
+        <name>Info</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::Info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="50" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__UTILS__NS_1_1ResourceType_1a54c1252abc87a78a301e6b6984470408" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ResourceManager</definition>
+        <argsstring></argsstring>
+        <name>ResourceManager</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::ResourceManager</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1ResourceManager" kindref="compound">ResourceManager</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="46" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1a5bb4761aa750478ea43cbc9fba32eb16" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
+        <definition>IResourceReloader* SR_UTILS_NS::ResourceType::m_reloader</definition>
+        <argsstring></argsstring>
+        <name>m_reloader</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::m_reloader</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="76" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1affcbcc43347f77222411b5cf82a42a7f" prot="private" static="no" mutable="no">
+        <type>ResourcesSet</type>
+        <definition>ResourcesSet SR_UTILS_NS::ResourceType::m_resources</definition>
+        <argsstring></argsstring>
+        <name>m_resources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::m_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="77" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1af8431a219431d7031f602f50185403ba" prot="private" static="no" mutable="no">
+        <type>CopiesMap</type>
+        <definition>CopiesMap SR_UTILS_NS::ResourceType::m_copies</definition>
+        <argsstring></argsstring>
+        <name>m_copies</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::m_copies</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="78" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1a492e756790d45719fb2e2f6d7934ed7a" prot="private" static="no" mutable="no">
+        <type>Info</type>
+        <definition>Info SR_UTILS_NS::ResourceType::m_info</definition>
+        <argsstring></argsstring>
+        <name>m_info</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::m_info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="79" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceType_1a09d9ab53797fbe313d1de98571565030" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_UTILS_NS::ResourceType::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="80" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1aa5f64810d8108eaa7364b0d9e0ed5ae4" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::ResourceType::ResourceType</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>ResourceType</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::ResourceType</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="52" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a6f6ea80f7e1bf1d0cc4da0d0786dd04f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::ResourceType::~ResourceType</definition>
+        <argsstring>() override</argsstring>
+        <name>~ResourceType</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::~ResourceType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="56" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a2bd801b6669b34ddc509c06d5e9bab9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+        <definition>SR_NODISCARD IResource * SR_UTILS_NS::ResourceType::Find</definition>
+        <argsstring>(const ResourceId &amp;id)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::Find</qualifiedname>
+        <param>
+          <type>const ResourceId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="59" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1ac9ebe2cce13f8c1ae06d47ebe7d23d13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::ResourceType::IsLast</definition>
+        <argsstring>(const ResourceId &amp;id)</argsstring>
+        <name>IsLast</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::IsLast</qualifiedname>
+        <param>
+          <type>const ResourceId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="60" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1ae8b9ccea03bfb658b6dd38d90d954dde" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const CopiesMap &amp;</type>
+        <definition>SR_NODISCARD const CopiesMap &amp; SR_UTILS_NS::ResourceType::GetCopiesRef</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCopiesRef</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::GetCopiesRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="61" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a255be7757f503a9a891c180a28438e4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD Info &amp;</type>
+        <definition>SR_NODISCARD Info &amp; SR_UTILS_NS::ResourceType::GetInfo</definition>
+        <argsstring>()</argsstring>
+        <name>GetInfo</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::GetInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="62" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a43f4fac972c2d09d1d53e7f53f15dded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::pair&lt; ResourcePath, ResourceInfo::HardPtr &gt;</type>
+        <definition>SR_NODISCARD std::pair&lt; ResourcePath, ResourceInfo::HardPtr &gt; SR_UTILS_NS::ResourceType::GetInfoByIndex</definition>
+        <argsstring>(uint64_t index)</argsstring>
+        <name>GetInfoByIndex</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::GetInfoByIndex</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="63" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a0dcc1283b4509084efe16e0d5bd47726" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
+        <definition>SR_NODISCARD IResourceReloader * SR_UTILS_NS::ResourceType::GetReloader</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetReloader</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::GetReloader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="64" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a18e2a667db2d8c2ab73b97fae8810abc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::string &amp;</type>
+        <definition>SR_NODISCARD const std::string &amp; SR_UTILS_NS::ResourceType::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::GetName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="65" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a68b9f9216643ffef2a5ed9f011819a04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceType::Remove</definition>
+        <argsstring>(IResource *pResource)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::Remove</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a34d069e1fa16c892eb7d2badfe2a5b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceType::Add</definition>
+        <argsstring>(IResource *pResource)</argsstring>
+        <name>Add</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::Add</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1a93998d1055ce05b11175a76368347ded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceType::SetReloader</definition>
+        <argsstring>(IResourceReloader *pReloader)</argsstring>
+        <name>SetReloader</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::SetReloader</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
+          <declname>pReloader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceType_1aa14e37504f53873078a90d8a6d62871c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceType::CollectUnused</definition>
+        <argsstring>()</argsstring>
+        <name>CollectUnused</name>
+        <qualifiedname>SR_UTILS_NS::ResourceType::CollectUnused</qualifiedname>
+        <briefdescription>
+<para>ставит все неиспользуемые ресурсы на очередь уничтожения </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="73" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::ResourceType</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceType"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::ResourceType</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceType"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="45" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="45" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a34d069e1fa16c892eb7d2badfe2a5b9d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Add</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1aa14e37504f53873078a90d8a6d62871c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>CollectUnused</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a8957d45722526f2f5390e415bd278042" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>CopiesMap</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a2bd801b6669b34ddc509c06d5e9bab9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Find</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1ae8b9ccea03bfb658b6dd38d90d954dde" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetCopiesRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a255be7757f503a9a891c180a28438e4a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a43f4fac972c2d09d1d53e7f53f15dded" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetInfoByIndex</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a18e2a667db2d8c2ab73b97fae8810abc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetName</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a0dcc1283b4509084efe16e0d5bd47726" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>GetReloader</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Info</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1ac9ebe2cce13f8c1ae06d47ebe7d23d13" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>IsLast</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1af8431a219431d7031f602f50185403ba" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_copies</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a492e756790d45719fb2e2f6d7934ed7a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_info</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a09d9ab53797fbe313d1de98571565030" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_name</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a5bb4761aa750478ea43cbc9fba32eb16" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_reloader</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1affcbcc43347f77222411b5cf82a42a7f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>m_resources</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a68b9f9216643ffef2a5ed9f011819a04" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>Remove</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a5825e80ff795b5c8c9e0d4f98ccfea41" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourceId</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a54c1252abc87a78a301e6b6984470408" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourceManager</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a08c0d327282f72a48f5f568a3374d33e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1aa5f64810d8108eaa7364b0d9e0ed5ae4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>ResourceType</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a93998d1055ce05b11175a76368347ded" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>SetReloader</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceType_1a6f6ea80f7e1bf1d0cc4da0d0786dd04f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceType</scope><name>~ResourceType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

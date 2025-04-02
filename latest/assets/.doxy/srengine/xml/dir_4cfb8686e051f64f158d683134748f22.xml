@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_4cfb8686e051f64f158d683134748f22" kind="dir">
+    <compoundname>Engine/Core/inc/Core/GUI/PropertyDrawers</compoundname>
+    <innerfile refid="BitMapPropertyDrawer_8h">BitMapPropertyDrawer.h</innerfile>
+    <innerfile refid="EnumPropertyDrawer_8h">EnumPropertyDrawer.h</innerfile>
+    <innerfile refid="MaterialDataPropertyDrawer_8h">MaterialDataPropertyDrawer.h</innerfile>
+    <innerfile refid="MaterialPropertyDrawer_8h">MaterialPropertyDrawer.h</innerfile>
+    <innerfile refid="ObjectPropertyDrawer_8h">ObjectPropertyDrawer.h</innerfile>
+    <innerfile refid="PathPropertyDrawer_8h">PathPropertyDrawer.h</innerfile>
+    <innerfile refid="PointerPropertyDrawer_8h">PointerPropertyDrawer.h</innerfile>
+    <innerfile refid="StringPropertyDrawer_8h">StringPropertyDrawer.h</innerfile>
+    <innerfile refid="VectorPropertyDrawer_8h">VectorPropertyDrawer.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/GUI/PropertyDrawers/"/>
+  </compounddef>
+</doxygen>

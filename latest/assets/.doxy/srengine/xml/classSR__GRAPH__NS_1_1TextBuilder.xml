@@ -1,0 +1,701 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1TextBuilder" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::TextBuilder</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="private" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1TextBuilder_1a4afd123463b50652bc1932a13c88fac5" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_GRAPH_NS::TextBuilder::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1TextBuilder_1a8eb644f06717f34784a6f758787aa9f5" prot="private" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">SR_GTYPES_NS::Font</ref> *</type>
+        <definition>using SR_GRAPH_NS::TextBuilder::FontPtr =  SR_GTYPES_NS::Font*</definition>
+        <argsstring></argsstring>
+        <name>FontPtr</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::FontPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1TextBuilder_1aea7d2b564f6cdf31f7e6ae5a781a0032" prot="private" static="no">
+        <type>std::u32string</type>
+        <definition>using SR_GRAPH_NS::TextBuilder::StringType =  std::u32string</definition>
+        <argsstring></argsstring>
+        <name>StringType</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::StringType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a29cf7d4ea56df3fe8195e5dd7f30fa8a" prot="private" static="no" mutable="no">
+        <type>FontStyle</type>
+        <definition>FontStyle SR_GRAPH_NS::TextBuilder::m_fontStyle</definition>
+        <argsstring></argsstring>
+        <name>m_fontStyle</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_fontStyle</qualifiedname>
+        <initializer>= FontStyle::Regular</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="61" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1ac36047cc45c3048daeda8c599afe3222" prot="private" static="no" mutable="no">
+        <type>FT_Render_Mode</type>
+        <definition>FT_Render_Mode SR_GRAPH_NS::TextBuilder::m_renderMode</definition>
+        <argsstring></argsstring>
+        <name>m_renderMode</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_renderMode</qualifiedname>
+        <initializer>= FT_RENDER_MODE_NORMAL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="62" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1ac863435f49beb6d8185fb717cbd85dbb" prot="private" static="no" mutable="no">
+        <type>FontPtr</type>
+        <definition>FontPtr SR_GRAPH_NS::TextBuilder::m_font</definition>
+        <argsstring></argsstring>
+        <name>m_font</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_font</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="64" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1ac6aaa5c93f7237c373ec5f352cc29dfe" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Glyph::Ptr &gt;</type>
+        <definition>std::vector&lt;Glyph::Ptr&gt; SR_GRAPH_NS::TextBuilder::m_glyphs</definition>
+        <argsstring></argsstring>
+        <name>m_glyphs</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_glyphs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="66" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a809d58341dc59ea53e43b3a4a788b6b3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::TextBuilder::m_kerning</definition>
+        <argsstring></argsstring>
+        <name>m_kerning</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_kerning</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="68" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a1e8ec80e45750f06602353d1b0cf81b3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::TextBuilder::m_debug</definition>
+        <argsstring></argsstring>
+        <name>m_debug</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_debug</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="69" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a506f31e4a9173e787b676d6b606bb13c" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::m_fontSize</definition>
+        <argsstring></argsstring>
+        <name>m_fontSize</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_fontSize</qualifiedname>
+        <initializer>= 12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="71" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a90b3c7e01baca8cc137d28b6e8b66336" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::m_align</definition>
+        <argsstring></argsstring>
+        <name>m_align</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_align</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="73" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a1119104c6e02ea7dae2bf4e05ee3ef60" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::m_valign</definition>
+        <argsstring></argsstring>
+        <name>m_valign</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_valign</qualifiedname>
+        <initializer>= 110</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="74" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1ac285449d6e552a0313b8b3ea1a9bae2c" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::m_space</definition>
+        <argsstring></argsstring>
+        <name>m_space</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_space</qualifiedname>
+        <initializer>= 24</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="75" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a2e1bf6c9e251e57def74026947d2bb1d" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::TextBuilder::m_top</definition>
+        <argsstring></argsstring>
+        <name>m_top</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_top</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="77" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1acbaa1530b1f9fbbd18ebb3d8d3ea4088" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::m_imageHeight</definition>
+        <argsstring></argsstring>
+        <name>m_imageHeight</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_imageHeight</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="79" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a85b26eeeaf686ff48508f92f5398c8b8" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::m_imageWidth</definition>
+        <argsstring></argsstring>
+        <name>m_imageWidth</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_imageWidth</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="80" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a9025df06cd429cbd4d35eb52cebb6833" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* SR_GRAPH_NS::TextBuilder::m_textureData</definition>
+        <argsstring></argsstring>
+        <name>m_textureData</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_textureData</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="81" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TextBuilder_1a7c8767bfbe85ad3a3ec8380282859339" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::TextBuilder::m_needParse</definition>
+        <argsstring></argsstring>
+        <name>m_needParse</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::m_needParse</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="83" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a2f0582ea27b86a54e2d6c9724c3e5c04" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::TextBuilder::TextBuilder</definition>
+        <argsstring>(FontPtr pFont)</argsstring>
+        <name>TextBuilder</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::TextBuilder</qualifiedname>
+        <param>
+          <type>FontPtr</type>
+          <declname>pFont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="29" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a490f4dd5aa9356bde1ee767f72057f1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::TextBuilder::~TextBuilder</definition>
+        <argsstring>() override</argsstring>
+        <name>~TextBuilder</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::~TextBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="30" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a2ee28457354d65f31a79577199c36dea" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GRAPH_NS::TextBuilder::GetSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetSize</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="33" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1aea97df2ecc3e356e5e069679c25745c8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GRAPH_NS::TextBuilder::GetWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetWidth</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="34" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1ac0c33d171d0dc954564c4693d8988739" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GRAPH_NS::TextBuilder::GetHeight</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetHeight</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="35" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1ac4f2b8250042b9a7006fc80696999be9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint8_t *</type>
+        <definition>SR_NODISCARD uint8_t * SR_GRAPH_NS::TextBuilder::GetData</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetData</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="36" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a7e82036f729e7c0af33eef2d03e93dcd" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD ImageFormat</type>
+        <definition>SR_NODISCARD ImageFormat SR_GRAPH_NS::TextBuilder::GetColorFormat</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetColorFormat</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetColorFormat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="37" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a5194116e5c99ce026d1a66a47f50e926" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GRAPH_NS::TextBuilder::GetFontSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFontSize</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetFontSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="38" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a2fa3da752d9ceeb1e53f46129dadfd4b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD FontStyle</type>
+        <definition>SR_NODISCARD FontStyle SR_GRAPH_NS::TextBuilder::GetFontStyle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFontStyle</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::GetFontStyle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="39" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a425f9bab9e04dda5cc1a981f769734ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_GRAPH_NS::TextBuilder::CalculateTextWidth</definition>
+        <argsstring>(const char *text)</argsstring>
+        <name>CalculateTextWidth</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::CalculateTextWidth</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="41" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a6afdb1c32a1ba288e74f32da245536e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::TextBuilder::Build</definition>
+        <argsstring>(const char *text)</argsstring>
+        <name>Build</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::Build</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a006ea5063f2009c16f7b39a796c9a1f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::TextBuilder::Build</definition>
+        <argsstring>(StringType text)</argsstring>
+        <name>Build</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::Build</qualifiedname>
+        <param>
+          <type>StringType</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1ac6f39ac7e7e7b31250da9cdae3ac78b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::SetFontStyle</definition>
+        <argsstring>(FontStyle style)</argsstring>
+        <name>SetFontStyle</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::SetFontStyle</qualifiedname>
+        <param>
+          <type>FontStyle</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="46" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a9046afa612bf9d2bec9d7cb672abb5ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::SetFontSize</definition>
+        <argsstring>(uint32_t size)</argsstring>
+        <name>SetFontSize</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::SetFontSize</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="47" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a387f412580525dd084f4ac7bb8efa7bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::SetKerning</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetKerning</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::SetKerning</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a003fd20f50418591491dee7f2c073835" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::SetDebug</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetDebug</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::SetDebug</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="49" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a50bbc8f013b34205570dacdd8502b1ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::InitFontSize</definition>
+        <argsstring>()</argsstring>
+        <name>InitFontSize</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::InitFontSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a717d25ffd040a533b0ff93c82fe4c987" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1ad2bb8843e2a30f104ef6760833517433" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::TextBuilder::ParseGlyphs</definition>
+        <argsstring>(const StringType &amp;text)</argsstring>
+        <name>ParseGlyphs</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::ParseGlyphs</qualifiedname>
+        <param>
+          <type>const StringType &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a30029ed1fd286d2d5e4cbbc1bf519fd0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::TextBuilder::PreProcess</definition>
+        <argsstring>(const StringType &amp;text, uint32_t iterator)</argsstring>
+        <name>PreProcess</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::PreProcess</qualifiedname>
+        <param>
+          <type>const StringType &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>iterator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="57" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TextBuilder_1a6c750da515ce2a587b8a284fcb9fd16f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::TextBuilder::PreProcessImpl</definition>
+        <argsstring>(const StringType &amp;text, uint32_t begin, uint32_t end)</argsstring>
+        <name>PreProcessImpl</name>
+        <qualifiedname>SR_GRAPH_NS::TextBuilder::PreProcessImpl</qualifiedname>
+        <param>
+          <type>const StringType &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="58" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::TextBuilder</label>
+        <link refid="classSR__GRAPH__NS_1_1TextBuilder"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::TextBuilder</label>
+        <link refid="classSR__GRAPH__NS_1_1TextBuilder"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" line="24" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h" bodystart="24" bodyend="85"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a6afdb1c32a1ba288e74f32da245536e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>Build</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a006ea5063f2009c16f7b39a796c9a1f1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>Build</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a425f9bab9e04dda5cc1a981f769734ca" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>CalculateTextWidth</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a717d25ffd040a533b0ff93c82fe4c987" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>Clear</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a8eb644f06717f34784a6f758787aa9f5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>FontPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a7e82036f729e7c0af33eef2d03e93dcd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetColorFormat</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac4f2b8250042b9a7006fc80696999be9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a5194116e5c99ce026d1a66a47f50e926" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetFontSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a2fa3da752d9ceeb1e53f46129dadfd4b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetFontStyle</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac0c33d171d0dc954564c4693d8988739" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetHeight</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a2ee28457354d65f31a79577199c36dea" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1aea97df2ecc3e356e5e069679c25745c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>GetWidth</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a50bbc8f013b34205570dacdd8502b1ab" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>InitFontSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a90b3c7e01baca8cc137d28b6e8b66336" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_align</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a1e8ec80e45750f06602353d1b0cf81b3" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_debug</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac863435f49beb6d8185fb717cbd85dbb" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_font</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a506f31e4a9173e787b676d6b606bb13c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_fontSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a29cf7d4ea56df3fe8195e5dd7f30fa8a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_fontStyle</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac6aaa5c93f7237c373ec5f352cc29dfe" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_glyphs</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1acbaa1530b1f9fbbd18ebb3d8d3ea4088" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_imageHeight</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a85b26eeeaf686ff48508f92f5398c8b8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_imageWidth</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a809d58341dc59ea53e43b3a4a788b6b3" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_kerning</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a7c8767bfbe85ad3a3ec8380282859339" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_needParse</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac36047cc45c3048daeda8c599afe3222" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_renderMode</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac285449d6e552a0313b8b3ea1a9bae2c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_space</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a9025df06cd429cbd4d35eb52cebb6833" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_textureData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a2e1bf6c9e251e57def74026947d2bb1d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_top</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a1119104c6e02ea7dae2bf4e05ee3ef60" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>m_valign</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ad2bb8843e2a30f104ef6760833517433" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>ParseGlyphs</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a30029ed1fd286d2d5e4cbbc1bf519fd0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>PreProcess</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a6c750da515ce2a587b8a284fcb9fd16f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>PreProcessImpl</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a003fd20f50418591491dee7f2c073835" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>SetDebug</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a9046afa612bf9d2bec9d7cb672abb5ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>SetFontSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1ac6f39ac7e7e7b31250da9cdae3ac78b1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>SetFontStyle</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a387f412580525dd084f4ac7bb8efa7bf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>SetKerning</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1aea7d2b564f6cdf31f7e6ae5a781a0032" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>StringType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a4afd123463b50652bc1932a13c88fac5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a2f0582ea27b86a54e2d6c9724c3e5c04" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>TextBuilder</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TextBuilder_1a490f4dd5aa9356bde1ee767f72057f1b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextBuilder</scope><name>~TextBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

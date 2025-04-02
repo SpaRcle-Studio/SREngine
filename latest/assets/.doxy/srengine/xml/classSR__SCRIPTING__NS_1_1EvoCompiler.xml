@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SCRIPTING__NS_1_1EvoCompiler" kind="class" language="C++" prot="public">
+    <compoundname>SR_SCRIPTING_NS::EvoCompiler</compoundname>
+    <basecompoundref refid="classSR__SCRIPTING__NS_1_1Compiler" prot="public" virt="non-virtual">SR_SCRIPTING_NS::Compiler</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">EvoScript::Compiler</basecompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler" prot="public" virt="non-virtual">SR_SCRIPTING_NS::GlobalEvoCompiler</derivedcompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a3d5eae7dd14a8761dec1bbad695470d7" prot="private" static="no" mutable="no">
+        <type>EvoScript::AddressTableGen *</type>
+        <definition>EvoScript::AddressTableGen* SR_SCRIPTING_NS::EvoCompiler::m_generator</definition>
+        <argsstring></argsstring>
+        <name>m_generator</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::m_generator</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="33" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a4e4f02bd8fbacfdca8cd6f63024dfb85" prot="private" static="no" mutable="no">
+        <type>EvoScript::CastingGen *</type>
+        <definition>EvoScript::CastingGen* SR_SCRIPTING_NS::EvoCompiler::m_casting</definition>
+        <argsstring></argsstring>
+        <name>m_casting</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::m_casting</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="34" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a67c4a9b5234135e06132f3b2fe362c37" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::EvoCompiler::EvoCompiler</definition>
+        <argsstring>(std::string cachePath)</argsstring>
+        <name>EvoCompiler</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::EvoCompiler</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>cachePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="19" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a17eee310493d6a969fdadd42db740511" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::EvoCompiler::~EvoCompiler</definition>
+        <argsstring>() override</argsstring>
+        <name>~EvoCompiler</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::~EvoCompiler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a3a21f4e8179d3dfbfea2bfeb18ffe259" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD EvoScript::CastingGen *</type>
+        <definition>SR_NODISCARD EvoScript::CastingGen * SR_SCRIPTING_NS::EvoCompiler::GetCasting</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCasting</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::GetCasting</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="23" column="44" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a654e242a4f9012e9859740c7b4269a6a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD EvoScript::AddressTableGen *</type>
+        <definition>SR_NODISCARD EvoScript::AddressTableGen * SR_SCRIPTING_NS::EvoCompiler::GetGenerator</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGenerator</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::GetGenerator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="24" column="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1a5250ffac67e2a6eaa1fccb34660e116a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::EvoCompiler::Init</definition>
+        <argsstring>() override</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::Init</qualifiedname>
+        <reimplements refid="classSR__SCRIPTING__NS_1_1Compiler_1a7974ac398660ef9bd61514a6b84c0860">Init</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="27" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoCompiler_1ab75dd5e0cbf85bbd7a3465849c59d408" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SCRIPTING_NS::EvoCompiler::GetGeneratorName</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;config) const</argsstring>
+        <name>GetGeneratorName</name>
+        <qualifiedname>SR_SCRIPTING_NS::EvoCompiler::GetGeneratorName</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="30" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>EvoScript::Compiler</label>
+      </node>
+      <node id="2">
+        <label>SR_SCRIPTING_NS::Compiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1Compiler"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::EvoCompiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1EvoCompiler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_SCRIPTING_NS::GlobalEvoCompiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>EvoScript::Compiler</label>
+      </node>
+      <node id="2">
+        <label>SR_SCRIPTING_NS::Compiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1Compiler"/>
+        <childnode refid="3" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::EvoCompiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1EvoCompiler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="17" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" bodystart="17" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1a5b896296f456079de26058913edc65bd" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>Compiler</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a67c4a9b5234135e06132f3b2fe362c37" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>EvoCompiler</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a3a21f4e8179d3dfbfea2bfeb18ffe259" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>GetCasting</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a654e242a4f9012e9859740c7b4269a6a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>GetGenerator</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1ab75dd5e0cbf85bbd7a3465849c59d408" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>GetGeneratorName</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a5250ffac67e2a6eaa1fccb34660e116a" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>Init</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a4e4f02bd8fbacfdca8cd6f63024dfb85" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>m_casting</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a3d5eae7dd14a8761dec1bbad695470d7" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>m_generator</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1a8a1be2fa48571e9c1ff046c0a60230b4" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>m_mutex</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1ac87d610421cd48d1137e97a02c3b0265" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>~Compiler</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a17eee310493d6a969fdadd42db740511" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoCompiler</scope><name>~EvoCompiler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__GRAPH__NS_1_1Memory" kind="namespace" language="C++">
+    <compoundname>SR_GRAPH_NS::Memory</compoundname>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh" prot="public">SR_GRAPH_NS::Memory::BakedMesh</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1CameraManager" prot="public">SR_GRAPH_NS::Memory::CameraManager</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource" prot="public">SR_GRAPH_NS::Memory::IGraphicsResource</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager" prot="public">SR_GRAPH_NS::Memory::MeshManager</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1MeshVidMemInfo" prot="public">SR_GRAPH_NS::Memory::MeshVidMemInfo</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderProgramManager" prot="public">SR_GRAPH_NS::Memory::ShaderProgramManager</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock" prot="public">SR_GRAPH_NS::Memory::ShaderUBOBlock</innerclass>
+    <innerclass refid="structSR__GRAPH__NS_1_1Memory_1_1TextureConfig" prot="public">SR_GRAPH_NS::Memory::TextureConfig</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1TextureConfigs" prot="public">SR_GRAPH_NS::Memory::TextureConfigs</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager" prot="public">SR_GRAPH_NS::Memory::UBOManager</innerclass>
+    <innerclass refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo" prot="public">SR_GRAPH_NS::Memory::VirtualProgramInfo</innerclass>
+    <innerclass refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo" prot="public">SR_GRAPH_NS::Memory::VirtualUBOInfo</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="MeshManager_8h_1aea905ec0876b484e9a60b366979aff2b" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>MeshMemoryType</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::MeshMemoryType</qualifiedname>
+        <enumvalue id="MeshManager_8h_1aea905ec0876b484e9a60b366979aff2ba88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="MeshManager_8h_1aea905ec0876b484e9a60b366979aff2ba0606acb1fab55498c21907ab199dc61e" prot="public">
+          <name>VBO</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="MeshManager_8h_1aea905ec0876b484e9a60b366979aff2badf83e044d3e1af4b0b154507c6ac3a79" prot="public">
+          <name>IBO</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h" bodystart="22" bodyend="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="21" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kind="struct" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::DrawPropertyContext</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1DrawPropertyContext_1aba55705657188c03b892d95f2f651736" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">EditorGUI</ref> *</type>
+        <definition>EditorGUI* SR_CORE_GUI_NS::DrawPropertyContext::pEditor</definition>
+        <argsstring></argsstring>
+        <name>pEditor</name>
+        <qualifiedname>SR_CORE_GUI_NS::DrawPropertyContext::pEditor</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="18" column="19" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::DrawPropertyContext</label>
+        <link refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pEditor</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_CORE_GUI_NS::EditorGUI</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorGUI"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_GUI_NS::WidgetManager</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="17" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="17" bodyend="19"/>
+    <listofallmembers>
+      <member refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext_1aba55705657188c03b892d95f2f651736" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::DrawPropertyContext</scope><name>pEditor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

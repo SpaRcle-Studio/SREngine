@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1ShaderReplacePredicate" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_GRAPH_NS::ShaderReplacePredicate</compoundname>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1MeshDrawerPass" prot="public" virt="non-virtual">SR_GRAPH_NS::MeshDrawerPass</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1a8c27d1b6d8ad022203f55c9bcf096d7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_GRAPH_NS::ShaderReplacePredicate::~ShaderReplacePredicate</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ShaderReplacePredicate</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderReplacePredicate::~ShaderReplacePredicate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="30" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1ae41650b8f4d52af2b0a164681c7c463f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">SR_GRAPH_NS::ShaderUseInfo</ref></type>
+        <definition>virtual SR_NODISCARD SR_GRAPH_NS::ShaderUseInfo SR_GRAPH_NS::ShaderReplacePredicate::ReplaceShader</definition>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader) const =0</argsstring>
+        <name>ReplaceShader</name>
+        <qualifiedname>SR_GRAPH_NS::ShaderReplacePredicate::ReplaceShader</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a0f5ae4c677fc4a1d8c38c67b9ea0026e">ReplaceShader</reimplementedby>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="31" column="57"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_GRAPH_NS::ColorBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::MeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
+        <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
+      </node>
+      <node id="5">
+        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="28" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="28" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1ae41650b8f4d52af2b0a164681c7c463f" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::ShaderReplacePredicate</scope><name>ReplaceShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1a8c27d1b6d8ad022203f55c9bcf096d7e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ShaderReplacePredicate</scope><name>~ShaderReplacePredicate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

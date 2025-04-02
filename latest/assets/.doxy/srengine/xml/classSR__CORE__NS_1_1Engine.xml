@@ -1,0 +1,1201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__NS_1_1Engine" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_NS::Engine</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Engine &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1aae9cf19dc90d8013746ad937b1483225" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">Engine</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::Super =  SR_HTYPES_NS::SharedPtr&lt;Engine&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_NS::Engine::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="55" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a62b332ac6f66fa613bd7ef336575d6cd" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">Engine</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::Ptr =  SR_HTYPES_NS::SharedPtr&lt;Engine&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_CORE_NS::Engine::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="56" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a57f1de323cba08e1fa5cf0950458ab65" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Window" kindref="compound">SR_GRAPH_NS::Window</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::WindowPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GRAPH_NS::Window&gt;</definition>
+        <argsstring></argsstring>
+        <name>WindowPtr</name>
+        <qualifiedname>SR_CORE_NS::Engine::WindowPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="57" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a38a88401211d782481104ddd8bed216a" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">SR_GRAPH_NS::RenderContext</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::RenderContextPtr =  SR_HTYPES_NS::SafePtr&lt;SR_GRAPH_NS::RenderContext&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderContextPtr</name>
+        <qualifiedname>SR_CORE_NS::Engine::RenderContextPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="58" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a0164e9462663a2422ae5f705dfb13bd3" prot="private" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">SR_GTYPES_NS::Camera</ref> *</type>
+        <definition>using SR_CORE_NS::Engine::CameraPtr =  SR_GTYPES_NS::Camera*</definition>
+        <argsstring></argsstring>
+        <name>CameraPtr</name>
+        <qualifiedname>SR_CORE_NS::Engine::CameraPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="59" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a36bfe84a3163b6a6f7bf501bb157318b" prot="private" static="no">
+        <type>std::chrono::high_resolution_clock</type>
+        <definition>using SR_CORE_NS::Engine::Clock =  std::chrono::high_resolution_clock</definition>
+        <argsstring></argsstring>
+        <name>Clock</name>
+        <qualifiedname>SR_CORE_NS::Engine::Clock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="60" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a47b75d4aec72471875629fb34091040e" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__PHYSICS__NS_1_1PhysicsScene" kindref="compound">SR_PHYSICS_NS::PhysicsScene</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::PhysicsScenePtr =  SR_HTYPES_NS::SafePtr&lt;SR_PHYSICS_NS::PhysicsScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>PhysicsScenePtr</name>
+        <qualifiedname>SR_CORE_NS::Engine::PhysicsScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="61" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a329bd72461ff4c12a9cbd69650fa90c8" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::ScenePtr =  SR_HTYPES_NS::SharedPtr&lt;SR_WORLD_NS::Scene&gt;</definition>
+        <argsstring></argsstring>
+        <name>ScenePtr</name>
+        <qualifiedname>SR_CORE_NS::Engine::ScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="62" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Engine_1a86c97f3a85be833f0132eb2a926d5a39" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">SR_GRAPH_NS::RenderScene</ref> &gt;</type>
+        <definition>using SR_CORE_NS::Engine::RenderScenePtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GRAPH_NS::RenderScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderScenePtr</name>
+        <qualifiedname>SR_CORE_NS::Engine::RenderScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="63" column="9" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a00078dcdd8c0ec3ad927f454dcb60881" prot="private" static="no" mutable="yes">
+        <type>std::recursive_mutex</type>
+        <definition>std::recursive_mutex SR_CORE_NS::Engine::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_mutex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="114" column="38" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a95b7a5f35b636abe5a49e2ed6eed6030" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_isCreate</definition>
+        <argsstring></argsstring>
+        <name>m_isCreate</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_isCreate</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="116" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a7b053d0ff00e7074ce06d9b31e23dde3" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_isInit</definition>
+        <argsstring></argsstring>
+        <name>m_isInit</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_isInit</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="117" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a88304c0b49d400806ef6559f2e12b37b" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_isRun</definition>
+        <argsstring></argsstring>
+        <name>m_isRun</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_isRun</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="118" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a9d7525b35890260ea90cf7e94b92c7eb" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_isGameMode</definition>
+        <argsstring></argsstring>
+        <name>m_isGameMode</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_isGameMode</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="120" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a9c9c94460e287ac7d05ed3d072ec7034" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_isActive</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="121" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a03470fba931f7809e7ecd615d2243630" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_isPaused</definition>
+        <argsstring></argsstring>
+        <name>m_isPaused</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_isPaused</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="122" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a0679f214eb84184696eb2cee1960485b" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_oneFramePauseSkip</definition>
+        <argsstring></argsstring>
+        <name>m_oneFramePauseSkip</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_oneFramePauseSkip</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="123" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a769a53580eb32aee01b5da6fff2820c4" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_NS::Engine::m_autoReloadResources</definition>
+        <argsstring></argsstring>
+        <name>m_autoReloadResources</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_autoReloadResources</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="124" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a55a055e708c60c51d9758188d9cba545" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_NS::Engine::m_speed</definition>
+        <argsstring></argsstring>
+        <name>m_speed</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_speed</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="126" column="17" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1afe717c6725804eb191d159f0a264f86d" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::TimePointType</type>
+        <definition>SR_UTILS_NS::TimePointType SR_CORE_NS::Engine::m_timeStart</definition>
+        <argsstring></argsstring>
+        <name>m_timeStart</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_timeStart</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="127" column="36" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a4ff0045550ab2590cd44d6df15bf7e64" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::ThreadsWorker::Ptr</type>
+        <definition>SR_UTILS_NS::ThreadsWorker::Ptr SR_CORE_NS::Engine::m_threadsWorker</definition>
+        <argsstring></argsstring>
+        <name>m_threadsWorker</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_threadsWorker</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="129" column="41" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a30596774b30341115310c2977cf87387" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1CmdManager" kindref="compound">SR_UTILS_NS::CmdManager</ref> *</type>
+        <definition>SR_UTILS_NS::CmdManager* SR_CORE_NS::Engine::m_cmdManager</definition>
+        <argsstring></argsstring>
+        <name>m_cmdManager</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_cmdManager</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="131" column="33" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a53340de89719093a4ca0fb8f71125e6a" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1InputDispatcher" kindref="compound">SR_UTILS_NS::InputDispatcher</ref> *</type>
+        <definition>SR_UTILS_NS::InputDispatcher* SR_CORE_NS::Engine::m_input</definition>
+        <argsstring></argsstring>
+        <name>m_input</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_input</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="132" column="38" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a8c2d3b7ac3f61bc57ef8b24971b6382c" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafeQueue" kindref="compound">SR_HTYPES_NS::SafeQueue</ref>&lt; ScenePtr &gt;</type>
+        <definition>SR_HTYPES_NS::SafeQueue&lt;ScenePtr&gt; SR_CORE_NS::Engine::m_sceneQueue</definition>
+        <argsstring></argsstring>
+        <name>m_sceneQueue</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_sceneQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="134" column="33" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a6bfe25422aa530ff0ff2037b202242ba" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__CORE__NS_1_1EngineScene" kindref="compound">EngineScene</ref> *</type>
+        <definition>EngineScene* SR_CORE_NS::Engine::m_engineScene</definition>
+        <argsstring></argsstring>
+        <name>m_engineScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_engineScene</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="136" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a31a22d69c6595c2f9be5c891bda56829" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__CORE__NS_1_1Application" kindref="compound">Application</ref> *</type>
+        <definition>Application* SR_CORE_NS::Engine::m_application</definition>
+        <argsstring></argsstring>
+        <name>m_application</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_application</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="137" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1aa790e71a2fb58484d22403f66652e456" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationManager" kindref="compound">SR_UTILS_NS::Localization::LocalizationManager</ref> *</type>
+        <definition>SR_UTILS_NS::Localization::LocalizationManager* SR_CORE_NS::Engine::m_localizationManager</definition>
+        <argsstring></argsstring>
+        <name>m_localizationManager</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_localizationManager</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="139" column="56" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a72babce9f71c513b2741e8cd8f18c430" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">SR_CORE_GUI_NS::EditorGUI</ref> *</type>
+        <definition>SR_CORE_GUI_NS::EditorGUI* SR_CORE_NS::Engine::m_editor</definition>
+        <argsstring></argsstring>
+        <name>m_editor</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_editor</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="141" column="35" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a891fce8af8ec98ffef618892d33ee0d1" prot="private" static="no" mutable="no">
+        <type>RenderContextPtr</type>
+        <definition>RenderContextPtr SR_CORE_NS::Engine::m_renderContext</definition>
+        <argsstring></argsstring>
+        <name>m_renderContext</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_renderContext</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="143" column="26" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1a888a280aa52e9df93d5d3983fe8939e1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; WindowPtr &gt;</type>
+        <definition>std::vector&lt;WindowPtr&gt; SR_CORE_NS::Engine::m_windows</definition>
+        <argsstring></argsstring>
+        <name>m_windows</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_windows</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="145" column="21" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Engine_1ae050b2c9b307efa994946488b154c1b9" prot="private" static="no" mutable="no">
+        <type>std::optional&lt; Utils::CursorLock &gt;</type>
+        <definition>std::optional&lt;Utils::CursorLock&gt; SR_CORE_NS::Engine::m_cursorLockOpt</definition>
+        <argsstring></argsstring>
+        <name>m_cursorLockOpt</name>
+        <qualifiedname>SR_CORE_NS::Engine::m_cursorLockOpt</qualifiedname>
+        <initializer>= std::nullopt</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="146" column="23" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a87b05408e53f2fd11e49cdb2aca932b0" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::Engine::Engine</definition>
+        <argsstring>(Application *pApplication)</argsstring>
+        <name>Engine</name>
+        <qualifiedname>SR_CORE_NS::Engine::Engine</qualifiedname>
+        <param>
+          <type><ref refid="classSR__CORE__NS_1_1Application" kindref="compound">Application</ref> *</type>
+          <declname>pApplication</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="65" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ad070284f29f59eb82922edae879b03dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::Engine::~Engine</definition>
+        <argsstring>() override</argsstring>
+        <name>~Engine</name>
+        <qualifiedname>SR_CORE_NS::Engine::~Engine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="66" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1abc7a82809662be98c2587e694f21a058" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::Execute</definition>
+        <argsstring>()</argsstring>
+        <name>Execute</name>
+        <qualifiedname>SR_CORE_NS::Engine::Execute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="68" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a1a7d9e714a96db13f868ec5a2bf269f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::Reload</definition>
+        <argsstring>()</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_CORE_NS::Engine::Reload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a261f6940aecbe15d68cbc4691bba7a75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::AddSceneToQueue</definition>
+        <argsstring>(const ScenePtr &amp;scene)</argsstring>
+        <name>AddSceneToQueue</name>
+        <qualifiedname>SR_CORE_NS::Engine::AddSceneToQueue</qualifiedname>
+        <param>
+          <type>const ScenePtr &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="72" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a24be12e0e68828ba5f12ef3014308f3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::SetActive</definition>
+        <argsstring>(bool isActive)</argsstring>
+        <name>SetActive</name>
+        <qualifiedname>SR_CORE_NS::Engine::SetActive</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isActive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ab30390dc68fa6f30742d75061a442009" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::SetPaused</definition>
+        <argsstring>(bool isPaused)</argsstring>
+        <name>SetPaused</name>
+        <qualifiedname>SR_CORE_NS::Engine::SetPaused</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isPaused</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="74" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a973f8ffb10fa4e9b1e0056159316997b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::SetSpeed</definition>
+        <argsstring>(float_t speed)</argsstring>
+        <name>SetSpeed</name>
+        <qualifiedname>SR_CORE_NS::Engine::SetSpeed</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>speed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="75" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1afb964303b6bf13776d841e848063c9a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::SetGameMode</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetGameMode</name>
+        <qualifiedname>SR_CORE_NS::Engine::SetGameMode</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="76" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1abe0f8ee0e48a3f4835c171c70b8a13d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::SetOneFramePauseSkip</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetOneFramePauseSkip</name>
+        <qualifiedname>SR_CORE_NS::Engine::SetOneFramePauseSkip</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="77" column="14" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a03142848b82b4ca483de83050c15cd51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Engine::IsNeedReloadResources</definition>
+        <argsstring>()</argsstring>
+        <name>IsNeedReloadResources</name>
+        <qualifiedname>SR_CORE_NS::Engine::IsNeedReloadResources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="79" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ac2237ad40ab6f4bfd3c546cb17a1c6f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::FixedUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>FixedUpdate</name>
+        <qualifiedname>SR_CORE_NS::Engine::FixedUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="81" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a6dd6bfb56af824ee9dcc964e89909535" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Engine::FlushScene</definition>
+        <argsstring>()</argsstring>
+        <name>FlushScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::FlushScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="82" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a0ac071e93869c1bd49d2cf5dbed0bc14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::LoadStartupScene</definition>
+        <argsstring>()</argsstring>
+        <name>LoadStartupScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::LoadStartupScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="83" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a6382d281e4a1169fd4fd816f04f41b02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::AddWindow</definition>
+        <argsstring>(WindowPtr pWindow)</argsstring>
+        <name>AddWindow</name>
+        <qualifiedname>SR_CORE_NS::Engine::AddWindow</qualifiedname>
+        <param>
+          <type>WindowPtr</type>
+          <declname>pWindow</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ad3907eb36de4cca5814134551bff4d2a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::HasSceneInQueue</definition>
+        <argsstring>() const</argsstring>
+        <name>HasSceneInQueue</name>
+        <qualifiedname>SR_CORE_NS::Engine::HasSceneInQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="87" column="27" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a7651c71af7d7e9232b25b1441a0794ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD ScenePtr</type>
+        <definition>SR_NODISCARD ScenePtr SR_CORE_NS::Engine::GetScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="88" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1aa1d44ff5dc302d3770f59d2d81672f80" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD RenderContextPtr</type>
+        <definition>SR_NODISCARD RenderContextPtr SR_CORE_NS::Engine::GetRenderContext</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderContext</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetRenderContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="89" column="39" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1aefc6e50f10a45721e8453c774157fedd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD RenderScenePtr</type>
+        <definition>SR_NODISCARD RenderScenePtr SR_CORE_NS::Engine::GetRenderScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetRenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="90" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a05d06feb6c7b722d30626af28e40baf1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD PhysicsScenePtr</type>
+        <definition>SR_NODISCARD PhysicsScenePtr SR_CORE_NS::Engine::GetPhysicsScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPhysicsScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetPhysicsScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="91" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a5e9965b2b205350c9f27f93cb4667a39" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD WindowPtr</type>
+        <definition>SR_NODISCARD WindowPtr SR_CORE_NS::Engine::GetMainWindow</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMainWindow</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetMainWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="92" column="32" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ac299c8794259158fe78a80089331e3b0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__WORLD__NS_1_1SceneUpdater" kindref="compound">SR_WORLD_NS::SceneUpdater</ref> *</type>
+        <definition>SR_NODISCARD SR_WORLD_NS::SceneUpdater * SR_CORE_NS::Engine::GetSceneBuilder</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSceneBuilder</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetSceneBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="93" column="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a9dd439bf37486363a3fe51d79146d187" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::IsActive</definition>
+        <argsstring>() const</argsstring>
+        <name>IsActive</name>
+        <qualifiedname>SR_CORE_NS::Engine::IsActive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="94" column="27" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ae6725f69a58ca7382d255585cba1d5c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::IsRun</definition>
+        <argsstring>() const</argsstring>
+        <name>IsRun</name>
+        <qualifiedname>SR_CORE_NS::Engine::IsRun</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="95" column="27" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a188dbe4374c6e380603e633ba0f18c19" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::IsPaused</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPaused</name>
+        <qualifiedname>SR_CORE_NS::Engine::IsPaused</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="96" column="27" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ab58d57c54b116c3920f54f6d20989983" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::IsGameMode</definition>
+        <argsstring>() const</argsstring>
+        <name>IsGameMode</name>
+        <qualifiedname>SR_CORE_NS::Engine::IsGameMode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="97" column="27" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ac64778aea118a32264e6d6a530ab743e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">SR_CORE_GUI_NS::EditorGUI</ref> *</type>
+        <definition>SR_NODISCARD SR_CORE_GUI_NS::EditorGUI * SR_CORE_NS::Engine::GetEditor</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEditor</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetEditor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="98" column="48" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a397b219a76e9ce984f6a36656884717f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1CmdManager" kindref="compound">SR_UTILS_NS::CmdManager</ref> *</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::CmdManager * SR_CORE_NS::Engine::GetCmdManager</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCmdManager</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetCmdManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="99" column="46" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a093606430f8826179fca90ee1537260d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__CORE__NS_1_1EngineScene" kindref="compound">EngineScene</ref> *</type>
+        <definition>SR_NODISCARD EngineScene * SR_CORE_NS::Engine::GetEngineScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEngineScene</name>
+        <qualifiedname>SR_CORE_NS::Engine::GetEngineScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="100" column="34" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a45d625800f46ec311d434a5a0ea33123" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_NS::Engine::IsApplicationFocused</definition>
+        <argsstring>() const</argsstring>
+        <name>IsApplicationFocused</name>
+        <qualifiedname>SR_CORE_NS::Engine::IsApplicationFocused</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="101" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a0b20e548f72827ddc802c0d6bf563c0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Engine::Create</definition>
+        <argsstring>()</argsstring>
+        <name>Create</name>
+        <qualifiedname>SR_CORE_NS::Engine::Create</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1ab186d905c75aa35e1cf8e5b3072a6979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Engine::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_CORE_NS::Engine::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="105" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a5723b049df6ed3337b4dd4e14dce020c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Engine::Run</definition>
+        <argsstring>()</argsstring>
+        <name>Run</name>
+        <qualifiedname>SR_CORE_NS::Engine::Run</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="106" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a5457d505746869e0d64772d3b4a2d4db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Engine::Close</definition>
+        <argsstring>()</argsstring>
+        <name>Close</name>
+        <qualifiedname>SR_CORE_NS::Engine::Close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="107" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1a2df3dba684100244c6c73b9d9da9653e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>WindowPtr</type>
+        <definition>static WindowPtr SR_CORE_NS::Engine::CreateMainWindow</definition>
+        <argsstring>()</argsstring>
+        <name>CreateMainWindow</name>
+        <qualifiedname>SR_CORE_NS::Engine::CreateMainWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="110" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Engine_1adda41f81f663147102eb2f6c3df7c875" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::Engine::DrawCallback</definition>
+        <argsstring>()</argsstring>
+        <name>DrawCallback</name>
+        <qualifiedname>SR_CORE_NS::Engine::DrawCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Engine.h" line="111" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_NS::Engine</label>
+        <link refid="classSR__CORE__NS_1_1Engine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Engine &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_NS::Engine</label>
+        <link refid="classSR__CORE__NS_1_1Engine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Engine &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/Engine.h" line="54" column="5" bodyfile="Engine/Core/inc/Core/Engine.h" bodystart="54" bodyend="148"/>
+    <listofallmembers>
+      <member refid="classSR__CORE__NS_1_1Engine_1a261f6940aecbe15d68cbc4691bba7a75" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AddSceneToQueue</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a6382d281e4a1169fd4fd816f04f41b02" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AddWindow</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>AutoFree</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a0164e9462663a2422ae5f705dfb13bd3" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>CameraPtr</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a36bfe84a3163b6a6f7bf501bb157318b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Clock</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a5457d505746869e0d64772d3b4a2d4db" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Close</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a0b20e548f72827ddc802c0d6bf563c0e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Create</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a2df3dba684100244c6c73b9d9da9653e" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>CreateMainWindow</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1adda41f81f663147102eb2f6c3df7c875" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>DrawCallback</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>DynamicCast</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a87b05408e53f2fd11e49cdb2aca932b0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Engine</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1abc7a82809662be98c2587e694f21a058" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Execute</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ac2237ad40ab6f4bfd3c546cb17a1c6f7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a6dd6bfb56af824ee9dcc964e89909535" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>FlushScene</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Get</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a397b219a76e9ce984f6a36656884717f" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetCmdManager</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ac64778aea118a32264e6d6a530ab743e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetEditor</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a093606430f8826179fca90ee1537260d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetEngineScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a5e9965b2b205350c9f27f93cb4667a39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetMainWindow</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a05d06feb6c7b722d30626af28e40baf1" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPhysicsScene</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1aa1d44ff5dc302d3770f59d2d81672f80" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRenderContext</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1aefc6e50f10a45721e8453c774157fedd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a7651c71af7d7e9232b25b1441a0794ea" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ac299c8794259158fe78a80089331e3b0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetSceneBuilder</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ad3907eb36de4cca5814134551bff4d2a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>HasSceneInQueue</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ab186d905c75aa35e1cf8e5b3072a6979" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Init</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a9dd439bf37486363a3fe51d79146d187" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>IsActive</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a45d625800f46ec311d434a5a0ea33123" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>IsApplicationFocused</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ab58d57c54b116c3920f54f6d20989983" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>IsGameMode</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a03142848b82b4ca483de83050c15cd51" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>IsNeedReloadResources</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a188dbe4374c6e380603e633ba0f18c19" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>IsPaused</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ae6725f69a58ca7382d255585cba1d5c2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>IsRun</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a0ac071e93869c1bd49d2cf5dbed0bc14" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>LoadStartupScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a31a22d69c6595c2f9be5c891bda56829" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_application</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a769a53580eb32aee01b5da6fff2820c4" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_autoReloadResources</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_basicManually</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a30596774b30341115310c2977cf87387" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_cmdManager</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ae050b2c9b307efa994946488b154c1b9" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_cursorLockOpt</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_data</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a72babce9f71c513b2741e8cd8f18c430" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_editor</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a6bfe25422aa530ff0ff2037b202242ba" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_engineScene</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a53340de89719093a4ca0fb8f71125e6a" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_input</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a9c9c94460e287ac7d05ed3d072ec7034" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_isActive</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a95b7a5f35b636abe5a49e2ed6eed6030" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_isCreate</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a9d7525b35890260ea90cf7e94b92c7eb" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_isGameMode</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a7b053d0ff00e7074ce06d9b31e23dde3" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_isInit</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a03470fba931f7809e7ecd615d2243630" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_isPaused</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a88304c0b49d400806ef6559f2e12b37b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_isRun</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1aa790e71a2fb58484d22403f66652e456" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_localizationManager</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a00078dcdd8c0ec3ad927f454dcb60881" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a0679f214eb84184696eb2cee1960485b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_oneFramePauseSkip</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a891fce8af8ec98ffef618892d33ee0d1" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_renderContext</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a8c2d3b7ac3f61bc57ef8b24971b6382c" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_sceneQueue</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a55a055e708c60c51d9758188d9cba545" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_speed</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a4ff0045550ab2590cd44d6df15bf7e64" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_threadsWorker</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1afe717c6725804eb191d159f0a264f86d" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_timeStart</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a888a280aa52e9df93d5d3983fe8939e1" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>m_windows</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>operator==</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a47b75d4aec72471875629fb34091040e" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>PhysicsScenePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a62b332ac6f66fa613bd7ef336575d6cd" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a1a7d9e714a96db13f868ec5a2bf269f8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Reload</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a38a88401211d782481104ddd8bed216a" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>RenderContextPtr</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a86c97f3a85be833f0132eb2a926d5a39" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>Reset</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a5723b049df6ed3337b4dd4e14dce020c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Run</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a329bd72461ff4c12a9cbd69650fa90c8" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>ScenePtr</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a24be12e0e68828ba5f12ef3014308f3d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SetActive</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1afb964303b6bf13776d841e848063c9a1" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SetGameMode</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1abe0f8ee0e48a3f4835c171c70b8a13d4" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SetOneFramePauseSkip</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ab30390dc68fa6f30742d75061a442009" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SetPaused</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a973f8ffb10fa4e9b1e0056159316997b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SetSpeed</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>StaticCast</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1aae9cf19dc90d8013746ad937b1483225" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>Valid</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1a57f1de323cba08e1fa5cf0950458ab65" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>WindowPtr</name></member>
+      <member refid="classSR__CORE__NS_1_1Engine_1ad070284f29f59eb82922edae879b03dd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>~Engine</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Engine</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_CORE_NS::Engine</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

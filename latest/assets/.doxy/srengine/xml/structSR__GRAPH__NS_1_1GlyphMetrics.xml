@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1GlyphMetrics" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::GlyphMetrics</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a9ebf1cda856bd3891eed927388b8b4c7" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::posX</definition>
+        <argsstring></argsstring>
+        <name>posX</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::posX</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Позиция по горизонтали </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="14" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1ac6b9d60bd433c4515975d5212d5ddff9" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::posY</definition>
+        <argsstring></argsstring>
+        <name>posY</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::posY</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Позиция по вертикали (от базовой линии) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="16" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a487a1d6f4170b09910d2167d3db04279" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::width</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Ширина глифа </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="18" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1af7528005dea9b730618ae87e9d683db4" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::height</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Высота глифа </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="20" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a3cb924f7d6d673c5036856d8f67a26e9" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::left</definition>
+        <argsstring></argsstring>
+        <name>left</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::left</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="22" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a7597880ea4426fa251f6e4f4080d78ac" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::top</definition>
+        <argsstring></argsstring>
+        <name>top</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::top</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="23" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1ae9ca3beeb1897636d9ec5eaf8b6c9520" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::advanceX</definition>
+        <argsstring></argsstring>
+        <name>advanceX</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::advanceX</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="25" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a1e25e4815becbe5da651a35ca4d53184" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::GlyphMetrics::advanceY</definition>
+        <argsstring></argsstring>
+        <name>advanceY</name>
+        <qualifiedname>SR_GRAPH_NS::GlyphMetrics::advanceY</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="26" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="12" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1ae9ca3beeb1897636d9ec5eaf8b6c9520" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>advanceX</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a1e25e4815becbe5da651a35ca4d53184" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>advanceY</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1af7528005dea9b730618ae87e9d683db4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>height</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a3cb924f7d6d673c5036856d8f67a26e9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>left</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a9ebf1cda856bd3891eed927388b8b4c7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>posX</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1ac6b9d60bd433c4515975d5212d5ddff9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>posY</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a7597880ea4426fa251f6e4f4080d78ac" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>top</name></member>
+      <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a487a1d6f4170b09910d2167d3db04279" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

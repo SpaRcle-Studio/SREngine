@@ -1,0 +1,1355 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GTYPES__NS_1_1Camera" kind="class" language="C++" prot="public">
+    <compoundname>SR_GTYPES_NS::Camera</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Component" prot="public" virt="non-virtual">SR_UTILS_NS::Component</basecompoundref>
+    <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1EditorCamera" prot="public" virt="non-virtual">SR_CORE_GUI_NS::EditorCamera</derivedcompoundref>
+    <innerclass refid="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo" prot="private">SR_GTYPES_NS::Camera::RenderTechniqueInfo</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Camera_1a87095c2597657f93b056a71164c21c5a" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; RenderScene &gt;</type>
+        <definition>using SR_GTYPES_NS::Camera::RenderScenePtr =  SR_HTYPES_NS::SharedPtr&lt;RenderScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderScenePtr</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::RenderScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Camera_1a3d9676df2b6ce44e5b77bc86c4754097" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref></type>
+        <definition>using SR_GTYPES_NS::Camera::Super =  SR_UTILS_NS::Component</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Camera_1a50db11ea3283cd053d1e40552a89c0cb" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">Camera</ref> &gt;</type>
+        <definition>using SR_GTYPES_NS::Camera::Ptr =  SR_HTYPES_NS::SharedPtr&lt;Camera&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="31" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a771ef91852815424665effce9d7ca0e7" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GTYPES_NS::Camera::m_priority</definition>
+        <argsstring></argsstring>
+        <name>m_priority</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_priority</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="105" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1afdb73795290cf3daafbcc2499a4df8ea" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_GTYPES_NS::Camera::m_far</definition>
+        <argsstring></argsstring>
+        <name>m_far</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_far</qualifiedname>
+        <initializer>= 750.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="108" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1ac5a5693a64386be267a9ec1a41aeb019" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_GTYPES_NS::Camera::m_near</definition>
+        <argsstring></argsstring>
+        <name>m_near</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_near</qualifiedname>
+        <initializer>= 0.01f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="110" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a3db184c7a6032e3f099f22fd5afaace7" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_GTYPES_NS::Camera::m_FOV</definition>
+        <argsstring></argsstring>
+        <name>m_FOV</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_FOV</qualifiedname>
+        <initializer>= 70.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="112" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a9c234cfb26cb79b89b40a6e11fef4fb3" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_GTYPES_NS::Camera::m_aspect</definition>
+        <argsstring></argsstring>
+        <name>m_aspect</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_aspect</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="118" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a009a3030f8f4ca0d30e51e465a1320cd" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Camera::m_hasErrors</definition>
+        <argsstring></argsstring>
+        <name>m_hasErrors</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_hasErrors</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="120" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a0abb413f8d64e1ed04246f600b81bea1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Camera::m_isRegistered</definition>
+        <argsstring></argsstring>
+        <name>m_isRegistered</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_isRegistered</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="122" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1ad4acb4a26aa1ce68b8663c7fdd27e578" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::m_projection</definition>
+        <argsstring></argsstring>
+        <name>m_projection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_projection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="124" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1acdff47ce44509b47c32be3cc28695920" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::m_projectionNoFOV</definition>
+        <argsstring></argsstring>
+        <name>m_projectionNoFOV</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_projectionNoFOV</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="125" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1ade6e1f3d207c13d64520ad380191bfb8" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::m_viewTranslateMat</definition>
+        <argsstring></argsstring>
+        <name>m_viewTranslateMat</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_viewTranslateMat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="126" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1aaea4fb538507b750bdf87ee94e3d895b" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::m_viewMat</definition>
+        <argsstring></argsstring>
+        <name>m_viewMat</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_viewMat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="127" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a221a61bc7ebdc3ada6e5c51b647c98e7" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::m_orthogonal</definition>
+        <argsstring></argsstring>
+        <name>m_orthogonal</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_orthogonal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="128" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a513aa8cb9cd718164b8ceae2e7ab5562" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
+        <definition>SR_MATH_NS::Quaternion SR_GTYPES_NS::Camera::m_rotation</definition>
+        <argsstring></argsstring>
+        <name>m_rotation</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_rotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="130" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a8c4dfc3c3e5cfa117171ef749f1cc4d8" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::m_viewDirection</definition>
+        <argsstring></argsstring>
+        <name>m_viewDirection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_viewDirection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="132" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a8aa94abca619f1fd6b9ba5da2c7d5408" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::m_position</definition>
+        <argsstring></argsstring>
+        <name>m_position</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="133" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1aa5e5121308becf5735bc6b77169fe127" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::UVector2</type>
+        <definition>SR_MATH_NS::UVector2 SR_GTYPES_NS::Camera::m_viewportSize</definition>
+        <argsstring></argsstring>
+        <name>m_viewportSize</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_viewportSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="134" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Camera_1a164c6cc9f0f74e24c58af7dadb0d69ec" prot="private" static="no" mutable="no">
+        <type>RenderTechniqueInfo</type>
+        <definition>RenderTechniqueInfo SR_GTYPES_NS::Camera::m_renderTechnique</definition>
+        <argsstring></argsstring>
+        <name>m_renderTechnique</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::m_renderTechnique</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="136" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="136" bodyend="136"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a45ea4ca33bdf3b04024cd6d88e5cfc9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::Camera::Camera</definition>
+        <argsstring>()</argsstring>
+        <name>Camera</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::Camera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="34" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac242de34bd62c6f38840bf37f8a8acfe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::Camera::~Camera</definition>
+        <argsstring>() override</argsstring>
+        <name>~Camera</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::~Camera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="35" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a6f77bb2633d24b9b2a8e1fa3849e0e05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::Start</definition>
+        <argsstring>() override</argsstring>
+        <name>Start</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::Start</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f">Start</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::OnMatrixDirty</definition>
+        <argsstring>() override</argsstring>
+        <name>OnMatrixDirty</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::OnMatrixDirty</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2">OnMatrixDirty</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::OnAttached</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttached</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::OnAttached</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036">OnAttached</reimplements>
+        <briefdescription>
+<para>Вызывается после добавления компонента к игровому объекту </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a0f0854c8d45651dc55c6a44f20528b2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::UpdateProjection</definition>
+        <argsstring>(uint32_t w, uint32_t h)</argsstring>
+        <name>UpdateProjection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::UpdateProjection</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a4cbe75de74328d6615d636a811847cee" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::Update</definition>
+        <argsstring>(float_t dt) override</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::Update</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1ac6a1ba6c0a2a6d0b8f29f4a9924b25fb">Update</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aadc4129a4d23df36a858973ab8ca58de" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_GTYPES_NS::Camera::IsEditorCamera</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsEditorCamera</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::IsEditorCamera</qualifiedname>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1EditorCamera_1a70371618d01c701310f5dd630d8e693e">IsEditorCamera</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="44" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4 &amp; SR_GTYPES_NS::Camera::GetView</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetView</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="47" column="66" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a3b7e9d3f4240eb89881154169692cc63" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4 &amp; SR_GTYPES_NS::Camera::GetOrthogonal</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetOrthogonal</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetOrthogonal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="48" column="66" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4 &amp; SR_GTYPES_NS::Camera::GetViewTranslate</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetViewTranslate</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetViewTranslate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="49" column="66" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a79b93c612e02ed390531ea901cdd12d6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4 &amp; SR_GTYPES_NS::Camera::GetProjection</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetProjection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetProjection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="50" column="66" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a887736d7f50d77c5f8b133614f300448" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4 &amp; SR_GTYPES_NS::Camera::GetProjectionNoFOV</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetProjectionNoFOV</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetProjectionNoFOV</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="51" column="66" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a418836a2a691249d942b88437b58d33c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Quaternion &amp; SR_GTYPES_NS::Camera::GetRotation</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetRotation</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetRotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="52" column="67" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ae677337d7264a0b069d02bf136d89570" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 SR_GTYPES_NS::Camera::GetSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSize</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="53" column="59" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewPosition</definition>
+        <argsstring>() const</argsstring>
+        <name>GetViewPosition</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetViewPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="54" column="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraEye</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCameraEye</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetCameraEye</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="55" column="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraDir</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCameraDir</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetCameraDir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="56" column="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad7904a1e9902362f3c720999538c276d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3 &amp;</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3 &amp; SR_GTYPES_NS::Camera::GetPosition</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPosition</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="57" column="65" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a6e080a7fd94c6139d5ae4cee2df26d12" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE glm::vec3</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE glm::vec3 SR_GTYPES_NS::Camera::GetGLPosition</definition>
+        <argsstring>() const</argsstring>
+        <name>GetGLPosition</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetGLPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="58" column="48" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE float_t SR_GTYPES_NS::Camera::GetFar</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFar</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetFar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="59" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aaf438a0365dfd08692aebdc1570e419b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE float_t SR_GTYPES_NS::Camera::GetNear</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNear</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetNear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="60" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE float_t SR_GTYPES_NS::Camera::GetFOV</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFOV</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetFOV</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="61" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE float_t</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE float_t SR_GTYPES_NS::Camera::GetAspect</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAspect</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetAspect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="62" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aef018d22216b905182903fc1bce5557c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE int32_t</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE int32_t SR_GTYPES_NS::Camera::GetPriority</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPriority</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetPriority</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="63" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>SR_NODISCARD SR_MATH_NS::Matrix4x4 SR_GTYPES_NS::Camera::GetImGuizmoView</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetImGuizmoView</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetImGuizmoView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="65" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const SR_MATH_NS::FVector3 &amp;</type>
+        <definition>SR_NODISCARD const SR_MATH_NS::FVector3 &amp; SR_GTYPES_NS::Camera::GetViewDirection</definition>
+        <argsstring>() const</argsstring>
+        <name>GetViewDirection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetViewDirection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="66" column="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewDirection</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;pos) const noexcept</argsstring>
+        <name>GetViewDirection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetViewDirection</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="67" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a4a903be3a90733dbad3fe9e3e26ecc89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD IRenderTechnique *</type>
+        <definition>SR_NODISCARD IRenderTechnique * SR_GTYPES_NS::Camera::GetRenderTechnique</definition>
+        <argsstring>()</argsstring>
+        <name>GetRenderTechnique</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetRenderTechnique</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="69" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a56f1a4720ad71a7ac8e65263629c99fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD RenderScenePtr</type>
+        <definition>SR_NODISCARD RenderScenePtr SR_GTYPES_NS::Camera::GetRenderScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderScene</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetRenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="70" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1af6318d76959d6567b2d4ea416c4b3445" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD RenderScenePtr</type>
+        <definition>SR_NODISCARD RenderScenePtr SR_GTYPES_NS::Camera::TryGetRenderScene</definition>
+        <argsstring>() const</argsstring>
+        <name>TryGetRenderScene</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::TryGetRenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="71" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a03e5ff8cbac4acec0dd8043a6732855d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_UTILS_NS::Path &amp; SR_GTYPES_NS::Camera::GetRenderTechniquePath</definition>
+        <argsstring>()</argsstring>
+        <name>GetRenderTechniquePath</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetRenderTechniquePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="72" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac26989ed1043d04a05f562f31c95c4aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FPoint</type>
+        <definition>virtual SR_NODISCARD SR_MATH_NS::FPoint SR_GTYPES_NS::Camera::GetMousePos</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMousePos</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetMousePos</qualifiedname>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1EditorCamera_1a1fc223bc0f7a87d1c514b5a33d95c37d">GetMousePos</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="74" column="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ae0637533222c48a57acd0e1ec3f52959" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_GTYPES_NS::Camera::CalculateScreenFactor</definition>
+        <argsstring>(const SR_MATH_NS::Matrix4x4 &amp;modelMatrix, float_t sizeClipSpace, bool orthogonal) const</argsstring>
+        <name>CalculateScreenFactor</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::CalculateScreenFactor</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+          <declname>modelMatrix</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>sizeClipSpace</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>orthogonal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="76" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a00252585d867c3e26a0f3e73ff363a5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_GTYPES_NS::Camera::CalculateScreenFactor</definition>
+        <argsstring>(const SR_MATH_NS::Matrix4x4 &amp;modelMatrix, const SR_MATH_NS::Matrix4x4 &amp;viewMatrix, float_t sizeClipSpace, bool orthogonal) const</argsstring>
+        <name>CalculateScreenFactor</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::CalculateScreenFactor</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+          <declname>modelMatrix</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+          <declname>viewMatrix</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>sizeClipSpace</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>orthogonal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="77" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ae0cfb85dc121a617331069bfd291ebff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Ray" kindref="compound">SR_MATH_NS::Ray</ref></type>
+        <definition>SR_NODISCARD SR_MATH_NS::Ray SR_GTYPES_NS::Camera::GetScreenRay</definition>
+        <argsstring>(const SR_MATH_NS::FPoint &amp;screenPos, bool orthogonal) const</argsstring>
+        <name>GetScreenRay</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetScreenRay</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FPoint &amp;</type>
+          <declname>screenPos</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>orthogonal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="79" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a8feef148afcbadac678bffcffe25514e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Ray" kindref="compound">SR_MATH_NS::Ray</ref></type>
+        <definition>SR_NODISCARD SR_MATH_NS::Ray SR_GTYPES_NS::Camera::GetScreenRay</definition>
+        <argsstring>(float_t x, float_t y, bool orthogonal) const</argsstring>
+        <name>GetScreenRay</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::GetScreenRay</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>orthogonal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="80" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aa923dea811e3ff96d420ce4d0b7b98c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::ScreenToWorldPoint</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;screenPos) const</argsstring>
+        <name>ScreenToWorldPoint</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::ScreenToWorldPoint</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>screenPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="81" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a804eded6c3d2b51649c307280b045e02" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::ScreenToWorldPoint</definition>
+        <argsstring>(const SR_MATH_NS::FVector2 &amp;screenPos) const</argsstring>
+        <name>ScreenToWorldPoint</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::ScreenToWorldPoint</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector2 &amp;</type>
+          <declname>screenPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="82" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aab51d4b350f2e2331c563fe06f0ac24a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::ScreenToWorldPoint</definition>
+        <argsstring>(const SR_MATH_NS::FVector2 &amp;screenPos, float_t depth) const</argsstring>
+        <name>ScreenToWorldPoint</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::ScreenToWorldPoint</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector2 &amp;</type>
+          <declname>screenPos</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="83" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1af720096a6ae5ad8517abb6d280fc4685" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::SetFar</definition>
+        <argsstring>(float_t value)</argsstring>
+        <name>SetFar</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::SetFar</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a2d3b02b93f204910985291199cb21224" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::SetNear</definition>
+        <argsstring>(float_t value)</argsstring>
+        <name>SetNear</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::SetNear</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="86" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a638d9fe2a73684c15bd909437a50903f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::SetFOV</definition>
+        <argsstring>(float_t value)</argsstring>
+        <name>SetFOV</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::SetFOV</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="87" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a35eb89ae4b657d17073f9ae0d2a79c23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::SetPriority</definition>
+        <argsstring>(int32_t priority)</argsstring>
+        <name>SetPriority</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::SetPriority</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>priority</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="88" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a76a5738d5676b9207c723d854d107547" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::SetRenderTechnique</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SetRenderTechnique</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::SetRenderTechnique</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="90" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a9bde700fe5d9d427a4cf9903bfcb2d7c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::UpdateProjection</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateProjection</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::UpdateProjection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="93" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a38cce93b8062f6f8f6c79fb1f57928be" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::UpdateView</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>UpdateView</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::UpdateView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="95" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a1970aad1257d0a5d231fb34a1f3f56df" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::OnDestroy</definition>
+        <argsstring>() override</argsstring>
+        <name>OnDestroy</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::OnDestroy</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f">OnDestroy</reimplements>
+        <briefdescription>
+<para>Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="97" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a60300722f479a824b9903f08ecd1ac82" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::OnEnable</definition>
+        <argsstring>() override</argsstring>
+        <name>OnEnable</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::OnEnable</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1af582e05d713cc0849a532ba2554c41ab">OnEnable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="98" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a314c3616df8aa102db40392e6b9e0658" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Camera::OnDisable</definition>
+        <argsstring>() override</argsstring>
+        <name>OnDisable</name>
+        <qualifiedname>SR_GTYPES_NS::Camera::OnDisable</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a33c4d449284bb7be17ac6c0b66dad816">OnDisable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="99" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Entity</label>
+      </node>
+      <node id="4">
+        <label>SR_CORE_GUI_NS::EditorCamera</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorCamera"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::Camera</label>
+        <link refid="classSR__GTYPES__NS_1_1Camera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::Camera</label>
+        <link refid="classSR__GTYPES__NS_1_1Camera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="22" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>BaseComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ae0637533222c48a57acd0e1ec3f52959" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>CalculateScreenFactor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a00252585d867c3e26a0f3e73ff363a5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>CalculateScreenFactor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a45ea4ca33bdf3b04024cd6d88e5cfc9a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Camera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Detach</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a18af2c953acad770e70af93a16882340" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetAspect</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetCameraDir</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetCameraEye</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetFar</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetFOV</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetGameObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a6e080a7fd94c6139d5ae4cee2df26d12" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetGLPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetImGuizmoView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac26989ed1043d04a05f562f31c95c4aa" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetMousePos</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aaf438a0365dfd08692aebdc1570e419b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetNear</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a3b7e9d3f4240eb89881154169692cc63" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetOrthogonal</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad7904a1e9902362f3c720999538c276d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aef018d22216b905182903fc1bce5557c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a79b93c612e02ed390531ea901cdd12d6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a887736d7f50d77c5f8b133614f300448" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetProjectionNoFOV</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a56f1a4720ad71a7ac8e65263629c99fb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a4a903be3a90733dbad3fe9e3e26ecc89" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetRenderTechnique</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a03e5ff8cbac4acec0dd8043a6732855d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetRenderTechniquePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetRoot</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a418836a2a691249d942b88437b58d33c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetRotation</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ae0cfb85dc121a617331069bfd291ebff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetScreenRay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a8feef148afcbadac678bffcffe25514e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetScreenRay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ae677337d7264a0b069d02bf136d89570" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetSize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetTransform</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetView</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewDirection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewDirection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewTranslate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>HasScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aadc4129a4d23df36a858973ab8ca58de" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsEditorCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>LateUpdate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a9c234cfb26cb79b89b40a6e11fef4fb3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_aspect</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1afdb73795290cf3daafbcc2499a4df8ea" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_far</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a3db184c7a6032e3f099f22fd5afaace7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_FOV</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a009a3030f8f4ca0d30e51e465a1320cd" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_hasErrors</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a0abb413f8d64e1ed04246f600b81bea1" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_isStarted</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac5a5693a64386be267a9ec1a41aeb019" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_near</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a221a61bc7ebdc3ada6e5c51b647c98e7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_orthogonal</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_parent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a8aa94abca619f1fd6b9ba5da2c7d5408" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_position</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a771ef91852815424665effce9d7ca0e7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_priority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad4acb4a26aa1ce68b8663c7fdd27e578" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_projection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1acdff47ce44509b47c32be3cc28695920" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_projectionNoFOV</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_properties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a164c6cc9f0f74e24c58af7dadb0d69ec" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_renderTechnique</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a513aa8cb9cd718164b8ceae2e7ab5562" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_rotation</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a8c4dfc3c3e5cfa117171ef749f1cc4d8" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_viewDirection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aaea4fb538507b750bdf87ee94e3d895b" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_viewMat</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aa5e5121308becf5735bc6b77169fe127" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_viewportSize</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ade6e1f3d207c13d64520ad380191bfb8" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>m_viewTranslateMat</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a1970aad1257d0a5d231fb34a1f3f56df" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnDetached</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a314c3616df8aa102db40392e6b9e0658" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnDisable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a60300722f479a824b9903f08ecd1ac82" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnEnable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnLoaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>OriginType</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a50db11ea3283cd053d1e40552a89c0cb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Ptr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a87095c2597657f93b056a71164c21c5a" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aa923dea811e3ff96d420ce4d0b7b98c9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a804eded6c3d2b51649c307280b045e02" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aab51d4b350f2e2331c563fe06f0ac24a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1af720096a6ae5ad8517abb6d280fc4685" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetFar</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a638d9fe2a73684c15bd909437a50903f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetFOV</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a2d3b02b93f204910985291199cb21224" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetNear</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a35eb89ae4b657d17073f9ae0d2a79c23" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a76a5738d5676b9207c723d854d107547" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>SetRenderTechnique</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a6f77bb2633d24b9b2a8e1fa3849e0e05" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Start</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a3d9676df2b6ce44e5b77bc86c4754097" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Super</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>TryGetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1af6318d76959d6567b2d4ea416c4b3445" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>TryGetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>TryGetScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a4cbe75de74328d6615d636a811847cee" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>Update</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a0f0854c8d45651dc55c6a44f20528b2b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>UpdateProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a9bde700fe5d9d427a4cf9903bfcb2d7c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>UpdateProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a38cce93b8062f6f8f6c79fb1f57928be" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>UpdateView</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac242de34bd62c6f38840bf37f8a8acfe" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>~Camera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

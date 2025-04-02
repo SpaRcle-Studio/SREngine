@@ -1,0 +1,524 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kind="struct" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::PropertyDrawerContext</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a629b5deec320cf79a9029d9c67a79162" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::PropertyDrawerContext::noHeader</definition>
+        <argsstring></argsstring>
+        <name>noHeader</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::noHeader</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="40" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a3abb356bf727cb12820f75913c257dbf" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::PropertyDrawerContext::openedByDefault</definition>
+        <argsstring></argsstring>
+        <name>openedByDefault</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::openedByDefault</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="41" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a6dae642ec7f65d6290a2d5d2c7080ab9" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::PropertyDrawerContext::lineHeight</definition>
+        <argsstring></argsstring>
+        <name>lineHeight</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::lineHeight</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="43" column="17" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a31426a902760fc2ba5013eb46ad3e856" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::PropertyDrawerContext::spaceWidth</definition>
+        <argsstring></argsstring>
+        <name>spaceWidth</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::spaceWidth</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="44" column="17" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a9f22fd5fe160184c97edd496c3ff5986" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::PropertyDrawerContext::axisButtonWidth</definition>
+        <argsstring></argsstring>
+        <name>axisButtonWidth</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::axisButtonWidth</qualifiedname>
+        <initializer>= 30.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="46" column="17" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a74b8aeeef1b07117bec04b1f33bb8f52" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_CORE_GUI_NS::PropertyDrawerContext::maxPartsInLine</definition>
+        <argsstring></argsstring>
+        <name>maxPartsInLine</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::maxPartsInLine</qualifiedname>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="47" column="18" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a562361f3ec2e233ab605800e4a591b6e" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::PropertyDrawerContext::fieldTitleWidth</definition>
+        <argsstring></argsstring>
+        <name>fieldTitleWidth</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::fieldTitleWidth</qualifiedname>
+        <initializer>= 90.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="49" column="17" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a7f49cf8ae7f3be0bcd38b7ca59c2227c" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::PropertyDrawerContext::fieldWidth</definition>
+        <argsstring></argsstring>
+        <name>fieldWidth</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::fieldWidth</qualifiedname>
+        <initializer>= 250.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="50" column="17" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aba3e862bfd4d2254dbd2658747bf2253" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::PropertyDrawerContext::fieldHeight</definition>
+        <argsstring></argsstring>
+        <name>fieldHeight</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::fieldHeight</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="51" column="17" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a1e4c310f0f1ff0971b3a4d9998019145" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(bool drag)&gt;</type>
+        <definition>SR_HTYPES_NS::Function&lt;void(bool drag)&gt; SR_CORE_GUI_NS::PropertyDrawerContext::onBeforeChangeCallback</definition>
+        <argsstring></argsstring>
+        <name>onBeforeChangeCallback</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::onBeforeChangeCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="72" column="32" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ad1a8afd67542a36f0897762e3afb69f7" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref></type>
+        <definition>SR_UTILS_NS::Reflection::EditorPropertyParams SR_CORE_GUI_NS::PropertyDrawerContext::editorPropertyParams</definition>
+        <argsstring></argsstring>
+        <name>editorPropertyParams</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::editorPropertyParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="73" column="55" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aff00973dc405dfa26a6051f0ee8330e4" prot="public" static="no" mutable="no">
+        <type>SR_UTILS_NS::Component::Ptr</type>
+        <definition>SR_UTILS_NS::Component::Ptr SR_CORE_GUI_NS::PropertyDrawerContext::pComponent</definition>
+        <argsstring></argsstring>
+        <name>pComponent</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::pComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="74" column="37" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aa115dd5eaab90e4bffaae95d44d68a0c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_CORE_GUI_NS::PropertyDrawerContext::propertyIndex</definition>
+        <argsstring></argsstring>
+        <name>propertyIndex</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::propertyIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="75" column="18" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a90defef5eba87969a34307df412ac1cb" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_CORE_GUI_NS::PropertyDrawerContext::customDisplayName</definition>
+        <argsstring></argsstring>
+        <name>customDisplayName</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::customDisplayName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="76" column="33" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1acd9f0ecc25a4970012d408f24e317da9" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref> *</type>
+        <definition>SR_UTILS_NS::Reflection::Value* SR_CORE_GUI_NS::PropertyDrawerContext::pValue</definition>
+        <argsstring></argsstring>
+        <name>pValue</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::pValue</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="77" column="40" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a67b6b04a53805852f1f1f1c9c4fa5179" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref> const  *</type>
+        <definition>SR_UTILS_NS::Reflection::Property const* SR_CORE_GUI_NS::PropertyDrawerContext::pProperty</definition>
+        <argsstring></argsstring>
+        <name>pProperty</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::pProperty</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="78" column="49" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ab8abf14c601398d83fdaef0b45973d77" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">EditorGUI</ref> *</type>
+        <definition>EditorGUI* SR_CORE_GUI_NS::PropertyDrawerContext::pEditor</definition>
+        <argsstring></argsstring>
+        <name>pEditor</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::pEditor</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="79" column="19" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a10ae5aeb7ed158b56bbeaf1407eb02ee" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SR_UTILS_NS::SRClass</ref> *</type>
+        <definition>SR_UTILS_NS::SRClass* SR_CORE_GUI_NS::PropertyDrawerContext::pOwner</definition>
+        <argsstring></argsstring>
+        <name>pOwner</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::pOwner</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="80" column="30" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a30444dfd167d28b1a7670afaf4644cbd" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::PropertyDrawerContext::PropertyDrawerContext</definition>
+        <argsstring>(const SR_UTILS_NS::Reflection::Property &amp;property)</argsstring>
+        <name>PropertyDrawerContext</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::PropertyDrawerContext</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref> &amp;</type>
+          <declname>property</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="32" column="18" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a928db6b92abf9e42b8615c4a76e8071f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::PropertyDrawerContext::PropertyDrawerContext</definition>
+        <argsstring>(SR_UTILS_NS::Reflection::Value *pValue)</argsstring>
+        <name>PropertyDrawerContext</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::PropertyDrawerContext</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref> *</type>
+          <declname>pValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="36" column="18" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aad38dfd51b3f3989366a83c2c3a35af7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_CORE_GUI_NS::PropertyDrawerContext::GetArrowWidth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetArrowWidth</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::GetArrowWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="53" column="30" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ad659a85b1caac210ab7448f8a1a65e67" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref> const &amp;</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Reflection::Property const  &amp; SR_CORE_GUI_NS::PropertyDrawerContext::GetProperty</definition>
+        <argsstring>() const</argsstring>
+        <name>GetProperty</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::GetProperty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="55" column="62" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a448fb944c2b422c87d09210d6a76a0af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_CORE_GUI_NS::PropertyDrawerContext::GetPropertyName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPropertyName</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::GetPropertyName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="56" column="46" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ab60ab76c70cfb44408183dbb44a615a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_CORE_GUI_NS::PropertyDrawerContext::GetPropertyDisplayName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPropertyDisplayName</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::GetPropertyDisplayName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="57" column="46" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a8e3b571fd0504f784d3b0db209e18ee6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_UTILS_NS::Reflection::EditorPropertyParams &amp; SR_CORE_GUI_NS::PropertyDrawerContext::GetEditorParams</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEditorParams</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::GetEditorParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="58" column="74" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a36f14d5ac2903623321783ee4e6cc700" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Reflection::Value SR_CORE_GUI_NS::PropertyDrawerContext::GetValue</definition>
+        <argsstring>() const</argsstring>
+        <name>GetValue</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::GetValue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="60" column="53" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="60" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a7db7e790d90116e6138c154b1aebd40c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_GUI_NS::PropertyDrawerContext::HasExplicitSetter</definition>
+        <argsstring>() const</argsstring>
+        <name>HasExplicitSetter</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerContext::HasExplicitSetter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="68" column="27" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="68" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="10">
+        <label>SR_CORE_GUI_NS::EditorGUI</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorGUI"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::PropertyDrawerContext</label>
+        <link refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>onBeforeChangeCallback</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>editorPropertyParams</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pComponent</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>customDisplayName</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>pValue</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>pProperty</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>pEditor</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>pOwner</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_GRAPH_GUI_NS::WidgetManager</label>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::Function&lt; void(bool drag)&gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1Function"/>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Component &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Reflection::EditorPropertyParams</label>
+        <link refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams"/>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::Reflection::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Reflection_1_1Property"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Reflection::Value</label>
+        <link refid="classSR__UTILS__NS_1_1Reflection_1_1Value"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="31" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="31" bodyend="81"/>
+    <listofallmembers>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a9f22fd5fe160184c97edd496c3ff5986" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>axisButtonWidth</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a90defef5eba87969a34307df412ac1cb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>customDisplayName</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ad1a8afd67542a36f0897762e3afb69f7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>editorPropertyParams</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aba3e862bfd4d2254dbd2658747bf2253" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>fieldHeight</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a562361f3ec2e233ab605800e4a591b6e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>fieldTitleWidth</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a7f49cf8ae7f3be0bcd38b7ca59c2227c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>fieldWidth</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aad38dfd51b3f3989366a83c2c3a35af7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetArrowWidth</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a8e3b571fd0504f784d3b0db209e18ee6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetEditorParams</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ad659a85b1caac210ab7448f8a1a65e67" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetProperty</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ab60ab76c70cfb44408183dbb44a615a6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetPropertyDisplayName</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a448fb944c2b422c87d09210d6a76a0af" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetPropertyName</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a36f14d5ac2903623321783ee4e6cc700" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>GetValue</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a7db7e790d90116e6138c154b1aebd40c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>HasExplicitSetter</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a6dae642ec7f65d6290a2d5d2c7080ab9" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>lineHeight</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a74b8aeeef1b07117bec04b1f33bb8f52" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>maxPartsInLine</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a629b5deec320cf79a9029d9c67a79162" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>noHeader</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a1e4c310f0f1ff0971b3a4d9998019145" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>onBeforeChangeCallback</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a3abb356bf727cb12820f75913c257dbf" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>openedByDefault</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aff00973dc405dfa26a6051f0ee8330e4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>pComponent</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1ab8abf14c601398d83fdaef0b45973d77" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>pEditor</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a10ae5aeb7ed158b56bbeaf1407eb02ee" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>pOwner</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a67b6b04a53805852f1f1f1c9c4fa5179" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>pProperty</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a30444dfd167d28b1a7670afaf4644cbd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>PropertyDrawerContext</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a928db6b92abf9e42b8615c4a76e8071f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>PropertyDrawerContext</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1aa115dd5eaab90e4bffaae95d44d68a0c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>propertyIndex</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1acd9f0ecc25a4970012d408f24e317da9" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>pValue</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext_1a31426a902760fc2ba5013eb46ad3e856" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerContext</scope><name>spaceWidth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

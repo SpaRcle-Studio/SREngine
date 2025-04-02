@@ -1,0 +1,696 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__NETWORK__NS_1_1PeerToPeer" kind="class" language="C++" prot="public">
+    <compoundname>SR_NETWORK_NS::PeerToPeer</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PeerToPeer &gt;</basecompoundref>
+    <innerclass refid="structSR__NETWORK__NS_1_1PeerToPeer_1_1Connection" prot="private">SR_NETWORK_NS::PeerToPeer::Connection</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1PeerToPeer_1a823307605cd639f3aba51cf835fe611f" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1PeerToPeer" kindref="compound">PeerToPeer</ref> &gt;</type>
+        <definition>using SR_NETWORK_NS::PeerToPeer::Super =  SR_HTYPES_NS::SharedPtr&lt;PeerToPeer&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1PeerToPeer_1a93b9b4ddb4f598799c04afbbafaedcab" prot="private" static="no">
+        <type>std::function&lt; void(const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">PeerToPeer::Ptr</ref> &amp;pP2P, const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;)&gt;</type>
+        <definition>using SR_NETWORK_NS::PeerToPeer::Callback =  std::function&lt;void(const PeerToPeer::Ptr&amp; pP2P, const Socket::Ptr&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>Callback</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::Callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__NETWORK__NS_1_1PeerToPeer_1ac26c806e60ca4a0547680edb68f6e39b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Context</definition>
+        <argsstring></argsstring>
+        <name>Context</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::Context</qualifiedname>
+        <param>
+          <type><ref refid="classSR__NETWORK__NS_1_1Context" kindref="compound">Context</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="15" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a807058f30d3e3ba8d1655062aa6b8441" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_NETWORK_NS::PeerToPeer::m_address</definition>
+        <argsstring></argsstring>
+        <name>m_address</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_address</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="55" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a15d9c34caeb902dcca22395c002f092a" prot="private" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_NETWORK_NS::PeerToPeer::m_port</definition>
+        <argsstring></argsstring>
+        <name>m_port</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_port</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="56" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a3ea4eaf94c3b4b4ce2cd2baf3b848544" prot="private" static="no" mutable="no">
+        <type>const SocketType</type>
+        <definition>const SocketType SR_NETWORK_NS::PeerToPeer::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_type</qualifiedname>
+        <initializer>= SocketType::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="58" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1ae8df20ca98925ebe1b9c8a3a3dfb6b4b" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref></type>
+        <definition>Context::Ptr SR_NETWORK_NS::PeerToPeer::m_context</definition>
+        <argsstring></argsstring>
+        <name>m_context</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="60" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a4a7d015f33fd66131283a4cff7a7cc97" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Acceptor::Ptr</ref></type>
+        <definition>Acceptor::Ptr SR_NETWORK_NS::PeerToPeer::m_acceptor</definition>
+        <argsstring></argsstring>
+        <name>m_acceptor</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_acceptor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="62" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1adbd9f6c93aa9b9c71b91229101b9d435" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref>, Connection &gt;</type>
+        <definition>std::map&lt;Socket::Ptr, Connection&gt; SR_NETWORK_NS::PeerToPeer::m_connections</definition>
+        <argsstring></argsstring>
+        <name>m_connections</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_connections</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="69" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a0ee58c0530300caf0d1461453d7e7cb6" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &gt;</type>
+        <definition>std::set&lt;Socket::Ptr&gt; SR_NETWORK_NS::PeerToPeer::m_newPeers</definition>
+        <argsstring></argsstring>
+        <name>m_newPeers</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_newPeers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="71" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1PeerToPeer_1a9fea866bbde27f51aa7caae5b706f3c0" prot="private" static="no" mutable="no">
+        <type>Callback</type>
+        <definition>Callback SR_NETWORK_NS::PeerToPeer::m_onAccept</definition>
+        <argsstring></argsstring>
+        <name>m_onAccept</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::m_onAccept</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="73" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1ad8bf488f2f942a2e2e6d341bcb7cda29" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_NETWORK_NS::PeerToPeer::PeerToPeer</definition>
+        <argsstring>(SocketType type, Context::Ptr pContext, std::string address, uint16_t port)</argsstring>
+        <name>PeerToPeer</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::PeerToPeer</qualifiedname>
+        <param>
+          <type>SocketType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Context::Ptr</ref></type>
+          <declname>pContext</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="19" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a9e321ac7a0130c0ff99436719f644e8c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::PeerToPeer::OnAccept</definition>
+        <argsstring>(Socket::Ptr &amp;&amp;pSocket)</argsstring>
+        <name>OnAccept</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::OnAccept</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;&amp;</type>
+          <declname>pSocket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a6f1991b92ae154821f75fd20a420a314" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::RegisterSocket</definition>
+        <argsstring>(Socket::Ptr pSocket, uint32_t address, uint16_t port)</argsstring>
+        <name>RegisterSocket</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::RegisterSocket</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref></type>
+          <declname>pSocket</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1afd00868c6f1ee799b3bc5a0795d6b5e3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::ConnectInternal</definition>
+        <argsstring>(const std::string &amp;address, uint16_t port, bool share)</argsstring>
+        <name>ConnectInternal</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::ConnectInternal</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>share</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1aa6950e1dc0ba481431a0bc2b4db34256" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::PeerToPeer::ProcessMessage</definition>
+        <argsstring>(const Socket::Ptr &amp;pSocket, const DataPackage::Ptr &amp;pData)</argsstring>
+        <name>ProcessMessage</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::ProcessMessage</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;</type>
+          <declname>pSocket</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">DataPackage::Ptr</ref> &amp;</type>
+          <declname>pData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1accc3bf1652e31e510ad5c73d18ee3e24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::SharePeer</definition>
+        <argsstring>(const Socket::Ptr &amp;pTarget, const Socket::Ptr &amp;pNewPeer)</argsstring>
+        <name>SharePeer</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::SharePeer</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;</type>
+          <declname>pTarget</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;</type>
+          <declname>pNewPeer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a4184c6875fae929a1f667b062b3082cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::SharePeer</definition>
+        <argsstring>(const Socket::Ptr &amp;pNewPeer)</argsstring>
+        <name>SharePeer</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::SharePeer</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;</type>
+          <declname>pNewPeer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a6996acc2803b7d73540a907ae0bb17c9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::ListerPeer</definition>
+        <argsstring>(const Socket::Ptr &amp;pSocket)</argsstring>
+        <name>ListerPeer</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::ListerPeer</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;</type>
+          <declname>pSocket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="52" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a01ab204ede5c86e3425f3e0131a13b93" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_NETWORK_NS::PeerToPeer::~PeerToPeer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PeerToPeer</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::~PeerToPeer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="22" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a27937a844c58b4d232999667424bde58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::Run</definition>
+        <argsstring>()</argsstring>
+        <name>Run</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::Run</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a63cee9862b9ab1f37f26b01c3ef42be6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::PeerToPeer::Close</definition>
+        <argsstring>()</argsstring>
+        <name>Close</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::Close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a9cad5487c5dcc24cbcc18c637a8db385" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::Connect</definition>
+        <argsstring>(const std::string &amp;address, uint16_t port)</argsstring>
+        <name>Connect</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::Connect</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1af6ef4309ac68d306182e6ba14beadeb4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::PeerToPeer::SetOnAcceptCallback</definition>
+        <argsstring>(Callback &amp;&amp;callback)</argsstring>
+        <name>SetOnAcceptCallback</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::SetOnAcceptCallback</qualifiedname>
+        <param>
+          <type>Callback &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="30" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a21598dea4f6bd657f2986a9f4548da89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Acceptor::Ptr</ref> &amp;</type>
+        <definition>SR_NODISCARD const Acceptor::Ptr &amp; SR_NETWORK_NS::PeerToPeer::GetAcceptor</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAcceptor</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::GetAcceptor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="32" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a6e2b8e0c437b5a3e92865cd299d04730" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_NETWORK_NS::PeerToPeer::GetConnectionsCount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetConnectionsCount</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::GetConnectionsCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="34" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1ac6ee3f326a78e918b4f30d84ab60c4ad" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_NETWORK_NS::PeerToPeer::GetNewPeersCount</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNewPeersCount</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::GetNewPeersCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="35" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a2e27cd70b0fbb2fbcb2467dc9d04df64" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_NETWORK_NS::PeerToPeer::IsOpen</definition>
+        <argsstring>() const</argsstring>
+        <name>IsOpen</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::IsOpen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="36" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a598d833978b3000cbeae4876617524bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_NETWORK_NS::PeerToPeer::HasConnection</definition>
+        <argsstring>(uint32_t address, uint16_t port) const</argsstring>
+        <name>HasConnection</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::HasConnection</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="37" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1PeerToPeer_1a0dc2421ba851fe6ce0422eb0c6255ad5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::PeerToPeer::SendKnownHosts</definition>
+        <argsstring>(const Socket::Ptr &amp;pSocket)</argsstring>
+        <name>SendKnownHosts</name>
+        <qualifiedname>SR_NETWORK_NS::PeerToPeer::SendKnownHosts</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Socket::Ptr</ref> &amp;</type>
+          <declname>pSocket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="39" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; PeerToPeer &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_NETWORK_NS::PeerToPeer</label>
+        <link refid="classSR__NETWORK__NS_1_1PeerToPeer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; PeerToPeer &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_NETWORK_NS::PeerToPeer</label>
+        <link refid="classSR__NETWORK__NS_1_1PeerToPeer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/PeerToPeer.h" bodystart="14" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>AutoFree</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a93b9b4ddb4f598799c04afbbafaedcab" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Callback</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a63cee9862b9ab1f37f26b01c3ef42be6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Close</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a9cad5487c5dcc24cbcc18c637a8db385" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Connect</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1afd00868c6f1ee799b3bc5a0795d6b5e3" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ConnectInternal</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ac26c806e60ca4a0547680edb68f6e39b" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a21598dea4f6bd657f2986a9f4548da89" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetAcceptor</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a6e2b8e0c437b5a3e92865cd299d04730" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetConnectionsCount</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ac6ee3f326a78e918b4f30d84ab60c4ad" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetNewPeersCount</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a598d833978b3000cbeae4876617524bf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>HasConnection</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a2e27cd70b0fbb2fbcb2467dc9d04df64" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>IsOpen</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a6996acc2803b7d73540a907ae0bb17c9" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ListerPeer</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a4a7d015f33fd66131283a4cff7a7cc97" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_acceptor</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a807058f30d3e3ba8d1655062aa6b8441" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_address</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_basicManually</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1adbd9f6c93aa9b9c71b91229101b9d435" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_connections</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ae8df20ca98925ebe1b9c8a3a3dfb6b4b" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_data</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a0ee58c0530300caf0d1461453d7e7cb6" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_newPeers</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a9fea866bbde27f51aa7caae5b706f3c0" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_onAccept</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a15d9c34caeb902dcca22395c002f092a" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_port</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a3ea4eaf94c3b4b4ce2cd2baf3b848544" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_type</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>MakeShared</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a9e321ac7a0130c0ff99436719f644e8c" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>OnAccept</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>operator==</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ad8bf488f2f942a2e2e6d341bcb7cda29" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>PeerToPeer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1aa6950e1dc0ba481431a0bc2b4db34256" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ProcessMessage</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a6f1991b92ae154821f75fd20a420a314" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>RegisterSocket</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Reset</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a27937a844c58b4d232999667424bde58" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Run</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a0dc2421ba851fe6ce0422eb0c6255ad5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SendKnownHosts</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1af6ef4309ac68d306182e6ba14beadeb4" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SetOnAcceptCallback</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1accc3bf1652e31e510ad5c73d18ee3e24" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharePeer</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a4184c6875fae929a1f667b062b3082cc" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharePeer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>StaticCast</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a823307605cd639f3aba51cf835fe611f" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Valid</name></member>
+      <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a01ab204ede5c86e3425f3e0131a13b93" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~PeerToPeer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

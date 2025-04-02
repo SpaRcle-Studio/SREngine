@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1NodeDictionary" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::NodeDictionary</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1NodeDictionary_1a1873c94331ea16bd2422b88c4c86d0b0" prot="private" static="no">
+        <type>std::function&lt; uint32_t(T *pA, T *pB)&gt;</type>
+        <definition>using SR_HTYPES_NS::NodeDictionary&lt; T &gt;::Comparator =  std::function&lt;uint32_t(T* pA, T* pB)&gt;</definition>
+        <argsstring></argsstring>
+        <name>Comparator</name>
+        <qualifiedname>SR_HTYPES_NS::NodeDictionary::Comparator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" line="54" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1NodeDictionary_1a9eed0194c661238a644d6cfd60d23831" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1LinkedList" kindref="compound">LinkedList</ref>&lt; T &gt;</type>
+        <definition>LinkedList&lt;T&gt; SR_HTYPES_NS::NodeDictionary&lt; T &gt;::m_keys</definition>
+        <argsstring></argsstring>
+        <name>m_keys</name>
+        <qualifiedname>SR_HTYPES_NS::NodeDictionary::m_keys</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" line="60" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1NodeDictionary_1a0485a34d9c3493333dcfe6dcb9f4a542" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1BinarySearchTree" kindref="compound">BinarySearchTree</ref>&lt; T &gt;</type>
+        <definition>BinarySearchTree&lt;T&gt; SR_HTYPES_NS::NodeDictionary&lt; T &gt;::m_binarySearchTree</definition>
+        <argsstring></argsstring>
+        <name>m_binarySearchTree</name>
+        <qualifiedname>SR_HTYPES_NS::NodeDictionary::m_binarySearchTree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" line="61" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1NodeDictionary_1a3bab40b67cc3a573c9720b991f168b52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::NodeDictionary&lt; T &gt;::Insert</definition>
+        <argsstring>(T *pKey, uint64_t keySize, T *pValue, uint64_t valueSize)</argsstring>
+        <name>Insert</name>
+        <qualifiedname>SR_HTYPES_NS::NodeDictionary::Insert</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>pKey</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>keySize</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>pValue</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>valueSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" line="56" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" bodystart="72" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1NodeDictionary_1a75c1e4effd356af43739ca0e7f7fb18c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD T *</type>
+        <definition>T * SR_HTYPES_NS::NodeDictionary&lt; T &gt;::Search</definition>
+        <argsstring>(T *pKey, uint64_t keySize) const</argsstring>
+        <name>Search</name>
+        <qualifiedname>SR_HTYPES_NS::NodeDictionary::Search</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>pKey</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>keySize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" line="57" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" bodystart="65" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_HTYPES_NS::NodeDictionary&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1NodeDictionary"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_HTYPES_NS::NodeDictionary&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1NodeDictionary"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" line="53" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/NodeDictionary.h" bodystart="53" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1NodeDictionary_1a1873c94331ea16bd2422b88c4c86d0b0" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>Comparator</name></member>
+      <member refid="classSR__HTYPES__NS_1_1NodeDictionary_1a3bab40b67cc3a573c9720b991f168b52" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>Insert</name></member>
+      <member refid="classSR__HTYPES__NS_1_1NodeDictionary_1a0485a34d9c3493333dcfe6dcb9f4a542" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>m_binarySearchTree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1NodeDictionary_1a9eed0194c661238a644d6cfd60d23831" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>m_keys</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1NodeDictionary_1a75c1e4effd356af43739ca0e7f7fb18c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>Search</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::NodeDictionary</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1341 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1StringUtils" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::StringUtils</compoundname>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StringUtils_1a77abc1865592573800833d91b02c5f9e" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string SR_UTILS_NS::StringUtils::base64_chars</definition>
+        <argsstring></argsstring>
+        <name>base64_chars</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::base64_chars</qualifiedname>
+        <initializer>=
+                &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+                &quot;abcdefghijklmnopqrstuvwxyz&quot;
+                &quot;0123456789+/&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="40" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1afa63c9b2dac60e26fcdaf86883033a9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringUtils::StringUtils</definition>
+        <argsstring>()=delete</argsstring>
+        <name>StringUtils</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::StringUtils</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="36" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ab642989168cf9496a033213e6890b29c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringUtils::StringUtils</definition>
+        <argsstring>(StringUtils &amp;)=delete</argsstring>
+        <name>StringUtils</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::StringUtils</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringUtils" kindref="compound">StringUtils</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="37" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aaec0c5899c3ed41fba9794cf4b4ea76c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringUtils::~StringUtils</definition>
+        <argsstring>()=delete</argsstring>
+        <name>~StringUtils</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::~StringUtils</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="38" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a31c718f0c4af35abd91d7c2d0dc86b34" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_INLINE_STATIC std::string</type>
+        <definition>SR_NODISCARD SR_INLINE_STATIC std::string SR_UTILS_NS::StringUtils::ToLower</definition>
+        <argsstring>(std::string str) noexcept</argsstring>
+        <name>ToLower</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ToLower</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="444" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="444" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a73a08eca1465f6bec216ea3009989391" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_INLINE_STATIC void</type>
+        <definition>SR_INLINE_STATIC void SR_UTILS_NS::StringUtils::ToLowerRef</definition>
+        <argsstring>(std::string_view str) noexcept</argsstring>
+        <name>ToLowerRef</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ToLowerRef</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="451" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="451" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aed245a02bedfd644dacfbd13a32047d7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_INLINE_STATIC void</type>
+        <definition>SR_INLINE_STATIC void SR_UTILS_NS::StringUtils::ToUpperRef</definition>
+        <argsstring>(std::string_view str) noexcept</argsstring>
+        <name>ToUpperRef</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ToUpperRef</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="457" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="457" bodyend="461"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ad5ac447bbb8e7b32d996e09fc6fdaa8c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::StringUtils::is_base64</definition>
+        <argsstring>(unsigned char c)</argsstring>
+        <name>is_base64</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::is_base64</qualifiedname>
+        <param>
+          <type>unsigned char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="45" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="45" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a09cf9b4b241028bf4dbb1c9fbc646d63" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::StringUtils::IsBase64</definition>
+        <argsstring>(unsigned char c)</argsstring>
+        <name>IsBase64</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::IsBase64</qualifiedname>
+        <param>
+          <type>unsigned char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="49" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="49" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a58b9ed9d9a3934c0801358ce9c61a918" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Base64Decode</definition>
+        <argsstring>(const std::string &amp;base64)</argsstring>
+        <name>Base64Decode</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Base64Decode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>base64</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="53" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aa0583dd147241d9f54cdc2615957a9cf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Base64Encode</definition>
+        <argsstring>(const std::string &amp;data)</argsstring>
+        <name>Base64Encode</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Base64Encode</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="54" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ad4947378da90b0e31b77932c2156d06e" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>static glm::vec3 SR_UTILS_NS::StringUtils::IntToColor</definition>
+        <argsstring>(size_t index) noexcept</argsstring>
+        <name>IntToColor</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::IntToColor</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="56" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="56" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a8307589251d6e9c980200f9b2f428feb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::string</type>
+        <definition>static SR_FORCE_INLINE std::string SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath</definition>
+        <argsstring>(std::string full_path)</argsstring>
+        <name>GetDirToFileFromFullPath</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>full_path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="64" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="64" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aacdb08ab065c6de508ff1fa1b26b68eb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::string</type>
+        <definition>static SR_FORCE_INLINE std::string SR_UTILS_NS::StringUtils::MultiConcat</definition>
+        <argsstring>(const std::string &amp;target, int32_t n)</argsstring>
+        <name>MultiConcat</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::MultiConcat</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="78" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="78" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1af096d04111cca3d1b849122ed60ce538" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::string</type>
+        <definition>static SR_FORCE_INLINE std::string SR_UTILS_NS::StringUtils::GetDirFromPath</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>GetDirFromPath</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetDirFromPath</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="87" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="87" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aed2070dd5c77423060142723e5d7ec6e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE int32_t</type>
+        <definition>static SR_FORCE_INLINE int32_t SR_UTILS_NS::StringUtils::IndexOf</definition>
+        <argsstring>(const std::string &amp;str, const char &amp;symbol, uint32_t offset=0)</argsstring>
+        <name>IndexOf</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::IndexOf</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char &amp;</type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="91" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="91" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a1f628832ca471ef88c0bd7f9ed7fac79" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE int32_t</type>
+        <definition>static SR_FORCE_INLINE int32_t SR_UTILS_NS::StringUtils::IndexOf</definition>
+        <argsstring>(const std::string &amp;str, const std::string &amp;subStr, uint32_t offset=0)</argsstring>
+        <name>IndexOf</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::IndexOf</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>subStr</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="98" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="98" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a825a0ae51fec1bc74e43a3fd727062a0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::string</type>
+        <definition>static SR_FORCE_INLINE std::string SR_UTILS_NS::StringUtils::GetFileNameFromFullPath</definition>
+        <argsstring>(std::string full_path)</argsstring>
+        <name>GetFileNameFromFullPath</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetFileNameFromFullPath</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>full_path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="106" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="106" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a46e8e6e3f159f74396eefd40f871af4e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::RemoveCharsFromString</definition>
+        <argsstring>(std::string source, const std::string &amp;charsToRemove)</argsstring>
+        <name>RemoveCharsFromString</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::RemoveCharsFromString</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>charsToRemove</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="120" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="120" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aad7a38076506a85ca1dfc7a74c01adc7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Remove</definition>
+        <argsstring>(std::string source, uint32_t count)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Remove</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="127" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a5eeb5481eb1a13f245150f0a50d4e3a9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Remove</definition>
+        <argsstring>(std::string source, uint32_t start, uint32_t count)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Remove</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="128" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a3d30e1c6dd3d94ae1f5d09c7cf777fbe" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::GetBetween</definition>
+        <argsstring>(const std::string &amp;source, int64_t begin, uint64_t end)</argsstring>
+        <name>GetBetween</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetBetween</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="130" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="130" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a89e94117be1d74fdd827b81d2a4e1dba" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>static std::string_view SR_UTILS_NS::StringUtils::GetBetween</definition>
+        <argsstring>(std::string_view source, char begin, char end, int8_t *pResult=nullptr)</argsstring>
+        <name>GetBetween</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetBetween</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>int8_t *</type>
+          <declname>pResult</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="134" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="134" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a6d6cd17ab7cc9beb4750287c12d192e7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Tab</definition>
+        <argsstring>(std::string code, uint32_t count=1)</argsstring>
+        <name>Tab</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Tab</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="158" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a37c248385dfdb59fe9f85ad817fb93af" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::GetBetween</definition>
+        <argsstring>(const std::string &amp;source, const std::string &amp;begin, const std::string &amp;end)</argsstring>
+        <name>GetBetween</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetBetween</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="160" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="160" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a47cc8f123a5d26399f25e07303a2acf1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Substring</definition>
+        <argsstring>(const std::string &amp;source, char symbol, uint32_t offset=0)</argsstring>
+        <name>Substring</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Substring</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="172" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="172" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a175157f9a18e5b8d4184bfcecbb7e750" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Substring</definition>
+        <argsstring>(const std::string &amp;source, const char *subStr)</argsstring>
+        <name>Substring</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Substring</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>subStr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="179" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="179" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ad062aa406f8994fff8807454fbb7f26a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Substring</definition>
+        <argsstring>(const std::string_view &amp;source, char symbol, uint32_t offset=0)</argsstring>
+        <name>Substring</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Substring</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="187" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="187" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aa49fcc375d9f2d5ab463c96c8a8e1a86" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>static std::string_view SR_UTILS_NS::StringUtils::SubstringView</definition>
+        <argsstring>(const std::string_view &amp;source, char symbol, uint32_t offset=0)</argsstring>
+        <name>SubstringView</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::SubstringView</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="195" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="195" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a565764c3c255fcd1c5ff2bcd3e868a03" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>static std::string_view SR_UTILS_NS::StringUtils::SubstringView</definition>
+        <argsstring>(const std::string_view &amp;source, StringAtom substr, uint32_t offset=0)</argsstring>
+        <name>SubstringView</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::SubstringView</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>substr</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="204" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="204" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a62130c06115998b877471380adfc3820" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE std::string</type>
+        <definition>static SR_FORCE_INLINE std::string SR_UTILS_NS::StringUtils::BackRead</definition>
+        <argsstring>(const std::string &amp;str, const char c, const int offset=0)</argsstring>
+        <name>BackRead</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::BackRead</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="213" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="213" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a3f0a0382a43ddf84084c4d8a91efe648" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::ReadFrom</definition>
+        <argsstring>(const std::string &amp;str, const char &amp;c, uint32_t start)</argsstring>
+        <name>ReadFrom</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ReadFrom</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="230" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ae72520c7cd71a7ca8df8a27db14ae392" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::ReadNumber</definition>
+        <argsstring>(const std::string &amp;str, uint32_t start)</argsstring>
+        <name>ReadNumber</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ReadNumber</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="232" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aafe038b0cabb2ad3e104b37fb76d3b6e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>static int32_t SR_UTILS_NS::StringUtils::FindClosest</definition>
+        <argsstring>(const std::string &amp;str, const std::string &amp;characters)</argsstring>
+        <name>FindClosest</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::FindClosest</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="234" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="234" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a74d5420a0850758a5aedd052d55aa45d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::ReadTo</definition>
+        <argsstring>(std::string str, const char c, int offset=0)</argsstring>
+        <name>ReadTo</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ReadTo</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="247" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="247" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1af08d9999845eb8d8ecc6560c7fc717de" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Resize</definition>
+        <argsstring>(std::string str, size_t newSize) noexcept</argsstring>
+        <name>Resize</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Resize</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>newSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="258" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="258" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a7764b552fa0a273e347478ded113c097" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::BackSubstring</definition>
+        <argsstring>(const std::string &amp;str, char c)</argsstring>
+        <name>BackSubstring</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::BackSubstring</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="263" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="263" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a124cfd0e414cc4cc570bb63907349cc7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::GetExtensionFromFilePath</definition>
+        <argsstring>(std::string path)</argsstring>
+        <name>GetExtensionFromFilePath</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::GetExtensionFromFilePath</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="274" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a235062829bab358fb921b5e07e06e9b8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::Reverse</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>Reverse</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Reverse</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="275" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1adb160aa774263788e3d38b0e10b24538" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::vec2</type>
+        <definition>static glm::vec2 SR_UTILS_NS::StringUtils::MakeVec2FromString</definition>
+        <argsstring>(const char *source, char chr, unsigned short start)</argsstring>
+        <name>MakeVec2FromString</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::MakeVec2FromString</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>chr</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="277" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a39833540af9083eff3dd14c22af24316" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>glm::vec3</type>
+        <definition>static glm::vec3 SR_UTILS_NS::StringUtils::MakeVec3FromString</definition>
+        <argsstring>(const char *source, char chr, unsigned short start)</argsstring>
+        <name>MakeVec3FromString</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::MakeVec3FromString</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>chr</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="278" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ac2812b75b8fca7faab564c2f7d2690ad" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>static unsigned long SR_UTILS_NS::StringUtils::FastStrLen</definition>
+        <argsstring>(const char *str) noexcept</argsstring>
+        <name>FastStrLen</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::FastStrLen</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="280" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="280" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a01deeef52341ab51c501c2dfca18a62d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::pair&lt; std::string, std::string &gt;</type>
+        <definition>static SR_NODISCARD std::pair&lt; std::string, std::string &gt; SR_UTILS_NS::StringUtils::SplitTwo</definition>
+        <argsstring>(std::string source, const std::string &amp;delimiter)</argsstring>
+        <name>SplitTwo</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::SplitTwo</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>delimiter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="289" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="289" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a960ed51be6d28d988671a57f16378f00" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; std::string_view &gt;</type>
+        <definition>static SR_NODISCARD std::vector&lt; std::string_view &gt; SR_UTILS_NS::StringUtils::SplitView</definition>
+        <argsstring>(std::string_view source, std::string_view delimiter)</argsstring>
+        <name>SplitView</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::SplitView</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>delimiter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="300" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a3a9a1d5842003220b43797f35aba7487" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; std::string_view &gt;</type>
+        <definition>static SR_NODISCARD std::vector&lt; std::string_view &gt; SR_UTILS_NS::StringUtils::SplitViewWithEmpty</definition>
+        <argsstring>(std::string_view source, std::string_view delimiter)</argsstring>
+        <name>SplitViewWithEmpty</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::SplitViewWithEmpty</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>delimiter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="301" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ac745f55777edd197c0609a8171d9a4f5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; std::string &gt;</type>
+        <definition>static SR_NODISCARD std::vector&lt; std::string &gt; SR_UTILS_NS::StringUtils::Split</definition>
+        <argsstring>(std::string source, const std::string &amp;delimiter)</argsstring>
+        <name>Split</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Split</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>delimiter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="302" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4546ef1cc6c47b383ea47fa7f96b5b40" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD char **</type>
+        <definition>static SR_NODISCARD char ** SR_UTILS_NS::StringUtils::Split</definition>
+        <argsstring>(const char *source, char chr, unsigned short start, unsigned short count_strs)</argsstring>
+        <name>Split</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Split</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>chr</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>count_strs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="304" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="304" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a3db5b5c9c1b7f6b5b8aa1a741bb12d89" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>static SR_NODISCARD bool SR_UTILS_NS::StringUtils::Contains</definition>
+        <argsstring>(const std::string &amp;str, const std::string &amp;word) noexcept</argsstring>
+        <name>Contains</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::Contains</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="349" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="349" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ac4f23d797031e8b0d04d62d23b2bff0d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float *</type>
+        <definition>static SR_NODISCARD float * SR_UTILS_NS::StringUtils::SplitFloats</definition>
+        <argsstring>(const char *source, char chr, unsigned short start, unsigned short count_floats)</argsstring>
+        <name>SplitFloats</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::SplitFloats</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>chr</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>unsigned short</type>
+          <declname>count_floats</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="353" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="353" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a7cbf8490520be9eec6aadab57eb3d0d4" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD unsigned char</type>
+        <definition>static SR_NODISCARD unsigned char SR_UTILS_NS::StringUtils::MathCount</definition>
+        <argsstring>(const char *str, char symb) noexcept</argsstring>
+        <name>MathCount</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::MathCount</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>symb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="402" column="50" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="402" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4bb44cb3cb35501f8f2e5b1d9f5e2e4c" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::StringUtils::ReplaceAllRecursive</definition>
+        <argsstring>(const std::string &amp;original, const std::vector&lt; std::string &gt; &amp;fromList, const std::string &amp;to) noexcept</argsstring>
+        <name>ReplaceAllRecursive</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ReplaceAllRecursive</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>original</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>fromList</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>to</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="412" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="412" bodyend="426"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a22220944dc39ea306bbf5ec1a0378d7c" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename stringType</type>
+          </param>
+        </templateparamlist>
+        <type>SR_NODISCARD stringType</type>
+        <definition>static SR_NODISCARD stringType SR_UTILS_NS::StringUtils::ReplaceAll</definition>
+        <argsstring>(stringType const &amp;original, stringType const &amp;from, stringType const &amp;to) noexcept</argsstring>
+        <name>ReplaceAll</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ReplaceAll</qualifiedname>
+        <param>
+          <type>stringType const &amp;</type>
+          <declname>original</declname>
+        </param>
+        <param>
+          <type>stringType const &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>stringType const &amp;</type>
+          <declname>to</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="428" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="428" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4ad26c61964df8cb2cfdb74e1841a6b1" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::StringUtils::MakePath</definition>
+        <argsstring>(const std::string &amp;str, bool toLower=false) noexcept</argsstring>
+        <name>MakePath</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::MakePath</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>toLower</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="463" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="463" bodyend="467"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a6839f2a39ac37c39e99628ea8808c6ea" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::StringUtils::FromCharVector</definition>
+        <argsstring>(const std::vector&lt; char &gt; &amp;vs) noexcept</argsstring>
+        <name>FromCharVector</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::FromCharVector</qualifiedname>
+        <param>
+          <type>const std::vector&lt; char &gt; &amp;</type>
+          <declname>vs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="468" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="468" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aa494fec846acd477c992b0ca7cede81b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::wstring</type>
+        <definition>static SR_NODISCARD std::wstring SR_UTILS_NS::StringUtils::utf8_to_wstring</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>utf8_to_wstring</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::utf8_to_wstring</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="474" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="474" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a80dffe424dfb6df05936bf318720538a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::StringUtils::wstring_to_utf8</definition>
+        <argsstring>(const std::wstring &amp;str)</argsstring>
+        <name>wstring_to_utf8</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::wstring_to_utf8</qualifiedname>
+        <param>
+          <type>const std::wstring &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="481" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="481" bodyend="485"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4d0608a8778143b4f47c9849ba12ce44" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::StringUtils::CutName</definition>
+        <argsstring>(std::string str, unsigned int frompos)</argsstring>
+        <name>CutName</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::CutName</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>frompos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="488" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="488" bodyend="494"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="34" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="34" bodyend="504"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a62130c06115998b877471380adfc3820" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>BackRead</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a7764b552fa0a273e347478ded113c097" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>BackSubstring</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a77abc1865592573800833d91b02c5f9e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>base64_chars</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a58b9ed9d9a3934c0801358ce9c61a918" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Base64Decode</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aa0583dd147241d9f54cdc2615957a9cf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Base64Encode</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a3db5b5c9c1b7f6b5b8aa1a741bb12d89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Contains</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a4d0608a8778143b4f47c9849ba12ce44" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>CutName</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ac2812b75b8fca7faab564c2f7d2690ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>FastStrLen</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aafe038b0cabb2ad3e104b37fb76d3b6e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>FindClosest</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a6839f2a39ac37c39e99628ea8808c6ea" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>FromCharVector</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a3d30e1c6dd3d94ae1f5d09c7cf777fbe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetBetween</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a89e94117be1d74fdd827b81d2a4e1dba" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetBetween</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a37c248385dfdb59fe9f85ad817fb93af" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetBetween</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1af096d04111cca3d1b849122ed60ce538" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetDirFromPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a8307589251d6e9c980200f9b2f428feb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetDirToFileFromFullPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a124cfd0e414cc4cc570bb63907349cc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetExtensionFromFilePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a825a0ae51fec1bc74e43a3fd727062a0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>GetFileNameFromFullPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aed2070dd5c77423060142723e5d7ec6e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>IndexOf</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a1f628832ca471ef88c0bd7f9ed7fac79" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>IndexOf</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ad4947378da90b0e31b77932c2156d06e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>IntToColor</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ad5ac447bbb8e7b32d996e09fc6fdaa8c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>is_base64</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a09cf9b4b241028bf4dbb1c9fbc646d63" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>IsBase64</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a4ad26c61964df8cb2cfdb74e1841a6b1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>MakePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1adb160aa774263788e3d38b0e10b24538" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>MakeVec2FromString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a39833540af9083eff3dd14c22af24316" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>MakeVec3FromString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a7cbf8490520be9eec6aadab57eb3d0d4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>MathCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aacdb08ab065c6de508ff1fa1b26b68eb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>MultiConcat</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a3f0a0382a43ddf84084c4d8a91efe648" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ReadFrom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ae72520c7cd71a7ca8df8a27db14ae392" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ReadNumber</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a74d5420a0850758a5aedd052d55aa45d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ReadTo</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aad7a38076506a85ca1dfc7a74c01adc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Remove</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a5eeb5481eb1a13f245150f0a50d4e3a9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Remove</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a46e8e6e3f159f74396eefd40f871af4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>RemoveCharsFromString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a22220944dc39ea306bbf5ec1a0378d7c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ReplaceAll</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a4bb44cb3cb35501f8f2e5b1d9f5e2e4c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ReplaceAllRecursive</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1af08d9999845eb8d8ecc6560c7fc717de" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Resize</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a235062829bab358fb921b5e07e06e9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Reverse</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ac745f55777edd197c0609a8171d9a4f5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Split</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a4546ef1cc6c47b383ea47fa7f96b5b40" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Split</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ac4f23d797031e8b0d04d62d23b2bff0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SplitFloats</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a01deeef52341ab51c501c2dfca18a62d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SplitTwo</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a960ed51be6d28d988671a57f16378f00" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SplitView</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a3a9a1d5842003220b43797f35aba7487" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SplitViewWithEmpty</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1afa63c9b2dac60e26fcdaf86883033a9d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>StringUtils</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ab642989168cf9496a033213e6890b29c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>StringUtils</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a47cc8f123a5d26399f25e07303a2acf1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Substring</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a175157f9a18e5b8d4184bfcecbb7e750" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Substring</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1ad062aa406f8994fff8807454fbb7f26a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Substring</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aa49fcc375d9f2d5ab463c96c8a8e1a86" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SubstringView</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a565764c3c255fcd1c5ff2bcd3e868a03" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SubstringView</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a6d6cd17ab7cc9beb4750287c12d192e7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Tab</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a31c718f0c4af35abd91d7c2d0dc86b34" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToLower</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a73a08eca1465f6bec216ea3009989391" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToLowerRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aed245a02bedfd644dacfbd13a32047d7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToUpperRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aa494fec846acd477c992b0ca7cede81b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>utf8_to_wstring</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1a80dffe424dfb6df05936bf318720538a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>wstring_to_utf8</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1aaec0c5899c3ed41fba9794cf4b4ea76c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>~StringUtils</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1LayerFilterPredicate" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_GRAPH_NS::LayerFilterPredicate</compoundname>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1MeshDrawerPass" prot="public" virt="non-virtual">SR_GRAPH_NS::MeshDrawerPass</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a6b18e07119f3243cf46f63a45c08c0dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_GRAPH_NS::LayerFilterPredicate::~LayerFilterPredicate</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LayerFilterPredicate</name>
+        <qualifiedname>SR_GRAPH_NS::LayerFilterPredicate::~LayerFilterPredicate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="18" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a7df1b05f16b3a2bdf9b1a3631677872d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_GRAPH_NS::LayerFilterPredicate::IsLayerAllowed</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom layer) const =0</argsstring>
+        <name>IsLayerAllowed</name>
+        <qualifiedname>SR_GRAPH_NS::LayerFilterPredicate::IsLayerAllowed</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ead50f17c9c553c5d3f3d62666cfc2a">IsLayerAllowed</reimplementedby>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>layer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="19" column="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_GRAPH_NS::ColorBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::LayerFilterPredicate</label>
+        <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::MeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="16" bodyend="20"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a7df1b05f16b3a2bdf9b1a3631677872d" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::LayerFilterPredicate</scope><name>IsLayerAllowed</name></member>
+      <member refid="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a6b18e07119f3243cf46f63a45c08c0dd" prot="public" virt="virtual"><scope>SR_GRAPH_NS::LayerFilterPredicate</scope><name>~LayerFilterPredicate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

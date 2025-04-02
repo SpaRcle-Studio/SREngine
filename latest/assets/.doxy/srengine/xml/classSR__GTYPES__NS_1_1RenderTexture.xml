@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GTYPES__NS_1_1RenderTexture" kind="class" language="C++" prot="public">
+    <compoundname>SR_GTYPES_NS::RenderTexture</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_UTILS_NS::Settings</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1RenderTexture_1a2defe945ad5d01bdc2201eb54ab02548" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Framebuffer" kindref="compound">Framebuffer</ref> *</type>
+        <definition>Framebuffer* SR_GTYPES_NS::RenderTexture::m_fbo</definition>
+        <argsstring></argsstring>
+        <name>m_fbo</name>
+        <qualifiedname>SR_GTYPES_NS::RenderTexture::m_fbo</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="27" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1a364594271e60c8de311c0a636bd385c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::RenderTexture::RenderTexture</definition>
+        <argsstring>()</argsstring>
+        <name>RenderTexture</name>
+        <qualifiedname>SR_GTYPES_NS::RenderTexture::RenderTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1a3db41383b86995f62a9be94b2e61c842" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::RenderTexture::~RenderTexture</definition>
+        <argsstring>() override</argsstring>
+        <name>~RenderTexture</name>
+        <qualifiedname>SR_GTYPES_NS::RenderTexture::~RenderTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="17" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1a95298b48ebe7ae8dd4a56c16d0cba96a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__GTYPES__NS_1_1RenderTexture" kindref="compound">RenderTexture</ref> *</type>
+        <definition>static RenderTexture * SR_GTYPES_NS::RenderTexture::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_GTYPES_NS::RenderTexture::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="20" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1ab7f43d9054bc15ea0f72158c71a0b5f4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::RenderTexture::ClearSettings</definition>
+        <argsstring>() override</argsstring>
+        <name>ClearSettings</name>
+        <qualifiedname>SR_GTYPES_NS::RenderTexture::ClearSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1RenderTexture_1a8b16103fda2c49b5dae74f97e83f7445" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::RenderTexture::LoadSettings</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;node) override</argsstring>
+        <name>LoadSettings</name>
+        <qualifiedname>SR_GTYPES_NS::RenderTexture::LoadSettings</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="24" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GTYPES_NS::RenderTexture</label>
+        <link refid="classSR__GTYPES__NS_1_1RenderTexture"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Settings</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GTYPES_NS::RenderTexture</label>
+        <link refid="classSR__GTYPES__NS_1_1RenderTexture"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Settings</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h" bodystart="14" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classSR__GTYPES__NS_1_1RenderTexture_1ab7f43d9054bc15ea0f72158c71a0b5f4" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>ClearSettings</name></member>
+      <member refid="classSR__GTYPES__NS_1_1RenderTexture_1a95298b48ebe7ae8dd4a56c16d0cba96a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1RenderTexture_1a8b16103fda2c49b5dae74f97e83f7445" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>LoadSettings</name></member>
+      <member refid="classSR__GTYPES__NS_1_1RenderTexture_1a2defe945ad5d01bdc2201eb54ab02548" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>m_fbo</name></member>
+      <member refid="classSR__GTYPES__NS_1_1RenderTexture_1a364594271e60c8de311c0a636bd385c0" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>RenderTexture</name></member>
+      <member refid="classSR__GTYPES__NS_1_1RenderTexture_1a3db41383b86995f62a9be94b2e61c842" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::RenderTexture</scope><name>~RenderTexture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

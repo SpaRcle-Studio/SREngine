@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_8d890c1ced0da046da53f80c44d31720" kind="dir">
+    <compoundname>Engine/Core/libs/Scripting</compoundname>
+    <innerdir refid="dir_7f135c995c1edef3d688ff3261945ab5">Engine/Core/libs/Scripting/inc</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/"/>
+  </compounddef>
+</doxygen>

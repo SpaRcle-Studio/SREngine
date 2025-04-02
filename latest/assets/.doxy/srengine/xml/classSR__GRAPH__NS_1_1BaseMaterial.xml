@@ -1,0 +1,769 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1BaseMaterial" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_GRAPH_NS::BaseMaterial</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;</basecompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1FileMaterial" prot="public" virt="non-virtual">SR_GRAPH_NS::FileMaterial</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1UniqueMaterial" prot="public" virt="non-virtual">SR_GRAPH_NS::UniqueMaterial</derivedcompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1c8d50e19cafd123599ee1007cf656ab" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1BaseMaterial" kindref="compound">BaseMaterial</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::BaseMaterial::Ptr =  SR_HTYPES_NS::SharedPtr&lt;BaseMaterial&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1a25ae9ac998b87f9824e67a655d2ca3da" prot="protected" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::BaseMaterial::RenderContextPtr =  SR_HTYPES_NS::SafePtr&lt;RenderContext&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderContextPtr</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::RenderContextPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="36" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1ae80ca5583683cd6ab3db00f5fc315871" prot="protected" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+        <definition>using SR_GRAPH_NS::BaseMaterial::ShaderPtr =  SR_GTYPES_NS::Shader*</definition>
+        <argsstring></argsstring>
+        <name>ShaderPtr</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::ShaderPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="37" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1b60febc85872aad9f9dfb3dd5dfcba1" prot="protected" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
+        <definition>using SR_GRAPH_NS::BaseMaterial::MeshPtr =  SR_GTYPES_NS::Mesh*</definition>
+        <argsstring></argsstring>
+        <name>MeshPtr</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::MeshPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="38" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1BaseMaterial_1a9fff54e4e52215623b23a61e52f572f0" prot="protected" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+        <definition>using SR_GRAPH_NS::BaseMaterial::TexturePtr =  SR_GTYPES_NS::Texture*</definition>
+        <argsstring></argsstring>
+        <name>TexturePtr</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::TexturePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="39" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a2a5b12f99f4054806650db28fe6d2925" prot="protected" static="no" mutable="yes">
+        <type>RenderContextPtr</type>
+        <definition>RenderContextPtr SR_GRAPH_NS::BaseMaterial::m_context</definition>
+        <argsstring></argsstring>
+        <name>m_context</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::m_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="76" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a31412c64e09721f9c352ad2a552f125e" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; MeshPtr, uint32_t &gt;</type>
+        <definition>SR_HTYPES_NS::ObjectPool&lt;MeshPtr, uint32_t&gt; SR_GRAPH_NS::BaseMaterial::m_meshes</definition>
+        <argsstring></argsstring>
+        <name>m_meshes</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::m_meshes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="78" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1caf518d2d7d5d9e2bc45f6eba3ca6fd" prot="protected" static="no" mutable="yes">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_GRAPH_NS::BaseMaterial::m_shaderChangedSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_shaderChangedSubscription</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::m_shaderChangedSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="80" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1BaseMaterial_1a6b2790fc232fecca8d01386a28282d55" prot="protected" static="no" mutable="yes">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_GRAPH_NS::BaseMaterial::m_propertyChangedSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_propertyChangedSubscription</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::m_propertyChangedSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="81" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a5d9dbe6fda56b9b3fce4c03ef7fcade8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::BaseMaterial::BaseMaterial</definition>
+        <argsstring>()</argsstring>
+        <name>BaseMaterial</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::BaseMaterial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="42" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1afa769f4b888d7f3900afc25e4019c08b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::BaseMaterial::~BaseMaterial</definition>
+        <argsstring>() override</argsstring>
+        <name>~BaseMaterial</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::~BaseMaterial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="43" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a49bcd5177ade3cc781423acc8fb97588" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_GRAPH_NS::BaseMaterial::SetVec4</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom id, const SR_MATH_NS::FVector4 &amp;v) noexcept</argsstring>
+        <name>SetVec4</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::SetVec4</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::FVector4 &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="46" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a6376c40d72e9fa60453f7a5cd4125c6b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_GRAPH_NS::BaseMaterial::SetBool</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom id, bool v) noexcept</argsstring>
+        <name>SetBool</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::SetBool</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="47" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a63ce489b511922a2922f35cc3b3e91bf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_GRAPH_NS::BaseMaterial::SetTexture</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom id, SR_GTYPES_NS::Texture *pTexture) noexcept</argsstring>
+        <name>SetTexture</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::SetTexture</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+          <declname>pTexture</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="48" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1addd7a75fff2b7b2a015c1fb6925fc2bb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_GRAPH_NS::BaseMaterial::GetRenderStageId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetRenderStageId</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::GetRenderStageId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="50" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a80bcd5bfd9f517dcda9cba03a29609aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::BaseMaterial::IsTransparent</definition>
+        <argsstring>() const</argsstring>
+        <name>IsTransparent</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::IsTransparent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="51" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1afc0fdc33be15755db556ae76419c446e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD ShaderPtr</type>
+        <definition>SR_NODISCARD ShaderPtr SR_GRAPH_NS::BaseMaterial::GetShader</definition>
+        <argsstring>() const</argsstring>
+        <name>GetShader</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::GetShader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="52" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1aef301cb16c0609034aeab36bdb616c9b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD RenderContextPtr</type>
+        <definition>SR_NODISCARD RenderContextPtr SR_GRAPH_NS::BaseMaterial::GetContext</definition>
+        <argsstring>() const</argsstring>
+        <name>GetContext</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::GetContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="53" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a932f0df30f2837d4bd3561f458fc4728" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD const MaterialData::Ptr &amp;</type>
+        <definition>virtual SR_NODISCARD const MaterialData::Ptr &amp; SR_GRAPH_NS::BaseMaterial::GetMaterialData</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetMaterialData</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::GetMaterialData</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FileMaterial_1a20660c1fe32c100da06f8e8750bb62e2">GetMaterialData</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1UniqueMaterial_1a58ff6e9894ff47a65c20f4279b43daef">GetMaterialData</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="54" column="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1ac188eae5e0af929f3d17dcc8c3d71a0f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD MaterialType</type>
+        <definition>virtual SR_NODISCARD MaterialType SR_GRAPH_NS::BaseMaterial::GetMaterialType</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetMaterialType</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::GetMaterialType</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FileMaterial_1adfc6013226e693c3b0e3a9766454d407">GetMaterialType</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1UniqueMaterial_1a50d117d072e45c1593d7a4230be0c352">GetMaterialType</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="56" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a7025adb4e608e7c8c7db2130f4e9dfbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>virtual SR_NODISCARD uint32_t SR_GRAPH_NS::BaseMaterial::RegisterMesh</definition>
+        <argsstring>(MeshPtr pMesh)</argsstring>
+        <name>RegisterMesh</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::RegisterMesh</qualifiedname>
+        <param>
+          <type>MeshPtr</type>
+          <declname>pMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="58" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1aa8b535c58e8a90670b530f67f6df2e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BaseMaterial::UnregisterMesh</definition>
+        <argsstring>(uint32_t *pId)</argsstring>
+        <name>UnregisterMesh</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::UnregisterMesh</qualifiedname>
+        <param>
+          <type>uint32_t *</type>
+          <declname>pId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="59" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1aab3c58af7c559c0d45faab3c45334500" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BaseMaterial::SetShader</definition>
+        <argsstring>(ShaderPtr pShader, SR_UTILS_NS::StringAtom stage=SR_UTILS_NS::StringAtom())</argsstring>
+        <name>SetShader</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::SetShader</qualifiedname>
+        <param>
+          <type>ShaderPtr</type>
+          <declname>pShader</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>stage</declname>
+          <defval><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="61" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a8b70231d2e3a61312c808e89d3f69836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::SetShader</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path, SR_UTILS_NS::StringAtom stage=SR_UTILS_NS::StringAtom())</argsstring>
+        <name>SetShader</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::SetShader</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>stage</declname>
+          <defval><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="62" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a92a95b1b6960ed0f5ba00b99acb9ffee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::OnPropertyChanged</definition>
+        <argsstring>(bool onlyUniforms) const</argsstring>
+        <name>OnPropertyChanged</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::OnPropertyChanged</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>onlyUniforms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1765c7bfb2e577fa22dddf54b8567bec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::OnShaderChanged</definition>
+        <argsstring>() const</argsstring>
+        <name>OnShaderChanged</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::OnShaderChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a60e16713e2e63b1797b5c1201713711f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::Use</definition>
+        <argsstring>()</argsstring>
+        <name>Use</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::Use</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1af721891f19dafc0675929be355612ee6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::UseSamplers</definition>
+        <argsstring>()</argsstring>
+        <name>UseSamplers</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::UseSamplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="68" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a397d4e2343ec0662176a319a2f9136dc" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::BaseMaterial::InitContext</definition>
+        <argsstring>() const</argsstring>
+        <name>InitContext</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::InitContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="71" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1a1f6d3286ce83c0d551b632da1719b92f" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::InitMaterialDataSubscriptions</definition>
+        <argsstring>() const</argsstring>
+        <name>InitMaterialDataSubscriptions</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::InitMaterialDataSubscriptions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="72" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1BaseMaterial_1ad6a6915f5ec2118b1a31c7cd651e97d5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::BaseMaterial::DeInitMaterialDataSubscriptions</definition>
+        <argsstring>() const</argsstring>
+        <name>DeInitMaterialDataSubscriptions</name>
+        <qualifiedname>SR_GRAPH_NS::BaseMaterial::DeInitMaterialDataSubscriptions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="73" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::BaseMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1BaseMaterial"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_GRAPH_NS::FileMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1FileMaterial"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_GRAPH_NS::UniqueMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1UniqueMaterial"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::BaseMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1BaseMaterial"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_context</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_meshes</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_propertyChangedSubscription</edgelabel>
+          <edgelabel>m_shaderChangedSubscription</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_HTYPES_NS::ObjectPool&lt; MeshPtr, uint32_t &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1ObjectPool"/>
+        <childnode refid="4" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SafePtr&lt; RenderContext &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::Subscription</label>
+        <link refid="classSR__UTILS__NS_1_1Subscription"/>
+        <childnode refid="4" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" line="30" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h" bodystart="30" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>AutoFree</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a5d9dbe6fda56b9b3fce4c03ef7fcade8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>BaseMaterial</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1ad6a6915f5ec2118b1a31c7cd651e97d5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>DeInitMaterialDataSubscriptions</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aef301cb16c0609034aeab36bdb616c9b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a932f0df30f2837d4bd3561f458fc4728" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetMaterialData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1ac188eae5e0af929f3d17dcc8c3d71a0f" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetMaterialType</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1addd7a75fff2b7b2a015c1fb6925fc2bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetRenderStageId</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1afc0fdc33be15755db556ae76419c446e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetShader</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>HasSerializationFlags</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a397d4e2343ec0662176a319a2f9136dc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>InitContext</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>InitializeClass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1f6d3286ce83c0d551b632da1719b92f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>InitMaterialDataSubscriptions</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a80bcd5bfd9f517dcda9cba03a29609aa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>IsTransparent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Load</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>m_basicManually</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a2a5b12f99f4054806650db28fe6d2925" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>m_context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a31412c64e09721f9c352ad2a552f125e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>m_meshes</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a6b2790fc232fecca8d01386a28282d55" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>m_propertyChangedSubscription</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1caf518d2d7d5d9e2bc45f6eba3ca6fd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>m_shaderChangedSubscription</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>MakeShared</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1b60febc85872aad9f9dfb3dd5dfcba1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>MeshPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OnPreSave</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a92a95b1b6960ed0f5ba00b99acb9ffee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OnPropertyChanged</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1765c7bfb2e577fa22dddf54b8567bec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OnShaderChanged</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;::"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;::"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;::"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;::"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;::"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>OriginType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a1c8d50e19cafd123599ee1007cf656ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a7025adb4e608e7c8c7db2130f4e9dfbf" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>RegisterMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a25ae9ac998b87f9824e67a655d2ca3da" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>RenderContextPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a6376c40d72e9fa60453f7a5cd4125c6b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetBool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aab3c58af7c559c0d45faab3c45334500" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a8b70231d2e3a61312c808e89d3f69836" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetShader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a63ce489b511922a2922f35cc3b3e91bf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetTexture</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a49bcd5177ade3cc781423acc8fb97588" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SetVec4</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1ae80ca5583683cd6ab3db00f5fc315871" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>StaticCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a9fff54e4e52215623b23a61e52f572f0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>TexturePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Unlock</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1aa8b535c58e8a90670b530f67f6df2e53" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>UnregisterMesh</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1a60e16713e2e63b1797b5c1201713711f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Use</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1af721891f19dafc0675929be355612ee6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>UseSamplers</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__GRAPH__NS_1_1BaseMaterial_1afa769f4b888d7f3900afc25e4019c08b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>~BaseMaterial</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::BaseMaterial</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1CursorLock" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::CursorLock</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1CursorLock_1a02ec1db24a71d5457f2ce36e82887d1d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::CursorLock::m_isLock</definition>
+        <argsstring></argsstring>
+        <name>m_isLock</name>
+        <qualifiedname>SR_UTILS_NS::CursorLock::m_isLock</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="102" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1CursorLock_1ae1dab9068ca0905a561b3550257429cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::CursorLock::CursorLock</definition>
+        <argsstring>()</argsstring>
+        <name>CursorLock</name>
+        <qualifiedname>SR_UTILS_NS::CursorLock::CursorLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="79" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="79" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1CursorLock_1a69ca57ee64938fb85d2c95656001bdc8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::CursorLock::~CursorLock</definition>
+        <argsstring>()</argsstring>
+        <name>~CursorLock</name>
+        <qualifiedname>SR_UTILS_NS::CursorLock::~CursorLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="84" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="84" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1CursorLock_1ab9dd9dd138841b1f88b3573197e9676c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::CursorLock::CursorLock</definition>
+        <argsstring>(CursorLock &amp;&amp;ref) noexcept</argsstring>
+        <name>CursorLock</name>
+        <qualifiedname>SR_UTILS_NS::CursorLock::CursorLock</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1CursorLock" kindref="compound">CursorLock</ref> &amp;&amp;</type>
+          <declname>ref</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="90" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="90" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1CursorLock_1a6c59cdd62512fa4258a32446944cc0ce" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1CursorLock" kindref="compound">CursorLock</ref> &amp;</type>
+        <definition>CursorLock &amp; SR_UTILS_NS::CursorLock::operator=</definition>
+        <argsstring>(CursorLock &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::CursorLock::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1CursorLock" kindref="compound">CursorLock</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="94" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="94" bodyend="99"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::CursorLock</label>
+        <link refid="classSR__UTILS__NS_1_1CursorLock"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::CursorLock</label>
+        <link refid="classSR__UTILS__NS_1_1CursorLock"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="77" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="77" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1CursorLock_1ae1dab9068ca0905a561b3550257429cf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>CursorLock</name></member>
+      <member refid="classSR__UTILS__NS_1_1CursorLock_1ab9dd9dd138841b1f88b3573197e9676c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>CursorLock</name></member>
+      <member refid="classSR__UTILS__NS_1_1CursorLock_1a02ec1db24a71d5457f2ce36e82887d1d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>m_isLock</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1CursorLock_1a6c59cdd62512fa4258a32446944cc0ce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::CursorLock</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1CursorLock_1a69ca57ee64938fb85d2c95656001bdc8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>~CursorLock</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::CursorLock</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

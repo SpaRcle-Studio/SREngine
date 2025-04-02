@@ -1,0 +1,98 @@
+
+
+# File CSSColor.h
+
+
+
+[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Utils**](dir_f3d6dc6978aa78088efd06c6b2710310.md) **>** [**inc**](dir_e0f1b8570fc577fb78354cd460e9e760.md) **>** [**Utils**](dir_06a42b3e946fb631201a76a22d1aab06.md) **>** [**Web**](dir_70f8c8659136766207f9e88b26ae6fb0.md) **>** [**CSS**](dir_c67fdec84752b754610b5eee0005e4af.md) **>** [**CSSColor.h**](CSSColor_8h.md)
+
+[Go to the source code of this file](CSSColor_8h_source.md)
+
+
+
+* `#include <Utils/Web/CSS/CSSSizeValue.h>`
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
+| namespace | [**Web**](namespaceSR__UTILS__NS_1_1Web.md) <br> |
+
+
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**CSSColor**](structSR__UTILS__NS_1_1Web_1_1CSSColor.md) <br> |
+| struct | [**CSSDirection**](structSR__UTILS__NS_1_1Web_1_1CSSDirection.md) <br> |
+| struct | [**CSSGradientColor**](structSR__UTILS__NS_1_1Web_1_1CSSGradientColor.md) <br> |
+| struct | [**CSSLinearGradient**](structSR__UTILS__NS_1_1Web_1_1CSSLinearGradient.md) <br> |
+| struct | [**CSSRGBAColor**](structSR__UTILS__NS_1_1Web_1_1CSSRGBAColor.md) <br> |
+| struct | [**CSSRadialGradient**](structSR__UTILS__NS_1_1Web_1_1CSSRadialGradient.md) <br> |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------
+The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h`
+

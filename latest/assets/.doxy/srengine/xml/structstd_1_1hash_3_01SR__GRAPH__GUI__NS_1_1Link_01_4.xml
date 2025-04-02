@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Link_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>std::hash&lt; SR_GRAPH_GUI_NS::Link &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Link_01_4_1a7b0a5b3890f322a94e4da3e9bdea59e2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t std::hash&lt; SR_GRAPH_GUI_NS::Link &gt;::operator()</definition>
+        <argsstring>(SR_GRAPH_GUI_NS::Node const &amp;link) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>std::hash&lt; SR_GRAPH_GUI_NS::Link &gt;::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">SR_GRAPH_GUI_NS::Node</ref> const &amp;</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="99" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="99" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="98" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="98" bodyend="103"/>
+    <listofallmembers>
+      <member refid="structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Link_01_4_1a7b0a5b3890f322a94e4da3e9bdea59e2" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_GRAPH_GUI_NS::Link &gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

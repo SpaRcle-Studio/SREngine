@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Reflection::EditorPropertyParams</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a30aaf3a562fd77b2b4b70b41fc779c33" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::EditorPropertyParams::m_displayName</definition>
+        <argsstring></argsstring>
+        <name>m_displayName</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_displayName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="40" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a6cc36f4122a799f9302d8076a55a4c18" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::EditorPropertyParams::m_tooltip</definition>
+        <argsstring></argsstring>
+        <name>m_tooltip</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_tooltip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="41" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a2ef29a0f3105ac6e1da54fbc934218a7" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::EditorPropertyParams::m_inspector</definition>
+        <argsstring></argsstring>
+        <name>m_inspector</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_inspector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="42" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a8475812bf9ce62c353d681bf49e419ca" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_UTILS_NS::Reflection::EditorPropertyParams::m_editorWidth</definition>
+        <argsstring></argsstring>
+        <name>m_editorWidth</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_editorWidth</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="43" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a6c2b2886ede46e8929008c1b6531af28" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_UTILS_NS::Reflection::EditorPropertyParams::m_dragSpeed</definition>
+        <argsstring></argsstring>
+        <name>m_dragSpeed</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_dragSpeed</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="44" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ad3e637822833da31c1aba415f2a3af78" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Reflection::EditorPropertyParams::m_noHeader</definition>
+        <argsstring></argsstring>
+        <name>m_noHeader</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_noHeader</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="45" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a2915a5d0398e29f8538f12212f139a55" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Reflection::EditorPropertyParams::m_notNull</definition>
+        <argsstring></argsstring>
+        <name>m_notNull</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_notNull</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="46" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a3e048fa8191c3b936e89451c8bda27b8" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, std::string_view &gt;</type>
+        <definition>std::map&lt;SR_UTILS_NS::StringAtom, std::string_view&gt; SR_UTILS_NS::Reflection::EditorPropertyParams::m_customArgs</definition>
+        <argsstring></argsstring>
+        <name>m_customArgs</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::m_customArgs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="47" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a5df57e35c46c7b8dc142ae5639ce24e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Reflection::EditorPropertyParams::EditorPropertyParams</definition>
+        <argsstring>()=default</argsstring>
+        <name>EditorPropertyParams</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::EditorPropertyParams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="14" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a11da6d33d03e71ceaeea28f2aaf049b4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetNoHeader</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>SetNoHeader</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetNoHeader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="16" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a29af1ea16a673dad23f90c84dd1bf750" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetNotNull</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>SetNotNull</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetNotNull</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="17" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a8806fcde782edbc541476055d0fe53c1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetDisplayName</definition>
+        <argsstring>(const StringAtom &amp;displayName) noexcept</argsstring>
+        <name>SetDisplayName</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetDisplayName</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>displayName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="18" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1abe4898448c7b90493328ab9442416bbe" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetTooltip</definition>
+        <argsstring>(const StringAtom &amp;tooltip) noexcept</argsstring>
+        <name>SetTooltip</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetTooltip</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>tooltip</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="19" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1abf6c49b71a1286deb7423318a2ee7c4c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetInspector</definition>
+        <argsstring>(const StringAtom &amp;inspector) noexcept</argsstring>
+        <name>SetInspector</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetInspector</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>inspector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="20" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a3c251c78d5c6e72cbe91390be01b9056" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetDragSpeed</definition>
+        <argsstring>(float_t speed) noexcept</argsstring>
+        <name>SetDragSpeed</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetDragSpeed</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>speed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="21" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ad4a1cad6a183e293d80c48d8f3275157" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">EditorPropertyParams</ref> &amp;</type>
+        <definition>EditorPropertyParams &amp; SR_UTILS_NS::Reflection::EditorPropertyParams::SetCustomArg</definition>
+        <argsstring>(const StringAtom &amp;name, std::string_view value) noexcept</argsstring>
+        <name>SetCustomArg</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::SetCustomArg</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="22" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a5b16d14c3f1e00b4c691cfd16a9ae0d7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>SR_NODISCARD StringAtom SR_UTILS_NS::Reflection::EditorPropertyParams::GetDisplayName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetDisplayName</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::GetDisplayName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="24" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a7dbf24342d8255d01cbc7bf30c607bab" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>SR_NODISCARD StringAtom SR_UTILS_NS::Reflection::EditorPropertyParams::GetTooltip</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetTooltip</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::GetTooltip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="25" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ae224b89ba187d4fca67dbeda9cfd6f28" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::Reflection::EditorPropertyParams::GetDragSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetDragSpeed</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::GetDragSpeed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="26" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a52aa84ce6fa005ed471014cc794f4d3b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::Reflection::EditorPropertyParams::GetEditorWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetEditorWidth</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::GetEditorWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="27" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a953df4d8143d44587caa21a3d8983eb2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>SR_NODISCARD StringAtom SR_UTILS_NS::Reflection::EditorPropertyParams::GetInspector</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetInspector</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::GetInspector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="28" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a886f63ff31ff5b902be2a09ef13fd233" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::EditorPropertyParams::IsNoHeader</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsNoHeader</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::IsNoHeader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="29" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ac691384e6f7c6c305d69275e4bda98ef" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::EditorPropertyParams::IsNotNull</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsNotNull</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::IsNotNull</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="30" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a9f7bce9cdb38567df8ef26c43737efc9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Reflection::EditorPropertyParams::GetCustomArg</definition>
+        <argsstring>(const StringAtom &amp;name) const noexcept</argsstring>
+        <name>GetCustomArg</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::EditorPropertyParams::GetCustomArg</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="32" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="32" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="12" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a5df57e35c46c7b8dc142ae5639ce24e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>EditorPropertyParams</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a9f7bce9cdb38567df8ef26c43737efc9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>GetCustomArg</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a5b16d14c3f1e00b4c691cfd16a9ae0d7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>GetDisplayName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ae224b89ba187d4fca67dbeda9cfd6f28" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>GetDragSpeed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a52aa84ce6fa005ed471014cc794f4d3b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>GetEditorWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a953df4d8143d44587caa21a3d8983eb2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>GetInspector</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a7dbf24342d8255d01cbc7bf30c607bab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>GetTooltip</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a886f63ff31ff5b902be2a09ef13fd233" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>IsNoHeader</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ac691384e6f7c6c305d69275e4bda98ef" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>IsNotNull</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a3e048fa8191c3b936e89451c8bda27b8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_customArgs</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a30aaf3a562fd77b2b4b70b41fc779c33" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_displayName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a6c2b2886ede46e8929008c1b6531af28" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_dragSpeed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a8475812bf9ce62c353d681bf49e419ca" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_editorWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a2ef29a0f3105ac6e1da54fbc934218a7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_inspector</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ad3e637822833da31c1aba415f2a3af78" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_noHeader</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a2915a5d0398e29f8538f12212f139a55" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_notNull</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a6cc36f4122a799f9302d8076a55a4c18" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>m_tooltip</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1ad4a1cad6a183e293d80c48d8f3275157" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetCustomArg</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a8806fcde782edbc541476055d0fe53c1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetDisplayName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a3c251c78d5c6e72cbe91390be01b9056" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetDragSpeed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1abf6c49b71a1286deb7423318a2ee7c4c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetInspector</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a11da6d33d03e71ceaeea28f2aaf049b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetNoHeader</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1a29af1ea16a673dad23f90c84dd1bf750" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetNotNull</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams_1abe4898448c7b90493328ab9442416bbe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::EditorPropertyParams</scope><name>SetTooltip</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

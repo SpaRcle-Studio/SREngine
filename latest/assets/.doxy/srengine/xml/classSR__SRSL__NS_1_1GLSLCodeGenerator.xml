@@ -1,0 +1,702 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRSL__NS_1_1GLSLCodeGenerator" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::GLSLCodeGenerator</compoundname>
+    <basecompoundref refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator" prot="public" virt="non-virtual">SR_SRSL_NS::ISRSLCodeGenerator</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; GLSLCodeGenerator &gt;</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a075579a55f38b099cc68b44980cf5062" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classSR__SRSL__NS_1_1SRSLShader" kindref="compound">SRSLShader</ref> *</type>
+        <definition>const SRSLShader* SR_SRSL_NS::GLSLCodeGenerator::m_shader</definition>
+        <argsstring></argsstring>
+        <name>m_shader</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::m_shader</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="59" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac087ed938db2c74c45a636a1ff081445" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::GLSLCodeGenerator::GLSLCodeGenerator</definition>
+        <argsstring>()=default</argsstring>
+        <name>GLSLCodeGenerator</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GLSLCodeGenerator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a423e3a77662503b89860b26b24f56ccf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::GLSLCodeGenerator::~GLSLCodeGenerator</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~GLSLCodeGenerator</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::~GLSLCodeGenerator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a0bdd790c680d0526bac96df4459dbb13" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateStage</definition>
+        <argsstring>(ShaderStage stage, const std::string &amp;preCode=std::string())</argsstring>
+        <name>GenerateStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateStage</qualifiedname>
+        <param>
+          <type>ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>preCode</declname>
+          <defval>std::string()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="22" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad0922e31901a83dada538d131562d398" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateVertexStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateVertexStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateVertexStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="24" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9f60c203567d812099c5ad4009b8a98f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateFragmentStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateFragmentStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateFragmentStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="25" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a51378bfe0bfd54506e98fec3e1db1af2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateRayGenStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateRayGenStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateRayGenStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="27" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aab416cf922d27083c311dbcea1318126" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateRayIntersectionStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateRayIntersectionStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateRayIntersectionStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="28" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2ae6e82b6e65624d301724dc6d91308d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateRayHitClosestStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateRayHitClosestStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateRayHitClosestStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="29" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac2c5e7735981393ab4773e74c6cf12e7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateRayHitAnyStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateRayHitAnyStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateRayHitAnyStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="30" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa17abb3fd06144a9e739bf3c3b2bde91" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateRayMissPrimaryStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateRayMissPrimaryStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateRayMissPrimaryStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="31" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1acb08fd2d7b96bce4111a374c61ebea28" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::optional&lt; std::string &gt;</type>
+        <definition>SR_NODISCARD std::optional&lt; std::string &gt; SR_SRSL_NS::GLSLCodeGenerator::GenerateRayMissSecondaryStage</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateRayMissSecondaryStage</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateRayMissSecondaryStage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="32" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a7c4a4d34970e85bd04c232e8729f2458" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::ReplaceToken</definition>
+        <argsstring>(const std::string &amp;token) const</argsstring>
+        <name>ReplaceToken</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::ReplaceToken</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="34" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa07d1886ef32a61f048750c6de356455" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GetVersion</definition>
+        <argsstring>(ShaderStage stage) const</argsstring>
+        <name>GetVersion</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GetVersion</qualifiedname>
+        <param>
+          <type>ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="35" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afe351661975fbf294aa78da854327b7d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateInputLocations</definition>
+        <argsstring>(ShaderStage stage) const</argsstring>
+        <name>GenerateInputLocations</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateInputLocations</qualifiedname>
+        <param>
+          <type>ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="36" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae7d032fe4dfc8ed4345a2a34c7140562" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateOutputLocations</definition>
+        <argsstring>(ShaderStage stage) const</argsstring>
+        <name>GenerateOutputLocations</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateOutputLocations</qualifiedname>
+        <param>
+          <type>ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="37" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a489f35883f0699096e3ddc88a378eecd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateUniforms</definition>
+        <argsstring>(ShaderStage stage) const</argsstring>
+        <name>GenerateUniforms</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateUniforms</qualifiedname>
+        <param>
+          <type>ShaderStage</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="38" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae4fa6003d306b08c42c1b6739f880414" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateLexicalTree</definition>
+        <argsstring>(SRSLLexicalTree *pLexicalTree, int32_t deep) const</argsstring>
+        <name>GenerateLexicalTree</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateLexicalTree</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLLexicalTree" kindref="compound">SRSLLexicalTree</ref> *</type>
+          <declname>pLexicalTree</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="40" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2a03c19d8d66c4a7f5d088865f6b079a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateLexicalTree</definition>
+        <argsstring>(SRSLLexicalTree *pLexicalTree, int32_t deep, const std::string &amp;preCode, const std::string &amp;postCode) const</argsstring>
+        <name>GenerateLexicalTree</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateLexicalTree</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLLexicalTree" kindref="compound">SRSLLexicalTree</ref> *</type>
+          <declname>pLexicalTree</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>preCode</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>postCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="41" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e02f281bf4edebe3da97ee32221005" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateFunction</definition>
+        <argsstring>(SRSLFunction *pFunction, int32_t deep) const</argsstring>
+        <name>GenerateFunction</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateFunction</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLFunction" kindref="compound">SRSLFunction</ref> *</type>
+          <declname>pFunction</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="43" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a52017c7477dd19d49178e33af1a43f09" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateFunction</definition>
+        <argsstring>(SRSLFunction *pFunction, int32_t deep, const std::string &amp;preCode, const std::string &amp;postCode) const</argsstring>
+        <name>GenerateFunction</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateFunction</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLFunction" kindref="compound">SRSLFunction</ref> *</type>
+          <declname>pFunction</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>preCode</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>postCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="44" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad779109cd8002bd3398f65e82e6a6167" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateType</definition>
+        <argsstring>(SRSLExpr *pExpr, int32_t deep) const</argsstring>
+        <name>GenerateType</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateType</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="46" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e3d11a83598fa9c3c7ca2f6dfc0c23" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateName</definition>
+        <argsstring>(SRSLExpr *pExpr, int32_t deep) const</argsstring>
+        <name>GenerateName</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateName</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="47" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a5dfc09d4792c37e9aa48ddd0945e6433" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateForStatement</definition>
+        <argsstring>(SRSLForStatement *pForStatement, int32_t deep) const</argsstring>
+        <name>GenerateForStatement</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateForStatement</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLForStatement" kindref="compound">SRSLForStatement</ref> *</type>
+          <declname>pForStatement</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="49" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a1e0220c5c51af8ea110e51b95c38a8c7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateIfStatement</definition>
+        <argsstring>(SRSLIfStatement *pIfStatement, int32_t deep) const</argsstring>
+        <name>GenerateIfStatement</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateIfStatement</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLIfStatement" kindref="compound">SRSLIfStatement</ref> *</type>
+          <declname>pIfStatement</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="50" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aec64664086590a9263a9dcbd04c4e03a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateExpression</definition>
+        <argsstring>(SRSLExpr *pExpr, int32_t deep) const</argsstring>
+        <name>GenerateExpression</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateExpression</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="51" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afd1e75f560a145805c440b309091e0c8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateVariable</definition>
+        <argsstring>(SRSLVariable *pVariable, int32_t deep) const</argsstring>
+        <name>GenerateVariable</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateVariable</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLVariable" kindref="compound">SRSLVariable</ref> *</type>
+          <declname>pVariable</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="52" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a09182f2f2a2133d11f3e4284d3cf63c5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::GenerateTab</definition>
+        <argsstring>(int32_t deep) const</argsstring>
+        <name>GenerateTab</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateTab</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="54" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a072d22dd9e2491c6f48c465b365d9386" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::GLSLCodeGenerator::VertexAttributeToString</definition>
+        <argsstring>(Vertices::Attribute attribute) const</argsstring>
+        <name>VertexAttributeToString</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::VertexAttributeToString</qualifiedname>
+        <param>
+          <type>Vertices::Attribute</type>
+          <declname>attribute</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="56" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae185b73016d5e0c0fb5b74ddb961dcd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD SRSLCodeGenRes</type>
+        <definition>SR_NODISCARD SRSLCodeGenRes SR_SRSL_NS::GLSLCodeGenerator::GenerateStages</definition>
+        <argsstring>(const SRSLShader *pShader) override</argsstring>
+        <name>GenerateStages</name>
+        <qualifiedname>SR_SRSL_NS::GLSLCodeGenerator::GenerateStages</qualifiedname>
+        <reimplements refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1ae8bcbc82a06cfa6779fe998650359005">GenerateStages</reimplements>
+        <param>
+          <type>const <ref refid="classSR__SRSL__NS_1_1SRSLShader" kindref="compound">SRSLShader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="19" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SRSL_NS::GLSLCodeGenerator</label>
+        <link refid="classSR__SRSL__NS_1_1GLSLCodeGenerator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRSL_NS::ISRSLCodeGenerator</label>
+        <link refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Singleton&lt; GLSLCodeGenerator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SRSL_NS::GLSLCodeGenerator</label>
+        <link refid="classSR__SRSL__NS_1_1GLSLCodeGenerator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRSL_NS::ISRSLCodeGenerator</label>
+        <link refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_result</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SRSL_NS::SRSLResult</label>
+        <link refid="structSR__SRSL__NS_1_1SRSLResult"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Singleton&lt; GLSLCodeGenerator &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h" bodystart="12" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aa93fd305bdbd46c3acf2c2109f58c27b" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>Clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aec64664086590a9263a9dcbd04c4e03a" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateExpression</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a5dfc09d4792c37e9aa48ddd0945e6433" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateForStatement</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9f60c203567d812099c5ad4009b8a98f" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateFragmentStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e02f281bf4edebe3da97ee32221005" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateFunction</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a52017c7477dd19d49178e33af1a43f09" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateFunction</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a1e0220c5c51af8ea110e51b95c38a8c7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateIfStatement</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afe351661975fbf294aa78da854327b7d" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateInputLocations</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae4fa6003d306b08c42c1b6739f880414" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateLexicalTree</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2a03c19d8d66c4a7f5d088865f6b079a" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateLexicalTree</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e3d11a83598fa9c3c7ca2f6dfc0c23" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateName</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae7d032fe4dfc8ed4345a2a34c7140562" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateOutputLocations</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a51378bfe0bfd54506e98fec3e1db1af2" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayGenStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac2c5e7735981393ab4773e74c6cf12e7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayHitAnyStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2ae6e82b6e65624d301724dc6d91308d" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayHitClosestStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aab416cf922d27083c311dbcea1318126" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayIntersectionStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa17abb3fd06144a9e739bf3c3b2bde91" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayMissPrimaryStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1acb08fd2d7b96bce4111a374c61ebea28" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateRayMissSecondaryStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a0bdd790c680d0526bac96df4459dbb13" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateStage</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ae185b73016d5e0c0fb5b74ddb961dcd1" prot="public" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateStages</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a09182f2f2a2133d11f3e4284d3cf63c5" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateTab</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad779109cd8002bd3398f65e82e6a6167" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateType</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a489f35883f0699096e3ddc88a378eecd" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateUniforms</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1afd1e75f560a145805c440b309091e0c8" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateVariable</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad0922e31901a83dada538d131562d398" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GenerateVertexStage</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aa07d1886ef32a61f048750c6de356455" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GetVersion</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ac087ed938db2c74c45a636a1ff081445" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>GLSLCodeGenerator</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>Instance</name></member>
+      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a8089889a38f86d7c48335deb3334ed4a" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>ISRSLCodeGenerator</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>m_mutex</name></member>
+      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a84294d16f2102887a4fb922121f85d66" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>m_result</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a075579a55f38b099cc68b44980cf5062" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>m_shader</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>operator=</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a7c4a4d34970e85bd04c232e8729f2458" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>ReplaceToken</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>SingletonBase</name></member>
+      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a435fea5b561ec3a2d4db04c19579bc55" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>SRSLCodeGenRes</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a072d22dd9e2491c6f48c465b365d9386" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>VertexAttributeToString</name></member>
+      <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a423e3a77662503b89860b26b24f56ccf" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>~GLSLCodeGenerator</name></member>
+      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a53b51b4fc70d90890f942165dc271d20" prot="protected" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>~ISRSLCodeGenerator</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::GLSLCodeGenerator</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

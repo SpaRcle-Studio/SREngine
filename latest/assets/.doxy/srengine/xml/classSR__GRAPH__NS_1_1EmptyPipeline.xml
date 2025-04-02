@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1EmptyPipeline" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::EmptyPipeline</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h" bodystart="11" bodyend="13"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

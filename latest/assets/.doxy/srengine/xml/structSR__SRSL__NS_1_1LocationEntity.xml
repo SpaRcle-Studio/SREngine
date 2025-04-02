@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__SRSL__NS_1_1LocationEntity" kind="struct" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::LocationEntity</compoundname>
+    <derivedcompoundref refid="structSR__SRSL__NS_1_1Lexem" prot="public" virt="non-virtual">SR_SRSL_NS::Lexem</derivedcompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a9b1522c115181e4f27c6d347964d8dd4" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::LocationEntity::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::offset</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="172" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a3e0d91dd2da6fa4a3ed1eeb59a5ad4dc" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::LocationEntity::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::length</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="173" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a34a8e5639944b2344582c509d88a1745" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_SRSL_NS::LocationEntity::fileIndex</definition>
+        <argsstring></argsstring>
+        <name>fileIndex</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::fileIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="174" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1LocationEntity_1a94cb2d4c434cda4ad94ca7bd318eb5c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::LocationEntity::LocationEntity</definition>
+        <argsstring>()=default</argsstring>
+        <name>LocationEntity</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::LocationEntity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="164" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1LocationEntity_1a6db6cc1b80897479b87085c7cbb554c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::LocationEntity::LocationEntity</definition>
+        <argsstring>(uint64_t offset, uint64_t length, uint16_t fileIndex)</argsstring>
+        <name>LocationEntity</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::LocationEntity</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>fileIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="166" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="166" bodyend="170"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_SRSL_NS::Lexem</label>
+        <link refid="structSR__SRSL__NS_1_1Lexem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRSL_NS::LocationEntity</label>
+        <link refid="structSR__SRSL__NS_1_1LocationEntity"/>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="163" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="163" bodyend="175"/>
+    <listofallmembers>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a34a8e5639944b2344582c509d88a1745" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>fileIndex</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a3e0d91dd2da6fa4a3ed1eeb59a5ad4dc" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>length</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a94cb2d4c434cda4ad94ca7bd318eb5c7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>LocationEntity</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a6db6cc1b80897479b87085c7cbb554c7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>LocationEntity</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a9b1522c115181e4f27c6d347964d8dd4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>offset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

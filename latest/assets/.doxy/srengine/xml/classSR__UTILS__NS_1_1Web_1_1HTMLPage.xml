@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Web_1_1HTMLPage" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_UTILS_NS::Web::HTMLPage</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; HTMLPage &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1adf07724de425f7d3438b1d1800e177fc" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage" kindref="compound">HTMLPage</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::Web::HTMLPage::Super =  SR_HTYPES_NS::SharedPtr&lt;HTMLPage&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="89" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a4de59f6c3999bf496d870cc38e395b0b" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage" kindref="compound">HTMLPage</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::Web::HTMLPage::Ptr =  SR_HTYPES_NS::SharedPtr&lt;HTMLPage&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="94" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1af84c3541be3edcd79878615f8f111a84" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">HTMLContainerInterface::Ptr</ref></type>
+        <definition>HTMLContainerInterface::Ptr SR_UTILS_NS::Web::HTMLPage::m_container</definition>
+        <argsstring></argsstring>
+        <name>m_container</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::m_container</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="112" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1af16e2d48699c25dfb249398579a26311" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* SR_UTILS_NS::Web::HTMLPage::m_document</definition>
+        <argsstring></argsstring>
+        <name>m_document</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::m_document</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="116" column="10" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ab308e15905d1d9720e0808a00fdf0ef5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Web::HTMLPage::HTMLPage</definition>
+        <argsstring>()</argsstring>
+        <name>HTMLPage</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::HTMLPage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="91" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a0d5c70087d6f0f12575417be737173a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Web::HTMLPage::~HTMLPage</definition>
+        <argsstring>()</argsstring>
+        <name>~HTMLPage</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::~HTMLPage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="96" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ae96fc44aeaa129a24a295c08f513a6a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; SR_UTILS_NS::Path &gt; &amp; SR_UTILS_NS::Web::HTMLPage::GetPaths</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPaths</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::GetPaths</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="101" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a30fabf6856c357ac7fd869588e09942c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">HTMLContainerInterface::Ptr</ref></type>
+        <definition>SR_NODISCARD HTMLContainerInterface::Ptr SR_UTILS_NS::Web::HTMLPage::GetContainer</definition>
+        <argsstring>() const</argsstring>
+        <name>GetContainer</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::GetContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="102" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a5e44070490f3d34886028782a26bbfe5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_UTILS_NS::Web::HTMLPage::GetDocument</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDocument</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::GetDocument</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="106" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="106" bodyend="106"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ab602b7ec6b176bea88c9706ce5d623b8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Ptr</type>
+        <definition>static Ptr SR_UTILS_NS::Web::HTMLPage::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path, const HTMLContainerInterface::Ptr &amp;pContainer=nullptr)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLPage::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">HTMLContainerInterface::Ptr</ref> &amp;</type>
+          <declname>pContainer</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="99" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; HTMLPage &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::Web::HTMLPage</label>
+        <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; HTMLPage &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::Web::HTMLPage</label>
+        <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" line="88" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h" bodystart="88" bodyend="119"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a30fabf6856c357ac7fd869588e09942c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a5e44070490f3d34886028782a26bbfe5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetDocument</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ae96fc44aeaa129a24a295c08f513a6a4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetPaths</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ab308e15905d1d9720e0808a00fdf0ef5" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>HTMLPage</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1ab602b7ec6b176bea88c9706ce5d623b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Load</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>m_basicManually</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1af84c3541be3edcd79878615f8f111a84" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>m_container</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>m_data</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1af16e2d48699c25dfb249398579a26311" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>m_document</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a4de59f6c3999bf496d870cc38e395b0b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>StaticCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1adf07724de425f7d3438b1d1800e177fc" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage_1a0d5c70087d6f0f12575417be737173a3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>~HTMLPage</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_UTILS_NS::Web::HTMLPage</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

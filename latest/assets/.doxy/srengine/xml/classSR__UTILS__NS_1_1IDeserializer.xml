@@ -1,0 +1,815 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1IDeserializer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_UTILS_NS::IDeserializer</compoundname>
+    <derivedcompoundref refid="classSR__UTILS__NS_1_1IBaseDeserializer" prot="public" virt="non-virtual">SR_UTILS_NS::IBaseDeserializer</derivedcompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>ReAllocPointerReason</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReAllocPointerReason</qualifiedname>
+        <enumvalue id="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1af0050362b45a1bdf34a9b8ab6c97a433" prot="public">
+          <name>IsNull</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1a78765241e9f1dad027b6e078afb94cde" prot="public">
+          <name>HasDifferentType</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Если обнаружена проблема при загрузке указателя, то нужно его пересоздать </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1IDeserializer_1ae91b8af83592f3a9e46f46e953a292a9" prot="public" static="no">
+        <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">IDeserializer</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::IDeserializer::UniquePtr =  std::unique_ptr&lt;IDeserializer&gt;</definition>
+        <argsstring></argsstring>
+        <name>UniquePtr</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::UniquePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1aa8f3b9a70102c6be70594dec1046ae87" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_UTILS_NS::IDeserializer::~IDeserializer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IDeserializer</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::~IDeserializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="24" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1abca544b939d0bcf0dba8055f84c499f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::SaveToFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path) const =0</argsstring>
+        <name>SaveToFile</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::SaveToFile</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5180495b760dc6af6944549e49b9011c">SaveToFile</reimplementedby>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="26" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a77e37dee1649da24ce52a95bbcaa4c3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::LoadFromFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)=0</argsstring>
+        <name>LoadFromFile</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::LoadFromFile</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1ac3154d51e2e43816876a60a42cd3e194">LoadFromFile</reimplementedby>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="27" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a15adfdb9a38d4a4cba5749bcfc1d7f0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::LoadFromString</definition>
+        <argsstring>(const std::string &amp;str)=0</argsstring>
+        <name>LoadFromString</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::LoadFromString</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1a32090fcffef7d279921a145599e56362">LoadFromString</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="28" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a1cf73ae6ad9fed00fc8499875061cdaa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>virtual SR_NODISCARD std::string SR_UTILS_NS::IDeserializer::ToString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="29" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a5bb106e75b059a12deba1bcf9c2cc0f0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::IsDefault</definition>
+        <argsstring>(const SerializationId &amp;name) const noexcept=0</argsstring>
+        <name>IsDefault</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::IsDefault</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a97255b60cbd191f5bf7f79077f000a8c">IsDefault</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="31" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a25cc1bbad2500a90305a35a0d88bc2d9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::ShouldSetDefaults</definition>
+        <argsstring>(const SerializationId &amp;name) const noexcept=0</argsstring>
+        <name>ShouldSetDefaults</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ShouldSetDefaults</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1a257c7731126b9614f4510f37bf6748d1">ShouldSetDefaults</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="32" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a0e035d1429ccd3fb7b12b18743d73609" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::ShouldSetDefaults</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>ShouldSetDefaults</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ShouldSetDefaults</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1ab73b63cd98a4bfa60783be61ea424027">ShouldSetDefaults</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="33" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1acbd2f1ecf77dc820da221fd597b43de1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::AllowNewMapKeys</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>AllowNewMapKeys</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::AllowNewMapKeys</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9">AllowNewMapKeys</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="34" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a54b9aed3912caba80b09a6addb1e0c58" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::IsPreserveMode</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>IsPreserveMode</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::IsPreserveMode</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1ae7e250e8ea6d1f90ad1b1b58e2a16207">IsPreserveMode</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="35" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a6c51334854ba345f5c5c4922b8c57f2d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_UTILS_NS::IDeserializer::AllowReAllocPointer</definition>
+        <argsstring>(ReAllocPointerReason reason) const noexcept=0</argsstring>
+        <name>AllowReAllocPointer</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::AllowReAllocPointer</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6">AllowReAllocPointer</reimplementedby>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1" kindref="member">ReAllocPointerReason</ref></type>
+          <declname>reason</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="36" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1ae2a2a6cc8844cd09510318c801fd7fd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ResetWalker</definition>
+        <argsstring>()=0</argsstring>
+        <name>ResetWalker</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ResetWalker</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a7886e3df1897f3be8f32f9366eff5e1f">ResetWalker</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="38" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a503e9cc239e1142aa91099e79eca9ef3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_UTILS_NS::IDeserializer::BeginItem</definition>
+        <argsstring>(const SerializationId &amp;id, uint32_t index)=0</argsstring>
+        <name>BeginItem</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::BeginItem</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a0d3298539c157d8ec4b8f9fb2fb34824">BeginItem</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="40" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1abc6cbe4dc3bd2b3875ebae48345fdcd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::EndItem</definition>
+        <argsstring>()=0</argsstring>
+        <name>EndItem</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::EndItem</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4d18c6a2b0437ba0ec69d241819d4a42">EndItem</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="41" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1aab3c279a3496789d5b3473ce618009c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_UTILS_NS::IDeserializer::BeginObject</definition>
+        <argsstring>(const SerializationId &amp;id)=0</argsstring>
+        <name>BeginObject</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::BeginObject</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a9ef5e296def19ffc466bf77d9787c633">BeginObject</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="43" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1af257151352337b5c35d42248b243975c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::EndObject</definition>
+        <argsstring>()=0</argsstring>
+        <name>EndObject</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::EndObject</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a6095a9c03e5caef545618b09c1085fe6">EndObject</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="44" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a6f28f1d3f56a6cf794b0329cefd7c99a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>uint64_t</type>
+        <definition>virtual uint64_t SR_UTILS_NS::IDeserializer::BeginArray</definition>
+        <argsstring>(const SerializationId &amp;id)=0</argsstring>
+        <name>BeginArray</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::BeginArray</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a288a3d56ac47bd979c2c851c1273c601">BeginArray</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="46" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a099da74270f8ebc9b786d62a24e40552" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::EndArray</definition>
+        <argsstring>()=0</argsstring>
+        <name>EndArray</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::EndArray</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a78fe121da536bcc3766bf23d6cc9b09f">EndArray</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="47" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1ab4c031eb7f954afb66aa97cbeda6fd89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::IDeserializer::ReadAny</definition>
+        <argsstring>(std::any &amp;value, const SerializationId &amp;name)</argsstring>
+        <name>ReadAny</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadAny</qualifiedname>
+        <param>
+          <type>std::any &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1afa7d0aba9b76f429660fa2312200eedc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadString</definition>
+        <argsstring>(std::string &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadString</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadString</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a9da1d572c985200dbffe6a8aed6ed3ba">ReadString</reimplementedby>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="51" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a784dc288c88131321781c6627c7ef8fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadString</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadString</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadString</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1aa0726eac2ef10d236a5a856746213bba">ReadString</reimplementedby>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="52" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a53e196e5c3bb29df32fe8a4128f86f18" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadString</definition>
+        <argsstring>(SR_HTYPES_NS::UnicodeString &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadString</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadString</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1affe2bfcff08cd0728d6e7bb6cc18fb75">ReadString</reimplementedby>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="53" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1aad1129bc0683fcf7b0e2493add62c3a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadString</definition>
+        <argsstring>(SR_UTILS_NS::Path &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadString</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadString</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ad0ae1c7cb737c8f7e3612583c4b1d286">ReadString</reimplementedby>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="54" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a8ce9daad7bbdea4805bee47147a278ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadBool</definition>
+        <argsstring>(bool &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadBool</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadBool</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5e9020baaac2f2639122919f9eb07a62">ReadBool</reimplementedby>
+        <param>
+          <type>bool &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="55" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1ad58c3beb8a479511b55150bf6f651b6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadInt</definition>
+        <argsstring>(int8_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5c9290b8e702e9dc5f461c65d18acf0f">ReadInt</reimplementedby>
+        <param>
+          <type>int8_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="56" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a24faf5c8c1fab95c801b81caf554d55f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadInt</definition>
+        <argsstring>(int16_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1afb83ca9d7bf784fa43f3be34cb5dfe63">ReadInt</reimplementedby>
+        <param>
+          <type>int16_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="57" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a353bc81de4d1e86c2421213492f59204" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadInt</definition>
+        <argsstring>(int32_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a87a5d04d5dd9f7435f2ce41110e70186">ReadInt</reimplementedby>
+        <param>
+          <type>int32_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="58" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a694befece3dbf57be8d941cb141deeff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadInt</definition>
+        <argsstring>(int64_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a2e0c45f71676998a0abacbf8f8c21a96">ReadInt</reimplementedby>
+        <param>
+          <type>int64_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="59" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1ae165086efa521d6b95ece081e38e4fd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadUInt</definition>
+        <argsstring>(uint8_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadUInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadUInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a2be0bcb6c2248c624ee7193ebc3b8ac2">ReadUInt</reimplementedby>
+        <param>
+          <type>uint8_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="60" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a94122abfdc157165bbeca218ee18aa8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadUInt</definition>
+        <argsstring>(uint16_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadUInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadUInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a2f97d8a37b14ea026ae08a4b58f5bcfe">ReadUInt</reimplementedby>
+        <param>
+          <type>uint16_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="61" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a0ca50026ef7a078816505d57343d60f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadUInt</definition>
+        <argsstring>(uint32_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadUInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadUInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a786afd129d1c9ddef8315dfdf5c2e212">ReadUInt</reimplementedby>
+        <param>
+          <type>uint32_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="62" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1af6209a375f1784a41fce1c671899af99" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadUInt</definition>
+        <argsstring>(uint64_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadUInt</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadUInt</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ad48a3ce7dcf3619e7df602f46ed601d7">ReadUInt</reimplementedby>
+        <param>
+          <type>uint64_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="63" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1aa11c6c2d723190bc4cc7242ee8e729bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadFloat</definition>
+        <argsstring>(float_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadFloat</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadFloat</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a57602329ccadb43676004c3bfbed47f4">ReadFloat</reimplementedby>
+        <param>
+          <type>float_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="64" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1ac65478e14e08ce935b91f52fc57f8a6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReadDouble</definition>
+        <argsstring>(double_t &amp;value, const SerializationId &amp;name)=0</argsstring>
+        <name>ReadDouble</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReadDouble</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4150c0fedeccfe74530749733d86b119">ReadDouble</reimplementedby>
+        <param>
+          <type>double_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="65" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IDeserializer_1a7603f7f0fbbd7df02079b32dc5cb5541" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_UTILS_NS::IDeserializer::ReportError</definition>
+        <argsstring>(const std::string &amp;message)=0</argsstring>
+        <name>ReportError</name>
+        <qualifiedname>SR_UTILS_NS::IDeserializer::ReportError</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1SRADeserializer_1a26a8b21e1852d7428a65d70b99a0c03e">ReportError</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="67" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::IBaseDeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseDeserializer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::IDeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1IDeserializer"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRADeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1SRADeserializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Deserializer.h" bodystart="11" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1acbd2f1ecf77dc820da221fd597b43de1" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>AllowNewMapKeys</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a6c51334854ba345f5c5c4922b8c57f2d" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>AllowReAllocPointer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a6f28f1d3f56a6cf794b0329cefd7c99a" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>BeginArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a503e9cc239e1142aa91099e79eca9ef3" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>BeginItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1aab3c279a3496789d5b3473ce618009c7" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>BeginObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a099da74270f8ebc9b786d62a24e40552" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>EndArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1abc6cbe4dc3bd2b3875ebae48345fdcd5" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>EndItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1af257151352337b5c35d42248b243975c" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>EndObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a5bb106e75b059a12deba1bcf9c2cc0f0" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>IsDefault</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a54b9aed3912caba80b09a6addb1e0c58" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>IsPreserveMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a77e37dee1649da24ce52a95bbcaa4c3b" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>LoadFromFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a15adfdb9a38d4a4cba5749bcfc1d7f0c" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>LoadFromString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ab4c031eb7f954afb66aa97cbeda6fd89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadAny</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a8ce9daad7bbdea4805bee47147a278ea" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ac65478e14e08ce935b91f52fc57f8a6f" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadDouble</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1aa11c6c2d723190bc4cc7242ee8e729bf" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ad58c3beb8a479511b55150bf6f651b6d" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a24faf5c8c1fab95c801b81caf554d55f" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a353bc81de4d1e86c2421213492f59204" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a694befece3dbf57be8d941cb141deeff" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1afa7d0aba9b76f429660fa2312200eedc" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a784dc288c88131321781c6627c7ef8fe" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a53e196e5c3bb29df32fe8a4128f86f18" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1aad1129bc0683fcf7b0e2493add62c3a6" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ae165086efa521d6b95ece081e38e4fd6" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a94122abfdc157165bbeca218ee18aa8d" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a0ca50026ef7a078816505d57343d60f9" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1af6209a375f1784a41fce1c671899af99" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReAllocPointerReason</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a7603f7f0fbbd7df02079b32dc5cb5541" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ReportError</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ae2a2a6cc8844cd09510318c801fd7fd9" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ResetWalker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1abca544b939d0bcf0dba8055f84c499f9" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>SaveToFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a25cc1bbad2500a90305a35a0d88bc2d9" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ShouldSetDefaults</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a0e035d1429ccd3fb7b12b18743d73609" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ShouldSetDefaults</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a1cf73ae6ad9fed00fc8499875061cdaa" prot="public" virt="virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ae91b8af83592f3a9e46f46e953a292a9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>UniquePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1aa8f3b9a70102c6be70594dec1046ae87" prot="public" virt="virtual"><scope>SR_UTILS_NS::IDeserializer</scope><name>~IDeserializer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

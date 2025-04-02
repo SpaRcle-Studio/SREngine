@@ -1,0 +1,54 @@
+
+
+# File ScriptHolder.h
+
+[**File List**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Scripting**](dir_8d890c1ced0da046da53f80c44d31720.md) **>** [**inc**](dir_7f135c995c1edef3d688ff3261945ab5.md) **>** [**Scripting**](dir_1d502c2700a8bda2469c0cfc127e6ee9.md) **>** [**ScriptHolder.h**](ScriptHolder_8h.md)
+
+[Go to the documentation of this file](ScriptHolder_8h.md)
+
+
+```C++
+//
+// Created by Monika on 04.03.2023.
+//
+
+#ifndef SR_ENGINE_SCRIPTHOLDER_H
+#define SR_ENGINE_SCRIPTHOLDER_H
+
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Common/NonCopyable.h>
+
+namespace SR_SCRIPTING_NS {
+    class ScriptHolder : public SR_HTYPES_NS::SafePtr<ScriptHolder>, public SR_UTILS_NS::NonCopyable {
+    public:
+        using Ptr = SR_HTYPES_NS::SafePtr<ScriptHolder>;
+
+    public:
+        explicit ScriptHolder(void* pScriptImpl)
+            : SR_HTYPES_NS::SafePtr<ScriptHolder>(this)
+            , m_scriptImpl(pScriptImpl)
+        { }
+
+        ~ScriptHolder() override {
+            SRAssert(!m_scriptImpl);
+        }
+
+    public:
+        void SetScript(void* pScriptImpl) {
+            m_scriptImpl = pScriptImpl;
+        }
+
+        template<typename T> SR_NODISCARD T* GetScript() const {
+            return reinterpret_cast<T*>(m_scriptImpl);
+        }
+
+    private:
+        void* m_scriptImpl = nullptr;
+
+    };
+}
+
+#endif //SR_ENGINE_SCRIPTHOLDER_H
+```
+
+

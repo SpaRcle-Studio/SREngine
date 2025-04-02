@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__TYPES__NS_1_1detail_1_1distance__detail" kind="namespace" language="C++">
+    <compoundname>SR_TYPES_NS::detail::distance_detail</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="UintWide__t_8h_1ad266424f3c7ab9127f50f72eb735d116" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class It</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits" kindref="compound">detail::iterator_detail::iterator_traits</ref>&lt; It &gt;::difference_type</type>
+        <definition>typename detail::iterator_detail::iterator_traits&lt; It &gt;::difference_type SR_TYPES_NS::detail::distance_detail::do_distance_unsafe</definition>
+        <argsstring>(It first, It last, detail::iterator_detail::random_access_iterator_tag)</argsstring>
+        <name>do_distance_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::distance_detail::do_distance_unsafe</qualifiedname>
+        <param>
+          <type>It</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>It</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1random__access__iterator__tag" kindref="compound">detail::iterator_detail::random_access_iterator_tag</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="372" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="372" bodyend="377"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="369" column="9"/>
+  </compounddef>
+</doxygen>

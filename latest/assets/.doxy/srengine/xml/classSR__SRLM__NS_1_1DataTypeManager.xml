@@ -1,0 +1,301 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRLM__NS_1_1DataTypeManager" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRLM_NS::DataTypeManager</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; DataTypeManager &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__SRLM__NS_1_1DataTypeManager_1ad767fdc03d152d672d6d7a0aaed27658" prot="private" static="no">
+        <type>uint64_t</type>
+        <definition>using SR_SRLM_NS::DataTypeManager::Hash =  uint64_t</definition>
+        <argsstring></argsstring>
+        <name>Hash</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::Hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__SRLM__NS_1_1DataTypeManager_1a4ba7970357eb3de88f224bb1393d3219" prot="private" static="no">
+        <type>std::unordered_map&lt; Hash, <ref refid="classSR__SRLM__NS_1_1DataTypeStruct" kindref="compound">DataTypeStruct</ref> * &gt;</type>
+        <definition>using SR_SRLM_NS::DataTypeManager::Structs =  std::unordered_map&lt;Hash, DataTypeStruct*&gt;</definition>
+        <argsstring></argsstring>
+        <name>Structs</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::Structs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1DataTypeManager_1a015dc3342dfd104658c8a3de3d2db877" prot="private" static="no" mutable="no">
+        <type>Structs</type>
+        <definition>Structs SR_SRLM_NS::DataTypeManager::m_structs</definition>
+        <argsstring></argsstring>
+        <name>m_structs</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::m_structs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="32" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1DataTypeManager_1a2c68e528b5b19da2f26ab9c8719937f7" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::FileWatcher::Ptr</type>
+        <definition>SR_UTILS_NS::FileWatcher::Ptr SR_SRLM_NS::DataTypeManager::m_watcher</definition>
+        <argsstring></argsstring>
+        <name>m_watcher</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::m_watcher</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="33" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1ae581ed5691740ad7100a77d70df6c0db" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRLM_NS::DataTypeManager::IsStructExists</definition>
+        <argsstring>(Hash hashName) const</argsstring>
+        <name>IsStructExists</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::IsStructExists</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="19" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1a098914e37df29824576cba8b4c5d13b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+        <definition>SR_NODISCARD DataType * SR_SRLM_NS::DataTypeManager::CreateByName</definition>
+        <argsstring>(Hash hashName)</argsstring>
+        <name>CreateByName</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::CreateByName</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="20" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1a0c5fdef0abc2398b59f7b9c2e36221af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+        <definition>SR_NODISCARD DataType * SR_SRLM_NS::DataTypeManager::CreateByName</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>CreateByName</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::CreateByName</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="21" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1aa90292cf3a0ddcaa025f7271cbc93625" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__SRLM__NS_1_1DataTypeStruct" kindref="compound">DataTypeStruct</ref> *</type>
+        <definition>SR_NODISCARD const DataTypeStruct * SR_SRLM_NS::DataTypeManager::GetStruct</definition>
+        <argsstring>(Hash hashName) const</argsstring>
+        <name>GetStruct</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::GetStruct</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="22" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1a2578cf645fa5970815407f55f5d8d6f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const Structs &amp;</type>
+        <definition>SR_NODISCARD const Structs &amp; SR_SRLM_NS::DataTypeManager::GetStructs</definition>
+        <argsstring>() const</argsstring>
+        <name>GetStructs</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::GetStructs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="23" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1a62ddcfa7ad17cf500a666beaae8dc800" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::DataTypeManager::InitSingleton</definition>
+        <argsstring>() override</argsstring>
+        <name>InitSingleton</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::InitSingleton</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332">InitSingleton</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1a1c914674606cd20a7a6181953615032e" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::DataTypeManager::OnSingletonDestroy</definition>
+        <argsstring>() override</argsstring>
+        <name>OnSingletonDestroy</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::OnSingletonDestroy</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342">OnSingletonDestroy</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1afc7e0b512da6be32e47a15836685021c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::DataTypeManager::ReloadSettings</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadSettings</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::ReloadSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataTypeManager_1acc0f2bfdcfd2434604fa6b592fdffbee" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::DataTypeManager::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_SRLM_NS::DataTypeManager::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="29" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SRLM_NS::DataTypeManager</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; DataTypeManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SRLM_NS::DataTypeManager</label>
+        <link refid="classSR__SRLM__NS_1_1DataTypeManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; DataTypeManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataTypeManager.h" bodystart="14" bodyend="35"/>
+    <listofallmembers>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1acc0f2bfdcfd2434604fa6b592fdffbee" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Clear</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a098914e37df29824576cba8b4c5d13b4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>CreateByName</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a0c5fdef0abc2398b59f7b9c2e36221af" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>CreateByName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1aa90292cf3a0ddcaa025f7271cbc93625" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetStruct</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a2578cf645fa5970815407f55f5d8d6f2" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetStructs</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1ad767fdc03d152d672d6d7a0aaed27658" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Hash</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a62ddcfa7ad17cf500a666beaae8dc800" prot="private" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1ae581ed5691740ad7100a77d70df6c0db" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsStructExists</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a015dc3342dfd104658c8a3de3d2db877" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>m_structs</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a2c68e528b5b19da2f26ab9c8719937f7" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>m_watcher</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a1c914674606cd20a7a6181953615032e" prot="private" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>operator=</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1afc7e0b512da6be32e47a15836685021c" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>ReloadSettings</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a4ba7970357eb3de88f224bb1393d3219" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Structs</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

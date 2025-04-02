@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1Memory_1_1CameraManager_1_1CameraInfo" kind="struct" language="C++" prot="private">
+    <compoundname>SR_GRAPH_NS::Memory::CameraManager::CameraInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1CameraManager_1_1CameraInfo_1afb5ce7cf871484daa979adcc69cc4a00" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::CameraManager::CameraInfo::destroyed</definition>
+        <argsstring></argsstring>
+        <name>destroyed</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::CameraManager::CameraInfo::destroyed</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="30" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1CameraManager_1_1CameraInfo_1a4bc295df9b0de0bd79e8e0a8098c3bcd" prot="public" static="no" mutable="no">
+        <type>RenderScenePtr</type>
+        <definition>RenderScenePtr SR_GRAPH_NS::Memory::CameraManager::CameraInfo::pRenderScene</definition>
+        <argsstring></argsstring>
+        <name>pRenderScene</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::CameraManager::CameraInfo::pRenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="31" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::Memory::CameraManager::CameraInfo</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pRenderScene</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; RenderScene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" bodystart="29" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1CameraManager_1_1CameraInfo_1afb5ce7cf871484daa979adcc69cc4a00" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::CameraManager::CameraInfo</scope><name>destroyed</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1CameraManager_1_1CameraInfo_1a4bc295df9b0de0bd79e8e0a8098c3bcd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::CameraManager::CameraInfo</scope><name>pRenderScene</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

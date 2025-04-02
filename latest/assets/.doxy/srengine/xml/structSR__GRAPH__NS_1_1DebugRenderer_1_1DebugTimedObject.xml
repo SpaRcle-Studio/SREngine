@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::DebugRenderer::DebugTimedObject</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1a252c2e44dc966b880fb2a955c0f0da5d" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::DebugRenderer::DebugTimedObject::startTimePoint</definition>
+        <argsstring></argsstring>
+        <name>startTimePoint</name>
+        <qualifiedname>SR_GRAPH_NS::DebugRenderer::DebugTimedObject::startTimePoint</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="46" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1a9f6e39e5e06107819680a16856b3262a" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::DebugRenderer::DebugTimedObject::endTimePoint</definition>
+        <argsstring></argsstring>
+        <name>endTimePoint</name>
+        <qualifiedname>SR_GRAPH_NS::DebugRenderer::DebugTimedObject::endTimePoint</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="47" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1a2d012a6b797f47724bcee3c3717c7b3b" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::DebugRenderer::DebugTimedObject::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>SR_GRAPH_NS::DebugRenderer::DebugTimedObject::duration</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="48" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1ad49e162c66311e3336fa6de20af5bff1" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo" kindref="compound">DrawInfo</ref></type>
+        <definition>DrawInfo SR_GRAPH_NS::DebugRenderer::DebugTimedObject::drawInfo</definition>
+        <argsstring></argsstring>
+        <name>drawInfo</name>
+        <qualifiedname>SR_GRAPH_NS::DebugRenderer::DebugTimedObject::drawInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="49" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::DebugRenderer::DebugTimedObject</label>
+        <link refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>drawInfo</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::DebugRenderer::DrawInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>modelMatrix</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>color</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_MATH_NS::FColor</label>
+        <link refid="classSR__MATH__NS_1_1FColor"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_MATH_NS::Matrix4x4</label>
+        <link refid="classSR__MATH__NS_1_1Matrix4x4"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>dir</edgelabel>
+          <edgelabel>position</edgelabel>
+          <edgelabel>right</edgelabel>
+          <edgelabel>up</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_MATH_NS::Vector4&lt; Unit &gt;</label>
+        <link refid="structSR__MATH__NS_1_1Vector4"/>
+      </node>
+      <node id="4">
+        <label>SR_MATH_NS::Vector4&lt; float_t &gt;</label>
+        <link refid="structSR__MATH__NS_1_1Vector4"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" line="45" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h" bodystart="45" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1ad49e162c66311e3336fa6de20af5bff1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer::DebugTimedObject</scope><name>drawInfo</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1a2d012a6b797f47724bcee3c3717c7b3b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer::DebugTimedObject</scope><name>duration</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1a9f6e39e5e06107819680a16856b3262a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer::DebugTimedObject</scope><name>endTimePoint</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DebugTimedObject_1a252c2e44dc966b880fb2a955c0f0da5d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugRenderer::DebugTimedObject</scope><name>startTimePoint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

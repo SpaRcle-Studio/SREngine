@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1GlobalSettings" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::GlobalSettings</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_UTILS_NS::Settings</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; T &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__UTILS__NS_1_1GlobalSettings_1a595b47c774b1ef9dff14310ff16bea88" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Singleton&lt; T &gt;</definition>
+        <argsstring></argsstring>
+        <name>Singleton&lt; T &gt;</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::Singleton&lt; T &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">Singleton</ref>&lt; T &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="108" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a7c384beb02cf67610f00e1d2e0da6f15" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED void</type>
+        <definition>static SR_MAYBE_UNUSED void SR_UTILS_NS::GlobalSettings&lt; T &gt;::DestroySettings</definition>
+        <argsstring>()</argsstring>
+        <name>DestroySettings</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::DestroySettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>Форсированно уничтожаем этот ресурс, чтобы не ждать пока закончится время жизни</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="60" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="60" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a8bdc50c581ac795faadb323561d27b23" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::GlobalSettings&lt; T &gt;::~GlobalSettings</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~GlobalSettings</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::~GlobalSettings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="82" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1af74f9a482683b871ed62c1539c2971ff" prot="private" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::GlobalSettings&lt; T &gt;::OnSingletonDestroy</definition>
+        <argsstring>() final</argsstring>
+        <name>OnSingletonDestroy</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::OnSingletonDestroy</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342">OnSingletonDestroy</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="85" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a5eb03779d112028f83c89bad53763d4d" prot="private" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::GlobalSettings&lt; T &gt;::InitSingleton</definition>
+        <argsstring>() final</argsstring>
+        <name>InitSingleton</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::InitSingleton</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332">InitSingleton</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="86" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="96" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a7bb6c851e4c2eb711e0b700e08a9ccb1" prot="private" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::GlobalSettings&lt; T &gt;::IsSingletonCanBeDestroyed</definition>
+        <argsstring>() const final</argsstring>
+        <name>IsSingletonCanBeDestroyed</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::IsSingletonCanBeDestroyed</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc">IsSingletonCanBeDestroyed</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="87" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1GlobalSettings_1a11a775a40888f29a71c2c3f3c09467c3" prot="private" static="no" const="no" explicit="no" inline="no" final="yes" virt="non-virtual">
+        <type>IResource::RemoveUPResult</type>
+        <definition>IResource::RemoveUPResult SR_UTILS_NS::GlobalSettings&lt; T &gt;::RemoveUsePoint</definition>
+        <argsstring>() final</argsstring>
+        <name>RemoveUsePoint</name>
+        <qualifiedname>SR_UTILS_NS::GlobalSettings::RemoveUsePoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="88" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="108" bodyend="112"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::GlobalSettings&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Settings</label>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::GlobalSettings&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1GlobalSettings"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Settings</label>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Settings.h" line="57" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Settings.h" bodystart="57" bodyend="90"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a7c384beb02cf67610f00e1d2e0da6f15" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>DestroySettings</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a5eb03779d112028f83c89bad53763d4d" prot="private" virt="virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a7bb6c851e4c2eb711e0b700e08a9ccb1" prot="private" virt="virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1af74f9a482683b871ed62c1539c2971ff" prot="private" virt="virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a11a775a40888f29a71c2c3f3c09467c3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a595b47c774b1ef9dff14310ff16bea88" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>Singleton&lt; T &gt;</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1GlobalSettings_1a8bdc50c581ac795faadb323561d27b23" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>~GlobalSettings</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::GlobalSettings</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

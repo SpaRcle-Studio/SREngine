@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Reflection::ValueSequenceContainer</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a4af4a5b898f854279f240f4ed9c9d6c4" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::Reflection::ValueSequenceContainer::Value</definition>
+        <argsstring></argsstring>
+        <name>Value</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="59" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ab2675d319b05855857fd4ab4806500b9" prot="private" static="no" mutable="no">
+        <type>entt::meta_sequence_container</type>
+        <definition>entt::meta_sequence_container SR_UTILS_NS::Reflection::ValueSequenceContainer::m_storage</definition>
+        <argsstring></argsstring>
+        <name>m_storage</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::m_storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="77" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a2767b0fd8a4c0f08e665ae08de4ea7c5" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Reflection::ValueSequenceContainer::ValueSequenceContainer</definition>
+        <argsstring>(entt::meta_sequence_container &amp;&amp;storage)</argsstring>
+        <name>ValueSequenceContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::ValueSequenceContainer</qualifiedname>
+        <param>
+          <type>entt::meta_sequence_container &amp;&amp;</type>
+          <declname>storage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="61" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="61" bodyend="63"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa278236810f6e74e945ed2034fbd587a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
+        <definition>SR_NODISCARD ValueSequenceContainerIterator SR_UTILS_NS::Reflection::ValueSequenceContainer::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="66" column="53" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a875fe9fc35fa58b05bfb463d93c2e224" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" kindref="compound">ValueSequenceContainerIterator</ref></type>
+        <definition>SR_NODISCARD ValueSequenceContainerIterator SR_UTILS_NS::Reflection::ValueSequenceContainer::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="67" column="53" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ac69730254b894826f33d330aca72910a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Reflection::ValueSequenceContainer::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa402ff805d3dc0c226a6ca971571cb82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Reflection::ValueSequenceContainer::Resize</definition>
+        <argsstring>(uint64_t size)</argsstring>
+        <name>Resize</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Resize</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1af149868692602b50e36dd949dcfd228b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Reflection::ValueSequenceContainer::Reserve</definition>
+        <argsstring>(uint64_t size)</argsstring>
+        <name>Reserve</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Reserve</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a346fbf70392a2103a370b7778efa50df" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::Reflection::ValueSequenceContainer::Size</definition>
+        <argsstring>() const</argsstring>
+        <name>Size</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="73" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a4585337cc6e965872f9f85caa83e6653" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::ValueSequenceContainer::Empty</definition>
+        <argsstring>() const</argsstring>
+        <name>Empty</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::ValueSequenceContainer::Empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="74" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="58" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="58" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa278236810f6e74e945ed2034fbd587a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>begin</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ac69730254b894826f33d330aca72910a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a4585337cc6e965872f9f85caa83e6653" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Empty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a875fe9fc35fa58b05bfb463d93c2e224" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>end</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1ab2675d319b05855857fd4ab4806500b9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>m_storage</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1af149868692602b50e36dd949dcfd228b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Reserve</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1aa402ff805d3dc0c226a6ca971571cb82" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Resize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a346fbf70392a2103a370b7778efa50df" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Size</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a4af4a5b898f854279f240f4ed9c9d6c4" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>Value</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer_1a2767b0fd8a4c0f08e665ae08de4ea7c5" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::ValueSequenceContainer</scope><name>ValueSequenceContainer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

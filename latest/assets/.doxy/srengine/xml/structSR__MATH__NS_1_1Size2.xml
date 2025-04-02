@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__MATH__NS_1_1Size2" kind="struct" language="C++" prot="public">
+    <compoundname>SR_MATH_NS::Size2</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size2_1af7632459460faa4222d522e4d3aacbe4" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; T &gt;</type>
+        <definition>Size&lt;T&gt; SR_MATH_NS::Size2&lt; T &gt;::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>SR_MATH_NS::Size2::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="58" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size2_1a9948760c262a06fbf0119030859c988d" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; T &gt;</type>
+        <definition>Size&lt;T&gt; SR_MATH_NS::Size2&lt; T &gt;::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>SR_MATH_NS::Size2::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="59" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size2_1aff1b84fa79efc11cd510f87baa635d0f" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; T &gt;</type>
+        <definition>Size&lt;T&gt; SR_MATH_NS::Size2&lt; T &gt;::w</definition>
+        <argsstring></argsstring>
+        <name>w</name>
+        <qualifiedname>SR_MATH_NS::Size2::w</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="62" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size2_1a03cfbc0b7cee36bb92b19542f26b47f4" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; T &gt;</type>
+        <definition>Size&lt;T&gt; SR_MATH_NS::Size2&lt; T &gt;::h</definition>
+        <argsstring></argsstring>
+        <name>h</name>
+        <qualifiedname>SR_MATH_NS::Size2::h</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="63" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Size2_1a3d98209cee06f0e1d6a8fcaee06305bf" prot="public" static="no" mutable="no">
+        <type>union <ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">SR_MATH_NS::Size2</ref></type>
+        <definition>union SR_MATH_NS::Size2 SR_MATH_NS::Size2&lt; T &gt;</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>SR_MATH_NS::Size2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="65" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Size2_1ac69c88691e5a5f4f53b10ed9009d3ef2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Size2&lt; T &gt;::Size2</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>Size2</name>
+        <qualifiedname>SR_MATH_NS::Size2::Size2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="51" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="51" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Size2_1a7d41c28a249ee1bf919a7eef9c87e894" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::Size2&lt; T &gt;::HasPercent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>HasPercent</name>
+        <qualifiedname>SR_MATH_NS::Size2::HasPercent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="67" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Size2_1affafdef3eacd39d59c2b3e83fba3e746" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; T &gt;</type>
+        <definition>SR_NODISCARD Vector2&lt; T &gt; SR_MATH_NS::Size2&lt; T &gt;::ToPixels</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ToPixels</name>
+        <qualifiedname>SR_MATH_NS::Size2::ToPixels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="69" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="69" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Size2_1a895e4a326b9d5f0887913e2fe5564756" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; T &gt;</type>
+        <definition>SR_NODISCARD Vector2&lt; T &gt; SR_MATH_NS::Size2&lt; T &gt;::ToPixels</definition>
+        <argsstring>(const Vector2&lt; T &gt; &amp;parentSize) const noexcept</argsstring>
+        <name>ToPixels</name>
+        <qualifiedname>SR_MATH_NS::Size2::ToPixels</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; T &gt; &amp;</type>
+          <declname>parentSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="73" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Size2_1a0e223cf1fb2f6a9e8c226d3dbc227b59" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_MATH_NS::Size2&lt; T &gt;::SetPixels</definition>
+        <argsstring>(const Vector2&lt; T &gt; &amp;size) noexcept</argsstring>
+        <name>SetPixels</name>
+        <qualifiedname>SR_MATH_NS::Size2::SetPixels</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">Vector2</ref>&lt; T &gt; &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="77" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="77" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="50" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="50" bodyend="83"/>
+    <listofallmembers>
+      <member refid="structSR__MATH__NS_1_1Size2_1a03cfbc0b7cee36bb92b19542f26b47f4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>h</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1a7d41c28a249ee1bf919a7eef9c87e894" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>HasPercent</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1a9948760c262a06fbf0119030859c988d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>height</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1a0e223cf1fb2f6a9e8c226d3dbc227b59" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>SetPixels</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1ac69c88691e5a5f4f53b10ed9009d3ef2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>Size2</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1affafdef3eacd39d59c2b3e83fba3e746" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>ToPixels</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1a895e4a326b9d5f0887913e2fe5564756" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>ToPixels</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1aff1b84fa79efc11cd510f87baa635d0f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>w</name></member>
+      <member refid="structSR__MATH__NS_1_1Size2_1af7632459460faa4222d522e4d3aacbe4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Size2</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

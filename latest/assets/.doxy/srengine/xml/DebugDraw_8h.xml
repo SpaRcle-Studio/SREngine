@@ -1,0 +1,695 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="DebugDraw_8h" kind="file" language="C++">
+    <compoundname>DebugDraw.h</compoundname>
+    <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
+    <includes refid="Vector4_8h" local="no">Utils/Math/Vector4.h</includes>
+    <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
+    <includes refid="Function_8h" local="no">Utils/Types/Function.h</includes>
+    <incdepgraph>
+      <node id="73">
+        <label>Utils/Common/Breakpoint.h</label>
+        <link refid="Breakpoint_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>Utils/Common/EnumReflector.h</label>
+        <link refid="EnumReflector_8h_source"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Utils/Common/Enumerations.h</label>
+        <link refid="Enumerations_8h_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>Utils/Common/HashManager.h</label>
+        <link refid="HashManager_8h_source"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>Utils/Common/Hashes.h</label>
+        <link refid="Hashes_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>Utils/Common/NonCopyable.h</label>
+        <link refid="NonCopyable_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>Utils/Common/Singleton.h</label>
+        <link refid="Singleton_8h_source"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Utils/inc/Utils/DebugDraw.h</label>
+        <link refid="DebugDraw_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>Utils/Math/Axis.h</label>
+        <link refid="Axis_8h_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/Math/Mathematics.h</label>
+        <link refid="Mathematics_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>Utils/Math/Quaternion.h</label>
+        <link refid="Quaternion_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Utils/Math/Vector2.h</label>
+        <link refid="Vector2_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Utils/Math/Vector3.h</label>
+        <link refid="Vector3_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>Utils/Math/Vector4.h</label>
+        <link refid="Vector4_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>Utils/Platform/Stacktrace.h</label>
+        <link refid="Stacktrace_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>Utils/Types/Function.h</label>
+        <link refid="Function_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>Utils/Types/Map.h</label>
+        <link refid="Map_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>Utils/Types/MerkleTree.h</label>
+        <link refid="MerkleTree_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>Utils/Types/SafePtrLockGuard.h</label>
+        <link refid="SafePtrLockGuard_8h_source"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>Utils/Types/StringAtom.h</label>
+        <link refid="StringAtom_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Utils/macros.h</label>
+        <link refid="macros_8h_source"/>
+      </node>
+      <node id="5">
+        <label>Utils/stdInclude.h</label>
+        <link refid="stdInclude_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Codegen/EnumsFwd.generated.hpp</label>
+      </node>
+      <node id="46">
+        <label>algorithm</label>
+      </node>
+      <node id="47">
+        <label>any</label>
+      </node>
+      <node id="40">
+        <label>array</label>
+      </node>
+      <node id="38">
+        <label>atomic</label>
+      </node>
+      <node id="35">
+        <label>cassert</label>
+      </node>
+      <node id="23">
+        <label>cctype</label>
+      </node>
+      <node id="7">
+        <label>cfloat</label>
+      </node>
+      <node id="55">
+        <label>chrono</label>
+      </node>
+      <node id="36">
+        <label>cmath</label>
+      </node>
+      <node id="19">
+        <label>codecvt</label>
+      </node>
+      <node id="59">
+        <label>concepts</label>
+      </node>
+      <node id="60">
+        <label>condition_variable</label>
+      </node>
+      <node id="17">
+        <label>cstdarg</label>
+      </node>
+      <node id="20">
+        <label>cstddef</label>
+      </node>
+      <node id="57">
+        <label>cstdint</label>
+      </node>
+      <node id="11">
+        <label>cstdio</label>
+      </node>
+      <node id="49">
+        <label>cstdlib</label>
+      </node>
+      <node id="25">
+        <label>cstring</label>
+      </node>
+      <node id="52">
+        <label>ctime</label>
+      </node>
+      <node id="44">
+        <label>exception</label>
+      </node>
+      <node id="84">
+        <label>flat_hash_map/flat_hash_map.hpp</label>
+      </node>
+      <node id="80">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="29">
+        <label>fstream</label>
+      </node>
+      <node id="42">
+        <label>functional</label>
+      </node>
+      <node id="64">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="67">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="65">
+        <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="66">
+        <label>glm/gtx/string_cast.hpp</label>
+      </node>
+      <node id="18">
+        <label>initializer_list</label>
+      </node>
+      <node id="58">
+        <label>iomanip</label>
+      </node>
+      <node id="12">
+        <label>iosfwd</label>
+      </node>
+      <node id="53">
+        <label>iostream</label>
+      </node>
+      <node id="9">
+        <label>limits</label>
+      </node>
+      <node id="51">
+        <label>list</label>
+      </node>
+      <node id="24">
+        <label>locale</label>
+      </node>
+      <node id="41">
+        <label>map</label>
+      </node>
+      <node id="28">
+        <label>memory</label>
+      </node>
+      <node id="33">
+        <label>mutex</label>
+      </node>
+      <node id="62">
+        <label>numbers</label>
+      </node>
+      <node id="61">
+        <label>numeric</label>
+      </node>
+      <node id="78">
+        <label>openssl/sha.h</label>
+      </node>
+      <node id="27">
+        <label>optional</label>
+      </node>
+      <node id="31">
+        <label>ostream</label>
+      </node>
+      <node id="32">
+        <label>queue</label>
+      </node>
+      <node id="56">
+        <label>random</label>
+      </node>
+      <node id="37">
+        <label>ranges</label>
+      </node>
+      <node id="54">
+        <label>ratio</label>
+      </node>
+      <node id="13">
+        <label>regex</label>
+      </node>
+      <node id="43">
+        <label>set</label>
+      </node>
+      <node id="16">
+        <label>shared_mutex</label>
+      </node>
+      <node id="8">
+        <label>span</label>
+      </node>
+      <node id="83">
+        <label>sparsehash/dense_hash_map</label>
+      </node>
+      <node id="50">
+        <label>sstream</label>
+      </node>
+      <node id="22">
+        <label>stack</label>
+      </node>
+      <node id="14">
+        <label>stdexcept</label>
+      </node>
+      <node id="34">
+        <label>string</label>
+      </node>
+      <node id="15">
+        <label>string_view</label>
+      </node>
+      <node id="48">
+        <label>thread</label>
+      </node>
+      <node id="10">
+        <label>type_traits</label>
+      </node>
+      <node id="45">
+        <label>unordered_map</label>
+      </node>
+      <node id="21">
+        <label>unordered_set</label>
+      </node>
+      <node id="39">
+        <label>utility</label>
+      </node>
+      <node id="26">
+        <label>variant</label>
+      </node>
+      <node id="30">
+        <label>vector</label>
+      </node>
+      <node id="79">
+        <label>xxHash/xxhash.h</label>
+      </node>
+      <node id="63">
+        <label>zlib.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classSR__UTILS__NS_1_1DebugDraw" prot="public">SR_UTILS_NS::DebugDraw</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks" prot="public">SR_UTILS_NS::DebugDraw::Callbacks</innerclass>
+    <innernamespace refid="namespaceSR__HTYPES__NS">SR_HTYPES_NS</innernamespace>
+    <innernamespace refid="namespaceSR__UTILS__NS">SR_UTILS_NS</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>Monika<sp/>on<sp/>20.09.2022.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_DEBUGDRAW_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_DEBUGDRAW_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Math/Vector3.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Math/Vector4.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Singleton.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/Function.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__HTYPES__NS" kindref="compound">SR_HTYPES_NS</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">RawMesh;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__UTILS__NS" kindref="compound">SR_UTILS_NS</ref><sp/>{</highlight></codeline>
+<codeline lineno="25" refid="classSR__UTILS__NS_1_1DebugDraw" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SR_DLL_EXPORT<sp/><ref refid="classSR__UTILS__NS_1_1DebugDraw" kindref="compound">DebugDraw</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Singleton&lt;DebugDraw&gt;<sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_SINGLETON(<ref refid="classSR__UTILS__NS_1_1DebugDraw" kindref="compound">DebugDraw</ref>)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RemoveCallback<sp/>=<sp/>SR_HTYPES_NS::Function&lt;void(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)&gt;;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DrawLineCallback<sp/>=<sp/>SR_HTYPES_NS::Function&lt;uint64_t(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time)&gt;;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DrawCubeCallback<sp/>=<sp/>SR_HTYPES_NS::Function&lt;uint64_t(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time)&gt;;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DrawPlaneCallback<sp/>=<sp/>DrawCubeCallback;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DrawSphereCallback<sp/>=<sp/>DrawCubeCallback;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DrawCapsuleCallback<sp/>=<sp/>DrawCubeCallback;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DrawMeshCallback<sp/>=<sp/>SR_HTYPES_NS::Function&lt;uint64_t(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time)&gt;;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks" kindref="compound">Callbacks</ref><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RemoveCallback<sp/>removeCallback;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DrawLineCallback<sp/>drawLineCallback;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DrawCubeCallback<sp/>drawCubeCallback;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DrawPlaneCallback<sp/>drawPlaneCallback;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DrawSphereCallback<sp/>drawSphereCallback;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DrawCapsuleCallback<sp/>drawCapsuleCallback;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DrawMeshCallback<sp/>drawMeshCallback;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>float_t<sp/>DEFAULT_DURATION<sp/>=<sp/>10.f;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor<sp/>DEFAULT_COLOR<sp/>=<sp/>SR_MATH_NS::FColor(255,<sp/>255,<sp/>255,<sp/>255);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3<sp/>DEFAULT_POSITION<sp/>=<sp/>SR_MATH_NS::FVector3::Zero();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3<sp/>DEFAULT_SCALE<sp/>=<sp/>SR_MATH_NS::FVector3::One();</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion<sp/>DEFAULT_QUATERNION<sp/>=<sp/>SR_MATH_NS::Quaternion::Identity();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCallbacks(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>pUserIdentifier,<sp/><ref refid="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks" kindref="compound">Callbacks</ref><sp/>callbacks);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>GetUserIdentifier()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_currentSwitcher;<sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>RemoveCallbacks(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>pUserIdentifier);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SwitchCallbacks(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>pUserIdentifier);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Remove(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId,<sp/>uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawMesh(SR_HTYPES_NS::RawMesh*<sp/>pRawMesh,<sp/>int32_t<sp/>meshId);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>start,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>end);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawLine();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCube();</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawPlane();</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawSphere();</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>scale);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>rot);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule(uint64_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>DrawCapsule();</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawQuaternion(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FVector3&amp;<sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::Quaternion&amp;<sp/>q,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>color,<sp/>float_t<sp/>time);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>m_currentSwitcher<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Callbacks*<sp/>m_currentCallbacks<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;void*,<sp/>Callbacks&gt;<sp/>m_callbacks;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_DEBUGDRAW_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h"/>
+  </compounddef>
+</doxygen>

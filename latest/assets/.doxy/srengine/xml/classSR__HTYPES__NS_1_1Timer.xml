@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1Timer" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::Timer</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1af378154593db39a2e2bdfa294053b568" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_HTYPES_NS::Timer::m_updateFrequency</definition>
+        <argsstring></argsstring>
+        <name>m_updateFrequency</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::m_updateFrequency</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="50" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1a6f9cb29c7e7e6c5e4bb677f21d836ca7" prot="private" static="no" mutable="no">
+        <type>double_t</type>
+        <definition>double_t SR_HTYPES_NS::Timer::m_deltaTime</definition>
+        <argsstring></argsstring>
+        <name>m_deltaTime</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::m_deltaTime</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="51" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1a847b9687b132031d1a58260708c738ba" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_HTYPES_NS::Timer::m_frames</definition>
+        <argsstring></argsstring>
+        <name>m_frames</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::m_frames</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="52" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Timer_1aae293b1433add52a1d770223a231fbb5" prot="private" static="no" mutable="no">
+        <type>TimePointType</type>
+        <definition>TimePointType SR_HTYPES_NS::Timer::m_beginFrame</definition>
+        <argsstring></argsstring>
+        <name>m_beginFrame</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::m_beginFrame</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="53" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1ac7e5443d001596ce33374d53c171da57" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Timer::Timer</definition>
+        <argsstring>(float_t updateFrequency)</argsstring>
+        <name>Timer</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::Timer</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>updateFrequency</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="14" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="14" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1ae2388dd12503d2039640d702068b451a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Timer::Timer</definition>
+        <argsstring>(uint32_t countInSecond)</argsstring>
+        <name>Timer</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::Timer</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>countInSecond</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="18" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1a4891934df088ac13b6417bb21a5004cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Timer::Timer</definition>
+        <argsstring>()</argsstring>
+        <name>Timer</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::Timer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="22" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="22" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1aa42c7d6abc0131bba54371a54c5e6b1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::Timer::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="27" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="27" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1aa6a8e5323509416159e48d0f408a15c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_HTYPES_NS::Timer::GetDeltaTime</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDeltaTime</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::GetDeltaTime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="46" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Timer_1a802745446d25fa4eba73c74dc3749cd2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_HTYPES_NS::Timer::GetFrames</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFrames</name>
+        <qualifiedname>SR_HTYPES_NS::Timer::GetFrames</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="47" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Timer.h" bodystart="12" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1aa6a8e5323509416159e48d0f408a15c1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>GetDeltaTime</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1a802745446d25fa4eba73c74dc3749cd2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>GetFrames</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1aae293b1433add52a1d770223a231fbb5" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>m_beginFrame</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1a6f9cb29c7e7e6c5e4bb677f21d836ca7" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>m_deltaTime</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1a847b9687b132031d1a58260708c738ba" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>m_frames</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1af378154593db39a2e2bdfa294053b568" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>m_updateFrequency</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1ac7e5443d001596ce33374d53c171da57" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>Timer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1ae2388dd12503d2039640d702068b451a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>Timer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1a4891934df088ac13b6417bb21a5004cf" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>Timer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Timer_1aa42c7d6abc0131bba54371a54c5e6b1e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Timer</scope><name>Update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

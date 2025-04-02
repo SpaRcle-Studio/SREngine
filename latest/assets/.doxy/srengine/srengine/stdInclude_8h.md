@@ -1,0 +1,250 @@
+
+
+# File stdInclude.h
+
+
+
+[**FileList**](files.md) **>** [**Core**](dir_0e25eeab45a2a860e54b41439eaf8784.md) **>** [**libs**](dir_ec277bd8bac57730a602f096f68de393.md) **>** [**Utils**](dir_f3d6dc6978aa78088efd06c6b2710310.md) **>** [**inc**](dir_e0f1b8570fc577fb78354cd460e9e760.md) **>** [**Utils**](dir_06a42b3e946fb631201a76a22d1aab06.md) **>** [**stdInclude.h**](stdInclude_8h.md)
+
+[Go to the source code of this file](stdInclude_8h_source.md)
+
+
+
+* `#include <Utils/macros.h>`
+* `#include <cfloat>`
+* `#include <span>`
+* `#include <limits>`
+* `#include <type_traits>`
+* `#include <cstdio>`
+* `#include <iosfwd>`
+* `#include <regex>`
+* `#include <stdexcept>`
+* `#include <string_view>`
+* `#include <shared_mutex>`
+* `#include <cstdarg>`
+* `#include <initializer_list>`
+* `#include <codecvt>`
+* `#include <cstddef>`
+* `#include <unordered_set>`
+* `#include <stack>`
+* `#include <cctype>`
+* `#include <locale>`
+* `#include <cstring>`
+* `#include <variant>`
+* `#include <optional>`
+* `#include <memory>`
+* `#include <fstream>`
+* `#include <vector>`
+* `#include <ostream>`
+* `#include <queue>`
+* `#include <mutex>`
+* `#include <string>`
+* `#include <cassert>`
+* `#include <cmath>`
+* `#include <ranges>`
+* `#include <atomic>`
+* `#include <utility>`
+* `#include <array>`
+* `#include <map>`
+* `#include <functional>`
+* `#include <set>`
+* `#include <exception>`
+* `#include <unordered_map>`
+* `#include <algorithm>`
+* `#include <any>`
+* `#include <thread>`
+* `#include <cstdlib>`
+* `#include <sstream>`
+* `#include <list>`
+* `#include <ctime>`
+* `#include <iostream>`
+* `#include <ratio>`
+* `#include <chrono>`
+* `#include <random>`
+* `#include <cstdint>`
+* `#include <iomanip>`
+* `#include <concepts>`
+* `#include <condition_variable>`
+* `#include <numeric>`
+* `#include <numbers>`
+* `#include <zlib.h>`
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) <br> |
+| namespace | [**string\_literals**](namespacestd_1_1literals_1_1string__literals.md) <br> |
+| namespace | [**string\_view\_literals**](namespacestd_1_1literals_1_1string__view__literals.md) <br> |
+
+
+## Classes
+
+| Type | Name |
+| ---: | :--- |
+| struct | [**InputIteratorPointer**](structSR__UTILS__NS_1_1InputIteratorPointer.md) &lt;typename T&gt;<br> |
+| struct | [**IsDerivedFrom**](structSR__UTILS__NS_1_1IsDerivedFrom.md) &lt;T, class U&gt;<br> |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|  std::string\_view | [**SRGetClassName**](#function-srgetclassname) (std::string\_view func\_signature) <br> |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Macros
+
+| Type | Name |
+| ---: | :--- |
+| define  | [**SR\_EXCHANGE**](stdInclude_8h.md#define-sr_exchange) (x, y) `SR\_UTILS\_NS::Exchange(x, y)`<br> |
+| define  | [**SR\_GET\_CLASS\_NAME**](stdInclude_8h.md#define-sr_get_class_name) () `SRGetClassName(\_\_PRETTY\_FUNCTION\_\_)`<br> |
+| define  | [**SR\_GET\_COMPILE\_TIME\_CLASS\_NAME**](stdInclude_8h.md#define-sr_get_compile_time_class_name) (T) `SR\_UTILS\_NS::GetCompileTimeTypeName&lt;T&gt;()`<br> |
+| define  | [**SR\_IGNORE\_UNUSED**](stdInclude_8h.md#define-sr_ignore_unused) (...) `SR\_UTILS\_NS::IgnoreUnused(\_\_VA\_ARGS\_\_)`<br> |
+
+## Public Functions Documentation
+
+
+
+
+### function SRGetClassName 
+
+```C++
+inline std::string_view SRGetClassName (
+    std::string_view func_signature
+) 
+```
+
+
+
+C++17 - 201703L C++14 - 201402L C++11 - 201103L C++98 - 199711L 
+
+
+        
+
+<hr>
+## Macro Definition Documentation
+
+
+
+
+
+### define SR\_EXCHANGE 
+
+```C++
+#define SR_EXCHANGE (
+    x,
+    y
+) `SR_UTILS_NS::Exchange(x, y)`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_GET\_CLASS\_NAME 
+
+```C++
+#define SR_GET_CLASS_NAME (
+    
+) `SRGetClassName(__PRETTY_FUNCTION__)`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_GET\_COMPILE\_TIME\_CLASS\_NAME 
+
+```C++
+#define SR_GET_COMPILE_TIME_CLASS_NAME (
+    T
+) `SR_UTILS_NS::GetCompileTimeTypeName<T>()`
+```
+
+
+
+
+<hr>
+
+
+
+### define SR\_IGNORE\_UNUSED 
+
+```C++
+#define SR_IGNORE_UNUSED (
+    ...
+) `SR_UTILS_NS::IgnoreUnused(__VA_ARGS__)`
+```
+
+
+
+
+<hr>
+
+------------------------------
+The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/stdInclude.h`
+

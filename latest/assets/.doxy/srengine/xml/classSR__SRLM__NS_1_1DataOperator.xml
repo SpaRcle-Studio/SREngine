@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRLM__NS_1_1DataOperator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_SRLM_NS::DataOperator</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="private" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorAddition" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorAddition</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorDivision" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorDivision</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorIsEqual" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorIsEqual</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorIsGreater" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorIsGreater</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorModulo" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorModulo</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorMultiplication" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorMultiplication</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1DataOperatorSubtraction" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperatorSubtraction</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1DataOperator_1a056b136cf61d1081c641d5cc522d61b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+        <definition>virtual SR_NODISCARD DataType * SR_SRLM_NS::DataOperator::Calculate</definition>
+        <argsstring>(DataType *pFirst, DataType *pSecond)=0</argsstring>
+        <name>Calculate</name>
+        <qualifiedname>SR_SRLM_NS::DataOperator::Calculate</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorAddition_1a87a51db0134d1c010b4028d2b209968d">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorDivision_1ac3d6675a222748d1cca8ad83d84c3002">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsEqual_1a338126d99ca202871ae0df0ff134f5bd">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsGreater_1abc4b65be62ab96e355be173fd52ec8cc">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsGreaterOrEqual_1afb370c80125cef1adea6c71a76c3faeb">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsLess_1ac680c70ff70b419096225e18ad58fe60">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsLessOrEqual_1a9dd24517b9d1883eb5d4ea5085d9e817">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsNotEqual_1a6ef93a53c9bc6251002a1d795dc9cc7a">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorModulo_1a53592951f0ceb4af88bb7e8a90b61e4c">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorMultiplication_1a170072acebb60125870961cea56f42ac">Calculate</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorSubtraction_1aa90584d000e1ea64421f088f24fc05f3">Calculate</reimplementedby>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+          <declname>pFirst</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+          <declname>pSecond</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataOperators.h" line="13" column="39"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SRLM_NS::DataOperator</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperator"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SRLM_NS::DataOperatorAddition</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorAddition"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_SRLM_NS::DataOperatorDivision</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorDivision"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_SRLM_NS::DataOperatorIsEqual</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorIsEqual"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_SRLM_NS::DataOperatorIsGreater</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorIsGreater"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_SRLM_NS::DataOperatorIsGreaterOrEqual</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorIsGreaterOrEqual"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_SRLM_NS::DataOperatorIsLess</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorIsLess"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_SRLM_NS::DataOperatorIsLessOrEqual</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorIsLessOrEqual"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_SRLM_NS::DataOperatorIsNotEqual</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorIsNotEqual"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_SRLM_NS::DataOperatorModulo</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorModulo"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_SRLM_NS::DataOperatorMultiplication</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorMultiplication"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_SRLM_NS::DataOperatorSubtraction</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperatorSubtraction"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SRLM_NS::DataOperator</label>
+        <link refid="classSR__SRLM__NS_1_1DataOperator"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/DataOperators.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/DataOperators.h" bodystart="11" bodyend="16"/>
+    <listofallmembers>
+      <member refid="classSR__SRLM__NS_1_1DataOperator_1a056b136cf61d1081c641d5cc522d61b3" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::DataOperator</scope><name>Calculate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

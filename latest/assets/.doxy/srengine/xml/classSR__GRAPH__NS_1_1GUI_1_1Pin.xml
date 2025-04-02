@@ -1,0 +1,680 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1GUI_1_1Pin" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::GUI::Pin</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="private" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1abf36f489c520445b2ac1a221f4952d37" prot="private" static="no">
+        <type>SR_SRLM_NS::DataTypeClass</type>
+        <definition>using SR_GRAPH_NS::GUI::Pin::PinType =  SR_SRLM_NS::DataTypeClass</definition>
+        <argsstring></argsstring>
+        <name>PinType</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::PinType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="34" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a11bac07c4b9137b84342e39ad83c3d90" prot="private" static="no">
+        <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">SR_SRLM_NS::DataType</ref> *</type>
+        <definition>using SR_GRAPH_NS::GUI::Pin::DataTypePtr =  SR_SRLM_NS::DataType*</definition>
+        <argsstring></argsstring>
+        <name>DataTypePtr</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::DataTypePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="35" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6db9d28bd448a131448276ee03de1e6d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Node</definition>
+        <argsstring></argsstring>
+        <name>Node</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Node</qualifiedname>
+        <param>
+          <type>Node</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="32" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a1e9ca4d39ca75620494c1f03ae5b00e8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Link</definition>
+        <argsstring></argsstring>
+        <name>Link</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Link</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="33" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1afe59586c6846bcb4968d83d83c56a87a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::GUI::Pin::m_editEnum</definition>
+        <argsstring></argsstring>
+        <name>m_editEnum</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::m_editEnum</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="77" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af33f9245d43ebe9788dd347e5520b107" prot="private" static="no" mutable="no">
+        <type>DataTypePtr</type>
+        <definition>DataTypePtr SR_GRAPH_NS::GUI::Pin::m_dataType</definition>
+        <argsstring></argsstring>
+        <name>m_dataType</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::m_dataType</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="78" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adf18027ea3ad8cca5bec2b208f512212" prot="private" static="no" mutable="no">
+        <type>std::unordered_set&lt; <ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref> * &gt;</type>
+        <definition>std::unordered_set&lt;Link*&gt; SR_GRAPH_NS::GUI::Pin::m_links</definition>
+        <argsstring></argsstring>
+        <name>m_links</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::m_links</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="80" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1aaf7b8394c0a744dd65b10f9dc58f41dd" prot="private" static="no" mutable="no">
+        <type>Node *</type>
+        <definition>Node* SR_GRAPH_NS::GUI::Pin::m_node</definition>
+        <argsstring></argsstring>
+        <name>m_node</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::m_node</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="81" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a459c9e6b7add62f3cbc28aa7b2870fcd" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_GRAPH_NS::GUI::Pin::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="82" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af32dc85d9ebc71e5c9523057d0053d59" prot="private" static="no" mutable="no">
+        <type>PinKind</type>
+        <definition>PinKind SR_GRAPH_NS::GUI::Pin::m_kind</definition>
+        <argsstring></argsstring>
+        <name>m_kind</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::m_kind</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="83" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a014030a96c3c053ea0097820f138e22a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::Pin::Pin</definition>
+        <argsstring>()</argsstring>
+        <name>Pin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Pin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="37" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6d0e60764432669042a354d6824bce5c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::Pin::Pin</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>Pin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Pin</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="38" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a7ab289a7e7bad5e2a86ef5a14564f274" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::Pin::Pin</definition>
+        <argsstring>(const std::string &amp;name, DataTypePtr pData)</argsstring>
+        <name>Pin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Pin</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>DataTypePtr</type>
+          <declname>pData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="39" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1ab12e952e05fdf64513808543ddf2d2c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::Pin::Pin</definition>
+        <argsstring>(const std::string &amp;name, PinKind kind)</argsstring>
+        <name>Pin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Pin</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>PinKind</type>
+          <declname>kind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a9ed27d4ca70ffbbb15cc14273e5d7521" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::Pin::Pin</definition>
+        <argsstring>(std::string name, PinKind kind, DataTypePtr pData)</argsstring>
+        <name>Pin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Pin</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>PinKind</type>
+          <declname>kind</declname>
+        </param>
+        <param>
+          <type>DataTypePtr</type>
+          <declname>pData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="41" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a8e11b313ed76aead7b77e1ca11cfa036" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::Pin::~Pin</definition>
+        <argsstring>() override</argsstring>
+        <name>~Pin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::~Pin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="42" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6f40966c4a5ab52a4cb9164b31482f47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::DrawPinIcon</definition>
+        <argsstring>(bool connected, uint32_t alpha)</argsstring>
+        <name>DrawPinIcon</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::DrawPinIcon</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>connected</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a79977b4eb8092655a3e91d0c110bcc13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::DrawOption</definition>
+        <argsstring>()</argsstring>
+        <name>DrawOption</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::DrawOption</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1ae3f3c154b900df366643ba095cc45b8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::PostDrawOption</definition>
+        <argsstring>()</argsstring>
+        <name>PostDrawOption</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::PostDrawOption</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af80f1823bdafa9ce1bb03e6b233caad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::SetNode</definition>
+        <argsstring>(Node *node)</argsstring>
+        <name>SetNode</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::SetNode</qualifiedname>
+        <param>
+          <type>Node *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1ad8cfe04ea920f047ad1a057a0f51c371" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::AddLink</definition>
+        <argsstring>(Link *link)</argsstring>
+        <name>AddLink</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::AddLink</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af2c9268f22f0f57f608e7e9f36b0592c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::RemoveLink</definition>
+        <argsstring>(Link *link)</argsstring>
+        <name>RemoveLink</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::RemoveLink</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a4d851b213922b38cedd4e0870fa48341" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD uintptr_t</type>
+        <definition>SR_NODISCARD uintptr_t SR_GRAPH_NS::GUI::Pin::GetId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetId</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="58" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="58" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a51c4ee7ede784905325ee5cfb690edb9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::GUI::Pin::IsLinked</definition>
+        <argsstring>(Pin *pin) const</argsstring>
+        <name>IsLinked</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::IsLinked</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="62" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a7f347421f45ec5545c31d28be5aba9a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::GUI::Pin::IsLinked</definition>
+        <argsstring>() const</argsstring>
+        <name>IsLinked</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::IsLinked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="63" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af850ab84444e3b87cd522f6abfaf8bd9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::GUI::Pin::CanLink</definition>
+        <argsstring>() const</argsstring>
+        <name>CanLink</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::CanLink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="64" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a30af9d5bbde7e1f4b482c9eaa23f2470" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_GRAPH_NS::GUI::Pin::GetWidth</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWidth</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="65" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a2ff1f5633a73ded7584477196ebbb42d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD PinType</type>
+        <definition>SR_NODISCARD PinType SR_GRAPH_NS::GUI::Pin::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="66" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a606e607c89c5737db03114072bae1423" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD PinKind</type>
+        <definition>SR_NODISCARD PinKind SR_GRAPH_NS::GUI::Pin::GetKind</definition>
+        <argsstring>() const</argsstring>
+        <name>GetKind</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetKind</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="67" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1afe453be5667f98c08be9e298475616aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Node *</type>
+        <definition>SR_NODISCARD Node * SR_GRAPH_NS::GUI::Pin::GetNode</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNode</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetNode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="68" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a2551494142152a42f9b91fb9809a907e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD DataTypePtr</type>
+        <definition>SR_NODISCARD DataTypePtr SR_GRAPH_NS::GUI::Pin::GetDataType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDataType</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetDataType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="69" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a004c537eaf6f61e9b18b840df448fe64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GRAPH_NS::GUI::Pin::GetIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>GetIndex</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetIndex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="70" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a0a81d2d31d15aa888c21ee8dbf4a5e5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::string &amp;</type>
+        <definition>SR_NODISCARD const std::string &amp; SR_GRAPH_NS::GUI::Pin::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="71" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1aa25b5ad5c2af3aa66e1d31a07ca9e644" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::Begin</definition>
+        <argsstring>(PinKind kind) const</argsstring>
+        <name>Begin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::Begin</qualifiedname>
+        <param>
+          <type>PinKind</type>
+          <declname>kind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a18057decb2c147c3880afebb252b7ff1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::Pin::End</definition>
+        <argsstring>() const</argsstring>
+        <name>End</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::End</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="74" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adb26ac8f303222021b1381ee2d8a3a8c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ImColor</type>
+        <definition>static ImColor SR_GRAPH_NS::GUI::Pin::GetIconColor</definition>
+        <argsstring>(const PinType &amp;type)</argsstring>
+        <name>GetIconColor</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetIconColor</qualifiedname>
+        <param>
+          <type>const PinType &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="45" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a81dafbaf272de88350c12d7bd2893315" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>IconType</type>
+        <definition>static IconType SR_GRAPH_NS::GUI::Pin::GetIconType</definition>
+        <argsstring>(const PinType &amp;type)</argsstring>
+        <name>GetIconType</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetIconType</qualifiedname>
+        <param>
+          <type>const PinType &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="46" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::GUI::Pin</label>
+        <link refid="classSR__GRAPH__NS_1_1GUI_1_1Pin"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::GUI::Pin</label>
+        <link refid="classSR__GRAPH__NS_1_1GUI_1_1Pin"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="31" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" bodystart="31" bodyend="85"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1ad8cfe04ea920f047ad1a057a0f51c371" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>AddLink</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1aa25b5ad5c2af3aa66e1d31a07ca9e644" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Begin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af850ab84444e3b87cd522f6abfaf8bd9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>CanLink</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a11bac07c4b9137b84342e39ad83c3d90" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>DataTypePtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a79977b4eb8092655a3e91d0c110bcc13" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>DrawOption</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6f40966c4a5ab52a4cb9164b31482f47" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>DrawPinIcon</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a18057decb2c147c3880afebb252b7ff1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>End</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a2551494142152a42f9b91fb9809a907e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetDataType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adb26ac8f303222021b1381ee2d8a3a8c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetIconColor</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a81dafbaf272de88350c12d7bd2893315" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetIconType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a4d851b213922b38cedd4e0870fa48341" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetId</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a004c537eaf6f61e9b18b840df448fe64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetIndex</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a606e607c89c5737db03114072bae1423" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetKind</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a0a81d2d31d15aa888c21ee8dbf4a5e5c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1afe453be5667f98c08be9e298475616aa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetNode</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a2ff1f5633a73ded7584477196ebbb42d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a30af9d5bbde7e1f4b482c9eaa23f2470" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetWidth</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a51c4ee7ede784905325ee5cfb690edb9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>IsLinked</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a7f347421f45ec5545c31d28be5aba9a3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>IsLinked</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a1e9ca4d39ca75620494c1f03ae5b00e8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Link</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af33f9245d43ebe9788dd347e5520b107" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>m_dataType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1afe59586c6846bcb4968d83d83c56a87a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>m_editEnum</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af32dc85d9ebc71e5c9523057d0053d59" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>m_kind</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adf18027ea3ad8cca5bec2b208f512212" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>m_links</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a459c9e6b7add62f3cbc28aa7b2870fcd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>m_name</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1aaf7b8394c0a744dd65b10f9dc58f41dd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>m_node</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6db9d28bd448a131448276ee03de1e6d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Node</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a014030a96c3c053ea0097820f138e22a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Pin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6d0e60764432669042a354d6824bce5c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Pin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a7ab289a7e7bad5e2a86ef5a14564f274" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Pin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1ab12e952e05fdf64513808543ddf2d2c4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Pin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a9ed27d4ca70ffbbb15cc14273e5d7521" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>Pin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1abf36f489c520445b2ac1a221f4952d37" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>PinType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1ae3f3c154b900df366643ba095cc45b8b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>PostDrawOption</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af2c9268f22f0f57f608e7e9f36b0592c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>RemoveLink</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1af80f1823bdafa9ce1bb03e6b233caad4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>SetNode</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a8e11b313ed76aead7b77e1ca11cfa036" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>~Pin</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

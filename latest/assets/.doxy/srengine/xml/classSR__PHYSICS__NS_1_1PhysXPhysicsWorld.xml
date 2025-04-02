@@ -1,0 +1,420 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld" kind="class" language="C++" prot="public">
+    <compoundname>SR_PHYSICS_NS::PhysXPhysicsWorld</compoundname>
+    <basecompoundref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" prot="public" virt="non-virtual">SR_PHYSICS_NS::PhysicsWorld</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1ac20c0f7385dd8adf40c7991d5e2635af" prot="private" static="no">
+        <type><ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">PhysicsWorld</ref></type>
+        <definition>using SR_PHYSICS_NS::PhysXPhysicsWorld::Super =  PhysicsWorld</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="18" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aef7a3b975ecba3247bad54d1f7054dfc" prot="private" static="no" mutable="no">
+        <type>physx::PxScene *</type>
+        <definition>physx::PxScene* SR_PHYSICS_NS::PhysXPhysicsWorld::m_scene</definition>
+        <argsstring></argsstring>
+        <name>m_scene</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::m_scene</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="42" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a24855ef786399e28ba268ee211b53239" prot="private" static="no" mutable="no">
+        <type>physx::PxDefaultCpuDispatcher *</type>
+        <definition>physx::PxDefaultCpuDispatcher* SR_PHYSICS_NS::PhysXPhysicsWorld::m_cpuDispatcher</definition>
+        <argsstring></argsstring>
+        <name>m_cpuDispatcher</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::m_cpuDispatcher</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="43" column="39" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1adaed394febc58cdb35728219adb8383f" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__PHYSICS__NS_1_1ContactReportCallback" kindref="compound">ContactReportCallback</ref> *</type>
+        <definition>ContactReportCallback* SR_PHYSICS_NS::PhysXPhysicsWorld::m_contactCallback</definition>
+        <argsstring></argsstring>
+        <name>m_contactCallback</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::m_contactCallback</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="44" column="31" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a95c359e1abad20bd2964923abba2d757" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; physx::PxActor * &gt;</type>
+        <definition>std::vector&lt;physx::PxActor*&gt; SR_PHYSICS_NS::PhysXPhysicsWorld::m_dynamicActors</definition>
+        <argsstring></argsstring>
+        <name>m_dynamicActors</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::m_dynamicActors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="46" column="21" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a0a6b70e3aff3e3e3ea08b0f1588c959f" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; physx::PxActor * &gt;</type>
+        <definition>std::vector&lt;physx::PxActor*&gt; SR_PHYSICS_NS::PhysXPhysicsWorld::m_staticActors</definition>
+        <argsstring></argsstring>
+        <name>m_staticActors</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::m_staticActors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="47" column="21" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a58cd9707cca478bff1a6df66b615ca1c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; physx::PxActor * &gt;</type>
+        <definition>std::vector&lt;physx::PxActor*&gt; SR_PHYSICS_NS::PhysXPhysicsWorld::m_actors</definition>
+        <argsstring></argsstring>
+        <name>m_actors</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::m_actors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="48" column="21" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aa9316fcc031b8ce7967817e93f453cbc" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PHYSICS_NS::PhysXPhysicsWorld::PhysXPhysicsWorld</definition>
+        <argsstring>(LibraryPtr pLibrary, Space space)</argsstring>
+        <name>PhysXPhysicsWorld</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::PhysXPhysicsWorld</qualifiedname>
+        <param>
+          <type>LibraryPtr</type>
+          <declname>pLibrary</declname>
+        </param>
+        <param>
+          <type>Space</type>
+          <declname>space</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="20" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a6379289c8dbd596bba2b822015e7f976" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PHYSICS_NS::PhysXPhysicsWorld::~PhysXPhysicsWorld</definition>
+        <argsstring>() override</argsstring>
+        <name>~PhysXPhysicsWorld</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::~PhysXPhysicsWorld</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="21" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a46723b3060fb8595fef740c917274f29" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::Initialize</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a1e51411e7c6c51475ec5d2739336eea1">Initialize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="24" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1ada24cf7f6e0bf81181a0d67c0cb498a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::ClearForces</definition>
+        <argsstring>() override</argsstring>
+        <name>ClearForces</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::ClearForces</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a1e5418735695c5b96d96e730d7164d9a">ClearForces</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1adf09f6b4333cc8b93bdca17ffa6aa8a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::Synchronize</definition>
+        <argsstring>() override</argsstring>
+        <name>Synchronize</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::Synchronize</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a80d76018be5bbb610cf2c581e8c6932a">Synchronize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a7ef0219bff2c66626d24cb0a2262b1aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::StepSimulation</definition>
+        <argsstring>(float_t step) override</argsstring>
+        <name>StepSimulation</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::StepSimulation</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1accd26f8fb9b4c5337ab16fbcb9ce8d61">StepSimulation</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>step</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a3a27129d55ec21f7576b6453b2667bea" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::AddRigidbody</definition>
+        <argsstring>(RigidbodyPtr pRigidbody) override</argsstring>
+        <name>AddRigidbody</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::AddRigidbody</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a31ed18c10ade55af3c308452b65329ce">AddRigidbody</reimplements>
+        <param>
+          <type>RigidbodyPtr</type>
+          <declname>pRigidbody</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1ad76c47c720bd64d3a0d6ba836c08b200" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::RemoveRigidbody</definition>
+        <argsstring>(RigidbodyPtr pRigidbody) override</argsstring>
+        <name>RemoveRigidbody</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::RemoveRigidbody</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a7e747af5ae57b273da400ee2d76ffa04">RemoveRigidbody</reimplements>
+        <param>
+          <type>RigidbodyPtr</type>
+          <declname>pRigidbody</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a30cae8b9c170a0b76e78476ae78ed1b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_PHYSICS_NS::PhysXPhysicsWorld::ForEachRigidbody3D</definition>
+        <argsstring>(const SR_HTYPES_NS::Function&lt; void(SR_PTYPES_NS::Rigidbody3D *)&gt; &amp;fun) override</argsstring>
+        <name>ForEachRigidbody3D</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::ForEachRigidbody3D</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a871aced13d58ef0d6435123457352bc1">ForEachRigidbody3D</reimplements>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__PTYPES__NS_1_1Rigidbody3D" kindref="compound">SR_PTYPES_NS::Rigidbody3D</ref> *)&gt; &amp;</type>
+          <declname>fun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aa8265582a1f3e8780a9c8b1984a6b131" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_PHYSICS_NS::PhysXPhysicsWorld::Flush</definition>
+        <argsstring>() override</argsstring>
+        <name>Flush</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::Flush</qualifiedname>
+        <reimplements refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1ac4b6642a733cd596fc2152fe647d4d66">Flush</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="35" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a34f993628753b0ce4f5ff051499d0934" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::SynchronizeStatic</definition>
+        <argsstring>()</argsstring>
+        <name>SynchronizeStatic</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::SynchronizeStatic</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a246e3596586fc59da51e02fea38e1b16" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::PhysXPhysicsWorld::SynchronizeDynamic</definition>
+        <argsstring>()</argsstring>
+        <name>SynchronizeDynamic</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPhysicsWorld::SynchronizeDynamic</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="39" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_PHYSICS_NS::PhysXPhysicsWorld</label>
+        <link refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_PHYSICS_NS::PhysicsWorld</label>
+        <link refid="classSR__PHYSICS__NS_1_1PhysicsWorld"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_PHYSICS_NS::LibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PHYSICS_NS::PhysXPhysicsWorld</label>
+        <link refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_PHYSICS_NS::PhysicsWorld</label>
+        <link refid="classSR__PHYSICS__NS_1_1PhysicsWorld"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_library</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_raycast3dImpl</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_PHYSICS_NS::Raycast3DImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1Raycast3DImpl"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_PHYSICS_NS::RaycastImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1RaycastImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_world</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" line="17" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h" bodystart="17" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a3a27129d55ec21f7576b6453b2667bea" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>AddRigidbody</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1ada24cf7f6e0bf81181a0d67c0cb498a1" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>ClearForces</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aa8265582a1f3e8780a9c8b1984a6b131" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>Flush</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a30cae8b9c170a0b76e78476ae78ed1b4" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>ForEachRigidbody3D</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a59e2a1c362e19aec513511808460800f" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>GetLibrary</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a6596bc73b42c50b555f7cd41b95f1149" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>GetRaycast3DImpl</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a46723b3060fb8595fef740c917274f29" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>Initialize</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a9a7c7b0cc10f0959064ab3e068f31459" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>LibraryPtr</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a58cd9707cca478bff1a6df66b615ca1c" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_actors</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1adaed394febc58cdb35728219adb8383f" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_contactCallback</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a24855ef786399e28ba268ee211b53239" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_cpuDispatcher</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a95c359e1abad20bd2964923abba2d757" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_dynamicActors</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1afc7135880986078bb212d84fab968227" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_library</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1aafa1cfb1bae0446846c57e02d948cecb" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_raycast3dImpl</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aef7a3b975ecba3247bad54d1f7054dfc" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_scene</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a5e071ad1151139fd6a6bf9fb2c97161c" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_space</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a0a6b70e3aff3e3e3ea08b0f1588c959f" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_staticActors</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>operator=</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1aaee900d577f523a843bca8e03986d18f" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>PhysicsWorld</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aa9316fcc031b8ce7967817e93f453cbc" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>PhysXPhysicsWorld</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a06efed8114ee5e400899a9c258ecf277" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>ReAddRigidbody</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1ad76c47c720bd64d3a0d6ba836c08b200" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>RemoveRigidbody</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a6bcd4d0f06d81f9582398ec77f9e47f9" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>RigidbodyPtr</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a74d5e5ab097cc5a7f9df81ce12219dab" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>Space</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a7ef0219bff2c66626d24cb0a2262b1aa" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>StepSimulation</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1ac20c0f7385dd8adf40c7991d5e2635af" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>Super</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1adf09f6b4333cc8b93bdca17ffa6aa8a7" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>Synchronize</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a246e3596586fc59da51e02fea38e1b16" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>SynchronizeDynamic</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a34f993628753b0ce4f5ff051499d0934" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>SynchronizeStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1ae26315eed2d4979cb1786e8072ceaf69" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~PhysicsWorld</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a6379289c8dbd596bba2b822015e7f976" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~PhysXPhysicsWorld</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

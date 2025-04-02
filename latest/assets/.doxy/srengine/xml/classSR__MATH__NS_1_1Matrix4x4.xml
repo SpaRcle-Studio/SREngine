@@ -1,0 +1,1682 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__MATH__NS_1_1Matrix4x4" kind="class" language="C++" prot="public">
+    <compoundname>SR_MATH_NS::Matrix4x4</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a93b9eb8577eedcdeb6de71a26f74ca74" prot="private" static="no" constexpr="yes" mutable="no">
+        <type>SR_INLINE_STATIC constexpr glm::mat4</type>
+        <definition>SR_INLINE_STATIC constexpr glm::mat4 SR_MATH_NS::Matrix4x4::GLM_IDENTITY_MAT4X4</definition>
+        <argsstring></argsstring>
+        <name>GLM_IDENTITY_MAT4X4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GLM_IDENTITY_MAT4X4</qualifiedname>
+        <initializer>= glm::mat4(1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="16" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1aa9040b2b37ddc0630dfc5b8eb60ccd6a" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">SR_MATH_NS::Vector4</ref>&lt; float_t &gt;</type>
+        <definition>SR_MATH_NS::Vector4&lt;float_t&gt; SR_MATH_NS::Matrix4x4::value[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>value</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="26" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1afc010333f409735319c194ba0e7b45b3" prot="public" static="no" mutable="no">
+        <type>glm::mat4</type>
+        <definition>glm::mat4 SR_MATH_NS::Matrix4x4::self</definition>
+        <argsstring></argsstring>
+        <name>self</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::self</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="27" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a7585c8407a47d8dc3a4722f0e0dd69fc" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">SR_MATH_NS::Vector4</ref>&lt; float_t &gt;</type>
+        <definition>SR_MATH_NS::Vector4&lt;float_t&gt; SR_MATH_NS::Matrix4x4::right</definition>
+        <argsstring></argsstring>
+        <name>right</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::right</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="29" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a7d5258aa8a7faf6abe00dd91d2ddadc1" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">SR_MATH_NS::Vector4</ref>&lt; float_t &gt;</type>
+        <definition>SR_MATH_NS::Vector4&lt;float_t&gt; SR_MATH_NS::Matrix4x4::up</definition>
+        <argsstring></argsstring>
+        <name>up</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::up</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="29" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1abdd47fe0ddfa04bbfba79d79d7e58a73" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">SR_MATH_NS::Vector4</ref>&lt; float_t &gt;</type>
+        <definition>SR_MATH_NS::Vector4&lt;float_t&gt; SR_MATH_NS::Matrix4x4::dir</definition>
+        <argsstring></argsstring>
+        <name>dir</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::dir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="29" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1af9aabb2f9514edd39ba831eb7dbca724" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">SR_MATH_NS::Vector4</ref>&lt; float_t &gt;</type>
+        <definition>SR_MATH_NS::Vector4&lt;float_t&gt; SR_MATH_NS::Matrix4x4::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="29" column="50" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a292532e46c927225f638cf67bd23e626" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>struct SR_MATH_NS::Matrix4x4 SR_MATH_NS::Matrix4x4::v</definition>
+        <argsstring></argsstring>
+        <name>v</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::v</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="30" column="15"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a7cd89858cfaf5a21d8fb3599cccb06e2" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m[4][4]</definition>
+        <argsstring>[4][4]</argsstring>
+        <name>m</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="31" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1adbda46793b38a1fa722f18b9a7e235b4" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m00</definition>
+        <argsstring></argsstring>
+        <name>m00</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m00</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="33" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a4b62217f05c4b851537648e398886b34" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m01</definition>
+        <argsstring></argsstring>
+        <name>m01</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m01</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="33" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1ad292d7acf678f13792eea08bbb9e66ca" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m02</definition>
+        <argsstring></argsstring>
+        <name>m02</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m02</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="33" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a29781162c228e7515802636c65597e2a" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m03</definition>
+        <argsstring></argsstring>
+        <name>m03</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m03</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="33" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1abb6f16e990e3bebbdcd99c3cf692a354" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m10</definition>
+        <argsstring></argsstring>
+        <name>m10</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m10</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="34" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1afcff7a0b60127e110f4eb7650147579a" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m11</definition>
+        <argsstring></argsstring>
+        <name>m11</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m11</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="34" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a2ce61a643a3518d71986065c977c1d6e" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m12</definition>
+        <argsstring></argsstring>
+        <name>m12</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m12</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="34" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1ad6aa2b21ea6c4c141de8f831dc926b6f" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m13</definition>
+        <argsstring></argsstring>
+        <name>m13</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m13</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="34" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1aa57174740b196a6efc227f1808cea0a5" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m20</definition>
+        <argsstring></argsstring>
+        <name>m20</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m20</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="35" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a98189679c1ae184351ad51cc9174a252" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m21</definition>
+        <argsstring></argsstring>
+        <name>m21</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m21</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="35" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1af074f91a9aacb6ae71751b4d231dd0d1" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m22</definition>
+        <argsstring></argsstring>
+        <name>m22</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m22</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="35" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1ac606f50c7d954c170e0c16b99e5f02dc" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m23</definition>
+        <argsstring></argsstring>
+        <name>m23</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m23</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="35" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1aec47241a529c57d76258f6f1bf98a132" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m30</definition>
+        <argsstring></argsstring>
+        <name>m30</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m30</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="36" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a4c9d0f599f0209f3f070029e11ede704" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m31</definition>
+        <argsstring></argsstring>
+        <name>m31</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m31</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="36" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a7bcb02634712d8652e24f0cdb0669655" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m32</definition>
+        <argsstring></argsstring>
+        <name>m32</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="36" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a0edd19b0ae4cedd98ac1e42720ef48c9" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Matrix4x4::m33</definition>
+        <argsstring></argsstring>
+        <name>m33</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::m33</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="36" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Matrix4x4_1a553456959cd4103c28cc4655a28e45df" prot="public" static="no" mutable="no">
+        <type>union <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref></type>
+        <definition>union SR_MATH_NS::Matrix4x4 SR_MATH_NS::Matrix4x4</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="38" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a56170ae6cd2abb075629e94ca1ad1ad4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::CreateViewMat</definition>
+        <argsstring>(Unit pitch=0, Unit yaw=0, Unit roll=0)</argsstring>
+        <name>CreateViewMat</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::CreateViewMat</qualifiedname>
+        <param>
+          <type>Unit</type>
+          <declname>pitch</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>yaw</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>roll</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>NOLINT </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="18" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="18" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1af93cb44b6a8497c8b3f5fe36261d4652" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static constexpr Matrix4x4 SR_MATH_NS::Matrix4x4::Identity</definition>
+        <argsstring>()</argsstring>
+        <name>Identity</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Identity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="69" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="69" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1ae645f352aa1b0c06335230fa3f73244f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationYawPitchRoll</definition>
+        <argsstring>(const FVector3 &amp;angles)</argsstring>
+        <name>RotationYawPitchRoll</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::RotationYawPitchRoll</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>angles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="73" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1ac79ec8c4ad26e87b8ce5ae2dcdddfdeb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::Perspective</definition>
+        <argsstring>(float_t FOV, float_t aspect, float_t nearValue, float_t farValue)</argsstring>
+        <name>Perspective</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Perspective</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>FOV</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>aspect</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>nearValue</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>farValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="77" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="77" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a510cd46efbff13ed5d6dceb9af07f30a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::FromEulers</definition>
+        <argsstring>(const FVector3 &amp;eulers)</argsstring>
+        <name>FromEulers</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::FromEulers</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>eulers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="81" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="81" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a9cfe8ed3c17d02fe91cbf7dc948627fd" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::Ortho</definition>
+        <argsstring>(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar)</argsstring>
+        <name>Ortho</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Ortho</qualifiedname>
+        <param>
+          <type>Unit</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>zNear</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>zFar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="85" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="85" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a8d1f4a6c594237526d96939b8e19f81e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::CreateTRS</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;translation, const SR_MATH_NS::Quaternion &amp;rotation, const SR_MATH_NS::FVector3 &amp;scale)</argsstring>
+        <name>CreateTRS</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::CreateTRS</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="103" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a90aa1b15a4333ccedc2c0de7900d323d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::LookAt</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;eye, const SR_MATH_NS::FVector3 &amp;center, const SR_MATH_NS::FVector3 &amp;up)</argsstring>
+        <name>LookAt</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::LookAt</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>eye</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>up</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="107" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="107" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a405b2992b0cacf7578f017a7e46c6009" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::FromQuaternion</definition>
+        <argsstring>(const Quaternion &amp;quaternion)</argsstring>
+        <name>FromQuaternion</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::FromQuaternion</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>quaternion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="115" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="115" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a0c49bb5148f9a68bb096ec4bd1544725" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis</definition>
+        <argsstring>(const SR_MATH_NS::FVector4 &amp;axis, Unit angle)</argsstring>
+        <name>RotationAxis</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::RotationAxis</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector4 &amp;</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="119" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="119" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a28bd5715c99ec1779cda38d4252dab39" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;axis, Unit angle)</argsstring>
+        <name>RotationAxis</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::RotationAxis</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="162" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="162" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1ab5396bce1b9ee56052f97ee3dd43d3df" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::FromScale</definition>
+        <argsstring>(const FVector3 &amp;scale)</argsstring>
+        <name>FromScale</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::FromScale</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="205" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="205" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1abbb45329a620740900432d32c8ce2e4f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>static Matrix4x4 SR_MATH_NS::Matrix4x4::FromTranslate</definition>
+        <argsstring>(const FVector3 &amp;translation)</argsstring>
+        <name>FromTranslate</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::FromTranslate</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="209" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="209" bodyend="211"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a7faa3737601c141d6d3ff176216d94f3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="40" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="40" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a83806f5cc6a2d1e1ddb78b49d27f9d59" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(FVector4 rows[4]) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
+          <declname>rows</declname>
+          <array>[4]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="44" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="44" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a75c0086f6ed6f9337045545249c4f4f4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const Unit &amp;scalar) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const Unit &amp;</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="51" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a454b0a066b94c43fcd43fe4104d9ad0f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const glm::mat4 &amp;mat) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const glm::mat4 &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="55" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1ab68f25fb7d6b4373a06e30b639db626f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(glm::mat4 &amp;&amp;mat) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>glm::mat4 &amp;&amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="59" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a2aa738c5b681be0cf8e275690be45f57" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const FVector3 &amp;translate, const Quaternion &amp;rotation) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translate</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="63" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a47ade5e21d488c615c7a9a7dc88a0bca" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const FVector3 &amp;translate, const FVector3 &amp;scale) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translate</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="64" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1aa212b5bd2efce5a49ef6eae1f556819f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const FVector3 &amp;translate, const Quaternion &amp;rotation, const FVector3 &amp;scale) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translate</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="65" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1abf1e8ea5188a2c6ccca60780c265bed7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const Quaternion &amp;rotation, const FVector3 &amp;scale) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="66" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a1876b93838e09d81ece99e5210a5ec0e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::Matrix4x4</definition>
+        <argsstring>(const FVector3 &amp;translate, const Quaternion &amp;rotation, const FVector3 &amp;scale, const FVector3 &amp;skew) noexcept</argsstring>
+        <name>Matrix4x4</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Matrix4x4</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translate</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>skew</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="67" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a6eeaf662be6d2007b893dd0b0994b437" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Matrix4x4::SR_DEPRECATED_EX</definition>
+        <argsstring>(&quot;FromQuaternion&quot;) static Matrix4x4 FromEulers(const Quaternion &amp;quaternion)</argsstring>
+        <name>SR_DEPRECATED_EX</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::SR_DEPRECATED_EX</qualifiedname>
+        <param>
+          <type>&quot;FromQuaternion&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="111" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="111" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a2176ad8cf610930507c8167d7fa278d8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Inverse</definition>
+        <argsstring>() const</argsstring>
+        <name>Inverse</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Inverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="213" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="213" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1ae8550520ed001f0fdfaf426a51dba12c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::RotateAxis</definition>
+        <argsstring>(const FVector3 &amp;axis, const double &amp;angle) const</argsstring>
+        <name>RotateAxis</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::RotateAxis</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="217" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="217" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1affb05783830491d802c95327ec2cbd99" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate</definition>
+        <argsstring>(const FVector3 &amp;angle) const</argsstring>
+        <name>Rotate</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Rotate</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="221" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="221" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a73101024a082355215f1d4c64945f6c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate</definition>
+        <argsstring>(const SR_MATH_NS::Quaternion &amp;q) const</argsstring>
+        <name>Rotate</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Rotate</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="225" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="225" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a5d438cb4bd7c4516e6acad4b667e2003" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::OrthogonalNormalize</definition>
+        <argsstring>() const</argsstring>
+        <name>OrthogonalNormalize</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::OrthogonalNormalize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="229" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="229" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a571cb5a9193e4de41c5ab1d05c4d7113" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const glm::mat4 &amp;</type>
+        <definition>SR_NODISCARD const glm::mat4 &amp; SR_MATH_NS::Matrix4x4::ToGLM</definition>
+        <argsstring>() const</argsstring>
+        <name>ToGLM</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::ToGLM</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="237" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="237" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a1cd02c8810fb378e1d07f2f7c9a5f3a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Translate</definition>
+        <argsstring>(const FVector3 &amp;vec3) const</argsstring>
+        <name>Translate</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Translate</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>vec3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="241" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="241" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a57255c4f10450afe326dc284e18f43ed" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
+        <definition>SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::GetAxis</definition>
+        <argsstring>(Axis axis) const</argsstring>
+        <name>GetAxis</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GetAxis</qualifiedname>
+        <param>
+          <type>Axis</type>
+          <declname>axis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="245" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="245" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a5633dd0c900d1dad266f327603beb2a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetTranslate</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTranslate</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GetTranslate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="256" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="256" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a74e5175f73ded9f0f277a2e676284520" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetScale</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScale</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GetScale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="260" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="260" bodyend="266"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a89d3e736e1cf9e88bede82b285ef2f6a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::Matrix4x4::IsFinite</definition>
+        <argsstring>() const</argsstring>
+        <name>IsFinite</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::IsFinite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="268" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="268" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a62e27e0c1b72ccb55fdab0394e2b229e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Matrix4x4::Decompose</definition>
+        <argsstring>(FVector3 &amp;translation, Quaternion &amp;quaternion, FVector3 &amp;scale) const</argsstring>
+        <name>Decompose</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Decompose</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>quaternion</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="272" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="272" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a9c80682502e48e400b85245ab8a02f7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Matrix4x4::Decompose</definition>
+        <argsstring>(FVector3 &amp;translation, Quaternion &amp;quaternion) const</argsstring>
+        <name>Decompose</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Decompose</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>quaternion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="289" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="289" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a378ed6d350e8916eda2cfd8e5026cfdb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Matrix4x4::Decompose</definition>
+        <argsstring>(FVector3 &amp;translation, FVector3 &amp;eulers, FVector3 &amp;scale) const</argsstring>
+        <name>Decompose</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Decompose</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>eulers</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="307" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="307" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1afc40efeed1659e75fa9fe9e8db146258" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Matrix4x4::Decompose</definition>
+        <argsstring>(FVector3 &amp;translation, FVector3 &amp;eulers, FVector3 &amp;scale, FVector3 &amp;skew) const</argsstring>
+        <name>Decompose</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Decompose</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>eulers</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>skew</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="325" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="325" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a02cfe8a4199fb445f93633dcda4cea12" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Matrix4x4::Decompose</definition>
+        <argsstring>(FVector3 &amp;translation, Quaternion &amp;rotation, FVector3 &amp;scale, FVector3 &amp;skew) const</argsstring>
+        <name>Decompose</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::Decompose</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>translation</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>skew</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="360" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="360" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a3bb21e3e9ac7d64b374225dcd9e28018" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
+        <definition>SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformPoint</definition>
+        <argsstring>(const FVector3 &amp;point) const</argsstring>
+        <name>TransformPoint</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::TransformPoint</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="379" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="379" bodyend="386"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a68f69acdd79d6981b38e8b02b68177f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
+        <definition>SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector</definition>
+        <argsstring>(const FVector3 &amp;point) const</argsstring>
+        <name>TransformVector</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::TransformVector</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref> &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="388" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="388" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1abae1a6953e5b477b7a587f0b8b8b3ba0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref></type>
+        <definition>SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector</definition>
+        <argsstring>(const FVector4 &amp;point) const</argsstring>
+        <name>TransformVector</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::TransformVector</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">FVector4</ref> &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="397" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="397" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a2f130967108e71a3a47cfff6196ce222" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::Unit</type>
+        <definition>SR_NODISCARD SR_MATH_NS::Unit SR_MATH_NS::Matrix4x4::GetSegmentLengthClipSpace</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;start, const SR_MATH_NS::FVector3 &amp;end, SR_MATH_NS::Unit displayRatio) const</argsstring>
+        <name>GetSegmentLengthClipSpace</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GetSegmentLengthClipSpace</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>SR_MATH_NS::Unit</type>
+          <declname>displayRatio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="406" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="406" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a483016a769d38c9704902dec0f615f3a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Matrix4x4::GetQuat</definition>
+        <argsstring>() const</argsstring>
+        <name>GetQuat</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GetQuat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="434" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="434" bodyend="444"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a76bf70bc58c3fdaa5306c9361669cb44" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">FVector3</ref></type>
+        <definition>SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetEulers</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEulers</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::GetEulers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="446" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="446" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a3e1b9ec4a871419b13ef9d59fd287076" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE SR_CONSTEXPR const SR_MATH_NS::FVector4 &amp;</type>
+        <definition>SR_FORCE_INLINE SR_CONSTEXPR const SR_MATH_NS::FVector4 &amp; SR_MATH_NS::Matrix4x4::operator[]</definition>
+        <argsstring>(int32_t row) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator[]</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>row</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="450" column="65" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="450" bodyend="452"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a9c0929a239a3ad5df53665108d307735" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE SR_CONSTEXPR SR_MATH_NS::FVector4 &amp;</type>
+        <definition>SR_FORCE_INLINE SR_CONSTEXPR SR_MATH_NS::FVector4 &amp; SR_MATH_NS::Matrix4x4::operator[]</definition>
+        <argsstring>(int32_t row)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator[]</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>row</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="454" column="59" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="454" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a6aeee060e7cbccd001cde9a716546f18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>Matrix4x4 SR_MATH_NS::Matrix4x4::operator*</definition>
+        <argsstring>(const Matrix4x4 &amp;mat) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref> &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="458" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1adedb40223773e389ee583612467e98e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_MATH_NS::Matrix4x4::operator*=</definition>
+        <argsstring>(const Matrix4x4 &amp;right)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref> &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="459" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="459" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a2b846589cc78fbc9e8e873eaa66cc902" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>Matrix4x4 SR_MATH_NS::Matrix4x4::operator+</definition>
+        <argsstring>(const Matrix4x4 &amp;mat) const</argsstring>
+        <name>operator+</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref> &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="463" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="463" bodyend="465"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a8b07f48a69fedc7a7dcda99f81d1d717" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_MATH_NS::Matrix4x4::operator+=</definition>
+        <argsstring>(const Matrix4x4 &amp;right)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref> &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="466" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="466" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a550dd1d102216d976fc75da283b2f33a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>Matrix4x4 SR_MATH_NS::Matrix4x4::operator*</definition>
+        <argsstring>(const Unit &amp;scalar) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator*</qualifiedname>
+        <param>
+          <type>const Unit &amp;</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="470" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="470" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1abe03cde390282f26ccc09e630304427c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_MATH_NS::Matrix4x4::operator*=</definition>
+        <argsstring>(const Unit &amp;scalar)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator*=</qualifiedname>
+        <param>
+          <type>const Unit &amp;</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="473" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="473" bodyend="475"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1aefc05bac8ec0f84c6f08218a9a6bf0df" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; U &gt;</type>
+        <definition>Vector4&lt; U &gt; SR_MATH_NS::Matrix4x4::operator*</definition>
+        <argsstring>(const Vector4&lt; U &gt; &amp;vector4) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; U &gt; &amp;</type>
+          <declname>vector4</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="477" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="477" bodyend="490"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1abc3b208991b0a7e345407c0462793048" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_MATH_NS::Matrix4x4::operator*=</definition>
+        <argsstring>(const Vector4&lt; U &gt; &amp;vector4)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; U &gt; &amp;</type>
+          <declname>vector4</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="491" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="491" bodyend="493"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1afc8cc6c6d87835eb27e0475627e18a3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>Matrix4x4 SR_MATH_NS::Matrix4x4::operator/</definition>
+        <argsstring>(Matrix4x4 mat)</argsstring>
+        <name>operator/</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator/</qualifiedname>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="495" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="495" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a134e58038f84acfe1fa18b4decde08d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>Matrix4x4 SR_MATH_NS::Matrix4x4::operator+</definition>
+        <argsstring>(Matrix4x4 mat)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator+</qualifiedname>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="499" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="499" bodyend="501"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Matrix4x4_1a22b058fcf7a0285bbe2ca010e91a6df3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>Matrix4x4 SR_MATH_NS::Matrix4x4::operator-</definition>
+        <argsstring>(Matrix4x4 mat)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>SR_MATH_NS::Matrix4x4::operator-</qualifiedname>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="502" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="502" bodyend="504"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_MATH_NS::Matrix4x4</label>
+        <link refid="classSR__MATH__NS_1_1Matrix4x4"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>dir</edgelabel>
+          <edgelabel>position</edgelabel>
+          <edgelabel>right</edgelabel>
+          <edgelabel>up</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_MATH_NS::Vector4&lt; float_t &gt;</label>
+        <link refid="structSR__MATH__NS_1_1Vector4"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4.h" bodystart="15" bodyend="505"/>
+    <listofallmembers>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a8d1f4a6c594237526d96939b8e19f81e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>CreateTRS</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a56170ae6cd2abb075629e94ca1ad1ad4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>CreateViewMat</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a62e27e0c1b72ccb55fdab0394e2b229e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Decompose</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a9c80682502e48e400b85245ab8a02f7b" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Decompose</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a378ed6d350e8916eda2cfd8e5026cfdb" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Decompose</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1afc40efeed1659e75fa9fe9e8db146258" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Decompose</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a02cfe8a4199fb445f93633dcda4cea12" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Decompose</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abdd47fe0ddfa04bbfba79d79d7e58a73" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>dir</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a510cd46efbff13ed5d6dceb9af07f30a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>FromEulers</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a405b2992b0cacf7578f017a7e46c6009" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>FromQuaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ab5396bce1b9ee56052f97ee3dd43d3df" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>FromScale</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abbb45329a620740900432d32c8ce2e4f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>FromTranslate</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a57255c4f10450afe326dc284e18f43ed" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GetAxis</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a76bf70bc58c3fdaa5306c9361669cb44" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GetEulers</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a483016a769d38c9704902dec0f615f3a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GetQuat</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a74e5175f73ded9f0f277a2e676284520" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GetScale</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a2f130967108e71a3a47cfff6196ce222" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GetSegmentLengthClipSpace</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a5633dd0c900d1dad266f327603beb2a0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GetTranslate</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a93b9eb8577eedcdeb6de71a26f74ca74" prot="private" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>GLM_IDENTITY_MAT4X4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1af93cb44b6a8497c8b3f5fe36261d4652" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Identity</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a2176ad8cf610930507c8167d7fa278d8" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Inverse</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a89d3e736e1cf9e88bede82b285ef2f6a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>IsFinite</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a90aa1b15a4333ccedc2c0de7900d323d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>LookAt</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7cd89858cfaf5a21d8fb3599cccb06e2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1adbda46793b38a1fa722f18b9a7e235b4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m00</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a4b62217f05c4b851537648e398886b34" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m01</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ad292d7acf678f13792eea08bbb9e66ca" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m02</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a29781162c228e7515802636c65597e2a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m03</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abb6f16e990e3bebbdcd99c3cf692a354" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m10</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1afcff7a0b60127e110f4eb7650147579a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m11</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a2ce61a643a3518d71986065c977c1d6e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m12</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ad6aa2b21ea6c4c141de8f831dc926b6f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m13</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1aa57174740b196a6efc227f1808cea0a5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m20</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a98189679c1ae184351ad51cc9174a252" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m21</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1af074f91a9aacb6ae71751b4d231dd0d1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m22</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ac606f50c7d954c170e0c16b99e5f02dc" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m23</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1aec47241a529c57d76258f6f1bf98a132" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m30</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a4c9d0f599f0209f3f070029e11ede704" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m31</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7bcb02634712d8652e24f0cdb0669655" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m32</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a0edd19b0ae4cedd98ac1e42720ef48c9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>m33</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7faa3737601c141d6d3ff176216d94f3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a83806f5cc6a2d1e1ddb78b49d27f9d59" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a75c0086f6ed6f9337045545249c4f4f4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a454b0a066b94c43fcd43fe4104d9ad0f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ab68f25fb7d6b4373a06e30b639db626f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a2aa738c5b681be0cf8e275690be45f57" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a47ade5e21d488c615c7a9a7dc88a0bca" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1aa212b5bd2efce5a49ef6eae1f556819f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abf1e8ea5188a2c6ccca60780c265bed7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a1876b93838e09d81ece99e5210a5ec0e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Matrix4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a6aeee060e7cbccd001cde9a716546f18" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a550dd1d102216d976fc75da283b2f33a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1aefc05bac8ec0f84c6f08218a9a6bf0df" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1adedb40223773e389ee583612467e98e0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator*=</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abe03cde390282f26ccc09e630304427c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator*=</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abc3b208991b0a7e345407c0462793048" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator*=</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a2b846589cc78fbc9e8e873eaa66cc902" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator+</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a134e58038f84acfe1fa18b4decde08d6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator+</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a8b07f48a69fedc7a7dcda99f81d1d717" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator+=</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a22b058fcf7a0285bbe2ca010e91a6df3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator-</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1afc8cc6c6d87835eb27e0475627e18a3a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator/</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a3e1b9ec4a871419b13ef9d59fd287076" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator[]</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a9c0929a239a3ad5df53665108d307735" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>operator[]</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a9cfe8ed3c17d02fe91cbf7dc948627fd" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Ortho</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a5d438cb4bd7c4516e6acad4b667e2003" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>OrthogonalNormalize</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ac79ec8c4ad26e87b8ce5ae2dcdddfdeb" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Perspective</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1af9aabb2f9514edd39ba831eb7dbca724" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>position</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7585c8407a47d8dc3a4722f0e0dd69fc" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>right</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1affb05783830491d802c95327ec2cbd99" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Rotate</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a73101024a082355215f1d4c64945f6c6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Rotate</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ae8550520ed001f0fdfaf426a51dba12c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>RotateAxis</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a0c49bb5148f9a68bb096ec4bd1544725" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>RotationAxis</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a28bd5715c99ec1779cda38d4252dab39" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>RotationAxis</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1ae645f352aa1b0c06335230fa3f73244f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>RotationYawPitchRoll</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1afc010333f409735319c194ba0e7b45b3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>self</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a6eeaf662be6d2007b893dd0b0994b437" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>SR_DEPRECATED_EX</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a571cb5a9193e4de41c5ab1d05c4d7113" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>ToGLM</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a3bb21e3e9ac7d64b374225dcd9e28018" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>TransformPoint</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a68f69acdd79d6981b38e8b02b68177f2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>TransformVector</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1abae1a6953e5b477b7a587f0b8b8b3ba0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>TransformVector</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a1cd02c8810fb378e1d07f2f7c9a5f3a5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>Translate</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7d5258aa8a7faf6abe00dd91d2ddadc1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>up</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1a292532e46c927225f638cf67bd23e626" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>v</name></member>
+      <member refid="classSR__MATH__NS_1_1Matrix4x4_1aa9040b2b37ddc0630dfc5b8eb60ccd6a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Matrix4x4</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

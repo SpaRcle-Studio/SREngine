@@ -1,0 +1,1058 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GTYPES__NS_1_1Text" kind="class" language="C++" prot="public">
+    <compoundname>SR_GTYPES_NS::Text</compoundname>
+    <basecompoundref refid="classSR__GTYPES__NS_1_1Mesh" prot="public" virt="non-virtual">SR_GTYPES_NS::Mesh</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Text_1aada3bf81775f44d054101f966333668a" prot="private" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">Mesh</ref></type>
+        <definition>using SR_GTYPES_NS::Text::Super =  Mesh</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GTYPES_NS::Text::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a722a9ad9a8461d16611fa6a1a54a8c5c" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref></type>
+        <definition>SR_HTYPES_NS::UnicodeString SR_GTYPES_NS::Text::m_text</definition>
+        <argsstring></argsstring>
+        <name>m_text</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_text</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="72" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a31dea4a5313bfd0b9bb0603f572de619" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::UVector2</type>
+        <definition>SR_MATH_NS::UVector2 SR_GTYPES_NS::Text::m_atlasSize</definition>
+        <argsstring></argsstring>
+        <name>m_atlasSize</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_atlasSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="78" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1aec4ba4d41c08481d4394929687adfdb0" prot="protected" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_GTYPES_NS::Text::m_fontSize</definition>
+        <argsstring></argsstring>
+        <name>m_fontSize</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_fontSize</qualifiedname>
+        <initializer>= 16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="80" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a1153adefcd16278fa1ea6eac5be8058e" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Text::m_is3D</definition>
+        <argsstring></argsstring>
+        <name>m_is3D</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_is3D</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="82" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ac45fd2faa8aa3ca3a606c56c0fe2d267" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Text::m_kerning</definition>
+        <argsstring></argsstring>
+        <name>m_kerning</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_kerning</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="84" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ace286a9b3db4841ca29416b802c08111" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Text::m_debug</definition>
+        <argsstring></argsstring>
+        <name>m_debug</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_debug</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="86" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a212acf09aa1cccef5ee4ba8a5b7890fb" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Text::m_preprocessor</definition>
+        <argsstring></argsstring>
+        <name>m_preprocessor</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_preprocessor</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="88" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a36dde86498395a4c3b93ce578f451b41" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Text::m_localization</definition>
+        <argsstring></argsstring>
+        <name>m_localization</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_localization</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="90" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1a9e2acf2abefd171bc14869bee4b77169" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GTYPES_NS::Text::m_id</definition>
+        <argsstring></argsstring>
+        <name>m_id</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_id</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="93" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Text_1ac0d92d2f83bdb1b8aeddfa271fe5fb20" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
+        <definition>Font* SR_GTYPES_NS::Text::m_font</definition>
+        <argsstring></argsstring>
+        <name>m_font</name>
+        <qualifiedname>SR_GTYPES_NS::Text::m_font</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="94" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a58ffd11d3f6267a167e6a6b597cf31c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::Text::Text</definition>
+        <argsstring>()</argsstring>
+        <name>Text</name>
+        <qualifiedname>SR_GTYPES_NS::Text::Text</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="19" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ace15847c818021baa50eaa7352d00ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::Text::~Text</definition>
+        <argsstring>() override</argsstring>
+        <name>~Text</name>
+        <qualifiedname>SR_GTYPES_NS::Text::~Text</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a16ebb160d9689c3f4d82a2f1b0a9132d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::UseMaterial</definition>
+        <argsstring>() override</argsstring>
+        <name>UseMaterial</name>
+        <qualifiedname>SR_GTYPES_NS::Text::UseMaterial</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a6e2ff3e57ab3d3d4d3f880f31b29637e">UseMaterial</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a0be9578346de45690762dc249e5e8d17" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::UseModelMatrix</definition>
+        <argsstring>() override</argsstring>
+        <name>UseModelMatrix</name>
+        <qualifiedname>SR_GTYPES_NS::Text::UseModelMatrix</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1ad02d2261a7521c316812c6e00349dc8d">UseModelMatrix</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="24" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a08b2b25d038432498aa5871803cacef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::UseSamplers</definition>
+        <argsstring>() override</argsstring>
+        <name>UseSamplers</name>
+        <qualifiedname>SR_GTYPES_NS::Text::UseSamplers</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a838cad3d42bd1d6e6185b4e8b8ff0ca7">UseSamplers</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1af05f81d2ff5a2b8d3d5f156b2d81ee22" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD MeshType</type>
+        <definition>SR_NODISCARD MeshType SR_GTYPES_NS::Text::GetMeshType</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetMeshType</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetMeshType</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a36d42f741b1a4d6d4120ba5f0e47c02f">GetMeshType</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="28" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a485f6e04654fffbebae0ec7a141e3b2c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Text::IsFlatMesh</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>IsFlatMesh</name>
+        <qualifiedname>SR_GTYPES_NS::Text::IsFlatMesh</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1ab6fd84bd06b28605b72477f4b7e4601e">IsFlatMesh</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="30" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a57a18cb5d54f38cbe4768cae125669c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Text::GetIndicesCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetIndicesCount</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetIndicesCount</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a19f3b3e8388e2a541d2577a20c6b50a5">GetIndicesCount</reimplements>
+        <briefdescription>
+<para>TODO: можно сделать при помощи 4х вершин </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="33" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a3f02b4b66998089cc6a0a3599605193a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Text::IsCalculatable</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsCalculatable</name>
+        <qualifiedname>SR_GTYPES_NS::Text::IsCalculatable</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a0da7dadb2349196b8fff383928a7081a">IsCalculatable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="35" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a1b414f779f834e54bb66eff59d262322" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE bool SR_GTYPES_NS::Text::GetKerning</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetKerning</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetKerning</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="36" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aab661ee23a9379e40a94a2f2c8cdf34f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE bool SR_GTYPES_NS::Text::IsDebugEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsDebugEnabled</name>
+        <qualifiedname>SR_GTYPES_NS::Text::IsDebugEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="37" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ac1eafba1c54285d51d1d46123b9b76c6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE bool SR_GTYPES_NS::Text::IsPreprocessorEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsPreprocessorEnabled</name>
+        <qualifiedname>SR_GTYPES_NS::Text::IsPreprocessorEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="38" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a17a8eba0482cb92c11855aa7f5781308" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE bool SR_GTYPES_NS::Text::IsLocalizationEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsLocalizationEnabled</name>
+        <qualifiedname>SR_GTYPES_NS::Text::IsLocalizationEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="39" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a76a8e13f53e747486782f22758bab85c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE <ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE Font * SR_GTYPES_NS::Text::GetFont</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFont</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetFont</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="40" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab5d62d990e456f81bea4f58d00bd0100" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE uint16_t</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE uint16_t SR_GTYPES_NS::Text::GetFontSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFontSize</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetFontSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="41" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a82c1372140d1fd686a9a04cd7d6318d4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Text::IsSupportVBO</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsSupportVBO</name>
+        <qualifiedname>SR_GTYPES_NS::Text::IsSupportVBO</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a4ec50ee8dc9308de4af8baec12fecbd8">IsSupportVBO</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="43" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ac072059473f7992a3b2660f41b0a9215" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_GTYPES_NS::Text::GetFontPath</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFontPath</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetFontPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="45" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ac305aaf2c864c2909fec9d0dfa0cb8fa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Text::GetAtlasWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetAtlasWidth</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetAtlasWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="46" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a5f7db96960ca4cedb7d9dfd22b984ac3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Text::GetAtlasHeight</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetAtlasHeight</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetAtlasHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="47" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1af35ce908eaf1daceaee463f0d3db53e3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::UnicodeString &amp; SR_GTYPES_NS::Text::GetText</definition>
+        <argsstring>() const</argsstring>
+        <name>GetText</name>
+        <qualifiedname>SR_GTYPES_NS::Text::GetText</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="49" column="56" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a80fce8c1c18b753b586d2c6c00d101c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetText</definition>
+        <argsstring>(const std::string &amp;text)</argsstring>
+        <name>SetText</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetText</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a714b414a4d2abd9f7223cb36347d6442" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetText</definition>
+        <argsstring>(const std::u16string &amp;text)</argsstring>
+        <name>SetText</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetText</qualifiedname>
+        <param>
+          <type>const std::u16string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab473e4ac5fba3de138ad1c1c26bfe768" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetText</definition>
+        <argsstring>(const std::u32string &amp;text)</argsstring>
+        <name>SetText</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetText</qualifiedname>
+        <param>
+          <type>const std::u32string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a799c1357f30cf016b3a688ff20b313b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetKerning</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetKerning</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetKerning</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a40f02731e29a088105cdd422f9d567b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetDebug</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetDebug</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetDebug</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aee3589cc10d0768b524b7bfd62d8d072" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetFont</definition>
+        <argsstring>(Font *pFont)</argsstring>
+        <name>SetFont</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetFont</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Font" kindref="compound">Font</ref> *</type>
+          <declname>pFont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aa7f411307e3fdad56f62b00e0c5ab6f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetFont</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SetFont</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetFont</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1ab2e323bf6a531f738f8a921af2d2b509" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetFontSize</definition>
+        <argsstring>(const uint16_t &amp;size)</argsstring>
+        <name>SetFontSize</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetFontSize</qualifiedname>
+        <param>
+          <type>const uint16_t &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="58" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a3eb372bec3d1acc456c74e18f1f5e7e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetUseLocalization</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetUseLocalization</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetUseLocalization</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a68790e68f11e8b3630bf8e537b2dc88c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::SetUsePreprocessor</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetUsePreprocessor</name>
+        <qualifiedname>SR_GTYPES_NS::Text::SetUsePreprocessor</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="60" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a707708bf29aef6266fb4ba93d952e85a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Text::Calculate</definition>
+        <argsstring>() override</argsstring>
+        <name>Calculate</name>
+        <qualifiedname>SR_GTYPES_NS::Text::Calculate</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a4395ff39f60bb6b7aeb2775fa02109f7">Calculate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="62" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a69ff7aafb753429e2ed6cd135bdfca26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::FreeVideoMemory</definition>
+        <argsstring>() override</argsstring>
+        <name>FreeVideoMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Text::FreeVideoMemory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="63" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1aa0bf875c1c6111f54f477f079f793c18" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Text::OnTextDirty</definition>
+        <argsstring>()</argsstring>
+        <name>OnTextDirty</name>
+        <qualifiedname>SR_GTYPES_NS::Text::OnTextDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Text_1a4d3993567f140461da4b9d2f61080861" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Text::BuildAtlas</definition>
+        <argsstring>()</argsstring>
+        <name>BuildAtlas</name>
+        <qualifiedname>SR_GTYPES_NS::Text::BuildAtlas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="67" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="6">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::IRenderComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GTYPES_NS::Mesh</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::Text</label>
+        <link refid="classSR__GTYPES__NS_1_1Text"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="14">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="16">
+        <label>SR_GRAPH_NS::DescriptorManager</label>
+        <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::IRenderComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GTYPES_NS::Mesh</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_renderQueues</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_descriptorManager</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>m_material</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::Text</label>
+        <link refid="classSR__GTYPES__NS_1_1Text"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="20" relation="usage">
+          <edgelabel>m_text</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="15">
+        <label>SR_HTYPES_NS::SortedVector&lt; SR_GRAPH_NS::RenderQueueInfo, SR_GRAPH_NS::RenderQueuePredicate &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SortedVector"/>
+      </node>
+      <node id="20">
+        <label>SR_HTYPES_NS::UnicodeString</label>
+        <link refid="classSR__HTYPES__NS_1_1UnicodeString"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h" bodystart="15" bodyend="96"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>BaseComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac081233babf593b4ccac9e5dabaf35d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>BindMesh</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a4d3993567f140461da4b9d2f61080861" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>BuildAtlas</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a707708bf29aef6266fb4ba93d952e85a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Calculate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>CameraPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>CloneComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1afee74621d25e156a4ed2e08fa560afb4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>DestroyMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Detach</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3c3d60b52d0ff3b84510c3b16348ee4f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Draw</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a69ff7aafb753429e2ed6cd135bdfca26" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a5f7db96960ca4cedb7d9dfd22b984ac3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetAtlasHeight</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ac305aaf2c864c2909fec9d0dfa0cb8fa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetAtlasWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a76a8e13f53e747486782f22758bab85c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFont</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ac072059473f7992a3b2660f41b0a9215" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFontPath</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ab5d62d990e456f81bea4f58d00bd0100" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFontSize</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1857b0420fe2a3b300e35246e756e3c9" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetFrustumCullingType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetGameObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1af7b9d9ffa581d6dca801dbb164afb6bd" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetIBO</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a57a18cb5d54f38cbe4768cae125669c4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetIndicesCount</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a1b414f779f834e54bb66eff59d262322" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetKerning</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetMatrix</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad0216837e2d43f93eeb56b53121fc1c5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetMeshIdentifier</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1af3adc9e3e276c74ac99cc24eca2208d1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetMeshLayer</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a5f570e2ab732cb7c42d019ccbc211374" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetMeshRegistrationInfo</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1af05f81d2ff5a2b8d3d5f156b2d81ee22" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetMeshType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetRenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetRoot</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a19c90c90366d059d27a9465ac4c46c8a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetShader</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1db605ebfd240f85388761927305ab1e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetSortingPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1af35ce908eaf1daceaee463f0d3db53e3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetText</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetTransform</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1adad828813143169c615bc8fc05051ca1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a5022d2d34048e219f80020fadd5e57a7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetVerticesCount</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a53dfdb25e64d474467bdf374cfa227f9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>GetVirtualUBO</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>HasScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab13165b3e9a49610b34cda27b2ca1b72" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>HasSortingPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a6dbb5d1a94533162f27ebed42894eb29" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsAwake</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a3f02b4b66998089cc6a0a3599605193a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsCalculatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1aab661ee23a9379e40a94a2f2c8cdf34f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsDebugEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a485f6e04654fffbebae0ec7a141e3b2c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsFlatMesh</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a17a8eba0482cb92c11855aa7f5781308" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsLocalizationEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c840cbd67eab2a2defb04f0bd3c323" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsMeshRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ac1eafba1c54285d51d1d46123b9b76c6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsPreprocessorEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsStarted</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a82c1372140d1fd686a9a04cd7d6318d4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsSupportVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0c42f4050860150b1bf7d0e53b4486b1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsUniformsDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ae2097756a2a2df22c758f7b9b3ed62" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsUniqueMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c963fbf2d7b184c1525d1de7e0d3cd4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>IsWaitReRegister</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>LateUpdate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a579cbdb8fac4dba00906f0ff854b0251" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a900009c9b385f6ff48081917109c828f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3446c21b42aef2c72b986aa1a3db55a1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a31dea4a5313bfd0b9bb0603f572de619" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_atlasSize</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ace286a9b3db4841ca29416b802c08111" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_debug</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a025a6751aee4601105000e7c9d960c9a" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_descriptorManager</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1eedf6ed8926b01f933ce6d17942d928" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_dirtyMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ac0d92d2f83bdb1b8aeddfa271fe5fb20" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_font</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1aec4ba4d41c08481d4394929687adfdb0" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_fontSize</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1abbbdef9e59eb97f8eed740c6e96c1a53" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_frustumCullingType</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa12c514db6c826253a1d368e7279e02a" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_hasErrors</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a9e2acf2abefd171bc14869bee4b77169" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_id</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a1153adefcd16278fa1ea6eac5be8058e" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_is3D</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isStarted</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4f1e404ddd0c7f28dd411d1b15ce7606" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isUniformsDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a15373448bde91b633ab94a57483baf36" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_isWaitReRegister</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ac45fd2faa8aa3ca3a606c56c0fe2d267" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_kerning</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a36dde86498395a4c3b93ce578f451b41" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_localization</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_material</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_parent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a212acf09aa1cccef5ee4ba8a5b7890fb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_preprocessor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_properties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3b6365455b15767000675149fb88d932" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_renderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_renderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a722a9ad9a8461d16611fa6a1a54a8c5c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_text</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_uboManager</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8e92536a0dbb2e45e1f2fda2e74ac7bb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_virtualDescriptor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad4bba700ef6bd6d6e86f2185869011e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>m_virtualUBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a55e5fd9cabd800e7aceabc257b130a58" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>MarkMaterialDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a486250cec513876fa1e9e09deae7008a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>MarkUniformsDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0cfb104ae1007606dc54e9f796e16de8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>MaterialPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c5058ac7d52e7a71925647eebff87fa" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Mesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aae5701ca77fad95071cf9fbcd29b6192" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnDetached</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a89241c5fbef2a125453e3c102a8abe5b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnDisable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1acd546e323a875a9139aeb061de5a8be9" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnEnable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1acc5b77265402b819d0ddb8a06c3b0087" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnLoaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1b0a2c9312c0344c53db90eae676a60d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1af3caea0c23c92bd870b87a3e52840645" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab78cc1eaebe6f734293b577b6d9ab1dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnReRegistered</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1beb296af0e07a7ca16aafeb8879294b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1aa0bf875c1c6111f54f477f079f793c18" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTextDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>OriginType</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ccf477eb64e1da05d8b6e0f0e82b0ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Ptr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a63ebff43aced52991bb2c7a97bccbb5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>RenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1add25474bae10f83e8854f3e93c4f7070" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>ReRegisterMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a40f02731e29a088105cdd422f9d567b3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetDebug</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0459026984bf4bd56d9ceb4f82f48d53" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetErrorsClean</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1aee3589cc10d0768b524b7bfd62d8d072" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFont</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1aa7f411307e3fdad56f62b00e0c5ab6f3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFont</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ab2e323bf6a531f738f8a921af2d2b509" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetFontSize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a799c1357f30cf016b3a688ff20b313b8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetKerning</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a401fac07ce716a41159227743be22be3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a6aed03245b902a8b0a1af46d0da4b1ee" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa4a105cef591fdf2c4d2e9023a729558" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetMatrix</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4a038ee5096e73f581d8c1ba9a9e5ef7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetMeshRegistrationInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a80fce8c1c18b753b586d2c6c00d101c5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetText</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a714b414a4d2abd9f7223cb36347d6442" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetText</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ab473e4ac5fba3de138ad1c1c26bfe768" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetText</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetUniformsClean</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a3eb372bec3d1acc456c74e18f1f5e7e3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetUseLocalization</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a68790e68f11e8b3630bf8e537b2dc88c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>SetUsePreprocessor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa763366331082200de8fffc15b9edb1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Start</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1aada3bf81775f44d054101f966333668a" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Super</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a58ffd11d3f6267a167e6a6b597cf31c6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>Text</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>TryGetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ab61fb3a6e950d558e4a24fd316c97062" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>TryGetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>TryGetScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3c93f75ec3bd28586d2719f451bf00a8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>TryLoad</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a272be772ca42d0f7b1e7c43b2af79bda" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>TryLoad</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab75774fcebeb90dc51478685bd577119" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>UnRegisterMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac6a1ba6c0a2a6d0b8f29f4a9924b25fb" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>Update</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a16ebb160d9689c3f4d82a2f1b0a9132d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>UseMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a0be9578346de45690762dc249e5e8d17" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>UseModelMatrix</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1a08b2b25d038432498aa5871803cacef4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a736239062e920cf16ef80dabc52fe4d3" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Text</scope><name>UseSSBO</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>~Component</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab673db708eaaf1226d8af1bf28effa7d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>~Mesh</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Text_1ace15847c818021baa50eaa7352d00ea2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Text</scope><name>~Text</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

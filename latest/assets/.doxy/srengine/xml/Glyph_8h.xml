@@ -1,0 +1,445 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="Glyph_8h" kind="file" language="C++">
+    <compoundname>Glyph.h</compoundname>
+    <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
+    <includes refid="FreeType_8h" local="no">Graphics/Font/FreeType.h</includes>
+    <includedby refid="TextBuilder_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h</includedby>
+    <incdepgraph>
+      <node id="62">
+        <label>Graphics/Font/FreeType.h</label>
+        <link refid="FreeType_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h</label>
+        <link refid="Glyph_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Utils/Common/NonCopyable.h</label>
+        <link refid="NonCopyable_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/macros.h</label>
+        <link refid="macros_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Utils/stdInclude.h</label>
+        <link refid="stdInclude_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>algorithm</label>
+      </node>
+      <node id="45">
+        <label>any</label>
+      </node>
+      <node id="38">
+        <label>array</label>
+      </node>
+      <node id="36">
+        <label>atomic</label>
+      </node>
+      <node id="33">
+        <label>cassert</label>
+      </node>
+      <node id="21">
+        <label>cctype</label>
+      </node>
+      <node id="5">
+        <label>cfloat</label>
+      </node>
+      <node id="53">
+        <label>chrono</label>
+      </node>
+      <node id="34">
+        <label>cmath</label>
+      </node>
+      <node id="17">
+        <label>codecvt</label>
+      </node>
+      <node id="57">
+        <label>concepts</label>
+      </node>
+      <node id="58">
+        <label>condition_variable</label>
+      </node>
+      <node id="15">
+        <label>cstdarg</label>
+      </node>
+      <node id="18">
+        <label>cstddef</label>
+      </node>
+      <node id="55">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>cstdio</label>
+      </node>
+      <node id="47">
+        <label>cstdlib</label>
+      </node>
+      <node id="23">
+        <label>cstring</label>
+      </node>
+      <node id="50">
+        <label>ctime</label>
+      </node>
+      <node id="42">
+        <label>exception</label>
+      </node>
+      <node id="64">
+        <label>freetype/ftglyph.h</label>
+      </node>
+      <node id="66">
+        <label>freetype/src/truetype/ttobjs.h</label>
+      </node>
+      <node id="65">
+        <label>freetype/tttables.h</label>
+      </node>
+      <node id="27">
+        <label>fstream</label>
+      </node>
+      <node id="63">
+        <label>ft2build.h</label>
+      </node>
+      <node id="40">
+        <label>functional</label>
+      </node>
+      <node id="16">
+        <label>initializer_list</label>
+      </node>
+      <node id="56">
+        <label>iomanip</label>
+      </node>
+      <node id="10">
+        <label>iosfwd</label>
+      </node>
+      <node id="51">
+        <label>iostream</label>
+      </node>
+      <node id="7">
+        <label>limits</label>
+      </node>
+      <node id="49">
+        <label>list</label>
+      </node>
+      <node id="22">
+        <label>locale</label>
+      </node>
+      <node id="39">
+        <label>map</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="31">
+        <label>mutex</label>
+      </node>
+      <node id="60">
+        <label>numbers</label>
+      </node>
+      <node id="59">
+        <label>numeric</label>
+      </node>
+      <node id="25">
+        <label>optional</label>
+      </node>
+      <node id="29">
+        <label>ostream</label>
+      </node>
+      <node id="30">
+        <label>queue</label>
+      </node>
+      <node id="54">
+        <label>random</label>
+      </node>
+      <node id="35">
+        <label>ranges</label>
+      </node>
+      <node id="52">
+        <label>ratio</label>
+      </node>
+      <node id="11">
+        <label>regex</label>
+      </node>
+      <node id="41">
+        <label>set</label>
+      </node>
+      <node id="14">
+        <label>shared_mutex</label>
+      </node>
+      <node id="6">
+        <label>span</label>
+      </node>
+      <node id="48">
+        <label>sstream</label>
+      </node>
+      <node id="20">
+        <label>stack</label>
+      </node>
+      <node id="12">
+        <label>stdexcept</label>
+      </node>
+      <node id="32">
+        <label>string</label>
+      </node>
+      <node id="13">
+        <label>string_view</label>
+      </node>
+      <node id="46">
+        <label>thread</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="43">
+        <label>unordered_map</label>
+      </node>
+      <node id="19">
+        <label>unordered_set</label>
+      </node>
+      <node id="37">
+        <label>utility</label>
+      </node>
+      <node id="24">
+        <label>variant</label>
+      </node>
+      <node id="28">
+        <label>vector</label>
+      </node>
+      <node id="61">
+        <label>zlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h</label>
+        <link refid="Glyph_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/TextBuilder.h</label>
+        <link refid="TextBuilder_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structSR__GRAPH__NS_1_1GlyphMetrics" prot="public">SR_GRAPH_NS::GlyphMetrics</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1Glyph" prot="public">SR_GRAPH_NS::Glyph</innerclass>
+    <innerclass refid="classSR__GRAPH__NS_1_1GlyphImage" prot="public">SR_GRAPH_NS::GlyphImage</innerclass>
+    <innernamespace refid="namespaceSR__GRAPH__NS">SR_GRAPH_NS</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>Monika<sp/>on<sp/>24.05.2023.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_GLYPH_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_GLYPH_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/NonCopyable.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/Font/FreeType.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
+<codeline lineno="12" refid="structSR__GRAPH__NS_1_1GlyphMetrics" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics" kindref="compound">GlyphMetrics</ref><sp/>{</highlight></codeline>
+<codeline lineno="14" refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a9ebf1cda856bd3891eed927388b8b4c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a9ebf1cda856bd3891eed927388b8b4c7" kindref="member">posX</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="16" refid="structSR__GRAPH__NS_1_1GlyphMetrics_1ac6b9d60bd433c4515975d5212d5ddff9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics_1ac6b9d60bd433c4515975d5212d5ddff9" kindref="member">posY</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="18" refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a487a1d6f4170b09910d2167d3db04279" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a487a1d6f4170b09910d2167d3db04279" kindref="member">width</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="20" refid="structSR__GRAPH__NS_1_1GlyphMetrics_1af7528005dea9b730618ae87e9d683db4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics_1af7528005dea9b730618ae87e9d683db4" kindref="member">height</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>left<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>top<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>advanceX<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>advanceY<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="classSR__GRAPH__NS_1_1Glyph" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Glyph<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>SR_UTILS_NS::NonCopyable<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/>SR_UTILS_NS::NonCopyable;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/>std::shared_ptr&lt;Glyph&gt;;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Glyph(FT_Glyph<sp/>pGlyph,<sp/>FT_Render_Mode<sp/>renderMode);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~Glyph()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>int32_t<sp/>GetPosX()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>int32_t<sp/>GetPosY()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetWidth()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetHeight()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint32_t<sp/>GetPixelSize()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>FT_Glyph<sp/>GetGlyph()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics" kindref="compound">GlyphMetrics</ref>&amp;<sp/>GetMetrics()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FT_Render_Mode<sp/>m_renderMode;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics" kindref="compound">GlyphMetrics</ref><sp/>m_metrics<sp/>=<sp/>{<sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FT_Glyph<sp/>m_glyph<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classSR__GRAPH__NS_1_1GlyphImage" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">GlyphImage<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>SR_UTILS_NS::NonCopyable<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/>std::shared_ptr&lt;GlyphImage&gt;;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GlyphImage()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~GlyphImage()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>GlyphImage::Ptr<sp/>Create(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Glyph::Ptr&amp;<sp/>pGlyph,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>needInit);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint8_t*<sp/>GetData()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_data;<sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InsertTo(uint8_t*<sp/>pTarget,<sp/>int32_t<sp/>top,<sp/>uint32_t<sp/>sizeX);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Debug(uint8_t*<sp/>pTarget,<sp/>int32_t<sp/>top,<sp/>uint32_t<sp/>sizeX);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Init();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t*<sp/>m_data<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Glyph::Ptr<sp/>m_glyph;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GLYPH_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h"/>
+  </compounddef>
+</doxygen>

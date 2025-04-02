@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1a0b3ca18b389935891901f213704480b7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;::Save</definition>
+        <argsstring>(ISerializer &amp;serializer, T value, const SerializationId &amp;id)</argsstring>
+        <name>Save</name>
+        <qualifiedname>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;::Save</qualifiedname>
+        <param>
+          <type>ISerializer &amp;</type>
+          <declname>serializer</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="603" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="603" bodyend="605"/>
+      </memberdef>
+      <memberdef kind="function" id="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1ae9221575f6c2f52d9787d22aff0626eb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;::Load</definition>
+        <argsstring>(IDeserializer &amp;deserializer, T &amp;value, const SerializationId &amp;id)</argsstring>
+        <name>Load</name>
+        <qualifiedname>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;::Load</qualifiedname>
+        <param>
+          <type>IDeserializer &amp;</type>
+          <declname>deserializer</declname>
+        </param>
+        <param>
+          <type>T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const SerializationId &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="607" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="607" bodyend="616"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" line="602" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/ObjectDataAccessors.inl.h" bodystart="602" bodyend="617"/>
+    <listofallmembers>
+      <member refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1ae9221575f6c2f52d9787d22aff0626eb" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</scope><name>Load</name></member>
+      <member refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1a0b3ca18b389935891901f213704480b7" prot="public" virt="non-virtual"><scope>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</scope><name>Save</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

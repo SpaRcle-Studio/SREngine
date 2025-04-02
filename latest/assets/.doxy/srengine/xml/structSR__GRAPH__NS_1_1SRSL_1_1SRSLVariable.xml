@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::SRSL::SRSLVariable</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1aa082c29f062431de2bcbf50737542251" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::SRSL::SRSLVariable::used</definition>
+        <argsstring></argsstring>
+        <name>used</name>
+        <qualifiedname>SR_GRAPH_NS::SRSL::SRSLVariable::used</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="19" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1a5d6b95cf041fe2b69d5068e3722f74ff" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::SRSL::SRSLVariable::show</definition>
+        <argsstring></argsstring>
+        <name>show</name>
+        <qualifiedname>SR_GRAPH_NS::SRSL::SRSLVariable::show</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="20" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1a6eb2bd7b8b60a0a826cf776965a5f3f7" prot="public" static="no" mutable="no">
+        <type>ShaderVarType</type>
+        <definition>ShaderVarType SR_GRAPH_NS::SRSL::SRSLVariable::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>SR_GRAPH_NS::SRSL::SRSLVariable::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="21" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1a950e38010acf7f2d7406b58cd5816f2e" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_NS::SRSL::SRSLVariable::binding</definition>
+        <argsstring></argsstring>
+        <name>binding</name>
+        <qualifiedname>SR_GRAPH_NS::SRSL::SRSLVariable::binding</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="22" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h" bodystart="18" bodyend="23"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1a950e38010acf7f2d7406b58cd5816f2e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRSL::SRSLVariable</scope><name>binding</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1a5d6b95cf041fe2b69d5068e3722f74ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRSL::SRSLVariable</scope><name>show</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1a6eb2bd7b8b60a0a826cf776965a5f3f7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRSL::SRSLVariable</scope><name>type</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLVariable_1aa082c29f062431de2bcbf50737542251" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRSL::SRSLVariable</scope><name>used</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

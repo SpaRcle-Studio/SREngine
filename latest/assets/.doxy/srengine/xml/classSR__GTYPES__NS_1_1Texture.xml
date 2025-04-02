@@ -1,0 +1,652 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GTYPES__NS_1_1Texture" kind="class" language="C++" prot="public">
+    <compoundname>SR_GTYPES_NS::Texture</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">Memory::IGraphicsResource</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Texture_1a625800f070c00033b47a367c808bbff0" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; RenderContext &gt;</type>
+        <definition>using SR_GTYPES_NS::Texture::RenderContextPtr =  SR_HTYPES_NS::SafePtr&lt;RenderContext&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderContextPtr</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::RenderContextPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Texture_1a9809d1ccb406b2dfd905c60a1f75c889" prot="public" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">Texture</ref> *</type>
+        <definition>using SR_GTYPES_NS::Texture::Ptr =  Texture*</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__GTYPES__NS_1_1Texture_1a03eea82555b23d66152bd999ba135529" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ::SR_GRAPH_NS::TextureLoader</definition>
+        <argsstring></argsstring>
+        <name>::SR_GRAPH_NS::TextureLoader</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::TextureLoader</qualifiedname>
+        <param>
+          <type>::SR_GRAPH_NS::TextureLoader</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="26" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1ae0e75130b0108dace3b8f6fdfd8773f3" prot="private" static="no" mutable="no">
+        <type>TextureData::Ptr</type>
+        <definition>TextureData::Ptr SR_GTYPES_NS::Texture::m_textureData</definition>
+        <argsstring></argsstring>
+        <name>m_textureData</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::m_textureData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="65" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1ad024385bbb73a3d3ad998a3f7e574ee3" prot="private" static="no" mutable="no">
+        <type>RenderContextPtr</type>
+        <definition>RenderContextPtr SR_GTYPES_NS::Texture::m_context</definition>
+        <argsstring></argsstring>
+        <name>m_context</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::m_context</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="66" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a3f4746ac09bce22bb9f757a5eaf6286e" prot="private" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GTYPES_NS::Texture::m_id</definition>
+        <argsstring></argsstring>
+        <name>m_id</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::m_id</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="68" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a77a07c5d8f099331ce5194d65a62e466" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_GTYPES_NS::Texture::m_hasErrors</definition>
+        <argsstring></argsstring>
+        <name>m_hasErrors</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::m_hasErrors</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="70" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Texture_1a3402aac74de069bac90fd1e9ace3f5ae" prot="private" static="no" mutable="no">
+        <type>Memory::TextureConfig</type>
+        <definition>Memory::TextureConfig SR_GTYPES_NS::Texture::m_config</definition>
+        <argsstring></argsstring>
+        <name>m_config</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::m_config</qualifiedname>
+        <initializer>= Memory::TextureConfig()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="72" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a796a2ffec096054f81f3fbf0d58b94bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::Texture::Texture</definition>
+        <argsstring>()</argsstring>
+        <name>Texture</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::Texture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="32" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a5ed7153344ec74d57496c57f79fc3dd2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::Texture::~Texture</definition>
+        <argsstring>() override</argsstring>
+        <name>~Texture</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::~Texture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1ae3f319904bf9a53a23105012bfbb8195" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Texture::Calculate</definition>
+        <argsstring>()</argsstring>
+        <name>Calculate</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::Calculate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="60" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a7c9a6cfcebe7f8d9c0cadf72c46c4585" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Texture::SetConfig</definition>
+        <argsstring>(const Memory::TextureConfig &amp;config)</argsstring>
+        <name>SetConfig</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::SetConfig</qualifiedname>
+        <param>
+          <type>const Memory::TextureConfig &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="61" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a63924b06d63077ef25209c5142491bf4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Texture::FreeTextureData</definition>
+        <argsstring>()</argsstring>
+        <name>FreeTextureData</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::FreeTextureData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="62" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a115ae54f6e6cfb73922f42a597a7766f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">Texture::Ptr</ref></type>
+        <definition>static Texture::Ptr SR_GTYPES_NS::Texture::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;rawPath, const std::optional&lt; Memory::TextureConfig &gt; &amp;config=std::nullopt)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>rawPath</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; Memory::TextureConfig &gt; &amp;</type>
+          <declname>config</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="36" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a3ec4dcb4ea472f098fa84d514be53fd1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">Texture::Ptr</ref></type>
+        <definition>static Texture::Ptr SR_GTYPES_NS::Texture::LoadRaw</definition>
+        <argsstring>(const uint8_t *pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &amp;config)</argsstring>
+        <name>LoadRaw</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::LoadRaw</qualifiedname>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>pData</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>bytes</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>const Memory::TextureConfig &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="37" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a82330744b960b27c827ac837daf0fff9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">Texture::Ptr</ref></type>
+        <definition>static Texture::Ptr SR_GTYPES_NS::Texture::LoadFromMemory</definition>
+        <argsstring>(const std::string &amp;data, const Memory::TextureConfig &amp;config)</argsstring>
+        <name>LoadFromMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::LoadFromMemory</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const Memory::TextureConfig &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="38" column="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a4f55ddd8dd342be9d10ca0daff7d2fa6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Texture::GetWidth</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetWidth</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="41" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a5b2ca46624b131a237f0d899e26c29eb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Texture::GetHeight</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetHeight</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="42" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a92241348bdcef2d2abdfe38e044380b4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::Texture::GetChannels</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetChannels</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetChannels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="43" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a184a0089246eec076d82d213f2d17b92" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_GTYPES_NS::Texture::GetId</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetId</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="44" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1ac1f117199dad910a86de66f2cbf30700" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_GTYPES_NS::Texture::GetDescriptor</definition>
+        <argsstring>()</argsstring>
+        <name>GetDescriptor</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetDescriptor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="45" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a743e324e8a7ea5c622ed02b2d04df30d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_GTYPES_NS::Texture::GetAssociatedPath</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetAssociatedPath</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetAssociatedPath</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043">GetAssociatedPath</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="46" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1aca68df4e81970699c0294a2c8ce6b13b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const Memory::TextureConfig &amp;</type>
+        <definition>SR_NODISCARD const Memory::TextureConfig &amp; SR_GTYPES_NS::Texture::GetTextureConfig</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetTextureConfig</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::GetTextureConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="47" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a6614b8299bfa1078c37628ae8686439b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::Texture::IsAllowedToRevive</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsAllowedToRevive</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::IsAllowedToRevive</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0">IsAllowedToRevive</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="49" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1ade6f800bc468ec796f1d1636cc6c20ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::Texture::FreeVideoMemory</definition>
+        <argsstring>() override</argsstring>
+        <name>FreeVideoMemory</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::FreeVideoMemory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1a7cc424f41115c31297fe77ba0b2c4213" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>RemoveUPResult</type>
+        <definition>RemoveUPResult SR_GTYPES_NS::Texture::RemoveUsePoint</definition>
+        <argsstring>() override</argsstring>
+        <name>RemoveUsePoint</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::RemoveUsePoint</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de">RemoveUsePoint</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Remove one point from count uses current resource </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="53" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1aa6df2ce4ebf931fddf271474a29aae80" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Texture::Unload</definition>
+        <argsstring>() override</argsstring>
+        <name>Unload</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::Unload</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b">Unload</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Texture_1aca045e656905ad2a6a68c646802e296c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_GTYPES_NS::Texture::Load</definition>
+        <argsstring>() override</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_GTYPES_NS::Texture::Load</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5">Load</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="57" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="6">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::Texture</label>
+        <link refid="classSR__GTYPES__NS_1_1Texture"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="7">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::Texture</label>
+        <link refid="classSR__GTYPES__NS_1_1Texture"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" line="25" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h" bodystart="25" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a03eea82555b23d66152bd999ba135529" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>::SR_GRAPH_NS::TextureLoader</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>AddUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Broadcast</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1ae3f319904bf9a53a23105012bfbb8195" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Calculate</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>CopyResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>DeleteResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Destroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Execute</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>ForceDestroy</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a63924b06d63077ef25209c5142491bf4" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeTextureData</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1ade6f800bc468ec796f1d1636cc6c20ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a743e324e8a7ea5c622ed02b2d04df30d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetAssociatedPath</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a92241348bdcef2d2abdfe38e044380b4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetChannels</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetCountUses</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1ac1f117199dad910a86de66f2cbf30700" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetDescriptor</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetFileHash</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a5b2ca46624b131a237f0d899e26c29eb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetHeight</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a184a0089246eec076d82d213f2d17b92" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetLifetime</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetReloadCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aa31a633243b797e85108ff82e91ddbac" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceHashName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceLoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abd5268fda05070754a11971a1acbd797" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourceName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4ad5ddd9e1b2c4349ea8e57c310c3447" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1aca68df4e81970699c0294a2c8ce6b13b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetTextureConfig</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a4f55ddd8dd342be9d10ca0daff7d2fa6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>GetWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>InitializeResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4be1db5eacb30d9690f21288ff39eb62" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsAlive</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a6614b8299bfa1078c37628ae8686439b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsAllowedToRevive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsFileResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsForceDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsResourceFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af251cc87f482b27ee3573d27d3a44a61" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsResourceType</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>IsResourceWillBeDeleted</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Kill</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a115ae54f6e6cfb73922f42a597a7766f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1aca045e656905ad2a6a68c646802e296c" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a82330744b960b27c827ac837daf0fff9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>LoadFromMemory</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a3ec4dcb4ea472f098fa84d514be53fd1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>LoadRaw</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>LoadState</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a3402aac74de069bac90fd1e9ace3f5ae" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_config</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1ad024385bbb73a3d3ad998a3f7e574ee3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_context</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_countUses</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_debugUnUseStackTraces</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_debugUseStackTraces</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a77a07c5d8f099331ce5194d65a62e466" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_hasErrors</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a3f4746ac09bce22bb9f757a5eaf6286e" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_id</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_isFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_loadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af0144fd07d3ddcf76669ebe112a597ca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_resourceHashName</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1ae0e75130b0108dace3b8f6fdfd8773f3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_textureData</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>m_watchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>OnReloadDone</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>OnResourceRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>OnResourceUpdated</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>operator=</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a9809d1ccb406b2dfd905c60a1f75c889" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Ptr</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RELOAD_BEGIN_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f7efd6d454b1324163980ee73d54f08" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RELOAD_DONE_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveUPResult</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a7cc424f41115c31297fe77ba0b2c4213" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a625800f070c00033b47a367c808bbff0" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>RenderContextPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>ReviveResource</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a7c9a6cfcebe7f8d9c0cadf72c46c4585" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>SetConfig</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>SetLifetime</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>SetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>SignalWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>StartWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>StopWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Subscribe</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a796a2ffec096054f81f3fbf0d58b94bd" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Texture</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1aa6df2ce4ebf931fddf271474a29aae80" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Unload</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>UpdateResourceLifeTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>UpdateResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>~IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Texture</scope><name>~SubscriptionHolder</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Texture_1a5ed7153344ec74d57496c57f79fc3dd2" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Texture</scope><name>~Texture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_24f2b9252cbd3f2e0c4afbfdbb5b103e" kind="dir">
+    <compoundname>Engine/Core/libs/Scripting/inc/Scripting/Impl</compoundname>
+    <innerfile refid="EvoBehaviour_8h">EvoBehaviour.h</innerfile>
+    <innerfile refid="EvoCompiler_8h">EvoCompiler.h</innerfile>
+    <innerfile refid="EvoScriptImpl_8h">EvoScriptImpl.h</innerfile>
+    <innerfile refid="EvoScriptManager_8h">EvoScriptManager.h</innerfile>
+    <innerfile refid="EvoScriptResourceReloader_8h">EvoScriptResourceReloader.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__AUDIO__NS_1_1SoundDevice" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_AUDIO_NS::SoundDevice</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__AUDIO__NS_1_1OpenALDevice" prot="public" virt="non-virtual">SR_AUDIO_NS::OpenALDevice</derivedcompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundDevice_1aae204e81ef932d19ca6a518871012cf2" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_AUDIO_NS::SoundDevice::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="29" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1SoundDevice_1a9e97f447cfa3931baa4129654e0090f0" prot="protected" static="no" mutable="no">
+        <type>AudioLibrary</type>
+        <definition>AudioLibrary SR_AUDIO_NS::SoundDevice::m_library</definition>
+        <argsstring></argsstring>
+        <name>m_library</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::m_library</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="30" column="22" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundDevice_1a4ce1d76faacda42323df3686773fd00f" prot="protected" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::SoundDevice::SoundDevice</definition>
+        <argsstring>(AudioLibrary library, const std::string &amp;name)</argsstring>
+        <name>SoundDevice</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::SoundDevice</qualifiedname>
+        <param>
+          <type>AudioLibrary</type>
+          <declname>library</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="14" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundDevice_1a5be1c65163fbacb5c9504b54832f6441" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::SoundDevice::~SoundDevice</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~SoundDevice</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::~SoundDevice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="17" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundDevice_1a6faf7bcd0c38bba5ae43021b8ee30359" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_AUDIO_NS::SoundDevice::Init</definition>
+        <argsstring>()=0</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::Init</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1OpenALDevice_1af16b0979f1f31c3dd98a1c25bd228e45">Init</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="23" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundDevice_1a4645d471a2dc848e557eec85f82fc791" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_AUDIO_NS::SoundDevice::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::GetName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="25" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundDevice_1a1a81a1e55fd335d804cd645eac8b60bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD AudioLibrary</type>
+        <definition>SR_NODISCARD AudioLibrary SR_AUDIO_NS::SoundDevice::GetLibrary</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLibrary</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::GetLibrary</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="26" column="35"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1SoundDevice_1a7b8b2f88db5344ae11c76fd896110419" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__AUDIO__NS_1_1SoundDevice" kindref="compound">SoundDevice</ref> *</type>
+        <definition>static SoundDevice * SR_AUDIO_NS::SoundDevice::Allocate</definition>
+        <argsstring>(AudioLibrary audioLibrary, const std::string &amp;name)</argsstring>
+        <name>Allocate</name>
+        <qualifiedname>SR_AUDIO_NS::SoundDevice::Allocate</qualifiedname>
+        <param>
+          <type>AudioLibrary</type>
+          <declname>audioLibrary</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="20" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>SR_AUDIO_NS::OpenALDevice</label>
+        <link refid="classSR__AUDIO__NS_1_1OpenALDevice"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_AUDIO_NS::SoundDevice</label>
+        <link refid="classSR__AUDIO__NS_1_1SoundDevice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::SoundDevice</label>
+        <link refid="classSR__AUDIO__NS_1_1SoundDevice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" line="12" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundDevice.h" bodystart="12" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a7b8b2f88db5344ae11c76fd896110419" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>Allocate</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a1a81a1e55fd335d804cd645eac8b60bb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>GetLibrary</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a4645d471a2dc848e557eec85f82fc791" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>GetName</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a6faf7bcd0c38bba5ae43021b8ee30359" prot="public" virt="pure-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>Init</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a9e97f447cfa3931baa4129654e0090f0" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>m_library</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1aae204e81ef932d19ca6a518871012cf2" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>m_name</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>operator=</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a4ce1d76faacda42323df3686773fd00f" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>SoundDevice</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundDevice_1a5be1c65163fbacb5c9504b54832f6441" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::SoundDevice</scope><name>~SoundDevice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

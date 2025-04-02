@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_193e1c173bb6bd0681658b8507d31117" kind="dir">
+    <compoundname>Engine/Core/libs/Graphics/inc/Graphics/Font</compoundname>
+    <innerfile refid="Font_8h">Font.h</innerfile>
+    <innerfile refid="FontLoader_8h">FontLoader.h</innerfile>
+    <innerfile refid="FreeType_8h">FreeType.h</innerfile>
+    <innerfile refid="FreeTypeDrawContext_8h">FreeTypeDrawContext.h</innerfile>
+    <innerfile refid="FreeTypeFace_8h">FreeTypeFace.h</innerfile>
+    <innerfile refid="Glyph_8h">Glyph.h</innerfile>
+    <innerfile refid="SDF_8h">SDF.h</innerfile>
+    <innerfile refid="Text_8h">Text.h</innerfile>
+    <innerfile refid="TextBuilder_8h">TextBuilder.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/"/>
+  </compounddef>
+</doxygen>

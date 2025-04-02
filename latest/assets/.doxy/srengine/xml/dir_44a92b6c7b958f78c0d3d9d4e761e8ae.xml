@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_44a92b6c7b958f78c0d3d9d4e761e8ae" kind="dir">
+    <compoundname>Engine/Core/inc/Core/GUI</compoundname>
+    <innerdir refid="dir_4cfb8686e051f64f158d683134748f22">Engine/Core/inc/Core/GUI/PropertyDrawers</innerdir>
+    <innerfile refid="About_8h">About.h</innerfile>
+    <innerfile refid="AnimatorEditor_8h">AnimatorEditor.h</innerfile>
+    <innerfile refid="ComponentDrawer_8h">ComponentDrawer.h</innerfile>
+    <innerfile refid="DragNDropHelper_8h">DragNDropHelper.h</innerfile>
+    <innerfile refid="EditorCamera_8h">EditorCamera.h</innerfile>
+    <innerfile refid="EditorGizmo_8h">EditorGizmo.h</innerfile>
+    <innerfile refid="EditorGUI_8h">EditorGUI.h</innerfile>
+    <innerfile refid="EngineSettings_8h">EngineSettings.h</innerfile>
+    <innerfile refid="EngineStatistics_8h">EngineStatistics.h</innerfile>
+    <innerfile refid="FileBrowser_8h">FileBrowser.h</innerfile>
+    <innerfile refid="Guizmo_8h">Guizmo.h</innerfile>
+    <innerfile refid="Hierarchy_8h">Hierarchy.h</innerfile>
+    <innerfile refid="Inspector_8h">Inspector.h</innerfile>
+    <innerfile refid="MaterialEditor_8h">MaterialEditor.h</innerfile>
+    <innerfile refid="PhysicsMaterialEditor_8h">PhysicsMaterialEditor.h</innerfile>
+    <innerfile refid="PropertyDrawer_8h">PropertyDrawer.h</innerfile>
+    <innerfile refid="RenderTechniqueEditor_8h">RenderTechniqueEditor.h</innerfile>
+    <innerfile refid="SceneRunner_8h">SceneRunner.h</innerfile>
+    <innerfile refid="SceneTools_8h">SceneTools.h</innerfile>
+    <innerfile refid="SceneViewer_8h">SceneViewer.h</innerfile>
+    <innerfile refid="SoundDebug_8h">SoundDebug.h</innerfile>
+    <innerfile refid="VisualScriptEditor_8h">VisualScriptEditor.h</innerfile>
+    <innerfile refid="WorldEdit_8h">WorldEdit.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/GUI/"/>
+  </compounddef>
+</doxygen>

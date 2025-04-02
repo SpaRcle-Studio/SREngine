@@ -1,0 +1,1427 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1RenderScene" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::RenderScene</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; RenderScene &gt;</basecompoundref>
+    <innerclass refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo" prot="public">SR_GRAPH_NS::RenderScene::CameraInfo</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a678618526fea7e10784ed74893400334" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">RenderScene</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::Super =  SR_HTYPES_NS::SharedPtr&lt;RenderScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="43" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a3a6ef061ede974aaadf903025ba2c793" prot="public" static="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager" kindref="compound">GUI::WidgetManager</ref> *</type>
+        <definition>using SR_GRAPH_NS::RenderScene::WidgetManagerPtr =  GUI::WidgetManager*</definition>
+        <argsstring></argsstring>
+        <name>WidgetManagerPtr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::WidgetManagerPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="45" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a706e7b12b9fe47190faeb80ecb6d919a" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager" kindref="compound">WidgetManagerPtr</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::WidgetManagers =  std::vector&lt;WidgetManagerPtr&gt;</definition>
+        <argsstring></argsstring>
+        <name>WidgetManagers</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::WidgetManagers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="46" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a1b63c3c8c749eca3d14d75758e67a90f" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::ScenePtr =  SR_HTYPES_NS::SharedPtr&lt;SR_WORLD_NS::Scene&gt;</definition>
+        <argsstring></argsstring>
+        <name>ScenePtr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::ScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="47" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1aadd6c912feed5b5a52c49bebfe3a1014" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Window" kindref="compound">Window</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::WindowPtr =  SR_HTYPES_NS::SharedPtr&lt;Window&gt;</definition>
+        <argsstring></argsstring>
+        <name>WindowPtr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::WindowPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="48" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1afeb6f3583b2a471b14bc1f75b5fd2258" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Camera" kindref="compound">SR_GTYPES_NS::Camera</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::CameraPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GTYPES_NS::Camera&gt;</definition>
+        <argsstring></argsstring>
+        <name>CameraPtr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::CameraPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="49" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a21e7ca65c0a9a2d0f40f13a0405b9b07" prot="public" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
+        <definition>using SR_GRAPH_NS::RenderScene::MeshPtr =  SR_GTYPES_NS::Mesh*</definition>
+        <argsstring></argsstring>
+        <name>MeshPtr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::MeshPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="50" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a48e9fa7041dbcea50543aeecec65ad9f" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::PipelinePtr =  SR_HTYPES_NS::SharedPtr&lt;Pipeline&gt;</definition>
+        <argsstring></argsstring>
+        <name>PipelinePtr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::PipelinePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="51" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1RenderScene_1a162201669e1f584856b478bf98ba18e8" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderScene" kindref="compound">RenderScene</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::RenderScene::Ptr =  SR_HTYPES_NS::SharedPtr&lt;RenderScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="52" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ad172800e9b9dde2cd77e7db56629529c" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderStrategy" kindref="compound">RenderStrategy</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;RenderStrategy&gt; SR_GRAPH_NS::RenderScene::m_renderStrategy</definition>
+        <argsstring></argsstring>
+        <name>m_renderStrategy</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_renderStrategy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="139" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ab016ef3674be127d8a89f947da18a23e" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">SR_ANIMATIONS_NS::Skeleton</ref> *</type>
+        <definition>SR_ANIMATIONS_NS::Skeleton* SR_GRAPH_NS::RenderScene::m_currentSkeleton</definition>
+        <argsstring></argsstring>
+        <name>m_currentSkeleton</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_currentSkeleton</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="141" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ab766bf5727248ef4f245144c9911a982" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1LightSystem" kindref="compound">LightSystem</ref> *</type>
+        <definition>LightSystem* SR_GRAPH_NS::RenderScene::m_lightSystem</definition>
+        <argsstring></argsstring>
+        <name>m_lightSystem</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_lightSystem</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="143" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1aeccef291bfda2a15549c5060e4b93a9b" prot="private" static="no" mutable="no">
+        <type>CameraPtr</type>
+        <definition>CameraPtr SR_GRAPH_NS::RenderScene::m_mainCamera</definition>
+        <argsstring></argsstring>
+        <name>m_mainCamera</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_mainCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="144" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a60b60be589395e5deec8cf6f544fa6bd" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; CameraPtr &gt;</type>
+        <definition>std::vector&lt;CameraPtr&gt; SR_GRAPH_NS::RenderScene::m_editorCameras</definition>
+        <argsstring></argsstring>
+        <name>m_editorCameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_editorCameras</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="146" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ae0e3816c75f76e7a8dafcd5a39c3e01e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; CameraPtr &gt;</type>
+        <definition>std::vector&lt;CameraPtr&gt; SR_GRAPH_NS::RenderScene::m_offScreenCameras</definition>
+        <argsstring></argsstring>
+        <name>m_offScreenCameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_offScreenCameras</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="147" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a60b1b6b60b7a33587b7c4287114972a0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo" kindref="compound">CameraInfo</ref> &gt;</type>
+        <definition>std::vector&lt;CameraInfo&gt; SR_GRAPH_NS::RenderScene::m_cameras</definition>
+        <argsstring></argsstring>
+        <name>m_cameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_cameras</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="148" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ad85d1c91083a3201a687394a19dafb4b" prot="private" static="no" mutable="no">
+        <type>WidgetManagers</type>
+        <definition>WidgetManagers SR_GRAPH_NS::RenderScene::m_widgetManagers</definition>
+        <argsstring></argsstring>
+        <name>m_widgetManagers</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_widgetManagers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="150" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a614f6635f67e104775cb48c2092970d8" prot="private" static="no" mutable="no">
+        <type>ScenePtr</type>
+        <definition>ScenePtr SR_GRAPH_NS::RenderScene::m_scene</definition>
+        <argsstring></argsstring>
+        <name>m_scene</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_scene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="152" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1aed9a8bf59cff2cd36abd5bf8f6cda5d0" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderer" kindref="compound">IRenderer</ref> &gt; &gt;</type>
+        <definition>std::map&lt;SR_UTILS_NS::StringAtom, SR_HTYPES_NS::SharedPtr&lt;IRenderer&gt; &gt; SR_GRAPH_NS::RenderScene::m_renderers</definition>
+        <argsstring></argsstring>
+        <name>m_renderers</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_renderers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="154" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a116c2a61da7b299e27267cc53a79dc83" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
+        <definition>IRenderTechnique* SR_GRAPH_NS::RenderScene::m_technique</definition>
+        <argsstring></argsstring>
+        <name>m_technique</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_technique</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="155" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a734b6c3eccfa8d43f7f25895e0174c2e" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
+        <definition>RenderContext* SR_GRAPH_NS::RenderScene::m_context</definition>
+        <argsstring></argsstring>
+        <name>m_context</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_context</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="156" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1aaf8c8cff6eb1e4d3fb02edef94825a92" prot="private" static="no" mutable="no">
+        <type>PassQueues</type>
+        <definition>PassQueues SR_GRAPH_NS::RenderScene::m_queues</definition>
+        <argsstring></argsstring>
+        <name>m_queues</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_queues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="158" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a22a31c3eaeceaf407820c36f066ee7d8" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::UVector2</type>
+        <definition>SR_MATH_NS::UVector2 SR_GRAPH_NS::RenderScene::m_surfaceSize</definition>
+        <argsstring></argsstring>
+        <name>m_surfaceSize</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_surfaceSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="160" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a1880033b7922c355b644fed5d8ae831b" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafeVar" kindref="compound">SR_HTYPES_NS::SafeVar</ref>&lt; uint32_t &gt;</type>
+        <definition>SR_HTYPES_NS::SafeVar&lt;uint32_t&gt; SR_GRAPH_NS::RenderScene::m_dirty</definition>
+        <argsstring></argsstring>
+        <name>m_dirty</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_dirty</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="162" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1ae8da7095781445381953044727c94ce4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::RenderScene::m_dirtyCameras</definition>
+        <argsstring></argsstring>
+        <name>m_dirtyCameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_dirtyCameras</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="164" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a8c8695adce7f13ba86593830df9b1643" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::RenderScene::m_hasDrawData</definition>
+        <argsstring></argsstring>
+        <name>m_hasDrawData</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_hasDrawData</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="165" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderScene_1a1aed9628a2e739b8da5894617948af3e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::RenderScene::m_bOverlay</definition>
+        <argsstring></argsstring>
+        <name>m_bOverlay</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::m_bOverlay</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="166" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1afc57125111909ee156a03122bc397821" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::RenderScene::RenderScene</definition>
+        <argsstring>(const ScenePtr &amp;scene, RenderContext *pContext)</argsstring>
+        <name>RenderScene</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::RenderScene</qualifiedname>
+        <param>
+          <type>const ScenePtr &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="59" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a8125906afa3d65ee52b4a310a858d3be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::RenderScene::~RenderScene</definition>
+        <argsstring>() override</argsstring>
+        <name>~RenderScene</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::~RenderScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="60" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1ab1851446e1af5e1b3321ee693943b8c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="63" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1af1d5c65c4710c6ffebec88495dee80f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::DeInit</definition>
+        <argsstring>()</argsstring>
+        <name>DeInit</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::DeInit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1aa75edb22872bf1a35c746211f9ca4f74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Render</definition>
+        <argsstring>()</argsstring>
+        <name>Render</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Render</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a8b68965f87b56c1a45b41ad945ca9c2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Submit</definition>
+        <argsstring>()</argsstring>
+        <name>Submit</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Submit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a14b9acfcc61f40b167321aecee7a8678" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Synchronize</definition>
+        <argsstring>()</argsstring>
+        <name>Synchronize</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Synchronize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a4d4a0d063ea40c45ba709ab5b777cc97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::OnResourceReloaded</definition>
+        <argsstring>(SR_UTILS_NS::IResource *pResource)</argsstring>
+        <name>OnResourceReloaded</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::OnResourceReloaded</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a40d36176efd5a66bf1aa453291bcf305" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::OnResize</definition>
+        <argsstring>(const SR_MATH_NS::UVector2 &amp;size)</argsstring>
+        <name>OnResize</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::OnResize</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::UVector2 &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="72" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a71ac0314274a562ebfc60320cd2a3faa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetDirty</definition>
+        <argsstring>()</argsstring>
+        <name>SetDirty</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetDirty</qualifiedname>
+        <briefdescription>
+<para>Можно вызывать не синхронно </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="75" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a035f8ae42f389ed3626ce4ebc059098a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetDirtyCameras</definition>
+        <argsstring>()</argsstring>
+        <name>SetDirtyCameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetDirtyCameras</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="77" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a2fec9737b83b71b7475b1e2b697e5f60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetTechnique</definition>
+        <argsstring>(IRenderTechnique *pTechnique)</argsstring>
+        <name>SetTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetTechnique</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
+          <declname>pTechnique</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="79" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a84deccf58a29bf7bc3c2f87c1d03ca2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetTechnique</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SetTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetTechnique</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a1f71c8dda5dc6ff11f3200bd2b32fd8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Register</definition>
+        <argsstring>(const CameraPtr &amp;pCamera)</argsstring>
+        <name>Register</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Register</qualifiedname>
+        <param>
+          <type>const CameraPtr &amp;</type>
+          <declname>pCamera</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="82" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a658ab09531c12a5502fa385d4d297336" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Register</definition>
+        <argsstring>(WidgetManagerPtr pWidgetManager)</argsstring>
+        <name>Register</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Register</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager" kindref="compound">WidgetManagerPtr</ref></type>
+          <declname>pWidgetManager</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="83" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a2bb70876116c9a1a0d7a86a4b0bd93fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Register</definition>
+        <argsstring>(MeshPtr pMesh)</argsstring>
+        <name>Register</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Register</qualifiedname>
+        <param>
+          <type>MeshPtr</type>
+          <declname>pMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="84" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a57c6a995eebce80dcb68e686848b4eac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Remove</definition>
+        <argsstring>(const CameraPtr &amp;pCamera)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Remove</qualifiedname>
+        <param>
+          <type>const CameraPtr &amp;</type>
+          <declname>pCamera</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="86" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a6d7e34ed27ecacae23b6fd8013a47b1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Remove</definition>
+        <argsstring>(WidgetManagerPtr pWidgetManager)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Remove</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager" kindref="compound">WidgetManagerPtr</ref></type>
+          <declname>pWidgetManager</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="87" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a5bc80c9960c56c4fce2708fd5c0e2f7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Remove</definition>
+        <argsstring>(MeshPtr pMesh)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Remove</qualifiedname>
+        <param>
+          <type>MeshPtr</type>
+          <declname>pMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="88" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a96e9ee243d91a6ac5200a524fa2233bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::ReRegister</definition>
+        <argsstring>(const MeshRegistrationInfo &amp;info)</argsstring>
+        <name>ReRegister</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::ReRegister</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__GRAPH__NS_1_1MeshRegistrationInfo" kindref="compound">MeshRegistrationInfo</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="90" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a2d201ac58e322da5aebd88b5221d935c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetOverlayEnabled</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetOverlayEnabled</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetOverlayEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="92" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a9a25df68d29c0d1765253e6410dd86ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetCurrentSkeleton</definition>
+        <argsstring>(SR_ANIMATIONS_NS::Skeleton *pSkeleton)</argsstring>
+        <name>SetCurrentSkeleton</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetCurrentSkeleton</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">SR_ANIMATIONS_NS::Skeleton</ref> *</type>
+          <declname>pSkeleton</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="93" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1ac594b3ac760f3c755dd58a5b62bcd252" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::ForEachTechnique</definition>
+        <argsstring>(const SR_HTYPES_NS::Function&lt; void(IRenderTechnique *)&gt; &amp;callback)</argsstring>
+        <name>ForEachTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::ForEachTechnique</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *)&gt; &amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="95" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1af95e67addb6ba214ccf335ea8cbaa756" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; T &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt; T &gt; SR_GRAPH_NS::RenderScene::AddRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>AddRenderer</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::AddRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="97" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="97" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a2e1e28b7c18eb18346aceca9c18d0a8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; T &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt; T &gt; SR_GRAPH_NS::RenderScene::GetRenderer</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRenderer</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="101" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="101" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a97500fd56956bc9db12313666da8a1a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderer" kindref="compound">IRenderer</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt; IRenderer &gt; SR_GRAPH_NS::RenderScene::AddRenderer</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>AddRenderer</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::AddRenderer</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="105" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a6c1645b10e2583841edcf3093bc63617" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1IRenderer" kindref="compound">IRenderer</ref> &gt;</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; IRenderer &gt; SR_GRAPH_NS::RenderScene::GetRenderer</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name) const</argsstring>
+        <name>GetRenderer</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetRenderer</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="107" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1ab378e6226159b59d393ed9a94364107c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::RenderScene::IsDirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsDirty</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::IsDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="108" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3231f853c845db4c9f13c736580c0be6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::RenderScene::IsEmpty</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEmpty</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::IsEmpty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="109" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a08f3a200a283cdbefa1af5f2e1d642da" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::RenderScene::IsOverlayEnabled</definition>
+        <argsstring>() const</argsstring>
+        <name>IsOverlayEnabled</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::IsOverlayEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="110" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a80aa3e928aee62c11a4f5005aabf0d5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> *</type>
+        <definition>SR_NODISCARD RenderContext * SR_GRAPH_NS::RenderScene::GetContext</definition>
+        <argsstring>() const</argsstring>
+        <name>GetContext</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="111" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a1ce67f3d611fc79f7557aaa984b9251c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1LightSystem" kindref="compound">LightSystem</ref> *</type>
+        <definition>SR_NODISCARD LightSystem * SR_GRAPH_NS::RenderScene::GetLightSystem</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLightSystem</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetLightSystem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="112" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a7987e8d85a22e78cbb22945cf317569b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">SR_ANIMATIONS_NS::Skeleton</ref> *</type>
+        <definition>SR_NODISCARD SR_ANIMATIONS_NS::Skeleton * SR_GRAPH_NS::RenderScene::GetCurrentSkeleton</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCurrentSkeleton</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetCurrentSkeleton</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="113" column="49" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3cfef17fa9840832a5e07cc42a4062a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const RenderScene::PipelinePtr &amp;</type>
+        <definition>SR_NODISCARD const RenderScene::PipelinePtr &amp; SR_GRAPH_NS::RenderScene::GetPipeline</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPipeline</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetPipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="114" column="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a0c63b578cbeeec1d16b168b23b9e4277" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD RenderScene::PipelinePtr</type>
+        <definition>SR_NODISCARD RenderScene::PipelinePtr SR_GRAPH_NS::RenderScene::GetPipeline</definition>
+        <argsstring>()</argsstring>
+        <name>GetPipeline</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetPipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="115" column="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1ad9ad45cf91036a3a94f9d2a071590990" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD WindowPtr</type>
+        <definition>SR_NODISCARD WindowPtr SR_GRAPH_NS::RenderScene::GetWindow</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWindow</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="116" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3ec0fbd86b0df9ffedd4934a56f28c4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const WidgetManagers &amp;</type>
+        <definition>SR_NODISCARD const WidgetManagers &amp; SR_GRAPH_NS::RenderScene::GetWidgetManagers</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWidgetManagers</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetWidgetManagers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="117" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a1af8eb77a401cba2ee85c78d2f06b507" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD CameraPtr</type>
+        <definition>SR_NODISCARD CameraPtr SR_GRAPH_NS::RenderScene::GetMainCamera</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMainCamera</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetMainCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="118" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1afeaba6c2e3c504f54f6d2f25ee83a570" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderStrategy" kindref="compound">RenderStrategy</ref> *</type>
+        <definition>SR_NODISCARD RenderStrategy * SR_GRAPH_NS::RenderScene::GetRenderStrategy</definition>
+        <argsstring>()</argsstring>
+        <name>GetRenderStrategy</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetRenderStrategy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="119" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3a0d1374fbc69491ad03f35050184c1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD CameraPtr</type>
+        <definition>SR_NODISCARD CameraPtr SR_GRAPH_NS::RenderScene::GetFirstOffScreenCamera</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFirstOffScreenCamera</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetFirstOffScreenCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="120" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a98f88d2e09c0e954455b2314449e31b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::UVector2 SR_GRAPH_NS::RenderScene::GetSurfaceSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSurfaceSize</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetSurfaceSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="121" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1abf00de6a73918396d0241000cd2f9829" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo" kindref="compound">CameraInfo</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; CameraInfo &gt; &amp; SR_GRAPH_NS::RenderScene::GetCameras</definition>
+        <argsstring>()</argsstring>
+        <name>GetCameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::GetCameras</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="122" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="122" bodyend="122"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a9da46281b9624b8c938764c9b2913ae1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SetMeshMaterial</definition>
+        <argsstring>(MeshPtr pMesh)</argsstring>
+        <name>SetMeshMaterial</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SetMeshMaterial</qualifiedname>
+        <param>
+          <type>MeshPtr</type>
+          <declname>pMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="125" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3da64505aec339bc04755e9d0d8865bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::SortCameras</definition>
+        <argsstring>()</argsstring>
+        <name>SortCameras</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::SortCameras</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="127" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a48df5eefb2901df0b0bca4091a4c910c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::RenderBlackScreen</definition>
+        <argsstring>()</argsstring>
+        <name>RenderBlackScreen</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::RenderBlackScreen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="128" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a3d42b6267e7da4e75f14c9b1de83bf18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::PrepareFrame</definition>
+        <argsstring>()</argsstring>
+        <name>PrepareFrame</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::PrepareFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="130" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1af259300d97f12303d7734f04d9cc6890" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Overlay</definition>
+        <argsstring>()</argsstring>
+        <name>Overlay</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Overlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="131" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a66c83fa24d893b17a38616f8a198740b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::PrepareRender</definition>
+        <argsstring>()</argsstring>
+        <name>PrepareRender</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::PrepareRender</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="132" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a58a62b50a5959573f40e37fecea993a9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Build</definition>
+        <argsstring>()</argsstring>
+        <name>Build</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Build</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="133" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a53f49e6dceae6fa58c0c8ec9adba3205" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::BuildQueue</definition>
+        <argsstring>()</argsstring>
+        <name>BuildQueue</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::BuildQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="134" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a19a7854df0e135eb61b222edc2289f54" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="135" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1RenderScene_1a5c860db307fee4241462757174a29251" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::RenderScene::PostUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>PostUpdate</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::PostUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="136" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::RenderScene</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderScene"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; RenderScene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::RenderScene</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderScene"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; RenderScene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="42" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="42" bodyend="168"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1af95e67addb6ba214ccf335ea8cbaa756" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>AddRenderer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a97500fd56956bc9db12313666da8a1a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>AddRenderer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>AutoFree</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a58a62b50a5959573f40e37fecea993a9" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Build</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a53f49e6dceae6fa58c0c8ec9adba3205" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>BuildQueue</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1afeb6f3583b2a471b14bc1f75b5fd2258" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>CameraPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1af1d5c65c4710c6ffebec88495dee80f6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>DeInit</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>DynamicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ac594b3ac760f3c755dd58a5b62bcd252" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>ForEachTechnique</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Get</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1abf00de6a73918396d0241000cd2f9829" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetCameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a80aa3e928aee62c11a4f5005aabf0d5f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a7987e8d85a22e78cbb22945cf317569b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetCurrentSkeleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3a0d1374fbc69491ad03f35050184c1b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetFirstOffScreenCamera</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1ce67f3d611fc79f7557aaa984b9251c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetLightSystem</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1af8eb77a401cba2ee85c78d2f06b507" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetMainCamera</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3cfef17fa9840832a5e07cc42a4062a1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetPipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a0c63b578cbeeec1d16b168b23b9e4277" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetPipeline</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a2e1e28b7c18eb18346aceca9c18d0a8d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRenderer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a6c1645b10e2583841edcf3093bc63617" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRenderer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1afeaba6c2e3c504f54f6d2f25ee83a570" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetRenderStrategy</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetSRClass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a98f88d2e09c0e954455b2314449e31b2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetSurfaceSize</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3ec0fbd86b0df9ffedd4934a56f28c4a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetWidgetManagers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ad9ad45cf91036a3a94f9d2a071590990" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>GetWindow</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab1851446e1af5e1b3321ee693943b8c9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Init</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab378e6226159b59d393ed9a94364107c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>IsDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3231f853c845db4c9f13c736580c0be6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>IsEmpty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a08f3a200a283cdbefa1af5f2e1d642da" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>IsOverlayEnabled</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_basicManually</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1aed9628a2e739b8da5894617948af3e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_bOverlay</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a60b1b6b60b7a33587b7c4287114972a0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_cameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a734b6c3eccfa8d43f7f25895e0174c2e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_context</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab016ef3674be127d8a89f947da18a23e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_currentSkeleton</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1880033b7922c355b644fed5d8ae831b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ae8da7095781445381953044727c94ce4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_dirtyCameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a60b60be589395e5deec8cf6f544fa6bd" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_editorCameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a8c8695adce7f13ba86593830df9b1643" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_hasDrawData</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ab766bf5727248ef4f245144c9911a982" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_lightSystem</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1aeccef291bfda2a15549c5060e4b93a9b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_mainCamera</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ae0e3816c75f76e7a8dafcd5a39c3e01e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_offScreenCameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1aaf8c8cff6eb1e4d3fb02edef94825a92" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_queues</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1aed9a8bf59cff2cd36abd5bf8f6cda5d0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_renderers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ad172800e9b9dde2cd77e7db56629529c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_renderStrategy</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a614f6635f67e104775cb48c2092970d8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_scene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a22a31c3eaeceaf407820c36f066ee7d8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_surfaceSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a116c2a61da7b299e27267cc53a79dc83" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_technique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1ad85d1c91083a3201a687394a19dafb4b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>m_widgetManagers</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>MakeShared</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a21e7ca65c0a9a2d0f40f13a0405b9b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>MeshPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a40d36176efd5a66bf1aa453291bcf305" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>OnResize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a4d4a0d063ea40c45ba709ab5b777cc97" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>operator==</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1af259300d97f12303d7734f04d9cc6890" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Overlay</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a48e9fa7041dbcea50543aeecec65ad9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a5c860db307fee4241462757174a29251" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>PostUpdate</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3d42b6267e7da4e75f14c9b1de83bf18" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>PrepareFrame</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a66c83fa24d893b17a38616f8a198740b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>PrepareRender</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a162201669e1f584856b478bf98ba18e8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1f71c8dda5dc6ff11f3200bd2b32fd8b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Register</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a658ab09531c12a5502fa385d4d297336" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Register</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a2bb70876116c9a1a0d7a86a4b0bd93fe" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Register</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a57c6a995eebce80dcb68e686848b4eac" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Remove</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a6d7e34ed27ecacae23b6fd8013a47b1d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Remove</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a5bc80c9960c56c4fce2708fd5c0e2f7f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Remove</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1aa75edb22872bf1a35c746211f9ca4f74" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Render</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a48df5eefb2901df0b0bca4091a4c910c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>RenderBlackScreen</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1afc57125111909ee156a03122bc397821" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>RenderScene</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a96e9ee243d91a6ac5200a524fa2233bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>ReRegister</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Reset</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a1b63c3c8c749eca3d14d75758e67a90f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a9a25df68d29c0d1765253e6410dd86ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetCurrentSkeleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a71ac0314274a562ebfc60320cd2a3faa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a035f8ae42f389ed3626ce4ebc059098a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetDirtyCameras</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a9da46281b9624b8c938764c9b2913ae1" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetMeshMaterial</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a2d201ac58e322da5aebd88b5221d935c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetOverlayEnabled</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a2fec9737b83b71b7475b1e2b697e5f60" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a84deccf58a29bf7bc3c2f87c1d03ca2a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SetTechnique</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3da64505aec339bc04755e9d0d8865bb" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>SortCameras</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>StaticCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a8b68965f87b56c1a45b41ad945ca9c2c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Submit</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a678618526fea7e10784ed74893400334" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a14b9acfcc61f40b167321aecee7a8678" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Synchronize</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Unlock</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a19a7854df0e135eb61b222edc2289f54" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Update</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>Valid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a3a6ef061ede974aaadf903025ba2c793" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>WidgetManagerPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a706e7b12b9fe47190faeb80ecb6d919a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>WidgetManagers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1aadd6c912feed5b5a52c49bebfe3a1014" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>WindowPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderScene_1a8125906afa3d65ee52b4a310a858d3be" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>~RenderScene</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderScene</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

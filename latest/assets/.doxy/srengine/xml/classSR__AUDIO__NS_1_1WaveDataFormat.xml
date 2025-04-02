@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__AUDIO__NS_1_1WaveDataFormat" kind="class" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::WaveDataFormat</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1WaveDataFormat_1ad2555e7de155fac872201ec81b13538d" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_AUDIO_NS::WaveDataFormat::m_numChannels</definition>
+        <argsstring></argsstring>
+        <name>m_numChannels</name>
+        <qualifiedname>SR_AUDIO_NS::WaveDataFormat::m_numChannels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="26" column="17" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1WaveDataFormat_1af12f8b106d3f6bd208c75ce2539a1ad0" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_AUDIO_NS::WaveDataFormat::m_samplesPerSecond</definition>
+        <argsstring></argsstring>
+        <name>m_samplesPerSecond</name>
+        <qualifiedname>SR_AUDIO_NS::WaveDataFormat::m_samplesPerSecond</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="27" column="17" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1WaveDataFormat_1a89015729612481db39f8e82ad948440c" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_AUDIO_NS::WaveDataFormat::m_bitsPerSample</definition>
+        <argsstring></argsstring>
+        <name>m_bitsPerSample</name>
+        <qualifiedname>SR_AUDIO_NS::WaveDataFormat::m_bitsPerSample</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="28" column="17" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1WaveDataFormat_1a5897e99222d91843c5ba9d07925aa4e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::WaveDataFormat::WaveDataFormat</definition>
+        <argsstring>()</argsstring>
+        <name>WaveDataFormat</name>
+        <qualifiedname>SR_AUDIO_NS::WaveDataFormat::WaveDataFormat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="17" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1WaveDataFormat_1a76865249b697a55f2a6d2c222aba3c44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::WaveDataFormat::~WaveDataFormat</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~WaveDataFormat</name>
+        <qualifiedname>SR_AUDIO_NS::WaveDataFormat::~WaveDataFormat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="23" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::WaveDataFormat</label>
+        <link refid="classSR__AUDIO__NS_1_1WaveDataFormat"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::WaveDataFormat</label>
+        <link refid="classSR__AUDIO__NS_1_1WaveDataFormat"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="15" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1a89015729612481db39f8e82ad948440c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>m_bitsPerSample</name></member>
+      <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1ad2555e7de155fac872201ec81b13538d" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>m_numChannels</name></member>
+      <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1af12f8b106d3f6bd208c75ce2539a1ad0" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>m_samplesPerSecond</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>operator=</name></member>
+      <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1a5897e99222d91843c5ba9d07925aa4e0" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>WaveDataFormat</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1a76865249b697a55f2a6d2c222aba3c44" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>~WaveDataFormat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1ResourceEmbedder" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::ResourceEmbedder</compoundname>
+    <innerclass refid="structSR__UTILS__NS_1_1ResourceEmbedder_1_1Resource" prot="private">SR_UTILS_NS::ResourceEmbedder::Resource</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a07227d400c0f929c267f44f6e9764326" prot="private" static="no" mutable="no">
+        <type>ska::flat_hash_map&lt; std::string_view, Resource &gt;</type>
+        <definition>ska::flat_hash_map&lt;std::string_view, Resource&gt; SR_UTILS_NS::ResourceEmbedder::m_resources</definition>
+        <argsstring></argsstring>
+        <name>m_resources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::m_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="46" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a3726387696bdbb2f2e23fbab64be44dd" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1ResourceEmbedder" kindref="compound">ResourceEmbedder</ref> &amp;</type>
+        <definition>static ResourceEmbedder &amp; SR_UTILS_NS::ResourceEmbedder::Instance</definition>
+        <argsstring>()</argsstring>
+        <name>Instance</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::Instance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="19" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="19" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1acf46101d4fdae2474566b71d4e0a6729" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::ResourceEmbedder::ExportToFile</definition>
+        <argsstring>(std::string_view path, const Resource &amp;resource, const SR_UTILS_NS::Path &amp;newDirectory)</argsstring>
+        <name>ExportToFile</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::ExportToFile</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const Resource &amp;</type>
+          <declname>resource</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>newDirectory</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="36" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a4e16b4cc27e424e83df728bb055b542c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::ResourceEmbedder::ExportToMemory</definition>
+        <argsstring>(std::string_view data)</argsstring>
+        <name>ExportToMemory</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::ExportToMemory</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="39" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a8ec4207dac735138a642c67157885bd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceEmbedder::RegisterResource</definition>
+        <argsstring>()</argsstring>
+        <name>RegisterResource</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::RegisterResource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="25" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="25" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a2f903ef1b4935afb507dbcc010e53c99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceEmbedder::ExportAllResources</definition>
+        <argsstring>()</argsstring>
+        <name>ExportAllResources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::ExportAllResources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a373cb069748bfb1a5c34012f53e109cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceEmbedder::ExportAllResources</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;newDirectory)</argsstring>
+        <name>ExportAllResources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::ExportAllResources</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>newDirectory</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1abe7eb43b94f8433e51686b81506bd609" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceEmbedder::ExportToFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>ExportToFile</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::ExportToFile</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="37" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1a1a1d0176341cd7bb0dcf7962b1b44acb" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::ResourceEmbedder::HexToBytes</definition>
+        <argsstring>(const std::string_view &amp;hex)</argsstring>
+        <name>HexToBytes</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::HexToBytes</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>hex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="42" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceEmbedder_1aa1fb4e42e521ea3af3c95d41187e2595" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>static SR_NODISCARD std::string SR_UTILS_NS::ResourceEmbedder::Decompress</definition>
+        <argsstring>(const Resource &amp;resource)</argsstring>
+        <name>Decompress</name>
+        <qualifiedname>SR_UTILS_NS::ResourceEmbedder::Decompress</qualifiedname>
+        <param>
+          <type>const Resource &amp;</type>
+          <declname>resource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="43" column="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceEmbedder.h" bodystart="13" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1aa1fb4e42e521ea3af3c95d41187e2595" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>Decompress</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a2f903ef1b4935afb507dbcc010e53c99" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>ExportAllResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a373cb069748bfb1a5c34012f53e109cc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>ExportAllResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1acf46101d4fdae2474566b71d4e0a6729" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>ExportToFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1abe7eb43b94f8433e51686b81506bd609" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>ExportToFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a4e16b4cc27e424e83df728bb055b542c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>ExportToMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a1a1d0176341cd7bb0dcf7962b1b44acb" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>HexToBytes</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a3726387696bdbb2f2e23fbab64be44dd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a07227d400c0f929c267f44f6e9764326" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>m_resources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceEmbedder_1a8ec4207dac735138a642c67157885bd6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceEmbedder</scope><name>RegisterResource</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

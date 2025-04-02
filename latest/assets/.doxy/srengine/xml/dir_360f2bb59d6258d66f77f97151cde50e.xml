@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_360f2bb59d6258d66f77f97151cde50e" kind="dir">
+    <compoundname>Engine/Core/libs/Graphics/inc/Graphics/Types</compoundname>
+    <innerdir refid="dir_5f6ef964ec8b90bf6766130495c7d0d9">Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry</innerdir>
+    <innerfile refid="Camera_8h">Camera.h</innerfile>
+    <innerfile refid="Descriptors_8h">Descriptors.h</innerfile>
+    <innerfile refid="EditorGrid_8h">EditorGrid.h</innerfile>
+    <innerfile refid="Framebuffer_8h">Framebuffer.h</innerfile>
+    <innerfile refid="GraphicsCommand_8h">GraphicsCommand.h</innerfile>
+    <innerfile refid="IRenderComponent_8h">IRenderComponent.h</innerfile>
+    <innerfile refid="Mesh_8h">Mesh.h</innerfile>
+    <innerfile refid="RenderTexture_8h">RenderTexture.h</innerfile>
+    <innerfile refid="Types_2Shader_8h">Shader.h</innerfile>
+    <innerfile refid="Skybox_8h">Skybox.h</innerfile>
+    <innerfile refid="Texture_8h">Texture.h</innerfile>
+    <innerfile refid="Uniforms_8h">Uniforms.h</innerfile>
+    <innerfile refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h">Vertices.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/"/>
+  </compounddef>
+</doxygen>

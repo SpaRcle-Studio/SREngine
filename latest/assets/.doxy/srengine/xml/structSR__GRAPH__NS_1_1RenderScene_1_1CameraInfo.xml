@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::RenderScene::CameraInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo_1a60ca90507c59b7a25f729e82f5b4830c" prot="public" static="no" mutable="no">
+        <type>CameraPtr</type>
+        <definition>CameraPtr SR_GRAPH_NS::RenderScene::CameraInfo::pCamera</definition>
+        <argsstring></argsstring>
+        <name>pCamera</name>
+        <qualifiedname>SR_GRAPH_NS::RenderScene::CameraInfo::pCamera</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="55" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::RenderScene::CameraInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pCamera</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Camera &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" line="54" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderScene.h" bodystart="54" bodyend="56"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1RenderScene_1_1CameraInfo_1a60ca90507c59b7a25f729e82f5b4830c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderScene::CameraInfo</scope><name>pCamera</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,583 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1UnicodeString" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::UnicodeString</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1UnicodeString_1a494a1c3e58e0923d9504983a2babd9bc" prot="public" static="no">
+        <type>char32_t</type>
+        <definition>using SR_HTYPES_NS::UnicodeString::CharType =  char32_t</definition>
+        <argsstring></argsstring>
+        <name>CharType</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::CharType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="13" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1UnicodeString_1a6ac7eb541fb3cb39ef0599388fbc23f5" prot="public" static="no">
+        <type>std::u32string::iterator</type>
+        <definition>using SR_HTYPES_NS::UnicodeString::Iterator =  std::u32string::iterator</definition>
+        <argsstring></argsstring>
+        <name>Iterator</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::Iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="14" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1UnicodeString_1a90f7beb239a7c282f1409cf9483183e0" prot="public" static="no">
+        <type>std::u32string::const_iterator</type>
+        <definition>using SR_HTYPES_NS::UnicodeString::ConstIterator =  std::u32string::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>ConstIterator</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::ConstIterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1UnicodeString_1a78138cee16e31daa13e8e25767d6fbac" prot="private" static="no" mutable="no">
+        <type>std::u32string</type>
+        <definition>std::u32string SR_HTYPES_NS::UnicodeString::m_internal</definition>
+        <argsstring></argsstring>
+        <name>m_internal</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::m_internal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="64" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a63523a1fad3a3fd87cb2ef30a9877606" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::UnicodeString::UnicodeString</definition>
+        <argsstring>()=default</argsstring>
+        <name>UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::UnicodeString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aefa974308ab6d4eaf968b6355d2dc4d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::UnicodeString::UnicodeString</definition>
+        <argsstring>(const UnicodeString &amp;other)</argsstring>
+        <name>UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::UnicodeString</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="19" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a4bb7dd8f4b45e1ddb8a38a2d492dc845" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::UnicodeString::UnicodeString</definition>
+        <argsstring>(UnicodeString &amp;&amp;other) noexcept</argsstring>
+        <name>UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::UnicodeString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aa5ad35e7a0adb2c0da28b7824c412495" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::UnicodeString::UnicodeString</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::UnicodeString</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a2eac57642c8aeb439e7e92b6d05a0e55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::UnicodeString::UnicodeString</definition>
+        <argsstring>(const std::u16string &amp;str)</argsstring>
+        <name>UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::UnicodeString</qualifiedname>
+        <param>
+          <type>const std::u16string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT(google-explicit-constructor) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aa8e4b8c92cc243619ac52504c997d323" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::UnicodeString::UnicodeString</definition>
+        <argsstring>(const std::u32string &amp;str)</argsstring>
+        <name>UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::UnicodeString</qualifiedname>
+        <param>
+          <type>const std::u32string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT(google-explicit-constructor) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aacaad68bd873efbf232f860adbb7fd2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_HTYPES_NS::UnicodeString::~UnicodeString</definition>
+        <argsstring>()=default</argsstring>
+        <name>~UnicodeString</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::~UnicodeString</qualifiedname>
+        <briefdescription>
+<para>NOLINT(google-explicit-constructor) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="26" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1ac34760c6a6e7d749844a85814c5a8ce7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+        <definition>UnicodeString &amp; SR_HTYPES_NS::UnicodeString::operator=</definition>
+        <argsstring>(const UnicodeString &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="28" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aef52c1be532f628f1fea780e6f00f5c3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+        <definition>UnicodeString &amp; SR_HTYPES_NS::UnicodeString::operator=</definition>
+        <argsstring>(UnicodeString &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="29" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1abbee36b7a30b1e5d5d9f139fd7209b46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+        <definition>UnicodeString &amp; SR_HTYPES_NS::UnicodeString::operator=</definition>
+        <argsstring>(const std::u32string &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator=</qualifiedname>
+        <param>
+          <type>const std::u32string &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="31" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aab7e889dd2e439b8564cca0eb41f4289" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+        <definition>UnicodeString &amp; SR_HTYPES_NS::UnicodeString::operator=</definition>
+        <argsstring>(std::u32string &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator=</qualifiedname>
+        <param>
+          <type>std::u32string &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="32" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a063752d47f0843b36359907a05ceba29" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::UnicodeString::operator==</definition>
+        <argsstring>(const std::u32string &amp;str) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator==</qualifiedname>
+        <param>
+          <type>const std::u32string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="34" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a115a872a243f9448d21e87e821df9827" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::UnicodeString::operator!=</definition>
+        <argsstring>(const std::u32string &amp;str) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator!=</qualifiedname>
+        <param>
+          <type>const std::u32string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="35" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a247f53aa7c5329ccb4a6859d2a5f2579" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::UnicodeString::operator==</definition>
+        <argsstring>(const UnicodeString &amp;str) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="37" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a4d40d82f770c047df2783218c513e4de" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::UnicodeString::operator!=</definition>
+        <argsstring>(const UnicodeString &amp;str) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">UnicodeString</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="38" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a887384a53e4e4c5895b7e15482f1de3c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::u32string_view</type>
+        <definition>SR_NODISCARD std::u32string_view SR_HTYPES_NS::UnicodeString::View</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>View</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::View</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="40" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a8f9a0e519706acf5a73fb76ea02efda3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::UnicodeString::operator std::u32string</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator std::u32string</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::u32string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="42" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a9217df1956778f337b8d0f09900f561b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::UnicodeString::operator std::u32string_view</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator std::u32string_view</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::u32string_view</qualifiedname>
+        <briefdescription>
+<para>NOLINT(google-explicit-constructor) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="43" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1ad07fe300bc6342844cccb5ee0ab074e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::UnicodeString::resize</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>resize</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::resize</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT(google-explicit-constructor) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a71afea01fe0d32ca929face0f8020817" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_HTYPES_NS::UnicodeString::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="48" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1abb0f2e7dc16658c3b36160a58f20e994" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD size_t</type>
+        <definition>SR_NODISCARD size_t SR_HTYPES_NS::UnicodeString::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="49" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1abecfd41c724b84a97ac09f0b2ec0fb40" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Iterator</type>
+        <definition>SR_NODISCARD Iterator SR_HTYPES_NS::UnicodeString::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="51" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a3407ee2c5c12b80d94432c1d49616ad3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Iterator</type>
+        <definition>SR_NODISCARD Iterator SR_HTYPES_NS::UnicodeString::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="52" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a6ef9c7bd692fcf653caa5af61c37b3ea" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD ConstIterator</type>
+        <definition>SR_NODISCARD ConstIterator SR_HTYPES_NS::UnicodeString::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="54" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a337dd9d752abad2068cb85740545c7bc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD ConstIterator</type>
+        <definition>SR_NODISCARD ConstIterator SR_HTYPES_NS::UnicodeString::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="55" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a8cedcb027406779dbc1dcd9db5bb79a5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const CharType *</type>
+        <definition>SR_NODISCARD const CharType * SR_HTYPES_NS::UnicodeString::c_str</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>c_str</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::c_str</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="57" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1aa86a01b22b8fc36c9e83624113247249" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD CharType *</type>
+        <definition>SR_NODISCARD CharType * SR_HTYPES_NS::UnicodeString::data</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="58" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1a5df9b8d3df28a598f806dcce7ff5c82a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD CharType &amp;</type>
+        <definition>SR_NODISCARD CharType &amp; SR_HTYPES_NS::UnicodeString::operator[]</definition>
+        <argsstring>(size_t position) noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator[]</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="60" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1UnicodeString_1ae3daaa5092ae0a4bf84eff8e2772016e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const CharType &amp;</type>
+        <definition>SR_NODISCARD const CharType &amp; SR_HTYPES_NS::UnicodeString::operator[]</definition>
+        <argsstring>(size_t position) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_HTYPES_NS::UnicodeString::operator[]</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="61" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UnicodeString.h" bodystart="11" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1abecfd41c724b84a97ac09f0b2ec0fb40" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>begin</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a6ef9c7bd692fcf653caa5af61c37b3ea" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>begin</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a8cedcb027406779dbc1dcd9db5bb79a5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>c_str</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a494a1c3e58e0923d9504983a2babd9bc" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>CharType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a90f7beb239a7c282f1409cf9483183e0" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>ConstIterator</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aa86a01b22b8fc36c9e83624113247249" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>data</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a71afea01fe0d32ca929face0f8020817" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>empty</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a3407ee2c5c12b80d94432c1d49616ad3" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>end</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a337dd9d752abad2068cb85740545c7bc" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>end</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a6ac7eb541fb3cb39ef0599388fbc23f5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>Iterator</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a78138cee16e31daa13e8e25767d6fbac" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>m_internal</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a8f9a0e519706acf5a73fb76ea02efda3" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator std::u32string</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a9217df1956778f337b8d0f09900f561b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator std::u32string_view</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a115a872a243f9448d21e87e821df9827" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a4d40d82f770c047df2783218c513e4de" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1ac34760c6a6e7d749844a85814c5a8ce7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aef52c1be532f628f1fea780e6f00f5c3" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1abbee36b7a30b1e5d5d9f139fd7209b46" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aab7e889dd2e439b8564cca0eb41f4289" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a063752d47f0843b36359907a05ceba29" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a247f53aa7c5329ccb4a6859d2a5f2579" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a5df9b8d3df28a598f806dcce7ff5c82a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator[]</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1ae3daaa5092ae0a4bf84eff8e2772016e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>operator[]</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1ad07fe300bc6342844cccb5ee0ab074e1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>resize</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1abb0f2e7dc16658c3b36160a58f20e994" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>size</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a63523a1fad3a3fd87cb2ef30a9877606" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>UnicodeString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aefa974308ab6d4eaf968b6355d2dc4d8" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>UnicodeString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a4bb7dd8f4b45e1ddb8a38a2d492dc845" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>UnicodeString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aa5ad35e7a0adb2c0da28b7824c412495" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>UnicodeString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a2eac57642c8aeb439e7e92b6d05a0e55" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>UnicodeString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aa8e4b8c92cc243619ac52504c997d323" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>UnicodeString</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1a887384a53e4e4c5895b7e15482f1de3c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>View</name></member>
+      <member refid="classSR__HTYPES__NS_1_1UnicodeString_1aacaad68bd873efbf232f860adbb7fd2f" prot="public" virt="virtual"><scope>SR_HTYPES_NS::UnicodeString</scope><name>~UnicodeString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

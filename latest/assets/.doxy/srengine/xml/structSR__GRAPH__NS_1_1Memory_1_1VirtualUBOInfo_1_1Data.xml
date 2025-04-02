@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ae95caf30965bb84de28fad2ea344a182" prot="public" static="no" mutable="no">
+        <type>UBO</type>
+        <definition>UBO SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::ubo</definition>
+        <argsstring></argsstring>
+        <name>ubo</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::ubo</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="26" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ad958797212adcb53552d32f8ee990d60" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::pShaderHandle</definition>
+        <argsstring></argsstring>
+        <name>pShaderHandle</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::pShaderHandle</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="27" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1a0dccbb88c9b01fc1b866574f77ec3a5a" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::uboSize</definition>
+        <argsstring></argsstring>
+        <name>uboSize</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::uboSize</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="28" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1adad7807380cb32d2e365e0a549897a9f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::Validate</definition>
+        <argsstring>() const</argsstring>
+        <name>Validate</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data::Validate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="30" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="30" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/UBOManager.h" bodystart="25" bodyend="35"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ad958797212adcb53552d32f8ee990d60" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</scope><name>pShaderHandle</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1ae95caf30965bb84de28fad2ea344a182" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</scope><name>ubo</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1a0dccbb88c9b01fc1b866574f77ec3a5a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</scope><name>uboSize</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualUBOInfo_1_1Data_1adad7807380cb32d2e365e0a549897a9f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualUBOInfo::Data</scope><name>Validate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

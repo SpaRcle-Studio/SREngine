@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1Hierarchy" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::Hierarchy</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_GRAPH_NS::GUI::Widget</basecompoundref>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a51b48dd360db44fff29a46aed31b5b67" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>ImVec4</type>
+        <definition>ImVec4 SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_FIRST</definition>
+        <argsstring></argsstring>
+        <name>SR_PREFAB_COLOR_FIRST</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_FIRST</qualifiedname>
+        <initializer>= ImVec4(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="17" column="33" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae6d836cd0570a9a215ab51fe6f3cbe5b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>ImVec4</type>
+        <definition>ImVec4 SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_SECOND</definition>
+        <argsstring></argsstring>
+        <name>SR_PREFAB_COLOR_SECOND</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_SECOND</qualifiedname>
+        <initializer>= ImVec4(1.f, 140.f / 255.f, 0, 1.f)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="18" column="33" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a01276bbc75e83719c2b6e402bf0c77a0" prot="private" static="no" mutable="no">
+        <type>const ImGuiTreeNodeFlags</type>
+        <definition>const ImGuiTreeNodeFlags SR_CORE_GUI_NS::Hierarchy::m_nodeFlagsWithChild</definition>
+        <argsstring></argsstring>
+        <name>m_nodeFlagsWithChild</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_nodeFlagsWithChild</qualifiedname>
+        <initializer>= ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="50" column="34" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1acc32c67b3b08915d90b309edf0e8573b" prot="private" static="no" mutable="no">
+        <type>const ImGuiTreeNodeFlags</type>
+        <definition>const ImGuiTreeNodeFlags SR_CORE_GUI_NS::Hierarchy::m_nodeFlagsWithoutChild</definition>
+        <argsstring></argsstring>
+        <name>m_nodeFlagsWithoutChild</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_nodeFlagsWithoutChild</qualifiedname>
+        <initializer>= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="51" column="34" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aa87072ea55fd69d87164f5da18ed13e3" prot="private" static="no" mutable="no">
+        <type>SR_WORLD_NS::Scene::Ptr</type>
+        <definition>SR_WORLD_NS::Scene::Ptr SR_CORE_GUI_NS::Hierarchy::m_scene</definition>
+        <argsstring></argsstring>
+        <name>m_scene</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_scene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="53" column="33" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" prot="private" static="no" mutable="no">
+        <type>std::list&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
+        <definition>std::list&lt;SR_UTILS_NS::SceneObject::Ptr&gt; SR_CORE_GUI_NS::Hierarchy::m_pointersHolder</definition>
+        <argsstring></argsstring>
+        <name>m_pointersHolder</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_pointersHolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="54" column="19" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a9bda454833af0943f4e392f88df454e7" prot="private" static="no" mutable="no">
+        <type>std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::SceneObject::Ptr&gt; SR_CORE_GUI_NS::Hierarchy::m_selected</definition>
+        <argsstring></argsstring>
+        <name>m_selected</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_selected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="55" column="18" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ac32caa7cc57b8fafb37c77309a1b70b3" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; SR_UTILS_NS::SceneObject::Ptr &gt;</type>
+        <definition>std::vector&lt;SR_UTILS_NS::SceneObject::Ptr&gt; SR_CORE_GUI_NS::Hierarchy::m_tree</definition>
+        <argsstring></argsstring>
+        <name>m_tree</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="56" column="21" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae2bd31037251ddfe5f8e3d7c41e629c5" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::Hierarchy::m_shiftPressed</definition>
+        <argsstring></argsstring>
+        <name>m_shiftPressed</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_shiftPressed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="58" column="21" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a2514040a454d548280c8daa9e6670473" prot="private" static="no" mutable="no">
+        <type>SR_GRAPH_NS::GUI::Widget *</type>
+        <definition>SR_GRAPH_NS::GUI::Widget* SR_CORE_GUI_NS::Hierarchy::m_sceneRunnerWidget</definition>
+        <argsstring></argsstring>
+        <name>m_sceneRunnerWidget</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::m_sceneRunnerWidget</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="60" column="34" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a7b75614fee4522621c7f0769aa22687a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::Hierarchy::Hierarchy</definition>
+        <argsstring>()</argsstring>
+        <name>Hierarchy</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::Hierarchy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a4652509093f7f1ac0fc51bfaa0eff132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::Hierarchy::~Hierarchy</definition>
+        <argsstring>() override</argsstring>
+        <name>~Hierarchy</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::~Hierarchy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="21" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1adb2d8d61191346b6472192bb8ec9f1b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::Update</definition>
+        <argsstring>(float_t dt) override</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::Update</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="24" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1abd67e7b4ccceefcc7b9c0373b816ca68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::SetScene</definition>
+        <argsstring>(const SR_WORLD_NS::Scene::Ptr &amp;scene) override</argsstring>
+        <name>SetScene</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SetScene</qualifiedname>
+        <param>
+          <type>const SR_WORLD_NS::Scene::Ptr &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a17c0e685cb7754f0317b47b92985a59d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::OnKeyDown</definition>
+        <argsstring>(const SR_UTILS_NS::KeyboardInputData *data) override</argsstring>
+        <name>OnKeyDown</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::OnKeyDown</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">SR_UTILS_NS::KeyboardInputData</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae3c65fbc8ba1ab390ab61a232f678f45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::OnKeyUp</definition>
+        <argsstring>(const SR_UTILS_NS::KeyboardInputData *data) override</argsstring>
+        <name>OnKeyUp</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::OnKeyUp</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">SR_UTILS_NS::KeyboardInputData</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aeae5c849f090fc083e01a22c78b9abd3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt; &amp; SR_CORE_GUI_NS::Hierarchy::GetSelected</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSelected</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::GetSelected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="31" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a0264f032de91a26b98d9b88ec69262b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::ClearSelected</definition>
+        <argsstring>()</argsstring>
+        <name>ClearSelected</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::ClearSelected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aaa468ffb73149b2cdbc2278cae3a0165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::SelectGameObject</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;ptr)</argsstring>
+        <name>SelectGameObject</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SelectGameObject</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a4a69d1a33fac10718dadb5a4af25ee75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::SetSelectedImpl</definition>
+        <argsstring>(const std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt; &amp;changeSelected)</argsstring>
+        <name>SetSelectedImpl</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SetSelectedImpl</qualifiedname>
+        <param>
+          <type>const std::set&lt; SR_UTILS_NS::SceneObject::Ptr &gt; &amp;</type>
+          <declname>changeSelected</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="36" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aad2240464f828673492726aa78e8c8f8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::ExpandPath</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;gm)</argsstring>
+        <name>ExpandPath</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::ExpandPath</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>gm</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a1e6716177a40eaea99616c7849df1d3a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::Draw</definition>
+        <argsstring>() override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::Draw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a51ed637960df07f8b633fea282b4caa8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::CheckSelected</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;gm)</argsstring>
+        <name>CheckSelected</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::CheckSelected</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>gm</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a63df9e56b7326553dd1e6c964b0bd06f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void SR_INLINE</type>
+        <definition>void SR_INLINE SR_CORE_GUI_NS::Hierarchy::ContextMenu</definition>
+        <argsstring>()</argsstring>
+        <name>ContextMenu</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::ContextMenu</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="42" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a1d1fb853e17c699bee3f18c899bc4dc7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::ChildContextMenu</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;gm, uint64_t id)</argsstring>
+        <name>ChildContextMenu</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::ChildContextMenu</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>gm</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a15fcdf495d5a461c1e60d90f377b27a1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Hierarchy::DrawChild</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;root, uint32_t prefabIndex)</argsstring>
+        <name>DrawChild</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::DrawChild</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>prefabIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a5bec53304ee03b7443d2687515578184" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void SR_INLINE</type>
+        <definition>void SR_INLINE SR_CORE_GUI_NS::Hierarchy::Copy</definition>
+        <argsstring>() const</argsstring>
+        <name>Copy</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::Copy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="45" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1aa9defca7cb772425fe26f905fc5efabe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void SR_INLINE</type>
+        <definition>void SR_INLINE SR_CORE_GUI_NS::Hierarchy::Paste</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;pParent, bool fromGUI)</argsstring>
+        <name>Paste</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::Paste</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>pParent</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>fromGUI</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="46" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a83d53bd642f454b320aca272af8f3217" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void SR_INLINE</type>
+        <definition>void SR_INLINE SR_CORE_GUI_NS::Hierarchy::Delete</definition>
+        <argsstring>()</argsstring>
+        <name>Delete</name>
+        <qualifiedname>SR_CORE_GUI_NS::Hierarchy::Delete</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="47" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::Hierarchy</label>
+        <link refid="classSR__CORE__GUI__NS_1_1Hierarchy"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::GUI::Widget</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::Hierarchy</label>
+        <link refid="classSR__CORE__GUI__NS_1_1Hierarchy"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::GUI::Widget</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="16" column="5" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="16" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a51ed637960df07f8b633fea282b4caa8" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>CheckSelected</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a1d1fb853e17c699bee3f18c899bc4dc7" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ChildContextMenu</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a0264f032de91a26b98d9b88ec69262b5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ClearSelected</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a63df9e56b7326553dd1e6c964b0bd06f" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ContextMenu</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a5bec53304ee03b7443d2687515578184" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Copy</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a83d53bd642f454b320aca272af8f3217" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Delete</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a1e6716177a40eaea99616c7849df1d3a" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Draw</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a15fcdf495d5a461c1e60d90f377b27a1" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>DrawChild</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aad2240464f828673492726aa78e8c8f8" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>ExpandPath</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aeae5c849f090fc083e01a22c78b9abd3" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>GetSelected</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a7b75614fee4522621c7f0769aa22687a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Hierarchy</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a01276bbc75e83719c2b6e402bf0c77a0" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_nodeFlagsWithChild</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1acc32c67b3b08915d90b309edf0e8573b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_nodeFlagsWithoutChild</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_pointersHolder</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aa87072ea55fd69d87164f5da18ed13e3" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_scene</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a2514040a454d548280c8daa9e6670473" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_sceneRunnerWidget</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a9bda454833af0943f4e392f88df454e7" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_selected</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ae2bd31037251ddfe5f8e3d7c41e629c5" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_shiftPressed</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ac32caa7cc57b8fafb37c77309a1b70b3" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>m_tree</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a17c0e685cb7754f0317b47b92985a59d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ae3c65fbc8ba1ab390ab61a232f678f45" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aa9defca7cb772425fe26f905fc5efabe" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Paste</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aaa468ffb73149b2cdbc2278cae3a0165" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>SelectGameObject</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1abd67e7b4ccceefcc7b9c0373b816ca68" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>SetScene</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a4a69d1a33fac10718dadb5a4af25ee75" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>SetSelectedImpl</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a51b48dd360db44fff29a46aed31b5b67" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>SR_PREFAB_COLOR_FIRST</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ae6d836cd0570a9a215ab51fe6f3cbe5b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>SR_PREFAB_COLOR_SECOND</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1adb2d8d61191346b6472192bb8ec9f1b0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>Update</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a4652509093f7f1ac0fc51bfaa0eff132" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Hierarchy</scope><name>~Hierarchy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine" kind="class" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</compoundname>
+    <basecompoundref refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode" prot="public" virt="non-virtual">SR_ANIMATIONS_NS::AnimationGraphNode</basecompoundref>
+    <includes refid="AnimationGraphNode_8h" local="no">AnimationGraphNode.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a5fbc69c217a20d1fd9ccdd27e2e09dfb" prot="private" static="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode" kindref="compound">AnimationGraphNode</ref></type>
+        <definition>using SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Super =  AnimationGraphNode</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="70" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1abbeb2156142fce03692a302781700078" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
+        <definition>AnimationStateMachine* SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::m_stateMachine</definition>
+        <argsstring></argsstring>
+        <name>m_stateMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::m_stateMachine</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="91" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a0899a1f20e7f75b1250de9015aaa513f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::AnimationGraphNodeStateMachine</definition>
+        <argsstring>()</argsstring>
+        <name>AnimationGraphNodeStateMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::AnimationGraphNodeStateMachine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="72" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="72" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a0454c6e9de49fe7752d53e6b061852e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::~AnimationGraphNodeStateMachine</definition>
+        <argsstring>() override</argsstring>
+        <name>~AnimationGraphNodeStateMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::~AnimationGraphNodeStateMachine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="76" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a57f6bc958b6b2bbac8a1fe9d9639728c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::SetStateMachine</definition>
+        <argsstring>(AnimationStateMachine *pMachine)</argsstring>
+        <name>SetStateMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::SetStateMachine</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
+          <declname>pMachine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="81" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a00a4316edb3440c7272b329f04aab4d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Compile</definition>
+        <argsstring>(CompileContext &amp;context) override</argsstring>
+        <name>Compile</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Compile</qualifiedname>
+        <reimplements refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1adda8f281ad37be24ec4f4de1823f3827">Compile</reimplements>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1CompileContext" kindref="compound">CompileContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="82" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1aa7067389837f8a575139418c9446bcc5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::IsStateActive</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name) const override</argsstring>
+        <name>IsStateActive</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::IsStateActive</qualifiedname>
+        <reimplements refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ae317d1aa8bf667395363c4fc518058b1">IsStateActive</reimplements>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="84" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1ad1a9628397bd4a0423b0d959ba787371" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationPose" kindref="compound">AnimationPose</ref> *</type>
+        <definition>SR_NODISCARD AnimationPose * SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Update</definition>
+        <argsstring>(UpdateContext &amp;context, const AnimationLink &amp;from) override</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Update</qualifiedname>
+        <reimplements refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a6bb150752fe838747b567110d9f6e086">Update</reimplements>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1UpdateContext" kindref="compound">UpdateContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1AnimationLink" kindref="compound">AnimationLink</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="85" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1acb02382fece9eef2b7bb7c428f5c6948" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine" kindref="compound">AnimationStateMachine</ref> *</type>
+        <definition>SR_NODISCARD AnimationStateMachine * SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::GetMachine</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetMachine</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::GetMachine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="87" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a8e5d891fbd558946f45106f4292a1cea" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD AnimationGraphNodeType</type>
+        <definition>SR_NODISCARD AnimationGraphNodeType SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::GetType</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetType</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::GetType</qualifiedname>
+        <reimplements refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a641bc1f3c4226b7b81b9795884818bb2">GetType</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="88" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a4ba0a9f1beef4037565d4e1d34c88ab0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine" kindref="compound">AnimationGraphNodeStateMachine</ref> *</type>
+        <definition>static SR_NODISCARD AnimationGraphNodeStateMachine * SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Load</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;nodeXml)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine::Load</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>nodeXml</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="79" column="60"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_ANIMATIONS_NS::AnimationGraphNode</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="9">
+        <label>Entity</label>
+      </node>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::AnimationGraph</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationGraph"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_path</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_pAnimator</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_ANIMATIONS_NS::AnimationGraphNode</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_graph</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>m_pose</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>m_stateMachine</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_ANIMATIONS_NS::AnimationPose</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationPose"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SR_ANIMATIONS_NS::AnimationStateMachine</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_ANIMATIONS_NS::Animator</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1Animator"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::IAnimationDataSet</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" line="69" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationGraphNode.h" bodystart="69" bodyend="93"/>
+    <listofallmembers>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ad053976f9a82fe6617f4345b8b127288" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>AnimationGraphNode</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a0899a1f20e7f75b1250de9015aaa513f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>AnimationGraphNodeStateMachine</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a00a4316edb3440c7272b329f04aab4d6" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>Compile</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a5387fc82236ee410872bafda8a12624b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>ConnectTo</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a1c900bc5ca0cdbef38527084ea4474e0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>GetIndex</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a891a7e9de136ac3a46245e34df06d9c3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>GetInputCount</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1acb02382fece9eef2b7bb7c428f5c6948" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>GetMachine</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a2f5190ef7d02128a08c4b62342f168c3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>GetOutputCount</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a8e5d891fbd558946f45106f4292a1cea" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>GetType</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1aa7067389837f8a575139418c9446bcc5" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>IsStateActive</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a4ba0a9f1beef4037565d4e1d34c88ab0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>Load</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1af37a825c77532fa1f61b00a8fba27937" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>m_graph</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1af7f3a78d6b0bb03a52e661ca5a45bab4" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>m_inputPins</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a9ce274254fc20557051d1441fd65c7a3" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>m_outputPins</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a06c148aad06c2bec159933325ffb86a8" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>m_pose</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1abbeb2156142fce03692a302781700078" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>m_stateMachine</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>operator=</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ade5e8529b80b34d7a28bdfcd4a323320" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>SetGraph</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a57f6bc958b6b2bbac8a1fe9d9639728c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>SetStateMachine</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a5fbc69c217a20d1fd9ccdd27e2e09dfb" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>Super</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1ad1a9628397bd4a0423b0d959ba787371" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>Update</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a2314026f75ade68bc0bc4fbf2bfa7a73" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>~AnimationGraphNode</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNodeStateMachine_1a0454c6e9de49fe7752d53e6b061852e5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>~AnimationGraphNodeStateMachine</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

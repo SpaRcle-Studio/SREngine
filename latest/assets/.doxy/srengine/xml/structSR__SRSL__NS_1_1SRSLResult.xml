@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__SRSL__NS_1_1SRSLResult" kind="struct" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::SRSLResult</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1af1f9387c1d1a6037774c6a576e2104f5" prot="public" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &gt;</type>
+        <definition>std::list&lt;SRSLMessage&gt; SR_SRSL_NS::SRSLResult::warnings</definition>
+        <argsstring></argsstring>
+        <name>warnings</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::warnings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="280" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="280" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" prot="public" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &gt;</type>
+        <definition>std::list&lt;SRSLMessage&gt; SR_SRSL_NS::SRSLResult::errors</definition>
+        <argsstring></argsstring>
+        <name>errors</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::errors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="281" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="281" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1aaa3d70df2281d3ab064f0b5c243e54ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLResult::SRSLResult</definition>
+        <argsstring>()=default</argsstring>
+        <name>SRSLResult</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::SRSLResult</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="250" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1a3443579901304d99d74d7ffaf60c5347" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLResult::SRSLResult</definition>
+        <argsstring>(SRSLReturnCode code)</argsstring>
+        <name>SRSLResult</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::SRSLResult</qualifiedname>
+        <param>
+          <type>SRSLReturnCode</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="252" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="252" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1a98a8d013f98a7a004ae223c934bd115e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLResult::SRSLResult</definition>
+        <argsstring>(SRSLReturnCode code, const Lexem *pLexem)</argsstring>
+        <name>SRSLResult</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::SRSLResult</qualifiedname>
+        <param>
+          <type>SRSLReturnCode</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
+          <declname>pLexem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="256" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="256" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ada484d74464cbb4d0fd7e011059abfac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &amp;</type>
+        <definition>SRSLMessage &amp; SR_SRSL_NS::SRSLResult::AddError</definition>
+        <argsstring>(const SRSLMessage &amp;message)</argsstring>
+        <name>AddError</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::AddError</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="260" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="260" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ad562b23967669a1d7a55245110be2481" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLResult::HasErrors</definition>
+        <argsstring>() const</argsstring>
+        <name>HasErrors</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::HasErrors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="262" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="262" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ab2ff371d065524c89d14e10c7998d124" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLResult::HasWarnings</definition>
+        <argsstring>() const</argsstring>
+        <name>HasWarnings</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::HasWarnings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="263" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="263" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1ac13ab6683556f94b79df48a7c1e6011f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLResult::HasAny</definition>
+        <argsstring>() const</argsstring>
+        <name>HasAny</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::HasAny</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="264" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="264" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLResult_1a35467f2ecbb32de727680666dc02eb1b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::SRSLResult::ToString</definition>
+        <argsstring>(const std::vector&lt; SR_UTILS_NS::StringAtom &gt; &amp;files, uint8_t tab=1) const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::ToString</qualifiedname>
+        <param>
+          <type>const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt; &amp;</type>
+          <declname>files</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>tab</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="266" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="266" bodyend="278"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="249" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="249" bodyend="282"/>
+    <listofallmembers>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1ada484d74464cbb4d0fd7e011059abfac" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>AddError</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>errors</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1ac13ab6683556f94b79df48a7c1e6011f" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>HasAny</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1ad562b23967669a1d7a55245110be2481" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>HasErrors</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1ab2ff371d065524c89d14e10c7998d124" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>HasWarnings</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1aaa3d70df2281d3ab064f0b5c243e54ac" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>SRSLResult</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1a3443579901304d99d74d7ffaf60c5347" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>SRSLResult</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1a98a8d013f98a7a004ae223c934bd115e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>SRSLResult</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1a35467f2ecbb32de727680666dc02eb1b" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>ToString</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1af1f9387c1d1a6037774c6a576e2104f5" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>warnings</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

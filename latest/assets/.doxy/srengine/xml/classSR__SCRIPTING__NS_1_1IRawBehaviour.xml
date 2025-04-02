@@ -1,0 +1,785 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SCRIPTING__NS_1_1IRawBehaviour" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_SCRIPTING_NS::IRawBehaviour</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1EvoBehaviour" prot="public" virt="non-virtual">SR_SCRIPTING_NS::EvoBehaviour</derivedcompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aa2fd7ad2173a2d58a4f8be0fc49623dd" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref></type>
+        <definition>using SR_SCRIPTING_NS::IRawBehaviour::Super =  SR_UTILS_NS::IResource</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="22" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a30b3d7b27a1e7cfc1507fa1e92c04fb4" prot="private" static="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>using SR_SCRIPTING_NS::IRawBehaviour::Properties =  std::vector&lt;std::string&gt;</definition>
+        <argsstring></argsstring>
+        <name>Properties</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Properties</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="23" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac21f792fed5b31a0ad3ccd5b4add29fd" prot="private" static="no">
+        <type>std::list&lt; std::pair&lt; std::string, std::any &gt; &gt;</type>
+        <definition>using SR_SCRIPTING_NS::IRawBehaviour::ValueProperties =  std::list&lt;std::pair&lt;std::string, std::any&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>ValueProperties</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::ValueProperties</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="24" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a09592cfe1a7c47ffdb5d087211ce4dc4" prot="protected" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::IRawBehaviour::m_hasErrors</definition>
+        <argsstring></argsstring>
+        <name>m_hasErrors</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::m_hasErrors</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="68" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a6178e3d4f6cd79e2954e2164cea0aef2" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__SCRIPTING__NS_1_1Behaviour" kindref="compound">Behaviour</ref> *</type>
+        <definition>Behaviour* SR_SCRIPTING_NS::IRawBehaviour::m_component</definition>
+        <argsstring></argsstring>
+        <name>m_component</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::m_component</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="69" column="19" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a4206a62164f35b523edaf156ab0d3a4e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::IRawBehaviour::IRawBehaviour</definition>
+        <argsstring>(uint64_t hashName)</argsstring>
+        <name>IRawBehaviour</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::IRawBehaviour</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="26" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="26" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a0e238f4e58aace80e182793946ce1346" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::SetComponent</definition>
+        <argsstring>(Behaviour *pBehaviour)</argsstring>
+        <name>SetComponent</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::SetComponent</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac694644f21c766e5eac945008c4042c2">SetComponent</reimplementedby>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1Behaviour" kindref="compound">Behaviour</ref> *</type>
+          <declname>pBehaviour</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="34" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8225920b0ced1a39f2a3c877e4fde5fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::IRawBehaviour::Load</definition>
+        <argsstring>() override</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Load</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5">Load</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="38" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a24eb129e303adba64c89c0c7a6453b9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::IRawBehaviour::Unload</definition>
+        <argsstring>() override</argsstring>
+        <name>Unload</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Unload</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b">Unload</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="39" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad3be0e8218a8b2b4c6a922093a43df64" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::IRawBehaviour::Reload</definition>
+        <argsstring>() override</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Reload</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c">Reload</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a18a8fd04a9fe7705ec664083bcb1c649" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::IRawBehaviour::OnReloadDone</definition>
+        <argsstring>() override</argsstring>
+        <name>OnReloadDone</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnReloadDone</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858">OnReloadDone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad29eb19fed53ca135e3a23623680bc50" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Properties</type>
+        <definition>virtual Properties SR_SCRIPTING_NS::IRawBehaviour::GetProperties</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetProperties</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::GetProperties</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a03c88b5c4852cb5ea27c9ba37263653a">GetProperties</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="44" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1af69c9660815351951a910fd9b93f9cb9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::any</type>
+        <definition>virtual std::any SR_SCRIPTING_NS::IRawBehaviour::GetProperty</definition>
+        <argsstring>(const std::string &amp;id) const =0</argsstring>
+        <name>GetProperty</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::GetProperty</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ad7764fbe8bf3c73c434bd83aa6e2a9bf">GetProperty</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="45" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aa83892a3b4d29a030a4689a8d32d9d48" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::SetProperty</definition>
+        <argsstring>(const std::string &amp;id, const std::any &amp;val)=0</argsstring>
+        <name>SetProperty</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::SetProperty</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a7225dbc865653bae7245471252018ae5">SetProperty</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const std::any &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="46" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a42275833aa30a5ee7d140a5ac76895ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::Awake</definition>
+        <argsstring>()=0</argsstring>
+        <name>Awake</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Awake</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1acc0b70f783a805a5b5688b3eb9dd28ff">Awake</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="48" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aef5ef7ff4f5256f5e416d2df3bc0b8d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnEnable</definition>
+        <argsstring>()=0</argsstring>
+        <name>OnEnable</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnEnable</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac112e54a30b067b82bb454cddeadb257">OnEnable</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="49" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad585002662a23bbb6354aed0ad9b91ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnDisable</definition>
+        <argsstring>()=0</argsstring>
+        <name>OnDisable</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnDisable</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1aa56329ca17aec7ff8f9896ebd761779c">OnDisable</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="50" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1af09c9de8477754103c7da8aaacbbdce7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnAttached</definition>
+        <argsstring>()=0</argsstring>
+        <name>OnAttached</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnAttached</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1afc44d67c18e8aca09012beef90516d89">OnAttached</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="51" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8833555a6148358ea32ec0ff4bee75c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnDetached</definition>
+        <argsstring>()=0</argsstring>
+        <name>OnDetached</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnDetached</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a3ba5a3649678459e3fc385ca72738c45">OnDetached</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="52" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a84749976a7baa2022ce409b83269d0ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnDestroy</definition>
+        <argsstring>()=0</argsstring>
+        <name>OnDestroy</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnDestroy</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a9e173410c8c7e6afc2f9d8f9972bf72e">OnDestroy</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="53" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ab7684c80e654c0300bb4da98365cb000" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::Start</definition>
+        <argsstring>()=0</argsstring>
+        <name>Start</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Start</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab8e8d9e8f6962040c72243a2fe2baa5b">Start</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="54" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8c5c7377b1377d368e094d9db9f7d50a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::Update</definition>
+        <argsstring>(float_t dt)=0</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Update</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ac37271fc95e2b68e28925c077c787f54">Update</reimplementedby>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="55" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad5664e1a835bea418a1c6edc071b3af8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::FixedUpdate</definition>
+        <argsstring>()=0</argsstring>
+        <name>FixedUpdate</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::FixedUpdate</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1aa2a6802e3987c5c1ef53df2663c838b2">FixedUpdate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="56" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8d46dd86506b0e5f61baba9450f3439c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnCollisionEnter</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)=0</argsstring>
+        <name>OnCollisionEnter</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnCollisionEnter</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a48bdbd20832b81f145a11cebf4dc0c6d">OnCollisionEnter</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="58" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a5a432612c866526a93ce162b8134f08b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnCollisionStay</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)=0</argsstring>
+        <name>OnCollisionStay</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnCollisionStay</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a8dfee99cd6503a1e833d1c5d6d7c503f">OnCollisionStay</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="59" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac7beb3fbdd23bc9d418a5dbd2d8e315b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnCollisionExit</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)=0</argsstring>
+        <name>OnCollisionExit</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnCollisionExit</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a39d661a834b180304d695055acb3a04b">OnCollisionExit</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="60" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a5b80fa5ba0c7c0bad7b3db79e8da6bdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnTriggerEnter</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)=0</argsstring>
+        <name>OnTriggerEnter</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnTriggerEnter</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a9a831af8dcd88a5295f10197c0e275f5">OnTriggerEnter</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="61" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a92231da55286ab2fd6d0d6e84dc9f46b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnTriggerExit</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)=0</argsstring>
+        <name>OnTriggerExit</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnTriggerExit</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a00fccb8ccaaf453f2a25a6b0f7d06ece">OnTriggerExit</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="62" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac4ee00a2a7dcb9cbdd99ad89763d7a5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnTriggerStay</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)=0</argsstring>
+        <name>OnTriggerStay</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnTriggerStay</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a8fa55bd416d9112420f56a7dc8fb7468">OnTriggerStay</reimplementedby>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="63" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a9356e2fb499d2e9bc85f2bc6883f54b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::IRawBehaviour::OnTransformSet</definition>
+        <argsstring>()=0</argsstring>
+        <name>OnTransformSet</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::OnTransformSet</qualifiedname>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a6998754c09cbf753a471f8ae8af892c1">OnTransformSet</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="65" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1IRawBehaviour_1af47102745c8ccec513e8a97bcf8e28ad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__SCRIPTING__NS_1_1IRawBehaviour" kindref="compound">IRawBehaviour</ref> *</type>
+        <definition>static IRawBehaviour * SR_SCRIPTING_NS::IRawBehaviour::Load</definition>
+        <argsstring>(SR_UTILS_NS::Path path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_SCRIPTING_NS::IRawBehaviour::Load</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="31" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="6">
+        <label>SR_SCRIPTING_NS::EvoBehaviour</label>
+        <link refid="classSR__SCRIPTING__NS_1_1EvoBehaviour"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::IRawBehaviour</label>
+        <link refid="classSR__SCRIPTING__NS_1_1IRawBehaviour"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="9">
+        <label>Entity</label>
+      </node>
+      <node id="10">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="7">
+        <label>SR_SCRIPTING_NS::Behaviour</label>
+        <link refid="classSR__SCRIPTING__NS_1_1Behaviour"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>m_rawBehaviour</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::IRawBehaviour</label>
+        <link refid="classSR__SCRIPTING__NS_1_1IRawBehaviour"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_component</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+      <node id="14">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="21" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" bodystart="21" bodyend="71"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>AddUsePoint</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a42275833aa30a5ee7d140a5ac76895ce" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>CopyResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>DeleteResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Destroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Execute</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad5664e1a835bea418a1c6edc071b3af8" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>ForceDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetAssociatedPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetCountUses</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetFileHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetLifetime</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad29eb19fed53ca135e3a23623680bc50" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetProperties</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1af69c9660815351951a910fd9b93f9cb9" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetProperty</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetReloadCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aa31a633243b797e85108ff82e91ddbac" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourceHashName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourceId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourceInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourceLoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abd5268fda05070754a11971a1acbd797" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourceName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4ad5ddd9e1b2c4349ea8e57c310c3447" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>InitializeResourcePath</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a4206a62164f35b523edaf156ab0d3a4e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IRawBehaviour</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4be1db5eacb30d9690f21288ff39eb62" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsAlive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsAllowedToRevive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsFileResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsForceDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsResourceFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af251cc87f482b27ee3573d27d3a44a61" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsResourceType</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>IsResourceWillBeDeleted</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Kill</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1af47102745c8ccec513e8a97bcf8e28ad" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Load</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8225920b0ced1a39f2a3c877e4fde5fe" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>LoadState</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a6178e3d4f6cd79e2954e2164cea0aef2" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_component</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_countUses</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_debugUnUseStackTraces</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_debugUseStackTraces</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a09592cfe1a7c47ffdb5d087211ce4dc4" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_hasErrors</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_isFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_loadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af0144fd07d3ddcf76669ebe112a597ca" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_resourceHashName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>m_watchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>NonCopyable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1af09c9de8477754103c7da8aaacbbdce7" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnAttached</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8d46dd86506b0e5f61baba9450f3439c" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac7beb3fbdd23bc9d418a5dbd2d8e315b" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a5a432612c866526a93ce162b8134f08b" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a84749976a7baa2022ce409b83269d0ae" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnDestroy</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8833555a6148358ea32ec0ff4bee75c6" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnDetached</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad585002662a23bbb6354aed0ad9b91ab" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnDisable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aef5ef7ff4f5256f5e416d2df3bc0b8d8" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnEnable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a18a8fd04a9fe7705ec664083bcb1c649" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnReloadDone</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnResourceRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnResourceUpdated</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a9356e2fb499d2e9bc85f2bc6883f54b3" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a5b80fa5ba0c7c0bad7b3db79e8da6bdd" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a92231da55286ab2fd6d0d6e84dc9f46b" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac4ee00a2a7dcb9cbdd99ad89763d7a5d" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>operator=</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a30b3d7b27a1e7cfc1507fa1e92c04fb4" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Properties</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a49a0ec81c7a8b434b0c46d8df4c38661" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Ptr</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad3be0e8218a8b2b4c6a922093a43df64" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>RELOAD_BEGIN_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f7efd6d454b1324163980ee73d54f08" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>RELOAD_DONE_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>RemoveUPResult</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>ReviveResource</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a0e238f4e58aace80e182793946ce1346" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>SetComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>SetLifetime</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aa83892a3b4d29a030a4689a8d32d9d48" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>SetProperty</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>SetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>SignalWatch</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ab7684c80e654c0300bb4da98365cb000" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Start</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>StartWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>StopWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Subscribe</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aa2fd7ad2173a2d58a4f8be0fc49623dd" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Super</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a24eb129e303adba64c89c0c7a6453b9d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Unload</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8c5c7377b1377d368e094d9db9f7d50a" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>UpdateResourceLifeTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>UpdateResources</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac21f792fed5b31a0ad3ccd5b4add29fd" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>ValueProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>~IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::IRawBehaviour</scope><name>~SubscriptionHolder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

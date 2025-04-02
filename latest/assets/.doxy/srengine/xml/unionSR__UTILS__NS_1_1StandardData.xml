@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="unionSR__UTILS__NS_1_1StandardData" kind="union" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::StandardData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a3b88d42176ee94cf81f563a3cbf25198" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StandardData::m_bool</definition>
+        <argsstring></argsstring>
+        <name>m_bool</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="58" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1aa20d67c4d908eb3bbaaaf4fe044eae94" prot="public" static="no" mutable="no">
+        <type>int8_t</type>
+        <definition>int8_t SR_UTILS_NS::StandardData::m_int8</definition>
+        <argsstring></argsstring>
+        <name>m_int8</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_int8</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="59" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a749765d7e3eddd678c61813aa5d61a0f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_UTILS_NS::StandardData::m_uint8</definition>
+        <argsstring></argsstring>
+        <name>m_uint8</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_uint8</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="60" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a69b3885d1fa93e890311ab8d430f4097" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t SR_UTILS_NS::StandardData::m_int16</definition>
+        <argsstring></argsstring>
+        <name>m_int16</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_int16</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="61" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1ac2b8bde60bbce64b7e9ae5c9b93edccc" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_UTILS_NS::StandardData::m_uint16</definition>
+        <argsstring></argsstring>
+        <name>m_uint16</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_uint16</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="62" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a07ffd5c66306780cd93ae05cb592a7d1" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_UTILS_NS::StandardData::m_int32</definition>
+        <argsstring></argsstring>
+        <name>m_int32</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_int32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="63" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a5026dd4fac63bf8e64e3d8c5361cf203" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_UTILS_NS::StandardData::m_uint32</definition>
+        <argsstring></argsstring>
+        <name>m_uint32</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_uint32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="64" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1add68d0e23663422f6e235aeca7929d8b" prot="public" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t SR_UTILS_NS::StandardData::m_int64</definition>
+        <argsstring></argsstring>
+        <name>m_int64</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_int64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="65" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a5c14376fc90d4a31ef5ccea86f06d516" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::StandardData::m_uint64</definition>
+        <argsstring></argsstring>
+        <name>m_uint64</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_uint64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="66" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a0654e208b44a2bf0abbbd0ade8bee2fa" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_UTILS_NS::StandardData::m_float</definition>
+        <argsstring></argsstring>
+        <name>m_float</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_float</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="67" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__UTILS__NS_1_1StandardData_1a0b0be856ab3e2f00ddb881b54e7ac7cd" prot="public" static="no" mutable="no">
+        <type>double_t</type>
+        <definition>double_t SR_UTILS_NS::StandardData::m_double</definition>
+        <argsstring></argsstring>
+        <name>m_double</name>
+        <qualifiedname>SR_UTILS_NS::StandardData::m_double</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="68" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="57" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="57" bodyend="69"/>
+    <listofallmembers>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a3b88d42176ee94cf81f563a3cbf25198" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_bool</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a0b0be856ab3e2f00ddb881b54e7ac7cd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_double</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a0654e208b44a2bf0abbbd0ade8bee2fa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_float</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a69b3885d1fa93e890311ab8d430f4097" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_int16</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a07ffd5c66306780cd93ae05cb592a7d1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_int32</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1add68d0e23663422f6e235aeca7929d8b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_int64</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1aa20d67c4d908eb3bbaaaf4fe044eae94" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_int8</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1ac2b8bde60bbce64b7e9ae5c9b93edccc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_uint16</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a5026dd4fac63bf8e64e3d8c5361cf203" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_uint32</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a5c14376fc90d4a31ef5ccea86f06d516" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_uint64</name></member>
+      <member refid="unionSR__UTILS__NS_1_1StandardData_1a749765d7e3eddd678c61813aa5d61a0f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardData</scope><name>m_uint8</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

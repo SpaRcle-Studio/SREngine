@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo" kind="struct" language="C++" prot="private">
+    <compoundname>SR_GRAPH_NS::DebugPass::ShaderInfo</compoundname>
+    <innerclass refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1_1MemInfo" prot="public">SR_GRAPH_NS::DebugPass::ShaderInfo::MemInfo</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a8740f1f0702996c788a213ac02f4cfcf" prot="public" static="no" mutable="no">
+        <type>SR_GTYPES_NS::Shader::Ptr</type>
+        <definition>SR_GTYPES_NS::Shader::Ptr SR_GRAPH_NS::DebugPass::ShaderInfo::pShader</definition>
+        <argsstring></argsstring>
+        <name>pShader</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPass::ShaderInfo::pShader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="16" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a67c4615f04c9eaa66792b28510d51aa9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::DebugPass::ShaderInfo::uboUsed</definition>
+        <argsstring></argsstring>
+        <name>uboUsed</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPass::ShaderInfo::uboUsed</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="23" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a77020c7be74d99d4a741deb9e48776c0" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1_1MemInfo" kindref="compound">MemInfo</ref> &gt;</type>
+        <definition>std::vector&lt;MemInfo&gt; SR_GRAPH_NS::DebugPass::ShaderInfo::UBOs</definition>
+        <argsstring></argsstring>
+        <name>UBOs</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPass::ShaderInfo::UBOs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="24" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a343d526c92b9b279de42575a129b16fa" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo" kindref="compound">DebugRenderer::DrawInfo</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;DebugRenderer::DrawInfo&gt; &gt; SR_GRAPH_NS::DebugPass::ShaderInfo::drawQueues</definition>
+        <argsstring></argsstring>
+        <name>drawQueues</name>
+        <qualifiedname>SR_GRAPH_NS::DebugPass::ShaderInfo::drawQueues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="25" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h" bodystart="15" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a343d526c92b9b279de42575a129b16fa" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass::ShaderInfo</scope><name>drawQueues</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a8740f1f0702996c788a213ac02f4cfcf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass::ShaderInfo</scope><name>pShader</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a77020c7be74d99d4a741deb9e48776c0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass::ShaderInfo</scope><name>UBOs</name></member>
+      <member refid="structSR__GRAPH__NS_1_1DebugPass_1_1ShaderInfo_1a67c4615f04c9eaa66792b28510d51aa9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DebugPass::ShaderInfo</scope><name>uboUsed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock" kind="struct" language="C++" prot="private">
+    <compoundname>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1a6254463491c9c5e35debd7c0f484c59c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::hashId</definition>
+        <argsstring></argsstring>
+        <name>hashId</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::hashId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="21" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1ad4353ceb5ceb8b5b99329a9d869d9f2c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="22" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1a4717d487ad0ac0dca2625198f85c0cd2" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::offset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="23" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1a44e665518eee0685ee2e022d756f3816" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::hidden</definition>
+        <argsstring></argsstring>
+        <name>hidden</name>
+        <qualifiedname>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock::hidden</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="24" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h" bodystart="20" bodyend="25"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1a6254463491c9c5e35debd7c0f484c59c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock</scope><name>hashId</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1a44e665518eee0685ee2e022d756f3816" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock</scope><name>hidden</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1a4717d487ad0ac0dca2625198f85c0cd2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock</scope><name>offset</name></member>
+      <member refid="structSR__GRAPH__NS_1_1Memory_1_1ShaderUBOBlock_1_1SubBlock_1ad4353ceb5ceb8b5b99329a9d869d9f2c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::ShaderUBOBlock::SubBlock</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

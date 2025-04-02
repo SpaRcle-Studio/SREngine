@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__WORLD__NS_1_1TensorKey" kind="struct" language="C++" prot="public">
+    <compoundname>SR_WORLD_NS::TensorKey</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__WORLD__NS_1_1TensorKey_1af3b955db8455de9c02004b2d6511001c" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::IVector3</type>
+        <definition>SR_MATH_NS::IVector3 SR_WORLD_NS::TensorKey::region</definition>
+        <argsstring></argsstring>
+        <name>region</name>
+        <qualifiedname>SR_WORLD_NS::TensorKey::region</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="21" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__WORLD__NS_1_1TensorKey_1a908cf7e30320e15c8b630362e62752f0" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::IVector3</type>
+        <definition>SR_MATH_NS::IVector3 SR_WORLD_NS::TensorKey::chunk</definition>
+        <argsstring></argsstring>
+        <name>chunk</name>
+        <qualifiedname>SR_WORLD_NS::TensorKey::chunk</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="22" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__WORLD__NS_1_1TensorKey_1a43f178a0b59cb022bdd64f07ec3f6264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_WORLD_NS::TensorKey::TensorKey</definition>
+        <argsstring>()=default</argsstring>
+        <name>TensorKey</name>
+        <qualifiedname>SR_WORLD_NS::TensorKey::TensorKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="14" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__WORLD__NS_1_1TensorKey_1ad769cf5dcb5d14d0e2b219692c94d76a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_WORLD_NS::TensorKey::TensorKey</definition>
+        <argsstring>(const SR_MATH_NS::IVector3 &amp;_region, const SR_MATH_NS::IVector3 &amp;_chunk)</argsstring>
+        <name>TensorKey</name>
+        <qualifiedname>SR_WORLD_NS::TensorKey::TensorKey</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::IVector3 &amp;</type>
+          <declname>_region</declname>
+        </param>
+        <param>
+          <type>const SR_MATH_NS::IVector3 &amp;</type>
+          <declname>_chunk</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="16" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__WORLD__NS_1_1TensorKey_1a0ffc68e1f599d485976589d90603bc88" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_WORLD_NS::TensorKey::operator==</definition>
+        <argsstring>(const TensorKey &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_WORLD_NS::TensorKey::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__WORLD__NS_1_1TensorKey" kindref="compound">TensorKey</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="24" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="24" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="13" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structSR__WORLD__NS_1_1TensorKey_1a908cf7e30320e15c8b630362e62752f0" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::TensorKey</scope><name>chunk</name></member>
+      <member refid="structSR__WORLD__NS_1_1TensorKey_1a0ffc68e1f599d485976589d90603bc88" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::TensorKey</scope><name>operator==</name></member>
+      <member refid="structSR__WORLD__NS_1_1TensorKey_1af3b955db8455de9c02004b2d6511001c" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::TensorKey</scope><name>region</name></member>
+      <member refid="structSR__WORLD__NS_1_1TensorKey_1a43f178a0b59cb022bdd64f07ec3f6264" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::TensorKey</scope><name>TensorKey</name></member>
+      <member refid="structSR__WORLD__NS_1_1TensorKey_1ad769cf5dcb5d14d0e2b219692c94d76a" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::TensorKey</scope><name>TensorKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

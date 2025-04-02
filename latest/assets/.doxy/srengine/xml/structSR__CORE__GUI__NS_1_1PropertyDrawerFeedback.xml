@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kind="struct" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::PropertyDrawerFeedback</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1a3035eac376a70458c343007856ff75c6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::PropertyDrawerFeedback::isChanged</definition>
+        <argsstring></argsstring>
+        <name>isChanged</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerFeedback::isChanged</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="84" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1aa95cf3e77efc7d632b6fd1953e7ceb5e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::PropertyDrawerFeedback::isDrag</definition>
+        <argsstring></argsstring>
+        <name>isDrag</name>
+        <qualifiedname>SR_CORE_GUI_NS::PropertyDrawerFeedback::isDrag</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="85" column="14" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="83" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="83" bodyend="86"/>
+    <listofallmembers>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1a3035eac376a70458c343007856ff75c6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerFeedback</scope><name>isChanged</name></member>
+      <member refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback_1aa95cf3e77efc7d632b6fd1953e7ceb5e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerFeedback</scope><name>isDrag</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

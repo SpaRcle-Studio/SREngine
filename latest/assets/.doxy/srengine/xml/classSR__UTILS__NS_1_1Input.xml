@@ -1,0 +1,730 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Input" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Input</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; Input &gt;</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1SubscriptionHolder" prot="public" virt="non-virtual">SR_UTILS_NS::SubscriptionHolder</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499c" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>State</name>
+        <qualifiedname>SR_UTILS_NS::Input::State</qualifiedname>
+        <enumvalue id="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499cabb98c20497b6e2dc6765bc6adb8d2c2b" prot="private">
+          <name>UnPressed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499ca08a38277b0309070706f6652eeae9a53" prot="private">
+          <name>Down</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499cad78a68f6a85421ae121c2cb5b73a1040" prot="private">
+          <name>Pressed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499ca258f49887ef8d14ac268c92b02503aaa" prot="private">
+          <name>Up</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Input_1af1685e66ae07a70c6277ec618bb3acab" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void()&gt;</type>
+        <definition>using SR_UTILS_NS::Input::CursorLockCallback =  SR_HTYPES_NS::Function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>CursorLockCallback</name>
+        <qualifiedname>SR_UTILS_NS::Input::CursorLockCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1ad9f11baca354abe30c3b6febcca76a61" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_UTILS_NS::Input::m_counterLock</definition>
+        <argsstring></argsstring>
+        <name>m_counterLock</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_counterLock</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="61" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1aec5b7059362e8b3db6571b264fb4e3fd" prot="private" static="no" mutable="no">
+        <type>CursorLockCallback</type>
+        <definition>CursorLockCallback SR_UTILS_NS::Input::m_lockCursorCallback</definition>
+        <argsstring></argsstring>
+        <name>m_lockCursorCallback</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_lockCursorCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="62" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a0554e61402372b514896e600f9669a63" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mouseDrag</definition>
+        <argsstring></argsstring>
+        <name>m_mouseDrag</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_mouseDrag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="64" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mousePrev</definition>
+        <argsstring></argsstring>
+        <name>m_mousePrev</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_mousePrev</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="65" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a268b3bf151074f0081ab9d4361ed5ff8" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mouse</definition>
+        <argsstring></argsstring>
+        <name>m_mouse</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_mouse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="66" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a21cac5ac144fd41b3fe96f9f0b55cf3e" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mouseScroll</definition>
+        <argsstring></argsstring>
+        <name>m_mouseScroll</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_mouseScroll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="67" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a7bbb9eeafc7e72d0679fb6673699ae2d" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_UTILS_NS::Input::m_mouseScrollCurrent</definition>
+        <argsstring></argsstring>
+        <name>m_mouseScrollCurrent</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_mouseScrollCurrent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="68" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a9a63247d52b0b09ab8caa5cf295a1a38" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::Input::m_init</definition>
+        <argsstring></argsstring>
+        <name>m_init</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_init</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="70" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a43749af9a310ce498fef965d937301ba" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::Input::m_isVisible</definition>
+        <argsstring></argsstring>
+        <name>m_isVisible</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_isVisible</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="71" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a4b998cf3045d13646c7460999e574fc4" prot="private" static="no" mutable="no">
+        <type>State</type>
+        <definition>State SR_UTILS_NS::Input::m_keys[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>m_keys</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_keys</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="73" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Input_1a3977fe32159fe75e3a332aa8f7683836" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* SR_UTILS_NS::Input::m_arr</definition>
+        <argsstring></argsstring>
+        <name>m_arr</name>
+        <qualifiedname>SR_UTILS_NS::Input::m_arr</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="74" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a78b3c197fbb2c8301a67478f4eff13c1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Input::~Input</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Input</name>
+        <qualifiedname>SR_UTILS_NS::Input::~Input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="23" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a2a0eb7912e9ab75a50242a9560dcb110" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::SetMouseScroll</definition>
+        <argsstring>(double_t xOffset, double_t yOffset)</argsstring>
+        <name>SetMouseScroll</name>
+        <qualifiedname>SR_UTILS_NS::Input::SetMouseScroll</qualifiedname>
+        <param>
+          <type>double_t</type>
+          <declname>xOffset</declname>
+        </param>
+        <param>
+          <type>double_t</type>
+          <declname>yOffset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="26" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="26" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ab1879fe2750f438d6cf1b9902314191f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::Check</definition>
+        <argsstring>()</argsstring>
+        <name>Check</name>
+        <qualifiedname>SR_UTILS_NS::Input::Check</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1aa89a32584ab7db00a635025cd773310a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::Reload</definition>
+        <argsstring>()</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_UTILS_NS::Input::Reload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a2c21f73cfb791e2095dacbd1bcaf70e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::ResetMouse</definition>
+        <argsstring>()</argsstring>
+        <name>ResetMouse</name>
+        <qualifiedname>SR_UTILS_NS::Input::ResetMouse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a397012e0b56087d512a0b04b226ff766" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Input::GetMouseDrag</definition>
+        <argsstring>()</argsstring>
+        <name>GetMouseDrag</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetMouseDrag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="34" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a7f6a2cf42f8cf347d0049dbf7e571323" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Input::GetMousePos</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMousePos</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetMousePos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="35" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1add45ebf3175cc1715a25334cf445388a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Input::GetPrevMousePos</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPrevMousePos</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetPrevMousePos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="36" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a11f65a21c1ac6eaa2daf7d66be88de1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Input::IsMouseMoved</definition>
+        <argsstring>() const</argsstring>
+        <name>IsMouseMoved</name>
+        <qualifiedname>SR_UTILS_NS::Input::IsMouseMoved</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="37" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ae736334f348f8253988f566c4471e1e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>int32_t SR_UTILS_NS::Input::GetMouseWheel</definition>
+        <argsstring>()</argsstring>
+        <name>GetMouseWheel</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetMouseWheel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="39" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ad9969bccbd1dbcbb36dd5bc70187cec0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Input::GetMouseDown</definition>
+        <argsstring>(MouseCode code)</argsstring>
+        <name>GetMouseDown</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetMouseDown</qualifiedname>
+        <param>
+          <type>MouseCode</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="41" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a8258dd2f44de087443c3119fc922e684" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Input::GetMouseUp</definition>
+        <argsstring>(MouseCode code)</argsstring>
+        <name>GetMouseUp</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetMouseUp</qualifiedname>
+        <param>
+          <type>MouseCode</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="42" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1af6479e3f691f3cfebe1622c936d16be5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Input::GetMouse</definition>
+        <argsstring>(MouseCode code)</argsstring>
+        <name>GetMouse</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetMouse</qualifiedname>
+        <param>
+          <type>MouseCode</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="43" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a89c3ee69b057cf802aa77847064c6b49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Input::GetKeyDown</definition>
+        <argsstring>(KeyCode key)</argsstring>
+        <name>GetKeyDown</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetKeyDown</qualifiedname>
+        <param>
+          <type>KeyCode</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a28b67ece023a843ba05d44a647c4c201" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Input::GetKeyUp</definition>
+        <argsstring>(KeyCode key)</argsstring>
+        <name>GetKeyUp</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetKeyUp</qualifiedname>
+        <param>
+          <type>KeyCode</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1afc404aa825ef6ad7c4b2a0a0327dd587" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Input::GetKey</definition>
+        <argsstring>(KeyCode key)</argsstring>
+        <name>GetKey</name>
+        <qualifiedname>SR_UTILS_NS::Input::GetKey</qualifiedname>
+        <param>
+          <type>KeyCode</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::SetCursorVisible</definition>
+        <argsstring>(bool isVisible)</argsstring>
+        <name>SetCursorVisible</name>
+        <qualifiedname>SR_UTILS_NS::Input::SetCursorVisible</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a581c59eb754f49c0ce8d7c554d4b59f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::SetCursorLockCallback</definition>
+        <argsstring>(CursorLockCallback &amp;&amp;callback)</argsstring>
+        <name>SetCursorLockCallback</name>
+        <qualifiedname>SR_UTILS_NS::Input::SetCursorLockCallback</qualifiedname>
+        <param>
+          <type>CursorLockCallback &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1ae8f9fd59e96fd70003bae45fd3928bae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::LockCursor</definition>
+        <argsstring>()</argsstring>
+        <name>LockCursor</name>
+        <qualifiedname>SR_UTILS_NS::Input::LockCursor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a10d2ecb685865a2931568011cea31ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::UnlockCursor</definition>
+        <argsstring>()</argsstring>
+        <name>UnlockCursor</name>
+        <qualifiedname>SR_UTILS_NS::Input::UnlockCursor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a9a3ed5820587782934f00b78db900ff4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::ForceUnlockCursor</definition>
+        <argsstring>()</argsstring>
+        <name>ForceUnlockCursor</name>
+        <qualifiedname>SR_UTILS_NS::Input::ForceUnlockCursor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="54" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a53af6477f866ebcb0e806265afae1f09" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <qualifiedname>SR_UTILS_NS::Input::Reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Input_1a2f35d49d0f6e50b8a80a13dd8e38fd18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Input::SetState</definition>
+        <argsstring>(uint16_t keyIndex, State state)</argsstring>
+        <name>SetState</name>
+        <qualifiedname>SR_UTILS_NS::Input::SetState</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>keyIndex</declname>
+        </param>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="58" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::Input</label>
+        <link refid="classSR__UTILS__NS_1_1Input"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; Input &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::Input</label>
+        <link refid="classSR__UTILS__NS_1_1Input"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; Input &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Input/InputSystem.h" bodystart="14" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1ab1879fe2750f438d6cf1b9902314191f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Check</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1af1685e66ae07a70c6277ec618bb3acab" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>CursorLockCallback</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a9a3ed5820587782934f00b78db900ff4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>ForceUnlockCursor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1afc404aa825ef6ad7c4b2a0a0327dd587" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetKey</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a89c3ee69b057cf802aa77847064c6b49" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetKeyDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a28b67ece023a843ba05d44a647c4c201" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetKeyUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1af6479e3f691f3cfebe1622c936d16be5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouse</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1ad9969bccbd1dbcbb36dd5bc70187cec0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a397012e0b56087d512a0b04b226ff766" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseDrag</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a7f6a2cf42f8cf347d0049dbf7e571323" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMousePos</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a8258dd2f44de087443c3119fc922e684" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1ae736334f348f8253988f566c4471e1e3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMouseWheel</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1add45ebf3175cc1715a25334cf445388a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetPrevMousePos</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::Input</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a11f65a21c1ac6eaa2daf7d66be88de1b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>IsMouseMoved</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1ae8f9fd59e96fd70003bae45fd3928bae" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>LockCursor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a3977fe32159fe75e3a332aa8f7683836" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_arr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1ad9f11baca354abe30c3b6febcca76a61" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_counterLock</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a9a63247d52b0b09ab8caa5cf295a1a38" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_init</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a43749af9a310ce498fef965d937301ba" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_isVisible</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a4b998cf3045d13646c7460999e574fc4" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_keys</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1aec5b7059362e8b3db6571b264fb4e3fd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_lockCursorCallback</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a268b3bf151074f0081ab9d4361ed5ff8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mouse</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a0554e61402372b514896e600f9669a63" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mouseDrag</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a7726db6cc327a33297bc550d72a49653" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mousePrev</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a21cac5ac144fd41b3fe96f9f0b55cf3e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mouseScroll</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a7bbb9eeafc7e72d0679fb6673699ae2d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mouseScrollCurrent</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1aa89a32584ab7db00a635025cd773310a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a53af6477f866ebcb0e806265afae1f09" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a2c21f73cfb791e2095dacbd1bcaf70e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>ResetMouse</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a581c59eb754f49c0ce8d7c554d4b59f1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetCursorLockCallback</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a8e8d82e4cbb1b14c9c8c375212719d50" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetCursorVisible</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a2a0eb7912e9ab75a50242a9560dcb110" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetMouseScroll</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a2f35d49d0f6e50b8a80a13dd8e38fd18" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SetState</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1ac7c8990837c729192316dfc7d2dc499c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>State</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Subscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a10d2ecb685865a2931568011cea31ae2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UnlockCursor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1Input_1a78b3c197fbb2c8301a67478f4eff13c1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>~Input</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Input</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_UTILS_NS::Input</scope><name>~SubscriptionHolder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

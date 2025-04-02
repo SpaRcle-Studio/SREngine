@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__GRAPH__UI__NS" kind="namespace" language="C++">
+    <compoundname>SR_GRAPH_UI_NS</compoundname>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1Canvas" prot="public">SR_GRAPH_UI_NS::Canvas</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1Gizmo" prot="public">SR_GRAPH_UI_NS::Gizmo</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UICanvasComponent" prot="public">SR_GRAPH_UI_NS::UICanvasComponent</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UISizeComponent" prot="public">SR_GRAPH_UI_NS::UISizeComponent</innerclass>
+    <innerclass refid="classSR__GRAPH__UI__NS_1_1UIWindow" prot="public">SR_GRAPH_UI_NS::UIWindow</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="Gizmo_8h_1a7dac85f6cc74cf1ddfe352e1b3d5876c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(GizmoMode, uint8_t, Local, Global)</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>GizmoMode</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Local</type>
+        </param>
+        <param>
+          <type>Global</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="12" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="12" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="Gizmo_8h_1a18016035e921f0f2240c442b0d806101" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::SR_ENUM_NS_STRUCT_T</definition>
+        <argsstring>(GizmoOperation, uint64_t, None=0, Center=1&lt;&lt; 0, Alternative=1&lt;&lt; 1, X=1&lt;&lt; 2, Y=1&lt;&lt; 3, Z=1&lt;&lt; 4, Translate=1&lt;&lt; 5, Rotate=1&lt;&lt; 6, Scale=1&lt;&lt; 7, Bounds=1&lt;&lt; 8, Space2D=1&lt;&lt; 9, Rotate2D=Space2D|Rotate|Z, TranslateX=X|Translate, TranslateY=Y|Translate, TranslateZ=Z|Translate, TranslateAltX=Y|Z|Translate|Alternative, TranslateAltY=X|Z|Translate|Alternative, TranslateAltZ=X|Y|Translate|Alternative, TranslateCenter=Translate|Center, TranslateAll=X|Y|Z|Translate|Center|Alternative, RotateX=X|Rotate, RotateY=Y|Rotate, RotateZ=Z|Rotate, RotateCenter=Rotate|Center, RotateAll=X|Y|Z|Rotate|Center, ScaleX=X|Scale, ScaleY=Y|Scale, ScaleZ=Z|Scale, ScaleCenter=Scale|Center, ScaleAll=X|Y|Z|Scale|Center, BoundsX=X|Bounds, BoundsY=Y|Bounds, BoundsZ=Z|Bounds, Universal=TranslateAll|RotateAll|ScaleAll)</argsstring>
+        <name>SR_ENUM_NS_STRUCT_T</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
+        <param>
+          <type>GizmoOperation</type>
+        </param>
+        <param>
+          <type>uint64_t</type>
+        </param>
+        <param>
+          <type>None</type>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>Center</type>
+          <defval>1&lt;&lt; 0</defval>
+        </param>
+        <param>
+          <type>Alternative</type>
+          <defval>1&lt;&lt; 1</defval>
+        </param>
+        <param>
+          <type>X</type>
+          <defval>1&lt;&lt; 2</defval>
+        </param>
+        <param>
+          <type>Y</type>
+          <defval>1&lt;&lt; 3</defval>
+        </param>
+        <param>
+          <type>Z</type>
+          <defval>1&lt;&lt; 4</defval>
+        </param>
+        <param>
+          <type>Translate</type>
+          <defval>1&lt;&lt; 5</defval>
+        </param>
+        <param>
+          <type>Rotate</type>
+          <defval>1&lt;&lt; 6</defval>
+        </param>
+        <param>
+          <type>Scale</type>
+          <defval>1&lt;&lt; 7</defval>
+        </param>
+        <param>
+          <type>Bounds</type>
+          <defval>1&lt;&lt; 8</defval>
+        </param>
+        <param>
+          <type>Space2D</type>
+          <defval>1&lt;&lt; 9</defval>
+        </param>
+        <param>
+          <type>Rotate2D</type>
+          <defval>Space2D|Rotate|Z</defval>
+        </param>
+        <param>
+          <type>TranslateX</type>
+          <defval>X|Translate</defval>
+        </param>
+        <param>
+          <type>TranslateY</type>
+          <defval>Y|Translate</defval>
+        </param>
+        <param>
+          <type>TranslateZ</type>
+          <defval>Z|Translate</defval>
+        </param>
+        <param>
+          <type>TranslateAltX</type>
+          <defval>Y|Z|Translate|Alternative</defval>
+        </param>
+        <param>
+          <type>TranslateAltY</type>
+          <defval>X|Z|Translate|Alternative</defval>
+        </param>
+        <param>
+          <type>TranslateAltZ</type>
+          <defval>X|Y|Translate|Alternative</defval>
+        </param>
+        <param>
+          <type>TranslateCenter</type>
+          <defval>Translate|Center</defval>
+        </param>
+        <param>
+          <type>TranslateAll</type>
+          <defval>X|Y|Z|Translate|Center|Alternative</defval>
+        </param>
+        <param>
+          <type>RotateX</type>
+          <defval>X|Rotate</defval>
+        </param>
+        <param>
+          <type>RotateY</type>
+          <defval>Y|Rotate</defval>
+        </param>
+        <param>
+          <type>RotateZ</type>
+          <defval>Z|Rotate</defval>
+        </param>
+        <param>
+          <type>RotateCenter</type>
+          <defval>Rotate|Center</defval>
+        </param>
+        <param>
+          <type>RotateAll</type>
+          <defval>X|Y|Z|Rotate|Center</defval>
+        </param>
+        <param>
+          <type>ScaleX</type>
+          <defval>X|Scale</defval>
+        </param>
+        <param>
+          <type>ScaleY</type>
+          <defval>Y|Scale</defval>
+        </param>
+        <param>
+          <type>ScaleZ</type>
+          <defval>Z|Scale</defval>
+        </param>
+        <param>
+          <type>ScaleCenter</type>
+          <defval>Scale|Center</defval>
+        </param>
+        <param>
+          <type>ScaleAll</type>
+          <defval>X|Y|Z|Scale|Center</defval>
+        </param>
+        <param>
+          <type>BoundsX</type>
+          <defval>X|Bounds</defval>
+        </param>
+        <param>
+          <type>BoundsY</type>
+          <defval>Y|Bounds</defval>
+        </param>
+        <param>
+          <type>BoundsZ</type>
+          <defval>Z|Bounds</defval>
+        </param>
+        <param>
+          <type>Universal</type>
+          <defval>TranslateAll|RotateAll|ScaleAll</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" line="14" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h" declline="14" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="UIWindow_8h_1af8332c5d96379e836088713a7362370d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_UI_NS::SR_ENUM_NS_STRUCT_T</definition>
+        <argsstring>(UIWindowAttributes, uint32_t, None=0, Dockable=1&lt;&lt; 0, Resizable=1&lt;&lt; 1, Movable=1&lt;&lt; 2, Closable=1&lt;&lt; 3, Minimizable=1&lt;&lt; 4, Maximizable=1&lt;&lt; 5)</argsstring>
+        <name>SR_ENUM_NS_STRUCT_T</name>
+        <qualifiedname>SR_GRAPH_UI_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
+        <param>
+          <type>UIWindowAttributes</type>
+        </param>
+        <param>
+          <type>uint32_t</type>
+        </param>
+        <param>
+          <type>None</type>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>Dockable</type>
+          <defval>1&lt;&lt; 0</defval>
+        </param>
+        <param>
+          <type>Resizable</type>
+          <defval>1&lt;&lt; 1</defval>
+        </param>
+        <param>
+          <type>Movable</type>
+          <defval>1&lt;&lt; 2</defval>
+        </param>
+        <param>
+          <type>Closable</type>
+          <defval>1&lt;&lt; 3</defval>
+        </param>
+        <param>
+          <type>Minimizable</type>
+          <defval>1&lt;&lt; 4</defval>
+        </param>
+        <param>
+          <type>Maximizable</type>
+          <defval>1&lt;&lt; 5</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h" line="11" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h" declline="11" declcolumn="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/GUI/SceneTools.h" line="12" column="1"/>
+  </compounddef>
+</doxygen>

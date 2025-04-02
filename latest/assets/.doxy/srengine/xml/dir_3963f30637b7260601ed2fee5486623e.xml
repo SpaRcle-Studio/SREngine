@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_3963f30637b7260601ed2fee5486623e" kind="dir">
+    <compoundname>Engine/Core/libs/Graphics</compoundname>
+    <innerdir refid="dir_cf695446dee09d9ecb81ac3a708470c3">Engine/Core/libs/Graphics/inc</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/"/>
+  </compounddef>
+</doxygen>

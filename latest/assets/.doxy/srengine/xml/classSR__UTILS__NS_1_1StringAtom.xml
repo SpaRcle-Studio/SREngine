@@ -1,0 +1,631 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1StringAtom" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::StringAtom</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StringAtom_1abe43244096ea0e74a748bc0a0df05bc4" prot="private" static="no" mutable="no">
+        <type>SR_INLINE_STATIC std::string</type>
+        <definition>SR_INLINE_STATIC std::string SR_UTILS_NS::StringAtom::DEFAULT</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::DEFAULT</qualifiedname>
+        <initializer>= std::string()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="17" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StringAtom_1a0ac94db45b83155996d2dfcc59d4fdbe" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+        <definition>StringHashInfo* SR_UTILS_NS::StringAtom::m_info</definition>
+        <argsstring></argsstring>
+        <name>m_info</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::m_info</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="68" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StringAtom_1afb20a94505df9a4bb108ed78e434d30f" prot="private" static="yes" mutable="no">
+        <type><ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+        <definition>StringHashInfo* SR_UTILS_NS::StringAtom::DEFAULT_STRING_INFO</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_STRING_INFO</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::DEFAULT_STRING_INFO</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="18" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a9191fe00705c013232e7114de9d6c06f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::StringAtom</definition>
+        <argsstring>()</argsstring>
+        <name>StringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::StringAtom</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ac3fb5fd5b3d0dd93a881b9d66fb674af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::StringAtom</definition>
+        <argsstring>(const StringAtom &amp;str)=default</argsstring>
+        <name>StringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::StringAtom</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a5bc07dd5a6f63ad6c675bac19342de95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::StringAtom</definition>
+        <argsstring>(StringHashInfo *pInfo)</argsstring>
+        <name>StringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::StringAtom</qualifiedname>
+        <param>
+          <type><ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+          <declname>pInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a467f806df1ebe22c1d613439d5b7ac04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::StringAtom</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>StringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::StringAtom</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="25" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a3e56505927f2a77256bc47cfe78820d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::StringAtom</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>StringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::StringAtom</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a1f3e21f5ffd55123cb837bfae62ebcf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::StringAtom</definition>
+        <argsstring>(std::string_view str)</argsstring>
+        <name>StringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::StringAtom</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="27" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a9b041f3c427b3d05cf26fd6c43d2af44" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::operator const std::string &amp;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator const std::string &amp;</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::string &amp;</qualifiedname>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="30" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ae5651d0d06a9a8b7c1303895f4e4892b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::StringAtom::operator std::string_view</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator std::string_view</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::string_view</qualifiedname>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="31" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a707656e026015b6486b1346bbb3fb9c3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StringAtom::operator==</definition>
+        <argsstring>(const StringAtom &amp;rhs) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a2be08302877e448155a9a5479efdcf13" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StringAtom::operator==</definition>
+        <argsstring>(const std::string &amp;rhs) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator==</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ab94219c79738b4a65e400605a6b43f45" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StringAtom::operator==</definition>
+        <argsstring>(const char *rhs) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator==</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ab8aba12eb42e4c854f930021f1dc33a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+        <definition>StringAtom &amp; SR_UTILS_NS::StringAtom::operator=</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator=</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="35" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a1da92cddd5af9cf9ea831b014626ae9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+        <definition>StringAtom &amp; SR_UTILS_NS::StringAtom::operator=</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator=</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="36" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a64d2b0a6f4cafaa36c7dfb3c91b0802c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StringAtom::operator()</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator()</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1aab0b3de6ffa4434daee968d291ba94a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StringAtom::operator()</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator()</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1af11c22175cc1c6e80d3d1940f8df60c7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StringAtom::operator&lt;</definition>
+        <argsstring>(const StringAtom &amp;other) const noexcept</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ade79e26106f5eab175a1e1d9ceeb9ea8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StringAtom::operator&lt;</definition>
+        <argsstring>(uint64_t hash) const noexcept</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator&lt;</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="41" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a20d5c9bb3706056c3c8be46298690746" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE SR_UTILS_NS::StringAtom::operator uint64_t</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator uint64_t</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator uint64_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="43" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a892765a214535e664ae08c4cb2406a04" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD char</type>
+        <definition>SR_NODISCARD char SR_UTILS_NS::StringAtom::operator[]</definition>
+        <argsstring>(size_t index) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::operator[]</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="45" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a45142cc3c03c3ded059cc59e7b83420b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::Size</definition>
+        <argsstring>() const</argsstring>
+        <name>Size</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::Size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="48" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a28c60fb77b7d01c23844e7adcde7e1fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="49" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1adb0f573da6286d4e4903a609fc5ed969" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::StringAtom::Contains</definition>
+        <argsstring>(const char *str) const</argsstring>
+        <name>Contains</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::Contains</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="50" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a6b63fb0924a8c6d00163f11f99e8f3c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::StringAtom::Empty</definition>
+        <argsstring>() const</argsstring>
+        <name>Empty</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::Empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="51" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a99a16e6786feda6bf2eab2976805b861" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::StringAtom::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="52" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a9471f1e33bc3220f6e29daac58bfba4b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::GetHash</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHash</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::GetHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="53" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a26addb610911e3bb4db528c6365ac31a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::StringAtom::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="54" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1ab0ef14075264e72746f76894e2da0abd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const char *</type>
+        <definition>SR_NODISCARD const char * SR_UTILS_NS::StringAtom::ToCStr</definition>
+        <argsstring>() const</argsstring>
+        <name>ToCStr</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::ToCStr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="55" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1addd3dd1d6bfbd07db2854821a71ebbaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const char *</type>
+        <definition>SR_NODISCARD const char * SR_UTILS_NS::StringAtom::c_str</definition>
+        <argsstring>() const</argsstring>
+        <name>c_str</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::c_str</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="56" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a50f98deaabdb50345367e165e905ffd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const char *</type>
+        <definition>SR_NODISCARD const char * SR_UTILS_NS::StringAtom::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="57" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a50b4a9be09fde0a89def8eb926a63c0f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const std::string &amp;</type>
+        <definition>SR_NODISCARD const std::string &amp; SR_UTILS_NS::StringAtom::ToStringRef</definition>
+        <argsstring>() const</argsstring>
+        <name>ToStringRef</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::ToStringRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="58" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a2d6b12be3522926e36786143561c2ecc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::StringAtom::ToStringView</definition>
+        <argsstring>() const</argsstring>
+        <name>ToStringView</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::ToStringView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="59" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1abe9cdcf67f3a7cf9808212daf4a3f890" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StringAtom::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="61" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="61" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringAtom_1a481555c58c062f7e5899336caf84e578" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StringAtom::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_UTILS_NS::StringAtom::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="65" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/StringAtom.h" bodystart="16" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1addd3dd1d6bfbd07db2854821a71ebbaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>c_str</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a481555c58c062f7e5899336caf84e578" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>Clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1abe9cdcf67f3a7cf9808212daf4a3f890" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1adb0f573da6286d4e4903a609fc5ed969" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>Contains</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a50f98deaabdb50345367e165e905ffd6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>data</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1abe43244096ea0e74a748bc0a0df05bc4" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>DEFAULT</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1afb20a94505df9a4bb108ed78e434d30f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>DEFAULT_STRING_INFO</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a6b63fb0924a8c6d00163f11f99e8f3c5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>Empty</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a99a16e6786feda6bf2eab2976805b861" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>empty</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a9471f1e33bc3220f6e29daac58bfba4b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>GetHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a0ac94db45b83155996d2dfcc59d4fdbe" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>m_info</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a9b041f3c427b3d05cf26fd6c43d2af44" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator const std::string &amp;</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1ae5651d0d06a9a8b7c1303895f4e4892b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator std::string_view</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a20d5c9bb3706056c3c8be46298690746" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator uint64_t</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a64d2b0a6f4cafaa36c7dfb3c91b0802c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator()</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1aab0b3de6ffa4434daee968d291ba94a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator()</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1af11c22175cc1c6e80d3d1940f8df60c7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator&lt;</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1ade79e26106f5eab175a1e1d9ceeb9ea8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator&lt;</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1ab8aba12eb42e4c854f930021f1dc33a9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a1da92cddd5af9cf9ea831b014626ae9a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a707656e026015b6486b1346bbb3fb9c3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a2be08302877e448155a9a5479efdcf13" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1ab94219c79738b4a65e400605a6b43f45" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a892765a214535e664ae08c4cb2406a04" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>operator[]</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a45142cc3c03c3ded059cc59e7b83420b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>Size</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a28c60fb77b7d01c23844e7adcde7e1fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>size</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a9191fe00705c013232e7114de9d6c06f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>StringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1ac3fb5fd5b3d0dd93a881b9d66fb674af" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>StringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a5bc07dd5a6f63ad6c675bac19342de95" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>StringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a467f806df1ebe22c1d613439d5b7ac04" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>StringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a3e56505927f2a77256bc47cfe78820d8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>StringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a1f3e21f5ffd55123cb837bfae62ebcf4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>StringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1ab0ef14075264e72746f76894e2da0abd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>ToCStr</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a26addb610911e3bb4db528c6365ac31a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a50b4a9be09fde0a89def8eb926a63c0f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>ToStringRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringAtom_1a2d6b12be3522926e36786143561c2ecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringAtom</scope><name>ToStringView</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

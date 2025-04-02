@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__PTYPES__NS_1_1WheelInternalData" kind="struct" language="C++" prot="public">
+    <compoundname>SR_PTYPES_NS::WheelInternalData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1a3d44392ccd8fb881d8d6eea3b5da9012" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::WheelInternalData::m_wheelMass</definition>
+        <argsstring></argsstring>
+        <name>m_wheelMass</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_wheelMass</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="22" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1ab83e28e31bd7a895093c87588e591afd" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::WheelInternalData::m_wheelMOI</definition>
+        <argsstring></argsstring>
+        <name>m_wheelMOI</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_wheelMOI</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="23" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1a8a0ab7e2f48f7d87422a31796ac1582a" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::WheelInternalData::m_wheelRadius</definition>
+        <argsstring></argsstring>
+        <name>m_wheelRadius</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_wheelRadius</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="24" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1ab6f967154af571dc6ef4439afe2ed287" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::WheelInternalData::m_wheelWidth</definition>
+        <argsstring></argsstring>
+        <name>m_wheelWidth</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_wheelWidth</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="25" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1a5bdea253d02f8cc793fbb5bd73eb3ab1" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::WheelInternalData::m_maxHandBrakeTorque</definition>
+        <argsstring></argsstring>
+        <name>m_maxHandBrakeTorque</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_maxHandBrakeTorque</qualifiedname>
+        <initializer>= 4000.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="26" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1aea0bef6f1e6da54cb5d13f3f091d67f4" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::WheelInternalData::m_maxSteer</definition>
+        <argsstring></argsstring>
+        <name>m_maxSteer</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_maxSteer</qualifiedname>
+        <initializer>= 0.3333f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="27" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1adbaf7f6bbb4f705c6670658d1e038185" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_PTYPES_NS::WheelInternalData::m_wheelCenterActorOffset</definition>
+        <argsstring></argsstring>
+        <name>m_wheelCenterActorOffset</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_wheelCenterActorOffset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="29" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1WheelInternalData_1a3bd73a0b38f8d9ed30b0a97665bd09e1" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" kindref="compound">PhysicsMaterial</ref> *</type>
+        <definition>PhysicsMaterial* SR_PTYPES_NS::WheelInternalData::m_wheelMaterial</definition>
+        <argsstring></argsstring>
+        <name>m_wheelMaterial</name>
+        <qualifiedname>SR_PTYPES_NS::WheelInternalData::m_wheelMaterial</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="31" column="25" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_PTYPES_NS::PhysicsMaterial</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::WheelInternalData</label>
+        <link refid="structSR__PTYPES__NS_1_1WheelInternalData"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_wheelMaterial</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" line="21" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h" bodystart="21" bodyend="33"/>
+    <listofallmembers>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1a5bdea253d02f8cc793fbb5bd73eb3ab1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_maxHandBrakeTorque</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1aea0bef6f1e6da54cb5d13f3f091d67f4" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_maxSteer</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1adbaf7f6bbb4f705c6670658d1e038185" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_wheelCenterActorOffset</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1a3d44392ccd8fb881d8d6eea3b5da9012" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_wheelMass</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1a3bd73a0b38f8d9ed30b0a97665bd09e1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_wheelMaterial</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1ab83e28e31bd7a895093c87588e591afd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_wheelMOI</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1a8a0ab7e2f48f7d87422a31796ac1582a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_wheelRadius</name></member>
+      <member refid="structSR__PTYPES__NS_1_1WheelInternalData_1ab6f967154af571dc6ef4439afe2ed287" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::WheelInternalData</scope><name>m_wheelWidth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

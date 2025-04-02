@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_16681fe1464e2912a23db58ce5093931" kind="dir">
+    <compoundname>Engine/Core/libs/Audio/inc/Audio/Decoders</compoundname>
+    <innerfile refid="IWaveDataProvider_8h">IWaveDataProvider.h</innerfile>
+    <innerfile refid="ModPlugDataProvider_8h">ModPlugDataProvider.h</innerfile>
+    <innerfile refid="MP3DataProvider_8h">MP3DataProvider.h</innerfile>
+    <innerfile refid="WAVDataProvider_8h">WAVDataProvider.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/"/>
+  </compounddef>
+</doxygen>

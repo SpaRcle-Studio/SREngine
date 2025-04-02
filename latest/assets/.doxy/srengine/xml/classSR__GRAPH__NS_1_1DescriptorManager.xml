@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1DescriptorManager" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::DescriptorManager</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</basecompoundref>
+    <innerclass refid="structSR__GRAPH__NS_1_1DescriptorManager_1_1DescriptorSetInfo" prot="private">SR_GRAPH_NS::DescriptorManager::DescriptorSetInfo</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>BindResult</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::BindResult</qualifiedname>
+        <enumvalue id="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90a505a83f220c02df2f85c3810cd9ceb38" prot="public">
+          <name>Success</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90a5ca95d54c2594160a4dde45c00cf668d" prot="public">
+          <name>Duplicated</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90ad7c8c85bf79bbe1b7188497c32c3b0ca" prot="public">
+          <name>Failed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="30" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DescriptorManager_1a89ef4b17aa94cd26134221632713414b" prot="public" static="no">
+        <type>int32_t</type>
+        <definition>using SR_GRAPH_NS::DescriptorManager::VirtualDescriptorSet =  int32_t</definition>
+        <argsstring></argsstring>
+        <name>VirtualDescriptorSet</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::VirtualDescriptorSet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1DescriptorManager_1a1afc0ee308fedcab8eec5ab7e5751a66" prot="private" static="no">
+        <type>int32_t</type>
+        <definition>using SR_GRAPH_NS::DescriptorManager::DescriptorSet =  int32_t</definition>
+        <argsstring></argsstring>
+        <name>DescriptorSet</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::DescriptorSet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a8a0d107353de4877c54d7f59048ade93" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1ObjectPool" kindref="compound">SR_HTYPES_NS::ObjectPool</ref>&lt; std::vector&lt; DescriptorSetInfo &gt;, VirtualDescriptorSet &gt;</type>
+        <definition>SR_HTYPES_NS::ObjectPool&lt;std::vector&lt;DescriptorSetInfo&gt;, VirtualDescriptorSet&gt; SR_GRAPH_NS::DescriptorManager::m_descriptorPool</definition>
+        <argsstring></argsstring>
+        <name>m_descriptorPool</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::m_descriptorPool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="51" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;Pipeline&gt; SR_GRAPH_NS::DescriptorManager::m_pipeline</definition>
+        <argsstring></argsstring>
+        <name>m_pipeline</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::m_pipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="52" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" static="no" mutable="yes">
+        <type>std::vector&lt; DescriptorType &gt;</type>
+        <definition>std::vector&lt;DescriptorType&gt; SR_GRAPH_NS::DescriptorManager::m_allocationTypesCache</definition>
+        <argsstring></argsstring>
+        <name>m_allocationTypesCache</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::m_allocationTypesCache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="54" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1ae5263847f34eff5ebd51ac71f13a9487" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::DescriptorManager::CollectUnused</definition>
+        <argsstring>()</argsstring>
+        <name>CollectUnused</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::CollectUnused</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD VirtualDescriptorSet</type>
+        <definition>SR_NODISCARD VirtualDescriptorSet SR_GRAPH_NS::DescriptorManager::AllocateDescriptorSet</definition>
+        <argsstring>(VirtualDescriptorSet reallocation=SR_ID_INVALID)</argsstring>
+        <name>AllocateDescriptorSet</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::AllocateDescriptorSet</qualifiedname>
+        <param>
+          <type>VirtualDescriptorSet</type>
+          <declname>reallocation</declname>
+          <defval>SR_ID_INVALID</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="39" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a9df1a047fccd12bdb084198af268bf30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>BindResult</type>
+        <definition>BindResult SR_GRAPH_NS::DescriptorManager::Bind</definition>
+        <argsstring>(VirtualDescriptorSet virtualDescriptorSet)</argsstring>
+        <name>Bind</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::Bind</qualifiedname>
+        <param>
+          <type>VirtualDescriptorSet</type>
+          <declname>virtualDescriptorSet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="40" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a38ffbe7ead0bc0c5249739ec6ce9927d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::DescriptorManager::Flush</definition>
+        <argsstring>()</argsstring>
+        <name>Flush</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::Flush</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a5e6ca1672086cd5a34fd30b854cca2f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::DescriptorManager::FreeDescriptorSet</definition>
+        <argsstring>(VirtualDescriptorSet *pVirtualDescriptorSet)</argsstring>
+        <name>FreeDescriptorSet</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::FreeDescriptorSet</qualifiedname>
+        <param>
+          <type>VirtualDescriptorSet *</type>
+          <declname>pVirtualDescriptorSet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1ae5abda35cce1a6a7f3eb5fdc733478cb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::DescriptorManager::SetPipeline</definition>
+        <argsstring>(SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt; pipeline) noexcept</argsstring>
+        <name>SetPipeline</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::SetPipeline</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
+          <declname>pipeline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="45" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1DescriptorManager_1a236ffb02af589b653d82eede9836d721" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD DescriptorSet</type>
+        <definition>SR_NODISCARD DescriptorSet SR_GRAPH_NS::DescriptorManager::AllocateMemory</definition>
+        <argsstring>(SR_GTYPES_NS::Shader *pShader) const</argsstring>
+        <name>AllocateMemory</name>
+        <qualifiedname>SR_GRAPH_NS::DescriptorManager::AllocateMemory</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
+          <declname>pShader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="48" column="36"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::DescriptorManager</label>
+        <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::DescriptorManager</label>
+        <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h" bodystart="21" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1acb6d2719e41b0b734ab781be63e63b88" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateDescriptorSet</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a236ffb02af589b653d82eede9836d721" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>AllocateMemory</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a9df1a047fccd12bdb084198af268bf30" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Bind</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aeb9bcbb5eb9d880a6b65134b6f075e90" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>BindResult</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1ae5263847f34eff5ebd51ac71f13a9487" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>CollectUnused</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a1afc0ee308fedcab8eec5ab7e5751a66" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>DescriptorSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a38ffbe7ead0bc0c5249739ec6ce9927d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Flush</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a5e6ca1672086cd5a34fd30b854cca2f1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>FreeDescriptorSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a38d76ce5645b49866375dcd4024e8125" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_allocationTypesCache</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a8a0d107353de4877c54d7f59048ade93" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_descriptorPool</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1aecf3c2a43605148da6debe626d98acee" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>m_pipeline</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1ae5abda35cce1a6a7f3eb5fdc733478cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>SetPipeline</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__GRAPH__NS_1_1DescriptorManager_1a89ef4b17aa94cd26134221632713414b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>VirtualDescriptorSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::DescriptorManager</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

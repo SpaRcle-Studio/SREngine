@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1LinkedList" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::LinkedList</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1LinkedList_1a9f936db3a6df8460f8574c17ac52a2d7" prot="private" static="no">
+        <type>std::function&lt; uint32_t(T *pA, T *pB)&gt;</type>
+        <definition>using SR_HTYPES_NS::LinkedList&lt; T &gt;::Comparator =  std::function&lt;uint32_t(T* pA, T* pB)&gt;</definition>
+        <argsstring></argsstring>
+        <name>Comparator</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Comparator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="12" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1LinkedList_1a04952e28939ec03fc82dde1961abac53" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__HTYPES__NS_1_1Node" kindref="compound">Node</ref> *</type>
+        <definition>Node* SR_HTYPES_NS::LinkedList&lt; T &gt;::m_head</definition>
+        <argsstring></argsstring>
+        <name>m_head</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::m_head</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="29" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1LinkedList_1aafabe596ceb22ec7edc1f09cf7609878" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_HTYPES_NS::LinkedList&lt; T &gt;::m_length</definition>
+        <argsstring></argsstring>
+        <name>m_length</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::m_length</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="30" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1a153befbf6a796c2809bdc865088e47d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::LinkedList&lt; T &gt;::LinkedList</definition>
+        <argsstring>()=default</argsstring>
+        <name>LinkedList</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::LinkedList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="14" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1ac8a220a74bc20cc4454ef4da7bc97ea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::LinkedList&lt; T &gt;::~LinkedList</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~LinkedList</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::~LinkedList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1a93f32b235a946b973ab526a9961b48b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::LinkedList&lt; T &gt;::Insert</definition>
+        <argsstring>(uint64_t index, T *pData, uint64_t size)</argsstring>
+        <name>Insert</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Insert</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>pData</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="18" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="128" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1a8101b20d52d3dcd7f1f4686b3040c2b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::LinkedList&lt; T &gt;::Remove</definition>
+        <argsstring>(uint64_t index)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Remove</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="19" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="95" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1aa1fec827c8ab0e888d71f4c53d03a0a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::LinkedList&lt; T &gt;::Sort</definition>
+        <argsstring>(const Comparator &amp;comparator)</argsstring>
+        <name>Sort</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Sort</qualifiedname>
+        <param>
+          <type>const Comparator &amp;</type>
+          <declname>comparator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>TODO: проверить код на корректность</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="20" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="71" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1ac5014b202cfc7f6b7ef6decf78dbd44c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_HTYPES_NS::LinkedList&lt; T &gt;::Search</definition>
+        <argsstring>(T *pQuery, const Comparator &amp;comparator)</argsstring>
+        <name>Search</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Search</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>pQuery</declname>
+        </param>
+        <param>
+          <type>const Comparator &amp;</type>
+          <declname>comparator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="22" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="34" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1a467296490d6a46f8ce9ad8b97c724dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::LinkedList&lt; T &gt;::Retrieve</definition>
+        <argsstring>(uint64_t index)</argsstring>
+        <name>Retrieve</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Retrieve</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="24" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1LinkedList_1aa3938f4eefa74004d3d67dac80d23f64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__HTYPES__NS_1_1Node" kindref="compound">Node</ref> *</type>
+        <definition>Node * SR_HTYPES_NS::LinkedList&lt; T &gt;::Iterate</definition>
+        <argsstring>(uint64_t index) const</argsstring>
+        <name>Iterate</name>
+        <qualifiedname>SR_HTYPES_NS::LinkedList::Iterate</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="26" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="114" bodyend="126"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_HTYPES_NS::LinkedList&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1LinkedList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_HTYPES_NS::LinkedList&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1LinkedList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" line="11" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/LinkedList.h" bodystart="11" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1a9f936db3a6df8460f8574c17ac52a2d7" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Comparator</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1a93f32b235a946b973ab526a9961b48b4" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Insert</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1aa3938f4eefa74004d3d67dac80d23f64" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Iterate</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1a153befbf6a796c2809bdc865088e47d7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>LinkedList</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1a04952e28939ec03fc82dde1961abac53" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>m_head</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1aafabe596ceb22ec7edc1f09cf7609878" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>m_length</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1a8101b20d52d3dcd7f1f4686b3040c2b5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Remove</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1a467296490d6a46f8ce9ad8b97c724dd5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Retrieve</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1ac5014b202cfc7f6b7ef6decf78dbd44c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Search</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1aa1fec827c8ab0e888d71f4c53d03a0a2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Sort</name></member>
+      <member refid="classSR__HTYPES__NS_1_1LinkedList_1ac8a220a74bc20cc4454ef4da7bc97ea1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>~LinkedList</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

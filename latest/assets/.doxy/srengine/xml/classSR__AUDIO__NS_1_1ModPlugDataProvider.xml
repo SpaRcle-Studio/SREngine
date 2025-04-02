@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__AUDIO__NS_1_1ModPlugDataProvider" kind="class" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::ModPlugDataProvider</compoundname>
+    <basecompoundref refid="classSR__AUDIO__NS_1_1IWaveDataProvider" prot="public" virt="non-virtual">SR_AUDIO_NS::IWaveDataProvider</basecompoundref>
+    <includes refid="ModPlugDataProvider_8h" local="no">ModPlugDataProvider.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a5e5880cb4784140b13d5f01bfcd7951b" prot="private" static="no" mutable="no">
+        <type>RawSoundDataPtr</type>
+        <definition>RawSoundDataPtr SR_AUDIO_NS::ModPlugDataProvider::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::m_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="34" column="25" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a4aeffd3a4c807733281d3e82174dd505" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref></type>
+        <definition>WaveDataFormat SR_AUDIO_NS::ModPlugDataProvider::m_format</definition>
+        <argsstring></argsstring>
+        <name>m_format</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::m_format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="35" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a885c214bd1338a33c623b175f01187db" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint8_t &gt;</type>
+        <definition>std::vector&lt;uint8_t&gt; SR_AUDIO_NS::ModPlugDataProvider::m_decodingBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_decodingBuffer</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::m_decodingBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="37" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac531a206a369d3f9e84c95e43ef4f9e7" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_AUDIO_NS::ModPlugDataProvider::m_bufferUsed</definition>
+        <argsstring></argsstring>
+        <name>m_bufferUsed</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::m_bufferUsed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="38" column="16" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1abc65a63eacb6492ba4f39c458a56506e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::ModPlugDataProvider::m_isEndOfStream</definition>
+        <argsstring></argsstring>
+        <name>m_isEndOfStream</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::m_isEndOfStream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="40" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac03869f156186054259a4466cb9cd7d7" prot="private" static="no" mutable="no">
+        <type>ModPlugFile *</type>
+        <definition>ModPlugFile* SR_AUDIO_NS::ModPlugDataProvider::m_ModPlugFile</definition>
+        <argsstring></argsstring>
+        <name>m_ModPlugFile</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::m_ModPlugFile</qualifiedname>
+        <briefdescription>
+<para>ModPlug stuff. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="43" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a88d5b444f0280bce2808291bc693d7f9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::ModPlugDataProvider::ModPlugDataProvider</definition>
+        <argsstring>(const RawSoundDataPtr &amp;data)</argsstring>
+        <name>ModPlugDataProvider</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::ModPlugDataProvider</qualifiedname>
+        <param>
+          <type>const RawSoundDataPtr &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="17" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1af3ea5e569588f2e078a68cc637c9947a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::ModPlugDataProvider::~ModPlugDataProvider</definition>
+        <argsstring>() override</argsstring>
+        <name>~ModPlugDataProvider</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::~ModPlugDataProvider</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1aa6809b862fe59785f57782930ea6e90c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref> &amp;</type>
+        <definition>SR_NODISCARD const WaveDataFormat &amp; SR_AUDIO_NS::ModPlugDataProvider::GetWaveDataFormat</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetWaveDataFormat</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::GetWaveDataFormat</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ac2c1207d17bd11ac4f4d438bff43ace8">GetWaveDataFormat</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="20" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a2bc43585cb3606b49994781f65baf602" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t * SR_AUDIO_NS::ModPlugDataProvider::GetWaveData</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetWaveData</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::GetWaveData</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a569b97418d4a6ed4ee516ef0f2abb556">GetWaveData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="22" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a86ec48e3a7b319fbc078e50f7c0ae4f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>size_t SR_AUDIO_NS::ModPlugDataProvider::GetWaveDataSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetWaveDataSize</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::GetWaveDataSize</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ab26e87dbef38f1885342e89213f38c00">GetWaveDataSize</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="23" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a9196fb87f84b0395d20d814ed93540a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>size_t SR_AUDIO_NS::ModPlugDataProvider::StreamWaveData</definition>
+        <argsstring>(size_t size) override</argsstring>
+        <name>StreamWaveData</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::StreamWaveData</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ae64cfd3e4df002b4b8f24032f3d2eec8">StreamWaveData</reimplements>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="25" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac602d28656f674e6b3972701547959bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::ModPlugDataProvider::IsStreaming</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsStreaming</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::IsStreaming</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a372028ebebed211b3aa15210533f15d3">IsStreaming</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="26" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ad2d7933470365e6fea38820dca6b1d48" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::ModPlugDataProvider::IsEndOfStream</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsEndOfStream</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::IsEndOfStream</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8defe15a64304984ac5bbb4bec8bf13a">IsEndOfStream</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="27" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a0851d7f0660c280c5f8deb0a6db174e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_AUDIO_NS::ModPlugDataProvider::Seek</definition>
+        <argsstring>(float_t seconds) override</argsstring>
+        <name>Seek</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::Seek</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a6b4466d3ec1888197aa7b8502896a186">Seek</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="28" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ae0f5191c5ca18fe67e3951c9c8343061" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int SR_AUDIO_NS::ModPlugDataProvider::DecodeFromFile</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>DecodeFromFile</name>
+        <qualifiedname>SR_AUDIO_NS::ModPlugDataProvider::DecodeFromFile</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="31" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>ModPlug decoder. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_AUDIO_NS::IWaveDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1IWaveDataProvider"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_AUDIO_NS::ModPlugDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1ModPlugDataProvider"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_AUDIO_NS::IWaveDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1IWaveDataProvider"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_AUDIO_NS::ModPlugDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1ModPlugDataProvider"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h" bodystart="15" bodyend="44"/>
+    <listofallmembers>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ae0f5191c5ca18fe67e3951c9c8343061" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>DecodeFromFile</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a2bc43585cb3606b49994781f65baf602" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>GetWaveData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1aa6809b862fe59785f57782930ea6e90c" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>GetWaveDataFormat</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a86ec48e3a7b319fbc078e50f7c0ae4f8" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>GetWaveDataSize</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ad2d7933470365e6fea38820dca6b1d48" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>IsEndOfStream</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac602d28656f674e6b3972701547959bf" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>IsStreaming</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a520b48179b5c4a3d4e1f99bf6f72395f" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>IsValid</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac531a206a369d3f9e84c95e43ef4f9e7" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_bufferUsed</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a5e5880cb4784140b13d5f01bfcd7951b" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_data</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a885c214bd1338a33c623b175f01187db" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_decodingBuffer</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a4aeffd3a4c807733281d3e82174dd505" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_format</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1abc65a63eacb6492ba4f39c458a56506e" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_isEndOfStream</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac03869f156186054259a4466cb9cd7d7" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_ModPlugFile</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a88d5b444f0280bce2808291bc693d7f9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>ModPlugDataProvider</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>operator=</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a23590a109d5a88509df288eb48877ccb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>Ptr</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a0851d7f0660c280c5f8deb0a6db174e2" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>Seek</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a9196fb87f84b0395d20d814ed93540a5" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>StreamWaveData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8931d5989f2b446efc900c6c75d00b27" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~IWaveDataProvider</name></member>
+      <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1af3ea5e569588f2e078a68cc637c9947a" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~ModPlugDataProvider</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

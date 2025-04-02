@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__ANIMATIONS__NS_1_1AnimationLink" kind="struct" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::AnimationLink</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1AnimationLink_1ae94f23a9a38276818711e5498c50f637" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_ANIMATIONS_NS::AnimationLink::m_targetNodeIndex</definition>
+        <argsstring></argsstring>
+        <name>m_targetNodeIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationLink::m_targetNodeIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="63" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1AnimationLink_1a9b77481388a431b19cebd7d2d0fb0cb6" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_ANIMATIONS_NS::AnimationLink::m_targetPinIndex</definition>
+        <argsstring></argsstring>
+        <name>m_targetPinIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationLink::m_targetPinIndex</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="64" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1AnimationLink_1a46b2b374ece08daa6ef8d7d6e4d17069" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::AnimationLink::AnimationLink</definition>
+        <argsstring>(uint16_t targetNodeIndex, uint16_t targetPinIndex)</argsstring>
+        <name>AnimationLink</name>
+        <qualifiedname>SR_ANIMATIONS_NS::AnimationLink::AnimationLink</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>targetNodeIndex</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>targetPinIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="57" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="57" bodyend="60"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="55" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="55" bodyend="66"/>
+    <listofallmembers>
+      <member refid="structSR__ANIMATIONS__NS_1_1AnimationLink_1a46b2b374ece08daa6ef8d7d6e4d17069" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationLink</scope><name>AnimationLink</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1AnimationLink_1ae94f23a9a38276818711e5498c50f637" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationLink</scope><name>m_targetNodeIndex</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1AnimationLink_1a9b77481388a431b19cebd7d2d0fb0cb6" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationLink</scope><name>m_targetPinIndex</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

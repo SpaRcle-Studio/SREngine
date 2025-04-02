@@ -1,0 +1,1231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Path" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Path</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classSR__UTILS__NS_1_1Path_1a7ce07c6a2ade8f891c67eb8a5e3e028a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Type</name>
+        <qualifiedname>SR_UTILS_NS::Path::Type</qualifiedname>
+        <enumvalue id="classSR__UTILS__NS_1_1Path_1a7ce07c6a2ade8f891c67eb8a5e3e028aaec0fc0100c4fc1ce4eea230c3dc10360" prot="public">
+          <name>Undefined</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Path_1a7ce07c6a2ade8f891c67eb8a5e3e028aa0b27918290ff5323bea1e3b78a9cf04e" prot="public">
+          <name>File</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Path_1a7ce07c6a2ade8f891c67eb8a5e3e028aab0f2b97dc5d2b76b26e040408bb1d8af" prot="public">
+          <name>Folder</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="20" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1ae0029b62490a2b56f8f390cf62fe4939" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_UTILS_NS::Path::m_path</definition>
+        <argsstring></argsstring>
+        <name>m_path</name>
+        <qualifiedname>SR_UTILS_NS::Path::m_path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="152" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1ae1dfe3096883b52d69efcaaa589c6b6a" prot="private" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view SR_UTILS_NS::Path::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>SR_UTILS_NS::Path::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="153" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1ae1e6ad028dad03f59cecad04ed413fc9" prot="private" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view SR_UTILS_NS::Path::m_ext</definition>
+        <argsstring></argsstring>
+        <name>m_ext</name>
+        <qualifiedname>SR_UTILS_NS::Path::m_ext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="154" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1a56e08b52981aeb04b27542237f6f9b1e" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::Path::m_hash</definition>
+        <argsstring></argsstring>
+        <name>m_hash</name>
+        <qualifiedname>SR_UTILS_NS::Path::m_hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="155" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Path_1a3d4e8f2411b9fb9caef76e927fca6453" prot="private" static="no" mutable="no">
+        <type>Type</type>
+        <definition>Type SR_UTILS_NS::Path::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <qualifiedname>SR_UTILS_NS::Path::m_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="156" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1af431d65c634561500af87a3d26158849" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>()</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="25" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a7db2a0d235222435521a8be7d94b12b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab179d98c72d781414e6f8966b3477ee1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(const char *path)</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="27" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ae65997db21b625db1d6aedbc76a6c6fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom stringAtom)</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>stringAtom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="28" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a49edd8c28246ea7e31f2b52308966d87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(std::string path)</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="29" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a514692aa1a46f0d1e773b84eb8a85ab1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(std::string_view path)</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="30" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aed18d742e6c6cae14e678cf2b046e818" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(std::wstring path)</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type>std::wstring</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="31" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a202548a9488e66ee2912b4b79150a7e0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::Path</definition>
+        <argsstring>(Path &amp;&amp;path) noexcept</argsstring>
+        <name>Path</name>
+        <qualifiedname>SR_UTILS_NS::Path::Path</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;&amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="33" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="33" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1af20c5766b829ff2fe3156307c909003e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path &amp; SR_UTILS_NS::Path::operator=</definition>
+        <argsstring>(Path &amp;&amp;path) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Path::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;&amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="41" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="41" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2670fff21cf4bfcf9b1e13f49efbd683" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Path::operator const std::string &amp;</definition>
+        <argsstring>()</argsstring>
+        <name>operator const std::string &amp;</name>
+        <qualifiedname>SR_UTILS_NS::Path::string &amp;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="50" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a339d138a039b8631b280efe940bbea6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+        <definition>Path &amp; SR_UTILS_NS::Path::operator=</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Path::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>NOLINT </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="52" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="52" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a87990decbebcd223a665323cf800a440" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Path::operator==</definition>
+        <argsstring>(const Path &amp;path) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_UTILS_NS::Path::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="63" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="63" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa455307fa464fbb994d0ae901474137c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char SR_UTILS_NS::Path::operator[]</definition>
+        <argsstring>(size_t index) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_UTILS_NS::Path::operator[]</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="67" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="67" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a9c8884ef5fd9bf40f3550c95b95ad260" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>char &amp;</type>
+        <definition>char &amp; SR_UTILS_NS::Path::operator[]</definition>
+        <argsstring>(size_t index) noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>SR_UTILS_NS::Path::operator[]</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="76" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="76" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a60a2df54efabac7acb51a58e02fa6da9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Path::Save</definition>
+        <argsstring>(ISerializer &amp;serializer, const SerializationId &amp;id) const</argsstring>
+        <name>Save</name>
+        <qualifiedname>SR_UTILS_NS::Path::Save</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">ISerializer</ref> &amp;</type>
+          <declname>serializer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="87" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a09f40f55a9aede4c00ad434c106da853" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Path::Load</definition>
+        <argsstring>(IDeserializer &amp;deserializer, const SerializationId &amp;id)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_UTILS_NS::Path::Load</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">IDeserializer</ref> &amp;</type>
+          <declname>deserializer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="88" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a19073e46f3c626f291a9933ab6d2c34f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_DEPRECATED bool</type>
+        <definition>SR_DEPRECATED bool SR_UTILS_NS::Path::Make</definition>
+        <argsstring>(Type type=Type::Undefined) const</argsstring>
+        <name>Make</name>
+        <qualifiedname>SR_UTILS_NS::Path::Make</qualifiedname>
+        <param>
+          <type>Type</type>
+          <declname>type</declname>
+          <defval>Type::Undefined</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="90" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2b0b6d65fb83ad855dcaea1331b1138d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Path::Create</definition>
+        <argsstring>() const</argsstring>
+        <name>Create</name>
+        <qualifiedname>SR_UTILS_NS::Path::Create</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="91" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a1303337230a1832e0cce2ff209d374f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Path::CreateIfNotExists</definition>
+        <argsstring>() const</argsstring>
+        <name>CreateIfNotExists</name>
+        <qualifiedname>SR_UTILS_NS::Path::CreateIfNotExists</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="92" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa116a2d72108b3211b5417022ea59dde" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::Copy</definition>
+        <argsstring>(const Path &amp;destination) const</argsstring>
+        <name>Copy</name>
+        <qualifiedname>SR_UTILS_NS::Path::Copy</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>destination</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="94" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa1836cb432ad15352db0eeedce67f7b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Path::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::Path::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="96" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3bc351fdb28132b90373fc82448f5ca4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Path::ConvertToFileName</definition>
+        <argsstring>() const</argsstring>
+        <name>ConvertToFileName</name>
+        <qualifiedname>SR_UTILS_NS::Path::ConvertToFileName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="97" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ad6a5d256bdfbee33e89337d0a4814c6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const std::string &amp;</type>
+        <definition>SR_NODISCARD const std::string &amp; SR_UTILS_NS::Path::ToStringRef</definition>
+        <argsstring>() const</argsstring>
+        <name>ToStringRef</name>
+        <qualifiedname>SR_UTILS_NS::Path::ToStringRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="98" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aee068b77e8ede7c7c4e11d7aa078d91c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string *</type>
+        <definition>SR_NODISCARD std::string * SR_UTILS_NS::Path::ToStringPtr</definition>
+        <argsstring>()</argsstring>
+        <name>ToStringPtr</name>
+        <qualifiedname>SR_UTILS_NS::Path::ToStringPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="99" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab3f7e156e0a640de3caf4e0d2180ae5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Path::ToStringView</definition>
+        <argsstring>() const</argsstring>
+        <name>ToStringView</name>
+        <qualifiedname>SR_UTILS_NS::Path::ToStringView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="100" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a8e2b509fb1203a8c3c41d1cee2f84e3f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::wstring</type>
+        <definition>SR_NODISCARD std::wstring SR_UTILS_NS::Path::ToWinApiPath</definition>
+        <argsstring>() const</argsstring>
+        <name>ToWinApiPath</name>
+        <qualifiedname>SR_UTILS_NS::Path::ToWinApiPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="101" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa7633eb8c868f037ba70b2881434f288" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::wstring</type>
+        <definition>SR_NODISCARD std::wstring SR_UTILS_NS::Path::ToUnicodeString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::Path::ToUnicodeString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="102" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a55b4c744396e25585085e718e415d12e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD size_t</type>
+        <definition>SR_NODISCARD size_t SR_UTILS_NS::Path::GetHash</definition>
+        <argsstring>() const</argsstring>
+        <name>GetHash</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="103" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ac52e86ff938e367615ea878bf00fa79e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::Path::GetFileHash</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFileHash</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetFileHash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="104" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1adcf1c8785f9901eb3729cd42aeb32965" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::Path::GetFolderHash</definition>
+        <argsstring>(uint64_t deep=SR_UINT64_MAX) const</argsstring>
+        <name>GetFolderHash</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetFolderHash</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>deep</declname>
+          <defval>SR_UINT64_MAX</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="105" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aeab65aa6d171b4658790e2963567d14d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const char *</type>
+        <definition>SR_NODISCARD const char * SR_UTILS_NS::Path::CStr</definition>
+        <argsstring>() const</argsstring>
+        <name>CStr</name>
+        <qualifiedname>SR_UTILS_NS::Path::CStr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="106" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a8933384dd1bd82fd06eb173162571481" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const char *</type>
+        <definition>SR_NODISCARD const char * SR_UTILS_NS::Path::c_str</definition>
+        <argsstring>() const</argsstring>
+        <name>c_str</name>
+        <qualifiedname>SR_UTILS_NS::Path::c_str</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="107" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a41a7267bbed303326b2cdd5246c3f2ba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::GetPrevious</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPrevious</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetPrevious</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="109" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1acec4d6ee41932fa0cda52ad01f249200" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::GetFolder</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFolder</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="110" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aa2809738a048f0111d418b68fd45ed42" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::Concat</definition>
+        <argsstring>(const Path &amp;path) const</argsstring>
+        <name>Concat</name>
+        <qualifiedname>SR_UTILS_NS::Path::Concat</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="111" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a7142245f563beb4d8fdef33b31dcaae5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::EmplaceFront</definition>
+        <argsstring>(const std::string &amp;str) const</argsstring>
+        <name>EmplaceFront</name>
+        <qualifiedname>SR_UTILS_NS::Path::EmplaceFront</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="112" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1abc973ba1ea672af7c7b7d0699aa23c72" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::ConcatExt</definition>
+        <argsstring>(const std::string &amp;ext) const</argsstring>
+        <name>ConcatExt</name>
+        <qualifiedname>SR_UTILS_NS::Path::ConcatExt</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>ext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="113" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2ee92284f6247a85b5a1a12d2e3da034" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::RemoveSubPath</definition>
+        <argsstring>(const Path &amp;subPath) const</argsstring>
+        <name>RemoveSubPath</name>
+        <qualifiedname>SR_UTILS_NS::Path::RemoveSubPath</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>subPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="114" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ae5e4b32e61a6f75401969e279dc28d2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::Path::SelfRemoveSubPath</definition>
+        <argsstring>(const Path &amp;subPath) const</argsstring>
+        <name>SelfRemoveSubPath</name>
+        <qualifiedname>SR_UTILS_NS::Path::SelfRemoveSubPath</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>subPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="115" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a9d49b1bf9e9aed021402a127ba126e00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::Valid</definition>
+        <argsstring>() const</argsstring>
+        <name>Valid</name>
+        <qualifiedname>SR_UTILS_NS::Path::Valid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="117" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a573f4a6f3d64e5ec02c1cda85ccbab2d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>SR_UTILS_NS::Path::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="118" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a0305faf27d5c822e5644afe7b9e9ddaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsSubPath</definition>
+        <argsstring>(const Path &amp;subPath) const</argsstring>
+        <name>IsSubPath</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsSubPath</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>subPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="119" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab6c0f82531e30900285a698a1c40d840" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::Contains</definition>
+        <argsstring>(const std::string &amp;str) const</argsstring>
+        <name>Contains</name>
+        <qualifiedname>SR_UTILS_NS::Path::Contains</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="120" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a66ea75fb9bdf17668ffe907f5668ce8f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsHidden</definition>
+        <argsstring>() const</argsstring>
+        <name>IsHidden</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsHidden</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="121" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ac5a8bdb1dad2f7cff03330a1b8f155d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::Exists</definition>
+        <argsstring>() const</argsstring>
+        <name>Exists</name>
+        <qualifiedname>SR_UTILS_NS::Path::Exists</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="122" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a2e175b50b1f6c33954799cede938fd00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::Exists</definition>
+        <argsstring>(Type type) const</argsstring>
+        <name>Exists</name>
+        <qualifiedname>SR_UTILS_NS::Path::Exists</qualifiedname>
+        <param>
+          <type>Type</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="123" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1abc571853263a3e6419ca9784b24aff6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD Type</type>
+        <definition>SR_NODISCARD Type SR_UTILS_NS::Path::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="125" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3698abc636553ceaa589cba87ccbea5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsDir</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDir</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsDir</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="126" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a020e077951b3f7bfe4843cc8f701d687" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsFile</definition>
+        <argsstring>() const</argsstring>
+        <name>IsFile</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsFile</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="127" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a376ec5cecc1c170ee7c2c04cb1964717" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsAbs</definition>
+        <argsstring>() const</argsstring>
+        <name>IsAbs</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsAbs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="128" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a90ac8b451687e7e846563335e55959c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsEmpty</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEmpty</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsEmpty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="129" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3a6c6cd123296b9058367808bcaffe2c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Path::IsDirEmpty</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDirEmpty</name>
+        <qualifiedname>SR_UTILS_NS::Path::IsDirEmpty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="130" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1afac17b5806247c91a070ea05434d2bd4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
+        <definition>SR_NODISCARD std::list&lt; Path &gt; SR_UTILS_NS::Path::GetFiles</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFiles</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetFiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="132" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ad7a63e123ddb75094f85572f24e8e00f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
+        <definition>SR_NODISCARD std::list&lt; Path &gt; SR_UTILS_NS::Path::GetFolders</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFolders</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetFolders</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="133" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1af79931ba215f438c605103b917b5cd1f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::list&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &gt;</type>
+        <definition>SR_NODISCARD std::list&lt; Path &gt; SR_UTILS_NS::Path::GetAll</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAll</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetAll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="134" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1ab7999c070e80458e2e00196b856bcb49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Path::GetWithoutExtension</definition>
+        <argsstring>() const</argsstring>
+        <name>GetWithoutExtension</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetWithoutExtension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="136" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a65314940277eaf649637f218592141fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Path::GetExtensionView</definition>
+        <argsstring>() const</argsstring>
+        <name>GetExtensionView</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetExtensionView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="137" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a5f8a38bebd4f84565a7ecdecfcd02469" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Path::GetBaseNameView</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBaseNameView</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetBaseNameView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="138" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a8a4a81e3d3ba3ec69c8c01f67e05e512" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Path::View</definition>
+        <argsstring>() const</argsstring>
+        <name>View</name>
+        <qualifiedname>SR_UTILS_NS::Path::View</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="139" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1aeb17e9c0b159d77deaaaf35f8786b66b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Path::GetExtension</definition>
+        <argsstring>() const</argsstring>
+        <name>GetExtension</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetExtension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="140" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a3287307023ec789dd17c19b5d63b73fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Path::GetBaseName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBaseName</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetBaseName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="141" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a4acb268f00da343e7a179f1e9377e3d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Path::GetBaseNameAndExt</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBaseNameAndExt</name>
+        <qualifiedname>SR_UTILS_NS::Path::GetBaseNameAndExt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="142" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a22da88912acfaf6316df1e680c38a541" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Path::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_UTILS_NS::Path::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="145" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a048dc2249537660f4fb816c2e0b3adb3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>Path SR_UTILS_NS::Path::Normalize</definition>
+        <argsstring>()</argsstring>
+        <name>Normalize</name>
+        <qualifiedname>SR_UTILS_NS::Path::Normalize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="147" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a26e02ba4d6d21ab28282e1891c56bec4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Path::NormalizeSelf</definition>
+        <argsstring>()</argsstring>
+        <name>NormalizeSelf</name>
+        <qualifiedname>SR_UTILS_NS::Path::NormalizeSelf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="148" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Path_1a5375fa7ad660574762ee0ce35edfea06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Path::ExtractNameAndExt</definition>
+        <argsstring>()</argsstring>
+        <name>ExtractNameAndExt</name>
+        <qualifiedname>SR_UTILS_NS::Path::ExtractNameAndExt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="149" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" line="18" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/FileSystem/Path.h" bodystart="18" bodyend="158"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Path_1a8933384dd1bd82fd06eb173162571481" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>c_str</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aa2809738a048f0111d418b68fd45ed42" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Concat</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1abc973ba1ea672af7c7b7d0699aa23c72" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ConcatExt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ab6c0f82531e30900285a698a1c40d840" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Contains</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a3bc351fdb28132b90373fc82448f5ca4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ConvertToFileName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aa116a2d72108b3211b5417022ea59dde" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Copy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a2b0b6d65fb83ad855dcaea1331b1138d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Create</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a1303337230a1832e0cce2ff209d374f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>CreateIfNotExists</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aeab65aa6d171b4658790e2963567d14d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>CStr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a7142245f563beb4d8fdef33b31dcaae5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>EmplaceFront</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a573f4a6f3d64e5ec02c1cda85ccbab2d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>empty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ac5a8bdb1dad2f7cff03330a1b8f155d2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Exists</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a2e175b50b1f6c33954799cede938fd00" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Exists</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a5375fa7ad660574762ee0ce35edfea06" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ExtractNameAndExt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1af79931ba215f438c605103b917b5cd1f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetAll</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a3287307023ec789dd17c19b5d63b73fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetBaseName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a4acb268f00da343e7a179f1e9377e3d9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetBaseNameAndExt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a5f8a38bebd4f84565a7ecdecfcd02469" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetBaseNameView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aeb17e9c0b159d77deaaaf35f8786b66b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetExtension</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a65314940277eaf649637f218592141fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetExtensionView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ac52e86ff938e367615ea878bf00fa79e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetFileHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1afac17b5806247c91a070ea05434d2bd4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetFiles</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1acec4d6ee41932fa0cda52ad01f249200" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetFolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1adcf1c8785f9901eb3729cd42aeb32965" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetFolderHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ad7a63e123ddb75094f85572f24e8e00f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetFolders</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a55b4c744396e25585085e718e415d12e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a41a7267bbed303326b2cdd5246c3f2ba" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetPrevious</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1abc571853263a3e6419ca9784b24aff6c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ab7999c070e80458e2e00196b856bcb49" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>GetWithoutExtension</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a376ec5cecc1c170ee7c2c04cb1964717" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsAbs</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a3698abc636553ceaa589cba87ccbea5e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsDir</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a3a6c6cd123296b9058367808bcaffe2c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsDirEmpty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a90ac8b451687e7e846563335e55959c1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsEmpty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a020e077951b3f7bfe4843cc8f701d687" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a66ea75fb9bdf17668ffe907f5668ce8f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsHidden</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a0305faf27d5c822e5644afe7b9e9ddaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>IsSubPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a09f40f55a9aede4c00ad434c106da853" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ae1e6ad028dad03f59cecad04ed413fc9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>m_ext</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a56e08b52981aeb04b27542237f6f9b1e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>m_hash</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ae1dfe3096883b52d69efcaaa589c6b6a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>m_name</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ae0029b62490a2b56f8f390cf62fe4939" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>m_path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a3d4e8f2411b9fb9caef76e927fca6453" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>m_type</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a19073e46f3c626f291a9933ab6d2c34f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Make</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a048dc2249537660f4fb816c2e0b3adb3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Normalize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a26e02ba4d6d21ab28282e1891c56bec4" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>NormalizeSelf</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a2670fff21cf4bfcf9b1e13f49efbd683" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>operator const std::string &amp;</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1af20c5766b829ff2fe3156307c909003e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a339d138a039b8631b280efe940bbea6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a87990decbebcd223a665323cf800a440" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aa455307fa464fbb994d0ae901474137c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>operator[]</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a9c8884ef5fd9bf40f3550c95b95ad260" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>operator[]</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1af431d65c634561500af87a3d26158849" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a7db2a0d235222435521a8be7d94b12b3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ab179d98c72d781414e6f8966b3477ee1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ae65997db21b625db1d6aedbc76a6c6fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a49edd8c28246ea7e31f2b52308966d87" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a514692aa1a46f0d1e773b84eb8a85ab1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aed18d742e6c6cae14e678cf2b046e818" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a202548a9488e66ee2912b4b79150a7e0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a2ee92284f6247a85b5a1a12d2e3da034" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>RemoveSubPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a60a2df54efabac7acb51a58e02fa6da9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ae5e4b32e61a6f75401969e279dc28d2d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>SelfRemoveSubPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aa1836cb432ad15352db0eeedce67f7b7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aee068b77e8ede7c7c4e11d7aa078d91c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ToStringPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ad6a5d256bdfbee33e89337d0a4814c6c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ToStringRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1ab3f7e156e0a640de3caf4e0d2180ae5e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ToStringView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1aa7633eb8c868f037ba70b2881434f288" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ToUnicodeString</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a8e2b509fb1203a8c3c41d1cee2f84e3f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>ToWinApiPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a7ce07c6a2ade8f891c67eb8a5e3e028a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Type</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a22da88912acfaf6316df1e680c38a541" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a9d49b1bf9e9aed021402a127ba126e00" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Path_1a8a4a81e3d3ba3ec69c8c01f67e05e512" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Path</scope><name>View</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

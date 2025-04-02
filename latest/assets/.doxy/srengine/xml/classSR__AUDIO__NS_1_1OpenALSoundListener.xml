@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__AUDIO__NS_1_1OpenALSoundListener" kind="class" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::OpenALSoundListener</compoundname>
+    <basecompoundref refid="classSR__AUDIO__NS_1_1SoundListener" prot="public" virt="non-virtual">SR_AUDIO_NS::SoundListener</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1afde409f1cde825da8e7be8fb1595227d" prot="private" static="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1SoundListener" kindref="compound">SoundListener</ref></type>
+        <definition>using SR_AUDIO_NS::OpenALSoundListener::Super =  SoundListener</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="12" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a1f0c320136f40998603991d1d3e128a1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::OpenALSoundListener::OpenALSoundListener</definition>
+        <argsstring>(SoundDevice *pDevice)</argsstring>
+        <name>OpenALSoundListener</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::OpenALSoundListener</qualifiedname>
+        <param>
+          <type><ref refid="classSR__AUDIO__NS_1_1SoundDevice" kindref="compound">SoundDevice</ref> *</type>
+          <declname>pDevice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="14" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" bodystart="14" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a992fa99d1b2cb50d7aa6d6785534a8f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::OpenALSoundListener::Init</definition>
+        <argsstring>() override</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::Init</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a8b6e067365c9ad167acb96aa3f5474ba">Init</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="18" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a7dded343c1c8ce4148e89a073d7dc7a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::OpenALSoundListener::Update</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;position, const SR_MATH_NS::Quaternion &amp;quaternion) override</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::Update</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a4ddaa1f27ef17a1b9b59125ae401efbe">Update</reimplements>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref> &amp;</type>
+          <declname>quaternion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a44ca5e7d1f47ccc5768de877baf10d5d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD ListenerDistanceModel</type>
+        <definition>SR_NODISCARD ListenerDistanceModel SR_AUDIO_NS::OpenALSoundListener::GetDistanceModel</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetDistanceModel</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::GetDistanceModel</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1af9a586e6598ef41aabd29f5ca5972d42">GetDistanceModel</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="21" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1aae78d774544c6d78ec58b0bfb6bdc6ca" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_AUDIO_NS::OpenALSoundListener::GetVelocity</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetVelocity</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::GetVelocity</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a024b489514193d056ac2668f5a1eee12">GetVelocity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="22" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a9359881fc8cb03cd00bb56ab68b141e3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_AUDIO_NS::OpenALSoundListener::GetPosition</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetPosition</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::GetPosition</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1ac826845d9eaf3f99079e1b6893d2823b">GetPosition</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="23" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a218f9068885240855a2afc0240f1a3e2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector6</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector6 SR_AUDIO_NS::OpenALSoundListener::GetOrientation</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetOrientation</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::GetOrientation</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a27fa48cf3072a8a9e52839bb9cfbb6e2">GetOrientation</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="24" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a6e9cfc57396a4874babee19a113a4c86" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_AUDIO_NS::OpenALSoundListener::GetGain</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetGain</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::GetGain</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a8749a01c9d8d1da8ced30299a302d7a5">GetGain</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="25" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a3b8608580602ae9a70e586eea9be4302" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_AUDIO_NS::OpenALSoundListener::SetDistanceModel</definition>
+        <argsstring>(ListenerDistanceModel distanceModel) override</argsstring>
+        <name>SetDistanceModel</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::SetDistanceModel</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a372142e01b6eb343e04e9df39add3ec0">SetDistanceModel</reimplements>
+        <param>
+          <type>ListenerDistanceModel</type>
+          <declname>distanceModel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1ac5291bf08d862801eb2641b0340332c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_AUDIO_NS::OpenALSoundListener::SetVelocity</definition>
+        <argsstring>(SR_MATH_NS::FVector3 velocity) override</argsstring>
+        <name>SetVelocity</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::SetVelocity</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1a00a2007d4dd06853d82311021141e735">SetVelocity</reimplements>
+        <param>
+          <type>SR_MATH_NS::FVector3</type>
+          <declname>velocity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1OpenALSoundListener_1a61da3db1f82cd6094a18687b8a93dc3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_AUDIO_NS::OpenALSoundListener::SetGain</definition>
+        <argsstring>(float_t gain) override</argsstring>
+        <name>SetGain</name>
+        <qualifiedname>SR_AUDIO_NS::OpenALSoundListener::SetGain</qualifiedname>
+        <reimplements refid="classSR__AUDIO__NS_1_1SoundListener_1aec9f95e9374176dfa04a80303f524f1a">SetGain</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>gain</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="30" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::OpenALSoundListener</label>
+        <link refid="classSR__AUDIO__NS_1_1OpenALSoundListener"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_AUDIO_NS::SoundListener</label>
+        <link refid="classSR__AUDIO__NS_1_1SoundListener"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_AUDIO_NS::ListenerData</label>
+        <link refid="structSR__AUDIO__NS_1_1ListenerData"/>
+      </node>
+      <node id="1">
+        <label>SR_AUDIO_NS::OpenALSoundListener</label>
+        <link refid="classSR__AUDIO__NS_1_1OpenALSoundListener"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_AUDIO_NS::SoundListener</label>
+        <link refid="classSR__AUDIO__NS_1_1SoundListener"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" line="11" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALSoundListener.h" bodystart="11" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1a23835484d4b57e4b9e1cdc9694858733" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Allocate</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1ab8bd9e7546dad540c77161b240cdc8ac" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1a85660e242b10607edbceb2e925f0c2a8" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1a3f5cd696f5d5445825a73cb8851ad6e6" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetDevice</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a44ca5e7d1f47ccc5768de877baf10d5d" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetDistanceModel</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a6e9cfc57396a4874babee19a113a4c86" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetGain</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a218f9068885240855a2afc0240f1a3e2" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetOrientation</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a9359881fc8cb03cd00bb56ab68b141e3" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetPosition</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1aae78d774544c6d78ec58b0bfb6bdc6ca" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetVelocity</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a992fa99d1b2cb50d7aa6d6785534a8f0" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Init</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1a4ceb746073a118ab576bdcadc757a722" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>m_data</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>NonCopyable</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a1f0c320136f40998603991d1d3e128a1" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>OpenALSoundListener</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>operator=</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1a7410d4f8c5c6591a7643a2cb6e1fdcbc" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>SetData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a3b8608580602ae9a70e586eea9be4302" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>SetDistanceModel</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a61da3db1f82cd6094a18687b8a93dc3b" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>SetGain</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1ac5291bf08d862801eb2641b0340332c7" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>SetVelocity</name></member>
+      <member refid="classSR__AUDIO__NS_1_1SoundListener_1aca13e98dce3305911659e90039d737f9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>SoundListener</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1afde409f1cde825da8e7be8fb1595227d" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Super</name></member>
+      <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a7dded343c1c8ce4148e89a073d7dc7a5" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

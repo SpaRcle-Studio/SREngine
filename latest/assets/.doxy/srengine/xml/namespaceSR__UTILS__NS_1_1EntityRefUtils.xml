@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__UTILS__NS_1_1EntityRefUtils" kind="namespace" language="C++">
+    <compoundname>SR_UTILS_NS::EntityRefUtils</compoundname>
+    <innerclass refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" prot="public">SR_UTILS_NS::EntityRefUtils::OwnerRef</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem" prot="public">SR_UTILS_NS::EntityRefUtils::PathItem</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="EntityRefUtils_8h_1ad2a19b0d115f5432771883c351dde9db" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem" kindref="compound">PathItem</ref> &gt;</type>
+        <definition>typedef std::vector&lt;PathItem&gt; SR_UTILS_NS::EntityRefUtils::RefPath</definition>
+        <argsstring></argsstring>
+        <name>RefPath</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::RefPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="58" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="EntityRefUtils_8h_1acd531cfaaac1ef5e503a8298caaab7a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EntityRefUtils::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(Action, uint8_t, Action_Parent, Action_Child, Action_Component)</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>Action</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Action_Parent</type>
+        </param>
+        <param>
+          <type>Action_Child</type>
+        </param>
+        <param>
+          <type>Action_Component</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="31" column="5" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="31" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="EntityRefUtils_8h_1a483b89d75a9bd68d6ff3e491dc15f5cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::Scene &gt; SR_UTILS_NS::EntityRefUtils::GetSceneFromOwner</definition>
+        <argsstring>(const OwnerRef &amp;owner)</argsstring>
+        <name>GetSceneFromOwner</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::GetSceneFromOwner</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="60" column="45" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="60" declcolumn="45"/>
+      </memberdef>
+      <memberdef kind="function" id="EntityRefUtils_8h_1afed7830f50023af921f90e27e3886bae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; Entity &gt;</type>
+        <definition>SR_MAYBE_UNUSED SR_HTYPES_NS::SharedPtr&lt; Entity &gt; SR_UTILS_NS::EntityRefUtils::GetEntity</definition>
+        <argsstring>(const OwnerRef &amp;owner, const RefPath &amp;path)</argsstring>
+        <name>GetEntity</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::GetEntity</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>owner</declname>
+        </param>
+        <param>
+          <type>const RefPath &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="62" column="45" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="62" declcolumn="45"/>
+      </memberdef>
+      <memberdef kind="function" id="EntityRefUtils_8h_1af17be528d7bff5d8303f39ada7dd11d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED RefPath</type>
+        <definition>SR_MAYBE_UNUSED RefPath SR_UTILS_NS::EntityRefUtils::CalculatePath</definition>
+        <argsstring>(const OwnerRef &amp;from)</argsstring>
+        <name>CalculatePath</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::CalculatePath</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="64" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="64" declcolumn="29"/>
+      </memberdef>
+      <memberdef kind="function" id="EntityRefUtils_8h_1a240cf646a185a380314ac97b21458482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED RefPath</type>
+        <definition>SR_MAYBE_UNUSED RefPath SR_UTILS_NS::EntityRefUtils::CalculateRelativePath</definition>
+        <argsstring>(const OwnerRef &amp;from, const OwnerRef &amp;target)</argsstring>
+        <name>CalculateRelativePath</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::CalculateRelativePath</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="65" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="65" declcolumn="29"/>
+      </memberdef>
+      <memberdef kind="function" id="EntityRefUtils_8h_1a6aab74edf35f6a4acdd846b5dcd4b065" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED bool</type>
+        <definition>SR_MAYBE_UNUSED bool SR_UTILS_NS::EntityRefUtils::IsOwnerValid</definition>
+        <argsstring>(const OwnerRef &amp;owner)</argsstring>
+        <name>IsOwnerValid</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::IsOwnerValid</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="67" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="67" declcolumn="26"/>
+      </memberdef>
+      <memberdef kind="function" id="EntityRefUtils_8h_1a36885ae0b9bfc160d84769174ccf2b6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED bool</type>
+        <definition>SR_MAYBE_UNUSED bool SR_UTILS_NS::EntityRefUtils::IsTargetInitialized</definition>
+        <argsstring>(const OwnerRef &amp;owner)</argsstring>
+        <name>IsTargetInitialized</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::IsTargetInitialized</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1OwnerRef" kindref="compound">OwnerRef</ref> &amp;</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="68" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" declline="68" declcolumn="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="21" column="1"/>
+  </compounddef>
+</doxygen>

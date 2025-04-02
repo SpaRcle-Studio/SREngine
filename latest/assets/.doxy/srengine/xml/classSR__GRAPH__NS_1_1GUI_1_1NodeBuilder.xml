@@ -1,0 +1,481 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::GUI::NodeBuilder</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167" prot="private" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>Stage</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Stage</qualifiedname>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167a4bbb8f967da6d1a610596d7257179c2b" prot="private">
+          <name>Invalid</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167a1a06729125544cab7cee73195fc044f0" prot="private">
+          <name>Begin</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167abf50d5e661106d0abe925af3c2e6f7e7" prot="private">
+          <name>Header</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167af15c1cae7882448b3fb0404682e17e61" prot="private">
+          <name>Content</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167a324118a6721dd6b8a9b9f4e327df2bf5" prot="private">
+          <name>Input</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167a29c2c02a361c9d7028472e5d92cd4a54" prot="private">
+          <name>Output</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167ab1ca34f82e83c52b010f86955f264e05" prot="private">
+          <name>Middle</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167a87557f11575c0ad78e4e28abedc13b6e" prot="private">
+          <name>End</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="20" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a758ebc09b55ab171622f269dee3f9b1d" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+        <definition>SR_GTYPES_NS::Texture* SR_GRAPH_NS::GUI::NodeBuilder::m_texture</definition>
+        <argsstring></argsstring>
+        <name>m_texture</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_texture</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="54" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6d33ec119c71986fc40157842b0d80c5" prot="private" static="no" mutable="no">
+        <type>uintptr_t</type>
+        <definition>uintptr_t SR_GRAPH_NS::GUI::NodeBuilder::m_currentNodeId</definition>
+        <argsstring></argsstring>
+        <name>m_currentNodeId</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_currentNodeId</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="56" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ac4dafb35d01d34c364201d85428d8878" prot="private" static="no" mutable="no">
+        <type>Node *</type>
+        <definition>Node* SR_GRAPH_NS::GUI::NodeBuilder::m_currentNode</definition>
+        <argsstring></argsstring>
+        <name>m_currentNode</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_currentNode</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="58" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae2682e5910d3ba5285c5e8b5afb1549d" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
+        <definition>Pin* SR_GRAPH_NS::GUI::NodeBuilder::m_currentPin</definition>
+        <argsstring></argsstring>
+        <name>m_currentPin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_currentPin</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="59" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae09f47eb8fcc1838e0dad285e891e726" prot="private" static="no" mutable="no">
+        <type>Stage</type>
+        <definition>Stage SR_GRAPH_NS::GUI::NodeBuilder::m_currentStage</definition>
+        <argsstring></argsstring>
+        <name>m_currentStage</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_currentStage</qualifiedname>
+        <initializer>= Stage::Invalid</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="61" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a474de23ab4347c7a35157b8e6b31289a" prot="private" static="no" mutable="no">
+        <type>ImU32</type>
+        <definition>ImU32 SR_GRAPH_NS::GUI::NodeBuilder::m_headerColor</definition>
+        <argsstring></argsstring>
+        <name>m_headerColor</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_headerColor</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="62" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a757308d3f45fb60411476ce3265be0c2" prot="private" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 SR_GRAPH_NS::GUI::NodeBuilder::m_headerMin</definition>
+        <argsstring></argsstring>
+        <name>m_headerMin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_headerMin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="64" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a73a3b433b020b75622c36f0aa51a1f44" prot="private" static="no" mutable="no">
+        <type>ImVec2</type>
+        <definition>ImVec2 SR_GRAPH_NS::GUI::NodeBuilder::m_headerMax</definition>
+        <argsstring></argsstring>
+        <name>m_headerMax</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_headerMax</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="65" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae3f2bce2f05af7a20594c51bcf467e70" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::GUI::NodeBuilder::m_hasHeader</definition>
+        <argsstring></argsstring>
+        <name>m_hasHeader</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_hasHeader</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="67" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6be6b2164722be93d90da835424741ee" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::NodeBuilder::NodeBuilder</definition>
+        <argsstring>(SR_GTYPES_NS::Texture *pTexture)</argsstring>
+        <name>NodeBuilder</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::NodeBuilder</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+          <declname>pTexture</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="31" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a47223e89216a464dd784684d8a3e9c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::GUI::NodeBuilder::~NodeBuilder</definition>
+        <argsstring>() override</argsstring>
+        <name>~NodeBuilder</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::~NodeBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="32" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a3b6d535c3044bd47dd9a3164b5b00d15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::Begin</definition>
+        <argsstring>(Node *pNode)</argsstring>
+        <name>Begin</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Begin</qualifiedname>
+        <param>
+          <type>Node *</type>
+          <declname>pNode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7f740b5d0b701ddb0025e4c3d283eafd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::End</definition>
+        <argsstring>()</argsstring>
+        <name>End</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::End</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a0a68b8d3585f332eeb3f76c8ab41a543" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::Header</definition>
+        <argsstring>(const ImVec4 &amp;color=ImVec4(1, 1, 1, 1))</argsstring>
+        <name>Header</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Header</qualifiedname>
+        <param>
+          <type>const ImVec4 &amp;</type>
+          <declname>color</declname>
+          <defval>ImVec4(1, 1, 1, 1)</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a75cd670eb7d489b6185d24e74a2e8b7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::EndHeader</definition>
+        <argsstring>()</argsstring>
+        <name>EndHeader</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::EndHeader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa0409a84d4d648c0c14fb991d2fffc87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::Input</definition>
+        <argsstring>(Pin *pPin)</argsstring>
+        <name>Input</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Input</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
+          <declname>pPin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a992864431d1a812a7ac685ef8563fd54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::EndInput</definition>
+        <argsstring>()</argsstring>
+        <name>EndInput</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::EndInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="41" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a92c3c2944e4be77744de7586e451f4e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::Middle</definition>
+        <argsstring>()</argsstring>
+        <name>Middle</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Middle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7d64622abb2b73fe86b8ba2ecfae0ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::Output</definition>
+        <argsstring>(Pin *pPin)</argsstring>
+        <name>Output</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Output</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
+          <declname>pPin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1af4f5bd5eaf79515dcdc62d3b4c160663" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::EndOutput</definition>
+        <argsstring>()</argsstring>
+        <name>EndOutput</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::EndOutput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="46" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa357267b8680c8c86c970b89d3bc45f9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::GUI::NodeBuilder::SetStage</definition>
+        <argsstring>(Stage stage)</argsstring>
+        <name>SetStage</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::SetStage</qualifiedname>
+        <param>
+          <type>Stage</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae5ca76f9e44fc8c519d0e5af22103460" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD ImTextureID</type>
+        <definition>SR_NODISCARD ImTextureID SR_GRAPH_NS::GUI::NodeBuilder::GetTextureId</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTextureId</name>
+        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::GetTextureId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="51" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::GUI::NodeBuilder</label>
+        <link refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::GUI::NodeBuilder</label>
+        <link refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="19" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="19" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a3b6d535c3044bd47dd9a3164b5b00d15" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Begin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7f740b5d0b701ddb0025e4c3d283eafd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>End</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a75cd670eb7d489b6185d24e74a2e8b7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>EndHeader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a992864431d1a812a7ac685ef8563fd54" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>EndInput</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1af4f5bd5eaf79515dcdc62d3b4c160663" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>EndOutput</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae5ca76f9e44fc8c519d0e5af22103460" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>GetTextureId</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a0a68b8d3585f332eeb3f76c8ab41a543" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Header</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa0409a84d4d648c0c14fb991d2fffc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Input</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ac4dafb35d01d34c364201d85428d8878" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentNode</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6d33ec119c71986fc40157842b0d80c5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentNodeId</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae2682e5910d3ba5285c5e8b5afb1549d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentPin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae09f47eb8fcc1838e0dad285e891e726" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentStage</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae3f2bce2f05af7a20594c51bcf467e70" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_hasHeader</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a474de23ab4347c7a35157b8e6b31289a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_headerColor</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a73a3b433b020b75622c36f0aa51a1f44" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_headerMax</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a757308d3f45fb60411476ce3265be0c2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_headerMin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a758ebc09b55ab171622f269dee3f9b1d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_texture</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a92c3c2944e4be77744de7586e451f4e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Middle</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6be6b2164722be93d90da835424741ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NodeBuilder</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7d64622abb2b73fe86b8ba2ecfae0ae4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Output</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa357267b8680c8c86c970b89d3bc45f9" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>SetStage</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Stage</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a47223e89216a464dd784684d8a3e9c72" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>~NodeBuilder</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

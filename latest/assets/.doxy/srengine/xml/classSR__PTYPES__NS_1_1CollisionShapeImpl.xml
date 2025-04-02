@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PTYPES__NS_1_1CollisionShapeImpl" kind="class" language="C++" prot="public">
+    <compoundname>SR_PTYPES_NS::CollisionShapeImpl</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__PTYPES__NS_1_1PhysXCollisionShape" prot="public" virt="non-virtual">SR_PTYPES_NS::PhysXCollisionShape</derivedcompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1af85aa861fa8f740a9a4072fff2b59d81" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> *</type>
+        <definition>CollisionShape* SR_PTYPES_NS::CollisionShapeImpl::m_shape</definition>
+        <argsstring></argsstring>
+        <name>m_shape</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::m_shape</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="42" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1ab8d07a5b987cbd7a50bf3ceb356b3d9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::CollisionShapeImpl::Update</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::Update</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="28" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a7b2f43af9f82909f0e6f608e2e93ea13" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_PTYPES_NS::CollisionShapeImpl::UpdateShape</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateShape</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::UpdateShape</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a51e27896fecccb6d81a2734b50781534">UpdateShape</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="29" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a82ac2293adc326fab0b9dbdbc06a7dbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_PTYPES_NS::CollisionShapeImpl::UpdateMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateMatrix</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::UpdateMatrix</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad58d722ffe208e003b309b233a9a33d9">UpdateMatrix</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="30" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a76c2c0a950fbc551d69d8d108197f7df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::CollisionShapeImpl::SetShape</definition>
+        <argsstring>(CollisionShape *pShape)</argsstring>
+        <name>SetShape</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::SetShape</qualifiedname>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> *</type>
+          <declname>pShape</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="32" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a2225190aa1ab2a4ddf5b4202342c2b23" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::CollisionShapeImpl::CalculateLocalInertia</definition>
+        <argsstring>(float_t mass) const</argsstring>
+        <name>CalculateLocalInertia</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::CalculateLocalInertia</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>mass</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="34" column="51" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a923c7bb373a4217535c2443567c51244" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>virtual SR_NODISCARD void * SR_PTYPES_NS::CollisionShapeImpl::GetHandle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetHandle</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::GetHandle</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1af272d3187d78a32cbeaa4ab544a1ce0a">GetHandle</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="38" column="35" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a572967d0c46534df86bb63e2a4638de5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> *</type>
+        <definition>SR_NODISCARD CollisionShape * SR_PTYPES_NS::CollisionShapeImpl::GetShape</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetShape</name>
+        <qualifiedname>SR_PTYPES_NS::CollisionShapeImpl::GetShape</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="39" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_PTYPES_NS::CollisionShapeImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShapeImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_PTYPES_NS::PhysXCollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysXCollisionShape"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_PTYPES_NS::CollisionShapeImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShapeImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="26" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="26" bodyend="44"/>
+    <listofallmembers>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a2225190aa1ab2a4ddf5b4202342c2b23" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>CalculateLocalInertia</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a923c7bb373a4217535c2443567c51244" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>GetHandle</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a572967d0c46534df86bb63e2a4638de5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>GetShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1af85aa861fa8f740a9a4072fff2b59d81" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>m_shape</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>operator=</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a76c2c0a950fbc551d69d8d108197f7df" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>SetShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1ab8d07a5b987cbd7a50bf3ceb356b3d9f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>Update</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a82ac2293adc326fab0b9dbdbc06a7dbe" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>UpdateMatrix</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a7b2f43af9f82909f0e6f608e2e93ea13" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>UpdateShape</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

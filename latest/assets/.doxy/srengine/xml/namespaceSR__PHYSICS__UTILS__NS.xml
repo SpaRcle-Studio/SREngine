@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__PHYSICS__UTILS__NS" kind="namespace" language="C++">
+    <compoundname>SR_PHYSICS_UTILS_NS</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="Bullet3PhysicsLib_8h_1a5b51337516842d9fd32ce5fc4ee220d2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED btVector3</type>
+        <definition>static SR_MAYBE_UNUSED btVector3 SR_PHYSICS_UTILS_NS::FV3ToBtV3</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;vector3)</argsstring>
+        <name>FV3ToBtV3</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::FV3ToBtV3</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="17" column="38" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="Bullet3PhysicsLib_8h_1a4cd4e5ca38ef160292f447cd203f0ffc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_MATH_NS::FVector3</type>
+        <definition>static SR_MAYBE_UNUSED SR_MATH_NS::FVector3 SR_PHYSICS_UTILS_NS::BtV33ToFV</definition>
+        <argsstring>(const btVector3 &amp;vector3)</argsstring>
+        <name>BtV33ToFV</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::BtV33ToFV</qualifiedname>
+        <param>
+          <type>const btVector3 &amp;</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="21" column="49" bodyfile="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="PhysXUtils_8h_1a25d8621307f650bab731d04970a7c729" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED physx::PxVec3</type>
+        <definition>static SR_MAYBE_UNUSED physx::PxVec3 SR_PHYSICS_UTILS_NS::FV3ToPxV3</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;vector3)</argsstring>
+        <name>FV3ToPxV3</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::FV3ToPxV3</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="27" column="42" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="27" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="PhysXUtils_8h_1abe7bd676e82e8ac55584b69e34213e18" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_MATH_NS::FVector3</type>
+        <definition>static SR_MAYBE_UNUSED SR_MATH_NS::FVector3 SR_PHYSICS_UTILS_NS::PxV3ToFV3</definition>
+        <argsstring>(const physx::PxVec3 &amp;vector3)</argsstring>
+        <name>PxV3ToFV3</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::PxV3ToFV3</qualifiedname>
+        <param>
+          <type>const physx::PxVec3 &amp;</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="31" column="49" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="31" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="PhysXUtils_8h_1ab5c7a7285e58314f90eb183fb5e27577" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>physx::PxCombineMode::Enum</type>
+        <definition>static physx::PxCombineMode::Enum SR_PHYSICS_UTILS_NS::CombineToPxCombine</definition>
+        <argsstring>(const Combine mode)</argsstring>
+        <name>CombineToPxCombine</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::CombineToPxCombine</qualifiedname>
+        <param>
+          <type>const Combine</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="35" column="39" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="35" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="PhysXUtils_8h_1ad933fdaa38942c2bd434eb65536dab8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>PhysXPvdConnection *</type>
+        <definition>PhysXPvdConnection * SR_PHYSICS_UTILS_NS::CreatePvdConnection</definition>
+        <argsstring>(physx::PxFoundation *pFoundation, const std::string &amp;ip, uint16_t port, uint32_t timeout)</argsstring>
+        <name>CreatePvdConnection</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::CreatePvdConnection</qualifiedname>
+        <param>
+          <type>physx::PxFoundation *</type>
+          <declname>pFoundation</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>ip</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="51" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="51" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a1c28045e08bc39187bcb207211b9a536" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED bool</type>
+        <definition>static SR_MAYBE_UNUSED bool SR_PHYSICS_UTILS_NS::Is2DShape</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>Is2DShape</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::Is2DShape</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="45" column="33" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="45" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a0607430050c8ee5de3f50faafe1a55e5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED bool</type>
+        <definition>static SR_MAYBE_UNUSED bool SR_PHYSICS_UTILS_NS::Is3DShape</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>Is3DShape</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::Is3DShape</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="60" column="33" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="60" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a864399de2b8af02d36265ceec26b7c41" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsSphere</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsSphere</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsSphere</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="76" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="76" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a452a0fbada6e5b599681c61b51a15396" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsBox</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsBox</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsBox</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="86" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="86" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1af372567cfbd5aef4ef346d590f13b3a7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsPlane</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsPlane</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsPlane</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="96" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="96" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1af3a2f3925505ea67af6dadbc99676ab6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsCapsule</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsCapsule</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsCapsule</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="105" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="105" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a301cc76cb2301b592a86d5eb11603ed3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsConvex</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsConvex</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsConvex</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="115" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="115" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a603c825ab1ec3526ed8d2d474ba30ba8" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsTriangleMesh</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsTriangleMesh</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsTriangleMesh</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="124" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="124" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1af62e9080d20bc3bdb9bb8eddad1165a5" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsCylinder</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsCylinder</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsCylinder</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="133" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="133" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a2b99866b2335d6a27ef378e7c4c00c9c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsShapeHasGeometry</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsShapeHasGeometry</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsShapeHasGeometry</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="143" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="143" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a7cc140a83f8c8191422cbcd14366c6e9" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsShapeHasRadius</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsShapeHasRadius</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsShapeHasRadius</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="147" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="147" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a260a8772535a18455e6f9e43e21c02a6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsShapeHasHeight</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsShapeHasHeight</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsShapeHasHeight</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="151" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a21fa692b02564eca946add83527f4834" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED constexpr bool</type>
+        <definition>static SR_MAYBE_UNUSED constexpr bool SR_PHYSICS_UTILS_NS::IsShapeHasSize</definition>
+        <argsstring>(ShapeType type)</argsstring>
+        <name>IsShapeHasSize</name>
+        <qualifiedname>SR_PHYSICS_UTILS_NS::IsShapeHasSize</qualifiedname>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="155" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" bodystart="155" bodyend="157"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h" line="16" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,697 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1Inspector" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::Inspector</compoundname>
+    <basecompoundref refid="classSR__GRAPH__GUI__NS_1_1Widget" prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::Widget</basecompoundref>
+    <innerclass refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentCategory" prot="private">SR_CORE_GUI_NS::Inspector::ComponentCategory</innerclass>
+    <innerclass refid="structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext" prot="private">SR_CORE_GUI_NS::Inspector::ComponentContext</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aa750fcdfe8fa1962f6fe54059127af3d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_CORE_GUI_NS::Inspector::m_componentSearchBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_componentSearchBuffer</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_componentSearchBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="60" column="21" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a92b605d59b19b9e0a0e43ac6fa8c458a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::Inspector::m_componentSearchOpened</definition>
+        <argsstring></argsstring>
+        <name>m_componentSearchOpened</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_componentSearchOpened</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="61" column="14" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a0db8f79080b55eaebf8dca74085bd945" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
+        <definition>std::vector&lt;SR_UTILS_NS::StringAtom&gt; SR_CORE_GUI_NS::Inspector::m_availableComponents</definition>
+        <argsstring></argsstring>
+        <name>m_availableComponents</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_availableComponents</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="63" column="21" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1ab84813a5c3e9f3400e459677aea47263" prot="private" static="no" mutable="no">
+        <type>ComponentCategory</type>
+        <definition>ComponentCategory SR_CORE_GUI_NS::Inspector::m_componentsCategories</definition>
+        <argsstring></argsstring>
+        <name>m_componentsCategories</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_componentsCategories</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="64" column="27" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1acccaf3cab9de4a290a3e3977e8f79f5a" prot="private" static="no" mutable="no">
+        <type>std::list&lt; SR_UTILS_NS::Component::Ptr &gt;</type>
+        <definition>std::list&lt;SR_UTILS_NS::Component::Ptr&gt; SR_CORE_GUI_NS::Inspector::m_pointersHolder</definition>
+        <argsstring></argsstring>
+        <name>m_pointersHolder</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_pointersHolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="66" column="19" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1ab4b8c4a1c690e98127de3703b4eb428b" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::SceneObject::Ptr</type>
+        <definition>SR_UTILS_NS::SceneObject::Ptr SR_CORE_GUI_NS::Inspector::m_sceneObject</definition>
+        <argsstring></argsstring>
+        <name>m_sceneObject</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_sceneObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="67" column="39" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1ad95f42fafd020ff5c18ecf02bdd6b49d" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__CORE__GUI__NS_1_1Hierarchy" kindref="compound">Hierarchy</ref> *</type>
+        <definition>Hierarchy* SR_CORE_GUI_NS::Inspector::m_hierarchy</definition>
+        <argsstring></argsstring>
+        <name>m_hierarchy</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_hierarchy</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="68" column="19" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a68d62e74a8ac9e0ca671c263f943d293" prot="private" static="no" mutable="no">
+        <type>SR_WORLD_NS::Scene::Ptr</type>
+        <definition>SR_WORLD_NS::Scene::Ptr SR_CORE_GUI_NS::Inspector::m_scene</definition>
+        <argsstring></argsstring>
+        <name>m_scene</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_scene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="69" column="33" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1abc9bf32f3bda46aeea7386bdb139900e" prot="private" static="no" mutable="no">
+        <type>std::map&lt; SR_UTILS_NS::EntityId, ComponentContext &gt;</type>
+        <definition>std::map&lt;SR_UTILS_NS::EntityId, ComponentContext&gt; SR_CORE_GUI_NS::Inspector::m_componentContexts</definition>
+        <argsstring></argsstring>
+        <name>m_componentContexts</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_componentContexts</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="75" column="18" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aee79a8c533ef13efb96600b6e2137222" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_CORE_GUI_NS::Inspector::m_maxComponentContexts</definition>
+        <argsstring></argsstring>
+        <name>m_maxComponentContexts</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_maxComponentContexts</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="76" column="18" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a689ce4e73ee89bcc44949aeeb2e118ff" prot="private" static="no" mutable="no">
+        <type>SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr</type>
+        <definition>SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr SR_CORE_GUI_NS::Inspector::m_pPointerDrawer</definition>
+        <argsstring></argsstring>
+        <name>m_pPointerDrawer</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_pPointerDrawer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="78" column="52" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aed09ddc67d81f70275d1a423f832a732" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_CORE_GUI_NS::Inspector::m_scrollBarWidth</definition>
+        <argsstring></argsstring>
+        <name>m_scrollBarWidth</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_scrollBarWidth</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="80" column="17" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aff0a2530393b2b7d2d25a944f025de5d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::Inspector::m_isDragMode</definition>
+        <argsstring></argsstring>
+        <name>m_isDragMode</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_isDragMode</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="82" column="14" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1abb5f789da766eb740e9599053341151e" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(bool drag)&gt;</type>
+        <definition>SR_HTYPES_NS::Function&lt;void(bool drag)&gt; SR_CORE_GUI_NS::Inspector::m_onBeforeChangeCallback</definition>
+        <argsstring></argsstring>
+        <name>m_onBeforeChangeCallback</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_onBeforeChangeCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="83" column="32" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aab163a3ff458fd8832d0fbfcf71ad1ad" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;SR_UTILS_NS::ISerializer&gt; SR_CORE_GUI_NS::Inspector::m_pTransformSerializer</definition>
+        <argsstring></argsstring>
+        <name>m_pTransformSerializer</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_pTransformSerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="84" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a8002a8fd248ab6909e91c6e9d4f2ac42" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;SR_UTILS_NS::ISerializer&gt; SR_CORE_GUI_NS::Inspector::m_pComponentsSerializer</definition>
+        <argsstring></argsstring>
+        <name>m_pComponentsSerializer</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_pComponentsSerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="85" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a2ad69374d5366d017bd23e7cbb383028" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;SR_UTILS_NS::ISerializer&gt; SR_CORE_GUI_NS::Inspector::m_pComponentSerializer</definition>
+        <argsstring></argsstring>
+        <name>m_pComponentSerializer</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_pComponentSerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="86" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a118986f00283e373d0323fbc163eea3b" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::Component::Ptr</type>
+        <definition>SR_UTILS_NS::Component::Ptr SR_CORE_GUI_NS::Inspector::m_editableComponent</definition>
+        <argsstring></argsstring>
+        <name>m_editableComponent</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_editableComponent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="87" column="37" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1aa30a1f8b9a8ee254964ea14b81f5435d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::Inspector::Inspector</definition>
+        <argsstring>()=default</argsstring>
+        <name>Inspector</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::Inspector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a98796579c06f93998c8aae307e8a7f62" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::Inspector::Inspector</definition>
+        <argsstring>(Hierarchy *hierarchy)</argsstring>
+        <name>Inspector</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::Inspector</qualifiedname>
+        <param>
+          <type><ref refid="classSR__CORE__GUI__NS_1_1Hierarchy" kindref="compound">Hierarchy</ref> *</type>
+          <declname>hierarchy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="34" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a6067fb4e9e9c60dd847a50d0c114545e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::Inspector::~Inspector</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Inspector</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::~Inspector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="35" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1aadc7a73d797bfcfe1a9bf29eacb0cbeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::Update</definition>
+        <argsstring>(float_t dt) override</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::Update</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9670d827380936251bb9f0af5f305ee4">Update</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a318293a621a587ee84cf75f406316a75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::SetScene</definition>
+        <argsstring>(const SR_WORLD_NS::Scene::Ptr &amp;scene) override</argsstring>
+        <name>SetScene</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::SetScene</qualifiedname>
+        <param>
+          <type>const SR_WORLD_NS::Scene::Ptr &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="40" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1aea7d7d4dd4105876171ab0a9125a6ef5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::Draw</definition>
+        <argsstring>() override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::Draw</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1af99c84543427d4895a4e70a156da5997">Draw</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a69a3e210a16dcb428b8b58bf690e61c4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::InspectGameObject</definition>
+        <argsstring>()</argsstring>
+        <name>InspectGameObject</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::InspectGameObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1afbdc3f49536262ce932a1cbab0674f46" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::InspectScene</definition>
+        <argsstring>()</argsstring>
+        <name>InspectScene</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::InspectScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a6c509a4facdcf1cf4e28f23c8b4594a8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::DrawComponents</definition>
+        <argsstring>(SR_UTILS_NS::IComponentable *pIComponentable)</argsstring>
+        <name>DrawComponents</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::DrawComponents</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">SR_UTILS_NS::IComponentable</ref> *</type>
+          <declname>pIComponentable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a551f89b59c1a7eeade9d8fb7d50e9b20" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::InspectTag</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function&lt; void(SR_UTILS_NS::StringAtom)&gt; &amp;callback)</argsstring>
+        <name>InspectTag</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::InspectTag</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>)&gt; &amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a08f6061986fc3eb0ea8e22aaa9e48f33" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::InspectLayer</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function&lt; void(SR_UTILS_NS::StringAtom)&gt; &amp;callback)</argsstring>
+        <name>InspectLayer</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::InspectLayer</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>layer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>)&gt; &amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1add4a5f16b651574120837e39704469ba" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::DrawComponent</definition>
+        <argsstring>(SR_UTILS_NS::Component *pComponent, uint32_t &amp;index)</argsstring>
+        <name>DrawComponent</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::DrawComponent</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref> *</type>
+          <declname>pComponent</declname>
+        </param>
+        <param>
+          <type>uint32_t &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="52" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a252868a6037c6272e0ae3d3696064420" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::DrawComponentCategory</definition>
+        <argsstring>(SR_UTILS_NS::IComponentable *pComponentable, ComponentCategory &amp;category, SR_UTILS_NS::StringAtom categoryName)</argsstring>
+        <name>DrawComponentCategory</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::DrawComponentCategory</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">SR_UTILS_NS::IComponentable</ref> *</type>
+          <declname>pComponentable</declname>
+        </param>
+        <param>
+          <type>ComponentCategory &amp;</type>
+          <declname>category</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>categoryName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1aefa9ce54f0181c271726e74c98648a7e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref></type>
+        <definition>SR_NODISCARD PropertyDrawerContext SR_CORE_GUI_NS::Inspector::CreateDrawerContext</definition>
+        <argsstring>(SR_UTILS_NS::Reflection::Value *pValue)</argsstring>
+        <name>CreateDrawerContext</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::CreateDrawerContext</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref> *</type>
+          <declname>pValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="57" column="44"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::Inspector</label>
+        <link refid="classSR__CORE__GUI__NS_1_1Inspector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::Inspector</label>
+        <link refid="classSR__CORE__GUI__NS_1_1Inspector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="27" column="5" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="27" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>AddFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>AddSubWidget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abe2d33de27ab9ac621ec9a1c215a09be" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>CheckFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a354cc7474ff0b80508a170aaa7cdd842" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>CheckHovered</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1c39213178a2434ac3088d4b1dc2c14f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Close</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aba6d1657b1057318338eb150c404a4de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>ContextPtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aefa9ce54f0181c271726e74c98648a7e" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>CreateDrawerContext</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aea7d7d4dd4105876171ab0a9125a6ef5" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Draw</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a60366ac8c85837e5c043d9ba80ea2a5a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>DrawAsSubWindow</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1add4a5f16b651574120837e39704469ba" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>DrawComponent</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a252868a6037c6272e0ae3d3696064420" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>DrawComponentCategory</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a6c509a4facdcf1cf4e28f23c8b4594a8" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>DrawComponents</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Event</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1d31a548d7f29f92191c4e3c8da0745a" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1afe5e46c56d62178290ebe24ce4d87026" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa413cba2094f8133d1b3cbd5243d4525" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6cd4f0b58e82722cb159f403aac45b36" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3209e5899cda24a44d5d034ad4bbd408" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetWeakStorage</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IEvent</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1a44342ba62f3a35d4c4dfa2c4b16aab" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Init</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InputHandler</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a69a3e210a16dcb428b8b58bf690e61c4" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InspectGameObject</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a08f6061986fc3eb0ea8e22aaa9e48f33" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InspectLayer</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aa30a1f8b9a8ee254964ea14b81f5435d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Inspector</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a98796579c06f93998c8aae307e8a7f62" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Inspector</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1afbdc3f49536262ce932a1cbab0674f46" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InspectScene</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a551f89b59c1a7eeade9d8fb7d50e9b20" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InspectTag</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ab9dde2f2f151ebf9d0a532437509e809" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IsFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2284c33f97d1fc8b93f2065328507f40" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IsHovered</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IsKeyPressed</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa7b9cc737b77f148ddaf23a2c687681b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IsOpen</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a0db8f79080b55eaebf8dca74085bd945" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_availableComponents</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1abc9bf32f3bda46aeea7386bdb139900e" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_componentContexts</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ab84813a5c3e9f3400e459677aea47263" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_componentsCategories</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aa750fcdfe8fa1962f6fe54059127af3d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_componentSearchBuffer</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a92b605d59b19b9e0a0e43ac6fa8c458a" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_componentSearchOpened</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a118986f00283e373d0323fbc163eea3b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_editableComponent</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ad95f42fafd020ff5c18ecf02bdd6b49d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_hierarchy</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aff0a2530393b2b7d2d25a944f025de5d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_isDragMode</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aee79a8c533ef13efb96600b6e2137222" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_maxComponentContexts</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_mutex</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1abb5f789da766eb740e9599053341151e" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_onBeforeChangeCallback</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a2ad69374d5366d017bd23e7cbb383028" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_pComponentSerializer</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a8002a8fd248ab6909e91c6e9d4f2ac42" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_pComponentsSerializer</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1acccaf3cab9de4a290a3e3977e8f79f5a" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_pointersHolder</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a689ce4e73ee89bcc44949aeeb2e118ff" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_pPointerDrawer</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aab163a3ff458fd8832d0fbfcf71ad1ad" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_pTransformSerializer</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a68d62e74a8ac9e0ca671c263f943d293" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_scene</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ab4b8c4a1c690e98127de3703b4eb428b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aed09ddc67d81f70275d1a423f832a732" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_scrollBarWidth</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_subWidgets</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_widgetFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa49560b82a3fbb6982fb725e70b92ea8" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnClose</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aced28345faf97a190e126802d65b856b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnKeyPress</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad6bba161a4fb2edb8fa157443709b8cb" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a047cdbebece4c4baa00673a647f9a686" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnMouseDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a103723382b77ab83ae6468436fb41088" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnMouseMove</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnMousePress</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnMouseUp</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aed9b7c656b3efa34f342fbcd1d20a26f" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a214c10395b43d1ae11dd7cfdd0104db0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Open</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3d3dd7631795048741ca59e6d1666a3c" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OpenFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9d49df74f8eae10ecc78e5886044b38c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a5362809b84a8df38cd96ed91c4fa32c9" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>ResetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3926681db7399eebd88b303addf9e106" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>ResetWeakStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad5871dbdbb8862c1a21a7600e6bc872c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6344cd24337dddf086e04093a7f7b279" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetCenter</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6221bbe02c9c66ce324814da3ae8377c" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a628d6e08d267e2bab19fa6a0247f2de6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9f93023aaad7df8c9f5572fcd3eec64e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetName</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a318293a621a587ee84cf75f406316a75" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a7c848e9633f66f96a935090bfb450bcd" prot="public" virt="virtual" ambiguityscope="SR_GRAPH_GUI_NS::Widget::"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a206de2fe59b705c189cfb792fa6584de" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>SetSize</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abb58557f3a79bc2790d525791aedb7ac" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>TextCenter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Trigger</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aadc7a73d797bfcfe1a9bf29eacb0cbeb" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Update</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Widget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Widget</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~Event</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~InputHandler</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a6067fb4e9e9c60dd847a50d0c114545e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~Inspector</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~Widget</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1EventDispatcher" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::EventDispatcher</compoundname>
+    <derivedcompoundref refid="classSR__UTILS__NS_1_1InputDispatcher" prot="public" virt="non-virtual">SR_UTILS_NS::InputDispatcher</derivedcompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EventDispatcher_1ad9990078cf73cff5eecd8c73d1d52e27" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::unordered_set&lt; <ref refid="classSR__UTILS__NS_1_1IEvent" kindref="compound">IEvent</ref> * &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::unordered_set&lt;IEvent*&gt; &gt; SR_UTILS_NS::EventDispatcher::m_events</definition>
+        <argsstring></argsstring>
+        <name>m_events</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::m_events</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="43" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1ad1d84bffc0cea470afe0e7da013c8438" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EventDispatcher::EventDispatcher</definition>
+        <argsstring>()=default</argsstring>
+        <name>EventDispatcher</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::EventDispatcher</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="15" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1a9c546243e6f6c6191ff2266bb4f4471d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_UTILS_NS::EventDispatcher::~EventDispatcher</definition>
+        <argsstring>()</argsstring>
+        <name>~EventDispatcher</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::~EventDispatcher</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="16" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1a8e61cd14de4f31f0169fef99a4b2ec82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EventDispatcher::UnregisterAll</definition>
+        <argsstring>()</argsstring>
+        <name>UnregisterAll</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::UnregisterAll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1ac9902e2d56b98ffd00756da7c715b2b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EventDispatcher::Register</definition>
+        <argsstring>(IEvent *event)</argsstring>
+        <name>Register</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::Register</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IEvent" kindref="compound">IEvent</ref> *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1ad5998466d146a436c60025d2538b5e3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EventDispatcher::Unregister</definition>
+        <argsstring>(IEvent *event)</argsstring>
+        <name>Unregister</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::Unregister</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IEvent" kindref="compound">IEvent</ref> *</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1a43700cc02c559f512b28df966e387240" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>_args</declname>
+            <defname>_args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EventDispatcher::Dispatch</definition>
+        <argsstring>(_args...a)</argsstring>
+        <name>Dispatch</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::Dispatch</qualifiedname>
+        <param>
+          <type>_args...</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="23" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" bodystart="23" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EventDispatcher_1a4b2041298f7459d93493a3a5eb35073d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ...</type>
+            <declname>_args</declname>
+            <defname>_args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EventDispatcher::Dispatch</definition>
+        <argsstring>(const std::string &amp;eventName, _args...a)</argsstring>
+        <name>Dispatch</name>
+        <qualifiedname>SR_UTILS_NS::EventDispatcher::Dispatch</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>eventName</declname>
+        </param>
+        <param>
+          <type>_args...</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="27" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" bodystart="27" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::EventDispatcher</label>
+        <link refid="classSR__UTILS__NS_1_1EventDispatcher"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::InputDispatcher</label>
+        <link refid="classSR__UTILS__NS_1_1InputDispatcher"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Events/EventDispatcher.h" bodystart="13" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1a43700cc02c559f512b28df966e387240" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>Dispatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1a4b2041298f7459d93493a3a5eb35073d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>Dispatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1ad1d84bffc0cea470afe0e7da013c8438" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>EventDispatcher</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1ad9990078cf73cff5eecd8c73d1d52e27" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>m_events</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1ac9902e2d56b98ffd00756da7c715b2b1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>Register</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1ad5998466d146a436c60025d2538b5e3e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>Unregister</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1a8e61cd14de4f31f0169fef99a4b2ec82" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>UnregisterAll</name></member>
+      <member refid="classSR__UTILS__NS_1_1EventDispatcher_1a9c546243e6f6c6191ff2266bb4f4471d" prot="public" virt="virtual"><scope>SR_UTILS_NS::EventDispatcher</scope><name>~EventDispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::BoolPropertyDrawer</compoundname>
+    <basecompoundref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" prot="public" virt="non-virtual">SR_CORE_GUI_NS::PropertyDrawerBase</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer_1a52ac8a263e9f73503dd7b21d8bb378dd" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" kindref="compound">BoolPropertyDrawer</ref> &gt;</type>
+        <definition>using SR_CORE_GUI_NS::BoolPropertyDrawer::Ptr =  SR_HTYPES_NS::SharedPtr&lt;BoolPropertyDrawer&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_CORE_GUI_NS::BoolPropertyDrawer::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="169" column="9" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer_1abd037ca92d15afb35cedb97c994e9ca6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref></type>
+        <definition>PropertyDrawerFeedback SR_CORE_GUI_NS::BoolPropertyDrawer::Draw</definition>
+        <argsstring>(const PropertyDrawerContext &amp;context) override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_GUI_NS::BoolPropertyDrawer::Draw</qualifiedname>
+        <reimplements refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a5ad40029bdc31890f56d1f619c49c4c8">Draw</reimplements>
+        <param>
+          <type>const <ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref> &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="171" column="32"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::BoolPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_CORE_GUI_NS::PropertyDrawerBase</label>
+        <link refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; PropertyDrawerBase &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::BoolPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_CORE_GUI_NS::PropertyDrawerBase</label>
+        <link refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; PropertyDrawerBase &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h" line="166" column="5" bodyfile="Engine/Core/inc/Core/GUI/PropertyDrawer.h" bodystart="166" bodyend="172"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>AutoFree</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a88669cfadc3ca1f7bcabc8630be7a2c7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>CheckSearchMatch</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer_1abd037ca92d15afb35cedb97c994e9ca6" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Draw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a85b3424f510437b2d5a4a790c8957f4c" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetRenderContext</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>InitializeClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>m_basicManually</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>m_data</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1adc9588b5b38597b49756411477eb4c90" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>PropertyDrawerBase</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer_1a52ac8a263e9f73503dd7b21d8bb378dd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Reset</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a890728c3ab184cc6f4c2a11931d006ae" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SetMappedValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a590b450ecb3bd14155950987845b828a" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SetReflectedValue</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1aabebcde84424bd73702c23897975ff9b" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::BoolPropertyDrawer</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

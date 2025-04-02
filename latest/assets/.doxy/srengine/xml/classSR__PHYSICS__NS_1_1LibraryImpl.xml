@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PHYSICS__NS_1_1LibraryImpl" kind="class" language="C++" prot="public">
+    <compoundname>SR_PHYSICS_NS::LibraryImpl</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl" prot="public" virt="non-virtual">SR_PHYSICS_NS::Box2DLibraryImpl</derivedcompoundref>
+    <derivedcompoundref refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl" prot="public" virt="non-virtual">SR_PHYSICS_NS::Bullet3LibraryImpl</derivedcompoundref>
+    <derivedcompoundref refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl" prot="public" virt="non-virtual">SR_PHYSICS_NS::PhysXLibraryImpl</derivedcompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a222cbc04d520e4137efec778854f65eb" prot="public" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_PHYSICS_NS::LibraryImpl::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="25" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a9eacebf62880b4e50958f8224961eed4" prot="public" static="no">
+        <type>SR_UTILS_NS::Measurement</type>
+        <definition>using SR_PHYSICS_NS::LibraryImpl::Space =  SR_UTILS_NS::Measurement</definition>
+        <argsstring></argsstring>
+        <name>Space</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::Space</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="26" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a5f49d7ce4c947872d0c98f5b9ccc536d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_PHYSICS_NS::LibraryImpl::m_isVehicleSupported</definition>
+        <argsstring></argsstring>
+        <name>m_isVehicleSupported</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::m_isVehicleSupported</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="53" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a3759f9c8e3bfd58b4e25f794a3877707" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PHYSICS_NS::LibraryImpl::LibraryImpl</definition>
+        <argsstring>()</argsstring>
+        <name>LibraryImpl</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::LibraryImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="28" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a60e7fcdb1afbad64b55483d699445b72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PHYSICS_NS::LibraryImpl::~LibraryImpl</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~LibraryImpl</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::~LibraryImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="29" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a796df622eed459d1e4279933b59bd7dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_PHYSICS_NS::LibraryImpl::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::Initialize</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a8b86a923ef871cf6cfcc9f5591d36c94">Initialize</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl_1a9667f45fa431019470f730cc260db7bf">Initialize</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1ad2a688367f2f7871abe2d506fc47cd83">Initialize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="32" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a905dee5a7955426bd66b1a27f35848f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PHYSICS_NS::LibraryImpl::ConnectPVD</definition>
+        <argsstring>()</argsstring>
+        <name>ConnectPVD</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::ConnectPVD</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1afae4db3b8ffd7ed14ad7d3a4dd723fc7">ConnectPVD</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="34" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a831472e4b25affa6cfd2780e40ba4edb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_PHYSICS_NS::LibraryImpl::IsShapeSupported</definition>
+        <argsstring>(ShapeType type) const</argsstring>
+        <name>IsShapeSupported</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::IsShapeSupported</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a584fcdc1ea2cf9dadd203372bb7e36c9">IsShapeSupported</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl_1ab31f432ed19689132bf5fb7471740863">IsShapeSupported</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a21cfd173138860856c9ab4161f5fe11b">IsShapeSupported</reimplementedby>
+        <param>
+          <type>ShapeType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="36" column="35" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a60dd183725be8535fc6cdecfbd4ae57e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD ShapeType</type>
+        <definition>virtual SR_NODISCARD ShapeType SR_PHYSICS_NS::LibraryImpl::GetDefaultShape</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDefaultShape</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::GetDefaultShape</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a9083fec385b85a6998513fda0ee0d07c">GetDefaultShape</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl_1ab7611a7363c63a2a4fa2ac2f2049e72c">GetDefaultShape</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a0226fca040274931d38e7dd5e48a66c4">GetDefaultShape</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="37" column="40" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a959aa5000ab95fbd538b50591f4e215c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1CollisionShapeImpl" kindref="compound">SR_PTYPES_NS::CollisionShapeImpl</ref> *</type>
+        <definition>virtual SR_NODISCARD SR_PTYPES_NS::CollisionShapeImpl * SR_PHYSICS_NS::LibraryImpl::CreateCollisionShapeImpl</definition>
+        <argsstring>()</argsstring>
+        <name>CreateCollisionShapeImpl</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::CreateCollisionShapeImpl</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a1ba46ec149f6d35f1d4ca4d4b7a86dd6">CreateCollisionShapeImpl</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="39" column="63" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a6aa63ba462bf783536d951cd987093ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Rigidbody2DImpl" kindref="compound">SR_PTYPES_NS::Rigidbody2DImpl</ref> *</type>
+        <definition>virtual SR_NODISCARD SR_PTYPES_NS::Rigidbody2DImpl * SR_PHYSICS_NS::LibraryImpl::CreateRigidbody2DImpl</definition>
+        <argsstring>()</argsstring>
+        <name>CreateRigidbody2DImpl</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::CreateRigidbody2DImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="41" column="60" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1aa5a978b0ec3aa665f31f1cf64344cb6f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl" kindref="compound">SR_PTYPES_NS::Rigidbody3DImpl</ref> *</type>
+        <definition>virtual SR_NODISCARD SR_PTYPES_NS::Rigidbody3DImpl * SR_PHYSICS_NS::LibraryImpl::CreateRigidbody3DImpl</definition>
+        <argsstring>()</argsstring>
+        <name>CreateRigidbody3DImpl</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::CreateRigidbody3DImpl</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a5d25633c997d89d4768ccdc387e95856">CreateRigidbody3DImpl</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="42" column="60" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1aeaae479e013a93a38b26f85957dc5f2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1Vehicle4W3D" kindref="compound">SR_PTYPES_NS::Vehicle4W3D</ref> *</type>
+        <definition>virtual SR_NODISCARD SR_PTYPES_NS::Vehicle4W3D * SR_PHYSICS_NS::LibraryImpl::CreateVehicle4W3D</definition>
+        <argsstring>()</argsstring>
+        <name>CreateVehicle4W3D</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::CreateVehicle4W3D</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a3ec7e8d6664808864dc6baf375558885">CreateVehicle4W3D</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="44" column="56" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1a226db5c203a8ee59515f8ac48f5f1e42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PHYSICS__NS_1_1PhysicsWorld" kindref="compound">SR_PHYSICS_NS::PhysicsWorld</ref> *</type>
+        <definition>virtual SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld * SR_PHYSICS_NS::LibraryImpl::CreatePhysicsWorld</definition>
+        <argsstring>(Space space)</argsstring>
+        <name>CreatePhysicsWorld</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::CreatePhysicsWorld</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1afbf0112161e2271085977f640493d3fb">CreatePhysicsWorld</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl_1a32db4a8730a51ec0c80015c84839fd91">CreatePhysicsWorld</reimplementedby>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a05fce7e5beafb9386745a278fa8e9b5d">CreatePhysicsWorld</reimplementedby>
+        <param>
+          <type>Space</type>
+          <declname>space</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="46" column="58" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1ae1cb3d6fcb23faf0868f1135c2d63c3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">SR_PTYPES_NS::PhysicsMaterialImpl</ref> *</type>
+        <definition>virtual SR_NODISCARD SR_PTYPES_NS::PhysicsMaterialImpl * SR_PHYSICS_NS::LibraryImpl::CreatePhysicsMaterial</definition>
+        <argsstring>()</argsstring>
+        <name>CreatePhysicsMaterial</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::CreatePhysicsMaterial</qualifiedname>
+        <reimplementedby refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a103baf1507f7df9b7ef06b94609c2f3c">CreatePhysicsMaterial</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="48" column="64" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PHYSICS__NS_1_1LibraryImpl_1aef3ea6e1dd14497f3d7a47f6bd61d76b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_PHYSICS_NS::LibraryImpl::IsVehicleSupported</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsVehicleSupported</name>
+        <qualifiedname>SR_PHYSICS_NS::LibraryImpl::IsVehicleSupported</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="50" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>SR_PHYSICS_NS::Box2DLibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_PHYSICS_NS::Bullet3LibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PHYSICS_NS::LibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_PHYSICS_NS::PhysXLibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_PHYSICS_NS::LibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" line="23" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h" bodystart="23" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a905dee5a7955426bd66b1a27f35848f1" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>ConnectPVD</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a959aa5000ab95fbd538b50591f4e215c" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreateCollisionShapeImpl</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1ae1cb3d6fcb23faf0868f1135c2d63c3a" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreatePhysicsMaterial</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a226db5c203a8ee59515f8ac48f5f1e42" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreatePhysicsWorld</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a6aa63ba462bf783536d951cd987093ba" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreateRigidbody2DImpl</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1aa5a978b0ec3aa665f31f1cf64344cb6f" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreateRigidbody3DImpl</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1aeaae479e013a93a38b26f85957dc5f2c" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>CreateVehicle4W3D</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a60dd183725be8535fc6cdecfbd4ae57e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>GetDefaultShape</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a796df622eed459d1e4279933b59bd7dd" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>Initialize</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a831472e4b25affa6cfd2780e40ba4edb" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>IsShapeSupported</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1aef3ea6e1dd14497f3d7a47f6bd61d76b" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>IsVehicleSupported</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a3759f9c8e3bfd58b4e25f794a3877707" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>LibraryImpl</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a5f49d7ce4c947872d0c98f5b9ccc536d" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>m_isVehicleSupported</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>operator=</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a9eacebf62880b4e50958f8224961eed4" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>Space</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a222cbc04d520e4137efec778854f65eb" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>Super</name></member>
+      <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a60e7fcdb1afbad64b55483d699445b72" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>~LibraryImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::LibraryImpl</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

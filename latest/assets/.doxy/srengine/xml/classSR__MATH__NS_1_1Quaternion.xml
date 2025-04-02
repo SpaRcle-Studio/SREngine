@@ -1,0 +1,1091 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__MATH__NS_1_1Quaternion" kind="class" language="C++" prot="public">
+    <compoundname>SR_MATH_NS::Quaternion</compoundname>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__MATH__NS_1_1Quaternion_1ac9f0df28912279d26a764ea3d2995e63" prot="private" static="no">
+        <type>Unit</type>
+        <definition>using SR_MATH_NS::Quaternion::T =  Unit</definition>
+        <argsstring></argsstring>
+        <name>T</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::T</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1a7ec46e704ecc1490fde846859018cf89" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_MATH_NS::Quaternion::Vector3&lt; Unit &gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector3&lt; Unit &gt;</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Vector3&lt; Unit &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1a759b0822ecc8cb89e698b97ea90a3c49" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Quaternion::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="22" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1aeca3308b241ad69a91c952ee06091e46" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Quaternion::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="23" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1a0ce6a0a2786bc1a0fe235b04eaadc9a1" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Quaternion::z</definition>
+        <argsstring></argsstring>
+        <name>z</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::z</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="24" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1ad2c38e39ed9b5df736cdadb3a5e3697c" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_MATH_NS::Quaternion::w</definition>
+        <argsstring></argsstring>
+        <name>w</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::w</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="25" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1ae01300185f7bd611c9af2f9e87ed1de7" prot="public" static="no" mutable="no">
+        <type>glm::quat</type>
+        <definition>glm::quat SR_MATH_NS::Quaternion::self</definition>
+        <argsstring></argsstring>
+        <name>self</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::self</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="28" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__MATH__NS_1_1Quaternion_1a904f8acedd13ba8dbf21562050d158a9" prot="public" static="no" mutable="no">
+        <type>union <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
+        <definition>union SR_MATH_NS::Quaternion SR_MATH_NS::Quaternion</definition>
+        <argsstring></argsstring>
+        <name></name>
+        <qualifiedname>SR_MATH_NS::Quaternion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="29" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ac5f07941f7b4051dc176ef70fbe9c095" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE glm::quat</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE glm::quat SR_MATH_NS::Quaternion::ToGLM</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ToGLM</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::ToGLM</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="31" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a4a696622ed6c48cd8d1ed490dbd65e9e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt;</type>
+        <definition>SR_NODISCARD Vector4&lt; Unit &gt; SR_MATH_NS::Quaternion::Vector</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Vector</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="32" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a55b975570e644056f46a43a382726134" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref></type>
+        <definition>SR_NODISCARD Matrix4x4 SR_MATH_NS::Quaternion::ToMat4x4</definition>
+        <argsstring>() const</argsstring>
+        <name>ToMat4x4</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::ToMat4x4</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="33" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ab51d5c5e29d4c855ee1ef1b85c66469a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE glm::mat4</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE glm::mat4 SR_MATH_NS::Quaternion::ToMat4x4GLM</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ToMat4x4GLM</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::ToMat4x4GLM</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="34" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ad340f046c05805c0dfd994fe6f53527d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt;</type>
+        <definition>SR_NODISCARD Vector3&lt; T &gt; SR_MATH_NS::Quaternion::EulerAngle</definition>
+        <argsstring>() const</argsstring>
+        <name>EulerAngle</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::EulerAngle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="35" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a9188137bd9b86a426102fdc90c743036" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Rotate</definition>
+        <argsstring>(const Vector3&lt; T &gt; &amp;v) const</argsstring>
+        <name>Rotate</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Rotate</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; T &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="36" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ae2b78f28fba7b065629ed2458a5e4223" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::RotateX</definition>
+        <argsstring>(Unit angle) const</argsstring>
+        <name>RotateX</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::RotateX</qualifiedname>
+        <param>
+          <type>Unit</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="38" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a63f07633d956723b785fc270d05a7213" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::RotateY</definition>
+        <argsstring>(Unit angle) const</argsstring>
+        <name>RotateY</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::RotateY</qualifiedname>
+        <param>
+          <type>Unit</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="39" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a7fb0125d41a09c7964c880e949b6d000" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::RotateZ</definition>
+        <argsstring>(Unit angle) const</argsstring>
+        <name>RotateZ</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::RotateZ</qualifiedname>
+        <param>
+          <type>Unit</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="40" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a96273a935b38e37832dcfb8feb6a9d44" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_MATH_NS::Quaternion::X</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>X</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::X</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="42" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ab7c49a72101947b2ba7e684aa31f343c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_MATH_NS::Quaternion::Y</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Y</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="43" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a30a9c3023574de7f7c727ff6ab6ee4d7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_MATH_NS::Quaternion::Z</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Z</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Z</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="44" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a1eb40c341ddd98447b6482ea06a57a63" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_MATH_NS::Quaternion::W</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>W</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::W</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="45" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a3e61a8fa75e0a9c5ef29f22dff89b9ee" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>(const Quaternion &amp;p_q)</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>p_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="47" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="47" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1afaf7583b86c2cd7a13d59af5bd17d696" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>(const Matrix4x4 &amp;matrix)</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">Matrix4x4</ref> &amp;</type>
+          <declname>matrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="54" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1acce758b1754d0d80e71e21081fd96299" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>()</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="56" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="56" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a48f648bc7dcd5a874cf59943fe92e428" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;p_euler)</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>p_euler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="62" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a5db108640e081c8876c641ca21085c07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>(const glm::quat &amp;q)</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <param>
+          <type>const glm::quat &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="64" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="64" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ae1e5733856ccb3b2163793c1b196d837" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;axis, Unit angle)</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="68" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a34e89dc835379178a937a82bc18d675a" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_MATH_NS::Quaternion::Quaternion</definition>
+        <argsstring>(T x, T y, T z, T w)</argsstring>
+        <name>Quaternion</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Quaternion</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="70" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="70" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a0e4afd44a869f870741c768cf0faf417" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Inverse</definition>
+        <argsstring>() const</argsstring>
+        <name>Inverse</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Inverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="83" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a0028d4d8b0affba1c80086c89593db69" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_FORCE_INLINE bool SR_FASTCALL</type>
+        <definition>SR_NODISCARD SR_FORCE_INLINE bool SR_FASTCALL SR_MATH_NS::Quaternion::IsEquals</definition>
+        <argsstring>(const Quaternion &amp;q, Unit tolerance) const noexcept</argsstring>
+        <name>IsEquals</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::IsEquals</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>tolerance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="87" column="55" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="87" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1abbedcf8940f95f2bda08846b8dc77fb2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Slerp</definition>
+        <argsstring>(const Quaternion &amp;q, Unit t) const</argsstring>
+        <name>Slerp</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Slerp</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <param>
+          <type>Unit</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="129" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="129" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a2c078f2cb94447d5dee42370034cb0a2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalized</definition>
+        <argsstring>() const</argsstring>
+        <name>Normalized</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Normalized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="185" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="185" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a558a8b7f475627a940a04b5e82bd7251" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalize</definition>
+        <argsstring>() const</argsstring>
+        <name>Normalize</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Normalize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="189" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="189" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a27591fdd8eab8116d7f4d9c53291e4d4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit</type>
+        <definition>SR_NODISCARD Unit SR_MATH_NS::Quaternion::Roll</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Roll</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Roll</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="193" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="193" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1aad6b2f78b919ba00662675853666070c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit</type>
+        <definition>SR_NODISCARD Unit SR_MATH_NS::Quaternion::Pitch</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Pitch</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Pitch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="197" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a3433ab628de291a8ba71285bcde22e09" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit</type>
+        <definition>SR_NODISCARD Unit SR_MATH_NS::Quaternion::SquaredNorm</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>SquaredNorm</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::SquaredNorm</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="198" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a79bd33d7465111592761eeab0fb972f0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit</type>
+        <definition>SR_NODISCARD Unit SR_MATH_NS::Quaternion::Yaw</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Yaw</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Yaw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="200" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="200" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a073b93162d54e779963c85fd2e882c23" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_MATH_NS::Quaternion::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="204" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="204" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a8e0491f698053fc628de61b353866888" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE bool</type>
+        <definition>SR_FORCE_INLINE bool SR_MATH_NS::Quaternion::operator!=</definition>
+        <argsstring>(const Quaternion &amp;q) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="208" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="208" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a188f9c89c34e58816f9979487438fc59" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE bool</type>
+        <definition>SR_FORCE_INLINE bool SR_MATH_NS::Quaternion::operator==</definition>
+        <argsstring>(const Quaternion &amp;q) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="212" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="212" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a70a577c7ab5d82f8f2346918a563c9bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD Unit SR_FASTCALL</type>
+        <definition>SR_NODISCARD Unit SR_FASTCALL SR_MATH_NS::Quaternion::Distance</definition>
+        <argsstring>(const Quaternion &amp;q) const</argsstring>
+        <name>Distance</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Distance</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="220" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a9f47c6e7c0e607902c63bbd7b4c8f6b1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Unit SR_FASTCALL</type>
+        <definition>SR_NODISCARD Unit SR_FASTCALL SR_MATH_NS::Quaternion::Angle</definition>
+        <argsstring>(const Quaternion &amp;q) const</argsstring>
+        <name>Angle</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Angle</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="222" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="222" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ad9379f360b6271501442e0cc56c00c9d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::Quaternion::IsFinite</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsFinite</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::IsFinite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>если будет inf или nan, то вернет false</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="226" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="226" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ab1cd175c70719c806aaae0e988953b6e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_MATH_NS::Quaternion::IsIdentity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsIdentity</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::IsIdentity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="231" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="231" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a9860933564ad14fbe41f494e2ec1a2db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE void</type>
+        <definition>SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator+=</definition>
+        <argsstring>(const Quaternion &amp;p_q)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>p_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="239" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="239" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a38234a93b99526ddd76cd760ce87f8c9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE void</type>
+        <definition>SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator-=</definition>
+        <argsstring>(const Quaternion &amp;p_q)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>p_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="242" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="242" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a7c437e0cd9bbbf81fdf41eba92e60950" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE void</type>
+        <definition>SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator*=</definition>
+        <argsstring>(const Quaternion &amp;p_q)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>p_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="245" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="245" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a0ff7da125f1a3b57230c4e342840c576" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE void</type>
+        <definition>SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator*=</definition>
+        <argsstring>(const double &amp;s)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator*=</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="248" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="248" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a071e510a10ff1c977ea8b3a35aa392fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE void</type>
+        <definition>SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator/=</definition>
+        <argsstring>(const double &amp;s)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator/=</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="251" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="251" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a93758b5b96463434f426318a88e48bc5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator+</definition>
+        <argsstring>(const Quaternion &amp;q2) const</argsstring>
+        <name>operator+</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="254" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="254" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1ac0793d771a2809871e896fd0999bc166" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator-</definition>
+        <argsstring>(const Quaternion &amp;q2) const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>q2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="258" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="258" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a30c54b4855ed75e3e6b5eca3f4edbb13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator-</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="262" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="262" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a030d6b37334e86547a29f26abcef2818" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator*</definition>
+        <argsstring>(const double &amp;s) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator*</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="266" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="266" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1aa6c57eeed6bf40b6e322ca638e10cf2a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FORCE_INLINE <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator/</definition>
+        <argsstring>(const double &amp;s) const</argsstring>
+        <name>operator/</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator/</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="271" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="271" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1acb315082473f93cc623f039754698a91" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt;</type>
+        <definition>Vector3&lt; Unit &gt; SR_MATH_NS::Quaternion::operator*</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;v) const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="277" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a372b4b5d831f72c47515d15af4bf9da9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt;</type>
+        <definition>Vector3&lt; Unit &gt; SR_MATH_NS::Quaternion::operator/</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;v) const</argsstring>
+        <name>operator/</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator/</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="278" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a8327af5cce74853ce24be79fbeb640ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>Quaternion SR_MATH_NS::Quaternion::operator*</definition>
+        <argsstring>(const Quaternion &amp;rhs) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="279" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="279" bodyend="281"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a3a9a25a0899985b10541106b004a81f5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>static Quaternion SR_MATH_NS::Quaternion::FromEuler</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;euler)</argsstring>
+        <name>FromEuler</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::FromEuler</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>euler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="77" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a31720b08c5614b83f113d5de04c378dd" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>static constexpr Quaternion SR_MATH_NS::Quaternion::Identity</definition>
+        <argsstring>()</argsstring>
+        <name>Identity</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::Identity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="79" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a50b1087d0237efc5cf04ce76e1b058c6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>static SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::LookAt</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;direction)</argsstring>
+        <name>LookAt</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::LookAt</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="182" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1Quaternion_1a7b8c226f1f9367acbaa04f36af1d3c2a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">Quaternion</ref></type>
+        <definition>static SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::LookAt</definition>
+        <argsstring>(const Vector3&lt; Unit &gt; &amp;direction, const Vector3&lt; Unit &gt; &amp;up)</argsstring>
+        <name>LookAt</name>
+        <qualifiedname>SR_MATH_NS::Quaternion::LookAt</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; Unit &gt; &amp;</type>
+          <declname>up</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="183" column="40"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Quaternion.h" bodystart="16" bodyend="282"/>
+    <listofallmembers>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a9f47c6e7c0e607902c63bbd7b4c8f6b1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Angle</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a70a577c7ab5d82f8f2346918a563c9bf" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Distance</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ad340f046c05805c0dfd994fe6f53527d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>EulerAngle</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a3a9a25a0899985b10541106b004a81f5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>FromEuler</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a31720b08c5614b83f113d5de04c378dd" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Identity</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a0e4afd44a869f870741c768cf0faf417" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Inverse</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a0028d4d8b0affba1c80086c89593db69" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsEquals</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ad9379f360b6271501442e0cc56c00c9d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsFinite</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ab1cd175c70719c806aaae0e988953b6e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>IsIdentity</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a50b1087d0237efc5cf04ce76e1b058c6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>LookAt</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a7b8c226f1f9367acbaa04f36af1d3c2a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>LookAt</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a558a8b7f475627a940a04b5e82bd7251" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Normalize</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a2c078f2cb94447d5dee42370034cb0a2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Normalized</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a8e0491f698053fc628de61b353866888" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator!=</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a030d6b37334e86547a29f26abcef2818" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1acb315082473f93cc623f039754698a91" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a8327af5cce74853ce24be79fbeb640ca" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator*</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a7c437e0cd9bbbf81fdf41eba92e60950" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator*=</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a0ff7da125f1a3b57230c4e342840c576" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator*=</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a93758b5b96463434f426318a88e48bc5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator+</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a9860933564ad14fbe41f494e2ec1a2db" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator+=</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ac0793d771a2809871e896fd0999bc166" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator-</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a30c54b4855ed75e3e6b5eca3f4edbb13" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator-</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a38234a93b99526ddd76cd760ce87f8c9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator-=</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1aa6c57eeed6bf40b6e322ca638e10cf2a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator/</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a372b4b5d831f72c47515d15af4bf9da9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator/</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a071e510a10ff1c977ea8b3a35aa392fd" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator/=</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a188f9c89c34e58816f9979487438fc59" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>operator==</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1aad6b2f78b919ba00662675853666070c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Pitch</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a3e61a8fa75e0a9c5ef29f22dff89b9ee" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1afaf7583b86c2cd7a13d59af5bd17d696" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1acce758b1754d0d80e71e21081fd96299" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a48f648bc7dcd5a874cf59943fe92e428" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a5db108640e081c8876c641ca21085c07" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ae1e5733856ccb3b2163793c1b196d837" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a34e89dc835379178a937a82bc18d675a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Quaternion</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a27591fdd8eab8116d7f4d9c53291e4d4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Roll</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a9188137bd9b86a426102fdc90c743036" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Rotate</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ae2b78f28fba7b065629ed2458a5e4223" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>RotateX</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a63f07633d956723b785fc270d05a7213" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>RotateY</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a7fb0125d41a09c7964c880e949b6d000" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>RotateZ</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ae01300185f7bd611c9af2f9e87ed1de7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>self</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1abbedcf8940f95f2bda08846b8dc77fb2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Slerp</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a3433ab628de291a8ba71285bcde22e09" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>SquaredNorm</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ac9f0df28912279d26a764ea3d2995e63" prot="private" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>T</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ac5f07941f7b4051dc176ef70fbe9c095" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToGLM</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a55b975570e644056f46a43a382726134" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToMat4x4</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ab51d5c5e29d4c855ee1ef1b85c66469a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToMat4x4GLM</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a073b93162d54e779963c85fd2e882c23" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>ToString</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a4a696622ed6c48cd8d1ed490dbd65e9e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Vector</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a7ec46e704ecc1490fde846859018cf89" prot="private" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Vector3&lt; Unit &gt;</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a1eb40c341ddd98447b6482ea06a57a63" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>W</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ad2c38e39ed9b5df736cdadb3a5e3697c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>w</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a96273a935b38e37832dcfb8feb6a9d44" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>X</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a759b0822ecc8cb89e698b97ea90a3c49" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>x</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1ab7c49a72101947b2ba7e684aa31f343c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Y</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1aeca3308b241ad69a91c952ee06091e46" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>y</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a79bd33d7465111592761eeab0fb972f0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Yaw</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a30a9c3023574de7f7c727ff6ab6ee4d7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>Z</name></member>
+      <member refid="classSR__MATH__NS_1_1Quaternion_1a0ce6a0a2786bc1a0fe235b04eaadc9a1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Quaternion</scope><name>z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

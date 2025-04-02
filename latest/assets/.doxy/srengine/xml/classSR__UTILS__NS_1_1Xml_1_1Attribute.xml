@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Xml_1_1Attribute" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Xml::Attribute</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a9834190331a5b8188dd3f2c78c0a6263" prot="private" static="no" mutable="no">
+        <type>pugi::xml_attribute</type>
+        <definition>pugi::xml_attribute SR_UTILS_NS::Xml::Attribute::m_attribute</definition>
+        <argsstring></argsstring>
+        <name>m_attribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::m_attribute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="39" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af5569619a3996b235e3356ad7c2919d7" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Xml::Attribute::m_valid</definition>
+        <argsstring></argsstring>
+        <name>m_valid</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::m_valid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="40" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1abf6e8c3f114b4acf983f018ce6727da6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Xml::Attribute::Attribute</definition>
+        <argsstring>()</argsstring>
+        <name>Attribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::Attribute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="28" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="28" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a7b6f71e80c04dc449bc405c781023ec1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Xml::Attribute::Attribute</definition>
+        <argsstring>(const pugi::xml_attribute &amp;attribute)</argsstring>
+        <name>Attribute</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::Attribute</qualifiedname>
+        <param>
+          <type>const pugi::xml_attribute &amp;</type>
+          <declname>attribute</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="33" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="33" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ac6aeb29e74ad4b28b4cf6baff7221de8" prot="public" static="no" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Xml::Attribute::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="55" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ad9babd8409af95a3a4c026d9e50add6d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::Valid</definition>
+        <argsstring>() const</argsstring>
+        <name>Valid</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::Valid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="59" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a81d0cb18fc1c26663a219d693e6981b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Xml::Attribute::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="61" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1aeee88f6ddfce2e9be70f3901c73b7135" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_UTILS_NS::Xml::Attribute::ToInt</definition>
+        <argsstring>() const</argsstring>
+        <name>ToInt</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToInt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="62" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ad6c59226e49966e1f91251c4a01c6caa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_UTILS_NS::Xml::Attribute::ToUInt</definition>
+        <argsstring>() const</argsstring>
+        <name>ToUInt</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToUInt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="63" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af65c97906349aede8b6acb874189a63c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int64_t</type>
+        <definition>SR_NODISCARD int64_t SR_UTILS_NS::Xml::Attribute::ToInt64</definition>
+        <argsstring>() const</argsstring>
+        <name>ToInt64</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToInt64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="64" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a36c4fdbeed82c33d759d9ab9bff4fae6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::Xml::Attribute::ToUInt64</definition>
+        <argsstring>() const</argsstring>
+        <name>ToUInt64</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToUInt64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="65" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1aaa964f2f5fe7ac96ec570516bebc1030" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::Xml::Attribute::ToFloat</definition>
+        <argsstring>() const</argsstring>
+        <name>ToFloat</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToFloat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="66" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a8174bbf703e0b14698465ba82298a62e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD double_t</type>
+        <definition>SR_NODISCARD double_t SR_UTILS_NS::Xml::Attribute::ToDouble</definition>
+        <argsstring>() const</argsstring>
+        <name>ToDouble</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToDouble</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="67" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a7fc1a9b34311befca4482d5d9f77c9a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::ToBool</definition>
+        <argsstring>() const</argsstring>
+        <name>ToBool</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToBool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="68" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ad296438918e2d625d35ec71524706333" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Xml::Attribute::ToString</definition>
+        <argsstring>(const std::string &amp;def) const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToString</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="70" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a36a74ade9a0adc88f1f8ee13525370ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_UTILS_NS::Xml::Attribute::ToInt</definition>
+        <argsstring>(int32_t def) const</argsstring>
+        <name>ToInt</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToInt</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="71" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af20ad5754f4faa0e4d3835a261f72f9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_UTILS_NS::Xml::Attribute::ToUInt</definition>
+        <argsstring>(uint32_t def) const</argsstring>
+        <name>ToUInt</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToUInt</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="72" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af63063267c84a6341d82a36e19a7d68f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD int64_t</type>
+        <definition>SR_NODISCARD int64_t SR_UTILS_NS::Xml::Attribute::ToInt64</definition>
+        <argsstring>(int64_t def) const</argsstring>
+        <name>ToInt64</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToInt64</qualifiedname>
+        <param>
+          <type>int64_t</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="73" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a8e5d901bc67d5170ff2531cf7cc18364" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::Xml::Attribute::ToUInt64</definition>
+        <argsstring>(uint64_t def) const</argsstring>
+        <name>ToUInt64</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToUInt64</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="74" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a3a77d5a134e5a8317281e324a33a0f83" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::Xml::Attribute::ToFloat</definition>
+        <argsstring>(float_t def) const</argsstring>
+        <name>ToFloat</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToFloat</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="75" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a8d946ece95c4c68f14da874d29f1ff0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::ToBool</definition>
+        <argsstring>(bool def) const</argsstring>
+        <name>ToBool</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::ToBool</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="76" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Xml_1_1Attribute_1acb61c0ed71885025a57f6628a821f7f5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::CheckError</definition>
+        <argsstring>(const std::string &amp;msg) const</argsstring>
+        <name>CheckError</name>
+        <qualifiedname>SR_UTILS_NS::Xml::Attribute::CheckError</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="43" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="43" bodyend="52"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Xml.h" bodystart="26" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1abf6e8c3f114b4acf983f018ce6727da6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>Attribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a7b6f71e80c04dc449bc405c781023ec1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>Attribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1acb61c0ed71885025a57f6628a821f7f5" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>CheckError</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a9834190331a5b8188dd3f2c78c0a6263" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>m_attribute</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af5569619a3996b235e3356ad7c2919d7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>m_valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ac6aeb29e74ad4b28b4cf6baff7221de8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>operator bool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a7fc1a9b34311befca4482d5d9f77c9a1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a8d946ece95c4c68f14da874d29f1ff0b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a8174bbf703e0b14698465ba82298a62e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToDouble</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1aaa964f2f5fe7ac96ec570516bebc1030" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a3a77d5a134e5a8317281e324a33a0f83" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1aeee88f6ddfce2e9be70f3901c73b7135" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a36a74ade9a0adc88f1f8ee13525370ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af65c97906349aede8b6acb874189a63c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToInt64</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af63063267c84a6341d82a36e19a7d68f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToInt64</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a81d0cb18fc1c26663a219d693e6981b5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ad296438918e2d625d35ec71524706333" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ad6c59226e49966e1f91251c4a01c6caa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1af20ad5754f4faa0e4d3835a261f72f9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a36c4fdbeed82c33d759d9ab9bff4fae6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToUInt64</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1a8e5d901bc67d5170ff2531cf7cc18364" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>ToUInt64</name></member>
+      <member refid="classSR__UTILS__NS_1_1Xml_1_1Attribute_1ad9babd8409af95a3a4c026d9e50add6d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Xml::Attribute</scope><name>Valid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

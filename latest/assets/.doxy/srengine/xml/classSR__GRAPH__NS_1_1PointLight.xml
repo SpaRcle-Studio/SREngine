@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1PointLight" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::PointLight</compoundname>
+    <basecompoundref refid="classSR__GRAPH__NS_1_1ILightComponent" prot="public" virt="non-virtual">SR_GRAPH_NS::ILightComponent</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1PointLight_1a90f3497dad77351d6d4a1f54c2a151a5" prot="protected" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_GRAPH_NS::PointLight::m_radius</definition>
+        <argsstring></argsstring>
+        <name>m_radius</name>
+        <qualifiedname>SR_GRAPH_NS::PointLight::m_radius</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h" line="15" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::ILightComponent</label>
+        <link refid="classSR__GRAPH__NS_1_1ILightComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::PointLight</label>
+        <link refid="classSR__GRAPH__NS_1_1PointLight"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::IRenderComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::ILightComponent</label>
+        <link refid="classSR__GRAPH__NS_1_1ILightComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::PointLight</label>
+        <link refid="classSR__GRAPH__NS_1_1PointLight"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::IRenderComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h" bodystart="11" bodyend="17"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>BaseComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>CameraPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>Detach</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1aecf5343d51a2c3bf56c3799288d586d5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetGameObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a92cd97808ed4fcedd79595fa767ebdbb" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetLightType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetRoot</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>GetTransform</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>HasScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsStarted</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a0a33ef54fce35d288b67b81c7c6dfad5" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>LateUpdate</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a76e298638ed28671b35d707975d9d3f3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_bounceIntensity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1af02042fc60deb8d5e34b579b1a4e50c0" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_intensity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_isStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_parent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_properties</name></member>
+      <member refid="classSR__GRAPH__NS_1_1PointLight_1a90f3497dad77351d6d4a1f54c2a151a5" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_radius</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_renderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a3412e5696f828c235dde1ff6aad8e4d4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>m_shadowType</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ILightComponent_1a10ee3185e641149fe7adc6f38124d1af" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnDetached</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a341f5491cabb294266eec545684cc553" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnDisable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ae13cacd5b7be1e43cc46f79b4157d07e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnEnable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>OriginType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab4d18e3d6dfde9a49838841267287d0a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>Ptr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a954248f79ae478aa4191a4a6bb9b8282" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>ScenePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>SetEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>SetParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>Start</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>TryGetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ab61fb3a6e950d558e4a24fd316c97062" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>TryGetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>TryGetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac6a1ba6c0a2a6d0b8f29f4a9924b25fb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>Update</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PointLight</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</compoundname>
+    <includes refid="ImGuiInternal_8h" local="no">ImGuiInternal.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a768a80eb11758c50344cd268b7e68ad5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers::Index</definition>
+        <argsstring></argsstring>
+        <name>Index</name>
+        <qualifiedname>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers::Index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="27" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a3d7e04de493316b7accadeaa49b55d9d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers::Count</definition>
+        <argsstring></argsstring>
+        <name>Count</name>
+        <qualifiedname>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers::Count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="28" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1aa9e4c505f8bd4fe968be4324685dd77d" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__FrameRenderBuffers" kindref="compound">ImGui_ImplVulkanH_FrameRenderBuffers</ref> *</type>
+        <definition>ImGui_ImplVulkanH_FrameRenderBuffers* SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers::FrameRenderBuffers</definition>
+        <argsstring></argsstring>
+        <name>FrameRenderBuffers</name>
+        <qualifiedname>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers::FrameRenderBuffers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="29" column="48" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Each viewport will hold 1 <ref refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers" kindref="compound">ImGui_ImplVulkanH_WindowRenderBuffers</ref> [Please zero-clear before use!] </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::ImGui_ImplVulkanH_FrameRenderBuffers</label>
+        <link refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__FrameRenderBuffers"/>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</label>
+        <link refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>FrameRenderBuffers</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="25" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="26" bodyend="30"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a3d7e04de493316b7accadeaa49b55d9d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</scope><name>Count</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1aa9e4c505f8bd4fe968be4324685dd77d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</scope><name>FrameRenderBuffers</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a768a80eb11758c50344cd268b7e68ad5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</scope><name>Index</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

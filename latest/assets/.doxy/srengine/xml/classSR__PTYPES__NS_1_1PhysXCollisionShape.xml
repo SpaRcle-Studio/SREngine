@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PTYPES__NS_1_1PhysXCollisionShape" kind="class" language="C++" prot="public">
+    <compoundname>SR_PTYPES_NS::PhysXCollisionShape</compoundname>
+    <basecompoundref refid="classSR__PTYPES__NS_1_1CollisionShapeImpl" prot="public" virt="non-virtual">SR_PTYPES_NS::CollisionShapeImpl</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a81fd0ff780f401bac001371c862da380" prot="private" static="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref></type>
+        <definition>using SR_PTYPES_NS::PhysXCollisionShape::Super =  CollisionShape</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="14" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1aee533307b0be731a7c671fad0df41afc" prot="private" static="no" mutable="no">
+        <type>physx::PxShape *</type>
+        <definition>physx::PxShape* SR_PTYPES_NS::PhysXCollisionShape::m_shape</definition>
+        <argsstring></argsstring>
+        <name>m_shape</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::m_shape</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="30" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a218673929a9d66683e4fa8f8e0b7aff9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PTYPES_NS::PhysXCollisionShape::~PhysXCollisionShape</definition>
+        <argsstring>() override</argsstring>
+        <name>~PhysXCollisionShape</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::~PhysXCollisionShape</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a51e27896fecccb6d81a2734b50781534" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::PhysXCollisionShape::UpdateShape</definition>
+        <argsstring>() override</argsstring>
+        <name>UpdateShape</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::UpdateShape</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a7b2f43af9f82909f0e6f608e2e93ea13">UpdateShape</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad58d722ffe208e003b309b233a9a33d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::PhysXCollisionShape::UpdateMatrix</definition>
+        <argsstring>() override</argsstring>
+        <name>UpdateMatrix</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::UpdateMatrix</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a82ac2293adc326fab0b9dbdbc06a7dbe">UpdateMatrix</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a579531b9f85d581c58538d07114681cd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD physx::PxMaterial *</type>
+        <definition>SR_NODISCARD physx::PxMaterial * SR_PTYPES_NS::PhysXCollisionShape::GetMaterial</definition>
+        <argsstring>() const</argsstring>
+        <name>GetMaterial</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::GetMaterial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="22" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad3e272c0b1561ec0053f29e04a625812" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD physx::PxConvexMesh *</type>
+        <definition>SR_NODISCARD physx::PxConvexMesh * SR_PTYPES_NS::PhysXCollisionShape::CreateConvexMesh</definition>
+        <argsstring>(SR_HTYPES_NS::RawMesh *pRawMesh)</argsstring>
+        <name>CreateConvexMesh</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::CreateConvexMesh</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">SR_HTYPES_NS::RawMesh</ref> *</type>
+          <declname>pRawMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="24" column="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a57d781a33d83d57726a41e1e752f95c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD physx::PxTriangleMesh *</type>
+        <definition>SR_NODISCARD physx::PxTriangleMesh * SR_PTYPES_NS::PhysXCollisionShape::CreateTriangleMesh</definition>
+        <argsstring>(SR_HTYPES_NS::RawMesh *pRawMesh)</argsstring>
+        <name>CreateTriangleMesh</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::CreateTriangleMesh</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">SR_HTYPES_NS::RawMesh</ref> *</type>
+          <declname>pRawMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="25" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXCollisionShape_1af272d3187d78a32cbeaa4ab544a1ce0a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_PTYPES_NS::PhysXCollisionShape::GetHandle</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetHandle</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXCollisionShape::GetHandle</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a923c7bb373a4217535c2443567c51244">GetHandle</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="27" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_PTYPES_NS::CollisionShapeImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShapeImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::PhysXCollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysXCollisionShape"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_PTYPES_NS::CollisionShapeImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShapeImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::PhysXCollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysXCollisionShape"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" line="13" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h" bodystart="13" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a2225190aa1ab2a4ddf5b4202342c2b23" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>CalculateLocalInertia</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad3e272c0b1561ec0053f29e04a625812" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>CreateConvexMesh</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a57d781a33d83d57726a41e1e752f95c2" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>CreateTriangleMesh</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1af272d3187d78a32cbeaa4ab544a1ce0a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>GetHandle</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a579531b9f85d581c58538d07114681cd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>GetMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a572967d0c46534df86bb63e2a4638de5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>GetShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1aee533307b0be731a7c671fad0df41afc" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>m_shape</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>operator=</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a76c2c0a950fbc551d69d8d108197f7df" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>SetShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a81fd0ff780f401bac001371c862da380" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>Super</name></member>
+      <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1ab8d07a5b987cbd7a50bf3ceb356b3d9f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>Update</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad58d722ffe208e003b309b233a9a33d9" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>UpdateMatrix</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a51e27896fecccb6d81a2734b50781534" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>UpdateShape</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a218673929a9d66683e4fa8f8e0b7aff9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>~PhysXCollisionShape</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

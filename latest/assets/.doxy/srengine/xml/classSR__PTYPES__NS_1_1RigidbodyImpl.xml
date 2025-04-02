@@ -1,0 +1,462 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PTYPES__NS_1_1RigidbodyImpl" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_PTYPES_NS::RigidbodyImpl</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__PTYPES__NS_1_1Rigidbody2DImpl" prot="public" virt="non-virtual">SR_PTYPES_NS::Rigidbody2DImpl</derivedcompoundref>
+    <derivedcompoundref refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl" prot="public" virt="non-virtual">SR_PTYPES_NS::Rigidbody3DImpl</derivedcompoundref>
+    <sectiondef kind="protected-type">
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1ab032adc0e2c478f63a09fc411092a682" prot="protected" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1NonCopyable" kindref="compound">SR_UTILS_NS::NonCopyable</ref></type>
+        <definition>using SR_PTYPES_NS::RigidbodyImpl::Super =  SR_UTILS_NS::NonCopyable</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="39" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a035f236a87bbaa11248891b80e0d9c25" prot="protected" static="no">
+        <type><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">SR_PHYSICS_NS::LibraryImpl</ref> *</type>
+        <definition>using SR_PTYPES_NS::RigidbodyImpl::LibraryPtr =  SR_PHYSICS_NS::LibraryImpl*</definition>
+        <argsstring></argsstring>
+        <name>LibraryPtr</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::LibraryPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="40" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a6fc49788a6962100241d99ec120f3b9d" prot="protected" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; PhysicsScene &gt;</type>
+        <definition>using SR_PTYPES_NS::RigidbodyImpl::PhysicsScenePtr =  SR_HTYPES_NS::SafePtr&lt;PhysicsScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>PhysicsScenePtr</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::PhysicsScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="41" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a68329c322874647a5bdd1e359c29b24c" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref> *</type>
+        <definition>Rigidbody* SR_PTYPES_NS::RigidbodyImpl::m_rigidbody</definition>
+        <argsstring></argsstring>
+        <name>m_rigidbody</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::m_rigidbody</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="64" column="19" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1ac64e11b6b8d4d6808129b7d529d1ee03" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
+        <definition>SR_MATH_NS::Quaternion SR_PTYPES_NS::RigidbodyImpl::m_rigidbodyRotation</definition>
+        <argsstring></argsstring>
+        <name>m_rigidbodyRotation</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::m_rigidbodyRotation</qualifiedname>
+        <initializer>= SR_MATH_NS::InfinityQuaternion</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="65" column="32" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a08b7a98f60c575a9653846a364421d18" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_PTYPES_NS::RigidbodyImpl::m_rigidbodyTranslation</definition>
+        <argsstring></argsstring>
+        <name>m_rigidbodyTranslation</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::m_rigidbodyTranslation</qualifiedname>
+        <initializer>= SR_MATH_NS::InfinityFV3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="66" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1af62c18b6b8b7602e2c4898e57c7f7824" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>virtual SR_NODISCARD void * SR_PTYPES_NS::RigidbodyImpl::GetHandle</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetHandle</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::GetHandle</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1ad57c6a182f85c36db6f42893edccb9ee">GetHandle</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="43" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8aebbc2660c9fdb82cb4a11c5fe37a59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::RigidbodyImpl::SetRigidbody</definition>
+        <argsstring>(Rigidbody *pRigidbody)</argsstring>
+        <name>SetRigidbody</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::SetRigidbody</qualifiedname>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref> *</type>
+          <declname>pRigidbody</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="46" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1aaef6188500b24ed9e12254731132c56e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::RigidbodyImpl::UpdateInertia</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateInertia</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::UpdateInertia</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1afd0cec0d9578288c87c17a96af961761">UpdateInertia</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="48" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a83f6c74a873186b4920c0df977f6bce4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::RigidbodyImpl::ClearForces</definition>
+        <argsstring>()</argsstring>
+        <name>ClearForces</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::ClearForces</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1af14d2900ed651cddb2b7f67c2f7337da">ClearForces</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="49" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1af6f2e1627106730b48ff19bc485924a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_PTYPES_NS::RigidbodyImpl::Synchronize</definition>
+        <argsstring>()</argsstring>
+        <name>Synchronize</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::Synchronize</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a414e545b5c4c67bcfc3f2a5221f3440f">Synchronize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="51" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a929d18eadf9b3c1adeab0557fa0fad2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_PTYPES_NS::RigidbodyImpl::InitBody</definition>
+        <argsstring>()</argsstring>
+        <name>InitBody</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::InitBody</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1a3df24742c107940f16d74d95539f7fd3">InitBody</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="53" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a3b3fcbd106764d6372e3180922ad129e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_PTYPES_NS::RigidbodyImpl::UpdateMatrix</definition>
+        <argsstring>(bool force)</argsstring>
+        <name>UpdateMatrix</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::UpdateMatrix</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1aec0cdc553592c6128ca4838c67c40f9e">UpdateMatrix</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="55" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8ff0f70440768bc847e834e589150c3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_PTYPES_NS::RigidbodyImpl::UpdateShapeInternal</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateShapeInternal</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::UpdateShapeInternal</qualifiedname>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl_1af43051b63fe417439ae5c06a54326f3e">UpdateShapeInternal</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="56" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1RigidbodyImpl_1a508579f47438da42f63a01779e8a41a3" prot="protected" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_NODISCARD T *</type>
+        <definition>SR_NODISCARD T * SR_PTYPES_NS::RigidbodyImpl::GetRigidbody</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetRigidbody</name>
+        <qualifiedname>SR_PTYPES_NS::RigidbodyImpl::GetRigidbody</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="59" column="35" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>SR_PTYPES_NS::PhysXRigidbody3DImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysXRigidbody3DImpl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_PTYPES_NS::Rigidbody2DImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody2DImpl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_PTYPES_NS::Rigidbody3DImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody3DImpl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::RigidbodyImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="15">
+        <label>SR_HTYPES_NS::SafePtr&lt; PhysicsScene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
+      </node>
+      <node id="13">
+        <label>SR_HTYPES_NS::SharedPtr&lt; CollisionShape &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="16">
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      </node>
+      <node id="14">
+        <label>SR_PHYSICS_NS::LibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_PTYPES_NS::PhysicsMaterial</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_PTYPES_NS::Rigidbody</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_shape</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>m_impl</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_library</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_physicsScene</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_rotation</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>m_material</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::RigidbodyImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_rigidbody</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_rigidbodyRotation</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+        <childnode refid="21" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="20">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+      <node id="10">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="37" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="37" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a83f6c74a873186b4920c0df977f6bce4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>ClearForces</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1af62c18b6b8b7602e2c4898e57c7f7824" prot="public" virt="pure-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>GetHandle</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a508579f47438da42f63a01779e8a41a3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>GetRigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a929d18eadf9b3c1adeab0557fa0fad2a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>InitBody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a035f236a87bbaa11248891b80e0d9c25" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>LibraryPtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a68329c322874647a5bdd1e359c29b24c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>m_rigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1ac64e11b6b8d4d6808129b7d529d1ee03" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>m_rigidbodyRotation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a08b7a98f60c575a9653846a364421d18" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>m_rigidbodyTranslation</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>operator=</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a6fc49788a6962100241d99ec120f3b9d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>PhysicsScenePtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8aebbc2660c9fdb82cb4a11c5fe37a59" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>SetRigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1ab032adc0e2c478f63a09fc411092a682" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>Super</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1af6f2e1627106730b48ff19bc485924a8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>Synchronize</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1aaef6188500b24ed9e12254731132c56e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>UpdateInertia</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a3b3fcbd106764d6372e3180922ad129e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>UpdateMatrix</name></member>
+      <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8ff0f70440768bc847e834e589150c3d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>UpdateShapeInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::RigidbodyImpl</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__UTILS__NS_1_1MarshalUtils" kind="namespace" language="C++">
+    <compoundname>SR_UTILS_NS::MarshalUtils</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="AnyMarshal_8h_1a52092b42bfbf9ca5b217f78a40655048" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Any</type>
+          </param>
+        </templateparamlist>
+        <type>Any SR_FASTCALL</type>
+        <definition>static Any SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadAny</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadAny</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadAny</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/AnyMarshal.h" line="12" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/AnyMarshal.h" bodystart="12" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="AnyMarshal_8h_1a89a48b02ff499ceb461ca49d4405355f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Any</type>
+          </param>
+        </templateparamlist>
+        <type>void SR_FASTCALL</type>
+        <definition>static void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveAny</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const Any &amp;any)</argsstring>
+        <name>SaveAny</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveAny</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const Any &amp;</type>
+          <declname>any</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/AnyMarshal.h" line="34" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/AnyMarshal.h" bodystart="34" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1ad721ab59bfacf8cec0fb58fc5ccd4a96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveValue</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const T &amp;value)</argsstring>
+        <name>SaveValue</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveValue</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="18" column="54" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="18" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a4aa1089ae4e495d73eadb766b7078318" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE_STATIC T SR_FASTCALL</type>
+        <definition>SR_INLINE_STATIC T SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadValue</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadValue</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadValue</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="81" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="81" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1af1d2908ca3b87a82789389d989bbe389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveShortString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::string &amp;str)</argsstring>
+        <name>SaveShortString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveShortString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="148" column="59" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="148" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1abb823ef297392917892cb2922d9e9479" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveUnicodeString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const SR_HTYPES_NS::UnicodeString &amp;str)</argsstring>
+        <name>SaveUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveUnicodeString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="154" column="59" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="154" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a92d489dceb4ad1b4f2136fbe3bd918d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::string &amp;str)</argsstring>
+        <name>SaveString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="160" column="59" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="160" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a08fb5ca83bc09d878cd55e5b8613acd7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED void SR_FASTCALL</type>
+        <definition>static SR_MAYBE_UNUSED void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::string_view &amp;str)</argsstring>
+        <name>SaveString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="166" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="166" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1ae553b07ef8b29effdc7b38632ce79a6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE_STATIC void SR_FASTCALL</type>
+        <definition>SR_INLINE_STATIC void SR_FASTCALL SR_UTILS_NS::MarshalUtils::SaveVector</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::vector&lt; T &gt; &amp;vector)</argsstring>
+        <name>SaveVector</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::SaveVector</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>vector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="172" column="54" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="172" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1ae4d9b751ce7f60daa9c7fcbec28fbe4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Vector</type>
+          </param>
+        </templateparamlist>
+        <type>SR_INLINE_STATIC Vector SR_FASTCALL</type>
+        <definition>SR_INLINE_STATIC Vector SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadVector</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadVector</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadVector</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="180" column="56" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="180" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1adc80af78a6c6c17e96dd1a02804bdcb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadShortStr</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadShortStr</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadShortStr</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="196" column="66" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="196" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a4998d18fe764a78ac564d77165db4825" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC SR_HTYPES_NS::UnicodeString SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadUnicodeString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadUnicodeString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="209" column="82" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="209" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a66e436ee03ef16cf88517d767f9129a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUtils::LoadStr</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>LoadStr</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::LoadStr</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="222" column="66" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="222" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1a97e8e6c907850fbe475d9d14a02a8e59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL SR_UTILS_NS::MarshalUtils::TryLoadShortStr</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>TryLoadShortStr</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::TryLoadShortStr</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="235" column="66" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="235" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="BaseMarshal_8h_1af71767b319b1d88628b89ce793a7a4b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED SR_INLINE_STATIC <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> SR_FASTCALL</type>
+        <definition>SR_MAYBE_UNUSED SR_INLINE_STATIC SR_HTYPES_NS::UnicodeString SR_FASTCALL SR_UTILS_NS::MarshalUtils::TryLoadUnicodeString</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream)</argsstring>
+        <name>TryLoadUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::TryLoadUnicodeString</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" line="248" column="82" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/BaseMarshal.h" bodystart="248" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="MarshalUtils_8h_1a29e850a25f2ddec669e451685ccae214" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED void</type>
+        <definition>static SR_MAYBE_UNUSED void SR_UTILS_NS::MarshalUtils::Encode</definition>
+        <argsstring>(SR_HTYPES_NS::Stream &amp;stream, const std::string &amp;str, StandardType type)</argsstring>
+        <name>Encode</name>
+        <qualifiedname>SR_UTILS_NS::MarshalUtils::Encode</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">SR_HTYPES_NS::Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>StandardType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/MarshalUtils.h" line="17" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/MarshalUtils.h" bodystart="17" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/AnyMarshal.h" line="11" column="1"/>
+  </compounddef>
+</doxygen>

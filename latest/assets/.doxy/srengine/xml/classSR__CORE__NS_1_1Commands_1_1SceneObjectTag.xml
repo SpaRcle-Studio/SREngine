@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_NS::Commands::SceneObjectTag</compoundname>
+    <basecompoundref refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" prot="public" virt="non-virtual">SR_CORE_NS::Commands::IEngineReversibleCommand</basecompoundref>
+    <includes refid="EngineCommands_8h" local="no">EngineCommands.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1a28ef0259be760e9469666da13603e8d8" prot="private" static="no">
+        <type><ref refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" kindref="compound">IEngineReversibleCommand</ref></type>
+        <definition>using SR_CORE_NS::Commands::SceneObjectTag::Super =  IEngineReversibleCommand</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="165" column="9" bodyfile="Engine/Core/inc/Core/EngineCommands.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1aeecf192b270e735733a376aa387f0c6c" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::EntityId</type>
+        <definition>SR_UTILS_NS::EntityId SR_CORE_NS::Commands::SceneObjectTag::m_entityId</definition>
+        <argsstring></argsstring>
+        <name>m_entityId</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::m_entityId</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="173" column="31" bodyfile="Engine/Core/inc/Core/EngineCommands.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af8af242c7e33a631b7c775431a0b8633" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_CORE_NS::Commands::SceneObjectTag::m_previousTag</definition>
+        <argsstring></argsstring>
+        <name>m_previousTag</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::m_previousTag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="174" column="33" bodyfile="Engine/Core/inc/Core/EngineCommands.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af619aec60606600662661af6b776a5ff" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_CORE_NS::Commands::SceneObjectTag::m_newTag</definition>
+        <argsstring></argsstring>
+        <name>m_newTag</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::m_newTag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="175" column="33" bodyfile="Engine/Core/inc/Core/EngineCommands.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af3936c9f7a721b5566a3a7284f82beed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::Commands::SceneObjectTag::SceneObjectTag</definition>
+        <argsstring>(const EnginePtr &amp;pEngine, const SR_UTILS_NS::SceneObject::Ptr &amp;pSO, SR_UTILS_NS::StringAtom newTag)</argsstring>
+        <name>SceneObjectTag</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::SceneObjectTag</qualifiedname>
+        <param>
+          <type>const EnginePtr &amp;</type>
+          <declname>pEngine</declname>
+        </param>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>newTag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="167" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1acf3ae0036dadf0aa873bbbc8047c4e59" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Commands::SceneObjectTag::Redo</definition>
+        <argsstring>() override</argsstring>
+        <name>Redo</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::Redo</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1ReversibleCommand_1a7f99f1ed7cfe3fd646462fbbeed48683">Redo</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="169" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1aaf710f029a1825107d53db915dc16985" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_NS::Commands::SceneObjectTag::Undo</definition>
+        <argsstring>() override</argsstring>
+        <name>Undo</name>
+        <qualifiedname>SR_CORE_NS::Commands::SceneObjectTag::Undo</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1ReversibleCommand_1a970cd668a7a4a7e5dee7602c9fa72cc4">Undo</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="170" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_CORE_NS::Commands::IEngineReversibleCommand</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_CORE_NS::Commands::SceneObjectTag</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ICommand</label>
+        <link refid="classSR__UTILS__NS_1_1ICommand"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ReversibleCommand</label>
+        <link refid="classSR__UTILS__NS_1_1ReversibleCommand"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_CORE_NS::Commands::IEngineReversibleCommand</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_engine</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_CORE_NS::Commands::SceneObjectTag</label>
+        <link refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_CORE_NS::Engine &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::Scene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::ICommand</label>
+        <link refid="classSR__UTILS__NS_1_1ICommand"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ReversibleCommand</label>
+        <link refid="classSR__UTILS__NS_1_1ReversibleCommand"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/EngineCommands.h" line="164" column="5" bodyfile="Engine/Core/inc/Core/EngineCommands.h" bodystart="164" bodyend="177"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ICommand_1aa10d7b2a972b838d5f49352e3d79dc5d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>DATA_ID</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a2e54bd8e825887ff963cefbee2d04b37" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>EnginePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1afa1a887469cc778c0977b1909e05c9cf" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>GetName</name></member>
+      <member refid="classSR__UTILS__NS_1_1ICommand_1ac995871c5e810a021558bc0c974a2604" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>ICommand</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a388e504efe0d60e2f1d17aa967ac62f0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>IEngineReversibleCommand</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1a288f4ab309c0575fa3ba86cfde41b297" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>Load</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a122f548f2e3431a0b746a6d77f5ecb03" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>m_engine</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1aeecf192b270e735733a376aa387f0c6c" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>m_entityId</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af619aec60606600662661af6b776a5ff" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>m_newTag</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af8af242c7e33a631b7c775431a0b8633" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>m_previousTag</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand_1a057d071b0218031d89c79ff3f16817c4" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>m_scene</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1acf3ae0036dadf0aa873bbbc8047c4e59" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>Redo</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1a8ec2f757fc0402ac760c35cbe6217239" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>ReversibleCommand</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1a0ac1c0ad5dcc808207c4380c7b6cce90" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>Save</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1af3936c9f7a721b5566a3a7284f82beed" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>SceneObjectTag</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1a28ef0259be760e9469666da13603e8d8" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>Super</name></member>
+      <member refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag_1aaf710f029a1825107d53db915dc16985" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>Undo</name></member>
+      <member refid="classSR__UTILS__NS_1_1ICommand_1ac789effbfbda10305e9cc24ebbf284af" prot="public" virt="virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>~ICommand</name></member>
+      <member refid="classSR__UTILS__NS_1_1ReversibleCommand_1ab7993ecf8325bffccd3a46bd4973a153" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Commands::SceneObjectTag</scope><name>~ReversibleCommand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

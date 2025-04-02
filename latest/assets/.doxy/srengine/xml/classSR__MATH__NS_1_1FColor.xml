@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__MATH__NS_1_1FColor" kind="class" language="C++" prot="public">
+    <compoundname>SR_MATH_NS::FColor</compoundname>
+    <basecompoundref refid="structSR__MATH__NS_1_1Vector4" prot="public" virt="non-virtual">SR_MATH_NS::Vector4&lt; Unit &gt;</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1ab64a7933ae53eae6cb77d5dd8766cfda" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>()</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="212" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="212" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a738aa2b6445f8d42b6a1b2ca01297898" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(Unit scalar)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>Unit</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="213" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="213" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a112a14b88a94eb26fed2d5991cb16c84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(const glm::vec4 &amp;vec4)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>const glm::vec4 &amp;</type>
+          <declname>vec4</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="214" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="214" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a0b03b4694814eaceffce54d739382b47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(const Vector4&lt; Unit &gt; &amp;v)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector4" kindref="compound">Vector4</ref>&lt; Unit &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="215" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="215" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a7b942460708d00314ed5b523e02e6a43" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(const FColor &amp;color)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="216" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="216" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a6b964780a165c9bd21c3100517ba541e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(FColor &amp;&amp;color)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;&amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="217" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="217" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1ae105d9ba123b15570b5a6f807d19ad3c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(double_t _x, double_t _y, double_t _z, double_t _w)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>double_t</type>
+          <declname>_x</declname>
+        </param>
+        <param>
+          <type>double_t</type>
+          <declname>_y</declname>
+        </param>
+        <param>
+          <type>double_t</type>
+          <declname>_z</declname>
+        </param>
+        <param>
+          <type>double_t</type>
+          <declname>_w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="218" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="218" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1abec6af1e46cb18da70461d312b4ce65c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(float_t _x, float_t _y, float_t _z, float_t _w)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>_x</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>_y</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>_z</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>_w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="219" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="219" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a505528367d22d6b2e65df56cf1c52f95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_FAST_CONSTRUCTOR</type>
+        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::FColor::FColor</definition>
+        <argsstring>(int32_t _x, int32_t _y, int32_t _z, int32_t _w)</argsstring>
+        <name>FColor</name>
+        <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>_x</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>_y</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>_z</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>_w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="220" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="220" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1acf4193febf48960d11f93a6a8f73ad55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
+        <definition>FColor &amp; SR_MATH_NS::FColor::operator=</definition>
+        <argsstring>(const FColor &amp;color)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_MATH_NS::FColor::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="222" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="222" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a45517e2ec13c5b243c7ec22c3fd14736" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;</type>
+        <definition>FColor &amp; SR_MATH_NS::FColor::operator=</definition>
+        <argsstring>(FColor &amp;&amp;color)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_MATH_NS::FColor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref> &amp;&amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="230" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="230" bodyend="236"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a8235aa4b44b21962e704f21d82fe5b86" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Red</definition>
+        <argsstring>()</argsstring>
+        <name>Red</name>
+        <qualifiedname>SR_MATH_NS::FColor::Red</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="238" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="238" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1ab054f9e068fa92af5fd903623ac21e9f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Green</definition>
+        <argsstring>()</argsstring>
+        <name>Green</name>
+        <qualifiedname>SR_MATH_NS::FColor::Green</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="239" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="239" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1aafee54dc25f9444a64ece7f2fd42b678" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Blue</definition>
+        <argsstring>()</argsstring>
+        <name>Blue</name>
+        <qualifiedname>SR_MATH_NS::FColor::Blue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="240" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="240" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1abafbde33ec9039216f2c382c28d2c965" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::White</definition>
+        <argsstring>()</argsstring>
+        <name>White</name>
+        <qualifiedname>SR_MATH_NS::FColor::White</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="241" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="241" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1afd8edf7872bf743c92b7a3e1fc64bc21" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Black</definition>
+        <argsstring>()</argsstring>
+        <name>Black</name>
+        <qualifiedname>SR_MATH_NS::FColor::Black</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="242" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="242" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a64bc234971dc6d319459e944c98bbc11" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Yellow</definition>
+        <argsstring>()</argsstring>
+        <name>Yellow</name>
+        <qualifiedname>SR_MATH_NS::FColor::Yellow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="243" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="243" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a13533ac3d261b1b7858583632f19ea2a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Cyan</definition>
+        <argsstring>()</argsstring>
+        <name>Cyan</name>
+        <qualifiedname>SR_MATH_NS::FColor::Cyan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="244" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="244" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a73914d5afc25223a6b62ec7c33a834af" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Magenta</definition>
+        <argsstring>()</argsstring>
+        <name>Magenta</name>
+        <qualifiedname>SR_MATH_NS::FColor::Magenta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="245" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a1dab9b2370874447d34bac366a6a4161" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">FColor</ref></type>
+        <definition>static constexpr FColor SR_MATH_NS::FColor::Alpha</definition>
+        <argsstring>()</argsstring>
+        <name>Alpha</name>
+        <qualifiedname>SR_MATH_NS::FColor::Alpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="246" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="246" bodyend="246"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_MATH_NS::FColor</label>
+        <link refid="classSR__MATH__NS_1_1FColor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_MATH_NS::Vector4&lt; Unit &gt;</label>
+        <link refid="structSR__MATH__NS_1_1Vector4"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_MATH_NS::FColor</label>
+        <link refid="classSR__MATH__NS_1_1FColor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_MATH_NS::Vector4&lt; Unit &gt;</label>
+        <link refid="structSR__MATH__NS_1_1Vector4"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="210" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="210" bodyend="248"/>
+    <listofallmembers>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a6e8e42f98e3cb7a416345b11e73dde68" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>a</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a6e8e42f98e3cb7a416345b11e73dde68" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>a</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a1dab9b2370874447d34bac366a6a4161" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Alpha</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac0a985978a004760cc821ec58ddb5fbc" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>b</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac0a985978a004760cc821ec58ddb5fbc" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>b</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1afd8edf7872bf743c92b7a3e1fc64bc21" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Black</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1aafee54dc25f9444a64ece7f2fd42b678" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Blue</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aa3c460c70421c3c82784053c125eab67" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Cast</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aa3c460c70421c3c82784053c125eab67" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Cast</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a9d8012ea7f8a7982b4e7f54e802c58c5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Clamp</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a9d8012ea7f8a7982b4e7f54e802c58c5" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Clamp</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aa936b71f8716a27728ba6dcd604646f0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>coord</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aa936b71f8716a27728ba6dcd604646f0" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>coord</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac4414a1e55955b214cc2c28192611b38" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Cross</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac4414a1e55955b214cc2c28192611b38" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Cross</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a13533ac3d261b1b7858583632f19ea2a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Cyan</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ae19bfeb93f5a60c03b8dcb95e7c404b3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>DistanceToPlane</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ae19bfeb93f5a60c03b8dcb95e7c404b3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>DistanceToPlane</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af76f86879def7124a1ea1c0685a47ae7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Dot</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af76f86879def7124a1ea1c0685a47ae7" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Dot</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ad7d947630fe1d53cc812b2837832cf70" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Dot3</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ad7d947630fe1d53cc812b2837832cf70" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Dot3</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1ab64a7933ae53eae6cb77d5dd8766cfda" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a738aa2b6445f8d42b6a1b2ca01297898" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a112a14b88a94eb26fed2d5991cb16c84" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a0b03b4694814eaceffce54d739382b47" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a7b942460708d00314ed5b523e02e6a43" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a6b964780a165c9bd21c3100517ba541e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1ae105d9ba123b15570b5a6f807d19ad3c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1abec6af1e46cb18da70461d312b4ce65c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a505528367d22d6b2e65df56cf1c52f95" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ae7ac5caef62503a489f8c5b914133452" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>g</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ae7ac5caef62503a489f8c5b914133452" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>g</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1ab054f9e068fa92af5fd903623ac21e9f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Green</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a9c1bbfe213055cbb6b1dfd4af4f37879" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>IsFinite</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a9c1bbfe213055cbb6b1dfd4af4f37879" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>IsFinite</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a3f6f74b546170c1a2596da25735d6375" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Length</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a3f6f74b546170c1a2596da25735d6375" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Length</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a73914d5afc25223a6b62ec7c33a834af" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Magenta</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a402084fc71d6259be2403f626bc0a763" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Normalize</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a402084fc71d6259be2403f626bc0a763" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Normalize</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac87519ef01b287e8178d3630c69a9194" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator!=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac87519ef01b287e8178d3630c69a9194" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator!=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a23d0b05c39e09b0ebafef286b97d5a6f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator%=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a23d0b05c39e09b0ebafef286b97d5a6f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator%=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1abf59b2673fe33ed99c940d74067e9fbe" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a57e6783d78b21268fd62027e27a8443f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1abf59b2673fe33ed99c940d74067e9fbe" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a57e6783d78b21268fd62027e27a8443f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a3480f6bcf418b79725e493d690d4fe04" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1afdf47c1d95562e49a63fc4b1d75afbb8" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a3480f6bcf418b79725e493d690d4fe04" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1afdf47c1d95562e49a63fc4b1d75afbb8" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator*=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a12c92e90cb51c14292ca08187f305e1c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator+</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a12c92e90cb51c14292ca08187f305e1c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator+</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a983f6a4310c2415b11bd4ed9ff170b3f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator-</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a1c586d1c9817190cd515d5f0340767da" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator-</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a983f6a4310c2415b11bd4ed9ff170b3f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator-</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a1c586d1c9817190cd515d5f0340767da" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator-</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a63e3efd2a7e91b670d1ed2dce7a60b0f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator/</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a63e3efd2a7e91b670d1ed2dce7a60b0f" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator/</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af5e69fa65fc026e1dced291e42a1931e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator/=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a5eca7306b09f926a014349b3943ffe8a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator/=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af5e69fa65fc026e1dced291e42a1931e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator/=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a5eca7306b09f926a014349b3943ffe8a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator/=</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1acf4193febf48960d11f93a6a8f73ad55" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator=</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a45517e2ec13c5b243c7ec22c3fd14736" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a6c5609cdf667c9a08fc59dfb59edcf50" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator==</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a6c5609cdf667c9a08fc59dfb59edcf50" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator==</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac3760382bf832b07ee3edee8924f03f2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator[]</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a3c20ebf9066065a5384e791a1841e3e1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator[]</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac3760382bf832b07ee3edee8924f03f2" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator[]</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a3c20ebf9066065a5384e791a1841e3e1" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>operator[]</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a0003ee5827f9a3d47bd164bcf5bf2dca" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>r</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a0003ee5827f9a3d47bd164bcf5bf2dca" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>r</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a8235aa4b44b21962e704f21d82fe5b86" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Red</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aecd285feeb52f18874911fd30402e470" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>SqrMagnitude</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aecd285feeb52f18874911fd30402e470" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>SqrMagnitude</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af34fd327346d4fa1348cad7c2051a66b" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>ToGLM</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af34fd327346d4fa1348cad7c2051a66b" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>ToGLM</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a7f29e88b281a6c7426e3779fa22de08d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitW</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a7f29e88b281a6c7426e3779fa22de08d" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitW</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a4726f210e1d999cd7cca313d664c8e49" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitX</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a4726f210e1d999cd7cca313d664c8e49" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitX</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a4cedbe6fd39d4bc1d74a2f2ee7d8b345" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitY</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a4cedbe6fd39d4bc1d74a2f2ee7d8b345" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitY</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a963c3b6f0754356e72f98ce17e2288d3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitZ</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a963c3b6f0754356e72f98ce17e2288d3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>UnitZ</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a6cb2fc9bffe28ec3f5e8858b3da4073b" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>ValueType</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac06ba0d0082a418caccd39c976a2497e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1abda2052955869c2e86bc649401263ed6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1acefe6d7a7601760bacdeb179eb660e17" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a469a0820890654f336adc70bb9416ada" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a8e2cb0b6e6c8213400948a5f90377685" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac06ba0d0082a418caccd39c976a2497e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1abda2052955869c2e86bc649401263ed6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1acefe6d7a7601760bacdeb179eb660e17" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a469a0820890654f336adc70bb9416ada" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a8e2cb0b6e6c8213400948a5f90377685" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Vector4</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a83ecca9332b4368952c53436d501cc34" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>w</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1a83ecca9332b4368952c53436d501cc34" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>w</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1abafbde33ec9039216f2c382c28d2c965" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>White</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aa7fd448773a3e27839abed1139c583df" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>x</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1aa7fd448773a3e27839abed1139c583df" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>x</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1acd2e16645e23661aefc405609ee8969a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>XY</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1acd2e16645e23661aefc405609ee8969a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>XY</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac5b38d3af4fba07990e934205df49135" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>XYZ</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1ac5b38d3af4fba07990e934205df49135" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>XYZ</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af4d9da488f58d5c13e0e9051594db5f4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>y</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af4d9da488f58d5c13e0e9051594db5f4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>y</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a64bc234971dc6d319459e944c98bbc11" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Yellow</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af601eb5912c14ce80e9c4265415fba20" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>z</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector4_1af601eb5912c14ce80e9c4265415fba20" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

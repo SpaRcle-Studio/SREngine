@@ -1,0 +1,575 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PTYPES__NS_1_1PhysicsMaterial" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_PTYPES_NS::PhysicsMaterial</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a2169c19339c88a94fc84749cdf0bf0e1" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">SR_UTILS_NS::IResource</ref></type>
+        <definition>using SR_PTYPES_NS::PhysicsMaterial::Super =  SR_UTILS_NS::IResource</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="37" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1af092759ed58dbc84ded06b318fa0d1a0" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__PTYPES__NS_1_1PhysicsMaterialData" kindref="compound">PhysicsMaterialData</ref></type>
+        <definition>PhysicsMaterialData SR_PTYPES_NS::PhysicsMaterial::m_materialData</definition>
+        <argsstring></argsstring>
+        <name>m_materialData</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::m_materialData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="69" column="29" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a658f9aa77cb56f9f3b19c557b33d62fb" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">SR_PTYPES_NS::Rigidbody</ref> * &gt;</type>
+        <definition>std::set&lt;SR_PTYPES_NS::Rigidbody*&gt; SR_PTYPES_NS::PhysicsMaterial::m_rigidbodies</definition>
+        <argsstring></argsstring>
+        <name>m_rigidbodies</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::m_rigidbodies</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="71" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a06b47aaf1614cd4497944121b2682b41" prot="private" static="no" mutable="no">
+        <type>std::map&lt; LibraryType, <ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">PhysicsMaterialImpl</ref> * &gt;</type>
+        <definition>std::map&lt;LibraryType, PhysicsMaterialImpl*&gt; SR_PTYPES_NS::PhysicsMaterial::m_implementations</definition>
+        <argsstring></argsstring>
+        <name>m_implementations</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::m_implementations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="72" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a00b83a15a365e947edac341e8724dace" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PTYPES_NS::PhysicsMaterial::PhysicsMaterial</definition>
+        <argsstring>()</argsstring>
+        <name>PhysicsMaterial</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::PhysicsMaterial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="39" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a273863fd433b44e4fa3b259e4d9701ec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PTYPES_NS::PhysicsMaterial::~PhysicsMaterial</definition>
+        <argsstring>() override</argsstring>
+        <name>~PhysicsMaterial</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::~PhysicsMaterial</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1add639a8a30846a7d4f75e87f3e6a3fc6" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::PhysicsMaterial::Load</definition>
+        <argsstring>() override</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::Load</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5">Load</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac8f715f54be0c9b7186d66f1cc60f8be" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::PhysicsMaterial::Unload</definition>
+        <argsstring>() override</argsstring>
+        <name>Unload</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::Unload</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b">Unload</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="66" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1af311d2aa814c8eb4d194348e34776f93" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" kindref="compound">PhysicsMaterial</ref> *</type>
+        <definition>static PhysicsMaterial * SR_PTYPES_NS::PhysicsMaterial::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;rawPath)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>rawPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="43" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ad3e8dcd4874a74466ac8b077e1cac5a5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_PTYPES_NS::PhysicsMaterial::Save</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path, const PhysicsMaterialData &amp;materialData)</argsstring>
+        <name>Save</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::Save</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__PTYPES__NS_1_1PhysicsMaterialData" kindref="compound">PhysicsMaterialData</ref> &amp;</type>
+          <declname>materialData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="44" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a64da078e723a8c05078dac4d43987c51" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD Super *</type>
+        <definition>SR_NODISCARD Super * SR_PTYPES_NS::PhysicsMaterial::CopyResource</definition>
+        <argsstring>(Super *destination) const override</argsstring>
+        <name>CopyResource</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::CopyResource</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2">CopyResource</reimplements>
+        <param>
+          <type>Super *</type>
+          <declname>destination</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="47" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a8a15f368404d49bd976f46de6b79adf3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_PTYPES_NS::PhysicsMaterial::GetDynamicFriction</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDynamicFriction</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::GetDynamicFriction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="49" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a32d30c8a2dd0dcc5812b080f9c85c93e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_PTYPES_NS::PhysicsMaterial::GetStaticFriction</definition>
+        <argsstring>() const</argsstring>
+        <name>GetStaticFriction</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::GetStaticFriction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="50" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a3e6e1ea0e9f96db0f501f73291cc3c03" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_PTYPES_NS::PhysicsMaterial::GetBounciness</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBounciness</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::GetBounciness</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="51" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1aac18b013ee8a49e0baeeb9ecbc3c512f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Combine</type>
+        <definition>SR_NODISCARD Combine SR_PTYPES_NS::PhysicsMaterial::GetFrictionCombine</definition>
+        <argsstring>() const</argsstring>
+        <name>GetFrictionCombine</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::GetFrictionCombine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="52" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ae4e7042c493bffaff95d132a0659dc31" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Combine</type>
+        <definition>SR_NODISCARD Combine SR_PTYPES_NS::PhysicsMaterial::GetBounceCombine</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBounceCombine</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::GetBounceCombine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="53" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a44bb4bdcedf4b23aef077989b770d410" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">PhysicsMaterialImpl</ref> *</type>
+        <definition>SR_NODISCARD PhysicsMaterialImpl * SR_PTYPES_NS::PhysicsMaterial::GetMaterialImpl</definition>
+        <argsstring>(LibraryType libraryType) const</argsstring>
+        <name>GetMaterialImpl</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::GetMaterialImpl</qualifiedname>
+        <param>
+          <type>LibraryType</type>
+          <declname>libraryType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="54" column="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1afe998d968a1f7a0af8c99916b64b655d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::SetDynamicFriction</definition>
+        <argsstring>(float_t dynamicFriction)</argsstring>
+        <name>SetDynamicFriction</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::SetDynamicFriction</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dynamicFriction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="56" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac67c655ff586305ed4a50afb87e2a05c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::SetStaticFriction</definition>
+        <argsstring>(float_t staticFriction)</argsstring>
+        <name>SetStaticFriction</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::SetStaticFriction</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>staticFriction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="57" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a0e70a19233941b64f39c70a847615b6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::SetBounciness</definition>
+        <argsstring>(float_t bounciness)</argsstring>
+        <name>SetBounciness</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::SetBounciness</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>bounciness</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="58" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1abec1bc86764c5fba71440d2553803ccb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::SetFrictionCombine</definition>
+        <argsstring>(Combine frictionCombine)</argsstring>
+        <name>SetFrictionCombine</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::SetFrictionCombine</qualifiedname>
+        <param>
+          <type>Combine</type>
+          <declname>frictionCombine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="59" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1a87e767dd76531a96d8e755ab27edca02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::SetBounceCombine</definition>
+        <argsstring>(Combine bounceCombine)</argsstring>
+        <name>SetBounceCombine</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::SetBounceCombine</qualifiedname>
+        <param>
+          <type>Combine</type>
+          <declname>bounceCombine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="60" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1afdf0727af089eb1197b232921a75c1ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::SetRigidbody</definition>
+        <argsstring>(SR_PTYPES_NS::Rigidbody *pRigidbody)</argsstring>
+        <name>SetRigidbody</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::SetRigidbody</qualifiedname>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">SR_PTYPES_NS::Rigidbody</ref> *</type>
+          <declname>pRigidbody</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="61" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysicsMaterial_1aae7a9a347521d769facf9dee3899acf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysicsMaterial::RemoveRigidbody</definition>
+        <argsstring>(SR_PTYPES_NS::Rigidbody *pRigidbody)</argsstring>
+        <name>RemoveRigidbody</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterial::RemoveRigidbody</qualifiedname>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">SR_PTYPES_NS::Rigidbody</ref> *</type>
+          <declname>pRigidbody</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="63" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_PTYPES_NS::PhysicsMaterial</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_PTYPES_NS::PhysicsMaterial</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="36" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="36" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>AddUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a64da078e723a8c05078dac4d43987c51" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>CopyResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>DeleteResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Destroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Execute</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>ForceDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetAssociatedPath</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1ae4e7042c493bffaff95d132a0659dc31" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetBounceCombine</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a3e6e1ea0e9f96db0f501f73291cc3c03" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetBounciness</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetCountUses</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a8a15f368404d49bd976f46de6b79adf3" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetDynamicFriction</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetFileHash</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1aac18b013ee8a49e0baeeb9ecbc3c512f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetFrictionCombine</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetLifetime</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a44bb4bdcedf4b23aef077989b770d410" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetMaterialImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetReloadCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aa31a633243b797e85108ff82e91ddbac" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourceHashName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourceId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourceInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourceLoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abd5268fda05070754a11971a1acbd797" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourceName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4ad5ddd9e1b2c4349ea8e57c310c3447" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a32d30c8a2dd0dcc5812b080f9c85c93e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>GetStaticFriction</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>InitializeResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4be1db5eacb30d9690f21288ff39eb62" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsAlive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsAllowedToRevive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsFileResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsForceDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsResourceFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af251cc87f482b27ee3573d27d3a44a61" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsResourceType</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>IsResourceWillBeDeleted</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Kill</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1af311d2aa814c8eb4d194348e34776f93" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Load</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1add639a8a30846a7d4f75e87f3e6a3fc6" prot="private" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>LoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_countUses</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_debugUnUseStackTraces</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_debugUseStackTraces</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a06b47aaf1614cd4497944121b2682b41" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_implementations</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_isFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_loadState</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1af092759ed58dbc84ded06b318fa0d1a0" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_materialData</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af0144fd07d3ddcf76669ebe112a597ca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_resourceHashName</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a658f9aa77cb56f9f3b19c557b33d62fb" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_rigidbodies</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>m_watchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>OnReloadDone</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>OnResourceRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>OnResourceUpdated</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>operator=</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a00b83a15a365e947edac341e8724dace" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>PhysicsMaterial</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a49a0ec81c7a8b434b0c46d8df4c38661" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Ptr</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>RELOAD_BEGIN_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f7efd6d454b1324163980ee73d54f08" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>RELOAD_DONE_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1aae7a9a347521d769facf9dee3899acf0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>RemoveRigidbody</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>RemoveUPResult</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>ReviveResource</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1ad3e8dcd4874a74466ac8b077e1cac5a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Save</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a87e767dd76531a96d8e755ab27edca02" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetBounceCombine</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a0e70a19233941b64f39c70a847615b6b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetBounciness</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1afe998d968a1f7a0af8c99916b64b655d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetDynamicFriction</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1abec1bc86764c5fba71440d2553803ccb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetFrictionCombine</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetLifetime</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetResourceHash</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1afdf0727af089eb1197b232921a75c1ce" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetRigidbody</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac67c655ff586305ed4a50afb87e2a05c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SetStaticFriction</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>SignalWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>StartWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>StopWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Subscribe</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a2169c19339c88a94fc84749cdf0bf0e1" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Super</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac8f715f54be0c9b7186d66f1cc60f8be" prot="private" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Unload</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>UpdateResourceLifeTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>UpdateResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>~IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a273863fd433b44e4fa3b259e4d9701ec" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>~PhysicsMaterial</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysicsMaterial</scope><name>~SubscriptionHolder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

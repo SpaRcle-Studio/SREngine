@@ -1,0 +1,483 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__AUDIO__NS_1_1Sound" kind="class" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::Sound</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IResource" prot="public" virt="non-virtual">SR_UTILS_NS::IResource</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__AUDIO__NS_1_1Sound_1ac9ec7acf0ed86ee8cdc6232e132b38e8" prot="private" static="no">
+        <type>void *</type>
+        <definition>using SR_AUDIO_NS::Sound::Handle =  void*</definition>
+        <argsstring></argsstring>
+        <name>Handle</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Handle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="16" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Sound.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1Sound_1aa7bd1adf98f3cae8d616156fdd1075bc" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1RawSound" kindref="compound">RawSound</ref> *</type>
+        <definition>RawSound* SR_AUDIO_NS::Sound::m_rawSound</definition>
+        <argsstring></argsstring>
+        <name>m_rawSound</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::m_rawSound</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="47" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/Sound.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__AUDIO__NS_1_1Sound_1a23da94ff4892a3fcfcf2d30f67c22a76" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__AUDIO__NS_1_1SoundData" kindref="compound">SoundData</ref> *</type>
+        <definition>SoundData* SR_AUDIO_NS::Sound::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::m_data</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="48" column="19" bodyfile="Engine/Core/libs/Audio/inc/Audio/Sound.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a83bace7e153c5636ff04c2848e2a3b45" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::Sound::Sound</definition>
+        <argsstring>()</argsstring>
+        <name>Sound</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Sound</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a30a154612020bdaf289e64cc1f35108b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::Sound::~Sound</definition>
+        <argsstring>() override</argsstring>
+        <name>~Sound</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::~Sound</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="19" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a5ada1ffad30820ae7a59c6b391b1e188" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_AUDIO_NS::Sound::GetFileHash</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetFileHash</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetFileHash</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1ac7b0f5ba1910f845c4f0d2ae3c220fbe">GetFileHash</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="21" column="31" bodyfile="Engine/Core/libs/Audio/inc/Audio/Sound.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a8993626615855dfdb99f6bfdf71b73a8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::Sound::Load</definition>
+        <argsstring>() override</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Load</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a88e5a84b8ca231eff9e93904fe2543c5">Load</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1acc7b1057cc08068762a3f17334ce8c25" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::Sound::Unload</definition>
+        <argsstring>() override</argsstring>
+        <name>Unload</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Unload</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b">Unload</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1ad6b2231b5c871ac9e6e4f7ca2628212f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::Sound::Reload</definition>
+        <argsstring>() override</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Reload</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c">Reload</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="41" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1ac57843f120003022a363d57e828f1ac5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__AUDIO__NS_1_1Sound" kindref="compound">Sound</ref> *</type>
+        <definition>static Sound * SR_AUDIO_NS::Sound::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="24" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1aa9668dea3bfdafd5f4ec05d2a87d961a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Handle</type>
+        <definition>Handle SR_AUDIO_NS::Sound::Play</definition>
+        <argsstring>(const PlayParams &amp;params)</argsstring>
+        <name>Play</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Play</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="26" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1ac02fa1ff158adfc15a306a0ad66ce434" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Handle</type>
+        <definition>Handle SR_AUDIO_NS::Sound::Play</definition>
+        <argsstring>()</argsstring>
+        <name>Play</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::Play</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="27" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a543024d0f240e3444351ec4dd0b2c5af" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_AUDIO_NS::Sound::IsAllowedToRevive</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsAllowedToRevive</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::IsAllowedToRevive</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IResource_1a6ad69fde6a46a6f50fab83b27b3db5b0">IsAllowedToRevive</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="29" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a398b6d1f27acaed794d215cf1415d047" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const uint8_t *</type>
+        <definition>SR_NODISCARD const uint8_t * SR_AUDIO_NS::Sound::GetBufferData</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBufferData</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetBufferData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="31" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a05a878ad748576dbba13b49b6945ea5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_AUDIO_NS::Sound::GetBufferSize</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBufferSize</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetBufferSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="32" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1adc43910d6b93b462f58f11c4ef5f6c2a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint8_t</type>
+        <definition>SR_NODISCARD uint8_t SR_AUDIO_NS::Sound::GetChannels</definition>
+        <argsstring>() const</argsstring>
+        <name>GetChannels</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetChannels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="33" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a1393d6a41a59d3e1b0eb5724ae3ff545" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint8_t</type>
+        <definition>SR_NODISCARD uint8_t SR_AUDIO_NS::Sound::GetBitsPerSample</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBitsPerSample</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetBitsPerSample</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="34" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a707f42d2033ce61ae36bcf481819cd0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_AUDIO_NS::Sound::GetSampleRate</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSampleRate</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetSampleRate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="35" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1abcacdf3e88401e48c8e7b75f58537d70" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__AUDIO__NS_1_1SoundData" kindref="compound">SoundData</ref> *</type>
+        <definition>SR_NODISCARD SoundData * SR_AUDIO_NS::Sound::GetData</definition>
+        <argsstring>() const</argsstring>
+        <name>GetData</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::GetData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="36" column="32"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1Sound_1a89451da218049b15918ca4d34a110d38" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_AUDIO_NS::Sound::SetRawSound</definition>
+        <argsstring>(RawSound *pRawSound)</argsstring>
+        <name>SetRawSound</name>
+        <qualifiedname>SR_AUDIO_NS::Sound::SetRawSound</qualifiedname>
+        <param>
+          <type><ref refid="classSR__AUDIO__NS_1_1RawSound" kindref="compound">RawSound</ref> *</type>
+          <declname>pRawSound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="44" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::Sound</label>
+        <link refid="classSR__AUDIO__NS_1_1Sound"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::Sound</label>
+        <link refid="classSR__AUDIO__NS_1_1Sound"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Sound.h" line="15" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Sound.h" bodystart="15" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>AddDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>AddUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>CheckResourceUsage</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>CopyResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>DeleteResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a700794249e341d5228920451cedf9ee7" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Destroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5dd9749c79cb65452e9e4d10efda42f8" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Execute</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a56bb33e9f5864b6fa62e473389a517b7" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>ForceDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aeabd3a189fe8c7c0c31c1fb6713c5043" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetAssociatedPath</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a1393d6a41a59d3e1b0eb5724ae3ff545" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetBitsPerSample</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a398b6d1f27acaed794d215cf1415d047" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetBufferData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a05a878ad748576dbba13b49b6945ea5e" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetBufferSize</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1adc43910d6b93b462f58f11c4ef5f6c2a" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetChannels</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac6c46124f5261f90e4392fd749afc0e1" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetContainerParents</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab4dd8bb36d912a3d541d63dd00570561" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetCountUses</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1abcacdf3e88401e48c8e7b75f58537d70" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a5ada1ffad30820ae7a59c6b391b1e188" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetFileHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetLifetime</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetReloadCount</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0186b5dcde6ac4e0d251590619639406" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aa31a633243b797e85108ff82e91ddbac" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourceHashName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourceId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abbc56086aaf55e5a1ec9788dcecee316" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourceInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourceLoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1abd5268fda05070754a11971a1acbd797" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourceName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4ad5ddd9e1b2c4349ea8e57c310c3447" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetResourcePath</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a707f42d2033ce61ae36bcf481819cd0b" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>GetSampleRate</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1ac9ec7acf0ed86ee8cdc6232e132b38e8" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Handle</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a2a266b012e03eec86b0050d2ff3c9f30" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>HasSubscriptions</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9035e8e13821bbcf09633e80365d0643" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>InitializeResourcePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a4be1db5eacb30d9690f21288ff39eb62" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ad94ef18d58f13582b7411b749ae81089" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsAlive</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a543024d0f240e3444351ec4dd0b2c5af" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsAllowedToRevive</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a91fdfb42142b2e37139e4742442a2fee" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsFileResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsForceDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3361a06ad632161eec6f69a4e9aab092" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1aee782635ef745075e9776c3f667904a5" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsResourceFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af251cc87f482b27ee3573d27d3a44a61" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsResourceType</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a3656bd90f2dfdf9f0df66098d72b2058" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>IsResourceWillBeDeleted</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a6c232e1ee7d10fd08a637cdb85da789b" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Kill</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1ac57843f120003022a363d57e828f1ac5" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Load</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a8993626615855dfdb99f6bfdf71b73a8" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0183032aa64809526edb04282f504e4b" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>LoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1adab7288944ca1d4f558cc95cbf099cb8" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_countUses</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a23da94ff4892a3fcfcf2d30f67c22a76" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_data</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ae7bda7ba4fbfba62c2c72b1894bbfe71" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_debugUnUseStackTraces</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a020496a1d169218d5379f54ba99cf6a5" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_debugUseStackTraces</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a45c441a3f4c53aafeb3de6c5aa64766c" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_isFromMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_loadState</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1aa7bd1adf98f3cae8d616156fdd1075bc" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_rawSound</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af0144fd07d3ddcf76669ebe112a597ca" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_resourceHashName</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>m_watchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>OnReloadDone</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>OnResourceRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>OnResourceUpdated</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>operator=</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1aa9668dea3bfdafd5f4ec05d2a87d961a" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Play</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1ac02fa1ff158adfc15a306a0ad66ce434" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Play</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a49a0ec81c7a8b434b0c46d8df4c38661" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Ptr</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1ad6b2231b5c871ac9e6e4f7ca2628212f" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Reload</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>RELOAD_BEGIN_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a7f7efd6d454b1324163980ee73d54f08" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>RELOAD_DONE_EVENT</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ab3931d45e2b3c2fd69160c76748dd95d" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>RemoveDependency</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1acfb5ac9abad809ecb7f6453ddd9f581d" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>RemoveUPResult</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac0cb7963e3bd5008d28412c0aa6196de" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>RemoveUsePoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a70da9b49736de59bddc1f26575f5da33" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>ReviveResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a0981532a88fdeb242d295a04690ec4dd" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetId</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a992fe5635f43333348b9c9445293e23b" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetLifetime</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a89451da218049b15918ca4d34a110d38" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetRawSound</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a2f72c195e91ef30f20f84ca3d56f7147" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SetResourceHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1af7628077663a2e55a7cf9bff31717743" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>SignalWatch</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a83bace7e153c5636ff04c2848e2a3b45" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Sound</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>StartWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>StopWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Subscribe</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1acc7b1057cc08068762a3f17334ce8c25" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Unload</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>Unsubscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>UpdateResourceLifeTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>UpdateResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~IResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~ResourceContainer</name></member>
+      <member refid="classSR__AUDIO__NS_1_1Sound_1a30a154612020bdaf289e64cc1f35108b" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~Sound</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_AUDIO_NS::Sound</scope><name>~SubscriptionHolder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

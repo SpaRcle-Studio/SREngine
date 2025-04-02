@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Yaml_1_1Document" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_UTILS_NS::Yaml::Document</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a08f4c4a383e5a2f415e25429d50f916d" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* SR_UTILS_NS::Yaml::Document::m_pImpl</definition>
+        <argsstring></argsstring>
+        <name>m_pImpl</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::m_pImpl</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="81" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1aa8bdd50269a109df19e09598bd78a598" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_UTILS_NS::Yaml::Document::m_path</definition>
+        <argsstring></argsstring>
+        <name>m_path</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::m_path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="82" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a70ac28b213992cf62b49f21b4c16f655" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Yaml::Document::Document</definition>
+        <argsstring>()=default</argsstring>
+        <name>Document</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::Document</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="58" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1adba331cee658e53e74875c2d1ef2150b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Yaml::Document::~Document</definition>
+        <argsstring>() override</argsstring>
+        <name>~Document</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::~Document</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="59" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1aabb2b1dfd2225fc436a7cbe63ffed7a2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Yaml::Document::Document</definition>
+        <argsstring>(Document &amp;&amp;document) noexcept</argsstring>
+        <name>Document</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::Document</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Document" kindref="compound">Document</ref> &amp;&amp;</type>
+          <declname>document</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="61" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1aa09536a0f5e4cb4eec5b5d21ea0939a0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Document" kindref="compound">Document</ref> &amp;</type>
+        <definition>Document &amp; SR_UTILS_NS::Yaml::Document::operator=</definition>
+        <argsstring>(Document &amp;&amp;document) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Document" kindref="compound">Document</ref> &amp;&amp;</type>
+          <declname>document</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="62" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a83be94f9531524ff29d9248a5becc046" prot="public" static="no" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Yaml::Document::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="63" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a60d39c06de681a80e8a156bb89c36eeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>Node SR_UTILS_NS::Yaml::Document::AppendChild</definition>
+        <argsstring>(const std::string_view &amp;name)</argsstring>
+        <name>AppendChild</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::AppendChild</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1aa2ce8a30034e69ed9a9fd6016c519fe9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Yaml::Document::Save</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path) const</argsstring>
+        <name>Save</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::Save</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="73" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a692fd30475d64deb44b429f72d341bb1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::Yaml::Document::Dump</definition>
+        <argsstring>() const</argsstring>
+        <name>Dump</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::Dump</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="74" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1ab2218e57ad44a2d3c0c4f83a8e2565b9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Yaml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>SR_NODISCARD Node SR_UTILS_NS::Yaml::Document::GetRoot</definition>
+        <argsstring>() const</argsstring>
+        <name>GetRoot</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::GetRoot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="76" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a8daea07dc82366084cc268d3a3ef1f29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Yaml_1_1Node" kindref="compound">Node</ref></type>
+        <definition>SR_NODISCARD Node SR_UTILS_NS::Yaml::Document::GetRoot</definition>
+        <argsstring>()</argsstring>
+        <name>GetRoot</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::GetRoot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="77" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a4113f9233d87fb4ead8069ff3f2e595c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Yaml::Document::IsValid</definition>
+        <argsstring>() const</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::IsValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="78" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1ab82add689ce33d420a88b1894033ee99" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Document" kindref="compound">Document</ref></type>
+        <definition>static Document SR_UTILS_NS::Yaml::Document::Empty</definition>
+        <argsstring>()</argsstring>
+        <name>Empty</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::Empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="66" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1a4fb8f1058e4783dfcfbf35009033c54d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Document" kindref="compound">Document</ref></type>
+        <definition>static Document SR_UTILS_NS::Yaml::Document::New</definition>
+        <argsstring>()</argsstring>
+        <name>New</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::New</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="67" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Yaml_1_1Document_1add2c2cda3adb6b65b41ddb3cbb223e31" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Yaml_1_1Document" kindref="compound">Document</ref></type>
+        <definition>static Document SR_UTILS_NS::Yaml::Document::Load</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_UTILS_NS::Yaml::Document::Load</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="68" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::Yaml::Document</label>
+        <link refid="classSR__UTILS__NS_1_1Yaml_1_1Document"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::Yaml::Document</label>
+        <link refid="classSR__UTILS__NS_1_1Yaml_1_1Document"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" line="56" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/Yaml.h" bodystart="56" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a60d39c06de681a80e8a156bb89c36eeb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>AppendChild</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a70ac28b213992cf62b49f21b4c16f655" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>Document</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1aabb2b1dfd2225fc436a7cbe63ffed7a2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>Document</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a692fd30475d64deb44b429f72d341bb1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>Dump</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1ab82add689ce33d420a88b1894033ee99" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>Empty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1ab2218e57ad44a2d3c0c4f83a8e2565b9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>GetRoot</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a8daea07dc82366084cc268d3a3ef1f29" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>GetRoot</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a4113f9233d87fb4ead8069ff3f2e595c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>IsValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1add2c2cda3adb6b65b41ddb3cbb223e31" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>Load</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1aa8bdd50269a109df19e09598bd78a598" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>m_path</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a08f4c4a383e5a2f415e25429d50f916d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>m_pImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a4fb8f1058e4783dfcfbf35009033c54d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>New</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1a83be94f9531524ff29d9248a5becc046" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>operator bool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1aa09536a0f5e4cb4eec5b5d21ea0939a0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::Yaml::Document</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1aa2ce8a30034e69ed9a9fd6016c519fe9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Yaml_1_1Document_1adba331cee658e53e74875c2d1ef2150b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>~Document</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Yaml::Document</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

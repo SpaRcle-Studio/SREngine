@@ -1,0 +1,577 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PTYPES__NS_1_1Rigidbody3D" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_PTYPES_NS::Rigidbody3D</compoundname>
+    <basecompoundref refid="classSR__PTYPES__NS_1_1Rigidbody" prot="public" virt="non-virtual">SR_PTYPES_NS::Rigidbody</basecompoundref>
+    <derivedcompoundref refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D" prot="public" virt="non-virtual">SR_PTYPES_NS::Bullet3Rigidbody3D</derivedcompoundref>
+    <includes refid="Rigidbody3D_8h" local="no">Rigidbody3D.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1Rigidbody3D_1ac4334c7a443e3e323d143bbd67286add" prot="private" static="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1Rigidbody" kindref="compound">Rigidbody</ref></type>
+        <definition>using SR_PTYPES_NS::Rigidbody3D::Super =  Rigidbody</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="33" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody3D_1af8e4fc2b63138bbd4871b909baf1c17d" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::BVector3</type>
+        <definition>SR_MATH_NS::BVector3 SR_PTYPES_NS::Rigidbody3D::m_linearLock</definition>
+        <argsstring></argsstring>
+        <name>m_linearLock</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::m_linearLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="54" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a6a09acbf6abb026afa23270073eca075" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::BVector3</type>
+        <definition>SR_MATH_NS::BVector3 SR_PTYPES_NS::Rigidbody3D::m_angularLock</definition>
+        <argsstring></argsstring>
+        <name>m_angularLock</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::m_angularLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="56" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a33e8dc2c2917cd7c2f437b89b8765582" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD SR_UTILS_NS::Measurement</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Measurement SR_PTYPES_NS::Rigidbody3D::GetMeasurement</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetMeasurement</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::GetMeasurement</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1Rigidbody_1a857b1f9fa92df7df614cdec68cbed33a">GetMeasurement</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="35" column="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a5bd479c65a566b99440d23d054cd349d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::BVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::BVector3 SR_PTYPES_NS::Rigidbody3D::GetLinearLock</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetLinearLock</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::GetLinearLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="37" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a971a99ef424066e273a0a321528d305f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::BVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::BVector3 SR_PTYPES_NS::Rigidbody3D::GetAngularLock</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetAngularLock</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::GetAngularLock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="38" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a9d224378a04f55f5fab39701969393c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody3D::GetLinearVelocity</definition>
+        <argsstring>() const</argsstring>
+        <name>GetLinearVelocity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::GetLinearVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="40" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a91de1361e76ada84f7c9310f7b03ccf1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_PTYPES_NS::Rigidbody3D::GetAngularVelocity</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAngularVelocity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::GetAngularVelocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="41" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a60fa92abd4f5aae8903611580f6bc783" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody3D::SetLinearLock</definition>
+        <argsstring>(const SR_MATH_NS::BVector3 &amp;lock)</argsstring>
+        <name>SetLinearLock</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::SetLinearLock</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::BVector3 &amp;</type>
+          <declname>lock</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a1402cd1a33216fdc5e99ad5538b16ef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody3D::SetAngularLock</definition>
+        <argsstring>(const SR_MATH_NS::BVector3 &amp;lock)</argsstring>
+        <name>SetAngularLock</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::SetAngularLock</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::BVector3 &amp;</type>
+          <declname>lock</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a047aa1c4d2fc7ca7bd03d51c03f1ad96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody3D::AddLinearVelocity</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;velocity)</argsstring>
+        <name>AddLinearVelocity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::AddLinearVelocity</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>velocity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a63795c7fb9bc36dcaeb8ae4cbe8c2288" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody3D::AddAngularVelocity</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;velocity)</argsstring>
+        <name>AddAngularVelocity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::AddAngularVelocity</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>velocity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a9361586e246603bdb1d5d01de4696ba0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody3D::SetLinearVelocity</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;velocity)</argsstring>
+        <name>SetLinearVelocity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::SetLinearVelocity</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>velocity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1Rigidbody3D_1a18255c2fad1a67fed798e73a033c63db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::Rigidbody3D::SetAngularVelocity</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;velocity)</argsstring>
+        <name>SetAngularVelocity</name>
+        <qualifiedname>SR_PTYPES_NS::Rigidbody3D::SetAngularVelocity</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>velocity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="50" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Entity</label>
+      </node>
+      <node id="5">
+        <label>SR_PTYPES_NS::Bullet3Rigidbody3D</label>
+        <link refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_PTYPES_NS::Rigidbody</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::Rigidbody3D</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody3D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Entity</label>
+      </node>
+      <node id="17">
+        <label>SR_HTYPES_NS::SafePtr&lt; PhysicsScene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
+      </node>
+      <node id="13">
+        <label>SR_HTYPES_NS::SharedPtr&lt; CollisionShape &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="15">
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      </node>
+      <node id="16">
+        <label>SR_PHYSICS_NS::LibraryImpl</label>
+        <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SR_PTYPES_NS::PhysicsMaterial</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_PTYPES_NS::Rigidbody</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_shape</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_impl</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_library</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>m_physicsScene</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_rotation</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>m_material</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_PTYPES_NS::Rigidbody3D</label>
+        <link refid="classSR__PTYPES__NS_1_1Rigidbody3D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_PTYPES_NS::RigidbodyImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_rigidbody</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_rigidbodyRotation</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+        <childnode refid="22" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="21">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+      <node id="9">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" line="31" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h" bodystart="31" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a63795c7fb9bc36dcaeb8ae4cbe8c2288" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>AddAngularVelocity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a047aa1c4d2fc7ca7bd03d51c03f1ad96" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>AddLinearVelocity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>BaseComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>CheckActivity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a6f8dd5e7fd02e9ef4069b283631ca0c0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>ClearForces</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Detach</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4b0a3a17900c987f5a7a5b7e25d4ed41" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a971a99ef424066e273a0a321528d305f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetAngularLock</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a91de1361e76ada84f7c9310f7b03ccf1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetAngularVelocity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad47d428ca458072a49ece50e0cbdaaf0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetCenter</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4cc2f1afea660661f0868ec2865af99b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetCenterDirection</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8ff4e09efeb16c0cb212f54a11e47afe" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetCollisionShape</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetGameObject</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a34d6be2eeb49a1c6b12fed3d62e7c9aa" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetHandle</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad030330291748075ebb435a67d654a5a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7f2e8699bd3193038337a5d70bccb3a9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetLibrary</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a5bd479c65a566b99440d23d054cd349d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetLinearLock</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a9d224378a04f55f5fab39701969393c4" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetLinearVelocity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7e379c9556c3315218ff96bb5ab77796" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetMass</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a33e8dc2c2917cd7c2f437b89b8765582" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetMeasurement</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetParent</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a2387c690be0dabaffda7618325f14937" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetPhysicsMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1afcffc336186393fff3ef13e44f46d063" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetPhysicsScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetRoot</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aff96b9c3a8d4d54dd60d6462d4e2d959" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetRotation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4f8904be33576494d8b8780a5358ab74" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetScale</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetTransform</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a9cb03ac6ee1cdad67094fe7340330319" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetTranslation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aaa34b7423d64495c8330eff4eb2794de" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>GetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>HasScene</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1abea25ed2ee078e4efdcadcc75a6baf76" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>InitBody</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsAwake</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a673709aff2f5f806291d34c309fa104b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsBodyDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8dc1dc6d573773758afa15c305261d00" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsDebugEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsEnabled</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ab1e9d4cd70f235b9f1a4f6e8cce09caf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a57b2e63bbbc6bb1d272470da5d92952e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsShapeDirty</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ab45a2e1491e7f2c5444f5f1699557866" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsShapeSupported</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsStarted</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1adc9677e981f2184c1382c1686b7605fb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsStatic</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa9481f582333acf391072a0091ff88cd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsTrigger</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>LateUpdate</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8e838f328c8579bd08b3853050cb51bd" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>LibraryPtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a6a09acbf6abb026afa23270073eca075" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_angularLock</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a95d7e88cf17f0fea60805bb11ea0ae8c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_center</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aed9af4d13f070b9657baa23b92677473" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_impl</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isAwake</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a2a6f7be0b7fc4b7f596c8045802e40d8" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isBodyDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a857b2c43c24c3913dbbca2243a96116d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isMatrixDirty</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa525477eef474862aee24d63ed7cd1b1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isShapeDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isStarted</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1adcfc142eb3791ccfbd8d8328e98ce0c9" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isStatic</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a20c687b68c7afa168ee330e90a54125d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_isTrigger</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aed08208749be420ad1b023ebb2c2913b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_library</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1af8e4fc2b63138bbd4871b909baf1c17d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_linearLock</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a526956950f5acfc4b0b2aad5dfae0895" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_mass</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7c357d7908649bb884f001b74038665b" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_material</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_parent</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a5791f0b028bda41452be41ab59d8beca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_physicsScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_properties</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4928c92a79aa48c51ac74947733f789d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_rotation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a690813a298023a0a2ce8f8229e44d9ab" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_scale</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aad07b277cddf078ff8f1e9c18597020f" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_shape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ac5a77c81d47ce273a54cbdc09545a132" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>m_translation</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a1549f428c9f7f1b02d23976a7b115643" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a37c006bf1edba7e91ba456edc91fc826" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnDetached</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a84be4e404cda0202f7aa72549f8c6b90" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnDisable</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a5f07661c4a5634c6ca706569dc67d58b" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnEnable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnLoaded</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a151d548ab301e1d0d2768c9f098952e9" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>OriginType</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1accc65a4dccf75bfdf211035af6a07deb" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>PhysicsScenePtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1af8a63d26d41151242c5da7e7194451dd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Ptr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ac993ace86683dcb490f72bcc44b7b12d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Rigidbody</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>ScenePtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a1402cd1a33216fdc5e99ad5538b16ef4" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetAngularLock</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a18255c2fad1a67fed798e73a033c63db" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetAngularVelocity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a994633cb07d2ac86d7b16c12463c6f8f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetCenter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aff81ad08e33d8df8a7e038a48eee36b9" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetIsStatic</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a2acd2a0ab912c157b997b346fc886110" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetIsTrigger</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a60fa92abd4f5aae8903611580f6bc783" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetLinearLock</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1a9361586e246603bdb1d5d01de4696ba0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetLinearVelocity</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4ecd16cddd8b0df30345daf0041fb74f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMass</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1adb0b5b7493617663924532cce930c2d7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4445f1afdadd8f48a5623c9cc455d1c9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa7725c58c8f77e15a16ecb07a2295b1f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetParent</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7e5a02d29c41e3b04cd8f1da9f3bd70a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aaf6b85e6c78c67639bf4358a8a5f54d4" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetShapeDirty</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a24f5465a52226de77a208a098157cbd2" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>SetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Start</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody3D_1ac4334c7a443e3e323d143bbd67286add" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Super</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a1a49fdcaeb455399028f744de86e04ff" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Synchronize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>TryGetParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>TryGetScene</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ac5f56aecdce13e617ad21d3f0d2ca808" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>Update</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a7aa40e106c7d9c98ef6b4c3ef6c4eb54" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>UpdateInertia</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a0abcc33f4e227627724cb3bb5cb698a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>UpdateMatrix</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ab2d7e35d3053f99f974dc28f4b045bf9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>UpdateShape</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa974fe505be3cebad065b5b77195a995" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>UpdateShapeInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>~Component</name></member>
+      <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a1fa8a6f06b50934611628390dd37d924" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3D</scope><name>~Rigidbody</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

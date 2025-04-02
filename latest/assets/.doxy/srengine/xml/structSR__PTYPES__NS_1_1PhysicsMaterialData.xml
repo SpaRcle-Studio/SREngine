@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__PTYPES__NS_1_1PhysicsMaterialData" kind="struct" language="C++" prot="public">
+    <compoundname>SR_PTYPES_NS::PhysicsMaterialData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a8469a4d795549c849c9f7f86b0448346" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::PhysicsMaterialData::dynamicFriction</definition>
+        <argsstring></argsstring>
+        <name>dynamicFriction</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterialData::dynamicFriction</qualifiedname>
+        <initializer>= 0.6f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="27" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a1e0ba622189e625d98c6377366c17dd7" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::PhysicsMaterialData::staticFriction</definition>
+        <argsstring></argsstring>
+        <name>staticFriction</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterialData::staticFriction</qualifiedname>
+        <initializer>= 0.6f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="28" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a5118fc318d80e9da9083d91fa38ef54e" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_PTYPES_NS::PhysicsMaterialData::bounciness</definition>
+        <argsstring></argsstring>
+        <name>bounciness</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterialData::bounciness</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="30" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a75164601dfa1bace6b400be61ccf52b1" prot="public" static="no" mutable="no">
+        <type>Combine</type>
+        <definition>Combine SR_PTYPES_NS::PhysicsMaterialData::frictionCombine</definition>
+        <argsstring></argsstring>
+        <name>frictionCombine</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterialData::frictionCombine</qualifiedname>
+        <initializer>= Combine::Average</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="32" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a9f79380368d2fd5ee09e126157906c5e" prot="public" static="no" mutable="no">
+        <type>Combine</type>
+        <definition>Combine SR_PTYPES_NS::PhysicsMaterialData::bounceCombine</definition>
+        <argsstring></argsstring>
+        <name>bounceCombine</name>
+        <qualifiedname>SR_PTYPES_NS::PhysicsMaterialData::bounceCombine</qualifiedname>
+        <initializer>= Combine::Average</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="33" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" line="26" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h" bodystart="26" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a9f79380368d2fd5ee09e126157906c5e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>bounceCombine</name></member>
+      <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a5118fc318d80e9da9083d91fa38ef54e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>bounciness</name></member>
+      <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a8469a4d795549c849c9f7f86b0448346" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>dynamicFriction</name></member>
+      <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a75164601dfa1bace6b400be61ccf52b1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>frictionCombine</name></member>
+      <member refid="structSR__PTYPES__NS_1_1PhysicsMaterialData_1a1e0ba622189e625d98c6377366c17dd7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysicsMaterialData</scope><name>staticFriction</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

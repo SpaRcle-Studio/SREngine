@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1SRASerializer" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::SRASerializer</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IBaseSerializer" prot="public" virt="non-virtual">SR_UTILS_NS::IBaseSerializer</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1SRAISerialization" prot="public" virt="non-virtual">SR_UTILS_NS::SRAISerialization</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRASerializer_1aa0b18bb6e4f0c457ef8b9f0c268cb792" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::SRASerializer::SRASerializer</definition>
+        <argsstring>()</argsstring>
+        <name>SRASerializer</name>
+        <qualifiedname>SR_UTILS_NS::SRASerializer::SRASerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="29" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRASerializer_1a0d16ba9747152037877e2fcdff618eea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1IDeserializer" kindref="compound">IDeserializer</ref> &gt;</type>
+        <definition>SR_NODISCARD std::unique_ptr&lt; IDeserializer &gt; SR_UTILS_NS::SRASerializer::CreateDeserializer</definition>
+        <argsstring>() const override</argsstring>
+        <name>CreateDeserializer</name>
+        <qualifiedname>SR_UTILS_NS::SRASerializer::CreateDeserializer</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1ISerializer_1ab97851c439d1f82af99e1489abb0498e">CreateDeserializer</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="32" column="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRASerializer_1acd495200692eb8d308d503c1c682e9d6" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRASerializer::IsAllowEmptyElementsInArrayImpl</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>IsAllowEmptyElementsInArrayImpl</name>
+        <qualifiedname>SR_UTILS_NS::SRASerializer::IsAllowEmptyElementsInArrayImpl</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af">IsAllowEmptyElementsInArrayImpl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="35" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>SR_UTILS_NS::IBaseSerialization</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseSerialization"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IBaseSerializer</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseSerializer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ISerializer</label>
+        <link refid="classSR__UTILS__NS_1_1ISerializer"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SRAISerialization</label>
+        <link refid="classSR__UTILS__NS_1_1SRAISerialization"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SRASerializer</label>
+        <link refid="classSR__UTILS__NS_1_1SRASerializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>SR_UTILS_NS::IBaseSerialization</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseSerialization"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_root</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::IBaseSerializer</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseSerializer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::ISerializer</label>
+        <link refid="classSR__UTILS__NS_1_1ISerializer"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SRAISerialization</label>
+        <link refid="classSR__UTILS__NS_1_1SRAISerialization"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SRASerializer</label>
+        <link refid="classSR__UTILS__NS_1_1SRASerializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::SerializationId</label>
+        <link refid="structSR__UTILS__NS_1_1SerializationId"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::SerializationNode</label>
+        <link refid="structSR__UTILS__NS_1_1SerializationNode"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>id</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::SerializationTrivialDataType</label>
+        <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="27" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="27" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1afc593da47599b35d268512476ff82c6e" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>BeginArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6fb5a5919bf96edbfa2d6033aebc9aeb" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>BeginItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a277fe3c1f948403e0f29549e6c533b8c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>BeginObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRASerializer_1a0d16ba9747152037877e2fcdff618eea" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>CreateDeserializer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a8e0143d0bcaa9e38f4d4a48f41c3fffc" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>EndArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1ab0342a1dda4c59d72c92f73df578c140" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>EndItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6b3a9e740546990c39f91bbbf1236fdb" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>EndObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetCurrentNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetCurrentNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1ae4b033390c22e8da5dc2fef7ca2f2a81" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsAllowEmptyElementsInArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRASerializer_1acd495200692eb8d308d503c1c682e9d6" prot="private" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsAllowEmptyElementsInArrayImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1af1665ef0d8643f2265738be86e6a642e" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsEditorAllowed</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ae186b0817ce5617ebd3ee89fe1d27172" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsNeedUseTabs</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1af250ffd18f218d2b3a482f64fc47881a" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsWriteDefaults</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1ab0c87bc1d2f1f7e2e06c45796e6febd2" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>IsWriteVersion</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_root</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_stack</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>m_walker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a1d47a52833734c95cf13338741066db9" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SaveToFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SaveToFileImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1ac4a3fb08a1f9b139ad0f6bc4f8e66602" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SetAllowEmptyElementsInArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1aef4007d9992238675cda80ecae615104" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SetEditorAllowed</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a929313320a3ebbf7e5dcb9fc6c364e38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SetUseTabs</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a4ff940fe5c4476d5c35ccd266591bc4c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SetWriteDefaults</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a0851c876582985f10fbf9656421fde78" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SetWriteVersion</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRASerializer_1aa0b18bb6e4f0c457ef8b9f0c268cb792" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>SRASerializer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a252e8554c44cd8b3007de9af763052ad" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ac4923d2272f3e99b4ac177df6b4af898" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>ToStringBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1af9e595d543868d640dd236cf1e4ff58a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>UniquePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a43a9b0692458ad44cad735b3f29389d8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteAny</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a30649b7e0669b6bb873a71c6225c6f88" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1ae2cc9186675e0311ecdb7b89f13e3778" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteDouble</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a740820101c14504e40c8a66faa095855" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a52da484510f53f9e335b5a85962235a7" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1aef89ec223c6e2c8dde294e03725c41c6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6e046632a673f405b1bd2b84d55ef987" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a35b1c1889df4d949f7ba06420bdb3f4d" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a200057522395fa29259d1e0f1fdeb105" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a63021025645194651fb6418eb6af41ce" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a6dd45d963ff639b998b1ee2d02307b1c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1a9020f4caea106a897013b875488f9ddd" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1adc5ff76299ea8efadaf6bdda036989ad" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerializer_1ac543808617269ccb51431f2b05c0f40d" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>WriteUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1ISerializer_1a1f645723d59ecfbfadee61c1c05c3311" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRASerializer</scope><name>~ISerializer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

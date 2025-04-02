@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__AUDIO__NS_1_1PlayParams" kind="struct" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::PlayParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a4aafc904b00b2f0a992dc96ed0475479" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; bool &gt;</type>
+        <definition>PlayParamChangeChecker&lt;bool&gt; SR_AUDIO_NS::PlayParams::async</definition>
+        <argsstring></argsstring>
+        <name>async</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::async</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="90" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a8d0095952f6cafc871b80b1abacf1033" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; bool &gt;</type>
+        <definition>PlayParamChangeChecker&lt;bool&gt; SR_AUDIO_NS::PlayParams::loop</definition>
+        <argsstring></argsstring>
+        <name>loop</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="91" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a6fcf5c532b599ae2edbe2f90412957a9" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; SpatializeMode &gt;</type>
+        <definition>PlayParamChangeChecker&lt;SpatializeMode&gt; SR_AUDIO_NS::PlayParams::spatialize</definition>
+        <argsstring></argsstring>
+        <name>spatialize</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::spatialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="92" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a1ed710dc3fba982ffadc7d22f15a9275" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; AudioLibrary &gt;</type>
+        <definition>PlayParamChangeChecker&lt;AudioLibrary&gt; SR_AUDIO_NS::PlayParams::library</definition>
+        <argsstring></argsstring>
+        <name>library</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::library</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="93" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a9dea43451c7077120c32d556c6be802c" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::maxDistance</definition>
+        <argsstring></argsstring>
+        <name>maxDistance</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::maxDistance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="94" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a7c8f9839632780b876510fdf7f10cb0c" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::referenceDistance</definition>
+        <argsstring></argsstring>
+        <name>referenceDistance</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::referenceDistance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="95" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a9528d3404de640a63005565d60866914" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::rolloffFactor</definition>
+        <argsstring></argsstring>
+        <name>rolloffFactor</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::rolloffFactor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="96" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1aa2c298914805c355716a2695e884ad49" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::relative</definition>
+        <argsstring></argsstring>
+        <name>relative</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::relative</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="97" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1ae7098d2b15b826eafd47eff919a08890" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::gain</definition>
+        <argsstring></argsstring>
+        <name>gain</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::gain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="98" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a228ba809bca5135becf30062c495fa07" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::minGain</definition>
+        <argsstring></argsstring>
+        <name>minGain</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::minGain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="99" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a23411d297caf458d2d77d5d63ef804e8" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::pitch</definition>
+        <argsstring></argsstring>
+        <name>pitch</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::pitch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="100" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a8efc2821e36cd6f80c8b063258c0f079" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::maxGain</definition>
+        <argsstring></argsstring>
+        <name>maxGain</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::maxGain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="101" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1aded693852e1f6847be6dcf37a852000d" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; float_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;float_t&gt; SR_AUDIO_NS::PlayParams::coneInnerAngle</definition>
+        <argsstring></argsstring>
+        <name>coneInnerAngle</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::coneInnerAngle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="102" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a45207a65288269e98cdbc0e304dcc906" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; uint64_t &gt;</type>
+        <definition>PlayParamChangeChecker&lt;uint64_t&gt; SR_AUDIO_NS::PlayParams::uniqueId</definition>
+        <argsstring></argsstring>
+        <name>uniqueId</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::uniqueId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="103" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1afbc15b7fc61b2851e1b5083091331972" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; SR_MATH_NS::FVector3 &gt;</type>
+        <definition>PlayParamChangeChecker&lt;SR_MATH_NS::FVector3&gt; SR_AUDIO_NS::PlayParams::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="104" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a2b8dba2f0d9f961865738980bc8ddad4" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; SR_MATH_NS::FVector3 &gt;</type>
+        <definition>PlayParamChangeChecker&lt;SR_MATH_NS::FVector3&gt; SR_AUDIO_NS::PlayParams::direction</definition>
+        <argsstring></argsstring>
+        <name>direction</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::direction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="105" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1aa9ed15c09e76f7f5d738f164b070b0d9" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; SR_MATH_NS::FVector3 &gt;</type>
+        <definition>PlayParamChangeChecker&lt;SR_MATH_NS::FVector3&gt; SR_AUDIO_NS::PlayParams::velocity</definition>
+        <argsstring></argsstring>
+        <name>velocity</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::velocity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="106" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a19966827c7afe6ed77c9e2aa03b41844" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; SR_MATH_NS::FVector6 &gt;</type>
+        <definition>PlayParamChangeChecker&lt;SR_MATH_NS::FVector6&gt; SR_AUDIO_NS::PlayParams::orientation</definition>
+        <argsstring></argsstring>
+        <name>orientation</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::orientation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="107" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayParams_1a82469ff5f1fa834edd669bd1e025e653" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref>&lt; std::string &gt;</type>
+        <definition>PlayParamChangeChecker&lt;std::string&gt; SR_AUDIO_NS::PlayParams::device</definition>
+        <argsstring></argsstring>
+        <name>device</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::device</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="108" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structSR__AUDIO__NS_1_1PlayParams_1abc5d4012383ed38a72c479c63d2bda20" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref></type>
+        <definition>static PlayParams SR_AUDIO_NS::PlayParams::GetDefault</definition>
+        <argsstring>()</argsstring>
+        <name>GetDefault</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::GetDefault</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="65" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__AUDIO__NS_1_1PlayParams_1a5fd7afdb967e9a32c1300107c27b73cc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_AUDIO_NS::PlayParams::MarkAsChanged</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>MarkAsChanged</name>
+        <qualifiedname>SR_AUDIO_NS::PlayParams::MarkAsChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="67" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="67" bodyend="87"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; AudioLibrary &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="7">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector3 &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="8">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector6 &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="3">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SpatializeMode &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="2">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; bool &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="5">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; float_t &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="9">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; std::string &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="6">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; uint64_t &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="1">
+        <label>SR_AUDIO_NS::PlayParams</label>
+        <link refid="structSR__AUDIO__NS_1_1PlayParams"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>async</edgelabel>
+          <edgelabel>loop</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>spatialize</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>library</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>coneInnerAngle</edgelabel>
+          <edgelabel>gain</edgelabel>
+          <edgelabel>maxDistance</edgelabel>
+          <edgelabel>maxGain</edgelabel>
+          <edgelabel>minGain</edgelabel>
+          <edgelabel>pitch</edgelabel>
+          <edgelabel>referenceDistance</edgelabel>
+          <edgelabel>relative</edgelabel>
+          <edgelabel>rolloffFactor</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>uniqueId</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>direction</edgelabel>
+          <edgelabel>position</edgelabel>
+          <edgelabel>velocity</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>orientation</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>device</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="63" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="63" bodyend="110"/>
+    <listofallmembers>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a4aafc904b00b2f0a992dc96ed0475479" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>async</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1aded693852e1f6847be6dcf37a852000d" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>coneInnerAngle</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a82469ff5f1fa834edd669bd1e025e653" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>device</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a2b8dba2f0d9f961865738980bc8ddad4" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>direction</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1ae7098d2b15b826eafd47eff919a08890" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>gain</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1abc5d4012383ed38a72c479c63d2bda20" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>GetDefault</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a1ed710dc3fba982ffadc7d22f15a9275" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>library</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a8d0095952f6cafc871b80b1abacf1033" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>loop</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a5fd7afdb967e9a32c1300107c27b73cc" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>MarkAsChanged</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a9dea43451c7077120c32d556c6be802c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>maxDistance</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a8efc2821e36cd6f80c8b063258c0f079" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>maxGain</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a228ba809bca5135becf30062c495fa07" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>minGain</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a19966827c7afe6ed77c9e2aa03b41844" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>orientation</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a23411d297caf458d2d77d5d63ef804e8" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>pitch</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1afbc15b7fc61b2851e1b5083091331972" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>position</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a7c8f9839632780b876510fdf7f10cb0c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>referenceDistance</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1aa2c298914805c355716a2695e884ad49" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>relative</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a9528d3404de640a63005565d60866914" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>rolloffFactor</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a6fcf5c532b599ae2edbe2f90412957a9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>spatialize</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1a45207a65288269e98cdbc0e304dcc906" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>uniqueId</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayParams_1aa9ed15c09e76f7f5d738f164b070b0d9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>velocity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

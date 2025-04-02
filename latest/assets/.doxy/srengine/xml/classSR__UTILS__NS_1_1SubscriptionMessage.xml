@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1SubscriptionMessage" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_UTILS_NS::SubscriptionMessage</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="private" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1SubscriptionMessage_1a0adbbbcc103f7eca98a6f2fa1e1f63c5" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, uint64_t &gt;</type>
+        <definition>std::map&lt;StringAtom, uint64_t&gt; SR_UTILS_NS::SubscriptionMessage::m_ints</definition>
+        <argsstring></argsstring>
+        <name>m_ints</name>
+        <qualifiedname>SR_UTILS_NS::SubscriptionMessage::m_ints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="49" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1SubscriptionMessage_1ab41140f7f9c18d99461f30c24b5cd485" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref>, bool &gt;</type>
+        <definition>std::map&lt;StringAtom, bool&gt; SR_UTILS_NS::SubscriptionMessage::m_bools</definition>
+        <argsstring></argsstring>
+        <name>m_bools</name>
+        <qualifiedname>SR_UTILS_NS::SubscriptionMessage::m_bools</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="50" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SubscriptionMessage_1ac3f5c4fc6a6350634dad743f2ecb54d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::SubscriptionMessage::SetInt</definition>
+        <argsstring>(const StringAtom id, const uint64_t value)</argsstring>
+        <name>SetInt</name>
+        <qualifiedname>SR_UTILS_NS::SubscriptionMessage::SetInt</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const uint64_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="18" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SubscriptionMessage_1ac8ec12724e10500a8165664b67728cdf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::SubscriptionMessage::SetBool</definition>
+        <argsstring>(const StringAtom id, const bool value)</argsstring>
+        <name>SetBool</name>
+        <qualifiedname>SR_UTILS_NS::SubscriptionMessage::SetBool</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="22" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="22" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SubscriptionMessage_1a77d7b4a6a62899e8db8ea9c919a967c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::SubscriptionMessage::GetInt</definition>
+        <argsstring>(const StringAtom id, const std::optional&lt; uint64_t &gt; def=std::nullopt) const</argsstring>
+        <name>GetInt</name>
+        <qualifiedname>SR_UTILS_NS::SubscriptionMessage::GetInt</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; uint64_t &gt;</type>
+          <declname>def</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="26" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="26" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SubscriptionMessage_1a0010209785654564681666edb2d634ba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SubscriptionMessage::GetBool</definition>
+        <argsstring>(const StringAtom id, const std::optional&lt; bool &gt; def=std::nullopt) const</argsstring>
+        <name>GetBool</name>
+        <qualifiedname>SR_UTILS_NS::SubscriptionMessage::GetBool</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; bool &gt;</type>
+          <declname>def</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="37" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="37" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SubscriptionMessage</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionMessage"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SubscriptionMessage</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionMessage"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="16" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionMessage_1a0010209785654564681666edb2d634ba" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionMessage</scope><name>GetBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionMessage_1a77d7b4a6a62899e8db8ea9c919a967c0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionMessage</scope><name>GetInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionMessage_1ab41140f7f9c18d99461f30c24b5cd485" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionMessage</scope><name>m_bools</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionMessage_1a0adbbbcc103f7eca98a6f2fa1e1f63c5" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionMessage</scope><name>m_ints</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionMessage_1ac8ec12724e10500a8165664b67728cdf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionMessage</scope><name>SetBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionMessage_1ac3f5c4fc6a6350634dad743f2ecb54d9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionMessage</scope><name>SetInt</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

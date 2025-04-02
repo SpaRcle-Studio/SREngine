@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1RenderSettings" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::RenderSettings</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1a7c66071d5ae36dba5aec706dbc76f422" prot="private" static="no" mutable="no">
+        <type>Quality</type>
+        <definition>Quality SR_GRAPH_NS::RenderSettings::shadows</definition>
+        <argsstring></argsstring>
+        <name>shadows</name>
+        <qualifiedname>SR_GRAPH_NS::RenderSettings::shadows</qualifiedname>
+        <initializer>= Quality::None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="21" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1a509fb64ce86e52f564e09809b9d92089" prot="private" static="no" mutable="no">
+        <type>Quality</type>
+        <definition>Quality SR_GRAPH_NS::RenderSettings::ScreenSpaceAO</definition>
+        <argsstring></argsstring>
+        <name>ScreenSpaceAO</name>
+        <qualifiedname>SR_GRAPH_NS::RenderSettings::ScreenSpaceAO</qualifiedname>
+        <initializer>= Quality::None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="22" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1RenderSettings_1ae4d4a6e707952961f7694acfddec47f0" prot="private" static="no" mutable="no">
+        <type>Quality</type>
+        <definition>Quality SR_GRAPH_NS::RenderSettings::particles</definition>
+        <argsstring></argsstring>
+        <name>particles</name>
+        <qualifiedname>SR_GRAPH_NS::RenderSettings::particles</qualifiedname>
+        <initializer>= Quality::None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="23" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::RenderSettings</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::RenderSettings</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderSettings"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="20" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" bodystart="20" bodyend="25"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderSettings_1ae4d4a6e707952961f7694acfddec47f0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>particles</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a509fb64ce86e52f564e09809b9d92089" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>ScreenSpaceAO</name></member>
+      <member refid="classSR__GRAPH__NS_1_1RenderSettings_1a7c66071d5ae36dba5aec706dbc76f422" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>shadows</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::RenderSettings</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

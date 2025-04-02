@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1ISamplersPass" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::ISamplersPass</compoundname>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1MeshDrawerPass" prot="public" virt="non-virtual">SR_GRAPH_NS::MeshDrawerPass</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1PostProcessPass" prot="public" virt="non-virtual">SR_GRAPH_NS::PostProcessPass</derivedcompoundref>
+    <innerclass refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler" prot="private">SR_GRAPH_NS::ISamplersPass::Sampler</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1ISamplersPass_1a811b30c48415428a42665a948a0a5c76" prot="private" static="no">
+        <type>std::vector&lt; Sampler &gt;</type>
+        <definition>using SR_GRAPH_NS::ISamplersPass::Samplers =  std::vector&lt;Sampler&gt;</definition>
+        <argsstring></argsstring>
+        <name>Samplers</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Samplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ISamplersPass_1a56e03f954a714aea582353d86ff7c722" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::ISamplersPass::m_dirtySamplers</definition>
+        <argsstring></argsstring>
+        <name>m_dirtySamplers</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::m_dirtySamplers</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="53" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ISamplersPass_1adef48b4645459c55b48399c6bbb7441b" prot="private" static="no" mutable="no">
+        <type>Samplers</type>
+        <definition>Samplers SR_GRAPH_NS::ISamplersPass::m_samplers</definition>
+        <argsstring></argsstring>
+        <name>m_samplers</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::m_samplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="54" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ISamplersPass_1a9152c04c5ab9e36032a0f583e3e5f40c" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
+        <definition>IRenderTechnique* SR_GRAPH_NS::ISamplersPass::m_pTechnique</definition>
+        <argsstring></argsstring>
+        <name>m_pTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::m_pTechnique</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="56" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1a4d6ba09d9f666b194cc2a8740e07e256" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_GRAPH_NS::ISamplersPass::~ISamplersPass</definition>
+        <argsstring>()</argsstring>
+        <name>~ISamplersPass</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::~ISamplersPass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="36" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1a9069d7a809b4d6a4f2bea7c0a7324cd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::ISamplersPass::LoadSamplersPass</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;passNode)</argsstring>
+        <name>LoadSamplersPass</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::LoadSamplersPass</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>passNode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1af41b07a501d2f5d98fa7d40566d9b529" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::ISamplersPass::UseSamplers</definition>
+        <argsstring>(ShaderUseInfo info)</argsstring>
+        <name>UseSamplers</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::UseSamplers</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a7fdbd68ae30677605bda55699c419394">UseSamplers</reimplementedby>
+        <param>
+          <type><ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref></type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="41" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1af04073e294a30c73c7ed3581d700d58c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::ISamplersPass::HasSamplers</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>HasSamplers</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::HasSamplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="43" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1a278818369eff66faee5881bbc747a27f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::ISamplersPass::IsSamplersDirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsSamplersDirty</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::IsSamplersDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="44" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1a67a1a0029c412a3f157b9f99995ec938" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::ISamplersPass::OnSamplersChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnSamplersChanged</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::OnSamplersChanged</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7ff01caedf031547f8416149deae336e">OnSamplersChanged</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="47" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1a7e588f69a586128652fe361e13313764" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::ISamplersPass::MarkSamplersDirty</definition>
+        <argsstring>()</argsstring>
+        <name>MarkSamplersDirty</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::MarkSamplersDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="48" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1aba0559086ff8566ead9530dc765081cf" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::ISamplersPass::PrepareSamplers</definition>
+        <argsstring>()</argsstring>
+        <name>PrepareSamplers</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::PrepareSamplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1ISamplersPass_1aa0e9ab3af5eb652b1333289e32f737da" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::ISamplersPass::SetISamplerRenderTechnique</definition>
+        <argsstring>(IRenderTechnique *pTechnique)</argsstring>
+        <name>SetISamplerRenderTechnique</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::SetISamplerRenderTechnique</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *</type>
+          <declname>pTechnique</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="50" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_GRAPH_NS::ColorBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::ISamplersPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::MeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_GRAPH_NS::PostProcessPass</label>
+        <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_GRAPH_NS::SSAOPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="16" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1af04073e294a30c73c7ed3581d700d58c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>HasSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a278818369eff66faee5881bbc747a27f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>IsSamplersDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a9069d7a809b4d6a4f2bea7c0a7324cd3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>LoadSamplersPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a56e03f954a714aea582353d86ff7c722" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>m_dirtySamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a9152c04c5ab9e36032a0f583e3e5f40c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>m_pTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1adef48b4645459c55b48399c6bbb7441b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>m_samplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a7e588f69a586128652fe361e13313764" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>MarkSamplersDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a67a1a0029c412a3f157b9f99995ec938" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>OnSamplersChanged</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aba0559086ff8566ead9530dc765081cf" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>PrepareSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a811b30c48415428a42665a948a0a5c76" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>Samplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1aa0e9ab3af5eb652b1333289e32f737da" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>SetISamplerRenderTechnique</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1af41b07a501d2f5d98fa7d40566d9b529" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a4d6ba09d9f666b194cc2a8740e07e256" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ISamplersPass</scope><name>~ISamplersPass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

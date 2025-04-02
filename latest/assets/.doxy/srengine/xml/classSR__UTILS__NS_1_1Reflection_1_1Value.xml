@@ -1,0 +1,857 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Reflection_1_1Value" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Reflection::Value</compoundname>
+    <includes refid="Value_8h" local="no">Value.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7b9efd5440cf2064c13ef3e24b9972d1" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *(*)(const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;)</type>
+        <definition>using SR_UTILS_NS::Reflection::Value::SRClassGetterFn =  SRClass*(*)(const Value&amp;)</definition>
+        <argsstring></argsstring>
+        <name>SRClassGetterFn</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::SRClassGetterFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="84" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a79cdaf48270c71f6eda421b9e9fb31f8" prot="private" static="no">
+        <type>void(*)(<ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;, <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *)</type>
+        <definition>using SR_UTILS_NS::Reflection::Value::SRClassSetterFn =  void(*)(Value&amp;, SRClass*)</definition>
+        <argsstring></argsstring>
+        <name>SRClassSetterFn</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::SRClassSetterFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="85" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a73562a390a7ef5f08c6899fc4c72b291" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::Reflection::Value::ValueSequenceContainerIterator</definition>
+        <argsstring></argsstring>
+        <name>ValueSequenceContainerIterator</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::ValueSequenceContainerIterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="83" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae392467b8b98884797c4785304094f7b" prot="private" static="no" mutable="no">
+        <type>entt::meta_any</type>
+        <definition>entt::meta_any SR_UTILS_NS::Reflection::Value::m_storage</definition>
+        <argsstring></argsstring>
+        <name>m_storage</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::m_storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="174" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a94b7bb1390e463f74b322580a81e5d48" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Reflection::Value::Value</definition>
+        <argsstring>(entt::meta_any &amp;&amp;storage)</argsstring>
+        <name>Value</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Value</qualifiedname>
+        <param>
+          <type>entt::meta_any &amp;&amp;</type>
+          <declname>storage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="87" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="87" bodyend="89"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ade2f185d09aef86897edf8d3b54b5317" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Reflection::Value::Value</definition>
+        <argsstring>()=default</argsstring>
+        <name>Value</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="92" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae16027e4ed50e1a8eeed45dab3414f09" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Reflection::Value::Value</definition>
+        <argsstring>(const Value &amp;other)</argsstring>
+        <name>Value</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Value</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="94" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="94" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab620a81c9de5930f9ba1affdea009f70" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+        <definition>Value &amp; SR_UTILS_NS::Reflection::Value::operator=</definition>
+        <argsstring>(const Value &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="102" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="102" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a597157ab436bbe8115a40628a2bf1efc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+        <definition>Value &amp; SR_UTILS_NS::Reflection::Value::operator=</definition>
+        <argsstring>(Value &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="113" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="113" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a084cb1797f4b90e1490dd08fe6ae293d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T * SR_UTILS_NS::Reflection::Value::TryCast</definition>
+        <argsstring>() const</argsstring>
+        <name>TryCast</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::TryCast</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="124" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a81aacb48604dd2093217278605ee060f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_UTILS_NS::Reflection::Value::TryCast</definition>
+        <argsstring>()</argsstring>
+        <name>TryCast</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::TryCast</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="125" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0cc194053f41dff0880c6f3335513d9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+        <definition>Value &amp; SR_UTILS_NS::Reflection::Value::Detach</definition>
+        <argsstring>()</argsstring>
+        <name>Detach</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Detach</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="127" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a1490be67e8e4597a8357bccc55d87066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+        <definition>Value &amp; SR_UTILS_NS::Reflection::Value::DetachIfConst</definition>
+        <argsstring>()</argsstring>
+        <name>DetachIfConst</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::DetachIfConst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="128" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a840c3cdc70848341f40368b10dc6f34d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" kindref="compound">ValueSequenceContainer</ref></type>
+        <definition>SR_NODISCARD ValueSequenceContainer SR_UTILS_NS::Reflection::Value::AsSequenceContainer</definition>
+        <argsstring>()</argsstring>
+        <name>AsSequenceContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::AsSequenceContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="130" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae58b00791f9ba53865a7aae1482d2c6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" kindref="compound">ValueSequenceContainer</ref></type>
+        <definition>SR_NODISCARD ValueSequenceContainer SR_UTILS_NS::Reflection::Value::AsSequenceContainer</definition>
+        <argsstring>() const</argsstring>
+        <name>AsSequenceContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::AsSequenceContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="131" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7a08f338ee1d29de77da01c9fa06ff43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
+        <definition>SR_NODISCARD Value SR_UTILS_NS::Reflection::Value::Ref</definition>
+        <argsstring>()</argsstring>
+        <name>Ref</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Ref</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="133" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a523aa908a378a9ab750933955f99ceca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
+        <definition>SR_NODISCARD Value SR_UTILS_NS::Reflection::Value::Copy</definition>
+        <argsstring>() const</argsstring>
+        <name>Copy</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Copy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="134" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a20643a653c758600bb5a4893ccf5cc95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsRef</definition>
+        <argsstring>() const</argsstring>
+        <name>IsRef</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="136" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab4635d29e20b922589b8483f6b789815" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsConst</definition>
+        <argsstring>() const</argsstring>
+        <name>IsConst</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsConst</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="137" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a3dacfcbe188633a6413b2522d54bcd3a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsSequenceContainer</definition>
+        <argsstring>() const</argsstring>
+        <name>IsSequenceContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsSequenceContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="139" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9f3153e39e5f32d2b7f4502aa2e840c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsAssociativeContainer</definition>
+        <argsstring>() const</argsstring>
+        <name>IsAssociativeContainer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsAssociativeContainer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="140" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6106063a446f067526cd7108e7e24a5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsBitMap</definition>
+        <argsstring>() const</argsstring>
+        <name>IsBitMap</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsBitMap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="141" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6ce734264c7e86ded5383b0a4fc92f35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsSmartPtr</definition>
+        <argsstring>() const</argsstring>
+        <name>IsSmartPtr</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsSmartPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="143" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2ff90af84c3000496eb2e001b5d706d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsPointer</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPointer</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsPointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="144" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a4ef0f56560149190a5be9a791258a332" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsString</definition>
+        <argsstring>() const</argsstring>
+        <name>IsString</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="145" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6d26579b2f7f7a3d01208bf37bf98f46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsStringView</definition>
+        <argsstring>() const</argsstring>
+        <name>IsStringView</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsStringView</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="146" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0c0812bad97ceaa8a5c5d019ad6dea93" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsStringAtom</definition>
+        <argsstring>() const</argsstring>
+        <name>IsStringAtom</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsStringAtom</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="147" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a029a8ca52194b4aabceb97d4f80b6607" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsUnicodeString</definition>
+        <argsstring>() const</argsstring>
+        <name>IsUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsUnicodeString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="148" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a128679afe6ca6f5ded454d50226621f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsPath</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPath</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="149" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ac1c40fe0568d44758b954ffc8a729980" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsMathVector</definition>
+        <argsstring>() const</argsstring>
+        <name>IsMathVector</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsMathVector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="150" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae4ad4c70eb838ee1ea9e1d9ab6b57293" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsMathSize</definition>
+        <argsstring>() const</argsstring>
+        <name>IsMathSize</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsMathSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="151" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9d313bec53fefd4cdad9f04eb9ef5975" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsBool</definition>
+        <argsstring>() const</argsstring>
+        <name>IsBool</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsBool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="152" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5384e935029c9ef884b0cb02b3b3f649" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsArithmetic</definition>
+        <argsstring>() const</argsstring>
+        <name>IsArithmetic</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsArithmetic</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="153" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1aced0a678ac13e145d682a0822b3edb98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsClass</definition>
+        <argsstring>() const</argsstring>
+        <name>IsClass</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsClass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="154" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5670ba81258ed4d8fba4f2a3014e12cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsTemplate</definition>
+        <argsstring>() const</argsstring>
+        <name>IsTemplate</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsTemplate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="155" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6db249d11d7872177c3c3c528270b307" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsIntegral</definition>
+        <argsstring>() const</argsstring>
+        <name>IsIntegral</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsIntegral</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="156" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a933f827411555ca31b4c92a4a7ba5a52" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsSigned</definition>
+        <argsstring>() const</argsstring>
+        <name>IsSigned</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsSigned</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="157" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a09973a21533ee13176dfc48b5f525a95" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Reflection::Value::IsEnum</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEnum</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::IsEnum</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="158" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a839bdea940ec62a4bec64e237e5b472a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Reflection::Value::GetTypeName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetTypeName</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::GetTypeName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="159" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0991ce1e7c3c57167aba2561632cbc01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Reflection::Value::GetSharedPtrType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSharedPtrType</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::GetSharedPtrType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="160" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a1f8a5e4c52ded1cf87b1e8ae5649c319" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_UTILS_NS::Reflection::Value::SizeOf</definition>
+        <argsstring>() const</argsstring>
+        <name>SizeOf</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::SizeOf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="161" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a57c56451d0e29eb4158e58a196dd1874" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_UTILS_NS::Reflection::Value::Data</definition>
+        <argsstring>()</argsstring>
+        <name>Data</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="162" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1aadf2312704c9c8d853be395c44afd85a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const void *</type>
+        <definition>SR_NODISCARD const void * SR_UTILS_NS::Reflection::Value::Data</definition>
+        <argsstring>() const</argsstring>
+        <name>Data</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="163" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1afcd247fa2137c10874e1b67f37ba7b30" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::Reflection::Value::GetEnumType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEnumType</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::GetEnumType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="164" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a13370039c8ec5d66df17cfa9e0aca422" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *</type>
+        <definition>SR_NODISCARD SRClass * SR_UTILS_NS::Reflection::Value::GetSRClass</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSRClass</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::GetSRClass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="165" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1acd034e0b8c2ae0495d0ce7da42584c13" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtrBase" kindref="compound">SR_HTYPES_NS::SharedPtrBase</ref> *</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtrBase * SR_UTILS_NS::Reflection::Value::GetSharedPtrBase</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSharedPtrBase</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::GetSharedPtrBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="166" column="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a85d448b983a4e873a07852a1f8ddff15" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD</type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Reflection::Value::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="168" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a010eb25ae1b9298ca8d5a1de9e86a463" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
+        <definition>Value SR_UTILS_NS::Reflection::Value::Create</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>Create</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::Create</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="120" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="205" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a39e2a44f7c3d52f1caacfcc5677f273d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
+        <definition>Value SR_UTILS_NS::Reflection::Value::CreateRef</definition>
+        <argsstring>(T &amp;value)</argsstring>
+        <name>CreateRef</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::CreateRef</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="121" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="211" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1af8634a9694c969b0fae3155b27a273fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref></type>
+        <definition>Value SR_UTILS_NS::Reflection::Value::CreateCRef</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>CreateCRef</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::CreateCRef</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="122" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="217" bodyend="221"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2370f85321dbfe77207a2b777788d803" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Reflection::Value::InitBase</definition>
+        <argsstring>(Value &amp;value)</argsstring>
+        <name>InitBase</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::Value::InitBase</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">Value</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implementation. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="171" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="180" bodyend="203"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" line="82" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Value.h" bodystart="82" bodyend="176"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a840c3cdc70848341f40368b10dc6f34d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>AsSequenceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae58b00791f9ba53865a7aae1482d2c6e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>AsSequenceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a523aa908a378a9ab750933955f99ceca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Copy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a010eb25ae1b9298ca8d5a1de9e86a463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Create</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1af8634a9694c969b0fae3155b27a273fc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>CreateCRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a39e2a44f7c3d52f1caacfcc5677f273d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>CreateRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a57c56451d0e29eb4158e58a196dd1874" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Data</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1aadf2312704c9c8d853be395c44afd85a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Data</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0cc194053f41dff0880c6f3335513d9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Detach</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a1490be67e8e4597a8357bccc55d87066" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>DetachIfConst</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1afcd247fa2137c10874e1b67f37ba7b30" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetEnumType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1acd034e0b8c2ae0495d0ce7da42584c13" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetSharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0991ce1e7c3c57167aba2561632cbc01" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetSharedPtrType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a13370039c8ec5d66df17cfa9e0aca422" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetSRClass</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a839bdea940ec62a4bec64e237e5b472a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>GetTypeName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2370f85321dbfe77207a2b777788d803" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>InitBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5384e935029c9ef884b0cb02b3b3f649" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsArithmetic</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9f3153e39e5f32d2b7f4502aa2e840c2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsAssociativeContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6106063a446f067526cd7108e7e24a5a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsBitMap</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a9d313bec53fefd4cdad9f04eb9ef5975" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1aced0a678ac13e145d682a0822b3edb98" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsClass</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab4635d29e20b922589b8483f6b789815" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsConst</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a09973a21533ee13176dfc48b5f525a95" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsEnum</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6db249d11d7872177c3c3c528270b307" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsIntegral</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae4ad4c70eb838ee1ea9e1d9ab6b57293" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsMathSize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ac1c40fe0568d44758b954ffc8a729980" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsMathVector</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a128679afe6ca6f5ded454d50226621f4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a2ff90af84c3000496eb2e001b5d706d2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsPointer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a20643a653c758600bb5a4893ccf5cc95" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a3dacfcbe188633a6413b2522d54bcd3a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsSequenceContainer</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a933f827411555ca31b4c92a4a7ba5a52" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsSigned</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6ce734264c7e86ded5383b0a4fc92f35" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsSmartPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a4ef0f56560149190a5be9a791258a332" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsString</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a0c0812bad97ceaa8a5c5d019ad6dea93" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsStringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a6d26579b2f7f7a3d01208bf37bf98f46" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsStringView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a5670ba81258ed4d8fba4f2a3014e12cc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsTemplate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a029a8ca52194b4aabceb97d4f80b6607" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>IsUnicodeString</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae392467b8b98884797c4785304094f7b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>m_storage</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a85d448b983a4e873a07852a1f8ddff15" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>operator bool</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ab620a81c9de5930f9ba1affdea009f70" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a597157ab436bbe8115a40628a2bf1efc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7a08f338ee1d29de77da01c9fa06ff43" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Ref</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a1f8a5e4c52ded1cf87b1e8ae5649c319" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>SizeOf</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a7b9efd5440cf2064c13ef3e24b9972d1" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>SRClassGetterFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a79cdaf48270c71f6eda421b9e9fb31f8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>SRClassSetterFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a084cb1797f4b90e1490dd08fe6ae293d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>TryCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a81aacb48604dd2093217278605ee060f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>TryCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a94b7bb1390e463f74b322580a81e5d48" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Value</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ade2f185d09aef86897edf8d3b54b5317" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Value</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1ae16027e4ed50e1a8eeed45dab3414f09" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>Value</name></member>
+      <member refid="classSR__UTILS__NS_1_1Reflection_1_1Value_1a73562a390a7ef5f08c6899fc4c72b291" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Reflection::Value</scope><name>ValueSequenceContainerIterator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,594 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GTYPES__NS_1_1DebugLine" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_GTYPES_NS::DebugLine</compoundname>
+    <basecompoundref refid="classSR__GTYPES__NS_1_1Mesh" prot="public" virt="non-virtual">SR_GTYPES_NS::Mesh</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1DebugLine_1a16fc27442667eee8796aa2c562122346" prot="private" static="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">Mesh</ref></type>
+        <definition>using SR_GTYPES_NS::DebugLine::Super =  Mesh</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1DebugLine_1abe498182b3d9dcdfe3eeb8588f325c76" prot="public" static="no">
+        <type>Vertices::SimpleVertex</type>
+        <definition>typedef Vertices::SimpleVertex SR_GTYPES_NS::DebugLine::VertexType</definition>
+        <argsstring></argsstring>
+        <name>VertexType</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::VertexType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="17" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__GTYPES__NS_1_1DebugLine_1aa41a130f156b145bffb3f4b5172c4c93" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Mesh</definition>
+        <argsstring></argsstring>
+        <name>Mesh</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::Mesh</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">Mesh</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="14" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1DebugLine_1a82df7ad046685b2cab5fcf0ff4f85fb7" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GTYPES_NS::DebugLine::m_startPoint</definition>
+        <argsstring></argsstring>
+        <name>m_startPoint</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::m_startPoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="41" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1DebugLine_1a1effaa1d75829ffca7bedb36a74da009" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_GTYPES_NS::DebugLine::m_endPoint</definition>
+        <argsstring></argsstring>
+        <name>m_endPoint</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::m_endPoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="42" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GTYPES__NS_1_1DebugLine_1a1b70fbff57c2b85a3792674ecfdc2715" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector4</type>
+        <definition>SR_MATH_NS::FVector4 SR_GTYPES_NS::DebugLine::m_color</definition>
+        <argsstring></argsstring>
+        <name>m_color</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::m_color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="43" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1ad9427160be650673090f70dff112f6d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::DebugLine::DebugLine</definition>
+        <argsstring>()=default</argsstring>
+        <name>DebugLine</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::DebugLine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a6cdf7e43be5f31c869c1ffdab0b2de2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GTYPES_NS::DebugLine::DebugLine</definition>
+        <argsstring>(SR_MATH_NS::FVector3 startPoint, SR_MATH_NS::FVector3 endPoint, SR_MATH_NS::FVector4 color)</argsstring>
+        <name>DebugLine</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::DebugLine</qualifiedname>
+        <param>
+          <type>SR_MATH_NS::FVector3</type>
+          <declname>startPoint</declname>
+        </param>
+        <param>
+          <type>SR_MATH_NS::FVector3</type>
+          <declname>endPoint</declname>
+        </param>
+        <param>
+          <type>SR_MATH_NS::FVector4</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="21" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a30e6421f5a1703cf639d3ce959d24ac8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::DebugLine::SetStartPoint</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;startPoint)</argsstring>
+        <name>SetStartPoint</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::SetStartPoint</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>startPoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="24" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a6bc56600c2ec4e23fb4853e926eeae97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::DebugLine::SetEndPoint</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;endPoint)</argsstring>
+        <name>SetEndPoint</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::SetEndPoint</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>endPoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a9ca4a6ccc0759764445f628c63bcba67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::DebugLine::SetColor</definition>
+        <argsstring>(const SR_MATH_NS::FVector4 &amp;color)</argsstring>
+        <name>SetColor</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::SetColor</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector4 &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a1e84e2042fe636781bd51cfe13265ca5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GTYPES_NS::DebugLine::UseMaterial</definition>
+        <argsstring>() override</argsstring>
+        <name>UseMaterial</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::UseMaterial</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a6e2ff3e57ab3d3d4d3f880f31b29637e">UseMaterial</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1ab5d8ae9e3beef28a0a39f6c064a6699b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD MeshType</type>
+        <definition>SR_NODISCARD MeshType SR_GTYPES_NS::DebugLine::GetMeshType</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetMeshType</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::GetMeshType</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a36d42f741b1a4d6d4120ba5f0e47c02f">GetMeshType</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="30" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a7167883e6f72c2c37077224271c22b5d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_GTYPES_NS::DebugLine::GetIndicesCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetIndicesCount</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::GetIndicesCount</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a19f3b3e8388e2a541d2577a20c6b50a5">GetIndicesCount</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="32" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1a235809b6118c7d4813c649a55302d13c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GTYPES_NS::DebugLine::IsSupportVBO</definition>
+        <argsstring>() const override</argsstring>
+        <name>IsSupportVBO</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::IsSupportVBO</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1a4ec50ee8dc9308de4af8baec12fecbd8">IsSupportVBO</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="33" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1DebugLine_1aba982af88e0b4061c9d0fa4ac535a909" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_GTYPES_NS::DebugLine::GetMeshLayer</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetMeshLayer</name>
+        <qualifiedname>SR_GTYPES_NS::DebugLine::GetMeshLayer</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Mesh_1af3adc9e3e276c74ac99cc24eca2208d1">GetMeshLayer</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="35" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="35" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="6">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::DebugLine</label>
+        <link refid="classSR__GTYPES__NS_1_1DebugLine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::IRenderComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GTYPES_NS::Mesh</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>Entity</label>
+      </node>
+      <node id="14">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="16">
+        <label>SR_GRAPH_NS::DescriptorManager</label>
+        <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GTYPES_NS::DebugLine</label>
+        <link refid="classSR__GTYPES__NS_1_1DebugLine"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::IRenderComponent</label>
+        <link refid="classSR__GTYPES__NS_1_1IRenderComponent"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GTYPES_NS::Mesh</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_renderQueues</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>m_descriptorManager</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>m_material</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="15">
+        <label>SR_HTYPES_NS::SortedVector&lt; SR_GRAPH_NS::RenderQueueInfo, SR_GRAPH_NS::RenderQueuePredicate &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SortedVector"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h" bodystart="13" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>BaseComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac081233babf593b4ccac9e5dabaf35d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>BindMesh</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4395ff39f60bb6b7aeb2775fa02109f7" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Calculate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>CameraPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>CloneComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1ad9427160be650673090f70dff112f6d6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>DebugLine</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a6cdf7e43be5f31c869c1ffdab0b2de2d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>DebugLine</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1afee74621d25e156a4ed2e08fa560afb4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>DestroyMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Detach</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3c3d60b52d0ff3b84510c3b16348ee4f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Draw</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0539e08ac8e0a491ef3d2f7f4324abb8" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>FreeVideoMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1857b0420fe2a3b300e35246e756e3c9" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetFrustumCullingType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetGameObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1af7b9d9ffa581d6dca801dbb164afb6bd" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetIBO</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a7167883e6f72c2c37077224271c22b5d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetIndicesCount</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1d06cec76546a9849a50b484293b684a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1adff93b7a6119dc188a28c6c0eb8a8e37" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetMatrix</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad0216837e2d43f93eeb56b53121fc1c5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetMeshIdentifier</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1aba982af88e0b4061c9d0fa4ac535a909" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetMeshLayer</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a5f570e2ab732cb7c42d019ccbc211374" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetMeshRegistrationInfo</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1ab5d8ae9e3beef28a0a39f6c064a6699b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetMeshType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c67cc73081e7682937fe2aaf59c65de" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetRenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1af32114a133ad6f5455d0e5ee95161fe5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetRoot</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a19c90c90366d059d27a9465ac4c46c8a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetShader</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1db605ebfd240f85388761927305ab1e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetSortingPriority</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetTransform</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1adad828813143169c615bc8fc05051ca1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a5022d2d34048e219f80020fadd5e57a7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetVerticesCount</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a53dfdb25e64d474467bdf374cfa227f9" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>GetVirtualUBO</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>HasScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab13165b3e9a49610b34cda27b2ca1b72" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>HasSortingPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a6dbb5d1a94533162f27ebed42894eb29" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsAwake</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0da7dadb2349196b8fff383928a7081a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsCalculatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab6fd84bd06b28605b72477f4b7e4601e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsFlatMesh</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c840cbd67eab2a2defb04f0bd3c323" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsMeshRegistered</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsStarted</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a235809b6118c7d4813c649a55302d13c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsSupportVBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0c42f4050860150b1bf7d0e53b4486b1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsUniformsDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ae2097756a2a2df22c758f7b9b3ed62" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsUniqueMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a2c963fbf2d7b184c1525d1de7e0d3cd4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>IsWaitReRegister</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>LateUpdate</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a579cbdb8fac4dba00906f0ff854b0251" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a900009c9b385f6ff48081917109c828f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3446c21b42aef2c72b986aa1a3db55a1" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Load</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a1b70fbff57c2b85a3792674ecfdc2715" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_color</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a025a6751aee4601105000e7c9d960c9a" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_descriptorManager</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1eedf6ed8926b01f933ce6d17942d928" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_dirtyMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a1effaa1d75829ffca7bedb36a74da009" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_endPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1abbbdef9e59eb97f8eed740c6e96c1a53" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_frustumCullingType</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa12c514db6c826253a1d368e7279e02a" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_hasErrors</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isStarted</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4f1e404ddd0c7f28dd411d1b15ce7606" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isUniformsDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a15373448bde91b633ab94a57483baf36" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_isWaitReRegister</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad418dcf562fe9670d34c11d93711ab83" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_material</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_parent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_properties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3b6365455b15767000675149fb88d932" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_renderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_renderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a82df7ad046685b2cab5fcf0ff4f85fb7" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_startPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ac6c0dd4752763f730a0909861c7612cf" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_uboManager</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8e92536a0dbb2e45e1f2fda2e74ac7bb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_virtualDescriptor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad4bba700ef6bd6d6e86f2185869011e3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>m_virtualUBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a55e5fd9cabd800e7aceabc257b130a58" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>MarkMaterialDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a486250cec513876fa1e9e09deae7008a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>MarkUniformsDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0cfb104ae1007606dc54e9f796e16de8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>MaterialPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1aa41a130f156b145bffb3f4b5172c4c93" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Mesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aae5701ca77fad95071cf9fbcd29b6192" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnDetached</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a89241c5fbef2a125453e3c102a8abe5b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnDisable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1acd546e323a875a9139aeb061de5a8be9" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnEnable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1acc5b77265402b819d0ddb8a06c3b0087" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnLoaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1b0a2c9312c0344c53db90eae676a60d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1af3caea0c23c92bd870b87a3e52840645" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab78cc1eaebe6f734293b577b6d9ab1dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnReRegistered</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a1beb296af0e07a7ca16aafeb8879294b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>OriginType</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a8ccf477eb64e1da05d8b6e0f0e82b0ae" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Ptr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a63ebff43aced52991bb2c7a97bccbb5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>RenderQueues</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1add25474bae10f83e8854f3e93c4f7070" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a16b24e7c8796db2f1d87bb2fdf22b5c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>ReRegisterMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a9ca4a6ccc0759764445f628c63bcba67" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetColor</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a6bc56600c2ec4e23fb4853e926eeae97" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetEndPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a0459026984bf4bd56d9ceb4f82f48d53" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetErrorsClean</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a401fac07ce716a41159227743be22be3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a6aed03245b902a8b0a1af46d0da4b1ee" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa4a105cef591fdf2c4d2e9023a729558" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetMatrix</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a4a038ee5096e73f581d8c1ba9a9e5ef7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetMeshRegistrationInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a30e6421f5a1703cf639d3ce959d24ac8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetStartPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a73a3904579729c1939e4e6757b39ab51" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>SetUniformsClean</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1aa763366331082200de8fffc15b9edb1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Start</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a16fc27442667eee8796aa2c562122346" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Super</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>TryGetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1ab61fb3a6e950d558e4a24fd316c97062" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>TryGetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>TryGetScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a3c93f75ec3bd28586d2719f451bf00a8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>TryLoad</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a272be772ca42d0f7b1e7c43b2af79bda" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>TryLoad</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab75774fcebeb90dc51478685bd577119" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>UnRegisterMesh</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac6a1ba6c0a2a6d0b8f29f4a9924b25fb" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>Update</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1a1e84e2042fe636781bd51cfe13265ca5" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>UseMaterial</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ad02d2261a7521c316812c6e00349dc8d" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>UseModelMatrix</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a838cad3d42bd1d6e6185b4e8b8ff0ca7" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>UseSamplers</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1a736239062e920cf16ef80dabc52fe4d3" prot="public" virt="virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>UseSSBO</name></member>
+      <member refid="classSR__GTYPES__NS_1_1DebugLine_1abe498182b3d9dcdfe3eeb8588f325c76" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>VertexType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>~Component</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Mesh_1ab673db708eaaf1226d8af1bf28effa7d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::DebugLine</scope><name>~Mesh</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

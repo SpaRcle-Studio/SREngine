@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1SSBOBinding" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::SSBOBinding</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SSBOBinding_1a1d86558a4f915228223615af736b03a7" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_GRAPH_NS::SSBOBinding::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>SR_GRAPH_NS::SSBOBinding::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="96" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SSBOBinding_1ab13602f34835f660606c4e0750977bae" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::SSBOBinding::binding</definition>
+        <argsstring></argsstring>
+        <name>binding</name>
+        <qualifiedname>SR_GRAPH_NS::SSBOBinding::binding</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="97" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SSBOBinding_1a42bca45d43b1d1cd0f6f9894968560a5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::SSBOBinding::ssbo</definition>
+        <argsstring></argsstring>
+        <name>ssbo</name>
+        <qualifiedname>SR_GRAPH_NS::SSBOBinding::ssbo</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="98" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::SSBOBinding</label>
+        <link refid="structSR__GRAPH__NS_1_1SSBOBinding"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="95" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="95" bodyend="99"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1SSBOBinding_1ab13602f34835f660606c4e0750977bae" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSBOBinding</scope><name>binding</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SSBOBinding_1a1d86558a4f915228223615af736b03a7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSBOBinding</scope><name>name</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SSBOBinding_1a42bca45d43b1d1cd0f6f9894968560a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSBOBinding</scope><name>ssbo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

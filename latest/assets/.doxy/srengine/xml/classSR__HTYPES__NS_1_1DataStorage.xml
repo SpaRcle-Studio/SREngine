@@ -1,0 +1,814 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1DataStorage" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::DataStorage</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">NonCopyable</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1DataStorage_1a494bf9dbaa33e067681f8ae516527f3b" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">DataStorage</ref> *</type>
+        <definition>using SR_HTYPES_NS::DataStorage::Ptr =  DataStorage*</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1DataStorage_1a3ef595362ce2633073b9e945a62f3b84" prot="private" static="no" mutable="no">
+        <type>std::map&lt; uint64_t, void * &gt;</type>
+        <definition>std::map&lt;uint64_t, void*&gt; SR_HTYPES_NS::DataStorage::m_pointers</definition>
+        <argsstring></argsstring>
+        <name>m_pointers</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::m_pointers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="81" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1DataStorage_1ac6530e3d444b6783656ed1f9290b8ecc" prot="private" static="no" mutable="no">
+        <type>std::map&lt; uint64_t, std::any &gt;</type>
+        <definition>std::map&lt;uint64_t, std::any&gt; SR_HTYPES_NS::DataStorage::m_values</definition>
+        <argsstring></argsstring>
+        <name>m_values</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::m_values</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="82" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1ac690d5c5de570e2c0fc79f537b689668" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::DataStorage::DataStorage</definition>
+        <argsstring>()=default</argsstring>
+        <name>DataStorage</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::DataStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="17" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1af9c0a38f65e8e73c735748939b7ee8b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::DataStorage::~DataStorage</definition>
+        <argsstring>() override</argsstring>
+        <name>~DataStorage</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::~DataStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1ad8e16c03421d5cf526606a25e8251e65" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::DataStorage::DataStorage</definition>
+        <argsstring>(DataStorage &amp;&amp;data) noexcept</argsstring>
+        <name>DataStorage</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::DataStorage</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">DataStorage</ref> &amp;&amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="22" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="22" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a1fad712d97b49068d754e388432b87ef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">DataStorage</ref> &amp;</type>
+        <definition>DataStorage &amp; SR_HTYPES_NS::DataStorage::operator=</definition>
+        <argsstring>(DataStorage &amp;&amp;data) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">DataStorage</ref> &amp;&amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="27" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="27" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1af9dfe6eb7c243a271e9cc752256320f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::SetPointer</definition>
+        <argsstring>(const std::string &amp;name, T *pointer)</argsstring>
+        <name>SetPointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::SetPointer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>pointer</declname>
+          <defname>pPointer</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><hruler/>
+ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="34" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="88" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a048cdd6f86e64df3bea1ef167cf7b562" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::SetPointer</definition>
+        <argsstring>(T *pointer)</argsstring>
+        <name>SetPointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::SetPointer</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>pointer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="35" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a8e1900ec3fa62d2b21387a5ac5107f8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::SetValue</definition>
+        <argsstring>(const std::string &amp;name, const T &amp;value)</argsstring>
+        <name>SetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::SetValue</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="37" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="104" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a765c835d1821b292823f99eac2457314" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::SetValue</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>SetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::SetValue</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="38" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="108" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a1b0e040d0aeac43eccc0b8917148bab2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::DataStorage::GetPointer</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>GetPointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetPointer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="40" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="96" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a1b13e2b9c17a62b4b08e37a893927539" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::DataStorage::GetPointer</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetPointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="41" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="100" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1aaa719d67879ba5cef690f62c9773e4ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::DataStorage::GetPointerDef</definition>
+        <argsstring>(const std::string &amp;name, T *def) const</argsstring>
+        <name>GetPointerDef</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetPointerDef</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="43" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="132" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a9de9089999a45be74f83925c0574dccd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::DataStorage::GetPointerDef</definition>
+        <argsstring>(T *def) const</argsstring>
+        <name>GetPointerDef</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetPointerDef</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="44" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="136" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1ab701d687db3a2ffd3e73c5f082143f09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValue</definition>
+        <argsstring>(const char *name) const</argsstring>
+        <name>GetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValue</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="46" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="112" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1ad023ded9f6703ad994560af0d477616a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValue</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>GetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValue</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="48" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="116" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a1e6419d9cf62199a3cd2dc4aa43dbf87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValue</definition>
+        <argsstring>() const</argsstring>
+        <name>GetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="49" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="120" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a501db1c6b2905d578556b81cb8b0f0bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValueDef</definition>
+        <argsstring>(const std::string &amp;name, const T &amp;def) const</argsstring>
+        <name>GetValueDef</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValueDef</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="51" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="124" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a6b3d0411c3594e1200d478afd6c023fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValueDef</definition>
+        <argsstring>(const T &amp;def) const</argsstring>
+        <name>GetValueDef</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValueDef</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="52" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="128" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a9732829176e3bae428e5254bc21650d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::DataStorage::RemovePointer</definition>
+        <argsstring>()</argsstring>
+        <name>RemovePointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::RemovePointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="54" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="140" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a85f7b8e6da4839592d4a345366b60b87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::DataStorage::RemovePointer</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>RemovePointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::RemovePointer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="55" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1aca7bd6cbb1561d2bdc632c8417ca36ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::DataStorage::RemoveValue</definition>
+        <argsstring>()</argsstring>
+        <name>RemoveValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::RemoveValue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="57" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="152" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1ad8485651be6301f2664bc45c4644577d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::DataStorage::RemoveValue</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>RemoveValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::RemoveValue</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="58" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="148" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a65b64757a38c6e3fb3921dc9c77f7e43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; std::pair&lt; std::string, T &gt; &gt;</type>
+        <definition>std::vector&lt; std::pair&lt; std::string, T &gt; &gt; SR_HTYPES_NS::DataStorage::GetValues</definition>
+        <argsstring>()</argsstring>
+        <name>GetValues</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="60" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="246" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a7edea198c701e806e88cee6d6d6d8fbb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="62" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="62" bodyend="65"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1addf46d31b2fc282bd8d8adccb1328ad8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::SetPointer</definition>
+        <argsstring>(uint64_t hashCode, T *pointer)</argsstring>
+        <name>SetPointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::SetPointer</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+          <defname>hashCore</defname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>pointer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><hruler/>
+ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="68" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="158" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a5c82ec5aa9c33a9f125898bd2e1fd28b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::DataStorage::SetValue</definition>
+        <argsstring>(uint64_t hashCode, const T &amp;value)</argsstring>
+        <name>SetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::SetValue</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="69" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="164" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a715575dd7d06f4f824e2c355178de260" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::DataStorage::GetPointer</definition>
+        <argsstring>(uint64_t hashCode) const</argsstring>
+        <name>GetPointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetPointer</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="71" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="168" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1adfc382e065799a6b47548169ddb67713" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_HTYPES_NS::DataStorage::GetPointerDef</definition>
+        <argsstring>(uint64_t hashCode, T *def) const</argsstring>
+        <name>GetPointerDef</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetPointerDef</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="72" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="183" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a6bb07dd9e593278f8950ff51bda9be94" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValue</definition>
+        <argsstring>(uint64_t hashCode) const</argsstring>
+        <name>GetValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValue</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="74" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="196" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1ac70e8629a278bd99158f63f9b7c9c69e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T SR_HTYPES_NS::DataStorage::GetValueDef</definition>
+        <argsstring>(uint64_t hashCode, const T &amp;def) const</argsstring>
+        <name>GetValueDef</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::GetValueDef</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>def</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="75" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="211" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a0c3a7687057ccce40bf2691b7efe2b40" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::DataStorage::RemovePointer</definition>
+        <argsstring>(uint64_t hashCode)</argsstring>
+        <name>RemovePointer</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::RemovePointer</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="77" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="226" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1DataStorage_1a1c0e43771998e717801a5ceedd26fcb1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_HTYPES_NS::DataStorage::RemoveValue</definition>
+        <argsstring>(uint64_t hashCode)</argsstring>
+        <name>RemoveValue</name>
+        <qualifiedname>SR_HTYPES_NS::DataStorage::RemoveValue</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="78" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="236" bodyend="244"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>NonCopyable</label>
+      </node>
+      <node id="1">
+        <label>SR_HTYPES_NS::DataStorage</label>
+        <link refid="classSR__HTYPES__NS_1_1DataStorage"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>NonCopyable</label>
+      </node>
+      <node id="1">
+        <label>SR_HTYPES_NS::DataStorage</label>
+        <link refid="classSR__HTYPES__NS_1_1DataStorage"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/DataStorage.h" bodystart="13" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a7edea198c701e806e88cee6d6d6d8fbb" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>Clear</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ac690d5c5de570e2c0fc79f537b689668" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>DataStorage</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ad8e16c03421d5cf526606a25e8251e65" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>DataStorage</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a1b0e040d0aeac43eccc0b8917148bab2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a1b13e2b9c17a62b4b08e37a893927539" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a715575dd7d06f4f824e2c355178de260" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1aaa719d67879ba5cef690f62c9773e4ab" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetPointerDef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a9de9089999a45be74f83925c0574dccd" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetPointerDef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1adfc382e065799a6b47548169ddb67713" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetPointerDef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ab701d687db3a2ffd3e73c5f082143f09" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ad023ded9f6703ad994560af0d477616a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a1e6419d9cf62199a3cd2dc4aa43dbf87" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a6bb07dd9e593278f8950ff51bda9be94" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a501db1c6b2905d578556b81cb8b0f0bb" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValueDef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a6b3d0411c3594e1200d478afd6c023fb" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValueDef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ac70e8629a278bd99158f63f9b7c9c69e" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValueDef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a65b64757a38c6e3fb3921dc9c77f7e43" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>GetValues</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a3ef595362ce2633073b9e945a62f3b84" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>m_pointers</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ac6530e3d444b6783656ed1f9290b8ecc" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>m_values</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a1fad712d97b49068d754e388432b87ef" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a494bf9dbaa33e067681f8ae516527f3b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a9732829176e3bae428e5254bc21650d5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>RemovePointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a85f7b8e6da4839592d4a345366b60b87" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>RemovePointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a0c3a7687057ccce40bf2691b7efe2b40" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>RemovePointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1aca7bd6cbb1561d2bdc632c8417ca36ab" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>RemoveValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1ad8485651be6301f2664bc45c4644577d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>RemoveValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a1c0e43771998e717801a5ceedd26fcb1" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>RemoveValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1af9dfe6eb7c243a271e9cc752256320f3" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>SetPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a048cdd6f86e64df3bea1ef167cf7b562" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>SetPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1addf46d31b2fc282bd8d8adccb1328ad8" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>SetPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a8e1900ec3fa62d2b21387a5ac5107f8e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>SetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a765c835d1821b292823f99eac2457314" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>SetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1a5c82ec5aa9c33a9f125898bd2e1fd28b" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>SetValue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1DataStorage_1af9c0a38f65e8e73c735748939b7ee8b3" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DataStorage</scope><name>~DataStorage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

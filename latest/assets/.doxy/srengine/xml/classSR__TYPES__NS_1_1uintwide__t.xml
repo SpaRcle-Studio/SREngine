@@ -1,0 +1,2900 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__TYPES__NS_1_1uintwide__t" kind="class" language="C++" prot="public">
+    <compoundname>SR_TYPES_NS::uintwide_t</compoundname>
+    <innerclass refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio" prot="private">SR_TYPES_NS::uintwide_t::digits_ratio</innerclass>
+    <templateparamlist>
+      <param>
+        <type>const size_t</type>
+        <declname>Width2</declname>
+        <defname>Width2</defname>
+      </param>
+      <param>
+        <type>typename LimbType</type>
+      </param>
+      <param>
+        <type>typename AllocatorType</type>
+      </param>
+      <param>
+        <type>const bool</type>
+        <declname>IsSigned</declname>
+        <defname>IsSigned</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1a6340cc51f230221a90c32cffcd4ba606" prot="public" static="no">
+        <type>LimbType</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::limb_type =  LimbType</definition>
+        <argsstring></argsstring>
+        <name>limb_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::limb_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2100" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1ab4c9d2dccf8b830dbe5400deb51a7c3a" prot="public" static="no">
+        <type>typename <ref refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kindref="compound">detail::uint_type_helper</ref>&lt; static_cast&lt; size_t &gt;(static_cast&lt; int &gt;(std::numeric_limits&lt; limb_type &gt;::digits *static_cast&lt; int &gt;(INT8_C(2))))&gt;::exact_unsigned_type</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::double_limb_type = 
+            typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(static_cast&lt;int&gt;(std::numeric_limits&lt;limb_type&gt;::digits* static_cast&lt;int&gt;(INT8_C(2))))&gt;::exact_unsigned_type</definition>
+        <argsstring></argsstring>
+        <name>double_limb_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::double_limb_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2102" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1a0c3b8647669c6ed098f61cb6d19afeeb" prot="public" static="no">
+        <type>limb_type</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::ushort_type =  limb_type</definition>
+        <argsstring></argsstring>
+        <name>ushort_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::ushort_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2107" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1a0983f765d1e0af9d21c612c25eb6e6c0" prot="public" static="no">
+        <type>double_limb_type</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::ularge_type =  double_limb_type</definition>
+        <argsstring></argsstring>
+        <name>ularge_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::ularge_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2108" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1ad1369bc9e1c16d293f2d9cb986bcfd00" prot="public" static="no">
+        <type>std::conditional_t&lt; std::is_same&lt; AllocatorType, void &gt;::value, <ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" kindref="compound">detail::fixed_static_array</ref>&lt; limb_type, number_of_limbs &gt;, <ref refid="classSR__TYPES__NS_1_1detail_1_1fixed__dynamic__array" kindref="compound">detail::fixed_dynamic_array</ref>&lt; limb_type, number_of_limbs, typename std::allocator_traits&lt; std::conditional_t&lt; std::is_same&lt; AllocatorType, void &gt;::value, std::allocator&lt; void &gt;, AllocatorType &gt; &gt;::template rebind_alloc&lt; limb_type &gt; &gt; &gt;</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::representation_type = 
+            std::conditional_t
+            &lt;std::is_same&lt;AllocatorType, void&gt;::value,
+            detail::fixed_static_array &lt;limb_type,
+            number_of_limbs&gt;,
+            detail::fixed_dynamic_array&lt;limb_type,
+            number_of_limbs,
+            typename std::allocator_traits&lt;std::conditional_t&lt;std::is_same&lt;AllocatorType, void&gt;::value,
+            std::allocator&lt;void&gt;,
+            AllocatorType&gt;&gt;::template rebind_alloc&lt;limb_type&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>representation_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::representation_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2153" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1a6d7015b6aa2e776a15baa159f3acf439" prot="public" static="no">
+        <type>typename representation_type::iterator</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::iterator =  typename representation_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2165" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1a0649aaa8ceff31d83f08478f101f32f9" prot="public" static="no">
+        <type>typename representation_type::const_iterator</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::const_iterator =  typename representation_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::const_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2166" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1af70a1d6722fb1cb76597ce9b479c1235" prot="public" static="no">
+        <type>typename representation_type::reverse_iterator</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::reverse_iterator =  typename representation_type::reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::reverse_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2167" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1a1e65c4fd0d5c82dcfff6c541936abce9" prot="public" static="no">
+        <type>typename representation_type::const_reverse_iterator</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::const_reverse_iterator =  typename representation_type::const_reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2168" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1uintwide__t_1ab4b4cd870015d1266399ce0ad9166329" prot="public" static="no">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; static_cast&lt; size_t &gt;(Width2 *static_cast&lt; size_t &gt;(UINT8_C(2))), limb_type, AllocatorType, IsSigned &gt;</type>
+        <definition>using SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::double_width_type =  uintwide_t&lt;static_cast&lt;size_t&gt;(Width2* static_cast&lt;size_t&gt;(UINT8_C(2))), limb_type, AllocatorType, IsSigned&gt;</definition>
+        <argsstring></argsstring>
+        <name>double_width_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::double_width_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2171" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2171" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classSR__TYPES__NS_1_1uintwide__t_1a9914f91ca368e80e83493c3289dcf1ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>typename OtherLimbType</type>
+          </param>
+          <param>
+            <type>typename OtherAllocatorType</type>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class uintwide_t</definition>
+        <argsstring></argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2097" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2097" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classSR__TYPES__NS_1_1uintwide__t_1a05f757ded2a95d69466daf188c097725" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>typename OtherLimbType</type>
+          </param>
+          <param>
+            <type>typename OtherAllocatorType</type>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSignedLeft</declname>
+            <defname>OtherIsSignedLeft</defname>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSignedRight</declname>
+            <defname>OtherIsSignedRight</defname>
+          </param>
+        </templateparamlist>
+        <type>std::pair&lt; <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt;, <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &gt;</type>
+        <definition>std::pair&lt; uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt;, uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &gt; divmod</definition>
+        <argsstring>(const uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt; &amp;a, const uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &amp;b, std::enable_if_t&lt;((!OtherIsSignedLeft) &amp;&amp;(!OtherIsSignedRight)), int &gt; *p_nullparam)</argsstring>
+        <name>divmod</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::divmod</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;((!OtherIsSignedLeft) &amp;&amp;(!OtherIsSignedRight)), int &gt; *</type>
+          <declname>p_nullparam</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3429" column="31"/>
+      </memberdef>
+      <memberdef kind="friend" id="classSR__TYPES__NS_1_1uintwide__t_1a05f757ded2a95d69466daf188c097725" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>typename OtherLimbType</type>
+          </param>
+          <param>
+            <type>typename OtherAllocatorType</type>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSignedLeft</declname>
+            <defname>OtherIsSignedLeft</defname>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSignedRight</declname>
+            <defname>OtherIsSignedRight</defname>
+          </param>
+        </templateparamlist>
+        <type>std::pair&lt; <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt;, <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &gt;</type>
+        <definition>std::pair&lt; uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt;, uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &gt; divmod</definition>
+        <argsstring>(const uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt; &amp;a, const uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &amp;b, std::enable_if_t&lt;((!OtherIsSignedLeft) &amp;&amp;(!OtherIsSignedRight)), int &gt; *p_nullparam)</argsstring>
+        <name>divmod</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::divmod</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;((!OtherIsSignedLeft) &amp;&amp;(!OtherIsSignedRight)), int &gt; *</type>
+          <declname>p_nullparam</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3438" column="31"/>
+      </memberdef>
+      <memberdef kind="friend" id="classSR__TYPES__NS_1_1uintwide__t_1aa993b88052144c9aad0707a16fe91418" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>typename OtherLimbType</type>
+          </param>
+          <param>
+            <type>typename OtherAllocatorType</type>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSignedLeft</declname>
+            <defname>OtherIsSignedLeft</defname>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSignedRight</declname>
+            <defname>OtherIsSignedRight</defname>
+          </param>
+        </templateparamlist>
+        <type>std::pair&lt; <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt;, <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &gt;</type>
+        <definition>std::pair&lt; uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt;, uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &gt; divmod</definition>
+        <argsstring>(const uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt; &amp;a, const uintwide_t&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &amp;b, std::enable_if_t&lt;(OtherIsSignedLeft||OtherIsSignedRight), int &gt; *p_nullparam)</argsstring>
+        <name>divmod</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::divmod</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedLeft &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, OtherLimbType, OtherAllocatorType, OtherIsSignedRight &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(OtherIsSignedLeft||OtherIsSignedRight), int &gt; *</type>
+          <declname>p_nullparam</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3447" column="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classSR__TYPES__NS_1_1uintwide__t_1a1f00b3f0031b41dd9329f548601469c6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::my_width2</definition>
+        <argsstring></argsstring>
+        <name>my_width2</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::my_width2</qualifiedname>
+        <initializer>= Width2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2124" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__TYPES__NS_1_1uintwide__t_1afa98b1c2f15aeb66d705b7ec280d6bf1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::number_of_limbs</definition>
+        <argsstring></argsstring>
+        <name>number_of_limbs</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::number_of_limbs</qualifiedname>
+        <initializer>=
+            static_cast&lt;size_t&gt;
+            (
+                Width2 / static_cast&lt;size_t&gt;(std::numeric_limits&lt;limb_type&gt;::digits)
+                )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2127" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__TYPES__NS_1_1uintwide__t_1a07e9604f2361a1fd710b18e8089ee029" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::number_of_limbs_karatsuba_threshold</definition>
+        <argsstring></argsstring>
+        <name>number_of_limbs_karatsuba_threshold</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::number_of_limbs_karatsuba_threshold</qualifiedname>
+        <initializer>=
+            static_cast&lt;size_t&gt;
+            (
+                static_cast&lt;unsigned&gt;
+                (
+                    static_cast&lt;unsigned&gt;(UINT8_C(128))
+                    + static_cast&lt;unsigned&gt;(UINT8_C(1))
+                    )
+                )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2133" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2133" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__TYPES__NS_1_1uintwide__t_1a91fc07408480e8e91cef34d4d606530c" prot="private" static="no" mutable="no">
+        <type>representation_type</type>
+        <definition>representation_type SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::values</definition>
+        <argsstring></argsstring>
+        <name>values</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::values</qualifiedname>
+        <initializer>{
+          static_cast&lt;typename representation_type::size_type&gt;(number_of_limbs),
+          static_cast&lt;typename representation_type::value_type&gt;(UINT8_C(0)),
+          typename representation_type::allocator_type()
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3412" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3413" bodyend="3417"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a8d943a87623862a0d984e2a27018b28a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>()=default</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2174" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a3bcf9c141a31074aa9b137b75b853135" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const UnsignedIntegralType v, std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value &amp;&amp;(std::numeric_limits&lt; UnsignedIntegralType &gt;::digits&lt;=std::numeric_limits&lt; limb_type &gt;::digits))&gt; *=nullptr)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value &amp;&amp;(std::numeric_limits&lt; UnsignedIntegralType &gt;::digits&lt;=std::numeric_limits&lt; limb_type &gt;::digits))&gt; *</type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2180" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2180" bodyend="2186"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a4be77deed4cd0e69e6bdf008430e7a54" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const UnsignedIntegralType v, std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value &amp;&amp;(std::numeric_limits&lt; UnsignedIntegralType &gt;::digits &gt; std::numeric_limits&lt; limb_type &gt;::digits))&gt; *p_nullparam=nullptr)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value &amp;&amp;(std::numeric_limits&lt; UnsignedIntegralType &gt;::digits &gt; std::numeric_limits&lt; limb_type &gt;::digits))&gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2192" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2192" bodyend="2221"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9b847a296ec831c27a3f61b960a528cd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename SignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const SignedIntegralType v, std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value)&gt; *p_nullparam=nullptr)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const SignedIntegralType</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value)&gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2225" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2225" bodyend="2245"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a03e1f56701c15fb70819689cc7b8d74b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FloatingPointType</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(std::is_floating_point&lt; FloatingPointType &gt;::value)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const FloatingPointType f)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const FloatingPointType</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2250" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2250" bodyend="2303"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a33849c0166fe740e6851304701a921f0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const uintwide_t &amp;other)=default</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2308" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aec4e992ef029cd030bc1e74aeb266178" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(OtherIsSigned !=IsSigned)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const uintwide_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;other)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2316" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2316" bodyend="2317"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ae4d49d585a649b198b4b7634ffd536c1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(Width2&lt; OtherWidth2)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;v)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2324" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2324" bodyend="2348"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ae4d49d585a649b198b4b7634ffd536c1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(Width2 &gt; OtherWidth2)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;v)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2355" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2355" bodyend="2381"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a37cd0e1ac0208de0157a3059a135aad9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const char *str_input)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str_input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2384" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2384" bodyend="2396"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a1eb9648f265de57e0ee9057e807e8aa2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(uintwide_t &amp;&amp;) noexcept=default</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2399" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a29e40933bcf2343ce44022eebbe19595" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(IsSigned !=OtherIsSigned)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(uintwide_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;&amp;other)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2405" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2405" bodyend="2406"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a669753fd3b000092bf5739c264e2e42a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;=default</type>
+        <definition>uintwide_t &amp;=default SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator=</definition>
+        <argsstring>(const uintwide_t &amp;)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2409" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a4049cbe84a23ecef0c83f62e9fc30613" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(OtherIsSigned !=IsSigned)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator=</definition>
+        <argsstring>(const uintwide_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2414" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2414" bodyend="2419"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aa878a220ccbb9cbaada0f08e7d944842" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;=default</type>
+        <definition>uintwide_t &amp;=default SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator=</definition>
+        <argsstring>(uintwide_t &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2422" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a59653f567305b8218dfd5353808eb9fc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(IsSigned !=OtherIsSigned)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator=</definition>
+        <argsstring>(uintwide_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2427" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2427" bodyend="2432"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ab1b90ddd01477c371193ce448798da3d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator=</definition>
+        <argsstring>(const std::string &amp;estr)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator=</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>estr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2435" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2435" bodyend="2440"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aaed3e4a13bf71cad24f823f4bcad8368" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator long double</definition>
+        <argsstring>() const</argsstring>
+        <name>operator long double</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator long double</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2443" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2443" bodyend="2443"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1af6bba53f8a16934de9085c875945b946" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator double</definition>
+        <argsstring>() const</argsstring>
+        <name>operator double</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator double</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2444" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2444" bodyend="2444"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a982c858af39db90ea585e72829e029dc" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator float</definition>
+        <argsstring>() const</argsstring>
+        <name>operator float</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator float</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2445" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2445" bodyend="2445"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a70c053f84d245207627ef530253e006f" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IntegralType</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>std::enable_if_t&lt;std::is_integral&lt;IntegralType&gt;::value&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator IntegralType</definition>
+        <argsstring>() const</argsstring>
+        <name>operator IntegralType</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator IntegralType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2450" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2450" bodyend="2460"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a73a6fd9f6089164956ff9dd7159a3a5b" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2463" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2463" bodyend="2463"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a43ea98b344709d94e71651b46c314c73" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2469" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2469" bodyend="2504"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a0b242f596c0a1864c38c2a7e0842370f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>representation_type &amp;</type>
+        <definition>representation_type &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::representation</definition>
+        <argsstring>()</argsstring>
+        <name>representation</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::representation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2507" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2507" bodyend="2507"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1afa34c4ac592d1ebb57f983a39b321c5c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::representation</definition>
+        <argsstring>() const -&gt; const representation_type &amp;</argsstring>
+        <name>representation</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::representation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2508" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2508" bodyend="2508"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a75c37d783f591714654309c855a46155" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::crepresentation</definition>
+        <argsstring>() const -&gt; const representation_type &amp;</argsstring>
+        <name>crepresentation</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::crepresentation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2509" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2509" bodyend="2509"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ab6a7924d8bd3067a1227b42f57d1e3f5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>const uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator+</definition>
+        <argsstring>() const</argsstring>
+        <name>operator+</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator+</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2512" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2512" bodyend="2512"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9ec0e3dfe5d6d7f373f3941a9904a004" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref></type>
+        <definition>uintwide_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator-</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2513" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2513" bodyend="2513"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9e5db0af3f69184b8c2a5878097f5fbf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator+=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2515" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2515" bodyend="2543"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a4cdc51de8a92a965c1781890df19ae3b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator-=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2545" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2545" bodyend="2564"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a1de42b7d2fdc6e8046fa1cc4dd5ac123" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator*=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2566" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2566" bodyend="2580"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a42044d94d5103663b522765e6b11f02a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::mul_by_limb</definition>
+        <argsstring>(const limb_type v)</argsstring>
+        <name>mul_by_limb</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::mul_by_limb</qualifiedname>
+        <param>
+          <type>const limb_type</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2582" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2582" bodyend="2597"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ae624b5c1ec3e703a3c6b80c73b864275" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator/=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator/=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2599" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2599" bodyend="2641"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a5b6178ae4de947fa4ef71faf4f6e576b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator%=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator%=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator%=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2643" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2643" bodyend="2685"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a5b072b073501305c219c90fa70ed3862" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2688" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2688" bodyend="2688"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1acd517b05c63b30a8a96e37b7fca6cae6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator--</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2689" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2689" bodyend="2689"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aab06973e67290a0596ad8e0e37cccd9f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref></type>
+        <definition>uintwide_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2692" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2692" bodyend="2692"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a6a59bd09eb39269f347cc5e745c61ba1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref></type>
+        <definition>uintwide_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2693" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2693" bodyend="2693"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1afa7c206a9a58aff41051479601bf6507" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator~</definition>
+        <argsstring>()</argsstring>
+        <name>operator~</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator~</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2695" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2695" bodyend="2701"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1af5217134c389ebfef608773ad46688a3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator|=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator|=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator|=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2703" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2703" bodyend="2717"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a05ba6fe36b80a66cf22cbc11a075ebc3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator^=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator^=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator^=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2719" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2719" bodyend="2737"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ad417e013abc00fd993a6617fc01f2082" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+        <definition>uintwide_t &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&amp;=</definition>
+        <argsstring>(const uintwide_t &amp;other)</argsstring>
+        <name>operator&amp;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&amp;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2739" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2739" bodyend="2753"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1acfba62b06efc08d1a96bca45b1776eb5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename SignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt; &amp;</type>
+        <definition>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), uintwide_t &gt; &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&lt;&lt;=</definition>
+        <argsstring>(const SignedIntegralType n)</argsstring>
+        <name>operator&lt;&lt;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&lt;&lt;=</qualifiedname>
+        <param>
+          <type>const SignedIntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2756" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2756" bodyend="2783"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a590649c7be471279056fe73756debe6f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;(!std::is_signed&lt; UnsignedIntegralType &gt;::value)), <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt; &amp;</type>
+        <definition>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;(!std::is_signed&lt; UnsignedIntegralType &gt;::value)), uintwide_t &gt; &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&lt;&lt;=</definition>
+        <argsstring>(const UnsignedIntegralType n)</argsstring>
+        <name>operator&lt;&lt;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&lt;&lt;=</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2786" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2786" bodyend="2806"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a8c7b6dd8b8dfd86184caffe88a48820f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename SignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt; &amp;</type>
+        <definition>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), uintwide_t &gt; &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&gt;&gt;=</definition>
+        <argsstring>(const SignedIntegralType n)</argsstring>
+        <name>operator&gt;&gt;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&gt;&gt;=</qualifiedname>
+        <param>
+          <type>const SignedIntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2809" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2809" bodyend="2839"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a02d536cbeb76d5233e52d77dc3f64513" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;(!std::is_signed&lt; UnsignedIntegralType &gt;::value)), <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt; &amp;</type>
+        <definition>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;(!std::is_signed&lt; UnsignedIntegralType &gt;::value)), uintwide_t &gt; &amp; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&gt;&gt;=</definition>
+        <argsstring>(const UnsignedIntegralType n)</argsstring>
+        <name>operator&gt;&gt;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&gt;&gt;=</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2842" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2842" bodyend="2865"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a589eee06b28e4d4a33aa3ec726a109f6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator==</definition>
+        <argsstring>(const uintwide_t &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2868" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2868" bodyend="2868"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9b57810b4dab3c17adf5052abc73e9bd" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&lt;</definition>
+        <argsstring>(const uintwide_t &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2869" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2869" bodyend="2869"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a675e6f79b124d6029f84cbe5b543f026" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&gt;</definition>
+        <argsstring>(const uintwide_t &amp;other) const</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2870" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2870" bodyend="2870"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a94e4b0eba55cd795b045e77b7bd14f10" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator!=</definition>
+        <argsstring>(const uintwide_t &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2871" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2871" bodyend="2871"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a6977ad9525eca4ebbc8cbbaba32466f9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&lt;=</definition>
+        <argsstring>(const uintwide_t &amp;other) const</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2872" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2872" bodyend="2872"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9467f3ca9966a5b00d9aba3c8041a5bc" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::operator&gt;=</definition>
+        <argsstring>(const uintwide_t &amp;other) const</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::operator&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2873" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2873" bodyend="2873"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a1585bae0635cef8d7c254966d63e5bfe" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename OutputStrIterator</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::wr_string</definition>
+        <argsstring>(OutputStrIterator str_result, const std::uint_fast8_t base_rep=static_cast&lt; std::uint_fast8_t &gt;(UINT8_C(0x10)), const bool show_base=true, const bool show_pos=false, const bool is_uppercase=true, unsigned_fast_type field_width=static_cast&lt; unsigned_fast_type &gt;(UINT8_C(0)), const char fill_char_str=&apos;0&apos;) const</argsstring>
+        <name>wr_string</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::wr_string</qualifiedname>
+        <param>
+          <type>OutputStrIterator</type>
+          <declname>str_result</declname>
+        </param>
+        <param>
+          <type>const std::uint_fast8_t</type>
+          <declname>base_rep</declname>
+          <defval>static_cast&lt; std::uint_fast8_t &gt;(UINT8_C(0x10))</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>show_base</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>show_pos</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>is_uppercase</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>unsigned_fast_type</type>
+          <declname>field_width</declname>
+          <defval>static_cast&lt; unsigned_fast_type &gt;(UINT8_C(0))</defval>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>fill_char_str</declname>
+          <defval>&apos;0&apos;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2928" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2928" bodyend="3146"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a454b7ff8fa83cd7f040358da5a10be05" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>RePhraseIsSigned</declname>
+            <defname>RePhraseIsSigned</defname>
+            <defval>IsSigned</defval>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(!RePhraseIsSigned)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::compare</definition>
+        <argsstring>(const uintwide_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;other) const -&gt; std::int_fast8_t</argsstring>
+        <name>compare</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::compare</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3150" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3150" bodyend="3155"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a454b7ff8fa83cd7f040358da5a10be05" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>RePhraseIsSigned</declname>
+            <defname>RePhraseIsSigned</defname>
+            <defval>IsSigned</defval>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; RePhraseIsSigned &gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::compare</definition>
+        <argsstring>(const uintwide_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;other) const -&gt; std::int_fast8_t</argsstring>
+        <name>compare</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::compare</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3159" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3159" bodyend="3182"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1af4b698f7ed5ac3c67fa9417f98904d74" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::negate</definition>
+        <argsstring>()</argsstring>
+        <name>negate</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::negate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3189" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3189" bodyend="3194"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a11559f131c2406b56729c0ffa9f53f81" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_divide_by_single_limb</definition>
+        <argsstring>(const limb_type short_denominator, const unsigned_fast_type u_offset, uintwide_t *remainder)</argsstring>
+        <name>eval_divide_by_single_limb</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_divide_by_single_limb</qualifiedname>
+        <param>
+          <type>const limb_type</type>
+          <declname>short_denominator</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>u_offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> *</type>
+          <declname>remainder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3197" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3197" bodyend="3252"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a5a10395e6804cb8c3ace1c7e486cd918" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::is_zero</definition>
+        <argsstring>() const -&gt; bool</argsstring>
+        <name>is_zero</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::is_zero</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3254" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3254" bodyend="3264"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aa9fdffcda9af236e3219bfc1eccd63d3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(!OtherIsSigned), <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt;</type>
+        <definition>static constexpr std::enable_if_t&lt;(!OtherIsSigned), uintwide_t &gt; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::limits_helper_max</definition>
+        <argsstring>()</argsstring>
+        <name>limits_helper_max</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::limits_helper_max</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2877" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2877" bodyend="2884"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a556b9c4dff6d2884f119516ad287cf02" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt; OtherIsSigned, <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt;</type>
+        <definition>static constexpr std::enable_if_t&lt; OtherIsSigned, uintwide_t &gt; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::limits_helper_max</definition>
+        <argsstring>()</argsstring>
+        <name>limits_helper_max</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::limits_helper_max</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2887" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2887" bodyend="2902"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a3b187653f22273ef8b0769f65ce6bd53" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(!OtherIsSigned), <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt;</type>
+        <definition>static constexpr std::enable_if_t&lt;(!OtherIsSigned), uintwide_t &gt; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::limits_helper_min</definition>
+        <argsstring>()</argsstring>
+        <name>limits_helper_min</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::limits_helper_min</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2905" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2905" bodyend="2908"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a5919b2acaaefae57b6eab233bdf38ed2" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>OtherIsSigned</declname>
+            <defname>OtherIsSigned</defname>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt; OtherIsSigned, <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &gt;</type>
+        <definition>static constexpr std::enable_if_t&lt; OtherIsSigned, uintwide_t &gt; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::limits_helper_min</definition>
+        <argsstring>()</argsstring>
+        <name>limits_helper_min</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::limits_helper_min</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2911" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2911" bodyend="2924"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ac441a316040159f04b1c3d09367a0a94" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>RePhraseIsSigned</declname>
+            <defname>RePhraseIsSigned</defname>
+            <defval>IsSigned</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static constexpr bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::is_neg</definition>
+        <argsstring>(const uintwide_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;, std::enable_if_t&lt;(!RePhraseIsSigned), int &gt; *=nullptr)</argsstring>
+        <name>is_neg</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::is_neg</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;</type>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(!RePhraseIsSigned), int &gt; *</type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3267" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3267" bodyend="3271"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a218cc63bd8af53a9bd03645fbd71de76" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>RePhraseIsSigned</declname>
+            <defname>RePhraseIsSigned</defname>
+            <defval>IsSigned</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static constexpr bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::is_neg</definition>
+        <argsstring>(const uintwide_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;a, std::enable_if_t&lt; RePhraseIsSigned, int &gt; *p_nullparam=nullptr)</argsstring>
+        <name>is_neg</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::is_neg</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt; RePhraseIsSigned, int &gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3274" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3274" bodyend="3280"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1af3b12c26bb7e6f31d242c919148aaf9b" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref></type>
+        <definition>static constexpr uintwide_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::from_rep</definition>
+        <argsstring>(const representation_type &amp;other_rep)</argsstring>
+        <name>from_rep</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::from_rep</qualifiedname>
+        <param>
+          <type>const representation_type &amp;</type>
+          <declname>other_rep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3282" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3282" bodyend="3316"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a04dcdb37d03c0b3f14b8f28d7a9b4600" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref></type>
+        <definition>static constexpr uintwide_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::from_rep</definition>
+        <argsstring>(representation_type &amp;&amp;other_rep) noexcept</argsstring>
+        <name>from_rep</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::from_rep</qualifiedname>
+        <param>
+          <type>representation_type &amp;&amp;</type>
+          <declname>other_rep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3318" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3318" bodyend="3354"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ad9f9ef44444060253e09877c2cf05e0a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>static constexpr char SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::my_fill_char</definition>
+        <argsstring>()</argsstring>
+        <name>my_fill_char</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::my_fill_char</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3356" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3356" bodyend="3356"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1af0519b2a1893efa3acdb258b90c3df09" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static constexpr bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::is_not_fill_char</definition>
+        <argsstring>(char c)</argsstring>
+        <name>is_not_fill_char</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::is_not_fill_char</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3358" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3358" bodyend="3358"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a815ba2e1875c711268035d5f40dce451" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static constexpr size_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::wr_string_max_buffer_size_oct</definition>
+        <argsstring>()</argsstring>
+        <name>wr_string_max_buffer_size_oct</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_oct</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3362" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3362" bodyend="3376"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1abc01405ce05afebdef78eddcd062595e" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static constexpr size_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::wr_string_max_buffer_size_hex</definition>
+        <argsstring>()</argsstring>
+        <name>wr_string_max_buffer_size_hex</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_hex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3378" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3378" bodyend="3392"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9db11ee482f6c554822279bbb7f34897" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static constexpr size_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::wr_string_max_buffer_size_dec</definition>
+        <argsstring>()</argsstring>
+        <name>wr_string_max_buffer_size_dec</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_dec</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3394" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3394" bodyend="3406"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a3bf8bdf6ef991328da5954871ecd4fea" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::auto::test_uintwide_t_edge::test_various_isolated_edge_cases</definition>
+        <argsstring>() -&gt; bool</argsstring>
+        <name>auto::test_uintwide_t_edge::test_various_isolated_edge_cases</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::test_various_isolated_edge_cases</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3422" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a418a6f55e657ab856206e625c3d4f274" prot="private" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(const representation_type &amp;other_rep)</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>const representation_type &amp;</type>
+          <declname>other_rep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3462" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3462" bodyend="3463"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a2c65131ec03fc2a1668352353366ca67" prot="private" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::uintwide_t</definition>
+        <argsstring>(representation_type &amp;&amp;other_rep) noexcept</argsstring>
+        <name>uintwide_t</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::uintwide_t</qualifiedname>
+        <param>
+          <type>representation_type &amp;&amp;</type>
+          <declname>other_rep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3465" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3465" bodyend="3466"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aa1d8c7a8c51886dedd15a965eff6707e" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnknownBuiltInIntegralType</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>std::enable_if_t&lt;std::is_integral&lt;UnknownBuiltInIntegralType&gt;::value&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::extract_builtin_integral_type</definition>
+        <argsstring>() const -&gt; UnknownBuiltInIntegralType</argsstring>
+        <name>extract_builtin_integral_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::extract_builtin_integral_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3581" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3581" bodyend="3594"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a3d1df7635647c26e58c736e771267ad4" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FloatingPointType</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>std::enable_if_t&lt;std::is_floating_point&lt;FloatingPointType&gt;::value&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::extract_builtin_floating_point_type</definition>
+        <argsstring>() const -&gt; FloatingPointType</argsstring>
+        <name>extract_builtin_floating_point_type</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::extract_builtin_floating_point_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3600" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3600" bodyend="3650"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aceb71a97e03392485ad08cffc4043737" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_divide_knuth</definition>
+        <argsstring>(const uintwide_t &amp;other, uintwide_t *remainder=nullptr)</argsstring>
+        <name>eval_divide_knuth</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_divide_knuth</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> *</type>
+          <declname>remainder</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4725" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4725" bodyend="4812"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aab396581e65f6722ee845e01e56654a1" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>RePhraseWidth2</declname>
+            <defname>RePhraseWidth2</defname>
+            <defval>Width2</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_divide_knuth_core</definition>
+        <argsstring>(const unsigned_fast_type u_offset, const unsigned_fast_type v_offset, const uintwide_t &amp;other, uintwide_t *remainder, std::enable_if_t&lt;(RePhraseWidth2 &gt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; limb_type &gt;::digits)), int &gt; *p_nullparam=nullptr)</argsstring>
+        <name>eval_divide_knuth_core</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_divide_knuth_core</qualifiedname>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>u_offset</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>v_offset</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> *</type>
+          <declname>remainder</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(RePhraseWidth2 &gt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; limb_type &gt;::digits)), int &gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4815" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4815" bodyend="5070"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a9d927b05f34f8b2e60a19fe7a7b0ba3c" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>RePhraseWidth2</declname>
+            <defname>RePhraseWidth2</defname>
+            <defval>Width2</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_divide_knuth_core</definition>
+        <argsstring>(const unsigned_fast_type u_offset, const unsigned_fast_type v_offset, const uintwide_t &amp;other, uintwide_t *remainder, std::enable_if_t&lt;(RePhraseWidth2&lt;=static_cast&lt; size_t &gt;(std::numeric_limits&lt; limb_type &gt;::digits)), int &gt; *p_nullparam=nullptr)</argsstring>
+        <name>eval_divide_knuth_core</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_divide_knuth_core</qualifiedname>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>u_offset</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>v_offset</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref> *</type>
+          <declname>remainder</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;(RePhraseWidth2&lt;=static_cast&lt; size_t &gt;(std::numeric_limits&lt; limb_type &gt;::digits)), int &gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5073" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5073" bodyend="5088"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a64aad33f1637ae72329dcf647f8674a2" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>WIDE_INTEGER_NODISCARD constexpr auto</type>
+        <definition>WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::right_shift_fill_value</definition>
+        <argsstring>() const -&gt; limb_type</argsstring>
+        <name>right_shift_fill_value</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::right_shift_fill_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5096" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5096" bodyend="5104"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a658ab4430f72afbbe69fe71d88bc56ea" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::shl</definition>
+        <argsstring>(IntegralType n)</argsstring>
+        <name>shl</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::shl</qualifiedname>
+        <param>
+          <type>IntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5107" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5107" bodyend="5156"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ad8a632e2541e4807506189f3254a6e41" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::shr</definition>
+        <argsstring>(IntegralType n)</argsstring>
+        <name>shr</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::shr</qualifiedname>
+        <param>
+          <type>IntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5159" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5159" bodyend="5222"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a1943542d554368d0dc372b279eb89ca2" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::rd_string</definition>
+        <argsstring>(const char *str_input, const unsigned_fast_type count, const int base_hint)</argsstring>
+        <name>rd_string</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::rd_string</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str_input</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base_hint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5225" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5225" bodyend="5361"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a0ddc2ab8397ccb49d538129bfad40be8" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::bitwise_not</definition>
+        <argsstring>()</argsstring>
+        <name>bitwise_not</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::bitwise_not</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5363" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5363" bodyend="5369"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a533d62372bc9e3727c480e35fab8360d" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::preincrement</definition>
+        <argsstring>()</argsstring>
+        <name>preincrement</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::preincrement</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5371" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5371" bodyend="5381"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a362d9cffc86d39ee87035409a88e75fa" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::predecrement</definition>
+        <argsstring>()</argsstring>
+        <name>predecrement</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::predecrement</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5383" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5383" bodyend="5393"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a7c8b12e6afeb8187edd02c4130616b90" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const bool</type>
+            <declname>RePhraseIsSigned</declname>
+            <defname>RePhraseIsSigned</defname>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(!RePhraseIsSigned)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>static constexpr unsigned_fast_type SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::extract_hex_digits</definition>
+        <argsstring>(uintwide_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;tu, char *pstr, const bool is_uppercase)</argsstring>
+        <name>extract_hex_digits</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::extract_hex_digits</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &amp;</type>
+          <declname>tu</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>pstr</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>is_uppercase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3470" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3470" bodyend="3493"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a3501b7890af55ca98ecc808f9da374cb" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIteratorLeftType</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRightType</type>
+          </param>
+        </templateparamlist>
+        <type>std::int_fast8_t</type>
+        <definition>static constexpr std::int_fast8_t SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::compare_ranges</definition>
+        <argsstring>(InputIteratorLeftType a, InputIteratorRightType b, const unsigned_fast_type count)</argsstring>
+        <name>compare_ranges</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::compare_ranges</qualifiedname>
+        <param>
+          <type>InputIteratorLeftType</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>InputIteratorRightType</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3497" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3497" bodyend="3528"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a08431866f0ad23304094ada30a262016" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_mul_unary</definition>
+        <argsstring>(uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;u, const uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;v, std::enable_if_t&lt;((OtherWidth2/std::numeric_limits&lt; LimbType &gt;::digits)&lt; number_of_limbs_karatsuba_threshold)&gt; *p_nullparam=nullptr)</argsstring>
+        <name>eval_mul_unary</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_mul_unary</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;((OtherWidth2/std::numeric_limits&lt; LimbType &gt;::digits)&lt; number_of_limbs_karatsuba_threshold)&gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3654" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3654" bodyend="3684"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ab7dbf10852ea5c78822ba7e2dada91e7" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>const size_t</type>
+            <declname>OtherWidth2</declname>
+            <defname>OtherWidth2</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_mul_unary</definition>
+        <argsstring>(uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;u, const uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;v, std::enable_if_t&lt;((OtherWidth2/std::numeric_limits&lt; LimbType &gt;::digits) &gt;=number_of_limbs_karatsuba_threshold)&gt; *p_nullparam=nullptr)</argsstring>
+        <name>eval_mul_unary</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_mul_unary</qualifiedname>
+        <param>
+          <type><ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; OtherWidth2, LimbType, AllocatorType, IsSigned &gt; &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::enable_if_t&lt;((OtherWidth2/std::numeric_limits&lt; LimbType &gt;::digits) &gt;=number_of_limbs_karatsuba_threshold)&gt; *</type>
+          <declname>p_nullparam</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3687" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3687" bodyend="3732"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a03a4fe099175c85444b05441064d7f37" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRight</type>
+          </param>
+        </templateparamlist>
+        <type>limb_type</type>
+        <definition>static constexpr limb_type SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_add_n</definition>
+        <argsstring>(ResultIterator r, InputIteratorLeft u, InputIteratorRight v, const unsigned_fast_type count, const limb_type carry_in=static_cast&lt; limb_type &gt;(UINT8_C(0)))</argsstring>
+        <name>eval_add_n</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_add_n</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>InputIteratorRight</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const limb_type</type>
+          <declname>carry_in</declname>
+          <defval>static_cast&lt; limb_type &gt;(UINT8_C(0))</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3737" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3737" bodyend="3774"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ab02b40db1ab8b92caa0f98afb97f373b" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRight</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static constexpr bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_subtract_n</definition>
+        <argsstring>(ResultIterator r, InputIteratorLeft u, InputIteratorRight v, const unsigned_fast_type count, const bool has_borrow_in=false)</argsstring>
+        <name>eval_subtract_n</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_subtract_n</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>InputIteratorRight</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>has_borrow_in</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3779" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3779" bodyend="3827"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aad4b07ee980797f065a935f0a78b47c8" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRight</type>
+          </param>
+          <param>
+            <type>const size_t</type>
+            <declname>RePhraseWidth2</declname>
+            <defname>RePhraseWidth2</defname>
+            <defval>Width2</defval>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;(<ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; RePhraseWidth2, LimbType, AllocatorType, IsSigned &gt;::number_of_limbs==4U)&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_n_by_n_to_lo_part</definition>
+        <argsstring>(ResultIterator r, InputIteratorLeft a, InputIteratorRight b, const unsigned_fast_type count)</argsstring>
+        <name>eval_multiply_n_by_n_to_lo_part</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_n_by_n_to_lo_part</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>InputIteratorRight</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="3834" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="3834" bodyend="3969"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1aad4b07ee980797f065a935f0a78b47c8" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRight</type>
+          </param>
+          <param>
+            <type>const size_t</type>
+            <declname>RePhraseWidth2</declname>
+            <defname>RePhraseWidth2</defname>
+            <defval>Width2</defval>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt;((<ref refid="classSR__TYPES__NS_1_1uintwide__t" kindref="compound">uintwide_t</ref>&lt; RePhraseWidth2, LimbType, AllocatorType &gt;::number_of_limbs !=static_cast&lt; size_t &gt;(UINT32_C(4))))&gt; const *</type>
+            <defval>nullptr</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_n_by_n_to_lo_part</definition>
+        <argsstring>(ResultIterator r, InputIteratorLeft a, InputIteratorRight b, const unsigned_fast_type count)</argsstring>
+        <name>eval_multiply_n_by_n_to_lo_part</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_n_by_n_to_lo_part</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>InputIteratorRight</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4279" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4279" bodyend="4373"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a5f07e853303c2a5d28c73bd809a92051" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRight</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_n_by_n_to_2n</definition>
+        <argsstring>(ResultIterator r, InputIteratorLeft a, InputIteratorRight b, const unsigned_fast_type count)</argsstring>
+        <name>eval_multiply_n_by_n_to_2n</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_n_by_n_to_2n</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>InputIteratorRight</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4378" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4378" bodyend="4428"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ac645a8096d0b243af399d6b81fe801db" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+        </templateparamlist>
+        <type>limb_type</type>
+        <definition>static constexpr limb_type SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_1d</definition>
+        <argsstring>(ResultIterator r, InputIteratorLeft a, const typename detail::iterator_detail::iterator_traits&lt; InputIteratorLeft &gt;::value_type b, const unsigned_fast_type count)</argsstring>
+        <name>eval_multiply_1d</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_1d</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const typename <ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits" kindref="compound">detail::iterator_detail::iterator_traits</ref>&lt; InputIteratorLeft &gt;::value_type</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4432" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4432" bodyend="4508"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a5d6dcc764d3882903a2d7d16a115eb49" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_kara_propagate_carry</definition>
+        <argsstring>(InputIteratorLeft t, const unsigned_fast_type n, const typename detail::iterator_detail::iterator_traits&lt; InputIteratorLeft &gt;::value_type carry)</argsstring>
+        <name>eval_multiply_kara_propagate_carry</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_kara_propagate_carry</qualifiedname>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const typename <ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits" kindref="compound">detail::iterator_detail::iterator_traits</ref>&lt; InputIteratorLeft &gt;::value_type</type>
+          <declname>carry</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4512" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4512" bodyend="4539"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1abaf7b7b36dc9c558ca225834863807ff" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_kara_propagate_borrow</definition>
+        <argsstring>(InputIteratorLeft t, const unsigned_fast_type n, const bool has_borrow)</argsstring>
+        <name>eval_multiply_kara_propagate_borrow</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_kara_propagate_borrow</qualifiedname>
+        <param>
+          <type>InputIteratorLeft</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>has_borrow</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4543" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4543" bodyend="4574"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1ac9365267f186aaf9a3e4418936539948" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultIterator</type>
+          </param>
+          <param>
+            <type>typename InputIteratorLeft</type>
+          </param>
+          <param>
+            <type>typename InputIteratorRight</type>
+          </param>
+          <param>
+            <type>typename InputIteratorTemp</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::eval_multiply_kara_n_by_n_to_2n</definition>
+        <argsstring>(ResultIterator r, const InputIteratorLeft a, const InputIteratorRight b, const unsigned_fast_type n, InputIteratorTemp t)</argsstring>
+        <name>eval_multiply_kara_n_by_n_to_2n</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::eval_multiply_kara_n_by_n_to_2n</qualifiedname>
+        <param>
+          <type>ResultIterator</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const InputIteratorLeft</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const InputIteratorRight</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>InputIteratorTemp</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="4581" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="4581" bodyend="4723"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__TYPES__NS_1_1uintwide__t_1a767ebb7a1698add82d452e32b25b54eb" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static constexpr bool SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt;::exceeds_width</definition>
+        <argsstring>(IntegralType n)</argsstring>
+        <name>exceeds_width</name>
+        <qualifiedname>SR_TYPES_NS::uintwide_t::exceeds_width</qualifiedname>
+        <param>
+          <type>IntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5091" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5091" bodyend="5094"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="2090" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="2091" bodyend="5394"/>
+    <listofallmembers>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a3bf8bdf6ef991328da5954871ecd4fea" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>auto::test_uintwide_t_edge::test_various_isolated_edge_cases</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0ddc2ab8397ccb49d538129bfad40be8" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>bitwise_not</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a454b7ff8fa83cd7f040358da5a10be05" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>compare</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a454b7ff8fa83cd7f040358da5a10be05" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>compare</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a3501b7890af55ca98ecc808f9da374cb" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>compare_ranges</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0649aaa8ceff31d83f08478f101f32f9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>const_iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a1e65c4fd0d5c82dcfff6c541936abce9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>const_reverse_iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a75c37d783f591714654309c855a46155" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>crepresentation</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a05f757ded2a95d69466daf188c097725" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>divmod</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a05f757ded2a95d69466daf188c097725" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>divmod</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aa993b88052144c9aad0707a16fe91418" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>divmod</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab4c9d2dccf8b830dbe5400deb51a7c3a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>double_limb_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab4b4cd870015d1266399ce0ad9166329" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>double_width_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a03a4fe099175c85444b05441064d7f37" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_add_n</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a11559f131c2406b56729c0ffa9f53f81" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_divide_by_single_limb</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aceb71a97e03392485ad08cffc4043737" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_divide_knuth</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aab396581e65f6722ee845e01e56654a1" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_divide_knuth_core</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9d927b05f34f8b2e60a19fe7a7b0ba3c" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_divide_knuth_core</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a08431866f0ad23304094ada30a262016" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_mul_unary</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab7dbf10852ea5c78822ba7e2dada91e7" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_mul_unary</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ac645a8096d0b243af399d6b81fe801db" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_1d</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ac9365267f186aaf9a3e4418936539948" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_kara_n_by_n_to_2n</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1abaf7b7b36dc9c558ca225834863807ff" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_kara_propagate_borrow</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a5d6dcc764d3882903a2d7d16a115eb49" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_kara_propagate_carry</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a5f07e853303c2a5d28c73bd809a92051" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_n_by_n_to_2n</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aad4b07ee980797f065a935f0a78b47c8" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_n_by_n_to_lo_part</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aad4b07ee980797f065a935f0a78b47c8" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_multiply_n_by_n_to_lo_part</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab02b40db1ab8b92caa0f98afb97f373b" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>eval_subtract_n</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a767ebb7a1698add82d452e32b25b54eb" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>exceeds_width</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a3d1df7635647c26e58c736e771267ad4" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>extract_builtin_floating_point_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aa1d8c7a8c51886dedd15a965eff6707e" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>extract_builtin_integral_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a7c8b12e6afeb8187edd02c4130616b90" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>extract_hex_digits</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1af3b12c26bb7e6f31d242c919148aaf9b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>from_rep</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a04dcdb37d03c0b3f14b8f28d7a9b4600" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>from_rep</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ac441a316040159f04b1c3d09367a0a94" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>is_neg</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a218cc63bd8af53a9bd03645fbd71de76" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>is_neg</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1af0519b2a1893efa3acdb258b90c3df09" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>is_not_fill_char</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a5a10395e6804cb8c3ace1c7e486cd918" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>is_zero</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a6d7015b6aa2e776a15baa159f3acf439" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a6340cc51f230221a90c32cffcd4ba606" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>limb_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aa9fdffcda9af236e3219bfc1eccd63d3" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>limits_helper_max</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a556b9c4dff6d2884f119516ad287cf02" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>limits_helper_max</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a3b187653f22273ef8b0769f65ce6bd53" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>limits_helper_min</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a5919b2acaaefae57b6eab233bdf38ed2" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>limits_helper_min</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a42044d94d5103663b522765e6b11f02a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>mul_by_limb</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ad9f9ef44444060253e09877c2cf05e0a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>my_fill_char</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a1f00b3f0031b41dd9329f548601469c6" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>my_width2</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1af4b698f7ed5ac3c67fa9417f98904d74" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>negate</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1afa98b1c2f15aeb66d705b7ec280d6bf1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>number_of_limbs</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a07e9604f2361a1fd710b18e8089ee029" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>number_of_limbs_karatsuba_threshold</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a73a6fd9f6089164956ff9dd7159a3a5b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator bool</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1af6bba53f8a16934de9085c875945b946" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator double</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a982c858af39db90ea585e72829e029dc" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator float</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a70c053f84d245207627ef530253e006f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator IntegralType</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aaed3e4a13bf71cad24f823f4bcad8368" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator long double</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a43ea98b344709d94e71651b46c314c73" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator uintwide_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a94e4b0eba55cd795b045e77b7bd14f10" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator!=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a5b6178ae4de947fa4ef71faf4f6e576b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator%=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ad417e013abc00fd993a6617fc01f2082" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&amp;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a1de42b7d2fdc6e8046fa1cc4dd5ac123" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator*=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab6a7924d8bd3067a1227b42f57d1e3f5" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator+</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a5b072b073501305c219c90fa70ed3862" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator++</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aab06973e67290a0596ad8e0e37cccd9f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator++</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9e5db0af3f69184b8c2a5878097f5fbf" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator+=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9ec0e3dfe5d6d7f373f3941a9904a004" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator-</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1acd517b05c63b30a8a96e37b7fca6cae6" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator--</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a6a59bd09eb39269f347cc5e745c61ba1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator--</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a4cdc51de8a92a965c1781890df19ae3b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator-=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ae624b5c1ec3e703a3c6b80c73b864275" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator/=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9b57810b4dab3c17adf5052abc73e9bd" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&lt;</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1acfba62b06efc08d1a96bca45b1776eb5" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&lt;&lt;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a590649c7be471279056fe73756debe6f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&lt;&lt;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a6977ad9525eca4ebbc8cbbaba32466f9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&lt;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a669753fd3b000092bf5739c264e2e42a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a4049cbe84a23ecef0c83f62e9fc30613" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aa878a220ccbb9cbaada0f08e7d944842" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a59653f567305b8218dfd5353808eb9fc" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab1b90ddd01477c371193ce448798da3d" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a589eee06b28e4d4a33aa3ec726a109f6" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator==</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a675e6f79b124d6029f84cbe5b543f026" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&gt;</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9467f3ca9966a5b00d9aba3c8041a5bc" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&gt;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a8c7b6dd8b8dfd86184caffe88a48820f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&gt;&gt;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a02d536cbeb76d5233e52d77dc3f64513" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator&gt;&gt;=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a05ba6fe36b80a66cf22cbc11a075ebc3" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator^=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1af5217134c389ebfef608773ad46688a3" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator|=</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1afa7c206a9a58aff41051479601bf6507" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>operator~</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a362d9cffc86d39ee87035409a88e75fa" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>predecrement</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a533d62372bc9e3727c480e35fab8360d" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>preincrement</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a1943542d554368d0dc372b279eb89ca2" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>rd_string</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0b242f596c0a1864c38c2a7e0842370f" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>representation</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1afa34c4ac592d1ebb57f983a39b321c5c" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>representation</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ad1369bc9e1c16d293f2d9cb986bcfd00" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>representation_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1af70a1d6722fb1cb76597ce9b479c1235" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>reverse_iterator</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a64aad33f1637ae72329dcf647f8674a2" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>right_shift_fill_value</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a658ab4430f72afbbe69fe71d88bc56ea" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>shl</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ad8a632e2541e4807506189f3254a6e41" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>shr</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9914f91ca368e80e83493c3289dcf1ca" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a8d943a87623862a0d984e2a27018b28a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a3bcf9c141a31074aa9b137b75b853135" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a4be77deed4cd0e69e6bdf008430e7a54" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9b847a296ec831c27a3f61b960a528cd" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a03e1f56701c15fb70819689cc7b8d74b" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a33849c0166fe740e6851304701a921f0" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1aec4e992ef029cd030bc1e74aeb266178" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ae4d49d585a649b198b4b7634ffd536c1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1ae4d49d585a649b198b4b7634ffd536c1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a37cd0e1ac0208de0157a3059a135aad9" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a1eb9648f265de57e0ee9057e807e8aa2" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a29e40933bcf2343ce44022eebbe19595" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a418a6f55e657ab856206e625c3d4f274" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a2c65131ec03fc2a1668352353366ca67" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>uintwide_t</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0983f765d1e0af9d21c612c25eb6e6c0" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>ularge_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0c3b8647669c6ed098f61cb6d19afeeb" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>ushort_type</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a91fc07408480e8e91cef34d4d606530c" prot="private" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>values</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a1585bae0635cef8d7c254966d63e5bfe" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>wr_string</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a9db11ee482f6c554822279bbb7f34897" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>wr_string_max_buffer_size_dec</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1abc01405ce05afebdef78eddcd062595e" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>wr_string_max_buffer_size_hex</name></member>
+      <member refid="classSR__TYPES__NS_1_1uintwide__t_1a815ba2e1875c711268035d5f40dce451" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::uintwide_t</scope><name>wr_string_max_buffer_size_oct</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

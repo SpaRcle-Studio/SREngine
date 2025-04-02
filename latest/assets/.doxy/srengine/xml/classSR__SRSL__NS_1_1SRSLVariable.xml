@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRSL__NS_1_1SRSLVariable" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::SRSLVariable</compoundname>
+    <basecompoundref refid="classSR__SRSL__NS_1_1SRSLLexicalUnit" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLLexicalUnit</basecompoundref>
+    <includes refid="LexicalTree_8h" local="no">LexicalTree.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLVariable_1a8afe39ab82283ed4493714f3c20c9588" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLDecorators" kindref="compound">SRSLDecorators</ref> *</type>
+        <definition>SRSLDecorators* SR_SRSL_NS::SRSLVariable::pDecorators</definition>
+        <argsstring></argsstring>
+        <name>pDecorators</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::pDecorators</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="184" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLVariable_1a712b8706aedde0f6fca6f53e08b9b7c3" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+        <definition>SRSLExpr* SR_SRSL_NS::SRSLVariable::pType</definition>
+        <argsstring></argsstring>
+        <name>pType</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::pType</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="185" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLVariable_1a4bb67dd23f121a3b3e6f1993b7a821a2" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+        <definition>SRSLExpr* SR_SRSL_NS::SRSLVariable::pName</definition>
+        <argsstring></argsstring>
+        <name>pName</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::pName</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="186" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLVariable_1a4533d2c5b8d50f565558c40fc528ccbe" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+        <definition>SRSLExpr* SR_SRSL_NS::SRSLVariable::pExpr</definition>
+        <argsstring></argsstring>
+        <name>pExpr</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::pExpr</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="187" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1a49307edc65e1aa604029dac4113f4aa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLVariable::SRSLVariable</definition>
+        <argsstring>()=default</argsstring>
+        <name>SRSLVariable</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::SRSLVariable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="155" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1a5ba626820aad40634e1d3661fdf304a5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLVariable::SRSLVariable</definition>
+        <argsstring>(SRSLVariable &amp;&amp;other) noexcept</argsstring>
+        <name>SRSLVariable</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::SRSLVariable</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLVariable" kindref="compound">SRSLVariable</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="157" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="157" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1acae6c935721d6126ee2d8755fbf67de2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLVariable" kindref="compound">SRSLVariable</ref> &amp;</type>
+        <definition>SRSLVariable &amp; SR_SRSL_NS::SRSLVariable::operator=</definition>
+        <argsstring>(SRSLVariable &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLVariable" kindref="compound">SRSLVariable</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="164" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="164" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1aab808d7de86c90179b662f6c084cf2ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLVariable::~SRSLVariable</definition>
+        <argsstring>() override</argsstring>
+        <name>~SRSLVariable</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::~SRSLVariable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="172" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="172" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1ad721df68d132442d74143bced44a131d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::SRSLVariable::ToString</definition>
+        <argsstring>(uint32_t deep) const override</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::ToString</qualifiedname>
+        <reimplements refid="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a1d2a7f7ba7273de4230e304dff295496">ToString</reimplements>
+        <param>
+          <type>uint32_t</type>
+          <declname>deep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="179" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1adf34f6615cea4aca57c62f476e841482" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::SRSLVariable::GetType</definition>
+        <argsstring>() const</argsstring>
+        <name>GetType</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::GetType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="181" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLVariable_1ab93b8a454cda48d4e8767dcb39111103" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::SRSLVariable::GetName</definition>
+        <argsstring>() const</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_SRSL_NS::SRSLVariable::GetName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="182" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_SRSL_NS::SRSLLexicalUnit</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLLexicalUnit"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLVariable</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLVariable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_SRSL_NS::SRSLDecorators</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLDecorators"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_SRSL_NS::SRSLExpr</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLExpr"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRSL_NS::SRSLLexicalUnit</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLLexicalUnit"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLVariable</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLVariable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pDecorators</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pExpr</edgelabel>
+          <edgelabel>pName</edgelabel>
+          <edgelabel>pType</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="153" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="153" bodyend="188"/>
+    <listofallmembers>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1ab93b8a454cda48d4e8767dcb39111103" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>GetName</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1adf34f6615cea4aca57c62f476e841482" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>GetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>NonCopyable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1acae6c935721d6126ee2d8755fbf67de2" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRSL_NS::SRSLLexicalUnit::"><scope>SR_SRSL_NS::SRSLVariable</scope><name>operator=</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1a8afe39ab82283ed4493714f3c20c9588" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>pDecorators</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1a4533d2c5b8d50f565558c40fc528ccbe" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>pExpr</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1a4bb67dd23f121a3b3e6f1993b7a821a2" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>pName</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1a712b8706aedde0f6fca6f53e08b9b7c3" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>pType</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1a49307edc65e1aa604029dac4113f4aa8" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>SRSLVariable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1a5ba626820aad40634e1d3661fdf304a5" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>SRSLVariable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1ad721df68d132442d74143bced44a131d" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLVariable_1aab808d7de86c90179b662f6c084cf2ea" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLVariable</scope><name>~SRSLVariable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

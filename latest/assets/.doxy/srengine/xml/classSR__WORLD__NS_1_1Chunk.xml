@@ -1,0 +1,703 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__WORLD__NS_1_1Chunk" kind="class" language="C++" prot="public">
+    <compoundname>SR_WORLD_NS::Chunk</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__CORE__NS_1_1VisualChunk" prot="public" virt="non-virtual">SR_CORE_NS::VisualChunk</derivedcompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classSR__WORLD__NS_1_1Chunk_1aa0ef9f8aa0b3cf0123d80a051d86c5a3" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>LoadState</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::LoadState</qualifiedname>
+        <enumvalue id="classSR__WORLD__NS_1_1Chunk_1aa0ef9f8aa0b3cf0123d80a051d86c5a3a87c261dc44f9a296b05786ef8d23c2ea" prot="public">
+          <name>PreLoaded</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__WORLD__NS_1_1Chunk_1aa0ef9f8aa0b3cf0123d80a051d86c5a3a7381d487d18845b379422325c0a768d6" prot="public">
+          <name>Loaded</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__WORLD__NS_1_1Chunk_1aa0ef9f8aa0b3cf0123d80a051d86c5a3aae11d3ee071e72953c90b02bff1a19cb" prot="public">
+          <name>Unload</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__WORLD__NS_1_1Chunk_1aa0ef9f8aa0b3cf0123d80a051d86c5a3a11803f40c277b679b08ce0b8d38fdefa" prot="public">
+          <name>Preload</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="36" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Chunk_1a18103dc4974d5084056dbf3118ac6ca4" prot="public" static="no">
+        <type>std::function&lt; <ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *(SRChunkAllocArgs)&gt;</type>
+        <definition>typedef std::function&lt;Chunk*(SRChunkAllocArgs)&gt; SR_WORLD_NS::Chunk::Allocator</definition>
+        <argsstring></argsstring>
+        <name>Allocator</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Allocator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="41" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__WORLD__NS_1_1Chunk_1aedb4ee3963d1d23f4d4715ecd0825960" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">Scene</ref> &gt;</type>
+        <definition>using SR_WORLD_NS::Chunk::ScenePtr =  SR_HTYPES_NS::SharedPtr&lt;Scene&gt;</definition>
+        <argsstring></argsstring>
+        <name>ScenePtr</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::ScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a8f09c50cefdcdc405d33797a517dac5b" prot="private" static="yes" mutable="no">
+        <type>Allocator</type>
+        <definition>Allocator SR_WORLD_NS::Chunk::g_allocator</definition>
+        <argsstring></argsstring>
+        <name>g_allocator</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::g_allocator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="72" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1aa6875a8b2e17475d634c2e21b08f069e" prot="protected" static="no" mutable="no">
+        <type>LoadState</type>
+        <definition>LoadState SR_WORLD_NS::Chunk::m_loadState</definition>
+        <argsstring></argsstring>
+        <name>m_loadState</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_loadState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="75" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1ab154ddd9c05d6828a1872833f6d15b4b" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__WORLD__NS_1_1Observer" kindref="compound">Observer</ref> *</type>
+        <definition>Observer* SR_WORLD_NS::Chunk::m_observer</definition>
+        <argsstring></argsstring>
+        <name>m_observer</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_observer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="77" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a0afd98e0eebc541dffcefc3c1aff59e8" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__WORLD__NS_1_1Region" kindref="compound">Region</ref> *</type>
+        <definition>Region* SR_WORLD_NS::Chunk::m_region</definition>
+        <argsstring></argsstring>
+        <name>m_region</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_region</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="78" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a1edc641dc9d70d46f3dfa814674f173d" prot="protected" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_WORLD_NS::Chunk::m_lifetime</definition>
+        <argsstring></argsstring>
+        <name>m_lifetime</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_lifetime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="80" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1aabba4d4e4f7132e19d3a5488551fea86" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::IVector2</type>
+        <definition>SR_MATH_NS::IVector2 SR_WORLD_NS::Chunk::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="82" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a3149485c6e8cae2c91df5b706f424b45" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::IVector3</type>
+        <definition>SR_MATH_NS::IVector3 SR_WORLD_NS::Chunk::m_regionPosition</definition>
+        <argsstring></argsstring>
+        <name>m_regionPosition</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_regionPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="83" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a57af58b90ff0bc7ce686e1a5f30e993a" prot="protected" static="no" mutable="no">
+        <type>SR_MATH_NS::IVector3</type>
+        <definition>SR_MATH_NS::IVector3 SR_WORLD_NS::Chunk::m_position</definition>
+        <argsstring></argsstring>
+        <name>m_position</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="84" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__WORLD__NS_1_1Chunk_1a9d6dab50d9d5b4004a8fab6c20efb202" prot="protected" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; GameObject &gt; &gt;</type>
+        <definition>std::list&lt;SR_HTYPES_NS::SharedPtr&lt;GameObject&gt; &gt; SR_WORLD_NS::Chunk::m_preloaded</definition>
+        <argsstring></argsstring>
+        <name>m_preloaded</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::m_preloaded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="86" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1aff0f93f606c2a5c1bc8b7e453a73e804" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_WORLD_NS::Chunk::Chunk</definition>
+        <argsstring>(SRChunkAllocArgs)</argsstring>
+        <name>Chunk</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Chunk</qualifiedname>
+        <param>
+          <type>SRChunkAllocArgs</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="31" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a32f4d04a381a732c0c07e3fc8ab85f3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_WORLD_NS::Chunk::~Chunk</definition>
+        <argsstring>() override</argsstring>
+        <name>~Chunk</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::~Chunk</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="34" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1ad4d531148868f9ad6b457fee620e2c3a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD LoadState</type>
+        <definition>SR_NODISCARD LoadState SR_WORLD_NS::Chunk::GetState</definition>
+        <argsstring>() const</argsstring>
+        <name>GetState</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::GetState</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="49" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a3fb7a37ec04b7d93dded113d0d385f97" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_WORLD_NS::Chunk::IsAlive</definition>
+        <argsstring>() const</argsstring>
+        <name>IsAlive</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::IsAlive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="50" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1ac8232d05c35ebbaa15e924552d1078d1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_WORLD_NS::Chunk::IsPreLoaded</definition>
+        <argsstring>() const</argsstring>
+        <name>IsPreLoaded</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::IsPreLoaded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="51" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a2c09d08e2eeb22f7432f089cedf7e2a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::IVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::IVector3 SR_WORLD_NS::Chunk::GetPosition</definition>
+        <argsstring>() const</argsstring>
+        <name>GetPosition</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::GetPosition</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="52" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a12f68bb27995884a47e52d5f5e523685" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_WORLD_NS::Chunk::GetWorldPosition</definition>
+        <argsstring>(SR_MATH_NS::Axis center=SR_MATH_NS::Axis::None) const</argsstring>
+        <name>GetWorldPosition</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::GetWorldPosition</qualifiedname>
+        <param>
+          <type>SR_MATH_NS::Axis</type>
+          <declname>center</declname>
+          <defval>SR_MATH_NS::Axis::None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="53" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1abcb9b9635562e4cfcd25fc7c7b72e705" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD ScenePtr</type>
+        <definition>SR_NODISCARD ScenePtr SR_WORLD_NS::Chunk::GetScene</definition>
+        <argsstring>() const</argsstring>
+        <name>GetScene</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::GetScene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="54" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a1c056996e2449d88ff6d0c642f21ba2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SR_WORLD_NS::Chunk::Save</definition>
+        <argsstring>(SR_HTYPES_NS::DataStorage *pContext) const</argsstring>
+        <name>Save</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Save</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> *</type>
+          <declname>pContext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="56" column="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a8e31722e3128faa1d63b215e85b0dac3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_WORLD_NS::Chunk::OnEnter</definition>
+        <argsstring>()</argsstring>
+        <name>OnEnter</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::OnEnter</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1VisualChunk_1a2f26f8ff1c05310bed156b6bc806c82b">OnEnter</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="59" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a883b7ec599bfac9bbec72a59051429ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_WORLD_NS::Chunk::OnExit</definition>
+        <argsstring>()</argsstring>
+        <name>OnExit</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::OnExit</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1VisualChunk_1aee7833cab1baa9d7975b7455c1349af7">OnExit</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="60" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a96f807e0c845dd67e2678e57c1d02578" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_WORLD_NS::Chunk::Reload</definition>
+        <argsstring>()</argsstring>
+        <name>Reload</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Reload</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1VisualChunk_1acced2c4c847659a025d32644d2090ad5">Reload</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="61" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a14a5abe2a7d81b6d56d4d871282ba599" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_WORLD_NS::Chunk::Update</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Update</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1VisualChunk_1aa34d726bf29c94881f5ab660e3172db9">Update</reimplementedby>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="62" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a4a7f8ca9d703d0249052f2710e11f3e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_WORLD_NS::Chunk::Access</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>Access</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Access</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="63" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a0d2fbf30e70809288ddd22a2e33b01f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_WORLD_NS::Chunk::Belongs</definition>
+        <argsstring>(const Math::FVector3 &amp;point)</argsstring>
+        <name>Belongs</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Belongs</qualifiedname>
+        <param>
+          <type>const Math::FVector3 &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="64" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a54ff9a41ef85f2d4805e8aa17e7d8712" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_WORLD_NS::Chunk::Unload</definition>
+        <argsstring>()</argsstring>
+        <name>Unload</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Unload</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1VisualChunk_1a24395e3af563c73fbb73df1d3dd1c611">Unload</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="65" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a9ac35fdf670771506e4e19b42493b6ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_WORLD_NS::Chunk::PreLoad</definition>
+        <argsstring>(SR_HTYPES_NS::Marshal *pMarshal)</argsstring>
+        <name>PreLoad</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::PreLoad</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Marshal" kindref="compound">SR_HTYPES_NS::Marshal</ref> *</type>
+          <declname>pMarshal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="66" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1af197d24b5da4bfb59246bad37c47be9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_WORLD_NS::Chunk::Load</definition>
+        <argsstring>()</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Load</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="67" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a1efded0b832bb1fc1450cd99d708932c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_WORLD_NS::Chunk::ApplyOffset</definition>
+        <argsstring>()</argsstring>
+        <name>ApplyOffset</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::ApplyOffset</qualifiedname>
+        <reimplementedby refid="classSR__CORE__NS_1_1VisualChunk_1a1a73b44ae8302a3da51524bd648f092f">ApplyOffset</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="69" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a2aa630c44ecfb79bd5899ac8b4343930" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SR_WORLD_NS::Chunk::SetAllocator</definition>
+        <argsstring>(const Allocator &amp;allocator)</argsstring>
+        <name>SetAllocator</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::SetAllocator</qualifiedname>
+        <param>
+          <type>const Allocator &amp;</type>
+          <declname>allocator</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="44" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a12dce23e46a83b6ebbc4e77ff0b1351b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> *</type>
+        <definition>static Chunk * SR_WORLD_NS::Chunk::Allocate</definition>
+        <argsstring>(SRChunkAllocArgs)</argsstring>
+        <name>Allocate</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Allocate</qualifiedname>
+        <param>
+          <type>SRChunkAllocArgs</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="45" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Chunk_1a0e5de285ca827b454a2621cd3fe8dfcd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_WORLD_NS::Chunk::Belongs</definition>
+        <argsstring>(const Math::IVector3 &amp;position, const Math::IVector2 &amp;size, const Math::FVector3 &amp;point)</argsstring>
+        <name>Belongs</name>
+        <qualifiedname>SR_WORLD_NS::Chunk::Belongs</qualifiedname>
+        <param>
+          <type>const Math::IVector3 &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const Math::IVector2 &amp;</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const Math::FVector3 &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="46" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>NonCopyable</label>
+      </node>
+      <node id="3">
+        <label>SR_CORE_NS::VisualChunk</label>
+        <link refid="classSR__CORE__NS_1_1VisualChunk"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_WORLD_NS::Chunk</label>
+        <link refid="classSR__WORLD__NS_1_1Chunk"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>NonCopyable</label>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Scene &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_WORLD_NS::Chunk</label>
+        <link refid="classSR__WORLD__NS_1_1Chunk"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_observer</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_region</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_WORLD_NS::Observer</label>
+        <link refid="classSR__WORLD__NS_1_1Observer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_offset</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_target</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_WORLD_NS::Offset</label>
+        <link refid="structSR__WORLD__NS_1_1Offset"/>
+      </node>
+      <node id="9">
+        <label>SR_WORLD_NS::Region</label>
+        <link refid="classSR__WORLD__NS_1_1Region"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_observer</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" line="28" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Chunk.h" bodystart="28" bodyend="88"/>
+    <listofallmembers>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a4a7f8ca9d703d0249052f2710e11f3e6" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Access</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a12dce23e46a83b6ebbc4e77ff0b1351b" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Allocate</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a18103dc4974d5084056dbf3118ac6ca4" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Allocator</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a1efded0b832bb1fc1450cd99d708932c" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>ApplyOffset</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a0e5de285ca827b454a2621cd3fe8dfcd" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Belongs</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a0d2fbf30e70809288ddd22a2e33b01f2" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Belongs</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1aff0f93f606c2a5c1bc8b7e453a73e804" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Chunk</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a8f09c50cefdcdc405d33797a517dac5b" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>g_allocator</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a2c09d08e2eeb22f7432f089cedf7e2a9" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>GetPosition</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1abcb9b9635562e4cfcd25fc7c7b72e705" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>GetScene</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1ad4d531148868f9ad6b457fee620e2c3a" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>GetState</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a12f68bb27995884a47e52d5f5e523685" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>GetWorldPosition</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a3fb7a37ec04b7d93dded113d0d385f97" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>IsAlive</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1ac8232d05c35ebbaa15e924552d1078d1" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>IsPreLoaded</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1af197d24b5da4bfb59246bad37c47be9c" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Load</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1aa0ef9f8aa0b3cf0123d80a051d86c5a3" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>LoadState</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a1edc641dc9d70d46f3dfa814674f173d" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_lifetime</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1aa6875a8b2e17475d634c2e21b08f069e" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_loadState</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1ab154ddd9c05d6828a1872833f6d15b4b" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_observer</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a57af58b90ff0bc7ce686e1a5f30e993a" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_position</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a9d6dab50d9d5b4004a8fab6c20efb202" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_preloaded</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a0afd98e0eebc541dffcefc3c1aff59e8" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_region</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a3149485c6e8cae2c91df5b706f424b45" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_regionPosition</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1aabba4d4e4f7132e19d3a5488551fea86" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>m_size</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a8e31722e3128faa1d63b215e85b0dac3" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>OnEnter</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a883b7ec599bfac9bbec72a59051429ee" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>OnExit</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a9ac35fdf670771506e4e19b42493b6ca" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>PreLoad</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a96f807e0c845dd67e2678e57c1d02578" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Reload</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a1c056996e2449d88ff6d0c642f21ba2e" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Save</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1aedb4ee3963d1d23f4d4715ecd0825960" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>ScenePtr</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a2aa630c44ecfb79bd5899ac8b4343930" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>SetAllocator</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a54ff9a41ef85f2d4805e8aa17e7d8712" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Unload</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a14a5abe2a7d81b6d56d4d871282ba599" prot="public" virt="virtual"><scope>SR_WORLD_NS::Chunk</scope><name>Update</name></member>
+      <member refid="classSR__WORLD__NS_1_1Chunk_1a32f4d04a381a732c0c07e3fc8ab85f3d" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Chunk</scope><name>~Chunk</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

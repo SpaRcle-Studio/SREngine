@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo" kind="struct" language="C++" prot="private">
+    <compoundname>SR_UTILS_NS::MigrationManager::MigrationInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1ac37484d29f5c96c28dfa17ce6f033146" prot="public" static="no" mutable="no">
+        <type>Version</type>
+        <definition>Version SR_UTILS_NS::MigrationManager::MigrationInfo::from</definition>
+        <argsstring></argsstring>
+        <name>from</name>
+        <qualifiedname>SR_UTILS_NS::MigrationManager::MigrationInfo::from</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" line="16" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1a8cf403b95448094baf6417918763bc0a" prot="public" static="no" mutable="no">
+        <type>Version</type>
+        <definition>Version SR_UTILS_NS::MigrationManager::MigrationInfo::to</definition>
+        <argsstring></argsstring>
+        <name>to</name>
+        <qualifiedname>SR_UTILS_NS::MigrationManager::MigrationInfo::to</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" line="17" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1a703ee58b0608a6be8efcf438d47eb7b4" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>StringAtom SR_UTILS_NS::MigrationManager::MigrationInfo::factory</definition>
+        <argsstring></argsstring>
+        <name>factory</name>
+        <qualifiedname>SR_UTILS_NS::MigrationManager::MigrationInfo::factory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" line="18" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1abc8a0caff6927b5b9811e0780a197a6b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::MigrationManager::MigrationInfo::operator&lt;</definition>
+        <argsstring>(const MigrationInfo &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>SR_UTILS_NS::MigrationManager::MigrationInfo::operator&lt;</qualifiedname>
+        <param>
+          <type>const MigrationInfo &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" line="20" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" bodystart="20" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::MigrationManager::MigrationInfo</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>factory</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/MigrationManager.h" bodystart="15" bodyend="23"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1a703ee58b0608a6be8efcf438d47eb7b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::MigrationManager::MigrationInfo</scope><name>factory</name></member>
+      <member refid="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1ac37484d29f5c96c28dfa17ce6f033146" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::MigrationManager::MigrationInfo</scope><name>from</name></member>
+      <member refid="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1abc8a0caff6927b5b9811e0780a197a6b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::MigrationManager::MigrationInfo</scope><name>operator&lt;</name></member>
+      <member refid="structSR__UTILS__NS_1_1MigrationManager_1_1MigrationInfo_1a8cf403b95448094baf6417918763bc0a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::MigrationManager::MigrationInfo</scope><name>to</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

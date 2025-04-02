@@ -1,0 +1,857 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__ANIMATIONS__NS_1_1Skeleton" kind="class" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::Skeleton</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Component" prot="public" virt="non-virtual">SR_UTILS_NS::Component</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ae2fc54b261d5b1641ddfe512a71b58ca" prot="private" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref></type>
+        <definition>using SR_ANIMATIONS_NS::Skeleton::Super =  SR_UTILS_NS::Component</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ace976f98f9fbde1400b25b6152f5cd36" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">Skeleton</ref> &gt;</type>
+        <definition>using SR_ANIMATIONS_NS::Skeleton::Ptr =  SR_HTYPES_NS::SharedPtr&lt;Skeleton&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a5025ac95ab91d8e7122b89c78caf41b4" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; RenderScene &gt;</type>
+        <definition>using SR_ANIMATIONS_NS::Skeleton::RenderScenePtr =  SR_HTYPES_NS::SharedPtr&lt;RenderScene&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderScenePtr</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::RenderScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a6c9d2921f8a54e18f1a754b769783c0e" prot="private" static="no" mutable="no">
+        <type>ska::flat_hash_map&lt; <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *, uint64_t &gt;</type>
+        <definition>ska::flat_hash_map&lt;Bone*, uint64_t&gt; SR_ANIMATIONS_NS::Skeleton::m_debugLines</definition>
+        <argsstring></argsstring>
+        <name>m_debugLines</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_debugLines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="63" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1afbbff383aae07f00b0bf2ebc6c1656f5" prot="private" static="no" mutable="no">
+        <type>ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> * &gt;</type>
+        <definition>ska::flat_hash_map&lt;SR_UTILS_NS::StringAtom, Bone*&gt; SR_ANIMATIONS_NS::Skeleton::m_bonesByName</definition>
+        <argsstring></argsstring>
+        <name>m_bonesByName</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_bonesByName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="64" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a95b213c63394df966cffefbacaafff76" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> * &gt;</type>
+        <definition>std::vector&lt;Bone*&gt; SR_ANIMATIONS_NS::Skeleton::m_bonesByIndex</definition>
+        <argsstring></argsstring>
+        <name>m_bonesByIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_bonesByIndex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="66" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a846b90e6574f6af3745b13f1f41e3c1b" prot="private" static="no" mutable="no">
+        <type>ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, uint16_t &gt;</type>
+        <definition>ska::flat_hash_map&lt;SR_UTILS_NS::StringAtom, uint16_t&gt; SR_ANIMATIONS_NS::Skeleton::m_optimizedBones</definition>
+        <argsstring></argsstring>
+        <name>m_optimizedBones</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_optimizedBones</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="68" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a009efbefd54ac84a209002474892ba4f" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
+        <definition>std::vector&lt;SR_MATH_NS::Matrix4x4&gt; SR_ANIMATIONS_NS::Skeleton::m_matrices</definition>
+        <argsstring></argsstring>
+        <name>m_matrices</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_matrices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="70" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a59282c08ced2f24e654aff16bfe8d6a9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt;</type>
+        <definition>std::vector&lt;SR_MATH_NS::Matrix4x4&gt; SR_ANIMATIONS_NS::Skeleton::m_skeletonOffsets</definition>
+        <argsstring></argsstring>
+        <name>m_skeletonOffsets</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_skeletonOffsets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="71" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a189680d2676606ab614d5ae37c310bab" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Bone::Ptr</ref></type>
+        <definition>Bone::Ptr SR_ANIMATIONS_NS::Skeleton::m_rootBone</definition>
+        <argsstring></argsstring>
+        <name>m_rootBone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_rootBone</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="75" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ab08f846a887d4c14f63f00686a4e2af5" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::Skeleton::m_debugEnabled</definition>
+        <argsstring></argsstring>
+        <name>m_debugEnabled</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_debugEnabled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="77" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__ANIMATIONS__NS_1_1Skeleton_1abed0e7cb79b6edab0397a8bcfaa528ca" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::Skeleton::m_dirtyMatrices</definition>
+        <argsstring></argsstring>
+        <name>m_dirtyMatrices</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::m_dirtyMatrices</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="79" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ab67487848c602afde31448ff1ebea7dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::Skeleton::~Skeleton</definition>
+        <argsstring>() override</argsstring>
+        <name>~Skeleton</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::~Skeleton</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a5dccf08ae83a9f1a8b16dc8b835f0823" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::Update</definition>
+        <argsstring>(float_t dt) override</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::Update</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1ac6a1ba6c0a2a6d0b8f29f4a9924b25fb">Update</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a34a125bce290ad83c6716fe12a332483" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::OnPostLoad</definition>
+        <argsstring>() override</argsstring>
+        <name>OnPostLoad</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::OnPostLoad</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1af7cab0877c6f06d9e32f40d58eb7b395" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::OnAttached</definition>
+        <argsstring>() override</argsstring>
+        <name>OnAttached</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::OnAttached</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a6e3f39cd7894486df8af8336c6778036">OnAttached</reimplements>
+        <briefdescription>
+<para>Вызывается после добавления компонента к игровому объекту </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a849a5a2b8638c0937425ce1dd4fa4920" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::OnDestroy</definition>
+        <argsstring>() override</argsstring>
+        <name>OnDestroy</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::OnDestroy</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1ae31753f4a155ecfdc85b995a775aab1f">OnDestroy</reimplements>
+        <briefdescription>
+<para>Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ac95942eead485fe7b01d9e8354d57e30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::Skeleton::ReCalculateSkeleton</definition>
+        <argsstring>()</argsstring>
+        <name>ReCalculateSkeleton</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::ReCalculateSkeleton</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="30" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a2d4848376a3b633e519f0822d3b1e7b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::CalculateMatrices</definition>
+        <argsstring>()</argsstring>
+        <name>CalculateMatrices</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::CalculateMatrices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1aa69b1b79352875c917ba7765fef9aca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::ResetSkeleton</definition>
+        <argsstring>()</argsstring>
+        <name>ResetSkeleton</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::ResetSkeleton</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a36d0b2e03274ea8212edaf1182d68098" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::SetOptimizedBones</definition>
+        <argsstring>(const ska::flat_hash_map&lt; SR_UTILS_NS::StringAtom, uint16_t &gt; &amp;bones)</argsstring>
+        <name>SetOptimizedBones</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::SetOptimizedBones</qualifiedname>
+        <param>
+          <type>const ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, uint16_t &gt; &amp;</type>
+          <declname>bones</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a5add662000221b5fff583ccf6151d50c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::SetBonesOffsets</definition>
+        <argsstring>(const std::vector&lt; SR_MATH_NS::Matrix4x4 &gt; &amp;offsets)</argsstring>
+        <name>SetBonesOffsets</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::SetBonesOffsets</qualifiedname>
+        <param>
+          <type>const std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt; &amp;</type>
+          <declname>offsets</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="36" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a464538b223b97c8c06ce5a9126183c8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>Bone * SR_ANIMATIONS_NS::Skeleton::AddBone</definition>
+        <argsstring>(Bone *pParent, SR_UTILS_NS::StringAtom name, bool recalculate)</argsstring>
+        <name>AddBone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::AddBone</qualifiedname>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+          <declname>pParent</declname>
+        </param>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>recalculate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a8419594882e1bcc57357548f5943c2d1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>SR_NODISCARD const Bone * SR_ANIMATIONS_NS::Skeleton::GetRootBone</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetRootBone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetRootBone</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="39" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1aaf01a245304b5fab5f9aba633a6adb4f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>SR_NODISCARD Bone * SR_ANIMATIONS_NS::Skeleton::GetRootBone</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetRootBone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetRootBone</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="40" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1aca3985dc5faf5a190de411b7053e3d4a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &amp;</type>
+        <definition>const SR_MATH_NS::Matrix4x4 &amp; SR_ANIMATIONS_NS::Skeleton::GetMatrixByIndex</definition>
+        <argsstring>(uint16_t index) noexcept</argsstring>
+        <name>GetMatrixByIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetMatrixByIndex</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="42" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a84a6b578b41458517ec0bb8175e706bf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; SR_MATH_NS::Matrix4x4 &gt; &amp; SR_ANIMATIONS_NS::Skeleton::GetMatrices</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetMatrices</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetMatrices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="43" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1afcb631aed76393974248ecb164d2a2bc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__MATH__NS_1_1Matrix4x4" kindref="compound">SR_MATH_NS::Matrix4x4</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; SR_MATH_NS::Matrix4x4 &gt; &amp; SR_ANIMATIONS_NS::Skeleton::GetOffsets</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetOffsets</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetOffsets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="44" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a159d5859d35363212bf34b294790c4ec" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1Transform" kindref="compound">SR_UTILS_NS::Transform</ref> *</type>
+        <definition>SR_UTILS_NS::Transform * SR_ANIMATIONS_NS::Skeleton::GetTransformByIndex</definition>
+        <argsstring>(uint16_t index) noexcept</argsstring>
+        <name>GetTransformByIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetTransformByIndex</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="45" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ab635d8f1badccae1ba887b52e64967b9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> * &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; Bone * &gt; &amp; SR_ANIMATIONS_NS::Skeleton::GetBones</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetBones</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetBones</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="46" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ab4202634e38b5c5cdd96a134b14d04ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>SR_NODISCARD Bone * SR_ANIMATIONS_NS::Skeleton::TryGetBone</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>TryGetBone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::TryGetBone</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="47" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a7ecc030a476318b9cc4348b97e8e692b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>SR_NODISCARD Bone * SR_ANIMATIONS_NS::Skeleton::GetBone</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>GetBone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetBone</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="48" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a3cd189d2777b214fae25cea4119f1fb2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>SR_NODISCARD Bone * SR_ANIMATIONS_NS::Skeleton::GetBoneByIndex</definition>
+        <argsstring>(uint16_t index) const</argsstring>
+        <name>GetBoneByIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetBoneByIndex</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="49" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a9159c1011933f6404507d92e99179aa7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_ANIMATIONS_NS::Skeleton::GetBoneIndex</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name)</argsstring>
+        <name>GetBoneIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetBoneIndex</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="50" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1abd47e8f373511fa1de75e2cbf79b1538" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::Skeleton::IsDebugEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsDebugEnabled</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::IsDebugEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="51" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a14e77992fdcc71a654bd7736ba8ae745" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::Skeleton::IsDirtyMatrices</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsDirtyMatrices</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::IsDirtyMatrices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="52" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a30d9fe350ae624c5abb0716a8fc61280" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const ska::flat_hash_map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, uint16_t &gt; &amp;</type>
+        <definition>SR_NODISCARD const ska::flat_hash_map&lt; SR_UTILS_NS::StringAtom, uint16_t &gt; &amp; SR_ANIMATIONS_NS::Skeleton::GetOptimizedBones</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetOptimizedBones</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::GetOptimizedBones</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="53" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1aa735b33514639e120718331162c1b337" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::SetDebugEnabled</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetDebugEnabled</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::SetDebugEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="54" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1ad6718d0d6a8ed2c22870b891b75af880" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_ANIMATIONS_NS::Skeleton::ExecuteInEditMode</definition>
+        <argsstring>() const override</argsstring>
+        <name>ExecuteInEditMode</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::ExecuteInEditMode</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a18af2c953acad770e70af93a16882340">ExecuteInEditMode</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="56" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a698d775c4209d6d50387439fe953ec62" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::UpdateDebug</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateDebug</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::UpdateDebug</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1Skeleton_1a0b2506b690d6a8aefb5b47646ae14b77" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Skeleton::DisableDebug</definition>
+        <argsstring>()</argsstring>
+        <name>DisableDebug</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Skeleton::DisableDebug</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="60" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::Skeleton</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1Skeleton"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::Skeleton</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1Skeleton"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h" bodystart="12" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a464538b223b97c8c06ce5a9126183c8f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>AddBone</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>BaseComponent</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a2d4848376a3b633e519f0822d3b1e7b9" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>CalculateMatrices</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>Detach</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a0b2506b690d6a8aefb5b47646ae14b77" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>DisableDebug</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ad6718d0d6a8ed2c22870b891b75af880" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a7ecc030a476318b9cc4348b97e8e692b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetBone</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a3cd189d2777b214fae25cea4119f1fb2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetBoneByIndex</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a9159c1011933f6404507d92e99179aa7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetBoneIndex</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab635d8f1badccae1ba887b52e64967b9" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetBones</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetGameObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a84a6b578b41458517ec0bb8175e706bf" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetMatrices</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aca3985dc5faf5a190de411b7053e3d4a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetMatrixByIndex</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1afcb631aed76393974248ecb164d2a2bc" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetOffsets</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a30d9fe350ae624c5abb0716a8fc61280" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetOptimizedBones</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetRoot</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a8419594882e1bcc57357548f5943c2d1" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetRootBone</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aaf01a245304b5fab5f9aba633a6adb4f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetRootBone</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetTransform</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a159d5859d35363212bf34b294790c4ec" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>GetTransformByIndex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>HasScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1abd47e8f373511fa1de75e2cbf79b1538" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsDebugEnabled</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a14e77992fdcc71a654bd7736ba8ae745" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsDirtyMatrices</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>LateUpdate</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a95b213c63394df966cffefbacaafff76" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_bonesByIndex</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1afbbff383aae07f00b0bf2ebc6c1656f5" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_bonesByName</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab08f846a887d4c14f63f00686a4e2af5" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_debugEnabled</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a6c9d2921f8a54e18f1a754b769783c0e" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_debugLines</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1abed0e7cb79b6edab0397a8bcfaa528ca" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_dirtyMatrices</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_isStarted</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a009efbefd54ac84a209002474892ba4f" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_matrices</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a846b90e6574f6af3745b13f1f41e3c1b" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_optimizedBones</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_parent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_properties</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a189680d2676606ab614d5ae37c310bab" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_rootBone</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a59282c08ced2f24e654aff16bfe8d6a9" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>m_skeletonOffsets</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1af7cab0877c6f06d9e32f40d58eb7b395" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a849a5a2b8638c0937425ce1dd4fa4920" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnDetached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a33c4d449284bb7be17ac6c0b66dad816" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnDisable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af582e05d713cc0849a532ba2554c41ab" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnEnable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e4032583aabcd6cfebed3e13f39a1a2" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a34a125bce290ad83c6716fe12a332483" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>OriginType</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ace976f98f9fbde1400b25b6152f5cd36" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>Ptr</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ac95942eead485fe7b01d9e8354d57e30" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>ReCalculateSkeleton</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5025ac95ab91d8e7122b89c78caf41b4" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aa69b1b79352875c917ba7765fef9aca3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>ResetSkeleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>ScenePtr</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5add662000221b5fff583ccf6151d50c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SetBonesOffsets</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1aa735b33514639e120718331162c1b337" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SetDebugEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SetEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a36d0b2e03274ea8212edaf1182d68098" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SetOptimizedBones</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>SetParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a572b27823d61376ebbd0c33758ea5d6f" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>Start</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ae2fc54b261d5b1641ddfe512a71b58ca" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>Super</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab4202634e38b5c5cdd96a134b14d04ef" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>TryGetBone</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>TryGetParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>TryGetScene</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5dccf08ae83a9f1a8b16dc8b835f0823" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>Update</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a698d775c4209d6d50387439fe953ec62" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>UpdateDebug</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>~Component</name></member>
+      <member refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ab67487848c602afde31448ff1ebea7dd" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Skeleton</scope><name>~Skeleton</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

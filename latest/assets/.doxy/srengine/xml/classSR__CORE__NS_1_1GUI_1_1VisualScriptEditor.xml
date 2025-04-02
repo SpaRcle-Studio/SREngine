@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_NS::GUI::VisualScriptEditor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_GRAPH_NS::GUI::Widget</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a08b46076ceb2ef1930b33f876975e390" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; uintptr_t, SR_GRAPH_NS::GUI::Node * &gt;</type>
+        <definition>std::unordered_map&lt;uintptr_t, SR_GRAPH_NS::GUI::Node*&gt; SR_CORE_NS::GUI::VisualScriptEditor::m_nodes</definition>
+        <argsstring></argsstring>
+        <name>m_nodes</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::m_nodes</qualifiedname>
+        <briefdescription>
+<para>void RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint); </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="38" column="28" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1ae154a31b8e83dd539562bc8abc1a9805" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; uintptr_t, <ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">SR_GRAPH_NS::GUI::Link</ref> * &gt;</type>
+        <definition>std::unordered_map&lt;uintptr_t, SR_GRAPH_NS::GUI::Link*&gt; SR_CORE_NS::GUI::VisualScriptEditor::m_links</definition>
+        <argsstring></argsstring>
+        <name>m_links</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::m_links</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="39" column="28" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a462203fac8b9cc6a39c2dc388b143834" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, SR_GRAPH_NS::GUI::Node * &gt;</type>
+        <definition>std::unordered_map&lt;std::string, SR_GRAPH_NS::GUI::Node*&gt; SR_CORE_NS::GUI::VisualScriptEditor::m_blueprints</definition>
+        <argsstring></argsstring>
+        <name>m_blueprints</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::m_blueprints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="40" column="28" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1ab6349f34016fe8f13041ff1738d9a27e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::GUI::VisualScriptEditor::VisualScriptEditor</definition>
+        <argsstring>()</argsstring>
+        <name>VisualScriptEditor</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::VisualScriptEditor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="21" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a265a3dba72ca79ba79e7ae590c965d3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::GUI::VisualScriptEditor::~VisualScriptEditor</definition>
+        <argsstring>() override</argsstring>
+        <name>~VisualScriptEditor</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::~VisualScriptEditor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1af39c96ddc6e55ff8f45d22e99ce54169" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::VisualScriptEditor::Draw</definition>
+        <argsstring>() override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::Draw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1acbcb77dabee7bab73dc8ffc2cbc247ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::VisualScriptEditor::AddNode</definition>
+        <argsstring>(SR_GRAPH_NS::GUI::Node *node)</argsstring>
+        <name>AddNode</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::AddNode</qualifiedname>
+        <param>
+          <type>SR_GRAPH_NS::GUI::Node *</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1afeac4039a6d4ae7ffeb5c1b3b045d396" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::VisualScriptEditor::AddLink</definition>
+        <argsstring>(SR_GRAPH_NS::GUI::Link *link)</argsstring>
+        <name>AddLink</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::AddLink</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">SR_GRAPH_NS::GUI::Link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="27" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a7dd943a0a1adbe353004f7f58e9a225f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_NS::GUI::VisualScriptEditor::LoadConfig</definition>
+        <argsstring>()</argsstring>
+        <name>LoadConfig</name>
+        <qualifiedname>SR_CORE_NS::GUI::VisualScriptEditor::LoadConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>SR_NODISCARD SR_GRAPH_NS::GUI::Node* CreateBlueprint(const std::string&amp; id) const; SR_NODISCARD bool ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="33" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_NS::GUI::VisualScriptEditor</label>
+        <link refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::GUI::Widget</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_NS::GUI::VisualScriptEditor</label>
+        <link refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::GUI::Widget</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" line="19" column="5" bodyfile="Engine/Core/inc/Core/GUI/VisualScriptEditor.h" bodystart="19" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1afeac4039a6d4ae7ffeb5c1b3b045d396" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>AddLink</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1acbcb77dabee7bab73dc8ffc2cbc247ad" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>AddNode</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1af39c96ddc6e55ff8f45d22e99ce54169" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>Draw</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a7dd943a0a1adbe353004f7f58e9a225f" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>LoadConfig</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a462203fac8b9cc6a39c2dc388b143834" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>m_blueprints</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1ae154a31b8e83dd539562bc8abc1a9805" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>m_links</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a08b46076ceb2ef1930b33f876975e390" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>m_nodes</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1ab6349f34016fe8f13041ff1738d9a27e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>VisualScriptEditor</name></member>
+      <member refid="classSR__CORE__NS_1_1GUI_1_1VisualScriptEditor_1a265a3dba72ca79ba79e7ae590c965d3b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GUI::VisualScriptEditor</scope><name>~VisualScriptEditor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,374 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kind="struct" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::UnionAnimationKey</compoundname>
+    <includes refid="AnimationKey_8h" local="no">AnimationKey.h</includes>
+    <innerclass refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data" prot="public">SR_ANIMATIONS_NS::UnionAnimationKey::Data</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a548d143ee96dc663fc8e187396216101" prot="public" static="no" mutable="no">
+        <type>union <ref refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data" kindref="compound">SR_ANIMATIONS_NS::UnionAnimationKey::Data</ref></type>
+        <definition>union SR_ANIMATIONS_NS::UnionAnimationKey::Data SR_ANIMATIONS_NS::UnionAnimationKey::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="126" column="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a080f30db780af211a7b5cca084a26aaf" prot="public" static="no" mutable="no">
+        <type>AnimationKeyType</type>
+        <definition>AnimationKeyType SR_ANIMATIONS_NS::UnionAnimationKey::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::type</qualifiedname>
+        <initializer>= AnimationKeyType::None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="128" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a10d87b8c33862ef75b8b6faf22c58f40" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_ANIMATIONS_NS::UnionAnimationKey::time</definition>
+        <argsstring></argsstring>
+        <name>time</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::time</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="129" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a29602754dbe8414a04865d25366db109" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::UnionAnimationKey::UnionAnimationKey</definition>
+        <argsstring>()=default</argsstring>
+        <name>UnionAnimationKey</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::UnionAnimationKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="75" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a2036aa02b9f18bb167156d7cb760d911" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::UnionAnimationKey::~UnionAnimationKey</definition>
+        <argsstring>()=default</argsstring>
+        <name>~UnionAnimationKey</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::~UnionAnimationKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="76" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a90e7b51c09d5ba5687f7b85b5341c600" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::UnionAnimationKey::UnionAnimationKey</definition>
+        <argsstring>(const UnionAnimationKey &amp;other)</argsstring>
+        <name>UnionAnimationKey</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::UnionAnimationKey</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="78" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="78" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ae1455282823660ea2622843bd01833d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+        <definition>UnionAnimationKey &amp; SR_ANIMATIONS_NS::UnionAnimationKey::operator=</definition>
+        <argsstring>(const UnionAnimationKey &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="82" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="82" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a9375757a8cf36f3f824e4804920444c6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_ANIMATIONS_NS::UnionAnimationKey::UpdateWithWeight</definition>
+        <argsstring>(float_t progress, const UnionAnimationKey &amp;prevKey, AnimationGameObjectData &amp;animation, float_t weight) const noexcept</argsstring>
+        <name>UpdateWithWeight</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::UpdateWithWeight</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>progress</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+          <declname>prevKey</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref> &amp;</type>
+          <declname>animation</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>weight</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="89" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a469430964ff8e9a7a6c50fd5b51b4d2c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_ANIMATIONS_NS::UnionAnimationKey::SetWithWeight</definition>
+        <argsstring>(AnimationGameObjectData &amp;animation, float_t weight) const noexcept</argsstring>
+        <name>SetWithWeight</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::SetWithWeight</qualifiedname>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref> &amp;</type>
+          <declname>animation</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>weight</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="90" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1aa7bb8d2d085267e11fd9d67fa7af5fd3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_ANIMATIONS_NS::UnionAnimationKey::Update</definition>
+        <argsstring>(float_t progress, const UnionAnimationKey &amp;prevKey, AnimationGameObjectData &amp;animation) const noexcept</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Update</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>progress</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+          <declname>prevKey</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref> &amp;</type>
+          <declname>animation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="92" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ad8f948eee1d1061a22a05d7614a9cbf6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_ANIMATIONS_NS::UnionAnimationKey::Set</definition>
+        <argsstring>(AnimationGameObjectData &amp;animation) const noexcept</argsstring>
+        <name>Set</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Set</qualifiedname>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref> &amp;</type>
+          <declname>animation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="93" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ab9b6fad1509b0a949f8ad9be39abeff8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_ANIMATIONS_NS::UnionAnimationKey::Update</definition>
+        <argsstring>(float_t progress, const UnionAnimationKey &amp;prevKey, AnimationGameObjectData &amp;animation, float_t toreance) const noexcept</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Update</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>progress</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+          <declname>prevKey</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref> &amp;</type>
+          <declname>animation</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>toreance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="95" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a8d4d4affe3080a58bc0110244fa10594" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_ANIMATIONS_NS::UnionAnimationKey::Set</definition>
+        <argsstring>(AnimationGameObjectData &amp;animation, float_t toreance) const noexcept</argsstring>
+        <name>Set</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Set</qualifiedname>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref> &amp;</type>
+          <declname>animation</declname>
+        </param>
+        <param>
+          <type>float_t</type>
+          <declname>toreance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="96" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a87233e17300f1e323a35936a31490420" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::UnionAnimationKey::SetData</definition>
+        <argsstring>(T data)</argsstring>
+        <name>SetData</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::SetData</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="98" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="98" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1acb69f2bd0f5409cddbf9bb261cbcf340" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::UnionAnimationKey::CopyFrom</definition>
+        <argsstring>(const UnionAnimationKey &amp;other)</argsstring>
+        <name>CopyFrom</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::CopyFrom</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey" kindref="compound">UnionAnimationKey</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="116" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::RotationKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1RotationKey"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>rotation</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_ANIMATIONS_NS::ScalingKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1ScalingKey"/>
+      </node>
+      <node id="3">
+        <label>SR_ANIMATIONS_NS::TranslationKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1TranslationKey"/>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::UnionAnimationKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_ANIMATIONS_NS::UnionAnimationKey::Data</label>
+        <link refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>translation</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>rotation</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>scaling</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="74" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="74" bodyend="131"/>
+    <listofallmembers>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1acb69f2bd0f5409cddbf9bb261cbcf340" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>CopyFrom</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a548d143ee96dc663fc8e187396216101" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>data</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ae1455282823660ea2622843bd01833d6" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>operator=</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ad8f948eee1d1061a22a05d7614a9cbf6" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>Set</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a8d4d4affe3080a58bc0110244fa10594" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>Set</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a87233e17300f1e323a35936a31490420" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>SetData</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a469430964ff8e9a7a6c50fd5b51b4d2c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>SetWithWeight</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a10d87b8c33862ef75b8b6faf22c58f40" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>time</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a080f30db780af211a7b5cca084a26aaf" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>type</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a29602754dbe8414a04865d25366db109" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>UnionAnimationKey</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a90e7b51c09d5ba5687f7b85b5341c600" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>UnionAnimationKey</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1aa7bb8d2d085267e11fd9d67fa7af5fd3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>Update</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1ab9b6fad1509b0a949f8ad9be39abeff8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>Update</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a9375757a8cf36f3f824e4804920444c6" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>UpdateWithWeight</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1UnionAnimationKey_1a2036aa02b9f18bb167156d7cb760d911" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey</scope><name>~UnionAnimationKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

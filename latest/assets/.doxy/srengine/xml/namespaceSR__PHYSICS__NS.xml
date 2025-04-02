@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__PHYSICS__NS" kind="namespace" language="C++">
+    <compoundname>SR_PHYSICS_NS</compoundname>
+    <innerclass refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl" prot="public">SR_PHYSICS_NS::Box2DLibraryImpl</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1Bullet3LibraryImpl" prot="public">SR_PHYSICS_NS::Bullet3LibraryImpl</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1Bullet3PhysicsWorld" prot="public">SR_PHYSICS_NS::Bullet3PhysicsWorld</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1ContactReportCallback" prot="public">SR_PHYSICS_NS::ContactReportCallback</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1LibraryImpl" prot="public">SR_PHYSICS_NS::LibraryImpl</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1PhysicsLibrary" prot="public">SR_PHYSICS_NS::PhysicsLibrary</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1PhysicsScene" prot="public">SR_PHYSICS_NS::PhysicsScene</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1PhysicsWorld" prot="public">SR_PHYSICS_NS::PhysicsWorld</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl" prot="public">SR_PHYSICS_NS::PhysXLibraryImpl</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld" prot="public">SR_PHYSICS_NS::PhysXPhysicsWorld</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1PhysXRaycast3DImpl" prot="public">SR_PHYSICS_NS::PhysXRaycast3DImpl</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1Raycast" prot="public">SR_PHYSICS_NS::Raycast</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1Raycast3D" prot="public">SR_PHYSICS_NS::Raycast3D</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1Raycast3DImpl" prot="public">SR_PHYSICS_NS::Raycast3DImpl</innerclass>
+    <innerclass refid="classSR__PHYSICS__NS_1_1RaycastImpl" prot="public">SR_PHYSICS_NS::RaycastImpl</innerclass>
+    <innernamespace refid="namespaceSR__PHYSICS__NS_1_1Types">SR_PHYSICS_NS::Types</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="Rigidbody_8h_1a3394b823debb936e32248f4b58064fb8" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>RBUpdShapeRes</name>
+        <qualifiedname>SR_PHYSICS_NS::RBUpdShapeRes</qualifiedname>
+        <enumvalue id="Rigidbody_8h_1a3394b823debb936e32248f4b58064fb8aff0a3b7f3daef040faf89a88fdac01b7" prot="public">
+          <name>Updated</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Rigidbody_8h_1a3394b823debb936e32248f4b58064fb8a902b0d55fddef6f8d651fe1035b7d4bd" prot="public">
+          <name>Error</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Rigidbody_8h_1a3394b823debb936e32248f4b58064fb8af80a4ad87fee7c9fdc19b7769495fdb5" prot="public">
+          <name>Nothing</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Rigidbody Update Shape Result. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" line="26" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Rigidbody.h" bodystart="26" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="PhysXUtils_8h_1ae4662181e762c436dd4891259f3aa95f" prot="public" static="no">
+        <type>debugger::comm::PvdConnection</type>
+        <definition>typedef debugger::comm::PvdConnection SR_PHYSICS_NS::PhysXPvdConnection</definition>
+        <argsstring></argsstring>
+        <name>PhysXPvdConnection</name>
+        <qualifiedname>SR_PHYSICS_NS::PhysXPvdConnection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" line="20" column="43" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="Physics_2inc_2Physics_2Utils_2Utils_8h_1a49909373ddc8d80800906281eeb4be65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PHYSICS_NS::SR_ENUM_NS_CLASS</definition>
+        <argsstring>(LibraryType, Unknown=0, Bullet3=1, Newton=2, PhysX=3, Havok=4, Volt=5, Shark=6, Box2D=7)</argsstring>
+        <name>SR_ENUM_NS_CLASS</name>
+        <qualifiedname>SR_PHYSICS_NS::SR_ENUM_NS_CLASS</qualifiedname>
+        <param>
+          <type>LibraryType</type>
+        </param>
+        <param>
+          <type>Unknown</type>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>Bullet3</type>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>Newton</type>
+          <defval>2</defval>
+        </param>
+        <param>
+          <type>PhysX</type>
+          <defval>3</defval>
+        </param>
+        <param>
+          <type>Havok</type>
+          <defval>4</defval>
+        </param>
+        <param>
+          <type>Volt</type>
+          <defval>5</defval>
+        </param>
+        <param>
+          <type>Shark</type>
+          <defval>6</defval>
+        </param>
+        <param>
+          <type>Box2D</type>
+          <defval>7</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" line="11" column="5" declfile="Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h" declline="11" declcolumn="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/Engine.h" line="33" column="1"/>
+  </compounddef>
+</doxygen>

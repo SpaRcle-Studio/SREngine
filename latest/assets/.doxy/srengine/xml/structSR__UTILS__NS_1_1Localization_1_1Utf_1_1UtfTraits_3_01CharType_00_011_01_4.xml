@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename CharType</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1af6960fd410acafd989ee5d976e080f47" prot="public" static="no">
+        <type>CharType</type>
+        <definition>typedef CharType SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::char_type</definition>
+        <argsstring></argsstring>
+        <name>char_type</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::char_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="28" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1aa5b701561600683ba486806254a98c56" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::MAX_WIDTH</definition>
+        <argsstring></argsstring>
+        <name>MAX_WIDTH</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::MAX_WIDTH</qualifiedname>
+        <initializer>= 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="45" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1a730b78ca05eb86da399d269882e0df04" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::TrailLength</definition>
+        <argsstring>(char_type ci)</argsstring>
+        <name>TrailLength</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::TrailLength</qualifiedname>
+        <param>
+          <type>char_type</type>
+          <declname>ci</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="30" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="30" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1aa27cffe7eb9d6529a78f016aba2964b3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::Width</definition>
+        <argsstring>(CodePoint value)</argsstring>
+        <name>Width</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::Width</qualifiedname>
+        <param>
+          <type>CodePoint</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="47" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="47" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1af0b013f5d7d108f24c7fb549c350afb2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::IsTrail</definition>
+        <argsstring>(char_type ci)</argsstring>
+        <name>IsTrail</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::IsTrail</qualifiedname>
+        <param>
+          <type>char_type</type>
+          <declname>ci</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="62" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1a20951b31f6cabc7bc9b3e93750ba1658" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::IsLead</definition>
+        <argsstring>(char_type ci)</argsstring>
+        <name>IsLead</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::IsLead</qualifiedname>
+        <param>
+          <type>char_type</type>
+          <declname>ci</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="67" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="67" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1a395e6e5b8274100824a4d2b50fec2fd7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>CodePoint</type>
+        <definition>static CodePoint SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::Decode</definition>
+        <argsstring>(Iterator &amp;p, Iterator e)</argsstring>
+        <name>Decode</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::Decode</qualifiedname>
+        <param>
+          <type>Iterator &amp;</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>First byte is fully validated here</para>
+<para>Ok as only ASCII may be of size = 0 also optimize for ASCII text</para>
+<para>Read the rest</para>
+<para>Check code point validity: no surrogates and valid range</para>
+<para>make sure it is the most compact representation</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="71" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="71" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1ab5ce8d1d09e5441d06876de4df1dc65f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>CodePoint</type>
+        <definition>static CodePoint SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::DecodeValid</definition>
+        <argsstring>(Iterator &amp;p)</argsstring>
+        <name>DecodeValid</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::DecodeValid</qualifiedname>
+        <param>
+          <type>Iterator &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>non-BMP rare</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="131" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="131" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1ae27cef02e0fa5ce2137e14636aa1239f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>static Iterator SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::Encode</definition>
+        <argsstring>(CodePoint value, Iterator out)</argsstring>
+        <name>Encode</name>
+        <qualifiedname>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;::Encode</qualifiedname>
+        <param>
+          <type>CodePoint</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="162" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="162" bodyend="183"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" line="27" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Localization/UTF.h" bodystart="27" bodyend="184"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1af6960fd410acafd989ee5d976e080f47" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>char_type</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1a395e6e5b8274100824a4d2b50fec2fd7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>Decode</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1ab5ce8d1d09e5441d06876de4df1dc65f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>DecodeValid</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1ae27cef02e0fa5ce2137e14636aa1239f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>Encode</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1a20951b31f6cabc7bc9b3e93750ba1658" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>IsLead</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1af0b013f5d7d108f24c7fb549c350afb2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>IsTrail</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1aa5b701561600683ba486806254a98c56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>MAX_WIDTH</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1a730b78ca05eb86da399d269882e0df04" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>TrailLength</name></member>
+      <member refid="structSR__UTILS__NS_1_1Localization_1_1Utf_1_1UtfTraits_3_01CharType_00_011_01_4_1aa27cffe7eb9d6529a78f016aba2964b3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Localization::Utf::UtfTraits&lt; CharType, 1 &gt;</scope><name>Width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

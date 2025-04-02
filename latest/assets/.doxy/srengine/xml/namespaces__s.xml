@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaces__s" kind="namespace" language="C++">
+    <compoundname>s_s</compoundname>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="str__switch_8h_1a783c009b8b3d02ae556fa4c51400ab96" prot="public" static="no">
+        <type>unsigned char</type>
+        <definition>typedef unsigned char s_s::uchar</definition>
+        <argsstring></argsstring>
+        <name>uchar</name>
+        <qualifiedname>s_s::uchar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="14" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="str__switch_8h_1ac8984b43643d4c61997c2415ec554c65" prot="public" static="no">
+        <type>unsigned long long</type>
+        <definition>typedef unsigned long long s_s::ullong</definition>
+        <argsstring></argsstring>
+        <name>ullong</name>
+        <qualifiedname>s_s::ullong</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="15" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="str__switch_8h_1a817583fcf33f3819e1a29e1b29aadfff" prot="public" static="no" mutable="no">
+        <type>const uchar</type>
+        <definition>const uchar s_s::MAX_LEN</definition>
+        <argsstring></argsstring>
+        <name>MAX_LEN</name>
+        <qualifiedname>s_s::MAX_LEN</qualifiedname>
+        <initializer>= 9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="17" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="str__switch_8h_1a2c1235715e6dfe510e7362cf9573afa0" prot="public" static="no" mutable="no">
+        <type>const ullong</type>
+        <definition>const ullong s_s::N_HASH</definition>
+        <argsstring></argsstring>
+        <name>N_HASH</name>
+        <qualifiedname>s_s::N_HASH</qualifiedname>
+        <initializer>= static_cast&lt;ullong&gt;(-1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="18" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="str__switch_8h_1a428f6d1b1c79bf6608cd2a7db837f19d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ullong</type>
+        <definition>ullong s_s::raise_128_to</definition>
+        <argsstring>(const uchar power)</argsstring>
+        <name>raise_128_to</name>
+        <qualifiedname>s_s::raise_128_to</qualifiedname>
+        <param>
+          <type>const uchar</type>
+          <declname>power</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="20" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="str__switch_8h_1ad49438cdb09fc599db351ccbd73e5bd3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool s_s::str_is_correct</definition>
+        <argsstring>(const char *const str)</argsstring>
+        <name>str_is_correct</name>
+        <qualifiedname>s_s::str_is_correct</qualifiedname>
+        <param>
+          <type>const char *const</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="25" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="25" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="str__switch_8h_1ad10ebb2a1aebaf8142f68410961cd8a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uchar</type>
+        <definition>uchar s_s::str_len</definition>
+        <argsstring>(const char *const str)</argsstring>
+        <name>str_len</name>
+        <qualifiedname>s_s::str_len</qualifiedname>
+        <param>
+          <type>const char *const</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="30" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="str__switch_8h_1ac03929b33037c80ac66689cc05353e2d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ullong</type>
+        <definition>ullong s_s::str_hash</definition>
+        <argsstring>(const char *const str, const uchar current_len)</argsstring>
+        <name>str_hash</name>
+        <qualifiedname>s_s::str_hash</qualifiedname>
+        <param>
+          <type>const char *const</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const uchar</type>
+          <declname>current_len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="35" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="35" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="str__switch_8h_1ab1a5e42ad7b23d0b99a4be7ec256032a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ullong</type>
+        <definition>ullong s_s::str_hash_for_switch</definition>
+        <argsstring>(const char *const str)</argsstring>
+        <name>str_hash_for_switch</name>
+        <qualifiedname>s_s::str_hash_for_switch</qualifiedname>
+        <param>
+          <type>const char *const</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="40" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="str__switch_8h_1a26972f02a7a1275a7479d440d7d66201" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ullong</type>
+        <definition>ullong s_s::str_hash_for_switch</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>str_hash_for_switch</name>
+        <qualifiedname>s_s::str_hash_for_switch</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="45" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" bodystart="45" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/str_switch.h" line="12" column="1"/>
+  </compounddef>
+</doxygen>

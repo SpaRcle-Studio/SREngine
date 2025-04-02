@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler" kind="struct" language="C++" prot="private">
+    <compoundname>SR_GRAPH_NS::ISamplersPass::Sampler</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a5594f24a47c3a97a22cad3493f20de48" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::ISamplersPass::Sampler::textureId</definition>
+        <argsstring></argsstring>
+        <name>textureId</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::textureId</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="25" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a8c750bfc4310bab10f303e95d7d8f354" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::ISamplersPass::Sampler::fboId</definition>
+        <argsstring></argsstring>
+        <name>fboId</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::fboId</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="26" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ac0eb94fde491bdccab0b406c6d3d20b7" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_GRAPH_NS::ISamplersPass::Sampler::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="27" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a2c334c19ee5a0fe0483025b3aa033a4e" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_GRAPH_NS::ISamplersPass::Sampler::fboName</definition>
+        <argsstring></argsstring>
+        <name>fboName</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::fboName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="28" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a48a9d0fdecd5e8788e27afa1605920e7" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+        <definition>SR_GTYPES_NS::Texture* SR_GRAPH_NS::ISamplersPass::Sampler::pTexture</definition>
+        <argsstring></argsstring>
+        <name>pTexture</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::pTexture</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="29" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a36a3b486c568dd637bd7664527f648cb" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_NS::ISamplersPass::Sampler::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::index</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="30" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a1477e9cea192f8f22bba9b9199a26dd4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::ISamplersPass::Sampler::depth</definition>
+        <argsstring></argsstring>
+        <name>depth</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::depth</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="31" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ab225fe44556cd912294c79b1c014ba50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::ISamplersPass::Sampler::Sampler</definition>
+        <argsstring>()=default</argsstring>
+        <name>Sampler</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::Sampler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="19" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a58ee8f437655a5fb7f8a11b15941faf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::ISamplersPass::Sampler::~Sampler</definition>
+        <argsstring>() override</argsstring>
+        <name>~Sampler</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::~Sampler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="20" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1adf1c9cbcf06c604821544edae7761a09" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::ISamplersPass::Sampler::Sampler</definition>
+        <argsstring>(Sampler &amp;&amp;other) noexcept</argsstring>
+        <name>Sampler</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::Sampler</qualifiedname>
+        <param>
+          <type>Sampler &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="22" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a0c29d4745694de751ea6d2f404e45a20" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>Sampler &amp;</type>
+        <definition>Sampler &amp; SR_GRAPH_NS::ISamplersPass::Sampler::operator=</definition>
+        <argsstring>(Sampler &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_GRAPH_NS::ISamplersPass::Sampler::operator=</qualifiedname>
+        <param>
+          <type>Sampler &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="23" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::ISamplersPass::Sampler</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>Memory::IGraphicsResource</label>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::ISamplersPass::Sampler</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>fboName</edgelabel>
+          <edgelabel>id</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pTexture</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_GTYPES_NS::Texture</label>
+        <link refid="classSR__GTYPES__NS_1_1Texture"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h" bodystart="18" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a1477e9cea192f8f22bba9b9199a26dd4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>depth</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a8c750bfc4310bab10f303e95d7d8f354" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>fboId</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a2c334c19ee5a0fe0483025b3aa033a4e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>fboName</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ac0eb94fde491bdccab0b406c6d3d20b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>id</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a36a3b486c568dd637bd7664527f648cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>index</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>NonCopyable</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a0c29d4745694de751ea6d2f404e45a20" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>operator=</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a48a9d0fdecd5e8788e27afa1605920e7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>pTexture</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ab225fe44556cd912294c79b1c014ba50" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>Sampler</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1adf1c9cbcf06c604821544edae7761a09" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>Sampler</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a5594f24a47c3a97a22cad3493f20de48" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>textureId</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>~NonCopyable</name></member>
+      <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a58ee8f437655a5fb7f8a11b15941faf4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>~Sampler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

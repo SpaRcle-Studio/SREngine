@@ -1,0 +1,1046 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1ResourceManager" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_UTILS_NS::ResourceManager</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; ResourceManager &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ResourceManager_1a6a7baca430346b21031a7a75f038471b" prot="private" static="no">
+        <type>uint64_t</type>
+        <definition>using SR_UTILS_NS::ResourceManager::Hash =  uint64_t</definition>
+        <argsstring></argsstring>
+        <name>Hash</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="26" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ac3bef02230103c09a8c9b3eb578696b8" prot="public" static="yes" mutable="no">
+        <type>const uint64_t</type>
+        <definition>const uint64_t SR_UTILS_NS::ResourceManager::ResourceLifeTime</definition>
+        <argsstring></argsstring>
+        <name>ResourceLifeTime</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::ResourceLifeTime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="28" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ab1fad66d37ddc08aa93fa1be280dcb8b" prot="private" static="no" mutable="no">
+        <type>ResourcesList</type>
+        <definition>ResourcesList SR_UTILS_NS::ResourceManager::m_destroyed</definition>
+        <argsstring></argsstring>
+        <name>m_destroyed</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_destroyed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="106" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a4072c3346c325b019d70e7375f95e683" prot="private" static="no" mutable="no">
+        <type>ResourcesTypes</type>
+        <definition>ResourcesTypes SR_UTILS_NS::ResourceManager::m_resources</definition>
+        <argsstring></argsstring>
+        <name>m_resources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_resources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="107" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ae61099ac116d545f38a2be937b80327f" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
+        <definition>IResourceReloader* SR_UTILS_NS::ResourceManager::m_defaultReloader</definition>
+        <argsstring></argsstring>
+        <name>m_defaultReloader</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_defaultReloader</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="109" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a01d07a22e5095b8ac50d78732c41c053" prot="private" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1FileWatcher" kindref="compound">FileWatcher</ref> &gt; &gt;</type>
+        <definition>std::list&lt;SR_HTYPES_NS::SharedPtr&lt;FileWatcher&gt; &gt; SR_UTILS_NS::ResourceManager::m_watchers</definition>
+        <argsstring></argsstring>
+        <name>m_watchers</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_watchers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="111" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1adb7f31b5719b379356b765d13005a6b9" prot="private" static="no" mutable="no">
+        <type>std::queue&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1FileWatcher" kindref="compound">FileWatcher</ref> &gt; &gt;</type>
+        <definition>std::queue&lt;SR_HTYPES_NS::SharedPtr&lt;FileWatcher&gt; &gt; SR_UTILS_NS::ResourceManager::m_dirtyWatchers</definition>
+        <argsstring></argsstring>
+        <name>m_dirtyWatchers</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_dirtyWatchers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="112" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a921f8555f64cc32f456586300f7f378a" prot="private" static="no" mutable="no">
+        <type>std::queue&lt; ResourceInfo::WeakPtr &gt;</type>
+        <definition>std::queue&lt;ResourceInfo::WeakPtr&gt; SR_UTILS_NS::ResourceManager::m_dirtyResources</definition>
+        <argsstring></argsstring>
+        <name>m_dirtyResources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_dirtyResources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="113" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1af1e5d7a5ce6f8d9a96d9f4594a3f3fbe" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; Hash, SR_HTYPES_NS::Thread::Ptr &gt;</type>
+        <definition>std::unordered_map&lt;Hash, SR_HTYPES_NS::Thread::Ptr&gt; SR_UTILS_NS::ResourceManager::m_asyncTasks</definition>
+        <argsstring></argsstring>
+        <name>m_asyncTasks</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_asyncTasks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="115" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a84b6ba8775424e9833f8c4dacda719e7" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::ResourceManager::m_usePointStackTraceProfiling</definition>
+        <argsstring></argsstring>
+        <name>m_usePointStackTraceProfiling</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_usePointStackTraceProfiling</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="117" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a1697e7c362e435009e08990441ce3e83" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::ResourceManager::m_isWatchingEnabled</definition>
+        <argsstring></argsstring>
+        <name>m_isWatchingEnabled</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_isWatchingEnabled</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="118" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ac8262fd7ed187b28f02c12786f65275d" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::ResourceManager::m_isInit</definition>
+        <argsstring></argsstring>
+        <name>m_isInit</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_isInit</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="119" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a7d1bf183963a32f5ebfca8cba7b59936" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::ResourceManager::m_isRun</definition>
+        <argsstring></argsstring>
+        <name>m_isRun</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_isRun</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="120" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1aa8ee11935a2f8d919c4b97447b43cecd" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::ResourceManager::m_force</definition>
+        <argsstring></argsstring>
+        <name>m_force</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_force</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="121" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a99281842bbec535994fd1e8347d0f41f" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>Path SR_UTILS_NS::ResourceManager::m_folder</definition>
+        <argsstring></argsstring>
+        <name>m_folder</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_folder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="123" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ab7ef79ff622895059016041c8dac7b22" prot="private" static="no" mutable="no">
+        <type>Types::Thread::Ptr</type>
+        <definition>Types::Thread::Ptr SR_UTILS_NS::ResourceManager::m_thread</definition>
+        <argsstring></argsstring>
+        <name>m_thread</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_thread</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="124" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1acf845704c5526c2b5d4a9844cd1a6689" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::ResourceManager::m_lastTime</definition>
+        <argsstring></argsstring>
+        <name>m_lastTime</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_lastTime</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="125" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a9e57cb4016df30bb845d1d5550457ece" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::ResourceManager::m_deltaTime</definition>
+        <argsstring></argsstring>
+        <name>m_deltaTime</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_deltaTime</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="126" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1ab7352f9fa1356a84775335e265dc2e99" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::ResourceManager::m_GCDt</definition>
+        <argsstring></argsstring>
+        <name>m_GCDt</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_GCDt</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="128" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ResourceManager_1a08520e07aca6da77cac82eb4165c897c" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_UTILS_NS::ResourceManager::m_hashCheckDt</definition>
+        <argsstring></argsstring>
+        <name>m_hashCheckDt</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::m_hashCheckDt</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="129" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a91adfc9dee17d02cb70ff457d6c4ebf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsLastResource</definition>
+        <argsstring>(IResource *resource)</argsstring>
+        <name>IsLastResource</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::IsLastResource</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>resource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="31" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a9a073fb3352abc58a34eb79e670d6010" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsUsePointStackTraceProfilingEnabled</definition>
+        <argsstring>() const</argsstring>
+        <name>IsUsePointStackTraceProfilingEnabled</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::IsUsePointStackTraceProfilingEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="32" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1aa99cbe17fc4191c078b64bd39e1b9832" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetResPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetResPath</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::GetResPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="33" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a66549d95268696d269d39eb1d07f8fe4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+        <definition>SR_NODISCARD const Path &amp; SR_UTILS_NS::ResourceManager::GetResPathRef</definition>
+        <argsstring>() const</argsstring>
+        <name>GetResPathRef</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::GetResPathRef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="34" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a42409fce9a9f88cc32fbfde31f52aae0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetCachePath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCachePath</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::GetCachePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="35" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1aec40a7c1c108425dcbdd09d7c6354bca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_UTILS_NS::ResourceManager::GetTypeName</definition>
+        <argsstring>(Hash hashName) const</argsstring>
+        <name>GetTypeName</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::GetTypeName</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="36" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1aa5aa7fe310dc86ca1bad0cb501e66640" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsWatchingEnabled</definition>
+        <argsstring>() const</argsstring>
+        <name>IsWatchingEnabled</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::IsWatchingEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="38" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ac7a0d0dc220d735f15ad621afef45ab2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1FileWatcher" kindref="compound">FileWatcher</ref> &gt;</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; FileWatcher &gt; SR_UTILS_NS::ResourceManager::StartWatch</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>StartWatch</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::StartWatch</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="40" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a7f0b616238229094d8bc39d290c9ff9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+        <definition>SR_NODISCARD IResource * SR_UTILS_NS::ResourceManager::Find</definition>
+        <argsstring>(uint64_t hashTypeName, const std::string &amp;ID)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Find</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashTypeName</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>ID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="42" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a230e4c1b1dc0aadb6a3947d57002fef0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::Synchronize</definition>
+        <argsstring>(bool force)</argsstring>
+        <name>Synchronize</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Synchronize</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a19cc800714e2e13eeef786de45b89309" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::SetWatchingEnabled</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetWatchingEnabled</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::SetWatchingEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="45" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a934dcb46f9a3c6391070d06cd76ba444" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::ReloadResource</definition>
+        <argsstring>(IResource *pResource)</argsstring>
+        <name>ReloadResource</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::ReloadResource</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a02d82466fe8c70874a807cf3d7d7f55e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::Execute</definition>
+        <argsstring>(const SR_HTYPES_NS::Function&lt; void()&gt; &amp;fun)</argsstring>
+        <name>Execute</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Execute</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void()&gt; &amp;</type>
+          <declname>fun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a8a3a1e5df134fc7d9ddb55c7bf8a2f38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::InspectResources</definition>
+        <argsstring>(const SR_HTYPES_NS::Function&lt; void(const ResourcesTypes &amp;)&gt; &amp;callback)</argsstring>
+        <name>InspectResources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::InspectResources</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(const ResourcesTypes &amp;)&gt; &amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ad49c6192cf93d61e12be5beac2d945c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_UTILS_NS::ResourceManager::Find</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Find</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="52" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a77bbb71a09c55a5324076fa002c47fff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_UTILS_NS::ResourceManager::Find</definition>
+        <argsstring>(const Path &amp;path)</argsstring>
+        <name>Find</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Find</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="56" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="56" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a49e63b860e0666e6c87ff1cab97f0155" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::RegisterType</definition>
+        <argsstring>()</argsstring>
+        <name>RegisterType</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::RegisterType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="61" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="61" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a3bc09ac972cc06c5dfc37801e34cf82c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResourceT</type>
+          </param>
+          <param>
+            <type>typename ReloaderT</type>
+          </param>
+          <param>
+            <type>typename ...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::RegisterReloader</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>RegisterReloader</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::RegisterReloader</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="68" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="68" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1aa4fb342c4e4b9be73c95665a6b26982a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::RegisterResource</definition>
+        <argsstring>(IResource *pResource)</argsstring>
+        <name>RegisterResource</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::RegisterResource</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+<para>Register resource in resource manager. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Call only from <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> parents </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="76" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1af11b19008519228124494275e7b17caa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::Destroy</definition>
+        <argsstring>(IResource *pResource)</argsstring>
+        <name>Destroy</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Destroy</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+<para>Register resource to destroy in resource manager. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Call only from <ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> parents </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="79" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a27ceda9a9e03bab68cb6318698771516" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::ReviveResource</definition>
+        <argsstring>(IResource *pResource)</argsstring>
+        <name>ReviveResource</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::ReviveResource</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>pResource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="81" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a2153f9916d204995149cdbb2aa424162" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::Init</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;resourcesFolder)</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Init</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>resourcesFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="84" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ad1e211136385ff28a78a20e7d704eb9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::Run</definition>
+        <argsstring>()</argsstring>
+        <name>Run</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Run</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ab5fcaf8e20ca0c75292dfd241d5dbc69" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::OnSingletonDestroy</definition>
+        <argsstring>() override</argsstring>
+        <name>OnSingletonDestroy</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::OnSingletonDestroy</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342">OnSingletonDestroy</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="87" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1adc3dda6abed3e33b12a79f36d291c0e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::ReloadResources</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>ReloadResources</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::ReloadResources</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Проверить хэши ресурсов и перезагрузить их, если это требуется </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="90" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a37942fe72729418195db218f014a3b9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::UpdateWatchers</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>UpdateWatchers</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::UpdateWatchers</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="91" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a7f53193f61393c673d7418d84a983e5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::PrintMemoryDump</definition>
+        <argsstring>()</argsstring>
+        <name>PrintMemoryDump</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::PrintMemoryDump</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="93" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a39b2812e40dee8de88025bdee1eac238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::EnableStackTraceProfiling</definition>
+        <argsstring>()</argsstring>
+        <name>EnableStackTraceProfiling</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::EnableStackTraceProfiling</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="94" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a5d3781a676831ca7156c5f354b1e8afa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::RegisterType</definition>
+        <argsstring>(const std::string &amp;name, uint64_t hashTypeName)</argsstring>
+        <name>RegisterType</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::RegisterType</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashTypeName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="97" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ac1cdcd9e78d760871fc5bc4402cf0eb3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::ResourceManager::RegisterReloader</definition>
+        <argsstring>(IResourceReloader *pReloader, uint64_t hashTypeName)</argsstring>
+        <name>RegisterReloader</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::RegisterReloader</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResourceReloader" kindref="compound">IResourceReloader</ref> *</type>
+          <declname>pReloader</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashTypeName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="98" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1aa5ccea80111e0eb1d284a80dd5921b8e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::Remove</definition>
+        <argsstring>(IResource *resource)</argsstring>
+        <name>Remove</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Remove</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
+          <declname>resource</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1ab260722a941e2a123f8812345123df6b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::GC</definition>
+        <argsstring>()</argsstring>
+        <name>GC</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::GC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1a6625dc35b9c0164152ed4ee3eed93572" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::AsyncUpdateWatchers</definition>
+        <argsstring>()</argsstring>
+        <name>AsyncUpdateWatchers</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::AsyncUpdateWatchers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="102" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ResourceManager_1acd4c89c28759d54e2fd8d202a36f146f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ResourceManager::Thread</definition>
+        <argsstring>()</argsstring>
+        <name>Thread</name>
+        <qualifiedname>SR_UTILS_NS::ResourceManager::Thread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="103" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::ResourceManager</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; ResourceManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::ResourceManager</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; ResourceManager &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" line="24" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceManager.h" bodystart="24" bodyend="131"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a6625dc35b9c0164152ed4ee3eed93572" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>AsyncUpdateWatchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1af11b19008519228124494275e7b17caa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Destroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a39b2812e40dee8de88025bdee1eac238" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>EnableStackTraceProfiling</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a02d82466fe8c70874a807cf3d7d7f55e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Execute</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a7f0b616238229094d8bc39d290c9ff9f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Find</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ad49c6192cf93d61e12be5beac2d945c1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Find</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a77bbb71a09c55a5324076fa002c47fff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Find</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab260722a941e2a123f8812345123df6b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GC</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a42409fce9a9f88cc32fbfde31f52aae0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetCachePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa99cbe17fc4191c078b64bd39e1b9832" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetResPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a66549d95268696d269d39eb1d07f8fe4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetResPathRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1aec40a7c1c108425dcbdd09d7c6354bca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>GetTypeName</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a6a7baca430346b21031a7a75f038471b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Hash</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a2153f9916d204995149cdbb2aa424162" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Init</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a8a3a1e5df134fc7d9ddb55c7bf8a2f38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>InspectResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a91adfc9dee17d02cb70ff457d6c4ebf3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>IsLastResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9a073fb3352abc58a34eb79e670d6010" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>IsUsePointStackTraceProfilingEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa5aa7fe310dc86ca1bad0cb501e66640" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>IsWatchingEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1af1e5d7a5ce6f8d9a96d9f4594a3f3fbe" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_asyncTasks</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ae61099ac116d545f38a2be937b80327f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_defaultReloader</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a9e57cb4016df30bb845d1d5550457ece" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_deltaTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab1fad66d37ddc08aa93fa1be280dcb8b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_destroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a921f8555f64cc32f456586300f7f378a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_dirtyResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1adb7f31b5719b379356b765d13005a6b9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_dirtyWatchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a99281842bbec535994fd1e8347d0f41f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_folder</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa8ee11935a2f8d919c4b97447b43cecd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_force</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab7352f9fa1356a84775335e265dc2e99" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_GCDt</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a08520e07aca6da77cac82eb4165c897c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_hashCheckDt</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ac8262fd7ed187b28f02c12786f65275d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_isInit</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a7d1bf183963a32f5ebfca8cba7b59936" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_isRun</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a1697e7c362e435009e08990441ce3e83" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_isWatchingEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1acf845704c5526c2b5d4a9844cd1a6689" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_lastTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a4072c3346c325b019d70e7375f95e683" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_resources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab7ef79ff622895059016041c8dac7b22" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_thread</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a84b6ba8775424e9833f8c4dacda719e7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_usePointStackTraceProfiling</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a01d07a22e5095b8ac50d78732c41c053" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>m_watchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ab5fcaf8e20ca0c75292dfd241d5dbc69" prot="public" virt="virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a7f53193f61393c673d7418d84a983e5a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>PrintMemoryDump</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a3bc09ac972cc06c5dfc37801e34cf82c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterReloader</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ac1cdcd9e78d760871fc5bc4402cf0eb3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterReloader</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa4fb342c4e4b9be73c95665a6b26982a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a49e63b860e0666e6c87ff1cab97f0155" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterType</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a5d3781a676831ca7156c5f354b1e8afa" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>RegisterType</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a934dcb46f9a3c6391070d06cd76ba444" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ReloadResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1adc3dda6abed3e33b12a79f36d291c0e0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ReloadResources</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1aa5ccea80111e0eb1d284a80dd5921b8e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Remove</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ac3bef02230103c09a8c9b3eb578696b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ResourceLifeTime</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a27ceda9a9e03bab68cb6318698771516" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ReviveResource</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ad1e211136385ff28a78a20e7d704eb9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Run</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a19cc800714e2e13eeef786de45b89309" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>SetWatchingEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1ac7a0d0dc220d735f15ad621afef45ab2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>StartWatch</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a230e4c1b1dc0aadb6a3947d57002fef0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Synchronize</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1acd4c89c28759d54e2fd8d202a36f146f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>Thread</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1ResourceManager_1a37942fe72729418195db218f014a3b9a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>UpdateWatchers</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ResourceManager</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

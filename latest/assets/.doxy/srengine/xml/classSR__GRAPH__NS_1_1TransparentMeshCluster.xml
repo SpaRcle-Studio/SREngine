@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1TransparentMeshCluster" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::TransparentMeshCluster</compoundname>
+    <basecompoundref refid="classSR__GRAPH__NS_1_1MeshCluster" prot="public" virt="non-virtual">SR_GRAPH_NS::MeshCluster</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1TransparentMeshCluster_1a25604348dd6bb05e9692a64d19fad2d2" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1OpaqueMeshCluster" kindref="compound">OpaqueMeshCluster</ref> *</type>
+        <definition>OpaqueMeshCluster* SR_GRAPH_NS::TransparentMeshCluster::m_opaque</definition>
+        <argsstring></argsstring>
+        <name>m_opaque</name>
+        <qualifiedname>SR_GRAPH_NS::TransparentMeshCluster::m_opaque</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="166" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TransparentMeshCluster_1a13a9ebbcf7f72c058831e2938ac19d7d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::TransparentMeshCluster::TransparentMeshCluster</definition>
+        <argsstring>(OpaqueMeshCluster *pOpaqueCluster)</argsstring>
+        <name>TransparentMeshCluster</name>
+        <qualifiedname>SR_GRAPH_NS::TransparentMeshCluster::TransparentMeshCluster</qualifiedname>
+        <param>
+          <type><ref refid="classSR__GRAPH__NS_1_1OpaqueMeshCluster" kindref="compound">OpaqueMeshCluster</ref> *</type>
+          <declname>pOpaqueCluster</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="156" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="156" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TransparentMeshCluster_1a99a4eb0360f1575e028b2a8a3e1c3461" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::TransparentMeshCluster::~TransparentMeshCluster</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~TransparentMeshCluster</name>
+        <qualifiedname>SR_GRAPH_NS::TransparentMeshCluster::~TransparentMeshCluster</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="160" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1TransparentMeshCluster_1aba37c8d4e63f82618556d58567c4a808" prot="private" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool SR_FASTCALL</type>
+        <definition>bool SR_FASTCALL SR_GRAPH_NS::TransparentMeshCluster::ChangeCluster</definition>
+        <argsstring>(MeshPtr pMesh) final</argsstring>
+        <name>ChangeCluster</name>
+        <qualifiedname>SR_GRAPH_NS::TransparentMeshCluster::ChangeCluster</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1MeshCluster_1a5abc6044fa63b0700f2fd493310ce424">ChangeCluster</reimplements>
+        <param>
+          <type>MeshPtr</type>
+          <declname>pMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="163" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::MeshCluster</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshCluster"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::TransparentMeshCluster</label>
+        <link refid="classSR__GRAPH__NS_1_1TransparentMeshCluster"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::MeshCluster</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshCluster"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::TransparentMeshCluster</label>
+        <link refid="classSR__GRAPH__NS_1_1TransparentMeshCluster"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="154" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="154" bodyend="168"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1aa75275f4bcda111f282f387c9492c17d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>Add</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a1edd3ceec988a473e0e106e9239c8286" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>begin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a222074f5631ef647f4c1261e5696df59" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>begin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TransparentMeshCluster_1aba37c8d4e63f82618556d58567c4a808" prot="private" virt="virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>ChangeCluster</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a46df05e06bc075e123b075034b08be2b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>ClusterCallback</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a7a5aa99e23105119b87e8d6d7e493c09" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>ConstIterator</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1aa31632befdb2dbcb352f9b06c093105a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>Empty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1ac3771c6e941c1450cae167a852e34f61" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>end</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a19bd2dc6aee9c75e99e11deac2d0a6ef" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>end</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a8c282df8591f99700ab5d14b7fd93a7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>erase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1afd119cb1801cf05887f28a063be39790" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>Iterator</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TransparentMeshCluster_1a25604348dd6bb05e9692a64d19fad2d2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>m_opaque</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1ad19bdf36b6c755d19db52726198e22c9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>m_subClusters</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1af119a5fdf12dcd407bc66e0e91dbcc0b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>MeshCluster</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1aa025bfb09d8cf8a384bd12b2175ad634" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>MeshPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>NonCopyable</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1adba9b9b87652e51cfff7427bb82f5eb4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>OnResourceReloaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TransparentMeshCluster_1a13a9ebbcf7f72c058831e2938ac19d7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>TransparentMeshCluster</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1a01f589ce1dc21cc1a89fafdd5353b42e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>Update</name></member>
+      <member refid="classSR__GRAPH__NS_1_1MeshCluster_1aebd8b3e467fef289c7ccfcf9c6d5db90" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>~MeshCluster</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__GRAPH__NS_1_1TransparentMeshCluster_1a99a4eb0360f1575e028b2a8a3e1c3461" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TransparentMeshCluster</scope><name>~TransparentMeshCluster</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

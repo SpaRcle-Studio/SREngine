@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1SRShaderCreateInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::SRShaderCreateInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a8800deb5ea6141f17b50340c73e252c6" prot="public" static="no" mutable="no">
+        <type>std::map&lt; ShaderStage, <ref refid="structSR__GRAPH__NS_1_1SRShaderStageInfo" kindref="compound">SRShaderStageInfo</ref> &gt;</type>
+        <definition>std::map&lt;ShaderStage, SRShaderStageInfo&gt; SR_GRAPH_NS::SRShaderCreateInfo::stages</definition>
+        <argsstring></argsstring>
+        <name>stages</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::stages</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="166" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a51f6069bf1ad4d7a9ba1eb1e202a7cd0" prot="public" static="no" mutable="no">
+        <type>PolygonMode</type>
+        <definition>PolygonMode SR_GRAPH_NS::SRShaderCreateInfo::polygonMode</definition>
+        <argsstring></argsstring>
+        <name>polygonMode</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::polygonMode</qualifiedname>
+        <initializer>= PolygonMode::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="168" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1ae66ee02e002f1cb32dd8b26a0c136962" prot="public" static="no" mutable="no">
+        <type>CullMode</type>
+        <definition>CullMode SR_GRAPH_NS::SRShaderCreateInfo::cullMode</definition>
+        <argsstring></argsstring>
+        <name>cullMode</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::cullMode</qualifiedname>
+        <initializer>= CullMode::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="169" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a6942d16ad21495b46da2ffeff7277d79" prot="public" static="no" mutable="no">
+        <type>DepthCompare</type>
+        <definition>DepthCompare SR_GRAPH_NS::SRShaderCreateInfo::depthCompare</definition>
+        <argsstring></argsstring>
+        <name>depthCompare</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::depthCompare</qualifiedname>
+        <initializer>= DepthCompare::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="170" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1ad1a795bed4afe5f0f144c2a8817d5a06" prot="public" static="no" mutable="no">
+        <type>PrimitiveTopology</type>
+        <definition>PrimitiveTopology SR_GRAPH_NS::SRShaderCreateInfo::primitiveTopology</definition>
+        <argsstring></argsstring>
+        <name>primitiveTopology</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::primitiveTopology</qualifiedname>
+        <initializer>= PrimitiveTopology::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="171" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a1640fed123a644a5cde399ee1dfbf9a2" prot="public" static="no" mutable="no">
+        <type>VertexAttributes</type>
+        <definition>VertexAttributes SR_GRAPH_NS::SRShaderCreateInfo::vertexAttributes</definition>
+        <argsstring></argsstring>
+        <name>vertexAttributes</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::vertexAttributes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="173" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1ab8e0a61340b2b44293adf1060a793dcd" prot="public" static="no" mutable="no">
+        <type>VertexDescriptions</type>
+        <definition>VertexDescriptions SR_GRAPH_NS::SRShaderCreateInfo::vertexDescriptions</definition>
+        <argsstring></argsstring>
+        <name>vertexDescriptions</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::vertexDescriptions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="174" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a9c195ea2723bc4f5fe9775537fc50f38" prot="public" static="no" mutable="no">
+        <type>UBOInfo</type>
+        <definition>UBOInfo SR_GRAPH_NS::SRShaderCreateInfo::uniforms</definition>
+        <argsstring></argsstring>
+        <name>uniforms</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::uniforms</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="175" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a27e0e9d0c992d83d34de883acb0a73d7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::SRShaderCreateInfo::blendEnabled</definition>
+        <argsstring></argsstring>
+        <name>blendEnabled</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::blendEnabled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="177" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1adc1e938143d96badbd60756d0b19e35a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::SRShaderCreateInfo::depthWrite</definition>
+        <argsstring></argsstring>
+        <name>depthWrite</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::depthWrite</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="178" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a44609e7bdcd0ab2f13bed7d54732d0e7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::SRShaderCreateInfo::depthTest</definition>
+        <argsstring></argsstring>
+        <name>depthTest</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::depthTest</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="179" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1af95ce318a5ce52f17ef7e69f785b3436" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::SRShaderCreateInfo::Validate</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>Validate</name>
+        <qualifiedname>SR_GRAPH_NS::SRShaderCreateInfo::Validate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="158" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="158" bodyend="163"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="156" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="156" bodyend="181"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a27e0e9d0c992d83d34de883acb0a73d7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>blendEnabled</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1ae66ee02e002f1cb32dd8b26a0c136962" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>cullMode</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a6942d16ad21495b46da2ffeff7277d79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>depthCompare</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a44609e7bdcd0ab2f13bed7d54732d0e7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>depthTest</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1adc1e938143d96badbd60756d0b19e35a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>depthWrite</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a51f6069bf1ad4d7a9ba1eb1e202a7cd0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>polygonMode</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1ad1a795bed4afe5f0f144c2a8817d5a06" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>primitiveTopology</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a8800deb5ea6141f17b50340c73e252c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>stages</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a9c195ea2723bc4f5fe9775537fc50f38" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>uniforms</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1af95ce318a5ce52f17ef7e69f785b3436" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>Validate</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1a1640fed123a644a5cde399ee1dfbf9a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>vertexAttributes</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SRShaderCreateInfo_1ab8e0a61340b2b44293adf1060a793dcd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SRShaderCreateInfo</scope><name>vertexDescriptions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

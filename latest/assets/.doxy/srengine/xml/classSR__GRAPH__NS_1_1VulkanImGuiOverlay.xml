@@ -1,0 +1,753 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::VulkanImGuiOverlay</compoundname>
+    <basecompoundref refid="classSR__GRAPH__NS_1_1ImGuiOverlay" prot="public" virt="non-virtual">SR_GRAPH_NS::ImGuiOverlay</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a3b04538b468d1f74132eeeaab0648217" prot="private" static="no">
+        <type><ref refid="classSR__GRAPH__NS_1_1ImGuiOverlay" kindref="compound">ImGuiOverlay</ref></type>
+        <definition>using SR_GRAPH_NS::VulkanImGuiOverlay::Super =  ImGuiOverlay</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aca3b2ac36b09d139dad0efdbc4ef59c5" prot="private" static="yes" mutable="no">
+        <type>const std::vector&lt; VkDescriptorPoolSize &gt;</type>
+        <definition>const std::vector&lt;VkDescriptorPoolSize&gt; SR_GRAPH_NS::VulkanImGuiOverlay::POOL_SIZES</definition>
+        <argsstring></argsstring>
+        <name>POOL_SIZES</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::POOL_SIZES</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="53" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a59da929a2a3b43c6a06a1ae3c04c2774" prot="private" static="no" mutable="no">
+        <type>EvoVulkan::SubmitInfo</type>
+        <definition>EvoVulkan::SubmitInfo SR_GRAPH_NS::VulkanImGuiOverlay::m_submitInfo</definition>
+        <argsstring></argsstring>
+        <name>m_submitInfo</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_submitInfo</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="56" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8cb70843af2758db24f6d43226ecaa83" prot="private" static="no" mutable="no">
+        <type>VkSemaphore</type>
+        <definition>VkSemaphore SR_GRAPH_NS::VulkanImGuiOverlay::m_semaphore</definition>
+        <argsstring></argsstring>
+        <name>m_semaphore</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_semaphore</qualifiedname>
+        <initializer>= VK_NULL_HANDLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="58" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aa6dcbc4e0de35e5286bb2b5ae9c92220" prot="private" static="no" mutable="no">
+        <type>VkCommandBufferBeginInfo</type>
+        <definition>VkCommandBufferBeginInfo SR_GRAPH_NS::VulkanImGuiOverlay::m_cmdBuffBI</definition>
+        <argsstring></argsstring>
+        <name>m_cmdBuffBI</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_cmdBuffBI</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="60" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a732ad3bf0ac70e0f0724633e1f06fe86" prot="private" static="no" mutable="no">
+        <type>VkRenderPassBeginInfo</type>
+        <definition>VkRenderPassBeginInfo SR_GRAPH_NS::VulkanImGuiOverlay::m_renderPassBI</definition>
+        <argsstring></argsstring>
+        <name>m_renderPassBI</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_renderPassBI</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="61" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab11c961d548e415abc3f4930d568f0d2" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; VkClearValue &gt;</type>
+        <definition>std::vector&lt;VkClearValue&gt; SR_GRAPH_NS::VulkanImGuiOverlay::m_clearValues</definition>
+        <argsstring></argsstring>
+        <name>m_clearValues</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_clearValues</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="62" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6c3891ef7cc91a45c7b596afbca8f2aa" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; VkFramebuffer &gt;</type>
+        <definition>std::vector&lt;VkFramebuffer&gt; SR_GRAPH_NS::VulkanImGuiOverlay::m_frameBuffs</definition>
+        <argsstring></argsstring>
+        <name>m_frameBuffs</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_frameBuffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="64" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a4243f7daa0c77d02ff4a9a969f8f24d3" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; VkCommandPool &gt;</type>
+        <definition>std::vector&lt;VkCommandPool&gt; SR_GRAPH_NS::VulkanImGuiOverlay::m_cmdPools</definition>
+        <argsstring></argsstring>
+        <name>m_cmdPools</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_cmdPools</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="65" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8596339debd927115070a7c0545d41af" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; VkCommandBuffer &gt;</type>
+        <definition>std::vector&lt;VkCommandBuffer&gt; SR_GRAPH_NS::VulkanImGuiOverlay::m_cmdBuffs</definition>
+        <argsstring></argsstring>
+        <name>m_cmdBuffs</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_cmdBuffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="66" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aadd40d41dd9793e416476b93ec0b4e4c" prot="private" static="no" mutable="no">
+        <type>EvoVulkan::Types::RenderPass</type>
+        <definition>EvoVulkan::Types::RenderPass SR_GRAPH_NS::VulkanImGuiOverlay::m_renderPass</definition>
+        <argsstring></argsstring>
+        <name>m_renderPass</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_renderPass</qualifiedname>
+        <initializer>= { }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="68" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a56e6ebfde08e201419c63af000bb09cc" prot="private" static="no" mutable="no">
+        <type>EvoVulkan::Types::DescriptorPool *</type>
+        <definition>EvoVulkan::Types::DescriptorPool* SR_GRAPH_NS::VulkanImGuiOverlay::m_pool</definition>
+        <argsstring></argsstring>
+        <name>m_pool</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_pool</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="70" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a13cf18f097fdb5821d1adcbbac84e0ba" prot="private" static="no" mutable="no">
+        <type>EvoVulkan::Types::Device *</type>
+        <definition>EvoVulkan::Types::Device* SR_GRAPH_NS::VulkanImGuiOverlay::m_device</definition>
+        <argsstring></argsstring>
+        <name>m_device</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_device</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="71" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad4b1959cf221650b9927a31c685422d7" prot="private" static="no" mutable="no">
+        <type>EvoVulkan::Types::Swapchain *</type>
+        <definition>EvoVulkan::Types::Swapchain* SR_GRAPH_NS::VulkanImGuiOverlay::m_swapChain</definition>
+        <argsstring></argsstring>
+        <name>m_swapChain</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_swapChain</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="72" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab89dc2642a0444d70b71833e19c7b7c6" prot="private" static="no" mutable="no">
+        <type>EvoVulkan::Types::MultisampleTarget *</type>
+        <definition>EvoVulkan::Types::MultisampleTarget* SR_GRAPH_NS::VulkanImGuiOverlay::m_multiSample</definition>
+        <argsstring></argsstring>
+        <name>m_multiSample</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_multiSample</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="73" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a767757efbc63213f69d964d0c632d211" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::VulkanImGuiOverlay::m_undockingActive</definition>
+        <argsstring></argsstring>
+        <name>m_undockingActive</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::m_undockingActive</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="75" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a3449d621adff6dc846ece113e943fa28" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::VulkanImGuiOverlay::VulkanImGuiOverlay</definition>
+        <argsstring>(PipelinePtr pPipeline)</argsstring>
+        <name>VulkanImGuiOverlay</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::VulkanImGuiOverlay</qualifiedname>
+        <param>
+          <type>PipelinePtr</type>
+          <declname>pPipeline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="15" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad27e79e15a83caa09afd271d672d1839" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::VulkanImGuiOverlay::~VulkanImGuiOverlay</definition>
+        <argsstring>() override</argsstring>
+        <name>~VulkanImGuiOverlay</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::~VulkanImGuiOverlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="19" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a2268d5e7a2866916b52e4c2cfe6fdbda" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::VulkanImGuiOverlay::Init</definition>
+        <argsstring>() override</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::Init</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac0baff0eada4fe683541bd2a9f06a31e">Init</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="26" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a29af9adf09ce0334fca42037aec188a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::VulkanImGuiOverlay::ReCreate</definition>
+        <argsstring>() override</argsstring>
+        <name>ReCreate</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::ReCreate</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1Overlay_1a4b13547efe6da891207c6b10a7a7b241">ReCreate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="27" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afffd7360632c6dd73f4f56bb2ecde9be" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_GRAPH_NS::VulkanImGuiOverlay::GetName</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::GetName</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1Overlay_1a075f309cb1545bf261cc2c6a1e1897ad">GetName</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="29" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab53ad32ab0aa553c8826614589f9dd81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD EvoVulkan::SubmitInfo &amp;</type>
+        <definition>SR_NODISCARD EvoVulkan::SubmitInfo &amp; SR_GRAPH_NS::VulkanImGuiOverlay::Render</definition>
+        <argsstring>(uint32_t frame)</argsstring>
+        <name>Render</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::Render</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="31" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a55c7d7e654e6df5e1efa739871c91d1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_GRAPH_NS::VulkanImGuiOverlay::GetTextureDescriptorSet</definition>
+        <argsstring>(uint32_t textureId) override</argsstring>
+        <name>GetTextureDescriptorSet</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::GetTextureDescriptorSet</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1Overlay_1a3cf0198a72b394bddad837fe6df737e3">GetTextureDescriptorSet</reimplements>
+        <param>
+          <type>uint32_t</type>
+          <declname>textureId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="32" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a344243133dc873a6e28547fadaf31620" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD VkSemaphore</type>
+        <definition>SR_NODISCARD VkSemaphore SR_GRAPH_NS::VulkanImGuiOverlay::GetSemaphore</definition>
+        <argsstring>()</argsstring>
+        <name>GetSemaphore</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::GetSemaphore</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="34" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a827c2b04e4fd5257b6341728dc84c462" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD EvoVulkan::SubmitInfo &amp;</type>
+        <definition>SR_NODISCARD EvoVulkan::SubmitInfo &amp; SR_GRAPH_NS::VulkanImGuiOverlay::GetSubmitInfo</definition>
+        <argsstring>()</argsstring>
+        <name>GetSubmitInfo</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::GetSubmitInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="35" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab5c11677e2224e6cc625d6fabdb10929" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanImGuiOverlay::ResetSubmitInfo</definition>
+        <argsstring>()</argsstring>
+        <name>ResetSubmitInfo</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::ResetSubmitInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ae0137bc70bacf4ec07e09c91d8a731e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanImGuiOverlay::ReloadFonts</definition>
+        <argsstring>() override</argsstring>
+        <name>ReloadFonts</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::ReloadFonts</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a75610c97f59a2b12c857a450710fb3d8">ReloadFonts</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a0673d04eef665d0d0fb30008b92f1953" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanImGuiOverlay::Destroy</definition>
+        <argsstring>() override</argsstring>
+        <name>Destroy</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::Destroy</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a855b9a4ec2cfc575b08d5c77ef318f63">Destroy</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="40" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6925f74283d0554d75706d4311c00a11" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::VulkanImGuiOverlay::BeginDraw</definition>
+        <argsstring>() override</argsstring>
+        <name>BeginDraw</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::BeginDraw</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1Overlay_1af85a65ce57f12ae2f386ff87534f1519">BeginDraw</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="42" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1af450a77cb6fa903e5848706801ae3341" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanImGuiOverlay::EndDraw</definition>
+        <argsstring>() override</argsstring>
+        <name>EndDraw</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::EndDraw</qualifiedname>
+        <reimplements refid="classSR__GRAPH__NS_1_1Overlay_1a5a89233a625be99783864dd3a0d9e8be">EndDraw</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="43" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ada97d278f1454505f3e992f60594c92a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::VulkanImGuiOverlay::InitializeRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>InitializeRenderer</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::InitializeRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a95f36e110f0fd4efaeb76a55912d9991" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanImGuiOverlay::DeInitializeRenderer</definition>
+        <argsstring>()</argsstring>
+        <name>DeInitializeRenderer</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::DeInitializeRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="47" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a5873ac6ac505a16f4a9134fe085fc6f3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::VulkanImGuiOverlay::DestroyBuffers</definition>
+        <argsstring>()</argsstring>
+        <name>DestroyBuffers</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::DestroyBuffers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afb490a657a7d9332181ca7b3319bf24f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::VulkanImGuiOverlay::GetCountImages</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCountImages</name>
+        <qualifiedname>SR_GRAPH_NS::VulkanImGuiOverlay::GetCountImages</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="50" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::ImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1ImGuiOverlay"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_NS::Overlay</label>
+        <link refid="classSR__GRAPH__NS_1_1Overlay"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Overlay &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::ImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1ImGuiOverlay"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_iniPathEditor</edgelabel>
+          <edgelabel>m_iniPathWidgets</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_NS::Overlay</label>
+        <link refid="classSR__GRAPH__NS_1_1Overlay"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_pipeline</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Overlay &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="12" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6925f74283d0554d75706d4311c00a11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>BeginDraw</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a95f36e110f0fd4efaeb76a55912d9991" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DeInitializeRenderer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a0673d04eef665d0d0fb30008b92f1953" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Destroy</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a5873ac6ac505a16f4a9134fe085fc6f3" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DestroyBuffers</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DynamicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1af450a77cb6fa903e5848706801ae3341" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>EndDraw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Get</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afb490a657a7d9332181ca7b3319bf24f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetCountImages</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aab06dd953554f04abda13d386cb150a0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetIconFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a7e41a01ab30c165687a590f70030692c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetMainFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afffd7360632c6dd73f4f56bb2ecde9be" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a285f4f021256056338f3684bbcf46cd6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetPipeline</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a344243133dc873a6e28547fadaf31620" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetSemaphore</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetSRClass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a827c2b04e4fd5257b6341728dc84c462" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetSubmitInfo</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a55c7d7e654e6df5e1efa739871c91d1a" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetTextureDescriptorSet</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a62a20cefd39e02b306088e37da90db9e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ImGuiOverlay</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a2268d5e7a2866916b52e4c2cfe6fdbda" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Init</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ada97d278f1454505f3e992f60594c92a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>InitializeRenderer</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1ad93fbafb17b027685d36f683468f38d7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>IsEnabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a95e321c5c5b43220012af9d3565e5ecf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>IsSurfaceDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ae10700545e1c77349689168f4fd7a622" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>IsUndockingActive</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a9a08f77658d6c7c2e9cb78041515bc77" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>IsViewportsEnabled</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_basicManually</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab11c961d548e415abc3f4930d568f0d2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_clearValues</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aa6dcbc4e0de35e5286bb2b5ae9c92220" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_cmdBuffBI</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8596339debd927115070a7c0545d41af" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_cmdBuffs</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a4243f7daa0c77d02ff4a9a969f8f24d3" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_cmdPools</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a3b08b9deb9fa10215e843df10e6dd29f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a13cf18f097fdb5821d1adcbbac84e0ba" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_device</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1ad7954977e8dfd35db1e5fe05b35ed6ec" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_enabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aa62e33f562522c9263ec74c7df78b98e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_fontSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6c3891ef7cc91a45c7b596afbca8f2aa" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_frameBuffs</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a89263cf3f8a80e5b5244d815f011d1aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iconFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1af2b6737175a3b61d45fa930f1b240ab9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iconFontSize</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1acf71bed33b451160693a76a086a30ebb" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iniPathEditor</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac7798722b0ad1637a456b0bbc5ad11e4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iniPathWidgets</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a89569b0bd54e8a8eed05ff82ecf905bc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_initialized</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a83517e59edd7d744af608afb0a2ae049" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_mainFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab89dc2642a0444d70b71833e19c7b7c6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_multiSample</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a1051f1ceeaa65a990b161534c7cebeae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_pipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a56e6ebfde08e201419c63af000bb09cc" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_pool</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aadd40d41dd9793e416476b93ec0b4e4c" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_renderPass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a732ad3bf0ac70e0f0724633e1f06fe86" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_renderPassBI</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8cb70843af2758db24f6d43226ecaa83" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_semaphore</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a59da929a2a3b43c6a06a1ae3c04c2774" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_submitInfo</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a0870246af5fc2f6adacc5b2398fdb071" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_surfaceDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad4b1959cf221650b9927a31c685422d7" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_swapChain</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1aff2b333e126157d26993fdb0493ef311" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_tracyEnabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a767757efbc63213f69d964d0c632d211" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_undockingActive</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>operator==</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1adc2f2b4a958c20d678dc7a0eafe70016" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Overlay</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1ad9fac3e14c9278f768830c317c59f960" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aca3b2ac36b09d139dad0efdbc4ef59c5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>POOL_SIZES</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a8dee6af18f237bad8b49808a9ac42292" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Prepare</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1af9b10347a580493fb98f15f79db2acdb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Ptr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a29af9adf09ce0334fca42037aec188a3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ReCreate</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ae0137bc70bacf4ec07e09c91d8a731e4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ReloadFonts</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab53ad32ab0aa553c8826614589f9dd81" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Render</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Reset</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab5c11677e2224e6cc625d6fabdb10929" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ResetSubmitInfo</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a09509c80b8b522393de956050d3bc696" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SetEnabled</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a7d9145d642ae07e64f6f0d480bf8e018" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SetSurfaceDirty</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>StaticCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a3b04538b468d1f74132eeeaab0648217" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Valid</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a3449d621adff6dc846ece113e943fa28" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>VulkanImGuiOverlay</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad27e79e15a83caa09afd271d672d1839" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~VulkanImGuiOverlay</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

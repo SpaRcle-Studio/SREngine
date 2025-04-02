@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1EntityIdList" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::EntityIdList</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1EntityIdList_1a2810bc83a2f0e1153cace73c1efd152f" prot="public" static="no">
+        <type>std::optional&lt; <ref refid="classSR__UTILS__NS_1_1EntityIdList" kindref="compound">EntityIdList</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::EntityIdList::Optional =  std::optional&lt;EntityIdList&gt;</definition>
+        <argsstring></argsstring>
+        <name>Optional</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::Optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="44" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityIdList_1a6078053c4f6f5d9bcab96fd08d29673f" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; EntityId &gt;</type>
+        <definition>std::vector&lt;EntityId&gt; SR_UTILS_NS::EntityIdList::m_entityIds</definition>
+        <argsstring></argsstring>
+        <name>m_entityIds</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::m_entityIds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="86" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityIdList_1ab806758737c5b6ddd9383ec9753272aa" prot="private" static="no" mutable="no">
+        <type>EntityController::Ptr</type>
+        <definition>EntityController::Ptr SR_UTILS_NS::EntityIdList::m_pController</definition>
+        <argsstring></argsstring>
+        <name>m_pController</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::m_pController</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="87" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1EntityIdList_1a2ca64b7d03d909b1770c7573d2ba4d3f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::EntityIdList::m_isReserved</definition>
+        <argsstring></argsstring>
+        <name>m_isReserved</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::m_isReserved</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="88" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a18c93649ea0f0ff8f7fb93395db848a0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EntityIdList::EntityIdList</definition>
+        <argsstring>(EntityController::Ptr pController)</argsstring>
+        <name>EntityIdList</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::EntityIdList</qualifiedname>
+        <param>
+          <type>EntityController::Ptr</type>
+          <declname>pController</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="46" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="46" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1adcadecd6762be097d5d87e4dfa1068af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EntityIdList::~EntityIdList</definition>
+        <argsstring>() override</argsstring>
+        <name>~EntityIdList</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::~EntityIdList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="50" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="50" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a4718350e5d24641606fddcfdc9e20741" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EntityIdList::EntityIdList</definition>
+        <argsstring>(EntityIdList &amp;&amp;other) noexcept</argsstring>
+        <name>EntityIdList</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::EntityIdList</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1EntityIdList" kindref="compound">EntityIdList</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="56" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1ac27ffb72577262c4f8b4ac5f07811b1d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1EntityIdList" kindref="compound">EntityIdList</ref> &amp;</type>
+        <definition>EntityIdList &amp; SR_UTILS_NS::EntityIdList::operator=</definition>
+        <argsstring>(EntityIdList &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1EntityIdList" kindref="compound">EntityIdList</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="62" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="62" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1ad6d4caca699c6d921cf5da98e69fc33b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::EntityIdList::IsReserved</definition>
+        <argsstring>() const</argsstring>
+        <name>IsReserved</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::IsReserved</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="72" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a16325b4cdb884ae842ed4a97275641ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::Reserve</definition>
+        <argsstring>(const uint64_t size)</argsstring>
+        <name>Reserve</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::Reserve</qualifiedname>
+        <param>
+          <type>const uint64_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="74" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a389c21f7b4c8f6f8ebf16e7cd8ad8889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::ReserveIds</definition>
+        <argsstring>()</argsstring>
+        <name>ReserveIds</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::ReserveIds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="76" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1ab838d1671997f009adbee90ba8d12dbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::UnReserveIds</definition>
+        <argsstring>()</argsstring>
+        <name>UnReserveIds</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::UnReserveIds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="77" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a410926800b078e449c9a5b44e2346be8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="79" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1af32324ff014a17a4562abf0d4a032c54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::Add</definition>
+        <argsstring>(EntityId id)</argsstring>
+        <name>Add</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::Add</qualifiedname>
+        <param>
+          <type>EntityId</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="81" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1aace57ba6a351040fe5dace99b6d753a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::Add</definition>
+        <argsstring>(const EntityIdList &amp;list)</argsstring>
+        <name>Add</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::Add</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1EntityIdList" kindref="compound">EntityIdList</ref> &amp;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="82" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1EntityIdList_1a9d8ee90f9f507e85adaca88f07c2633e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::EntityIdList::Add</definition>
+        <argsstring>(const std::vector&lt; EntityId &gt; &amp;list)</argsstring>
+        <name>Add</name>
+        <qualifiedname>SR_UTILS_NS::EntityIdList::Add</qualifiedname>
+        <param>
+          <type>const std::vector&lt; EntityId &gt; &amp;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="83" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::EntityIdList</label>
+        <link refid="classSR__UTILS__NS_1_1EntityIdList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::EntityIdList</label>
+        <link refid="classSR__UTILS__NS_1_1EntityIdList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" line="42" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h" bodystart="42" bodyend="90"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1af32324ff014a17a4562abf0d4a032c54" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Add</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1aace57ba6a351040fe5dace99b6d753a4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Add</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a9d8ee90f9f507e85adaca88f07c2633e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Add</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a410926800b078e449c9a5b44e2346be8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a18c93649ea0f0ff8f7fb93395db848a0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>EntityIdList</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a4718350e5d24641606fddcfdc9e20741" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>EntityIdList</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1ad6d4caca699c6d921cf5da98e69fc33b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>IsReserved</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a6078053c4f6f5d9bcab96fd08d29673f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>m_entityIds</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a2ca64b7d03d909b1770c7573d2ba4d3f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>m_isReserved</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1ab806758737c5b6ddd9383ec9753272aa" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>m_pController</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1ac27ffb72577262c4f8b4ac5f07811b1d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::EntityIdList</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a2810bc83a2f0e1153cace73c1efd152f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Optional</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a16325b4cdb884ae842ed4a97275641ac" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>Reserve</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1a389c21f7b4c8f6f8ebf16e7cd8ad8889" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>ReserveIds</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1ab838d1671997f009adbee90ba8d12dbe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>UnReserveIds</name></member>
+      <member refid="classSR__UTILS__NS_1_1EntityIdList_1adcadecd6762be097d5d87e4dfa1068af" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>~EntityIdList</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::EntityIdList</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

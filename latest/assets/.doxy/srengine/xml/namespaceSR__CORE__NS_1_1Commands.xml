@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__CORE__NS_1_1Commands" kind="namespace" language="C++">
+    <compoundname>SR_CORE_NS::Commands</compoundname>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1ChangeHierarchySelected" prot="public">SR_CORE_NS::Commands::ChangeHierarchySelected</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1ComponentChange" prot="public">SR_CORE_NS::Commands::ComponentChange</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1ComponentsChange" prot="public">SR_CORE_NS::Commands::ComponentsChange</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1EntityEnable" prot="public">SR_CORE_NS::Commands::EntityEnable</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1GameObjectMove" prot="public">SR_CORE_NS::Commands::GameObjectMove</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1GameObjectTransform" prot="public">SR_CORE_NS::Commands::GameObjectTransform</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1IEngineReversibleCommand" prot="public">SR_CORE_NS::Commands::IEngineReversibleCommand</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectDelete" prot="public">SR_CORE_NS::Commands::SceneObjectDelete</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectInstance" prot="public">SR_CORE_NS::Commands::SceneObjectInstance</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectLayer" prot="public">SR_CORE_NS::Commands::SceneObjectLayer</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectRename" prot="public">SR_CORE_NS::Commands::SceneObjectRename</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Commands_1_1SceneObjectTag" prot="public">SR_CORE_NS::Commands::SceneObjectTag</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="EngineCommands_8h_1a40b72919bedb33bd37e1cf7de6f7d7ab" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED static SR_NODISCARD std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
+        <definition>SR_MAYBE_UNUSED static SR_NODISCARD std::unique_ptr&lt; SR_UTILS_NS::ISerializer &gt; SR_CORE_NS::Commands::CreateSerializer</definition>
+        <argsstring>()</argsstring>
+        <name>CreateSerializer</name>
+        <qualifiedname>SR_CORE_NS::Commands::CreateSerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/EngineCommands.h" line="31" column="57" bodyfile="Engine/Core/inc/Core/EngineCommands.h" bodystart="31" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/EngineCommands.h" line="30" column="1"/>
+  </compounddef>
+</doxygen>

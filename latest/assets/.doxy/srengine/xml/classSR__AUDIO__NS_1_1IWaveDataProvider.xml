@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__AUDIO__NS_1_1IWaveDataProvider" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_AUDIO_NS::IWaveDataProvider</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__AUDIO__NS_1_1MP3DataProvider" prot="public" virt="non-virtual">SR_AUDIO_NS::MP3DataProvider</derivedcompoundref>
+    <derivedcompoundref refid="classSR__AUDIO__NS_1_1ModPlugDataProvider" prot="public" virt="non-virtual">SR_AUDIO_NS::ModPlugDataProvider</derivedcompoundref>
+    <derivedcompoundref refid="classSR__AUDIO__NS_1_1WAVDataProvider" prot="public" virt="non-virtual">SR_AUDIO_NS::WAVDataProvider</derivedcompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a23590a109d5a88509df288eb48877ccb" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classSR__AUDIO__NS_1_1IWaveDataProvider" kindref="compound">IWaveDataProvider</ref> &gt;</type>
+        <definition>using SR_AUDIO_NS::IWaveDataProvider::Ptr =  std::shared_ptr&lt;IWaveDataProvider&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="34" column="9" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8931d5989f2b446efc900c6c75d00b27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_AUDIO_NS::IWaveDataProvider::~IWaveDataProvider</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~IWaveDataProvider</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::~IWaveDataProvider</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="37" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1ac2c1207d17bd11ac4f4d438bff43ace8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__AUDIO__NS_1_1WaveDataFormat" kindref="compound">WaveDataFormat</ref> &amp;</type>
+        <definition>virtual SR_NODISCARD const WaveDataFormat &amp; SR_AUDIO_NS::IWaveDataProvider::GetWaveDataFormat</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetWaveDataFormat</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::GetWaveDataFormat</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1aa6809b862fe59785f57782930ea6e90c">GetWaveDataFormat</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1a0b3f539e8b73f37bcc725040202142cb">GetWaveDataFormat</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1WAVDataProvider_1a5a72fb84bdd112e90e81d2c6ba6bd1ec">GetWaveDataFormat</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="39" column="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a569b97418d4a6ed4ee516ef0f2abb556" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD const uint8_t *</type>
+        <definition>virtual SR_NODISCARD const uint8_t * SR_AUDIO_NS::IWaveDataProvider::GetWaveData</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetWaveData</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::GetWaveData</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a2bc43585cb3606b49994781f65baf602">GetWaveData</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1ab83d9cd1a7d910abf18513bca3ce6a26">GetWaveData</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1WAVDataProvider_1a6eb3a78e3b874e78e9aebcc59fa9f8ab">GetWaveData</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="41" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1ab26e87dbef38f1885342e89213f38c00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD size_t</type>
+        <definition>virtual SR_NODISCARD size_t SR_AUDIO_NS::IWaveDataProvider::GetWaveDataSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetWaveDataSize</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::GetWaveDataSize</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a86ec48e3a7b319fbc078e50f7c0ae4f8">GetWaveDataSize</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1aff400c1c4c096a3a93636791aee6f2dc">GetWaveDataSize</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1WAVDataProvider_1a5948b19ffcedc4dd7d86c859f7244a5d">GetWaveDataSize</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="42" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a372028ebebed211b3aa15210533f15d3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_AUDIO_NS::IWaveDataProvider::IsStreaming</definition>
+        <argsstring>() const</argsstring>
+        <name>IsStreaming</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::IsStreaming</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac602d28656f674e6b3972701547959bf">IsStreaming</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1a3e8de87febca6173c2bbe2d6075ce88f">IsStreaming</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="44" column="35" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8defe15a64304984ac5bbb4bec8bf13a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_AUDIO_NS::IWaveDataProvider::IsEndOfStream</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEndOfStream</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::IsEndOfStream</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ad2d7933470365e6fea38820dca6b1d48">IsEndOfStream</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1ac99a82966ebbe8217303757227a33ecc">IsEndOfStream</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="45" column="35" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a6b4466d3ec1888197aa7b8502896a186" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_AUDIO_NS::IWaveDataProvider::Seek</definition>
+        <argsstring>(float_t seconds)</argsstring>
+        <name>Seek</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::Seek</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a0851d7f0660c280c5f8deb0a6db174e2">Seek</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1a10b14fe33c53df3fe72f6b84a30fef8f">Seek</reimplementedby>
+        <param>
+          <type>float_t</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="46" column="22" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1ae64cfd3e4df002b4b8f24032f3d2eec8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>size_t</type>
+        <definition>virtual size_t SR_AUDIO_NS::IWaveDataProvider::StreamWaveData</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>StreamWaveData</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::StreamWaveData</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a9196fb87f84b0395d20d814ed93540a5">StreamWaveData</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1MP3DataProvider_1a69cf12659055fa7a18d217c8ae187ff7">StreamWaveData</reimplementedby>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1WAVDataProvider_1a1e82149127542d76e44891a9d8dec1ba">StreamWaveData</reimplementedby>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="47" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__AUDIO__NS_1_1IWaveDataProvider_1a520b48179b5c4a3d4e1f99bf6f72395f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_AUDIO_NS::IWaveDataProvider::IsValid</definition>
+        <argsstring>() const</argsstring>
+        <name>IsValid</name>
+        <qualifiedname>SR_AUDIO_NS::IWaveDataProvider::IsValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="49" column="27" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::IWaveDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1IWaveDataProvider"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_AUDIO_NS::MP3DataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1MP3DataProvider"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_AUDIO_NS::ModPlugDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1ModPlugDataProvider"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_AUDIO_NS::WAVDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1WAVDataProvider"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::IWaveDataProvider</label>
+        <link refid="classSR__AUDIO__NS_1_1IWaveDataProvider"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" line="31" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h" bodystart="32" bodyend="51"/>
+    <listofallmembers>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a569b97418d4a6ed4ee516ef0f2abb556" prot="public" virt="pure-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>GetWaveData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ac2c1207d17bd11ac4f4d438bff43ace8" prot="public" virt="pure-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>GetWaveDataFormat</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ab26e87dbef38f1885342e89213f38c00" prot="public" virt="pure-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>GetWaveDataSize</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8defe15a64304984ac5bbb4bec8bf13a" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>IsEndOfStream</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a372028ebebed211b3aa15210533f15d3" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>IsStreaming</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a520b48179b5c4a3d4e1f99bf6f72395f" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>IsValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>operator=</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a23590a109d5a88509df288eb48877ccb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>Ptr</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a6b4466d3ec1888197aa7b8502896a186" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>Seek</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ae64cfd3e4df002b4b8f24032f3d2eec8" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>StreamWaveData</name></member>
+      <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8931d5989f2b446efc900c6c75d00b27" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>~IWaveDataProvider</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

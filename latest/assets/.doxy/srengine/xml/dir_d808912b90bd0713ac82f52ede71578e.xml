@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_d808912b90bd0713ac82f52ede71578e" kind="dir">
+    <compoundname>Engine/Core/libs/Physics/inc/Physics/Bullet3</compoundname>
+    <innerfile refid="Bullet3CollisionShape_8h">Bullet3CollisionShape.h</innerfile>
+    <innerfile refid="Bullet3LibraryImpl_8h">Bullet3LibraryImpl.h</innerfile>
+    <innerfile refid="Bullet3PhysicsLib_8h">Bullet3PhysicsLib.h</innerfile>
+    <innerfile refid="Bullet3PhysicsWorld_8h">Bullet3PhysicsWorld.h</innerfile>
+    <innerfile refid="Bullet3Rigidbody3D_8h">Bullet3Rigidbody3D.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Physics/inc/Physics/Bullet3/"/>
+  </compounddef>
+</doxygen>

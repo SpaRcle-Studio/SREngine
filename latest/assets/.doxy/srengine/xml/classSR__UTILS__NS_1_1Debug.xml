@@ -1,0 +1,809 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1Debug" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::Debug</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; Debug &gt;</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51b" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Level</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Level</qualifiedname>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51ba6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51ba28d0edd045e05cf5af64e35ae0c4c6ef" prot="public">
+          <name>Low</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51ba87f8a6ab85c9ced3702b4ea641ad4bb5" prot="public">
+          <name>Medium</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51ba655d20c1ca69519ca647684edbb2db35" prot="public">
+          <name>High</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51babbd47109890259c0127154db1af26c75" prot="public">
+          <name>Full</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="25" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="enum" id="classSR__UTILS__NS_1_1Debug_1a8dcfb3fa3acb42d68c439b55a9ffcaf4" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Theme</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Theme</qualifiedname>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1a8dcfb3fa3acb42d68c439b55a9ffcaf4aa18366b217ebf811ad1886e4f4f865b2" prot="public">
+          <name>Dark</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__UTILS__NS_1_1Debug_1a8dcfb3fa3acb42d68c439b55a9ffcaf4a9914a0ce04a7b7b6a8e39bec55064b82" prot="public">
+          <name>Light</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="29" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1adf99edfe02915aa2725af8a3a1da886c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Debug::m_showUseMemory</definition>
+        <argsstring></argsstring>
+        <name>m_showUseMemory</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_showUseMemory</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="73" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a8ec0e161110f460f735b9b8807896ba3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Debug::m_ColorThemeIsEnabled</definition>
+        <argsstring></argsstring>
+        <name>m_ColorThemeIsEnabled</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_ColorThemeIsEnabled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="74" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a634512f7e7cf76b57eee9fb459be2741" prot="private" static="no" mutable="no">
+        <type>Theme</type>
+        <definition>Theme SR_UTILS_NS::Debug::m_theme</definition>
+        <argsstring></argsstring>
+        <name>m_theme</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_theme</qualifiedname>
+        <initializer>= Theme::Light</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="76" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a153ff07f4eb76e3f05e0bbf463c5de2c" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::Debug::m_isInit</definition>
+        <argsstring></argsstring>
+        <name>m_isInit</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_isInit</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="78" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1ab8931ca9161bf3330e02406ebb8e1fcf" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">Path</ref></type>
+        <definition>Path SR_UTILS_NS::Debug::m_logPath</definition>
+        <argsstring></argsstring>
+        <name>m_logPath</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_logPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="79" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a28c2cd2f67c99bae4be38beacfaaee54" prot="private" static="no" mutable="no">
+        <type>std::ofstream</type>
+        <definition>std::ofstream SR_UTILS_NS::Debug::m_file</definition>
+        <argsstring></argsstring>
+        <name>m_file</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_file</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="80" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1ac4ceb1fdd56a9784631994b0e248a09d" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; Level &gt;</type>
+        <definition>std::atomic&lt;Level&gt; SR_UTILS_NS::Debug::m_level</definition>
+        <argsstring></argsstring>
+        <name>m_level</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_level</qualifiedname>
+        <initializer>= Level::Low</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="81" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a253516fe278f997cfa650b33110302e0" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_UTILS_NS::Debug::m_countErrors</definition>
+        <argsstring></argsstring>
+        <name>m_countErrors</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_countErrors</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="82" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Debug_1a449e280a0ce702f1715a7242a84e15a3" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t SR_UTILS_NS::Debug::m_countWarnings</definition>
+        <argsstring></argsstring>
+        <name>m_countWarnings</name>
+        <qualifiedname>SR_UTILS_NS::Debug::m_countWarnings</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="83" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a45a7f47d26377cc523fc6045daf1b0ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Debug::SR_REGISTER_SINGLETON</definition>
+        <argsstring>(Debug)</argsstring>
+        <name>SR_REGISTER_SINGLETON</name>
+        <qualifiedname>SR_UTILS_NS::Debug::SR_REGISTER_SINGLETON</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1Debug" kindref="compound">Debug</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a83863c5637f6142415badd003c3dcd27" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::InitColorTheme</definition>
+        <argsstring>()</argsstring>
+        <name>InitColorTheme</name>
+        <qualifiedname>SR_UTILS_NS::Debug::InitColorTheme</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="37" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a59d59a1cdb093d55954e31936a8b3e32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::Debug::~Debug</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Debug</name>
+        <qualifiedname>SR_UTILS_NS::Debug::~Debug</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="34" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a8dc331dfa7f79664ca753a835616d920" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::SetLevel</definition>
+        <argsstring>(Level level)</argsstring>
+        <name>SetLevel</name>
+        <qualifiedname>SR_UTILS_NS::Debug::SetLevel</qualifiedname>
+        <param>
+          <type>Level</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="40" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a757f652572ebf514fcbe983eec06f087" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Level</type>
+        <definition>SR_NODISCARD Level SR_UTILS_NS::Debug::GetLevel</definition>
+        <argsstring>()</argsstring>
+        <name>GetLevel</name>
+        <qualifiedname>SR_UTILS_NS::Debug::GetLevel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="42" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a4b54df4a0dc8f207aa1baec0442842ae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::Debug::IsInitialized</definition>
+        <argsstring>() const</argsstring>
+        <name>IsInitialized</name>
+        <qualifiedname>SR_UTILS_NS::Debug::IsInitialized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="43" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1ae69a23e3a38dd5beb0222c1f2e6a6991" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::MakeCrash</definition>
+        <argsstring>()</argsstring>
+        <name>MakeCrash</name>
+        <qualifiedname>SR_UTILS_NS::Debug::MakeCrash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a3d173aa00b5c99c278edf9e9c4fb53ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::TestPrint</definition>
+        <argsstring>()</argsstring>
+        <name>TestPrint</name>
+        <qualifiedname>SR_UTILS_NS::Debug::TestPrint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a7513ef0cf316f88f30e0b88471621c75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Init</definition>
+        <argsstring>(const std::string &amp;log_path, bool ShowUsedMemory, Theme colorTheme=Theme::Light)</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Init</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>log_path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>ShowUsedMemory</declname>
+        </param>
+        <param>
+          <type>Theme</type>
+          <declname>colorTheme</declname>
+          <defval>Theme::Light</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a865c4c1f62fe3f53a78e00d75a72979c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::OnSingletonDestroy</definition>
+        <argsstring>() override</argsstring>
+        <name>OnSingletonDestroy</name>
+        <qualifiedname>SR_UTILS_NS::Debug::OnSingletonDestroy</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342">OnSingletonDestroy</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a459ba596f0584e86e70588b5f49f8b8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Log</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Log</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Log</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="52" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a3550e51d57e74a47529ccd84aa159468" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Success</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Success</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Success</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="53" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a621bf8b0292943e0a1803fb17b60018b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::VulkanLog</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>VulkanLog</name>
+        <qualifiedname>SR_UTILS_NS::Debug::VulkanLog</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="54" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1adf5b93fca5b5ebd6d5b1888b20245058" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Info</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Info</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Info</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aed1795cb83a907c49e69f1968e244555" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Graph</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Graph</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Graph</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="56" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a087387605273058286777e492be9c6b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Vulkan</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Vulkan</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Vulkan</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="57" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a8319c0aea9a5aeeae2919afed0c1391b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Shader</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Shader</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Shader</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="58" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aa967c62d97fc139a78952716e1961055" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Script</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Script</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Script</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="59" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a622d4095839a8bf382d09094ad0af7c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::System</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>System</name>
+        <qualifiedname>SR_UTILS_NS::Debug::System</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="60" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a12c50f20648f927bd8fbb1ac31515f92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Warn</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Warn</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Warn</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="61" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1adad79dd9e6c21fcb7c40f3acb348f8dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Error</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Error</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Error</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="62" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a9a2d61e56b833e31c0995e97a9de51df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::VulkanError</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>VulkanError</name>
+        <qualifiedname>SR_UTILS_NS::Debug::VulkanError</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="63" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1aeeae05719d836dcf73aa370c06b4f498" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Debug::Assert</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>Assert</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Assert</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="64" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1afba9ea475b6f08e3d60c9aa3dc0a9b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Debug::AssertOnceCheck</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>AssertOnceCheck</name>
+        <qualifiedname>SR_UTILS_NS::Debug::AssertOnceCheck</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1ad27a8e9ac65a3e90555eecd824bee9fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::ScriptLog</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>ScriptLog</name>
+        <qualifiedname>SR_UTILS_NS::Debug::ScriptLog</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="67" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a1c0dba348af79e5c3850ecd894af55b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::ScriptError</definition>
+        <argsstring>(const std::string &amp;msg)</argsstring>
+        <name>ScriptError</name>
+        <qualifiedname>SR_UTILS_NS::Debug::ScriptError</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="68" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Debug_1a2c99f3989aa4a2622f553e6df0a0f100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Debug::Print</definition>
+        <argsstring>(std::string msg, DebugLogType type)</argsstring>
+        <name>Print</name>
+        <qualifiedname>SR_UTILS_NS::Debug::Print</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type>DebugLogType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="70" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::Debug</label>
+        <link refid="classSR__UTILS__NS_1_1Debug"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; Debug &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::Debug</label>
+        <link refid="classSR__UTILS__NS_1_1Debug"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; Debug &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Debug.h" line="22" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Debug.h" bodystart="22" bodyend="85"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Debug_1aeeae05719d836dcf73aa370c06b4f498" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Assert</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1afba9ea475b6f08e3d60c9aa3dc0a9b74" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>AssertOnceCheck</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1adad79dd9e6c21fcb7c40f3acb348f8dd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Error</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a757f652572ebf514fcbe983eec06f087" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>GetLevel</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::Debug</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1aed1795cb83a907c49e69f1968e244555" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Graph</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1adf5b93fca5b5ebd6d5b1888b20245058" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Info</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a7513ef0cf316f88f30e0b88471621c75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Init</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a83863c5637f6142415badd003c3dcd27" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>InitColorTheme</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a4b54df4a0dc8f207aa1baec0442842ae" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1aa3bbbac43d02b757f4c9adad4fceb51b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Level</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a459ba596f0584e86e70588b5f49f8b8a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Log</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a8ec0e161110f460f735b9b8807896ba3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_ColorThemeIsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a253516fe278f997cfa650b33110302e0" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_countErrors</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a449e280a0ce702f1715a7242a84e15a3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_countWarnings</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a28c2cd2f67c99bae4be38beacfaaee54" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_file</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a153ff07f4eb76e3f05e0bbf463c5de2c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_isInit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1ac4ceb1fdd56a9784631994b0e248a09d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_level</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1ab8931ca9161bf3330e02406ebb8e1fcf" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_logPath</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1adf99edfe02915aa2725af8a3a1da886c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_showUseMemory</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a634512f7e7cf76b57eee9fb459be2741" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>m_theme</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1ae69a23e3a38dd5beb0222c1f2e6a6991" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>MakeCrash</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a865c4c1f62fe3f53a78e00d75a72979c" prot="public" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a2c99f3989aa4a2622f553e6df0a0f100" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Print</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1aa967c62d97fc139a78952716e1961055" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Script</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a1c0dba348af79e5c3850ecd894af55b7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>ScriptError</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1ad27a8e9ac65a3e90555eecd824bee9fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>ScriptLog</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a8dc331dfa7f79664ca753a835616d920" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>SetLevel</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a8319c0aea9a5aeeae2919afed0c1391b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Shader</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a45a7f47d26377cc523fc6045daf1b0ab" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>SR_REGISTER_SINGLETON</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a3550e51d57e74a47529ccd84aa159468" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Success</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a622d4095839a8bf382d09094ad0af7c7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>System</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a3d173aa00b5c99c278edf9e9c4fb53ba" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>TestPrint</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a8dcfb3fa3acb42d68c439b55a9ffcaf4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Theme</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a087387605273058286777e492be9c6b5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Vulkan</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a9a2d61e56b833e31c0995e97a9de51df" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>VulkanError</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a621bf8b0292943e0a1803fb17b60018b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>VulkanLog</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a12c50f20648f927bd8fbb1ac31515f92" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>Warn</name></member>
+      <member refid="classSR__UTILS__NS_1_1Debug_1a59d59a1cdb093d55954e31936a8b3e32" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>~Debug</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Debug</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Debug</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

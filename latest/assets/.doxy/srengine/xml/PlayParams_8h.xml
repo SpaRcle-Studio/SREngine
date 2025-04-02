@@ -1,0 +1,669 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="PlayParams_8h" kind="file" language="C++">
+    <compoundname>PlayParams.h</compoundname>
+    <includes refid="Vector3_8h" local="no">Utils/Math/Vector3.h</includes>
+    <includes refid="Vector6_8h" local="no">Utils/Math/Vector6.h</includes>
+    <includes refid="AudioLibrary_8h" local="no">Audio/AudioLibrary.h</includes>
+    <includes refid="SoundFormat_8h" local="no">Audio/SoundFormat.h</includes>
+    <includedby refid="Sound_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Sound.h</includedby>
+    <includedby refid="SoundManager_8h" local="no">Engine/Core/libs/Audio/inc/Audio/SoundManager.h</includedby>
+    <includedby refid="AudioSource_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</includedby>
+    <incdepgraph>
+      <node id="89">
+        <label>Audio/AudioLibrary.h</label>
+        <link refid="AudioLibrary_8h_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Audio/inc/Audio/PlayParams.h</label>
+        <link refid="PlayParams_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>Audio/SoundFormat.h</label>
+        <link refid="SoundFormat_8h_source"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>Utils/Common/Breakpoint.h</label>
+        <link refid="Breakpoint_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>Utils/Common/EnumReflector.h</label>
+        <link refid="EnumReflector_8h_source"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Utils/Common/Enumerations.h</label>
+        <link refid="Enumerations_8h_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>Utils/Common/HashManager.h</label>
+        <link refid="HashManager_8h_source"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>Utils/Common/Hashes.h</label>
+        <link refid="Hashes_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>Utils/Common/NonCopyable.h</label>
+        <link refid="NonCopyable_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>Utils/Common/Singleton.h</label>
+        <link refid="Singleton_8h_source"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>Utils/Math/Axis.h</label>
+        <link refid="Axis_8h_source"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/Math/Mathematics.h</label>
+        <link refid="Mathematics_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>Utils/Math/Quaternion.h</label>
+        <link refid="Quaternion_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Utils/Math/Vector2.h</label>
+        <link refid="Vector2_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Utils/Math/Vector3.h</label>
+        <link refid="Vector3_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>Utils/Math/Vector6.h</label>
+        <link refid="Vector6_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>Utils/Platform/Stacktrace.h</label>
+        <link refid="Stacktrace_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>Utils/Types/Map.h</label>
+        <link refid="Map_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>Utils/Types/MerkleTree.h</label>
+        <link refid="MerkleTree_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>Utils/Types/SafePtrLockGuard.h</label>
+        <link refid="SafePtrLockGuard_8h_source"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>Utils/Types/StringAtom.h</label>
+        <link refid="StringAtom_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Utils/macros.h</label>
+        <link refid="macros_8h_source"/>
+      </node>
+      <node id="5">
+        <label>Utils/stdInclude.h</label>
+        <link refid="stdInclude_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Codegen/EnumsFwd.generated.hpp</label>
+      </node>
+      <node id="46">
+        <label>algorithm</label>
+      </node>
+      <node id="47">
+        <label>any</label>
+      </node>
+      <node id="40">
+        <label>array</label>
+      </node>
+      <node id="38">
+        <label>atomic</label>
+      </node>
+      <node id="35">
+        <label>cassert</label>
+      </node>
+      <node id="23">
+        <label>cctype</label>
+      </node>
+      <node id="7">
+        <label>cfloat</label>
+      </node>
+      <node id="55">
+        <label>chrono</label>
+      </node>
+      <node id="36">
+        <label>cmath</label>
+      </node>
+      <node id="19">
+        <label>codecvt</label>
+      </node>
+      <node id="59">
+        <label>concepts</label>
+      </node>
+      <node id="60">
+        <label>condition_variable</label>
+      </node>
+      <node id="17">
+        <label>cstdarg</label>
+      </node>
+      <node id="20">
+        <label>cstddef</label>
+      </node>
+      <node id="57">
+        <label>cstdint</label>
+      </node>
+      <node id="11">
+        <label>cstdio</label>
+      </node>
+      <node id="49">
+        <label>cstdlib</label>
+      </node>
+      <node id="25">
+        <label>cstring</label>
+      </node>
+      <node id="52">
+        <label>ctime</label>
+      </node>
+      <node id="44">
+        <label>exception</label>
+      </node>
+      <node id="84">
+        <label>flat_hash_map/flat_hash_map.hpp</label>
+      </node>
+      <node id="80">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="29">
+        <label>fstream</label>
+      </node>
+      <node id="42">
+        <label>functional</label>
+      </node>
+      <node id="64">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="67">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="65">
+        <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="66">
+        <label>glm/gtx/string_cast.hpp</label>
+      </node>
+      <node id="18">
+        <label>initializer_list</label>
+      </node>
+      <node id="58">
+        <label>iomanip</label>
+      </node>
+      <node id="12">
+        <label>iosfwd</label>
+      </node>
+      <node id="53">
+        <label>iostream</label>
+      </node>
+      <node id="9">
+        <label>limits</label>
+      </node>
+      <node id="51">
+        <label>list</label>
+      </node>
+      <node id="24">
+        <label>locale</label>
+      </node>
+      <node id="41">
+        <label>map</label>
+      </node>
+      <node id="28">
+        <label>memory</label>
+      </node>
+      <node id="33">
+        <label>mutex</label>
+      </node>
+      <node id="62">
+        <label>numbers</label>
+      </node>
+      <node id="61">
+        <label>numeric</label>
+      </node>
+      <node id="78">
+        <label>openssl/sha.h</label>
+      </node>
+      <node id="27">
+        <label>optional</label>
+      </node>
+      <node id="31">
+        <label>ostream</label>
+      </node>
+      <node id="32">
+        <label>queue</label>
+      </node>
+      <node id="56">
+        <label>random</label>
+      </node>
+      <node id="37">
+        <label>ranges</label>
+      </node>
+      <node id="54">
+        <label>ratio</label>
+      </node>
+      <node id="13">
+        <label>regex</label>
+      </node>
+      <node id="43">
+        <label>set</label>
+      </node>
+      <node id="16">
+        <label>shared_mutex</label>
+      </node>
+      <node id="8">
+        <label>span</label>
+      </node>
+      <node id="83">
+        <label>sparsehash/dense_hash_map</label>
+      </node>
+      <node id="50">
+        <label>sstream</label>
+      </node>
+      <node id="22">
+        <label>stack</label>
+      </node>
+      <node id="14">
+        <label>stdexcept</label>
+      </node>
+      <node id="34">
+        <label>string</label>
+      </node>
+      <node id="15">
+        <label>string_view</label>
+      </node>
+      <node id="48">
+        <label>thread</label>
+      </node>
+      <node id="10">
+        <label>type_traits</label>
+      </node>
+      <node id="45">
+        <label>unordered_map</label>
+      </node>
+      <node id="21">
+        <label>unordered_set</label>
+      </node>
+      <node id="39">
+        <label>utility</label>
+      </node>
+      <node id="26">
+        <label>variant</label>
+      </node>
+      <node id="30">
+        <label>vector</label>
+      </node>
+      <node id="79">
+        <label>xxHash/xxhash.h</label>
+      </node>
+      <node id="63">
+        <label>zlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>Engine/Core/libs/Audio/inc/Audio/PlayParams.h</label>
+        <link refid="PlayParams_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Engine/Core/libs/Audio/inc/Audio/Sound.h</label>
+        <link refid="Sound_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Engine/Core/libs/Audio/inc/Audio/SoundManager.h</label>
+        <link refid="SoundManager_8h_source"/>
+      </node>
+      <node id="4">
+        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</label>
+        <link refid="AudioSource_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" prot="public">SR_AUDIO_NS::PlayParamChangeChecker</innerclass>
+    <innerclass refid="structSR__AUDIO__NS_1_1PlayParams" prot="public">SR_AUDIO_NS::PlayParams</innerclass>
+    <innernamespace refid="namespaceSR__AUDIO__NS">SR_AUDIO_NS</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>Monika<sp/>on<sp/>09.07.2022.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_PLAYPARAMS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_PLAYPARAMS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Math/Vector3.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Math/Vector6.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Audio/AudioLibrary.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Audio/SoundFormat.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_AUDIO_NS<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(PlayParamType,<sp/>uint8_t,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Async,<sp/>Loop,<sp/>Library,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Relative,<sp/>Gain,<sp/>MinGain,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Pitch,<sp/>ConeInnerAngle,<sp/>ConeOuterAngle,<sp/>UniqueId,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Position,<sp/>Direction,<sp/>Velocity,<sp/>ConeOuterGain,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Orientation,<sp/>Device,<sp/>MaxGain,<sp/>MaxDistance,<sp/>RolloffFactor,<sp/>ReferenceDistance,<sp/>Spatialize</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">PlayParamChangeChecker<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PlayParamChangeChecker()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>PlayParamChangeChecker(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_value(value)</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_changed(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_hasValue(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_FORCE_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_value()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_hasValue;<sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_FORCE_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_changed()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_changed;<sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_FORCE_INLINE<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_value;<sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_FORCE_INLINE<sp/>T&amp;<sp/>value()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_value;<sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PlayParamChangeChecker&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_value<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_hasValue<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_FORCE_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reset_changed()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_changed<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_FORCE_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>mark_as_changed()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_changed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>m_value;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_changed<sp/>:<sp/>4<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_hasValue<sp/>:<sp/>4<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(SpatializeMode,<sp/>uint8_t,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Off,<sp/>On,<sp/>Auto</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="structSR__AUDIO__NS_1_1PlayParams" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref><sp/>GetDefault();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>MarkAsChanged()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>async.mark_as_changed();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>loop.mark_as_changed();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialize.mark_as_changed();</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>library.mark_as_changed();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maxDistance.mark_as_changed();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>referenceDistance.mark_as_changed();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rolloffFactor.mark_as_changed();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>relative.mark_as_changed();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gain.mark_as_changed();</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>minGain.mark_as_changed();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pitch.mark_as_changed();</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maxGain.mark_as_changed();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>coneInnerAngle.mark_as_changed();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uniqueId.mark_as_changed();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>position.mark_as_changed();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>direction.mark_as_changed();</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>velocity.mark_as_changed();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orientation.mark_as_changed();</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>device.mark_as_changed();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;bool&gt;</ref><sp/>async;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;bool&gt;</ref><sp/>loop;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;SpatializeMode&gt;</ref><sp/>spatialize;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;AudioLibrary&gt;</ref><sp/>library;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>maxDistance;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>referenceDistance;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>rolloffFactor;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>relative;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>gain;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>minGain;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>pitch;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>maxGain;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;float_t&gt;</ref><sp/>coneInnerAngle;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;uint64_t&gt;</ref><sp/>uniqueId;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;SR_MATH_NS::FVector3&gt;</ref><sp/>position;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;SR_MATH_NS::FVector3&gt;</ref><sp/>direction;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;SR_MATH_NS::FVector3&gt;</ref><sp/>velocity;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;SR_MATH_NS::FVector6&gt;</ref><sp/>orientation;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker&lt;std::string&gt;</ref><sp/>device;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PLAYPARAMS_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h"/>
+  </compounddef>
+</doxygen>

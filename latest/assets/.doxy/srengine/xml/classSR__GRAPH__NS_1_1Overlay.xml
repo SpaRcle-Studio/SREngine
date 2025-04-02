@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1Overlay" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_GRAPH_NS::Overlay</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Overlay &gt;</basecompoundref>
+    <derivedcompoundref refid="classSR__GRAPH__NS_1_1ImGuiOverlay" prot="public" virt="non-virtual">SR_GRAPH_NS::ImGuiOverlay</derivedcompoundref>
+    <includes refid="Overlay_8h" local="no">Overlay.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Overlay_1a609a2b5dbf66e0c8dc8721534a0c8344" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Overlay" kindref="compound">Overlay</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::Overlay::Super =  SR_HTYPES_NS::SharedPtr&lt;Overlay&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Overlay_1af9b10347a580493fb98f15f79db2acdb" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Overlay" kindref="compound">Overlay</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::Overlay::Ptr =  SR_HTYPES_NS::SharedPtr&lt;Overlay&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Overlay_1ad9fac3e14c9278f768830c317c59f960" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
+        <definition>using SR_GRAPH_NS::Overlay::PipelinePtr =  SR_HTYPES_NS::SharedPtr&lt;Pipeline&gt;</definition>
+        <argsstring></argsstring>
+        <name>PipelinePtr</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::PipelinePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Overlay_1a1051f1ceeaa65a990b161534c7cebeae" prot="protected" static="no" mutable="no">
+        <type>PipelinePtr</type>
+        <definition>PipelinePtr SR_GRAPH_NS::Overlay::m_pipeline</definition>
+        <argsstring></argsstring>
+        <name>m_pipeline</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::m_pipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="51" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Overlay_1ad7954977e8dfd35db1e5fe05b35ed6ec" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Overlay::m_enabled</definition>
+        <argsstring></argsstring>
+        <name>m_enabled</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::m_enabled</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="53" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Overlay_1a89569b0bd54e8a8eed05ff82ecf905bc" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Overlay::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::m_initialized</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="54" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Overlay_1a0870246af5fc2f6adacc5b2398fdb071" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Overlay::m_surfaceDirty</definition>
+        <argsstring></argsstring>
+        <name>m_surfaceDirty</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::m_surfaceDirty</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="55" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Overlay_1aff2b333e126157d26993fdb0493ef311" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::Overlay::m_tracyEnabled</definition>
+        <argsstring></argsstring>
+        <name>m_tracyEnabled</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::m_tracyEnabled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="56" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1adc2f2b4a958c20d678dc7a0eafe70016" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::Overlay::Overlay</definition>
+        <argsstring>(PipelinePtr pPipeline)</argsstring>
+        <name>Overlay</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::Overlay</qualifiedname>
+        <param>
+          <type>PipelinePtr</type>
+          <declname>pPipeline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="28" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1abb9fe01351c86ea0ecc7aa05efb38cec" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_GRAPH_NS::Overlay::Init</definition>
+        <argsstring>()=0</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::Init</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac0baff0eada4fe683541bd2a9f06a31e">Init</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a2268d5e7a2866916b52e4c2cfe6fdbda">Init</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="31" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a5c51e9d3e1a33f1c7a5bdb4dbb30a993" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_GRAPH_NS::Overlay::IsUndockingActive</definition>
+        <argsstring>() const =0</argsstring>
+        <name>IsUndockingActive</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::IsUndockingActive</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ae10700545e1c77349689168f4fd7a622">IsUndockingActive</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="32" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a4b13547efe6da891207c6b10a7a7b241" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_GRAPH_NS::Overlay::ReCreate</definition>
+        <argsstring>()=0</argsstring>
+        <name>ReCreate</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::ReCreate</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a29af9adf09ce0334fca42037aec188a3">ReCreate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="33" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a95e321c5c5b43220012af9d3565e5ecf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::Overlay::IsSurfaceDirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsSurfaceDirty</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::IsSurfaceDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="34" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1ad93fbafb17b027685d36f683468f38d7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_GRAPH_NS::Overlay::IsEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsEnabled</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::IsEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="35" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a285f4f021256056338f3684bbcf46cd6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const PipelinePtr &amp;</type>
+        <definition>SR_NODISCARD const PipelinePtr &amp; SR_GRAPH_NS::Overlay::GetPipeline</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetPipeline</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::GetPipeline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="36" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a3cf0198a72b394bddad837fe6df737e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>virtual SR_NODISCARD void * SR_GRAPH_NS::Overlay::GetTextureDescriptorSet</definition>
+        <argsstring>(uint32_t textureId)</argsstring>
+        <name>GetTextureDescriptorSet</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::GetTextureDescriptorSet</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a55c7d7e654e6df5e1efa739871c91d1a">GetTextureDescriptorSet</reimplementedby>
+        <param>
+          <type>uint32_t</type>
+          <declname>textureId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="38" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a075f309cb1545bf261cc2c6a1e1897ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>virtual SR_NODISCARD std::string SR_GRAPH_NS::Overlay::GetName</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetName</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::GetName</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afffd7360632c6dd73f4f56bb2ecde9be">GetName</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="39" column="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1aa2d259d24ded7c9c057f709f1a3327bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::Overlay::Destroy</definition>
+        <argsstring>()=0</argsstring>
+        <name>Destroy</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::Destroy</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a855b9a4ec2cfc575b08d5c77ef318f63">Destroy</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a0673d04eef665d0d0fb30008b92f1953">Destroy</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="41" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1aa45ceabf024ae0ea8e98062b87e0c002" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::Overlay::Prepare</definition>
+        <argsstring>()</argsstring>
+        <name>Prepare</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::Prepare</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a8dee6af18f237bad8b49808a9ac42292">Prepare</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="43" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1af85a65ce57f12ae2f386ff87534f1519" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_GRAPH_NS::Overlay::BeginDraw</definition>
+        <argsstring>()=0</argsstring>
+        <name>BeginDraw</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::BeginDraw</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6925f74283d0554d75706d4311c00a11">BeginDraw</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="44" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a5a89233a625be99783864dd3a0d9e8be" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_NS::Overlay::EndDraw</definition>
+        <argsstring>()=0</argsstring>
+        <name>EndDraw</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::EndDraw</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1af450a77cb6fa903e5848706801ae3341">EndDraw</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="45" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a09509c80b8b522393de956050d3bc696" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::Overlay::SetEnabled</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetEnabled</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::SetEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="47" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Overlay_1a7d9145d642ae07e64f6f0d480bf8e018" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_GRAPH_NS::Overlay::SetSurfaceDirty</definition>
+        <argsstring>()</argsstring>
+        <name>SetSurfaceDirty</name>
+        <qualifiedname>SR_GRAPH_NS::Overlay::SetSurfaceDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="48" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ | Base overlay | Type of overlay | <ref refid="classSR__GRAPH__NS_1_1Overlay" kindref="compound">Overlay</ref> renderer | | <ref refid="classSR__GRAPH__NS_1_1Overlay" kindref="compound">Overlay</ref> -&gt; TypeOverlay -&gt; RendererTypeOverlay | </para>
+<sect1 id="classSR__GRAPH__NS_1_1Overlay_1autotoc_md1_1s1"><sect2 id="classSR__GRAPH__NS_1_1Overlay_1autotoc_md1">
+<title>| Overlay -&gt; ImGuiOverlay -&gt; VulkanImGuiOverlay |</title></sect2></sect1>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_GRAPH_NS::ImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1ImGuiOverlay"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::Overlay</label>
+        <link refid="classSR__GRAPH__NS_1_1Overlay"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Overlay &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::Overlay</label>
+        <link refid="classSR__GRAPH__NS_1_1Overlay"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_pipeline</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Overlay &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/Overlay.h" bodystart="21" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>AutoFree</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1af85a65ce57f12ae2f386ff87534f1519" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>BeginDraw</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1aa2d259d24ded7c9c057f709f1a3327bb" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Destroy</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>DynamicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a5a89233a625be99783864dd3a0d9e8be" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>EndDraw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Get</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a075f309cb1545bf261cc2c6a1e1897ad" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a285f4f021256056338f3684bbcf46cd6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetPipeline</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetSRClass</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a3cf0198a72b394bddad837fe6df737e3" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetTextureDescriptorSet</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1abb9fe01351c86ea0ecc7aa05efb38cec" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Init</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1ad93fbafb17b027685d36f683468f38d7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>IsEnabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a95e321c5c5b43220012af9d3565e5ecf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>IsSurfaceDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a5c51e9d3e1a33f1c7a5bdb4dbb30a993" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>IsUndockingActive</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_basicManually</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1ad7954977e8dfd35db1e5fe05b35ed6ec" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_enabled</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a89569b0bd54e8a8eed05ff82ecf905bc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_initialized</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a1051f1ceeaa65a990b161534c7cebeae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_pipeline</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a0870246af5fc2f6adacc5b2398fdb071" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_surfaceDirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1aff2b333e126157d26993fdb0493ef311" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>m_tracyEnabled</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>operator==</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1adc2f2b4a958c20d678dc7a0eafe70016" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Overlay</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1ad9fac3e14c9278f768830c317c59f960" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>PipelinePtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1aa45ceabf024ae0ea8e98062b87e0c002" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Prepare</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1af9b10347a580493fb98f15f79db2acdb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Ptr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a4b13547efe6da891207c6b10a7a7b241" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>ReCreate</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Reset</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a09509c80b8b522393de956050d3bc696" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SetEnabled</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a7d9145d642ae07e64f6f0d480bf8e018" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SetSurfaceDirty</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>StaticCast</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Overlay_1a609a2b5dbf66e0c8dc8721534a0c8344" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Overlay</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

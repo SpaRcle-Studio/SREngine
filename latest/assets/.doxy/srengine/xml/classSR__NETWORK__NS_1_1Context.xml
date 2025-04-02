@@ -1,0 +1,536 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__NETWORK__NS_1_1Context" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_NETWORK_NS::Context</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Context &gt;</basecompoundref>
+    <derivedcompoundref refid="classSR__NETWORK__NS_1_1AsioContext" prot="public" virt="non-virtual">SR_NETWORK_NS::AsioContext</derivedcompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1Context_1a564a8630548634c12c3cbdd12b9d2742" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Context" kindref="compound">Context</ref> &gt;</type>
+        <definition>using SR_NETWORK_NS::Context::Super =  SR_HTYPES_NS::SharedPtr&lt;Context&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_NETWORK_NS::Context::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1Context_1a90f33bbbccdbff5286a351f7f986783a" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1PeerToPeer" kindref="compound">PeerToPeer</ref> &gt;</type>
+        <definition>using SR_NETWORK_NS::Context::PeerToPeerPtr =  SR_HTYPES_NS::SharedPtr&lt;PeerToPeer&gt;</definition>
+        <argsstring></argsstring>
+        <name>PeerToPeerPtr</name>
+        <qualifiedname>SR_NETWORK_NS::Context::PeerToPeerPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="30" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1Context_1a24b4dfb5d56a8ef9d2236f6ab3abeb81" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Acceptor" kindref="compound">Acceptor</ref> &gt;</type>
+        <definition>using SR_NETWORK_NS::Context::AcceptorPtr =  SR_HTYPES_NS::SharedPtr&lt;Acceptor&gt;</definition>
+        <argsstring></argsstring>
+        <name>AcceptorPtr</name>
+        <qualifiedname>SR_NETWORK_NS::Context::AcceptorPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="31" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__NETWORK__NS_1_1Context_1a2f55018f9981c4a4af24227623f2c98a" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Socket" kindref="compound">Socket</ref> &gt;</type>
+        <definition>using SR_NETWORK_NS::Context::SocketPtr =  SR_HTYPES_NS::SharedPtr&lt;Socket&gt;</definition>
+        <argsstring></argsstring>
+        <name>SocketPtr</name>
+        <qualifiedname>SR_NETWORK_NS::Context::SocketPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="32" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Context_1a5962d6a010c8bb308aca5505869db88c" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_NETWORK_NS::Context::m_isRunning</definition>
+        <argsstring></argsstring>
+        <name>m_isRunning</name>
+        <qualifiedname>SR_NETWORK_NS::Context::m_isRunning</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="60" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Context_1ad4107fe658dde66270e17b3cb4850b8c" prot="protected" static="no" mutable="no">
+        <type>std::list&lt; AcceptorPtr &gt;</type>
+        <definition>std::list&lt;AcceptorPtr&gt; SR_NETWORK_NS::Context::m_asyncAcceptors</definition>
+        <argsstring></argsstring>
+        <name>m_asyncAcceptors</name>
+        <qualifiedname>SR_NETWORK_NS::Context::m_asyncAcceptors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="62" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Context_1a4ef7c98634ef6589909fba1e662856fb" prot="protected" static="no" mutable="no">
+        <type>std::list&lt; SocketPtr &gt;</type>
+        <definition>std::list&lt;SocketPtr&gt; SR_NETWORK_NS::Context::m_asyncReceiveSockets</definition>
+        <argsstring></argsstring>
+        <name>m_asyncReceiveSockets</name>
+        <qualifiedname>SR_NETWORK_NS::Context::m_asyncReceiveSockets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="63" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__NETWORK__NS_1_1Context_1aeb7fc44a0ac30447f2860b3e0009bbcb" prot="protected" static="no" mutable="no">
+        <type>std::list&lt; std::pair&lt; PeerToPeerPtr, SocketPtr &gt; &gt;</type>
+        <definition>std::list&lt;std::pair&lt;PeerToPeerPtr, SocketPtr&gt; &gt; SR_NETWORK_NS::Context::m_asyncSendKnownHostsSockets</definition>
+        <argsstring></argsstring>
+        <name>m_asyncSendKnownHostsSockets</name>
+        <qualifiedname>SR_NETWORK_NS::Context::m_asyncSendKnownHostsSockets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="64" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1abaf10183e7404d7af992ea6f09f9adad" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_NETWORK_NS::Context::Context</definition>
+        <argsstring>()</argsstring>
+        <name>Context</name>
+        <qualifiedname>SR_NETWORK_NS::Context::Context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="34" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a5831185fc0a178be53cef4a4df4ba799" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_NETWORK_NS::Context::~Context</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Context</name>
+        <qualifiedname>SR_NETWORK_NS::Context::~Context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="37" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a30b4a73537b704ea60461a1364d5d1f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_NETWORK_NS::Context::Run</definition>
+        <argsstring>()=0</argsstring>
+        <name>Run</name>
+        <qualifiedname>SR_NETWORK_NS::Context::Run</qualifiedname>
+        <reimplementedby refid="classSR__NETWORK__NS_1_1AsioContext_1ac3f4c00cd91c13622a95c974a1c4b6f2">Run</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="43" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1ab7ae37898d11f09803f378f8013fdc47" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void SR_NETWORK_NS::Context::Stop</definition>
+        <argsstring>()=0</argsstring>
+        <name>Stop</name>
+        <qualifiedname>SR_NETWORK_NS::Context::Stop</qualifiedname>
+        <reimplementedby refid="classSR__NETWORK__NS_1_1AsioContext_1a6b6e34d0e93167c54739c8c6a63aea7b">Stop</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="44" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a5b4535c26a342d68d9bcd405ff5083b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool SR_NETWORK_NS::Context::Poll</definition>
+        <argsstring>()</argsstring>
+        <name>Poll</name>
+        <qualifiedname>SR_NETWORK_NS::Context::Poll</qualifiedname>
+        <reimplementedby refid="classSR__NETWORK__NS_1_1AsioContext_1a3258b5ec1a44944c1edcfeb3f8a13307">Poll</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="46" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a9fb6baa462165b345e1a3e442673b610" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::Context::AddAsyncAcceptor</definition>
+        <argsstring>(const AcceptorPtr &amp;pAcceptor)</argsstring>
+        <name>AddAsyncAcceptor</name>
+        <qualifiedname>SR_NETWORK_NS::Context::AddAsyncAcceptor</qualifiedname>
+        <param>
+          <type>const AcceptorPtr &amp;</type>
+          <declname>pAcceptor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="49" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a4630818f55d4b2be901c65b2871516a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::Context::AddAsyncReceiveSocket</definition>
+        <argsstring>(const SocketPtr &amp;pSocket)</argsstring>
+        <name>AddAsyncReceiveSocket</name>
+        <qualifiedname>SR_NETWORK_NS::Context::AddAsyncReceiveSocket</qualifiedname>
+        <param>
+          <type>const SocketPtr &amp;</type>
+          <declname>pSocket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a15b5f3981638d0bf89f38c1e07407ae9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_NETWORK_NS::Context::AddAsyncSendKnownHostsSocket</definition>
+        <argsstring>(const PeerToPeerPtr &amp;pP2P, const SocketPtr &amp;pSocket)</argsstring>
+        <name>AddAsyncSendKnownHostsSocket</name>
+        <qualifiedname>SR_NETWORK_NS::Context::AddAsyncSendKnownHostsSocket</qualifiedname>
+        <param>
+          <type>const PeerToPeerPtr &amp;</type>
+          <declname>pP2P</declname>
+        </param>
+        <param>
+          <type>const SocketPtr &amp;</type>
+          <declname>pSocket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a3a33fda9a76d66f66d99bab1778b5d94" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Socket" kindref="compound">Socket</ref> &gt;</type>
+        <definition>virtual SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Socket &gt; SR_NETWORK_NS::Context::CreateSocket</definition>
+        <argsstring>(SocketType type)=0</argsstring>
+        <name>CreateSocket</name>
+        <qualifiedname>SR_NETWORK_NS::Context::CreateSocket</qualifiedname>
+        <reimplementedby refid="classSR__NETWORK__NS_1_1AsioContext_1a1c912c59ff870b95b28df9116fa760e0">CreateSocket</reimplementedby>
+        <param>
+          <type>SocketType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="53" column="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a24a540b0f73f0bfbc6dc9ceb6d63f221" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Pinger" kindref="compound">Pinger</ref> &gt;</type>
+        <definition>virtual SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Pinger &gt; SR_NETWORK_NS::Context::CreatePinger</definition>
+        <argsstring>()=0</argsstring>
+        <name>CreatePinger</name>
+        <qualifiedname>SR_NETWORK_NS::Context::CreatePinger</qualifiedname>
+        <reimplementedby refid="classSR__NETWORK__NS_1_1AsioContext_1ab39de2e023a7d74d2b0244aaa4ea0d5a">CreatePinger</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="54" column="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1abaa0f86b5fc6b508c5a52d3b387320a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Acceptor" kindref="compound">Acceptor</ref> &gt;</type>
+        <definition>virtual SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Acceptor &gt; SR_NETWORK_NS::Context::CreateAcceptor</definition>
+        <argsstring>(SocketType type, const std::string &amp;address, uint16_t port)=0</argsstring>
+        <name>CreateAcceptor</name>
+        <qualifiedname>SR_NETWORK_NS::Context::CreateAcceptor</qualifiedname>
+        <reimplementedby refid="classSR__NETWORK__NS_1_1AsioContext_1aae63691eae1739bf6d78e99cc05c2f4c">CreateAcceptor</reimplementedby>
+        <param>
+          <type>SocketType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="55" column="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a8fcd42244d9f3da5629d96f8531c7b2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1PeerToPeer" kindref="compound">PeerToPeer</ref> &gt;</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; PeerToPeer &gt; SR_NETWORK_NS::Context::CreateP2P</definition>
+        <argsstring>(SocketType type, const std::string &amp;address, uint16_t port)</argsstring>
+        <name>CreateP2P</name>
+        <qualifiedname>SR_NETWORK_NS::Context::CreateP2P</qualifiedname>
+        <param>
+          <type>SocketType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="57" column="46"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1a9a5c0e966baa5a3e286dbcb067e66436" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Context" kindref="compound">Context</ref> &gt;</type>
+        <definition>static SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Context &gt; SR_NETWORK_NS::Context::Create</definition>
+        <argsstring>()</argsstring>
+        <name>Create</name>
+        <qualifiedname>SR_NETWORK_NS::Context::Create</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="40" column="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__NETWORK__NS_1_1Context_1af075307057d5c5247236a59417f0466d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__NETWORK__NS_1_1Context" kindref="compound">Context</ref> &gt;</type>
+        <definition>static SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Context &gt; SR_NETWORK_NS::Context::CreateAndRun</definition>
+        <argsstring>()</argsstring>
+        <name>CreateAndRun</name>
+        <qualifiedname>SR_NETWORK_NS::Context::CreateAndRun</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="41" column="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Context &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="4">
+        <label>SR_NETWORK_NS::AsioContext</label>
+        <link refid="classSR__NETWORK__NS_1_1AsioContext"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_NETWORK_NS::Context</label>
+        <link refid="classSR__NETWORK__NS_1_1Context"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Context &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_NETWORK_NS::Context</label>
+        <link refid="classSR__NETWORK__NS_1_1Context"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" line="28" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Network/Context.h" bodystart="28" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a24b4dfb5d56a8ef9d2236f6ab3abeb81" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AcceptorPtr</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a9fb6baa462165b345e1a3e442673b610" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AddAsyncAcceptor</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a4630818f55d4b2be901c65b2871516a7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AddAsyncReceiveSocket</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a15b5f3981638d0bf89f38c1e07407ae9" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AddAsyncSendKnownHostsSocket</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>AutoFree</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1abaf10183e7404d7af992ea6f09f9adad" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Context</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a9a5c0e966baa5a3e286dbcb067e66436" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Create</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1abaa0f86b5fc6b508c5a52d3b387320a9" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Context</scope><name>CreateAcceptor</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1af075307057d5c5247236a59417f0466d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>CreateAndRun</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a8fcd42244d9f3da5629d96f8531c7b2e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>CreateP2P</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a24a540b0f73f0bfbc6dc9ceb6d63f221" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Context</scope><name>CreatePinger</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a3a33fda9a76d66f66d99bab1778b5d94" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Context</scope><name>CreateSocket</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1ad4107fe658dde66270e17b3cb4850b8c" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>m_asyncAcceptors</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a4ef7c98634ef6589909fba1e662856fb" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>m_asyncReceiveSockets</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1aeb7fc44a0ac30447f2860b3e0009bbcb" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>m_asyncSendKnownHostsSockets</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>m_basicManually</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>m_data</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a5962d6a010c8bb308aca5505869db88c" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>m_isRunning</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>operator==</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a90f33bbbccdbff5286a351f7f986783a" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>PeerToPeerPtr</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a5b4535c26a342d68d9bcd405ff5083b9" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>Poll</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>Reset</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a30b4a73537b704ea60461a1364d5d1f3" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Run</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a2f55018f9981c4a4af24227623f2c98a" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>SocketPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>StaticCast</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1ab7ae37898d11f09803f378f8013fdc47" prot="public" virt="pure-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Stop</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a564a8630548634c12c3cbdd12b9d2742" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>Valid</name></member>
+      <member refid="classSR__NETWORK__NS_1_1Context_1a5831185fc0a178be53cef4a4df4ba799" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>~Context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::Context</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_NETWORK_NS::Context</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

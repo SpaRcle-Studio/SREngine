@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_d71989b0a6c56e7cf67d0c5ae6ec80fd" kind="dir">
+    <compoundname>Engine/Core/libs/Audio/inc/Audio</compoundname>
+    <innerdir refid="dir_16681fe1464e2912a23db58ce5093931">Engine/Core/libs/Audio/inc/Audio/Decoders</innerdir>
+    <innerdir refid="dir_45f97ee406bd7a76126228ed02b235a4">Engine/Core/libs/Audio/inc/Audio/Impl</innerdir>
+    <innerdir refid="dir_729cedc52027d33bd7afa3f0ac3e6b5f">Engine/Core/libs/Audio/inc/Audio/Types</innerdir>
+    <innerfile refid="AudioLibrary_8h">AudioLibrary.h</innerfile>
+    <innerfile refid="ListenerData_8h">ListenerData.h</innerfile>
+    <innerfile refid="PlayParams_8h">PlayParams.h</innerfile>
+    <innerfile refid="RawSound_8h">RawSound.h</innerfile>
+    <innerfile refid="Sound_8h">Sound.h</innerfile>
+    <innerfile refid="SoundContext_8h">SoundContext.h</innerfile>
+    <innerfile refid="SoundData_8h">SoundData.h</innerfile>
+    <innerfile refid="SoundDevice_8h">SoundDevice.h</innerfile>
+    <innerfile refid="SoundFormat_8h">SoundFormat.h</innerfile>
+    <innerfile refid="SoundListener_8h">SoundListener.h</innerfile>
+    <innerfile refid="SoundManager_8h">SoundManager.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Audio/inc/Audio/"/>
+  </compounddef>
+</doxygen>

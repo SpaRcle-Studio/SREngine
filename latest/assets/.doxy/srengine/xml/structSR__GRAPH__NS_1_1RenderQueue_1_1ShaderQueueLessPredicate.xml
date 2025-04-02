@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1RenderQueue_1_1ShaderQueueLessPredicate" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::RenderQueue::ShaderQueueLessPredicate</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__GRAPH__NS_1_1RenderQueue_1_1ShaderQueueLessPredicate_1a60fa1c1bbe22b977e64b1237e1576380" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD constexpr bool</type>
+        <definition>SR_NODISCARD constexpr bool SR_GRAPH_NS::RenderQueue::ShaderQueueLessPredicate::operator()</definition>
+        <argsstring>(const ShaderUseInfo &amp;left, const ShaderUseInfo &amp;right) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SR_GRAPH_NS::RenderQueue::ShaderQueueLessPredicate::operator()</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref> &amp;</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">ShaderUseInfo</ref> &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="87" column="41" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="87" bodyend="89"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" line="86" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderQueue.h" bodystart="86" bodyend="90"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1RenderQueue_1_1ShaderQueueLessPredicate_1a60fa1c1bbe22b977e64b1237e1576380" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderQueue::ShaderQueueLessPredicate</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

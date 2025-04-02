@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</compoundname>
+    <basecompoundref refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash" prot="public" virt="non-virtual">SR_UTILS_NS::SRConditionallyEnabledHash&lt; SR_GRAPH_NS::ShaderProperties, !std::is_const_v&lt; SR_GRAPH_NS::ShaderProperties &gt; &amp;&amp;!std::is_volatile_v&lt; SR_GRAPH_NS::ShaderProperties &gt; &amp;&amp;(std::is_enum_v&lt; SR_GRAPH_NS::ShaderProperties &gt;||std::is_integral_v&lt; SR_GRAPH_NS::ShaderProperties &gt;||std::is_pointer_v&lt; SR_GRAPH_NS::ShaderProperties &gt;)&gt;</basecompoundref>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4_1a2b832c94c7721cd0bdb13a759adad361" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;::operator()</definition>
+        <argsstring>(SR_GRAPH_NS::ShaderProperties const &amp;value) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;::operator()</qualifiedname>
+        <param>
+          <type>SR_GRAPH_NS::ShaderProperties const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="227" column="12" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="227" bodyend="236"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>static constexpr uint64_t SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;::DoHash</definition>
+        <argsstring>(const SR_GRAPH_NS::ShaderProperties &amp;value) noexcept</argsstring>
+        <name>DoHash</name>
+        <qualifiedname>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;::DoHash</qualifiedname>
+        <param>
+          <type>const SR_GRAPH_NS::ShaderProperties &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/Hashes.h" line="175" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="175" bodyend="177"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, Enabled &gt;</label>
+        <link refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</label>
+        <link refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, Enabled &gt;</label>
+        <link refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</label>
+        <link refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="226" column="10" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="226" bodyend="237"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</scope><name>DoHash</name></member>
+      <member refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4_1a2b832c94c7721cd0bdb13a759adad361" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</scope><name>operator()</name></member>
+      <member refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_1acd3b340d9335de5b16c57dc4eaccdf2c" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SRConditionallyEnabledHash::"><scope>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

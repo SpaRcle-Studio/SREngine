@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1PostProcessingUBO" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::PostProcessingUBO</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PostProcessingUBO_1a0f08d6be5c8410fe4ed52363fba01cdd" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::PostProcessingUBO::gamma</definition>
+        <argsstring></argsstring>
+        <name>gamma</name>
+        <qualifiedname>SR_GRAPH_NS::PostProcessingUBO::gamma</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="35" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PostProcessingUBO_1a6a58678b2e4072af45dd7edcf67c0ca1" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_NS::PostProcessingUBO::saturation</definition>
+        <argsstring></argsstring>
+        <name>saturation</name>
+        <qualifiedname>SR_GRAPH_NS::PostProcessingUBO::saturation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="36" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="34" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="34" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1PostProcessingUBO_1a0f08d6be5c8410fe4ed52363fba01cdd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PostProcessingUBO</scope><name>gamma</name></member>
+      <member refid="structSR__GRAPH__NS_1_1PostProcessingUBO_1a6a58678b2e4072af45dd7edcf67c0ca1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PostProcessingUBO</scope><name>saturation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

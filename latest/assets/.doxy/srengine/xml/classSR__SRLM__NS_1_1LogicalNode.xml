@@ -1,0 +1,1230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRLM__NS_1_1LogicalNode" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>SR_SRLM_NS::LogicalNode</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1ConnectorNode" prot="public" virt="non-virtual">SR_SRLM_NS::ConnectorNode</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1EndResetNode" prot="public" virt="non-virtual">SR_SRLM_NS::EndResetNode</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1IComputeNode" prot="public" virt="non-virtual">SR_SRLM_NS::IComputeNode</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1IExecutableNode" prot="public" virt="non-virtual">SR_SRLM_NS::IExecutableNode</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRLM__NS_1_1StartResetNode" prot="public" virt="non-virtual">SR_SRLM_NS::StartResetNode</derivedcompoundref>
+    <innerclass refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodeConnect" prot="public">SR_SRLM_NS::LogicalNode::NodeConnect</innerclass>
+    <innerclass refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" prot="public">SR_SRLM_NS::LogicalNode::NodePin</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" static="no">
+        <type>uint64_t</type>
+        <definition>using SR_SRLM_NS::LogicalNode::Hash =  uint64_t</definition>
+        <argsstring></argsstring>
+        <name>Hash</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::Hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="44" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">NodePin</ref> &gt;</type>
+        <definition>using SR_SRLM_NS::LogicalNode::Pins =  std::vector&lt;NodePin&gt;</definition>
+        <argsstring></argsstring>
+        <name>Pins</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::Pins</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="56" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" static="no" mutable="yes">
+        <type>LogicalNodeStatus</type>
+        <definition>LogicalNodeStatus SR_SRLM_NS::LogicalNode::m_status</definition>
+        <argsstring></argsstring>
+        <name>m_status</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::m_status</qualifiedname>
+        <initializer>= LogicalNodeStatus::None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="120" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_SRLM_NS::LogicalNode::m_nodeIndex</definition>
+        <argsstring></argsstring>
+        <name>m_nodeIndex</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::m_nodeIndex</qualifiedname>
+        <initializer>= SR_UINT32_MAX</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="122" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" static="no" mutable="no">
+        <type>Pins</type>
+        <definition>Pins SR_SRLM_NS::LogicalNode::m_inputs</definition>
+        <argsstring></argsstring>
+        <name>m_inputs</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::m_inputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="124" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" static="no" mutable="no">
+        <type>Pins</type>
+        <definition>Pins SR_SRLM_NS::LogicalNode::m_outputs</definition>
+        <argsstring></argsstring>
+        <name>m_outputs</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::m_outputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="125" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" static="no" mutable="no">
+        <type><ref refid="classSR__SRLM__NS_1_1LogicalMachine" kindref="compound">LogicalMachine</ref> *</type>
+        <definition>LogicalMachine* SR_SRLM_NS::LogicalNode::m_machine</definition>
+        <argsstring></argsstring>
+        <name>m_machine</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::m_machine</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="127" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRLM_NS::LogicalNode::~LogicalNode</definition>
+        <argsstring>() override</argsstring>
+        <name>~LogicalNode</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::~LogicalNode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="58" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::ClearLogicalNode</definition>
+        <argsstring>()</argsstring>
+        <name>ClearLogicalNode</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::ClearLogicalNode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="63" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::ResetInputFlows</definition>
+        <argsstring>()</argsstring>
+        <name>ResetInputFlows</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::ResetInputFlows</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::ResetOutputFlows</definition>
+        <argsstring>()</argsstring>
+        <name>ResetOutputFlows</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::ResetOutputFlows</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::ResetStatus</definition>
+        <argsstring>()</argsstring>
+        <name>ResetStatus</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::ResetStatus</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::SetMachine</definition>
+        <argsstring>(LogicalMachine *pMachine)</argsstring>
+        <name>SetMachine</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::SetMachine</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1LogicalMachine" kindref="compound">LogicalMachine</ref> *</type>
+          <declname>pMachine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="69" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::SetNodeIndex</definition>
+        <argsstring>(uint32_t index)</argsstring>
+        <name>SetNodeIndex</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::SetNodeIndex</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="70" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::SaveXml</definition>
+        <argsstring>(SR_XML_NS::Node &amp;xmlNode)</argsstring>
+        <name>SaveXml</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::SaveXml</qualifiedname>
+        <param>
+          <type>SR_XML_NS::Node &amp;</type>
+          <declname>xmlNode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="72" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::SetInput</definition>
+        <argsstring>(const DataType *pInput, uint32_t index)</argsstring>
+        <name>SetInput</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::SetInput</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+          <declname>pInput</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="73" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+        <definition>SR_NODISCARD const DataType * SR_SRLM_NS::LogicalNode::CalcInput</definition>
+        <argsstring>(uint32_t index)</argsstring>
+        <name>CalcInput</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::CalcInput</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="75" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a9a188617821a9e68cf4f07d1fb92ac1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+        <definition>virtual SR_NODISCARD const DataType * SR_SRLM_NS::LogicalNode::GetOutput</definition>
+        <argsstring>(uint32_t index)</argsstring>
+        <name>GetOutput</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetOutput</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1IComputeNode_1a83e26601b04bd52dc04715f878eef654">GetOutput</reimplementedby>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="77" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Pins &amp;</type>
+        <definition>SR_NODISCARD Pins &amp; SR_SRLM_NS::LogicalNode::GetInputs</definition>
+        <argsstring>()</argsstring>
+        <name>GetInputs</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetInputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="78" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD Pins &amp;</type>
+        <definition>SR_NODISCARD Pins &amp; SR_SRLM_NS::LogicalNode::GetOutputs</definition>
+        <argsstring>()</argsstring>
+        <name>GetOutputs</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetOutputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="79" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
+        <definition>SR_NODISCARD LogicalNode * SR_SRLM_NS::LogicalNode::GetBaseLogicalNode</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>GetBaseLogicalNode</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetBaseLogicalNode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="80" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a3787e340fcad5f7c498bb18b9bd32ee0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>virtual SR_NODISCARD uint64_t SR_SRLM_NS::LogicalNode::GetNodeHashName</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetNodeHashName</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetNodeHashName</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1d409e99cee98de18c99830ee1d40dcc">GetNodeHashName</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a0423708df1a9d31cb644558a7c5d5900">GetNodeHashName</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1accc9935275f87aeadb88bbcf967950e9">GetNodeHashName</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="81" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1aee0451ad12205e73d1daf4d5b2369515" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>virtual SR_NODISCARD std::string SR_SRLM_NS::LogicalNode::GetNodeName</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetNodeName</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetNodeName</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a826b7d043b1cccd8b3a653e2470e8210">GetNodeName</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a69d2e35a43d8358361689c2589c0bd56">GetNodeName</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1a156b97b3ea2b52bbac3efce99af7a604">GetNodeName</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="82" column="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::Reset</definition>
+        <argsstring>()</argsstring>
+        <name>Reset</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::Reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="84" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::MarkDirty</definition>
+        <argsstring>()</argsstring>
+        <name>MarkDirty</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::MarkDirty</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1IComputeNode_1a74b766d43e3ae0002ba84015d07d71cc">MarkDirty</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="85" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::InitValues</definition>
+        <argsstring>()</argsstring>
+        <name>InitValues</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::InitValues</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a5d78d38a45fbfce76dd74aaf86582bf8">InitValues</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="86" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::InitNode</definition>
+        <argsstring>()</argsstring>
+        <name>InitNode</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::InitNode</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1StartPassNode_1a8e212a69fee177e90605a2848cd4d55d">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1abb45d046801ace0096bebcb65a0aeefe">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BranchNode_1ad5111d996b4b3bfd995ac03eb0c06af8">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BreakStructNode_1a5e6715cd98192ced8c05159ebc2aead4">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a720fa95e610625a99d02015b3e043d90">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1a06333ac2f356908fc8a727200b8a34ed">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1CreateStructNode_1ac401c442baec74f57902c4141434da7b">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a3e1b989c40fe1de9aa6db2363219a71a">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1af8a5fa713f1c70d10d7e5d35ce3bfd17">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1SequenceNode_1a3da87ffe7f553bba54153b1dc9299692">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1a1d053db0c62ccdedceb5f5ce1c6b0639">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartResetNode_1aafa93b7dc08fb306988e97e75b1a8eb2">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1SynchronizeNode_1ad5611ed6806c1f2e9d00d9d9d3054a70">InitNode</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="87" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SRLM_NS::LogicalNode::Execute</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>Execute</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::Execute</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BranchNode_1a4512a7e0fd709f914d461bc73f5661ca">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BreakStructNode_1a8f4f83a75ec6d693d09641f01363bf45">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a9c1a22759b235a1e0695ec5226e661d7">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1a462a1626e7177b5f856f397590d12fd2">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1CreateStructNode_1aed0c6d361db7683b80451f6f3252e930">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a797a595ee42ee253f5701f9f65a6f615">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1a43322b6a020d99ca5a7ec71d16fdf33f">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1PlusNode_1a4164316bdd5ac55525e759b9e8b68168">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1SequenceNode_1a6837c315fe1e87f18918d61370292090">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1af2b4a55f769d229fed168a9cda0c4a97">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartResetNode_1ab42c55d51a07d15fce5bafc7344cebf1">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1SynchronizeNode_1a2cafe2b5d5eefd43956b4df89738b9b2">Execute</reimplementedby>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="89" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_SRLM_NS::LogicalNode::IsNeedRepeat</definition>
+        <argsstring>() const</argsstring>
+        <name>IsNeedRepeat</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::IsNeedRepeat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="93" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_SRLM_NS::LogicalNode::IsNeedPostRepeat</definition>
+        <argsstring>() const</argsstring>
+        <name>IsNeedPostRepeat</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::IsNeedPostRepeat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="94" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_SRLM_NS::LogicalNode::IsEntryPoint</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsEntryPoint</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::IsEntryPoint</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1a76b3ec8022218332e054a17bf34e13a7">IsEntryPoint</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="95" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_SRLM_NS::LogicalNode::IsDirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsDirty</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::IsDirty</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1IComputeNode_1a9f37004e13920f2f20d50fa1dba6a292">IsDirty</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="96" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a2b21db0c5ec27638efd1130064904612" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>SR_NODISCARD LogicalNodeType</type>
+        <definition>virtual SR_NODISCARD LogicalNodeType SR_SRLM_NS::LogicalNode::GetType</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>GetType</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetType</qualifiedname>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConnectorNode_1ab6b432dd1acaf508a7d540e37db4a2a6">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1a154c2c6e15e6186c834e342a578517d8">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1IComputeNode_1a9ab059c1350d7aae11c343d029aacb61">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartResetNode_1a1182c0728b30b56e580a556608707428">GetType</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="97" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRLM_NS::LogicalNode::HasErrors</definition>
+        <argsstring>() const</argsstring>
+        <name>HasErrors</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::HasErrors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="98" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRLM_NS::LogicalNode::IsSuccessfullyCompleted</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsSuccessfullyCompleted</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::IsSuccessfullyCompleted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="99" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a3f002bccae511f95dcb0b128a838ce70" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_SRLM_NS::LogicalNode::GetNodeIndex</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetNodeIndex</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetNodeIndex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="100" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD LogicalNodeStatus</type>
+        <definition>SR_NODISCARD LogicalNodeStatus SR_SRLM_NS::LogicalNode::GetStatus</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetStatus</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::GetStatus</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="101" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::RemoveInput</definition>
+        <argsstring>(uint32_t index)</argsstring>
+        <name>RemoveInput</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::RemoveInput</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::RemoveOutput</definition>
+        <argsstring>(uint32_t index)</argsstring>
+        <name>RemoveOutput</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::RemoveOutput</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="105" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">NodePin</ref> &amp;</type>
+        <definition>NodePin &amp; SR_SRLM_NS::LogicalNode::AddInputData</definition>
+        <argsstring>(DataType *pData, uint64_t hashName=SR_UINT64_MAX)</argsstring>
+        <name>AddInputData</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::AddInputData</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+          <declname>pData</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+          <defval>SR_UINT64_MAX</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="107" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">NodePin</ref> &amp;</type>
+        <definition>NodePin &amp; SR_SRLM_NS::LogicalNode::AddOutputData</definition>
+        <argsstring>(DataType *pData, uint64_t hashName=SR_UINT64_MAX)</argsstring>
+        <name>AddOutputData</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::AddOutputData</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+          <declname>pData</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+          <defval>SR_UINT64_MAX</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="108" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::RemoveInputConnection</definition>
+        <argsstring>(LogicalNode *pNode, uint32_t pinIndex)</argsstring>
+        <name>RemoveInputConnection</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::RemoveInputConnection</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
+          <declname>pNode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pinIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="110" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::RemoveOutputConnection</definition>
+        <argsstring>(LogicalNode *pNode, uint32_t pinIndex)</argsstring>
+        <name>RemoveOutputConnection</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::RemoveOutputConnection</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
+          <declname>pNode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pinIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="111" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::AddInputConnection</definition>
+        <argsstring>(LogicalNode *pNode, uint32_t nodePinIndex, uint32_t pinIndex)</argsstring>
+        <name>AddInputConnection</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::AddInputConnection</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
+          <declname>pNode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nodePinIndex</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pinIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="113" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::LogicalNode::AddOutputConnection</definition>
+        <argsstring>(LogicalNode *pNode, uint32_t nodePinIndex, uint32_t pinIndex)</argsstring>
+        <name>AddOutputConnection</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::AddOutputConnection</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
+          <declname>pNode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>nodePinIndex</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pinIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">NodePin</ref> &amp;</type>
+        <definition>NodePin &amp; SR_SRLM_NS::LogicalNode::AddInputData</definition>
+        <argsstring>(uint64_t hashName=SR_UINT64_MAX)</argsstring>
+        <name>AddInputData</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::AddInputData</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+          <defval>SR_UINT64_MAX</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="116" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodePin" kindref="compound">NodePin</ref> &amp;</type>
+        <definition>NodePin &amp; SR_SRLM_NS::LogicalNode::AddOutputData</definition>
+        <argsstring>(uint64_t hashName=SR_UINT64_MAX)</argsstring>
+        <name>AddOutputData</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::AddOutputData</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+          <defval>SR_UINT64_MAX</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="117" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="117" bodyend="117"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">LogicalNode</ref> *</type>
+        <definition>static SR_NODISCARD LogicalNode * SR_SRLM_NS::LogicalNode::LoadXml</definition>
+        <argsstring>(const SR_XML_NS::Node &amp;xmlNode)</argsstring>
+        <name>LoadXml</name>
+        <qualifiedname>SR_SRLM_NS::LogicalNode::LoadXml</qualifiedname>
+        <param>
+          <type>const SR_XML_NS::Node &amp;</type>
+          <declname>xmlNode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="61" column="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="12">
+        <label>SR_GRAPH_NS::BasePass</label>
+        <link refid="classSR__GRAPH__NS_1_1BasePass"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>SR_GRAPH_NS::CascadedShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_GRAPH_NS::ClearBuffersPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ClearBuffersPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>SR_GRAPH_NS::ColorBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ColorBufferPass"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_GRAPH_NS::DebugPass</label>
+        <link refid="classSR__GRAPH__NS_1_1DebugPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>SR_GRAPH_NS::DepthBufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1DepthBufferPass"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>SR_GRAPH_NS::FlatClusterPass</label>
+        <link refid="classSR__GRAPH__NS_1_1FlatClusterPass"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>SR_GRAPH_NS::FramebufferPass</label>
+        <link refid="classSR__GRAPH__NS_1_1FramebufferPass"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SR_GRAPH_NS::GroupPass</label>
+        <link refid="classSR__GRAPH__NS_1_1GroupPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>SR_GRAPH_NS::IMesh3DClusterPass</label>
+        <link refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>SR_GRAPH_NS::IMeshClusterPass</label>
+        <link refid="classSR__GRAPH__NS_1_1IMeshClusterPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_GRAPH_NS::IRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1IRenderTechnique"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>SR_GRAPH_NS::MeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>SR_GRAPH_NS::OffScreenMeshDrawerPass</label>
+        <link refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass"/>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>SR_GRAPH_NS::OpaquePass</label>
+        <link refid="classSR__GRAPH__NS_1_1OpaquePass"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>SR_GRAPH_NS::PostProcessPass</label>
+        <link refid="classSR__GRAPH__NS_1_1PostProcessPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SR_GRAPH_NS::RenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1RenderTechnique"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>SR_GRAPH_NS::SSAOPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SSAOPass"/>
+        <childnode refid="34" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>
+        <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>SR_GRAPH_NS::ShaderOverridePass</label>
+        <link refid="classSR__GRAPH__NS_1_1ShaderOverridePass"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>SR_GRAPH_NS::ShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1ShadowMapPass"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>SR_GRAPH_NS::SkyboxPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SkyboxPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>SR_GRAPH_NS::StartPassNode</label>
+        <link refid="classSR__GRAPH__NS_1_1StartPassNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>SR_GRAPH_NS::SwapchainPass</label>
+        <link refid="classSR__GRAPH__NS_1_1SwapchainPass"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>SR_GRAPH_NS::TransparentPass</label>
+        <link refid="classSR__GRAPH__NS_1_1TransparentPass"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>SR_GRAPH_NS::VarianceShadowMapPass</label>
+        <link refid="classSR__GRAPH__NS_1_1VarianceShadowMapPass"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>SR_GRAPH_NS::WidgetPass</label>
+        <link refid="classSR__GRAPH__NS_1_1WidgetPass"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>SR_SRLM_NS::BranchNode</label>
+        <link refid="classSR__SRLM__NS_1_1BranchNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_SRLM_NS::BreakStructNode</label>
+        <link refid="classSR__SRLM__NS_1_1BreakStructNode"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SRLM_NS::ConnectorNode</label>
+        <link refid="classSR__SRLM__NS_1_1ConnectorNode"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_SRLM_NS::ConstructorNode</label>
+        <link refid="classSR__SRLM__NS_1_1ConstructorNode"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_SRLM_NS::ConvertorNode</label>
+        <link refid="classSR__SRLM__NS_1_1ConvertorNode"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_SRLM_NS::CreateStructNode</label>
+        <link refid="classSR__SRLM__NS_1_1CreateStructNode"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>SR_SRLM_NS::DebugPrintNode</label>
+        <link refid="classSR__SRLM__NS_1_1DebugPrintNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_SRLM_NS::EndResetNode</label>
+        <link refid="classSR__SRLM__NS_1_1EndResetNode"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_SRLM_NS::IComputeNode</label>
+        <link refid="classSR__SRLM__NS_1_1IComputeNode"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_SRLM_NS::IExecutableNode</label>
+        <link refid="classSR__SRLM__NS_1_1IExecutableNode"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_SRLM_NS::PlusNode</label>
+        <link refid="classSR__SRLM__NS_1_1PlusNode"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>SR_SRLM_NS::SequenceNode</label>
+        <link refid="classSR__SRLM__NS_1_1SequenceNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>SR_SRLM_NS::StartNode</label>
+        <link refid="classSR__SRLM__NS_1_1StartNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>SR_SRLM_NS::StartResetNode</label>
+        <link refid="classSR__SRLM__NS_1_1StartResetNode"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>SR_SRLM_NS::SynchronizeNode</label>
+        <link refid="classSR__SRLM__NS_1_1SynchronizeNode"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" line="42" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalNode.h" bodystart="42" bodyend="129"/>
+    <listofallmembers>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>AddInputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>AddInputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>AddInputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>AddOutputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>AddOutputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>AddOutputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>CalcInput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>ClearLogicalNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>Execute</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetBaseLogicalNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetInputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3787e340fcad5f7c498bb18b9bd32ee0" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetNodeHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3f002bccae511f95dcb0b128a838ce70" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetNodeIndex</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aee0451ad12205e73d1daf4d5b2369515" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetNodeName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a188617821a9e68cf4f07d1fb92ac1e" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetOutput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetOutputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetStatus</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a2b21db0c5ec27638efd1130064904612" prot="public" virt="pure-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>GetType</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>HasErrors</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>Hash</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>InitNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>InitValues</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7a198b9924e270e946544b410c7e4429" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>IsDirty</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>IsEntryPoint</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>IsNeedPostRepeat</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>IsNeedRepeat</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>IsSuccessfullyCompleted</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>LoadXml</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>m_inputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>m_machine</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>m_nodeIndex</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>m_outputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>m_status</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1abeb669de15f340d47b81aff73c8494a7" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>MarkDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>operator=</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>Pins</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>RemoveInput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>RemoveInputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>RemoveOutput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>RemoveOutputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>Reset</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>ResetInputFlows</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>ResetOutputFlows</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>ResetStatus</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>SaveXml</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>SetInput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>SetMachine</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>SetNodeIndex</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>~LogicalNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRLM_NS::LogicalNode</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

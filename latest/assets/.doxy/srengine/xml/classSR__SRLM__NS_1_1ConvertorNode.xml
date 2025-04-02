@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRLM__NS_1_1ConvertorNode" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRLM_NS::ConvertorNode</compoundname>
+    <basecompoundref refid="classSR__SRLM__NS_1_1IComputeNode" prot="public" virt="non-virtual">SR_SRLM_NS::IComputeNode</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1ConvertorNode_1a29a76622057b649fbb6f06beabf95240" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRLM_NS::ConvertorNode::m_initInputTypeHashName</definition>
+        <argsstring></argsstring>
+        <name>m_initInputTypeHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::m_initInputTypeHashName</qualifiedname>
+        <initializer>= SR_UINT64_MAX</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="31" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRLM__NS_1_1ConvertorNode_1a37a77e1bf66ad2c24f154d128ed15de9" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRLM_NS::ConvertorNode::m_initOutputTypeHashName</definition>
+        <argsstring></argsstring>
+        <name>m_initOutputTypeHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::m_initOutputTypeHashName</qualifiedname>
+        <initializer>= SR_UINT64_MAX</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="32" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1a06333ac2f356908fc8a727200b8a34ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::ConvertorNode::InitNode</definition>
+        <argsstring>() override</argsstring>
+        <name>InitNode</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::InitNode</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1LogicalNode_1ae6934733a21e34c45488912bdac8b9a4">InitNode</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="13" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1a462a1626e7177b5f856f397590d12fd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::ConvertorNode::Execute</definition>
+        <argsstring>(float_t dt) override</argsstring>
+        <name>Execute</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::Execute</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1LogicalNode_1ab95638d1f3f8a9b82a1dfdaa63d28d1f">Execute</reimplements>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="15" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1ade3c29f015357c62323931e11933a8ed" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRLM_NS::ConvertorNode::GetInputTypeName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetInputTypeName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::GetInputTypeName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="17" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1acc5da37aec42fe555065e5285d33b6b8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRLM_NS::ConvertorNode::GetOutputTypeName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetOutputTypeName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::GetOutputTypeName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="18" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1a685e744ea127fd72cda9e9ddb22a926f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRLM_NS::ConvertorNode::GetInputHashName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetInputHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::GetInputHashName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="19" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1a3702a1b3ed4957e95762f2f82a82e251" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRLM_NS::ConvertorNode::GetOutputHashName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetOutputHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::GetOutputHashName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="20" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1accc9935275f87aeadb88bbcf967950e9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRLM_NS::ConvertorNode::GetNodeHashName</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetNodeHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::GetNodeHashName</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1LogicalNode_1a3787e340fcad5f7c498bb18b9bd32ee0">GetNodeHashName</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="21" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1a156b97b3ea2b52bbac3efce99af7a604" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRLM_NS::ConvertorNode::GetNodeName</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>GetNodeName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::GetNodeName</qualifiedname>
+        <reimplements refid="classSR__SRLM__NS_1_1LogicalNode_1aee0451ad12205e73d1daf4d5b2369515">GetNodeName</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="22" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1abe0edd621d064b38d337956b5d381dfe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::ConvertorNode::SetInitInputTypeHashName</definition>
+        <argsstring>(uint64_t hashName)</argsstring>
+        <name>SetInitInputTypeHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::SetInitInputTypeHashName</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="24" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1a33711d7ff7e8653ff40052c77e83b1bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRLM_NS::ConvertorNode::SetInitOutputTypeHashName</definition>
+        <argsstring>(uint64_t hashName)</argsstring>
+        <name>SetInitOutputTypeHashName</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::SetInitOutputTypeHashName</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="25" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SRLM__NS_1_1ConvertorNode_1ad622c53717bbcf8cea65f8eadcb3dd72" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRLM_NS::ConvertorNode::ToString</definition>
+        <argsstring>(const DataType *pDataType) const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>SR_SRLM_NS::ConvertorNode::ToString</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
+          <declname>pDataType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="28" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SRLM_NS::ConvertorNode</label>
+        <link refid="classSR__SRLM__NS_1_1ConvertorNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRLM_NS::IComputeNode</label>
+        <link refid="classSR__SRLM__NS_1_1IComputeNode"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SRLM_NS::ConvertorNode</label>
+        <link refid="classSR__SRLM__NS_1_1ConvertorNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRLM_NS::IComputeNode</label>
+        <link refid="classSR__SRLM__NS_1_1IComputeNode"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_SRLM_NS::LogicalMachine</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SRLM_NS::LogicalNode</label>
+        <link refid="classSR__SRLM__NS_1_1LogicalNode"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_machine</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/SRLM/ConvertorNode.h" bodystart="11" bodyend="33"/>
+    <listofallmembers>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ab3c0a5a98cac126779884574caa24802" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>AddInputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a451d30d4d677248caa80bb7ac74baad9" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>AddInputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a72915afde33f4d0c714e454cab1544c7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>AddInputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac528a232f2481034bf0c9c866aadf580" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>AddOutputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a968e3caf521de3d586f0ffb6cd9c2e07" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>AddOutputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a70d337798b8e852a40f5f3a74fe35d79" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>AddOutputData</name></member>
+      <member refid="classSR__SRLM__NS_1_1IComputeNode_1a5e22889178ee3335e3642482014a728f" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>Base</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a45ac417b161b1412c23159c307dd5fc7" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>CalcInput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0351f30fc7afe7f45854cde8e09f64" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>ClearLogicalNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a462a1626e7177b5f856f397590d12fd2" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>Execute</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac38d38ae8e248a1b1ad573f3e2ac7ccf" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetBaseLogicalNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a685e744ea127fd72cda9e9ddb22a926f" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetInputHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a7fcb00a1223a4547e39260ce606a3630" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetInputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1ade3c29f015357c62323931e11933a8ed" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetInputTypeName</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1accc9935275f87aeadb88bbcf967950e9" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetNodeHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3f002bccae511f95dcb0b128a838ce70" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetNodeIndex</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a156b97b3ea2b52bbac3efce99af7a604" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetNodeName</name></member>
+      <member refid="classSR__SRLM__NS_1_1IComputeNode_1a83e26601b04bd52dc04715f878eef654" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetOutput</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a3702a1b3ed4957e95762f2f82a82e251" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetOutputHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aa14e801043f55bacd8b6ae930d1b063b" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetOutputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1acc5da37aec42fe555065e5285d33b6b8" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetOutputTypeName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae8e205c3d55f751a1cffabd6ae2cbafa" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetStatus</name></member>
+      <member refid="classSR__SRLM__NS_1_1IComputeNode_1a9ab059c1350d7aae11c343d029aacb61" prot="protected" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>GetType</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a39f67280ae696a53716dbe19ef2461ab" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>HasErrors</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4b0bdf3803c8a5163c579feab8e93704" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>Hash</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a06333ac2f356908fc8a727200b8a34ed" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>InitNode</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a46d4de6ffa829b0ac09255febc01f8c3" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>InitValues</name></member>
+      <member refid="classSR__SRLM__NS_1_1IComputeNode_1a9f37004e13920f2f20d50fa1dba6a292" prot="protected" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>IsDirty</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae3301d2d44de7af8fc7e186f8691a854" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>IsEntryPoint</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aafd12c320ddcfd1850b69560ba7b3131" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>IsNeedPostRepeat</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a187877bae66f7b85f2e285d83ae2874f" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>IsNeedRepeat</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a0f333ecbc614fc619a47de757b06b048" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>IsSuccessfullyCompleted</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a6bcd14ebcd882a6f89e531c1789f7037" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>LoadXml</name></member>
+      <member refid="classSR__SRLM__NS_1_1IComputeNode_1a5d674f395fb8702d46a35d8f5496320e" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_dirty</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a29a76622057b649fbb6f06beabf95240" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_initInputTypeHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a37a77e1bf66ad2c24f154d128ed15de9" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_initOutputTypeHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1aaefebe7fd52cbf14db7c85bbe21b49ef" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_inputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a94e08d6063aad6edd1ff62430d08fd20" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_machine</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3a2a6ff04f3fe1f0a7d3691fa9c38bad" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_nodeIndex</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acdfab2ebb3fe8db5559f506f14207265" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_outputs</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a326155de44e7fe4f9a7f6f905f239e83" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>m_status</name></member>
+      <member refid="classSR__SRLM__NS_1_1IComputeNode_1a74b766d43e3ae0002ba84015d07d71cc" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>MarkDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>operator=</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a9a07bf1f90447c55603ffa6b1e0bed70" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>Pins</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ae81c72460b1aeba9e7a6d61cfd26ab69" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>RemoveInput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a3dd7841012e531003e34e7b8cee39c8a" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>RemoveInputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d32f0aa31055f7327c207e687fd159f" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>RemoveOutput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1afd6d611ab23c3ebcf79120447d4ca783" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>RemoveOutputConnection</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a4fe38d653d32f3462b0f932fe1db83a7" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>Reset</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ac04e4fd8681f829b225da3d92de851f9" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>ResetInputFlows</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1ad119153e52e8ea5c69fc41d600a6f98b" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>ResetOutputFlows</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a26cb3321be56bb940227895f39e39585" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>ResetStatus</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a1d2f00105677e74286e1d1c8dee82255" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>SaveXml</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1abe0edd621d064b38d337956b5d381dfe" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>SetInitInputTypeHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1a33711d7ff7e8653ff40052c77e83b1bc" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>SetInitOutputTypeHashName</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1acee317aea228ef1431a3a4b37010cedb" prot="public" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>SetInput</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a5b46945b1d679dbd01c1eb4587adfd8b" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>SetMachine</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a915d9919621e79a3ee48ddb15799123c" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>SetNodeIndex</name></member>
+      <member refid="classSR__SRLM__NS_1_1ConvertorNode_1ad622c53717bbcf8cea65f8eadcb3dd72" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>ToString</name></member>
+      <member refid="classSR__SRLM__NS_1_1LogicalNode_1a19b262ecaf034d84c1783c24712ccf2d" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>~LogicalNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRLM_NS::ConvertorNode</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

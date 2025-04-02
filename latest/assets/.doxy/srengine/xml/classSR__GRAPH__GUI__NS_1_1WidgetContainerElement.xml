@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_GUI_NS::WidgetContainerElement</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1InputHandler" prot="public" virt="non-virtual">SR_UTILS_NS::InputHandler</basecompoundref>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; WidgetContainerElement &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1af209b6a5f9270db78b261afa7d1f5ae6" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(bool isActive)&gt;</type>
+        <definition>using SR_GRAPH_GUI_NS::WidgetContainerElement::Callback =  SR_HTYPES_NS::Function&lt;void(bool isActive)&gt;</definition>
+        <argsstring></argsstring>
+        <name>Callback</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::Callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="12" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1aea464c46c1f034338a99a1bc741724f5" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> *)&gt;</type>
+        <definition>using SR_GRAPH_GUI_NS::WidgetContainerElement::CustomDrawCallback =  SR_HTYPES_NS::Function&lt;void(WidgetContainerElement*)&gt;</definition>
+        <argsstring></argsstring>
+        <name>CustomDrawCallback</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::CustomDrawCallback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a2bcbb6d0b759f55d49b973bcb90c2030" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; bool()&gt;</type>
+        <definition>using SR_GRAPH_GUI_NS::WidgetContainerElement::IsActiveFn =  SR_HTYPES_NS::Function&lt;bool()&gt;</definition>
+        <argsstring></argsstring>
+        <name>IsActiveFn</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::IsActiveFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a3c257177e964daf998979b36ede2d194" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_GRAPH_GUI_NS::WidgetContainerElement::m_itemSpacing</definition>
+        <argsstring></argsstring>
+        <name>m_itemSpacing</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::m_itemSpacing</qualifiedname>
+        <initializer>= { 0.f, 0.f }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="31" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1ae20dbc428686b05ffdd6e21de3cb0054" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_GRAPH_GUI_NS::WidgetContainerElement::m_width</definition>
+        <argsstring></argsstring>
+        <name>m_width</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::m_width</qualifiedname>
+        <initializer>= 22.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="32" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a90e9dc1dca436ee409ee8e11b0ab492e" prot="private" static="no" mutable="no">
+        <type>Callback</type>
+        <definition>Callback SR_GRAPH_GUI_NS::WidgetContainerElement::m_onClick</definition>
+        <argsstring></argsstring>
+        <name>m_onClick</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::m_onClick</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="33" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a0dc224ed847f3bb807cb82bbb16a2f7d" prot="private" static="no" mutable="no">
+        <type>CustomDrawCallback</type>
+        <definition>CustomDrawCallback SR_GRAPH_GUI_NS::WidgetContainerElement::m_customDraw</definition>
+        <argsstring></argsstring>
+        <name>m_customDraw</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::m_customDraw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="34" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a772f1bea4713074a7efe679fefde113c" prot="private" static="no" mutable="no">
+        <type>IsActiveFn</type>
+        <definition>IsActiveFn SR_GRAPH_GUI_NS::WidgetContainerElement::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::m_isActive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="35" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1abcc886ce07e20f0fbfb7e8e70c8565c3" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_GRAPH_GUI_NS::WidgetContainerElement::m_text</definition>
+        <argsstring></argsstring>
+        <name>m_text</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::m_text</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="36" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1accadb531c21503ec6910b62b26c1949c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_GUI_NS::WidgetContainerElement::WidgetContainerElement</definition>
+        <argsstring>()</argsstring>
+        <name>WidgetContainerElement</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::WidgetContainerElement</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a9bff8e8b46a091359da31dfe81aa2822" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
+        <definition>WidgetContainerElement &amp; SR_GRAPH_GUI_NS::WidgetContainerElement::SetOnClick</definition>
+        <argsstring>(Callback &amp;&amp;onClick)</argsstring>
+        <name>SetOnClick</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::SetOnClick</qualifiedname>
+        <param>
+          <type>Callback &amp;&amp;</type>
+          <declname>onClick</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="19" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1ada296ed9b56d72e09d86ef4250735e8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
+        <definition>WidgetContainerElement &amp; SR_GRAPH_GUI_NS::WidgetContainerElement::SetIsActive</definition>
+        <argsstring>(IsActiveFn &amp;&amp;isActive)</argsstring>
+        <name>SetIsActive</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::SetIsActive</qualifiedname>
+        <param>
+          <type>IsActiveFn &amp;&amp;</type>
+          <declname>isActive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="20" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a214e8bd223457dd209d8f05c4b106df7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
+        <definition>WidgetContainerElement &amp; SR_GRAPH_GUI_NS::WidgetContainerElement::SetText</definition>
+        <argsstring>(std::string text)</argsstring>
+        <name>SetText</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::SetText</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="21" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a9c3237cebd1525610bc03ecd7268adc8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
+        <definition>WidgetContainerElement &amp; SR_GRAPH_GUI_NS::WidgetContainerElement::SetCustomDraw</definition>
+        <argsstring>(CustomDrawCallback &amp;&amp;customDraw)</argsstring>
+        <name>SetCustomDraw</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::SetCustomDraw</qualifiedname>
+        <param>
+          <type>CustomDrawCallback &amp;&amp;</type>
+          <declname>customDraw</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="22" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a6031d30e3399647593ce570a736dfdd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
+        <definition>WidgetContainerElement &amp; SR_GRAPH_GUI_NS::WidgetContainerElement::SetWidth</definition>
+        <argsstring>(float_t width)</argsstring>
+        <name>SetWidth</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::SetWidth</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>width</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="23" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a1ca9850ec6bc6dba686f2dd13960ce7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kindref="compound">WidgetContainerElement</ref> &amp;</type>
+        <definition>WidgetContainerElement &amp; SR_GRAPH_GUI_NS::WidgetContainerElement::SetItemSpacing</definition>
+        <argsstring>(const SR_MATH_NS::FVector2 &amp;spacing)</argsstring>
+        <name>SetItemSpacing</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::SetItemSpacing</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector2 &amp;</type>
+          <declname>spacing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="24" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a5578ee2733ee5bebd41a70ca812be38d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector2 SR_GRAPH_GUI_NS::WidgetContainerElement::GetItemSpacing</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetItemSpacing</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::GetItemSpacing</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="26" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a66e0558480edc132a5ca2f6c85ce138d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_GRAPH_GUI_NS::WidgetContainerElement::Draw</definition>
+        <argsstring>()</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::WidgetContainerElement::Draw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="28" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_GRAPH_GUI_NS::WidgetContainerElement</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; WidgetContainerElement &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_GUI_NS::WidgetContainerElement</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; WidgetContainerElement &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetContainer.h" bodystart="11" bodyend="38"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>AutoFree</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1af209b6a5f9270db78b261afa7d1f5ae6" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Callback</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1aea464c46c1f034338a99a1bc741724f5" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>CustomDrawCallback</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a66e0558480edc132a5ca2f6c85ce138d" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Draw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>DynamicCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Event</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Get</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a5578ee2733ee5bebd41a70ca812be38d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetItemSpacing</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>InputHandler</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a2bcbb6d0b759f55d49b973bcb90c2030" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IsActiveFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IsKeyPressed</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_basicManually</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a0dc224ed847f3bb807cb82bbb16a2f7d" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_customDraw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a772f1bea4713074a7efe679fefde113c" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_isActive</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a3c257177e964daf998979b36ede2d194" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_itemSpacing</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a90e9dc1dca436ee409ee8e11b0ab492e" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_onClick</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1abcc886ce07e20f0fbfb7e8e70c8565c3" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_text</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1ae20dbc428686b05ffdd6e21de3cb0054" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>m_width</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>MakeShared</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a34b3284a272f57baa63c010363799780" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ae4afa7831ec14706acfe7ab983aeb8c2" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnKeyPress</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a5d57999c9706826f4702bcefa9be7cba" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a047cdbebece4c4baa00673a647f9a686" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnMouseDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a103723382b77ab83ae6468436fb41088" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnMouseMove</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnMousePress</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>OnMouseUp</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Reset</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a9c3237cebd1525610bc03ecd7268adc8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetCustomDraw</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1ada296ed9b56d72e09d86ef4250735e8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetIsActive</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a1ca9850ec6bc6dba686f2dd13960ce7b" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetItemSpacing</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a9bff8e8b46a091359da31dfe81aa2822" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetOnClick</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a214e8bd223457dd209d8f05c4b106df7" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetText</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a6031d30e3399647593ce570a736dfdd7" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SetWidth</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>StaticCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Trigger</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Valid</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1accadb531c21503ec6910b62b26c1949c" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>WidgetContainerElement</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~Event</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~InputHandler</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceCodegen" kind="namespace" language="C++">
+    <compoundname>Codegen</compoundname>
+    <innerclass refid="structCodegen_1_1EnumSelector" prot="public">Codegen::EnumSelector</innerclass>
+    <innerclass refid="structCodegen_1_1SRClassMetaTemplate" prot="public">Codegen::SRClassMetaTemplate</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="EnumReflector_8h_1a1adda562e7572270f41021ef28879703" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_UTILS_NS::EnumVariant</type>
+        <definition>SR_UTILS_NS::EnumVariant Codegen::GetEnumVariant</definition>
+        <argsstring>(T) noexcept</argsstring>
+        <name>GetEnumVariant</name>
+        <qualifiedname>Codegen::GetEnumVariant</qualifiedname>
+        <param>
+          <type>T</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="25" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="EnumReflector_8h_1a2e0a939e2042e7664b9593906bf59a5f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>size_t</type>
+        <definition>size_t Codegen::GetEnumItemsCount</definition>
+        <argsstring>(T) noexcept</argsstring>
+        <name>GetEnumItemsCount</name>
+        <qualifiedname>Codegen::GetEnumItemsCount</qualifiedname>
+        <param>
+          <type>T</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="29" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="29" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="21" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__PTYPES__NS_1_1PhysXMaterialImpl" kind="class" language="C++" prot="public">
+    <compoundname>SR_PTYPES_NS::PhysXMaterialImpl</compoundname>
+    <basecompoundref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" prot="public" virt="non-virtual">SR_PTYPES_NS::PhysicsMaterialImpl</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a157caae26294a8bf8f2938cb709d3a64" prot="private" static="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl" kindref="compound">PhysicsMaterialImpl</ref></type>
+        <definition>using SR_PTYPES_NS::PhysXMaterialImpl::Super =  PhysicsMaterialImpl</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="18" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ab200158255425eb9af11b23f295416f8" prot="private" static="no">
+        <type><ref refid="classSR__PHYSICS__NS_1_1LibraryImpl" kindref="compound">SR_PHYSICS_NS::LibraryImpl</ref> *</type>
+        <definition>using SR_PTYPES_NS::PhysXMaterialImpl::LibraryPtr =  SR_PHYSICS_NS::LibraryImpl*</definition>
+        <argsstring></argsstring>
+        <name>LibraryPtr</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::LibraryPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="19" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a14b89817cbd9e470a9e95fa75d8f70c3" prot="private" static="no" mutable="no">
+        <type>physx::PxMaterial *</type>
+        <definition>physx::PxMaterial* SR_PTYPES_NS::PhysXMaterialImpl::m_pxMaterial</definition>
+        <argsstring></argsstring>
+        <name>m_pxMaterial</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::m_pxMaterial</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="36" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1af7abf1cf8744da94c2b4a675045d4bd4" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" kindref="compound">PhysicsMaterial</ref> *</type>
+        <definition>PhysicsMaterial* SR_PTYPES_NS::PhysXMaterialImpl::m_material</definition>
+        <argsstring></argsstring>
+        <name>m_material</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::m_material</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="37" column="25" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1af3aef6e578790a4ad063b61c901ce1fc" prot="private" static="no" mutable="no">
+        <type>physx::PxPhysics *</type>
+        <definition>physx::PxPhysics* SR_PTYPES_NS::PhysXMaterialImpl::m_physics</definition>
+        <argsstring></argsstring>
+        <name>m_physics</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::m_physics</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="39" column="26" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a33882f1be8cb9a97061b1e3a499e8edf" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PTYPES_NS::PhysXMaterialImpl::PhysXMaterialImpl</definition>
+        <argsstring>(LibraryPtr pLibrary)</argsstring>
+        <name>PhysXMaterialImpl</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::PhysXMaterialImpl</qualifiedname>
+        <param>
+          <type>LibraryPtr</type>
+          <declname>pLibrary</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="21" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a561c31b8867d4d2f7d81a4757d60a64d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_PTYPES_NS::PhysXMaterialImpl::~PhysXMaterialImpl</definition>
+        <argsstring>() override</argsstring>
+        <name>~PhysXMaterialImpl</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::~PhysXMaterialImpl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ab974bd8e089f70a2c933de8b3a9d0073" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::PhysXMaterialImpl::Init</definition>
+        <argsstring>() override</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::Init</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1acb162b1c667ca212dbb6e1d60d5fc2e0">Init</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ac82bad3551038fbf34939f111abe9a32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_PTYPES_NS::PhysXMaterialImpl::ReInit</definition>
+        <argsstring>()</argsstring>
+        <name>ReInit</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::ReInit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a7360961dbc7abb62f8865661a423e9a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysXMaterialImpl::DeInit</definition>
+        <argsstring>() override</argsstring>
+        <name>DeInit</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::DeInit</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1a5a0ff5c410c560d1421f8ca7691c5151">DeInit</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a9b75677c50f568bed0e6882eace9f840" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_PTYPES_NS::PhysXMaterialImpl::SetMaterial</definition>
+        <argsstring>(PhysicsMaterial *pMaterial) override</argsstring>
+        <name>SetMaterial</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::SetMaterial</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1a918ed79cb6e92ed96069102920cf0c1d">SetMaterial</reimplements>
+        <param>
+          <type><ref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" kindref="compound">PhysicsMaterial</ref> *</type>
+          <declname>pMaterial</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="30" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a9f2a91387cc7c2bde71e514db0b322fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_PTYPES_NS::PhysXMaterialImpl::GetHandle</definition>
+        <argsstring>() override</argsstring>
+        <name>GetHandle</name>
+        <qualifiedname>SR_PTYPES_NS::PhysXMaterialImpl::GetHandle</qualifiedname>
+        <reimplements refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1a75961318db3b29ecb8676e9d22880503">GetHandle</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="33" column="27" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_PTYPES_NS::PhysXMaterialImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_PTYPES_NS::PhysicsMaterialImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_PTYPES_NS::PhysXMaterialImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_PTYPES_NS::PhysicsMaterialImpl</label>
+        <link refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" line="17" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h" bodystart="17" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a7360961dbc7abb62f8865661a423e9a8" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>DeInit</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a9f2a91387cc7c2bde71e514db0b322fa" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>GetHandle</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1abf92be0dbd7c481eaf396e2c9be565a1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>GetLibrary</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ab974bd8e089f70a2c933de8b3a9d0073" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>Init</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ab200158255425eb9af11b23f295416f8" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>LibraryPtr</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1af7abf1cf8744da94c2b4a675045d4bd4" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>m_material</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1af3aef6e578790a4ad063b61c901ce1fc" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>m_physics</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a14b89817cbd9e470a9e95fa75d8f70c3" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>m_pxMaterial</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>operator=</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1addc8870a93fcf1df319d49b3bd225e9e" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>PhysicsMaterialImpl</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a33882f1be8cb9a97061b1e3a499e8edf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>PhysXMaterialImpl</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ac82bad3551038fbf34939f111abe9a32" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>ReInit</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a9b75677c50f568bed0e6882eace9f840" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>SetMaterial</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a157caae26294a8bf8f2938cb709d3a64" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>Super</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a561c31b8867d4d2f7d81a4757d60a64d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>~PhysXMaterialImpl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

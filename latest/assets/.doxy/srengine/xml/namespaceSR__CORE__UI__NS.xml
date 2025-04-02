@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__CORE__UI__NS" kind="namespace" language="C++">
+    <compoundname>SR_CORE_UI_NS</compoundname>
+    <innerclass refid="classSR__CORE__UI__NS_1_1Button" prot="public">SR_CORE_UI_NS::Button</innerclass>
+    <innerclass refid="classSR__CORE__UI__NS_1_1IButton" prot="public">SR_CORE_UI_NS::IButton</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="IButton_8h_1abc6a1d53904960eb0e51ecc326164aa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_UI_NS::SR_ENUM_NS_STRUCT_T</definition>
+        <argsstring>(ButtonState, uint8_t, Idle=1&lt;&lt; 0, Hovered=1&lt;&lt; 1, Pressed=1&lt;&lt; 2)</argsstring>
+        <name>SR_ENUM_NS_STRUCT_T</name>
+        <qualifiedname>SR_CORE_UI_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
+        <param>
+          <type>ButtonState</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>Idle</type>
+          <defval>1&lt;&lt; 0</defval>
+        </param>
+        <param>
+          <type>Hovered</type>
+          <defval>1&lt;&lt; 1</defval>
+        </param>
+        <param>
+          <type>Pressed</type>
+          <defval>1&lt;&lt; 2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/UI/IButton.h" line="17" column="5" declfile="Engine/Core/inc/Core/UI/IButton.h" declline="17" declcolumn="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/UI/Button.h" line="10" column="1"/>
+  </compounddef>
+</doxygen>

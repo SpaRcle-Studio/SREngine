@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__GRAPH__NS_1_1PipelinePreInitInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::PipelinePreInitInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1acde0963234c8c0a878d583a61b978dd1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_NS::PipelinePreInitInfo::samplesCount</definition>
+        <argsstring></argsstring>
+        <name>samplesCount</name>
+        <qualifiedname>SR_GRAPH_NS::PipelinePreInitInfo::samplesCount</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="60" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a8f925f3c064325aa59b19a588f6f352b" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_GRAPH_NS::PipelinePreInitInfo::appName</definition>
+        <argsstring></argsstring>
+        <name>appName</name>
+        <qualifiedname>SR_GRAPH_NS::PipelinePreInitInfo::appName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="61" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1aef218b221e731a3cae0eb204971030bd" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_GRAPH_NS::PipelinePreInitInfo::engineName</definition>
+        <argsstring></argsstring>
+        <name>engineName</name>
+        <qualifiedname>SR_GRAPH_NS::PipelinePreInitInfo::engineName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="62" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a73e7d8d05a2026c7f09cd8aacf7bb21a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_GRAPH_NS::PipelinePreInitInfo::vsync</definition>
+        <argsstring></argsstring>
+        <name>vsync</name>
+        <qualifiedname>SR_GRAPH_NS::PipelinePreInitInfo::vsync</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="63" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a62b89ea3fcd2b0cbc36567e37cc3c392" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_GRAPH_NS::PipelinePreInitInfo::GLSLCompilerPath</definition>
+        <argsstring></argsstring>
+        <name>GLSLCompilerPath</name>
+        <qualifiedname>SR_GRAPH_NS::PipelinePreInitInfo::GLSLCompilerPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="64" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_GRAPH_NS::PipelinePreInitInfo</label>
+        <link refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>GLSLCompilerPath</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" line="59" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h" bodystart="59" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a8f925f3c064325aa59b19a588f6f352b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelinePreInitInfo</scope><name>appName</name></member>
+      <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1aef218b221e731a3cae0eb204971030bd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelinePreInitInfo</scope><name>engineName</name></member>
+      <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a62b89ea3fcd2b0cbc36567e37cc3c392" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelinePreInitInfo</scope><name>GLSLCompilerPath</name></member>
+      <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1acde0963234c8c0a878d583a61b978dd1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelinePreInitInfo</scope><name>samplesCount</name></member>
+      <member refid="structSR__GRAPH__NS_1_1PipelinePreInitInfo_1a73e7d8d05a2026c7f09cd8aacf7bb21a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PipelinePreInitInfo</scope><name>vsync</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

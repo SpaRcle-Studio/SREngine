@@ -1,0 +1,1126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__TYPES__NS_1_1detail" kind="namespace" language="C++">
+    <compoundname>SR_TYPES_NS::detail</compoundname>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe" prot="public">SR_TYPES_NS::detail::allocator_dummy_unsafe</innerclass>
+    <innerclass refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array" prot="public">SR_TYPES_NS::detail::dynamic_array</innerclass>
+    <innerclass refid="classSR__TYPES__NS_1_1detail_1_1fixed__dynamic__array" prot="public">SR_TYPES_NS::detail::fixed_dynamic_array</innerclass>
+    <innerclass refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" prot="public">SR_TYPES_NS::detail::fixed_static_array</innerclass>
+    <innerclass refid="classSR__TYPES__NS_1_1detail_1_1native__float__parts" prot="public">SR_TYPES_NS::detail::native_float_parts</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" prot="public">SR_TYPES_NS::detail::uint_type_helper</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B63fb5b46f0a854a3fab1d24dd63c093c" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(17))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(32)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(33))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(64)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(9))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(16)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(8)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two" prot="public">SR_TYPES_NS::detail::verify_power_of_two</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two__times__granularity__one__sixty__fourth" prot="public">SR_TYPES_NS::detail::verify_power_of_two_times_granularity_one_sixty_fourth</innerclass>
+    <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1array__detail">SR_TYPES_NS::detail::array_detail</innernamespace>
+    <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1distance__detail">SR_TYPES_NS::detail::distance_detail</innernamespace>
+    <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1iterator__detail">SR_TYPES_NS::detail::iterator_detail</innernamespace>
+    <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1my__own">SR_TYPES_NS::detail::my_own</innernamespace>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="UintWide__t_8h_1a8eb02af7cfda74e23b94db6b392273a8" prot="public" static="no">
+        <type>std::uint32_t</type>
+        <definition>using SR_TYPES_NS::detail::size_t =  std::uint32_t</definition>
+        <argsstring></argsstring>
+        <name>size_t</name>
+        <qualifiedname>SR_TYPES_NS::detail::size_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1110" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="UintWide__t_8h_1a528e4e7d75652011d04fefa5075b034d" prot="public" static="no">
+        <type>std::int32_t</type>
+        <definition>using SR_TYPES_NS::detail::ptrdiff_t =  std::int32_t</definition>
+        <argsstring></argsstring>
+        <name>ptrdiff_t</name>
+        <qualifiedname>SR_TYPES_NS::detail::ptrdiff_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1111" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="UintWide__t_8h_1a3d823d86c643bdd4d0fd53a9be4c8bcc" prot="public" static="no">
+        <type>typename <ref refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kindref="compound">uint_type_helper</ref>&lt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; size_t &gt;::digits+0)&gt;::fast_unsigned_type</type>
+        <definition>using SR_TYPES_NS::detail::unsigned_fast_type =  typename uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;size_t   &gt;::digits + 0)&gt;::fast_unsigned_type</definition>
+        <argsstring></argsstring>
+        <name>unsigned_fast_type</name>
+        <qualifiedname>SR_TYPES_NS::detail::unsigned_fast_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1171" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="UintWide__t_8h_1a4221b85f498a1b26fbc4c45be90d5bbb" prot="public" static="no">
+        <type>typename <ref refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kindref="compound">uint_type_helper</ref>&lt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; ptrdiff_t &gt;::digits+1)&gt;::fast_signed_type</type>
+        <definition>using SR_TYPES_NS::detail::signed_fast_type =  typename uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;ptrdiff_t&gt;::digits + 1)&gt;::fast_signed_type</definition>
+        <argsstring></argsstring>
+        <name>signed_fast_type</name>
+        <qualifiedname>SR_TYPES_NS::detail::signed_fast_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1172" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1172" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="UintWide__t_8h_1a1a158269a4ea32106155dd99c9f39019" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ArithmeticType</type>
+          </param>
+        </templateparamlist>
+        <type>ArithmeticType</type>
+        <definition>ArithmeticType SR_TYPES_NS::detail::abs_unsafe</definition>
+        <argsstring>(ArithmeticType val)</argsstring>
+        <name>abs_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::abs_unsafe</qualifiedname>
+        <param>
+          <type>ArithmeticType</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="6589" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6589" bodyend="6603" declfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" declline="229" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aed5916547e850fc2537faa2cd24d26b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename DestinationIterator</type>
+          </param>
+          <param>
+            <type>typename ValueType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::detail::fill_unsafe</definition>
+        <argsstring>(DestinationIterator first, DestinationIterator last, ValueType val)</argsstring>
+        <name>fill_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::fill_unsafe</qualifiedname>
+        <param>
+          <type>DestinationIterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>DestinationIterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>ValueType</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="234" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="234" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aee8db21f1618e07d85f59533b2582407" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ArithmeticType</type>
+          </param>
+        </templateparamlist>
+        <type>ArithmeticType</type>
+        <definition>ArithmeticType SR_TYPES_NS::detail::max_unsafe</definition>
+        <argsstring>(const ArithmeticType &amp;left, const ArithmeticType &amp;right)</argsstring>
+        <name>max_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::max_unsafe</qualifiedname>
+        <param>
+          <type>const ArithmeticType &amp;</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>const ArithmeticType &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="246" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="246" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aea71ba68435459cc7f5b76022d9d2aa2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ArithmeticType</type>
+          </param>
+        </templateparamlist>
+        <type>ArithmeticType</type>
+        <definition>ArithmeticType SR_TYPES_NS::detail::min_unsafe</definition>
+        <argsstring>(const ArithmeticType &amp;left, const ArithmeticType &amp;right)</argsstring>
+        <name>min_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::min_unsafe</qualifiedname>
+        <param>
+          <type>const ArithmeticType &amp;</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>const ArithmeticType &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="253" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="253" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a69aafa47dac899b3ca2764c32a0dca0f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIterator</type>
+          </param>
+          <param>
+            <type>typename DestinationIterator</type>
+          </param>
+        </templateparamlist>
+        <type>DestinationIterator</type>
+        <definition>DestinationIterator SR_TYPES_NS::detail::copy_unsafe</definition>
+        <argsstring>(InputIterator first, InputIterator last, DestinationIterator dest)</argsstring>
+        <name>copy_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::copy_unsafe</qualifiedname>
+        <param>
+          <type>InputIterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>DestinationIterator</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="261" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="261" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1ae5ae22558885854669df0e18e274e7fa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIterator</type>
+          </param>
+          <param>
+            <type>typename DestinationIterator</type>
+          </param>
+        </templateparamlist>
+        <type>DestinationIterator</type>
+        <definition>DestinationIterator SR_TYPES_NS::detail::copy_backward_unsafe</definition>
+        <argsstring>(InputIterator first, InputIterator last, DestinationIterator dest)</argsstring>
+        <name>copy_backward_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::copy_backward_unsafe</qualifiedname>
+        <param>
+          <type>InputIterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>DestinationIterator</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="281" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="281" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a6cb49a70531f9f19d66d40a4d2029543" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::detail::swap_unsafe</definition>
+        <argsstring>(T &amp;left, T &amp;right)</argsstring>
+        <name>swap_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::swap_unsafe</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>T &amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="294" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="294" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1ad973049ef839b159d4694e76119c9cf5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::detail::swap_unsafe</definition>
+        <argsstring>(T &amp;&amp;left, T &amp;&amp;right)</argsstring>
+        <name>swap_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::swap_unsafe</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="303" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="303" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1ab07351870412255fcd047ade59f177d3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIt</type>
+          </param>
+          <param>
+            <type>typename UnaryPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>InputIt</type>
+        <definition>InputIt SR_TYPES_NS::detail::find_if_unsafe</definition>
+        <argsstring>(InputIt first, InputIt last, UnaryPredicate p)</argsstring>
+        <name>find_if_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::find_if_unsafe</qualifiedname>
+        <param>
+          <type>InputIt</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIt</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>UnaryPredicate</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="312" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="312" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a36f951c0fa568dc7bbb202a14411139d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ForwardIt</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>ForwardIt</type>
+        <definition>ForwardIt SR_TYPES_NS::detail::lower_bound_unsafe</definition>
+        <argsstring>(ForwardIt first, ForwardIt last, const T &amp;value)</argsstring>
+        <name>lower_bound_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::lower_bound_unsafe</qualifiedname>
+        <param>
+          <type>ForwardIt</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>ForwardIt</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="326" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="326" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aaef64911595d857a0d21269507d2757d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ForwardIt</type>
+          </param>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::detail::binary_search_unsafe</definition>
+        <argsstring>(ForwardIt first, ForwardIt last, const T &amp;value)</argsstring>
+        <name>binary_search_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::binary_search_unsafe</qualifiedname>
+        <param>
+          <type>ForwardIt</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>ForwardIt</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="362" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="362" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1add6b2c4d61989e97a6d07f38b576aa79" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class It</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits" kindref="compound">iterator_detail::iterator_traits</ref>&lt; It &gt;::difference_type</type>
+        <definition>typename iterator_detail::iterator_traits&lt; It &gt;::difference_type SR_TYPES_NS::detail::distance_unsafe</definition>
+        <argsstring>(It first, It last)</argsstring>
+        <name>distance_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::distance_unsafe</qualifiedname>
+        <param>
+          <type>It</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>It</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="381" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="381" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a5bd1774a8b569b144b76daf578eb72b7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class InputIt1</type>
+          </param>
+          <param>
+            <type>class InputIt2</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::detail::equal_unsafe</definition>
+        <argsstring>(InputIt1 first1, InputIt1 last1, InputIt2 first2)</argsstring>
+        <name>equal_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::equal_unsafe</qualifiedname>
+        <param>
+          <type>InputIt1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>InputIt1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>InputIt2</type>
+          <declname>first2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="395" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="395" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a4568afed97c45e379884ba9548b33fb7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class InputIt1</type>
+          </param>
+          <param>
+            <type>class InputIt2</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_TYPES_NS::detail::lexicographical_compare_unsafe</definition>
+        <argsstring>(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)</argsstring>
+        <name>lexicographical_compare_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::lexicographical_compare_unsafe</qualifiedname>
+        <param>
+          <type>InputIt1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>InputIt1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>InputIt2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>InputIt2</type>
+          <declname>last2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="409" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="409" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a156572e226bd098b06fcd6d070b0f44f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IteratorType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_TYPES_NS::detail::iter_swap_unsafe</definition>
+        <argsstring>(IteratorType a, IteratorType b)</argsstring>
+        <name>iter_swap_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::iter_swap_unsafe</qualifiedname>
+        <param>
+          <type>IteratorType</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>IteratorType</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="428" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="428" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a3036f67235ee3d84c9844f95a6c38026" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ForwardIt1</type>
+          </param>
+          <param>
+            <type>class ForwardIt2</type>
+          </param>
+        </templateparamlist>
+        <type>ForwardIt2</type>
+        <definition>ForwardIt2 SR_TYPES_NS::detail::swap_ranges_unsafe</definition>
+        <argsstring>(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2)</argsstring>
+        <name>swap_ranges_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::swap_ranges_unsafe</qualifiedname>
+        <param>
+          <type>ForwardIt1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>ForwardIt1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>ForwardIt2</type>
+          <declname>first2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="439" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="439" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a2c7347202e16883909915c4b527e7388" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt;</type>
+        <definition>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt; SR_TYPES_NS::detail::clz_unsafe</definition>
+        <argsstring>(UnsignedIntegralType v) noexcept</argsstring>
+        <name>clz_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::clz_unsafe</qualifiedname>
+        <param>
+          <type>UnsignedIntegralType</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="450" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="450" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a729595c89c65a392ff15fa47b8b7cd50" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt;</type>
+        <definition>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt; SR_TYPES_NS::detail::ctz_unsafe</definition>
+        <argsstring>(const UnsignedIntegralType v) noexcept</argsstring>
+        <name>ctz_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::ctz_unsafe</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="487" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="487" bodyend="502"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aa1da0272cf20882464af31fecfdc2293" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), UnsignedIntegralType &gt;</type>
+        <definition>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), UnsignedIntegralType &gt; SR_TYPES_NS::detail::gcd_unsafe</definition>
+        <argsstring>(UnsignedIntegralType u, UnsignedIntegralType v)</argsstring>
+        <name>gcd_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::gcd_unsafe</qualifiedname>
+        <param>
+          <type>UnsignedIntegralType</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>UnsignedIntegralType</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="505" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="505" bodyend="538"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a88d537b8e86d7bd78307238507363a0b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ForwardIterator</type>
+          </param>
+          <param>
+            <type>typename OutputIterator</type>
+          </param>
+        </templateparamlist>
+        <type>OutputIterator</type>
+        <definition>OutputIterator SR_TYPES_NS::detail::import_export_helper</definition>
+        <argsstring>(ForwardIterator in, OutputIterator out, const signed_fast_type total_bits_to_use, const unsigned_fast_type chunk_size_in, const unsigned_fast_type chunk_size_out)</argsstring>
+        <name>import_export_helper</name>
+        <qualifiedname>SR_TYPES_NS::detail::import_export_helper</qualifiedname>
+        <param>
+          <type>ForwardIterator</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>OutputIterator</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const signed_fast_type</type>
+          <declname>total_bits_to_use</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>chunk_size_in</declname>
+        </param>
+        <param>
+          <type>const unsigned_fast_type</type>
+          <declname>chunk_size_out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1188" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1188" bodyend="1265"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aa1c95c7fa2c92b9a240c6ae49546997b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::lsb_helper</definition>
+        <argsstring>(const UnsignedIntegralType &amp;u)</argsstring>
+        <name>lsb_helper</name>
+        <qualifiedname>SR_TYPES_NS::detail::lsb_helper</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5919" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5919" bodyend="5946" declfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" declline="1808" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1ac03d4ccafb24bbae504bb4102ad42c1f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper</definition>
+        <argsstring>(const UnsignedIntegralType &amp;u)</argsstring>
+        <name>msb_helper</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper</qualifiedname>
+        <param>
+          <type>const UnsignedIntegralType &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5949" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5949" bodyend="5981" declfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" declline="1811" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a2adebca3d3836affe5471f6ff909261a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</definition>
+        <argsstring>(const std::uint32_t &amp;u)</argsstring>
+        <name>msb_helper&lt; std::uint32_t &gt;</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</qualifiedname>
+        <param>
+          <type>const std::uint32_t &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1814" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5984" bodyend="5997" declfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" declline="1814" declcolumn="19"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a065b244b06ac6002632d70b669d1b8c7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</definition>
+        <argsstring>(const std::uint16_t &amp;u)</argsstring>
+        <name>msb_helper&lt; std::uint16_t &gt;</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</qualifiedname>
+        <param>
+          <type>const std::uint16_t &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1817" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6000" bodyend="6012" declfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" declline="1817" declcolumn="19"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1ab2c78817df92dc166457d5affec878c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</definition>
+        <argsstring>(const std::uint8_t &amp;u)</argsstring>
+        <name>msb_helper&lt; std::uint8_t &gt;</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</qualifiedname>
+        <param>
+          <type>const std::uint8_t &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1820" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6015" bodyend="6026" declfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" declline="1820" declcolumn="19"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1aba3a66094587aa71dee8838e59e4ba4f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename DestinationIterator</type>
+          </param>
+          <param>
+            <type>typename SourceIterator</type>
+          </param>
+        </templateparamlist>
+        <type>DestinationIterator</type>
+        <definition>DestinationIterator SR_TYPES_NS::detail::strcpy_unsafe</definition>
+        <argsstring>(DestinationIterator dst, SourceIterator src)</argsstring>
+        <name>strcpy_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::strcpy_unsafe</qualifiedname>
+        <param>
+          <type>DestinationIterator</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type>SourceIterator</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1825" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1825" bodyend="1830"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a982ba2e444fb0ca2c303551b766dc123" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::strlen_unsafe</definition>
+        <argsstring>(const char *p_str)</argsstring>
+        <name>strlen_unsafe</name>
+        <qualifiedname>SR_TYPES_NS::detail::strlen_unsafe</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>p_str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1833" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1833" bodyend="1840"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a36fc0b330758c9179dbc9af3cd1de5a6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIterator</type>
+          </param>
+          <param>
+            <type>typename IntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>InputIterator</type>
+        <definition>InputIterator SR_TYPES_NS::detail::advance_and_point</definition>
+        <argsstring>(InputIterator it, IntegralType n)</argsstring>
+        <name>advance_and_point</name>
+        <qualifiedname>SR_TYPES_NS::detail::advance_and_point</qualifiedname>
+        <param>
+          <type>InputIterator</type>
+          <declname>it</declname>
+        </param>
+        <param>
+          <type>IntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1844" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1844" bodyend="1854"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a89e797879311c2ee4509936dca50133b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedShortType</type>
+          </param>
+          <param>
+            <type>typename UnsignedLargeType</type>
+            <defval>typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;UnsignedShortType&gt;::digits * 2)&gt;::exact_unsigned_type</defval>
+          </param>
+        </templateparamlist>
+        <type>UnsignedShortType</type>
+        <definition>UnsignedShortType SR_TYPES_NS::detail::make_lo</definition>
+        <argsstring>(const UnsignedLargeType &amp;u)</argsstring>
+        <name>make_lo</name>
+        <qualifiedname>SR_TYPES_NS::detail::make_lo</qualifiedname>
+        <param>
+          <type>const UnsignedLargeType &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1858" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1858" bodyend="1881"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a126244e2f9378899b0d31976e5019cfd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedShortType</type>
+          </param>
+          <param>
+            <type>typename UnsignedLargeType</type>
+            <defval>typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;UnsignedShortType&gt;::digits * 2)&gt;::exact_unsigned_type</defval>
+          </param>
+        </templateparamlist>
+        <type>UnsignedShortType</type>
+        <definition>UnsignedShortType SR_TYPES_NS::detail::make_hi</definition>
+        <argsstring>(const UnsignedLargeType &amp;u)</argsstring>
+        <name>make_hi</name>
+        <qualifiedname>SR_TYPES_NS::detail::make_hi</qualifiedname>
+        <param>
+          <type>const UnsignedLargeType &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1885" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1885" bodyend="1908"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a4cdc7c6722e4935d29589db1d6df87e3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedShortType</type>
+          </param>
+          <param>
+            <type>typename UnsignedLargeType</type>
+            <defval>typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;UnsignedShortType&gt;::digits * 2)&gt;::exact_unsigned_type</defval>
+          </param>
+        </templateparamlist>
+        <type>UnsignedLargeType</type>
+        <definition>UnsignedLargeType SR_TYPES_NS::detail::make_large</definition>
+        <argsstring>(const UnsignedShortType &amp;lo, const UnsignedShortType &amp;hi)</argsstring>
+        <name>make_large</name>
+        <qualifiedname>SR_TYPES_NS::detail::make_large</qualifiedname>
+        <param>
+          <type>const UnsignedShortType &amp;</type>
+          <declname>lo</declname>
+        </param>
+        <param>
+          <type>const UnsignedShortType &amp;</type>
+          <declname>hi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1912" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1912" bodyend="1943"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a364652cf2b6a9147f92298383080fa34" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value), UnsignedIntegralType &gt;</type>
+        <definition>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value), UnsignedIntegralType &gt; SR_TYPES_NS::detail::negate</definition>
+        <argsstring>(UnsignedIntegralType u)</argsstring>
+        <name>negate</name>
+        <qualifiedname>SR_TYPES_NS::detail::negate</qualifiedname>
+        <param>
+          <type>UnsignedIntegralType</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1946" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1946" bodyend="1957"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a3343bc0e157e407f57179887541c0dbc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename SignedIntegralType</type>
+          </param>
+        </templateparamlist>
+        <type>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), SignedIntegralType &gt;</type>
+        <definition>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), SignedIntegralType &gt; SR_TYPES_NS::detail::negate</definition>
+        <argsstring>(SignedIntegralType n)</argsstring>
+        <name>negate</name>
+        <qualifiedname>SR_TYPES_NS::detail::negate</qualifiedname>
+        <param>
+          <type>SignedIntegralType</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1960" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1960" bodyend="1973"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a2adebca3d3836affe5471f6ff909261a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</definition>
+        <argsstring>(const std::uint32_t &amp;u)</argsstring>
+        <name>msb_helper&lt; std::uint32_t &gt;</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</qualifiedname>
+        <param>
+          <type>const std::uint32_t &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="5984" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="5984" bodyend="5997"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a065b244b06ac6002632d70b669d1b8c7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</definition>
+        <argsstring>(const std::uint16_t &amp;u)</argsstring>
+        <name>msb_helper&lt; std::uint16_t &gt;</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</qualifiedname>
+        <param>
+          <type>const std::uint16_t &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="6000" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6000" bodyend="6012"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1ab2c78817df92dc166457d5affec878c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>unsigned_fast_type</type>
+        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</definition>
+        <argsstring>(const std::uint8_t &amp;u)</argsstring>
+        <name>msb_helper&lt; std::uint8_t &gt;</name>
+        <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</qualifiedname>
+        <param>
+          <type>const std::uint8_t &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="6015" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6015" bodyend="6026"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a719399f30dee8129f33800ec539ed8c3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename UnsignedShortType</type>
+          </param>
+        </templateparamlist>
+        <type>UnsignedShortType</type>
+        <definition>UnsignedShortType SR_TYPES_NS::detail::integer_gcd_reduce</definition>
+        <argsstring>(UnsignedShortType u, UnsignedShortType v)</argsstring>
+        <name>integer_gcd_reduce</name>
+        <qualifiedname>SR_TYPES_NS::detail::integer_gcd_reduce</qualifiedname>
+        <param>
+          <type>UnsignedShortType</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>UnsignedShortType</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="6457" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6457" bodyend="6464"/>
+      </memberdef>
+      <memberdef kind="function" id="UintWide__t_8h_1a7b99226d08ae362e0c3ad11d816e50e8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IntegerType</type>
+          </param>
+        </templateparamlist>
+        <type>IntegerType</type>
+        <definition>IntegerType SR_TYPES_NS::detail::lcm_impl</definition>
+        <argsstring>(const IntegerType &amp;a, const IntegerType &amp;b)</argsstring>
+        <name>lcm_impl</name>
+        <qualifiedname>SR_TYPES_NS::detail::lcm_impl</qualifiedname>
+        <param>
+          <type>const IntegerType &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const IntegerType &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="6606" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="6606" bodyend="6619"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="103" column="5"/>
+  </compounddef>
+</doxygen>

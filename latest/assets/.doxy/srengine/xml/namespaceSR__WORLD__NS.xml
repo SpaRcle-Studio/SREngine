@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__WORLD__NS" kind="namespace" language="C++">
+    <compoundname>SR_WORLD_NS</compoundname>
+    <innerclass refid="classSR__WORLD__NS_1_1CameraData" prot="public">SR_WORLD_NS::CameraData</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1Chunk" prot="public">SR_WORLD_NS::Chunk</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1Observer" prot="public">SR_WORLD_NS::Observer</innerclass>
+    <innerclass refid="structSR__WORLD__NS_1_1Offset" prot="public">SR_WORLD_NS::Offset</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1Region" prot="public">SR_WORLD_NS::Region</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1Scene" prot="public">SR_WORLD_NS::Scene</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1SceneAllocator" prot="public">SR_WORLD_NS::SceneAllocator</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1SceneAssetLogic" prot="public">SR_WORLD_NS::SceneAssetLogic</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic" prot="public">SR_WORLD_NS::SceneCubeChunkLogic</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1SceneLogic" prot="public">SR_WORLD_NS::SceneLogic</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1ScenePrefabLogic" prot="public">SR_WORLD_NS::ScenePrefabLogic</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1SceneUpdater" prot="public">SR_WORLD_NS::SceneUpdater</innerclass>
+    <innerclass refid="structSR__WORLD__NS_1_1TensorKey" prot="public">SR_WORLD_NS::TensorKey</innerclass>
+    <innerclass refid="classSR__WORLD__NS_1_1WorldGen" prot="public">SR_WORLD_NS::WorldGen</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Region_8h_1a8da1b2dd3d2024456e061f66521dd3ea" prot="public" static="no">
+        <type>std::unordered_map&lt; Math::IVector3, <ref refid="classSR__WORLD__NS_1_1Chunk" kindref="compound">Chunk</ref> * &gt;</type>
+        <definition>typedef std::unordered_map&lt;Math::IVector3, Chunk*&gt; SR_WORLD_NS::Chunks</definition>
+        <argsstring></argsstring>
+        <name>Chunks</name>
+        <qualifiedname>SR_WORLD_NS::Chunks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="25" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Region_8h_1a1740ded0f1c21c6423bed8a68ae48bc5" prot="public" static="no">
+        <type>std::unordered_map&lt; Math::IVector3, SR_HTYPES_NS::Marshal::Ptr &gt;</type>
+        <definition>typedef std::unordered_map&lt;Math::IVector3, SR_HTYPES_NS::Marshal::Ptr&gt; SR_WORLD_NS::CachedChunks</definition>
+        <argsstring></argsstring>
+        <name>CachedChunks</name>
+        <qualifiedname>SR_WORLD_NS::CachedChunks</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Region.h" line="26" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Region.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="TensorKey_8h_1a9aa2c253d2549767ddf3efc34e42bde2" prot="public" static="no">
+        <type>std::unordered_map&lt; <ref refid="structSR__WORLD__NS_1_1TensorKey" kindref="compound">TensorKey</ref>, std::vector&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; SceneObject &gt; &gt; &gt;</type>
+        <definition>typedef std::unordered_map&lt;TensorKey, std::vector&lt;SR_HTYPES_NS::SharedPtr&lt;SceneObject&gt; &gt; &gt; SR_WORLD_NS::Tensor</definition>
+        <argsstring></argsstring>
+        <name>Tensor</name>
+        <qualifiedname>SR_WORLD_NS::Tensor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="55" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="TensorKey_8h_1a51e9002b96d13bab796c226d28333d60" prot="public" static="no">
+        <type>std::list&lt; <ref refid="classSR__WORLD__NS_1_1Region" kindref="compound">Region</ref> * &gt;</type>
+        <definition>typedef std::list&lt;Region*&gt; SR_WORLD_NS::Regions</definition>
+        <argsstring></argsstring>
+        <name>Regions</name>
+        <qualifiedname>SR_WORLD_NS::Regions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" line="56" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/TensorKey.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="Observer_8h_1a259a176f0962867f4bb7aa16ae503841" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_DLL_EXPORT Math::IVector3</type>
+        <definition>SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::MakeChunk</definition>
+        <argsstring>(const Math::IVector3 &amp;rawChunkPos, int32_t width)</argsstring>
+        <name>MakeChunk</name>
+        <qualifiedname>SR_WORLD_NS::MakeChunk</qualifiedname>
+        <param>
+          <type>const Math::IVector3 &amp;</type>
+          <declname>rawChunkPos</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>width</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="103" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="103" declcolumn="34"/>
+      </memberdef>
+      <memberdef kind="function" id="Observer_8h_1a77be4f76674839c9ae483675d497376f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_DLL_EXPORT Math::Unit</type>
+        <definition>SR_DLL_EXPORT Math::Unit SR_WORLD_NS::AddOffset</definition>
+        <argsstring>(const Math::Unit &amp;value, const Math::Unit &amp;offset)</argsstring>
+        <name>AddOffset</name>
+        <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
+        <param>
+          <type>const Math::Unit &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const Math::Unit &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="104" column="30" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="104" declcolumn="30"/>
+      </memberdef>
+      <memberdef kind="function" id="Observer_8h_1a1db586fe3a285da0afa4a87f78195879" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_DLL_EXPORT Math::FVector3</type>
+        <definition>SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset</definition>
+        <argsstring>(const Math::FVector3 &amp;chunk, const Math::FVector3 &amp;offset)</argsstring>
+        <name>AddOffset</name>
+        <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
+        <param>
+          <type>const Math::FVector3 &amp;</type>
+          <declname>chunk</declname>
+        </param>
+        <param>
+          <type>const Math::FVector3 &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="105" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="105" declcolumn="34"/>
+      </memberdef>
+      <memberdef kind="function" id="Observer_8h_1a216d308bfff8a7be469b4edd7e50541c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_DLL_EXPORT Math::IVector3</type>
+        <definition>SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::AddOffset</definition>
+        <argsstring>(const Math::IVector3 &amp;chunk, const Math::IVector3 &amp;offset)</argsstring>
+        <name>AddOffset</name>
+        <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
+        <param>
+          <type>const Math::IVector3 &amp;</type>
+          <declname>chunk</declname>
+        </param>
+        <param>
+          <type>const Math::IVector3 &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="106" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="106" declcolumn="34"/>
+      </memberdef>
+      <memberdef kind="function" id="Observer_8h_1a9fe6d4e8cb9565f888c3b0d251b312df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_DLL_EXPORT Math::FVector3</type>
+        <definition>SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset</definition>
+        <argsstring>(const Math::FVector3 &amp;region, const Math::IVector3 &amp;offset)</argsstring>
+        <name>AddOffset</name>
+        <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
+        <param>
+          <type>const Math::FVector3 &amp;</type>
+          <declname>region</declname>
+        </param>
+        <param>
+          <type>const Math::IVector3 &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="107" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="107" declcolumn="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/Engine.h" line="41" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRSL__NS_1_1SRSLTypeInfo" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::SRSLTypeInfo</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; SRSLTypeInfo &gt;</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1af98358205759ba62c02fa881baab8591" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; uint64_t &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; uint64_t &gt; SR_SRSL_NS::SRSLTypeInfo::GetDimension</definition>
+        <argsstring>(const std::string &amp;code, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetDimension</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetDimension</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="16" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a48b5a372397bd35b55c9b23ef154780e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; uint64_t &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; uint64_t &gt; SR_SRSL_NS::SRSLTypeInfo::GetDimension</definition>
+        <argsstring>(const SRSLExpr *pExpr, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetDimension</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetDimension</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="17" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a22ca2cf0f92bd6292200d7dc410d87b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD ShaderVarType</type>
+        <definition>SR_NODISCARD ShaderVarType SR_SRSL_NS::SRSLTypeInfo::StringToType</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>StringToType</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::StringToType</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="19" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a3a6c518decc8bc45f32b3a56e426d5ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::SRSLTypeInfo::GetTypeName</definition>
+        <argsstring>(const std::string &amp;code)</argsstring>
+        <name>GetTypeName</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetTypeName</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="20" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a10bb91ff0505af7496ca7ad53c431cd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_SRSL_NS::SRSLTypeInfo::GetTypeName</definition>
+        <argsstring>(const SRSLExpr *pExpr)</argsstring>
+        <name>GetTypeName</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetTypeName</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="21" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1ab7bc23b19e8198db852746eb7e29e4dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRSL_NS::SRSLTypeInfo::GetTypeSize</definition>
+        <argsstring>(const std::string &amp;code, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetTypeSize</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetTypeSize</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="23" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1aad9a9229b5b455cfc8139e9a5e374d37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRSL_NS::SRSLTypeInfo::GetTypeSize</definition>
+        <argsstring>(const SRSLExpr *pExpr, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetTypeSize</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetTypeSize</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="24" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a542ca981b17766776972cd29206b585b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRSL_NS::SRSLTypeInfo::GetAlignedTypeSize</definition>
+        <argsstring>(const std::string &amp;code, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetAlignedTypeSize</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetAlignedTypeSize</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="26" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1a50feb6471bf93880af1c2d359d559bbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRSL_NS::SRSLTypeInfo::GetAlignedTypeSize</definition>
+        <argsstring>(const SRSLExpr *pExpr, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetAlignedTypeSize</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetAlignedTypeSize</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="27" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1af64d66c1d5843a077f9e8e6266e31aa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD uint64_t</type>
+        <definition>SR_NODISCARD uint64_t SR_SRSL_NS::SRSLTypeInfo::GetStructSize</definition>
+        <argsstring>(const std::string &amp;name, const SRSLAnalyzedTree::Ptr &amp;pAnalyzedTree)</argsstring>
+        <name>GetStructSize</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::GetStructSize</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const SRSLAnalyzedTree::Ptr &amp;</type>
+          <declname>pAnalyzedTree</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="29" column="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLTypeInfo_1afb7fe7a3cca767b4ca9cfb9e08f81372" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SRSLAnalyzedTree::Ptr</type>
+        <definition>SR_NODISCARD SRSLAnalyzedTree::Ptr SR_SRSL_NS::SRSLTypeInfo::Analyze</definition>
+        <argsstring>(const std::string &amp;code)</argsstring>
+        <name>Analyze</name>
+        <qualifiedname>SR_SRSL_NS::SRSLTypeInfo::Analyze</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="32" column="44"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLTypeInfo</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLTypeInfo"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLTypeInfo &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLTypeInfo</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLTypeInfo"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLTypeInfo &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h" bodystart="13" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1afb7fe7a3cca767b4ca9cfb9e08f81372" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>Analyze</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a542ca981b17766776972cd29206b585b" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetAlignedTypeSize</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a50feb6471bf93880af1c2d359d559bbd" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetAlignedTypeSize</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1af98358205759ba62c02fa881baab8591" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetDimension</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a48b5a372397bd35b55c9b23ef154780e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetDimension</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1af64d66c1d5843a077f9e8e6266e31aa9" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetStructSize</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a3a6c518decc8bc45f32b3a56e426d5ca" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetTypeName</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a10bb91ff0505af7496ca7ad53c431cd9" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetTypeName</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1ab7bc23b19e8198db852746eb7e29e4dc" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetTypeSize</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1aad9a9229b5b455cfc8139e9a5e374d37" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>GetTypeSize</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>SingletonBase</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a22ca2cf0f92bd6292200d7dc410d87b4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>StringToType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLTypeInfo</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

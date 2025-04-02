@@ -1,0 +1,1714 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="TypeTraits_2Property_8h" kind="file" language="C++">
+    <compoundname>Property.h</compoundname>
+    <includes refid="NonCopyable_8h" local="no">Utils/Common/NonCopyable.h</includes>
+    <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
+    <includes refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h" local="no">Utils/Common/TypeInfo.h</includes>
+    <includes refid="Function_8h" local="no">Utils/Types/Function.h</includes>
+    <includes refid="StringAtom_8h" local="no">Utils/Types/StringAtom.h</includes>
+    <includes refid="Marshal_8h" local="no">Utils/Types/Marshal.h</includes>
+    <includes refid="Debug_8h" local="no">Utils/Debug.h</includes>
+    <includedby refid="EntityRef_8h" local="no">Engine/Core/libs/Utils/inc/Utils/ECS/EntityRef.h</includedby>
+    <includedby refid="StandardProperty_8h" local="no">Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h</includedby>
+    <incdepgraph>
+      <node id="106">
+        <label>Utils/Common/AnyMarshal.h</label>
+        <link refid="AnyMarshal_8h_source"/>
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>Utils/Common/AnyVisitor.h</label>
+        <link refid="AnyVisitor_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>Utils/Common/BaseMarshal.h</label>
+        <link refid="BaseMarshal_8h_source"/>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>Utils/Common/Breakpoint.h</label>
+        <link refid="Breakpoint_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="110">
+        <label>Utils/Common/CastUtils.h</label>
+        <link refid="CastUtils_8h_source"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>Utils/Common/EnumReflector.h</label>
+        <link refid="EnumReflector_8h_source"/>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>Utils/Common/Enumerations.h</label>
+        <link refid="Enumerations_8h_source"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>Utils/Common/HashManager.h</label>
+        <link refid="HashManager_8h_source"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>Utils/Common/Hashes.h</label>
+        <link refid="Hashes_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>Utils/Common/MarshalUtils.h</label>
+        <link refid="MarshalUtils_8h_source"/>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Utils/Common/NonCopyable.h</label>
+        <link refid="NonCopyable_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>Utils/Common/Singleton.h</label>
+        <link refid="Singleton_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>Utils/Common/StringFormat.h</label>
+        <link refid="StringFormat_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>Utils/Common/StringUtils.h</label>
+        <link refid="StringUtils_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>Utils/Common/ThreadUtils.h</label>
+        <link refid="ThreadUtils_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>Utils/Common/TypeInfo.h</label>
+        <link refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>Utils/Debug.h</label>
+        <link refid="Debug_8h_source"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>Utils/FileSystem/Path.h</label>
+        <link refid="Path_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>Utils/Math/Axis.h</label>
+        <link refid="Axis_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>Utils/Math/Mathematics.h</label>
+        <link refid="Mathematics_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>Utils/Math/Quaternion.h</label>
+        <link refid="Quaternion_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>Utils/Math/Size.h</label>
+        <link refid="Size_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>Utils/Math/Vector2.h</label>
+        <link refid="Vector2_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>Utils/Math/Vector3.h</label>
+        <link refid="Vector3_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>Utils/Math/Vector4.h</label>
+        <link refid="Vector4_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>Utils/Math/Vector6.h</label>
+        <link refid="Vector6_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>Utils/Platform/Platform.h</label>
+        <link refid="Platform_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>Utils/Platform/Stacktrace.h</label>
+        <link refid="Stacktrace_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>Utils/Serialization/ObjectDataAccessor.h</label>
+        <link refid="ObjectDataAccessor_8h_source"/>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Utils/inc/Utils/TypeTraits/Property.h</label>
+        <link refid="TypeTraits_2Property_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>Utils/TypeTraits/TypeTraits.h</label>
+        <link refid="TypeTraits_8h_source"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>Utils/Types/Function.h</label>
+        <link refid="Function_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>Utils/Types/Map.h</label>
+        <link refid="Map_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>Utils/Types/Marshal.h</label>
+        <link refid="Marshal_8h_source"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Utils/Types/MerkleTree.h</label>
+        <link refid="MerkleTree_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>Utils/Types/SafePtrLockGuard.h</label>
+        <link refid="SafePtrLockGuard_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>Utils/Types/Stream.h</label>
+        <link refid="Stream_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>Utils/Types/StringAtom.h</label>
+        <link refid="StringAtom_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Utils/Types/UnicodeString.h</label>
+        <link refid="UnicodeString_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/macros.h</label>
+        <link refid="macros_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Utils/stdInclude.h</label>
+        <link refid="stdInclude_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>Codegen/EnumsFwd.generated.hpp</label>
+      </node>
+      <node id="44">
+        <label>algorithm</label>
+      </node>
+      <node id="45">
+        <label>any</label>
+      </node>
+      <node id="38">
+        <label>array</label>
+      </node>
+      <node id="36">
+        <label>atomic</label>
+      </node>
+      <node id="33">
+        <label>cassert</label>
+      </node>
+      <node id="21">
+        <label>cctype</label>
+      </node>
+      <node id="5">
+        <label>cfloat</label>
+      </node>
+      <node id="53">
+        <label>chrono</label>
+      </node>
+      <node id="34">
+        <label>cmath</label>
+      </node>
+      <node id="17">
+        <label>codecvt</label>
+      </node>
+      <node id="57">
+        <label>concepts</label>
+      </node>
+      <node id="58">
+        <label>condition_variable</label>
+      </node>
+      <node id="15">
+        <label>cstdarg</label>
+      </node>
+      <node id="18">
+        <label>cstddef</label>
+      </node>
+      <node id="55">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>cstdio</label>
+      </node>
+      <node id="47">
+        <label>cstdlib</label>
+      </node>
+      <node id="23">
+        <label>cstring</label>
+      </node>
+      <node id="50">
+        <label>ctime</label>
+      </node>
+      <node id="42">
+        <label>exception</label>
+      </node>
+      <node id="76">
+        <label>flat_hash_map/flat_hash_map.hpp</label>
+      </node>
+      <node id="105">
+        <label>fmt/color.h</label>
+      </node>
+      <node id="72">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="104">
+        <label>fmt/printf.h</label>
+      </node>
+      <node id="27">
+        <label>fstream</label>
+      </node>
+      <node id="40">
+        <label>functional</label>
+      </node>
+      <node id="84">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="87">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="85">
+        <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="86">
+        <label>glm/gtx/string_cast.hpp</label>
+      </node>
+      <node id="16">
+        <label>initializer_list</label>
+      </node>
+      <node id="56">
+        <label>iomanip</label>
+      </node>
+      <node id="10">
+        <label>iosfwd</label>
+      </node>
+      <node id="51">
+        <label>iostream</label>
+      </node>
+      <node id="7">
+        <label>limits</label>
+      </node>
+      <node id="49">
+        <label>list</label>
+      </node>
+      <node id="22">
+        <label>locale</label>
+      </node>
+      <node id="39">
+        <label>map</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="31">
+        <label>mutex</label>
+      </node>
+      <node id="60">
+        <label>numbers</label>
+      </node>
+      <node id="59">
+        <label>numeric</label>
+      </node>
+      <node id="70">
+        <label>openssl/sha.h</label>
+      </node>
+      <node id="25">
+        <label>optional</label>
+      </node>
+      <node id="29">
+        <label>ostream</label>
+      </node>
+      <node id="30">
+        <label>queue</label>
+      </node>
+      <node id="54">
+        <label>random</label>
+      </node>
+      <node id="35">
+        <label>ranges</label>
+      </node>
+      <node id="52">
+        <label>ratio</label>
+      </node>
+      <node id="11">
+        <label>regex</label>
+      </node>
+      <node id="41">
+        <label>set</label>
+      </node>
+      <node id="14">
+        <label>shared_mutex</label>
+      </node>
+      <node id="6">
+        <label>span</label>
+      </node>
+      <node id="75">
+        <label>sparsehash/dense_hash_map</label>
+      </node>
+      <node id="48">
+        <label>sstream</label>
+      </node>
+      <node id="20">
+        <label>stack</label>
+      </node>
+      <node id="12">
+        <label>stdexcept</label>
+      </node>
+      <node id="32">
+        <label>string</label>
+      </node>
+      <node id="13">
+        <label>string_view</label>
+      </node>
+      <node id="46">
+        <label>thread</label>
+      </node>
+      <node id="8">
+        <label>type_traits</label>
+      </node>
+      <node id="43">
+        <label>unordered_map</label>
+      </node>
+      <node id="19">
+        <label>unordered_set</label>
+      </node>
+      <node id="37">
+        <label>utility</label>
+      </node>
+      <node id="24">
+        <label>variant</label>
+      </node>
+      <node id="28">
+        <label>vector</label>
+      </node>
+      <node id="71">
+        <label>xxHash/xxhash.h</label>
+      </node>
+      <node id="61">
+        <label>zlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="59">
+        <label>Engine/Core/inc/Core/EngineCommands.h</label>
+        <link refid="EngineCommands_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Engine/Core/inc/Core/GUI/DragNDropHelper.h</label>
+        <link refid="DragNDropHelper_8h_source"/>
+      </node>
+      <node id="16">
+        <label>Engine/Core/inc/Core/GUI/EditorCamera.h</label>
+        <link refid="EditorCamera_8h_source"/>
+      </node>
+      <node id="57">
+        <label>Engine/Core/inc/Core/GUI/EditorGUI.h</label>
+        <link refid="EditorGUI_8h_source"/>
+      </node>
+      <node id="34">
+        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <link refid="EditorGizmo_8h_source"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>Engine/Core/inc/Core/GUI/Guizmo.h</label>
+        <link refid="Guizmo_8h_source"/>
+      </node>
+      <node id="61">
+        <label>Engine/Core/inc/Core/GUI/Hierarchy.h</label>
+        <link refid="Hierarchy_8h_source"/>
+      </node>
+      <node id="62">
+        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <link refid="Inspector_8h_source"/>
+      </node>
+      <node id="74">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawer.h</label>
+        <link refid="PropertyDrawer_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
+        <link refid="BitMapPropertyDrawer_8h_source"/>
+      </node>
+      <node id="76">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
+        <link refid="EnumPropertyDrawer_8h_source"/>
+      </node>
+      <node id="78">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
+        <link refid="MaterialDataPropertyDrawer_8h_source"/>
+      </node>
+      <node id="81">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
+        <link refid="MaterialPropertyDrawer_8h_source"/>
+      </node>
+      <node id="77">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <link refid="ObjectPropertyDrawer_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
+        <link refid="PathPropertyDrawer_8h_source"/>
+      </node>
+      <node id="80">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
+        <link refid="PointerPropertyDrawer_8h_source"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
+        <link refid="StringPropertyDrawer_8h_source"/>
+      </node>
+      <node id="83">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
+        <link refid="VectorPropertyDrawer_8h_source"/>
+      </node>
+      <node id="70">
+        <label>Engine/Core/inc/Core/GUI/SceneRunner.h</label>
+        <link refid="SceneRunner_8h_source"/>
+      </node>
+      <node id="35">
+        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <link refid="SceneTools_8h_source"/>
+      </node>
+      <node id="63">
+        <label>Engine/Core/inc/Core/GUI/SceneViewer.h</label>
+        <link refid="SceneViewer_8h_source"/>
+      </node>
+      <node id="71">
+        <label>Engine/Core/inc/Core/GUI/WorldEdit.h</label>
+        <link refid="WorldEdit_8h_source"/>
+      </node>
+      <node id="22">
+        <label>Engine/Core/inc/Core/UI/Button.h</label>
+        <link refid="Button_8h_source"/>
+      </node>
+      <node id="21">
+        <label>Engine/Core/inc/Core/UI/IButton.h</label>
+        <link refid="IButton_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <link refid="EngineScene_8h_source"/>
+      </node>
+      <node id="9">
+        <label>Engine/Core/inc/Core/World/World.h</label>
+        <link refid="World_8h_source"/>
+      </node>
+      <node id="10">
+        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioListener.h</label>
+        <link refid="AudioListener_8h_source"/>
+      </node>
+      <node id="11">
+        <label>Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h</label>
+        <link refid="AudioSource_8h_source"/>
+      </node>
+      <node id="4">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationChannel.h</label>
+        <link refid="AnimationChannel_8h_source"/>
+      </node>
+      <node id="65">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h</label>
+        <link refid="AnimationKey_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationPose.h</label>
+        <link refid="AnimationPose_8h_source"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <link refid="Animator_8h_source"/>
+      </node>
+      <node id="13">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
+        <link refid="Bone_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/BoneComponent.h</label>
+        <link refid="BoneComponent_8h_source"/>
+      </node>
+      <node id="14">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h</label>
+        <link refid="Text_8h_source"/>
+      </node>
+      <node id="92">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h</label>
+        <link refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_source"/>
+      </node>
+      <node id="24">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/AreaLight.h</label>
+        <link refid="AreaLight_8h_source"/>
+      </node>
+      <node id="25">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/DirectionalLight.h</label>
+        <link refid="DirectionalLight_8h_source"/>
+      </node>
+      <node id="23">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/ILightComponent.h</label>
+        <link refid="ILightComponent_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/PointLight.h</label>
+        <link refid="PointLight_8h_source"/>
+      </node>
+      <node id="27">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/ProbeLight.h</label>
+        <link refid="ProbeLight_8h_source"/>
+      </node>
+      <node id="28">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/SpotLight.h</label>
+        <link refid="SpotLight_8h_source"/>
+      </node>
+      <node id="94">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Loaders/SRSL.h</label>
+        <link refid="SRSL_8h_source"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h</label>
+        <link refid="ShaderProperties_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</label>
+        <link refid="BaseMaterial_8h_source"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
+        <link refid="FileMaterial_8h_source"/>
+      </node>
+      <node id="101">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialProperty.h</label>
+        <link refid="MaterialProperty_8h_source"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/MeshMaterialProperty.h</label>
+        <link refid="MeshMaterialProperty_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
+        <link refid="UniqueMaterial_8h_source"/>
+      </node>
+      <node id="102">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/ShaderUBOBlock.h</label>
+        <link refid="ShaderUBOBlock_8h_source"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <link refid="CascadedShadowMapPass_8h_source"/>
+        <childnode refid="107" relation="include">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <link refid="ColorBufferPass_8h_source"/>
+      </node>
+      <node id="97">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <link refid="DebugPass_8h_source"/>
+      </node>
+      <node id="19">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <link refid="HTMLDrawerPass_8h_source"/>
+      </node>
+      <node id="104">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
+        <childnode refid="105" relation="include">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <link refid="VarianceShadowMapPass_8h_source"/>
+      </node>
+      <node id="96">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <link refid="DebugRenderer_8h_source"/>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
+        <link refid="HTMLDrawableElement_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
+        <link refid="HTMLRenderer_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
+        <link refid="RenderContext_8h_source"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Evaluator.h</label>
+        <link refid="Evaluator_8h_source"/>
+      </node>
+      <node id="110">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
+        <link refid="GLSLCodeGenerator_8h_source"/>
+      </node>
+      <node id="111">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
+        <link refid="SRSL_2Shader_8h_source"/>
+      </node>
+      <node id="103">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/ShaderType.h</label>
+        <link refid="ShaderType_8h_source"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/ShaderVariables.h</label>
+        <link refid="ShaderVariables_8h_source"/>
+      </node>
+      <node id="113">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
+        <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
+      </node>
+      <node id="15">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h</label>
+        <link refid="Camera_8h_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
+        <link refid="DebugLine_8h_source"/>
+      </node>
+      <node id="40">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <link refid="DebugWireframeMesh_8h_source"/>
+      </node>
+      <node id="39">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <link refid="IndexedMesh_8h_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="29">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <link refid="ProceduralMesh_8h_source"/>
+      </node>
+      <node id="6">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <link refid="SkinnedMesh_8h_source"/>
+      </node>
+      <node id="32">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <link refid="Sprite_8h_source"/>
+      </node>
+      <node id="20">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/IRenderComponent.h</label>
+        <link refid="IRenderComponent_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
+        <link refid="Mesh_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h</label>
+        <link refid="Types_2Shader_8h_source"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Anchor.h</label>
+        <link refid="Anchor_8h_source"/>
+      </node>
+      <node id="42">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Canvas.h</label>
+        <link refid="Canvas_8h_source"/>
+      </node>
+      <node id="33">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <link refid="Gizmo_8h_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UICanvasComponent.h</label>
+        <link refid="UICanvasComponent_8h_source"/>
+      </node>
+      <node id="88">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UISizeComponent.h</label>
+        <link refid="UISizeComponent_8h_source"/>
+      </node>
+      <node id="43">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/UIWindow.h</label>
+        <link refid="UIWindow_8h_source"/>
+      </node>
+      <node id="45">
+        <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <link refid="Rigidbody2D_8h_source"/>
+      </node>
+      <node id="46">
+        <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <link refid="Rigidbody3D_8h_source"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
+        <link refid="Vehicle4W3D_8h_source"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <link refid="Bullet3CollisionShape_8h_source"/>
+      </node>
+      <node id="47">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <link refid="Bullet3Rigidbody3D_8h_source"/>
+      </node>
+      <node id="115">
+        <label>Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <link refid="CollisionShape_8h_source"/>
+        <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <link refid="PhysXCollisionShape_8h_source"/>
+      </node>
+      <node id="48">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <link refid="PhysXRigidbody3D_8h_source"/>
+      </node>
+      <node id="51">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
+        <link refid="PhysXVehicle4W3D_8h_source"/>
+      </node>
+      <node id="44">
+        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <link refid="Rigidbody_8h_source"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>Engine/Core/libs/Physics/inc/Physics/Vehicle.h</label>
+        <link refid="Vehicle_8h_source"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h</label>
+        <link refid="Behaviour_8h_source"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoBehaviour.h</label>
+        <link refid="EvoBehaviour_8h_source"/>
+      </node>
+      <node id="8">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Component.h</label>
+        <link refid="Component_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/ComponentManager.h</label>
+        <link refid="ComponentManager_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Entity.h</label>
+        <link refid="Entity_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/EntityController.h</label>
+        <link refid="EntityController_8h_source"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/EntityRef.h</label>
+        <link refid="EntityRef_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/GameObject.h</label>
+        <link refid="GameObject_8h_source"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h</label>
+        <link refid="IComponentable_8h_source"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
+        <link refid="SceneObject_8h_source"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>Engine/Core/libs/Utils/inc/Utils/ECS/Transform2D.h</label>
+        <link refid="Transform2D_8h_source"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>Engine/Core/libs/Utils/inc/Utils/Game/CameraFlyMover.h</label>
+        <link refid="CameraFlyMover_8h_source"/>
+      </node>
+      <node id="66">
+        <label>Engine/Core/libs/Utils/inc/Utils/Game/DebugLogComponent.h</label>
+        <link refid="DebugLogComponent_8h_source"/>
+      </node>
+      <node id="67">
+        <label>Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h</label>
+        <link refid="LookAtComponent_8h_source"/>
+      </node>
+      <node id="84">
+        <label>Engine/Core/libs/Utils/inc/Utils/Tests/ReflectionTestComponent.h</label>
+        <link refid="ReflectionTestComponent_8h_source"/>
+      </node>
+      <node id="91">
+        <label>Engine/Core/libs/Utils/inc/Utils/TypeTraits/Properties.h</label>
+        <link refid="Properties_8h_source"/>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Utils/inc/Utils/TypeTraits/Property.h</label>
+        <link refid="TypeTraits_2Property_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h</label>
+        <link refid="StandardProperty_8h_source"/>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Engine/Core/libs/Utils/inc/Utils/UI/UIModifier.h</label>
+        <link refid="UIModifier_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Engine/Core/libs/Utils/inc/Utils/World/Scene.h</label>
+        <link refid="Scene_8h_source"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
+        <link refid="SceneCubeChunkLogic_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classSR__UTILS__NS_1_1Property" prot="public">SR_UTILS_NS::Property</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1ExternalProperty" prot="public">SR_UTILS_NS::ExternalProperty</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1LabelProperty" prot="public">SR_UTILS_NS::LabelProperty</innerclass>
+    <innernamespace refid="namespaceSR__UTILS__NS">SR_UTILS_NS</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="TypeTraits_2Property_8h_1a4aa0840f6f16f5a15a296ebe4dde3903" prot="public" static="no">
+        <name>SR_REGISTER_TYPE_TRAITS_PROPERTY</name>
+        <param><defname>className</defname></param>
+        <param><defname>version</defname></param>
+        <initializer>    static <ref refid="classSR__UTILS__NS_1_1Property" kindref="compound">SR_UTILS_NS::Property</ref>* AllocateBase() { return (<ref refid="classSR__UTILS__NS_1_1Property" kindref="compound">SR_UTILS_NS::Property</ref>*)new className(); }                    \
+    SR_INLINE_STATIC const uint16_t VESION = version;                                                                   \
+    SR_INLINE_STATIC const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> PROPERTY_TYPE_NAME = #className;                                     \
+    SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> GetPropertyTypeName() const noexcept override { return PROPERTY_TYPE_NAME; }   \
+    SR_NODISCARD uint16_t GetPropertyVersion() const noexcept override { return VESION; }                               \</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Property.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Property.h" bodystart="16" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>Monika<sp/>on<sp/>07.11.2023.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_TYPE_TRAITS_PROPERTY_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_TYPE_TRAITS_PROPERTY_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/NonCopyable.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Enumerations.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/TypeInfo.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/Function.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/StringAtom.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Types/Marshal.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Debug.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_REGISTER_TYPE_TRAITS_PROPERTY(className,<sp/>version)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="17"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>static<sp/>SR_UTILS_NS::Property*<sp/>AllocateBase()<sp/>{<sp/>return<sp/>(SR_UTILS_NS::Property*)new<sp/>className();<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/>const<sp/>uint16_t<sp/>VESION<sp/>=<sp/>version;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/>const<sp/>SR_UTILS_NS::StringAtom<sp/>PROPERTY_TYPE_NAME<sp/>=<sp/>#className;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_UTILS_NS::StringAtom<sp/>GetPropertyTypeName()<sp/>const<sp/>noexcept<sp/>override<sp/>{<sp/>return<sp/>PROPERTY_TYPE_NAME;<sp/>}<sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="21"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>uint16_t<sp/>GetPropertyVersion()<sp/>const<sp/>noexcept<sp/>override<sp/>{<sp/>return<sp/>VESION;<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceSR__UTILS__NS" kindref="compound">SR_UTILS_NS</ref><sp/>{</highlight></codeline>
+<codeline lineno="24" refid="classSR__UTILS__NS_1_1Property" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Property<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>SR_UTILS_NS::NonCopyable<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Base<sp/>=<sp/>Property;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ActiveConditionFn<sp/>=<sp/>SR_HTYPES_NS::Function&lt;bool()&gt;;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MarshalPtr<sp/>=<sp/>SR_HTYPES_NS::Marshal::Ptr;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MarshalRef<sp/>=<sp/>SR_HTYPES_NS::Marshal&amp;;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">MarshalUniquePtr<sp/>=<sp/>std::unique_ptr&lt;SR_HTYPES_NS::Marshal&gt;;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property(Property&amp;&amp;<sp/>other)<sp/>noexcept</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_activeCondition(SR_EXCHANGE(other.m_activeCondition,<sp/>ActiveConditionFn()))</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_publicity(SR_EXCHANGE(other.m_publicity,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_description(SR_EXCHANGE(other.m_description,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_name(SR_EXCHANGE(other.m_name,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_dontSave(SR_EXCHANGE(other.m_dontSave,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_isOptionalMode(SR_EXCHANGE(other.m_isOptionalMode,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_optional(SR_EXCHANGE(other.m_optional,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_sameLine(SR_EXCHANGE(other.m_sameLine,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_width(SR_EXCHANGE(other.m_width,<sp/>{<sp/>}))</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>operator=(Property&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_activeCondition<sp/>=<sp/>SR_EXCHANGE(other.m_activeCondition,<sp/>ActiveConditionFn());</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_publicity<sp/>=<sp/>SR_EXCHANGE(other.m_publicity,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_description<sp/>=<sp/>SR_EXCHANGE(other.m_description,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_name<sp/>=<sp/>SR_EXCHANGE(other.m_name,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_dontSave<sp/>=<sp/>SR_EXCHANGE(other.m_dontSave,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_isOptionalMode<sp/>=<sp/>SR_EXCHANGE(other.m_isOptionalMode,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_optional<sp/>=<sp/>SR_EXCHANGE(other.m_optional,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_sameLine<sp/>=<sp/>SR_EXCHANGE(other.m_sameLine,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_width<sp/>=<sp/>SR_EXCHANGE(other.m_width,<sp/>{<sp/>});</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="classSR__UTILS__NS_1_1Property_1af9340acbf95c692c5a4b0042be4831f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Property_1af9340acbf95c692c5a4b0042be4831f4" kindref="member">SaveProperty</ref>(MarshalRef<sp/>marshal)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><sp/>}</highlight></codeline>
+<codeline lineno="60" refid="classSR__UTILS__NS_1_1Property_1ac2bb845328aaf4affd8f7a7c23e8ccd7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Property_1ac2bb845328aaf4affd8f7a7c23e8ccd7" kindref="member">LoadProperty</ref>(MarshalRef<sp/>marshal)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Property" kindref="compound">Property</ref>&amp;<sp/>SetPublicity(PropertyPublicity<sp/>publicity)<sp/>{<sp/>m_publicity<sp/>=<sp/>publicity;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetActiveCondition(ActiveConditionFn<sp/>value)<sp/>{<sp/>m_activeCondition<sp/>=<sp/>std::move(value);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetName(SR_UTILS_NS::StringAtom<sp/>value)<sp/>{<sp/>m_name<sp/>=<sp/>value;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetWidth(float_t<sp/>value)<sp/>{<sp/>m_width<sp/>=<sp/>value;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetReadOnly()<sp/>{<sp/>m_publicity<sp/>=<sp/>PropertyPublicity::ReadOnly;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetSameLine()<sp/>{<sp/>m_sameLine<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetDontSave()<sp/>{<sp/>m_dontSave<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetOptionalMode()<sp/>{<sp/>m_isOptionalMode<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Property&amp;<sp/>SetOptional(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value)<sp/>{<sp/>m_optional<sp/>=<sp/>value;<sp/>SRAssert(IsOptionalMode());<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>SR_UTILS_NS::StringAtom<sp/>GetPropertyTypeName()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>virtual<sp/>uint16_t<sp/>GetPropertyVersion()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>PropertyPublicity<sp/>GetPublicity()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_publicity;<sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_UTILS_NS::StringAtom<sp/>GetName()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_name;<sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>float_t<sp/>GetWidth()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_width;<sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsSameLine()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_sameLine;<sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsDontSave()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_dontSave;<sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsOptionalMode()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_isOptionalMode;<sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>GetOptional()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_optional;<sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsActive()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>protected:</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>MarshalUniquePtr<sp/>AllocatePropertyBlock()<sp/>const;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>MarshalUniquePtr<sp/>LoadPropertyBase(MarshalRef<sp/>marshal)<sp/>const;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SavePropertyBase(MarshalRef<sp/>marshal,<sp/>MarshalUniquePtr<sp/>pBlock)<sp/>const;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>private:</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ActiveConditionFn<sp/>m_activeCondition;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PropertyPublicity<sp/>m_publicity<sp/>=<sp/>PropertyPublicity::Public;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::StringAtom<sp/>m_description;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::StringAtom<sp/>m_name;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_dontSave<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_isOptionalMode<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_sameLine<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>m_width<sp/>=<sp/>70.f;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_optional<sp/>=<sp/>false;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classSR__UTILS__NS_1_1ExternalProperty" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>class<sp/><ref refid="classSR__UTILS__NS_1_1ExternalProperty" kindref="compound">ExternalProperty</ref><sp/>:<sp/>public<sp/>Property<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_TYPE_TRAITS_PROPERTY(<ref refid="classSR__UTILS__NS_1_1ExternalProperty" kindref="compound">ExternalProperty</ref>,<sp/>1000)</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PropertyGetterFn<sp/>=<sp/>SR_HTYPES_NS::Function&lt;Property*()&gt;;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SaveProperty(MarshalRef<sp/>marshal)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LoadProperty(MarshalRef<sp/>marshal)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>Property*<sp/>GetExternalProperty()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PropertyGetterFn&amp;<sp/>GetPropertyGetter()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_getter;<sp/>}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1ExternalProperty" kindref="compound">ExternalProperty</ref>&amp;<sp/>SetPropertyGetter(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PropertyGetterFn&amp;<sp/>value)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>m_getter<sp/>=<sp/>value;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PropertyGetterFn<sp/>m_getter;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="classSR__UTILS__NS_1_1LabelProperty" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1LabelProperty" kindref="compound">LabelProperty</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>Property<sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_REGISTER_TYPE_TRAITS_PROPERTY(<ref refid="classSR__UTILS__NS_1_1LabelProperty" kindref="compound">LabelProperty</ref>,<sp/>1000)</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1LabelProperty" kindref="compound">LabelProperty</ref>&amp;<sp/>SetLabel(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_UTILS_NS::StringAtom&amp;<sp/>value)<sp/>{<sp/>m_label<sp/>=<sp/>value;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1LabelProperty" kindref="compound">LabelProperty</ref>&amp;<sp/>SetColor(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SR_MATH_NS::FColor&amp;<sp/>value)<sp/>{<sp/>m_color<sp/>=<sp/>value;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_UTILS_NS::StringAtom<sp/>GetLabel()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_label;<sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_MATH_NS::FColor<sp/>GetColor()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_color;<sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::StringAtom<sp/>m_label;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_MATH_NS::FColor<sp/>m_color;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_TYPE_TRAITS_PROPERTY_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Property.h"/>
+  </compounddef>
+</doxygen>

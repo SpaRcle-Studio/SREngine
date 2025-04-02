@@ -1,0 +1,499 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::SRSLLexicalAnalyzer</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; SRSLLexicalAnalyzer &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>LXAState</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::LXAState</qualifiedname>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a21c7233fc6b3bd7166e23be5191c7320" prot="private">
+          <name>Decorators</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a5041ffe849fcde6f23f9d99c2e949265" prot="private">
+          <name>Decorator</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029aa09fc85e9b190609e62da8af167fb937" prot="private">
+          <name>DecoratorArgs</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029aa1a6657be79cc0fc1e9b23b9e108f043" prot="private">
+          <name>Expression</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a47c14840d8e15331fa420b9b2f757cd9" prot="private">
+          <name>Variable</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a86408593c34af77fdd90df932f8b5261" prot="private">
+          <name>Function</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a9bdfb5e75e66dd66eb2fbc5996c8e628" prot="private">
+          <name>FunctionArgs</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a5e0f50f526fbfafbf187c5fcce2bd1ac" prot="private">
+          <name>FunctionBody</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a69bf1eda358268e97a9d792c0e88b10d" prot="private">
+          <name>IfStatement</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a8629ec2ba7946a5d5b3b4bef2a331ddd" prot="private">
+          <name>IfStatementBody</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a1aa62482819b414c6ad8d46175217fde" prot="private">
+          <name>ForStatement</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a02a0f9ef5e880acbe60724a978fecec8" prot="private">
+          <name>ForStatementVariable</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a9440e09ea12e628526dbda4f34341e0b" prot="private">
+          <name>ForStatementCondition</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a80db93aa763f91a82ab50c6ef5dd9ba3" prot="private">
+          <name>ForStatementExpression</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a95497c2ef3b2eb59e7572e7363f758e2" prot="private">
+          <name>ForStatementBody</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="14" bodyend="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a1c61cd60e8dc58cb18128ac5e6dd1b28" prot="private" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="classSR__SRSL__NS_1_1SRSLLexicalTree" kindref="compound">SRSLLexicalTree</ref> * &gt;</type>
+        <definition>std::list&lt;SRSLLexicalTree*&gt; SR_SRSL_NS::SRSLLexicalAnalyzer::m_lexicalTree</definition>
+        <argsstring></argsstring>
+        <name>m_lexicalTree</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_lexicalTree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="38" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a222a8fdc4197dd5702fef2b478177e7f" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLDecorators" kindref="compound">SRSLDecorators</ref> *</type>
+        <definition>SRSLDecorators* SR_SRSL_NS::SRSLLexicalAnalyzer::m_decorators</definition>
+        <argsstring></argsstring>
+        <name>m_decorators</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_decorators</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="40" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1adfb9fc55c379a8ca838fc3347fbb6413" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+        <definition>SRSLExpr* SR_SRSL_NS::SRSLLexicalAnalyzer::m_expr</definition>
+        <argsstring></argsstring>
+        <name>m_expr</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_expr</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="41" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1af7adfcab9cb7f71401558ec79b5dd511" prot="private" static="no" mutable="no">
+        <type><ref refid="structSR__SRSL__NS_1_1SRSLResult" kindref="compound">SRSLResult</ref></type>
+        <definition>SRSLResult SR_SRSL_NS::SRSLLexicalAnalyzer::m_result</definition>
+        <argsstring></argsstring>
+        <name>m_result</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_result</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="43" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aab3cdbd7bda72447f602d2fa85ea4fb9" prot="private" static="no" mutable="no">
+        <type>std::list&lt; LXAState &gt;</type>
+        <definition>std::list&lt;LXAState&gt; SR_SRSL_NS::SRSLLexicalAnalyzer::m_states</definition>
+        <argsstring></argsstring>
+        <name>m_states</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_states</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="44" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57254fe3716bf8fb6d91842eaa5da695" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> &gt;</type>
+        <definition>std::vector&lt;Lexem&gt; SR_SRSL_NS::SRSLLexicalAnalyzer::m_lexems</definition>
+        <argsstring></argsstring>
+        <name>m_lexems</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_lexems</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="46" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a4c6b05a57847d1e8c8538a743c409104" prot="private" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t SR_SRSL_NS::SRSLLexicalAnalyzer::m_currentLexem</definition>
+        <argsstring></argsstring>
+        <name>m_currentLexem</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::m_currentLexem</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="47" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1afc673be395be8ffea5987d14fba4a631" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD std::pair&lt; SRSLAnalyzedTree::Ptr, <ref refid="structSR__SRSL__NS_1_1SRSLResult" kindref="compound">SRSLResult</ref> &gt;</type>
+        <definition>SR_NODISCARD std::pair&lt; SRSLAnalyzedTree::Ptr, SRSLResult &gt; SR_SRSL_NS::SRSLLexicalAnalyzer::Analyze</definition>
+        <argsstring>(std::vector&lt; Lexem &gt; &amp;&amp;lexems)</argsstring>
+        <name>Analyze</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::Analyze</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> &gt; &amp;&amp;</type>
+          <declname>lexems</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="20" column="32"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aff486cc6d3f28d21d84279f629a9c3a7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLLexicalAnalyzer::Clear</definition>
+        <argsstring>()</argsstring>
+        <name>Clear</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::Clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="23" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ae893e757cc7362f11ddcaa414831db7a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessMain</definition>
+        <argsstring>()</argsstring>
+        <name>ProcessMain</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessMain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="25" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ab71e37ebd990479cc8864b551f84a678" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessBracket</definition>
+        <argsstring>()</argsstring>
+        <name>ProcessBracket</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessBracket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="26" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1af1a1f3996d7aa80b431ed7e90f819e7f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessDecorators</definition>
+        <argsstring>()</argsstring>
+        <name>ProcessDecorators</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessDecorators</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="27" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1afcda9ae94406fb891ceb901565e6e773" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessExpression</definition>
+        <argsstring>(bool isFunctionName=false, bool isSimpleExpr=false)</argsstring>
+        <name>ProcessExpression</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::ProcessExpression</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>isFunctionName</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isSimpleExpr</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ae9279d22b2a3578abc13fe30ce52490f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLLexicalUnit" kindref="compound">SRSLLexicalUnit</ref> *</type>
+        <definition>SR_NODISCARD SRSLLexicalUnit * SR_SRSL_NS::SRSLLexicalAnalyzer::TryProcessIdentifier</definition>
+        <argsstring>()</argsstring>
+        <name>TryProcessIdentifier</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::TryProcessIdentifier</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="30" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aaa337a290cc47a3661d30d4ca7921546" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLLexicalAnalyzer::InBounds</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>InBounds</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::InBounds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="32" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a72694053fb0d284b369dc3bca56f06e5" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SRSL_NS::SRSLLexicalAnalyzer::IsHasErrors</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsHasErrors</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::IsHasErrors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="33" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a5b5dc85fdbde580a2912e807090848c6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
+        <definition>SR_NODISCARD const Lexem * SR_SRSL_NS::SRSLLexicalAnalyzer::GetLexem</definition>
+        <argsstring>(int64_t offset) const</argsstring>
+        <name>GetLexem</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::GetLexem</qualifiedname>
+        <param>
+          <type>int64_t</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="34" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a93a07bcc1377ffe5431a18c4476165e2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
+        <definition>SR_NODISCARD const Lexem * SR_SRSL_NS::SRSLLexicalAnalyzer::GetCurrentLexem</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCurrentLexem</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexicalAnalyzer::GetCurrentLexem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="35" column="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLLexicalAnalyzer</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLLexicalAnalyzer &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLLexicalAnalyzer</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; SRSLLexicalAnalyzer &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="11" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1afc673be395be8ffea5987d14fba4a631" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>Analyze</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aff486cc6d3f28d21d84279f629a9c3a7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>Clear</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a93a07bcc1377ffe5431a18c4476165e2" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>GetCurrentLexem</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a5b5dc85fdbde580a2912e807090848c6" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>GetLexem</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aaa337a290cc47a3661d30d4ca7921546" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>InBounds</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>Instance</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a72694053fb0d284b369dc3bca56f06e5" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>IsHasErrors</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>LockSingleton</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>LXAState</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a4c6b05a57847d1e8c8538a743c409104" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_currentLexem</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a222a8fdc4197dd5702fef2b478177e7f" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_decorators</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1adfb9fc55c379a8ca838fc3347fbb6413" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_expr</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57254fe3716bf8fb6d91842eaa5da695" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_lexems</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a1c61cd60e8dc58cb18128ac5e6dd1b28" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_lexicalTree</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_mutex</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1af7adfcab9cb7f71401558ec79b5dd511" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_result</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aab3cdbd7bda72447f602d2fa85ea4fb9" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>m_states</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>operator=</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ab71e37ebd990479cc8864b551f84a678" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>ProcessBracket</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1af1a1f3996d7aa80b431ed7e90f819e7f" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>ProcessDecorators</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1afcda9ae94406fb891ceb901565e6e773" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>ProcessExpression</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ae893e757cc7362f11ddcaa414831db7a" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>ProcessMain</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>SingletonBase</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ae9279d22b2a3578abc13fe30ce52490f" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>TryProcessIdentifier</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

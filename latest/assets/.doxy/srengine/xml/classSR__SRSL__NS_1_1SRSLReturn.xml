@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__SRSL__NS_1_1SRSLReturn" kind="class" language="C++" prot="public">
+    <compoundname>SR_SRSL_NS::SRSLReturn</compoundname>
+    <basecompoundref refid="classSR__SRSL__NS_1_1SRSLLexicalUnit" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLLexicalUnit</basecompoundref>
+    <includes refid="LexicalTree_8h" local="no">LexicalTree.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLReturn_1ae807e2d7a7328682e51825c286e817e9" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+        <definition>SRSLExpr* SR_SRSL_NS::SRSLReturn::pExpr</definition>
+        <argsstring></argsstring>
+        <name>pExpr</name>
+        <qualifiedname>SR_SRSL_NS::SRSLReturn::pExpr</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="211" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="211" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLReturn_1a8b245b1681b5af778e2de5c9e36376a7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLReturn::SRSLReturn</definition>
+        <argsstring>(SRSLExpr *pExpr)</argsstring>
+        <name>SRSLReturn</name>
+        <qualifiedname>SR_SRSL_NS::SRSLReturn::SRSLReturn</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
+          <declname>pExpr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="194" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="194" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLReturn_1a61d3575dbf0f338e1b29042c249486df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLReturn::~SRSLReturn</definition>
+        <argsstring>() override</argsstring>
+        <name>~SRSLReturn</name>
+        <qualifiedname>SR_SRSL_NS::SRSLReturn::~SRSLReturn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="198" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="198" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLReturn_1abc1698969ad800251e5219c4864c83a5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SRSL_NS::SRSLReturn::SRSLReturn</definition>
+        <argsstring>(SRSLReturn &amp;&amp;other) noexcept</argsstring>
+        <name>SRSLReturn</name>
+        <qualifiedname>SR_SRSL_NS::SRSLReturn::SRSLReturn</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLReturn" kindref="compound">SRSLReturn</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="202" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="202" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLReturn_1ad2142feefc6669d7ff4c1bda87b291f7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__SRSL__NS_1_1SRSLReturn" kindref="compound">SRSLReturn</ref> &amp;</type>
+        <definition>SRSLReturn &amp; SR_SRSL_NS::SRSLReturn::operator=</definition>
+        <argsstring>(SRSLReturn &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_SRSL_NS::SRSLReturn::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SRSL__NS_1_1SRSLReturn" kindref="compound">SRSLReturn</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="206" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="206" bodyend="209"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_SRSL_NS::SRSLLexicalUnit</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLLexicalUnit"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLReturn</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLReturn"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_SRSL_NS::SRSLExpr</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLExpr"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_SRSL_NS::SRSLLexicalUnit</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLLexicalUnit"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_SRSL_NS::SRSLReturn</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLReturn"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pExpr</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="192" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="192" bodyend="212"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>NonCopyable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLReturn_1ad2142feefc6669d7ff4c1bda87b291f7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_SRSL_NS::SRSLLexicalUnit::"><scope>SR_SRSL_NS::SRSLReturn</scope><name>operator=</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLReturn_1ae807e2d7a7328682e51825c286e817e9" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>pExpr</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLReturn_1a8b245b1681b5af778e2de5c9e36376a7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>SRSLReturn</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLReturn_1abc1698969ad800251e5219c4864c83a5" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>SRSLReturn</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexicalUnit_1a1d2a7f7ba7273de4230e304dff295496" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLReturn_1a61d3575dbf0f338e1b29042c249486df" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLReturn</scope><name>~SRSLReturn</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

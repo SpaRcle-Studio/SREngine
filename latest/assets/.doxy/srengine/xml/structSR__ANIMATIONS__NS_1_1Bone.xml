@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__ANIMATIONS__NS_1_1Bone" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>SR_ANIMATIONS_NS::Bone</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Bone &gt;</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1a98ce114f36daadfcd3597341ad9cad73" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_ANIMATIONS_NS::Bone::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="36" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1af516861b6f0ed99b305400e29fabf11d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">Bone::Ptr</ref> &gt;</type>
+        <definition>std::vector&lt;Bone::Ptr&gt; SR_ANIMATIONS_NS::Bone::bones</definition>
+        <argsstring></argsstring>
+        <name>bones</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::bones</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="38" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1a9395f62d3650b2dcf30e6c615029819c" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1GameObject" kindref="compound">SR_UTILS_NS::GameObject</ref> &gt;</type>
+        <definition>SR_HTYPES_NS::SharedPtr&lt;SR_UTILS_NS::GameObject&gt; SR_ANIMATIONS_NS::Bone::gameObject</definition>
+        <argsstring></argsstring>
+        <name>gameObject</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::gameObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="40" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1aef6a99eea928f91b8b11c5f7248c87d2" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>Bone* SR_ANIMATIONS_NS::Bone::pParent</definition>
+        <argsstring></argsstring>
+        <name>pParent</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::pParent</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="41" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1a3d11d68fccc64d92ed0081803c41c1c5" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+        <definition>Bone* SR_ANIMATIONS_NS::Bone::pRoot</definition>
+        <argsstring></argsstring>
+        <name>pRoot</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::pRoot</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="42" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1a129bbcbd1b135774116232f348a2f1f8" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::Bone::hasError</definition>
+        <argsstring></argsstring>
+        <name>hasError</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::hasError</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="43" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1Bone_1aac039c332ffdd736f86d04f91682f1de" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">Skeleton</ref> *</type>
+        <definition>Skeleton* SR_ANIMATIONS_NS::Bone::pSkeleton</definition>
+        <argsstring></argsstring>
+        <name>pSkeleton</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::pSkeleton</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="44" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1Bone_1aa91b530cd75c300cf8989cc729345cbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::Bone::Bone</definition>
+        <argsstring>()</argsstring>
+        <name>Bone</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::Bone</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1Bone_1a94b67f359bf7b00c2ca79202324e756a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Bone::SetSkeleton</definition>
+        <argsstring>(Skeleton *pSkeleton)</argsstring>
+        <name>SetSkeleton</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::SetSkeleton</qualifiedname>
+        <param>
+          <type><ref refid="classSR__ANIMATIONS__NS_1_1Skeleton" kindref="compound">Skeleton</ref> *</type>
+          <declname>pSkeleton</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="24" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="24" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1Bone_1a417452004d3b43084cab8f19250fb57a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_ANIMATIONS_NS::Bone::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::Initialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="28" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1Bone_1a6440dbf8f9ce1f4e55eed93cd26316bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Bone::InitTreeIfNeed</definition>
+        <argsstring>()</argsstring>
+        <name>InitTreeIfNeed</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::InitTreeIfNeed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="29" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1Bone_1ad2f8aea5f4c6abbfdc9460332092e415" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_ANIMATIONS_NS::Bone::InitTree</definition>
+        <argsstring>(Bone *pParent)</argsstring>
+        <name>InitTree</name>
+        <qualifiedname>SR_ANIMATIONS_NS::Bone::InitTree</qualifiedname>
+        <param>
+          <type><ref refid="structSR__ANIMATIONS__NS_1_1Bone" kindref="compound">Bone</ref> *</type>
+          <declname>pParent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="32" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::Bone</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1Bone"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Bone &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="11">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::Bone</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1Bone"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>gameObject</edgelabel>
+        </childnode>
+        <childnode refid="1" relation="usage">
+          <edgelabel>pParent</edgelabel>
+          <edgelabel>pRoot</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>pSkeleton</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_ANIMATIONS_NS::Skeleton</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1Skeleton"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; Bone &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SR_UTILS_NS::GameObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="14">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" line="17" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h" bodystart="17" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>AutoFree</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1aa91b530cd75c300cf8989cc729345cbe" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Bone</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1af516861b6f0ed99b305400e29fabf11d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>bones</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>DynamicCast</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a9395f62d3650b2dcf30e6c615029819c" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>gameObject</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>GetUncheckedRef</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a129bbcbd1b135774116232f348a2f1f8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>hasError</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>HasSerializationFlags</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a417452004d3b43084cab8f19250fb57a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Initialize</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>InitializeClass</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1ad2f8aea5f4c6abbfdc9460332092e415" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>InitTree</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a6440dbf8f9ce1f4e55eed93cd26316bd" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>InitTreeIfNeed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Load</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>m_basicManually</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>m_data</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>MakeShared</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a98ce114f36daadfcd3597341ad9cad73" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>name</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>OnPreSave</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>OriginType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>PolymorphicCast</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1aef6a99eea928f91b8b11c5f7248c87d2" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>pParent</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a3d11d68fccc64d92ed0081803c41c1c5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>pRoot</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1aac039c332ffdd736f86d04f91682f1de" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>pSkeleton</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Save</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SetPointerFromBase</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1Bone_1a94b67f359bf7b00c2ca79202324e756a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SetSkeleton</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::Bone</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,959 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1StandardProperty" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::StandardProperty</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Property" prot="public" virt="non-virtual">SR_UTILS_NS::Property</basecompoundref>
+    <includes refid="StandardProperty_8h" local="no">StandardProperty.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1StandardProperty_1aab5a8c64e9c0feceb61e32d34130371c" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(void *)&gt;</type>
+        <definition>using SR_UTILS_NS::StandardProperty::SetterFn =  SR_HTYPES_NS::Function&lt;void(void*)&gt;</definition>
+        <argsstring></argsstring>
+        <name>SetterFn</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetterFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="15" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1StandardProperty_1a1a21f5e2f6720728f813ea2875ff2453" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(void *)&gt;</type>
+        <definition>using SR_UTILS_NS::StandardProperty::GetterFn =  SR_HTYPES_NS::Function&lt;void(void*)&gt;</definition>
+        <argsstring></argsstring>
+        <name>GetterFn</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetterFn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="16" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1aef4e9408128be3cb0019d1d67f133404" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::StandardProperty::m_multiline</definition>
+        <argsstring></argsstring>
+        <name>m_multiline</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::m_multiline</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="97" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1a94c90924e850abbb758f543a603239e0" prot="private" static="no" mutable="no">
+        <type>StandardType</type>
+        <definition>StandardType SR_UTILS_NS::StandardProperty::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::m_type</qualifiedname>
+        <initializer>= StandardType::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="98" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1a0668e506abffb82b6b7c1e44cbc386ee" prot="private" static="no" mutable="no">
+        <type>SetterFn</type>
+        <definition>SetterFn SR_UTILS_NS::StandardProperty::m_setter</definition>
+        <argsstring></argsstring>
+        <name>m_setter</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::m_setter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="99" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1af3cb635a8bca23185d0be1aee8bfb1b1" prot="private" static="no" mutable="no">
+        <type>GetterFn</type>
+        <definition>GetterFn SR_UTILS_NS::StandardProperty::m_getter</definition>
+        <argsstring></argsstring>
+        <name>m_getter</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::m_getter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="100" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1af28600ea9800fb76451b0a3ecc8e4ed3" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_UTILS_NS::StandardProperty::m_drag</definition>
+        <argsstring></argsstring>
+        <name>m_drag</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::m_drag</qualifiedname>
+        <initializer>= 1.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="101" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1StandardProperty_1abc4d053ca462b0c8bcbd6e9d03219470" prot="private" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_UTILS_NS::StandardProperty::m_resetValue</definition>
+        <argsstring></argsstring>
+        <name>m_resetValue</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::m_resetValue</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="102" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ac070d9a6075399e93ed3fb59702d641e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SaveProperty</definition>
+        <argsstring>(MarshalRef marshal) const noexcept override</argsstring>
+        <name>SaveProperty</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SaveProperty</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Property_1af9340acbf95c692c5a4b0042be4831f4">SaveProperty</reimplements>
+        <param>
+          <type>MarshalRef</type>
+          <declname>marshal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="18" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aeb403c56c772e47dfa0ac15fcdd637ef" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::LoadProperty</definition>
+        <argsstring>(MarshalRef marshal) noexcept override</argsstring>
+        <name>LoadProperty</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::LoadProperty</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Property_1ac2bb845328aaf4affd8f7a7c23e8ccd7">LoadProperty</reimplements>
+        <param>
+          <type>MarshalRef</type>
+          <declname>marshal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="19" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ab4e6be7ca97495d3bd3597f0424a5210" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
+        <definition>StandardProperty &amp; SR_UTILS_NS::StandardProperty::SetSetter</definition>
+        <argsstring>(SetterFn fn)</argsstring>
+        <name>SetSetter</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetSetter</qualifiedname>
+        <param>
+          <type>SetterFn</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="21" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a5ab9ed92d0917b90bbe8eb931202d13a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
+        <definition>StandardProperty &amp; SR_UTILS_NS::StandardProperty::SetGetter</definition>
+        <argsstring>(GetterFn fn)</argsstring>
+        <name>SetGetter</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetGetter</qualifiedname>
+        <param>
+          <type>GetterFn</type>
+          <declname>fn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="22" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1af6118864750dcc1436b8de69bf07756a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
+        <definition>StandardProperty &amp; SR_UTILS_NS::StandardProperty::SetType</definition>
+        <argsstring>(StandardType type)</argsstring>
+        <name>SetType</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetType</qualifiedname>
+        <param>
+          <type>StandardType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="23" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aef5e15dc8cd5dfa9239ca07594e125aa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD StandardType</type>
+        <definition>SR_NODISCARD StandardType SR_UTILS_NS::StandardProperty::GetStandardType</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetStandardType</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetStandardType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="25" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a60cea3bc7a10e8bb6bf435a547afcec0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::StandardProperty::GetDrag</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetDrag</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetDrag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="27" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aea43c653fb4df276075f866ed26ba9e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
+        <definition>StandardProperty &amp; SR_UTILS_NS::StandardProperty::SetDrag</definition>
+        <argsstring>(float_t value)</argsstring>
+        <name>SetDrag</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetDrag</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="28" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ab1a8980092714aefd1493be828975413" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::StandardProperty::GetResetValue</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetResetValue</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetResetValue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="30" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a1465e897a10a28ae226575ccbfb074c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> &amp;</type>
+        <definition>StandardProperty &amp; SR_UTILS_NS::StandardProperty::SetResetValue</definition>
+        <argsstring>(float_t value)</argsstring>
+        <name>SetResetValue</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetResetValue</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="31" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a7166459fdd01cba8825a1e90644143f3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::StandardProperty::IsMultiline</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsMultiline</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::IsMultiline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="33" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1af40b59d55668b0f913c7c5ee8fdfc9d1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetMultiline</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>SetMultiline</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetMultiline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="34" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aedc7c7f9ac0407c9f40023b96656ae7f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::StandardProperty::GetBool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetBool</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetBool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="36" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aaf161b55a9e7cc786208746b42a0b78c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetBool</definition>
+        <argsstring>(bool value) noexcept</argsstring>
+        <name>SetBool</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetBool</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="37" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a552fa65fb12c8ea60bcd6afa94a22b8f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD float_t</type>
+        <definition>SR_NODISCARD float_t SR_UTILS_NS::StandardProperty::GetFloat</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFloat</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetFloat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="39" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a12052b26a149c3909bfd5d92f7e25c02" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetFloat</definition>
+        <argsstring>(float_t value) noexcept</argsstring>
+        <name>SetFloat</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetFloat</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="40" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a75ba9604554713f671c5a90920f2a652" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD int32_t</type>
+        <definition>SR_NODISCARD int32_t SR_UTILS_NS::StandardProperty::GetInt32</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetInt32</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetInt32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="42" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a09976dd12f7fff0215b80cd282dfa6fc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetInt32</definition>
+        <argsstring>(int32_t value) noexcept</argsstring>
+        <name>SetInt32</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetInt32</qualifiedname>
+        <param>
+          <type>int32_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="43" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a3e61e14668cf674995a5f0fc7c311830" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint16_t</type>
+        <definition>SR_NODISCARD uint16_t SR_UTILS_NS::StandardProperty::GetUInt16</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetUInt16</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetUInt16</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="45" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a0cfd6856b5b65d989800adcc7cf68e99" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetUInt16</definition>
+        <argsstring>(uint16_t value) noexcept</argsstring>
+        <name>SetUInt16</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetUInt16</qualifiedname>
+        <param>
+          <type>uint16_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="46" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a57410a6bb0792d3dd47828177159564c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD int16_t</type>
+        <definition>SR_NODISCARD int16_t SR_UTILS_NS::StandardProperty::GetInt16</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetInt16</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetInt16</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="48" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a73d3301fdf2a4a79f835ab81a8918936" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetInt16</definition>
+        <argsstring>(int16_t value) noexcept</argsstring>
+        <name>SetInt16</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetInt16</qualifiedname>
+        <param>
+          <type>int16_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="49" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a4e3097f8344462a040c7f152f6f9d327" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD uint32_t SR_UTILS_NS::StandardProperty::GetUInt32</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetUInt32</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetUInt32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="51" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a3c6265abdd1091beaef11f44ca7d02d5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetUInt32</definition>
+        <argsstring>(uint32_t value) noexcept</argsstring>
+        <name>SetUInt32</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetUInt32</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="52" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aec640cb7abd481b0c92df32f026ced43" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_UTILS_NS::StandardProperty::GetString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetString</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="54" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a9cd43ef8ceda857f699c98302c284194" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetString</definition>
+        <argsstring>(const std::string &amp;value) noexcept</argsstring>
+        <name>SetString</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetString</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a29dc542e159fb1344a1887b720e160ef" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref></type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::UnicodeString SR_UTILS_NS::StandardProperty::GetUnicodeString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetUnicodeString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="57" column="50" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1abb7518d0bd26474807cae31d80ce2b93" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetUnicodeString</definition>
+        <argsstring>(const SR_HTYPES_NS::UnicodeString &amp;value) noexcept</argsstring>
+        <name>SetUnicodeString</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetUnicodeString</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1UnicodeString" kindref="compound">SR_HTYPES_NS::UnicodeString</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="58" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ad78c3b7568e1bc905c4bdf74036a38eb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::StandardProperty::GetStringAtom</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetStringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetStringAtom</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="60" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a78b2e42944bfb8ce3e6a5c051c1c3988" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetStringAtom</definition>
+        <argsstring>(const SR_UTILS_NS::StringAtom &amp;value) noexcept</argsstring>
+        <name>SetStringAtom</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetStringAtom</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="61" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a68462a2ad4f51e31183f5ed3e401ea2b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::StandardProperty::GetFVector2</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFVector2</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetFVector2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="63" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a93cc6801401ed434be27f48191e19d82" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetFVector2</definition>
+        <argsstring>(const SR_MATH_NS::FVector2 &amp;value) noexcept</argsstring>
+        <name>SetFVector2</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetFVector2</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector2 &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="64" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a24288db6986e05933eec8e0f6565370f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
+        <definition>SR_NODISCARD SR_MATH_NS::UVector2 SR_UTILS_NS::StandardProperty::GetUVector2</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetUVector2</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetUVector2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="66" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a4c8c5da1dfb9876d800b03ad3bd8e48e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetUVector2</definition>
+        <argsstring>(const SR_MATH_NS::UVector2 &amp;value) noexcept</argsstring>
+        <name>SetUVector2</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetUVector2</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::UVector2 &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="67" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a6156fcede63d3645f89d35331b040a94" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::StandardProperty::GetFVector3</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFVector3</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetFVector3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="69" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aa034758e87f1df6fc9c06c57e981acd3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetFVector3</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;value) noexcept</argsstring>
+        <name>SetFVector3</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetFVector3</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="70" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ac699d255495bb41b1621cd96ed4ae862" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::BVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::BVector3 SR_UTILS_NS::StandardProperty::GetBVector3</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetBVector3</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetBVector3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="72" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a4f9521206cc7ac1a2af307d6defc2a86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetBVector3</definition>
+        <argsstring>(const SR_MATH_NS::BVector3 &amp;value) noexcept</argsstring>
+        <name>SetBVector3</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetBVector3</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::BVector3 &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="73" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1aa3599c079ac2963d1688233a2e3c2e63" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector4</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector4 SR_UTILS_NS::StandardProperty::GetFVector4</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetFVector4</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetFVector4</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="75" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a291c6da276b9e06860bb6f3b46cd1bfb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetFVector4</definition>
+        <argsstring>(const SR_MATH_NS::FVector4 &amp;value) noexcept</argsstring>
+        <name>SetFVector4</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetFVector4</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector4 &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="76" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="76" bodyend="76"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1a300aeae1e42dc31752ca4a7cdc06f8cd" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>StandardType</type>
+            <declname>type</declname>
+            <defname>type</defname>
+          </param>
+        </templateparamlist>
+        <type>SR_NODISCARD T</type>
+        <definition>SR_NODISCARD T SR_UTILS_NS::StandardProperty::GetValue</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetValue</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::GetValue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="79" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="79" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StandardProperty_1ade704d3b92aca4c529a423e562898bb6" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>StandardType</type>
+            <declname>type</declname>
+            <defname>type</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SR_UTILS_NS::StandardProperty::SetValue</definition>
+        <argsstring>(const T &amp;value) noexcept</argsstring>
+        <name>SetValue</name>
+        <qualifiedname>SR_UTILS_NS::StandardProperty::SetValue</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="89" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="89" bodyend="94"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>-------------------------------------<mdash/> <ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">StandardProperty</ref> ---------------------------------------------------<mdash/> </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::StandardProperty</label>
+        <link refid="classSR__UTILS__NS_1_1StandardProperty"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::StandardProperty</label>
+        <link refid="classSR__UTILS__NS_1_1StandardProperty"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" line="13" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/StandardProperty.h" bodystart="13" bodyend="104"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Property_1ad10eb1ac5384dcd8db5377da438bb98a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>ActiveConditionFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1ac72cf8f65b3de91dfea85a3bdc6c46a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>AllocatePropertyBlock</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a048491d16dea0903a7e67103f6bede8a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>Base</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aedc7c7f9ac0407c9f40023b96656ae7f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1ac699d255495bb41b1621cd96ed4ae862" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetBVector3</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a60cea3bc7a10e8bb6bf435a547afcec0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetDrag</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a552fa65fb12c8ea60bcd6afa94a22b8f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a68462a2ad4f51e31183f5ed3e401ea2b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetFVector2</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a6156fcede63d3645f89d35331b040a94" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetFVector3</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aa3599c079ac2963d1688233a2e3c2e63" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetFVector4</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a57410a6bb0792d3dd47828177159564c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetInt16</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a75ba9604554713f671c5a90920f2a652" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetInt32</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a029d55370bdb669bc4e68eaa144993d9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a1506f0edabe49f86277de07aa3f792e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetOptional</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a97914998743bd61fcbe6392ff236ddb2" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetPropertyTypeName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a792b5b2a1d6762038d49555acc0b2a4c" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetPropertyVersion</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a0fed0876ca537745d9b9e21728e795e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetPublicity</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1ab1a8980092714aefd1493be828975413" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetResetValue</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aef5e15dc8cd5dfa9239ca07594e125aa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetStandardType</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aec640cb7abd481b0c92df32f026ced43" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1ad78c3b7568e1bc905c4bdf74036a38eb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetStringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a1a21f5e2f6720728f813ea2875ff2453" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetterFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a3e61e14668cf674995a5f0fc7c311830" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetUInt16</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a4e3097f8344462a040c7f152f6f9d327" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetUInt32</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a29dc542e159fb1344a1887b720e160ef" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetUnicodeString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a24288db6986e05933eec8e0f6565370f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetUVector2</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a300aeae1e42dc31752ca4a7cdc06f8cd" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetValue</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a2184501d3229c21b084ae09056d42973" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>GetWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1adaccefa30a4db5f1639a351ef17af5cc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1af84aadeb3b0152b6f9dc0f55b47ffc99" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>IsDontSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a7166459fdd01cba8825a1e90644143f3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>IsMultiline</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a665e29de5aeb4fa95f163f9aae1debd6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>IsOptionalMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a9803e4edca20ecf477ca0cb04adf9fe6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>IsSameLine</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aeb403c56c772e47dfa0ac15fcdd637ef" prot="public" virt="virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>LoadProperty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a1fd0a4ec98e445bc2fbc193e321cf7a5" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>LoadPropertyBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1af28600ea9800fb76451b0a3ecc8e4ed3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>m_drag</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1af3cb635a8bca23185d0be1aee8bfb1b1" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>m_getter</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aef4e9408128be3cb0019d1d67f133404" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>m_multiline</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1abc4d053ca462b0c8bcbd6e9d03219470" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>m_resetValue</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a0668e506abffb82b6b7c1e44cbc386ee" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>m_setter</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a94c90924e850abbb758f543a603239e0" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>m_type</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1afdf203b715fe62050253dbb52ab7a587" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>MarshalPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a44d961f66cc045a9946b22c6a76853f9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>MarshalRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a7638578d661dfc1fb0b836340617520b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>MarshalUniquePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a9205ba3a3a6091df74becd464636600f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::StandardProperty</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1aff9767a0a7c012fa82e9ded83c11cb03" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>Property</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1ac151bd4ad688bea5e74d9f4a0cb9a550" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>Property</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1ac070d9a6075399e93ed3fb59702d641e" prot="public" virt="virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SaveProperty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a495782632d99b69665970159dacd3d1f" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SavePropertyBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a63738f467b9027e1ebf515d16799d85d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetActiveCondition</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aaf161b55a9e7cc786208746b42a0b78c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a4f9521206cc7ac1a2af307d6defc2a86" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetBVector3</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a2b3bf517d0b053341fc70f0d056dd654" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetDontSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aea43c653fb4df276075f866ed26ba9e4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetDrag</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a12052b26a149c3909bfd5d92f7e25c02" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a93cc6801401ed434be27f48191e19d82" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetFVector2</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aa034758e87f1df6fc9c06c57e981acd3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetFVector3</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a291c6da276b9e06860bb6f3b46cd1bfb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetFVector4</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a5ab9ed92d0917b90bbe8eb931202d13a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetGetter</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a73d3301fdf2a4a79f835ab81a8918936" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetInt16</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a09976dd12f7fff0215b80cd282dfa6fc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetInt32</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1af40b59d55668b0f913c7c5ee8fdfc9d1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetMultiline</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1ad5ea8347ff5d4d0622d6154f8619fd42" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a2da68e0585e30f43f7f7043e15c7e31e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetOptional</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1ae970b906eeba1c18f956689282f0f0a0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetOptionalMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1aebb0a101c094fb9cd2bce3b01bcaa7f8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetPublicity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a1c10f300f030edd5bb5f032c0fb33580" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetReadOnly</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a1465e897a10a28ae226575ccbfb074c3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetResetValue</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a02319afa5aa0a16b2b294dd0e2fbd4bc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetSameLine</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1ab4e6be7ca97495d3bd3597f0424a5210" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetSetter</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a9cd43ef8ceda857f699c98302c284194" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a78b2e42944bfb8ce3e6a5c051c1c3988" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetStringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1aab5a8c64e9c0feceb61e32d34130371c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetterFn</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1af6118864750dcc1436b8de69bf07756a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a0cfd6856b5b65d989800adcc7cf68e99" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetUInt16</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a3c6265abdd1091beaef11f44ca7d02d5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetUInt32</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1abb7518d0bd26474807cae31d80ce2b93" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetUnicodeString</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1a4c8c5da1dfb9876d800b03ad3bd8e48e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetUVector2</name></member>
+      <member refid="classSR__UTILS__NS_1_1StandardProperty_1ade704d3b92aca4c529a423e562898bb6" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetValue</name></member>
+      <member refid="classSR__UTILS__NS_1_1Property_1a44ce1cb0781ff4b7621146e393325fcd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>SetWidth</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::StandardProperty</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,362 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="Descriptors_8h" kind="file" language="C++">
+    <compoundname>Descriptors.h</compoundname>
+    <includes refid="macros_8h" local="no">Utils/macros.h</includes>
+    <includedby refid="DescriptorManager_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h</includedby>
+    <includedby refid="PipelineState_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</includedby>
+    <includedby refid="AbstractCasts_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h</label>
+        <link refid="Descriptors_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Utils/macros.h</label>
+        <link refid="macros_8h_source"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="45">
+        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <link refid="EditorGizmo_8h_source"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <link refid="SceneTools_8h_source"/>
+      </node>
+      <node id="9">
+        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <link refid="EngineScene_8h_source"/>
+      </node>
+      <node id="34">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Animator.h</label>
+        <link refid="Animator_8h_source"/>
+      </node>
+      <node id="32">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Bone.h</label>
+        <link refid="Bone_8h_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Animations/Skeleton.h</label>
+        <link refid="Skeleton_8h_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h</label>
+        <link refid="Text_8h_source"/>
+      </node>
+      <node id="49">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
+        <link refid="LightSystem_8h_source"/>
+      </node>
+      <node id="2">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/DescriptorManager.h</label>
+        <link refid="DescriptorManager_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h</label>
+        <link refid="BasePass_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
+        <link refid="CascadedShadowMapPass_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
+        <link refid="ColorBufferPass_8h_source"/>
+      </node>
+      <node id="16">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <link refid="DebugPass_8h_source"/>
+      </node>
+      <node id="19">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <link refid="DepthBufferPass_8h_source"/>
+      </node>
+      <node id="13">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatClusterPass.h</label>
+        <link refid="FlatClusterPass_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h</label>
+        <link refid="FlatColorBufferPass_8h_source"/>
+      </node>
+      <node id="5">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/FramebufferPass.h</label>
+        <link refid="FramebufferPass_8h_source"/>
+      </node>
+      <node id="4">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/GroupPass.h</label>
+        <link refid="GroupPass_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
+        <link refid="HTMLDrawerPass_8h_source"/>
+      </node>
+      <node id="15">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMesh3DClusterPass.h</label>
+        <link refid="IMesh3DClusterPass_8h_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/IMeshClusterPass.h</label>
+        <link refid="IMeshClusterPass_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OpaquePass.h</label>
+        <link refid="OpaquePass_8h_source"/>
+      </node>
+      <node id="27">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/PostProcessPass.h</label>
+        <link refid="PostProcessPass_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SSAOPass.h</label>
+        <link refid="SSAOPass_8h_source"/>
+      </node>
+      <node id="18">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <link refid="ShaderOverridePass_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <link refid="ShadowMapPass_8h_source"/>
+      </node>
+      <node id="29">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SkyboxPass.h</label>
+        <link refid="SkyboxPass_8h_source"/>
+      </node>
+      <node id="6">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/SwapchainPass.h</label>
+        <link refid="SwapchainPass_8h_source"/>
+      </node>
+      <node id="21">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/TransparentPass.h</label>
+        <link refid="TransparentPass_8h_source"/>
+      </node>
+      <node id="25">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
+        <link refid="VarianceShadowMapPass_8h_source"/>
+      </node>
+      <node id="30">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/WidgetPass.h</label>
+        <link refid="WidgetPass_8h_source"/>
+      </node>
+      <node id="50">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
+        <link refid="EmptyPipeline_8h_source"/>
+      </node>
+      <node id="48">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
+        <link refid="Pipeline_8h_source"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</label>
+        <link refid="PipelineState_8h_source"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/AbstractCasts.h</label>
+        <link refid="AbstractCasts_8h_source"/>
+      </node>
+      <node id="51">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
+        <link refid="VulkanPipeline_8h_source"/>
+      </node>
+      <node id="7">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/IRenderTechnique.h</label>
+        <link refid="IRenderTechnique_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderTechnique.h</label>
+        <link refid="RenderTechnique_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
+        <link refid="ScriptableRenderTechnique_8h_source"/>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h</label>
+        <link refid="Descriptors_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugLine.h</label>
+        <link refid="DebugLine_8h_source"/>
+      </node>
+      <node id="39">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <link refid="DebugWireframeMesh_8h_source"/>
+      </node>
+      <node id="38">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <link refid="IndexedMesh_8h_source"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="40">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <link refid="ProceduralMesh_8h_source"/>
+      </node>
+      <node id="35">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <link refid="SkinnedMesh_8h_source"/>
+      </node>
+      <node id="43">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <link refid="Sprite_8h_source"/>
+      </node>
+      <node id="31">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Mesh.h</label>
+        <link refid="Mesh_8h_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <link refid="Gizmo_8h_source"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespaceSR__GRAPH__NS">SR_GRAPH_NS</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>Monika<sp/>on<sp/>06.06.2021.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_DESCRIPTORS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_DESCRIPTORS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/macros.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>DescriptorType<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,<sp/>Uniform,<sp/>CombinedImage,<sp/>Storage</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_DESCRIPTORS_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h"/>
+  </compounddef>
+</doxygen>

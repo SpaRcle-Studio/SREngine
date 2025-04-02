@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1ThreadWorker" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>SR_UTILS_NS::ThreadWorker</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ThreadWorker &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1ThreadWorker_1a71d5ae41becaad1a7c5f242d1cb4a498" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__UTILS__NS_1_1ThreadWorker" kindref="compound">ThreadWorker</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::ThreadWorker::Super =  SR_HTYPES_NS::SharedPtr&lt;ThreadWorker&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="65" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadWorker_1a74f36c8b3f6aadb3ea893a9a19330694" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1ThreadsWorker" kindref="compound">ThreadsWorker</ref> *</type>
+        <definition>ThreadsWorker* SR_UTILS_NS::ThreadWorker::m_threadsWorker</definition>
+        <argsstring></argsstring>
+        <name>m_threadsWorker</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::m_threadsWorker</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="84" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadWorker_1a88db6ceafa29797edd87607e48a3c44a" prot="private" static="no" mutable="no">
+        <type>SR_HTYPES_NS::Thread::Ptr</type>
+        <definition>SR_HTYPES_NS::Thread::Ptr SR_UTILS_NS::ThreadWorker::m_thread</definition>
+        <argsstring></argsstring>
+        <name>m_thread</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::m_thread</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="85" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadWorker_1a89c62ada4d9c67fd9d98e8eed9b2ce93" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">ThreadWorkerStateBase::Ptr</ref> &gt;</type>
+        <definition>std::vector&lt;ThreadWorkerStateBase::Ptr&gt; SR_UTILS_NS::ThreadWorker::m_states</definition>
+        <argsstring></argsstring>
+        <name>m_states</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::m_states</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="86" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadWorker_1ad669ca1c156526efb342aea91e3c70a7" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_UTILS_NS::ThreadWorker::m_currentState</definition>
+        <argsstring></argsstring>
+        <name>m_currentState</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::m_currentState</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="87" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadWorker_1ab81d27bfddbc054f297abbabf1487632" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_UTILS_NS::ThreadWorker::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="88" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1ThreadWorker_1a7da4f72d098cf004f5ad881e2af33021" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_UTILS_NS::ThreadWorker::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::m_isActive</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="89" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a52eb1e308631e8e6c8e847f146e63f47" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::ThreadWorker::ThreadWorker</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>ThreadWorker</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::ThreadWorker</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="67" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a9ded2218f44982c179a5012107679526" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ThreadWorker::AddState</definition>
+        <argsstring>(ThreadWorkerStateBase::Ptr pState)</argsstring>
+        <name>AddState</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::AddState</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">ThreadWorkerStateBase::Ptr</ref></type>
+          <declname>pState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="69" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a212dedb151378d405979d1715844c3aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ThreadWorker::SetThreadsWorker</definition>
+        <argsstring>(ThreadsWorker *pThreadsWorker)</argsstring>
+        <name>SetThreadsWorker</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::SetThreadsWorker</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1ThreadsWorker" kindref="compound">ThreadsWorker</ref> *</type>
+          <declname>pThreadsWorker</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="71" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a1294c99fd4241bd8c50851baf2e77f75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ThreadWorker::Start</definition>
+        <argsstring>()</argsstring>
+        <name>Start</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::Start</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a3e61ff32494e7dcbf5646becb9fc6c3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ThreadWorker::Stop</definition>
+        <argsstring>()</argsstring>
+        <name>Stop</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::Stop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="74" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1ae6eddaab17cfe6e44ec2cec259db249e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1ThreadsWorker" kindref="compound">ThreadsWorker</ref> *</type>
+        <definition>SR_NODISCARD ThreadsWorker * SR_UTILS_NS::ThreadWorker::GetThreadsWorker</definition>
+        <argsstring>() const</argsstring>
+        <name>GetThreadsWorker</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::GetThreadsWorker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="76" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a18fde14c495224a707a545a0000fb603" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">ThreadWorkerStateBase::Ptr</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; ThreadWorkerStateBase::Ptr &gt; &amp; SR_UTILS_NS::ThreadWorker::GetStates</definition>
+        <argsstring>() const</argsstring>
+        <name>GetStates</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::GetStates</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="77" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a96df80cc76be71fa11c04f76b294eff7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ThreadWorker::Work</definition>
+        <argsstring>()</argsstring>
+        <name>Work</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::Work</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ThreadWorker_1a2bb7ec7e944c3fcbd178029e7084e749" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::ThreadWorker::Update</definition>
+        <argsstring>()</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_UTILS_NS::ThreadWorker::Update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="81" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; ThreadWorker &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::ThreadWorker</label>
+        <link refid="classSR__UTILS__NS_1_1ThreadWorker"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; ThreadWorker &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::ThreadWorker</label>
+        <link refid="classSR__UTILS__NS_1_1ThreadWorker"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" line="64" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/ThreadWorker.h" bodystart="64" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a9ded2218f44982c179a5012107679526" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>AddState</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>DynamicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetSRClass</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a18fde14c495224a707a545a0000fb603" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetStates</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetThis</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1ae6eddaab17cfe6e44ec2cec259db249e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetThreadsWorker</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_basicManually</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1ad669ca1c156526efb342aea91e3c70a7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_currentState</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_data</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a7da4f72d098cf004f5ad881e2af33021" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1ab81d27bfddbc054f297abbabf1487632" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_name</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a89c62ada4d9c67fd9d98e8eed9b2ce93" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_states</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a88db6ceafa29797edd87607e48a3c44a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_thread</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a74f36c8b3f6aadb3ea893a9a19330694" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>m_threadsWorker</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>MakeShared</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a212dedb151378d405979d1715844c3aa" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SetThreadsWorker</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a1294c99fd4241bd8c50851baf2e77f75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Start</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>StaticCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>StaticCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a3e61ff32494e7dcbf5646becb9fc6c3b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Stop</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a71d5ae41becaad1a7c5f242d1cb4a498" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Super</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a52eb1e308631e8e6c8e847f146e63f47" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>ThreadWorker</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Unlock</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a2bb7ec7e944c3fcbd178029e7084e749" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Update</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Valid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1ThreadWorker_1a96df80cc76be71fa11c04f76b294eff7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>Work</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_UTILS_NS::ThreadWorker</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

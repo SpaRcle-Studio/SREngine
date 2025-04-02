@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="dir_1554428c6196beacfc88f8b62d61c979" kind="dir">
+    <compoundname>Engine/Core/libs/Scripting/inc/Scripting/Mono</compoundname>
+    <innerfile refid="MonoTest_8h">MonoTest.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Mono/"/>
+  </compounddef>
+</doxygen>

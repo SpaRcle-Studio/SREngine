@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__CORE__NS" kind="namespace" language="C++">
+    <compoundname>SR_CORE_NS</compoundname>
+    <innerclass refid="classSR__CORE__NS_1_1Application" prot="public">SR_CORE_NS::Application</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1ChunkSystemState" prot="public">SR_CORE_NS::ChunkSystemState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1DeltaTimeState" prot="public">SR_CORE_NS::DeltaTimeState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1DrawState" prot="public">SR_CORE_NS::DrawState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1EditorSettings" prot="public">SR_CORE_NS::EditorSettings</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1Engine" prot="public">SR_CORE_NS::Engine</innerclass>
+    <innerclass refid="structSR__CORE__NS_1_1EngineScene" prot="public">SR_CORE_NS::EngineScene</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1GraphicsResourceReloader" prot="public">SR_CORE_NS::GraphicsResourceReloader</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1InitializeState" prot="public">SR_CORE_NS::InitializeState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1PollEventsState" prot="public">SR_CORE_NS::PollEventsState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1PrepareState" prot="public">SR_CORE_NS::PrepareState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1SceneUpdateState" prot="public">SR_CORE_NS::SceneUpdateState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1StopState" prot="public">SR_CORE_NS::StopState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1SubmitState" prot="public">SR_CORE_NS::SubmitState</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1TestManager" prot="public">SR_CORE_NS::TestManager</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1VisualChunk" prot="public">SR_CORE_NS::VisualChunk</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1VisualRegion" prot="public">SR_CORE_NS::VisualRegion</innerclass>
+    <innerclass refid="classSR__CORE__NS_1_1World" prot="public">SR_CORE_NS::World</innerclass>
+    <innernamespace refid="namespaceSR__CORE__NS_1_1Commands">SR_CORE_NS::Commands</innernamespace>
+    <innernamespace refid="namespaceSR__CORE__NS_1_1GUI">SR_CORE_NS::GUI</innernamespace>
+    <innernamespace refid="namespaceSR__CORE__NS_1_1Importers">SR_CORE_NS::Importers</innernamespace>
+    <innernamespace refid="namespaceSR__CORE__NS_1_1Resources">SR_CORE_NS::Resources</innernamespace>
+    <innernamespace refid="namespaceSR__CORE__NS_1_1Tests">SR_CORE_NS::Tests</innernamespace>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceSR__CORE__NS_1a1b7065090cb28cddf59270370fc79aa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_NS::SR_ENUM_NS_CLASS_T</definition>
+        <argsstring>(EditorIcon, uint32_t, Unknown, Material, File, Back, Play, Stop, PauseActive, Pause, FrameSkip, EmptyFolder, Folder, Script, Reset, Shapes, Game, ZIP, JPG, TXT, XML, PNG, DLL, Font, Audio)</argsstring>
+        <name>SR_ENUM_NS_CLASS_T</name>
+        <qualifiedname>SR_CORE_NS::SR_ENUM_NS_CLASS_T</qualifiedname>
+        <param>
+          <type>EditorIcon</type>
+        </param>
+        <param>
+          <type>uint32_t</type>
+        </param>
+        <param>
+          <type>Unknown</type>
+        </param>
+        <param>
+          <type>Material</type>
+        </param>
+        <param>
+          <type>File</type>
+        </param>
+        <param>
+          <type>Back</type>
+        </param>
+        <param>
+          <type>Play</type>
+        </param>
+        <param>
+          <type>Stop</type>
+        </param>
+        <param>
+          <type>PauseActive</type>
+        </param>
+        <param>
+          <type>Pause</type>
+        </param>
+        <param>
+          <type>FrameSkip</type>
+        </param>
+        <param>
+          <type>EmptyFolder</type>
+        </param>
+        <param>
+          <type>Folder</type>
+        </param>
+        <param>
+          <type>Script</type>
+        </param>
+        <param>
+          <type>Reset</type>
+        </param>
+        <param>
+          <type>Shapes</type>
+        </param>
+        <param>
+          <type>Game</type>
+        </param>
+        <param>
+          <type>ZIP</type>
+        </param>
+        <param>
+          <type>JPG</type>
+        </param>
+        <param>
+          <type>TXT</type>
+        </param>
+        <param>
+          <type>XML</type>
+        </param>
+        <param>
+          <type>PNG</type>
+        </param>
+        <param>
+          <type>DLL</type>
+        </param>
+        <param>
+          <type>Font</type>
+        </param>
+        <param>
+          <type>Audio</type>
+        </param>
+        <briefdescription>
+<para>Здесь хранятся названия иконок, движок получает иконку по пути, указанному для названия в файле SREngine/Resources/Editor/Configs/EditorSettings.xml. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Settings/EditorSettings.h" line="12" column="5" declfile="Engine/Core/inc/Core/Settings/EditorSettings.h" declline="12" declcolumn="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>#include &lt;Graphics/Font/ITextComponent.h&gt; </para>
+    </detaileddescription>
+    <location file="Engine/Core/inc/Core/Application.h" line="11" column="1"/>
+  </compounddef>
+</doxygen>

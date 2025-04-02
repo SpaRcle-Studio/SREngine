@@ -1,0 +1,1058 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__UTILS__NS_1_1Web" kind="namespace" language="C++">
+    <compoundname>SR_UTILS_NS::Web</compoundname>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1CSS" prot="public">SR_UTILS_NS::Web::CSS</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSColor" prot="public">SR_UTILS_NS::Web::CSSColor</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection" prot="public">SR_UTILS_NS::Web::CSSDirection</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor" prot="public">SR_UTILS_NS::Web::CSSGradientColor</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSLinearGradient" prot="public">SR_UTILS_NS::Web::CSSLinearGradient</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" prot="public">SR_UTILS_NS::Web::CSSOptional</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum" prot="public">SR_UTILS_NS::Web::CSSOptionalEnum</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnumContainer" prot="public">SR_UTILS_NS::Web::CSSOptionalEnumContainer</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1CSSParser" prot="public">SR_UTILS_NS::Web::CSSParser</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSParserContext" prot="public">SR_UTILS_NS::Web::CSSParserContext</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSRadialGradient" prot="public">SR_UTILS_NS::Web::CSSRadialGradient</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSRGBAColor" prot="public">SR_UTILS_NS::Web::CSSRGBAColor</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue" prot="public">SR_UTILS_NS::Web::CSSSizeValue</innerclass>
+    <innerclass refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" prot="public">SR_UTILS_NS::Web::CSSStyle</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface" prot="public">SR_UTILS_NS::Web::HTMLContainerInterface</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage" prot="public">SR_UTILS_NS::Web::HTMLPage</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="CSSColor_8h_1a7d6c3571c7e3f93be3f602e1b373e482" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CSSGradientSide</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSGradientSide</qualifiedname>
+        <enumvalue id="CSSColor_8h_1a7d6c3571c7e3f93be3f602e1b373e482ae6dbf27de921d218be1dc42b896df2f9" prot="public">
+          <name>ClosestSide</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSColor_8h_1a7d6c3571c7e3f93be3f602e1b373e482a15185c59f15b53b5e3bdab71c7dc51eb" prot="public">
+          <name>ClosestCorner</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSColor_8h_1a7d6c3571c7e3f93be3f602e1b373e482afff17d4913b2a5e98b409d85e753de7e" prot="public">
+          <name>FarthestSide</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSColor_8h_1a7d6c3571c7e3f93be3f602e1b373e482a0a0feea7e68c2ff3b75b7c415ebec923" prot="public">
+          <name>FarthestCorner</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" bodystart="11" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="enum" id="CSSEnums_8h_1aa93dc339c01ef9c676c57c34d9feb980" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CSSBoxSizing</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSBoxSizing</qualifiedname>
+        <enumvalue id="CSSEnums_8h_1aa93dc339c01ef9c676c57c34d9feb980a252d7c42c31ba0ab0e4b5908031ed34e" prot="public">
+          <name>ContentBox</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1aa93dc339c01ef9c676c57c34d9feb980a8e19c92a582cdc5d1c59d34b8adab775" prot="public">
+          <name>BorderBox</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1aa93dc339c01ef9c676c57c34d9feb980ac49484faf79e2388b580e49444d6ac11" prot="public">
+          <name>Inherit</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="14" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="enum" id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CSSPosition</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSPosition</qualifiedname>
+        <enumvalue id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652ab51ca26c6c89cfc9bec338f7a0d3e0c8" prot="public">
+          <name>Absolute</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652a2ca9469819fb0fb61ff98e914a7ccca0" prot="public">
+          <name>Relative</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652a4457d440870ad6d42bab9082d9bf9b61" prot="public">
+          <name>Fixed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652a84a8921b25f505d0d2077aeb5db4bc16" prot="public">
+          <name>Static</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a41f623bc7af9c0e43d3d8adf87fad652ad8f6d391ba573fe747a3360afb99904d" prot="public">
+          <name>Sticky</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="18" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="18" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="enum" id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CSSDisplay</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSDisplay</qualifiedname>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ae1e4c8c9ccd9fc39c391da4bcd093fb2" prot="public">
+          <name>Block</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-outside&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a0125cf5f3ca38b312ca5d3b511c45a13" prot="public">
+          <name>Inline</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a60d7734f2def9d00d7802dfdc3017b92" prot="public">
+          <name>RunIn</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406af1a76f66cca677c6e628d9ca58a6c8fc" prot="public">
+          <name>Flow</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-inside&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a60bd20c4a49c4475c628678f88883f03" prot="public">
+          <name>FlowRoot</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a51c45b795d5d18a3e4e0c37e8b20a141" prot="public">
+          <name>Table</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a09d2bd168181f1e64c2b1651a80a8aa8" prot="public">
+          <name>Flex</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a5174d1309f275ba6f275db3af9eb3e18" prot="public">
+          <name>Grid</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a9916d1fc59fe22cc046a2fe1615bc764" prot="public">
+          <name>Ruby</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406acbd8a7e24d3d49641a1af2008faa0aa1" prot="public">
+          <name>BlockFlow</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-outside&gt; plus &lt;display-inside&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a1051cfdd38a6b8ba33134c3ded64c65f" prot="public">
+          <name>InlineTable</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a91175e529acde91be7d4edc39b86e376" prot="public">
+          <name>FlexRunIn</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ab332941182f94d378ce2013a80c61075" prot="public">
+          <name>ListItem</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-listitem&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406afe462fcd499195e1c082af3f2f1c953d" prot="public">
+          <name>ListItemBlock</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a93e3dbf65874123db8a8707d26d24a53" prot="public">
+          <name>ListItemInline</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406aaaa53e0973164e09bcf8204eb9811918" prot="public">
+          <name>ListItemFlow</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a5e75682bca3337c3d32945b2c91be919" prot="public">
+          <name>ListItemFlowRoot</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a7d58249035a29e73c2b01fc505a43a1e" prot="public">
+          <name>ListItemBlockFlow</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406aded3c4cc6f2645cc3a6d81418a728e43" prot="public">
+          <name>ListItemBlockFlowRoot</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ac2982f9f3d5ffea26fb49b6d3b832c7b" prot="public">
+          <name>FlowListItemBlock</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a2ceaf926ebd5993cc6cc164554d31cec" prot="public">
+          <name>TableRowGroup</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-internal&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ae53d646c022f968e7d65d51e75dea433" prot="public">
+          <name>TableHeaderGroup</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a5ae3a78aba4b0682f40d285627b427ec" prot="public">
+          <name>TableFooterGroup</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ac5e7a1b952c1aef76f2ebaefe5964bcf" prot="public">
+          <name>TableRow</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406aec59885ac67ff272217266569edc23e9" prot="public">
+          <name>TableCell</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406aeeba998bbd3c10e33cf44a0682483fcb" prot="public">
+          <name>TableColumnGroup</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a58d16ea3e3ee021cb3830f83fc143d46" prot="public">
+          <name>TableColumn</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a9732207bccc697d425954979ff294a64" prot="public">
+          <name>TableCaption</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406acedb952c72c6d9482d7bd18a6cc316cd" prot="public">
+          <name>RubyBase</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406aad2fefbe3b8a39ac065a2ac58a2cb868" prot="public">
+          <name>RubyText</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406abd69a7dc7b0e30b931f14a4d25c68005" prot="public">
+          <name>RubyBaseContainer</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a611a49c2a0d9b768e607f6faaea8c4b3" prot="public">
+          <name>RubyTextContainer</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ac1df1da7a1ce305a3b60af9d5733ac1d" prot="public">
+          <name>Contents</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-box&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ab6faaa2de521de4583dd5bf854adb61e" prot="public">
+          <name>InlineBlock</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>&lt;display-legacy&gt; values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a6078fa5895f981c57482851b17fbdca4" prot="public">
+          <name>InlineFlex</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a9bf92d64f135a8ef39d5f4b131ea4322" prot="public">
+          <name>InlineGrid</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ac49484faf79e2388b580e49444d6ac11" prot="public">
+          <name>Inherit</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Global values </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a4f2a91e15af2631ff9424564b8a45fb2" prot="public">
+          <name>Initial</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406ac9f88e098f6fe4e4e112eeb05ccb9671" prot="public">
+          <name>Unset</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="CSSEnums_8h_1a60fd5ec893f3c662f5a71924cef18406a62e5cef85d46f1a5a2144d9fd463b79e" prot="public">
+          <name>SIZE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="26" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="enum" id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cf" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>HTMLTag</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLTag</qualifiedname>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaec0fc0100c4fc1ce4eea230c3dc10360" prot="public">
+          <name>Undefined</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa43d11850893d2fe84a1e618121c1cc0a" prot="public">
+          <name>Div</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa9ce62112cff8eb735d9270c2e285b000" prot="public">
+          <name>Span</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa44c29edb103a2872f519ad0c9a0fdaaa" prot="public">
+          <name>P</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa106530dc42baa21c67f8a3af4d7fd9e1" prot="public">
+          <name>H1</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaca2bf3f6b7e18a508253e9521510a4b5" prot="public">
+          <name>H2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfab14763210c3ab7284e9cbe731d7dc2a5" prot="public">
+          <name>H3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa6b57370ba89bd88a2d6d819d65f6007a" prot="public">
+          <name>H4</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa830652084dda69b6b957e2c3a7bd9b18" prot="public">
+          <name>H5</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa2ac6cc2e6434c3db7291b230f3c36b39" prot="public">
+          <name>H6</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa7fc56270e7a70fa81a5935b72eacbe29" prot="public">
+          <name>A</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa21133d71a056222fa2096906538e4e04" prot="public">
+          <name>Img</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa324118a6721dd6b8a9b9f4e327df2bf5" prot="public">
+          <name>Input</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa87b7760f14fbff78d8819291f36ab9a0" prot="public">
+          <name>Button</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfad359c6df99b25183d81f7d728b71de0e" prot="public">
+          <name>Form</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfab021df6aac4654c454f46c77646e745f" prot="public">
+          <name>Label</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfae0626222614bdee31951d84c64e5e9ff" prot="public">
+          <name>Select</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa054b4f3ea543c990f6b125f41af6ebf7" prot="public">
+          <name>Option</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfab5d4d25fe3fa9f8263b5f279a372b709" prot="public">
+          <name>Textarea</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa51c45b795d5d18a3e4e0c37e8b20a141" prot="public">
+          <name>Table</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa94059bb88074d280b6902283edb526c7" prot="public">
+          <name>Tr</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa7205636bb6ee2cc464c30ce1cda43caa" prot="public">
+          <name>Td</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaeeeb9a8eb45dd351d9ec0eb4acce66ce" prot="public">
+          <name>Th</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa5973f82964ee34c79630ac3032bcee47" prot="public">
+          <name>Thead</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa699dc161513957be7067d3c1265daa76" prot="public">
+          <name>Tbody</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa06ba1255ce19450324bf4af29bb322d0" prot="public">
+          <name>Tfoot</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa6e8016a9f7292d1ad9140e85dce6111f" prot="public">
+          <name>Ul</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfac93d25f8bce591b89346b694b535ce15" prot="public">
+          <name>Ol</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa8640d08847fe5e081f0a41c4579bf26a" prot="public">
+          <name>Li</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa4d570d3cfbc6f7e7b1cb289d22f8ca3d" prot="public">
+          <name>Dl</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa2f2eed8f5763e849ad71fcc4dddaa33d" prot="public">
+          <name>Dt</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa419af6d362a14b7a789ba1c7e772bbae" prot="public">
+          <name>Dd</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa8d37869ebc7af08a31df14fe3f48bee2" prot="public">
+          <name>Br</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa08ee99e4c183670239a50ae73fcd39d6" prot="public">
+          <name>Hr</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfab6755d218d5f4e1cef9cce9cc39aeda9" prot="public">
+          <name>Meta</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa97e7c9a7d06eac006a28bf05467fcc8b" prot="public">
+          <name>Link</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaae284f900f9d6e21ba69144cfc91e41b" prot="public">
+          <name>Style</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaf907e651164789346ae0a1e257c462d8" prot="public">
+          <name>Script</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfab78a3223503896721cca1303f776159b" prot="public">
+          <name>Title</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa98921133d10fbdb0fb6dbb7b2648befe" prot="public">
+          <name>Head</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaac101b32dda4448cf13a93fe283dddd8" prot="public">
+          <name>Body</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa3135f4019bee015e2d1ae7f77f9f3f64" prot="public">
+          <name>Html</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa9dffbf69ffba8bc38bc4e01abf4b1675" prot="public">
+          <name>Text</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfabf50d5e661106d0abe925af3c2e6f7e7" prot="public">
+          <name>Header</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaa4932cf9fffdd4b9b00f4d289ba7f205" prot="public">
+          <name>MAX_SIZE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="12" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="12" bodyend="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="CSSSizeValue_8h_1abd641958a2e203557edfd2f4f6279925" prot="public" static="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptional</ref>&lt; <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue" kindref="compound">CSSSizeValue</ref> &gt;</type>
+        <definition>using SR_UTILS_NS::Web::CSSOptionalSizeValue =  CSSOptional&lt;CSSSizeValue&gt;</definition>
+        <argsstring></argsstring>
+        <name>CSSOptionalSizeValue</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSOptionalSizeValue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" line="114" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="CSSColor_8h_1a680a61fdadd1845cf293e4db75a78851" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC const <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSColor" kindref="compound">CSSColor</ref></type>
+        <definition>SR_INLINE_STATIC const CSSColor SR_UTILS_NS::Web::DEFAULT_CSS_COLOR</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_CSS_COLOR</name>
+        <qualifiedname>SR_UTILS_NS::Web::DEFAULT_CSS_COLOR</qualifiedname>
+        <initializer>= <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSColor" kindref="compound">CSSColor</ref>()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" line="108" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSColor.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="CSSEnums_8h_1a63273cc4473b133af5c10c39a5913050" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC CSSDisplay</type>
+        <definition>SR_INLINE_STATIC CSSDisplay SR_UTILS_NS::Web::DEFAULT_CSS_DISPLAY</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_CSS_DISPLAY</name>
+        <qualifiedname>SR_UTILS_NS::Web::DEFAULT_CSS_DISPLAY</qualifiedname>
+        <initializer>= CSSDisplay::Inline</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="59" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="CSSEnums_8h_1a31cbbb5786848a889cf397df9c9850de" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC CSSDisplay</type>
+        <definition>SR_INLINE_STATIC CSSDisplay SR_UTILS_NS::Web::DEFAULT_CSS_DISPLAY_BODY</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_CSS_DISPLAY_BODY</name>
+        <qualifiedname>SR_UTILS_NS::Web::DEFAULT_CSS_DISPLAY_BODY</qualifiedname>
+        <initializer>= CSSDisplay::Block</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="60" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="CSSEnums_8h_1a605642f63228439b3374afb82d134b75" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC CSSPosition</type>
+        <definition>SR_INLINE_STATIC CSSPosition SR_UTILS_NS::Web::DEFAULT_CSS_POSITION</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_CSS_POSITION</name>
+        <qualifiedname>SR_UTILS_NS::Web::DEFAULT_CSS_POSITION</qualifiedname>
+        <initializer>= CSSPosition::Static</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="61" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="CSSEnums_8h_1ae692c86525be53cde7d7cb3dcfd6dc73" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC CSSBoxSizing</type>
+        <definition>SR_INLINE_STATIC CSSBoxSizing SR_UTILS_NS::Web::DEFAULT_CSS_BOX_SIZING</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_CSS_BOX_SIZING</name>
+        <qualifiedname>SR_UTILS_NS::Web::DEFAULT_CSS_BOX_SIZING</qualifiedname>
+        <initializer>= CSSBoxSizing::ContentBox</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="62" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="Tag_8h_1af03b8b44b1918a8a1a718837975628a2" prot="public" static="no" mutable="no">
+        <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_UTILS_NS::Web::UndefinedTag</definition>
+        <argsstring></argsstring>
+        <name>UndefinedTag</name>
+        <qualifiedname>SR_UTILS_NS::Web::UndefinedTag</qualifiedname>
+        <initializer>= &quot;undef&quot;_atom</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="22" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="CSSEnums_8h_1a16f971eec8e6bcc375cb4e5df214bcb9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>CSSPosition</type>
+        <definition>static CSSPosition SR_UTILS_NS::Web::StringToCSSPosition</definition>
+        <argsstring>(const std::string_view str)</argsstring>
+        <name>StringToCSSPosition</name>
+        <qualifiedname>SR_UTILS_NS::Web::StringToCSSPosition</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="64" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="64" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="CSSEnums_8h_1a6adf3aef00576acd10d04b32a08bae0d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>CSSBoxSizing</type>
+        <definition>static CSSBoxSizing SR_UTILS_NS::Web::StringToCSSBoxSizing</definition>
+        <argsstring>(const std::string_view str)</argsstring>
+        <name>StringToCSSBoxSizing</name>
+        <qualifiedname>SR_UTILS_NS::Web::StringToCSSBoxSizing</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="79" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="79" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="CSSEnums_8h_1a2c099f3fddb2993be90f7f60a8bb12f7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>CSSDisplay</type>
+        <definition>static CSSDisplay SR_UTILS_NS::Web::StringToCSSDisplay</definition>
+        <argsstring>(const std::string_view str)</argsstring>
+        <name>StringToCSSDisplay</name>
+        <qualifiedname>SR_UTILS_NS::Web::StringToCSSDisplay</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="92" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="92" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="CSSEnums_8h_1a47e40e7ba60b8c143c4e296eea45ee5b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>static SR_UTILS_NS::StringAtom SR_UTILS_NS::Web::CSSPositionToString</definition>
+        <argsstring>(CSSPosition position)</argsstring>
+        <name>CSSPositionToString</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSPositionToString</qualifiedname>
+        <param>
+          <type>CSSPosition</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="142" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="142" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="CSSEnums_8h_1ab1da839fd07f6e42d92537e93748113c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>static SR_UTILS_NS::StringAtom SR_UTILS_NS::Web::CSSBoxSizingToString</definition>
+        <argsstring>(CSSBoxSizing boxSizing)</argsstring>
+        <name>CSSBoxSizingToString</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSBoxSizingToString</qualifiedname>
+        <param>
+          <type>CSSBoxSizing</type>
+          <declname>boxSizing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="158" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="158" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="CSSEnums_8h_1ac230e19b2f0afcc45de37df79d0e3d98" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>static SR_UTILS_NS::StringAtom SR_UTILS_NS::Web::CSSDisplayToString</definition>
+        <argsstring>(CSSDisplay display)</argsstring>
+        <name>CSSDisplayToString</name>
+        <qualifiedname>SR_UTILS_NS::Web::CSSDisplayToString</qualifiedname>
+        <param>
+          <type>CSSDisplay</type>
+          <declname>display</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" line="172" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSEnums.h" bodystart="172" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="Tag_8h_1ad0fbfe75f59b4efb5b2cc05df2a1868a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD HTMLTag</type>
+        <definition>SR_NODISCARD HTMLTag SR_UTILS_NS::Web::MyHTMLTagToHTMLTag</definition>
+        <argsstring>(size_t tag)</argsstring>
+        <name>MyHTMLTagToHTMLTag</name>
+        <qualifiedname>SR_UTILS_NS::Web::MyHTMLTagToHTMLTag</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="24" column="26" declfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" declline="24" declcolumn="26"/>
+      </memberdef>
+      <memberdef kind="function" id="Tag_8h_1a6d9909a7034110cfc3452de878e6baa1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD HTMLTag</type>
+        <definition>static SR_NODISCARD HTMLTag SR_UTILS_NS::Web::StringAtomToHTMLTag</definition>
+        <argsstring>(const SR_UTILS_NS::StringAtom &amp;tag)</argsstring>
+        <name>StringAtomToHTMLTag</name>
+        <qualifiedname>SR_UTILS_NS::Web::StringAtomToHTMLTag</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="26" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="26" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="Tag_8h_1affe5e55457f28854e81e2a7ecb3de7b6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>static SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::Web::HTMLTagToStringAtom</definition>
+        <argsstring>(HTMLTag tag)</argsstring>
+        <name>HTMLTagToStringAtom</name>
+        <qualifiedname>SR_UTILS_NS::Web::HTMLTagToStringAtom</qualifiedname>
+        <param>
+          <type>HTMLTag</type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" line="45" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/HTML/Tag.h" bodystart="45" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSS.h" line="15" column="1"/>
+  </compounddef>
+</doxygen>

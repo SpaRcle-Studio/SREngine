@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__AUDIO__NS_1_1ALfVec3" kind="struct" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::ALfVec3</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1ALfVec3_1a905137c83bcc9354f7982ec139d75f1f" prot="public" static="no" mutable="no">
+        <type>ALfloat</type>
+        <definition>ALfloat SR_AUDIO_NS::ALfVec3::vec3[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>vec3</name>
+        <qualifiedname>SR_AUDIO_NS::ALfVec3::vec3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="14" column="34" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/Impl/OpenALTools.h" bodystart="14" bodyend="14"/>
+    <listofallmembers>
+      <member refid="structSR__AUDIO__NS_1_1ALfVec3_1a905137c83bcc9354f7982ec139d75f1f" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ALfVec3</scope><name>vec3</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

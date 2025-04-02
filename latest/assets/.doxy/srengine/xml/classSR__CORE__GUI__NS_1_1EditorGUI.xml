@@ -1,0 +1,1011 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1EditorGUI" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::EditorGUI</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::WidgetManager</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a59da424204ca60eb89a8ac2e085fe92f" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>Click</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Click</qualifiedname>
+        <enumvalue id="classSR__CORE__GUI__NS_1_1EditorGUI_1a59da424204ca60eb89a8ac2e085fe92fa6adf97f83acf6453d4a6a4b1070f3754" prot="private">
+          <name>None</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__CORE__GUI__NS_1_1EditorGUI_1a59da424204ca60eb89a8ac2e085fe92fab8a4d4c7e6bb7b5534b856ce7a9ccde0" prot="private">
+          <name>Drag</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__CORE__GUI__NS_1_1EditorGUI_1a59da424204ca60eb89a8ac2e085fe92fae7ddb7cd777b59610b220bcfa80bd95f" prot="private">
+          <name>Miss</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="51" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1abdd836ee99ccfbcfb1161ede330c4910" prot="private" static="no">
+        <type>SR_GRAPH_GUI_NS::WidgetManager</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::Super =  SR_GRAPH_GUI_NS::WidgetManager</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="44" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a6ed9b19f22cc02da37f74cd32002dffc" prot="private" static="no">
+        <type>std::unordered_map&lt; size_t, SR_GRAPH_NS::GUI::Widget * &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::Widgets =  std::unordered_map&lt;size_t, SR_GRAPH_NS::GUI::Widget*&gt;</definition>
+        <argsstring></argsstring>
+        <name>Widgets</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Widgets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="45" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a4d5a6e0ea20684c339d82bfbce1a0472" prot="private" static="no">
+        <type>std::map&lt; EditorIcon, <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> * &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::Icons =  std::map&lt;EditorIcon, SR_GTYPES_NS::Texture*&gt;</definition>
+        <argsstring></argsstring>
+        <name>Icons</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Icons</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="46" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aab2408855682331dc5af13c56ae2c2cd" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">SR_GRAPH_NS::RenderContext</ref> &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::RenderContextPtr =  SR_HTYPES_NS::SafePtr&lt;SR_GRAPH_NS::RenderContext&gt;</definition>
+        <argsstring></argsstring>
+        <name>RenderContextPtr</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::RenderContextPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="47" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ab63c52ae68fb203877a9988b520cb77d" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Window" kindref="compound">SR_GRAPH_NS::Window</ref> &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::WindowPtr =  SR_HTYPES_NS::SharedPtr&lt;SR_GRAPH_NS::Window&gt;</definition>
+        <argsstring></argsstring>
+        <name>WindowPtr</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::WindowPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="48" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a3a5b6d64d1a75288890f6bd64a736a50" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::ScenePtr =  SR_HTYPES_NS::SharedPtr&lt;SR_WORLD_NS::Scene&gt;</definition>
+        <argsstring></argsstring>
+        <name>ScenePtr</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::ScenePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="49" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ad1c3566f080f81d65a5e105df854ad5f" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">SR_CORE_NS::Engine</ref> &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorGUI::EnginePtr =  SR_HTYPES_NS::SharedPtr&lt;SR_CORE_NS::Engine&gt;</definition>
+        <argsstring></argsstring>
+        <name>EnginePtr</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::EnginePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="50" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ab580cb3b2dc44a6c29860a83f017f0cc" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_CORE_GUI_NS::EditorGUI::m_cachedScenePath</definition>
+        <argsstring></argsstring>
+        <name>m_cachedScenePath</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_cachedScenePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="144" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1afad4f7993a6b5dd04456f277964e41ad" prot="private" static="no" mutable="no">
+        <type>RenderContextPtr</type>
+        <definition>RenderContextPtr SR_CORE_GUI_NS::EditorGUI::m_context</definition>
+        <argsstring></argsstring>
+        <name>m_context</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="146" column="26" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a2b858e70daf8f50bfa920ba89b6aeaff" prot="private" static="no" mutable="no">
+        <type>EnginePtr</type>
+        <definition>EnginePtr SR_CORE_GUI_NS::EditorGUI::m_engine</definition>
+        <argsstring></argsstring>
+        <name>m_engine</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_engine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="147" column="19" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a77de8de2b23413459ab40abf3991bf80" prot="private" static="no" mutable="no">
+        <type>Widgets</type>
+        <definition>Widgets SR_CORE_GUI_NS::EditorGUI::m_widgets</definition>
+        <argsstring></argsstring>
+        <name>m_widgets</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_widgets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="149" column="17" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a3c7fe3a7dece668bcf9ad45b5ca71e3b" prot="private" static="no" mutable="no">
+        <type>Icons</type>
+        <definition>Icons SR_CORE_GUI_NS::EditorGUI::m_icons</definition>
+        <argsstring></argsstring>
+        <name>m_icons</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_icons</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="150" column="15" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aab362bce14e2d4c502c507db863835ab" prot="private" static="no" mutable="no">
+        <type>Click</type>
+        <definition>Click SR_CORE_GUI_NS::EditorGUI::m_click</definition>
+        <argsstring></argsstring>
+        <name>m_click</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_click</qualifiedname>
+        <initializer>= Click::None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="152" column="15" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b1921f31ec192b146186b8e9ef54208" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::EditorGUI::m_isInit</definition>
+        <argsstring></argsstring>
+        <name>m_isInit</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_isInit</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="154" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1adb74dd85269d6391ac691896da91705f" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::EditorGUI::m_hasErrors</definition>
+        <argsstring></argsstring>
+        <name>m_hasErrors</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_hasErrors</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="155" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a1d93f2ab7372325614e97e9f8316834d" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::EditorGUI::m_enabled</definition>
+        <argsstring></argsstring>
+        <name>m_enabled</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_enabled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="156" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a0770c1495bede31d13fe97a65b4b2b42" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::EditorGUI::m_loaded</definition>
+        <argsstring></argsstring>
+        <name>m_loaded</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_loaded</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="157" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a1417df05f7f9018843d1fa1719a6fead" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::EditorGUI::m_useDocking</definition>
+        <argsstring></argsstring>
+        <name>m_useDocking</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_useDocking</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="159" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af22c3d62df1784a235ab20872535667d" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_CORE_GUI_NS::EditorGUI::m_dragWindow</definition>
+        <argsstring></argsstring>
+        <name>m_dragWindow</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_dragWindow</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="160" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af3a544dae6ee08d895ae4ed367f08dbc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::EditorGUI::m_imGuiDemo</definition>
+        <argsstring></argsstring>
+        <name>m_imGuiDemo</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::m_imGuiDemo</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="162" column="14" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a898a1c7dcc4c40f3b8ffeeefedaee42c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::EditorGUI::EditorGUI</definition>
+        <argsstring>(const EnginePtr &amp;pEngine)</argsstring>
+        <name>EditorGUI</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::EditorGUI</qualifiedname>
+        <param>
+          <type>const EnginePtr &amp;</type>
+          <declname>pEngine</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="55" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a31e1ee8f282f9985ca8cb34375e4cb6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::EditorGUI::~EditorGUI</definition>
+        <argsstring>() override</argsstring>
+        <name>~EditorGUI</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::~EditorGUI</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="56" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a053a86d45a6b2d0a9f1da3f98d6dac9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::Enable</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>Enable</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Enable</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8f5582e64248d8c9618e461d5bd07f17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_DEPRECATED void</type>
+        <definition>SR_DEPRECATED void SR_CORE_GUI_NS::EditorGUI::AddWindow</definition>
+        <argsstring>(T *widget)</argsstring>
+        <name>AddWindow</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::AddWindow</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>widget</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="61" column="39" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="61" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a9636edfdae266d820f45effb2c534b67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; SR_CORE_GUI_NS::EditorGUI::AddWidget</definition>
+        <argsstring>(T *pWidget)</argsstring>
+        <name>AddWidget</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::AddWidget</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>pWidget</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="65" column="22" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="65" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ab46994c0ea32a17d329236c7d252eec2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>SR_DEPRECATED T *</type>
+        <definition>SR_DEPRECATED T * SR_CORE_GUI_NS::EditorGUI::GetWindow</definition>
+        <argsstring>()</argsstring>
+        <name>GetWindow</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="76" column="36" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="76" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b20695d0afe72065b2b5475717b50dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GRAPH__GUI__NS_1_1Widget" kindref="compound">SR_GRAPH_GUI_NS::Widget</ref> *</type>
+        <definition>SR_NODISCARD SR_GRAPH_GUI_NS::Widget * SR_CORE_GUI_NS::EditorGUI::GetWidget</definition>
+        <argsstring>(const SR_UTILS_NS::StringAtom &amp;name) const</argsstring>
+        <name>GetWidget</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetWidget</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="80" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5f7be886daa6e4893804ac70680f216c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_CORE_GUI_NS::EditorGUI::GetWidget</definition>
+        <argsstring>()</argsstring>
+        <name>GetWidget</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetWidget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="82" column="22" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="82" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a826c7bec3cef42bc103e4fe59139945c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * SR_CORE_GUI_NS::EditorGUI::OpenWidget</definition>
+        <argsstring>()</argsstring>
+        <name>OpenWidget</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::OpenWidget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="93" column="22" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="93" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aec3c96078d9c08ad7232ba63580beb73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::CloseAllWidgets</definition>
+        <argsstring>()</argsstring>
+        <name>CloseAllWidgets</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::CloseAllWidgets</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a42d8502fca54c75536ac621a27d230e9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_GUI_NS::EditorGUI::Enabled</definition>
+        <argsstring>() const</argsstring>
+        <name>Enabled</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Enabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="103" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af2418385f5e9175b012d0600b30e8e22" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_GUI_NS::EditorGUI::IsDockingEnabled</definition>
+        <argsstring>() const</argsstring>
+        <name>IsDockingEnabled</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::IsDockingEnabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="104" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1abb9175b07cd9dc209c6cb7bca4091857" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_CORE_GUI_NS::EditorGUI::GetIconDescriptor</definition>
+        <argsstring>(EditorIcon icon) const</argsstring>
+        <name>GetIconDescriptor</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetIconDescriptor</qualifiedname>
+        <param>
+          <type>EditorIcon</type>
+          <declname>icon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="105" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a15dc762a6c4ceb608843bf8156b13d22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">SR_GTYPES_NS::Texture</ref> *</type>
+        <definition>SR_NODISCARD SR_GTYPES_NS::Texture * SR_CORE_GUI_NS::EditorGUI::GetIcon</definition>
+        <argsstring>(EditorIcon icon) const</argsstring>
+        <name>GetIcon</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetIcon</qualifiedname>
+        <param>
+          <type>EditorIcon</type>
+          <declname>icon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="106" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a13a4f68a024346ae7cdb49b526088344" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const EnginePtr &amp;</type>
+        <definition>SR_NODISCARD const EnginePtr &amp; SR_CORE_GUI_NS::EditorGUI::GetEngine</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEngine</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::GetEngine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="107" column="38" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a9849d8bc00521c623dc6fc747be69877" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_GUI_NS::EditorGUI::IsInitialized</definition>
+        <argsstring>() const</argsstring>
+        <name>IsInitialized</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::IsInitialized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="108" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a31cb3f18b97ec6246b5f118abdbab502" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::SetDockingEnabled</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>SetDockingEnabled</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::SetDockingEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="110" column="14" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a66dae4535da891942ed28ce5dd9776db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::Draw</definition>
+        <argsstring>() override</argsstring>
+        <name>Draw</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Draw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="112" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aec91b3d6557510d32954e771d7d08ff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::Update</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Update</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="113" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aac250e14cf7795ad870bd45fb33c0bac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::FixedUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>FixedUpdate</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::FixedUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a0baf278d8073bbaeab279d50f1676295" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::Save</definition>
+        <argsstring>()</argsstring>
+        <name>Save</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Save</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="115" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ad37b3bd99876893a6f09f030c4057018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::EditorGUI::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="117" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aaac99f5329f31124aa0870a3435219e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::DeInit</definition>
+        <argsstring>()</argsstring>
+        <name>DeInit</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::DeInit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="118" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b118495a82a4a3ad30a97742c8d948e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::CacheScenePath</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;scenePath)</argsstring>
+        <name>CacheScenePath</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::CacheScenePath</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>scenePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="120" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a98abd9fe103e00fd2bdebd618fc82292" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_CORE_GUI_NS::EditorGUI::LoadSceneFromCachedPath</definition>
+        <argsstring>()</argsstring>
+        <name>LoadSceneFromCachedPath</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::LoadSceneFromCachedPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="121" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a517b7d2aa988e3820b30b6cd10e3ed10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::ReloadWindows</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadWindows</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::ReloadWindows</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="123" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a18a06bff7df2110f0d29ced84e8ce8a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::ResetToDefault</definition>
+        <argsstring>()</argsstring>
+        <name>ResetToDefault</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::ResetToDefault</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="125" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ac28f19d0af9b8bbaabdf47d52eeef386" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::InstantiateSO</definition>
+        <argsstring>(const SR_UTILS_NS::SceneObject::Ptr &amp;pSO)</argsstring>
+        <name>InstantiateSO</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::InstantiateSO</qualifiedname>
+        <param>
+          <type>const SR_UTILS_NS::SceneObject::Ptr &amp;</type>
+          <declname>pSO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="128" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5383cb00bd6089953dd8988cfb25178e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::OnMouseMove</definition>
+        <argsstring>(const SR_UTILS_NS::MouseInputData *data) override</argsstring>
+        <name>OnMouseMove</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::OnMouseMove</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1MouseInputData" kindref="compound">SR_UTILS_NS::MouseInputData</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="130" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a968cef77b127589ca70d21de9f9487e5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::OnKeyDown</definition>
+        <argsstring>(const SR_UTILS_NS::KeyboardInputData *data) override</argsstring>
+        <name>OnKeyDown</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::OnKeyDown</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">SR_UTILS_NS::KeyboardInputData</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="132" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aa6278eb09afb02562a78c5239ead58d7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::OnKeyPress</definition>
+        <argsstring>(const SR_UTILS_NS::KeyboardInputData *data) override</argsstring>
+        <name>OnKeyPress</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::OnKeyPress</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">SR_UTILS_NS::KeyboardInputData</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="133" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5c3828d82575443d989a483a3db426f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::OnKeyUp</definition>
+        <argsstring>(const SR_UTILS_NS::KeyboardInputData *data) override</argsstring>
+        <name>OnKeyUp</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::OnKeyUp</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">SR_UTILS_NS::KeyboardInputData</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="134" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1aee6c3d2316038126c61114d5e9c12493" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::Load</definition>
+        <argsstring>()</argsstring>
+        <name>Load</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::Load</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="137" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1af4c8664a1976d98481f39951ffdf24ea" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::DrawDockingSpace</definition>
+        <argsstring>()</argsstring>
+        <name>DrawDockingSpace</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::DrawDockingSpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="139" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1a5ced7fc7ea4e53c761a69d9dbc3424f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::DrawMenuBar</definition>
+        <argsstring>()</argsstring>
+        <name>DrawMenuBar</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::DrawMenuBar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="140" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorGUI_1ad51afe6c7222f451429b51be3bd695db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorGUI::DrawWindowPage</definition>
+        <argsstring>()</argsstring>
+        <name>DrawWindowPage</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorGUI::DrawWindowPage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="141" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::EditorGUI</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorGUI"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::WidgetManager</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::EditorGUI</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorGUI"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::WidgetManager</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/EditorGUI.h" line="43" column="5" bodyfile="Engine/Core/inc/Core/GUI/EditorGUI.h" bodystart="43" bodyend="164"/>
+    <listofallmembers>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a9636edfdae266d820f45effb2c534b67" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>AddWidget</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8f5582e64248d8c9618e461d5bd07f17" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>AddWindow</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b118495a82a4a3ad30a97742c8d948e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>CacheScenePath</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a59da424204ca60eb89a8ac2e085fe92f" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Click</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aec3c96078d9c08ad7232ba63580beb73" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>CloseAllWidgets</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aaac99f5329f31124aa0870a3435219e5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>DeInit</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a66dae4535da891942ed28ce5dd9776db" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Draw</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1af4c8664a1976d98481f39951ffdf24ea" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>DrawDockingSpace</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a5ced7fc7ea4e53c761a69d9dbc3424f2" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>DrawMenuBar</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ad51afe6c7222f451429b51be3bd695db" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>DrawWindowPage</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a898a1c7dcc4c40f3b8ffeeefedaee42c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>EditorGUI</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a053a86d45a6b2d0a9f1da3f98d6dac9b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Enable</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a42d8502fca54c75536ac621a27d230e9" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Enabled</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ad1c3566f080f81d65a5e105df854ad5f" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>EnginePtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aac250e14cf7795ad870bd45fb33c0bac" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a13a4f68a024346ae7cdb49b526088344" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetEngine</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a15dc762a6c4ceb608843bf8156b13d22" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetIcon</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1abb9175b07cd9dc209c6cb7bca4091857" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetIconDescriptor</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b20695d0afe72065b2b5475717b50dd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetWidget</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a5f7be886daa6e4893804ac70680f216c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetWidget</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ab46994c0ea32a17d329236c7d252eec2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>GetWindow</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a4d5a6e0ea20684c339d82bfbce1a0472" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Icons</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ad37b3bd99876893a6f09f030c4057018" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Init</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ac28f19d0af9b8bbaabdf47d52eeef386" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>InstantiateSO</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1af2418385f5e9175b012d0600b30e8e22" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>IsDockingEnabled</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a9849d8bc00521c623dc6fc747be69877" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>IsInitialized</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aee6c3d2316038126c61114d5e9c12493" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Load</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a98abd9fe103e00fd2bdebd618fc82292" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>LoadSceneFromCachedPath</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ab580cb3b2dc44a6c29860a83f017f0cc" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_cachedScenePath</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aab362bce14e2d4c502c507db863835ab" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_click</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1afad4f7993a6b5dd04456f277964e41ad" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_context</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1af22c3d62df1784a235ab20872535667d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_dragWindow</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a1d93f2ab7372325614e97e9f8316834d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_enabled</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a2b858e70daf8f50bfa920ba89b6aeaff" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_engine</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1adb74dd85269d6391ac691896da91705f" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_hasErrors</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a3c7fe3a7dece668bcf9ad45b5ca71e3b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_icons</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1af3a544dae6ee08d895ae4ed367f08dbc" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_imGuiDemo</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a8b1921f31ec192b146186b8e9ef54208" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_isInit</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a0770c1495bede31d13fe97a65b4b2b42" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_loaded</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a1417df05f7f9018843d1fa1719a6fead" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_useDocking</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a77de8de2b23413459ab40abf3991bf80" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>m_widgets</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a968cef77b127589ca70d21de9f9487e5" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aa6278eb09afb02562a78c5239ead58d7" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>OnKeyPress</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a5c3828d82575443d989a483a3db426f6" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a5383cb00bd6089953dd8988cfb25178e" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>OnMouseMove</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a826c7bec3cef42bc103e4fe59139945c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>OpenWidget</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a517b7d2aa988e3820b30b6cd10e3ed10" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>ReloadWindows</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aab2408855682331dc5af13c56ae2c2cd" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>RenderContextPtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a18a06bff7df2110f0d29ced84e8ce8a6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>ResetToDefault</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a0baf278d8073bbaeab279d50f1676295" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Save</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a3a5b6d64d1a75288890f6bd64a736a50" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>ScenePtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a31cb3f18b97ec6246b5f118abdbab502" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>SetDockingEnabled</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1abdd836ee99ccfbcfb1161ede330c4910" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Super</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1aec91b3d6557510d32954e771d7d08ff7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Update</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a6ed9b19f22cc02da37f74cd32002dffc" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>Widgets</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1ab63c52ae68fb203877a9988b520cb77d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>WindowPtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorGUI_1a31e1ee8f282f9985ca8cb34375e4cb6f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGUI</scope><name>~EditorGUI</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

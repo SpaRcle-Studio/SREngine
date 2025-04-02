@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__ANIMATIONS__NS_1_1ScalingKey" kind="struct" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::ScalingKey</compoundname>
+    <includes refid="AnimationKey_8h" local="no">AnimationKey.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1ScalingKey_1a27df7ddb664f1c356378c65c373986df" prot="public" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector3</type>
+        <definition>SR_MATH_NS::FVector3 SR_ANIMATIONS_NS::ScalingKey::scaling</definition>
+        <argsstring></argsstring>
+        <name>scaling</name>
+        <qualifiedname>SR_ANIMATIONS_NS::ScalingKey::scaling</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="68" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1ScalingKey_1a68a2a827f2b2d8227f7fed2be11f7f49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::ScalingKey::ScalingKey</definition>
+        <argsstring>()=default</argsstring>
+        <name>ScalingKey</name>
+        <qualifiedname>SR_ANIMATIONS_NS::ScalingKey::ScalingKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="62" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__ANIMATIONS__NS_1_1ScalingKey_1a4d21b6e2ad451b8c34177cfe31c0ea4e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::ScalingKey::ScalingKey</definition>
+        <argsstring>(const SR_MATH_NS::FVector3 &amp;scaling)</argsstring>
+        <name>ScalingKey</name>
+        <qualifiedname>SR_ANIMATIONS_NS::ScalingKey::ScalingKey</qualifiedname>
+        <param>
+          <type>const SR_MATH_NS::FVector3 &amp;</type>
+          <declname>scaling</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="63" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="63" bodyend="65"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="60" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="60" bodyend="70"/>
+    <listofallmembers>
+      <member refid="structSR__ANIMATIONS__NS_1_1ScalingKey_1a27df7ddb664f1c356378c65c373986df" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ScalingKey</scope><name>scaling</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1ScalingKey_1a68a2a827f2b2d8227f7fed2be11f7f49" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ScalingKey</scope><name>ScalingKey</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1ScalingKey_1a4d21b6e2ad451b8c34177cfe31c0ea4e" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ScalingKey</scope><name>ScalingKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data" kind="union" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::UnionAnimationKey::Data</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1aa80b2cc84bb709cd4b2390e974d5e59b" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1TranslationKey" kindref="compound">TranslationKey</ref></type>
+        <definition>TranslationKey SR_ANIMATIONS_NS::UnionAnimationKey::Data::translation</definition>
+        <argsstring></argsstring>
+        <name>translation</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Data::translation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="120" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a72ab2176a9ad2255bc36d45a68e45d89" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1RotationKey" kindref="compound">RotationKey</ref></type>
+        <definition>RotationKey SR_ANIMATIONS_NS::UnionAnimationKey::Data::rotation</definition>
+        <argsstring></argsstring>
+        <name>rotation</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Data::rotation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="121" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a2ebcdb8a890dff75357b69ce23c676f7" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__ANIMATIONS__NS_1_1ScalingKey" kindref="compound">ScalingKey</ref></type>
+        <definition>ScalingKey SR_ANIMATIONS_NS::UnionAnimationKey::Data::scaling</definition>
+        <argsstring></argsstring>
+        <name>scaling</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Data::scaling</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="122" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1ae4949aa38cae355c99ef326781e7084a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::UnionAnimationKey::Data::Data</definition>
+        <argsstring>()</argsstring>
+        <name>Data</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Data::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="124" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a11950fb495802ccf5a01de89f0fc6b0f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_ANIMATIONS_NS::UnionAnimationKey::Data::~Data</definition>
+        <argsstring>()</argsstring>
+        <name>~Data</name>
+        <qualifiedname>SR_ANIMATIONS_NS::UnionAnimationKey::Data::~Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="125" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="125" bodyend="125"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>SR_ANIMATIONS_NS::RotationKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1RotationKey"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>rotation</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::ScalingKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1ScalingKey"/>
+      </node>
+      <node id="2">
+        <label>SR_ANIMATIONS_NS::TranslationKey</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1TranslationKey"/>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::UnionAnimationKey::Data</label>
+        <link refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>translation</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>rotation</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>scaling</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" line="119" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationKey.h" bodystart="119" bodyend="126"/>
+    <listofallmembers>
+      <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1ae4949aa38cae355c99ef326781e7084a" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey::Data</scope><name>Data</name></member>
+      <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a72ab2176a9ad2255bc36d45a68e45d89" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey::Data</scope><name>rotation</name></member>
+      <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a2ebcdb8a890dff75357b69ce23c676f7" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey::Data</scope><name>scaling</name></member>
+      <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1aa80b2cc84bb709cd4b2390e974d5e59b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey::Data</scope><name>translation</name></member>
+      <member refid="unionSR__ANIMATIONS__NS_1_1UnionAnimationKey_1_1Data_1a11950fb495802ccf5a01de89f0fc6b0f" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::UnionAnimationKey::Data</scope><name>~Data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

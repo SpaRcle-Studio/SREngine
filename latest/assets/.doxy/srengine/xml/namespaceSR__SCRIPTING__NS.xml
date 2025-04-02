@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__SCRIPTING__NS" kind="namespace" language="C++">
+    <compoundname>SR_SCRIPTING_NS</compoundname>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1Behaviour" prot="public">SR_SCRIPTING_NS::Behaviour</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1Compiler" prot="public">SR_SCRIPTING_NS::Compiler</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1EvoBehaviour" prot="public">SR_SCRIPTING_NS::EvoBehaviour</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1EvoCompiler" prot="public">SR_SCRIPTING_NS::EvoCompiler</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1EvoScriptImpl" prot="public">SR_SCRIPTING_NS::EvoScriptImpl</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1EvoScriptManager" prot="public">SR_SCRIPTING_NS::EvoScriptManager</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader" prot="public">SR_SCRIPTING_NS::EvoScriptResourceReloader</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler" prot="public">SR_SCRIPTING_NS::GlobalEvoCompiler</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1IRawBehaviour" prot="public">SR_SCRIPTING_NS::IRawBehaviour</innerclass>
+    <innerclass refid="classSR__SCRIPTING__NS_1_1ScriptHolder" prot="public">SR_SCRIPTING_NS::ScriptHolder</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="Script_8h_1a6b426064b9c27fef8f8751907ecc4224" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ScriptType</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptType</qualifiedname>
+        <enumvalue id="Script_8h_1a6b426064b9c27fef8f8751907ecc4224a439d4b331583ba706fbb22aeee7afad3" prot="public">
+          <name>EvoScript</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Script_8h_1a6b426064b9c27fef8f8751907ecc4224a0ae9478a1db9d1e2c48efa49eac1c7c6" prot="public">
+          <name>Lua</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Script.h" line="13" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Script.h" bodystart="13" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Script_8h_1ad6949ce9e8a70effe080c8569d2e006b" prot="public" static="no">
+        <type>std::chrono::high_resolution_clock::time_point</type>
+        <definition>typedef std::chrono::high_resolution_clock::time_point SR_SCRIPTING_NS::Time</definition>
+        <argsstring></argsstring>
+        <name>Time</name>
+        <qualifiedname>SR_SCRIPTING_NS::Time</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Script.h" line="11" column="60" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Base/Script.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EvoBehaviour_8h_1aaa8de353012990144ff0a3f6f5f0cc49" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* SR_SCRIPTING_NS::CollisionFnPtr) (const SR_UTILS_NS::CollisionData &amp;data)</definition>
+        <argsstring>)(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>CollisionFnPtr</name>
+        <qualifiedname>SR_SCRIPTING_NS::CollisionFnPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoBehaviour.h" line="13" column="13" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoBehaviour.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="MonoTest_8h_1a38a2f4208951355091b8232fde3645f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::RunMonoTest</definition>
+        <argsstring>()</argsstring>
+        <name>RunMonoTest</name>
+        <qualifiedname>SR_SCRIPTING_NS::RunMonoTest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Mono/MonoTest.h" line="11" column="10" declfile="Engine/Core/libs/Scripting/inc/Scripting/Mono/MonoTest.h" declline="11" declcolumn="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Base/Behaviour.h" line="18" column="1"/>
+  </compounddef>
+</doxygen>

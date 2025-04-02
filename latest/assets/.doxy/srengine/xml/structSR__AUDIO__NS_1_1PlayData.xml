@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__AUDIO__NS_1_1PlayData" kind="struct" language="C++" prot="public">
+    <compoundname>SR_AUDIO_NS::PlayData</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a95bb1efcd4d8e612c56ad887e892640c" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__AUDIO__NS_1_1Sound" kindref="compound">Sound</ref> *</type>
+        <definition>Sound* SR_AUDIO_NS::PlayData::pSound</definition>
+        <argsstring></argsstring>
+        <name>pSound</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::pSound</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="24" column="15" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a608bfb7c572821b06d2822f8c12f1232" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__AUDIO__NS_1_1SoundData" kindref="compound">SoundData</ref> *</type>
+        <definition>SoundData* SR_AUDIO_NS::PlayData::pData</definition>
+        <argsstring></argsstring>
+        <name>pData</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::pData</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="25" column="19" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a933b5f73f4f5fbe810f505cfdc9882dd" prot="public" static="no" mutable="no">
+        <type>SoundSource</type>
+        <definition>SoundSource SR_AUDIO_NS::PlayData::pSource</definition>
+        <argsstring></argsstring>
+        <name>pSource</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::pSource</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="26" column="21" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a74fd667ed2e7124887cdb07711c1bc31" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__AUDIO__NS_1_1PlayParams" kindref="compound">PlayParams</ref></type>
+        <definition>PlayParams SR_AUDIO_NS::PlayData::params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::params</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="27" column="20" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a4498c2439edbfabea71b97c63c12d28c" prot="public" static="no" mutable="no">
+        <type>float_t</type>
+        <definition>float_t SR_AUDIO_NS::PlayData::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::offset</qualifiedname>
+        <initializer>= 0.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="28" column="17" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a5072779c93b83d5361b111dd869677bb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::PlayData::isPlaying</definition>
+        <argsstring></argsstring>
+        <name>isPlaying</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::isPlaying</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="29" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__AUDIO__NS_1_1PlayData_1a0bcf35440d1a88c46be63d9554f5c863" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_AUDIO_NS::PlayData::isFailed</definition>
+        <argsstring></argsstring>
+        <name>isFailed</name>
+        <qualifiedname>SR_AUDIO_NS::PlayData::isFailed</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="30" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::PlayData</label>
+        <link refid="structSR__AUDIO__NS_1_1PlayData"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_AUDIO_NS::PlayData</label>
+        <link refid="structSR__AUDIO__NS_1_1PlayData"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>pSound</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>pData</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>params</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; AudioLibrary &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="17">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector3 &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="18">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector6 &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="13">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SpatializeMode &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="12">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; bool &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="15">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; float_t &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="19">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; std::string &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="16">
+        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; uint64_t &gt;</label>
+        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
+      </node>
+      <node id="11">
+        <label>SR_AUDIO_NS::PlayParams</label>
+        <link refid="structSR__AUDIO__NS_1_1PlayParams"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>async</edgelabel>
+          <edgelabel>loop</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>spatialize</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>library</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>coneInnerAngle</edgelabel>
+          <edgelabel>gain</edgelabel>
+          <edgelabel>maxDistance</edgelabel>
+          <edgelabel>maxGain</edgelabel>
+          <edgelabel>minGain</edgelabel>
+          <edgelabel>pitch</edgelabel>
+          <edgelabel>referenceDistance</edgelabel>
+          <edgelabel>relative</edgelabel>
+          <edgelabel>rolloffFactor</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>uniqueId</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>direction</edgelabel>
+          <edgelabel>position</edgelabel>
+          <edgelabel>velocity</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>orientation</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>device</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_AUDIO_NS::Sound</label>
+        <link refid="classSR__AUDIO__NS_1_1Sound"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_AUDIO_NS::SoundContext</label>
+        <link refid="classSR__AUDIO__NS_1_1SoundContext"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_device</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_AUDIO_NS::SoundData</label>
+        <link refid="structSR__AUDIO__NS_1_1SoundData"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>pContext</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>pSound</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_AUDIO_NS::SoundDevice</label>
+        <link refid="classSR__AUDIO__NS_1_1SoundDevice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::IResource</label>
+        <link refid="classSR__UTILS__NS_1_1IResource"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
+          <edgelabel>RELOAD_DONE_EVENT</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::ResourceContainer</label>
+        <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::SubscriptionHolder</label>
+        <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="23" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="23" bodyend="31"/>
+    <listofallmembers>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a0bcf35440d1a88c46be63d9554f5c863" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>isFailed</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a5072779c93b83d5361b111dd869677bb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>isPlaying</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>NonCopyable</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a4498c2439edbfabea71b97c63c12d28c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>offset</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>operator=</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a74fd667ed2e7124887cdb07711c1bc31" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>params</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a608bfb7c572821b06d2822f8c12f1232" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>pData</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a95bb1efcd4d8e612c56ad887e892640c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>pSound</name></member>
+      <member refid="structSR__AUDIO__NS_1_1PlayData_1a933b5f73f4f5fbe810f505cfdc9882dd" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>pSource</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::PlayData</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

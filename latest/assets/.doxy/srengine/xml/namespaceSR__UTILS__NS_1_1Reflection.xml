@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="namespaceSR__UTILS__NS_1_1Reflection" kind="namespace" language="C++">
+    <compoundname>SR_UTILS_NS::Reflection</compoundname>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" prot="public">SR_UTILS_NS::Reflection::EditorPropertyParams</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1Property" prot="public">SR_UTILS_NS::Reflection::Property</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1Value" prot="public">SR_UTILS_NS::Reflection::Value</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainer" prot="public">SR_UTILS_NS::Reflection::ValueSequenceContainer</innerclass>
+    <innerclass refid="classSR__UTILS__NS_1_1Reflection_1_1ValueSequenceContainerIterator" prot="public">SR_UTILS_NS::Reflection::ValueSequenceContainerIterator</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="Reflection_2Property_8h_1a0306e1b958ab48a66303f30d8459e624" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::GetPropertyInspector</definition>
+        <argsstring>()</argsstring>
+        <name>GetPropertyInspector</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::GetPropertyInspector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="119" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" bodystart="119" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="Reflection_2Property_8h_1a9fb70cc066a772ac6296cdcd2daf6772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeSerializePropertyName</definition>
+        <argsstring>(std::string_view name)</argsstring>
+        <name>MakeSerializePropertyName</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::MakeSerializePropertyName</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="144" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" declline="144" declcolumn="29"/>
+      </memberdef>
+      <memberdef kind="function" id="Reflection_2Property_8h_1a09b8fcb9fe79fb1815c2163a249f63d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_UTILS_NS::Reflection::MakeDisplayName</definition>
+        <argsstring>(std::string_view name)</argsstring>
+        <name>MakeDisplayName</name>
+        <qualifiedname>SR_UTILS_NS::Reflection::MakeDisplayName</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="145" column="29" declfile="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" declline="145" declcolumn="29"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Reflection/Property.h" line="11" column="1"/>
+  </compounddef>
+</doxygen>

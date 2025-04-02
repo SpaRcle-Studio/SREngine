@@ -1,0 +1,395 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1HashManager" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::HashManager</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="private" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <includes refid="HashManager_8h" local="no">HashManager.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1HashManager_1a019d56d769a4e95b6e929d5dd88fba08" prot="private" static="no">
+        <type>uint64_t</type>
+        <definition>using SR_UTILS_NS::HashManager::Hash =  uint64_t</definition>
+        <argsstring></argsstring>
+        <name>Hash</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="22" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__UTILS__NS_1_1HashManager_1aae383bfcc576158d5bf44d9b6c83421d" prot="private" static="no">
+        <type>ska::flat_hash_map&lt; Hash, <ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> * &gt;</type>
+        <definition>using SR_UTILS_NS::HashManager::Storage =  ska::flat_hash_map&lt;Hash, StringHashInfo*&gt;</definition>
+        <argsstring></argsstring>
+        <name>Storage</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="23" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1HashManager_1a294cb1682ad0acaf65faa9c8b4141152" prot="private" static="no" mutable="no">
+        <type>Storage</type>
+        <definition>Storage SR_UTILS_NS::HashManager::m_strings</definition>
+        <argsstring></argsstring>
+        <name>m_strings</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::m_strings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="53" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1HashManager_1adaf6f0cafa82c90aed21f8efb96719f9" prot="private" static="no" mutable="yes">
+        <type>std::recursive_mutex</type>
+        <definition>std::recursive_mutex SR_UTILS_NS::HashManager::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::m_mutex</qualifiedname>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="54" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a75a9eaa3c048b44600a25a1144927d39" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::HashManager::HashManager</definition>
+        <argsstring>()=default</argsstring>
+        <name>HashManager</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::HashManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="25" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a249ce982576131d060e141440bb974fb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::HashManager::~HashManager</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~HashManager</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::~HashManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1ae414c0b46b9c55de0f6628ea5cd9f0b8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+        <definition>SR_NODISCARD StringHashInfo * SR_UTILS_NS::HashManager::Register</definition>
+        <argsstring>(std::string str, Hash hash)</argsstring>
+        <name>Register</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Register</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>Hash</type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="50" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1af26406e694801e57f0bb681a706300ca" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_MAYBE_UNUSED <ref refid="classSR__UTILS__NS_1_1HashManager" kindref="compound">HashManager</ref> &amp;</type>
+        <definition>static SR_MAYBE_UNUSED HashManager &amp; SR_UTILS_NS::HashManager::Instance</definition>
+        <argsstring>()</argsstring>
+        <name>Instance</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Instance</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="29" column="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a727d47973149f0c3385e1e1d3546a70b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::HashManager::Lock</definition>
+        <argsstring>() const</argsstring>
+        <name>Lock</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Lock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="32" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a26a92592aa6c9302b9f4a5bcb98028c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::HashManager::Unlock</definition>
+        <argsstring>() const</argsstring>
+        <name>Unlock</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Unlock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="33" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a9c2940184d2b2b4667fdbcc80390b4f2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD const std::string_view &amp;</type>
+        <definition>SR_NODISCARD const std::string_view &amp; SR_UTILS_NS::HashManager::HashToString</definition>
+        <argsstring>(Hash hash) const</argsstring>
+        <name>HashToString</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::HashToString</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="35" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a3345991ca012f2df42959b1cf3d364a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>SR_NODISCARD StringAtom SR_UTILS_NS::HashManager::HashToStringAtom</definition>
+        <argsstring>(Hash hash) const</argsstring>
+        <name>HashToStringAtom</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::HashToStringAtom</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="36" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a94aa16c854558a432b42c01e60bc7cc8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::HashManager::Exists</definition>
+        <argsstring>(Hash hash) const</argsstring>
+        <name>Exists</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::Exists</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hash</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="37" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a43bfb40d52143fb2497210678f52be8a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const Storage &amp;</type>
+        <definition>SR_NODISCARD const Storage &amp; SR_UTILS_NS::HashManager::GetStorage</definition>
+        <argsstring>() const</argsstring>
+        <name>GetStorage</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::GetStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="39" column="36" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a18020db161dcd90789ebe431778ad0d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+        <definition>SR_NODISCARD StringHashInfo * SR_UTILS_NS::HashManager::GetOrAddInfo</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>GetOrAddInfo</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::GetOrAddInfo</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="41" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a09804ec0159931cf2a351c99d1fe5142" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+        <definition>SR_NODISCARD StringHashInfo * SR_UTILS_NS::HashManager::GetOrAddInfo</definition>
+        <argsstring>(const std::string_view &amp;str)</argsstring>
+        <name>GetOrAddInfo</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::GetOrAddInfo</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="42" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a8f59068dba32f0eb5f33a49288a8f5c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="structSR__UTILS__NS_1_1StringHashInfo" kindref="compound">StringHashInfo</ref> *</type>
+        <definition>SR_NODISCARD StringHashInfo * SR_UTILS_NS::HashManager::GetOrAddInfo</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>GetOrAddInfo</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::GetOrAddInfo</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="43" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a29573d75d5c99a30c1955d949db21a2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Hash</type>
+        <definition>Hash SR_UTILS_NS::HashManager::AddHash</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>AddHash</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::AddHash</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1a49c3ab57384e8d555bab136e96c9d648" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Hash</type>
+        <definition>Hash SR_UTILS_NS::HashManager::AddHash</definition>
+        <argsstring>(const std::string_view &amp;str)</argsstring>
+        <name>AddHash</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::AddHash</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1HashManager_1af39d4a47f7666f4b26c2309115aef814" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Hash</type>
+        <definition>Hash SR_UTILS_NS::HashManager::AddHash</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>AddHash</name>
+        <qualifiedname>SR_UTILS_NS::HashManager::AddHash</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="47" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Не можем наследоваться от <ref refid="classSR__UTILS__NS_1_1Singleton" kindref="compound">Singleton</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::HashManager</label>
+        <link refid="classSR__UTILS__NS_1_1HashManager"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::HashManager</label>
+        <link refid="classSR__UTILS__NS_1_1HashManager"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" line="21" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/HashManager.h" bodystart="21" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a29573d75d5c99a30c1955d949db21a2c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>AddHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a49c3ab57384e8d555bab136e96c9d648" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>AddHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1af39d4a47f7666f4b26c2309115aef814" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>AddHash</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a94aa16c854558a432b42c01e60bc7cc8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Exists</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a18020db161dcd90789ebe431778ad0d2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>GetOrAddInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a09804ec0159931cf2a351c99d1fe5142" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>GetOrAddInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a8f59068dba32f0eb5f33a49288a8f5c7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>GetOrAddInfo</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a43bfb40d52143fb2497210678f52be8a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>GetStorage</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a019d56d769a4e95b6e929d5dd88fba08" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Hash</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a75a9eaa3c048b44600a25a1144927d39" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>HashManager</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a9c2940184d2b2b4667fdbcc80390b4f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>HashToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a3345991ca012f2df42959b1cf3d364a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>HashToStringAtom</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1af26406e694801e57f0bb681a706300ca" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a727d47973149f0c3385e1e1d3546a70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Lock</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1adaf6f0cafa82c90aed21f8efb96719f9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a294cb1682ad0acaf65faa9c8b4141152" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>m_strings</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1ae414c0b46b9c55de0f6628ea5cd9f0b8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Register</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1aae383bfcc576158d5bf44d9b6c83421d" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Storage</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a26a92592aa6c9302b9f4a5bcb98028c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>Unlock</name></member>
+      <member refid="classSR__UTILS__NS_1_1HashManager_1a249ce982576131d060e141440bb974fb" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::HashManager</scope><name>~HashManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__UTILS__NS_1_1SRADeserializer" kind="class" language="C++" prot="public">
+    <compoundname>SR_UTILS_NS::SRADeserializer</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1IBaseDeserializer" prot="public" virt="non-virtual">SR_UTILS_NS::IBaseDeserializer</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1SRAISerialization" prot="public" virt="non-virtual">SR_UTILS_NS::SRAISerialization</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1SRADeserializer_1a78f2a39abc9a7ed976bf3a9bb6b8c18a" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend SR_UTILS_NS::SRADeserializer::SRASerializer</definition>
+        <argsstring></argsstring>
+        <name>SRASerializer</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::SRASerializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="40" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1ac3154d51e2e43816876a60a42cd3e194" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::LoadFromFile</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path) override</argsstring>
+        <name>LoadFromFile</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::LoadFromFile</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a77e37dee1649da24ce52a95bbcaa4c3b">LoadFromFile</reimplements>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="42" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a32090fcffef7d279921a145599e56362" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::LoadFromString</definition>
+        <argsstring>(const std::string &amp;str) override</argsstring>
+        <name>LoadFromString</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::LoadFromString</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a15adfdb9a38d4a4cba5749bcfc1d7f0c">LoadFromString</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="43" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a257c7731126b9614f4510f37bf6748d1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::ShouldSetDefaults</definition>
+        <argsstring>(const SerializationId &amp;name) const noexcept override</argsstring>
+        <name>ShouldSetDefaults</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::ShouldSetDefaults</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a25cc1bbad2500a90305a35a0d88bc2d9">ShouldSetDefaults</reimplements>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="45" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1ab73b63cd98a4bfa60783be61ea424027" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::ShouldSetDefaults</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>ShouldSetDefaults</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::ShouldSetDefaults</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a0e035d1429ccd3fb7b12b18743d73609">ShouldSetDefaults</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="46" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::AllowNewMapKeys</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>AllowNewMapKeys</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::AllowNewMapKeys</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1acbd2f1ecf77dc820da221fd597b43de1">AllowNewMapKeys</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="47" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1ae7e250e8ea6d1f90ad1b1b58e2a16207" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::IsPreserveMode</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>IsPreserveMode</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::IsPreserveMode</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a54b9aed3912caba80b09a6addb1e0c58">IsPreserveMode</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="48" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::AllowReAllocPointer</definition>
+        <argsstring>(ReAllocPointerReason reason) const noexcept override</argsstring>
+        <name>AllowReAllocPointer</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::AllowReAllocPointer</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a6c51334854ba345f5c5c4922b8c57f2d">AllowReAllocPointer</reimplements>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1" kindref="member">ReAllocPointerReason</ref></type>
+          <declname>reason</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="49" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SRADeserializer_1a26a8b21e1852d7428a65d70b99a0c03e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::SRADeserializer::ReportError</definition>
+        <argsstring>(const std::string &amp;message) override</argsstring>
+        <name>ReportError</name>
+        <qualifiedname>SR_UTILS_NS::SRADeserializer::ReportError</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1IDeserializer_1a7603f7f0fbbd7df02079b32dc5cb5541">ReportError</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="51" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_UTILS_NS::IBaseDeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseDeserializer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::IBaseSerialization</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseSerialization"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::IDeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1IDeserializer"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SRADeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1SRADeserializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SRAISerialization</label>
+        <link refid="classSR__UTILS__NS_1_1SRAISerialization"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_UTILS_NS::IBaseDeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseDeserializer"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::IBaseSerialization</label>
+        <link refid="classSR__UTILS__NS_1_1IBaseSerialization"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_root</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::IDeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1IDeserializer"/>
+      </node>
+      <node id="1">
+        <label>SR_UTILS_NS::SRADeserializer</label>
+        <link refid="classSR__UTILS__NS_1_1SRADeserializer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::SRAISerialization</label>
+        <link refid="classSR__UTILS__NS_1_1SRAISerialization"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::SerializationId</label>
+        <link refid="structSR__UTILS__NS_1_1SerializationId"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::SerializationNode</label>
+        <link refid="structSR__UTILS__NS_1_1SerializationNode"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>id</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::SerializationTrivialDataType</label>
+        <link refid="unionSR__UTILS__NS_1_1SerializationTrivialDataType"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" line="39" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/SRASerialization.h" bodystart="39" bodyend="53"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a67181fd654516e454c45e063e5f4bbd9" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowNewMapKeys</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a738a00dcd6015aaa7f11d45f8c06f4f6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>AllowReAllocPointer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a288a3d56ac47bd979c2c851c1273c601" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>BeginArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a0d3298539c157d8ec4b8f9fb2fb34824" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>BeginItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a9ef5e296def19ffc466bf77d9787c633" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>BeginObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a78fe121da536bcc3766bf23d6cc9b09f" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndArray</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4d18c6a2b0437ba0ec69d241819d4a42" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a6095a9c03e5caef545618b09c1085fe6" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>EndObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a6c2ed40e88068d5558157bb4238fc2c9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetCurrentNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4db644f026964230f3933efe8655f8f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetCurrentNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a44738c1f287d67625d1e757b1bff1b5c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a3ada5c5722382f3ba36fbeb607a4017a" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ad4afdab87bcec0fc25bf96c7490d10fe" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2268f719568d46427de3da07aed3b477" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>GetWalkNode</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aeff9dc19052b786fcd07eb9c2da6f5af" prot="protected" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsAllowEmptyElementsInArrayImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a97255b60cbd191f5bf7f79077f000a8c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsDefault</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ae186b0817ce5617ebd3ee89fe1d27172" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsNeedUseTabs</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1ae7e250e8ea6d1f90ad1b1b58e2a16207" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>IsPreserveMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1ac3154d51e2e43816876a60a42cd3e194" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>LoadFromFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a32090fcffef7d279921a145599e56362" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>LoadFromString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1ae494a0fc533f5482207b5d2ad5ac2a9e" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_root</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a2309dce220bbbf13e3c82ccc3b193dd6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_stack</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1a4f35e011acf0daf2bef0d11e7e8a47b0" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>m_walker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ab4c031eb7f954afb66aa97cbeda6fd89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadAny</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5e9020baaac2f2639122919f9eb07a62" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadBool</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a4150c0fedeccfe74530749733d86b119" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadDouble</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a57602329ccadb43676004c3bfbed47f4" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadFloat</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5c9290b8e702e9dc5f461c65d18acf0f" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1afb83ca9d7bf784fa43f3be34cb5dfe63" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a87a5d04d5dd9f7435f2ce41110e70186" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a2e0c45f71676998a0abacbf8f8c21a96" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a9da1d572c985200dbffe6a8aed6ed3ba" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1aa0726eac2ef10d236a5a856746213bba" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ad0ae1c7cb737c8f7e3612583c4b1d286" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1affe2bfcff08cd0728d6e7bb6cc18fb75" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadString</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a2be0bcb6c2248c624ee7193ebc3b8ac2" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a2f97d8a37b14ea026ae08a4b58f5bcfe" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a786afd129d1c9ddef8315dfdf5c2e212" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1ad48a3ce7dcf3619e7df602f46ed601d7" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReadUInt</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1afff9a5dd6dd23fd254378b08558878a1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReAllocPointerReason</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a26a8b21e1852d7428a65d70b99a0c03e" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ReportError</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a7886e3df1897f3be8f32f9366eff5e1f" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ResetWalker</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseDeserializer_1a5180495b760dc6af6944549e49b9011c" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SaveToFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1IBaseSerialization_1aabb53dc9898915e869ce8da89e8505a3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SaveToFileImpl</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRAISerialization_1a929313320a3ebbf7e5dcb9fc6c364e38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SetUseTabs</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a257c7731126b9614f4510f37bf6748d1" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ShouldSetDefaults</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1ab73b63cd98a4bfa60783be61ea424027" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ShouldSetDefaults</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRADeserializer_1a78f2a39abc9a7ed976bf3a9bb6b8c18a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>SRASerializer</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1a1cf73ae6ad9fed00fc8499875061cdaa" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ToString</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRAISerialization_1ac4923d2272f3e99b4ac177df6b4af898" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>ToStringBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1ae91b8af83592f3a9e46f46e953a292a9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>UniquePtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1IDeserializer_1aa8f3b9a70102c6be70594dec1046ae87" prot="public" virt="virtual"><scope>SR_UTILS_NS::SRADeserializer</scope><name>~IDeserializer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

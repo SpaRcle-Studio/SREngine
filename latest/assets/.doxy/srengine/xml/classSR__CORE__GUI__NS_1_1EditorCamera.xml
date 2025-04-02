@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1EditorCamera" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::EditorCamera</compoundname>
+    <basecompoundref refid="classSR__GTYPES__NS_1_1Camera" prot="public" virt="non-virtual">SR_GTYPES_NS::Camera</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1EditorCamera_1ab76dddd60a59e2389088a1af12751c65" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__GUI__NS_1_1EditorCamera" kindref="compound">EditorCamera</ref> &gt;</type>
+        <definition>using SR_CORE_GUI_NS::EditorCamera::Ptr =  SR_HTYPES_NS::SharedPtr&lt;EditorCamera&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorCamera::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="17" column="9" bodyfile="Engine/Core/inc/Core/GUI/EditorCamera.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1EditorCamera_1a8b7b8612f22e478db61ad29a3d137329" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__CORE__GUI__NS_1_1SceneViewer" kindref="compound">SceneViewer</ref> *</type>
+        <definition>SceneViewer* SR_CORE_GUI_NS::EditorCamera::m_sceneViewer</definition>
+        <argsstring></argsstring>
+        <name>m_sceneViewer</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorCamera::m_sceneViewer</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="28" column="21" bodyfile="Engine/Core/inc/Core/GUI/EditorCamera.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorCamera_1aac7a08b0e6613a1a02ae6c52603f84ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::EditorCamera::SetSceneViewer</definition>
+        <argsstring>(SceneViewer *pSceneViewer)</argsstring>
+        <name>SetSceneViewer</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorCamera::SetSceneViewer</qualifiedname>
+        <param>
+          <type><ref refid="classSR__CORE__GUI__NS_1_1SceneViewer" kindref="compound">SceneViewer</ref> *</type>
+          <declname>pSceneViewer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="20" column="14" bodyfile="Engine/Core/inc/Core/GUI/EditorCamera.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorCamera_1ad2a212f9950f6bc5cdf3f23dcc3acb57" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_GUI_NS::EditorCamera::ExecuteInEditMode</definition>
+        <argsstring>() const override</argsstring>
+        <name>ExecuteInEditMode</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorCamera::ExecuteInEditMode</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a18af2c953acad770e70af93a16882340">ExecuteInEditMode</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="22" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorCamera.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorCamera_1a70371618d01c701310f5dd630d8e693e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_CORE_GUI_NS::EditorCamera::IsEditorCamera</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>IsEditorCamera</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorCamera::IsEditorCamera</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Camera_1aadc4129a4d23df36a858973ab8ca58de">IsEditorCamera</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="23" column="27" bodyfile="Engine/Core/inc/Core/GUI/EditorCamera.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1EditorCamera_1a1fc223bc0f7a87d1c514b5a33d95c37d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FPoint</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FPoint SR_CORE_GUI_NS::EditorCamera::GetMousePos</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetMousePos</name>
+        <qualifiedname>SR_CORE_GUI_NS::EditorCamera::GetMousePos</qualifiedname>
+        <reimplements refid="classSR__GTYPES__NS_1_1Camera_1ac26989ed1043d04a05f562f31c95c4aa">GetMousePos</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="25" column="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::EditorCamera</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorCamera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GTYPES_NS::Camera</label>
+        <link refid="classSR__GTYPES__NS_1_1Camera"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Entity</label>
+      </node>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::EditorCamera</label>
+        <link refid="classSR__CORE__GUI__NS_1_1EditorCamera"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GTYPES_NS::Camera</label>
+        <link refid="classSR__GTYPES__NS_1_1Camera"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/EditorCamera.h" line="14" column="5" bodyfile="Engine/Core/inc/Core/GUI/EditorCamera.h" bodystart="14" bodyend="30"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>Awake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>BaseComponent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ae0637533222c48a57acd0e1ec3f52959" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>CalculateScreenFactor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a00252585d867c3e26a0f3e73ff363a5a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>CalculateScreenFactor</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a45ea4ca33bdf3b04024cd6d88e5cfc9a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>Camera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>CheckActivity</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>Detach</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1ad2a212f9950f6bc5cdf3f23dcc3acb57" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GameObjectPtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetAspect</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetBarycenter</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraDir</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraEye</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetComponentProperties</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetFar</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetFOV</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetGameObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a6e080a7fd94c6139d5ae4cee2df26d12" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetGLPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac03a4e3c575c08d9932d213729688d6d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetImGuizmoView</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetIndexInSceneUpdater</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1a1fc223bc0f7a87d1c514b5a33d95c37d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetMousePos</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aaf438a0365dfd08692aebdc1570e419b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetNear</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a3b7e9d3f4240eb89881154169692cc63" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetOrthogonal</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad7904a1e9902362f3c720999538c276d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aef018d22216b905182903fc1bce5557c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a79b93c612e02ed390531ea901cdd12d6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a887736d7f50d77c5f8b133614f300448" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetProjectionNoFOV</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a56f1a4720ad71a7ac8e65263629c99fb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a4a903be3a90733dbad3fe9e3e26ecc89" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRenderTechnique</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a03e5ff8cbac4acec0dd8043a6732855d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRenderTechniquePath</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a499a53cb08f173222c9a0bbc06af98fd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRoot</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a418836a2a691249d942b88437b58d33c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetRotation</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0baa97c9e541c9150845fcd338b6f4f8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1afa3d93c2126fa899ebbcc8ab7b752291" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetSceneObject</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ae0cfb85dc121a617331069bfd291ebff" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetScreenRay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a8feef148afcbadac678bffcffe25514e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetScreenRay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ae677337d7264a0b069d02bf136d89570" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetSize</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetTransform</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetView</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewDirection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewDirection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewTranslate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>HasParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>HasScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1a70371618d01c701310f5dd630d8e693e" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsEditorCamera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsPausedMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsPlayingMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>IsUpdatable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>LateUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_indexInSceneUpdater</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a58ed325cff4da93cce7d1ffd323e4886" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_isActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a353c88717dd50e343371ffe0d0d8c068" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_isAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a01d2835c4cb9cab3dc85a24cb6330830" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_isAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aa9bfad916eec33a0f4351054194c53e3" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_isComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_isEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_isStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_parent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_properties</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_scene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_sceneObject</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1a8b7b8612f22e478db61ad29a3d137329" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>m_sceneViewer</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1a42ced6421db34114f544ba2d7b6c6d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa0c5a5e6d07bf4d4516229fe544dd49" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af64eb0df50ce6d50cd22662edf0e6a7b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a7a6557ebfc240e92b332b22fe85ebddf" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a1970aad1257d0a5d231fb34a1f3f56df" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aba0d2511d0fb2342ae68f97c24f05ffc" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnDetached</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a314c3616df8aa102db40392e6b9e0658" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnDisable</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a60300722f479a824b9903f08ecd1ac82" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnEnable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a561f35b144564e8df91651b3f8e57693" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af7e2ecd6bef36595ac12274d6a6cc77c" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnLoaded</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a08a31e8f19278cf24c8d370612983b4f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aee0027f96ce5bec8a30edf069fa4dc10" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1adb3637af3274c542b44b17a27bebd5a0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aac7babfab0aaf8e811e05f8f55dbebb1" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a54e04b235d9aaa0f027996b71362242b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a9bb3f2e63ed778951c409dba0bd1915f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a5b3c94dcc9fd4c8f2ed748601d0c4e2a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>OriginType</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1ab76dddd60a59e2389088a1af12751c65" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>Ptr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a6e97391d1dc50a29f1bdc0179c925019" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SceneObjectPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a2e37d2ebbceab36530a6c79cad4b3606" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aa923dea811e3ff96d420ce4d0b7b98c9" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a804eded6c3d2b51649c307280b045e02" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aab51d4b350f2e2331c563fe06f0ac24a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>ScreenToWorldPoint</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ad94a8ad5e03600e4f9bdae868ba6021b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetEnabled</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1af720096a6ae5ad8517abb6d280fc4685" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetFar</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a638d9fe2a73684c15bd909437a50903f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetFOV</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1af57bdc6a2c4f4ed50fec8a5175bcbf8f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetIndexIdSceneUpdater</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a2d3b02b93f204910985291199cb21224" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetNear</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1ac9780c1f95cd3106101f4e1595550816" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a35eb89ae4b657d17073f9ae0d2a79c23" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetPriority</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a76a5738d5676b9207c723d854d107547" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetRenderTechnique</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1EditorCamera_1aac7a08b0e6613a1a02ae6c52603f84ee" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>SetSceneViewer</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a6f77bb2633d24b9b2a8e1fa3849e0e05" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>Start</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a55ba0d3b4c08092148668bae579366ff" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>TryGetParent</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1af6318d76959d6567b2d4ea416c4b3445" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>TryGetRenderScene</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a02cdaa6ae8c728a1f66192c9e6f54322" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>TryGetScene</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a4cbe75de74328d6615d636a811847cee" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>Update</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a0f0854c8d45651dc55c6a44f20528b2b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>UpdateProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a9bde700fe5d9d427a4cf9903bfcb2d7c" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>UpdateProjection</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a38cce93b8062f6f8f6c79fb1f57928be" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>UpdateView</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1ac242de34bd62c6f38840bf37f8a8acfe" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>~Camera</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a135465a44a99fa3e946782dbc11f56c7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

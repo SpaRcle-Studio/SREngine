@@ -1,0 +1,925 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="PipelineType_8h" kind="file" language="C++">
+    <compoundname>PipelineType.h</compoundname>
+    <includes refid="Enumerations_8h" local="no">Utils/Common/Enumerations.h</includes>
+    <includes refid="Debug_8h" local="no">Utils/Debug.h</includes>
+    <includes refid="Matrix4x4_8h" local="no">Utils/Math/Matrix4x4.h</includes>
+    <includedby refid="MeshManager_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h</includedby>
+    <includedby refid="DepthBufferPass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</includedby>
+    <includedby refid="ShaderOverridePass_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</includedby>
+    <includedby refid="PipelineState_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</includedby>
+    <includedby refid="RenderContext_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h</includedby>
+    <includedby refid="BasicWindowImpl_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h</label>
+        <link refid="PipelineType_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>Utils/Common/Breakpoint.h</label>
+        <link refid="Breakpoint_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>Utils/Common/CastUtils.h</label>
+        <link refid="CastUtils_8h_source"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Utils/Common/EnumReflector.h</label>
+        <link refid="EnumReflector_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Utils/Common/Enumerations.h</label>
+        <link refid="Enumerations_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>Utils/Common/HashManager.h</label>
+        <link refid="HashManager_8h_source"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>Utils/Common/Hashes.h</label>
+        <link refid="Hashes_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Utils/Common/NonCopyable.h</label>
+        <link refid="NonCopyable_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/Common/Singleton.h</label>
+        <link refid="Singleton_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>Utils/Common/StringFormat.h</label>
+        <link refid="StringFormat_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>Utils/Common/StringUtils.h</label>
+        <link refid="StringUtils_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>Utils/Common/ThreadUtils.h</label>
+        <link refid="ThreadUtils_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>Utils/Debug.h</label>
+        <link refid="Debug_8h_source"/>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>Utils/FileSystem/Path.h</label>
+        <link refid="Path_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>Utils/Math/Axis.h</label>
+        <link refid="Axis_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>Utils/Math/Mathematics.h</label>
+        <link refid="Mathematics_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>Utils/Math/Matrix4x4.h</label>
+        <link refid="Matrix4x4_8h_source"/>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>Utils/Math/Quaternion.h</label>
+        <link refid="Quaternion_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>Utils/Math/Vector2.h</label>
+        <link refid="Vector2_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>Utils/Math/Vector3.h</label>
+        <link refid="Vector3_8h_source"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>Utils/Math/Vector4.h</label>
+        <link refid="Vector4_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Utils/Math/Vector6.h</label>
+        <link refid="Vector6_8h_source"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>Utils/Platform/Platform.h</label>
+        <link refid="Platform_8h_source"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>Utils/Platform/Stacktrace.h</label>
+        <link refid="Stacktrace_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>Utils/Serialization/ObjectDataAccessor.h</label>
+        <link refid="ObjectDataAccessor_8h_source"/>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>Utils/TypeTraits/TypeTraits.h</label>
+        <link refid="TypeTraits_8h_source"/>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>Utils/Types/Map.h</label>
+        <link refid="Map_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Utils/Types/MerkleTree.h</label>
+        <link refid="MerkleTree_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>Utils/Types/SafePtrLockGuard.h</label>
+        <link refid="SafePtrLockGuard_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>Utils/Types/StringAtom.h</label>
+        <link refid="StringAtom_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Utils/macros.h</label>
+        <link refid="macros_8h_source"/>
+      </node>
+      <node id="6">
+        <label>Utils/stdInclude.h</label>
+        <link refid="stdInclude_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>Codegen/EnumsFwd.generated.hpp</label>
+      </node>
+      <node id="47">
+        <label>algorithm</label>
+      </node>
+      <node id="48">
+        <label>any</label>
+      </node>
+      <node id="41">
+        <label>array</label>
+      </node>
+      <node id="39">
+        <label>atomic</label>
+      </node>
+      <node id="36">
+        <label>cassert</label>
+      </node>
+      <node id="24">
+        <label>cctype</label>
+      </node>
+      <node id="8">
+        <label>cfloat</label>
+      </node>
+      <node id="56">
+        <label>chrono</label>
+      </node>
+      <node id="37">
+        <label>cmath</label>
+      </node>
+      <node id="20">
+        <label>codecvt</label>
+      </node>
+      <node id="60">
+        <label>concepts</label>
+      </node>
+      <node id="61">
+        <label>condition_variable</label>
+      </node>
+      <node id="18">
+        <label>cstdarg</label>
+      </node>
+      <node id="21">
+        <label>cstddef</label>
+      </node>
+      <node id="58">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>cstdio</label>
+      </node>
+      <node id="50">
+        <label>cstdlib</label>
+      </node>
+      <node id="26">
+        <label>cstring</label>
+      </node>
+      <node id="53">
+        <label>ctime</label>
+      </node>
+      <node id="45">
+        <label>exception</label>
+      </node>
+      <node id="76">
+        <label>flat_hash_map/flat_hash_map.hpp</label>
+      </node>
+      <node id="99">
+        <label>fmt/color.h</label>
+      </node>
+      <node id="72">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="98">
+        <label>fmt/printf.h</label>
+      </node>
+      <node id="30">
+        <label>fstream</label>
+      </node>
+      <node id="43">
+        <label>functional</label>
+      </node>
+      <node id="82">
+        <label>glm/glm.hpp</label>
+      </node>
+      <node id="85">
+        <label>glm/gtc/quaternion.hpp</label>
+      </node>
+      <node id="83">
+        <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="102">
+        <label>glm/gtx/matrix_decompose.hpp</label>
+      </node>
+      <node id="84">
+        <label>glm/gtx/string_cast.hpp</label>
+      </node>
+      <node id="19">
+        <label>initializer_list</label>
+      </node>
+      <node id="59">
+        <label>iomanip</label>
+      </node>
+      <node id="13">
+        <label>iosfwd</label>
+      </node>
+      <node id="54">
+        <label>iostream</label>
+      </node>
+      <node id="10">
+        <label>limits</label>
+      </node>
+      <node id="52">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>locale</label>
+      </node>
+      <node id="42">
+        <label>map</label>
+      </node>
+      <node id="29">
+        <label>memory</label>
+      </node>
+      <node id="34">
+        <label>mutex</label>
+      </node>
+      <node id="63">
+        <label>numbers</label>
+      </node>
+      <node id="62">
+        <label>numeric</label>
+      </node>
+      <node id="70">
+        <label>openssl/sha.h</label>
+      </node>
+      <node id="28">
+        <label>optional</label>
+      </node>
+      <node id="32">
+        <label>ostream</label>
+      </node>
+      <node id="33">
+        <label>queue</label>
+      </node>
+      <node id="57">
+        <label>random</label>
+      </node>
+      <node id="38">
+        <label>ranges</label>
+      </node>
+      <node id="55">
+        <label>ratio</label>
+      </node>
+      <node id="14">
+        <label>regex</label>
+      </node>
+      <node id="44">
+        <label>set</label>
+      </node>
+      <node id="17">
+        <label>shared_mutex</label>
+      </node>
+      <node id="9">
+        <label>span</label>
+      </node>
+      <node id="75">
+        <label>sparsehash/dense_hash_map</label>
+      </node>
+      <node id="51">
+        <label>sstream</label>
+      </node>
+      <node id="23">
+        <label>stack</label>
+      </node>
+      <node id="15">
+        <label>stdexcept</label>
+      </node>
+      <node id="35">
+        <label>string</label>
+      </node>
+      <node id="16">
+        <label>string_view</label>
+      </node>
+      <node id="49">
+        <label>thread</label>
+      </node>
+      <node id="11">
+        <label>type_traits</label>
+      </node>
+      <node id="46">
+        <label>unordered_map</label>
+      </node>
+      <node id="22">
+        <label>unordered_set</label>
+      </node>
+      <node id="40">
+        <label>utility</label>
+      </node>
+      <node id="27">
+        <label>variant</label>
+      </node>
+      <node id="31">
+        <label>vector</label>
+      </node>
+      <node id="71">
+        <label>xxHash/xxhash.h</label>
+      </node>
+      <node id="64">
+        <label>zlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="13">
+        <label>Engine/Core/inc/Core/GUI/EditorGizmo.h</label>
+        <link refid="EditorGizmo_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Engine/Core/inc/Core/GUI/Inspector.h</label>
+        <link refid="Inspector_8h_source"/>
+      </node>
+      <node id="24">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawer.h</label>
+        <link refid="PropertyDrawer_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h</label>
+        <link refid="BitMapPropertyDrawer_8h_source"/>
+      </node>
+      <node id="27">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/EnumPropertyDrawer.h</label>
+        <link refid="EnumPropertyDrawer_8h_source"/>
+      </node>
+      <node id="29">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h</label>
+        <link refid="MaterialDataPropertyDrawer_8h_source"/>
+      </node>
+      <node id="32">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.h</label>
+        <link refid="MaterialPropertyDrawer_8h_source"/>
+      </node>
+      <node id="28">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h</label>
+        <link refid="ObjectPropertyDrawer_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PathPropertyDrawer.h</label>
+        <link refid="PathPropertyDrawer_8h_source"/>
+      </node>
+      <node id="31">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/PointerPropertyDrawer.h</label>
+        <link refid="PointerPropertyDrawer_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/StringPropertyDrawer.h</label>
+        <link refid="StringPropertyDrawer_8h_source"/>
+      </node>
+      <node id="34">
+        <label>Engine/Core/inc/Core/GUI/PropertyDrawers/VectorPropertyDrawer.h</label>
+        <link refid="VectorPropertyDrawer_8h_source"/>
+      </node>
+      <node id="14">
+        <label>Engine/Core/inc/Core/GUI/SceneTools.h</label>
+        <link refid="SceneTools_8h_source"/>
+      </node>
+      <node id="35">
+        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <link refid="EngineScene_8h_source"/>
+      </node>
+      <node id="41">
+        <label>Engine/Core/inc/Core/World/World.h</label>
+        <link refid="World_8h_source"/>
+      </node>
+      <node id="20">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Lighting/LightSystem.h</label>
+        <link refid="LightSystem_8h_source"/>
+      </node>
+      <node id="2">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/MeshManager.h</label>
+        <link refid="MeshManager_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
+        <link refid="DebugPass_8h_source"/>
+      </node>
+      <node id="15">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DepthBufferPass.h</label>
+        <link refid="DepthBufferPass_8h_source"/>
+      </node>
+      <node id="16">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShaderOverridePass.h</label>
+        <link refid="ShaderOverridePass_8h_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ShadowMapPass.h</label>
+        <link refid="ShadowMapPass_8h_source"/>
+      </node>
+      <node id="21">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h</label>
+        <link refid="EmptyPipeline_8h_source"/>
+      </node>
+      <node id="19">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Pipeline.h</label>
+        <link refid="Pipeline_8h_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineState.h</label>
+        <link refid="PipelineState_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h</label>
+        <link refid="PipelineType_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/VulkanPipeline.h</label>
+        <link refid="VulkanPipeline_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
+        <link refid="DebugRenderer_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h</label>
+        <link refid="RenderContext_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/DebugWireframeMesh.h</label>
+        <link refid="DebugWireframeMesh_8h_source"/>
+      </node>
+      <node id="5">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/IndexedMesh.h</label>
+        <link refid="IndexedMesh_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Mesh3D.h</label>
+        <link refid="Mesh3D_8h_source"/>
+      </node>
+      <node id="7">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/MeshComponent.h</label>
+        <link refid="MeshComponent_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/ProceduralMesh.h</label>
+        <link refid="ProceduralMesh_8h_source"/>
+      </node>
+      <node id="10">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/SkinnedMesh.h</label>
+        <link refid="SkinnedMesh_8h_source"/>
+      </node>
+      <node id="11">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Geometry/Sprite.h</label>
+        <link refid="Sprite_8h_source"/>
+      </node>
+      <node id="12">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/UI/Gizmo.h</label>
+        <link refid="Gizmo_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/AndroidWindow.h</label>
+        <link refid="AndroidWindow_8h_source"/>
+      </node>
+      <node id="36">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h</label>
+        <link refid="BasicWindowImpl_8h_source"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/GLFWWindow.h</label>
+        <link refid="GLFWWindow_8h_source"/>
+      </node>
+      <node id="39">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Win32Window.h</label>
+        <link refid="Win32Window_8h_source"/>
+      </node>
+      <node id="40">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h</label>
+        <link refid="Window_8h_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Window/X11Window.h</label>
+        <link refid="X11Window_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespaceSR__GRAPH__NS">SR_GRAPH_NS</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>Nikita<sp/>on<sp/>01.04.2021.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_PIPELINE_TYPE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_PIPELINE_TYPE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Common/Enumerations.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Debug.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Math/Matrix4x4.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS_T(PipelineType,<sp/>uint8_t,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unknown,<sp/>OpenGL,<sp/>Vulkan,<sp/>DirectX9,<sp/>DirectX10,<sp/>DirectX11,<sp/>DirectX12</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PIPELINE_TYPE_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion" kind="union" language="C++" prot="public">
+    <compoundname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a316d910684be9279f202d623779dd763" prot="public" static="no" mutable="no">
+        <type>int8_t</type>
+        <definition>int8_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s8</definition>
+        <argsstring></argsstring>
+        <name>s8</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s8</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="828" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="828" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a8e24d23c927f84248bc243ac173a88a2" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u8</definition>
+        <argsstring></argsstring>
+        <name>u8</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u8</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="829" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="829" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a3fc45ebcab88678c6404167fb217129f" prot="public" static="no" mutable="no">
+        <type>int16_t</type>
+        <definition>int16_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s16</definition>
+        <argsstring></argsstring>
+        <name>s16</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s16</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="830" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="830" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a0a148b29e8e503d92b2385f7a9369f1f" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u16</definition>
+        <argsstring></argsstring>
+        <name>u16</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u16</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="831" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="831" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a1e04b672e2cf5cf3e6addf5f10f79808" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s32</definition>
+        <argsstring></argsstring>
+        <name>s32</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="832" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="832" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1afee2d520cbfc1342ba9ff1bbb8832ee8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u32</definition>
+        <argsstring></argsstring>
+        <name>u32</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="833" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="833" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ae9b1b8af3039a5bbbcb730d50f3e827d" prot="public" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s64</definition>
+        <argsstring></argsstring>
+        <name>s64</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::s64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="834" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="834" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ad35d484ea3964d7b69abdebd280b576a" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u64</definition>
+        <argsstring></argsstring>
+        <name>u64</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::u64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="835" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="835" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1acca2583438dfddf28f07b8e2cc2db3f6" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::f32</definition>
+        <argsstring></argsstring>
+        <name>f32</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::f32</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="836" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="836" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ae462fb3b097ebb8db72ea52b096746c6" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::f64</definition>
+        <argsstring></argsstring>
+        <name>f64</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion::f64</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="837" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="837" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="827" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="827" bodyend="838"/>
+    <listofallmembers>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1acca2583438dfddf28f07b8e2cc2db3f6" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>f32</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ae462fb3b097ebb8db72ea52b096746c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>f64</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a3fc45ebcab88678c6404167fb217129f" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>s16</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a1e04b672e2cf5cf3e6addf5f10f79808" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>s32</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ae9b1b8af3039a5bbbcb730d50f3e827d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>s64</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a316d910684be9279f202d623779dd763" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>s8</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a0a148b29e8e503d92b2385f7a9369f1f" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>u16</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1afee2d520cbfc1342ba9ff1bbb8832ee8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>u32</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ad35d484ea3964d7b69abdebd280b576a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>u64</name></member>
+      <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a8e24d23c927f84248bc243ac173a88a2" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</scope><name>u8</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

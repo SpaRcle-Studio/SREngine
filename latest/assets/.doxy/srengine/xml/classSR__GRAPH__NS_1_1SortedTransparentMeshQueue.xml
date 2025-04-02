@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__GRAPH__NS_1_1SortedTransparentMeshQueue" kind="class" language="C++" prot="public">
+    <compoundname>SR_GRAPH_NS::SortedTransparentMeshQueue</compoundname>
+    <basecompoundref refid="classSR__GRAPH__NS_1_1SortedMeshQueue" prot="public" virt="non-virtual">SR_GRAPH_NS::SortedMeshQueue</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedTransparentMeshQueue_1ad909bf614d1fd26db0287cc8d341d65a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::SortedTransparentMeshQueue::~SortedTransparentMeshQueue</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~SortedTransparentMeshQueue</name>
+        <qualifiedname>SR_GRAPH_NS::SortedTransparentMeshQueue::~SortedTransparentMeshQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="71" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::SortedMeshQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1SortedMeshQueue"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::SortedTransparentMeshQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1SortedTransparentMeshQueue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_GRAPH_NS::SortedMeshQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1SortedMeshQueue"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_GRAPH_NS::SortedTransparentMeshQueue</label>
+        <link refid="classSR__GRAPH__NS_1_1SortedTransparentMeshQueue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="69" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="69" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a787f40059af8e6a067539a0de045f2f6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>Add</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ac852b9646ef66f469e20916b8552699c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>begin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a924206ba5616a36b4f71d9046d351608" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>begin</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1af10c9580eb50e68b0ef71e2490f170d8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>Clear</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ae5262e32be328e22226eb311f69a861d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>ConstIterator</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a7fa09b035cc11fba28bc95dda30a515f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>empty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a0fe9e24c5c4570ca2f84f73147b73794" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>end</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ad4357379ad02c8cc8f7807ec25e6ccfe" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>end</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1adf6bff62eb6ee9c7a2e7c0f3840098e8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>GetQueue</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1acf7fa76241326ee2ca43cc84db726ea2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>Iterator</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1aec4e8859d4191acbab2a2c6af37aaab8" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>m_data</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a8640b19f11311eeda251a13f07af2136" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>m_dirty</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ae90b4f5960c943c7a92bddf23cdd887e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>m_queue</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a24f032b79d28544f12f24a116f9e3364" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>m_target</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a381e45e5ffa8d8f21d406cd901fbe75d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>MeshPtr</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1adbb75be0b3a04f7cc55053f50bba4f1f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>Remove</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a5dfd87df1c2f036ad0146696d6af1df4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>ReverseConstIterator</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ad402708b56030627bc381c5b8e2905ce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>ReverseIterator</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a6ba841274d25372fdd237a361d9b4d63" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>SetTarget</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a518adc7bcd8bebe76d1e01fe85f73f79" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>ShaderPtr</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a9d5d04abc93535f8fd257240fa310f90" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>Sort</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a658703271f1b0051870a3f025c5e9739" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>SortedMeshQueue</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a28c25194ff3a8dfa64da5bad7362a125" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>SortInternal</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a39b6f38808fa44ded240c807fcee2175" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>~SortedMeshQueue</name></member>
+      <member refid="classSR__GRAPH__NS_1_1SortedTransparentMeshQueue_1ad909bf614d1fd26db0287cc8d341d65a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedTransparentMeshQueue</scope><name>~SortedTransparentMeshQueue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

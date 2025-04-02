@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::RenderTechniqueEditor</compoundname>
+    <basecompoundref refid="classSR__GRAPH__GUI__NS_1_1NodeWidget" prot="public" virt="non-virtual">SR_GRAPH_GUI_NS::NodeWidget</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a5295e4a05a79d1e3a68354543161eb54" prot="private" static="no">
+        <type><ref refid="classSR__GRAPH__GUI__NS_1_1NodeWidget" kindref="compound">SR_GRAPH_GUI_NS::NodeWidget</ref></type>
+        <definition>using SR_CORE_GUI_NS::RenderTechniqueEditor::Super =  SR_GRAPH_GUI_NS::NodeWidget</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_CORE_GUI_NS::RenderTechniqueEditor::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="14" column="9" bodyfile="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a98218fdaf492bc9a2ba09def2ac12ea8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::RenderTechniqueEditor::RenderTechniqueEditor</definition>
+        <argsstring>()</argsstring>
+        <name>RenderTechniqueEditor</name>
+        <qualifiedname>SR_CORE_GUI_NS::RenderTechniqueEditor::RenderTechniqueEditor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1ae7fcc71de04237ef1d72fefffcfb4141" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_CORE_GUI_NS::RenderTechniqueEditor::~RenderTechniqueEditor</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~RenderTechniqueEditor</name>
+        <qualifiedname>SR_CORE_GUI_NS::RenderTechniqueEditor::~RenderTechniqueEditor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="17" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a73f18cf12576b6a171327f40967bef6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::RenderTechniqueEditor::OnOpen</definition>
+        <argsstring>() override</argsstring>
+        <name>OnOpen</name>
+        <qualifiedname>SR_CORE_GUI_NS::RenderTechniqueEditor::OnOpen</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1Widget_1aed9b7c656b3efa34f342fbcd1d20a26f">OnOpen</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="20" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1adbae2473b4812b3d72882920bf160ece" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::RenderTechniqueEditor::InitCreationPopup</definition>
+        <argsstring>() override</argsstring>
+        <name>InitCreationPopup</name>
+        <qualifiedname>SR_CORE_GUI_NS::RenderTechniqueEditor::InitCreationPopup</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a31e1dfc6d1173842c53b8eb40e48dbe9">InitCreationPopup</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="21" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a64cadc3e2d8e7bf54628a7b15e4202cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::RenderTechniqueEditor::DrawLeftPanel</definition>
+        <argsstring>() override</argsstring>
+        <name>DrawLeftPanel</name>
+        <qualifiedname>SR_CORE_GUI_NS::RenderTechniqueEditor::DrawLeftPanel</qualifiedname>
+        <reimplements refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ab5616229433d3415bb18dad3a2575e96">DrawLeftPanel</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="22" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::RenderTechniqueEditor</label>
+        <link refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::NodeWidget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1NodeWidget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::RenderTechniqueEditor</label>
+        <link refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_GUI_NS::NodeWidget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1NodeWidget"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_creationPopup</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_currentFile</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GRAPH_GUI_NS::Widget</label>
+        <link refid="classSR__GRAPH__GUI__NS_1_1Widget"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>SR_HTYPES_NS::SharedPtr&lt; PopupItemSubWidget &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Event"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::IEvent</label>
+        <link refid="classSR__UTILS__NS_1_1IEvent"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::InputHandler</label>
+        <link refid="classSR__UTILS__NS_1_1InputHandler"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="11">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h" bodystart="13" bodyend="24"/>
+    <listofallmembers>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>AddFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a688a0dcd9938d906e3d2be254eca48e4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>AddLink</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a375d36a4967522114518eaab08b1a3b6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>AddNode</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>AddSubWidget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1abd944f87d6a6a36bbf6e814d7929f665" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>CanAddNode</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abe2d33de27ab9ac621ec9a1c215a09be" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>CheckFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a354cc7474ff0b80508a170aaa7cdd842" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>CheckHovered</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a321ec2ddb378410a0b56721cfb18487e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Clear</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1c39213178a2434ac3088d4b1dc2c14f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Close</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aba6d1657b1057318338eb150c404a4de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>ContextPtr</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a85ee3523b82687852fc2e6192c7cc74f" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Draw</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a60366ac8c85837e5c043d9ba80ea2a5a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>DrawAsSubWindow</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a64cadc3e2d8e7bf54628a7b15e4202cd" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>DrawLeftPanel</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af000e35da9096733217349a049c9cbba" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>DrawNodeEditor</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a1c4d0b9c92d2bffb22eb55ff3d8bf160" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>DrawPopupMenu</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a5b5ae7cf8ac26992099be697274ffb73" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>DrawTopPanel</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Event</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ad2b11de509089ba0bd64bb06cf6fb6c7" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Execute</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ac991400ebbaa7c5bdb885f88225c0ecb" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>FindProperty</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1d31a548d7f29f92191c4e3c8da0745a" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1afe5e46c56d62178290ebe24ce4d87026" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>GetContext</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa413cba2094f8133d1b3cbd5243d4525" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>GetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6cd4f0b58e82722cb159f403aac45b36" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>GetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3209e5899cda24a44d5d034ad4bbd408" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>GetRenderScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>GetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>GetWeakStorage</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>IEvent</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af427950d40d48cd091fae13a8ffc21b7" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Init</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1adbae2473b4812b3d72882920bf160ece" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>InitCreationPopup</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a32412b02a67f2d6cc5c12e90e4b0a920" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>InitStructsCreationPopup</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>InputHandler</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ab9dde2f2f151ebf9d0a532437509e809" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>IsFocused</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a2284c33f97d1fc8b93f2065328507f40" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>IsHovered</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>IsKeyPressed</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa7b9cc737b77f148ddaf23a2c687681b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>IsOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a4931b36dbd489c3d6d41a7a51d3ba880" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_creationPopup</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a4364eb5014b66ff915c3c7c399cb1d44" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_currentFile</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1abe9dc88e5c3264ac078406770ccea6d5" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_leftPaneWidth</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ab04e5e7aec8ff357a1ae1571d747d89e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_links</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_mutex</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a5bb204a26ed8697fe08dc62b71cef85b" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_nodeBuilder</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1ae16783115005044f264d68ce1ef1c826" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_nodes</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a8e4520d386cb425733cbb7edb746134d" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_properties</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a059b5c27872a0d4ed29d002017916d99" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_rightPaneWidth</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_subWidgets</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>m_widgetFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a958ada728226fe725f4eba3e9b38f5ae" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>NodeWidget</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>NonCopyable</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a32da4f2ba831d4b13c687bc829beb7a7" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnClose</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnKeyDown</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aced28345faf97a190e126802d65b856b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnKeyPress</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad6bba161a4fb2edb8fa157443709b8cb" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnKeyUp</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a047cdbebece4c4baa00673a647f9a686" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnMouseDown</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a103723382b77ab83ae6468436fb41088" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnMouseMove</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnMousePress</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnMouseUp</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a73f18cf12576b6a171327f40967bef6d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OnOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a214c10395b43d1ae11dd7cfdd0104db0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Open</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3d3dd7631795048741ca59e6d1666a3c" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>OpenFile</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>operator=</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1afdb344a0f229ecb10652306b49effc43" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>RemoveLink</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a1a801810ac93ae3abc03d8b0227c5c2f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>RemoveNode</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9d49df74f8eae10ecc78e5886044b38c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>RenderScenePtr</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a98218fdaf492bc9a2ba09def2ac12ea8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>RenderTechniqueEditor</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a5362809b84a8df38cd96ed91c4fa32c9" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>ResetStrongStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3926681db7399eebd88b303addf9e106" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>ResetWeakStorage</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad5871dbdbb8862c1a21a7600e6bc872c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>ScenePtr</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6344cd24337dddf086e04093a7f7b279" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>SetCenter</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a6221bbe02c9c66ce324814da3ae8377c" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>SetFlags</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a628d6e08d267e2bab19fa6a0247f2de6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>SetManager</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9f93023aaad7df8c9f5572fcd3eec64e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>SetName</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a7c848e9633f66f96a935090bfb450bcd" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>SetScene</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a206de2fe59b705c189cfb792fa6584de" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>SetSize</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1a5295e4a05a79d1e3a68354543161eb54" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Super</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abb58557f3a79bc2790d525791aedb7ac" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>TextCenter</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a071866f1c8743450f2c77cbf91db146f" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>TopPanelClose</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a868196f4ac5c84bb7e150539a92885a1" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>TopPanelOpen</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af62026011224cb39ac96bdc325af6304" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>TopPanelSave</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af15f6aa41a3091dd3c548f0453b8568c" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>TopPanelSaveAt</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Trigger</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9670d827380936251bb9f0af5f305ee4" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Update</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a0c5ff7c46b409834768b63c0f32d4e7b" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>UpdateTouch</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Widget</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>Widget</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~Event</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~InputHandler</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1af750605b9405c534ffa4f43115988362" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~NodeWidget</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1RenderTechniqueEditor_1ae7fcc71de04237ef1d72fefffcfb4141" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~RenderTechniqueEditor</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::RenderTechniqueEditor</scope><name>~Widget</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

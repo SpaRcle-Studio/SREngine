@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>SR_UTILS_NS::EntityRefUtils::PathItem</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a2541b033982b941a7d7dcdf9b0ea0bb5" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+        <definition>StringAtom SR_UTILS_NS::EntityRefUtils::PathItem::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::PathItem::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="44" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a49ccafb9afad94a3d4ec633ee29491a6" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t SR_UTILS_NS::EntityRefUtils::PathItem::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::PathItem::index</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="46" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a5fdf4ae10ff96be9de9f2f4a23f171b4" prot="public" static="no" mutable="no">
+        <type>Action</type>
+        <definition>Action SR_UTILS_NS::EntityRefUtils::PathItem::action</definition>
+        <argsstring></argsstring>
+        <name>action</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::PathItem::action</qualifiedname>
+        <initializer>= Action::Action_Parent</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="48" column="16" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a82b7348daf8aaa929ccb116aa87c8f82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EntityRefUtils::PathItem::PathItem</definition>
+        <argsstring>()=default</argsstring>
+        <name>PathItem</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::PathItem::PathItem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="38" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a20f1a54f51f556834e13e0eda51142f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::EntityRefUtils::PathItem::PathItem</definition>
+        <argsstring>(const StringAtom name, const uint16_t index, const Action action)</argsstring>
+        <name>PathItem</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::PathItem::PathItem</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const Action</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="39" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1aeb991f296240550007b955fcbb0477e2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::EntityRefUtils::PathItem::operator==</definition>
+        <argsstring>(const PathItem &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_UTILS_NS::EntityRefUtils::PathItem::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem" kindref="compound">PathItem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="50" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="50" bodyend="55"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_UTILS_NS::EntityRefUtils::PathItem</label>
+        <link refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::EntityRefUtils::PathItem</label>
+        <link refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" line="35" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/EntityRefUtils.h" bodystart="35" bodyend="56"/>
+    <listofallmembers>
+      <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a5fdf4ae10ff96be9de9f2f4a23f171b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>action</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>HasSerializationFlags</name></member>
+      <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a49ccafb9afad94a3d4ec633ee29491a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>index</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>InitializeClass</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>Load</name></member>
+      <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a2541b033982b941a7d7dcdf9b0ea0bb5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>name</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>OnPreSave</name></member>
+      <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1aeb991f296240550007b955fcbb0477e2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>OriginType</name></member>
+      <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a82b7348daf8aaa929ccb116aa87c8f82" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>PathItem</name></member>
+      <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a20f1a54f51f556834e13e0eda51142f9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>PathItem</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

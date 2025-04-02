@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1IRawMeshHolder" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::IRawMeshHolder</compoundname>
+    <derivedcompoundref refid="classSR__GTYPES__NS_1_1DebugWireframeMesh" prot="public" virt="non-virtual">SR_GTYPES_NS::DebugWireframeMesh</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GTYPES__NS_1_1Mesh3D" prot="public" virt="non-virtual">SR_GTYPES_NS::Mesh3D</derivedcompoundref>
+    <derivedcompoundref refid="classSR__GTYPES__NS_1_1SkinnedMesh" prot="public" virt="non-virtual">SR_GTYPES_NS::SkinnedMesh</derivedcompoundref>
+    <derivedcompoundref refid="classSR__PTYPES__NS_1_1CollisionShape" prot="public" virt="non-virtual">SR_PTYPES_NS::CollisionShape</derivedcompoundref>
+    <includes refid="IRawMeshHolder_8h" local="no">IRawMeshHolder.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54f8031259b5b3ea78a9f794143e681d" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1RawMesh" kindref="compound">SR_HTYPES_NS::RawMesh</ref> *</type>
+        <definition>using SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr =  SR_HTYPES_NS::RawMesh*</definition>
+        <argsstring></argsstring>
+        <name>RawMeshPtr</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::RawMeshPtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="18" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1e49a98ca25d90f7b5a7208a58477f84" prot="public" static="no">
+        <type>int32_t</type>
+        <definition>using SR_HTYPES_NS::IRawMeshHolder::MeshIndex =  int32_t</definition>
+        <argsstring></argsstring>
+        <name>MeshIndex</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::MeshIndex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="19" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54493d5fd9b4f2a57e7a70c217d93560" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_HTYPES_NS::IRawMeshHolder::m_reloadSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_reloadSubscription</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::m_reloadSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="39" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1ae95e6c9b60553a100ddedecf8fa2face" prot="private" static="no" mutable="no">
+        <type>RawMeshPtr</type>
+        <definition>RawMeshPtr SR_HTYPES_NS::IRawMeshHolder::m_rawMesh</definition>
+        <argsstring></argsstring>
+        <name>m_rawMesh</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::m_rawMesh</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="40" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a48bbd761d0762ba3b63fac9aa34daff5" prot="private" static="no" mutable="no">
+        <type>MeshIndex</type>
+        <definition>MeshIndex SR_HTYPES_NS::IRawMeshHolder::m_meshId</definition>
+        <argsstring></argsstring>
+        <name>m_meshId</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::m_meshId</qualifiedname>
+        <initializer>= SR_ID_INVALID</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>определяет порядок меша в файле, если их там несколько TODO: переделать в int16_t, но нужно написать миграторы. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="43" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a13569cf849ebce2239302bf23a63690a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual SR_HTYPES_NS::IRawMeshHolder::~IRawMeshHolder</definition>
+        <argsstring>()</argsstring>
+        <name>~IRawMeshHolder</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::~IRawMeshHolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="21" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD MeshIndex</type>
+        <definition>SR_NODISCARD MeshIndex SR_HTYPES_NS::IRawMeshHolder::GetMeshId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetMeshId</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::GetMeshId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="24" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a4df7afb95a7b0b85ebd5791dcc87a650" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD RawMeshPtr</type>
+        <definition>SR_NODISCARD RawMeshPtr SR_HTYPES_NS::IRawMeshHolder::GetRawMesh</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetRawMesh</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::GetRawMesh</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="25" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a39436d2cc283eb4a57a268d6448f4fd3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_NODISCARD SR_UTILS_NS::Path SR_HTYPES_NS::IRawMeshHolder::GetMeshPath</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetMeshPath</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::GetMeshPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="26" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string SR_HTYPES_NS::IRawMeshHolder::GetMeshStringPath</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetMeshStringPath</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::GetMeshStringPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="27" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a38601beec7f801e569e00c1236d9e487" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_HTYPES_NS::IRawMeshHolder::IsValidMeshId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>IsValidMeshId</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::IsValidMeshId</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="28" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5b9e46a96d1f3ffdcd128f071e6934ac" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::vector&lt; <ref refid="structSR__UTILS__NS_1_1Vertex" kindref="compound">SR_UTILS_NS::Vertex</ref> &gt;</type>
+        <definition>SR_NODISCARD std::vector&lt; SR_UTILS_NS::Vertex &gt; SR_HTYPES_NS::IRawMeshHolder::GetVertices</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetVertices</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::GetVertices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="29" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8cedda755c832cabdaaf14644939695d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string_view</type>
+        <definition>SR_NODISCARD std::string_view SR_HTYPES_NS::IRawMeshHolder::GetGeometryName</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>GetGeometryName</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::GetGeometryName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="30" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a0b7780b0866a0482fa8bbc365d9b795b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_HTYPES_NS::IRawMeshHolder::OnRawMeshChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnRawMeshChanged</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::OnRawMeshChanged</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a71647c3497766a65ce2eb7835762aa05">OnRawMeshChanged</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1a08bd11faeb76d0d9d3ecdcb03cf03b3e">OnRawMeshChanged</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1a5882874deab2bb403553f7a28ffdc43d">OnRawMeshChanged</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1CollisionShape_1add34bdd0ff6bf78697d39ce2b155ae7c">OnRawMeshChanged</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="32" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::IRawMeshHolder::SetRawMesh</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SetRawMesh</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::SetRawMesh</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::IRawMeshHolder::SetRawMesh</definition>
+        <argsstring>(RawMeshPtr pRawMesh)</argsstring>
+        <name>SetRawMesh</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::SetRawMesh</qualifiedname>
+        <param>
+          <type>RawMeshPtr</type>
+          <declname>pRawMesh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5a6bc29a5ae54972e18fb7d61124ecff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::IRawMeshHolder::SetMeshId</definition>
+        <argsstring>(MeshIndex meshIndex, bool forceReload=false)</argsstring>
+        <name>SetMeshId</name>
+        <qualifiedname>SR_HTYPES_NS::IRawMeshHolder::SetMeshId</qualifiedname>
+        <param>
+          <type>MeshIndex</type>
+          <declname>meshIndex</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>forceReload</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="36" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Этот класс предоставляет удобный интерфейс для работы с RwMesh. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_GTYPES_NS::DebugWireframeMesh</label>
+        <link refid="classSR__GTYPES__NS_1_1DebugWireframeMesh"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_GTYPES_NS::Mesh3D</label>
+        <link refid="classSR__GTYPES__NS_1_1Mesh3D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_GTYPES_NS::SkinnedMesh</label>
+        <link refid="classSR__GTYPES__NS_1_1SkinnedMesh"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_HTYPES_NS::IRawMeshHolder</label>
+        <link refid="classSR__HTYPES__NS_1_1IRawMeshHolder"/>
+      </node>
+      <node id="6">
+        <label>SR_PTYPES_NS::Bullet3CollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_PTYPES_NS::CollisionShape</label>
+        <link refid="classSR__PTYPES__NS_1_1CollisionShape"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" line="16" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h" bodystart="16" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8cedda755c832cabdaaf14644939695d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetGeometryName</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1f90420ae0c606687c75766d55d95621" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetMeshId</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a39436d2cc283eb4a57a268d6448f4fd3" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetMeshPath</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1af16c3ef83f6a6e8b98a62fc85a6928d0" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetMeshStringPath</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a4df7afb95a7b0b85ebd5791dcc87a650" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetRawMesh</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5b9e46a96d1f3ffdcd128f071e6934ac" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>GetVertices</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a38601beec7f801e569e00c1236d9e487" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>IsValidMeshId</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a48bbd761d0762ba3b63fac9aa34daff5" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>m_meshId</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1ae95e6c9b60553a100ddedecf8fa2face" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>m_rawMesh</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54493d5fd9b4f2a57e7a70c217d93560" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>m_reloadSubscription</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a1e49a98ca25d90f7b5a7208a58477f84" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>MeshIndex</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a0b7780b0866a0482fa8bbc365d9b795b" prot="public" virt="virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>OnRawMeshChanged</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a54f8031259b5b3ea78a9f794143e681d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>RawMeshPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5a6bc29a5ae54972e18fb7d61124ecff" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>SetMeshId</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a8f54083212793185d112dfc01e612baf" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>SetRawMesh</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1ad5f9834371708471d3f6712e145aa7ae" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>SetRawMesh</name></member>
+      <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a13569cf849ebce2239302bf23a63690a" prot="public" virt="virtual"><scope>SR_HTYPES_NS::IRawMeshHolder</scope><name>~IRawMeshHolder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

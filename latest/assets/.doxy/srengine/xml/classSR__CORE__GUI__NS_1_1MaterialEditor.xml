@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__CORE__GUI__NS_1_1MaterialEditor" kind="class" language="C++" prot="public">
+    <compoundname>SR_CORE_GUI_NS::MaterialEditor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SR_GRAPH_NS::GUI::Widget</basecompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::MaterialEditor</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MaterialEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::GUI::Widget</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_CORE_GUI_NS::MaterialEditor</label>
+        <link refid="classSR__CORE__GUI__NS_1_1MaterialEditor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_GRAPH_NS::GUI::Widget</label>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/inc/Core/GUI/MaterialEditor.h" line="9" column="5" bodyfile="Engine/Core/inc/Core/GUI/MaterialEditor.h" bodystart="9" bodyend="11"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

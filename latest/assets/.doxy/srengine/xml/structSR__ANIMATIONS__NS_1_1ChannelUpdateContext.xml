@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext" kind="struct" language="C++" prot="public">
+    <compoundname>SR_ANIMATIONS_NS::ChannelUpdateContext</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext_1a9f96001ea438ba31fb5418e46cd08079" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; uint16_t &gt;</type>
+        <definition>std::optional&lt;uint16_t&gt; SR_ANIMATIONS_NS::ChannelUpdateContext::gameObjectIndex</definition>
+        <argsstring></argsstring>
+        <name>gameObjectIndex</name>
+        <qualifiedname>SR_ANIMATIONS_NS::ChannelUpdateContext::gameObjectIndex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="45" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext_1a1c2f1c88683a7f9e18faf3c30680c431" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationPose" kindref="compound">AnimationPose</ref> *</type>
+        <definition>AnimationPose* SR_ANIMATIONS_NS::ChannelUpdateContext::pPose</definition>
+        <argsstring></argsstring>
+        <name>pPose</name>
+        <qualifiedname>SR_ANIMATIONS_NS::ChannelUpdateContext::pPose</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="46" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext_1a531916e525f4d930a19dae099a027f86" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__ANIMATIONS__NS_1_1AnimationGraph" kindref="compound">AnimationGraph</ref> *</type>
+        <definition>AnimationGraph* SR_ANIMATIONS_NS::ChannelUpdateContext::pGraph</definition>
+        <argsstring></argsstring>
+        <name>pGraph</name>
+        <qualifiedname>SR_ANIMATIONS_NS::ChannelUpdateContext::pGraph</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="47" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="9">
+        <label>Entity</label>
+      </node>
+      <node id="4">
+        <label>SR_ANIMATIONS_NS::AnimationGraph</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationGraph"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_path</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_pAnimator</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_ANIMATIONS_NS::AnimationPose</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1AnimationPose"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_ANIMATIONS_NS::Animator</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1Animator"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>SR_ANIMATIONS_NS::ChannelUpdateContext</label>
+        <link refid="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pPose</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pGraph</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_ANIMATIONS_NS::IAnimationDataSet</label>
+        <link refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="8">
+        <label>SR_UTILS_NS::Component</label>
+        <link refid="classSR__UTILS__NS_1_1Component"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_sceneObject</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>m_parent</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>m_scene</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_properties</edgelabel>
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_UTILS_NS::IComponentable</label>
+        <link refid="classSR__UTILS__NS_1_1IComponentable"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+      <node id="16">
+        <label>SR_UTILS_NS::Property</label>
+        <link refid="classSR__UTILS__NS_1_1Property"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>SR_UTILS_NS::PropertyContainer</label>
+        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>SR_WORLD_NS::Scene</label>
+        <link refid="classSR__WORLD__NS_1_1Scene"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" line="44" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationContext.h" bodystart="44" bodyend="48"/>
+    <listofallmembers>
+      <member refid="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext_1a9f96001ea438ba31fb5418e46cd08079" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ChannelUpdateContext</scope><name>gameObjectIndex</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext_1a531916e525f4d930a19dae099a027f86" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ChannelUpdateContext</scope><name>pGraph</name></member>
+      <member refid="structSR__ANIMATIONS__NS_1_1ChannelUpdateContext_1a1c2f1c88683a7f9e18faf3c30680c431" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::ChannelUpdateContext</scope><name>pPose</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

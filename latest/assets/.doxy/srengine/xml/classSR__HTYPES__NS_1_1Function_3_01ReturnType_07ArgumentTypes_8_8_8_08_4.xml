@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4" kind="class" language="C++" prot="public">
+    <compoundname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</compoundname>
+    <innerclass refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1_1free__function__holder" prot="private">SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::free_function_holder</innerclass>
+    <innerclass refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1_1function__holder__base" prot="private">SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::function_holder_base</innerclass>
+    <innerclass refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1_1member__function__holder" prot="private">SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::member_function_holder</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename ReturnType</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>ArgumentTypes</declname>
+        <defname>ArgumentTypes</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1ab46141b8b52bf83e73d0f59b7d93089e" prot="private" static="no">
+        <type>std::unique_ptr&lt; function_holder_base &gt;</type>
+        <definition>using SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::invoker_t =  std::unique_ptr&lt;function_holder_base&gt;</definition>
+        <argsstring></argsstring>
+        <name>invoker_t</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::invoker_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="17" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a0b5263438ffdce1e9b1d13f2a44f0e0d" prot="public" static="no">
+        <type>ReturnType</type>
+        <definition>typedef ReturnType SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::signature_type(ArgumentTypes...)</definition>
+        <argsstring>(ArgumentTypes...)</argsstring>
+        <name>signature_type</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::signature_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="19" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a3903a72b6834e74744a5a3bc72792b16" prot="private" static="no" mutable="no">
+        <type>invoker_t</type>
+        <definition>invoker_t SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::mInvoker</definition>
+        <argsstring></argsstring>
+        <name>mInvoker</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::mInvoker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="120" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a84ba77013460920f528c5b6d9e2d1ca1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</definition>
+        <argsstring>()</argsstring>
+        <name>Function</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1ac11231df791bfdf5d41f9bfcaf234814" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FunctionT</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</definition>
+        <argsstring>(FunctionT f)</argsstring>
+        <name>Function</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</qualifiedname>
+        <param>
+          <type>FunctionT</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="25" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="25" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1af6a8f538bd2d1f1ffbefcd4e2de6fc5a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</definition>
+        <argsstring>(Function &amp;&amp;function) noexcept</argsstring>
+        <name>Function</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">Function</ref> &amp;&amp;</type>
+          <declname>function</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="29" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a4cff13cbb4c3bdb97535554b8cf7cf60" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">Function</ref> &amp;</type>
+        <definition>Function &amp; SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator=</definition>
+        <argsstring>(Function &amp;&amp;function) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">Function</ref> &amp;&amp;</type>
+          <declname>function</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="33" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="33" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1af2ad6d4eb74dae9b52fe0fe61634dcf2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FunctionType</type>
+          </param>
+          <param>
+            <type>typename ClassType</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</definition>
+        <argsstring>(FunctionType ClassType::*f)</argsstring>
+        <name>Function</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</qualifiedname>
+        <param>
+          <type>FunctionType ClassType::*</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>NOLINT. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="38" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a398ec2640f6fa943d7db616cc6820fa5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</definition>
+        <argsstring>(const Function &amp;other)</argsstring>
+        <name>Function</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::Function</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">Function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="42" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="42" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a905f55ae0143d4a7e96b5b2266f35963" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">Function</ref> &amp;</type>
+        <definition>Function &amp; SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator=</definition>
+        <argsstring>(const Function &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">Function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="46" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a02895453d4a3240fbc7b1170c1d7ea3c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>ReturnType</type>
+        <definition>ReturnType SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator()</definition>
+        <argsstring>(ArgumentTypes... args) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>ArgumentTypes...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="51" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1ab95510f5db20095e3e7c475a827c6fa0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>NOLINT</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="55" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="55" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" line="14" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Function.h" bodystart="15" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a84ba77013460920f528c5b6d9e2d1ca1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>Function</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1ac11231df791bfdf5d41f9bfcaf234814" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>Function</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1af6a8f538bd2d1f1ffbefcd4e2de6fc5a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>Function</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1af2ad6d4eb74dae9b52fe0fe61634dcf2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>Function</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a398ec2640f6fa943d7db616cc6820fa5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>Function</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1ab46141b8b52bf83e73d0f59b7d93089e" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>invoker_t</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a3903a72b6834e74744a5a3bc72792b16" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>mInvoker</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1ab95510f5db20095e3e7c475a827c6fa0" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a02895453d4a3240fbc7b1170c1d7ea3c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>operator()</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a4cff13cbb4c3bdb97535554b8cf7cf60" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a905f55ae0143d4a7e96b5b2266f35963" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Function_3_01ReturnType_07ArgumentTypes_8_8_8_08_4_1a0b5263438ffdce1e9b1d13f2a44f0e0d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Function&lt; ReturnType(ArgumentTypes...)&gt;</scope><name>signature_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
