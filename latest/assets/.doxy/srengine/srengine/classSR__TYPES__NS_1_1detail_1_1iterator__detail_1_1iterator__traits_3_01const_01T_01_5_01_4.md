@@ -33,16 +33,11 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef std::ptrdiff\_t | [**difference\_type**](#typedef-difference_type-12)  <br> |
-| typedef typename const T \*::difference\_type | [**difference\_type**](#typedef-difference_type-22)  <br> |
-| typedef [**random\_access\_iterator\_tag**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1random__access__iterator__tag.md) | [**iterator\_category**](#typedef-iterator_category-12)  <br> |
-| typedef typename const T \*::iterator\_category | [**iterator\_category**](#typedef-iterator_category-22)  <br> |
-| typedef const value\_type \* | [**pointer**](#typedef-pointer-12)  <br> |
-| typedef typename const T \*::pointer | [**pointer**](#typedef-pointer-22)  <br> |
-| typedef const value\_type & | [**reference**](#typedef-reference-12)  <br> |
-| typedef typename const T \*::reference | [**reference**](#typedef-reference-22)  <br> |
-| typedef T | [**value\_type**](#typedef-value_type-12)  <br> |
-| typedef typename const T \*::value\_type | [**value\_type**](#typedef-value_type-22)  <br> |
+| typedef std::ptrdiff\_t | [**difference\_type**](#typedef-difference_type)  <br> |
+| typedef [**random\_access\_iterator\_tag**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1random__access__iterator__tag.md) | [**iterator\_category**](#typedef-iterator_category)  <br> |
+| typedef const value\_type \* | [**pointer**](#typedef-pointer)  <br> |
+| typedef const value\_type & | [**reference**](#typedef-reference)  <br> |
+| typedef T | [**value\_type**](#typedef-value_type)  <br> |
 
 
 
@@ -96,7 +91,7 @@
 
 
 
-### typedef difference\_type [1/2]
+### typedef difference\_type 
 
 ```C++
 using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::difference_type =  std::ptrdiff_t;
@@ -109,20 +104,7 @@ using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::differ
 
 
 
-### typedef difference\_type [2/2]
-
-```C++
-using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::difference_type = ;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef iterator\_category [1/2]
+### typedef iterator\_category 
 
 ```C++
 using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::iterator_category =  random_access_iterator_tag;
@@ -135,20 +117,7 @@ using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::iterat
 
 
 
-### typedef iterator\_category [2/2]
-
-```C++
-using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::iterator_category = ;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef pointer [1/2]
+### typedef pointer 
 
 ```C++
 using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::pointer =  const value_type*;
@@ -161,20 +130,7 @@ using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::pointe
 
 
 
-### typedef pointer [2/2]
-
-```C++
-using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::pointer = ;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef reference [1/2]
+### typedef reference 
 
 ```C++
 using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::reference =  const value_type&;
@@ -187,36 +143,10 @@ using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::refere
 
 
 
-### typedef reference [2/2]
-
-```C++
-using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::reference = ;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef value\_type [1/2]
+### typedef value\_type 
 
 ```C++
 using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::value_type =  T;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef value\_type [2/2]
-
-```C++
-using SR_TYPES_NS::detail::iterator_detail::iterator_traits< const T * >::value_type = ;
 ```
 
 

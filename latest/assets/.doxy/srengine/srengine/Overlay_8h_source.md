@@ -20,7 +20,6 @@
 namespace SR_GRAPH_NS {
     class Pipeline;
 
-
     class Overlay : public SR_HTYPES_NS::SharedPtr<Overlay> {
     public:
         using Super = SR_HTYPES_NS::SharedPtr<Overlay>;

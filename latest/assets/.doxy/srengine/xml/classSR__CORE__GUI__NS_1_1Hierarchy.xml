@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__CORE__GUI__NS_1_1Hierarchy" kind="class" language="C++" prot="public">
     <compoundname>SR_CORE_GUI_NS::Hierarchy</compoundname>
     <basecompoundref prot="public" virt="non-virtual">SR_GRAPH_NS::GUI::Widget</basecompoundref>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1a51b48dd360db44fff29a46aed31b5b67" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>ImVec4</type>
-        <definition>ImVec4 SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_FIRST</definition>
+        <type>constexpr ImVec4</type>
+        <definition>constexpr ImVec4 SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_FIRST</definition>
         <argsstring></argsstring>
         <name>SR_PREFAB_COLOR_FIRST</name>
         <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_FIRST</qualifiedname>
@@ -20,8 +20,8 @@
         <location file="Engine/Core/inc/Core/GUI/Hierarchy.h" line="17" column="33" bodyfile="Engine/Core/inc/Core/GUI/Hierarchy.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Hierarchy_1ae6d836cd0570a9a215ab51fe6f3cbe5b" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>ImVec4</type>
-        <definition>ImVec4 SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_SECOND</definition>
+        <type>constexpr ImVec4</type>
+        <definition>constexpr ImVec4 SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_SECOND</definition>
         <argsstring></argsstring>
         <name>SR_PREFAB_COLOR_SECOND</name>
         <qualifiedname>SR_CORE_GUI_NS::Hierarchy::SR_PREFAB_COLOR_SECOND</qualifiedname>

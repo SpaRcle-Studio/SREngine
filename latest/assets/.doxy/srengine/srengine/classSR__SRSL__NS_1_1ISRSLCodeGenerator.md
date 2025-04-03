@@ -102,7 +102,7 @@ Inherited by the following classes: [SR\_SRSL\_NS::GLSLCodeGenerator](classSR__S
 ### typedef SRSLCodeGenRes 
 
 ```C++
-using SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes =  std::pair<SRSLResult, std::map<ShaderStage, std::string>>;
+using SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes =  std::pair<SRSLResult, std::map<ShaderStage, std::string> >;
 ```
 
 

@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**std**](namespacestd.md) **>** [**hash&lt; SR\_HTYPES\_NS::SafePtr&lt; T &gt; &gt;**](structstd_1_1hash_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4.md)
+[**ClassList**](annotated.md) **>** [**hash&lt; SR\_HTYPES\_NS::SafePtr&lt; T &gt; &gt;**](structstd_1_1hash_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4.md)
 
 
 
@@ -90,7 +90,7 @@
 ### function operator() 
 
 ```C++
-inline size_t std::hash< SR_HTYPES_NS::SafePtr< T > >::operator() (
+inline size_t hash< SR_HTYPES_NS::SafePtr< T > >::operator() (
     SR_HTYPES_NS::SafePtr < T > const & ptr
 ) const
 ```

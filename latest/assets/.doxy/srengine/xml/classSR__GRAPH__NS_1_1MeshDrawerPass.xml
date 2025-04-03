@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1MeshDrawerPass" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::MeshDrawerPass</compoundname>
     <basecompoundref refid="classSR__GRAPH__NS_1_1BasePass" prot="public" virt="non-virtual">SR_GRAPH_NS::BasePass</basecompoundref>
@@ -774,31 +774,31 @@
         <childnode refid="11" relation="usage">
           <edgelabel>m_camera</edgelabel>
         </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="18" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="24" relation="usage">
+        <childnode refid="21" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="24">
+      <node id="21">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="23">
         <label>SR_GRAPH_NS::ISamplersPass</label>
         <link refid="classSR__GRAPH__NS_1_1ISamplersPass"/>
       </node>
-      <node id="27">
+      <node id="24">
         <label>SR_GRAPH_NS::LayerFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1LayerFilterPredicate"/>
       </node>
-      <node id="21">
+      <node id="18">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="19" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -806,20 +806,20 @@
         <link refid="classSR__GRAPH__NS_1_1MeshDrawerPass"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
         <childnode refid="26" relation="public-inheritance">
         </childnode>
-        <childnode refid="27" relation="public-inheritance">
-        </childnode>
-        <childnode refid="28" relation="public-inheritance">
-        </childnode>
-        <childnode refid="29" relation="public-inheritance">
-        </childnode>
       </node>
-      <node id="29">
+      <node id="26">
         <label>SR_GRAPH_NS::PriorityFilterPredicate</label>
         <link refid="classSR__GRAPH__NS_1_1PriorityFilterPredicate"/>
       </node>
-      <node id="28">
+      <node id="25">
         <label>SR_GRAPH_NS::ShaderReplacePredicate</label>
         <link refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate"/>
       </node>
@@ -828,23 +828,6 @@
         <link refid="classSR__GTYPES__NS_1_1Camera"/>
         <childnode refid="12" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="14">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="16" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
       <node id="5">
         <label>SR_SRLM_NS::IExecutableNode</label>
@@ -873,19 +856,16 @@
         <childnode refid="13" relation="public-inheritance">
         </childnode>
         <childnode refid="14" relation="usage">
-          <edgelabel>m_sceneObject</edgelabel>
-        </childnode>
-        <childnode refid="17" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="19" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>m_properties</edgelabel>
         </childnode>
       </node>
-      <node id="17">
+      <node id="14">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="13" relation="public-inheritance">
@@ -907,16 +887,16 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="20">
+      <node id="17">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="16">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="20" relation="public-inheritance">
+        <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -925,19 +905,19 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
-        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="23" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="22">
-        <label>SR_UTILS_NS::Singleton&lt; UBOManager &gt;</label>
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="20" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="19">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
         <childnode refid="4" relation="public-inheritance">
@@ -951,10 +931,10 @@
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="18">
+      <node id="15">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>
@@ -1046,8 +1026,8 @@
       <member refid="classSR__GRAPH__NS_1_1ISamplersPass_1a7e588f69a586128652fe361e13313764" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MarkSamplersDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a7a70a21bb631f62e665555e71d3b97f8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MeshDrawerPass</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1aa7c29336844c31150ba16812fc82ad7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SR_GRAPH_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SR_GRAPH_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_SRLM_NS::IExecutableNode::"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasePass_1ad6e7d35a53f2d509bf057186f66481e6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::MeshDrawerPass</scope><name>OnMeshAdded</name></member>

@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) **>** [**SharedPointerTraits**](namespaceSR__UTILS__NS_1_1SharedPointerTraits.md) **>** [**IsSharedPointer**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer.md)
+[**ClassList**](annotated.md) **>** [**IsSharedPointer**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer.md)
 
 
 

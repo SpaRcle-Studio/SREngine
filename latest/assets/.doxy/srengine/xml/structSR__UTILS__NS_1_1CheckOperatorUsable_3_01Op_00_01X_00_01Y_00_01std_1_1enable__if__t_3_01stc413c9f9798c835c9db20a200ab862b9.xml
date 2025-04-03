@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1CheckOperatorUsable_3_01Op_00_01X_00_01Y_00_01std_1_1enable__if__t_3_01stc413c9f9798c835c9db20a200ab862b9" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::CheckOperatorUsable&lt; Op, X, Y, std::enable_if_t&lt; std::is_same_v&lt; Y, std::nullptr_t &gt; &amp;&amp;!SupportsNullptrComparisonV&lt; X &gt; &gt; &gt;</compoundname>
-    <basecompoundref refid="structSR__UTILS__NS_1_1IsDetected" prot="public" virt="non-virtual">SR_UTILS_NS::IsDetected&lt; Op, X, Y &gt;</basecompoundref>
     <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
     <templateparamlist>
       <param>
@@ -22,46 +21,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
-        <label>Details::Detector&lt; Details::Empty, void, Op, Args... &gt;::value_t</label>
-      </node>
       <node id="1">
         <label>SR_UTILS_NS::CheckOperatorUsable&lt; Op, X, Y, std::enable_if_t&lt; std::is_same_v&lt; Y, std::nullptr_t &gt; &amp;&amp;!SupportsNullptrComparisonV&lt; X &gt; &gt; &gt;</label>
         <link refid="structSR__UTILS__NS_1_1CheckOperatorUsable_3_01Op_00_01X_00_01Y_00_01std_1_1enable__if__t_3_01stc413c9f9798c835c9db20a200ab862b9"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="2">
-        <label>SR_UTILS_NS::IsDetected&lt; Op, X, Y &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1IsDetected"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
         <label>std::false_type</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="3">
-        <label>Details::Detector&lt; Details::Empty, void, Op, Args... &gt;::value_t</label>
-      </node>
       <node id="1">
         <label>SR_UTILS_NS::CheckOperatorUsable&lt; Op, X, Y, std::enable_if_t&lt; std::is_same_v&lt; Y, std::nullptr_t &gt; &amp;&amp;!SupportsNullptrComparisonV&lt; X &gt; &gt; &gt;</label>
         <link refid="structSR__UTILS__NS_1_1CheckOperatorUsable_3_01Op_00_01X_00_01Y_00_01std_1_1enable__if__t_3_01stc413c9f9798c835c9db20a200ab862b9"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="2">
-        <label>SR_UTILS_NS::IsDetected&lt; Op, X, Y &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1IsDetected"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
         <label>std::false_type</label>
       </node>
     </collaborationgraph>

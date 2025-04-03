@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__GUI__NS_1_1Widget" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_GRAPH_GUI_NS::Widget</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
@@ -700,18 +700,18 @@
         <argsstring>()=0</argsstring>
         <name>Draw</name>
         <qualifiedname>SR_GRAPH_GUI_NS::Widget::Draw</qualifiedname>
+        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1WidgetContainer_1aa58592c95abef5399235709ecbd0d99c">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1About_1acd72223ce630fec5cea7ee2f24389003">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1AnimatorEditor_1a4b6b327798b2ef07364b9d75ded7f2ed">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1EngineSettings_1af4fea5a0b1495ae63f7db721175264cb">Draw</reimplementedby>
+        <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4e3e6e73b001338101a0fb76ba6de98c">Draw</reimplementedby>
+        <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a33f127d23f628f8b0f3c5f2d4a38ab29">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1Inspector_1aea7d7d4dd4105876171ab0a9125a6ef5">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1PhysicsMaterialEditor_1a2c8f61b71f450854d411bfd95d4e7a9d">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a8c6c2ed76220eb96a8846eda3a43702e">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SoundDebug_1a56445873d222f924780a47a53ebeae4a">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1WorldEdit_1a279a97f37b8f4ad33dd62536c91876f4">Draw</reimplementedby>
-        <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4e3e6e73b001338101a0fb76ba6de98c">Draw</reimplementedby>
-        <reimplementedby refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a33f127d23f628f8b0f3c5f2d4a38ab29">Draw</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1NodeWidget_1a85ee3523b82687852fc2e6192c7cc74f">Draw</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1WidgetContainer_1aa58592c95abef5399235709ecbd0d99c">Draw</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1041,7 +1041,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
@@ -1071,7 +1071,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
@@ -1157,7 +1157,7 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a206de2fe59b705c189cfb792fa6584de" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>SetSize</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a15e325414eee8d24735bf44b4888d0c9" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1abb58557f3a79bc2790d525791aedb7ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>TextCenter</name></member>
-      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>Trigger</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>Trigger</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a9670d827380936251bb9f0af5f305ee4" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>Update</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>Widget</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Widget</scope><name>Widget</name></member>

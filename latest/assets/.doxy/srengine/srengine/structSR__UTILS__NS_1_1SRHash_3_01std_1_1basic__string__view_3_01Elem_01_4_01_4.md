@@ -15,27 +15,7 @@
 
 
 
-Inherits the following classes: [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md),  [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Inherits the following classes: [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md)
 
 
 
@@ -98,50 +78,14 @@ See [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditi
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator()) (const T & keyVal) const<br> |
-
-
-## Public Functions inherited from SR_UTILS_NS::SRConditionallyEnabledHash
-
-See [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md)
-
-| Type | Name |
-| ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator()) (const T & keyVal) const<br> |
+|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator()) (const T & keyVal) noexcept const<br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD static constexpr size\_t | [**DoHash**](#function-dohash-12) (const std::basic\_string\_view&lt; Elem &gt; keyVal) noexcept<br> |
-|  uint64\_t | [**DoHash**](#function-dohash-22) (const std::basic\_string\_view&lt; Elem &gt; & value) noexcept<br> |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+|  SR\_NODISCARD static constexpr size\_t | [**DoHash**](#function-dohash) (const std::basic\_string\_view&lt; Elem &gt; keyVal) noexcept<br> |
 
 
 
@@ -199,26 +143,11 @@ See [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditi
 
 
 
-### function DoHash [1/2]
+### function DoHash 
 
 ```C++
 static inline SR_NODISCARD static constexpr size_t SR_UTILS_NS::SRHash< std::basic_string_view< Elem > >::DoHash (
     const std::basic_string_view< Elem > keyVal
-) noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function DoHash [2/2]
-
-```C++
-static inline uint64_t SR_UTILS_NS::SRHash< std::basic_string_view< Elem > >::DoHash (
-    const std::basic_string_view< Elem > & value
 ) noexcept
 ```
 

@@ -51,8 +51,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  std::enable\_if\_t&lt;(std::is\_floating\_point&lt; FloatingPointType &gt;::value &&std::numeric\_limits&lt; FloatingPointType &gt;::is\_iec559), FloatingPointType &gt; | [**frexp**](#function-frexp) (FloatingPointType x, int \* expptr) <br> |
-|  std::enable\_if\_t&lt;(std::is\_floating\_point&lt; FloatingPointType &gt;::value &&std::numeric\_limits&lt; FloatingPointType &gt;::is\_iec559), bool &gt; | [**isfinite**](#function-isfinite) (FloatingPointType x) <br> |
+|  constexpr auto | [**frexp**](#function-frexp) (FloatingPointType x, int \* expptr) <br> |
+|  constexpr auto() | [**isfinite**](#function-isfinite) (FloatingPointType x) <br> |
 
 
 
@@ -90,7 +90,7 @@
 
 ```C++
 template<typename FloatingPointType>
-std::enable_if_t<(std::is_floating_point< FloatingPointType >::value &&std::numeric_limits< FloatingPointType >::is_iec559), FloatingPointType > SR_TYPES_NS::detail::my_own::frexp (
+constexpr auto SR_TYPES_NS::detail::my_own::frexp (
     FloatingPointType x,
     int * expptr
 ) 
@@ -107,7 +107,7 @@ std::enable_if_t<(std::is_floating_point< FloatingPointType >::value &&std::nume
 
 ```C++
 template<typename FloatingPointType>
-std::enable_if_t<(std::is_floating_point< FloatingPointType >::value &&std::numeric_limits< FloatingPointType >::is_iec559), bool > SR_TYPES_NS::detail::my_own::isfinite (
+constexpr auto() SR_TYPES_NS::detail::my_own::isfinite (
     FloatingPointType x
 ) 
 ```

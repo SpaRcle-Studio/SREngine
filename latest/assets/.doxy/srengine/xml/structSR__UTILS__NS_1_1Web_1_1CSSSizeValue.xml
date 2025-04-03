@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Web::CSSSizeValue</compoundname>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" prot="public" virt="non-virtual">SR_UTILS_NS::Web::CSSOptional&lt; CSSSizeValue &gt;</derivedcompoundref>
@@ -133,7 +133,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" line="106" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Web/CSS/CSSSizeValue.h" bodystart="106" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ab666a1300eca4a22674e8433e7e65f0a" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a9128e659182b0941fc8a37d805f81622" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue" kindref="compound">SR_UTILS_NS::Web::CSSSizeValue</ref></type>
         <definition>union SR_UTILS_NS::Web::CSSSizeValue SR_UTILS_NS::Web::CSSSizeValue</definition>
         <argsstring></argsstring>
@@ -480,7 +480,6 @@
         <argsstring>()</argsstring>
         <name>OnChanged</name>
         <qualifiedname>SR_UTILS_NS::Web::CSSSizeValue::OnChanged</qualifiedname>
-        <reimplementedby refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1a244f1be6cfa78a7cd4c1544a7316a9fd">OnChanged</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1a244f1be6cfa78a7cd4c1544a7316a9fd">OnChanged</reimplementedby>
         <briefdescription>
         </briefdescription>

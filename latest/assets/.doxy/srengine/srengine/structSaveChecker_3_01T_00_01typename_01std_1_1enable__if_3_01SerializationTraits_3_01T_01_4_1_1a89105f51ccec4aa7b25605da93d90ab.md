@@ -55,8 +55,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**CanBeSaved**](#function-canbesaved-12) (const T & value) <br> |
-|  bool | [**CanBeSaved**](#function-canbesaved-22) (const T & value) <br> |
+|  bool | [**CanBeSaved**](#function-canbesaved) (const T & value) <br> |
 
 
 
@@ -88,22 +87,7 @@
 
 
 
-### function CanBeSaved [1/2]
-
-```C++
-static inline bool SaveChecker< T, typename std::enable_if< SerializationTraits< T >::IsSerializable >::type >::CanBeSaved (
-    const T & value
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function CanBeSaved [2/2]
+### function CanBeSaved 
 
 ```C++
 static inline bool SaveChecker< T, typename std::enable_if< SerializationTraits< T >::IsSerializable >::type >::CanBeSaved (

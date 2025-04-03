@@ -110,7 +110,7 @@
 * **PassQueue** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **PassQueues** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **PhysXPvdConnection** ([**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md))
-* **ptrdiff\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **ptrdiff\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 
 
 ## r
@@ -149,8 +149,8 @@
 * **ShaderPropertyVariant** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **ShaderSamplers** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SRSLSamplers** ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
-* **signed\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
-* **size\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **signed\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
+* **size\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **SRHashType** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 
 
@@ -177,7 +177,7 @@
 * **UVector4** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **UVector6** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **Unit** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
-* **unsigned\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **unsigned\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **uint1024\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **uint128\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **uint16384\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))

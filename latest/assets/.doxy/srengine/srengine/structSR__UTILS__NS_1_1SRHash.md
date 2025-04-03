@@ -78,14 +78,14 @@ See [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditi
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator()) (const T & keyVal) const<br> |
+|  SR\_NODISCARD constexpr size\_t | [**operator()**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md#function-operator()) (const T & keyVal) noexcept const<br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  uint64\_t | [**DoHash**](#function-dohash) (const T & value) noexcept<br> |
+|  constexpr uint64\_t | [**DoHash**](#function-dohash) (const T & value) noexcept<br> |
 
 
 
@@ -146,7 +146,7 @@ See [SR\_UTILS\_NS::SRConditionallyEnabledHash](structSR__UTILS__NS_1_1SRConditi
 ### function DoHash 
 
 ```C++
-static inline uint64_t SR_UTILS_NS::SRHash::DoHash (
+static inline constexpr uint64_t SR_UTILS_NS::SRHash::DoHash (
     const T & value
 ) noexcept
 ```

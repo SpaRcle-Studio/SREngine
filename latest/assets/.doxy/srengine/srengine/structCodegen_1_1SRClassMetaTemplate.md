@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**Codegen**](namespaceCodegen.md) **>** [**SRClassMetaTemplate**](structCodegen_1_1SRClassMetaTemplate.md)
+[**ClassList**](annotated.md) **>** [**SRClassMetaTemplate**](structCodegen_1_1SRClassMetaTemplate.md)
 
 
 

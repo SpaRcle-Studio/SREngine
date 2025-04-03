@@ -15,7 +15,7 @@
 
 
 
-Inherits the following classes: std::is_integral< SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned > >,  std::integral_constant< bool, true >
+Inherits the following classes: std::integral_constant< bool, true >
 
 
 

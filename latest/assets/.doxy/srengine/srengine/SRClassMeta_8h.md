@@ -39,7 +39,6 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**SRClassMetaTemplate**](structCodegen_1_1SRClassMetaTemplate.md) &lt;class T&gt;<br> |
 | class | [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) <br> |
 
 

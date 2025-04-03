@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__NETWORK__NS_1_1AsioTCPAcceptor" kind="class" language="C++" prot="public">
     <compoundname>SR_NETWORK_NS::AsioTCPAcceptor</compoundname>
     <basecompoundref refid="classSR__NETWORK__NS_1_1Acceptor" prot="public" virt="non-virtual">SR_NETWORK_NS::Acceptor</basecompoundref>
@@ -245,7 +245,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Acceptor &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
@@ -269,7 +269,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Acceptor &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
@@ -306,14 +306,9 @@
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1ae1b4614d0994c356af33d9996b9738f8" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>AsioTCPAcceptor</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>AutoFree</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a477e0c5be851676b320c91a8982c8e57" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Callback</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a29750a8ec0b88fcd11dca90793679c60" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Close</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Get</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8777dc9c16713f3dfeb7cb57fea940f7" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetLocalAddress</name></member>
@@ -322,16 +317,10 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetRawPtr</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a82f89b081d5f66f57ada83d73912e115" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetRemoteAddress</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a4d01f24c4a58ca9834ad15017cbedd3b" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetRemotePort</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetSRClass</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a8b22b2f1af7b1d0574aa5e645431d073" prot="private" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Init</name></member>
@@ -351,44 +340,23 @@
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a5a895e508ab4ceed8773a2268a0be082" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>m_socket</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a6bbe853164c0c27193932b58a2277099" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>m_type</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>MakeShared</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>MakeShared</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator bool</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator!=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator-&gt;</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator-&gt;</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator==</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>operator==</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>PolymorphicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>PolymorphicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>RecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Reset</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Reset</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a277d57c869ef48e9a723fedad232dd4e" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SetCallback</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a622b5db710aa09b74ca2034f53c37355" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SetRepeated</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>SharedPtr</name></member>
@@ -400,17 +368,12 @@
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a149c3dc7b665232235a53fd3e97b228f" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>StartAsync</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a7cfcbe0de6133d08a9196578be2aaf00" prot="private" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>StartInternal</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>StaticCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>StaticCast</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1adcd6893808c5ca08a9d34d12f691125a" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>Valid</name></member>
       <member refid="classSR__NETWORK__NS_1_1Acceptor_1a2b37e9492da2cc24a6ad4fd908f39109" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~Acceptor</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor_1a0be7b5a6b7096698d4ddb4c0bd61d683" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~AsioTCPAcceptor</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioTCPAcceptor</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>

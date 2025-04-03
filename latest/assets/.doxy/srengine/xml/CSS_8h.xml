@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="CSS_8h" kind="file" language="C++">
     <compoundname>CSS.h</compoundname>
     <includes refid="CSSSizeValue_8h" local="no">Utils/Web/CSS/CSSSizeValue.h</includes>
@@ -925,33 +925,32 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/Debug.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_UTILS_NS::Web<sp/>{</highlight></codeline>
-<codeline lineno="16" refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">CSSStyle<sp/>{</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSStyle()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16" refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ParseProperty(std::string_view<sp/>name,<sp/>std::string_view<sp/>data);</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::string<sp/>ToString(uint16_t<sp/>depth<sp/>=<sp/>0)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>CSSStyle<sp/>Merge(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CSSStyle&amp;<sp/>main,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CSSStyle&amp;<sp/>other);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref><sp/>Merge(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref>&amp;<sp/>main,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kindref="compound">CSSStyle</ref>&amp;<sp/>other);</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/></highlight></codeline>
 <codeline lineno="26" refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle_1ad2490e4f5200f73f60b901f6c724c0a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle_1ad2490e4f5200f73f60b901f6c724c0a7" kindref="member">width</ref>,<sp/></highlight><highlight class="comment">//<sp/>=<sp/>CSSSizeValue(0.f,<sp/>CSSSizeValue::Unit::Percent),</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>height;<sp/></highlight><highlight class="comment">//<sp/>=<sp/>CSSSizeValue(0.f,<sp/>CSSSizeValue::Unit::Percent);</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>minWidth,<sp/>minHeight;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>maxWidth,<sp/>maxHeight;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>minWidth,<sp/>minHeight;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>maxWidth,<sp/>maxHeight;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>top,<sp/>right,<sp/>bottom,<sp/>left;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>marginTop,<sp/>marginRight,<sp/>marginBottom,<sp/>marginLeft;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>top,<sp/>right,<sp/>bottom,<sp/>left;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>marginTop,<sp/>marginRight,<sp/>marginBottom,<sp/>marginLeft;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>paddingTop,<sp/>paddingRight,<sp/>paddingBottom,<sp/>paddingLeft;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>borderTop,<sp/>borderRight,<sp/>borderBottom,<sp/>borderLeft;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>paddingTop,<sp/>paddingRight,<sp/>paddingBottom,<sp/>paddingLeft;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>borderTop,<sp/>borderRight,<sp/>borderBottom,<sp/>borderLeft;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle_1ab34062dc128225be7b7c1504d826c8ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle_1ab34062dc128225be7b7c1504d826c8ff" kindref="member">opacity</ref>;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSOptionalSizeValue<sp/>zIndex;</highlight></codeline>
+<codeline lineno="49" refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle_1ab34062dc128225be7b7c1504d826c8ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/><ref refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle_1ab34062dc128225be7b7c1504d826c8ff" kindref="member">opacity</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" kindref="compound">CSSOptionalSizeValue</ref><sp/>zIndex;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum" kindref="compound">CSSOptionalEnum&lt;CSSDisplay&gt;</ref><sp/>display<sp/>=<sp/>CSSOptionalEnum&lt;CSSDisplay&gt;::CreateDefault(DEFAULT_CSS_DISPLAY);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum" kindref="compound">CSSOptionalEnum&lt;CSSDisplay&gt;</ref><sp/>display<sp/>=<sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum" kindref="compound">CSSOptionalEnum&lt;CSSDisplay&gt;::CreateDefault</ref>(DEFAULT_CSS_DISPLAY);</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSPosition<sp/>position<sp/>=<sp/>CSSPosition::Static;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
@@ -961,13 +960,13 @@
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSSBoxSizing<sp/>boxSizing<sp/>=<sp/>CSSBoxSizing::ContentBox;</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="classSR__UTILS__NS_1_1Web_1_1CSS" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CSS<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>SR_HTYPES_NS::SharedPtr&lt;CSS&gt;<sp/>{</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/>SR_HTYPES_NS::SharedPtr&lt;CSS&gt;;</highlight></codeline>
+<codeline lineno="62" refid="classSR__UTILS__NS_1_1Web_1_1CSS" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__UTILS__NS_1_1Web_1_1CSS" kindref="compound">CSS</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt;CSS&gt;<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Super<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;CSS&gt;</ref>;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/>SR_HTYPES_NS::SharedPtr&lt;CSS&gt;;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;CSS&gt;</ref>;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CSS();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Web_1_1CSS" kindref="compound">CSS</ref>();</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>std::string<sp/>ToString(uint16_t<sp/>depth<sp/>=<sp/>0)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>

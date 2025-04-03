@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**std**](namespacestd.md) **>** [**less&lt; SR\_UTILS\_NS::StringAtom &gt;**](structstd_1_1less_3_01SR__UTILS__NS_1_1StringAtom_01_4.md)
+[**ClassList**](annotated.md) **>** [**less&lt; SR\_UTILS\_NS::StringAtom &gt;**](structstd_1_1less_3_01SR__UTILS__NS_1_1StringAtom_01_4.md)
 
 
 
@@ -90,7 +90,7 @@
 ### function operator() 
 
 ```C++
-inline bool std::less< SR_UTILS_NS::StringAtom >::operator() (
+inline bool less< SR_UTILS_NS::StringAtom >::operator() (
     const SR_UTILS_NS::StringAtom & lhs,
     const SR_UTILS_NS::StringAtom & rhs
 ) noexcept const

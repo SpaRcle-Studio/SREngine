@@ -1,14 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1SRConditionallyEnabledHash" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::SRConditionallyEnabledHash</compoundname>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</derivedcompoundref>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderSamplers_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderSamplers &gt;</derivedcompoundref>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01SR__HTYPES__NS_1_1RawMeshParams_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; SR_HTYPES_NS::RawMeshParams &gt;</derivedcompoundref>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01double_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; double &gt;</derivedcompoundref>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01float_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; float &gt;</derivedcompoundref>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; long double &gt;</derivedcompoundref>
-    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; T &gt;</derivedcompoundref>
     <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; std::basic_string&lt; Elem, std::char_traits&lt; Elem &gt;, Alloc &gt; &gt;</derivedcompoundref>
     <derivedcompoundref refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4" prot="public" virt="non-virtual">SR_UTILS_NS::SRHash&lt; std::basic_string_view&lt; Elem &gt; &gt;</derivedcompoundref>
     <templateparamlist>
@@ -22,10 +16,10 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_1acd3b340d9335de5b16c57dc4eaccdf2c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(SR_UTILS_NS::SRHash&lt; T &gt;::DoHash(keyVal))" virt="non-virtual">
+      <memberdef kind="function" id="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_1acd3b340d9335de5b16c57dc4eaccdf2c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD constexpr size_t</type>
         <definition>SR_NODISCARD constexpr size_t SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, Enabled &gt;::operator()</definition>
-        <argsstring>(const T &amp;keyVal) const</argsstring>
+        <argsstring>(const T &amp;keyVal) const noexcept(noexcept(SR_UTILS_NS::SRHash&lt; T &gt;::DoHash(keyVal)))</argsstring>
         <name>operator()</name>
         <qualifiedname>SR_UTILS_NS::SRConditionallyEnabledHash::operator()</qualifiedname>
         <param>
@@ -51,54 +45,18 @@
         <link refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash"/>
       </node>
       <node id="2">
-        <label>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4"/>
+        <label>SR_UTILS_NS::SRHash&lt; T &gt;</label>
+        <link refid="structSR__UTILS__NS_1_1SRHash"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderSamplers &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderSamplers_01_4"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::SRHash&lt; SR_HTYPES_NS::RawMeshParams &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01SR__HTYPES__NS_1_1RawMeshParams_01_4"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_UTILS_NS::SRHash&lt; double &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01double_01_4"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::SRHash&lt; float &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01float_01_4"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::SRHash&lt; long double &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
         <label>SR_UTILS_NS::SRHash&lt; std::basic_string&lt; Elem, std::char_traits&lt; Elem &gt;, Alloc &gt; &gt;</label>
         <link refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="4">
         <label>SR_UTILS_NS::SRHash&lt; std::basic_string_view&lt; Elem &gt; &gt;</label>
         <link refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4"/>
         <childnode refid="1" relation="public-inheritance">

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__HTYPES__NS_1_1Thread_1_1Factory" kind="class" language="C++" prot="public">
     <compoundname>SR_HTYPES_NS::Thread::Factory</compoundname>
     <basecompoundref prot="public" virt="non-virtual">Singleton&lt; Factory &gt;</basecompoundref>
@@ -40,10 +40,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a3b08bde1cd17fa2db1ff109112895e26" prot="public" static="no" mutable="no">
-        <type>SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(<ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref>&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(std SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(<ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref>&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(const std SR_NODISCARD uint32_</type>
-        <definition>SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(Ptr&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(std SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(Ptr&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(const std SR_NODISCARD uint32_ SR_HTYPES_NS::Thread::Factory::GetThreadsCount) ()</definition>
-        <argsstring>)()</argsstring>
+      <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1af7975088905fa79e9a136cbe7a23b992" prot="public" static="no" mutable="no">
+        <type>SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(<ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref>&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(std SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(<ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref>&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(const std SR_NODISCARD uint32_t</type>
+        <definition>SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(Ptr&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(std SR_NODISCARD SR_DEPRECATED_EX(&quot;Not safe, use Create(Ptr&amp; pThread, Functor&amp;&amp; fn, Args&amp;&amp;... args)&quot;) Ptr Create(const std SR_NODISCARD uint32_t SR_HTYPES_NS::Thread::Factory::GetThreadsCount()</definition>
+        <argsstring>()</argsstring>
         <name>GetThreadsCount</name>
         <qualifiedname>SR_HTYPES_NS::Thread::Factory::GetThreadsCount</qualifiedname>
         <briefdescription>
@@ -304,7 +304,7 @@
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a8266175a219b9402ddefa1368a36a599" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Factory</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a21814e8c45b606dcf33622d523ca731f" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetMainThread</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a246dc300ee941bd96c0a487012414ab7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetThisThread</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a3b08bde1cd17fa2db1ff109112895e26" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetThreadsCount</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1af7975088905fa79e9a136cbe7a23b992" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>GetThreadsCount</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad341e152e836310a9d802b30c02bd179" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>m_main</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1addd11e30e30a396f84ec6c536be258b9" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>m_threads</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1add7157af0d2b1f88007ff24eff82733d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>PrintThreads</name></member>

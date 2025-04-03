@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1SerializationId" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::SerializationId</compoundname>
     <sectiondef kind="private-static-attrib">
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SerializationId_1a00a6d4bb84a85a73fb8edc7b3b095f99" prot="private" static="yes" constexpr="yes" mutable="no">
-        <type>uint64_t</type>
-        <definition>uint64_t SR_UTILS_NS::SerializationId::MaxNameLength</definition>
+        <type>constexpr uint64_t</type>
+        <definition>constexpr uint64_t SR_UTILS_NS::SerializationId::MaxNameLength</definition>
         <argsstring></argsstring>
         <name>MaxNameLength</name>
         <qualifiedname>SR_UTILS_NS::SerializationId::MaxNameLength</qualifiedname>
@@ -118,7 +118,7 @@
             <defname>S</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref></type>
+        <type>constexpr <ref refid="structSR__UTILS__NS_1_1SerializationId" kindref="compound">SerializationId</ref></type>
         <definition>static constexpr SerializationId SR_UTILS_NS::SerializationId::Create</definition>
         <argsstring>(const char(&amp;text)[S]) noexcept</argsstring>
         <name>Create</name>

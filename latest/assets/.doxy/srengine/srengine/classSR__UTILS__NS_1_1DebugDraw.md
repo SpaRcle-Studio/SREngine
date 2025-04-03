@@ -73,11 +73,11 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**DEFAULT\_COLOR**](#variable-default_color)   = `[**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md)(255, 255, 255, 255)`<br> |
-|  float\_t | [**DEFAULT\_DURATION**](#variable-default_duration)   = `10.f`<br> |
-|  SR\_MATH\_NS::FVector3 | [**DEFAULT\_POSITION**](#variable-default_position)   = `SR\_MATH\_NS::FVector3::Zero()`<br> |
-|  [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**DEFAULT\_QUATERNION**](#variable-default_quaternion)   = `SR\_MATH\_NS::Quaternion::Identity()`<br> |
-|  SR\_MATH\_NS::FVector3 | [**DEFAULT\_SCALE**](#variable-default_scale)   = `SR\_MATH\_NS::FVector3::One()`<br> |
+|  constexpr [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**DEFAULT\_COLOR**](#variable-default_color)   = `[**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md)(255, 255, 255, 255)`<br> |
+|  constexpr float\_t | [**DEFAULT\_DURATION**](#variable-default_duration)   = `10.f`<br> |
+|  constexpr SR\_MATH\_NS::FVector3 | [**DEFAULT\_POSITION**](#variable-default_position)   = `SR\_MATH\_NS::FVector3::Zero()`<br> |
+|  constexpr [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**DEFAULT\_QUATERNION**](#variable-default_quaternion)   = `SR\_MATH\_NS::Quaternion::Identity()`<br> |
+|  constexpr SR\_MATH\_NS::FVector3 | [**DEFAULT\_SCALE**](#variable-default_scale)   = `SR\_MATH\_NS::FVector3::One()`<br> |
 
 
 
@@ -532,7 +532,7 @@ using SR_UTILS_NS::DebugDraw::RemoveCallback =  SR_HTYPES_NS::Function<void(uint
 ### variable DEFAULT\_COLOR 
 
 ```C++
-SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR;
+constexpr SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR;
 ```
 
 
@@ -545,7 +545,7 @@ SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR;
 ### variable DEFAULT\_DURATION 
 
 ```C++
-float_t SR_UTILS_NS::DebugDraw::DEFAULT_DURATION;
+constexpr float_t SR_UTILS_NS::DebugDraw::DEFAULT_DURATION;
 ```
 
 
@@ -558,7 +558,7 @@ float_t SR_UTILS_NS::DebugDraw::DEFAULT_DURATION;
 ### variable DEFAULT\_POSITION 
 
 ```C++
-SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION;
+constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION;
 ```
 
 
@@ -571,7 +571,7 @@ SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION;
 ### variable DEFAULT\_QUATERNION 
 
 ```C++
-SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION;
+constexpr SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION;
 ```
 
 
@@ -584,7 +584,7 @@ SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION;
 ### variable DEFAULT\_SCALE 
 
 ```C++
-SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_SCALE;
+constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_SCALE;
 ```
 
 

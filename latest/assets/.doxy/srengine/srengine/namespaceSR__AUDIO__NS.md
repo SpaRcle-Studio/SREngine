@@ -58,8 +58,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef struct SR\_AUDIO\_NS::ALfVec3 | [**ALfVec3**](#typedef-alfvec3)  <br> |
-| typedef struct SR\_AUDIO\_NS::ALfVec6 | [**ALfVec6**](#typedef-alfvec6)  <br> |
+| typedef struct [**SR\_AUDIO\_NS::ALfVec3**](structSR__AUDIO__NS_1_1ALfVec3.md) | [**ALfVec3**](#typedef-alfvec3)  <br> |
+| typedef struct [**SR\_AUDIO\_NS::ALfVec6**](structSR__AUDIO__NS_1_1ALfVec6.md) | [**ALfVec6**](#typedef-alfvec6)  <br> |
 | typedef std::string | [**AudioDeviceName**](#typedef-audiodevicename)  <br> |
 | typedef std::vector&lt; uint8\_t &gt; | [**RawSoundData**](#typedef-rawsounddata)  <br> |
 | typedef std::shared\_ptr&lt; RawSoundData &gt; | [**RawSoundDataPtr**](#typedef-rawsounddataptr)  <br> |
@@ -104,9 +104,9 @@
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (PlayParamType, uint8\_t, Async, Loop, Library, Relative, Gain, MinGain, Pitch, ConeInnerAngle, ConeOuterAngle, UniqueId, Position, Direction, Velocity, ConeOuterGain, Orientation, Device, MaxGain, MaxDistance, RolloffFactor, ReferenceDistance, Spatialize) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (SpatializeMode, uint8\_t, Off, On, Auto) <br> |
 |  RawSoundDataPtr | [**TryMP3InsideWAV**](#function-trymp3insidewav) (const RawSoundDataPtr & data) <br> |
-|  typename std::enable\_if\_t&lt;!std::is\_same\_v&lt; void, decltype(function(params...))&gt;, decltype(function(params...))&gt; | [**alCallImpl**](#function-alcallimpl) (const char \* filename, const std::uint\_fast32\_t line, alFunction function, Params... params) <br> |
-|  typename std::enable\_if\_t&lt; std::is\_same\_v&lt; void, decltype(function(params...))&gt;, bool &gt; | [**alcCallImpl**](#function-alccallimpl) (const char \* filename, const std::uint\_fast32\_t line, alcFunction function, ALCdevice \* device, Params... params) <br> |
-|  typename std::enable\_if\_t&lt;!std::is\_same\_v&lt; void, decltype(function(params...))&gt;, bool &gt; | [**alcCallImpl**](#function-alccallimpl) (const char \* filename, const std::uint\_fast32\_t line, alcFunction function, ReturnType & returnValue, ALCdevice \* device, Params... params) <br> |
+|  auto | [**alCallImpl**](#function-alcallimpl) (const char \* filename, const std::uint\_fast32\_t line, alFunction function, Params... params) <br> |
+|  auto | [**alcCallImpl**](#function-alccallimpl) (const char \* filename, const std::uint\_fast32\_t line, alcFunction function, ALCdevice \* device, Params... params) <br> |
+|  auto | [**alcCallImpl**](#function-alccallimpl) (const char \* filename, const std::uint\_fast32\_t line, alcFunction function, ReturnType & returnValue, ALCdevice \* device, Params... params) <br> |
 |  bool | [**check\_al\_errors**](#function-check_al_errors) (const std::string & filename, const std::uint\_fast32\_t line) <br> |
 |  bool | [**check\_alc\_errors**](#function-check_alc_errors) (const std::string & filename, const std::uint\_fast32\_t line, ALCdevice \* device) <br> |
 
@@ -178,7 +178,7 @@ typedef struct SR_AUDIO_NS::ALfVec6 SR_AUDIO_NS::ALfVec6;
 ### typedef AudioDeviceName 
 
 ```C++
-using SR_AUDIO_NS::AudioDeviceName =  std::string;
+using SR_AUDIO_NS::AudioDeviceName = typedef std::string;
 ```
 
 
@@ -217,7 +217,7 @@ typedef std::shared_ptr<RawSoundData> SR_AUDIO_NS::RawSoundDataPtr;
 ### typedef SoundBuffer 
 
 ```C++
-using SR_AUDIO_NS::SoundBuffer =  void*;
+using SR_AUDIO_NS::SoundBuffer = typedef void*;
 ```
 
 
@@ -249,7 +249,7 @@ enum SR_AUDIO_NS::SoundFormat {
 ### typedef SoundSource 
 
 ```C++
-using SR_AUDIO_NS::SoundSource =  void*;
+using SR_AUDIO_NS::SoundSource = typedef void*;
 ```
 
 
@@ -458,7 +458,7 @@ RawSoundDataPtr SR_AUDIO_NS::TryMP3InsideWAV (
 
 ```C++
 template<typename alFunction, typename... Params>
-typename std::enable_if_t<!std::is_same_v< void, decltype(function(params...))>, decltype(function(params...))> SR_AUDIO_NS::alCallImpl (
+auto SR_AUDIO_NS::alCallImpl (
     const char * filename,
     const std::uint_fast32_t line,
     alFunction function,
@@ -477,7 +477,7 @@ typename std::enable_if_t<!std::is_same_v< void, decltype(function(params...))>,
 
 ```C++
 template<typename alcFunction, typename... Params>
-typename std::enable_if_t< std::is_same_v< void, decltype(function(params...))>, bool > SR_AUDIO_NS::alcCallImpl (
+auto SR_AUDIO_NS::alcCallImpl (
     const char * filename,
     const std::uint_fast32_t line,
     alcFunction function,
@@ -497,7 +497,7 @@ typename std::enable_if_t< std::is_same_v< void, decltype(function(params...))>,
 
 ```C++
 template<typename alcFunction, typename ReturnType, typename... Params>
-typename std::enable_if_t<!std::is_same_v< void, decltype(function(params...))>, bool > SR_AUDIO_NS::alcCallImpl (
+auto SR_AUDIO_NS::alcCallImpl (
     const char * filename,
     const std::uint_fast32_t line,
     alcFunction function,

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1FileWatcher" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::FileWatcher</compoundname>
     <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; FileWatcher &gt;</basecompoundref>
@@ -463,7 +463,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; FileWatcher &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -487,7 +487,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; FileWatcher &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -520,14 +520,9 @@
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>AutoFree</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a414d8c1b0b1d27e6d41dce66b7d70b05" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>CallBack</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a4c04e257ff280e3e093104ea6501ed2b" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>FileWatcher</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Get</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1afa19a5ee822443b07d0b62d82f0bd993" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetMutex</name></member>
@@ -537,14 +532,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1ab6160841cbd2f037e7807961f6007a1f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Hash</name></member>
@@ -565,48 +554,28 @@
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1ae66e71e6a6cb8d6f6a1fec1454237c97" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>m_name</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a16d6d87a89f314bfd9e3cbf0301b93da" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>m_path</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>MakeShared</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>MakeShared</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a7dc9f27fb6c385493136047fda6d635f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Mutex</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator*</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator-&gt;</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator-&gt;</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="private" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator==</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>operator==</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1ad9bd241a696b7cc7d5791dfdab09fa70" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Pause</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1afe2c8b4baf05c297721edc5eb4b820f4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>RecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>ReinterpretCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Reset</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Reset</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a54c1252abc87a78a301e6b6984470408" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>ResourceManager</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a393689dd8cbd20d6f89a31947dfbab46" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Resume</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a2159146a56f47031a986981ccb7e665d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SetCallBack</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1ab1b90a56336a65f72c49fd8dca0cd991" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SetName</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtr</name></member>
@@ -616,16 +585,11 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a22b10df2ab1d3705abd75a9b21544520" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Signal</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>StaticCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>StaticCast</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1ab9b0e808195c3de04a3cfdc12222d9b3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Stop</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Unlock</name></member>
       <member refid="classSR__UTILS__NS_1_1FileWatcher_1a9bac6c12a991a20241838f60259f3175" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Update</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Valid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>Valid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_UTILS_NS::FileWatcher</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>

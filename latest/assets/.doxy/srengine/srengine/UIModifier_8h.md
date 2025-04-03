@@ -38,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**UIModifierComponent**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md) <br>_@hidden_  |
+| class | [**UIModifierComponent**](classSR__UTILS__NS_1_1UI_1_1UIModifierComponent.md) <br> |
 | struct | [**UIModifierContext**](structSR__UTILS__NS_1_1UI_1_1UIModifierContext.md) <br> |
 
 

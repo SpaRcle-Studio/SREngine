@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1DetectedOr" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::DetectedOr</compoundname>
-    <basecompoundref refid="structSR__UTILS__NS_1_1Details_1_1Detector" prot="public" virt="non-virtual">SR_UTILS_NS::Details::Detector&lt; Default, void, Op, Args... &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">SR_UTILS_NS::Details::Detector&lt; Default, void, Op, Args... &gt;</basecompoundref>
     <templateparamlist>
       <param>
         <type>class Default</type>
@@ -24,8 +24,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>SR_UTILS_NS::Details::Detector&lt; Default, void, Op, Args... &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1Details_1_1Detector"/>
+        <label>SR_UTILS_NS::Details::Detector&lt; Default, AlwaysVoid, Op, Args &gt;</label>
       </node>
       <node id="1">
         <label>SR_UTILS_NS::DetectedOr&lt; Default, Op, Args &gt;</label>
@@ -36,8 +35,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>SR_UTILS_NS::Details::Detector&lt; Default, void, Op, Args... &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1Details_1_1Detector"/>
+        <label>SR_UTILS_NS::Details::Detector&lt; Default, AlwaysVoid, Op, Args &gt;</label>
       </node>
       <node id="1">
         <label>SR_UTILS_NS::DetectedOr&lt; Default, Op, Args &gt;</label>

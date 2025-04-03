@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1BasePass" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::BasePass</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1ResourceContainer" prot="public" virt="non-virtual">SR_UTILS_NS::ResourceContainer</basecompoundref>
@@ -286,10 +286,10 @@
         <name>Load</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Load</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1CascadedShadowMapPass_1a6eb97c14e3deb1eb14615e8f1e74362d">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ClearBuffersPass_1ab96fe2a0d8a2065bac42c0e838e45c2c">Load</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1af2b30bca318e5c56cff97873043ddcdf">Load</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a789d91a591d644a853241bc9106f9a0c">Load</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1a8c075b4acea7ded027964851abcfad85">Load</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ClearBuffersPass_1ab96fe2a0d8a2065bac42c0e838e45c2c">Load</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1afb4405820e3f634ad6eaaf91285c840e">Load</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1ab5b2d079289e877e97e3cb7462362246">Load</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac3d3bb5e3b2deea3eb91486959e159db">Load</reimplementedby>
@@ -323,13 +323,13 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1ad5c1af15b98c42ac465ace7d9dc1d520">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a09b0a395bbca9251af130eeed0702b8e">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a661adeb2704d34a3c017111e41b42917">Init</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab283e950411fbad853de8e59c5c686ad">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a578fc888ccea11924e1df5c9e776043b">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a660d8bc99d6b36b662e68730ca4c81ed">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1a9653212e2cb0dbe328edaa9e6769082f">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ShadowMapPass_1a580aba139da78fe1ed1d2f27f456a831">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1a9392fa5e9339c5d91ebcb805bb1c0836">Init</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a2f1592c4a61c050fb8c1eb2527d14b49">Init</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ab283e950411fbad853de8e59c5c686ad">Init</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -423,8 +423,8 @@
         <name>Overlay</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Overlay</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1afcd0df18da4c2514e1c04791846424cb">Overlay</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0a6c686ad1fa68b3503a00a8069b1a1d">Overlay</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1WidgetPass_1a86e472c6af737085a6a7aad1660e2cec">Overlay</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0a6c686ad1fa68b3503a00a8069b1a1d">Overlay</reimplementedby>
         <briefdescription>
 <para>Вызывается всегда и в самом начале </para>
         </briefdescription>
@@ -458,10 +458,10 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1af6340e2214eba8b099b816f2488310cc">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a1bb5f8f8e93b8068a9d80ab183e1cf66">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1abefde6903c1310e9469844939695ae29">Prepare</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1af06afdd96b707b8c2bcef3743a557b0e">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a3c35b40b7095392be6ae0fe7bd4edf05">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a96b21122ce1e39f663bc2b1b71e16f0b">Prepare</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1WidgetPass_1ae71846643e4648f729ee4cfd8c20f037">Prepare</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1af06afdd96b707b8c2bcef3743a557b0e">Prepare</reimplementedby>
         <briefdescription>
 <para>Вызывается всегда но полсе оверлея </para>
         </briefdescription>
@@ -495,15 +495,14 @@
         <argsstring>()</argsstring>
         <name>Render</name>
         <qualifiedname>SR_GRAPH_NS::BasePass::Render</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1ClearBuffersPass_1a13e3aa08b7cba39e82882764140c920f">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ColorBufferPass_1a4567549000c8cc50b03d400a0bb8d333">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DebugPass_1a501b6e1ebe5566cecf1905dbf55f465f">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1FlatClusterPass_1aaa1cfb5e478b2ac881f6d66bdc8c4a99">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1add5c3faa372b9c02729e06251c20548f">Render</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1ClearBuffersPass_1a13e3aa08b7cba39e82882764140c920f">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1aeb3bb1e19eb614553fd33d63890e03d1">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a4ed4b0fed3a2c488362afb6010f13b2b">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a58fe72b533c23c8986cb298548a11baf">Render</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1acc82c1ef472390c3961ed51fbc28d974">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1ac08d09bf73b19357108b84e6ba07f6fb">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a33fefe9ddd8bac7c20397308bd4c4261">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1afe3807c59ce206965c62a218db9c28ff">Render</reimplementedby>
@@ -512,6 +511,7 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1a7ec2dcbcc7d3c2e4104151b0d68776be">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a117e63f90fa13a3a6b99fff395f8dfb8">Render</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1af8ab62e5d15d700db602e5ea8079d5a1">Render</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1acc82c1ef472390c3961ed51fbc28d974">Render</reimplementedby>
         <briefdescription>
 <para>Вызывается только во время построения </para>
         </briefdescription>
@@ -550,7 +550,6 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a023706556f7c21c0f366b64d9ee250fd">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMesh3DClusterPass_1a641d7bed746885545c3bf544b10f7f44">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a0b54458d9dc89d63757ba38e20591da9">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0f225f27cf92cb04d29b03650f7eb6fe">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a37ab910895bbd048cc7b8338b30586d3">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a39032468632681f25ca46f0693308a7a">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1a06bc4f4875d9ca6fb96a77a054e3a5d5">Update</reimplementedby>
@@ -558,6 +557,7 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1SkyboxPass_1aad5a1eeb1659372fdad4437d6996a5df">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a852fcbdd62931d9e0cc2cf32982226f9">Update</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1ae46fb09d3a4975ecae475dc31844d8f4">Update</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a0f225f27cf92cb04d29b03650f7eb6fe">Update</reimplementedby>
         <briefdescription>
 <para>Вызывается постоянно после построения </para>
         </briefdescription>
@@ -592,12 +592,12 @@
         <reimplementedby refid="classSR__GRAPH__NS_1_1FramebufferPass_1af26d60b8538dba1f553991136299e461">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1a2b5a1013c99bd74a87e2505f5409dfbc">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1a808a79d7f71dcb4477199fd4555aee3f">OnResize</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac330f5ff4ba1b807bb9e84c43924c3a8">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1aa6fc3fe2752cc600fe681a62a22d4b50">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1OffScreenMeshDrawerPass_1a4cecff17587b90edebb89381333c25d9">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ab12b11b6f5b8d4ed11c5925e9ef5eb09">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ShaderOverridePass_1a4f11276fea1c66e59b5fce6e760b5860">OnResize</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SSAOPass_1a5fb104f9c71313f49c4180b13645b9f0">OnResize</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac330f5ff4ba1b807bb9e84c43924c3a8">OnResize</reimplementedby>
         <param>
           <type>const SR_MATH_NS::UVector2 &amp;</type>
           <declname>size</declname>
@@ -618,9 +618,9 @@
         <qualifiedname>SR_GRAPH_NS::BasePass::OnMultisampleChanged</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GroupPass_1af1ea7ea9db878175331d7e78c3c06991">OnMultisampleChanged</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IMeshClusterPass_1ae1818ca6d02dce41e492539ff8540212">OnMultisampleChanged</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac34275c0ff731da6ce455c9b17556f83">OnMultisampleChanged</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1MeshDrawerPass_1a2c8facd7b70961d91c011f337c8902f0">OnMultisampleChanged</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1PostProcessPass_1ad05a141ed0aa624f1f0f2a04855070e5">OnMultisampleChanged</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1ac34275c0ff731da6ce455c9b17556f83">OnMultisampleChanged</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1068,23 +1068,23 @@
         <childnode refid="10" relation="usage">
           <edgelabel>m_camera</edgelabel>
         </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="23" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="23">
+      <node id="20">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="17">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="21" relation="public-inheritance">
+        <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
       <node id="10">
@@ -1092,23 +1092,6 @@
         <link refid="classSR__GTYPES__NS_1_1Camera"/>
         <childnode refid="11" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="13">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="15" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="15">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
       <node id="4">
         <label>SR_SRLM_NS::IExecutableNode</label>
@@ -1137,19 +1120,16 @@
         <childnode refid="12" relation="public-inheritance">
         </childnode>
         <childnode refid="13" relation="usage">
-          <edgelabel>m_sceneObject</edgelabel>
-        </childnode>
-        <childnode refid="16" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>m_properties</edgelabel>
         </childnode>
       </node>
-      <node id="16">
+      <node id="13">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="12" relation="public-inheritance">
@@ -1171,16 +1151,16 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="19">
+      <node id="16">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="15">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="19" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -1189,19 +1169,19 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
-        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="22" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="21">
-        <label>SR_UTILS_NS::Singleton&lt; UBOManager &gt;</label>
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="22" relation="public-inheritance">
+        <childnode refid="19" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="18">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
         <childnode refid="3" relation="public-inheritance">
@@ -1215,10 +1195,10 @@
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="17">
+      <node id="14">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

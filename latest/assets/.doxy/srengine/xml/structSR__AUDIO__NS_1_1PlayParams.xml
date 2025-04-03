@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__AUDIO__NS_1_1PlayParams" kind="struct" language="C++" prot="public">
     <compoundname>SR_AUDIO_NS::PlayParams</compoundname>
     <sectiondef kind="public-attrib">
@@ -306,79 +306,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <collaborationgraph>
-      <node id="4">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; AudioLibrary &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="7">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector3 &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="8">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector6 &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="3">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SpatializeMode &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="2">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; bool &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="5">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; float_t &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="9">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; std::string &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="6">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; uint64_t &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="1">
-        <label>SR_AUDIO_NS::PlayParams</label>
-        <link refid="structSR__AUDIO__NS_1_1PlayParams"/>
-        <childnode refid="2" relation="usage">
-          <edgelabel>async</edgelabel>
-          <edgelabel>loop</edgelabel>
-        </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>spatialize</edgelabel>
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>library</edgelabel>
-        </childnode>
-        <childnode refid="5" relation="usage">
-          <edgelabel>coneInnerAngle</edgelabel>
-          <edgelabel>gain</edgelabel>
-          <edgelabel>maxDistance</edgelabel>
-          <edgelabel>maxGain</edgelabel>
-          <edgelabel>minGain</edgelabel>
-          <edgelabel>pitch</edgelabel>
-          <edgelabel>referenceDistance</edgelabel>
-          <edgelabel>relative</edgelabel>
-          <edgelabel>rolloffFactor</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>uniqueId</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
-          <edgelabel>direction</edgelabel>
-          <edgelabel>position</edgelabel>
-          <edgelabel>velocity</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>orientation</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>device</edgelabel>
-        </childnode>
-      </node>
-    </collaborationgraph>
     <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="63" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="63" bodyend="110"/>
     <listofallmembers>
       <member refid="structSR__AUDIO__NS_1_1PlayParams_1a4aafc904b00b2f0a992dc96ed0475479" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParams</scope><name>async</name></member>

@@ -60,7 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**InputIteratorPointer**](#function-inputiteratorpointer) (ValueType && value) <br>_NOLINT(google-explicit-constructor)_  |
+|  constexpr | [**InputIteratorPointer**](#function-inputiteratorpointer) (ValueType && value) noexcept<br>_NOLINT(google-explicit-constructor)_  |
 |  SR\_NODISCARD constexpr Reference | [**operator\***](#function-operator) () noexcept<br> |
 |  SR\_NODISCARD constexpr Pointer | [**operator-&gt;**](#function-operator_1) () noexcept<br> |
 
@@ -143,7 +143,7 @@ _NOLINT(google-explicit-constructor)_
 ```C++
 inline constexpr SR_UTILS_NS::InputIteratorPointer::InputIteratorPointer (
     ValueType && value
-) 
+) noexcept
 ```
 
 

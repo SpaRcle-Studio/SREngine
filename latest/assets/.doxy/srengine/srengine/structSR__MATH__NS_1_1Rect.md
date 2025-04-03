@@ -75,10 +75,10 @@
 |  constexpr | [**Rect**](#function-rect-45) (T x, T y, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
 |  constexpr | [**Rect**](#function-rect-55) () <br> |
 |  SR\_NODISCARD constexpr T | [**Right**](#function-right) () noexcept const<br> |
-|  void | [**SetBottom**](#function-setbottom) (const T & value) <br> |
-|  void | [**SetLeft**](#function-setleft) (const T & value) <br> |
-|  void | [**SetRight**](#function-setright) (const T & value) <br> |
-|  void | [**SetTop**](#function-settop) (const T & value) <br> |
+|  constexpr void | [**SetBottom**](#function-setbottom) (const T & value) <br> |
+|  constexpr void | [**SetLeft**](#function-setleft) (const T & value) <br> |
+|  constexpr void | [**SetRight**](#function-setright) (const T & value) <br> |
+|  constexpr void | [**SetTop**](#function-settop) (const T & value) <br> |
 |  SR\_NODISCARD constexpr T | [**Top**](#function-top) () noexcept const<br> |
 |  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**WH**](#function-wh) () noexcept const<br> |
 |  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH0**](#function-wh0) () noexcept const<br> |
@@ -396,7 +396,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Right () noexcept const
 ### function SetBottom 
 
 ```C++
-inline void SR_MATH_NS::Rect::SetBottom (
+inline constexpr void SR_MATH_NS::Rect::SetBottom (
     const T & value
 ) 
 ```
@@ -411,7 +411,7 @@ inline void SR_MATH_NS::Rect::SetBottom (
 ### function SetLeft 
 
 ```C++
-inline void SR_MATH_NS::Rect::SetLeft (
+inline constexpr void SR_MATH_NS::Rect::SetLeft (
     const T & value
 ) 
 ```
@@ -426,7 +426,7 @@ inline void SR_MATH_NS::Rect::SetLeft (
 ### function SetRight 
 
 ```C++
-inline void SR_MATH_NS::Rect::SetRight (
+inline constexpr void SR_MATH_NS::Rect::SetRight (
     const T & value
 ) 
 ```
@@ -441,7 +441,7 @@ inline void SR_MATH_NS::Rect::SetRight (
 ### function SetTop 
 
 ```C++
-inline void SR_MATH_NS::Rect::SetTop (
+inline constexpr void SR_MATH_NS::Rect::SetTop (
     const T & value
 ) 
 ```

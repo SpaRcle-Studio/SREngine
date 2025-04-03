@@ -39,8 +39,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**HasEmpty**](#variable-hasempty)   = `IsDetectedV&lt;HasMethodEmptyT, T&gt;`<br> |
-|  bool | [**IsSerializable**](#variable-isserializable)   = `std::is\_base\_of\_v&lt;[**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md), T&gt;`<br> |
+|  constexpr bool | [**HasEmpty**](#variable-hasempty)   = `IsDetectedV&lt;HasMethodEmptyT, T&gt;`<br> |
+|  constexpr bool | [**IsSerializable**](#variable-isserializable)   = `std::is\_base\_of\_v&lt;[**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md), T&gt;`<br> |
 
 
 
@@ -91,7 +91,7 @@
 ### variable HasEmpty 
 
 ```C++
-bool SR_UTILS_NS::SerializationTraits< T >::HasEmpty;
+constexpr bool SR_UTILS_NS::SerializationTraits< T >::HasEmpty;
 ```
 
 
@@ -104,7 +104,7 @@ bool SR_UTILS_NS::SerializationTraits< T >::HasEmpty;
 ### variable IsSerializable 
 
 ```C++
-bool SR_UTILS_NS::SerializationTraits< T >::IsSerializable;
+constexpr bool SR_UTILS_NS::SerializationTraits< T >::IsSerializable;
 ```
 
 

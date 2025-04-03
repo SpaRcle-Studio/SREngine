@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__TYPES__NS_1_1detail_1_1distance__detail" kind="namespace" language="C++">
     <compoundname>SR_TYPES_NS::detail::distance_detail</compoundname>
     <sectiondef kind="func">
-      <memberdef kind="function" id="UintWide__t_8h_1ad266424f3c7ab9127f50f72eb735d116" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="UintWide__t_8h_1ad266424f3c7ab9127f50f72eb735d116" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class It</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits" kindref="compound">detail::iterator_detail::iterator_traits</ref>&lt; It &gt;::difference_type</type>
-        <definition>typename detail::iterator_detail::iterator_traits&lt; It &gt;::difference_type SR_TYPES_NS::detail::distance_detail::do_distance_unsafe</definition>
-        <argsstring>(It first, It last, detail::iterator_detail::random_access_iterator_tag)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::distance_detail::do_distance_unsafe</definition>
+        <argsstring>(It first, It last, detail::iterator_detail::random_access_iterator_tag) -&gt; typename detail::iterator_detail::iterator_traits&lt; It &gt;::difference_type</argsstring>
         <name>do_distance_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::distance_detail::do_distance_unsafe</qualifiedname>
         <param>

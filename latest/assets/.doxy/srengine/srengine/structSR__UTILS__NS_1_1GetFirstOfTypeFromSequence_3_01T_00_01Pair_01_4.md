@@ -39,8 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_INLINE constexpr auto | [**value**](#variable-value-12)   = `std::conditional\_t&lt;std::is\_same\_v&lt;T, typename Pair::type&gt;, Pair, [**GetFirstOfTypeFromSequenceAssert**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert.md)&lt;T&gt;&gt;::value`<br> |
-|  SR\_INLINE constexpr auto | [**value**](#variable-value-22)  <br> |
+|  SR\_INLINE constexpr auto | [**value**](#variable-value)   = `std::conditional\_t&lt;std::is\_same\_v&lt;T, typename Pair::type&gt;, Pair, [**GetFirstOfTypeFromSequenceAssert**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert.md)&lt;T&gt;&gt;::value`<br> |
 
 
 
@@ -88,23 +87,10 @@
 
 
 
-### variable value [1/2]
+### variable value 
 
 ```C++
 SR_INLINE constexpr auto SR_UTILS_NS::GetFirstOfTypeFromSequence< T, Pair >::value;
-```
-
-
-
-
-<hr>
-
-
-
-### variable value [2/2]
-
-```C++
-SR_INLINE constexpr auto SR_UTILS_NS::GetFirstOfTypeFromSequence< T, Pair, Pairs >::value;
 ```
 
 

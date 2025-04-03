@@ -56,9 +56,8 @@
 |  constexpr | [**SRConditionallyEnabledHash**](#function-srconditionallyenabledhash-13) () = delete<br> |
 |  constexpr | [**SRConditionallyEnabledHash**](#function-srconditionallyenabledhash-23) (const [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) &) = delete<br> |
 |  constexpr | [**SRConditionallyEnabledHash**](#function-srconditionallyenabledhash-33) ([**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) &&) = delete<br> |
-|  SR\_NODISCARD constexpr size\_t | [**operator()**](#function-operator()) (const T & keyVal) const<br> |
-|  [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) & | [**operator=**](#function-operator) (const [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) &) = delete<br> |
-|  [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) & | [**operator=**](#function-operator_1) ([**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) &&) = delete<br> |
+|  constexpr [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) & | [**operator=**](#function-operator) (const [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) &) = delete<br> |
+|  constexpr [**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) & | [**operator=**](#function-operator_1) ([**SRConditionallyEnabledHash**](structSR__UTILS__NS_1_1SRConditionallyEnabledHash.md) &&) = delete<br> |
 
 
 
@@ -135,25 +134,10 @@ constexpr SR_UTILS_NS::SRConditionallyEnabledHash< T, false >::SRConditionallyEn
 
 
 
-### function operator() 
-
-```C++
-inline SR_NODISCARD constexpr size_t SR_UTILS_NS::SRConditionallyEnabledHash< T, false >::operator() (
-    const T & keyVal
-) const
-```
-
-
-
-
-<hr>
-
-
-
 ### function operator= 
 
 ```C++
-SRConditionallyEnabledHash & SR_UTILS_NS::SRConditionallyEnabledHash< T, false >::operator= (
+constexpr SRConditionallyEnabledHash & SR_UTILS_NS::SRConditionallyEnabledHash< T, false >::operator= (
     const SRConditionallyEnabledHash &
 ) = delete
 ```
@@ -168,7 +152,7 @@ SRConditionallyEnabledHash & SR_UTILS_NS::SRConditionallyEnabledHash< T, false >
 ### function operator= 
 
 ```C++
-SRConditionallyEnabledHash & SR_UTILS_NS::SRConditionallyEnabledHash< T, false >::operator= (
+constexpr SRConditionallyEnabledHash & SR_UTILS_NS::SRConditionallyEnabledHash< T, false >::operator= (
     SRConditionallyEnabledHash &&
 ) = delete
 ```

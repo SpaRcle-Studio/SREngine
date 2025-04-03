@@ -17,6 +17,7 @@
 
 
 
+Inherited by the following classes: [SR\_GRAPH\_NS::RenderContext](classSR__GRAPH__NS_1_1RenderContext.md),  [SR\_PHYSICS\_NS::PhysicsScene](classSR__PHYSICS__NS_1_1PhysicsScene.md),  [SR\_SCRIPTING\_NS::ScriptHolder](classSR__SCRIPTING__NS_1_1ScriptHolder.md)
 
 
 

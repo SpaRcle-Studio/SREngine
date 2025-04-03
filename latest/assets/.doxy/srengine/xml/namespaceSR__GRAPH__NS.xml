@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__GRAPH__NS" kind="namespace" language="C++">
     <compoundname>SR_GRAPH_NS</compoundname>
     <innerclass refid="classSR__GRAPH__NS_1_1AndroidWindow" prot="public">SR_GRAPH_NS::AndroidWindow</innerclass>
@@ -332,9 +332,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/BasePass.h" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="PassQueue_8h_1a3ab480948c4b9890e0688dbaa512a908" prot="public" static="no">
+      <memberdef kind="typedef" id="PassQueue_8h_1a04a3c7cbc375fae47bc12d9206d62ff7" prot="public" static="no">
         <type>std::vector&lt; <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> * &gt;</type>
-        <definition>using SR_GRAPH_NS::PassQueue =  std::vector&lt;BasePass*&gt;</definition>
+        <definition>using SR_GRAPH_NS::PassQueue = typedef std::vector&lt;BasePass*&gt;</definition>
         <argsstring></argsstring>
         <name>PassQueue</name>
         <qualifiedname>SR_GRAPH_NS::PassQueue</qualifiedname>
@@ -346,9 +346,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" bodystart="13" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="PassQueue_8h_1a97fb48a453c513b10af73749f7aff785" prot="public" static="no">
+      <memberdef kind="typedef" id="PassQueue_8h_1a60eadbd4ed1391d2864b428830ed1ccd" prot="public" static="no">
         <type>std::vector&lt; PassQueue &gt;</type>
-        <definition>using SR_GRAPH_NS::PassQueues =  std::vector&lt;PassQueue&gt;</definition>
+        <definition>using SR_GRAPH_NS::PassQueues = typedef std::vector&lt;PassQueue&gt;</definition>
         <argsstring></argsstring>
         <name>PassQueues</name>
         <qualifiedname>SR_GRAPH_NS::PassQueues</qualifiedname>
@@ -402,9 +402,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" line="142" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/IShaderProgram.h" bodystart="142" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="PipelineState_8h_1a47eecca72db86bdf787ac95c47ab85ad" prot="public" static="no">
+      <memberdef kind="typedef" id="PipelineState_8h_1aea8415011633d07cad6f77b894722b8f" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1SRDescriptorUpdateInfo" kindref="compound">SRDescriptorUpdateInfo</ref> &gt;</type>
-        <definition>using SR_GRAPH_NS::SRDescriptorUpdateInfos =  std::vector&lt;SRDescriptorUpdateInfo&gt;</definition>
+        <definition>using SR_GRAPH_NS::SRDescriptorUpdateInfos = typedef std::vector&lt;SRDescriptorUpdateInfo&gt;</definition>
         <argsstring></argsstring>
         <name>SRDescriptorUpdateInfos</name>
         <qualifiedname>SR_GRAPH_NS::SRDescriptorUpdateInfos</qualifiedname>
@@ -2636,6 +2636,9 @@
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
+<para>partition</para>
+<para>swap(i, j);</para>
+<para>recursion</para>
 <para>partition</para>
 <para>swap(i, j);</para>
 <para>recursion</para>

@@ -51,7 +51,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**test\_various\_isolated\_edge\_cases**](#function-test_various_isolated_edge_cases) () <br> |
+|  auto | [**test\_various\_isolated\_edge\_cases**](#function-test_various_isolated_edge_cases) () <br> |
 
 
 
@@ -88,7 +88,7 @@
 ### function test\_various\_isolated\_edge\_cases 
 
 ```C++
-bool test_uintwide_t_edge::test_various_isolated_edge_cases () 
+auto test_uintwide_t_edge::test_various_isolated_edge_cases () 
 ```
 
 

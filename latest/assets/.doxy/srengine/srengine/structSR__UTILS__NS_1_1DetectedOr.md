@@ -15,63 +15,7 @@
 
 
 
-Inherits the following classes: [SR\_UTILS\_NS::Details::Detector](structSR__UTILS__NS_1_1Details_1_1Detector.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Public Types inherited from SR_UTILS_NS::Details::Detector
-
-See [SR\_UTILS\_NS::Details::Detector](structSR__UTILS__NS_1_1Details_1_1Detector.md)
-
-| Type | Name |
-| ---: | :--- |
-| typedef Default | [**type**](structSR__UTILS__NS_1_1Details_1_1Detector.md#typedef-type)  <br> |
-| typedef std::false\_type | [**value\_t**](structSR__UTILS__NS_1_1Details_1_1Detector.md#typedef-value_t)  <br> |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Inherits the following classes: SR_UTILS_NS::Details::Detector< Default, void, Op, Args... >
 
 
 

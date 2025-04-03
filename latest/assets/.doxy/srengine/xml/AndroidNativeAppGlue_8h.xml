@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="AndroidNativeAppGlue_8h" kind="file" language="C++">
     <compoundname>AndroidNativeAppGlue.h</compoundname>
     <includes refid="stdInclude_8h" local="no">Utils/stdInclude.h</includes>
@@ -358,10 +358,10 @@
     <innerclass refid="structandroid__poll__source" prot="public">android_poll_source</innerclass>
     <innerclass refid="structandroid__app" prot="public">android_app</innerclass>
     <sectiondef kind="enum">
-      <memberdef kind="enum" id="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eeda" prot="public" static="no" strong="no">
+      <memberdef kind="enum" id="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4a" prot="public" static="no" strong="no">
         <type></type>
         <name></name>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eedaa66661a2e57566ddd214710ca3494b0b9" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4aa66661a2e57566ddd214710ca3494b0b9" prot="public">
           <name>LOOPER_ID_MAIN</name>
           <initializer>= 1</initializer>
           <briefdescription>
@@ -370,7 +370,7 @@
 <para>Looper data ID of commands coming from the app&apos;s main thread, which is returned as an identifier from ALooper_pollOnce(). The data for this identifier is a pointer to an <ref refid="structandroid__poll__source" kindref="compound">android_poll_source</ref> structure. These can be retrieved and processed with android_app_read_cmd() and android_app_exec_cmd(). </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eedaa5e50c78fcf09cc1b0ab723f71aa7004a" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4aa5e50c78fcf09cc1b0ab723f71aa7004a" prot="public">
           <name>LOOPER_ID_INPUT</name>
           <initializer>= 2</initializer>
           <briefdescription>
@@ -379,7 +379,7 @@
 <para>Looper data ID of events coming from the AInputQueue of the application&apos;s window, which is returned as an identifier from ALooper_pollOnce(). The data for this identifier is a pointer to an <ref refid="structandroid__poll__source" kindref="compound">android_poll_source</ref> structure. These can be read via the inputQueue object of <ref refid="structandroid__app" kindref="compound">android_app</ref>. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eedaa9310453935dbed3c38ca54243f8d1114" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4aa9310453935dbed3c38ca54243f8d1114" prot="public">
           <name>LOOPER_ID_USER</name>
           <initializer>= 3</initializer>
           <briefdescription>
@@ -396,10 +396,10 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" line="117" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/AndroidNativeAppGlue.h" bodystart="117" bodyend="140"/>
       </memberdef>
-      <memberdef kind="enum" id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10d" prot="public" static="no" strong="no">
+      <memberdef kind="enum" id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603" prot="public" static="no" strong="no">
         <type></type>
         <name></name>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da7819d1cf24caefafd27bc595faa90cff" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a7819d1cf24caefafd27bc595faa90cff" prot="public">
           <name>APP_CMD_INPUT_CHANGED</name>
           <briefdescription>
           </briefdescription>
@@ -407,7 +407,7 @@
 <para>Command from main thread: the AInputQueue has changed. Upon processing this command, android_app-&gt;inputQueue will be updated to the new queue (or NULL). </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da0d6fca4488718da1af972b5eb76b4e70" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a0d6fca4488718da1af972b5eb76b4e70" prot="public">
           <name>APP_CMD_INIT_WINDOW</name>
           <briefdescription>
           </briefdescription>
@@ -415,7 +415,7 @@
 <para>Command from main thread: a new ANativeWindow is ready for use. Upon receiving this command, android_app-&gt;window will contain the new window surface. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10dae4454163b5148d7feb2c1398e87f1bd5" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603ae4454163b5148d7feb2c1398e87f1bd5" prot="public">
           <name>APP_CMD_TERM_WINDOW</name>
           <briefdescription>
           </briefdescription>
@@ -423,7 +423,7 @@
 <para>Command from main thread: the existing ANativeWindow needs to be terminated. Upon receiving this command, android_app-&gt;window still contains the existing window; after calling android_app_exec_cmd it will be set to NULL. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da448514d4220320ec7a7e7324e019f42c" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a448514d4220320ec7a7e7324e019f42c" prot="public">
           <name>APP_CMD_WINDOW_RESIZED</name>
           <briefdescription>
           </briefdescription>
@@ -431,7 +431,7 @@
 <para>Command from main thread: the current ANativeWindow has been resized. Please redraw with its new size. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da1b0e01d7dd6e8ca91e8a51033ca3e59a" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a1b0e01d7dd6e8ca91e8a51033ca3e59a" prot="public">
           <name>APP_CMD_WINDOW_REDRAW_NEEDED</name>
           <briefdescription>
           </briefdescription>
@@ -439,7 +439,7 @@
 <para>Command from main thread: the system needs that the current ANativeWindow be redrawn. You should redraw the window before handing this to android_app_exec_cmd() in order to avoid transient drawing glitches. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da867d94e17fcae1afb7a1518b7716f3f4" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a867d94e17fcae1afb7a1518b7716f3f4" prot="public">
           <name>APP_CMD_CONTENT_RECT_CHANGED</name>
           <briefdescription>
           </briefdescription>
@@ -447,7 +447,7 @@
 <para>Command from main thread: the content area of the window has changed, such as from the soft input window being shown or hidden. You can find the new content rect in android_app::contentRect. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da185c97bb056e5f4b95ddadecbec20e7e" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a185c97bb056e5f4b95ddadecbec20e7e" prot="public">
           <name>APP_CMD_GAINED_FOCUS</name>
           <briefdescription>
           </briefdescription>
@@ -455,7 +455,7 @@
 <para>Command from main thread: the app&apos;s activity window has gained input focus. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da0288cde5cba1809643528f87a08b7652" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a0288cde5cba1809643528f87a08b7652" prot="public">
           <name>APP_CMD_LOST_FOCUS</name>
           <briefdescription>
           </briefdescription>
@@ -463,7 +463,7 @@
 <para>Command from main thread: the app&apos;s activity window has lost input focus. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da1e522859766d39850cbc3f1c015b632c" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a1e522859766d39850cbc3f1c015b632c" prot="public">
           <name>APP_CMD_CONFIG_CHANGED</name>
           <briefdescription>
           </briefdescription>
@@ -471,7 +471,7 @@
 <para>Command from main thread: the current device configuration has changed. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da81f8fd5d321c73ce40ac190c097dfc07" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a81f8fd5d321c73ce40ac190c097dfc07" prot="public">
           <name>APP_CMD_LOW_MEMORY</name>
           <briefdescription>
           </briefdescription>
@@ -479,7 +479,7 @@
 <para>Command from main thread: the system is running low on memory. Try to reduce your memory use. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10daf3fe7e75c6650752c617380c1dae3e5a" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603af3fe7e75c6650752c617380c1dae3e5a" prot="public">
           <name>APP_CMD_START</name>
           <briefdescription>
           </briefdescription>
@@ -487,7 +487,7 @@
 <para>Command from main thread: the app&apos;s activity has been started. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10dae74474be4b21cdcde2ef833e6e8cd239" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603ae74474be4b21cdcde2ef833e6e8cd239" prot="public">
           <name>APP_CMD_RESUME</name>
           <briefdescription>
           </briefdescription>
@@ -495,7 +495,7 @@
 <para>Command from main thread: the app&apos;s activity has been resumed. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da90c4a6ced7ede689613ce2b1e0f95d66" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a90c4a6ced7ede689613ce2b1e0f95d66" prot="public">
           <name>APP_CMD_SAVE_STATE</name>
           <briefdescription>
           </briefdescription>
@@ -503,7 +503,7 @@
 <para>Command from main thread: the app should generate a new saved state for itself, to restore from later if needed. If you have saved state, allocate it with malloc and place it in android_app.savedState with the size in android_app.savedStateSize. The will be freed for you later. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da074614e1c74af041e42a982d85a22fee" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a074614e1c74af041e42a982d85a22fee" prot="public">
           <name>APP_CMD_PAUSE</name>
           <briefdescription>
           </briefdescription>
@@ -511,7 +511,7 @@
 <para>Command from main thread: the app&apos;s activity has been paused. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da85fd01d255415043aeb43f552ae1c970" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a85fd01d255415043aeb43f552ae1c970" prot="public">
           <name>APP_CMD_STOP</name>
           <briefdescription>
           </briefdescription>
@@ -519,7 +519,7 @@
 <para>Command from main thread: the app&apos;s activity has been stopped. </para>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10daf816e28d8f833b5e9597b40ce725974f" prot="public">
+        <enumvalue id="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603af816e28d8f833b5e9597b40ce725974f" prot="public">
           <name>APP_CMD_DESTROY</name>
           <briefdescription>
           </briefdescription>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1Window" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::Window</compoundname>
     <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Window &gt;</basecompoundref>
@@ -627,7 +627,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Window &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -645,7 +645,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Window &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -666,17 +666,12 @@
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1afc0a7c91c6bc5c43dd294e4842872188" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>ClientToScreen</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a804d57f4ce2bfa02977b2398598ca20f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Close</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a6ddfd94a4af285c4ae0067b1dff267c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>CloseCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a2992f0f791479ec6f391e21db7d562bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DrawCallback</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1aad6e9f0a012d94382d77d9ee110ce304" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>FocusCallback</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1ab84cba3ea60b64bed4e62cc3716d4fb5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetBaseWindow</name></member>
@@ -687,15 +682,9 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1aa2d5a7664f22d643ba5ab776466cc7ce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetSize</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetSRClass</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetSRClass</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1ab473adb8d653616b048a67b55f53a7e9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Initialize</name></member>
@@ -714,34 +703,21 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1ad9146ea1b8a64dda0466422d27eb684a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>m_scrollCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1ad37658714ab884662d6da65e09a4fc1b" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>m_windowImpl</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>MakeShared</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>MakeShared</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1aa56b323f28af3637ba53ba90b381c22b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Open</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator-&gt;</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator-&gt;</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator==</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>operator==</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a5c03bd9e0bcf983a36b7c6705337be92" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>PollEvents</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>PolymorphicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a7559d1c9b7ffe82295bda4894a517ed9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a04a9fb954a34af4b3e83843535f52584" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>RenderContextPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>Reset</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>Reset</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a6308978acfc416057f8fea98d065852f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>ResizeCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a5ad6a969d3d57291935a0d1518535fd6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>ScreenToClient</name></member>
@@ -751,16 +727,9 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1acc06769dc1006cc96a5ac7c634ef510f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SetFocusCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a28a7d08f681802351a38e7a8a668c4b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SetFullScreen</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a7cab14e5d9abcb987075957fdce07ba9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SetResizeCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1acd1ffac02b5e4959b7a825727fd370cd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SetScrollCallback</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
@@ -769,17 +738,12 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>StaticCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1af9f26136dee904860f27155af657f6c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Unlock</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1afbd9febd591d4946750a0643dd850874" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Window</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a89638d41a2b71259a1105ab7fc63544b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>WindowHandle</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1aea8978a38680ff857845c9e879d8f58a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~Window</name></member>

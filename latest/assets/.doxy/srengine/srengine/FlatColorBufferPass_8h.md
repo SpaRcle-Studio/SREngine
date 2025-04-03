@@ -82,28 +82,7 @@
 
 
 
-## Macros
 
-| Type | Name |
-| ---: | :--- |
-| define  | [**SR\_ENGINE\_GRAPHICS\_FLAT\_COLOR\_BUFFER\_PASS\_H**](FlatColorBufferPass_8h.md#define-sr_engine_graphics_flat_color_buffer_pass_h)  <br> |
-
-## Macro Definition Documentation
-
-
-
-
-
-### define SR\_ENGINE\_GRAPHICS\_FLAT\_COLOR\_BUFFER\_PASS\_H 
-
-```C++
-#define SR_ENGINE_GRAPHICS_FLAT_COLOR_BUFFER_PASS_H 
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h`

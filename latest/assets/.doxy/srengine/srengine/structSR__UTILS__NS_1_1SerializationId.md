@@ -61,7 +61,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) | [**Create**](#function-create) (const char(&) text) noexcept<br> |
+|  constexpr [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) | [**Create**](#function-create) (const char(&) text) noexcept<br> |
 |  [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) | [**CreateFromCStr**](#function-createfromcstr) (const char \* text) noexcept<br> |
 |  [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) | [**CreateFromString**](#function-createfromstring) (const std::string\_view text) noexcept<br> |
 
@@ -153,7 +153,7 @@ SR_CONSTEXPR SR_UTILS_NS::SerializationId::~SerializationId () noexcept
 
 ```C++
 template<uint64_t S>
-static inline SerializationId SR_UTILS_NS::SerializationId::Create (
+static inline constexpr SerializationId SR_UTILS_NS::SerializationId::Create (
     const char(&) text
 ) noexcept
 ```

@@ -15,7 +15,7 @@
 
 
 
-Inherits the following classes: std::false_type,  std::true_type
+Inherits the following classes: std::true_type
 
 
 

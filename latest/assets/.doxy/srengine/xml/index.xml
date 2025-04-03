@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.13.2" xml:lang="en-US">
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.8" xml:lang="en-US">
   <compound refid="classSR__CORE__GUI__NS_1_1About" kind="class"><name>SR_CORE_GUI_NS::About</name>
     <member refid="classSR__CORE__GUI__NS_1_1About_1aa3ffd6cfe0781a78bd4de7563c6a0ec7" kind="typedef"><name>Super</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1About_1a5689b1f89101ca0f04a3634cfa829e86" kind="function"><name>About</name></member>
@@ -428,7 +428,6 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1AnyVisitor_3_4" kind="struct"><name>SR_UTILS_NS::AnyVisitor&lt;&gt;</name>
     <member refid="structSR__UTILS__NS_1_1AnyVisitor_3_4_1a229b6409d4b94e5d869f61498509051a" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1AnyVisitor_1a19199b1a1c68a699d8babb95c4bb7b0e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classSpaRcle_1_1API" kind="class"><name>SpaRcle::API</name>
     <member refid="classSpaRcle_1_1API_1a941e91df8fe53ed583c01890fb15ef19" kind="function"><name>API</name></member>
@@ -955,7 +954,7 @@
   <compound refid="classSR__SCRIPTING__NS_1_1Behaviour" kind="class"><name>SR_SCRIPTING_NS::Behaviour</name>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1acd507febf24a0f2628c432798522e5c3" kind="typedef"><name>GameObjectPtr</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1aaf64cd01187dff3d2b004fb48ed8d192" kind="typedef"><name>Properties</name></member>
-    <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a3b8c732913d10ac0b39e6b4165b448c1" kind="typedef"><name>ValueProperties</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1af3985538dec54109aca99c20a243d6a6" kind="typedef"><name>ValueProperties</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1aebe21485393cb8d00f470d46de5ce1a0" kind="typedef"><name>Super</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a58ed6e334353b73b8ac80004b0b9c2e0" kind="variable"><name>m_rawBehaviour</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1Behaviour_1a88ce12c402f4dd0766287eb6732ebbca" kind="function"><name>Reload</name></member>
@@ -1731,7 +1730,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1aaeda44b670fe0b20aad9e1b392e00393" kind="variable"><name>type</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a94f2bc7d29e9c42e28bab70275017378" kind="variable"><name>direction</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a91f59540be25dfa4adc532f6e4cceb0c" kind="variable"><name>degree</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1ae1c15d3d35f66ebba9b4951bde3406b2" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection_1a25ed9671963d24b02db8b5bb83e4fbee" kind="variable"><name></name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor" kind="struct"><name>SR_UTILS_NS::Web::CSSGradientColor</name>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSGradientColor_1a49b905f66d5b3d3ba91af4dffc67428d" kind="variable"><name>color</name></member>
@@ -1834,7 +1833,7 @@
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ad3579d47e3f497ca3d4152eb15bb3478" kind="variable"><name>percent</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a52001a76a637197e9937f1b5f58d7330" kind="variable"><name>dpi</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a091cd7f8d1d79db1a4332834add1efa9" kind="variable"><name>deg</name></member>
-    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1ab666a1300eca4a22674e8433e7e65f0a" kind="variable"><name></name></member>
+    <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a9128e659182b0941fc8a37d805f81622" kind="variable"><name></name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a248defadfbdae30a585a521b88acb427" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1a5e2d6b1465a1b725206848946d49b41c" kind="function"><name>CSSSizeValue</name></member>
     <member refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue_1aaf98edc7b6d691eeef454ce75196ccef" kind="function"><name>CSSSizeValue</name></member>
@@ -2425,148 +2424,54 @@
   <compound refid="structDefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;</name>
     <member refid="structDefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a57c4db8580f22221dfc561766c76d60e" kind="function"><name>IsDefault</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>SR_UTILS_NS::DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a85d0178270608d7dd8222dea45c317a2" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1a4334670aa8b0ae564e74f7b6973a8b4f" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1af61aec4810929fb03fa8449294ff8874" kind="typedef"><name>IsAlwaysFalse</name></member>
-  </compound>
   <compound refid="structDefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4" kind="struct"><name>DefaultChecker&lt; std::array&lt; T, N &gt; &gt;</name>
     <member refid="structDefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1af990d6e685cc9ddaa398da8fc6c75ca6" kind="typedef"><name>IsAlwaysFalse</name></member>
     <member refid="structDefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1a3100909fd30422a91468bd52fcc55263" kind="function"><name>IsDefault</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultChecker&lt; std::array&lt; T, N &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1a17e36fa6c2895bd568174830c7fca2ff" kind="typedef"><name>IsAlwaysFalse</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1af61aec4810929fb03fa8449294ff8874" kind="typedef"><name>IsAlwaysFalse</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1a4e8910193b134bab95ffc8061a0d57ba" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1a4334670aa8b0ae564e74f7b6973a8b4f" kind="function"><name>IsDefault</name></member>
-  </compound>
   <compound refid="structDefaultChecker_3_01std_1_1optional_3_01T_01_4_01_4" kind="struct"><name>DefaultChecker&lt; std::optional&lt; T &gt; &gt;</name>
     <member refid="structDefaultChecker_3_01std_1_1optional_3_01T_01_4_01_4_1a38bed5e8dd52a109f34aca12ca8ecadd" kind="function"><name>IsDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1optional_3_01T_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultChecker&lt; std::optional&lt; T &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1optional_3_01T_01_4_01_4_1a3affc892351e1fb419b58ac8db2d3341" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1a4334670aa8b0ae564e74f7b6973a8b4f" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1af61aec4810929fb03fa8449294ff8874" kind="typedef"><name>IsAlwaysFalse</name></member>
   </compound>
   <compound refid="structDefaultChecker_3_01T_00_01std_1_1enable__if__t_3_01SerializationTraits_3_01T_01_4_1_1HasEm7f8e838d2164f5264d4241b1c97027d7" kind="struct"><name>DefaultChecker&lt; T, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::HasEmpty &amp;&amp;!IsTypeFromStdArrayTemplateV&lt; T &gt; &gt; &gt;</name>
     <member refid="structDefaultChecker_3_01T_00_01std_1_1enable__if__t_3_01SerializationTraits_3_01T_01_4_1_1HasEm7f8e838d2164f5264d4241b1c97027d7_1a44c046cf8339f256a31fc2c668043219" kind="function"><name>IsDefault</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01std_1_1enable__if__t_3_01SerializationTraits_3_f1ad6a1b8208027db52c5c5add79c61d" kind="struct"><name>SR_UTILS_NS::DefaultChecker&lt; T, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::HasEmpty &amp;&amp;!IsTypeFromStdArrayTemplateV&lt; T &gt; &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01std_1_1enable__if__t_3_01SerializationTraits_3_f1ad6a1b8208027db52c5c5add79c61d_1a4d75bc5348c6eec295d8225dfb619361" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1a4334670aa8b0ae564e74f7b6973a8b4f" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1af61aec4810929fb03fa8449294ff8874" kind="typedef"><name>IsAlwaysFalse</name></member>
-  </compound>
   <compound refid="structDefaultChecker_3_01T_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__default__construccd7dc995762fd2295150430612ff7889" kind="struct"><name>DefaultChecker&lt; T, typename std::enable_if_t&lt; std::is_default_constructible_v&lt; T &gt; &amp;&amp;CheckOperatorUsableV&lt; CheckerEqualityComparable, T, T &gt; &amp;&amp;!SerializationTraits&lt; T &gt;::HasEmpty &amp;&amp;!std::is_same_v&lt; T, SR_UTILS_NS::StringAtom &gt; &gt; &gt;</name>
     <member refid="structDefaultChecker_3_01T_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__default__construccd7dc995762fd2295150430612ff7889_1a83f6b64634d48c2757e129400844168e" kind="function"><name>IsDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__5bc20061f0ddc01a3d078bd35df479a5" kind="struct"><name>SR_UTILS_NS::DefaultChecker&lt; T, typename std::enable_if_t&lt; std::is_default_constructible_v&lt; T &gt; &amp;&amp;CheckOperatorUsableV&lt; CheckerEqualityComparable, T, T &gt; &amp;&amp;!SerializationTraits&lt; T &gt;::HasEmpty &amp;&amp;!std::is_same_v&lt; T, SR_UTILS_NS::StringAtom &gt; &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__5bc20061f0ddc01a3d078bd35df479a5_1a6ff93ad6196f257b4951c6878b3d38a5" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1a4334670aa8b0ae564e74f7b6973a8b4f" kind="function"><name>IsDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultChecker_1af61aec4810929fb03fa8449294ff8874" kind="typedef"><name>IsAlwaysFalse</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker" kind="struct"><name>DefaultObjectMaker</name>
     <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
-  </compound>
   <compound refid="structDefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" kind="struct"><name>DefaultObjectMaker&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</name>
     <member refid="structDefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4_1a895692e232bf8976ad80164e171e14fd" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4_1a479bdde9fac271cbbea89a375c5af447" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4_1ab7c54d678278f7f161a4cbdbf832b9f0" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4_1a41f2319ab9557d58808ca50d9304b90c" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>DefaultObjectMaker&lt; SR_UTILS_NS::StringAtom &gt;</name>
     <member refid="structDefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1acb228a14e878a35843b736d6bad6b90d" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a40d7e94ccf897d742f0eb6a4d1722ed6" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; SR_UTILS_NS::StringAtom &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a9a49e22256eb0b601d2ae7523aa3634b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4_1ac16184efbaec14148c53b8444c89dc9c" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4" kind="struct"><name>DefaultObjectMaker&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</name>
     <member refid="structDefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1ab2425231f1cea499be6c695f86802d8f" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1aca52cf2bddc77ef4999f3d9729f49258" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a4a0ae542d4b627eccc6120c72bce50b4" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1af4a0afe21d123e0aa6b66cba3b046548" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4" kind="struct"><name>DefaultObjectMaker&lt; std::optional&lt; T &gt; &gt;</name>
     <member refid="structDefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4_1a693cd30427a410aedd03ea0eb772669f" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4_1a0e6c3b2779517f4aa19302a82f6e3951" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; std::optional&lt; T &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4_1ad51a0bcf6bb2da76cba03172d6a6fed0" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4_1a2cdd09ca517b562976f011ab588f4de9" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4" kind="struct"><name>DefaultObjectMaker&lt; std::set&lt; T, Less, Allocator &gt; &gt;</name>
     <member refid="structDefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1a51e5170e3e5705245676037526549cf1" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1aece4fa70a46b631150806a012667929b" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; std::set&lt; T, Less, Allocator &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1a1222d0e4aee9a505453215e67750cc16" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1ae5d502d4d4fe22f29ef1b8efa2ebc5ef" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01std_1_1string_01_4" kind="struct"><name>DefaultObjectMaker&lt; std::string &gt;</name>
     <member refid="structDefaultObjectMaker_3_01std_1_1string_01_4_1a222bc1ebbc5b1deff6a9aa17ee952a22" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01std_1_1string_01_4_1abf50d5371e5d6713c5c3eda984976e2b" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1string_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; std::string &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1string_01_4_1a84d1c68a456b6ec1acf2c46da063581d" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1string_01_4_1a43b41819bf765a8b6fc9fcd4ac7e64b5" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_01KeyEqual_00_01Allocator_01_4_01_4" kind="struct"><name>DefaultObjectMaker&lt; std::unordered_map&lt; T, U, Hash, KeyEqual, Allocator &gt; &gt;</name>
     <member refid="structDefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_01KeyEqual_00_01Allocator_01_4_01_4_1a2052f5810893e66d9c719818cc5743c2" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_01KeyEqual_00_01Allocator_01_4_01_4_1a79971f8aacd1dda970215bda1f3a7671" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_0166c036aa51ea51240830509b4715eacb" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; std::unordered_map&lt; T, U, Hash, KeyEqual, Allocator &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_0166c036aa51ea51240830509b4715eacb_1aa7cc268adaad689a59fdcbed037c4e36" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_0166c036aa51ea51240830509b4715eacb_1a30fc6d66d5fa48564d1626f9c1c3cd6e" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="structDefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4" kind="struct"><name>DefaultObjectMaker&lt; std::vector&lt; T, TOther... &gt; &gt;</name>
     <member refid="structDefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4_1a4cccb75e64c5a8a7c425f83d60e54af7" kind="variable"><name>value</name></member>
-    <member refid="structDefaultObjectMaker_1a8ce9fbc6aa5d476a5902e79d8d9c49dd" kind="variable"><name>value</name></member>
     <member refid="structDefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4_1a1c4de3886e6e648e3ef4219d0a643e0f" kind="function"><name>MakeDefault</name></member>
-    <member refid="structDefaultObjectMaker_1a0a02c35ecfc6d587a6447411019f1d2e" kind="function"><name>MakeDefault</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4" kind="struct"><name>SR_UTILS_NS::DefaultObjectMaker&lt; std::vector&lt; T, TOther... &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4_1af24b0f367745be91df1430bd8263222f" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1a8462ad41710936f6f494da4adcba122b" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4_1a28dd9d0af05bf9f1ef72fc98b60edfef" kind="function"><name>MakeDefault</name></member>
-    <member refid="structSR__UTILS__NS_1_1DefaultObjectMaker_1ada25d7638941031c9c512447d5d63623" kind="function"><name>MakeDefault</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1DefaultResourceReloader" kind="class"><name>SR_UTILS_NS::DefaultResourceReloader</name>
     <member refid="classSR__UTILS__NS_1_1DefaultResourceReloader_1a03c2d62f2709ee605a1211d6ca403843" kind="function"><name>Reload</name></member>
@@ -2628,8 +2533,6 @@
   <compound refid="structSR__UTILS__NS_1_1Details_1_1Detector_3_01Default_00_01std_1_1void__t_3_01Op_3_01Args_8_8_86bb0dd47b703eedb0ac0acb502b0839c" kind="struct"><name>SR_UTILS_NS::Details::Detector&lt; Default, std::void_t&lt; Op&lt; Args... &gt; &gt;, Op, Args... &gt;</name>
     <member refid="structSR__UTILS__NS_1_1Details_1_1Detector_3_01Default_00_01std_1_1void__t_3_01Op_3_01Args_8_8_86bb0dd47b703eedb0ac0acb502b0839c_1af1f5928662cf0f29e6d0d6555955d5e9" kind="typedef"><name>value_t</name></member>
     <member refid="structSR__UTILS__NS_1_1Details_1_1Detector_3_01Default_00_01std_1_1void__t_3_01Op_3_01Args_8_8_86bb0dd47b703eedb0ac0acb502b0839c_1a3f8ca667ae67238422192b4b08785dbe" kind="typedef"><name>type</name></member>
-    <member refid="structSR__UTILS__NS_1_1Details_1_1Detector_1adbe85a03d9cdbcc2d440a2515d0e6688" kind="typedef"><name>value_t</name></member>
-    <member refid="structSR__UTILS__NS_1_1Details_1_1Detector_1a987cb32621ec11aa223939cbd1746beb" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1DictionaryEntry" kind="class"><name>SR_HTYPES_NS::DictionaryEntry</name>
     <member refid="classSR__HTYPES__NS_1_1DictionaryEntry_1a2178f15fe42cc85e7e4203b17dc3a642" kind="typedef"><name>Super</name></member>
@@ -2646,7 +2549,7 @@
   </compound>
   <compound refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio" kind="struct"><name>SR_TYPES_NS::uintwide_t::digits_ratio</name>
     <member refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio_1acff67bc3d234d7ba1e4c12f9452f5c7c" kind="typedef"><name>local_unknown_builtin_integral_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio_1a96ef9da985cf0c9495d8ef340297ce41" kind="typedef"><name>local_unsigned_conversion_type</name></member>
+    <member refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio_1a0330e0238b7b56414462f0c90536a5ed" kind="typedef"><name>local_unsigned_conversion_type</name></member>
     <member refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio_1a6834a35ba9963d8b626aeec03d4bf584" kind="variable"><name>value</name></member>
     <member refid="structSR__TYPES__NS_1_1uintwide__t_1_1digits__ratio_1a539be9541487caa041009ca13e765e0e" kind="function"><name>extract</name></member>
   </compound>
@@ -2711,59 +2614,6 @@
     <member refid="classSR__CORE__NS_1_1DrawState_1ac5e28b4f9c4a5e11a96e785a93a491f9" kind="typedef"><name>Super</name></member>
     <member refid="classSR__CORE__NS_1_1DrawState_1a24a83fdc2ea640ff0f53e98177441905" kind="function"><name>ExecuteImpl</name></member>
   </compound>
-  <compound refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array" kind="class"><name>SR_TYPES_NS::detail::dynamic_array</name>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ada1a9601748e7102a107c43048a09299" kind="typedef"><name>allocator_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a1b499920bb624fd80c89bf2f401ee915" kind="typedef"><name>value_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a32f1ecf4058dcb4817a165423a12be1b" kind="typedef"><name>reference</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a449a76517689c27a9c64a1d799606a47" kind="typedef"><name>const_reference</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a9c7563157b3f28453ad44d9207428115" kind="typedef"><name>iterator</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a4f52979220b514e14803daa477d9ea50" kind="typedef"><name>const_iterator</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1af7d90f4572f1ff86a58df966846c90f1" kind="typedef"><name>pointer</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a40ae36d9825482ed80f2b8850c749fcb" kind="typedef"><name>const_pointer</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1adab8506e1ace7445c3ec4da81579863c" kind="typedef"><name>size_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1af2481fe7fd615a53bc8f2a6fffe51651" kind="typedef"><name>difference_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1abfc524d8dbcada15da08a4b660d97d5e" kind="typedef"><name>reverse_iterator</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ac92a035ad4bf3d96b1fc157dee1fa101" kind="typedef"><name>const_reverse_iterator</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aff195cf7f9db9b81b74d9167b5d4f4d6" kind="variable"><name>elem_count</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a19150beaf64e39198ba5bf3d872a55bf" kind="variable"><name>elems</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aa8abad374bc981ba4fc2c03aff07b1f9" kind="function"><name>dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a9888813bc9f35bf43d5585a127273aba" kind="function"><name>dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1addfb4b5dee1e0e05dfaba4e61367bcc5" kind="function"><name>dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aabca0cd93824f0619244d483c0c06510" kind="function"><name>dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a9644e00cb1f35a07966fd8e35fb905ee" kind="function"><name>dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a5981ddffc4d24bda04f58890a88fa9de" kind="function"><name>dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a16a00aa330813f38f4885618cef59e8e" kind="function"><name>~dynamic_array</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a921dfd1ca6acdadcc3030ec237b8565d" kind="function"><name>operator=</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a54ff0daf4aae278f6f7bc0086b1420d0" kind="function"><name>operator=</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a814059c7edc38d5ad9439ce8ae69418c" kind="function"><name>begin</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aa1518c9d41560a3051f46e5758ad4c04" kind="function"><name>begin</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ad531e54e4c3c6e958dcebfd16e2eb164" kind="function"><name>end</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a2e1e27ba7aaa67249b44558da479ea50" kind="function"><name>end</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a37a4567a0aa5b15998e14f57c6be1a24" kind="function"><name>cbegin</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aaaca494cd95f7505cbb288ae5abe89cb" kind="function"><name>cend</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a4888e082753de994e82542cc600aae25" kind="function"><name>rbegin</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a41462d47e519e9f9bdc043b847b86bfb" kind="function"><name>rbegin</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a5ef58940a223db58c46c152732a2d3f7" kind="function"><name>rend</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a0bde530cfe95ba24ec9b01423d879be7" kind="function"><name>rend</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a426c226d9288d1197ef5b705bedd8bc2" kind="function"><name>crbegin</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a7304e8736528ab64275c67224849a467" kind="function"><name>crend</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ae81e652447d57be1d875dc253a9e3ad2" kind="function"><name>data</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a0e3ce50e894d538835eac5c9bacc85ad" kind="function"><name>data</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a326693a45b4b98ccf99afe5eba86af45" kind="function"><name>size</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a9ce7dc16d7d45372d43211045fc02378" kind="function"><name>max_size</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a3ed64befa0746cd043f4ba9715a87234" kind="function"><name>empty</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ac2fb26037e9bfbcbd4d78e686c54e1c3" kind="function"><name>operator[]</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a80222527ef81f67bb4c34f421f981d9c" kind="function"><name>operator[]</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a56e9d128dfa86dccf0017d2733ba224f" kind="function"><name>front</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1abf1ba2173405d68dd9791c00c67be02f" kind="function"><name>front</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a4c94770debf1c320c8c7c4417d1153bb" kind="function"><name>back</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aedb46914d53810e6a3c1f8e398682a50" kind="function"><name>back</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a1a02c15b3790fec1206e833a66aec832" kind="function"><name>at</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ad37d89ac2e891ddaad39e1d5bfe1cee9" kind="function"><name>at</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1a98f13bda1711737114cbf1fe28e053ae" kind="function"><name>fill</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1ad1cac35d5159fdacefa1605932d859cd" kind="function"><name>swap</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array_1aedb4c26654e14912f0f4c4eabd43914b" kind="function"><name>swap</name></member>
-  </compound>
   <compound refid="classutil_1_1dynamic__array" kind="class"><name>util::dynamic_array</name>
     <member refid="classutil_1_1dynamic__array_1ada1a9601748e7102a107c43048a09299" kind="typedef"><name>allocator_type</name></member>
     <member refid="classutil_1_1dynamic__array_1a1b499920bb624fd80c89bf2f401ee915" kind="typedef"><name>value_type</name></member>
@@ -2775,7 +2625,7 @@
     <member refid="classutil_1_1dynamic__array_1a40ae36d9825482ed80f2b8850c749fcb" kind="typedef"><name>const_pointer</name></member>
     <member refid="classutil_1_1dynamic__array_1adab8506e1ace7445c3ec4da81579863c" kind="typedef"><name>size_type</name></member>
     <member refid="classutil_1_1dynamic__array_1af2481fe7fd615a53bc8f2a6fffe51651" kind="typedef"><name>difference_type</name></member>
-    <member refid="classutil_1_1dynamic__array_1abfc524d8dbcada15da08a4b660d97d5e" kind="typedef"><name>reverse_iterator</name></member>
+    <member refid="classutil_1_1dynamic__array_1ad01b2fc56dd6679e2bc6404697ac9c64" kind="typedef"><name>reverse_iterator</name></member>
     <member refid="classutil_1_1dynamic__array_1ac92a035ad4bf3d96b1fc157dee1fa101" kind="typedef"><name>const_reverse_iterator</name></member>
     <member refid="classutil_1_1dynamic__array_1aff195cf7f9db9b81b74d9167b5d4f4d6" kind="variable"><name>elem_count</name></member>
     <member refid="classutil_1_1dynamic__array_1a19150beaf64e39198ba5bf3d872a55bf" kind="variable"><name>elems</name></member>
@@ -2971,7 +2821,6 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Hash_1_1Detail_1_1Encoder_3_01S_00_010_01_4" kind="struct"><name>SR_UTILS_NS::Hash::Detail::Encoder&lt; S, 0 &gt;</name>
     <member refid="structSR__UTILS__NS_1_1Hash_1_1Detail_1_1Encoder_3_01S_00_010_01_4_1a346eb20e7622445c8c322d45de089398" kind="function"><name>EncodeChar</name></member>
-    <member refid="structSR__UTILS__NS_1_1Hash_1_1Detail_1_1Encoder_1a7d2742d1b013a9ab7bbfbb20fcd38ac7" kind="function"><name>EncodeChar</name></member>
   </compound>
   <compound refid="classSR__SRLM__NS_1_1EndResetNode" kind="class"><name>SR_SRLM_NS::EndResetNode</name>
     <member refid="classSR__SRLM__NS_1_1EndResetNode_1a71f3439966c3ca5063db966cb8080849" kind="typedef"><name>Super</name></member>
@@ -3274,7 +3123,7 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1EnumTraits" kind="struct"><name>SR_UTILS_NS::EnumTraits</name>
     <member refid="structSR__UTILS__NS_1_1EnumTraits_1ae5be3b6039a9afc8e400e37c0e1ef9a6" kind="typedef"><name>EnumResultType</name></member>
-    <member refid="structSR__UTILS__NS_1_1EnumTraits_1afc796d5984eefc6e601ae0e1ff2c42dc" kind="typedef"><name>EnumSelectorType</name></member>
+    <member refid="structSR__UTILS__NS_1_1EnumTraits_1afda4c0f18e01d7e74b73b2fb1dd0ef61" kind="typedef"><name>EnumSelectorType</name></member>
     <member refid="structSR__UTILS__NS_1_1EnumTraits_1aaaf6710fe9fe916ca28bfc0b1fa94fb2" kind="variable"><name>IsDeclaredInNamespace</name></member>
     <member refid="structSR__UTILS__NS_1_1EnumTraits_1a626243576b7200973602dd64e0ebb044" kind="variable"><name>IsEnum</name></member>
     <member refid="structSR__UTILS__NS_1_1EnumTraits_1a942394bf765d2c9c7fbc24f1dc012cac" kind="variable"><name>IsFlags</name></member>
@@ -3394,7 +3243,7 @@
     <member refid="classSR__SCRIPTING__NS_1_1EvoScriptManager_1a94c69089ca0e7cc366b7153475abd618" kind="function"><name>FindMSVCCompiler</name></member>
   </compound>
   <compound refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader" kind="class"><name>SR_SCRIPTING_NS::EvoScriptResourceReloader</name>
-    <member refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader_1a2a3ffeb1039f634d444658bf94e39901" kind="typedef"><name>StashedProperties</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader_1ac338b3a4b0aaa2f64c0935b616060b59" kind="typedef"><name>StashedProperties</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader_1a5efea558c54374f5a14ed85dab7edbc0" kind="function"><name>Reload</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader_1a92280731e90858ca88d59da6a53973aa" kind="function"><name>FreeStashedProperties</name></member>
   </compound>
@@ -3410,7 +3259,7 @@
   <compound refid="classSR__HTYPES__NS_1_1Thread_1_1Factory" kind="class"><name>SR_HTYPES_NS::Thread::Factory</name>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1adbc148eaddd341d7ae4d07c9e9e33bfd" kind="friend"><name>Thread</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad65c08dfe4e139823932dd5f935830f2" kind="friend"><name>Thread::Factory</name></member>
-    <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a3b08bde1cd17fa2db1ff109112895e26" kind="variable"><name>GetThreadsCount</name></member>
+    <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1af7975088905fa79e9a136cbe7a23b992" kind="variable"><name>GetThreadsCount</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1addd11e30e30a396f84ec6c536be258b9" kind="variable"><name>m_threads</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad341e152e836310a9d802b30c02bd179" kind="variable"><name>m_main</name></member>
     <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a8266175a219b9402ddefa1368a36a599" kind="function"><name>Factory</name></member>
@@ -3528,7 +3377,7 @@
     <member refid="classSR__CORE__NS_1_1GUI_1_1FileBrowser_1a214227a288095ebc4b081d51143c6708" kind="function"><name>LoadFoldersTree</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1FileDialog" kind="class"><name>SR_UTILS_NS::FileDialog</name>
-    <member refid="classSR__UTILS__NS_1_1FileDialog_1a0ff818eba639b226b05666953c208723" kind="typedef"><name>Filter</name></member>
+    <member refid="classSR__UTILS__NS_1_1FileDialog_1a45e23b55851d5069eaf1758102d1aa09" kind="typedef"><name>Filter</name></member>
     <member refid="classSR__UTILS__NS_1_1FileDialog_1af6c2e26691e64e514e6cf6b87d9b4fbf" kind="function"><name>~FileDialog</name></member>
     <member refid="classSR__UTILS__NS_1_1FileDialog_1a4b868d1dce7dac3d3c3d98ca0e3c8b3c" kind="function"><name>InitSingleton</name></member>
     <member refid="classSR__UTILS__NS_1_1FileDialog_1aa5e0704132988c6faae0377d20b9870b" kind="function"><name>OnSingletonDestroy</name></member>
@@ -3950,7 +3799,6 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4" kind="struct"><name>SR_UTILS_NS::GetFirstOfTypeFromSequence&lt; T, Pair &gt;</name>
     <member refid="structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4_1a3b3f4c72dcac88761004bf72684e0a53" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_1a422dd9dc6697e85bee2590c4a4e737e5" kind="variable"><name>value</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert" kind="struct"><name>SR_UTILS_NS::GetFirstOfTypeFromSequenceAssert</name>
     <member refid="structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert_1a74096062742ea65ecabfb64de00ae495" kind="variable"><name>value</name></member>
@@ -3960,7 +3808,6 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Details_1_1GetPromPack_3_010_00_01T_00_01Types_8_8_8_01_4" kind="struct"><name>SR_UTILS_NS::Details::GetPromPack&lt; 0, T, Types... &gt;</name>
     <member refid="structSR__UTILS__NS_1_1Details_1_1GetPromPack_3_010_00_01T_00_01Types_8_8_8_01_4_1a5681ac6d9748d3d90ad0f321f51367ca" kind="typedef"><name>type</name></member>
-    <member refid="structSR__UTILS__NS_1_1Details_1_1GetPromPack_1a264bbeb09687a8e23484c4b0f9d76064" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classSR__GRAPH__UI__NS_1_1Gizmo" kind="class"><name>SR_GRAPH_UI_NS::Gizmo</name>
     <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1aa0396da932515b72af926c23276e74c9" kind="enum"><name>GizmoMeshLoadMode</name></member>
@@ -4264,7 +4111,6 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SFINAE_1_1HasMethodStruct_3_01Class_00_01std_1_1enable__if__t_3_01std_1_16e27abfcf3e3a3c074a7caf466df7a36" kind="struct"><name>SR_UTILS_NS::SFINAE::HasMethodStruct&lt; Class, std::enable_if_t&lt; std::is_member_function_pointer_v&lt; decltype(&amp;Class::Name)&gt; &gt; &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SFINAE_1_1HasMethodStruct_3_01Class_00_01std_1_1enable__if__t_3_01std_1_16e27abfcf3e3a3c074a7caf466df7a36_1a12c263c370b0c304ac853c737b2352a7" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1SFINAE_1_1HasMethodStruct_1a6aa3bd6c592a49d3fc6e5f4d21e28118" kind="variable"><name>value</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1Hierarchy" kind="class"><name>SR_CORE_GUI_NS::Hierarchy</name>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a51b48dd360db44fff29a46aed31b5b67" kind="variable"><name>SR_PREFAB_COLOR_FIRST</name></member>
@@ -4943,7 +4789,7 @@
   <compound refid="classSR__SCRIPTING__NS_1_1IRawBehaviour" kind="class"><name>SR_SCRIPTING_NS::IRawBehaviour</name>
     <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1aa2fd7ad2173a2d58a4f8be0fc49623dd" kind="typedef"><name>Super</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a30b3d7b27a1e7cfc1507fa1e92c04fb4" kind="typedef"><name>Properties</name></member>
-    <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ac21f792fed5b31a0ad3ccd5b4add29fd" kind="typedef"><name>ValueProperties</name></member>
+    <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a3b93d5e4b50adf3eaecce5efd456613e" kind="typedef"><name>ValueProperties</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a09592cfe1a7c47ffdb5d087211ce4dc4" kind="variable"><name>m_hasErrors</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a6178e3d4f6cd79e2954e2164cea0aef2" kind="variable"><name>m_component</name></member>
     <member refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a4206a62164f35b523edaf156ab0d3a4e" kind="function"><name>IRawBehaviour</name></member>
@@ -5207,8 +5053,8 @@
   <compound refid="structSR__UTILS__NS_1_1IsCompleteType_3_01T_00_01std_1_1void__t_3_01decltype_07sizeof_07T_08_08_4_01_4" kind="struct"><name>SR_UTILS_NS::IsCompleteType&lt; T, std::void_t&lt; decltype(sizeof(T))&gt; &gt;</name>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1IsDerivedFrom" kind="struct"><name>SR_UTILS_NS::IsDerivedFrom</name>
+    <member refid="structSR__UTILS__NS_1_1IsDerivedFrom_1a76299c691a530b8ebcb34fba175b10a0" kind="variable"><name>test</name></member>
     <member refid="structSR__UTILS__NS_1_1IsDerivedFrom_1acab64605167b18d159f8cf3ff17e7da5" kind="variable"><name>value</name></member>
-    <member refid="structSR__UTILS__NS_1_1IsDerivedFrom_1ab99b85c63bfd2e8f691560d4e1a6ebc7" kind="function"><name>test</name></member>
     <member refid="structSR__UTILS__NS_1_1IsDerivedFrom_1af3a765696cdadaf100772b0293304646" kind="function"><name>test</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1IsDetected" kind="struct"><name>SR_UTILS_NS::IsDetected</name>
@@ -5262,7 +5108,7 @@
     <member refid="classSR__UTILS__NS_1_1ISerializer_1a82837f9312babc8ce2919775b05b415a" kind="function"><name>SaveToFile</name></member>
   </compound>
   <compound refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator" kind="class"><name>SR_SRSL_NS::ISRSLCodeGenerator</name>
-    <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a435fea5b561ec3a2d4db04c19579bc55" kind="typedef"><name>SRSLCodeGenRes</name></member>
+    <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aabb4cfa38910990fbd5defa0be9addae" kind="typedef"><name>SRSLCodeGenRes</name></member>
     <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a84294d16f2102887a4fb922121f85d66" kind="variable"><name>m_result</name></member>
     <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a8089889a38f86d7c48335deb3334ed4a" kind="function"><name>ISRSLCodeGenerator</name></member>
     <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a53b51b4fc70d90890f942165dc271d20" kind="function"><name>~ISRSLCodeGenerator</name></member>
@@ -5314,11 +5160,6 @@
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1a9c14935e737c7343453e5a9a21b5fe2d" kind="typedef"><name>pointer</name></member>
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1a1708efd69cb97d80f50176d7aef9f1c1" kind="typedef"><name>reference</name></member>
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1aa435adb84acdde2b66fab20bb42540ac" kind="typedef"><name>iterator_category</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a22c38328f88bc7e95a33b6679275e723" kind="typedef"><name>difference_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a92b8d9f88d175415fc3e2ecfaa7b5e5d" kind="typedef"><name>value_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a2a41106b6e6bb1bcec58ea76eefce716" kind="typedef"><name>pointer</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1ad1a67d647509332282ecd633608232fd" kind="typedef"><name>reference</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a7a63f44a0d21c98bbbb77328202128fd" kind="typedef"><name>iterator_category</name></member>
   </compound>
   <compound refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01T_01_5_01_4" kind="class"><name>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; T * &gt;</name>
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01T_01_5_01_4_1abd7ee1bfea3fa77968fb16bb6b7a4f66" kind="typedef"><name>difference_type</name></member>
@@ -5326,11 +5167,6 @@
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01T_01_5_01_4_1ae63a67407bb5d35755744d2378bad72b" kind="typedef"><name>pointer</name></member>
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01T_01_5_01_4_1ad67fd50aa9b1478814f19f09f1007970" kind="typedef"><name>reference</name></member>
     <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01T_01_5_01_4_1a920160ec503a8c5c0569d53e87bda3e8" kind="typedef"><name>iterator_category</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a22c38328f88bc7e95a33b6679275e723" kind="typedef"><name>difference_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a92b8d9f88d175415fc3e2ecfaa7b5e5d" kind="typedef"><name>value_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a2a41106b6e6bb1bcec58ea76eefce716" kind="typedef"><name>pointer</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1ad1a67d647509332282ecd633608232fd" kind="typedef"><name>reference</name></member>
-    <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a7a63f44a0d21c98bbbb77328202128fd" kind="typedef"><name>iterator_category</name></member>
   </compound>
   <compound refid="classSR__AUDIO__NS_1_1IWaveDataProvider" kind="class"><name>SR_AUDIO_NS::IWaveDataProvider</name>
     <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a23590a109d5a88509df288eb48877ccb" kind="typedef"><name>Ptr</name></member>
@@ -5818,7 +5654,7 @@
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7d5258aa8a7faf6abe00dd91d2ddadc1" kind="variable"><name>up</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1abdd47fe0ddfa04bbfba79d79d7e58a73" kind="variable"><name>dir</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1af9aabb2f9514edd39ba831eb7dbca724" kind="variable"><name>position</name></member>
-    <member refid="classSR__MATH__NS_1_1Matrix4x4_1a292532e46c927225f638cf67bd23e626" kind="variable"><name>v</name></member>
+    <member refid="classSR__MATH__NS_1_1Matrix4x4_1ad104b6d6ed8b10d1da2d6170af2e1702" kind="variable"><name>v</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7cd89858cfaf5a21d8fb3599cccb06e2" kind="variable"><name>m</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1adbda46793b38a1fa722f18b9a7e235b4" kind="variable"><name>m00</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a4b62217f05c4b851537648e398886b34" kind="variable"><name>m01</name></member>
@@ -5836,7 +5672,7 @@
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a4c9d0f599f0209f3f070029e11ede704" kind="variable"><name>m31</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a7bcb02634712d8652e24f0cdb0669655" kind="variable"><name>m32</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a0edd19b0ae4cedd98ac1e42720ef48c9" kind="variable"><name>m33</name></member>
-    <member refid="classSR__MATH__NS_1_1Matrix4x4_1a553456959cd4103c28cc4655a28e45df" kind="variable"><name></name></member>
+    <member refid="classSR__MATH__NS_1_1Matrix4x4_1a131716ea4d149cd207b4b368ecd50d04" kind="variable"><name></name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1a56170ae6cd2abb075629e94ca1ad1ad4" kind="function"><name>CreateViewMat</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1af93cb44b6a8497c8b3f5fe36261d4652" kind="function"><name>Identity</name></member>
     <member refid="classSR__MATH__NS_1_1Matrix4x4_1ae645f352aa1b0c06335230fa3f73244f" kind="function"><name>RotationYawPitchRoll</name></member>
@@ -6267,7 +6103,6 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1Hash_1_1Detail_1_1MM_3_01size_00_01size_00_01dummy_01_4" kind="struct"><name>SR_UTILS_NS::Hash::Detail::MM&lt; size, size, dummy &gt;</name>
     <member refid="structSR__UTILS__NS_1_1Hash_1_1Detail_1_1MM_3_01size_00_01size_00_01dummy_01_4_1a5e53f88fd1d1f8196f2b21807d48b824" kind="function"><name>crc32</name></member>
-    <member refid="structSR__UTILS__NS_1_1Hash_1_1Detail_1_1MM_1abe25659a8c95f22a647d10326cda37b0" kind="function"><name>crc32</name></member>
   </compound>
   <compound refid="classSR__AUDIO__NS_1_1ModPlugDataProvider" kind="class"><name>SR_AUDIO_NS::ModPlugDataProvider</name>
     <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a5e5880cb4784140b13d5f01bfcd7951b" kind="variable"><name>m_data</name></member>
@@ -6640,241 +6475,93 @@
     <member refid="structObjectDataAccessor_3_01bool_01_4_1a3e159486b726d1a39ef0c0894e5fee3c" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01bool_01_4_1ad37a2387759d7ba607a6a20b697af5c6" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01bool_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; bool &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01bool_01_4_1a9aae73717251b4d9953e72bb33c34ad8" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01bool_01_4_1aead44dd1959ef6b033a86cfd0f99b8d9" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01double__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; double_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01double__t_01_4_1a56c78433484e80989833dad14d87e8bd" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01double__t_01_4_1aa02a29f5504a4dc8c082df39300a10b0" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01double__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; double_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01double__t_01_4_1ab1ea825f9bbbfdcfe90074c40bd7811d" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01double__t_01_4_1aae865ab183ff90e6b5b6a2ae3cfa5ee7" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01float__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; float_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01float__t_01_4_1abf4d7ba86e018c53862e75687835c1b7" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01float__t_01_4_1a743d3c65a40e7873aa9f0441a9aed1a1" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01float__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; float_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01float__t_01_4_1aed1b493e9ae2ece8b99a41fbf0d42d08" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01float__t_01_4_1aa14a59eb44c885038a7f3cb8c22846a3" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674" kind="struct"><name>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a35012ecf3ed8b1821943fcfe50f56d44" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_32bd86362c60b521e671c70984ad6674_1a6d60d036a2270765ce1fc9c638d4f17c" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_bcc0cde7fe2a1b6a6c918edb68e74246" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_bcc0cde7fe2a1b6a6c918edb68e74246_1a8119085c71610b8986f4ed6dac9f1fd9" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_bcc0cde7fe2a1b6a6c918edb68e74246_1ae8e3ef58d247bda4ba84a87d8658f73c" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_bb92e27d691c2f87c93122b3b271db79" kind="struct"><name>ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt;!SerializationTraits&lt; T &gt;::HasOriginType &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_bb92e27d691c2f87c93122b3b271db79_1a1396ee02bd71d87691e59b94bf898318" kind="function"><name>Load</name></member>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_bb92e27d691c2f87c93122b3b271db79_1acfc682a91974f4106cedbae62b266a9f" kind="function"><name>Save</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_863ff9278aaa6e199c62f71431dce0e6" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt;!SerializationTraits&lt; T &gt;::HasOriginType &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_863ff9278aaa6e199c62f71431dce0e6_1a23234c51557a062ec6a29093c474937c" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_863ff9278aaa6e199c62f71431dce0e6_1ac50d42402b742708ea482d4eff1294b8" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_HTYPES_NS::UnicodeString &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4_1af5f547205ffb858a41aad62473bba452" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4_1a17b5f73845d3ecba5a4ed37379314229" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_HTYPES_NS::UnicodeString &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4_1a8afb1949d2450d4a2cbd124750650355" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4_1a8fc0e608de6ea1c11187344c5b242ad7" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1BVector3_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::BVector3 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1BVector3_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::BVector3 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1BVector4_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::BVector4 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1BVector4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::BVector4 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FSize &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4_1a11dd7c4b1ed8b5fe12c61b707e0456e5" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4_1a4df9c6c1976a5edcbbaf4f64366ee458" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FSize &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4_1add3a124609b86c280d967e54014469ec" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4_1ab0e4a1f0476307b7318fa2ca1436a55d" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FSize2 &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4_1aa5af1368d160b1708a84512ed7b6d72f" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4_1a92f700610f2681409c841296384c6ed2" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FSize2 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4_1a613bbce623566dfbbb1068d0fd56d22b" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4_1af2beb52a2b9f5314430ce6a838162f85" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FVector2_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FVector2 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector2_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector2 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FVector3_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FVector3 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector3_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector3 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FVector4_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FVector4 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector4 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1FVector6_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::FVector6 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector6_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector6 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector2_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IVector2 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector2_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector2 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector3_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IVector3 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector3_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector3 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector4_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IVector4 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector4 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1IVector6_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::IVector6 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector6_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector6 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1a5c5b24a7e8e7d080013a327e3b66783c" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1ab18eb8a6d95e96df54a64fa8ba0298f4" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1a23bcd98de4aca242444b7901f1a240c2" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4_1ad55a44cec8354ad28a804c54e1041b16" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1UVector2_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::UVector2 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector2_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector2 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1UVector3_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::UVector3 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector3_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector3 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1UVector4_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::UVector4 &gt;</name>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector4 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01SR__MATH__NS_1_1UVector6_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_MATH_NS::UVector6 &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector6_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector6 &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_UTILS_NS::Path &gt;</name>
     <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4_1adb73d68e102c1ed815f91bc8d6cb507d" kind="function"><name>Save</name></member>
     <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4_1a2dd2782d17d1ef8d618f6e3598656667" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>ObjectDataAccessor&lt; SR_UTILS_NS::StringAtom &gt;</name>
     <member refid="structObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a27d537cff66ae1f65d22fda1b3649a82" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a47c9f33af068265d07b721a2f21fea07" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; SR_UTILS_NS::StringAtom &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4_1a5988fcdc657fd366881230f9959cffec" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4_1af7c862050b5ed3b75aa40e4ff1d6d5c2" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::array&lt; T, N &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1a565fec16541698e7f44bf29f1431d338" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1af16f614eb2aba1799d1416153c4405e9" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::array&lt; T, N &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1aad30ed4fb548884b61a2448b4204047f" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4_1a4238af6f1a6abc295de06019eec94676" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1int16__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::int16_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1int16__t_01_4_1ab253cf02c1122168d51659f7b8adff47" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1int16__t_01_4_1a269a79922ff878ba3501f4bf8c0bfc55" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int16__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::int16_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int16__t_01_4_1a629a54c19fa932e6d12fc2efaaabf485" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int16__t_01_4_1aca402fc164d2258e1edbc240b00efa89" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1int32__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::int32_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1int32__t_01_4_1a040e75dfa33371e04df6ef51133fb1ef" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1int32__t_01_4_1a4e5957a5dc181aa8ff424e31a17056e6" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int32__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::int32_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int32__t_01_4_1ab09a1f7b372f87fcbd04b805f2ce96c7" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int32__t_01_4_1a93e5c03575ac5d2f0a2d6ba3b107a446" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1int64__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::int64_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1int64__t_01_4_1a2c46ba3e4b13ccf217d8d6c941bb3fa7" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1int64__t_01_4_1ab41f1fdc1947ac20457d61603fe23089" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int64__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::int64_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int64__t_01_4_1a20fccbe2938fc80d4d9bfdbcba53d7e7" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int64__t_01_4_1af2e20865f45324582627e6d5a3b4d7e4" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1int8__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::int8_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1int8__t_01_4_1aade632d3b0323fd1a7b61d98a05694c4" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1int8__t_01_4_1ab4eed9ea6cd17d3f392725a883b5b114" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int8__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::int8_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int8__t_01_4_1ae2fddb4a9eb4d66071c7258428aa45e5" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int8__t_01_4_1a3b613f8f62b8d10b608f10e245aedf98" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a3fc09d793a444233f6b0fb332936ed9f" kind="typedef"><name>MapType</name></member>
@@ -6882,33 +6569,13 @@
     <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1adf5378d8edb146d2cc3dfc8877aa43ca" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1aaed5f010350bb5521d1f1c15af385a63" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a03ada73bb5a0cf615bb167ac94488e57" kind="typedef"><name>MapType</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1ab2c7d22301174be46dd6b3882a12da4e" kind="typedef"><name>ValueType</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1ad76899b7fd5bd4f6a0f4d7d9d5c51c94" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4_1a512441b2d476f9ffb86665a0f86b2871" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a1b9896c7d46fac96f59d323400e4c2d4" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a6feb04b5c627c265c5609bf89a8811a2" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a7c7f0f0048290a05f5d3d8923e53e2d8" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4_1a59b8db7c0943e88dc747b261d2399fa6" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1ae67043d214e010daf8e0ce95b573fe7d" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a6cc8d7be615a86ad46055fb2823a2164" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1aca6ac4713c7cd5a1a0c71e4a4603376a" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4_1a1707acd1d8f23b6445f1aa62f9b75c02" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::set&lt; T, Less, Allocator &gt; &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1ae7e3fe03ab47f1da8fa9e93c3cf2b7d1" kind="typedef"><name>SetType</name></member>
@@ -6916,105 +6583,45 @@
     <member refid="structObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1a71453d4b74036decefd1573686cdf7fb" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1acc8987dc3daa0ecda0717767b41dce98" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::set&lt; T, Less, Allocator &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1aa3e66814fb40fe9003fbcc20be0deaa2" kind="typedef"><name>SetType</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1a641422f10735e032cf3bd05583e8d1a0" kind="typedef"><name>ValueType</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1a6966a68a12c981ee835e3b330f79c3e1" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4_1afdebf9cbc9f6e835647b96f42d7ce67e" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1string_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::string &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1string_01_4_1a754e202f4e45d29b58e88817774835ee" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1string_01_4_1a18fa46eaca6d34468a6ad53ccc9e9ba6" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1string_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::string &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1string_01_4_1aabf2a93d7d705484b84e989c45bb9d29" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1string_01_4_1aee123b7767ae21ae8b5aa8836483630f" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1uint16__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::uint16_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1uint16__t_01_4_1a26d0dc0dca3cb429665bbdceec977c87" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1uint16__t_01_4_1a1f0a4a0e31e0327439a25f9aece0dc57" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint16__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::uint16_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint16__t_01_4_1a362c80d2fba2a8fb0224dee655230d94" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint16__t_01_4_1a88cd706e1a80f6ce0a50336fe4bb7c84" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1uint32__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::uint32_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1uint32__t_01_4_1ab3acf33abb329427c8abe926b7e8ad8d" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1uint32__t_01_4_1a89544f9c34a6257a532cedc7ab309936" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint32__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::uint32_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint32__t_01_4_1ac4836b1f0323193563a91992f67af9a5" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint32__t_01_4_1a0e7bd425340974ae4c5f56508c931bac" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1uint64__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::uint64_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1uint64__t_01_4_1a3441cbfbbe9e95a4c10e2bfb629f0270" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1uint64__t_01_4_1afd0b0d519b20b05447fadb3c6c457f03" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint64__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::uint64_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint64__t_01_4_1aca1cbd87d91b8fd596aa238ab8b067c4" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint64__t_01_4_1ac917338313c2951f83f5d63f18ae7552" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1uint8__t_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::uint8_t &gt;</name>
     <member refid="structObjectDataAccessor_3_01std_1_1uint8__t_01_4_1a9c882479ef774e7a6dd0ab8b1fb19310" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01std_1_1uint8__t_01_4_1ad0576029aa09bc7b98a1d8236708d256" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint8__t_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::uint8_t &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint8__t_01_4_1a4b62e843a019f9350e6eae3885cf19a9" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint8__t_01_4_1a80719415e44089fda9d42c81604364a1" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structObjectDataAccessor_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4" kind="struct"><name>ObjectDataAccessor&lt; std::vector&lt; T, TOther... &gt; &gt;</name>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; std::vector&lt; T, TOther... &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" kind="struct"><name>ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</name>
     <member refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1a0b3ca18b389935891901f213704480b7" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1ae9221575f6c2f52d9787d22aff0626eb" kind="function"><name>Load</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1ab858ea9111fbe37eddd6d691c61eb24f" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4_1a6bd212b8fe152c5d909b2a2ccfbf64e2" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
-  </compound>
   <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessor&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</name>
     <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2_1ae138657ccc104fec0dd90c256d1cc126" kind="function"><name>Save</name></member>
     <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2_1a278afe1e8a63c593b526c8bc5ff87824" kind="function"><name>Load</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1aca624c3aafce7462f9059f7bad92c590" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessor_1af3000fca1ac9291eaad3eb2bf5585e1f" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessorMathVector" kind="struct"><name>ObjectDataAccessorMathVector</name>
     <member refid="structObjectDataAccessorMathVector_1a685dfeb65c1f7fdffabccbcbab7a5029" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessorMathVector_1af34de8082ab9fa206a2c501086aa535a" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessorMathVector" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessorMathVector</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessorMathVector_1afdd01221f7c92f5a05cdf27075b6d0c6" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessorMathVector_1a45bd23fe17aad869252ba8a9be0b0aa1" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="structObjectDataAccessorVector" kind="struct"><name>ObjectDataAccessorVector</name>
     <member refid="structObjectDataAccessorVector_1a232fba1d2c393dbc1108416c7233dd25" kind="variable"><name>itemId</name></member>
     <member refid="structObjectDataAccessorVector_1a6c61bbf88f2431fc36f4af5886b37b2b" kind="variable"><name>dataId</name></member>
     <member refid="structObjectDataAccessorVector_1a3b113cc0b6bfa123172d2b11cbfb02f0" kind="function"><name>Save</name></member>
     <member refid="structObjectDataAccessorVector_1a8efa97b69360b831bf12fc9037c04985" kind="function"><name>Load</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1ObjectDataAccessorVector" kind="struct"><name>SR_UTILS_NS::ObjectDataAccessorVector</name>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessorVector_1a8f7dd15a66a7e3091895434eebcbde6d" kind="variable"><name>itemId</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessorVector_1add22a34ff7cd54afac0a01df93b619b4" kind="variable"><name>dataId</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessorVector_1ae905a6d544e09f2371829696412c4386" kind="function"><name>Save</name></member>
-    <member refid="structSR__UTILS__NS_1_1ObjectDataAccessorVector_1a02061c28801e311fdf48fe9b16e5ec79" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1ObjectPool" kind="class"><name>SR_HTYPES_NS::ObjectPool</name>
     <member refid="classSR__HTYPES__NS_1_1ObjectPool_1a2b8813e847d6243ff46bf4fb289441f7" kind="variable"><name>m_objects</name></member>
@@ -7336,7 +6943,7 @@
     <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1aeb991f296240550007b955fcbb0477e2" kind="function"><name>operator==</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1PathProperty" kind="class"><name>SR_UTILS_NS::PathProperty</name>
-    <member refid="classSR__UTILS__NS_1_1PathProperty_1a5c11453a3f8391c841b77d873b572b5d" kind="typedef"><name>Filter</name></member>
+    <member refid="classSR__UTILS__NS_1_1PathProperty_1a9f00244f1d03dfea0788dfe0c558e31e" kind="typedef"><name>Filter</name></member>
     <member refid="classSR__UTILS__NS_1_1PathProperty_1a74b7e0d1eed6ae615825213440691a3d" kind="typedef"><name>SetterFn</name></member>
     <member refid="classSR__UTILS__NS_1_1PathProperty_1aa3118ed8cb10b216cdf58ab8d2ac53e4" kind="typedef"><name>GetterFn</name></member>
     <member refid="classSR__UTILS__NS_1_1PathProperty_1a1fece339689781e0a1f82c68f59aea40" kind="variable"><name>m_widgetEditor</name></member>
@@ -8252,7 +7859,7 @@
     <member refid="classSR__MATH__NS_1_1Quaternion_1a0ce6a0a2786bc1a0fe235b04eaadc9a1" kind="variable"><name>z</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ad2c38e39ed9b5df736cdadb3a5e3697c" kind="variable"><name>w</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ae01300185f7bd611c9af2f9e87ed1de7" kind="variable"><name>self</name></member>
-    <member refid="classSR__MATH__NS_1_1Quaternion_1a904f8acedd13ba8dbf21562050d158a9" kind="variable"><name></name></member>
+    <member refid="classSR__MATH__NS_1_1Quaternion_1ad70bdc1474a49695989b8f673ce6c3a4" kind="variable"><name></name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1ac5f07941f7b4051dc176ef70fbe9c095" kind="function"><name>ToGLM</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1a4a696622ed6c48cd8d1ed490dbd65e9e" kind="function"><name>Vector</name></member>
     <member refid="classSR__MATH__NS_1_1Quaternion_1a55b975570e644056f46a43a382726134" kind="function"><name>ToMat4x4</name></member>
@@ -8438,7 +8045,7 @@
     <member refid="structSR__MATH__NS_1_1Rect_1a9aede93f101b42c6c96837e35f77248a" kind="variable"><name>h</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a291917b262fd3db63af18713e0142a94" kind="variable"><name>xy</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a876d951a1851731af35458cc261b55ff" kind="variable"><name>wh</name></member>
-    <member refid="structSR__MATH__NS_1_1Rect_1a9a5db1f797158414df79251c8f4a3d39" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Rect_1a406e1b6ebb516602a7c98cb5dc2f2ff8" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a52e894022e89254c8ab5f02ab132ca16" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a578ca3f2633fc6f2ab9d7a4371e1cbe4" kind="function"><name>Rect</name></member>
     <member refid="structSR__MATH__NS_1_1Rect_1a3d803fb5829c2a2f0688032b3105a593" kind="function"><name>Rect</name></member>
@@ -8585,7 +8192,7 @@
     <member refid="classSR__WORLD__NS_1_1Region_1aa38ac46514f89736e3b86e1014cf4092" kind="function"><name>Allocate</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1RemoveCVRef" kind="struct"><name>SR_UTILS_NS::RemoveCVRef</name>
-    <member refid="structSR__UTILS__NS_1_1RemoveCVRef_1a3dfd90630ce2e88fac97d869932b6afd" kind="typedef"><name>type</name></member>
+    <member refid="structSR__UTILS__NS_1_1RemoveCVRef_1ae77db5ee31a911ad54f321749abbda3e" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1RenderContext" kind="class"><name>SR_GRAPH_NS::RenderContext</name>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a2bf611bba5fc01fb28bb25d7118f3b83" kind="typedef"><name>RenderScenePtr</name></member>
@@ -8598,7 +8205,7 @@
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a8a6bb816bfd8d4a172ed83a6d6063ad3" kind="typedef"><name>CameraPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a19f02e0f915ee33efb23536f78f3609d" kind="typedef"><name>ShaderPtr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a7ef0f8a2974b4f5a5b4444cd1f5ffce2" kind="typedef"><name>WindowPtr</name></member>
-    <member refid="classSR__GRAPH__NS_1_1RenderContext_1ab3b3ac8a56be7f4b6daae096dccad648" kind="typedef"><name>RenderScenes</name></member>
+    <member refid="classSR__GRAPH__NS_1_1RenderContext_1a0af83703e1da57d3721ade70b15ea5b0" kind="typedef"><name>RenderScenes</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1ade436770103801f761fb22d40a72c5f3" kind="typedef"><name>Ptr</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1a65d15078faff0caaf8af88f7a1f29982" kind="variable"><name>m_updateState</name></member>
     <member refid="classSR__GRAPH__NS_1_1RenderContext_1aa3bbfde8df19a950628fe43675580f7c" kind="variable"><name>m_framebuffers</name></member>
@@ -8989,7 +8596,7 @@
   <compound refid="classSR__UTILS__NS_1_1ResourceType" kind="class"><name>SR_UTILS_NS::ResourceType</name>
     <member refid="classSR__UTILS__NS_1_1ResourceType_1a5825e80ff795b5c8c9e0d4f98ccfea41" kind="typedef"><name>ResourceId</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceType_1a08c0d327282f72a48f5f568a3374d33e" kind="typedef"><name>ResourcePath</name></member>
-    <member refid="classSR__UTILS__NS_1_1ResourceType_1a8957d45722526f2f5390e415bd278042" kind="typedef"><name>CopiesMap</name></member>
+    <member refid="classSR__UTILS__NS_1_1ResourceType_1a5de7ce33323757847225bdf95dd6ede8" kind="typedef"><name>CopiesMap</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceType_1a08dfb0c91b7a2b5549fe2834f4ad9b20" kind="typedef"><name>Info</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceType_1a54c1252abc87a78a301e6b6984470408" kind="friend"><name>ResourceManager</name></member>
     <member refid="classSR__UTILS__NS_1_1ResourceType_1a5bb4761aa750478ea43cbc9fba32eb16" kind="variable"><name>m_reloader</name></member>
@@ -9332,24 +8939,11 @@
   <compound refid="structSaveChecker" kind="struct"><name>SaveChecker</name>
     <member refid="structSaveChecker_1a28dd9bc8ae6f02130b66bbfa1428ce1d" kind="function"><name>CanBeSaved</name></member>
   </compound>
-  <compound refid="structSR__UTILS__NS_1_1SaveChecker" kind="struct"><name>SR_UTILS_NS::SaveChecker</name>
-    <member refid="structSR__UTILS__NS_1_1SaveChecker_1af60810f017657501688b08cd86993fa8" kind="function"><name>CanBeSaved</name></member>
-  </compound>
   <compound refid="structSaveChecker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_01Seriae0fe5aa9749d3924f0e7a121912ccac8" kind="struct"><name>SaveChecker&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</name>
     <member refid="structSaveChecker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable__if__t_3_01Seriae0fe5aa9749d3924f0e7a121912ccac8_1aef134ebf952da8139709535760c30c98" kind="function"><name>CanBeSaved</name></member>
-    <member refid="structSaveChecker_1a28dd9bc8ae6f02130b66bbfa1428ce1d" kind="function"><name>CanBeSaved</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1SaveChecker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable9d207a6623f032e90f18b6ab57d365d7" kind="struct"><name>SR_UTILS_NS::SaveChecker&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1SaveChecker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable9d207a6623f032e90f18b6ab57d365d7_1ad3fde38a2efb391f700713179788550f" kind="function"><name>CanBeSaved</name></member>
-    <member refid="structSR__UTILS__NS_1_1SaveChecker_1af60810f017657501688b08cd86993fa8" kind="function"><name>CanBeSaved</name></member>
   </compound>
   <compound refid="structSaveChecker_3_01T_00_01typename_01std_1_1enable__if_3_01SerializationTraits_3_01T_01_4_1_1a89105f51ccec4aa7b25605da93d90ab" kind="struct"><name>SaveChecker&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</name>
     <member refid="structSaveChecker_3_01T_00_01typename_01std_1_1enable__if_3_01SerializationTraits_3_01T_01_4_1_1a89105f51ccec4aa7b25605da93d90ab_1a30e277b47dde6560d37fb35a70d6e2d5" kind="function"><name>CanBeSaved</name></member>
-    <member refid="structSaveChecker_1a28dd9bc8ae6f02130b66bbfa1428ce1d" kind="function"><name>CanBeSaved</name></member>
-  </compound>
-  <compound refid="structSR__UTILS__NS_1_1SaveChecker_3_01T_00_01typename_01std_1_1enable__if_3_01SerializationTrai86ff178b9c6ba98343a5edcb76ff7b5c" kind="struct"><name>SR_UTILS_NS::SaveChecker&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</name>
-    <member refid="structSR__UTILS__NS_1_1SaveChecker_3_01T_00_01typename_01std_1_1enable__if_3_01SerializationTrai86ff178b9c6ba98343a5edcb76ff7b5c_1a7e88a44e6eb6c7b00d52f6ac763c8b57" kind="function"><name>CanBeSaved</name></member>
-    <member refid="structSR__UTILS__NS_1_1SaveChecker_1af60810f017657501688b08cd86993fa8" kind="function"><name>CanBeSaved</name></member>
   </compound>
   <compound refid="structSR__ANIMATIONS__NS_1_1ScalingKey" kind="struct"><name>SR_ANIMATIONS_NS::ScalingKey</name>
     <member refid="structSR__ANIMATIONS__NS_1_1ScalingKey_1a27df7ddb664f1c356378c65c373986df" kind="variable"><name>scaling</name></member>
@@ -10149,7 +9743,7 @@
   <compound refid="structSR__MATH__NS_1_1Size" kind="struct"><name>SR_MATH_NS::Size</name>
     <member refid="structSR__MATH__NS_1_1Size_1aca993cc4f087238f52af9401d5a4c075" kind="variable"><name>value</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1a22fb4d151dfcbad7ef2dd298ab816a6b" kind="variable"><name>v</name></member>
-    <member refid="structSR__MATH__NS_1_1Size_1a9d221432b5686a7339580a261b0b275a" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Size_1a368cbda216a5cc8b8ada90f8a70d0a6d" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Size_1acaedcbaca354b1bc1fefb28af1b48d99" kind="variable"><name>metric</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1a3b286d50f061414353b23b287c0b64b8" kind="function"><name>Size</name></member>
     <member refid="structSR__MATH__NS_1_1Size_1aafc6c9612b22c422e319732be1bd87ba" kind="function"><name>Size</name></member>
@@ -10163,7 +9757,7 @@
     <member refid="structSR__MATH__NS_1_1Size2_1a9948760c262a06fbf0119030859c988d" kind="variable"><name>height</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1aff1b84fa79efc11cd510f87baa635d0f" kind="variable"><name>w</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1a03cfbc0b7cee36bb92b19542f26b47f4" kind="variable"><name>h</name></member>
-    <member refid="structSR__MATH__NS_1_1Size2_1a3d98209cee06f0e1d6a8fcaee06305bf" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Size2_1a16468e58e7b04652a31275016b0a86d2" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1ac69c88691e5a5f4f53b10ed9009d3ef2" kind="function"><name>Size2</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1a7d41c28a249ee1bf919a7eef9c87e894" kind="function"><name>HasPercent</name></member>
     <member refid="structSR__MATH__NS_1_1Size2_1affafdef3eacd39d59c2b3e83fba3e746" kind="function"><name>ToPixels</name></member>
@@ -10632,7 +10226,6 @@
     <member refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_3_01T_00_01false_01_4_1aceaefbed1c15bd44d2f9e21c61b43661" kind="function"><name>SRConditionallyEnabledHash</name></member>
     <member refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_3_01T_00_01false_01_4_1af8de942aaa4f6445bf2ae8f5308f1341" kind="function"><name>operator=</name></member>
     <member refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_3_01T_00_01false_01_4_1a0f49d9bc391461a8c511cbe338df3bd3" kind="function"><name>operator=</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash_1acd3b340d9335de5b16c57dc4eaccdf2c" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1SRCubeMapCreateInfo" kind="struct"><name>SR_GRAPH_NS::SRCubeMapCreateInfo</name>
     <member refid="structSR__GRAPH__NS_1_1SRCubeMapCreateInfo_1a09e1a8ca5efe06b2140c00d113ebd0cd" kind="variable"><name>data</name></member>
@@ -10659,39 +10252,30 @@
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01double_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; double &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01double_01_4_1aa1b788bde4b7ee208b8c42580895ce02" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01float_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; float &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01float_01_4_1af80279bfea5e16b3330451e32e32b950" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; long double &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01long_01double_01_4_1a3cee91122358e6e6adde3d4e2d28acaa" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; nullptr_t &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01nullptr__t_01_4_1ae4505ecfbf19940616f82bf4cb7109f0" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderProperties &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderProperties_01_4_1a2b832c94c7721cd0bdb13a759adad361" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderSamplers_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; SR_GRAPH_NS::ShaderSamplers &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01SR__GRAPH__NS_1_1ShaderSamplers_01_4_1acaea6522d128c48b89ecfe0013ab4265" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01SR__HTYPES__NS_1_1RawMeshParams_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; SR_HTYPES_NS::RawMeshParams &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01SR__HTYPES__NS_1_1RawMeshParams_01_4_1a92014580964ee9f9d1159901149a5911" kind="function"><name>operator()</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; std::basic_string&lt; Elem, std::char_traits&lt; Elem &gt;, Alloc &gt; &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string_3_01Elem_00_01std_1_1char__traits_3_01Elem_01_4_00_01Alloc_01_4_01_4_1ac1a65449b412dff98f2aad00dc3d0f2c" kind="function"><name>DoHash</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4" kind="struct"><name>SR_UTILS_NS::SRHash&lt; std::basic_string_view&lt; Elem &gt; &gt;</name>
     <member refid="structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4_1a0c824048321a3ea706ac7b1a58b8410e" kind="function"><name>DoHash</name></member>
-    <member refid="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" kind="function"><name>DoHash</name></member>
   </compound>
   <compound refid="classSR__UTILS__NS_1_1SRProperty" kind="class"><name>SR_UTILS_NS::SRProperty</name>
     <member refid="classSR__UTILS__NS_1_1SRProperty_1a8af17be07062a9b5fa523a2d15731e48" kind="variable"><name>m_name</name></member>
@@ -12278,59 +11862,31 @@
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B63fb5b46f0a854a3fab1d24dd63c093c_1ac45330986e4bb55d35631b2862bcdc76" kind="typedef"><name>exact_signed_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B63fb5b46f0a854a3fab1d24dd63c093c_1a800e2d08e77b13cd3c6fdda253c7a33c" kind="typedef"><name>fast_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B63fb5b46f0a854a3fab1d24dd63c093c_1a90f3208ed075933713036ce64fd98433" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ac996f5b927bc83637b48ffd0c2eb5def" kind="typedef"><name>exact_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a106ef2a13cd0d1fef0a596b73ff6fcc0" kind="typedef"><name>exact_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aae3aa392d076a807dfe3ee364a6a1271" kind="typedef"><name>fast_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ae90b8252a4f7a51e76712c1fa69b1faa" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aa5811b884cd037715d0dace420b77eab" kind="function"><name>bit_count</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a1e67d4b943eb4f4c2c4b04f8b5b57ba4" kind="function"><name>bit_count_lo</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a10f7d53fe491866ac7c4d6fbeaccf3b0" kind="function"><name>bit_count_hi</name></member>
   </compound>
   <compound refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2" kind="struct"><name>SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(33))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(64)))&gt; &gt;</name>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1aa0201043145d6efdd848aadbe66cab79" kind="typedef"><name>exact_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a13cbb9e31de0eb59c03a91b235c27dba" kind="typedef"><name>exact_signed_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a6a94bf33280782771f7a39118a02481b" kind="typedef"><name>fast_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2_1a9d51ab55fe8ccf56d049d9d903d27d49" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ac996f5b927bc83637b48ffd0c2eb5def" kind="typedef"><name>exact_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a106ef2a13cd0d1fef0a596b73ff6fcc0" kind="typedef"><name>exact_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aae3aa392d076a807dfe3ee364a6a1271" kind="typedef"><name>fast_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ae90b8252a4f7a51e76712c1fa69b1faa" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aa5811b884cd037715d0dace420b77eab" kind="function"><name>bit_count</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a1e67d4b943eb4f4c2c4b04f8b5b57ba4" kind="function"><name>bit_count_lo</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a10f7d53fe491866ac7c4d6fbeaccf3b0" kind="function"><name>bit_count_hi</name></member>
   </compound>
   <compound refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18" kind="struct"><name>SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(9))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(16)))&gt; &gt;</name>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18_1a1b5ec27bd49a072deda2996f52675d6f" kind="typedef"><name>exact_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18_1ad17a2ca158c015da3d4e7705b678ec83" kind="typedef"><name>exact_signed_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18_1a93ff45aec11759e416af9c772b4a3819" kind="typedef"><name>fast_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18_1a855d37cd674a583ef9dcb3a82f6ce25f" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ac996f5b927bc83637b48ffd0c2eb5def" kind="typedef"><name>exact_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a106ef2a13cd0d1fef0a596b73ff6fcc0" kind="typedef"><name>exact_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aae3aa392d076a807dfe3ee364a6a1271" kind="typedef"><name>fast_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ae90b8252a4f7a51e76712c1fa69b1faa" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aa5811b884cd037715d0dace420b77eab" kind="function"><name>bit_count</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a1e67d4b943eb4f4c2c4b04f8b5b57ba4" kind="function"><name>bit_count_lo</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a10f7d53fe491866ac7c4d6fbeaccf3b0" kind="function"><name>bit_count_hi</name></member>
   </compound>
   <compound refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491" kind="struct"><name>SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(8)))&gt; &gt;</name>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491_1ae2a3f8c30e91411f3e060c1de4cb60fb" kind="typedef"><name>exact_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491_1a48d2e613ba03d683495cba431d065d51" kind="typedef"><name>exact_signed_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491_1ab28db0a8daf09a1d6b1a62f02dae7192" kind="typedef"><name>fast_unsigned_type</name></member>
     <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491_1a6668140e8a39e97b73dd7f370a20f1c0" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ac996f5b927bc83637b48ffd0c2eb5def" kind="typedef"><name>exact_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a106ef2a13cd0d1fef0a596b73ff6fcc0" kind="typedef"><name>exact_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aae3aa392d076a807dfe3ee364a6a1271" kind="typedef"><name>fast_unsigned_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1ae90b8252a4f7a51e76712c1fa69b1faa" kind="typedef"><name>fast_signed_type</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1aa5811b884cd037715d0dace420b77eab" kind="function"><name>bit_count</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a1e67d4b943eb4f4c2c4b04f8b5b57ba4" kind="function"><name>bit_count_lo</name></member>
-    <member refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_1a10f7d53fe491866ac7c4d6fbeaccf3b0" kind="function"><name>bit_count_hi</name></member>
   </compound>
   <compound refid="classSR__TYPES__NS_1_1uintwide__t" kind="class"><name>SR_TYPES_NS::uintwide_t</name>
     <member refid="classSR__TYPES__NS_1_1uintwide__t_1a6340cc51f230221a90c32cffcd4ba606" kind="typedef"><name>limb_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1uintwide__t_1ab4c9d2dccf8b830dbe5400deb51a7c3a" kind="typedef"><name>double_limb_type</name></member>
+    <member refid="classSR__TYPES__NS_1_1uintwide__t_1af9f2145ecead7dbfb078461ac80cd1ea" kind="typedef"><name>double_limb_type</name></member>
     <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0c3b8647669c6ed098f61cb6d19afeeb" kind="typedef"><name>ushort_type</name></member>
     <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0983f765d1e0af9d21c612c25eb6e6c0" kind="typedef"><name>ularge_type</name></member>
-    <member refid="classSR__TYPES__NS_1_1uintwide__t_1ad1369bc9e1c16d293f2d9cb986bcfd00" kind="typedef"><name>representation_type</name></member>
+    <member refid="classSR__TYPES__NS_1_1uintwide__t_1a3c1837b91a4f56c478910f6ed12a2f67" kind="typedef"><name>representation_type</name></member>
     <member refid="classSR__TYPES__NS_1_1uintwide__t_1a6d7015b6aa2e776a15baa159f3acf439" kind="typedef"><name>iterator</name></member>
     <member refid="classSR__TYPES__NS_1_1uintwide__t_1a0649aaa8ceff31d83f08478f101f32f9" kind="typedef"><name>const_iterator</name></member>
     <member refid="classSR__TYPES__NS_1_1uintwide__t_1af70a1d6722fb1cb76597ce9b479c1235" kind="typedef"><name>reverse_iterator</name></member>
@@ -12722,7 +12278,7 @@
     <member refid="structSR__MATH__NS_1_1Vector2_1a2bfe28e835809dde9ba5de30b1edc885" kind="variable"><name>top</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a2ced756008cc2560c48ecc238b18d0f9" kind="variable"><name>bottom</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a06e26740d9709f430b9be0efdff8707d" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector2_1abe6d7810d6696d4f7265a0a9c3013a5a" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1ae038b0463a0219c82f4a2fc13d3fbf68" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a5ce4f26dfc0d47494da2230666490755" kind="function"><name>Vector2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1ace2dd6f9df99300d725ad70a2fa30260" kind="function"><name>Vector2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a5d8ffa6d4410610bdf195031f34fdd2b" kind="function"><name>Vector2</name></member>
@@ -12782,7 +12338,7 @@
     <member refid="structSR__MATH__NS_1_1Vector3_1a8514956322972f72b626db5f1f6a3839" kind="variable"><name>y</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a23257d25f7b83bf9bbfa7c2522746b26" kind="variable"><name>z</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a38cc2c1f6b96c858cde44a912541d43c" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector3_1a7048c56ebcf6b612c9a234e8fd1ae6f6" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector3_1abaab65c9793e017c86ccbddc209cccad" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a75e87ac4a4b858fb6727e4055490e12d" kind="function"><name>Vector3</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1a18a58a28b46591282657ea131bcc4bd6" kind="function"><name>Vector3</name></member>
     <member refid="structSR__MATH__NS_1_1Vector3_1af6f51307942578ce8c9f17ac566810e9" kind="function"><name>Vector3</name></member>
@@ -12909,7 +12465,7 @@
     <member refid="structSR__MATH__NS_1_1Vector4_1ac0a985978a004760cc821ec58ddb5fbc" kind="variable"><name>b</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1a6e8e42f98e3cb7a416345b11e73dde68" kind="variable"><name>a</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1aa936b71f8716a27728ba6dcd604646f0" kind="variable"><name>coord</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector4_1a16704dc99b71f45a7bb3ac424e986ea0" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector4_1a06dcaacb9ce3c110045077fdd8a96fc6" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1ac06ba0d0082a418caccd39c976a2497e" kind="function"><name>Vector4</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1abda2052955869c2e86bc649401263ed6" kind="function"><name>Vector4</name></member>
     <member refid="structSR__MATH__NS_1_1Vector4_1acefe6d7a7601760bacdeb179eb660e17" kind="function"><name>Vector4</name></member>
@@ -12961,7 +12517,7 @@
     <member refid="structSR__MATH__NS_1_1Vector6_1a826081ee0cf772e931c2d692414f0418" kind="variable"><name>vec2d1</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a85c31fd88996c7e3376ede3d3c9967e1" kind="variable"><name>vec2d2</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1a0dd89c54210647f8d7bd0e3977bb169a" kind="variable"><name>vec2d3</name></member>
-    <member refid="structSR__MATH__NS_1_1Vector6_1a8e04d5635b2a2bb552c4aa8c0e62f0fb" kind="variable"><name></name></member>
+    <member refid="structSR__MATH__NS_1_1Vector6_1a1b7dce05a85ad0d80b71ff613b3f505d" kind="variable"><name></name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1ab316abffc8c9f50be9eaa084250f8943" kind="function"><name>Vector6</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1aae10069b0df068cfdc68c386df748535" kind="function"><name>Vector6</name></member>
     <member refid="structSR__MATH__NS_1_1Vector6_1af2b20b9b7747dadbbc07ce7e8894e465" kind="function"><name>Vector6</name></member>
@@ -13027,7 +12583,7 @@
     <member refid="structSR__UTILS__NS_1_1Vertex_1a6938a7cd71b4adbb374210cd0a7de504" kind="variable"><name>weightsNum</name></member>
     <member refid="structSR__UTILS__NS_1_1Vertex_1acf240ab20ff0075be6aade819a48a079" kind="variable"><name>boneId</name></member>
     <member refid="structSR__UTILS__NS_1_1Vertex_1a7eb384cc2db3e02462c0cb52379a4016" kind="variable"><name>weight</name></member>
-    <member refid="structSR__UTILS__NS_1_1Vertex_1aa118a7552c6d4fae0f6e2baca82cc639" kind="variable"><name>weights</name></member>
+    <member refid="structSR__UTILS__NS_1_1Vertex_1a7c41be61c5a54fcb1648bcd0a35357db" kind="variable"><name>weights</name></member>
     <member refid="structSR__UTILS__NS_1_1Vertex_1a30af75c683c6d036db51730110f4820f" kind="function"><name>Vertex</name></member>
     <member refid="structSR__UTILS__NS_1_1Vertex_1a3e6770452c1f2641e548d84f852a7028" kind="function"><name>Vertex</name></member>
     <member refid="structSR__UTILS__NS_1_1Vertex_1a3955d1efb0c97bca2bcce5d6b01d3294" kind="function"><name>Vertex</name></member>
@@ -13600,9 +13156,9 @@
     <member refid="IWaveDataProvider_8h_1ad6d6f1126e2c7ead79a9ba7f5d3c3489" kind="typedef"><name>RawSoundDataPtr</name></member>
     <member refid="OpenALTools_8h_1a51955f8627499b4915608d3f5e11c550" kind="typedef"><name>ALfVec3</name></member>
     <member refid="OpenALTools_8h_1a91ce54d28b2e7e2ae8500d438061abf8" kind="typedef"><name>ALfVec6</name></member>
-    <member refid="SoundFormat_8h_1a0a165a2f2f0f2c9d846a0ee6dad5ec2e" kind="typedef"><name>SoundBuffer</name></member>
-    <member refid="SoundFormat_8h_1a28a7fed398206d9e35497a81db3958ba" kind="typedef"><name>SoundSource</name></member>
-    <member refid="SoundManager_8h_1adce2085f46d724ee51f8fb9f0a27e245" kind="typedef"><name>AudioDeviceName</name></member>
+    <member refid="SoundFormat_8h_1a8da403179f9cde4ecff3796a476e6307" kind="typedef"><name>SoundBuffer</name></member>
+    <member refid="SoundFormat_8h_1a22735a81fd5d0bd889561b3d3891ecf4" kind="typedef"><name>SoundSource</name></member>
+    <member refid="SoundManager_8h_1ad93e426f89b62b0045fd60bef1aa325a" kind="typedef"><name>AudioDeviceName</name></member>
     <member refid="AudioSource_8h_1a00427737b3cbfc853481426fd5a6be88" kind="variable"><name>SR_SUPPORTED_AUDIO_FORMATS</name></member>
     <member refid="AudioLibrary_8h_1ad1115950fa8f1033fb9d42885d1b7eff" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="IWaveDataProvider_8h_1a4bd0793c71902314f2652edb23155e20" kind="function"><name>CreateWaveDataProvider</name></member>
@@ -13736,12 +13292,12 @@
     <member refid="ShaderProperties_8h_1a41bd7df3390015dc7cb3202df57e28bf" kind="typedef"><name>ShaderSamplers</name></member>
     <member refid="ShaderProperties_8h_1a3ce09526ddf0e5907be9e5507b58b850" kind="typedef"><name>SSBOBindings</name></member>
     <member refid="BasePass_8h_1a5ba4e456f01edbfffc80498045fe58d4" kind="typedef"><name>RenderPassMap</name></member>
-    <member refid="PassQueue_8h_1a3ab480948c4b9890e0688dbaa512a908" kind="typedef"><name>PassQueue</name></member>
-    <member refid="PassQueue_8h_1a97fb48a453c513b10af73749f7aff785" kind="typedef"><name>PassQueues</name></member>
+    <member refid="PassQueue_8h_1a04a3c7cbc375fae47bc12d9206d62ff7" kind="typedef"><name>PassQueue</name></member>
+    <member refid="PassQueue_8h_1a60eadbd4ed1391d2864b428830ed1ccd" kind="typedef"><name>PassQueues</name></member>
     <member refid="IShaderProgram_8h_1a30c402d3cecc6ca0ef68c47d618e848c" kind="typedef"><name>VertexAttributes</name></member>
     <member refid="IShaderProgram_8h_1aee7414ef72723b858b95ab2d146ebc66" kind="typedef"><name>VertexDescriptions</name></member>
     <member refid="IShaderProgram_8h_1af3ed9349ba9da3bb03bae39bb6b2ea79" kind="typedef"><name>UBOInfo</name></member>
-    <member refid="PipelineState_8h_1a47eecca72db86bdf787ac95c47ab85ad" kind="typedef"><name>SRDescriptorUpdateInfos</name></member>
+    <member refid="PipelineState_8h_1aea8415011633d07cad6f77b894722b8f" kind="typedef"><name>SRDescriptorUpdateInfos</name></member>
     <member refid="MeshCluster_8h_1a5f330758c46b2310cc7ba5e6b36c3bd4" kind="typedef"><name>ClusterVBOId</name></member>
     <member refid="MeshCluster_8h_1aa796cc0d477f02852672eed308174822" kind="typedef"><name>MeshGroup</name></member>
     <member refid="MeshCluster_8h_1a7eca809f30f816af48fcc6bb0392e52e" kind="typedef"><name>MeshGroups</name></member>
@@ -13977,12 +13533,12 @@
     <member refid="Rect_8h_1a996644829b3cfa3d9eb54253b3f2e6c7" kind="typedef"><name>FRect</name></member>
     <member refid="Rect_8h_1ad5c82373097f35b09c87f0840234e4dd" kind="typedef"><name>IRect</name></member>
     <member refid="Rect_8h_1a0b19db8b861de0d99a3db07a8e7eaa55" kind="typedef"><name>URect</name></member>
-    <member refid="Size_8h_1a0ffcc069246e5cd0c2c73887ad7fb398" kind="typedef"><name>FSize</name></member>
-    <member refid="Size_8h_1ae038c1c1d625c8e47b4c2f5dbd38fdf0" kind="typedef"><name>ISize</name></member>
-    <member refid="Size_8h_1a1316afad84ee0ffc0d5ebaf779b940c3" kind="typedef"><name>USize</name></member>
-    <member refid="Size_8h_1aa71b948d4d8fd08e8f131a2d78f6d9d1" kind="typedef"><name>FSize2</name></member>
-    <member refid="Size_8h_1ab67b693942daa0e417ee692d5ce103a4" kind="typedef"><name>ISize2</name></member>
-    <member refid="Size_8h_1a94066d36944c434a3b5922eb0dca79e4" kind="typedef"><name>USize2</name></member>
+    <member refid="Size_8h_1ae00e5bcb9c1a4ae92593f39108511196" kind="typedef"><name>FSize</name></member>
+    <member refid="Size_8h_1ab7052bc6d5197a5dad9097d49b946f81" kind="typedef"><name>ISize</name></member>
+    <member refid="Size_8h_1a670bc97bd98b6bebde0cb3301d807d9d" kind="typedef"><name>USize</name></member>
+    <member refid="Size_8h_1ad660b861de3feffa766a0b5f32e90649" kind="typedef"><name>FSize2</name></member>
+    <member refid="Size_8h_1a427d0a0d8bfd2e71ad4b238fc62aaab9" kind="typedef"><name>ISize2</name></member>
+    <member refid="Size_8h_1ab177cb8be8a525b65574c8cf1dd095d9" kind="typedef"><name>USize2</name></member>
     <member refid="Vector2_8h_1a5159ce2c654d1fa5cd44ca5cbacc1143" kind="typedef"><name>FVector2</name></member>
     <member refid="Vector2_8h_1a830ffc08e2a280913c9c11469fa1e102" kind="typedef"><name>FPoint</name></member>
     <member refid="Vector2_8h_1a1c1edc6944d688f33883e4d87e4f15ff" kind="typedef"><name>USVector2</name></member>
@@ -14162,32 +13718,28 @@
     <member refid="ShaderVariables_8h_1a2e96e85aa130fbb3a57ba37bfaa5c431" kind="function"><name>GetTypeSize</name></member>
   </compound>
   <compound refid="namespaceSR__TYPES__NS" kind="namespace"><name>SR_TYPES_NS</name>
-    <member refid="UintWide__t_8h_1a2cbb3534f22a834921cf273ab8dc5049" kind="typedef"><name>uint64_t</name></member>
-    <member refid="UintWide__t_8h_1a86f4bad694c79eab32c52283a89205e1" kind="typedef"><name>uint128_t</name></member>
-    <member refid="UintWide__t_8h_1a6f66d62efc00325ff1efdd28748689d7" kind="typedef"><name>uint256_t</name></member>
-    <member refid="UintWide__t_8h_1a116cb5e84fc888af9250bf567441c2a1" kind="typedef"><name>uint512_t</name></member>
-    <member refid="UintWide__t_8h_1add19d8e9fe16cd7ab018adb044d5bdfc" kind="typedef"><name>uint1024_t</name></member>
-    <member refid="UintWide__t_8h_1a2476653dba2b26fd2f27abe19bec2864" kind="typedef"><name>uint2048_t</name></member>
-    <member refid="UintWide__t_8h_1aa42877608e377ee133d226712cdfe252" kind="typedef"><name>uint4096_t</name></member>
-    <member refid="UintWide__t_8h_1adc5f78ab8ccbed0b987533adcf889626" kind="typedef"><name>uint8192_t</name></member>
-    <member refid="UintWide__t_8h_1a435e03d722834e87a9034167a04fabc1" kind="typedef"><name>uint16384_t</name></member>
-    <member refid="UintWide__t_8h_1ae1491af82011a00362654fa4cc6d38ee" kind="typedef"><name>uint32768_t</name></member>
-    <member refid="UintWide__t_8h_1a7ee4621bec03bb8577ba0fa580f94812" kind="typedef"><name>uint65536_t</name></member>
-    <member refid="UintWide__t_8h_1a0ece427d00d5d6e73bb8375b6c536de7" kind="typedef"><name>int64_t</name></member>
-    <member refid="UintWide__t_8h_1a15429a053c198c4ffb977fa250e6f9e2" kind="typedef"><name>int128_t</name></member>
-    <member refid="UintWide__t_8h_1a2685a8dcd0adf343835ad244cb32bde1" kind="typedef"><name>int256_t</name></member>
-    <member refid="UintWide__t_8h_1a51d54ae0f52221a04dba2d6729ee1906" kind="typedef"><name>int512_t</name></member>
-    <member refid="UintWide__t_8h_1ad6e667fedd49415b6effad132ea6d20a" kind="typedef"><name>int1024_t</name></member>
-    <member refid="UintWide__t_8h_1a39f3f6f9ff56d66f278596931e980047" kind="typedef"><name>int2048_t</name></member>
-    <member refid="UintWide__t_8h_1a09749c933f0b3f7f3f762a8397da6402" kind="typedef"><name>int4096_t</name></member>
-    <member refid="UintWide__t_8h_1a30a9922a374603ab0d5e225fde528d29" kind="typedef"><name>int8192_t</name></member>
-    <member refid="UintWide__t_8h_1acaf6d6298f255abd46dea4d3643c661c" kind="typedef"><name>int16384_t</name></member>
-    <member refid="UintWide__t_8h_1a34f8afb4fb684d188f421c17d4ee6ffa" kind="typedef"><name>int32768_t</name></member>
-    <member refid="UintWide__t_8h_1a30688bddc7e87ef88cb4eac8f89ed7c0" kind="typedef"><name>int65536_t</name></member>
-    <member refid="UintWide__t_8h_1a8eb02af7cfda74e23b94db6b392273a8" kind="typedef"><name>size_t</name></member>
-    <member refid="UintWide__t_8h_1a528e4e7d75652011d04fefa5075b034d" kind="typedef"><name>ptrdiff_t</name></member>
-    <member refid="UintWide__t_8h_1a3d823d86c643bdd4d0fd53a9be4c8bcc" kind="typedef"><name>unsigned_fast_type</name></member>
-    <member refid="UintWide__t_8h_1a4221b85f498a1b26fbc4c45be90d5bbb" kind="typedef"><name>signed_fast_type</name></member>
+    <member refid="UintWide__t_8h_1ae72c36cd6e3109229a22d4b0f1294e66" kind="typedef"><name>uint64_t</name></member>
+    <member refid="UintWide__t_8h_1a5301c1649ee81600ea74eebf2ee4344b" kind="typedef"><name>uint128_t</name></member>
+    <member refid="UintWide__t_8h_1a38a8320e4fa455f107cd39596d155a5b" kind="typedef"><name>uint256_t</name></member>
+    <member refid="UintWide__t_8h_1a39a3bfc6669da4fb2769c8832f7754ff" kind="typedef"><name>uint512_t</name></member>
+    <member refid="UintWide__t_8h_1af4d92fd5fed3015c3c2c97593beb5448" kind="typedef"><name>uint1024_t</name></member>
+    <member refid="UintWide__t_8h_1a5d2bddf78991eec7a9eed023b48a70fe" kind="typedef"><name>uint2048_t</name></member>
+    <member refid="UintWide__t_8h_1a095b25a29756d980124a08de2613ff47" kind="typedef"><name>uint4096_t</name></member>
+    <member refid="UintWide__t_8h_1a5c1306e7c8afefb0f58ee98dd750a538" kind="typedef"><name>uint8192_t</name></member>
+    <member refid="UintWide__t_8h_1ab248508ee7bd1abe9cc0844f790d450b" kind="typedef"><name>uint16384_t</name></member>
+    <member refid="UintWide__t_8h_1a965c2ab5e48ef620b8835c682bb1768b" kind="typedef"><name>uint32768_t</name></member>
+    <member refid="UintWide__t_8h_1aa160a998b697a0cfbfcd1484b6114fd0" kind="typedef"><name>uint65536_t</name></member>
+    <member refid="UintWide__t_8h_1a14cb706963de85b6e8f78d134e0d4305" kind="typedef"><name>int64_t</name></member>
+    <member refid="UintWide__t_8h_1a5a86612be1cc873b47c1fdf89e2ff937" kind="typedef"><name>int128_t</name></member>
+    <member refid="UintWide__t_8h_1aaa0f9263b7cfe7cb118955627450b71c" kind="typedef"><name>int256_t</name></member>
+    <member refid="UintWide__t_8h_1a5ca8a087285bc40cfb2bbd782157ada0" kind="typedef"><name>int512_t</name></member>
+    <member refid="UintWide__t_8h_1a871783e13176d5710c262ba49120cedb" kind="typedef"><name>int1024_t</name></member>
+    <member refid="UintWide__t_8h_1a21a26cdcc02424f42095814d23d52bb3" kind="typedef"><name>int2048_t</name></member>
+    <member refid="UintWide__t_8h_1a92c9536f4a121853055f284ab821a2ff" kind="typedef"><name>int4096_t</name></member>
+    <member refid="UintWide__t_8h_1a57f6a5a2c3ffb10aac094a63505eb6d4" kind="typedef"><name>int8192_t</name></member>
+    <member refid="UintWide__t_8h_1ae937ca8bc01297e28f46e7ba11a92920" kind="typedef"><name>int16384_t</name></member>
+    <member refid="UintWide__t_8h_1a1bdc1669190e3928704e67b68318cbc1" kind="typedef"><name>int32768_t</name></member>
+    <member refid="UintWide__t_8h_1a19ea2cd8fc8a9d7b8947b974f00ad029" kind="typedef"><name>int65536_t</name></member>
     <member refid="UintWide__t_8h_1a248d615eaa03fa4baf2176af01737b2e" kind="variable"><name>numeric_limits_uintwide_t_base</name></member>
     <member refid="UintWide__t_8h_1a329ffe75b30cec71bd7afd76d951e83a" kind="variable"><name>int</name></member>
     <member refid="UintWide__t_8h_1a6684a668be6f14e412d45f97b3d38a9e" kind="variable"><name>digits</name></member>
@@ -14284,17 +13836,17 @@
     <member refid="UintWide__t_8h_1ad82c6f1fb2b949b22f016aa0219787fc" kind="function"><name>to_string</name></member>
     <member refid="UintWide__t_8h_1a22ef5d37d97c7964d876f710bbbf1cd2" kind="function"><name>import_bits</name></member>
     <member refid="UintWide__t_8h_1a8e9273c15c3928504ec7dec423276d72" kind="function"><name>export_bits</name></member>
-    <member refid="UintWide__t_8h_1ae55c5fb6f9ba197f478b400c7884116b" kind="function"><name>max</name></member>
-    <member refid="UintWide__t_8h_1a9293c2f6d18b14d342b4f5df2634a06d" kind="function"><name>min</name></member>
+    <member refid="UintWide__t_8h_1a4c2dbd0b5069e05384cf28bc77a12048" kind="function"><name>max</name></member>
+    <member refid="UintWide__t_8h_1a3703cbe9a3359de498d24896e529aa0b" kind="function"><name>min</name></member>
     <member refid="UintWide__t_8h_1a0baf4940fdc3bbba09875242afb7dbd7" kind="function"><name>lowest</name></member>
     <member refid="UintWide__t_8h_1a9e43b4ccf4a7e23e8b38e133e1b60b92" kind="function"><name>pow</name></member>
     <member refid="UintWide__t_8h_1a5b0de44168a64bb64519dcf0b5d517d2" kind="function"><name>powm</name></member>
   </compound>
   <compound refid="namespaceSR__TYPES__NS_1_1detail" kind="namespace"><name>SR_TYPES_NS::detail</name>
-    <member refid="UintWide__t_8h_1a8eb02af7cfda74e23b94db6b392273a8" kind="typedef"><name>size_t</name></member>
-    <member refid="UintWide__t_8h_1a528e4e7d75652011d04fefa5075b034d" kind="typedef"><name>ptrdiff_t</name></member>
-    <member refid="UintWide__t_8h_1a3d823d86c643bdd4d0fd53a9be4c8bcc" kind="typedef"><name>unsigned_fast_type</name></member>
-    <member refid="UintWide__t_8h_1a4221b85f498a1b26fbc4c45be90d5bbb" kind="typedef"><name>signed_fast_type</name></member>
+    <member refid="UintWide__t_8h_1a4447e46d183ec8d2fff0af1a3aa9518e" kind="typedef"><name>size_t</name></member>
+    <member refid="UintWide__t_8h_1a8b1f41836cfee4ec038e4c7fef674176" kind="typedef"><name>ptrdiff_t</name></member>
+    <member refid="UintWide__t_8h_1a05d34a675da9f3c5ac887cb065bf4149" kind="typedef"><name>unsigned_fast_type</name></member>
+    <member refid="UintWide__t_8h_1aef45428377c146c3e3acf659461af6cd" kind="typedef"><name>signed_fast_type</name></member>
     <member refid="UintWide__t_8h_1a1a158269a4ea32106155dd99c9f39019" kind="function"><name>abs_unsafe</name></member>
     <member refid="UintWide__t_8h_1aed5916547e850fc2537faa2cd24d26b6" kind="function"><name>fill_unsafe</name></member>
     <member refid="UintWide__t_8h_1aee8db21f1618e07d85f59533b2582407" kind="function"><name>max_unsafe</name></member>
@@ -14350,7 +13902,7 @@
   </compound>
   <compound refid="namespaceSR__TYPES__NS_1_1detail_1_1my__own" kind="namespace"><name>SR_TYPES_NS::detail::my_own</name>
     <member refid="UintWide__t_8h_1aa7f14ed721c746deba69ab3b36a7ce50" kind="function"><name>frexp</name></member>
-    <member refid="UintWide__t_8h_1a47de8ae29e8853fe0c6d6a64b5ae97b5" kind="function"><name>isfinite</name></member>
+    <member refid="UintWide__t_8h_1abe027e1800c392c7486ce3a7b914b6ca" kind="function"><name>isfinite</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS" kind="namespace"><name>SR_UTILS_NS</name>
     <member refid="namespaceSR__UTILS__NS_1a88a8b541898e07836525f5dbe6ce81cd" kind="enum"><name>SyncType</name></member>
@@ -14398,19 +13950,19 @@
     <member refid="namespaceSR__UTILS__NS_1a03b692b2fe07bf51db84e2c155bf2245" kind="typedef"><name>ResourcesList</name></member>
     <member refid="namespaceSR__UTILS__NS_1aeae9074628aecbee9bb8d1409bfc7da0" kind="typedef"><name>ResourcesSet</name></member>
     <member refid="namespaceSR__UTILS__NS_1a78b72ed6f09b03bf7d3fb77a450a4a44" kind="typedef"><name>ResourcesTypes</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a4ee38485211b74a53d29969eefd38b18" kind="typedef"><name>HasMethodEmptyT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1aecf4c4626b149d02c6fc17452072aea8" kind="typedef"><name>RemoveQualifiersT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1aebf55402410a7b3151a164df3813ebc1" kind="typedef"><name>RebindAllocT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a03dd5066fcd9b382b19c1846f87abd8e" kind="typedef"><name>SRHashType</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a97da6192a196850b48e97dfb8146a249" kind="typedef"><name>TimePointType</name></member>
-    <member refid="namespaceSR__UTILS__NS_1ae9070c807c1080c90bacedb764cf8de6" kind="typedef"><name>DetectedT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a4bccb01ae3aa45102087700b7a041028" kind="typedef"><name>HasNullptrComparison</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a003c882d7099d0045766e51cef9be8b5" kind="typedef"><name>DetectedOrT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a2a832b3cd4c5baaa7a7456d2952822b5" kind="typedef"><name>GetPromPackT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a5cb92e84d08eb03d8811743837d48563" kind="typedef"><name>TypeValuePairT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1af7e8e4e036d2b912f3c0657ff60ac7e4" kind="typedef"><name>RemoveCVRefT</name></member>
-    <member refid="namespaceSR__UTILS__NS_1a973c3dfd4e2639c6b3183e1591a7576a" kind="typedef"><name>CheckerEqualityComparable</name></member>
-    <member refid="namespaceSR__UTILS__NS_1ada900dc387ce312d49c7ad7e521fb9ef" kind="typedef"><name>CheckerOperatorMinus</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a0694a4a9cf90cf0b54e22dde7aaefd1f" kind="typedef"><name>HasMethodEmptyT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1af7366c17501e538017fa0af55a860083" kind="typedef"><name>RemoveQualifiersT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a6264b8791b5f460d93e46f2daa397260" kind="typedef"><name>RebindAllocT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a6d6c7fcefa5595fc4b0a08b8bdc7fe61" kind="typedef"><name>SRHashType</name></member>
+    <member refid="namespaceSR__UTILS__NS_1aeb836600e154f4f82d233e9027a822c4" kind="typedef"><name>TimePointType</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a0ef66a69a66f40fad33e05aa4e9f9f20" kind="typedef"><name>DetectedT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a321a3bcd6723e0c4df9eb193d10d9989" kind="typedef"><name>HasNullptrComparison</name></member>
+    <member refid="namespaceSR__UTILS__NS_1abb356a99ac3f1d128beff9314de3c04f" kind="typedef"><name>DetectedOrT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a5182a0d24f4585602f1f2e9521df1a1c" kind="typedef"><name>GetPromPackT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a007b43a03f2dedf7b8a6ac9f2439b3cb" kind="typedef"><name>TypeValuePairT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1a4f74ac361f1b016325d039cf0d069589" kind="typedef"><name>RemoveCVRefT</name></member>
+    <member refid="namespaceSR__UTILS__NS_1ab6e4b8bf34362b30d3fee943910879ce" kind="typedef"><name>CheckerEqualityComparable</name></member>
+    <member refid="namespaceSR__UTILS__NS_1abfe04248b1bdd77eb2727aadf66df6a3" kind="typedef"><name>CheckerOperatorMinus</name></member>
     <member refid="namespaceSR__UTILS__NS_1a159d21808683ed04f7b39b41a1cb2e68" kind="variable"><name>SR_FNV_OFFSET_BASIS</name></member>
     <member refid="namespaceSR__UTILS__NS_1a916e57d1337312d742b63dda99078bca" kind="variable"><name>SR_FNV_PRIME</name></member>
     <member refid="namespaceSR__UTILS__NS_1ad57b2c6159d4ac536e7c2aaeed7ed665" kind="variable"><name>IsAnyOfV</name></member>
@@ -14538,8 +14090,8 @@
     <member refid="Base64_8h_1a98058efac005748142c7b9bc4239d49d" kind="function"><name>CompileTimeDecode</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Details" kind="namespace"><name>SR_UTILS_NS::Details</name>
-    <member refid="Serialization_8h_1a71e0218eb2d9495a71ac4b75e0acb4c0" kind="typedef"><name>IsDefaultCheckerAlwaysFalseT</name></member>
-    <member refid="Serialization_8h_1ac76f4658561637060f7eca2a59f87be7" kind="typedef"><name>ReserveMethodT</name></member>
+    <member refid="Serialization_8h_1a26929409f0cc35477b6bbddd47dc832d" kind="typedef"><name>IsDefaultCheckerAlwaysFalseT</name></member>
+    <member refid="Serialization_8h_1a4807585643005d3ec2f0251db474566e" kind="typedef"><name>ReserveMethodT</name></member>
     <member refid="TypeTraits_8h_1ad38da9beb02cc3cbddc736b7de1e04a5" kind="function"><name>GetFromPackResolver</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1EntityRefUtils" kind="namespace"><name>SR_UTILS_NS::EntityRefUtils</name>
@@ -14574,7 +14126,7 @@
     <member refid="Icu_8h_1a2de0e04293c3cdff18e9801c4292a33da72ef2b9b6965d078e3c7f95487a82d1c" kind="enumvalue"><name>Skip</name></member>
     <member refid="Icu_8h_1a2de0e04293c3cdff18e9801c4292a33da11a755d598c0c417f9a36758c3da7481" kind="enumvalue"><name>Stop</name></member>
     <member refid="Icu_8h_1a2de0e04293c3cdff18e9801c4292a33da7a1920d61156abc05a60135aefe8bc67" kind="enumvalue"><name>Default</name></member>
-    <member refid="LocalizationManager_8h_1a65aef740d64823060322607dba7a5ae4" kind="typedef"><name>Locale</name></member>
+    <member refid="LocalizationManager_8h_1aa177a02f924d9b00ef63567b469b143f" kind="typedef"><name>Locale</name></member>
     <member refid="Convert_8h_1adc64cabb03dfb78ca327abd3ffa2eb9d" kind="function"><name>ConvertTo</name></member>
     <member refid="Convert_8h_1aaab5ddb76265dfd368731f4ea8dac406" kind="function"><name>ConvertFrom</name></member>
     <member refid="Encoding_8h_1a8d521ab16c25c45ddc930ddb9fde5f36" kind="function"><name>SetLocale</name></member>
@@ -14670,19 +14222,19 @@
     <member refid="Reflection_2Property_8h_1a09b8fcb9fe79fb1815c2163a249f63d3" kind="function"><name>MakeDisplayName</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Serialization" kind="namespace"><name>SR_UTILS_NS::Serialization</name>
-    <member refid="Serialization_8h_1a281e754151ed0d0e572be301aa0fdac4" kind="function"><name>IsValidValue</name></member>
-    <member refid="Serialization_8h_1a5a478b6fa724526716fb1cf614cbdefe" kind="function"><name>CanBeSaved</name></member>
-    <member refid="Serialization_8h_1a7f872dd7efb74bad3401e8210382d090" kind="function"><name>Save</name></member>
-    <member refid="Serialization_8h_1ab43b014a55565d8b785b2a883a4921a1" kind="function"><name>SaveCheckDefault</name></member>
-    <member refid="Serialization_8h_1a88fcf6f092fee0d1340f66d56378a177" kind="function"><name>Load</name></member>
+    <member refid="namespaceSR__UTILS__NS_1_1Serialization_1a281e754151ed0d0e572be301aa0fdac4" kind="function"><name>IsValidValue</name></member>
+    <member refid="namespaceSR__UTILS__NS_1_1Serialization_1a5a478b6fa724526716fb1cf614cbdefe" kind="function"><name>CanBeSaved</name></member>
+    <member refid="namespaceSR__UTILS__NS_1_1Serialization_1a7f872dd7efb74bad3401e8210382d090" kind="function"><name>Save</name></member>
+    <member refid="namespaceSR__UTILS__NS_1_1Serialization_1ab43b014a55565d8b785b2a883a4921a1" kind="function"><name>SaveCheckDefault</name></member>
+    <member refid="namespaceSR__UTILS__NS_1_1Serialization_1a88fcf6f092fee0d1340f66d56378a177" kind="function"><name>Load</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1SFINAE" kind="namespace"><name>SR_UTILS_NS::SFINAE</name>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1SharedPointerTraits" kind="namespace"><name>SR_UTILS_NS::SharedPointerTraits</name>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1StoreUtils" kind="namespace"><name>SR_UTILS_NS::StoreUtils</name>
-    <member refid="StoreUtils_8h_1ae60a67b0a8307d8bce980dec526c1a17" kind="typedef"><name>Temp</name></member>
-    <member refid="StoreUtils_8h_1a3aebe7851a7e5b7f02e0fe96582c3124" kind="typedef"><name>User</name></member>
+    <member refid="StoreUtils_8h_1ab98f860f28f2da43ef40513b9acc79c1" kind="typedef"><name>Temp</name></member>
+    <member refid="StoreUtils_8h_1ac09f9144f466aca26cd14a53c8fa56ce" kind="typedef"><name>User</name></member>
   </compound>
   <compound refid="namespaceSR__UTILS__NS_1_1Tests" kind="namespace"><name>SR_UTILS_NS::Tests</name>
   </compound>
@@ -14800,7 +14352,7 @@
     <member refid="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfa9dffbf69ffba8bc38bc4e01abf4b1675" kind="enumvalue"><name>Text</name></member>
     <member refid="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfabf50d5e661106d0abe925af3c2e6f7e7" kind="enumvalue"><name>Header</name></member>
     <member refid="Tag_8h_1a86e36ebd8a00ffec77c109fcffd8a4cfaa4932cf9fffdd4b9b00f4d289ba7f205" kind="enumvalue"><name>MAX_SIZE</name></member>
-    <member refid="CSSSizeValue_8h_1abd641958a2e203557edfd2f4f6279925" kind="typedef"><name>CSSOptionalSizeValue</name></member>
+    <member refid="CSSSizeValue_8h_1a30d0df76ffe783f4d0c6065552a3f20e" kind="typedef"><name>CSSOptionalSizeValue</name></member>
     <member refid="CSSColor_8h_1a680a61fdadd1845cf293e4db75a78851" kind="variable"><name>DEFAULT_CSS_COLOR</name></member>
     <member refid="CSSEnums_8h_1a63273cc4473b133af5c10c39a5913050" kind="variable"><name>DEFAULT_CSS_DISPLAY</name></member>
     <member refid="CSSEnums_8h_1a31cbbb5786848a889cf397df9c9850de" kind="variable"><name>DEFAULT_CSS_DISPLAY_BODY</name></member>
@@ -14838,7 +14390,6 @@
     <member refid="Observer_8h_1a9fe6d4e8cb9565f888c3b0d251b312df" kind="function"><name>AddOffset</name></member>
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
-    <member refid="UintWide__t_8h_1a532ffc9a9fb7bf43174078d7404af008" kind="variable"><name>numeric_limits&lt; SR_TYPES_NS::uintwide_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt; &gt;</name></member>
     <member refid="UintWide__t_8h_1a7d30e0b15a3595eb9d6379233ba16196" kind="variable"><name>LimbType</name></member>
     <member refid="UintWide__t_8h_1abdd511067230eab21febb3888393b4d2" kind="variable"><name>AllocatorType</name></member>
     <member refid="UintWide__t_8h_1a2c61a634587a1cc50d8a7a89580a53c6" kind="variable"><name>IsSigned</name></member>
@@ -15149,10 +14700,6 @@
   </compound>
   <compound refid="Link_8h" kind="file"><name>Link.h</name>
   </compound>
-  <compound refid="Graphics_2inc_2Graphics_2GUI_2Node_8h" kind="file"><name>Node.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2Types_2Node_8h" kind="file"><name>Node.h</name>
-  </compound>
   <compound refid="NodeBuilder_8h" kind="file"><name>NodeBuilder.h</name>
   </compound>
   <compound refid="NodeCreation_8h" kind="file"><name>NodeCreation.h</name>
@@ -15164,23 +14711,6 @@
   <compound refid="Pin_8h" kind="file"><name>Pin.h</name>
   </compound>
   <compound refid="PopupMenu_8h" kind="file"><name>PopupMenu.h</name>
-  </compound>
-  <compound refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="Physics_2inc_2Physics_2Utils_2Utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2Network_2Utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2SRLM_2Utils_8h" kind="file"><name>Utils.h</name>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ad9f5f37108322174fee04e4dda9ffbe3" kind="define"><name>SR_LM_REGISTER_BASE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a522693765b1e3f2bfea835f4551e83db" kind="define"><name>SR_LM_REGISTER_TYPE_NO_META</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a306a04ac48ee7fdc2ba9f39506bececc" kind="define"><name>SR_LM_REGISTER_TYPE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1aed63a8801424c0100cf2ae8d405a6674" kind="define"><name>SR_LM_REGISTER_TYPE_GETTER_SETTER</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ac0d97fb0f171e8ff646fa3a7c73a218f" kind="define"><name>SR_LM_REGISTER_TYPE_SG_COPY</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a810f20ead43171167841f6a47e718a2a" kind="define"><name>SR_LM_REGISTER_TYPE_FULL</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a73a1df9f919b7be5e87298a48cf8f7c5" kind="define"><name>SR_LM_REGISTER_TYPE_FULL_MOVE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a8324e2800a57b5a9c86d6c322d973fb6" kind="define"><name>SR_INIT_LOGICAL_NODE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1af5b78d43b1e373fbc5b9c89d33b88520" kind="define"><name>SR_REGISTER_LOGICAL_NODE</name></member>
   </compound>
   <compound refid="Widget_8h" kind="file"><name>Widget.h</name>
   </compound>
@@ -15277,7 +14807,6 @@
   <compound refid="FlatClusterPass_8h" kind="file"><name>FlatClusterPass.h</name>
   </compound>
   <compound refid="FlatColorBufferPass_8h" kind="file"><name>FlatColorBufferPass.h</name>
-    <member refid="FlatColorBufferPass_8h_1ac018f8e6761189e7418f1f59430719c7" kind="define"><name>SR_ENGINE_GRAPHICS_FLAT_COLOR_BUFFER_PASS_H</name></member>
   </compound>
   <compound refid="FramebufferPass_8h" kind="file"><name>FramebufferPass.h</name>
   </compound>
@@ -15420,17 +14949,9 @@
   </compound>
   <compound refid="RefAnalyzer_8h" kind="file"><name>RefAnalyzer.h</name>
   </compound>
-  <compound refid="SRSL_2Shader_8h" kind="file"><name>Shader.h</name>
-  </compound>
-  <compound refid="Types_2Shader_8h" kind="file"><name>Shader.h</name>
-  </compound>
   <compound refid="ShaderType_8h" kind="file"><name>ShaderType.h</name>
   </compound>
   <compound refid="ShaderVariables_8h" kind="file"><name>ShaderVariables.h</name>
-  </compound>
-  <compound refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h" kind="file"><name>TypeInfo.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h" kind="file"><name>TypeInfo.h</name>
   </compound>
   <compound refid="Camera_8h" kind="file"><name>Camera.h</name>
   </compound>
@@ -15464,15 +14985,15 @@
   </compound>
   <compound refid="RenderTexture_8h" kind="file"><name>RenderTexture.h</name>
   </compound>
+  <compound refid="SRSL_2Shader_8h" kind="file"><name>Shader.h</name>
+  </compound>
+  <compound refid="Types_2Shader_8h" kind="file"><name>Shader.h</name>
+  </compound>
   <compound refid="Skybox_8h" kind="file"><name>Skybox.h</name>
   </compound>
   <compound refid="Texture_8h" kind="file"><name>Texture.h</name>
   </compound>
   <compound refid="Uniforms_8h" kind="file"><name>Uniforms.h</name>
-  </compound>
-  <compound refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h" kind="file"><name>Vertices.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2Common_2Vertices_8h" kind="file"><name>Vertices.h</name>
   </compound>
   <compound refid="Anchor_8h" kind="file"><name>Anchor.h</name>
   </compound>
@@ -15718,7 +15239,15 @@
   </compound>
   <compound refid="ToString_8h" kind="file"><name>ToString.h</name>
   </compound>
+  <compound refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h" kind="file"><name>TypeInfo.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h" kind="file"><name>TypeInfo.h</name>
+  </compound>
   <compound refid="VectorUtils_8h" kind="file"><name>VectorUtils.h</name>
+  </compound>
+  <compound refid="Graphics_2inc_2Graphics_2Types_2Vertices_8h" kind="file"><name>Vertices.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2Common_2Vertices_8h" kind="file"><name>Vertices.h</name>
   </compound>
   <compound refid="Debug_8h" kind="file"><name>Debug.h</name>
     <member refid="Debug_8h_1ac85651a297f41e6add773cf80b4015c6" kind="define"><name>SR_LOG</name></member>
@@ -16046,27 +15575,27 @@
   <compound refid="Socket_8h" kind="file"><name>Socket.h</name>
   </compound>
   <compound refid="AndroidNativeAppGlue_8h" kind="file"><name>AndroidNativeAppGlue.h</name>
-    <member refid="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eeda" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eedaa66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eedaa5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a57f77157e07cfb39a4e9ff31aea9eedaa9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10d" kind="enum"><name></name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10dae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10daf3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10dae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10da85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
-    <member refid="AndroidNativeAppGlue_8h_1a5a7ea24b123f30e8f31c2aa80eecf10daf816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4a" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4aa66661a2e57566ddd214710ca3494b0b9" kind="enumvalue"><name>LOOPER_ID_MAIN</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4aa5e50c78fcf09cc1b0ab723f71aa7004a" kind="enumvalue"><name>LOOPER_ID_INPUT</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1a7cc2e4244ca368f68e5746185eda6c4aa9310453935dbed3c38ca54243f8d1114" kind="enumvalue"><name>LOOPER_ID_USER</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603" kind="enum"><name></name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a7819d1cf24caefafd27bc595faa90cff" kind="enumvalue"><name>APP_CMD_INPUT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a0d6fca4488718da1af972b5eb76b4e70" kind="enumvalue"><name>APP_CMD_INIT_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603ae4454163b5148d7feb2c1398e87f1bd5" kind="enumvalue"><name>APP_CMD_TERM_WINDOW</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a448514d4220320ec7a7e7324e019f42c" kind="enumvalue"><name>APP_CMD_WINDOW_RESIZED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a1b0e01d7dd6e8ca91e8a51033ca3e59a" kind="enumvalue"><name>APP_CMD_WINDOW_REDRAW_NEEDED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a867d94e17fcae1afb7a1518b7716f3f4" kind="enumvalue"><name>APP_CMD_CONTENT_RECT_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a185c97bb056e5f4b95ddadecbec20e7e" kind="enumvalue"><name>APP_CMD_GAINED_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a0288cde5cba1809643528f87a08b7652" kind="enumvalue"><name>APP_CMD_LOST_FOCUS</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a1e522859766d39850cbc3f1c015b632c" kind="enumvalue"><name>APP_CMD_CONFIG_CHANGED</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a81f8fd5d321c73ce40ac190c097dfc07" kind="enumvalue"><name>APP_CMD_LOW_MEMORY</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603af3fe7e75c6650752c617380c1dae3e5a" kind="enumvalue"><name>APP_CMD_START</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603ae74474be4b21cdcde2ef833e6e8cd239" kind="enumvalue"><name>APP_CMD_RESUME</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a90c4a6ced7ede689613ce2b1e0f95d66" kind="enumvalue"><name>APP_CMD_SAVE_STATE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a074614e1c74af041e42a982d85a22fee" kind="enumvalue"><name>APP_CMD_PAUSE</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603a85fd01d255415043aeb43f552ae1c970" kind="enumvalue"><name>APP_CMD_STOP</name></member>
+    <member refid="AndroidNativeAppGlue_8h_1aedcf2109f459315e1a7f2af73ec9b603af816e28d8f833b5e9597b40ce725974f" kind="enumvalue"><name>APP_CMD_DESTROY</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a05d3cc727656e360f4d2bb290ceec365" kind="function"><name>android_app_read_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1a19fcc2ceab1c8d7f0664f9436950bf18" kind="function"><name>android_app_pre_exec_cmd</name></member>
     <member refid="AndroidNativeAppGlue_8h_1af0b682de686fba098479227bc5a2f044" kind="function"><name>android_app_post_exec_cmd</name></member>
@@ -16166,6 +15695,23 @@
   </compound>
   <compound refid="LogicalNodes_8h" kind="file"><name>LogicalNodes.h</name>
   </compound>
+  <compound refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" kind="file"><name>Utils.h</name>
+  </compound>
+  <compound refid="Physics_2inc_2Physics_2Utils_2Utils_8h" kind="file"><name>Utils.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2Network_2Utils_8h" kind="file"><name>Utils.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2SRLM_2Utils_8h" kind="file"><name>Utils.h</name>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ad9f5f37108322174fee04e4dda9ffbe3" kind="define"><name>SR_LM_REGISTER_BASE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a522693765b1e3f2bfea835f4551e83db" kind="define"><name>SR_LM_REGISTER_TYPE_NO_META</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a306a04ac48ee7fdc2ba9f39506bececc" kind="define"><name>SR_LM_REGISTER_TYPE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1aed63a8801424c0100cf2ae8d405a6674" kind="define"><name>SR_LM_REGISTER_TYPE_GETTER_SETTER</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ac0d97fb0f171e8ff646fa3a7c73a218f" kind="define"><name>SR_LM_REGISTER_TYPE_SG_COPY</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a810f20ead43171167841f6a47e718a2a" kind="define"><name>SR_LM_REGISTER_TYPE_FULL</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a73a1df9f919b7be5e87298a48cf8f7c5" kind="define"><name>SR_LM_REGISTER_TYPE_FULL_MOVE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a8324e2800a57b5a9c86d6c322d973fb6" kind="define"><name>SR_INIT_LOGICAL_NODE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1af5b78d43b1e373fbc5b9c89d33b88520" kind="define"><name>SR_REGISTER_LOGICAL_NODE</name></member>
+  </compound>
   <compound refid="stdInclude_8h" kind="file"><name>stdInclude.h</name>
     <member refid="stdInclude_8h_1a998e3f57e9efd36fa6a215ab654affa4" kind="define"><name>SR_GET_CLASS_NAME</name></member>
     <member refid="stdInclude_8h_1abfb4b7729ca2fb01876603931e04a2ef" kind="define"><name>SR_GET_COMPILE_TIME_CLASS_NAME</name></member>
@@ -16216,6 +15762,10 @@
   </compound>
   <compound refid="Mutex_8h" kind="file"><name>Mutex.h</name>
     <member refid="Mutex_8h_1a2b67b9a39f79771f3fcbcdbf058a6634" kind="define"><name>SR_SHARED_RECURSIVE_MUTEX_ERROR</name></member>
+  </compound>
+  <compound refid="Graphics_2inc_2Graphics_2GUI_2Node_8h" kind="file"><name>Node.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2Types_2Node_8h" kind="file"><name>Node.h</name>
   </compound>
   <compound refid="NodeDictionary_8h" kind="file"><name>NodeDictionary.h</name>
   </compound>

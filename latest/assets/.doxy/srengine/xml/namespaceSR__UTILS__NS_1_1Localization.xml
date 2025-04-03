@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__UTILS__NS_1_1Localization" kind="namespace" language="C++">
     <compoundname>SR_UTILS_NS::Localization</compoundname>
     <innerclass refid="classSR__UTILS__NS_1_1Localization_1_1LocalizationFile" prot="public">SR_UTILS_NS::Localization::LocalizationFile</innerclass>
@@ -47,9 +47,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="LocalizationManager_8h_1a65aef740d64823060322607dba7a5ae4" prot="public" static="no">
+      <memberdef kind="typedef" id="LocalizationManager_8h_1aa177a02f924d9b00ef63567b469b143f" prot="public" static="no">
         <type>std::string</type>
-        <definition>using SR_UTILS_NS::Localization::Locale =  std::string</definition>
+        <definition>using SR_UTILS_NS::Localization::Locale = typedef std::string</definition>
         <argsstring></argsstring>
         <name>Locale</name>
         <qualifiedname>SR_UTILS_NS::Localization::Locale</qualifiedname>

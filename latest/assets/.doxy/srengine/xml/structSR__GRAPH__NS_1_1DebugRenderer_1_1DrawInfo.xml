@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__GRAPH__NS_1_1DebugRenderer_1_1DrawInfo" kind="struct" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::DebugRenderer::DrawInfo</compoundname>
     <sectiondef kind="public-attrib">
@@ -86,33 +86,22 @@
         <childnode refid="2" relation="usage">
           <edgelabel>modelMatrix</edgelabel>
         </childnode>
-        <childnode refid="4" relation="usage">
+        <childnode refid="3" relation="usage">
           <edgelabel>color</edgelabel>
         </childnode>
       </node>
-      <node id="4">
+      <node id="3">
         <label>SR_MATH_NS::FColor</label>
         <link refid="classSR__MATH__NS_1_1FColor"/>
-        <childnode refid="5" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
         <label>SR_MATH_NS::Matrix4x4</label>
         <link refid="classSR__MATH__NS_1_1Matrix4x4"/>
-        <childnode refid="3" relation="usage">
-          <edgelabel>dir</edgelabel>
-          <edgelabel>position</edgelabel>
-          <edgelabel>right</edgelabel>
-          <edgelabel>up</edgelabel>
-          <edgelabel>value</edgelabel>
-        </childnode>
       </node>
-      <node id="5">
-        <label>SR_MATH_NS::Vector4&lt; Unit &gt;</label>
-        <link refid="structSR__MATH__NS_1_1Vector4"/>
-      </node>
-      <node id="3">
-        <label>SR_MATH_NS::Vector4&lt; float_t &gt;</label>
+      <node id="4">
+        <label>SR_MATH_NS::Vector4&lt; T &gt;</label>
         <link refid="structSR__MATH__NS_1_1Vector4"/>
       </node>
     </collaborationgraph>

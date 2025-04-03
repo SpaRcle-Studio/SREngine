@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two" kind="struct" language="C++" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two" kind="struct" language="C++" prot="private">
     <compoundname>SR_TYPES_NS::detail::verify_power_of_two</compoundname>
     <templateparamlist>
       <param>
@@ -11,8 +11,8 @@
     </templateparamlist>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two_1a4b1ba051b2e24bfd6e00507f3f7d58e5" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>auto</type>
-        <definition>auto SR_TYPES_NS::detail::verify_power_of_two&lt; Width2 &gt;::conditional_value</definition>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::verify_power_of_two&lt; Width2 &gt;::conditional_value</definition>
         <argsstring></argsstring>
         <name>conditional_value</name>
         <qualifiedname>SR_TYPES_NS::detail::verify_power_of_two::conditional_value</qualifiedname>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::GUI::WidgetManager</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
@@ -467,7 +467,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
@@ -497,7 +497,7 @@
         </childnode>
       </node>
       <node id="4">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
@@ -551,7 +551,7 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a321fbec288569bd9b51abe984807016d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>SetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a845625c93c125fa99efb739de8af9bc3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>SetScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af81394b27a7b4630712c2c67d9e39c5f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>ShowAll</name></member>
-      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>Trigger</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>Trigger</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a88fc6b23c80d0df1aa6376ce0b67b39d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>WidgetManager</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>~Event</name></member>
       <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::WidgetManager</scope><name>~IEvent</name></member>

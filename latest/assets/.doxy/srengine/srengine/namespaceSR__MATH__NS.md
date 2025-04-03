@@ -89,12 +89,12 @@
 
 | Type | Name |
 | ---: | :--- |
-|  double\_t | [**DoubleMAX**](#variable-doublemax)   = `std::numeric\_limits&lt;double\_t&gt;::max()`<br>_can broke render_  |
-|  float\_t | [**FloatMAX**](#variable-floatmax)   = `std::numeric\_limits&lt;float\_t&gt;::max()`<br> |
-|  [**IVector2**](structSR__MATH__NS_1_1Vector2.md) | [**IVector2MAX**](#variable-ivector2max)   = `[**IVector2**](structSR__MATH__NS_1_1Vector2.md)(SR\_INT32\_MAX)`<br> |
-|  int32\_t | [**Int32MAX**](#variable-int32max)   = `std::numeric\_limits&lt;int32\_t&gt;::max()`<br> |
+|  constexpr double\_t | [**DoubleMAX**](#variable-doublemax)   = `std::numeric\_limits&lt;double\_t&gt;::max()`<br>_can broke render_  |
+|  constexpr float\_t | [**FloatMAX**](#variable-floatmax)   = `std::numeric\_limits&lt;float\_t&gt;::max()`<br> |
+|  constexpr [**IVector2**](structSR__MATH__NS_1_1Vector2.md) | [**IVector2MAX**](#variable-ivector2max)   = `[**IVector2**](structSR__MATH__NS_1_1Vector2.md)(SR\_INT32\_MAX)`<br> |
+|  constexpr int32\_t | [**Int32MAX**](#variable-int32max)   = `std::numeric\_limits&lt;int32\_t&gt;::max()`<br> |
 |  std::unordered\_map&lt; SRHashType, [**FColor**](classSR__MATH__NS_1_1FColor.md) &gt; | [**SR\_COLOR\_PALETTE**](#variable-sr_color_palette)  <br> |
-|  Unit | [**UnitMAX**](#variable-unitmax)   = `FloatMAX`<br> |
+|  constexpr Unit | [**UnitMAX**](#variable-unitmax)   = `FloatMAX`<br> |
 
 
 ## Public Static Attributes
@@ -132,10 +132,10 @@
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMScaleMat4x4**](#function-glmscalemat4x4) (glm::mat4 & matrix, const SR\_MATH\_NS::FVector3 & v) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMTranslateMat4x4**](#function-glmtranslatemat4x4) (glm::mat4 & matrix, const glm::vec3 & v) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMTranslateMat4x4**](#function-glmtranslatemat4x4) (glm::mat4 & matrix, const SR\_MATH\_NS::FVector3 & v) <br> |
-|  bool | [**IsBool**](#function-isbool) () <br> |
-|  bool | [**IsFloat**](#function-isfloat) () <br> |
-|  bool | [**IsInt**](#function-isint) () <br> |
-|  bool | [**IsNumber**](#function-isnumber) () <br> |
+|  constexpr bool | [**IsBool**](#function-isbool) () <br> |
+|  constexpr bool | [**IsFloat**](#function-isfloat) () <br> |
+|  constexpr bool | [**IsInt**](#function-isint) () <br> |
+|  constexpr bool | [**IsNumber**](#function-isnumber) () <br> |
 |  double\_t | [**NoiseTemplate**](#function-noisetemplate) (T\_IndexFunc idxfunc, double\_t x, double\_t y) <br> |
 |  double\_t | [**NoiseTemplate**](#function-noisetemplate) (T\_IndexFunc idxfunc, double\_t x, double\_t y, double\_t z) <br> |
 |  double\_t | [**NoiseTemplate**](#function-noisetemplate) (T\_IndexFunc idxfunc, double\_t x, double\_t y, double\_t z, double\_t t) <br> |
@@ -154,7 +154,7 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD static SR\_FORCE\_INLINE constexpr T | [**Abs**](#function-abs) (T value) <br> |
-|  uint32\_t | [**BGRToHEX**](#function-bgrtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
+|  constexpr uint32\_t | [**BGRToHEX**](#function-bgrtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
 |  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**BuildPlan**](#function-buildplan) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & point, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & normal) <br> |
 |  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**BuildPlan**](#function-buildplan) (const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & point, const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & p\_normal) <br> |
 |  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
@@ -162,8 +162,8 @@
 |  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcTranslationPlanNormal**](#function-calctranslationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraEye, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
 |  bool | [**DecomposeTransform**](#function-decomposetransform) (const glm::mat4 & matrix, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & rotation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) <br> |
 |  SR\_FORCE\_INLINE double\_t SR\_FASTCALL | [**FastSqrt**](#function-fastsqrt) (double\_t value) <br> |
-|  [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToBGR**](#function-hextobgr) (uint32\_t hex) <br> |
-|  [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToRGB**](#function-hextorgb) (uint32\_t hex) <br> |
+|  constexpr [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToBGR**](#function-hextobgr) (uint32\_t hex) <br> |
+|  constexpr [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToRGB**](#function-hextorgb) (uint32\_t hex) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsAnyMaskIncludedSubMask**](#function-isanymaskincludedsubmask) (MaskLeft mask, std::initializer\_list&lt; MakeRight &gt; subMasks) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsEquals**](#function-isequals) (const T & a, const Y & b) noexcept<br> |
 |  SR\_FORCE\_INLINE bool | [**IsEquals**](#function-isequals) (const T & a, const Y & b, const Z & tolerance) noexcept<br> |
@@ -171,7 +171,7 @@
 |  SR\_FORCE\_INLINE bool | [**IsMaskIncludedSubMask**](#function-ismaskincludedsubmask) (MaskLeft mask, MakeRight subMask) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsNumber**](#function-isnumber) (std::string\_view str) <br> |
 |  SR\_FORCE\_INLINE double\_t | [**Lerp**](#function-lerp) (double\_t t, double\_t a, double\_t b) <br> |
-|  uint32\_t | [**RGBToHEX**](#function-rgbtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
+|  constexpr uint32\_t | [**RGBToHEX**](#function-rgbtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
 |  SR\_FORCE\_INLINE Unit | [**Sign**](#function-sign) (Unit value) <br> |
 
 
@@ -272,7 +272,7 @@ typedef Rect<Unit> SR_MATH_NS::FRect;
 ### typedef FSize 
 
 ```C++
-using SR_MATH_NS::FSize =  Size<float_t>;
+using SR_MATH_NS::FSize = typedef Size<float_t>;
 ```
 
 
@@ -285,7 +285,7 @@ using SR_MATH_NS::FSize =  Size<float_t>;
 ### typedef FSize2 
 
 ```C++
-using SR_MATH_NS::FSize2 =  Size2<float_t>;
+using SR_MATH_NS::FSize2 = typedef Size2<float_t>;
 ```
 
 
@@ -376,7 +376,7 @@ typedef Rect<int32_t> SR_MATH_NS::IRect;
 ### typedef ISize 
 
 ```C++
-using SR_MATH_NS::ISize =  Size<int32_t>;
+using SR_MATH_NS::ISize = typedef Size<int32_t>;
 ```
 
 
@@ -389,7 +389,7 @@ using SR_MATH_NS::ISize =  Size<int32_t>;
 ### typedef ISize2 
 
 ```C++
-using SR_MATH_NS::ISize2 =  Size2<int32_t>;
+using SR_MATH_NS::ISize2 = typedef Size2<int32_t>;
 ```
 
 
@@ -493,7 +493,7 @@ typedef Vector2<uint16_t> SR_MATH_NS::USVector2;
 ### typedef USize 
 
 ```C++
-using SR_MATH_NS::USize =  Size<uint32_t>;
+using SR_MATH_NS::USize = typedef Size<uint32_t>;
 ```
 
 
@@ -506,7 +506,7 @@ using SR_MATH_NS::USize =  Size<uint32_t>;
 ### typedef USize2 
 
 ```C++
-using SR_MATH_NS::USize2 =  Size2<uint32_t>;
+using SR_MATH_NS::USize2 = typedef Size2<uint32_t>;
 ```
 
 
@@ -587,7 +587,7 @@ typedef float SR_MATH_NS::Unit;
 
 _can broke render_ 
 ```C++
-double_t SR_MATH_NS::DoubleMAX;
+constexpr double_t SR_MATH_NS::DoubleMAX;
 ```
 
 
@@ -600,7 +600,7 @@ double_t SR_MATH_NS::DoubleMAX;
 ### variable FloatMAX 
 
 ```C++
-float_t SR_MATH_NS::FloatMAX;
+constexpr float_t SR_MATH_NS::FloatMAX;
 ```
 
 
@@ -613,7 +613,7 @@ float_t SR_MATH_NS::FloatMAX;
 ### variable IVector2MAX 
 
 ```C++
-IVector2 SR_MATH_NS::IVector2MAX;
+constexpr IVector2 SR_MATH_NS::IVector2MAX;
 ```
 
 
@@ -626,7 +626,7 @@ IVector2 SR_MATH_NS::IVector2MAX;
 ### variable Int32MAX 
 
 ```C++
-int32_t SR_MATH_NS::Int32MAX;
+constexpr int32_t SR_MATH_NS::Int32MAX;
 ```
 
 
@@ -652,7 +652,7 @@ std::unordered_map<SRHashType, FColor> SR_MATH_NS::SR_COLOR_PALETTE;
 ### variable UnitMAX 
 
 ```C++
-Unit SR_MATH_NS::UnitMAX;
+constexpr Unit SR_MATH_NS::UnitMAX;
 ```
 
 
@@ -865,7 +865,7 @@ SR_INLINE_STATIC void SR_FASTCALL SR_MATH_NS::GLMTranslateMat4x4 (
 
 ```C++
 template<typename T>
-bool SR_MATH_NS::IsBool () 
+constexpr bool SR_MATH_NS::IsBool () 
 ```
 
 
@@ -879,7 +879,7 @@ bool SR_MATH_NS::IsBool ()
 
 ```C++
 template<typename T>
-bool SR_MATH_NS::IsFloat () 
+constexpr bool SR_MATH_NS::IsFloat () 
 ```
 
 
@@ -893,7 +893,7 @@ bool SR_MATH_NS::IsFloat ()
 
 ```C++
 template<typename T>
-bool SR_MATH_NS::IsInt () 
+constexpr bool SR_MATH_NS::IsInt () 
 ```
 
 
@@ -907,7 +907,7 @@ bool SR_MATH_NS::IsInt ()
 
 ```C++
 template<typename T>
-bool SR_MATH_NS::IsNumber () 
+constexpr bool SR_MATH_NS::IsNumber () 
 ```
 
 
@@ -1139,7 +1139,7 @@ static SR_NODISCARD static SR_FORCE_INLINE constexpr T SR_MATH_NS::Abs (
 ### function BGRToHEX 
 
 ```C++
-static uint32_t SR_MATH_NS::BGRToHEX (
+static constexpr uint32_t SR_MATH_NS::BGRToHEX (
     const IVector3 & color
 ) 
 ```
@@ -1270,7 +1270,7 @@ static SR_FORCE_INLINE double_t SR_FASTCALL SR_MATH_NS::FastSqrt (
 ### function HEXToBGR 
 
 ```C++
-static IVector3 SR_MATH_NS::HEXToBGR (
+static constexpr IVector3 SR_MATH_NS::HEXToBGR (
     uint32_t hex
 ) 
 ```
@@ -1285,7 +1285,7 @@ static IVector3 SR_MATH_NS::HEXToBGR (
 ### function HEXToRGB 
 
 ```C++
-static IVector3 SR_MATH_NS::HEXToRGB (
+static constexpr IVector3 SR_MATH_NS::HEXToRGB (
     uint32_t hex
 ) 
 ```
@@ -1416,7 +1416,7 @@ static SR_FORCE_INLINE double_t SR_MATH_NS::Lerp (
 ### function RGBToHEX 
 
 ```C++
-static uint32_t SR_MATH_NS::RGBToHEX (
+static constexpr uint32_t SR_MATH_NS::RGBToHEX (
     const IVector3 & color
 ) 
 ```

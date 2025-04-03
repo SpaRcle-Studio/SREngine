@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**std**](namespacestd.md) **>** [**less&lt; SR\_HTYPES\_NS::SafePtr&lt; T &gt; &gt;**](structstd_1_1less_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4.md)
+[**ClassList**](annotated.md) **>** [**less&lt; SR\_HTYPES\_NS::SafePtr&lt; T &gt; &gt;**](structstd_1_1less_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4.md)
 
 
 
@@ -90,7 +90,7 @@
 ### function operator() 
 
 ```C++
-inline bool std::less< SR_HTYPES_NS::SafePtr< T > >::operator() (
+inline bool less< SR_HTYPES_NS::SafePtr< T > >::operator() (
     const SR_HTYPES_NS::SafePtr < T > & lhs,
     const SR_HTYPES_NS::SafePtr < T > & rhs
 ) const

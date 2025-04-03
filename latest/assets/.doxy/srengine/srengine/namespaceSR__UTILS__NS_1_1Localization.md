@@ -135,7 +135,7 @@ enum SR_UTILS_NS::Localization::EncMethodType {
 
 _TODO: стоит ли Locale делать через enum или следует использовать коды типа "en"._ 
 ```C++
-using SR_UTILS_NS::Localization::Locale =  std::string;
+using SR_UTILS_NS::Localization::Locale = typedef std::string;
 ```
 
 

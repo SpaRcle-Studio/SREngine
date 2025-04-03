@@ -45,7 +45,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  unsigned int | [**crc\_table**](#variable-crc_table)  <br> |
+|  constexpr unsigned int | [**crc\_table**](#variable-crc_table)  <br> |
 
 
 
@@ -64,16 +64,16 @@
 
 | Type | Name |
 | ---: | :--- |
-|  std::string\_view | [**GetTypeName**](#function-gettypename) () <br> |
-|  auto | [**crc32**](#function-crc32) (const char \* in) <br> |
+|  constexpr std::string\_view | [**GetTypeName**](#function-gettypename) () <br> |
+|  constexpr auto | [**crc32**](#function-crc32) (const char \* in) <br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  SRHashType | [**InitialHash**](#function-initialhash) () noexcept<br> |
-|  SRHashType | [**MagicPrime**](#function-magicprime) () noexcept<br> |
+|  constexpr SRHashType | [**InitialHash**](#function-initialhash) () noexcept<br> |
+|  constexpr SRHashType | [**MagicPrime**](#function-magicprime) () noexcept<br> |
 
 
 
@@ -108,7 +108,7 @@
 ### variable crc\_table 
 
 ```C++
-unsigned int SR_UTILS_NS::Hash::Detail::crc_table[256];
+constexpr unsigned int SR_UTILS_NS::Hash::Detail::crc_table[256];
 ```
 
 
@@ -124,7 +124,7 @@ unsigned int SR_UTILS_NS::Hash::Detail::crc_table[256];
 
 ```C++
 template<class T>
-std::string_view SR_UTILS_NS::Hash::Detail::GetTypeName () 
+constexpr std::string_view SR_UTILS_NS::Hash::Detail::GetTypeName () 
 ```
 
 
@@ -137,7 +137,7 @@ std::string_view SR_UTILS_NS::Hash::Detail::GetTypeName ()
 ### function crc32 
 
 ```C++
-auto SR_UTILS_NS::Hash::Detail::crc32 (
+constexpr auto SR_UTILS_NS::Hash::Detail::crc32 (
     const char * in
 ) 
 ```
@@ -154,7 +154,7 @@ auto SR_UTILS_NS::Hash::Detail::crc32 (
 ### function InitialHash 
 
 ```C++
-static SRHashType SR_UTILS_NS::Hash::Detail::InitialHash () noexcept
+static constexpr SRHashType SR_UTILS_NS::Hash::Detail::InitialHash () noexcept
 ```
 
 
@@ -167,7 +167,7 @@ static SRHashType SR_UTILS_NS::Hash::Detail::InitialHash () noexcept
 ### function MagicPrime 
 
 ```C++
-static SRHashType SR_UTILS_NS::Hash::Detail::MagicPrime () noexcept
+static constexpr SRHashType SR_UTILS_NS::Hash::Detail::MagicPrime () noexcept
 ```
 
 

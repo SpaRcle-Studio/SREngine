@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_5ea2fe9b8fa53724ec2c57fac60d8202" kind="dir">
     <compoundname>Engine/Core/libs/Graphics/inc/Graphics/Render</compoundname>
     <innerdir refid="dir_61d1e3212a5ebb6051fcf94a0e8c88e1">Engine/Core/libs/Graphics/inc/Graphics/Render/HTML</innerdir>

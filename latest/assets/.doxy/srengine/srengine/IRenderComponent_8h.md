@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IRenderComponent**](classSR__GTYPES__NS_1_1IRenderComponent.md) <br>_@hidden_  |
+| class | [**IRenderComponent**](classSR__GTYPES__NS_1_1IRenderComponent.md) <br> |
 
 
 

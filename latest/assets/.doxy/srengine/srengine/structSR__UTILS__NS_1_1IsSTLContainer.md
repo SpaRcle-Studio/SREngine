@@ -40,7 +40,7 @@ _type trait to utilize the implementation type traits as well as decay the type_
 
 | Type | Name |
 | ---: | :--- |
-|  bool const | [**value**](#variable-value)   = `[**is\_stl\_container\_impl::is\_stl\_container**](structSR__UTILS__NS_1_1is__stl__container__impl_1_1is__stl__container.md)&lt;std::decay\_t&lt;T&gt;&gt;::value`<br> |
+|  constexpr bool const | [**value**](#variable-value)   = `[**is\_stl\_container\_impl::is\_stl\_container**](structSR__UTILS__NS_1_1is__stl__container__impl_1_1is__stl__container.md)&lt;std::decay\_t&lt;T&gt;&gt;::value`<br> |
 
 
 
@@ -91,7 +91,7 @@ _type trait to utilize the implementation type traits as well as decay the type_
 ### variable value 
 
 ```C++
-bool const SR_UTILS_NS::IsSTLContainer< T >::value;
+constexpr bool const SR_UTILS_NS::IsSTLContainer< T >::value;
 ```
 
 

@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) **>** [**Details**](namespaceSR__UTILS__NS_1_1Details.md) **>** [**GetPromPack&lt; 0, T, Types... &gt;**](structSR__UTILS__NS_1_1Details_1_1GetPromPack_3_010_00_01T_00_01Types_8_8_8_01_4.md)
+[**ClassList**](annotated.md) **>** [**GetPromPack&lt; 0, T, Types... &gt;**](structSR__UTILS__NS_1_1Details_1_1GetPromPack_3_010_00_01T_00_01Types_8_8_8_01_4.md)
 
 
 
@@ -33,8 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef T | [**type**](#typedef-type-12)  <br> |
-| typedef typename [**GetPromPack**](structSR__UTILS__NS_1_1Details_1_1GetPromPack.md)&lt; I - 1, Types... &gt;::type | [**type**](#typedef-type-22)  <br> |
+| typedef T | [**type**](#typedef-type)  <br> |
 
 
 
@@ -88,23 +87,10 @@
 
 
 
-### typedef type [1/2]
+### typedef type 
 
 ```C++
 using SR_UTILS_NS::Details::GetPromPack< 0, T, Types... >::type =  T;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef type [2/2]
-
-```C++
-using SR_UTILS_NS::Details::GetPromPack< I, T, Types >::type = ;
 ```
 
 

@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md) **>** [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)
+[**ClassList**](annotated.md) **>** [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)
 
 
 
@@ -35,8 +35,8 @@
 | ---: | :--- |
 | typedef typename representation\_type::const\_iterator | [**const\_iterator**](#typedef-const_iterator)  <br> |
 | typedef typename representation\_type::const\_reverse\_iterator | [**const\_reverse\_iterator**](#typedef-const_reverse_iterator)  <br> |
-| typedef typename [**detail::uint\_type\_helper**](structSR__TYPES__NS_1_1detail_1_1uint__type__helper.md)&lt; static\_cast&lt; size\_t &gt;(static\_cast&lt; int &gt;(std::numeric\_limits&lt; limb\_type &gt;::digits \*static\_cast&lt; int &gt;(INT8\_C(2))))&gt;::exact\_unsigned\_type | [**double\_limb\_type**](#typedef-double_limb_type)  <br> |
-| typedef [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; static\_cast&lt; size\_t &gt;(Width2 \*static\_cast&lt; size\_t &gt;(UINT8\_C(2))), limb\_type, AllocatorType, IsSigned &gt; | [**double\_width\_type**](#typedef-double_width_type)  <br> |
+| typedef typename detail::uint\_type\_helper&lt; static\_cast&lt; size\_t &gt;(static\_cast&lt; int &gt;(std::numeric\_limits&lt; limb\_type &gt;::digits \*static\_cast&lt; int &gt;(INT8\_C(2))))&gt;::exact\_unsigned\_type | [**double\_limb\_type**](#typedef-double_limb_type)  <br> |
+| typedef uintwide\_t&lt; static\_cast&lt; size\_t &gt;(Width2 \*static\_cast&lt; size\_t &gt;(UINT8\_C(2))), limb\_type, AllocatorType, IsSigned &gt; | [**double\_width\_type**](#typedef-double_width_type)  <br> |
 | typedef typename representation\_type::iterator | [**iterator**](#typedef-iterator)  <br> |
 | typedef LimbType | [**limb\_type**](#typedef-limb_type)  <br> |
 | typedef std::conditional\_t&lt; std::is\_same&lt; AllocatorType, void &gt;::value, [**detail::fixed\_static\_array**](classSR__TYPES__NS_1_1detail_1_1fixed__static__array.md)&lt; limb\_type, number\_of\_limbs &gt;, [**detail::fixed\_dynamic\_array**](classSR__TYPES__NS_1_1detail_1_1fixed__dynamic__array.md)&lt; limb\_type, number\_of\_limbs, typename std::allocator\_traits&lt; std::conditional\_t&lt; std::is\_same&lt; AllocatorType, void &gt;::value, std::allocator&lt; void &gt;, AllocatorType &gt; &gt;::template rebind\_alloc&lt; limb\_type &gt; &gt; &gt; | [**representation\_type**](#typedef-representation_type)  <br> |
@@ -53,9 +53,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**my\_width2**](#variable-my_width2)   = `Width2`<br> |
-|  size\_t | [**number\_of\_limbs**](#variable-number_of_limbs)   = `/* multi line expression */`<br> |
-|  size\_t | [**number\_of\_limbs\_karatsuba\_threshold**](#variable-number_of_limbs_karatsuba_threshold)   = `/* multi line expression */`<br> |
+|  constexpr size\_t | [**my\_width2**](#variable-my_width2)   = `Width2`<br> |
+|  constexpr size\_t | [**number\_of\_limbs**](#variable-number_of_limbs)   = `/* multi line expression */`<br> |
+|  constexpr size\_t | [**number\_of\_limbs\_karatsuba\_threshold**](#variable-number_of_limbs_karatsuba_threshold)   = `/* multi line expression */`<br> |
 
 
 
@@ -74,83 +74,83 @@
 
 | Type | Name |
 | ---: | :--- |
-|  WIDE\_INTEGER\_NODISCARD constexpr auto | [**compare**](#function-compare-12) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; & other) const<br> |
-|  WIDE\_INTEGER\_NODISCARD constexpr auto | [**compare**](#function-compare-12) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; & other) const<br> |
+|  WIDE\_INTEGER\_NODISCARD constexpr auto | [**compare**](#function-compare-12) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; & other) const<br> |
+|  WIDE\_INTEGER\_NODISCARD constexpr auto | [**compare**](#function-compare-12) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; & other) const<br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**crepresentation**](#function-crepresentation) () const<br> |
-|  void | [**eval\_divide\_by\_single\_limb**](#function-eval_divide_by_single_limb) (const limb\_type short\_denominator, const unsigned\_fast\_type u\_offset, [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) \* remainder) <br> |
+|  constexpr auto | [**eval\_divide\_by\_single\_limb**](#function-eval_divide_by_single_limb) (const limb\_type short\_denominator, const unsigned\_fast\_type u\_offset, uintwide\_t \* remainder) <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**is\_zero**](#function-is_zero) () const<br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**mul\_by\_limb**](#function-mul_by_limb) (const limb\_type v) <br> |
-|  void | [**negate**](#function-negate) () <br> |
+|  constexpr auto | [**mul\_by\_limb**](#function-mul_by_limb) (const limb\_type v) <br> |
+|  constexpr auto | [**negate**](#function-negate) () <br> |
 |  constexpr | [**operator IntegralType**](#function-operator-integraltype) () const<br> |
 |  constexpr | [**operator bool**](#function-operator-bool) () const<br> |
 |  constexpr | [**operator double**](#function-operator-double) () const<br> |
 |  constexpr | [**operator float**](#function-operator-float) () const<br> |
 |  constexpr | [**operator long double**](#function-operator-long-double) () const<br> |
 |  constexpr | [**operator uintwide\_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt;**](#function-operator-uintwide_t<-otherwidth2,-limbtype,-allocatortype,-otherissigned->) () const<br> |
-|  bool | [**operator!=**](#function-operator) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) const<br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator%=**](#function-operator_1) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator&=**](#function-operator_2) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator\*=**](#function-operator_3) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator+**](#function-operator_4) () const<br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator++**](#function-operator_5) () <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) | [**operator++**](#function-operator_6) (int) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator+=**](#function-operator_7) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) | [**operator-**](#function-operator_8) () const<br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator--**](#function-operator_9) () <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) | [**operator--**](#function-operator_10) (int) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator-=**](#function-operator_11) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator/=**](#function-operator_12) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  bool | [**operator&lt;**](#function-operator_13) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) const<br> |
-|  std::enable\_if\_t&lt;(std::is\_integral&lt; SignedIntegralType &gt;::value &&std::is\_signed&lt; SignedIntegralType &gt;::value), [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; & | [**operator&lt;&lt;=**](#function-operator_14) (const SignedIntegralType n) <br> |
-|  std::enable\_if\_t&lt;(std::is\_integral&lt; UnsignedIntegralType &gt;::value &&(!std::is\_signed&lt; UnsignedIntegralType &gt;::value)), [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; & | [**operator&lt;&lt;=**](#function-operator_15) (const UnsignedIntegralType n) <br> |
-|  bool | [**operator&lt;=**](#function-operator_16) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) const<br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &=default | [**operator=**](#function-operator_17) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator=**](#function-operator_18) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &=default | [**operator=**](#function-operator_19) ([**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) && other) noexcept<br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator=**](#function-operator_20) ([**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; && other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator=**](#function-operator_21) (const std::string & estr) <br> |
-|  bool | [**operator==**](#function-operator_22) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) const<br> |
-|  bool | [**operator&gt;**](#function-operator_23) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) const<br> |
-|  bool | [**operator&gt;=**](#function-operator_24) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) const<br> |
-|  std::enable\_if\_t&lt;(std::is\_integral&lt; SignedIntegralType &gt;::value &&std::is\_signed&lt; SignedIntegralType &gt;::value), [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; & | [**operator&gt;&gt;=**](#function-operator_25) (const SignedIntegralType n) <br> |
-|  std::enable\_if\_t&lt;(std::is\_integral&lt; UnsignedIntegralType &gt;::value &&(!std::is\_signed&lt; UnsignedIntegralType &gt;::value)), [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; & | [**operator&gt;&gt;=**](#function-operator_26) (const UnsignedIntegralType n) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator^=**](#function-operator_27) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator\|=**](#function-operator_28) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & | [**operator~**](#function-operator_29) () <br> |
-|  representation\_type & | [**representation**](#function-representation-12) () <br> |
+|  constexpr auto | [**operator!=**](#function-operator) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator%=**](#function-operator_1) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator&=**](#function-operator_2) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator\*=**](#function-operator_3) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator+**](#function-operator_4) () const<br> |
+|  constexpr auto | [**operator++**](#function-operator_5) () <br> |
+|  constexpr auto | [**operator++**](#function-operator_6) (int) <br> |
+|  constexpr auto | [**operator+=**](#function-operator_7) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator-**](#function-operator_8) () const<br> |
+|  constexpr auto | [**operator--**](#function-operator_9) () <br> |
+|  constexpr auto | [**operator--**](#function-operator_10) (int) <br> |
+|  constexpr auto | [**operator-=**](#function-operator_11) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator/=**](#function-operator_12) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator&lt;**](#function-operator_13) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&lt;&lt;=**](#function-operator_14) (const SignedIntegralType n) <br> |
+|  constexpr auto | [**operator&lt;&lt;=**](#function-operator_15) (const UnsignedIntegralType n) <br> |
+|  constexpr auto | [**operator&lt;=**](#function-operator_16) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator=**](#function-operator_17) (const uintwide\_t &) <br> |
+|  constexpr auto | [**operator=**](#function-operator_18) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; & other) <br> |
+|  constexpr auto | [**operator=**](#function-operator_19) (uintwide\_t && other) noexcept<br> |
+|  constexpr auto | [**operator=**](#function-operator_20) (uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; && other) <br> |
+|  constexpr auto | [**operator=**](#function-operator_21) (const std::string & estr) <br> |
+|  constexpr auto | [**operator==**](#function-operator_22) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&gt;**](#function-operator_23) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&gt;=**](#function-operator_24) (const uintwide\_t & other) const<br> |
+|  constexpr auto | [**operator&gt;&gt;=**](#function-operator_25) (const SignedIntegralType n) <br> |
+|  constexpr auto | [**operator&gt;&gt;=**](#function-operator_26) (const UnsignedIntegralType n) <br> |
+|  constexpr auto | [**operator^=**](#function-operator_27) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator\|=**](#function-operator_28) (const uintwide\_t & other) <br> |
+|  constexpr auto | [**operator~**](#function-operator_29) () <br> |
+|  constexpr auto | [**representation**](#function-representation-12) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**representation**](#function-representation-22) () const<br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-215) () = default<br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-315) (const UnsignedIntegralType v, std::enable\_if\_t&lt;(std::is\_integral&lt; UnsignedIntegralType &gt;::value &&std::is\_unsigned&lt; UnsignedIntegralType &gt;::value &&(std::numeric\_limits&lt; UnsignedIntegralType &gt;::digits&lt;=std::numeric\_limits&lt; limb\_type &gt;::digits))&gt; \*=nullptr) <br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-415) (const UnsignedIntegralType v, std::enable\_if\_t&lt;(std::is\_integral&lt; UnsignedIntegralType &gt;::value &&std::is\_unsigned&lt; UnsignedIntegralType &gt;::value &&(std::numeric\_limits&lt; UnsignedIntegralType &gt;::digits &gt; std::numeric\_limits&lt; limb\_type &gt;::digits))&gt; \* p\_nullparam=nullptr) <br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-515) (const SignedIntegralType v, std::enable\_if\_t&lt;(std::is\_integral&lt; SignedIntegralType &gt;::value &&std::is\_signed&lt; SignedIntegralType &gt;::value)&gt; \* p\_nullparam=nullptr) <br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-615) (const FloatingPointType f) <br> |
-|  constexpr | [**uintwide\_t**](#function-uintwide_t-715) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) & other) = default<br> |
-|  constexpr | [**uintwide\_t**](#function-uintwide_t-815) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; & other) <br> |
-|  constexpr | [**uintwide\_t**](#function-uintwide_t-915) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; & v) <br> |
-|  constexpr | [**uintwide\_t**](#function-uintwide_t-915) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; & v) <br> |
+|  constexpr | [**uintwide\_t**](#function-uintwide_t-715) (const uintwide\_t & other) = default<br> |
+|  constexpr | [**uintwide\_t**](#function-uintwide_t-815) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; & other) <br> |
+|  constexpr | [**uintwide\_t**](#function-uintwide_t-915) (const uintwide\_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; & v) <br> |
+|  constexpr | [**uintwide\_t**](#function-uintwide_t-915) (const uintwide\_t&lt; OtherWidth2, LimbType, AllocatorType, OtherIsSigned &gt; & v) <br> |
 |  constexpr | [**uintwide\_t**](#function-uintwide_t-1115) (const char \* str\_input) <br> |
-|  constexpr | [**uintwide\_t**](#function-uintwide_t-1215) ([**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &&) noexcept<br> |
-|  constexpr | [**uintwide\_t**](#function-uintwide_t-1315) ([**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; && other) <br> |
-|  bool | [**wr\_string**](#function-wr_string) (OutputStrIterator str\_result, const std::uint\_fast8\_t base\_rep=static\_cast&lt; std::uint\_fast8\_t &gt;(UINT8\_C(0x10)), const bool show\_base=true, const bool show\_pos=false, const bool is\_uppercase=true, unsigned\_fast\_type field\_width=static\_cast&lt; unsigned\_fast\_type &gt;(UINT8\_C(0)), const char fill\_char\_str='0') const<br> |
+|  constexpr | [**uintwide\_t**](#function-uintwide_t-1215) (uintwide\_t &&) noexcept<br> |
+|  constexpr | [**uintwide\_t**](#function-uintwide_t-1315) (uintwide\_t&lt; Width2, LimbType, AllocatorType, OtherIsSigned &gt; && other) <br> |
+|  constexpr auto | [**wr\_string**](#function-wr_string) (OutputStrIterator str\_result, const std::uint\_fast8\_t base\_rep=static\_cast&lt; std::uint\_fast8\_t &gt;(UINT8\_C(0x10)), const bool show\_base=true, const bool show\_pos=false, const bool is\_uppercase=true, unsigned\_fast\_type field\_width=static\_cast&lt; unsigned\_fast\_type &gt;(UINT8\_C(0)), const char fill\_char\_str='0') const<br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) | [**from\_rep**](#function-from_rep-12) (const representation\_type & other\_rep) <br> |
-|  [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) | [**from\_rep**](#function-from_rep-22) (representation\_type && other\_rep) noexcept<br> |
-|  bool | [**is\_neg**](#function-is_neg-12) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &, std::enable\_if\_t&lt;(!RePhraseIsSigned), int &gt; \*=nullptr) <br> |
-|  bool | [**is\_neg**](#function-is_neg-22) (const [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md)&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; & a, std::enable\_if\_t&lt; RePhraseIsSigned, int &gt; \* p\_nullparam=nullptr) <br> |
-|  bool | [**is\_not\_fill\_char**](#function-is_not_fill_char) (char c) <br> |
-|  std::enable\_if\_t&lt;(!OtherIsSigned), [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; | [**limits\_helper\_max**](#function-limits_helper_max-12) () <br> |
-|  std::enable\_if\_t&lt; OtherIsSigned, [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; | [**limits\_helper\_max**](#function-limits_helper_max-22) () <br> |
-|  std::enable\_if\_t&lt;(!OtherIsSigned), [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; | [**limits\_helper\_min**](#function-limits_helper_min-12) () <br> |
-|  std::enable\_if\_t&lt; OtherIsSigned, [**uintwide\_t**](classSR__TYPES__NS_1_1uintwide__t.md) &gt; | [**limits\_helper\_min**](#function-limits_helper_min-22) () <br> |
-|  char | [**my\_fill\_char**](#function-my_fill_char) () <br> |
-|  size\_t | [**wr\_string\_max\_buffer\_size\_dec**](#function-wr_string_max_buffer_size_dec) () <br> |
-|  size\_t | [**wr\_string\_max\_buffer\_size\_hex**](#function-wr_string_max_buffer_size_hex) () <br> |
-|  size\_t | [**wr\_string\_max\_buffer\_size\_oct**](#function-wr_string_max_buffer_size_oct) () <br> |
+|  constexpr auto | [**from\_rep**](#function-from_rep-12) (const representation\_type & other\_rep) <br> |
+|  constexpr auto | [**from\_rep**](#function-from_rep-22) (representation\_type && other\_rep) noexcept<br> |
+|  constexpr auto | [**is\_neg**](#function-is_neg-12) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; &, std::enable\_if\_t&lt;(!RePhraseIsSigned), int &gt; \*=nullptr) <br> |
+|  constexpr auto | [**is\_neg**](#function-is_neg-22) (const uintwide\_t&lt; Width2, LimbType, AllocatorType, RePhraseIsSigned &gt; & a, std::enable\_if\_t&lt; RePhraseIsSigned, int &gt; \* p\_nullparam=nullptr) <br> |
+|  constexpr auto | [**is\_not\_fill\_char**](#function-is_not_fill_char) (char c) <br> |
+|  constexpr auto | [**limits\_helper\_max**](#function-limits_helper_max-12) () <br> |
+|  constexpr auto | [**limits\_helper\_max**](#function-limits_helper_max-22) () <br> |
+|  constexpr auto | [**limits\_helper\_min**](#function-limits_helper_min-12) () <br> |
+|  constexpr auto | [**limits\_helper\_min**](#function-limits_helper_min-22) () <br> |
+|  constexpr auto | [**my\_fill\_char**](#function-my_fill_char) () <br> |
+|  constexpr auto | [**wr\_string\_max\_buffer\_size\_dec**](#function-wr_string_max_buffer_size_dec) () <br> |
+|  constexpr auto | [**wr\_string\_max\_buffer\_size\_hex**](#function-wr_string_max_buffer_size_hex) () <br> |
+|  constexpr auto | [**wr\_string\_max\_buffer\_size\_oct**](#function-wr_string_max_buffer_size_oct) () <br> |
 
 
 
@@ -211,8 +211,7 @@ using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::cons
 ### typedef double\_limb\_type 
 
 ```C++
-using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::double_limb_type = 
-            typename detail::uint_type_helper<static_cast<size_t>(static_cast<int>(std::numeric_limits<limb_type>::digits* static_cast<int>(INT8_C(2))))>::exact_unsigned_type;
+using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::double_limb_type =  typename detail::uint_type_helper<static_cast<size_t>(static_cast<int>(std::numeric_limits<limb_type>::digits* static_cast<int>(INT8_C(2))))>::exact_unsigned_type;
 ```
 
 
@@ -264,16 +263,7 @@ using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::limb
 ### typedef representation\_type 
 
 ```C++
-using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::representation_type = 
-            std::conditional_t
-            <std::is_same<AllocatorType, void>::value,
-            detail::fixed_static_array <limb_type,
-            number_of_limbs>,
-            detail::fixed_dynamic_array<limb_type,
-            number_of_limbs,
-            typename std::allocator_traits<std::conditional_t<std::is_same<AllocatorType, void>::value,
-            std::allocator<void>,
-            AllocatorType>>::template rebind_alloc<limb_type>>>;
+using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::representation_type =  std::conditional_t <std::is_same<AllocatorType, void>::value, detail::fixed_static_array <limb_type, number_of_limbs>, detail::fixed_dynamic_array<limb_type, number_of_limbs, typename std::allocator_traits<std::conditional_t<std::is_same<AllocatorType, void>::value, std::allocator<void>, AllocatorType> >::template rebind_alloc<limb_type> >>;
 ```
 
 
@@ -327,7 +317,7 @@ using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::usho
 ### variable my\_width2 
 
 ```C++
-size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::my_width2;
+constexpr size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::my_width2;
 ```
 
 
@@ -340,7 +330,7 @@ size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::my_
 ### variable number\_of\_limbs 
 
 ```C++
-size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::number_of_limbs;
+constexpr size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::number_of_limbs;
 ```
 
 
@@ -353,7 +343,7 @@ size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::num
 ### variable number\_of\_limbs\_karatsuba\_threshold 
 
 ```C++
-size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::number_of_limbs_karatsuba_threshold;
+constexpr size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::number_of_limbs_karatsuba_threshold;
 ```
 
 
@@ -369,8 +359,8 @@ size_t SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::num
 
 ```C++
 template<const bool RePhraseIsSigned, std::enable_if_t<(!RePhraseIsSigned)> const *>
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::compare (
-    const uintwide_t < Width2, LimbType, AllocatorType, RePhraseIsSigned > & other
+inline WIDE_INTEGER_NODISCARD constexpr auto uintwide_t::compare (
+    const uintwide_t< Width2, LimbType, AllocatorType, RePhraseIsSigned > & other
 ) const
 ```
 
@@ -385,8 +375,8 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::compare (
 
 ```C++
 template<const bool RePhraseIsSigned, std::enable_if_t< RePhraseIsSigned > const *>
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::compare (
-    const uintwide_t < Width2, LimbType, AllocatorType, RePhraseIsSigned > & other
+inline WIDE_INTEGER_NODISCARD constexpr auto uintwide_t::compare (
+    const uintwide_t< Width2, LimbType, AllocatorType, RePhraseIsSigned > & other
 ) const
 ```
 
@@ -400,7 +390,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::compare (
 ### function crepresentation 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::crepresentation () const
+inline WIDE_INTEGER_NODISCARD constexpr auto uintwide_t::crepresentation () const
 ```
 
 
@@ -413,7 +403,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::crepresent
 ### function eval\_divide\_by\_single\_limb 
 
 ```C++
-inline void SR_TYPES_NS::uintwide_t::eval_divide_by_single_limb (
+inline constexpr auto uintwide_t::eval_divide_by_single_limb (
     const limb_type short_denominator,
     const unsigned_fast_type u_offset,
     uintwide_t * remainder
@@ -430,7 +420,7 @@ inline void SR_TYPES_NS::uintwide_t::eval_divide_by_single_limb (
 ### function is\_zero 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::is_zero () const
+inline WIDE_INTEGER_NODISCARD constexpr auto uintwide_t::is_zero () const
 ```
 
 
@@ -443,7 +433,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::is_zero ()
 ### function mul\_by\_limb 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::mul_by_limb (
+inline constexpr auto uintwide_t::mul_by_limb (
     const limb_type v
 ) 
 ```
@@ -458,7 +448,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::mul_by_limb (
 ### function negate 
 
 ```C++
-inline void SR_TYPES_NS::uintwide_t::negate () 
+inline constexpr auto uintwide_t::negate () 
 ```
 
 
@@ -472,7 +462,7 @@ inline void SR_TYPES_NS::uintwide_t::negate ()
 
 ```C++
 template<typename IntegralType, typename>
-inline explicit constexpr SR_TYPES_NS::uintwide_t::operator IntegralType () const
+inline explicit constexpr uintwide_t::operator IntegralType () const
 ```
 
 
@@ -485,7 +475,7 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::operator IntegralType () cons
 ### function operator bool 
 
 ```C++
-inline explicit constexpr SR_TYPES_NS::uintwide_t::operator bool () const
+inline explicit constexpr uintwide_t::operator bool () const
 ```
 
 
@@ -498,7 +488,7 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::operator bool () const
 ### function operator double 
 
 ```C++
-inline explicit constexpr SR_TYPES_NS::uintwide_t::operator double () const
+inline explicit constexpr uintwide_t::operator double () const
 ```
 
 
@@ -511,7 +501,7 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::operator double () const
 ### function operator float 
 
 ```C++
-inline explicit constexpr SR_TYPES_NS::uintwide_t::operator float () const
+inline explicit constexpr uintwide_t::operator float () const
 ```
 
 
@@ -524,7 +514,7 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::operator float () const
 ### function operator long double 
 
 ```C++
-inline explicit constexpr SR_TYPES_NS::uintwide_t::operator long double () const
+inline explicit constexpr uintwide_t::operator long double () const
 ```
 
 
@@ -538,7 +528,7 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::operator long double () const
 
 ```C++
 template<const size_t OtherWidth2, const bool OtherIsSigned>
-inline constexpr SR_TYPES_NS::uintwide_t::operator uintwide_t< OtherWidth2, LimbType, AllocatorType, OtherIsSigned > () const
+inline constexpr uintwide_t::operator uintwide_t< OtherWidth2, LimbType, AllocatorType, OtherIsSigned > () const
 ```
 
 
@@ -551,7 +541,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::operator uintwide_t< OtherWidth2, Limb
 ### function operator!= 
 
 ```C++
-inline bool SR_TYPES_NS::uintwide_t::operator!= (
+inline constexpr auto uintwide_t::operator!= (
     const uintwide_t & other
 ) const
 ```
@@ -566,7 +556,7 @@ inline bool SR_TYPES_NS::uintwide_t::operator!= (
 ### function operator%= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator%= (
+inline constexpr auto uintwide_t::operator%= (
     const uintwide_t & other
 ) 
 ```
@@ -581,7 +571,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator%= (
 ### function operator&= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator&= (
+inline constexpr auto uintwide_t::operator&= (
     const uintwide_t & other
 ) 
 ```
@@ -596,7 +586,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator&= (
 ### function operator\*= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator*= (
+inline constexpr auto uintwide_t::operator*= (
     const uintwide_t & other
 ) 
 ```
@@ -611,7 +601,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator*= (
 ### function operator+ 
 
 ```C++
-inline const uintwide_t & SR_TYPES_NS::uintwide_t::operator+ () const
+inline constexpr auto uintwide_t::operator+ () const
 ```
 
 
@@ -624,7 +614,7 @@ inline const uintwide_t & SR_TYPES_NS::uintwide_t::operator+ () const
 ### function operator++ 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator++ () 
+inline constexpr auto uintwide_t::operator++ () 
 ```
 
 
@@ -637,7 +627,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator++ ()
 ### function operator++ 
 
 ```C++
-inline uintwide_t SR_TYPES_NS::uintwide_t::operator++ (
+inline constexpr auto uintwide_t::operator++ (
     int
 ) 
 ```
@@ -652,7 +642,7 @@ inline uintwide_t SR_TYPES_NS::uintwide_t::operator++ (
 ### function operator+= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator+= (
+inline constexpr auto uintwide_t::operator+= (
     const uintwide_t & other
 ) 
 ```
@@ -667,7 +657,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator+= (
 ### function operator- 
 
 ```C++
-inline uintwide_t SR_TYPES_NS::uintwide_t::operator- () const
+inline constexpr auto uintwide_t::operator- () const
 ```
 
 
@@ -680,7 +670,7 @@ inline uintwide_t SR_TYPES_NS::uintwide_t::operator- () const
 ### function operator-- 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator-- () 
+inline constexpr auto uintwide_t::operator-- () 
 ```
 
 
@@ -693,7 +683,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator-- ()
 ### function operator-- 
 
 ```C++
-inline uintwide_t SR_TYPES_NS::uintwide_t::operator-- (
+inline constexpr auto uintwide_t::operator-- (
     int
 ) 
 ```
@@ -708,7 +698,7 @@ inline uintwide_t SR_TYPES_NS::uintwide_t::operator-- (
 ### function operator-= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator-= (
+inline constexpr auto uintwide_t::operator-= (
     const uintwide_t & other
 ) 
 ```
@@ -723,7 +713,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator-= (
 ### function operator/= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator/= (
+inline constexpr auto uintwide_t::operator/= (
     const uintwide_t & other
 ) 
 ```
@@ -738,7 +728,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator/= (
 ### function operator&lt; 
 
 ```C++
-inline bool SR_TYPES_NS::uintwide_t::operator< (
+inline constexpr auto uintwide_t::operator< (
     const uintwide_t & other
 ) const
 ```
@@ -754,7 +744,7 @@ inline bool SR_TYPES_NS::uintwide_t::operator< (
 
 ```C++
 template<typename SignedIntegralType>
-inline std::enable_if_t<(std::is_integral< SignedIntegralType >::value &&std::is_signed< SignedIntegralType >::value), uintwide_t > & SR_TYPES_NS::uintwide_t::operator<<= (
+inline constexpr auto uintwide_t::operator<<= (
     const SignedIntegralType n
 ) 
 ```
@@ -770,7 +760,7 @@ inline std::enable_if_t<(std::is_integral< SignedIntegralType >::value &&std::is
 
 ```C++
 template<typename UnsignedIntegralType>
-inline std::enable_if_t<(std::is_integral< UnsignedIntegralType >::value &&(!std::is_signed< UnsignedIntegralType >::value)), uintwide_t > & SR_TYPES_NS::uintwide_t::operator<<= (
+inline constexpr auto uintwide_t::operator<<= (
     const UnsignedIntegralType n
 ) 
 ```
@@ -785,7 +775,7 @@ inline std::enable_if_t<(std::is_integral< UnsignedIntegralType >::value &&(!std
 ### function operator&lt;= 
 
 ```C++
-inline bool SR_TYPES_NS::uintwide_t::operator<= (
+inline constexpr auto uintwide_t::operator<= (
     const uintwide_t & other
 ) const
 ```
@@ -800,7 +790,7 @@ inline bool SR_TYPES_NS::uintwide_t::operator<= (
 ### function operator= 
 
 ```C++
-uintwide_t &=default SR_TYPES_NS::uintwide_t::operator= (
+constexpr auto uintwide_t::operator= (
     const uintwide_t &
 ) 
 ```
@@ -816,8 +806,8 @@ uintwide_t &=default SR_TYPES_NS::uintwide_t::operator= (
 
 ```C++
 template<const bool OtherIsSigned, std::enable_if_t<(OtherIsSigned !=IsSigned)> const *>
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator= (
-    const uintwide_t < Width2, LimbType, AllocatorType, OtherIsSigned > & other
+inline constexpr auto uintwide_t::operator= (
+    const uintwide_t< Width2, LimbType, AllocatorType, OtherIsSigned > & other
 ) 
 ```
 
@@ -831,7 +821,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator= (
 ### function operator= 
 
 ```C++
-uintwide_t &=default SR_TYPES_NS::uintwide_t::operator= (
+constexpr auto uintwide_t::operator= (
     uintwide_t && other
 ) noexcept
 ```
@@ -847,8 +837,8 @@ uintwide_t &=default SR_TYPES_NS::uintwide_t::operator= (
 
 ```C++
 template<const bool OtherIsSigned, std::enable_if_t<(IsSigned !=OtherIsSigned)> const *>
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator= (
-    uintwide_t < Width2, LimbType, AllocatorType, OtherIsSigned > && other
+inline constexpr auto uintwide_t::operator= (
+    uintwide_t< Width2, LimbType, AllocatorType, OtherIsSigned > && other
 ) 
 ```
 
@@ -862,7 +852,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator= (
 ### function operator= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator= (
+inline constexpr auto uintwide_t::operator= (
     const std::string & estr
 ) 
 ```
@@ -877,7 +867,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator= (
 ### function operator== 
 
 ```C++
-inline bool SR_TYPES_NS::uintwide_t::operator== (
+inline constexpr auto uintwide_t::operator== (
     const uintwide_t & other
 ) const
 ```
@@ -892,7 +882,7 @@ inline bool SR_TYPES_NS::uintwide_t::operator== (
 ### function operator&gt; 
 
 ```C++
-inline bool SR_TYPES_NS::uintwide_t::operator> (
+inline constexpr auto uintwide_t::operator> (
     const uintwide_t & other
 ) const
 ```
@@ -907,7 +897,7 @@ inline bool SR_TYPES_NS::uintwide_t::operator> (
 ### function operator&gt;= 
 
 ```C++
-inline bool SR_TYPES_NS::uintwide_t::operator>= (
+inline constexpr auto uintwide_t::operator>= (
     const uintwide_t & other
 ) const
 ```
@@ -923,7 +913,7 @@ inline bool SR_TYPES_NS::uintwide_t::operator>= (
 
 ```C++
 template<typename SignedIntegralType>
-inline std::enable_if_t<(std::is_integral< SignedIntegralType >::value &&std::is_signed< SignedIntegralType >::value), uintwide_t > & SR_TYPES_NS::uintwide_t::operator>>= (
+inline constexpr auto uintwide_t::operator>>= (
     const SignedIntegralType n
 ) 
 ```
@@ -939,7 +929,7 @@ inline std::enable_if_t<(std::is_integral< SignedIntegralType >::value &&std::is
 
 ```C++
 template<typename UnsignedIntegralType>
-inline std::enable_if_t<(std::is_integral< UnsignedIntegralType >::value &&(!std::is_signed< UnsignedIntegralType >::value)), uintwide_t > & SR_TYPES_NS::uintwide_t::operator>>= (
+inline constexpr auto uintwide_t::operator>>= (
     const UnsignedIntegralType n
 ) 
 ```
@@ -954,7 +944,7 @@ inline std::enable_if_t<(std::is_integral< UnsignedIntegralType >::value &&(!std
 ### function operator^= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator^= (
+inline constexpr auto uintwide_t::operator^= (
     const uintwide_t & other
 ) 
 ```
@@ -969,7 +959,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator^= (
 ### function operator\|= 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator|= (
+inline constexpr auto uintwide_t::operator|= (
     const uintwide_t & other
 ) 
 ```
@@ -984,7 +974,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator|= (
 ### function operator~ 
 
 ```C++
-inline uintwide_t & SR_TYPES_NS::uintwide_t::operator~ () 
+inline constexpr auto uintwide_t::operator~ () 
 ```
 
 
@@ -997,7 +987,7 @@ inline uintwide_t & SR_TYPES_NS::uintwide_t::operator~ ()
 ### function representation [1/2]
 
 ```C++
-inline representation_type & SR_TYPES_NS::uintwide_t::representation () 
+inline constexpr auto uintwide_t::representation () 
 ```
 
 
@@ -1010,7 +1000,7 @@ inline representation_type & SR_TYPES_NS::uintwide_t::representation ()
 ### function representation [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::representation () const
+inline WIDE_INTEGER_NODISCARD constexpr auto uintwide_t::representation () const
 ```
 
 
@@ -1023,7 +1013,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uintwide_t::representa
 ### function uintwide\_t [2/15]
 
 ```C++
-constexpr SR_TYPES_NS::uintwide_t::uintwide_t () = default
+constexpr uintwide_t::uintwide_t () = default
 ```
 
 
@@ -1037,7 +1027,7 @@ constexpr SR_TYPES_NS::uintwide_t::uintwide_t () = default
 
 ```C++
 template<typename UnsignedIntegralType>
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+inline constexpr uintwide_t::uintwide_t (
     const UnsignedIntegralType v,
     std::enable_if_t<(std::is_integral< UnsignedIntegralType >::value &&std::is_unsigned< UnsignedIntegralType >::value &&(std::numeric_limits< UnsignedIntegralType >::digits<=std::numeric_limits< limb_type >::digits))> *=nullptr
 ) 
@@ -1054,7 +1044,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<typename UnsignedIntegralType>
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+inline constexpr uintwide_t::uintwide_t (
     const UnsignedIntegralType v,
     std::enable_if_t<(std::is_integral< UnsignedIntegralType >::value &&std::is_unsigned< UnsignedIntegralType >::value &&(std::numeric_limits< UnsignedIntegralType >::digits > std::numeric_limits< limb_type >::digits))> * p_nullparam=nullptr
 ) 
@@ -1071,7 +1061,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<typename SignedIntegralType>
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+inline constexpr uintwide_t::uintwide_t (
     const SignedIntegralType v,
     std::enable_if_t<(std::is_integral< SignedIntegralType >::value &&std::is_signed< SignedIntegralType >::value)> * p_nullparam=nullptr
 ) 
@@ -1088,7 +1078,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<typename FloatingPointType, std::enable_if_t<(std::is_floating_point< FloatingPointType >::value)> const *>
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+inline constexpr uintwide_t::uintwide_t (
     const FloatingPointType f
 ) 
 ```
@@ -1103,7 +1093,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 ### function uintwide\_t [7/15]
 
 ```C++
-constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+constexpr uintwide_t::uintwide_t (
     const uintwide_t & other
 ) = default
 ```
@@ -1119,8 +1109,8 @@ constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<const bool OtherIsSigned, std::enable_if_t<(OtherIsSigned !=IsSigned)> const *>
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
-    const uintwide_t < Width2, LimbType, AllocatorType, OtherIsSigned > & other
+inline constexpr uintwide_t::uintwide_t (
+    const uintwide_t< Width2, LimbType, AllocatorType, OtherIsSigned > & other
 ) 
 ```
 
@@ -1135,8 +1125,8 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<const size_t OtherWidth2, const bool OtherIsSigned, std::enable_if_t<(Width2< OtherWidth2)> const *>
-inline explicit constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
-    const uintwide_t < OtherWidth2, LimbType, AllocatorType, OtherIsSigned > & v
+inline explicit constexpr uintwide_t::uintwide_t (
+    const uintwide_t< OtherWidth2, LimbType, AllocatorType, OtherIsSigned > & v
 ) 
 ```
 
@@ -1151,8 +1141,8 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<const size_t OtherWidth2, const bool OtherIsSigned, std::enable_if_t<(Width2 > OtherWidth2)> const *>
-inline explicit constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
-    const uintwide_t < OtherWidth2, LimbType, AllocatorType, OtherIsSigned > & v
+inline explicit constexpr uintwide_t::uintwide_t (
+    const uintwide_t< OtherWidth2, LimbType, AllocatorType, OtherIsSigned > & v
 ) 
 ```
 
@@ -1166,7 +1156,7 @@ inline explicit constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 ### function uintwide\_t [11/15]
 
 ```C++
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+inline constexpr uintwide_t::uintwide_t (
     const char * str_input
 ) 
 ```
@@ -1181,7 +1171,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 ### function uintwide\_t [12/15]
 
 ```C++
-constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
+constexpr uintwide_t::uintwide_t (
     uintwide_t &&
 ) noexcept
 ```
@@ -1197,8 +1187,8 @@ constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<const bool OtherIsSigned, std::enable_if_t<(IsSigned !=OtherIsSigned)> const *>
-inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
-    uintwide_t < Width2, LimbType, AllocatorType, OtherIsSigned > && other
+inline constexpr uintwide_t::uintwide_t (
+    uintwide_t< Width2, LimbType, AllocatorType, OtherIsSigned > && other
 ) 
 ```
 
@@ -1213,7 +1203,7 @@ inline constexpr SR_TYPES_NS::uintwide_t::uintwide_t (
 
 ```C++
 template<typename OutputStrIterator>
-inline bool SR_TYPES_NS::uintwide_t::wr_string (
+inline constexpr auto uintwide_t::wr_string (
     OutputStrIterator str_result,
     const std::uint_fast8_t base_rep=static_cast< std::uint_fast8_t >(UINT8_C(0x10)),
     const bool show_base=true,
@@ -1236,7 +1226,7 @@ inline bool SR_TYPES_NS::uintwide_t::wr_string (
 ### function from\_rep [1/2]
 
 ```C++
-static inline uintwide_t SR_TYPES_NS::uintwide_t::from_rep (
+static inline constexpr auto uintwide_t::from_rep (
     const representation_type & other_rep
 ) 
 ```
@@ -1251,7 +1241,7 @@ static inline uintwide_t SR_TYPES_NS::uintwide_t::from_rep (
 ### function from\_rep [2/2]
 
 ```C++
-static inline uintwide_t SR_TYPES_NS::uintwide_t::from_rep (
+static inline constexpr auto uintwide_t::from_rep (
     representation_type && other_rep
 ) noexcept
 ```
@@ -1267,8 +1257,8 @@ static inline uintwide_t SR_TYPES_NS::uintwide_t::from_rep (
 
 ```C++
 template<const bool RePhraseIsSigned>
-static inline bool SR_TYPES_NS::uintwide_t::is_neg (
-    const uintwide_t < Width2, LimbType, AllocatorType, RePhraseIsSigned > &,
+static inline constexpr auto uintwide_t::is_neg (
+    const uintwide_t< Width2, LimbType, AllocatorType, RePhraseIsSigned > &,
     std::enable_if_t<(!RePhraseIsSigned), int > *=nullptr
 ) 
 ```
@@ -1284,8 +1274,8 @@ static inline bool SR_TYPES_NS::uintwide_t::is_neg (
 
 ```C++
 template<const bool RePhraseIsSigned>
-static inline bool SR_TYPES_NS::uintwide_t::is_neg (
-    const uintwide_t < Width2, LimbType, AllocatorType, RePhraseIsSigned > & a,
+static inline constexpr auto uintwide_t::is_neg (
+    const uintwide_t< Width2, LimbType, AllocatorType, RePhraseIsSigned > & a,
     std::enable_if_t< RePhraseIsSigned, int > * p_nullparam=nullptr
 ) 
 ```
@@ -1300,7 +1290,7 @@ static inline bool SR_TYPES_NS::uintwide_t::is_neg (
 ### function is\_not\_fill\_char 
 
 ```C++
-static inline bool SR_TYPES_NS::uintwide_t::is_not_fill_char (
+static inline constexpr auto uintwide_t::is_not_fill_char (
     char c
 ) 
 ```
@@ -1316,7 +1306,7 @@ static inline bool SR_TYPES_NS::uintwide_t::is_not_fill_char (
 
 ```C++
 template<const bool OtherIsSigned>
-static inline std::enable_if_t<(!OtherIsSigned), uintwide_t > SR_TYPES_NS::uintwide_t::limits_helper_max () 
+static inline constexpr auto uintwide_t::limits_helper_max () 
 ```
 
 
@@ -1330,7 +1320,7 @@ static inline std::enable_if_t<(!OtherIsSigned), uintwide_t > SR_TYPES_NS::uintw
 
 ```C++
 template<const bool OtherIsSigned>
-static inline std::enable_if_t< OtherIsSigned, uintwide_t > SR_TYPES_NS::uintwide_t::limits_helper_max () 
+static inline constexpr auto uintwide_t::limits_helper_max () 
 ```
 
 
@@ -1344,7 +1334,7 @@ static inline std::enable_if_t< OtherIsSigned, uintwide_t > SR_TYPES_NS::uintwid
 
 ```C++
 template<const bool OtherIsSigned>
-static inline std::enable_if_t<(!OtherIsSigned), uintwide_t > SR_TYPES_NS::uintwide_t::limits_helper_min () 
+static inline constexpr auto uintwide_t::limits_helper_min () 
 ```
 
 
@@ -1358,7 +1348,7 @@ static inline std::enable_if_t<(!OtherIsSigned), uintwide_t > SR_TYPES_NS::uintw
 
 ```C++
 template<const bool OtherIsSigned>
-static inline std::enable_if_t< OtherIsSigned, uintwide_t > SR_TYPES_NS::uintwide_t::limits_helper_min () 
+static inline constexpr auto uintwide_t::limits_helper_min () 
 ```
 
 
@@ -1371,7 +1361,7 @@ static inline std::enable_if_t< OtherIsSigned, uintwide_t > SR_TYPES_NS::uintwid
 ### function my\_fill\_char 
 
 ```C++
-static inline char SR_TYPES_NS::uintwide_t::my_fill_char () 
+static inline constexpr auto uintwide_t::my_fill_char () 
 ```
 
 
@@ -1384,7 +1374,7 @@ static inline char SR_TYPES_NS::uintwide_t::my_fill_char ()
 ### function wr\_string\_max\_buffer\_size\_dec 
 
 ```C++
-static inline size_t SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_dec () 
+static inline constexpr auto uintwide_t::wr_string_max_buffer_size_dec () 
 ```
 
 
@@ -1397,7 +1387,7 @@ static inline size_t SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_dec ()
 ### function wr\_string\_max\_buffer\_size\_hex 
 
 ```C++
-static inline size_t SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_hex () 
+static inline constexpr auto uintwide_t::wr_string_max_buffer_size_hex () 
 ```
 
 
@@ -1410,7 +1400,7 @@ static inline size_t SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_hex ()
 ### function wr\_string\_max\_buffer\_size\_oct 
 
 ```C++
-static inline size_t SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_oct () 
+static inline constexpr auto uintwide_t::wr_string_max_buffer_size_oct () 
 ```
 
 
@@ -1426,7 +1416,7 @@ static inline size_t SR_TYPES_NS::uintwide_t::wr_string_max_buffer_size_oct ()
 
 ```C++
 template<const size_t OtherWidth2, typename OtherLimbType, typename OtherAllocatorType, const bool OtherIsSigned>
-class SR_TYPES_NS::uintwide_t::uintwide_t (
+class uintwide_t::uintwide_t (
     uintwide_t
 ) 
 ```

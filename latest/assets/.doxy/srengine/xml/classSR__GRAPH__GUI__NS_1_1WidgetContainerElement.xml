@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_GUI_NS::WidgetContainerElement</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1InputHandler" prot="public" virt="non-virtual">SR_UTILS_NS::InputHandler</basecompoundref>
@@ -302,7 +302,7 @@
         </childnode>
       </node>
       <node id="5">
-        <label>SR_HTYPES_NS::SharedPtr&lt; WidgetContainerElement &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
@@ -312,7 +312,7 @@
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
       <node id="3">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
@@ -338,7 +338,7 @@
         </childnode>
       </node>
       <node id="5">
-        <label>SR_HTYPES_NS::SharedPtr&lt; WidgetContainerElement &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
@@ -355,7 +355,7 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
       <node id="3">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
@@ -440,7 +440,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>StaticCast</name></member>
-      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Trigger</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Trigger</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Valid</name></member>

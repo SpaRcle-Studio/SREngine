@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1Overloaded" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Overloaded</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">Fs...</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">SR_UTILS_NS::Fs</basecompoundref>
     <templateparamlist>
       <param>
         <type>class...</type>
@@ -16,7 +16,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>Fs...</label>
+        <label>Fs</label>
       </node>
       <node id="1">
         <label>SR_UTILS_NS::Overloaded&lt; Fs &gt;</label>
@@ -27,7 +27,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>Fs...</label>
+        <label>Fs</label>
       </node>
       <node id="1">
         <label>SR_UTILS_NS::Overloaded&lt; Fs &gt;</label>

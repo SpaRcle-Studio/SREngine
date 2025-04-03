@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__SRSL__NS_1_1ISRSLCodeGenerator" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_SRSL_NS::ISRSLCodeGenerator</compoundname>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1GLSLCodeGenerator" prot="public" virt="non-virtual">SR_SRSL_NS::GLSLCodeGenerator</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLPseudoCodeGenerator" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLPseudoCodeGenerator</derivedcompoundref>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a435fea5b561ec3a2d4db04c19579bc55" prot="public" static="no">
+      <memberdef kind="typedef" id="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aabb4cfa38910990fbd5defa0be9addae" prot="public" static="no">
         <type>std::pair&lt; <ref refid="structSR__SRSL__NS_1_1SRSLResult" kindref="compound">SRSLResult</ref>, std::map&lt; ShaderStage, std::string &gt; &gt;</type>
-        <definition>using SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes =  std::pair&lt;SRSLResult, std::map&lt;ShaderStage, std::string&gt;&gt;</definition>
+        <definition>using SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes =  std::pair&lt;SRSLResult, std::map&lt;ShaderStage, std::string&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>SRSLCodeGenRes</name>
         <qualifiedname>SR_SRSL_NS::ISRSLCodeGenerator::SRSLCodeGenRes</qualifiedname>
@@ -142,7 +142,7 @@
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1ae8bcbc82a06cfa6779fe998650359005" prot="protected" virt="pure-virtual"><scope>SR_SRSL_NS::ISRSLCodeGenerator</scope><name>GenerateStages</name></member>
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a8089889a38f86d7c48335deb3334ed4a" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::ISRSLCodeGenerator</scope><name>ISRSLCodeGenerator</name></member>
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a84294d16f2102887a4fb922121f85d66" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::ISRSLCodeGenerator</scope><name>m_result</name></member>
-      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a435fea5b561ec3a2d4db04c19579bc55" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ISRSLCodeGenerator</scope><name>SRSLCodeGenRes</name></member>
+      <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1aabb4cfa38910990fbd5defa0be9addae" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::ISRSLCodeGenerator</scope><name>SRSLCodeGenRes</name></member>
       <member refid="classSR__SRSL__NS_1_1ISRSLCodeGenerator_1a53b51b4fc70d90890f942165dc271d20" prot="protected" virt="virtual"><scope>SR_SRSL_NS::ISRSLCodeGenerator</scope><name>~ISRSLCodeGenerator</name></member>
     </listofallmembers>
   </compounddef>

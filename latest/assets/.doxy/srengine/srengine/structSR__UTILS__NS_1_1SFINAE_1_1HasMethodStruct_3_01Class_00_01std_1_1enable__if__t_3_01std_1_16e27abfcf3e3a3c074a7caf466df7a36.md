@@ -39,8 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value-12)   = `std::is\_member\_function\_pointer\_v&lt;decltype(&Class::Name)&gt;`<br> |
-|  bool | [**value**](#variable-value-22)  <br> |
+|  constexpr bool | [**value**](#variable-value)   = `std::is\_member\_function\_pointer\_v&lt;decltype(&Class::Name)&gt;`<br> |
 
 
 
@@ -88,23 +87,10 @@
 
 
 
-### variable value [1/2]
+### variable value 
 
 ```C++
-bool SR_UTILS_NS::SFINAE::HasMethodStruct< Class, std::enable_if_t< std::is_member_function_pointer_v< decltype(&Class::Name)> > >::value;
-```
-
-
-
-
-<hr>
-
-
-
-### variable value [2/2]
-
-```C++
-bool SR_UTILS_NS::SFINAE::HasMethodStruct< Class, std::enable_if_t< std::is_member_function_pointer_v< decltype(&Class::Name)> > >::value;
+constexpr bool SR_UTILS_NS::SFINAE::HasMethodStruct< Class, std::enable_if_t< std::is_member_function_pointer_v< decltype(&Class::Name)> > >::value;
 ```
 
 

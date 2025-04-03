@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="LexerUtils_8h" kind="file" language="C++">
     <compoundname>LexerUtils.h</compoundname>
     <includes refid="Singleton_8h" local="no">Utils/Common/Singleton.h</includes>
@@ -897,10 +897,10 @@
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>WrongMacroName,<sp/>IncludeNotExists,<sp/>UnexceptedError,<sp/>IncludeError,<sp/>InvalidFunction,<sp/>InvalidString</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163" refid="structSR__SRSL__NS_1_1LocationEntity" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">LocationEntity<sp/>{</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LocationEntity()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163" refid="structSR__SRSL__NS_1_1LocationEntity" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__SRSL__NS_1_1LocationEntity" kindref="compound">LocationEntity</ref><sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1LocationEntity" kindref="compound">LocationEntity</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LocationEntity(uint64_t<sp/>offset,<sp/>uint64_t<sp/>length,<sp/>uint16_t<sp/>fileIndex)</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1LocationEntity" kindref="compound">LocationEntity</ref>(uint64_t<sp/>offset,<sp/>uint64_t<sp/>length,<sp/>uint16_t<sp/>fileIndex)</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>offset(offset)</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>length(length)</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>fileIndex(fileIndex)</highlight></codeline>
@@ -911,17 +911,17 @@
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint16_t<sp/>fileIndex<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177" refid="structSR__SRSL__NS_1_1Lexem" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">Lexem<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>LocationEntity<sp/>{</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Lexem()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="177" refid="structSR__SRSL__NS_1_1Lexem" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structSR__SRSL__NS_1_1LocationEntity" kindref="compound">LocationEntity</ref><sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"></highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Lexem(uint64_t<sp/>offset,<sp/>uint64_t<sp/>length,<sp/>LexemKind<sp/>kind,<sp/>std::string&amp;&amp;<sp/>value,<sp/>uint16_t<sp/>fileIndex)</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>LocationEntity(offset,<sp/>length,<sp/>fileIndex)</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref>(uint64_t<sp/>offset,<sp/>uint64_t<sp/>length,<sp/>LexemKind<sp/>kind,<sp/>std::string&amp;&amp;<sp/>value,<sp/>uint16_t<sp/>fileIndex)</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structSR__SRSL__NS_1_1LocationEntity" kindref="compound">LocationEntity</ref>(offset,<sp/>length,<sp/>fileIndex)</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>kind(kind)</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>value(SR_UTILS_NS::Exchange(value,<sp/>{<sp/>}))</highlight></codeline>
 <codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="185"><highlight class="normal"></highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Lexem(uint64_t<sp/>offset,<sp/>uint64_t<sp/>length,<sp/>LexemKind<sp/>kind,<sp/>uint16_t<sp/>fileIndex)</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>LocationEntity(offset,<sp/>length,<sp/>fileIndex)</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref>(uint64_t<sp/>offset,<sp/>uint64_t<sp/>length,<sp/>LexemKind<sp/>kind,<sp/>uint16_t<sp/>fileIndex)</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structSR__SRSL__NS_1_1LocationEntity" kindref="compound">LocationEntity</ref>(offset,<sp/>length,<sp/>fileIndex)</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>kind(kind)</highlight></codeline>
 <codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="190"><highlight class="normal"></highlight></codeline>
@@ -929,7 +929,7 @@
 <codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>value;</highlight></codeline>
 <codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="194"><highlight class="normal"></highlight></codeline>
-<codeline lineno="195" refid="structSR__SRSL__NS_1_1SRSLMessage" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__SRSL__NS_1_1SRSLMessage_1a6bc8f0f79cf52d74c4ba160e7f9e4093" kindref="member">SRSLMessage</ref><sp/>{</highlight></codeline>
+<codeline lineno="195" refid="structSR__SRSL__NS_1_1SRSLMessage" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref><sp/>{</highlight></codeline>
 <codeline lineno="196" refid="structSR__SRSL__NS_1_1SRSLMessage_1a6bc8f0f79cf52d74c4ba160e7f9e4093" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1SRSLMessage_1a6bc8f0f79cf52d74c4ba160e7f9e4093" kindref="member">SRSLMessage</ref>(SRSLReturnCode<sp/>code)<sp/></highlight></codeline>
 <codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>code(code)</highlight></codeline>
 <codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
@@ -983,8 +983,8 @@
 <codeline lineno="246"><highlight class="normal"></highlight></codeline>
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight></codeline>
-<codeline lineno="249" refid="structSR__SRSL__NS_1_1SRSLResult" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SRSLResult<sp/>{</highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRSLResult()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="249" refid="structSR__SRSL__NS_1_1SRSLResult" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__SRSL__NS_1_1SRSLResult" kindref="compound">SRSLResult</ref><sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1SRSLResult" kindref="compound">SRSLResult</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"></highlight></codeline>
 <codeline lineno="252" refid="structSR__SRSL__NS_1_1SRSLResult_1a3443579901304d99d74d7ffaf60c5347" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__SRSL__NS_1_1SRSLResult_1a3443579901304d99d74d7ffaf60c5347" kindref="member">SRSLResult</ref>(SRSLReturnCode<sp/>code)<sp/>{<sp/></highlight></codeline>
 <codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AddError(code);</highlight></codeline>

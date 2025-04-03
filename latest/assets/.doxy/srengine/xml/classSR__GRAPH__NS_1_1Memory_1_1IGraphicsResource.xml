@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource" kind="class" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::Memory::IGraphicsResource</compoundname>
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1IRenderTechnique" prot="public" virt="non-virtual">SR_GRAPH_NS::IRenderTechnique</derivedcompoundref>
@@ -83,7 +83,7 @@
     <sectiondef kind="protected-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aea07823cda84fd97ca230b9b9dbb3280" prot="protected" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>constexpr</type>
-        <definition>SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource</definition>
+        <definition>constexpr SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource</definition>
         <argsstring>()=default</argsstring>
         <name>IGraphicsResource</name>
         <qualifiedname>SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource</qualifiedname>
@@ -298,38 +298,18 @@
         <label>SR_GRAPH_NS::Memory::IGraphicsResource</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource"/>
         <childnode refid="2" relation="usage">
-          <edgelabel>m_pipeline</edgelabel>
-        </childnode>
-        <childnode refid="5" relation="usage">
           <edgelabel>m_renderContext</edgelabel>
         </childnode>
       </node>
-      <node id="5">
+      <node id="2">
         <label>SR_GRAPH_NS::RenderContext</label>
         <link refid="classSR__GRAPH__NS_1_1RenderContext"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_HTYPES_NS::SafePtr&lt; RenderContext &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
-      </node>
-      <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="4" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+        <label>SR_HTYPES_NS::SafePtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
       </node>
     </collaborationgraph>
     <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="17" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="17" bodyend="59"/>

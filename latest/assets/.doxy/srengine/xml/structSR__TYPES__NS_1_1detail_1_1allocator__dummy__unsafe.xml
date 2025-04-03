@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe" kind="struct" language="C++" prot="public">
     <compoundname>SR_TYPES_NS::detail::allocator_dummy_unsafe</compoundname>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe_1ae8b4429144a46232594290bf8bcc56d3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>constexpr</type>
-        <definition>SR_TYPES_NS::detail::allocator_dummy_unsafe::allocator_dummy_unsafe</definition>
+        <definition>constexpr SR_TYPES_NS::detail::allocator_dummy_unsafe::allocator_dummy_unsafe</definition>
         <argsstring>()=default</argsstring>
         <name>allocator_dummy_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::allocator_dummy_unsafe::allocator_dummy_unsafe</qualifiedname>

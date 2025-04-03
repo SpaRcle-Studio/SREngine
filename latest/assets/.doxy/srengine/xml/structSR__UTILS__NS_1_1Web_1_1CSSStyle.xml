@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1Web_1_1CSSStyle" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Web::CSSStyle</compoundname>
     <sectiondef kind="public-attrib">
@@ -506,64 +506,42 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="7">
+      <node id="2">
         <label>SR_UTILS_NS::Web::CSSColor</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSColor"/>
-        <childnode refid="8" relation="usage">
+        <childnode refid="3" relation="usage">
           <edgelabel>color</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="4" relation="usage">
           <edgelabel>linearGradient</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>radialGradient</edgelabel>
         </childnode>
       </node>
-      <node id="10">
+      <node id="5">
         <label>SR_UTILS_NS::Web::CSSDirection</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSDirection"/>
       </node>
-      <node id="9">
+      <node id="4">
         <label>SR_UTILS_NS::Web::CSSLinearGradient</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSLinearGradient"/>
-        <childnode refid="10" relation="usage">
+        <childnode refid="5" relation="usage">
           <edgelabel>direction</edgelabel>
         </childnode>
       </node>
-      <node id="5">
-        <label>SR_UTILS_NS::Web::CSSOptional&lt; CSSOptionalEnumContainer&lt; CSSDisplay &gt; &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>SR_UTILS_NS::Web::CSSOptional&lt; CSSSizeValue &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_UTILS_NS::Web::CSSOptionalEnum&lt; CSSDisplay &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::Web::CSSOptionalEnumContainer&lt; CSSDisplay &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnumContainer"/>
-      </node>
-      <node id="8">
+      <node id="3">
         <label>SR_UTILS_NS::Web::CSSRGBAColor</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSRGBAColor"/>
       </node>
-      <node id="11">
+      <node id="6">
         <label>SR_UTILS_NS::Web::CSSRadialGradient</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSRadialGradient"/>
-        <childnode refid="3" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>at</edgelabel>
         </childnode>
       </node>
-      <node id="3">
+      <node id="7">
         <label>SR_UTILS_NS::Web::CSSSizeValue</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSSizeValue"/>
       </node>
@@ -571,22 +549,6 @@
         <label>SR_UTILS_NS::Web::CSSStyle</label>
         <link refid="structSR__UTILS__NS_1_1Web_1_1CSSStyle"/>
         <childnode refid="2" relation="usage">
-          <edgelabel>borderBottom</edgelabel>
-          <edgelabel>borderLeft</edgelabel>
-          <edgelabel>borderRight</edgelabel>
-          <edgelabel>borderTop</edgelabel>
-          <edgelabel>bottom</edgelabel>
-          <edgelabel>height</edgelabel>
-          <edgelabel>left</edgelabel>
-          <edgelabel>marginBottom</edgelabel>
-          <edgelabel>marginLeft</edgelabel>
-          <edgelabel>marginRight</edgelabel>
-          <edgelabel>...</edgelabel>
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>display</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
           <edgelabel>backgroundColor</edgelabel>
           <edgelabel>color</edgelabel>
         </childnode>

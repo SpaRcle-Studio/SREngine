@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md) **>** [**detail**](namespaceSR__TYPES__NS_1_1detail.md) **>** [**uint\_type\_helper**](structSR__TYPES__NS_1_1detail_1_1uint__type__helper.md)
+[**ClassList**](annotated.md) **>** [**uint\_type\_helper**](structSR__TYPES__NS_1_1detail_1_1uint__type__helper.md)
 
 
 

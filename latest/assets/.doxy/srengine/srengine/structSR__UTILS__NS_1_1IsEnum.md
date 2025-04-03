@@ -44,7 +44,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value)   = `IsEnum::IsEnumType()`<br> |
+|  constexpr bool | [**value**](#variable-value)   = `IsEnum::IsEnumType()`<br> |
 
 
 
@@ -65,7 +65,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**IsEnumType**](#function-isenumtype) () <br> |
+|  constexpr bool | [**IsEnumType**](#function-isenumtype) () <br> |
 
 
 
@@ -115,7 +115,7 @@ using SR_UTILS_NS::IsEnum< T >::Type =  SR_UTILS_NS::RemoveQualifiersT<T>;
 ### variable value 
 
 ```C++
-bool SR_UTILS_NS::IsEnum< T >::value;
+constexpr bool SR_UTILS_NS::IsEnum< T >::value;
 ```
 
 
@@ -130,7 +130,7 @@ bool SR_UTILS_NS::IsEnum< T >::value;
 ### function IsEnumType 
 
 ```C++
-static inline bool SR_UTILS_NS::IsEnum::IsEnumType () 
+static inline constexpr bool SR_UTILS_NS::IsEnum::IsEnumType () 
 ```
 
 

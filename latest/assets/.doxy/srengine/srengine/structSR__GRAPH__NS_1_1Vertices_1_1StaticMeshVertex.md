@@ -69,7 +69,7 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_FORCE\_INLINE std::vector&lt; std::pair&lt; Attribute, size\_t &gt; &gt; | [**GetAttributes**](#function-getattributes) (bool asTypes) <br> |
-|  SR\_FORCE\_INLINE SR\_VERTEX\_DESCRIPTION | [**GetDescription**](#function-getdescription) () <br> |
+|  constexpr SR\_FORCE\_INLINE SR\_VERTEX\_DESCRIPTION | [**GetDescription**](#function-getdescription) () <br> |
 |  SR\_FORCE\_INLINE std::vector&lt; std::string &gt; | [**GetNames**](#function-getnames) () <br> |
 
 
@@ -217,7 +217,7 @@ static inline SR_FORCE_INLINE std::vector< std::pair< Attribute, size_t > > SR_G
 ### function GetDescription 
 
 ```C++
-static inline SR_FORCE_INLINE SR_VERTEX_DESCRIPTION SR_GRAPH_NS::Vertices::StaticMeshVertex::GetDescription () 
+static inline constexpr SR_FORCE_INLINE SR_VERTEX_DESCRIPTION SR_GRAPH_NS::Vertices::StaticMeshVertex::GetDescription () 
 ```
 
 

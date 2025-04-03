@@ -85,7 +85,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 
 | Type | Name |
 | ---: | :--- |
-|  const char \* | [**EXTENSION**](#variable-extension)   = `"prefab"`<br> |
+|  constexpr const char \* | [**EXTENSION**](#variable-extension)   = `"prefab"`<br> |
 
 
 
@@ -468,7 +468,7 @@ using SR_UTILS_NS::Prefab::ScenePtr =  SR_WORLD_NS::Scene*;
 ### variable EXTENSION 
 
 ```C++
-const char* SR_UTILS_NS::Prefab::EXTENSION;
+constexpr const char* SR_UTILS_NS::Prefab::EXTENSION;
 ```
 
 

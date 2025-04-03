@@ -18,6 +18,7 @@
 Inherits the following classes: SR_UTILS_NS::Settings,  [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_1Singleton.md)
 
 
+Inherited by the following classes: [SR\_CORE\_NS::EditorSettings](classSR__CORE__NS_1_1EditorSettings.md),  [SR\_UTILS\_NS::LayerManager](classSR__UTILS__NS_1_1LayerManager.md),  [SR\_UTILS\_NS::TagManager](classSR__UTILS__NS_1_1TagManager.md)
 
 
 

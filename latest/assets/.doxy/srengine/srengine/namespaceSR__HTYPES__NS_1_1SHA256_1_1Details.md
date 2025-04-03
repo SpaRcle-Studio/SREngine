@@ -37,7 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  std::array&lt; uint32\_t, 64 &gt; | [**sha256\_constants**](#variable-sha256_constants)   = `/* multi line expression */`<br> |
+|  constexpr std::array&lt; uint32\_t, 64 &gt; | [**sha256\_constants**](#variable-sha256_constants)   = `/* multi line expression */`<br> |
 
 
 
@@ -93,7 +93,7 @@
 ### variable sha256\_constants 
 
 ```C++
-std::array<uint32_t, 64> SR_HTYPES_NS::SHA256::Details::sha256_constants;
+constexpr std::array<uint32_t, 64> SR_HTYPES_NS::SHA256::Details::sha256_constants;
 ```
 
 

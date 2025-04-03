@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value)   = `decltype(IsDerivedFrom::test(std::declval&lt;U&gt;()))::value`<br>_NOLINT._  |
+|  constexpr bool | [**value**](#variable-value)   = `decltype(IsDerivedFrom::test(std::declval&lt;U&gt;()))::value`<br>_NOLINT._  |
 
 
 
@@ -91,7 +91,7 @@
 
 _NOLINT._ 
 ```C++
-bool SR_UTILS_NS::IsDerivedFrom< T, U >::value;
+constexpr bool SR_UTILS_NS::IsDerivedFrom< T, U >::value;
 ```
 
 

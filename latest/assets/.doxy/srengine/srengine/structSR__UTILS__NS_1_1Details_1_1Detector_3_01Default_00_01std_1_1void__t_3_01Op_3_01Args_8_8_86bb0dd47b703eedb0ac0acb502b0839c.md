@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) **>** [**Details**](namespaceSR__UTILS__NS_1_1Details.md) **>** [**Detector&lt; Default, std::void\_t&lt; Op&lt; Args... &gt; &gt;, Op, Args... &gt;**](structSR__UTILS__NS_1_1Details_1_1Detector_3_01Default_00_01std_1_1void__t_3_01Op_3_01Args_8_8_86bb0dd47b703eedb0ac0acb502b0839c.md)
+[**ClassList**](annotated.md) **>** [**Detector&lt; Default, std::void\_t&lt; Op&lt; Args... &gt; &gt;, Op, Args... &gt;**](structSR__UTILS__NS_1_1Details_1_1Detector_3_01Default_00_01std_1_1void__t_3_01Op_3_01Args_8_8_86bb0dd47b703eedb0ac0acb502b0839c.md)
 
 
 
@@ -33,10 +33,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef Op&lt; Args... &gt; | [**type**](#typedef-type-12)  <br> |
-| typedef Default | [**type**](#typedef-type-22)  <br> |
-| typedef std::true\_type | [**value\_t**](#typedef-value_t-12)  <br> |
-| typedef std::false\_type | [**value\_t**](#typedef-value_t-22)  <br> |
+| typedef Op&lt; Args... &gt; | [**type**](#typedef-type)  <br> |
+| typedef std::true\_type | [**value\_t**](#typedef-value_t)  <br> |
 
 
 
@@ -90,7 +88,7 @@
 
 
 
-### typedef type [1/2]
+### typedef type 
 
 ```C++
 using SR_UTILS_NS::Details::Detector< Default, std::void_t< Op< Args... > >, Op, Args... >::type =  Op<Args...>;
@@ -103,36 +101,10 @@ using SR_UTILS_NS::Details::Detector< Default, std::void_t< Op< Args... > >, Op,
 
 
 
-### typedef type [2/2]
-
-```C++
-using SR_UTILS_NS::Details::Detector< Default, std::void_t< Op< Args... > >, Op, Args >::type = ;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef value\_t [1/2]
+### typedef value\_t 
 
 ```C++
 using SR_UTILS_NS::Details::Detector< Default, std::void_t< Op< Args... > >, Op, Args... >::value_t =  std::true_type;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef value\_t [2/2]
-
-```C++
-using SR_UTILS_NS::Details::Detector< Default, std::void_t< Op< Args... > >, Op, Args >::value_t = ;
 ```
 
 

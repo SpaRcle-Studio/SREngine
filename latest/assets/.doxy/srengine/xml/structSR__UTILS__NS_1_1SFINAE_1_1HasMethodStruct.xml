@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1SFINAE_1_1HasMethodStruct" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::SFINAE::HasMethodStruct</compoundname>
     <templateparamlist>
@@ -13,8 +13,8 @@
     </templateparamlist>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1SFINAE_1_1HasMethodStruct_1a6aa3bd6c592a49d3fc6e5f4d21e28118" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::SFINAE::HasMethodStruct&lt; Class, Enabled &gt;::value</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::SFINAE::HasMethodStruct&lt; Class, Enabled &gt;::value</definition>
         <argsstring></argsstring>
         <name>value</name>
         <qualifiedname>SR_UTILS_NS::SFINAE::HasMethodStruct::value</qualifiedname>

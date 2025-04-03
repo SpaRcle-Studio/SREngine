@@ -55,10 +55,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**Load**](#function-load-12) ([**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer, [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & value, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) <br> |
-|  void | [**Load**](#function-load-22) ([**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) &, [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) &, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) &) <br> |
-|  void | [**Save**](#function-save-12) ([**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & value, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) <br> |
-|  void | [**Save**](#function-save-22) ([**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) &, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) &, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) &) <br> |
+|  void | [**Load**](#function-load) ([**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer, [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & value, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) <br> |
+|  void | [**Save**](#function-save) ([**ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & value, const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id) <br> |
 
 
 
@@ -90,7 +88,7 @@
 
 
 
-### function Load [1/2]
+### function Load 
 
 ```C++
 static inline void SR_UTILS_NS::ObjectDataAccessor< SR_UTILS_NS::Path >::Load (
@@ -107,47 +105,13 @@ static inline void SR_UTILS_NS::ObjectDataAccessor< SR_UTILS_NS::Path >::Load (
 
 
 
-### function Load [2/2]
-
-```C++
-static inline void SR_UTILS_NS::ObjectDataAccessor< SR_UTILS_NS::Path >::Load (
-    IDeserializer &,
-    SR_UTILS_NS::Path &,
-    const SerializationId &
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Save [1/2]
+### function Save 
 
 ```C++
 static inline void SR_UTILS_NS::ObjectDataAccessor< SR_UTILS_NS::Path >::Save (
     ISerializer & serializer,
     const SR_UTILS_NS::Path & value,
     const SerializationId & id
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Save [2/2]
-
-```C++
-static inline void SR_UTILS_NS::ObjectDataAccessor< SR_UTILS_NS::Path >::Save (
-    ISerializer &,
-    const SR_UTILS_NS::Path &,
-    const SerializationId &
 ) 
 ```
 

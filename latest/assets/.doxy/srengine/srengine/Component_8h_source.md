@@ -28,7 +28,6 @@
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/TypeTraits/Properties.h>
 
-
 namespace SR_HTYPES_NS {
     class DataStorage;
 }

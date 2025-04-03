@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1IResourceReloader" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_UTILS_NS::IResourceReloader</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
@@ -47,9 +47,9 @@
         <argsstring>(const SR_UTILS_NS::Path &amp;path, ResourceInfo *pResourceInfo)=0</argsstring>
         <name>Reload</name>
         <qualifiedname>SR_UTILS_NS::IResourceReloader::Reload</qualifiedname>
+        <reimplementedby refid="classSR__UTILS__NS_1_1DefaultResourceReloader_1a03c2d62f2709ee605a1211d6ca403843">Reload</reimplementedby>
         <reimplementedby refid="classSR__CORE__NS_1_1GraphicsResourceReloader_1a89fa096272f13d70ee5faff1c7d92507">Reload</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoScriptResourceReloader_1a5efea558c54374f5a14ed85dab7edbc0">Reload</reimplementedby>
-        <reimplementedby refid="classSR__UTILS__NS_1_1DefaultResourceReloader_1a03c2d62f2709ee605a1211d6ca403843">Reload</reimplementedby>
         <param>
           <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
           <declname>path</declname>

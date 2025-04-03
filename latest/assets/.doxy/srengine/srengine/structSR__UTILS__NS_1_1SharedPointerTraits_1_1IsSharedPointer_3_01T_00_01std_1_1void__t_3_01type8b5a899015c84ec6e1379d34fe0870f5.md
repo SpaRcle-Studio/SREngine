@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) **>** [**SharedPointerTraits**](namespaceSR__UTILS__NS_1_1SharedPointerTraits.md) **>** [**IsSharedPointer&lt; T, std::void\_t&lt; typename T::SharedPointerType &gt; &gt;**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer_3_01T_00_01std_1_1void__t_3_01type8b5a899015c84ec6e1379d34fe0870f5.md)
+[**ClassList**](annotated.md) **>** [**IsSharedPointer&lt; T, std::void\_t&lt; typename T::SharedPointerType &gt; &gt;**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer_3_01T_00_01std_1_1void__t_3_01type8b5a899015c84ec6e1379d34fe0870f5.md)
 
 
 
@@ -15,7 +15,7 @@
 
 
 
-Inherits the following classes: std::false_type,  std::true_type
+Inherits the following classes: std::true_type
 
 
 

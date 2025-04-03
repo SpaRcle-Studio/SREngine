@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1Base64_1_1FixedString" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Base64::FixedString</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::array&lt; char, N &gt;</basecompoundref>
@@ -13,7 +13,7 @@
     <sectiondef kind="public-func">
       <memberdef kind="function" id="structSR__UTILS__NS_1_1Base64_1_1FixedString_1a142a239d1c06e76126c3b7478222f186" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type>constexpr</type>
-        <definition>SR_UTILS_NS::Base64::FixedString&lt; N &gt;::FixedString</definition>
+        <definition>constexpr SR_UTILS_NS::Base64::FixedString&lt; N &gt;::FixedString</definition>
         <argsstring>(const char(&amp;input)[N])</argsstring>
         <name>FixedString</name>
         <qualifiedname>SR_UTILS_NS::Base64::FixedString::FixedString</qualifiedname>
@@ -39,7 +39,7 @@
           </param>
         </templateparamlist>
         <type>constexpr</type>
-        <definition>SR_UTILS_NS::Base64::FixedString&lt; N &gt;::FixedString</definition>
+        <definition>constexpr SR_UTILS_NS::Base64::FixedString&lt; N &gt;::FixedString</definition>
         <argsstring>(const char(&amp;input)[N], std::index_sequence&lt; Is... &gt;)</argsstring>
         <name>FixedString</name>
         <qualifiedname>SR_UTILS_NS::Base64::FixedString::FixedString</qualifiedname>

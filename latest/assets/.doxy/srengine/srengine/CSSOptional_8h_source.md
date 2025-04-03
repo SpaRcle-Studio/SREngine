@@ -23,7 +23,6 @@ namespace SR_UTILS_NS::Web {
         CSSOptional() = default;
         CSSOptional(const T& value) : T(value), m_isDefault(false) { } 
         CSSOptional(const T&& value) : T(value), m_isDefault(false) { } 
-
     public:
         template<typename Y> static CSSOptional CreateDefault(Y value) {
             CSSOptional<Y> result(value);

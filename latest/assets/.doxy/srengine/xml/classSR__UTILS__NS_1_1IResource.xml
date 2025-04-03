@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1IResource" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::IResource</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1ResourceContainer" prot="public" virt="non-virtual">SR_UTILS_NS::ResourceContainer</basecompoundref>
@@ -580,9 +580,9 @@
         <argsstring>() const</argsstring>
         <name>IsAllowedToRevive</name>
         <qualifiedname>SR_UTILS_NS::IResource::IsAllowedToRevive</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a931204ffbe4f45be3cbc81b18d579e30">IsAllowedToRevive</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1RawSound_1acc16a9e976d849277bb4c257274a2fb9">IsAllowedToRevive</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1Sound_1a543024d0f240e3444351ec4dd0b2c5af">IsAllowedToRevive</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a931204ffbe4f45be3cbc81b18d579e30">IsAllowedToRevive</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1ab5bf51aeef3715803f9e493efc877b2a">IsAllowedToRevive</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Skybox_1a5fb71cea01d9b994d5cdd4525405dd54">IsAllowedToRevive</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Texture_1a6614b8299bfa1078c37628ae8686439b">IsAllowedToRevive</reimplementedby>
@@ -856,8 +856,8 @@
         <argsstring>(IResource *destination) const</argsstring>
         <name>CopyResource</name>
         <qualifiedname>SR_UTILS_NS::IResource::CopyResource</qualifiedname>
-        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a64da078e723a8c05078dac4d43987c51">CopyResource</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1a0330425d0a25ead98a398e9b85a08ea9">CopyResource</reimplementedby>
+        <reimplementedby refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1a64da078e723a8c05078dac4d43987c51">CopyResource</reimplementedby>
         <param>
           <type><ref refid="classSR__UTILS__NS_1_1IResource" kindref="compound">IResource</ref> *</type>
           <declname>destination</declname>
@@ -1013,18 +1013,18 @@
         <argsstring>()</argsstring>
         <name>Unload</name>
         <qualifiedname>SR_UTILS_NS::IResource::Unload</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a406115cbad4bf6f91d92ea5b727c8e70">Unload</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1RawSound_1a56c0e3af13ce5e2c75d7cbb043bdac17">Unload</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1Sound_1acc7b1057cc08068762a3f17334ce8c25">Unload</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FileMaterialResource_1aa3a0ed76b5e1fe60a086f2c93e8c4fd1">Unload</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1a406115cbad4bf6f91d92ea5b727c8e70">Unload</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Font_1a7f7a5c4b12e85c2c66485ea8555e11b2">Unload</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FileMaterialResource_1aa3a0ed76b5e1fe60a086f2c93e8c4fd1">Unload</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1a6626d1907c9de6985f91015eb5e56a55">Unload</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Texture_1aa6df2ce4ebf931fddf271474a29aae80">Unload</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac8f715f54be0c9b7186d66f1cc60f8be">Unload</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab042ddc3d3c08d3c31685e634b96e2fd">Unload</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a24eb129e303adba64c89c0c7a6453b9d">Unload</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1a9865f9689a3291a70933bd0b4ea4c256">Unload</reimplementedby>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab042ddc3d3c08d3c31685e634b96e2fd">Unload</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1Prefab_1a22864bb450c8b92a7b02bd775dca1861">Unload</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1a9865f9689a3291a70933bd0b4ea4c256">Unload</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1039,18 +1039,18 @@
         <argsstring>()</argsstring>
         <name>Load</name>
         <qualifiedname>SR_UTILS_NS::IResource::Load</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1ac39e70a82c5485891de83becb2b15c59">Load</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1RawSound_1a5d2f32f6b567fc106f656df14637b7ff">Load</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1Sound_1a8993626615855dfdb99f6bfdf71b73a8">Load</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a55656fa5871721de5df9d1cb2e0a7918">Load</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1AnimationClip_1ac39e70a82c5485891de83becb2b15c59">Load</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Font_1a7d8e81c045b95456ae5478ee9c2e3bf9">Load</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__NS_1_1FileMaterialResource_1a55656fa5871721de5df9d1cb2e0a7918">Load</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1a35e3d9350ffdad6bb90fe4715f3fc476">Load</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Texture_1aca045e656905ad2a6a68c646802e296c">Load</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1add639a8a30846a7d4f75e87f3e6a3fc6">Load</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a1de8d943155a764da877740f115b20a1">Load</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8225920b0ced1a39f2a3c877e4fde5fe">Load</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1aa1f3dbe4292a77ffd711b148ab2ebc10">Load</reimplementedby>
+        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a1de8d943155a764da877740f115b20a1">Load</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1Prefab_1ae36898b43f196487e085a5a8dec23cae">Load</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1aa1f3dbe4292a77ffd711b148ab2ebc10">Load</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

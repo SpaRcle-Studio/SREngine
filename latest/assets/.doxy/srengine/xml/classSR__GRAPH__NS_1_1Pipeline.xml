@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GRAPH__NS_1_1Pipeline" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_GRAPH_NS::Pipeline</compoundname>
     <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</basecompoundref>
@@ -2635,7 +2635,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</label>
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -2646,7 +2646,7 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="18">
+      <node id="15">
         <label>Memory::IGraphicsResource</label>
       </node>
       <node id="7">
@@ -2665,15 +2665,6 @@
           <edgelabel>m_fboQueue</edgelabel>
         </childnode>
         <childnode refid="8" relation="usage">
-          <edgelabel>m_window</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>m_renderContext</edgelabel>
-        </childnode>
-        <childnode refid="10" relation="usage">
-          <edgelabel>m_bindedDescriptors</edgelabel>
-        </childnode>
-        <childnode refid="12" relation="usage">
           <edgelabel>m_buildState</edgelabel>
           <edgelabel>m_previousState</edgelabel>
           <edgelabel>m_state</edgelabel>
@@ -2686,59 +2677,43 @@
           <edgelabel>GLSLCompilerPath</edgelabel>
         </childnode>
       </node>
-      <node id="12">
+      <node id="8">
         <label>SR_GRAPH_NS::PipelineState</label>
         <link refid="structSR__GRAPH__NS_1_1PipelineState"/>
-        <childnode refid="13" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>pShader</edgelabel>
         </childnode>
-        <childnode refid="19" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>pFrameBuffer</edgelabel>
         </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>pRenderStrategy</edgelabel>
         </childnode>
       </node>
-      <node id="20">
+      <node id="17">
         <label>SR_GRAPH_NS::RenderStrategy</label>
         <link refid="classSR__GRAPH__NS_1_1RenderStrategy"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="16">
         <label>SR_GTYPES_NS::Framebuffer</label>
         <link refid="classSR__GTYPES__NS_1_1Framebuffer"/>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>SR_GTYPES_NS::Shader</label>
-        <link refid="classSR__GTYPES__NS_1_1Shader"/>
-        <childnode refid="14" relation="public-inheritance">
-        </childnode>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_HTYPES_NS::PoolSet&lt; bool &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1PoolSet"/>
-        <childnode refid="11" relation="private-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
-        <label>SR_HTYPES_NS::SafePtr&lt; SR_GRAPH_NS::RenderContext &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
-      </node>
-      <node id="2">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Pipeline &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="3" relation="public-inheritance">
+        <label>SR_GTYPES_NS::Shader</label>
+        <link refid="classSR__GTYPES__NS_1_1Shader"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Window &gt;</label>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -2754,19 +2729,19 @@
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
-      <node id="14">
+      <node id="10">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
@@ -2774,17 +2749,17 @@
         <label>SR_UTILS_NS::Path</label>
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
-      <node id="15">
+      <node id="11">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="14">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="16">
+      <node id="13">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
@@ -2801,8 +2776,6 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1af81410f29289ddcdbc64cc6136541152" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocateVBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9b512eefe13cdf24947049580ee9ddce" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocateVBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a1489bfad7910dfa67da4cd370a2d85d7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AllocDescriptorSet</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AutoFree</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a44e8cb731ec0c2e4e1e8b54e17536f95" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>BeginCmdBuffer</name></member>
@@ -2829,7 +2802,6 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9bc3dccbd8dbf6c7bc763dc0266ea0f0" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>DrawFrame</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aaceaecea8ed5aeb817c9a8747136059c" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>DrawIndices</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>DynamicCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a95961969c011a8e8262e2ec06a62043d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>EndCmdBuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1acced55d1326270c88a66712286456a43" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>EndDrawOverlay</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a01f2fe74ff09c104967616a40a0c99d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>EndRender</name></member>
@@ -2843,8 +2815,6 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5e980d2254ac1d64638e1be4d0e4c933" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>FreeTexture</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab5074c05db24bd7c6d9ba1e907de104b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>FreeUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3dcb36dde792890be71a9dd8a10c45c1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>FreeVBO</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a16fca09b49251d2d0652ad62fdf05d93" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetBuildIterationsCount</name></member>
@@ -2872,22 +2842,16 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a446a1952b907eef14754edbb04b839d6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetQueue</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRawPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRawPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRawPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a15c5fafc94621d9a92f093197fbc1ddc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderContext</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a8631f760e9f59858ad8ba8d84c0a0361" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3f9df613c23c25957a4e4eab167764e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetRenderStageId</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a6bd537edd19543d21248e1fddaa70035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSamplesCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a276cbbe5cf7a8c0f400e19fadc2005d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetShaderHandles</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSRClass</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSRClass</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a7ba5601d4c263cc845360a6ba4e3f29d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetState</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a92a340b822c38c39846cd8c270e4b062" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetSupportedSamples</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetThis</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetThis</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a59d68a94646d1fe584e9f23b66851767" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a477e5d9526688aa7a58637e6a93fcd3e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetUsedMemory</name></member>
@@ -2930,28 +2894,18 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a4c66f92cb85ee9d6bbdfdc1838bd1e92" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_supportedSampleCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab799c01653464ce90c3241823266de3e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>m_window</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>MakeShared</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>MakeShared</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a08cbedc2d011a36e5c313365d7cdc12d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>OnMultiSampleChanged</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac85d74cd02b3ba4a666a67e9e8fab1b8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>OnResize</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator bool</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator!=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator*</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator-&gt;</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator-&gt;</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator=</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator==</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>operator==</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5123762e4b3a892dd428bc47785e6658" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae4bf2dbefcce42f08d405a0c672eaba6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>PipelineError</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>PolymorphicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae8737b0b9ff5066393c1469ec40f0da1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>PostInit</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0653e0e7ea5806f7aea1025e2eed3713" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>PreInit</name></member>
@@ -2961,11 +2915,8 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ace4671f770642ef3660ea635d5877a10" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>PushConstants</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa5a64ab443d7d624352546e79e627333" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ReCreateOverlay</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>RecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1af0ec6284cb3ee2c81353f8c1b5262894" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>RenderContextPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Reset</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Reset</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aacd471fd5fc1cf6593084ed32fdf2f80" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ResetLastShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad846040ca78fa8e11c0719fca8b522d9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ResetSubmitQueue</name></member>
@@ -2979,7 +2930,6 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a5f89edb1c9196fe4e6e04f8752fec942" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetOverlayEnabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a27b5f31af0335610237640390fa7d205" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetOverlaySurfaceDirty</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetPointerFromBase</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetPointerFromBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a35f5177f0fd6c04613b59c0be8744fcb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetSampleCount</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a666d5711c8f746ad151a3e35d93f3793" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetScissor</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad195b1f18e0f6335ce74f60a3db653d4" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SetViewport</name></member>
@@ -2987,12 +2937,6 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3286735b51ac84f5c4638f1daac13682" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ShaderProgram</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a234ad285d6a26d677dc0311c00d21994" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ShaderPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPointerType</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
@@ -3001,12 +2945,9 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>StaticCast</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1abdfa547f1e9dba855ebb3b2baf48c326" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0ea329322e342c86b39e1b6e02fde87e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SwitchWindow</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>TryRecursiveLockIfValid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Unlock</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1acf194951c3347fbcbd72b25b8e059948" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UnUseShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ab3479ba793344cf86fc1d50aa8fad34f" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UpdateDescriptorSets</name></member>
@@ -3015,10 +2956,8 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a69662cc79877bb2e0c1bf234e413d9b1" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UpdateUBO</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad728c9bfa517597163f4e4bfd932913d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>UseShader</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Valid</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0b7d68be8cf3c74bd1b4ee64daf4222d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>WindowPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1afdad4a4a7a09b3b1d7cd3bf39af69771" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~Pipeline</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>

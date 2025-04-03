@@ -448,7 +448,7 @@ typedef bool(* SR_GRAPH_NS::MeshQSortCmpFn) (const SR_GTYPES_NS::Mesh *left, con
 ### typedef PassQueue 
 
 ```C++
-using SR_GRAPH_NS::PassQueue =  std::vector<BasePass*>;
+using SR_GRAPH_NS::PassQueue = typedef std::vector<BasePass*>;
 ```
 
 
@@ -461,7 +461,7 @@ using SR_GRAPH_NS::PassQueue =  std::vector<BasePass*>;
 ### typedef PassQueues 
 
 ```C++
-using SR_GRAPH_NS::PassQueues =  std::vector<PassQueue>;
+using SR_GRAPH_NS::PassQueues = typedef std::vector<PassQueue>;
 ```
 
 
@@ -487,7 +487,7 @@ typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(const SR_XML_NS::
 ### typedef SRDescriptorUpdateInfos 
 
 ```C++
-using SR_GRAPH_NS::SRDescriptorUpdateInfos =  std::vector<SRDescriptorUpdateInfo>;
+using SR_GRAPH_NS::SRDescriptorUpdateInfos = typedef std::vector<SRDescriptorUpdateInfo>;
 ```
 
 

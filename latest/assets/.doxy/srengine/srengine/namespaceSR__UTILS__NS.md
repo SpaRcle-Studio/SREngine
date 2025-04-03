@@ -38,7 +38,7 @@
 | namespace | [**Platform**](namespaceSR__UTILS__NS_1_1Platform.md) <br> |
 | namespace | [**Reflection**](namespaceSR__UTILS__NS_1_1Reflection.md) <br> |
 | namespace | [**SFINAE**](namespaceSR__UTILS__NS_1_1SFINAE.md) <br> |
-| namespace | [**Serialization**](namespaceSR__UTILS__NS_1_1Serialization.md) <br> |
+| namespace | [**Serialization**](namespaceSR__UTILS__NS_1_1Serialization.md) <br>_Default object makers for serialization._  |
 | namespace | [**SharedPointerTraits**](namespaceSR__UTILS__NS_1_1SharedPointerTraits.md) <br> |
 | namespace | [**StoreUtils**](namespaceSR__UTILS__NS_1_1StoreUtils.md) <br> |
 | namespace | [**Tests**](namespaceSR__UTILS__NS_1_1Tests.md) <br> |
@@ -76,20 +76,6 @@
 | class | [**DebugDraw**](classSR__UTILS__NS_1_1DebugDraw.md) <br> |
 | class | [**DebugLogComponent**](classSR__UTILS__NS_1_1DebugLogComponent.md) <br> |
 | struct | [**DefaultChecker**](structSR__UTILS__NS_1_1DefaultChecker.md) &lt;typename T, typename Enable&gt;<br> |
-| struct | [**DefaultChecker&lt; SR\_UTILS\_NS::StringAtom &gt;**](structSR__UTILS__NS_1_1DefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
-| struct | [**DefaultChecker&lt; T, std::enable\_if\_t&lt; SerializationTraits&lt; T &gt;::HasEmpty &&!IsTypeFromStdArrayTemplateV&lt; T &gt; &gt; &gt;**](structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01std_1_1enable__if__t_3_01SerializationTraits_3_f1ad6a1b8208027db52c5c5add79c61d.md) &lt;class T&gt;<br>_Specialization for types with "empty" method (std::vector, std::string, std::array, etc...)_  |
-| struct | [**DefaultChecker&lt; T, typename std::enable\_if\_t&lt; std::is\_default\_constructible\_v&lt; T &gt; &&CheckOperatorUsableV&lt; CheckerEqualityComparable, T, T &gt; &&!SerializationTraits&lt; T &gt;::HasEmpty &&!std::is\_same\_v&lt; T, SR\_UTILS\_NS::StringAtom &gt; &gt; &gt;**](structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__5bc20061f0ddc01a3d078bd35df479a5.md) &lt;class T&gt;<br>_Default checkers for serialization._  |
-| struct | [**DefaultChecker&lt; std::array&lt; T, N &gt; &gt;**](structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4.md) &lt;class T, N&gt;<br> |
-| struct | [**DefaultChecker&lt; std::optional&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1optional_3_01T_01_4_01_4.md) &lt;class T&gt;<br> |
-| struct | [**DefaultObjectMaker**](structSR__UTILS__NS_1_1DefaultObjectMaker.md) &lt;typename T, typename Enable&gt;<br>_Default object makers for serialization._  |
-| struct | [**DefaultObjectMaker&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;class T&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; SR\_UTILS\_NS::StringAtom &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4.md) &lt;typename T, typename U, typename Compare, typename Allocator&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; std::optional&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4.md) &lt;class T&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; std::set&lt; T, Less, Allocator &gt; &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4.md) &lt;typename T, typename Less, typename Allocator&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; std::string &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1string_01_4.md) &lt;&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; std::unordered\_map&lt; T, U, Hash, KeyEqual, Allocator &gt; &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_0166c036aa51ea51240830509b4715eacb.md) &lt;typename T, typename U, typename Hash, typename KeyEqual, typename Allocator&gt;<br> |
-| struct | [**DefaultObjectMaker&lt; std::vector&lt; T, TOther... &gt; &gt;**](structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4.md) &lt;class T, TOther&gt;<br> |
 | class | [**DefaultResourceReloader**](classSR__UTILS__NS_1_1DefaultResourceReloader.md) <br> |
 | struct | [**DetectedOr**](structSR__UTILS__NS_1_1DetectedOr.md) &lt;class Default, Op, Args&gt;<br> |
 | class | [**EntityController**](classSR__UTILS__NS_1_1EntityController.md) <br> |
@@ -164,50 +150,8 @@
 | class | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md) <br> |
 | class | [**NonMovable**](classSR__UTILS__NS_1_1NonMovable.md) <br> |
 | struct | [**ObjectDataAccessor**](structSR__UTILS__NS_1_1ObjectDataAccessor.md) &lt;typename T, typename Enable&gt;<br>_Specialization for serializable types._  |
-| struct | [**ObjectDataAccessor&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt;, std::enable\_if\_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_bcc0cde7fe2a1b6a6c918edb68e74246.md) &lt;typename T&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt;, std::enable\_if\_t&lt;!SerializationTraits&lt; T &gt;::HasOriginType &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_863ff9278aaa6e199c62f71431dce0e6.md) &lt;typename T&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_HTYPES\_NS::UnicodeString &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::BVector3 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1BVector3_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::BVector4 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1BVector4_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FSize &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FSize2 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FVector2 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector2_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FVector3 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector3_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FVector4 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector4_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::FVector6 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector6_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::IVector2 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector2_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::IVector3 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector3_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::IVector4 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector4_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::IVector6 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector6_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::Quaternion &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::UVector2 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector2_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::UVector3 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector3_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::UVector4 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector4_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_MATH\_NS::UVector6 &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector6_01_4.md) &lt;&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; SR\_UTILS\_NS::Path &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; SR\_UTILS\_NS::StringAtom &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; T, typename std::enable\_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**ObjectDataAccessor&lt; T, typename std::enable\_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2.md) &lt;typename T&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; bool &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01bool_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; double\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01double__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; float\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01float__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::array&lt; T, N &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4.md) &lt;typename T, N&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::int16\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int16__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::int32\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int32__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::int64\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int64__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::int8\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int8__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4.md) &lt;typename T, typename U, typename Compare, typename Allocator&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4.md) &lt;typename T, typename U&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::set&lt; T, Less, Allocator &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4.md) &lt;typename T, typename Less, typename Allocator&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::string &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1string_01_4.md) &lt;&gt;<br>_Data accessors for objects serialization._  |
-| struct | [**ObjectDataAccessor&lt; std::uint16\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint16__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::uint32\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint32__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::uint64\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint64__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::uint8\_t &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint8__t_01_4.md) &lt;&gt;<br> |
-| struct | [**ObjectDataAccessor&lt; std::vector&lt; T, TOther... &gt; &gt;**](structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4.md) &lt;typename T, TOther&gt;<br> |
-| struct | [**ObjectDataAccessorMathVector**](structSR__UTILS__NS_1_1ObjectDataAccessorMathVector.md) &lt;typename Type, dim&gt;<br> |
-| struct | [**ObjectDataAccessorVector**](structSR__UTILS__NS_1_1ObjectDataAccessorVector.md) &lt;class T&gt;<br> |
 | struct | [**Overloaded**](structSR__UTILS__NS_1_1Overloaded.md) &lt;Fs&gt;<br> |
 | class | [**Passkey**](classSR__UTILS__NS_1_1Passkey.md) &lt;typename T, AllowSuccessor, Others&gt;<br> |
 | class | [**Path**](classSR__UTILS__NS_1_1Path.md) <br> |
@@ -245,9 +189,6 @@
 | struct | [**SRHash&lt; std::basic\_string\_view&lt; Elem &gt; &gt;**](structSR__UTILS__NS_1_1SRHash_3_01std_1_1basic__string__view_3_01Elem_01_4_01_4.md) &lt;class Elem&gt;<br> |
 | class | [**SRProperty**](classSR__UTILS__NS_1_1SRProperty.md) <br> |
 | class | [**SRPropertyVariant**](classSR__UTILS__NS_1_1SRPropertyVariant.md) <br> |
-| struct | [**SaveChecker**](structSR__UTILS__NS_1_1SaveChecker.md) &lt;typename T, typename Enable&gt;<br> |
-| struct | [**SaveChecker&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt;, std::enable\_if\_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;**](structSR__UTILS__NS_1_1SaveChecker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable9d207a6623f032e90f18b6ab57d365d7.md) &lt;typename T&gt;<br> |
-| struct | [**SaveChecker&lt; T, typename std::enable\_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;**](structSR__UTILS__NS_1_1SaveChecker_3_01T_00_01typename_01std_1_1enable__if_3_01SerializationTrai86ff178b9c6ba98343a5edcb76ff7b5c.md) &lt;typename T&gt;<br> |
 | class | [**Serializable**](classSR__UTILS__NS_1_1Serializable.md) <br> |
 | struct | [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) <br> |
 | struct | [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) <br> |
@@ -294,7 +235,7 @@
 | typedef decltype(std::declval&lt; const X &gt;()==std::declval&lt; const Y &gt;()) | [**CheckerEqualityComparable**](#typedef-checkerequalitycomparable)  <br> |
 | typedef decltype(std::declval&lt; const X &gt;() - std::declval&lt; const Y &gt;()) | [**CheckerOperatorMinus**](#typedef-checkeroperatorminus)  <br> |
 | typedef typename [**DetectedOr**](structSR__UTILS__NS_1_1DetectedOr.md)&lt; Default, Op, Args... &gt;::type | [**DetectedOrT**](#typedef-detectedort)  <br> |
-| typedef typename [**Details::Detector**](structSR__UTILS__NS_1_1Details_1_1Detector.md)&lt; [**Details::Empty**](structSR__UTILS__NS_1_1Details_1_1Empty.md), void, Op, Args... &gt;::type | [**DetectedT**](#typedef-detectedt)  <br> |
+| typedef typename Details::Detector&lt; Details::Empty, void, Op, Args... &gt;::type | [**DetectedT**](#typedef-detectedt)  <br> |
 | typedef std::function&lt; Entity::Ptr(void)&gt; | [**EntityAllocator**](#typedef-entityallocator)  <br> |
 | typedef uint64\_t | [**EntityId**](#typedef-entityid)  <br> |
 | enum uint8\_t | [**EnumVariant**](#enum-enumvariant)  <br> |
@@ -327,39 +268,38 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**AlwaysFalseV**](#variable-alwaysfalsev)   = `std::is\_same\_v&lt;std::decay\_t&lt;T&gt;, std::add\_cv\_t&lt;std::decay\_t&lt;T&gt;&gt;&gt;`<br> |
-|  bool | [**CheckOperatorUsableV**](#variable-checkoperatorusablev)   = `[**CheckOperatorUsable**](structSR__UTILS__NS_1_1CheckOperatorUsable.md)&lt;Op, X, Y&gt;::value`<br> |
-|  uint64\_t | [**ConstexprStringsMaxEntries**](#variable-constexprstringsmaxentries)   = `512`<br> |
-|  auto | [**GetFirstOfTypeFromSequenceV**](#variable-getfirstoftypefromsequencev)   = `[**GetFirstOfTypeFromSequence**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence.md)&lt;T, Pairs...&gt;::value`<br> |
-|  bool | [**HasTypeInPackV**](#variable-hastypeinpackv)   = `std::disjunction\_v&lt;std::is\_same&lt;T, Types&gt;...&gt;`<br> |
-|  bool | [**IsAnyOfV**](#variable-isanyofv)   = `std::disjunction\_v&lt;std::is\_same&lt;T, Types&gt;...&gt;`<br> |
-|  bool | [**IsBaseOfV**](#variable-isbaseofv)   = `std::is\_base\_of\_v&lt;BaseT, DerivedT&gt;`<br> |
-|  bool | [**IsCompleteTypeV**](#variable-iscompletetypev)   = `[**IsCompleteType**](structSR__UTILS__NS_1_1IsCompleteType.md)&lt;T&gt;::value`<br> |
+|  constexpr bool | [**AlwaysFalseV**](#variable-alwaysfalsev)   = `std::is\_same\_v&lt;std::decay\_t&lt;T&gt;, std::add\_cv\_t&lt;std::decay\_t&lt;T&gt;&gt;&gt;`<br> |
+|  constexpr bool | [**CheckOperatorUsableV**](#variable-checkoperatorusablev)   = `[**CheckOperatorUsable**](structSR__UTILS__NS_1_1CheckOperatorUsable.md)&lt;Op, X, Y&gt;::value`<br> |
+|  constexpr uint64\_t | [**ConstexprStringsMaxEntries**](#variable-constexprstringsmaxentries)   = `512`<br> |
+|  constexpr auto | [**GetFirstOfTypeFromSequenceV**](#variable-getfirstoftypefromsequencev)   = `[**GetFirstOfTypeFromSequence**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence.md)&lt;T, Pairs...&gt;::value`<br> |
+|  constexpr bool | [**HasTypeInPackV**](#variable-hastypeinpackv)   = `std::disjunction\_v&lt;std::is\_same&lt;T, Types&gt;...&gt;`<br> |
+|  constexpr bool | [**IsAnyOfV**](#variable-isanyofv)   = `std::disjunction\_v&lt;std::is\_same&lt;T, Types&gt;...&gt;`<br> |
+|  constexpr bool | [**IsBaseOfV**](#variable-isbaseofv)   = `std::is\_base\_of\_v&lt;BaseT, DerivedT&gt;`<br> |
+|  constexpr bool | [**IsCompleteTypeV**](#variable-iscompletetypev)   = `[**IsCompleteType**](structSR__UTILS__NS_1_1IsCompleteType.md)&lt;T&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsDefaultCheckerAlwaysFalse**](#variable-isdefaultcheckeralwaysfalse)   = `DetectedOrT&lt;std::false\_type, Details::IsDefaultCheckerAlwaysFalseT, T&gt;::value`<br> |
-|  bool | [**IsDetectedConvertibleV**](#variable-isdetectedconvertiblev)   = `[**IsDetectedConvertible**](structSR__UTILS__NS_1_1IsDetectedConvertible.md)&lt;To, Op, Args...&gt;::value`<br> |
-|  bool | [**IsDetectedExactV**](#variable-isdetectedexactv)   = `[**IsDetectedExact**](structSR__UTILS__NS_1_1IsDetectedExact.md)&lt;Expected, Op, Args...&gt;::value`<br> |
-|  bool | [**IsDetectedV**](#variable-isdetectedv)   = `[**IsDetected**](structSR__UTILS__NS_1_1IsDetected.md)&lt;Op, Args...&gt;::value`<br> |
+|  constexpr bool | [**IsDetectedConvertibleV**](#variable-isdetectedconvertiblev)   = `[**IsDetectedConvertible**](structSR__UTILS__NS_1_1IsDetectedConvertible.md)&lt;To, Op, Args...&gt;::value`<br> |
+|  constexpr bool | [**IsDetectedExactV**](#variable-isdetectedexactv)   = `[**IsDetectedExact**](structSR__UTILS__NS_1_1IsDetectedExact.md)&lt;Expected, Op, Args...&gt;::value`<br> |
+|  constexpr bool | [**IsDetectedV**](#variable-isdetectedv)   = `[**IsDetected**](structSR__UTILS__NS_1_1IsDetected.md)&lt;Op, Args...&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsECharT**](#variable-isechart)   = `IsAnyOfV&lt;T, char, wchar\_t, char8\_t, char16\_t, char32\_t&gt;`<br> |
-|  bool | [**IsEnumV**](#variable-isenumv)   = `[**IsEnum**](structSR__UTILS__NS_1_1IsEnum.md)&lt;T&gt;::value`<br> |
-|  bool | [**IsSREnumV**](#variable-issrenumv)   = `[**IsSREnum**](structSR__UTILS__NS_1_1IsSREnum.md)&lt;T&gt;::value`<br> |
-|  bool | [**IsSTLVectorV**](#variable-isstlvectorv)   = `IsSTLVector&lt;T&gt;()`<br> |
-|  bool | [**IsSameClassTemplateV**](#variable-issameclasstemplatev)   = `[**IsSameClassTemplate**](structSR__UTILS__NS_1_1IsSameClassTemplate.md)&lt;Tmpl1, Tmpl2&gt;::value`<br> |
-|  bool | [**IsSharedPointerV**](#variable-issharedpointerv)   = `[**SharedPointerTraits::IsSharedPointer**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer.md)&lt;T&gt;::value`<br> |
+|  constexpr bool | [**IsEnumV**](#variable-isenumv)   = `[**IsEnum**](structSR__UTILS__NS_1_1IsEnum.md)&lt;T&gt;::value`<br> |
+|  constexpr bool | [**IsSREnumV**](#variable-issrenumv)   = `[**IsSREnum**](structSR__UTILS__NS_1_1IsSREnum.md)&lt;T&gt;::value`<br> |
+|  constexpr bool | [**IsSTLVectorV**](#variable-isstlvectorv)   = `IsSTLVector&lt;T&gt;()`<br> |
+|  constexpr bool | [**IsSameClassTemplateV**](#variable-issameclasstemplatev)   = `[**IsSameClassTemplate**](structSR__UTILS__NS_1_1IsSameClassTemplate.md)&lt;Tmpl1, Tmpl2&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsStdArrayTemplateV**](#variable-isstdarraytemplatev)   = `[**IsStdArrayTemplate**](structSR__UTILS__NS_1_1IsStdArrayTemplate.md)&lt;Tmpl&gt;::value`<br> |
-|  bool | [**IsTemplateClassV**](#variable-istemplateclassv)   = `[**IsTemplateClass**](structSR__UTILS__NS_1_1IsTemplateClass.md)&lt;T&gt;::value`<br> |
-|  bool | [**IsTypeFromClassTemplateV**](#variable-istypefromclasstemplatev)   = `[**IsTypeFromClassTemplate**](structSR__UTILS__NS_1_1IsTypeFromClassTemplate.md)&lt;T, Tmpl&gt;::value`<br> |
+|  constexpr bool | [**IsTemplateClassV**](#variable-istemplateclassv)   = `[**IsTemplateClass**](structSR__UTILS__NS_1_1IsTemplateClass.md)&lt;T&gt;::value`<br> |
+|  constexpr bool | [**IsTypeFromClassTemplateV**](#variable-istypefromclasstemplatev)   = `[**IsTypeFromClassTemplate**](structSR__UTILS__NS_1_1IsTypeFromClassTemplate.md)&lt;T, Tmpl&gt;::value`<br> |
 |  SR\_INLINE constexpr bool | [**IsTypeFromStdArrayTemplateV**](#variable-istypefromstdarraytemplatev)   = `[**IsTypeFromStdArrayTemplate**](structSR__UTILS__NS_1_1IsTypeFromStdArrayTemplate.md)&lt;T&gt;::value`<br> |
 |  const KeyCode | [**KeyCodes**](#variable-keycodes)  <br> |
 |  const MouseCode | [**MouseCodes**](#variable-mousecodes)   = `/* multi line expression */`<br> |
-|  bool | [**NoTypeInPackV**](#variable-notypeinpackv)   = `std::conjunction\_v&lt;std::negation&lt;std::is\_same&lt;T, Types&gt;&gt;...&gt;`<br> |
-|  bool | [**PackOfSameTypeV**](#variable-packofsametypev)   = `std::conjunction\_v&lt;std::is\_same&lt;T, Types&gt;...&gt;`<br> |
+|  constexpr bool | [**NoTypeInPackV**](#variable-notypeinpackv)   = `std::conjunction\_v&lt;std::negation&lt;std::is\_same&lt;T, Types&gt;&gt;...&gt;`<br> |
+|  constexpr bool | [**PackOfSameTypeV**](#variable-packofsametypev)   = `std::conjunction\_v&lt;std::is\_same&lt;T, Types&gt;...&gt;`<br> |
 |  SR\_INLINE\_STATIC [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**RESOURCE\_ID\_SEPARATOR**](#variable-resource_id_separator)   = `"→→→"`<br> |
 |  const std::vector&lt; [**Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; | [**SKYBOX\_INDEXED\_VERTICES**](#variable-skybox_indexed_vertices)   = `/* multi line expression */`<br> |
 |  const std::vector&lt; uint32\_t &gt; | [**SKYBOX\_INDICES**](#variable-skybox_indices)   = `{ 0,1,2,0,2,3,2,1,4,5,2,4,6,0,3,6,3,7,5,4,6,7,5,6,3,2,5,3,5,7,4,1,0,6,4,0 }`<br> |
 |  SR\_INLINE\_STATIC constexpr uint64\_t | [**SR\_FNV\_OFFSET\_BASIS**](#variable-sr_fnv_offset_basis)   = `14695981039346656037ULL`<br> |
 |  SR\_INLINE\_STATIC constexpr uint64\_t | [**SR\_FNV\_PRIME**](#variable-sr_fnv_prime)   = `1099511628211ULL`<br> |
-|  bool | [**SupportsNullptrComparisonV**](#variable-supportsnullptrcomparisonv)   = `[**SupportsNullptrComparison**](structSR__UTILS__NS_1_1SupportsNullptrComparison.md)&lt;T&gt;::value`<br> |
-|  auto | [**TypeValuePairV**](#variable-typevaluepairv)   = `[**TypeValuePair**](structSR__UTILS__NS_1_1TypeValuePair.md)&lt;T, val&gt;::value`<br> |
+|  constexpr bool | [**SupportsNullptrComparisonV**](#variable-supportsnullptrcomparisonv)   = `[**SupportsNullptrComparison**](structSR__UTILS__NS_1_1SupportsNullptrComparison.md)&lt;T&gt;::value`<br> |
+|  constexpr auto | [**TypeValuePairV**](#variable-typevaluepairv)   = `[**TypeValuePair**](structSR__UTILS__NS_1_1TypeValuePair.md)&lt;T, val&gt;::value`<br> |
 
 
 
@@ -381,9 +321,9 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_INLINE\_STATIC void | [**Breakpoint**](#function-breakpoint) () <br> |
-|  uint64\_t | [**CalculateHash**](#function-calculatehash) (const T & value) <br> |
+|  constexpr uint64\_t | [**CalculateHash**](#function-calculatehash) (const T & value) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**CharToInt**](#function-chartoint) (const char c) <br> |
-|  auto | [**CompileTimeConcatStrings**](#function-compiletimeconcatstrings) (const char(&) s1, const char(&) s2) <br> |
+|  constexpr auto | [**CompileTimeConcatStrings**](#function-compiletimeconcatstrings) (const char(&) s1, const char(&) s2) <br> |
 |  std::vector&lt; [**Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; | [**ComputeConvexHull**](#function-computeconvexhull) (const std::vector&lt; [**Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; & vertices) <br> |
 |  SR\_DLL\_EXPORT void | [**DisableStacktrace**](#function-disablestacktrace) () <br> |
 |  SR\_NODISCARD SR\_CONSTEXPR uint64\_t | [**Distance**](#function-distance) (InIt pFirst, InIt pLast) <br> |
@@ -396,25 +336,25 @@
 |  SR\_NODISCARD std::string | [**Format**](#function-format) (const char \* fmt, Args &&... args) <br> |
 |  SR\_NODISCARD std::string | [**Format**](#function-format) (const std::string & fmt, Args &&... args) <br> |
 |  std::string | [**GetCmdOption**](#function-getcmdoption) (char \*\* begin, char \*\* end, const std::string & option) <br> |
-|  const char \* | [**GetCompileTimeTypeName**](#function-getcompiletimetypename) () <br> |
+|  constexpr const char \* | [**GetCompileTimeTypeName**](#function-getcompiletimetypename) () <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetEnumReflectorName**](#function-getenumreflectorname) () <br> |
-|  uint8\_t | [**GetMathSizeDim**](#function-getmathsizedim) (const StandardType type) <br> |
-|  uint8\_t | [**GetMathSizeDim**](#function-getmathsizedim) () <br> |
-|  StandardType | [**GetMathSizeType**](#function-getmathsizetype) (const StandardType type) <br> |
-|  StandardType | [**GetMathSizeType**](#function-getmathsizetype) () <br> |
-|  uint8\_t | [**GetMathVectorDim**](#function-getmathvectordim) (const StandardType type) <br> |
-|  uint8\_t | [**GetMathVectorDim**](#function-getmathvectordim) () <br> |
-|  StandardType | [**GetMathVectorType**](#function-getmathvectortype) (const StandardType type) <br> |
-|  StandardType | [**GetMathVectorType**](#function-getmathvectortype) () <br> |
+|  constexpr uint8\_t | [**GetMathSizeDim**](#function-getmathsizedim) (const StandardType type) <br> |
+|  constexpr uint8\_t | [**GetMathSizeDim**](#function-getmathsizedim) () <br> |
+|  constexpr StandardType | [**GetMathSizeType**](#function-getmathsizetype) (const StandardType type) <br> |
+|  constexpr StandardType | [**GetMathSizeType**](#function-getmathsizetype) () <br> |
+|  constexpr uint8\_t | [**GetMathVectorDim**](#function-getmathvectordim) (const StandardType type) <br> |
+|  constexpr uint8\_t | [**GetMathVectorDim**](#function-getmathvectordim) () <br> |
+|  constexpr StandardType | [**GetMathVectorType**](#function-getmathvectortype) (const StandardType type) <br> |
+|  constexpr StandardType | [**GetMathVectorType**](#function-getmathvectortype) () <br> |
 |  std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetResourceFolder**](#function-getresourcefolder) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & appFolder) <br> |
 |  SR\_DLL\_EXPORT [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) \* | [**GetSingletonManager**](#function-getsingletonmanager) () noexcept<br> |
 |  SR\_DLL\_EXPORT std::string | [**GetStacktrace**](#function-getstacktrace) () <br> |
-|  StandardType | [**GetStandardType**](#function-getstandardtype) () <br> |
+|  constexpr StandardType | [**GetStandardType**](#function-getstandardtype) () <br> |
 |  SR\_INLINE [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetThisThreadId**](#function-getthisthreadid) () <br> |
 |  SR\_INLINE std::string | [**GetThreadId**](#function-getthreadid) (const std::thread & thread) <br> |
 |  bool | [**HasCmdOption**](#function-hascmdoption) (char \*\* begin, char \*\* end, const std::string & option) <br> |
 |  SR\_NODISCARD constexpr uint64\_t | [**HashArrayRepresentation**](#function-hasharrayrepresentation) (const T \*const first, const size\_t count) noexcept<br> |
-|  uint64\_t | [**HashCombine**](#function-hashcombine) (const T & value, uint64\_t hash=0) <br> |
+|  constexpr uint64\_t | [**HashCombine**](#function-hashcombine) (const T & value, uint64\_t hash=0) <br> |
 |  SR\_NODISCARD constexpr uint64\_t | [**HashRepresentation**](#function-hashrepresentation) (const T & keyVal) noexcept<br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexCharToUInt8**](#function-hexchartouint8) (const char c) <br>_Функция для преобразования hex символа в целое число_  |
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**HexCharToUInt8**](#function-hexchartouint8) (const char high, const char low) <br> |
@@ -423,13 +363,13 @@
 |  SR\_CONSTEXPR void | [**IgnoreUnused**](#function-ignoreunused) (const T & ...) <br> |
 |  SR\_INLINE bool | [**IsDefault**](#function-isdefault) (const T & value) <br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC bool | [**IsHexString**](#function-ishexstring) (const std::string\_view str) <br> |
-|  bool | [**IsLogical**](#function-islogical) () <br> |
-|  bool | [**IsMathSize**](#function-ismathsize) (const StandardType type) <br> |
-|  bool | [**IsMathSize**](#function-ismathsize) () <br> |
-|  bool | [**IsMathVector**](#function-ismathvector) () <br> |
-|  bool | [**IsSTLVector**](#function-isstlvector) () <br> |
-|  bool | [**IsString**](#function-isstring) () <br> |
-|  bool | [**IsVolatile**](#function-isvolatile) () <br> |
+|  constexpr bool | [**IsLogical**](#function-islogical) () <br> |
+|  constexpr bool | [**IsMathSize**](#function-ismathsize) (const StandardType type) <br> |
+|  constexpr bool | [**IsMathSize**](#function-ismathsize) () <br> |
+|  constexpr bool | [**IsMathVector**](#function-ismathvector) () <br> |
+|  constexpr bool | [**IsSTLVector**](#function-isstlvector) () <br> |
+|  constexpr bool | [**IsString**](#function-isstring) () <br> |
+|  constexpr bool | [**IsVolatile**](#function-isvolatile) () <br> |
 |  SR\_NODISCARD T | [**LexicalCast**](#function-lexicalcast) (std::string\_view str) <br> |
 |   | [**Overloaded**](#function-overloaded) (Fs && ...) <br> |
 |   | [**Passkey**](#function-passkey) (const T \*) <br> |
@@ -515,7 +455,7 @@
 ### typedef CheckerEqualityComparable 
 
 ```C++
-using SR_UTILS_NS::CheckerEqualityComparable =  decltype(std::declval<const X>() == std::declval<const Y>());
+using SR_UTILS_NS::CheckerEqualityComparable = typedef decltype(std::declval<const X>() == std::declval<const Y>());
 ```
 
 
@@ -528,7 +468,7 @@ using SR_UTILS_NS::CheckerEqualityComparable =  decltype(std::declval<const X>()
 ### typedef CheckerOperatorMinus 
 
 ```C++
-using SR_UTILS_NS::CheckerOperatorMinus =  decltype(std::declval<const X>() - std::declval<const Y>());
+using SR_UTILS_NS::CheckerOperatorMinus = typedef decltype(std::declval<const X>() - std::declval<const Y>());
 ```
 
 
@@ -541,7 +481,7 @@ using SR_UTILS_NS::CheckerOperatorMinus =  decltype(std::declval<const X>() - st
 ### typedef DetectedOrT 
 
 ```C++
-using SR_UTILS_NS::DetectedOrT =  typename DetectedOr<Default, Op, Args...>::type;
+using SR_UTILS_NS::DetectedOrT = typedef typename DetectedOr<Default, Op, Args...>::type;
 ```
 
 
@@ -554,7 +494,7 @@ using SR_UTILS_NS::DetectedOrT =  typename DetectedOr<Default, Op, Args...>::typ
 ### typedef DetectedT 
 
 ```C++
-using SR_UTILS_NS::DetectedT =  typename Details::Detector<Details::Empty, void, Op, Args...>::type;
+using SR_UTILS_NS::DetectedT = typedef typename Details::Detector<Details::Empty, void, Op, Args...>::type;
 ```
 
 
@@ -610,7 +550,7 @@ enum SR_UTILS_NS::EnumVariant {
 ### typedef GetPromPackT 
 
 ```C++
-using SR_UTILS_NS::GetPromPackT =  typename decltype(Details::GetFromPackResolver<Index, Types...>())::type;
+using SR_UTILS_NS::GetPromPackT = typedef typename decltype(Details::GetFromPackResolver<Index, Types...>())::type;
 ```
 
 
@@ -623,7 +563,7 @@ using SR_UTILS_NS::GetPromPackT =  typename decltype(Details::GetFromPackResolve
 ### typedef HasMethodEmptyT 
 
 ```C++
-using SR_UTILS_NS::HasMethodEmptyT =  decltype(std::declval<const T&>().empty());
+using SR_UTILS_NS::HasMethodEmptyT = typedef decltype(std::declval<const T&>().empty());
 ```
 
 
@@ -636,7 +576,7 @@ using SR_UTILS_NS::HasMethodEmptyT =  decltype(std::declval<const T&>().empty())
 ### typedef HasNullptrComparison 
 
 ```C++
-using SR_UTILS_NS::HasNullptrComparison =  decltype(std::declval<const T>() == nullptr);
+using SR_UTILS_NS::HasNullptrComparison = typedef decltype(std::declval<const T>() == nullptr);
 ```
 
 
@@ -720,7 +660,7 @@ enum SR_UTILS_NS::MouseCode {
 ### typedef RebindAllocT 
 
 ```C++
-using SR_UTILS_NS::RebindAllocT =  typename std::allocator_traits<Alloc>::template rebind_alloc<ValueType>;
+using SR_UTILS_NS::RebindAllocT = typedef typename std::allocator_traits<Alloc>::template rebind_alloc<ValueType>;
 ```
 
 
@@ -733,7 +673,7 @@ using SR_UTILS_NS::RebindAllocT =  typename std::allocator_traits<Alloc>::templa
 ### typedef RemoveCVRefT 
 
 ```C++
-using SR_UTILS_NS::RemoveCVRefT =  typename RemoveCVRef<T>::type;
+using SR_UTILS_NS::RemoveCVRefT = typedef typename RemoveCVRef<T>::type;
 ```
 
 
@@ -746,7 +686,7 @@ using SR_UTILS_NS::RemoveCVRefT =  typename RemoveCVRef<T>::type;
 ### typedef RemoveQualifiersT 
 
 ```C++
-using SR_UTILS_NS::RemoveQualifiersT =  std::remove_const_t<std::remove_reference_t<std::remove_const_t<std::remove_volatile_t<T>>>>;
+using SR_UTILS_NS::RemoveQualifiersT = typedef std::remove_const_t<std::remove_reference_t<std::remove_const_t<std::remove_volatile_t<T> >> >;
 ```
 
 
@@ -798,7 +738,7 @@ typedef ska::flat_hash_map<uint64_t, ResourceType*> SR_UTILS_NS::ResourcesTypes;
 ### typedef SRHashType 
 
 ```C++
-using SR_UTILS_NS::SRHashType =  uint64_t;
+using SR_UTILS_NS::SRHashType = typedef uint64_t;
 ```
 
 
@@ -893,7 +833,7 @@ enum SR_UTILS_NS::SyncType {
 ### typedef TimePointType 
 
 ```C++
-using SR_UTILS_NS::TimePointType =  std::chrono::time_point<std::chrono::steady_clock>;
+using SR_UTILS_NS::TimePointType = typedef std::chrono::time_point<std::chrono::steady_clock>;
 ```
 
 
@@ -906,7 +846,7 @@ using SR_UTILS_NS::TimePointType =  std::chrono::time_point<std::chrono::steady_
 ### typedef TypeValuePairT 
 
 ```C++
-using SR_UTILS_NS::TypeValuePairT =  typename TypeValuePair<T, val>::type;
+using SR_UTILS_NS::TypeValuePairT = typedef typename TypeValuePair<T, val>::type;
 ```
 
 
@@ -921,7 +861,7 @@ using SR_UTILS_NS::TypeValuePairT =  typename TypeValuePair<T, val>::type;
 ### variable AlwaysFalseV 
 
 ```C++
-bool SR_UTILS_NS::AlwaysFalseV;
+constexpr bool SR_UTILS_NS::AlwaysFalseV;
 ```
 
 
@@ -934,7 +874,7 @@ bool SR_UTILS_NS::AlwaysFalseV;
 ### variable CheckOperatorUsableV 
 
 ```C++
-bool SR_UTILS_NS::CheckOperatorUsableV;
+constexpr bool SR_UTILS_NS::CheckOperatorUsableV;
 ```
 
 
@@ -947,7 +887,7 @@ bool SR_UTILS_NS::CheckOperatorUsableV;
 ### variable ConstexprStringsMaxEntries 
 
 ```C++
-uint64_t SR_UTILS_NS::ConstexprStringsMaxEntries;
+constexpr uint64_t SR_UTILS_NS::ConstexprStringsMaxEntries;
 ```
 
 
@@ -960,7 +900,7 @@ uint64_t SR_UTILS_NS::ConstexprStringsMaxEntries;
 ### variable GetFirstOfTypeFromSequenceV 
 
 ```C++
-auto SR_UTILS_NS::GetFirstOfTypeFromSequenceV;
+constexpr auto SR_UTILS_NS::GetFirstOfTypeFromSequenceV;
 ```
 
 
@@ -973,7 +913,7 @@ auto SR_UTILS_NS::GetFirstOfTypeFromSequenceV;
 ### variable HasTypeInPackV 
 
 ```C++
-bool SR_UTILS_NS::HasTypeInPackV;
+constexpr bool SR_UTILS_NS::HasTypeInPackV;
 ```
 
 
@@ -986,7 +926,7 @@ bool SR_UTILS_NS::HasTypeInPackV;
 ### variable IsAnyOfV 
 
 ```C++
-bool SR_UTILS_NS::IsAnyOfV;
+constexpr bool SR_UTILS_NS::IsAnyOfV;
 ```
 
 
@@ -999,7 +939,7 @@ bool SR_UTILS_NS::IsAnyOfV;
 ### variable IsBaseOfV 
 
 ```C++
-bool SR_UTILS_NS::IsBaseOfV;
+constexpr bool SR_UTILS_NS::IsBaseOfV;
 ```
 
 
@@ -1012,7 +952,7 @@ bool SR_UTILS_NS::IsBaseOfV;
 ### variable IsCompleteTypeV 
 
 ```C++
-bool SR_UTILS_NS::IsCompleteTypeV;
+constexpr bool SR_UTILS_NS::IsCompleteTypeV;
 ```
 
 
@@ -1038,7 +978,7 @@ SR_INLINE constexpr bool SR_UTILS_NS::IsDefaultCheckerAlwaysFalse;
 ### variable IsDetectedConvertibleV 
 
 ```C++
-bool SR_UTILS_NS::IsDetectedConvertibleV;
+constexpr bool SR_UTILS_NS::IsDetectedConvertibleV;
 ```
 
 
@@ -1051,7 +991,7 @@ bool SR_UTILS_NS::IsDetectedConvertibleV;
 ### variable IsDetectedExactV 
 
 ```C++
-bool SR_UTILS_NS::IsDetectedExactV;
+constexpr bool SR_UTILS_NS::IsDetectedExactV;
 ```
 
 
@@ -1064,7 +1004,7 @@ bool SR_UTILS_NS::IsDetectedExactV;
 ### variable IsDetectedV 
 
 ```C++
-bool SR_UTILS_NS::IsDetectedV;
+constexpr bool SR_UTILS_NS::IsDetectedV;
 ```
 
 
@@ -1090,7 +1030,7 @@ SR_INLINE constexpr bool SR_UTILS_NS::IsECharT;
 ### variable IsEnumV 
 
 ```C++
-bool SR_UTILS_NS::IsEnumV;
+constexpr bool SR_UTILS_NS::IsEnumV;
 ```
 
 
@@ -1103,7 +1043,7 @@ bool SR_UTILS_NS::IsEnumV;
 ### variable IsSREnumV 
 
 ```C++
-bool SR_UTILS_NS::IsSREnumV;
+constexpr bool SR_UTILS_NS::IsSREnumV;
 ```
 
 
@@ -1116,7 +1056,7 @@ bool SR_UTILS_NS::IsSREnumV;
 ### variable IsSTLVectorV 
 
 ```C++
-bool SR_UTILS_NS::IsSTLVectorV;
+constexpr bool SR_UTILS_NS::IsSTLVectorV;
 ```
 
 
@@ -1129,20 +1069,7 @@ bool SR_UTILS_NS::IsSTLVectorV;
 ### variable IsSameClassTemplateV 
 
 ```C++
-bool SR_UTILS_NS::IsSameClassTemplateV;
-```
-
-
-
-
-<hr>
-
-
-
-### variable IsSharedPointerV 
-
-```C++
-bool SR_UTILS_NS::IsSharedPointerV;
+constexpr bool SR_UTILS_NS::IsSameClassTemplateV;
 ```
 
 
@@ -1168,7 +1095,7 @@ SR_INLINE constexpr bool SR_UTILS_NS::IsStdArrayTemplateV;
 ### variable IsTemplateClassV 
 
 ```C++
-bool SR_UTILS_NS::IsTemplateClassV;
+constexpr bool SR_UTILS_NS::IsTemplateClassV;
 ```
 
 
@@ -1181,7 +1108,7 @@ bool SR_UTILS_NS::IsTemplateClassV;
 ### variable IsTypeFromClassTemplateV 
 
 ```C++
-bool SR_UTILS_NS::IsTypeFromClassTemplateV;
+constexpr bool SR_UTILS_NS::IsTypeFromClassTemplateV;
 ```
 
 
@@ -1233,7 +1160,7 @@ const MouseCode SR_UTILS_NS::MouseCodes[];
 ### variable NoTypeInPackV 
 
 ```C++
-bool SR_UTILS_NS::NoTypeInPackV;
+constexpr bool SR_UTILS_NS::NoTypeInPackV;
 ```
 
 
@@ -1246,7 +1173,7 @@ bool SR_UTILS_NS::NoTypeInPackV;
 ### variable PackOfSameTypeV 
 
 ```C++
-bool SR_UTILS_NS::PackOfSameTypeV;
+constexpr bool SR_UTILS_NS::PackOfSameTypeV;
 ```
 
 
@@ -1324,7 +1251,7 @@ SR_INLINE_STATIC constexpr uint64_t SR_UTILS_NS::SR_FNV_PRIME;
 ### variable SupportsNullptrComparisonV 
 
 ```C++
-bool SR_UTILS_NS::SupportsNullptrComparisonV;
+constexpr bool SR_UTILS_NS::SupportsNullptrComparisonV;
 ```
 
 
@@ -1337,7 +1264,7 @@ bool SR_UTILS_NS::SupportsNullptrComparisonV;
 ### variable TypeValuePairV 
 
 ```C++
-auto SR_UTILS_NS::TypeValuePairV;
+constexpr auto SR_UTILS_NS::TypeValuePairV;
 ```
 
 
@@ -1366,7 +1293,7 @@ SR_INLINE_STATIC void SR_UTILS_NS::Breakpoint ()
 
 ```C++
 template<typename T>
-uint64_t SR_UTILS_NS::CalculateHash (
+constexpr uint64_t SR_UTILS_NS::CalculateHash (
     const T & value
 ) 
 ```
@@ -1397,7 +1324,7 @@ SR_NODISCARD SR_INLINE_STATIC uint8_t SR_UTILS_NS::CharToInt (
 
 ```C++
 template<size_t N1, size_t N2>
-auto SR_UTILS_NS::CompileTimeConcatStrings (
+constexpr auto SR_UTILS_NS::CompileTimeConcatStrings (
     const char(&) s1,
     const char(&) s2
 ) 
@@ -1612,7 +1539,7 @@ std::string SR_UTILS_NS::GetCmdOption (
 
 ```C++
 template<typename T>
-const char * SR_UTILS_NS::GetCompileTimeTypeName () 
+constexpr const char * SR_UTILS_NS::GetCompileTimeTypeName () 
 ```
 
 
@@ -1639,7 +1566,7 @@ SR_UTILS_NS::StringAtom SR_UTILS_NS::GetEnumReflectorName ()
 ### function GetMathSizeDim 
 
 ```C++
-uint8_t SR_UTILS_NS::GetMathSizeDim (
+constexpr uint8_t SR_UTILS_NS::GetMathSizeDim (
     const StandardType type
 ) 
 ```
@@ -1655,7 +1582,7 @@ uint8_t SR_UTILS_NS::GetMathSizeDim (
 
 ```C++
 template<typename T>
-uint8_t SR_UTILS_NS::GetMathSizeDim () 
+constexpr uint8_t SR_UTILS_NS::GetMathSizeDim () 
 ```
 
 
@@ -1668,7 +1595,7 @@ uint8_t SR_UTILS_NS::GetMathSizeDim ()
 ### function GetMathSizeType 
 
 ```C++
-StandardType SR_UTILS_NS::GetMathSizeType (
+constexpr StandardType SR_UTILS_NS::GetMathSizeType (
     const StandardType type
 ) 
 ```
@@ -1684,7 +1611,7 @@ StandardType SR_UTILS_NS::GetMathSizeType (
 
 ```C++
 template<typename T>
-StandardType SR_UTILS_NS::GetMathSizeType () 
+constexpr StandardType SR_UTILS_NS::GetMathSizeType () 
 ```
 
 
@@ -1697,7 +1624,7 @@ StandardType SR_UTILS_NS::GetMathSizeType ()
 ### function GetMathVectorDim 
 
 ```C++
-uint8_t SR_UTILS_NS::GetMathVectorDim (
+constexpr uint8_t SR_UTILS_NS::GetMathVectorDim (
     const StandardType type
 ) 
 ```
@@ -1713,7 +1640,7 @@ uint8_t SR_UTILS_NS::GetMathVectorDim (
 
 ```C++
 template<typename T>
-uint8_t SR_UTILS_NS::GetMathVectorDim () 
+constexpr uint8_t SR_UTILS_NS::GetMathVectorDim () 
 ```
 
 
@@ -1726,7 +1653,7 @@ uint8_t SR_UTILS_NS::GetMathVectorDim ()
 ### function GetMathVectorType 
 
 ```C++
-StandardType SR_UTILS_NS::GetMathVectorType (
+constexpr StandardType SR_UTILS_NS::GetMathVectorType (
     const StandardType type
 ) 
 ```
@@ -1742,7 +1669,7 @@ StandardType SR_UTILS_NS::GetMathVectorType (
 
 ```C++
 template<typename T>
-StandardType SR_UTILS_NS::GetMathVectorType () 
+constexpr StandardType SR_UTILS_NS::GetMathVectorType () 
 ```
 
 
@@ -1797,7 +1724,7 @@ SR_DLL_EXPORT std::string SR_UTILS_NS::GetStacktrace ()
 
 ```C++
 template<typename T>
-StandardType SR_UTILS_NS::GetStandardType () 
+constexpr StandardType SR_UTILS_NS::GetStandardType () 
 ```
 
 
@@ -1873,7 +1800,7 @@ SR_NODISCARD constexpr uint64_t SR_UTILS_NS::HashArrayRepresentation (
 
 ```C++
 template<typename T>
-uint64_t SR_UTILS_NS::HashCombine (
+constexpr uint64_t SR_UTILS_NS::HashCombine (
     const T & value,
     uint64_t hash=0
 ) 
@@ -2016,7 +1943,7 @@ SR_NODISCARD SR_INLINE_STATIC bool SR_UTILS_NS::IsHexString (
 
 ```C++
 template<typename T>
-bool SR_UTILS_NS::IsLogical () 
+constexpr bool SR_UTILS_NS::IsLogical () 
 ```
 
 
@@ -2029,7 +1956,7 @@ bool SR_UTILS_NS::IsLogical ()
 ### function IsMathSize 
 
 ```C++
-bool SR_UTILS_NS::IsMathSize (
+constexpr bool SR_UTILS_NS::IsMathSize (
     const StandardType type
 ) 
 ```
@@ -2045,7 +1972,7 @@ bool SR_UTILS_NS::IsMathSize (
 
 ```C++
 template<typename T>
-bool SR_UTILS_NS::IsMathSize () 
+constexpr bool SR_UTILS_NS::IsMathSize () 
 ```
 
 
@@ -2059,7 +1986,7 @@ bool SR_UTILS_NS::IsMathSize ()
 
 ```C++
 template<typename T>
-bool SR_UTILS_NS::IsMathVector () 
+constexpr bool SR_UTILS_NS::IsMathVector () 
 ```
 
 
@@ -2073,7 +2000,7 @@ bool SR_UTILS_NS::IsMathVector ()
 
 ```C++
 template<typename T>
-bool SR_UTILS_NS::IsSTLVector () 
+constexpr bool SR_UTILS_NS::IsSTLVector () 
 ```
 
 
@@ -2087,7 +2014,7 @@ bool SR_UTILS_NS::IsSTLVector ()
 
 ```C++
 template<typename T>
-bool SR_UTILS_NS::IsString () 
+constexpr bool SR_UTILS_NS::IsString () 
 ```
 
 
@@ -2101,7 +2028,7 @@ bool SR_UTILS_NS::IsString ()
 
 ```C++
 template<typename T>
-bool SR_UTILS_NS::IsVolatile () 
+constexpr bool SR_UTILS_NS::IsVolatile () 
 ```
 
 

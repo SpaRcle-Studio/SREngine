@@ -45,10 +45,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**IsDeclaredInNamespace**](#variable-isdeclaredinnamespace)   = `(Codegen::GetEnumVariant(static\_cast&lt;const EnumResultType\*&gt;(nullptr)) != EnumVariant::Undefined)`<br> |
-|  bool | [**IsEnum**](#variable-isenum)   = `Codegen::GetEnumVariant(EnumSelectorType{}) != EnumVariant::Undefined`<br> |
-|  bool | [**IsFlags**](#variable-isflags)   = `Codegen::GetEnumVariant(EnumSelectorType{}) == EnumVariant::Flags`<br> |
-|  size\_t | [**NumItems**](#variable-numitems)   = `Codegen::GetEnumItemsCount(EnumSelectorType{})`<br> |
+|  constexpr bool | [**IsDeclaredInNamespace**](#variable-isdeclaredinnamespace)   = `(Codegen::GetEnumVariant(static\_cast&lt;const EnumResultType\*&gt;(nullptr)) != EnumVariant::Undefined)`<br> |
+|  constexpr bool | [**IsEnum**](#variable-isenum)   = `Codegen::GetEnumVariant(EnumSelectorType{}) != EnumVariant::Undefined`<br> |
+|  constexpr bool | [**IsFlags**](#variable-isflags)   = `Codegen::GetEnumVariant(EnumSelectorType{}) == EnumVariant::Flags`<br> |
+|  constexpr size\_t | [**NumItems**](#variable-numitems)   = `Codegen::GetEnumItemsCount(EnumSelectorType{})`<br> |
 
 
 
@@ -112,7 +112,7 @@ using SR_UTILS_NS::EnumTraits< EnumType >::EnumResultType =  typename std::condi
 ### typedef EnumSelectorType 
 
 ```C++
-using SR_UTILS_NS::EnumTraits< EnumType >::EnumSelectorType =  typename std::conditional_t<IsDeclaredInNamespace, const EnumResultType*, Codegen::EnumSelector<EnumType>>;
+using SR_UTILS_NS::EnumTraits< EnumType >::EnumSelectorType =  typename std::conditional_t<IsDeclaredInNamespace, const EnumResultType*, Codegen::EnumSelector<EnumType> >;
 ```
 
 
@@ -127,7 +127,7 @@ using SR_UTILS_NS::EnumTraits< EnumType >::EnumSelectorType =  typename std::con
 ### variable IsDeclaredInNamespace 
 
 ```C++
-bool SR_UTILS_NS::EnumTraits< EnumType >::IsDeclaredInNamespace;
+constexpr bool SR_UTILS_NS::EnumTraits< EnumType >::IsDeclaredInNamespace;
 ```
 
 
@@ -140,7 +140,7 @@ bool SR_UTILS_NS::EnumTraits< EnumType >::IsDeclaredInNamespace;
 ### variable IsEnum 
 
 ```C++
-bool SR_UTILS_NS::EnumTraits< EnumType >::IsEnum;
+constexpr bool SR_UTILS_NS::EnumTraits< EnumType >::IsEnum;
 ```
 
 
@@ -153,7 +153,7 @@ bool SR_UTILS_NS::EnumTraits< EnumType >::IsEnum;
 ### variable IsFlags 
 
 ```C++
-bool SR_UTILS_NS::EnumTraits< EnumType >::IsFlags;
+constexpr bool SR_UTILS_NS::EnumTraits< EnumType >::IsFlags;
 ```
 
 
@@ -166,7 +166,7 @@ bool SR_UTILS_NS::EnumTraits< EnumType >::IsFlags;
 ### variable NumItems 
 
 ```C++
-size_t SR_UTILS_NS::EnumTraits< EnumType >::NumItems;
+constexpr size_t SR_UTILS_NS::EnumTraits< EnumType >::NumItems;
 ```
 
 

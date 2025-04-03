@@ -37,11 +37,11 @@
 
 | Type | Name |
 | ---: | :--- |
-|  double\_t | [**grads2**](#variable-grads2)  <br> |
-|  double\_t | [**grads3**](#variable-grads3)  <br> |
-|  double\_t | [**grads4**](#variable-grads4)  <br> |
-|  uint8\_t | [**perm**](#variable-perm)   = `/* multi line expression */`<br> |
-|  double\_t | [**uniform**](#variable-uniform)  <br> |
+|  constexpr double\_t | [**grads2**](#variable-grads2)  <br> |
+|  constexpr double\_t | [**grads3**](#variable-grads3)  <br> |
+|  constexpr double\_t | [**grads4**](#variable-grads4)  <br> |
+|  constexpr uint8\_t | [**perm**](#variable-perm)   = `/* multi line expression */`<br> |
+|  constexpr double\_t | [**uniform**](#variable-uniform)  <br> |
 
 
 
@@ -92,7 +92,7 @@
 ### variable grads2 
 
 ```C++
-double_t SR_MATH_NS::NoiseTable::grads2[256][2];
+constexpr double_t SR_MATH_NS::NoiseTable::grads2[256][2];
 ```
 
 
@@ -105,7 +105,7 @@ double_t SR_MATH_NS::NoiseTable::grads2[256][2];
 ### variable grads3 
 
 ```C++
-double_t SR_MATH_NS::NoiseTable::grads3[256][3];
+constexpr double_t SR_MATH_NS::NoiseTable::grads3[256][3];
 ```
 
 
@@ -118,7 +118,7 @@ double_t SR_MATH_NS::NoiseTable::grads3[256][3];
 ### variable grads4 
 
 ```C++
-double_t SR_MATH_NS::NoiseTable::grads4[256][4];
+constexpr double_t SR_MATH_NS::NoiseTable::grads4[256][4];
 ```
 
 
@@ -131,7 +131,7 @@ double_t SR_MATH_NS::NoiseTable::grads4[256][4];
 ### variable perm 
 
 ```C++
-uint8_t SR_MATH_NS::NoiseTable::perm[256];
+constexpr uint8_t SR_MATH_NS::NoiseTable::perm[256];
 ```
 
 
@@ -144,7 +144,7 @@ uint8_t SR_MATH_NS::NoiseTable::perm[256];
 ### variable uniform 
 
 ```C++
-double_t SR_MATH_NS::NoiseTable::uniform[256];
+constexpr double_t SR_MATH_NS::NoiseTable::uniform[256];
 ```
 
 

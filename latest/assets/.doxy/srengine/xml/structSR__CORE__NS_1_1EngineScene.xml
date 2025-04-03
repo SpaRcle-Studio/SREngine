@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__CORE__NS_1_1EngineScene" kind="struct" language="C++" prot="public">
     <compoundname>SR_CORE_NS::EngineScene</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
@@ -472,10 +472,10 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="10">
+      <node id="4">
         <label>SR_CORE_NS::Engine</label>
         <link refid="classSR__CORE__NS_1_1Engine"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -484,60 +484,26 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
         <childnode refid="3" relation="usage">
-          <edgelabel>pScene</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>pRenderScene</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
-          <edgelabel>pPhysicsScene</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
           <edgelabel>pSceneUpdater</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>pMainCamera</edgelabel>
-        </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="4" relation="usage">
           <edgelabel>pEngine</edgelabel>
         </childnode>
       </node>
-      <node id="7">
-        <label>SR_HTYPES_NS::SafePtr&lt; SR_PHYSICS_NS::PhysicsScene &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
-      </node>
-      <node id="11">
-        <label>SR_HTYPES_NS::SharedPtr&lt; Engine &gt;</label>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GRAPH_NS::RenderScene &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_GTYPES_NS::Camera &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SR_WORLD_NS::Scene &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="5" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>m_data</edgelabel>
         </childnode>
       </node>
-      <node id="5">
+      <node id="7">
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
@@ -545,7 +511,7 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="8">
+      <node id="3">
         <label>SR_WORLD_NS::SceneUpdater</label>
         <link refid="classSR__WORLD__NS_1_1SceneUpdater"/>
         <childnode refid="2" relation="public-inheritance">

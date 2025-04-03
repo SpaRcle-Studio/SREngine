@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GTYPES__NS_1_1Mesh" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_GTYPES_NS::Mesh</compoundname>
     <basecompoundref refid="classSR__GTYPES__NS_1_1IRenderComponent" prot="public" virt="non-virtual">SR_GTYPES_NS::IRenderComponent</basecompoundref>
@@ -461,10 +461,10 @@
         <argsstring>() const</argsstring>
         <name>IsCalculatable</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::IsCalculatable</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a3f02b4b66998089cc6a0a3599605193a">IsCalculatable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1a725199ac6ffd3df2bd2f9caad2ab7fce">IsCalculatable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1ae856ccedae6a060b798f3c37314e36ab">IsCalculatable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1acb1c5d3dbde2c12c7b317e3d0106129a">IsCalculatable</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a3f02b4b66998089cc6a0a3599605193a">IsCalculatable</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -510,8 +510,8 @@
         <argsstring>() const noexcept</argsstring>
         <name>IsFlatMesh</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::IsFlatMesh</qualifiedname>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a10a7ae0ece4fde741b8107d9063ab42e">IsFlatMesh</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a485f6e04654fffbebae0ec7a141e3b2c">IsFlatMesh</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a10a7ae0ece4fde741b8107d9063ab42e">IsFlatMesh</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -588,10 +588,10 @@
         <argsstring>() const =0</argsstring>
         <name>IsSupportVBO</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::IsSupportVBO</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a82c1372140d1fd686a9a04cd7d6318d4">IsSupportVBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugLine_1a235809b6118c7d4813c649a55302d13c">IsSupportVBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1IndexedMesh_1acd2426952f16cf3f88068adef2d09a04">IsSupportVBO</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1adc6b23cd26da870ee3ff8eb1fc408353">IsSupportVBO</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a82c1372140d1fd686a9a04cd7d6318d4">IsSupportVBO</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -606,10 +606,10 @@
         <argsstring>() const =0</argsstring>
         <name>GetIndicesCount</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::GetIndicesCount</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a57a18cb5d54f38cbe4768cae125669c4">GetIndicesCount</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugLine_1a7167883e6f72c2c37077224271c22b5d">GetIndicesCount</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1IndexedMesh_1a898c8bb0651bfcdb5c01125c8b34bdc8">GetIndicesCount</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a42a8a19c0ce2e1f5b1d940c748d4cb70">GetIndicesCount</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a57a18cb5d54f38cbe4768cae125669c4">GetIndicesCount</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -696,13 +696,13 @@
         <argsstring>() const noexcept=0</argsstring>
         <name>GetMeshType</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::GetMeshType</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1af05f81d2ff5a2b8d3d5f156b2d81ee22">GetMeshType</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugLine_1ab5d8ae9e3beef28a0a39f6c064a6699b">GetMeshType</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a939e3597723f5e3feb514adfeab23fb4">GetMeshType</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1a6e4f14eb69451418d19b4347e3bec2d5">GetMeshType</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a1b494dddb7f1182ec87ac58f76039e91">GetMeshType</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1aac8383df19fbed15c4d227f7de6662bf">GetMeshType</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a38f07065d9371ae532607f8f589ab759">GetMeshType</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1af05f81d2ff5a2b8d3d5f156b2d81ee22">GetMeshType</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -904,13 +904,13 @@
         <argsstring>()</argsstring>
         <name>UseMaterial</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::UseMaterial</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a16ebb160d9689c3f4d82a2f1b0a9132d">UseMaterial</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugLine_1a1e84e2042fe636781bd51cfe13265ca5">UseMaterial</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1ac1bbce7c76cdc1591b3a2354e8f5f217">UseMaterial</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1a1b509feae0e3e482b6e5bbaea1eb0167">UseMaterial</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a823faa68ac39e8ac9b872610106f4349">UseMaterial</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ae936a8109ab76da9ae3878f2b6b5332e">UseMaterial</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a73ebdc87ce357476550d5b5f1ac7c64f">UseMaterial</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a16ebb160d9689c3f4d82a2f1b0a9132d">UseMaterial</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -925,11 +925,11 @@
         <argsstring>()</argsstring>
         <name>UseModelMatrix</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::UseModelMatrix</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a0be9578346de45690762dc249e5e8d17">UseModelMatrix</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1a7111593ce28ac6d3f8635271c660a32d">UseModelMatrix</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a58b77d0540d3a4c9b6885c69391d5c64">UseModelMatrix</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ae957c15800961614c9fe81e35b2670ce">UseModelMatrix</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a45824885d9aa2fa19632d774c5a1c3c3">UseModelMatrix</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a0be9578346de45690762dc249e5e8d17">UseModelMatrix</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1271,13 +1271,13 @@
         <argsstring>()</argsstring>
         <name>Calculate</name>
         <qualifiedname>SR_GTYPES_NS::Mesh::Calculate</qualifiedname>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a707708bf29aef6266fb4ba93d952e85a">Calculate</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1DebugWireframeMesh_1a4d597832057985029f3b6ef2c69ee9c6">Calculate</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1IndexedMesh_1ab9a915299cbac7482344fcdc270c1094">Calculate</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh3D_1ae1a30f8505e1bc1b948b0be9a2c34f50">Calculate</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1ProceduralMesh_1a27260cd51b0292e5b9f69fa260bea19d">Calculate</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1SkinnedMesh_1ac956768308c8cc73915daeb35ae81219">Calculate</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Sprite_1a267ece6bfee123eb07e142b043660d56">Calculate</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Text_1a707708bf29aef6266fb4ba93d952e85a">Calculate</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1371,13 +1371,13 @@
       <node id="4">
         <label>Entity</label>
       </node>
-      <node id="13">
+      <node id="10">
         <label>Memory::IGraphicsResource</label>
       </node>
-      <node id="15">
+      <node id="11">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -1391,44 +1391,11 @@
         <link refid="classSR__GTYPES__NS_1_1Mesh"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
-        <childnode refid="14" relation="usage">
-          <edgelabel>m_renderQueues</edgelabel>
-        </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
-          <edgelabel>m_material</edgelabel>
-        </childnode>
-      </node>
-      <node id="18">
-        <label>SR_HTYPES_NS::SharedPtr&lt; BaseMaterial &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="7" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="14">
-        <label>SR_HTYPES_NS::SortedVector&lt; SR_GRAPH_NS::RenderQueueInfo, SR_GRAPH_NS::RenderQueuePredicate &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SortedVector"/>
       </node>
       <node id="3">
         <label>SR_UTILS_NS::Component</label>
@@ -1436,56 +1403,53 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
         <childnode refid="5" relation="usage">
-          <edgelabel>m_sceneObject</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>m_properties</edgelabel>
         </childnode>
       </node>
-      <node id="8">
+      <node id="5">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="9">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="11">
+      <node id="8">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="7">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
-        <label>SR_UTILS_NS::Singleton&lt; DescriptorManager &gt;</label>
+      <node id="12">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="13">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="6">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="8" relation="public-inheritance">
+        <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

@@ -39,8 +39,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) <br> |
-| struct | [**hash&lt; SR\_GRAPH\_GUI\_NS::Link &gt;**](structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Link_01_4.md) &lt;&gt;<br> |
-| struct | [**hash&lt; SR\_GRAPH\_GUI\_NS::Node &gt;**](structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Node_01_4.md) &lt;&gt;<br> |
 
 
 

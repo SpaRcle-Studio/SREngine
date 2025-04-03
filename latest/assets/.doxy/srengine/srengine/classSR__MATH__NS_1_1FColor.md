@@ -153,15 +153,15 @@ See [SR\_MATH\_NS::Vector4](structSR__MATH__NS_1_1Vector4.md)
 
 | Type | Name |
 | ---: | :--- |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Alpha**](#function-alpha) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Black**](#function-black) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Blue**](#function-blue) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Cyan**](#function-cyan) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Green**](#function-green) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Magenta**](#function-magenta) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Red**](#function-red) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**White**](#function-white) () <br> |
-|  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Yellow**](#function-yellow) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Alpha**](#function-alpha) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Black**](#function-black) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Blue**](#function-blue) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Cyan**](#function-cyan) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Green**](#function-green) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Magenta**](#function-magenta) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Red**](#function-red) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**White**](#function-white) () <br> |
+|  constexpr [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**Yellow**](#function-yellow) () <br> |
 
 
 ## Public Static Functions inherited from SR_MATH_NS::Vector4
@@ -170,10 +170,10 @@ See [SR\_MATH\_NS::Vector4](structSR__MATH__NS_1_1Vector4.md)
 
 | Type | Name |
 | ---: | :--- |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitW**](structSR__MATH__NS_1_1Vector4.md#function-unitw) () <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitX**](structSR__MATH__NS_1_1Vector4.md#function-unitx) () <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitY**](structSR__MATH__NS_1_1Vector4.md#function-unity) () <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitZ**](structSR__MATH__NS_1_1Vector4.md#function-unitz) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitW**](structSR__MATH__NS_1_1Vector4.md#function-unitw) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitX**](structSR__MATH__NS_1_1Vector4.md#function-unitx) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitY**](structSR__MATH__NS_1_1Vector4.md#function-unity) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitZ**](structSR__MATH__NS_1_1Vector4.md#function-unitz) () <br> |
 
 
 
@@ -406,7 +406,7 @@ inline FColor & SR_MATH_NS::FColor::operator= (
 ### function Alpha 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Alpha () 
+static inline constexpr FColor SR_MATH_NS::FColor::Alpha () 
 ```
 
 
@@ -419,7 +419,7 @@ static inline FColor SR_MATH_NS::FColor::Alpha ()
 ### function Black 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Black () 
+static inline constexpr FColor SR_MATH_NS::FColor::Black () 
 ```
 
 
@@ -432,7 +432,7 @@ static inline FColor SR_MATH_NS::FColor::Black ()
 ### function Blue 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Blue () 
+static inline constexpr FColor SR_MATH_NS::FColor::Blue () 
 ```
 
 
@@ -445,7 +445,7 @@ static inline FColor SR_MATH_NS::FColor::Blue ()
 ### function Cyan 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Cyan () 
+static inline constexpr FColor SR_MATH_NS::FColor::Cyan () 
 ```
 
 
@@ -458,7 +458,7 @@ static inline FColor SR_MATH_NS::FColor::Cyan ()
 ### function Green 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Green () 
+static inline constexpr FColor SR_MATH_NS::FColor::Green () 
 ```
 
 
@@ -471,7 +471,7 @@ static inline FColor SR_MATH_NS::FColor::Green ()
 ### function Magenta 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Magenta () 
+static inline constexpr FColor SR_MATH_NS::FColor::Magenta () 
 ```
 
 
@@ -484,7 +484,7 @@ static inline FColor SR_MATH_NS::FColor::Magenta ()
 ### function Red 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Red () 
+static inline constexpr FColor SR_MATH_NS::FColor::Red () 
 ```
 
 
@@ -497,7 +497,7 @@ static inline FColor SR_MATH_NS::FColor::Red ()
 ### function White 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::White () 
+static inline constexpr FColor SR_MATH_NS::FColor::White () 
 ```
 
 
@@ -510,7 +510,7 @@ static inline FColor SR_MATH_NS::FColor::White ()
 ### function Yellow 
 
 ```C++
-static inline FColor SR_MATH_NS::FColor::Yellow () 
+static inline constexpr FColor SR_MATH_NS::FColor::Yellow () 
 ```
 
 

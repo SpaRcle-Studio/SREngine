@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__SRLM__NS_1_1LogicalNode" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_SRLM_NS::LogicalNode</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
@@ -348,8 +348,8 @@
         <name>GetNodeHashName</name>
         <qualifiedname>SR_SRLM_NS::LogicalNode::GetNodeHashName</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a1d409e99cee98de18c99830ee1d40dcc">GetNodeHashName</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a0423708df1a9d31cb644558a7c5d5900">GetNodeHashName</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1accc9935275f87aeadb88bbcf967950e9">GetNodeHashName</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a0423708df1a9d31cb644558a7c5d5900">GetNodeHashName</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -365,8 +365,8 @@
         <name>GetNodeName</name>
         <qualifiedname>SR_SRLM_NS::LogicalNode::GetNodeName</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1IRenderTechnique_1a826b7d043b1cccd8b3a653e2470e8210">GetNodeName</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a69d2e35a43d8358361689c2589c0bd56">GetNodeName</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1a156b97b3ea2b52bbac3efce99af7a604">GetNodeName</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a69d2e35a43d8358361689c2589c0bd56">GetNodeName</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -427,17 +427,17 @@
         <qualifiedname>SR_SRLM_NS::LogicalNode::InitNode</qualifiedname>
         <reimplementedby refid="classSR__GRAPH__NS_1_1StartPassNode_1a8e212a69fee177e90605a2848cd4d55d">InitNode</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1SwapchainPass_1abb45d046801ace0096bebcb65a0aeefe">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1BranchNode_1ad5111d996b4b3bfd995ac03eb0c06af8">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1BreakStructNode_1a5e6715cd98192ced8c05159ebc2aead4">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a720fa95e610625a99d02015b3e043d90">InitNode</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1a06333ac2f356908fc8a727200b8a34ed">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1CreateStructNode_1ac401c442baec74f57902c4141434da7b">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a3e1b989c40fe1de9aa6db2363219a71a">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1af8a5fa713f1c70d10d7e5d35ce3bfd17">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1SequenceNode_1a3da87ffe7f553bba54153b1dc9299692">InitNode</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1a1d053db0c62ccdedceb5f5ce1c6b0639">InitNode</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1StartResetNode_1aafa93b7dc08fb306988e97e75b1a8eb2">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1af8a5fa713f1c70d10d7e5d35ce3bfd17">InitNode</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1SynchronizeNode_1ad5611ed6806c1f2e9d00d9d9d3054a70">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1SequenceNode_1a3da87ffe7f553bba54153b1dc9299692">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BranchNode_1ad5111d996b4b3bfd995ac03eb0c06af8">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1CreateStructNode_1ac401c442baec74f57902c4141434da7b">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BreakStructNode_1a5e6715cd98192ced8c05159ebc2aead4">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a3e1b989c40fe1de9aa6db2363219a71a">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1a1d053db0c62ccdedceb5f5ce1c6b0639">InitNode</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a720fa95e610625a99d02015b3e043d90">InitNode</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -452,18 +452,18 @@
         <argsstring>(float_t dt)</argsstring>
         <name>Execute</name>
         <qualifiedname>SR_SRLM_NS::LogicalNode::Execute</qualifiedname>
-        <reimplementedby refid="classSR__SRLM__NS_1_1BranchNode_1a4512a7e0fd709f914d461bc73f5661ca">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1BreakStructNode_1a8f4f83a75ec6d693d09641f01363bf45">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a9c1a22759b235a1e0695ec5226e661d7">Execute</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1ConvertorNode_1a462a1626e7177b5f856f397590d12fd2">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1CreateStructNode_1aed0c6d361db7683b80451f6f3252e930">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a797a595ee42ee253f5701f9f65a6f615">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1a43322b6a020d99ca5a7ec71d16fdf33f">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1PlusNode_1a4164316bdd5ac55525e759b9e8b68168">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1SequenceNode_1a6837c315fe1e87f18918d61370292090">Execute</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1af2b4a55f769d229fed168a9cda0c4a97">Execute</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1StartResetNode_1ab42c55d51a07d15fce5bafc7344cebf1">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1a43322b6a020d99ca5a7ec71d16fdf33f">Execute</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1SynchronizeNode_1a2cafe2b5d5eefd43956b4df89738b9b2">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1SequenceNode_1a6837c315fe1e87f18918d61370292090">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BranchNode_1a4512a7e0fd709f914d461bc73f5661ca">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1CreateStructNode_1aed0c6d361db7683b80451f6f3252e930">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1BreakStructNode_1a8f4f83a75ec6d693d09641f01363bf45">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DebugPrintNode_1a797a595ee42ee253f5701f9f65a6f615">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1StartNode_1af2b4a55f769d229fed168a9cda0c4a97">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConstructorNode_1a9c1a22759b235a1e0695ec5226e661d7">Execute</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1PlusNode_1a4164316bdd5ac55525e759b9e8b68168">Execute</reimplementedby>
         <param>
           <type>float_t</type>
           <declname>dt</declname>
@@ -540,11 +540,11 @@
         <argsstring>() const noexcept=0</argsstring>
         <name>GetType</name>
         <qualifiedname>SR_SRLM_NS::LogicalNode::GetType</qualifiedname>
-        <reimplementedby refid="classSR__SRLM__NS_1_1ConnectorNode_1ab6b432dd1acaf508a7d540e37db4a2a6">GetType</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1a154c2c6e15e6186c834e342a578517d8">GetType</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1IComputeNode_1a9ab059c1350d7aae11c343d029aacb61">GetType</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1IExecutableNode_1a5e765eb12571b7a44b7f1dc9cfcf2b4e">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1IComputeNode_1a9ab059c1350d7aae11c343d029aacb61">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1ConnectorNode_1ab6b432dd1acaf508a7d540e37db4a2a6">GetType</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1StartResetNode_1a1182c0728b30b56e580a556608707428">GetType</reimplementedby>
+        <reimplementedby refid="classSR__SRLM__NS_1_1EndResetNode_1a154c2c6e15e6186c834e342a578517d8">GetType</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

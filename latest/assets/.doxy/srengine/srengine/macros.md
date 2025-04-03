@@ -106,7 +106,6 @@
 * **SR\_ICON\_UNDO** ([**Icons.h**](Icons_8h.md))
 * **SR\_ALLOCATE\_RENDER\_PASS** ([**BasePass.h**](BasePass_8h.md))
 * **SR\_REGISTER\_RENDER\_PASS** ([**BasePass.h**](BasePass_8h.md))
-* **SR\_ENGINE\_GRAPHICS\_FLAT\_COLOR\_BUFFER\_PASS\_H** ([**FlatColorBufferPass.h**](FlatColorBufferPass_8h.md))
 * **SR\_TRACY\_VK\_COLLECT** ([**VulkanTracy.h**](VulkanTracy_8h.md))
 * **SR\_TRACY\_VK\_CREATE** ([**VulkanTracy.h**](VulkanTracy_8h.md))
 * **SR\_TRACY\_VK\_FRAME\_ZONE\_N** ([**VulkanTracy.h**](VulkanTracy_8h.md))

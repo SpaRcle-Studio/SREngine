@@ -86,10 +86,10 @@
 |  SR\_NODISCARD T | [**Sum**](#function-sum) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec2 | [**ToGLM**](#function-toglm) () noexcept const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
-|  SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-14) () <br> |
-|  SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-24) (T p\_x, T p\_y) <br> |
-|  SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-34) (T p) <br> |
-|  SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-44) (const glm::vec2 & vec2) <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-14) () <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-24) (T p\_x, T p\_y) <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-34) (T p) <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector2**](#function-vector2-44) (const glm::vec2 & vec2) <br> |
 |  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator) (T p\_scalar) const<br> |
 |  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator_1) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & p\_v) const<br> |
 |  SR\_FORCE\_INLINE [**Vector2**](structSR__MATH__NS_1_1Vector2.md) | [**operator\***](#function-operator_2) (const U & scalar) noexcept const<br> |
@@ -124,8 +124,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**One**](#function-one) () <br> |
-|  [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**Zero**](#function-zero) () <br> |
+|  constexpr [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**One**](#function-one) () <br> |
+|  constexpr [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**Zero**](#function-zero) () <br> |
 
 
 
@@ -499,7 +499,7 @@ inline SR_NODISCARD std::string SR_MATH_NS::Vector2::ToString () const
 ### function Vector2 [1/4]
 
 ```C++
-inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 () 
+inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 () 
 ```
 
 
@@ -512,7 +512,7 @@ inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 ()
 ### function Vector2 [2/4]
 
 ```C++
-inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
+inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
     T p_x,
     T p_y
 ) 
@@ -528,7 +528,7 @@ inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
 ### function Vector2 [3/4]
 
 ```C++
-inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
+inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
     T p
 ) 
 ```
@@ -543,7 +543,7 @@ inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
 ### function Vector2 [4/4]
 
 ```C++
-inline SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
+inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector2::Vector2 (
     const glm::vec2 & vec2
 ) 
 ```
@@ -990,7 +990,7 @@ inline SR_FORCE_INLINE T & SR_MATH_NS::Vector2::operator[] (
 ### function One 
 
 ```C++
-static inline Vector2 < T > SR_MATH_NS::Vector2::One () 
+static inline constexpr Vector2 < T > SR_MATH_NS::Vector2::One () 
 ```
 
 
@@ -1003,7 +1003,7 @@ static inline Vector2 < T > SR_MATH_NS::Vector2::One ()
 ### function Zero 
 
 ```C++
-static inline Vector2 < T > SR_MATH_NS::Vector2::Zero () 
+static inline constexpr Vector2 < T > SR_MATH_NS::Vector2::Zero () 
 ```
 
 

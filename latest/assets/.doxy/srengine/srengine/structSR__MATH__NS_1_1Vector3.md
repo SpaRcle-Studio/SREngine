@@ -117,9 +117,9 @@
 |  SR\_NODISCARD glm::vec3 | [**ToGLM**](#function-toglm) () noexcept const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**ToQuat**](#function-toquat) () const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
-|  SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-18) () <br> |
-|  SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-28) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec) <br> |
-|  SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-38) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & vec, U value) <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-18) () <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-28) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec) <br> |
+|  constexpr SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-38) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & vec, U value) <br> |
 |  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-48) (const float \* vec) <br> |
 |  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-58) (const uint8\_t \* axis) <br> |
 |  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-68) (T p\_x, T p\_y, T p\_z) <br> |
@@ -168,25 +168,25 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**AxisByIndex**](#function-axisbyindex) (uint8\_t axis) <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**AxisByIndex**](#function-axisbyindex) (uint8\_t axis) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Cross**](#function-cross-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_a, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_b) <br> |
 |  T | [**Dot**](#function-dot-22) ([**Vector3**](structSR__MATH__NS_1_1Vector3.md) lhs, [**Vector3**](structSR__MATH__NS_1_1Vector3.md) rhs) <br> |
 |  T | [**FixAxis**](#function-fixaxis) (T axis) <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Forward**](#function-forward) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Forward**](#function-forward) () <br> |
 |  Unit | [**Magnitude**](#function-magnitude) ([**Vector3**](structSR__MATH__NS_1_1Vector3.md) vec) <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**One**](#function-one) () <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Right**](#function-right) () <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Up**](#function-up) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**One**](#function-one) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Right**](#function-right) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Up**](#function-up) () <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XY**](#function-xy-23) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v, U value) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XY**](#function-xy-33) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XZ**](#function-xz-23) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v, U value) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XZ**](#function-xz-33) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**YZ**](#function-yz-23) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v, U value) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**YZ**](#function-yz-33) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v) <br> |
-|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Zero**](#function-zero) () <br> |
+|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Zero**](#function-zero) () <br> |
 
 
 
@@ -1009,7 +1009,7 @@ inline SR_NODISCARD std::string SR_MATH_NS::Vector3::ToString () const
 ### function Vector3 [1/8]
 
 ```C++
-inline SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 () 
+inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 () 
 ```
 
 
@@ -1023,7 +1023,7 @@ inline SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 ()
 
 ```C++
 template<typename U>
-inline explicit SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
+inline explicit constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
     const Vector3 < U > & vec
 ) 
 ```
@@ -1039,7 +1039,7 @@ inline explicit SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
 
 ```C++
 template<typename U>
-inline explicit SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
+inline explicit constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
     const Vector2 < U > & vec,
     U value
 ) 
@@ -1693,7 +1693,7 @@ inline SR_FORCE_INLINE constexpr T & SR_MATH_NS::Vector3::operator[] (
 ### function AxisByIndex 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::AxisByIndex (
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::AxisByIndex (
     uint8_t axis
 ) 
 ```
@@ -1755,7 +1755,7 @@ static inline T SR_MATH_NS::Vector3::FixAxis (
 ### function Forward 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::Forward () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Forward () 
 ```
 
 
@@ -1783,7 +1783,7 @@ static inline Unit SR_MATH_NS::Vector3::Magnitude (
 ### function One 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::One () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::One () 
 ```
 
 
@@ -1796,7 +1796,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::One ()
 ### function Right 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::Right () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Right () 
 ```
 
 
@@ -1809,7 +1809,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::Right ()
 ### function UnitX 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::UnitX () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitX () 
 ```
 
 
@@ -1822,7 +1822,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::UnitX ()
 ### function UnitY 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::UnitY () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitY () 
 ```
 
 
@@ -1835,7 +1835,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::UnitY ()
 ### function UnitZ 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::UnitZ () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitZ () 
 ```
 
 
@@ -1848,7 +1848,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::UnitZ ()
 ### function Up 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::Up () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Up () 
 ```
 
 
@@ -1960,7 +1960,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::YZ (
 ### function Zero 
 
 ```C++
-static inline Vector3 < T > SR_MATH_NS::Vector3::Zero () 
+static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Zero () 
 ```
 
 

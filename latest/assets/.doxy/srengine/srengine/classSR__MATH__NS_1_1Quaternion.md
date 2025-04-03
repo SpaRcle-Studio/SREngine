@@ -117,7 +117,7 @@
 | Type | Name |
 | ---: | :--- |
 |  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**FromEuler**](#function-fromeuler) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & euler) <br> |
-|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Identity**](#function-identity) () <br> |
+|  constexpr [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Identity**](#function-identity) () <br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & direction) <br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & direction, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & up) <br> |
 
@@ -950,7 +950,7 @@ static Quaternion SR_MATH_NS::Quaternion::FromEuler (
 ### function Identity 
 
 ```C++
-static inline Quaternion SR_MATH_NS::Quaternion::Identity () 
+static inline constexpr Quaternion SR_MATH_NS::Quaternion::Identity () 
 ```
 
 

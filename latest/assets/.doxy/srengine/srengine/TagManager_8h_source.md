@@ -26,7 +26,6 @@ namespace SR_UTILS_NS {
         using Hash = uint64_t;
     public:
         SR_INLINE_STATIC const StringAtom UNTAGGED = "Untagged"; 
-
     public:
         SR_NODISCARD StringAtom GetTagByIndex(uint16_t index) const;
         SR_NODISCARD StringAtom GetDefaultTag() const;

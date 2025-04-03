@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md) **>** [**Details**](namespaceSR__UTILS__NS_1_1Details.md) **>** [**Detector**](structSR__UTILS__NS_1_1Details_1_1Detector.md)
+[**ClassList**](annotated.md) **>** [**Detector**](structSR__UTILS__NS_1_1Details_1_1Detector.md)
 
 
 
@@ -17,6 +17,7 @@
 
 
 
+Inherited by the following classes: [SR\_UTILS\_NS::DetectedOr](structSR__UTILS__NS_1_1DetectedOr.md)
 
 
 

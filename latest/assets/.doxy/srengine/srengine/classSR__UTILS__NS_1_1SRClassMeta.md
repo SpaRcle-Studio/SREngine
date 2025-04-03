@@ -15,7 +15,6 @@
 
 
 
-Inherited by the following classes: [Codegen::SRClassMetaTemplate](structCodegen_1_1SRClassMetaTemplate.md)
 
 
 

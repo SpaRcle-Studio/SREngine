@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__SRLM__NS_1_1DataOperatorIsEqual" kind="class" language="C++" prot="public">
     <compoundname>SR_SRLM_NS::DataOperatorIsEqual</compoundname>
     <basecompoundref refid="classSR__SRLM__NS_1_1DataOperator" prot="public" virt="non-virtual">SR_SRLM_NS::DataOperator</basecompoundref>
@@ -14,9 +14,9 @@
         <name>Calculate</name>
         <qualifiedname>SR_SRLM_NS::DataOperatorIsEqual::Calculate</qualifiedname>
         <reimplements refid="classSR__SRLM__NS_1_1DataOperator_1a056b136cf61d1081c641d5cc522d61b3">Calculate</reimplements>
+        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsNotEqual_1a6ef93a53c9bc6251002a1d795dc9cc7a">Calculate</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsGreaterOrEqual_1afb370c80125cef1adea6c71a76c3faeb">Calculate</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsLessOrEqual_1a9dd24517b9d1883eb5d4ea5085d9e817">Calculate</reimplementedby>
-        <reimplementedby refid="classSR__SRLM__NS_1_1DataOperatorIsNotEqual_1a6ef93a53c9bc6251002a1d795dc9cc7a">Calculate</reimplementedby>
         <param>
           <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">DataType</ref> *</type>
           <declname>pFirst</declname>

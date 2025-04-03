@@ -60,7 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**IsDefault**](#function-isdefault) (const std::array&lt; T, N &gt; & value) <br> |
+|  constexpr bool | [**IsDefault**](#function-isdefault) (const std::array&lt; T, N &gt; & value) <br> |
 
 
 
@@ -110,7 +110,7 @@ using DefaultChecker< std::array< T, N > >::IsAlwaysFalse =  std::bool_constant<
 ### function IsDefault 
 
 ```C++
-static inline bool DefaultChecker< std::array< T, N > >::IsDefault (
+static inline constexpr bool DefaultChecker< std::array< T, N > >::IsDefault (
     const std::array< T, N > & value
 ) 
 ```

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="FlatColorBufferPass_8h" kind="file" language="C++">
     <compoundname>FlatColorBufferPass.h</compoundname>
     <includes refid="IColorBufferPass_8h" local="no">Graphics/Pass/IColorBufferPass.h</includes>
@@ -1049,18 +1049,6 @@
       </node>
     </incdepgraph>
     <innernamespace refid="namespaceSR__GRAPH__NS">SR_GRAPH_NS</innernamespace>
-    <sectiondef kind="define">
-      <memberdef kind="define" id="FlatColorBufferPass_8h_1ac018f8e6761189e7418f1f59430719c7" prot="public" static="no">
-        <name>SR_ENGINE_GRAPHICS_FLAT_COLOR_BUFFER_PASS_H</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h" line="10" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/FlatColorBufferPass.h" bodystart="10" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

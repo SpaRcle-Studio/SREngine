@@ -627,10 +627,6 @@ std::vector<Component::Ptr> SR_UTILS_NS::IComponentable::m_components;
 
 
 
-@propertyCondition(!This.IsPrefab()) 
-
-
-        
 
 <hr>
 ## Protected Functions Documentation

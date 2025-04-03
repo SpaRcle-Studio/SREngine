@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__size_3_01array_3_01T_00_01N_01_4_01_4" kind="class" language="C++" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__size_3_01array_3_01T_00_01N_01_4_01_4" kind="class" language="C++" prot="private">
     <compoundname>SR_TYPES_NS::detail::array_detail::tuple_size&lt; array&lt; T, N &gt; &gt;</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::integral_constant&lt; std::size_t, N &gt;</basecompoundref>
     <templateparamlist>
@@ -20,7 +20,6 @@
     <inheritancegraph>
       <node id="1">
         <label>SR_TYPES_NS::detail::array_detail::tuple_size&lt; array&lt; T, N &gt; &gt;</label>
-        <link refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__size_3_01array_3_01T_00_01N_01_4_01_4"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -31,7 +30,6 @@
     <collaborationgraph>
       <node id="1">
         <label>SR_TYPES_NS::detail::array_detail::tuple_size&lt; array&lt; T, N &gt; &gt;</label>
-        <link refid="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__size_3_01array_3_01T_00_01N_01_4_01_4"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>

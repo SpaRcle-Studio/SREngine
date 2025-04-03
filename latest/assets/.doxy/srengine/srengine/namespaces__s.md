@@ -63,12 +63,12 @@
 
 | Type | Name |
 | ---: | :--- |
-|  ullong | [**raise\_128\_to**](#function-raise_128_to) (const uchar power) <br> |
-|  ullong | [**str\_hash**](#function-str_hash) (const char \*const str, const uchar current\_len) <br> |
+|  constexpr ullong | [**raise\_128\_to**](#function-raise_128_to) (const uchar power) <br> |
+|  constexpr ullong | [**str\_hash**](#function-str_hash) (const char \*const str, const uchar current\_len) <br> |
 |  ullong | [**str\_hash\_for\_switch**](#function-str_hash_for_switch) (const char \*const str) <br> |
 |  ullong | [**str\_hash\_for\_switch**](#function-str_hash_for_switch) (const std::string & str) <br> |
-|  bool | [**str\_is\_correct**](#function-str_is_correct) (const char \*const str) <br> |
-|  uchar | [**str\_len**](#function-str_len) (const char \*const str) <br> |
+|  constexpr bool | [**str\_is\_correct**](#function-str_is_correct) (const char \*const str) <br> |
+|  constexpr uchar | [**str\_len**](#function-str_len) (const char \*const str) <br> |
 
 
 
@@ -161,7 +161,7 @@ const ullong s_s::N_HASH;
 ### function raise\_128\_to 
 
 ```C++
-ullong s_s::raise_128_to (
+constexpr ullong s_s::raise_128_to (
     const uchar power
 ) 
 ```
@@ -176,7 +176,7 @@ ullong s_s::raise_128_to (
 ### function str\_hash 
 
 ```C++
-ullong s_s::str_hash (
+constexpr ullong s_s::str_hash (
     const char *const str,
     const uchar current_len
 ) 
@@ -222,7 +222,7 @@ inline ullong s_s::str_hash_for_switch (
 ### function str\_is\_correct 
 
 ```C++
-bool s_s::str_is_correct (
+constexpr bool s_s::str_is_correct (
     const char *const str
 ) 
 ```
@@ -237,7 +237,7 @@ bool s_s::str_is_correct (
 ### function str\_len 
 
 ```C++
-uchar s_s::str_len (
+constexpr uchar s_s::str_len (
     const char *const str
 ) 
 ```

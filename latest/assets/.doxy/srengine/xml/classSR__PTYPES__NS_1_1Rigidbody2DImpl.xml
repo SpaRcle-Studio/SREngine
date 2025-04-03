@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__PTYPES__NS_1_1Rigidbody2DImpl" kind="class" language="C++" prot="public">
     <compoundname>SR_PTYPES_NS::Rigidbody2DImpl</compoundname>
     <basecompoundref refid="classSR__PTYPES__NS_1_1RigidbodyImpl" prot="public" virt="non-virtual">SR_PTYPES_NS::RigidbodyImpl</basecompoundref>
@@ -29,47 +29,20 @@
       <node id="6">
         <label>Entity</label>
       </node>
-      <node id="16">
-        <label>SR_HTYPES_NS::SafePtr&lt; PhysicsScene &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
-      </node>
-      <node id="14">
-        <label>SR_HTYPES_NS::SharedPtr&lt; CollisionShape &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="9" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
-      <node id="17">
+      <node id="13">
         <label>SR_MATH_NS::Quaternion</label>
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
-      <node id="15">
+      <node id="12">
         <label>SR_PHYSICS_NS::LibraryImpl</label>
         <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="14">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="19" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
@@ -77,22 +50,21 @@
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="14" relation="usage">
-          <edgelabel>m_shape</edgelabel>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_center</edgelabel>
+          <edgelabel>m_scale</edgelabel>
+          <edgelabel>m_translation</edgelabel>
         </childnode>
         <childnode refid="2" relation="usage">
           <edgelabel>m_impl</edgelabel>
         </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>m_library</edgelabel>
         </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>m_physicsScene</edgelabel>
-        </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>m_rotation</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
@@ -110,8 +82,11 @@
         <childnode refid="4" relation="usage">
           <edgelabel>m_rigidbody</edgelabel>
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>m_rigidbodyRotation</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_rigidbodyTranslation</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -120,32 +95,29 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
         <childnode refid="7" relation="usage">
-          <edgelabel>m_sceneObject</edgelabel>
-        </childnode>
-        <childnode refid="10" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_properties</edgelabel>
         </childnode>
       </node>
-      <node id="10">
+      <node id="7">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="15">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="20" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
-        <childnode refid="21" relation="public-inheritance">
+        <childnode refid="17" relation="public-inheritance">
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="18" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -154,37 +126,41 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="13">
+      <node id="10">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="9">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="13" relation="public-inheritance">
+        <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="16">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="18">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="21">
+      <node id="17">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
-      <node id="11">
+      <node id="8">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="11">
+        <label>SR_MATH_NS::Vector3&lt; Unit &gt;</label>
+        <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
     <location file="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" line="11" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h" bodystart="11" bodyend="13"/>

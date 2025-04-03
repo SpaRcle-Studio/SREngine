@@ -15,55 +15,7 @@
 
 
 
-Inherits the following classes: [SR\_UTILS\_NS::IsDetected](structSR__UTILS__NS_1_1IsDetected.md),  std::false_type
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Inherits the following classes: std::false_type
 
 
 

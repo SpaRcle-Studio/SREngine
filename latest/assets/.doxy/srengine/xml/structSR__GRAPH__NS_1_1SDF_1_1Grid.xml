@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__GRAPH__NS_1_1SDF_1_1Grid" kind="struct" language="C++" prot="public">
     <compoundname>SR_GRAPH_NS::SDF::Grid</compoundname>
     <sectiondef kind="public-attrib">
@@ -167,8 +167,8 @@
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a8b3191945cc0c8394f21fe4814bfdd20" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>GenerateSDF</name></member>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a833aa79050a6a1598a2b9c9bee5cc138" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>Get</name></member>
-      <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a122ef12e7311479140b03f492c99e2e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>Grid</name></member>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a0527c9b101ae4d218a711b8a11bcc740" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>grid</name></member>
+      <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1a122ef12e7311479140b03f492c99e2e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>Grid</name></member>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1acc9d5125c03006a06d194e644c977ea0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>h</name></member>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1ab510bddf6e3b9dc1e5bbb2503562eb69" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>Put</name></member>
       <member refid="structSR__GRAPH__NS_1_1SDF_1_1Grid_1af15940f4e708206f6b379917012bb7e7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SDF::Grid</scope><name>w</name></member>

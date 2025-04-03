@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md) **>** [**detail**](namespaceSR__TYPES__NS_1_1detail.md) **>** [**array\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1array__detail.md) **>** [**array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md)
+[**ClassList**](annotated.md) **>** [**array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md)
 
 
 
@@ -17,6 +17,7 @@
 
 
 
+Inherited by the following classes: [SR\_TYPES\_NS::detail::fixed\_static\_array](classSR__TYPES__NS_1_1detail_1_1fixed__static__array.md)
 
 
 
@@ -59,7 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_type | [**static\_size**](#variable-static_size)   = `N`<br> |
+|  constexpr size\_type | [**static\_size**](#variable-static_size)   = `N`<br> |
 
 
 
@@ -78,7 +79,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**assign**](#function-assign) (const value\_type & value) <br> |
+|  constexpr auto | [**assign**](#function-assign) (const value\_type & value) <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**at**](#function-at-12) (const size\_type i) <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**at**](#function-at-22) (const size\_type i) const<br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**back**](#function-back-12) () <br> |
@@ -94,17 +95,17 @@
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**data**](#function-data-22) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**end**](#function-end-12) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**end**](#function-end-22) () const<br> |
-|  void | [**fill**](#function-fill) (const value\_type & value) <br> |
+|  constexpr auto | [**fill**](#function-fill) (const value\_type & value) <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**front**](#function-front-12) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**front**](#function-front-22) () const<br> |
-|  [**array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md) & | [**operator=**](#function-operator) (const [**array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md)&lt; T2, N &gt; & y) <br> |
+|  constexpr auto | [**operator=**](#function-operator) (const array&lt; T2, N &gt; & y) <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**operator[]**](#function-operator_1) (const size\_type i) <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**operator[]**](#function-operator_2) (const size\_type i) const<br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**rbegin**](#function-rbegin-12) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**rbegin**](#function-rbegin-22) () const<br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**rend**](#function-rend-12) () <br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**rend**](#function-rend-22) () const<br> |
-|  void | [**swap**](#function-swap) ([**array**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1array.md)&lt; T2, N &gt; & y) noexcept<br> |
+|  constexpr auto | [**swap**](#function-swap) (array&lt; T2, N &gt; & y) noexcept<br> |
 
 
 ## Public Static Functions
@@ -308,7 +309,7 @@ value_type SR_TYPES_NS::detail::array_detail::array< T, N >::elems[N];
 ### variable static\_size 
 
 ```C++
-size_type SR_TYPES_NS::detail::array_detail::array< T, N >::static_size;
+constexpr size_type SR_TYPES_NS::detail::array_detail::array< T, N >::static_size;
 ```
 
 
@@ -323,7 +324,7 @@ size_type SR_TYPES_NS::detail::array_detail::array< T, N >::static_size;
 ### function assign 
 
 ```C++
-inline void SR_TYPES_NS::detail::array_detail::array::assign (
+inline constexpr auto array::assign (
     const value_type & value
 ) 
 ```
@@ -338,7 +339,7 @@ inline void SR_TYPES_NS::detail::array_detail::array::assign (
 ### function at [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::at (
+inline WIDE_INTEGER_NODISCARD constexpr auto array::at (
     const size_type i
 ) 
 ```
@@ -353,7 +354,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function at [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::at (
+inline WIDE_INTEGER_NODISCARD constexpr auto array::at (
     const size_type i
 ) const
 ```
@@ -368,7 +369,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function back [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::back () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::back () 
 ```
 
 
@@ -381,7 +382,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function back [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::back () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::back () const
 ```
 
 
@@ -394,7 +395,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function begin [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::begin () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::begin () 
 ```
 
 
@@ -407,7 +408,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function begin [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::begin () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::begin () const
 ```
 
 
@@ -420,7 +421,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function c\_array 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::c_array () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::c_array () 
 ```
 
 
@@ -433,7 +434,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function cbegin 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::cbegin () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::cbegin () const
 ```
 
 
@@ -446,7 +447,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function cend 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::cend () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::cend () const
 ```
 
 
@@ -459,7 +460,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function crbegin 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::crbegin () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::crbegin () const
 ```
 
 
@@ -472,7 +473,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function crend 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::crend () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::crend () const
 ```
 
 
@@ -485,7 +486,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function data [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::data () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::data () const
 ```
 
 
@@ -498,7 +499,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function data [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::data () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::data () 
 ```
 
 
@@ -511,7 +512,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function end [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::end () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::end () 
 ```
 
 
@@ -524,7 +525,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function end [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::end () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::end () const
 ```
 
 
@@ -537,7 +538,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function fill 
 
 ```C++
-inline void SR_TYPES_NS::detail::array_detail::array::fill (
+inline constexpr auto array::fill (
     const value_type & value
 ) 
 ```
@@ -552,7 +553,7 @@ inline void SR_TYPES_NS::detail::array_detail::array::fill (
 ### function front [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::front () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::front () 
 ```
 
 
@@ -565,7 +566,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function front [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::front () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::front () const
 ```
 
 
@@ -579,8 +580,8 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 
 ```C++
 template<typename T2>
-inline array & SR_TYPES_NS::detail::array_detail::array::operator= (
-    const array < T2, N > & y
+inline constexpr auto array::operator= (
+    const array< T2, N > & y
 ) 
 ```
 
@@ -594,7 +595,7 @@ inline array & SR_TYPES_NS::detail::array_detail::array::operator= (
 ### function operator[] 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::operator[] (
+inline WIDE_INTEGER_NODISCARD constexpr auto array::operator[] (
     const size_type i
 ) 
 ```
@@ -609,7 +610,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function operator[] 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::operator[] (
+inline WIDE_INTEGER_NODISCARD constexpr auto array::operator[] (
     const size_type i
 ) const
 ```
@@ -624,7 +625,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function rbegin [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::rbegin () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::rbegin () 
 ```
 
 
@@ -637,7 +638,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function rbegin [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::rbegin () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::rbegin () const
 ```
 
 
@@ -650,7 +651,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function rend [1/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::rend () 
+inline WIDE_INTEGER_NODISCARD constexpr auto array::rend () 
 ```
 
 
@@ -663,7 +664,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 ### function rend [2/2]
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::rend () const
+inline WIDE_INTEGER_NODISCARD constexpr auto array::rend () const
 ```
 
 
@@ -677,8 +678,8 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::
 
 ```C++
 template<typename T2>
-inline void SR_TYPES_NS::detail::array_detail::array::swap (
-    array < T2, N > & y
+inline constexpr auto array::swap (
+    array< T2, N > & y
 ) noexcept
 ```
 
@@ -694,7 +695,7 @@ inline void SR_TYPES_NS::detail::array_detail::array::swap (
 ### function empty 
 
 ```C++
-static inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::empty () 
+static inline WIDE_INTEGER_NODISCARD constexpr auto array::empty () 
 ```
 
 
@@ -707,7 +708,7 @@ static inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_d
 ### function max\_size 
 
 ```C++
-static inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::max_size () 
+static inline WIDE_INTEGER_NODISCARD constexpr auto array::max_size () 
 ```
 
 
@@ -720,7 +721,7 @@ static inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_d
 ### function size 
 
 ```C++
-static inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::detail::array_detail::array::size () 
+static inline WIDE_INTEGER_NODISCARD constexpr auto array::size () 
 ```
 
 

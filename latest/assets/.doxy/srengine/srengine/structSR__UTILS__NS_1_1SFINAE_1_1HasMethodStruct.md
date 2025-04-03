@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value)   = `false`<br> |
+|  constexpr bool | [**value**](#variable-value)   = `false`<br> |
 
 
 
@@ -90,7 +90,7 @@
 ### variable value 
 
 ```C++
-bool SR_UTILS_NS::SFINAE::HasMethodStruct< Class, Enabled >::value;
+constexpr bool SR_UTILS_NS::SFINAE::HasMethodStruct< Class, Enabled >::value;
 ```
 
 

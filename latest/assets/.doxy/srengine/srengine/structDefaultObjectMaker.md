@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value)   = `false`<br> |
+|  constexpr bool | [**value**](#variable-value)   = `false`<br> |
 
 
 
@@ -95,7 +95,7 @@
 ### variable value 
 
 ```C++
-bool DefaultObjectMaker< T, Enable >::value;
+constexpr bool DefaultObjectMaker< T, Enable >::value;
 ```
 
 

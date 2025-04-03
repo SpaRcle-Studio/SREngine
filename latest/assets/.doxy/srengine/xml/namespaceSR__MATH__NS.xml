@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__MATH__NS" kind="namespace" language="C++">
     <compoundname>SR_MATH_NS</compoundname>
     <innerclass refid="classSR__MATH__NS_1_1FColor" prot="public">SR_MATH_NS::FColor</innerclass>
@@ -72,9 +72,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" line="173" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Rect.h" bodystart="173" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="Size_8h_1a0ffcc069246e5cd0c2c73887ad7fb398" prot="public" static="no">
+      <memberdef kind="typedef" id="Size_8h_1ae00e5bcb9c1a4ae92593f39108511196" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; float_t &gt;</type>
-        <definition>using SR_MATH_NS::FSize =  Size&lt;float_t&gt;</definition>
+        <definition>using SR_MATH_NS::FSize = typedef Size&lt;float_t&gt;</definition>
         <argsstring></argsstring>
         <name>FSize</name>
         <qualifiedname>SR_MATH_NS::FSize</qualifiedname>
@@ -86,9 +86,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="85" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="85" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="Size_8h_1ae038c1c1d625c8e47b4c2f5dbd38fdf0" prot="public" static="no">
+      <memberdef kind="typedef" id="Size_8h_1ab7052bc6d5197a5dad9097d49b946f81" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; int32_t &gt;</type>
-        <definition>using SR_MATH_NS::ISize =  Size&lt;int32_t&gt;</definition>
+        <definition>using SR_MATH_NS::ISize = typedef Size&lt;int32_t&gt;</definition>
         <argsstring></argsstring>
         <name>ISize</name>
         <qualifiedname>SR_MATH_NS::ISize</qualifiedname>
@@ -100,9 +100,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="86" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="86" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="Size_8h_1a1316afad84ee0ffc0d5ebaf779b940c3" prot="public" static="no">
+      <memberdef kind="typedef" id="Size_8h_1a670bc97bd98b6bebde0cb3301d807d9d" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size" kindref="compound">Size</ref>&lt; uint32_t &gt;</type>
-        <definition>using SR_MATH_NS::USize =  Size&lt;uint32_t&gt;</definition>
+        <definition>using SR_MATH_NS::USize = typedef Size&lt;uint32_t&gt;</definition>
         <argsstring></argsstring>
         <name>USize</name>
         <qualifiedname>SR_MATH_NS::USize</qualifiedname>
@@ -114,9 +114,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="87" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="87" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="Size_8h_1aa71b948d4d8fd08e8f131a2d78f6d9d1" prot="public" static="no">
+      <memberdef kind="typedef" id="Size_8h_1ad660b861de3feffa766a0b5f32e90649" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">Size2</ref>&lt; float_t &gt;</type>
-        <definition>using SR_MATH_NS::FSize2 =  Size2&lt;float_t&gt;</definition>
+        <definition>using SR_MATH_NS::FSize2 = typedef Size2&lt;float_t&gt;</definition>
         <argsstring></argsstring>
         <name>FSize2</name>
         <qualifiedname>SR_MATH_NS::FSize2</qualifiedname>
@@ -128,9 +128,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="89" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="89" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="Size_8h_1ab67b693942daa0e417ee692d5ce103a4" prot="public" static="no">
+      <memberdef kind="typedef" id="Size_8h_1a427d0a0d8bfd2e71ad4b238fc62aaab9" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">Size2</ref>&lt; int32_t &gt;</type>
-        <definition>using SR_MATH_NS::ISize2 =  Size2&lt;int32_t&gt;</definition>
+        <definition>using SR_MATH_NS::ISize2 = typedef Size2&lt;int32_t&gt;</definition>
         <argsstring></argsstring>
         <name>ISize2</name>
         <qualifiedname>SR_MATH_NS::ISize2</qualifiedname>
@@ -142,9 +142,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" line="90" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Size.h" bodystart="90" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="Size_8h_1a94066d36944c434a3b5922eb0dca79e4" prot="public" static="no">
+      <memberdef kind="typedef" id="Size_8h_1ab177cb8be8a525b65574c8cf1dd095d9" prot="public" static="no">
         <type><ref refid="structSR__MATH__NS_1_1Size2" kindref="compound">Size2</ref>&lt; uint32_t &gt;</type>
-        <definition>using SR_MATH_NS::USize2 =  Size2&lt;uint32_t&gt;</definition>
+        <definition>using SR_MATH_NS::USize2 = typedef Size2&lt;uint32_t&gt;</definition>
         <argsstring></argsstring>
         <name>USize2</name>
         <qualifiedname>SR_MATH_NS::USize2</qualifiedname>
@@ -425,8 +425,8 @@
     </sectiondef>
     <sectiondef kind="var">
       <memberdef kind="variable" id="Mathematics_8h_1a6ca9e2517b0c925456e39ccf67840c08" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>double_t</type>
-        <definition>double_t SR_MATH_NS::DoubleMAX</definition>
+        <type>constexpr double_t</type>
+        <definition>constexpr double_t SR_MATH_NS::DoubleMAX</definition>
         <argsstring></argsstring>
         <name>DoubleMAX</name>
         <qualifiedname>SR_MATH_NS::DoubleMAX</qualifiedname>
@@ -441,8 +441,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="133" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Mathematics_8h_1ac7f4904102ad18cae706461a6198e764" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>float_t</type>
-        <definition>float_t SR_MATH_NS::FloatMAX</definition>
+        <type>constexpr float_t</type>
+        <definition>constexpr float_t SR_MATH_NS::FloatMAX</definition>
         <argsstring></argsstring>
         <name>FloatMAX</name>
         <qualifiedname>SR_MATH_NS::FloatMAX</qualifiedname>
@@ -456,8 +456,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="134" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="134" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Mathematics_8h_1a183d4268cc7f073ba3e586aad6e86de8" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>int32_t</type>
-        <definition>int32_t SR_MATH_NS::Int32MAX</definition>
+        <type>constexpr int32_t</type>
+        <definition>constexpr int32_t SR_MATH_NS::Int32MAX</definition>
         <argsstring></argsstring>
         <name>Int32MAX</name>
         <qualifiedname>SR_MATH_NS::Int32MAX</qualifiedname>
@@ -471,8 +471,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" line="135" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Mathematics.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="Mathematics_8h_1ab4609eb5adff7f6b2dfe0fcec00e3ce4" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>Unit</type>
-        <definition>Unit SR_MATH_NS::UnitMAX</definition>
+        <type>constexpr Unit</type>
+        <definition>constexpr Unit SR_MATH_NS::UnitMAX</definition>
         <argsstring></argsstring>
         <name>UnitMAX</name>
         <qualifiedname>SR_MATH_NS::UnitMAX</qualifiedname>
@@ -516,8 +516,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" line="244" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector2.h" bodystart="244" bodyend="244"/>
       </memberdef>
       <memberdef kind="variable" id="Vector2_8h_1a8827c7ae5fc1ea905fd9edf01480cb9a" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">IVector2</ref></type>
-        <definition>IVector2 SR_MATH_NS::IVector2MAX</definition>
+        <type>constexpr <ref refid="structSR__MATH__NS_1_1Vector2" kindref="compound">IVector2</ref></type>
+        <definition>constexpr IVector2 SR_MATH_NS::IVector2MAX</definition>
         <argsstring></argsstring>
         <name>IVector2MAX</name>
         <qualifiedname>SR_MATH_NS::IVector2MAX</qualifiedname>
@@ -901,8 +901,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_MATH_NS::IsFloat</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_MATH_NS::IsFloat</definition>
         <argsstring>()</argsstring>
         <name>IsFloat</name>
         <qualifiedname>SR_MATH_NS::IsFloat</qualifiedname>
@@ -920,8 +920,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_MATH_NS::IsBool</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_MATH_NS::IsBool</definition>
         <argsstring>()</argsstring>
         <name>IsBool</name>
         <qualifiedname>SR_MATH_NS::IsBool</qualifiedname>
@@ -939,8 +939,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_MATH_NS::IsInt</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_MATH_NS::IsInt</definition>
         <argsstring>()</argsstring>
         <name>IsInt</name>
         <qualifiedname>SR_MATH_NS::IsInt</qualifiedname>
@@ -958,8 +958,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_MATH_NS::IsNumber</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_MATH_NS::IsNumber</definition>
         <argsstring>()</argsstring>
         <name>IsNumber</name>
         <qualifiedname>SR_MATH_NS::IsNumber</qualifiedname>
@@ -1387,6 +1387,8 @@
         <inbodydescription>
 <para>Determine cell</para>
 <para>Coordinate components relative to the cell vertices</para>
+<para>Determine cell</para>
+<para>Coordinate components relative to the cell vertices</para>
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="37" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="37" bodyend="68" declfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" declline="27" declcolumn="25"/>
       </memberdef>
@@ -1422,6 +1424,8 @@
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
+<para>Determine cell</para>
+<para>Coordinate components relative to the cell vertices</para>
 <para>Determine cell</para>
 <para>Coordinate components relative to the cell vertices</para>
         </inbodydescription>
@@ -1463,6 +1467,10 @@
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
+<para>Determine cell</para>
+<para>Coordinate components relative to the cell vertices</para>
+<para>at it</para>
+<para>at it+1</para>
 <para>Determine cell</para>
 <para>Coordinate components relative to the cell vertices</para>
 <para>at it</para>
@@ -1619,7 +1627,7 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="311" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="311" bodyend="319"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a3472de887822e30dee43f7ea67e211e0" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
+        <type>constexpr uint32_t</type>
         <definition>static constexpr uint32_t SR_MATH_NS::RGBToHEX</definition>
         <argsstring>(const IVector3 &amp;color)</argsstring>
         <name>RGBToHEX</name>
@@ -1637,7 +1645,7 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="321" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="321" bodyend="323"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1af4e4dbaa0508558b25117c9cbd7bcff6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint32_t</type>
+        <type>constexpr uint32_t</type>
         <definition>static constexpr uint32_t SR_MATH_NS::BGRToHEX</definition>
         <argsstring>(const IVector3 &amp;color)</argsstring>
         <name>BGRToHEX</name>
@@ -1655,7 +1663,7 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="325" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="325" bodyend="327"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1ad396ed594c5914bf3b5f7c4774b1d9c1" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">IVector3</ref></type>
+        <type>constexpr <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">IVector3</ref></type>
         <definition>static constexpr IVector3 SR_MATH_NS::HEXToRGB</definition>
         <argsstring>(uint32_t hex)</argsstring>
         <name>HEXToRGB</name>
@@ -1673,7 +1681,7 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="329" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" bodystart="329" bodyend="337"/>
       </memberdef>
       <memberdef kind="function" id="Vector4_8h_1a755ad80d15a8c297efeff822ef120d6d" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">IVector3</ref></type>
+        <type>constexpr <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">IVector3</ref></type>
         <definition>static constexpr IVector3 SR_MATH_NS::HEXToBGR</definition>
         <argsstring>(uint32_t hex)</argsstring>
         <name>HEXToBGR</name>

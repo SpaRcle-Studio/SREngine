@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**std**](namespacestd.md) **>** [**hash&lt; SR\_UTILS\_NS::StringAtom &gt;**](structstd_1_1hash_3_01SR__UTILS__NS_1_1StringAtom_01_4.md)
+[**ClassList**](annotated.md) **>** [**hash&lt; SR\_UTILS\_NS::StringAtom &gt;**](structstd_1_1hash_3_01SR__UTILS__NS_1_1StringAtom_01_4.md)
 
 
 
@@ -90,7 +90,7 @@
 ### function operator() 
 
 ```C++
-inline size_t std::hash< SR_UTILS_NS::StringAtom >::operator() (
+inline size_t hash< SR_UTILS_NS::StringAtom >::operator() (
     SR_UTILS_NS::StringAtom const & object
 ) noexcept const
 ```

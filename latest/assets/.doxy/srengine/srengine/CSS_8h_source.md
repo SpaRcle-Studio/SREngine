@@ -45,7 +45,6 @@ namespace SR_UTILS_NS::Web {
         CSSOptionalSizeValue paddingTop, paddingRight, paddingBottom, paddingLeft;
         CSSOptionalSizeValue borderTop, borderRight, borderBottom, borderLeft;
 
-
         CSSOptionalSizeValue opacity;
         CSSOptionalSizeValue zIndex;
 

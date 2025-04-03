@@ -8,9 +8,8 @@
 
 
 
-[More...](#detailed-description)
 
-* `#include <Rigidbody3D.h>`
+
 
 
 
@@ -386,14 +385,6 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 
 
 
-## Detailed Description
-
-
-
- 
-
-
-    
 ## Public Functions Documentation
 
 

@@ -53,8 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  decltype(auto) | [**operator()**](#function-operator()-12) (std::any & a, F && f) const<br> |
-|  void | [**operator()**](#function-operator()-22) (Any && any, F && f) const<br> |
+|  decltype(auto) | [**operator()**](#function-operator()) (std::any & a, F && f) const<br> |
 
 
 
@@ -88,28 +87,12 @@
 
 
 
-### function operator() [1/2]
+### function operator() 
 
 ```C++
 template<class F>
 inline decltype(auto) SR_UTILS_NS::AnyVisitor<>::operator() (
     std::any & a,
-    F && f
-) const
-```
-
-
-
-
-<hr>
-
-
-
-### function operator() [2/2]
-
-```C++
-inline void SR_UTILS_NS::AnyVisitor<>::operator() (
-    Any && any,
     F && f
 ) const
 ```

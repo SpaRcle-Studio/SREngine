@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__AUDIO__NS_1_1PlayData" kind="struct" language="C++" prot="public">
     <compoundname>SR_AUDIO_NS::PlayData</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
@@ -141,76 +141,9 @@
           <edgelabel>params</edgelabel>
         </childnode>
       </node>
-      <node id="14">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; AudioLibrary &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="17">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector3 &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="18">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SR_MATH_NS::FVector6 &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="13">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; SpatializeMode &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="12">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; bool &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="15">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; float_t &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="19">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; std::string &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
-      <node id="16">
-        <label>SR_AUDIO_NS::PlayParamChangeChecker&lt; uint64_t &gt;</label>
-        <link refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker"/>
-      </node>
       <node id="11">
         <label>SR_AUDIO_NS::PlayParams</label>
         <link refid="structSR__AUDIO__NS_1_1PlayParams"/>
-        <childnode refid="12" relation="usage">
-          <edgelabel>async</edgelabel>
-          <edgelabel>loop</edgelabel>
-        </childnode>
-        <childnode refid="13" relation="usage">
-          <edgelabel>spatialize</edgelabel>
-        </childnode>
-        <childnode refid="14" relation="usage">
-          <edgelabel>library</edgelabel>
-        </childnode>
-        <childnode refid="15" relation="usage">
-          <edgelabel>coneInnerAngle</edgelabel>
-          <edgelabel>gain</edgelabel>
-          <edgelabel>maxDistance</edgelabel>
-          <edgelabel>maxGain</edgelabel>
-          <edgelabel>minGain</edgelabel>
-          <edgelabel>pitch</edgelabel>
-          <edgelabel>referenceDistance</edgelabel>
-          <edgelabel>relative</edgelabel>
-          <edgelabel>rolloffFactor</edgelabel>
-        </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>uniqueId</edgelabel>
-        </childnode>
-        <childnode refid="17" relation="usage">
-          <edgelabel>direction</edgelabel>
-          <edgelabel>position</edgelabel>
-          <edgelabel>velocity</edgelabel>
-        </childnode>
-        <childnode refid="18" relation="usage">
-          <edgelabel>orientation</edgelabel>
-        </childnode>
-        <childnode refid="19" relation="usage">
-          <edgelabel>device</edgelabel>
-        </childnode>
       </node>
       <node id="3">
         <label>SR_AUDIO_NS::Sound</label>

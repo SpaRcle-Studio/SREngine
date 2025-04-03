@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" kind="struct" language="C++" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" kind="struct" language="C++" prot="private">
     <compoundname>std::less&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</compoundname>
     <templateparamlist>
       <param>

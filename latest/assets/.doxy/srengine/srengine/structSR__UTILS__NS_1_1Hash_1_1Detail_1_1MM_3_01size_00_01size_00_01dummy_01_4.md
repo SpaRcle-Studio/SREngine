@@ -55,8 +55,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  unsigned int | [**crc32**](#function-crc32-12) (const char \* str, unsigned int prev\_crc=0xFFFFFFFF) <br> |
-|  unsigned int | [**crc32**](#function-crc32-22) (const char \* str, unsigned int prev\_crc=0xFFFFFFFF) <br> |
+|  constexpr unsigned int | [**crc32**](#function-crc32) (const char \* str, unsigned int prev\_crc=0xFFFFFFFF) <br> |
 
 
 
@@ -88,26 +87,10 @@
 
 
 
-### function crc32 [1/2]
+### function crc32 
 
 ```C++
-static inline unsigned int SR_UTILS_NS::Hash::Detail::MM< size, size, dummy >::crc32 (
-    const char * str,
-    unsigned int prev_crc=0xFFFFFFFF
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function crc32 [2/2]
-
-```C++
-static inline unsigned int SR_UTILS_NS::Hash::Detail::MM< size, size, dummy >::crc32 (
+static inline constexpr unsigned int SR_UTILS_NS::Hash::Detail::MM< size, size, dummy >::crc32 (
     const char * str,
     unsigned int prev_crc=0xFFFFFFFF
 ) 

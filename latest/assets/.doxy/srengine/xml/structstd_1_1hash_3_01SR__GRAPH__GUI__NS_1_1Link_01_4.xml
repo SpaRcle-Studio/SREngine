@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Link_01_4" kind="struct" language="C++" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structstd_1_1hash_3_01SR__GRAPH__GUI__NS_1_1Link_01_4" kind="struct" language="C++" prot="private">
     <compoundname>std::hash&lt; SR_GRAPH_GUI_NS::Link &gt;</compoundname>
     <templateparamlist>
     </templateparamlist>

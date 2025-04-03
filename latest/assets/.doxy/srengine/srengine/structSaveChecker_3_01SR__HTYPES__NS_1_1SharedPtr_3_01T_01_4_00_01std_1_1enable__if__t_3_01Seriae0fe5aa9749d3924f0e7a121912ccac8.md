@@ -55,8 +55,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**CanBeSaved**](#function-canbesaved-12) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & value) <br> |
-|  bool | [**CanBeSaved**](#function-canbesaved-22) (const T & value) <br> |
+|  bool | [**CanBeSaved**](#function-canbesaved) (const [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; & value) <br> |
 
 
 
@@ -88,26 +87,11 @@
 
 
 
-### function CanBeSaved [1/2]
+### function CanBeSaved 
 
 ```C++
 static inline bool SaveChecker< SR_HTYPES_NS::SharedPtr< T >, std::enable_if_t< SerializationTraits< T >::IsSerializable > >::CanBeSaved (
     const SR_HTYPES_NS::SharedPtr < T > & value
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function CanBeSaved [2/2]
-
-```C++
-static inline bool SaveChecker< SR_HTYPES_NS::SharedPtr< T >, std::enable_if_t< SerializationTraits< T >::IsSerializable > >::CanBeSaved (
-    const T & value
 ) 
 ```
 

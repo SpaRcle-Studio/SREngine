@@ -40,8 +40,6 @@
 | ---: | :--- |
 | class | [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) <br> |
 | struct | [**formatter&lt; SR\_UTILS\_NS::StringAtom &gt;**](structfmt_1_1formatter_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
-| struct | [**hash&lt; SR\_UTILS\_NS::StringAtom &gt;**](structstd_1_1hash_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
-| struct | [**less&lt; SR\_UTILS\_NS::StringAtom &gt;**](structstd_1_1less_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
 
 
 

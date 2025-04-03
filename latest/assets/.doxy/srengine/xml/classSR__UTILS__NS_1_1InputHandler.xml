@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1InputHandler" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::InputHandler</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1Event" prot="public" virt="non-virtual">SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</basecompoundref>
@@ -140,8 +140,8 @@
         <name>OnKeyPress</name>
         <qualifiedname>SR_UTILS_NS::InputHandler::OnKeyPress</qualifiedname>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a8ab8c641e3a53e9025f362f477a61a38">OnKeyPress</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1Widget_1aced28345faf97a190e126802d65b856b">OnKeyPress</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af6f3c2331cc123eee6e2ed01664a9bb9">OnKeyPress</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1Widget_1aced28345faf97a190e126802d65b856b">OnKeyPress</reimplementedby>
         <param>
           <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">KeyboardInputData</ref> *</type>
           <declname>data</declname>
@@ -160,10 +160,10 @@
         <argsstring>(const KeyboardInputData *data)</argsstring>
         <name>OnKeyDown</name>
         <qualifiedname>SR_UTILS_NS::InputHandler::OnKeyDown</qualifiedname>
-        <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneTools_1a28693a7004d8e26efac489c84b12972f">OnKeyDown</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a22a8111c91cb3d13734681a8287dca0e">OnKeyDown</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae">OnKeyDown</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab37a4363e4174eb2f199ae804abcf337">OnKeyDown</reimplementedby>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1SceneTools_1a28693a7004d8e26efac489c84b12972f">OnKeyDown</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae">OnKeyDown</reimplementedby>
         <param>
           <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">KeyboardInputData</ref> *</type>
           <declname>data</declname>
@@ -182,8 +182,8 @@
         <argsstring>(const KeyboardInputData *data)</argsstring>
         <name>OnKeyUp</name>
         <qualifiedname>SR_UTILS_NS::InputHandler::OnKeyUp</qualifiedname>
-        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad6bba161a4fb2edb8fa157443709b8cb">OnKeyUp</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a5172e57846779ca91807d5133d0ea47e">OnKeyUp</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__GUI__NS_1_1Widget_1ad6bba161a4fb2edb8fa157443709b8cb">OnKeyUp</reimplementedby>
         <param>
           <type>const <ref refid="classSR__UTILS__NS_1_1KeyboardInputData" kindref="compound">KeyboardInputData</ref> *</type>
           <declname>data</declname>
@@ -367,7 +367,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -385,7 +385,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>SR_UTILS_NS::Event&lt; InputDeviceData * &gt;</label>
+        <label>SR_UTILS_NS::Event&lt; _args &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Event"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -415,7 +415,7 @@
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a6c910542d5f00663837a3af04d774107" prot="public" virt="virtual"><scope>SR_UTILS_NS::InputHandler</scope><name>OnMousePress</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1af18a761f7df246302137fe44699d0dc8" prot="public" virt="virtual"><scope>SR_UTILS_NS::InputHandler</scope><name>OnMouseUp</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ae7da77d252b39bd4f1bd93193708f166" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::InputHandler</scope><name>Trigger</name></member>
-      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event&lt; InputDeviceData * &gt;::"><scope>SR_UTILS_NS::InputHandler</scope><name>Trigger</name></member>
+      <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_UTILS_NS::InputHandler</scope><name>Trigger</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a9bc45fb43b4c09af57b3daccab237f0c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::InputHandler</scope><name>TriggerKeyboard</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a516232074efedab3a236edd855f00fc0" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::InputHandler</scope><name>TriggerMouse</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::InputHandler</scope><name>~Event</name></member>

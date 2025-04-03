@@ -55,8 +55,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SRHashType | [**EncodeChar**](#function-encodechar-12) (SRHashType hash, const  char) noexcept<br> |
-|  SRHashType | [**EncodeChar**](#function-encodechar-22) (SRHashType hash, const char(&) text) noexcept<br> |
+|  constexpr SRHashType | [**EncodeChar**](#function-encodechar) (SRHashType hash, const  char) noexcept<br> |
 
 
 
@@ -88,28 +87,12 @@
 
 
 
-### function EncodeChar [1/2]
+### function EncodeChar 
 
 ```C++
-static inline SRHashType SR_UTILS_NS::Hash::Detail::Encoder< S, 0 >::EncodeChar (
+static inline constexpr SRHashType SR_UTILS_NS::Hash::Detail::Encoder< S, 0 >::EncodeChar (
     SRHashType hash,
     const char
-) noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function EncodeChar [2/2]
-
-```C++
-static inline SRHashType SR_UTILS_NS::Hash::Detail::Encoder< S, 0 >::EncodeChar (
-    SRHashType hash,
-    const char(&) text
 ) noexcept
 ```
 

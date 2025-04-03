@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**util**](namespaceutil.md) **>** [**dynamic\_array**](classutil_1_1dynamic__array.md)
+[**ClassList**](annotated.md) **>** [**dynamic\_array**](classutil_1_1dynamic__array.md)
 
 
 
@@ -70,42 +70,42 @@ Inherited by the following classes: [SR\_TYPES\_NS::detail::fixed\_dynamic\_arra
 
 | Type | Name |
 | ---: | :--- |
-|  reference | [**at**](#function-at-12) (const size\_type i) <br> |
-|  const\_reference | [**at**](#function-at-22) (const size\_type i) const<br> |
-|  reference | [**back**](#function-back-12) () <br> |
-|  const\_reference | [**back**](#function-back-22) () const<br> |
-|  iterator | [**begin**](#function-begin-12) () <br> |
-|  const\_iterator | [**begin**](#function-begin-22) () const<br> |
-|  const\_iterator | [**cbegin**](#function-cbegin) () const<br> |
-|  const\_iterator | [**cend**](#function-cend) () const<br> |
-|  [**const\_reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md) | [**crbegin**](#function-crbegin) () const<br> |
-|  [**const\_reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md) | [**crend**](#function-crend) () const<br> |
-|  pointer | [**data**](#function-data-12) () <br> |
-|  const\_pointer | [**data**](#function-data-22) () const<br> |
+|  constexpr auto | [**at**](#function-at-12) (const size\_type i) <br> |
+|  constexpr auto | [**at**](#function-at-22) (const size\_type i) const<br> |
+|  constexpr auto | [**back**](#function-back-12) () <br> |
+|  constexpr auto | [**back**](#function-back-22) () const<br> |
+|  constexpr auto | [**begin**](#function-begin-12) () <br> |
+|  constexpr auto | [**begin**](#function-begin-22) () const<br> |
+|  constexpr auto | [**cbegin**](#function-cbegin) () const<br> |
+|  constexpr auto | [**cend**](#function-cend) () const<br> |
+|  constexpr auto | [**crbegin**](#function-crbegin) () const<br> |
+|  constexpr auto | [**crend**](#function-crend) () const<br> |
+|  constexpr auto | [**data**](#function-data-12) () <br> |
+|  constexpr auto | [**data**](#function-data-22) () const<br> |
 |  constexpr | [**dynamic\_array**](#function-dynamic_array-16) () = delete<br> |
 |  constexpr | [**dynamic\_array**](#function-dynamic_array-26) (size\_type count\_in, const\_reference value\_in=value\_type(), const allocator\_type & alloc\_in=allocator\_type()) <br> |
-|  constexpr | [**dynamic\_array**](#function-dynamic_array-36) (const [**dynamic\_array**](classutil_1_1dynamic__array.md) & other) <br> |
+|  constexpr | [**dynamic\_array**](#function-dynamic_array-36) (const dynamic\_array & other) <br> |
 |  constexpr | [**dynamic\_array**](#function-dynamic_array-46) (input\_iterator first, input\_iterator last, const allocator\_type & alloc\_in=allocator\_type()) <br> |
 |  constexpr | [**dynamic\_array**](#function-dynamic_array-56) (std::initializer\_list&lt; value\_type &gt; lst, const allocator\_type & alloc\_in=allocator\_type()) <br> |
-|  constexpr | [**dynamic\_array**](#function-dynamic_array-66) ([**dynamic\_array**](classutil_1_1dynamic__array.md) && other) noexcept<br> |
-|  bool | [**empty**](#function-empty) () const<br> |
-|  iterator | [**end**](#function-end-12) () <br> |
-|  const\_iterator | [**end**](#function-end-22) () const<br> |
-|  void | [**fill**](#function-fill) (const value\_type & value\_in) <br> |
-|  reference | [**front**](#function-front-12) () <br> |
-|  const\_reference | [**front**](#function-front-22) () const<br> |
-|  size\_type | [**max\_size**](#function-max_size) () const<br> |
-|  [**dynamic\_array**](classutil_1_1dynamic__array.md) & | [**operator=**](#function-operator) (const [**dynamic\_array**](classutil_1_1dynamic__array.md) & other) <br> |
-|  [**dynamic\_array**](classutil_1_1dynamic__array.md) & | [**operator=**](#function-operator_1) ([**dynamic\_array**](classutil_1_1dynamic__array.md) && other) noexcept<br> |
-|  reference | [**operator[]**](#function-operator_2) (const size\_type i) <br> |
-|  const\_reference | [**operator[]**](#function-operator_3) (const size\_type i) const<br> |
-|  [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md) | [**rbegin**](#function-rbegin-12) () <br> |
-|  [**const\_reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md) | [**rbegin**](#function-rbegin-22) () const<br> |
-|  [**reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md) | [**rend**](#function-rend-12) () <br> |
-|  [**const\_reverse\_iterator**](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md) | [**rend**](#function-rend-22) () const<br> |
-|  size\_type | [**size**](#function-size) () const<br> |
-|  void | [**swap**](#function-swap-12) ([**dynamic\_array**](classutil_1_1dynamic__array.md) & other) noexcept<br> |
-|  void | [**swap**](#function-swap-22) ([**dynamic\_array**](classutil_1_1dynamic__array.md) && other) noexcept<br> |
+|  constexpr | [**dynamic\_array**](#function-dynamic_array-66) (dynamic\_array && other) noexcept<br> |
+|  constexpr auto | [**empty**](#function-empty) () const<br> |
+|  constexpr auto | [**end**](#function-end-12) () <br> |
+|  constexpr auto | [**end**](#function-end-22) () const<br> |
+|  constexpr auto | [**fill**](#function-fill) (const value\_type & value\_in) <br> |
+|  constexpr auto | [**front**](#function-front-12) () <br> |
+|  constexpr auto | [**front**](#function-front-22) () const<br> |
+|  constexpr auto | [**max\_size**](#function-max_size) () const<br> |
+|  constexpr auto | [**operator=**](#function-operator) (const dynamic\_array & other) <br> |
+|  constexpr auto | [**operator=**](#function-operator_1) (dynamic\_array && other) noexcept<br> |
+|  constexpr auto | [**operator[]**](#function-operator_2) (const size\_type i) <br> |
+|  constexpr auto | [**operator[]**](#function-operator_3) (const size\_type i) const<br> |
+|  constexpr auto | [**rbegin**](#function-rbegin-12) () <br> |
+|  constexpr auto | [**rbegin**](#function-rbegin-22) () const<br> |
+|  constexpr auto | [**rend**](#function-rend-12) () <br> |
+|  constexpr auto | [**rend**](#function-rend-22) () const<br> |
+|  constexpr auto | [**size**](#function-size) () const<br> |
+|  constexpr auto | [**swap**](#function-swap-12) (dynamic\_array & other) noexcept<br> |
+|  constexpr auto | [**swap**](#function-swap-22) (dynamic\_array && other) noexcept<br> |
 | virtual  | [**~dynamic\_array**](#function-dynamic_array) () <br> |
 
 
@@ -260,7 +260,7 @@ using util::dynamic_array< ValueType, AllocatorType, SizeType, DiffType >::refer
 ### typedef reverse\_iterator 
 
 ```C++
-using util::dynamic_array< ValueType, AllocatorType, SizeType, DiffType >::reverse_iterator =  SR_TYPES_NS::detail::iterator_detail::reverse_iterator<      value_type*>;
+using util::dynamic_array< ValueType, AllocatorType, SizeType, DiffType >::reverse_iterator =  SR_TYPES_NS::detail::iterator_detail::reverse_iterator< value_type*>;
 ```
 
 
@@ -301,7 +301,7 @@ using util::dynamic_array< ValueType, AllocatorType, SizeType, DiffType >::value
 ### function at [1/2]
 
 ```C++
-inline reference util::dynamic_array::at (
+inline constexpr auto dynamic_array::at (
     const size_type i
 ) 
 ```
@@ -316,7 +316,7 @@ inline reference util::dynamic_array::at (
 ### function at [2/2]
 
 ```C++
-inline const_reference util::dynamic_array::at (
+inline constexpr auto dynamic_array::at (
     const size_type i
 ) const
 ```
@@ -331,7 +331,7 @@ inline const_reference util::dynamic_array::at (
 ### function back [1/2]
 
 ```C++
-inline reference util::dynamic_array::back () 
+inline constexpr auto dynamic_array::back () 
 ```
 
 
@@ -344,7 +344,7 @@ inline reference util::dynamic_array::back ()
 ### function back [2/2]
 
 ```C++
-inline const_reference util::dynamic_array::back () const
+inline constexpr auto dynamic_array::back () const
 ```
 
 
@@ -357,7 +357,7 @@ inline const_reference util::dynamic_array::back () const
 ### function begin [1/2]
 
 ```C++
-inline iterator util::dynamic_array::begin () 
+inline constexpr auto dynamic_array::begin () 
 ```
 
 
@@ -370,7 +370,7 @@ inline iterator util::dynamic_array::begin ()
 ### function begin [2/2]
 
 ```C++
-inline const_iterator util::dynamic_array::begin () const
+inline constexpr auto dynamic_array::begin () const
 ```
 
 
@@ -383,7 +383,7 @@ inline const_iterator util::dynamic_array::begin () const
 ### function cbegin 
 
 ```C++
-inline const_iterator util::dynamic_array::cbegin () const
+inline constexpr auto dynamic_array::cbegin () const
 ```
 
 
@@ -396,7 +396,7 @@ inline const_iterator util::dynamic_array::cbegin () const
 ### function cend 
 
 ```C++
-inline const_iterator util::dynamic_array::cend () const
+inline constexpr auto dynamic_array::cend () const
 ```
 
 
@@ -409,7 +409,7 @@ inline const_iterator util::dynamic_array::cend () const
 ### function crbegin 
 
 ```C++
-inline const_reverse_iterator util::dynamic_array::crbegin () const
+inline constexpr auto dynamic_array::crbegin () const
 ```
 
 
@@ -422,7 +422,7 @@ inline const_reverse_iterator util::dynamic_array::crbegin () const
 ### function crend 
 
 ```C++
-inline const_reverse_iterator util::dynamic_array::crend () const
+inline constexpr auto dynamic_array::crend () const
 ```
 
 
@@ -435,7 +435,7 @@ inline const_reverse_iterator util::dynamic_array::crend () const
 ### function data [1/2]
 
 ```C++
-inline pointer util::dynamic_array::data () 
+inline constexpr auto dynamic_array::data () 
 ```
 
 
@@ -448,7 +448,7 @@ inline pointer util::dynamic_array::data ()
 ### function data [2/2]
 
 ```C++
-inline const_pointer util::dynamic_array::data () const
+inline constexpr auto dynamic_array::data () const
 ```
 
 
@@ -461,7 +461,7 @@ inline const_pointer util::dynamic_array::data () const
 ### function dynamic\_array [1/6]
 
 ```C++
-constexpr util::dynamic_array::dynamic_array () = delete
+constexpr dynamic_array::dynamic_array () = delete
 ```
 
 
@@ -474,7 +474,7 @@ constexpr util::dynamic_array::dynamic_array () = delete
 ### function dynamic\_array [2/6]
 
 ```C++
-inline explicit constexpr util::dynamic_array::dynamic_array (
+inline explicit constexpr dynamic_array::dynamic_array (
     size_type count_in,
     const_reference value_in=value_type(),
     const allocator_type & alloc_in=allocator_type()
@@ -491,7 +491,7 @@ inline explicit constexpr util::dynamic_array::dynamic_array (
 ### function dynamic\_array [3/6]
 
 ```C++
-inline constexpr util::dynamic_array::dynamic_array (
+inline constexpr dynamic_array::dynamic_array (
     const dynamic_array & other
 ) 
 ```
@@ -507,7 +507,7 @@ inline constexpr util::dynamic_array::dynamic_array (
 
 ```C++
 template<typename input_iterator>
-inline constexpr util::dynamic_array::dynamic_array (
+inline constexpr dynamic_array::dynamic_array (
     input_iterator first,
     input_iterator last,
     const allocator_type & alloc_in=allocator_type()
@@ -524,7 +524,7 @@ inline constexpr util::dynamic_array::dynamic_array (
 ### function dynamic\_array [5/6]
 
 ```C++
-inline constexpr util::dynamic_array::dynamic_array (
+inline constexpr dynamic_array::dynamic_array (
     std::initializer_list< value_type > lst,
     const allocator_type & alloc_in=allocator_type()
 ) 
@@ -540,7 +540,7 @@ inline constexpr util::dynamic_array::dynamic_array (
 ### function dynamic\_array [6/6]
 
 ```C++
-inline constexpr util::dynamic_array::dynamic_array (
+inline constexpr dynamic_array::dynamic_array (
     dynamic_array && other
 ) noexcept
 ```
@@ -555,7 +555,7 @@ inline constexpr util::dynamic_array::dynamic_array (
 ### function empty 
 
 ```C++
-inline bool util::dynamic_array::empty () const
+inline constexpr auto dynamic_array::empty () const
 ```
 
 
@@ -568,7 +568,7 @@ inline bool util::dynamic_array::empty () const
 ### function end [1/2]
 
 ```C++
-inline iterator util::dynamic_array::end () 
+inline constexpr auto dynamic_array::end () 
 ```
 
 
@@ -581,7 +581,7 @@ inline iterator util::dynamic_array::end ()
 ### function end [2/2]
 
 ```C++
-inline const_iterator util::dynamic_array::end () const
+inline constexpr auto dynamic_array::end () const
 ```
 
 
@@ -594,7 +594,7 @@ inline const_iterator util::dynamic_array::end () const
 ### function fill 
 
 ```C++
-inline void util::dynamic_array::fill (
+inline constexpr auto dynamic_array::fill (
     const value_type & value_in
 ) 
 ```
@@ -609,7 +609,7 @@ inline void util::dynamic_array::fill (
 ### function front [1/2]
 
 ```C++
-inline reference util::dynamic_array::front () 
+inline constexpr auto dynamic_array::front () 
 ```
 
 
@@ -622,7 +622,7 @@ inline reference util::dynamic_array::front ()
 ### function front [2/2]
 
 ```C++
-inline const_reference util::dynamic_array::front () const
+inline constexpr auto dynamic_array::front () const
 ```
 
 
@@ -635,7 +635,7 @@ inline const_reference util::dynamic_array::front () const
 ### function max\_size 
 
 ```C++
-inline size_type util::dynamic_array::max_size () const
+inline constexpr auto dynamic_array::max_size () const
 ```
 
 
@@ -648,7 +648,7 @@ inline size_type util::dynamic_array::max_size () const
 ### function operator= 
 
 ```C++
-inline dynamic_array & util::dynamic_array::operator= (
+inline constexpr auto dynamic_array::operator= (
     const dynamic_array & other
 ) 
 ```
@@ -663,7 +663,7 @@ inline dynamic_array & util::dynamic_array::operator= (
 ### function operator= 
 
 ```C++
-inline dynamic_array & util::dynamic_array::operator= (
+inline constexpr auto dynamic_array::operator= (
     dynamic_array && other
 ) noexcept
 ```
@@ -678,7 +678,7 @@ inline dynamic_array & util::dynamic_array::operator= (
 ### function operator[] 
 
 ```C++
-inline reference util::dynamic_array::operator[] (
+inline constexpr auto dynamic_array::operator[] (
     const size_type i
 ) 
 ```
@@ -693,7 +693,7 @@ inline reference util::dynamic_array::operator[] (
 ### function operator[] 
 
 ```C++
-inline const_reference util::dynamic_array::operator[] (
+inline constexpr auto dynamic_array::operator[] (
     const size_type i
 ) const
 ```
@@ -708,7 +708,7 @@ inline const_reference util::dynamic_array::operator[] (
 ### function rbegin [1/2]
 
 ```C++
-inline reverse_iterator util::dynamic_array::rbegin () 
+inline constexpr auto dynamic_array::rbegin () 
 ```
 
 
@@ -721,7 +721,7 @@ inline reverse_iterator util::dynamic_array::rbegin ()
 ### function rbegin [2/2]
 
 ```C++
-inline const_reverse_iterator util::dynamic_array::rbegin () const
+inline constexpr auto dynamic_array::rbegin () const
 ```
 
 
@@ -734,7 +734,7 @@ inline const_reverse_iterator util::dynamic_array::rbegin () const
 ### function rend [1/2]
 
 ```C++
-inline reverse_iterator util::dynamic_array::rend () 
+inline constexpr auto dynamic_array::rend () 
 ```
 
 
@@ -747,7 +747,7 @@ inline reverse_iterator util::dynamic_array::rend ()
 ### function rend [2/2]
 
 ```C++
-inline const_reverse_iterator util::dynamic_array::rend () const
+inline constexpr auto dynamic_array::rend () const
 ```
 
 
@@ -760,7 +760,7 @@ inline const_reverse_iterator util::dynamic_array::rend () const
 ### function size 
 
 ```C++
-inline size_type util::dynamic_array::size () const
+inline constexpr auto dynamic_array::size () const
 ```
 
 
@@ -773,7 +773,7 @@ inline size_type util::dynamic_array::size () const
 ### function swap [1/2]
 
 ```C++
-inline void util::dynamic_array::swap (
+inline constexpr auto dynamic_array::swap (
     dynamic_array & other
 ) noexcept
 ```
@@ -788,7 +788,7 @@ inline void util::dynamic_array::swap (
 ### function swap [2/2]
 
 ```C++
-inline void util::dynamic_array::swap (
+inline constexpr auto dynamic_array::swap (
     dynamic_array && other
 ) noexcept
 ```
@@ -803,7 +803,7 @@ inline void util::dynamic_array::swap (
 ### function ~dynamic\_array 
 
 ```C++
-inline virtual util::dynamic_array::~dynamic_array () 
+inline virtual dynamic_array::~dynamic_array () 
 ```
 
 

@@ -4,7 +4,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md) **>** [**uniform\_int\_distribution**](classSR__TYPES__NS_1_1uniform__int__distribution.md) **>** [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md)
+[**ClassList**](annotated.md) **>** [**uniform\_int\_distribution**](classSR__TYPES__NS_1_1uniform__int__distribution.md) **>** [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md)
 
 
 
@@ -53,13 +53,13 @@
 | ---: | :--- |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**get\_a**](#function-get_a) () const<br> |
 |  WIDE\_INTEGER\_NODISCARD constexpr auto | [**get\_b**](#function-get_b) () const<br> |
-|  [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & | [**operator=**](#function-operator) (const [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & other) <br> |
-|  [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & | [**operator=**](#function-operator_1) ([**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) && other) noexcept<br> |
-|  constexpr | [**param\_type**](#function-param_type-13) (const [**result\_type**](classSR__TYPES__NS_1_1uintwide__t.md) & p\_a=(std::numeric\_limits&lt; [**result\_type**](classSR__TYPES__NS_1_1uintwide__t.md) &gt;::min)(), const [**result\_type**](classSR__TYPES__NS_1_1uintwide__t.md) & p\_b=(std::numeric\_limits&lt; [**result\_type**](classSR__TYPES__NS_1_1uintwide__t.md) &gt;::max)()) <br> |
+|  constexpr auto | [**operator=**](#function-operator) (const [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & other) <br> |
+|  constexpr auto | [**operator=**](#function-operator_1) ([**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) && other) noexcept<br> |
+|  constexpr | [**param\_type**](#function-param_type-13) (const result\_type & p\_a=(std::numeric\_limits&lt; result\_type &gt;::min)(), const result\_type & p\_b=(std::numeric\_limits&lt; result\_type &gt;::max)()) <br> |
 |  constexpr | [**param\_type**](#function-param_type-23) (const [**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) & other) <br> |
 |  constexpr | [**param\_type**](#function-param_type-33) ([**param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md) && other) noexcept<br> |
-|  void | [**set\_a**](#function-set_a) (const [**result\_type**](classSR__TYPES__NS_1_1uintwide__t.md) & p\_a) <br> |
-|  void | [**set\_b**](#function-set_b) (const [**result\_type**](classSR__TYPES__NS_1_1uintwide__t.md) & p\_b) <br> |
+|  constexpr auto | [**set\_a**](#function-set_a) (const result\_type & p\_a) <br> |
+|  constexpr auto | [**set\_b**](#function-set_b) (const result\_type & p\_b) <br> |
 |   | [**~param\_type**](#function-param_type) () = default<br> |
 
 
@@ -97,7 +97,7 @@
 ### function get\_a 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uniform_int_distribution::param_type::get_a () const
+inline WIDE_INTEGER_NODISCARD constexpr auto uniform_int_distribution::param_type::get_a () const
 ```
 
 
@@ -110,7 +110,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uniform_int_distributi
 ### function get\_b 
 
 ```C++
-inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uniform_int_distribution::param_type::get_b () const
+inline WIDE_INTEGER_NODISCARD constexpr auto uniform_int_distribution::param_type::get_b () const
 ```
 
 
@@ -123,7 +123,7 @@ inline WIDE_INTEGER_NODISCARD constexpr auto SR_TYPES_NS::uniform_int_distributi
 ### function operator= 
 
 ```C++
-inline param_type & SR_TYPES_NS::uniform_int_distribution::param_type::operator= (
+inline constexpr auto uniform_int_distribution::param_type::operator= (
     const param_type & other
 ) 
 ```
@@ -138,7 +138,7 @@ inline param_type & SR_TYPES_NS::uniform_int_distribution::param_type::operator=
 ### function operator= 
 
 ```C++
-inline param_type & SR_TYPES_NS::uniform_int_distribution::param_type::operator= (
+inline constexpr auto uniform_int_distribution::param_type::operator= (
     param_type && other
 ) noexcept
 ```
@@ -153,7 +153,7 @@ inline param_type & SR_TYPES_NS::uniform_int_distribution::param_type::operator=
 ### function param\_type [1/3]
 
 ```C++
-inline explicit constexpr SR_TYPES_NS::uniform_int_distribution::param_type::param_type (
+inline explicit constexpr uniform_int_distribution::param_type::param_type (
     const result_type & p_a=(std::numeric_limits< result_type >::min)(),
     const result_type & p_b=(std::numeric_limits< result_type >::max)()
 ) 
@@ -169,7 +169,7 @@ inline explicit constexpr SR_TYPES_NS::uniform_int_distribution::param_type::par
 ### function param\_type [2/3]
 
 ```C++
-inline constexpr SR_TYPES_NS::uniform_int_distribution::param_type::param_type (
+inline constexpr uniform_int_distribution::param_type::param_type (
     const param_type & other
 ) 
 ```
@@ -184,7 +184,7 @@ inline constexpr SR_TYPES_NS::uniform_int_distribution::param_type::param_type (
 ### function param\_type [3/3]
 
 ```C++
-inline constexpr SR_TYPES_NS::uniform_int_distribution::param_type::param_type (
+inline constexpr uniform_int_distribution::param_type::param_type (
     param_type && other
 ) noexcept
 ```
@@ -199,7 +199,7 @@ inline constexpr SR_TYPES_NS::uniform_int_distribution::param_type::param_type (
 ### function set\_a 
 
 ```C++
-inline void SR_TYPES_NS::uniform_int_distribution::param_type::set_a (
+inline constexpr auto uniform_int_distribution::param_type::set_a (
     const result_type & p_a
 ) 
 ```
@@ -214,7 +214,7 @@ inline void SR_TYPES_NS::uniform_int_distribution::param_type::set_a (
 ### function set\_b 
 
 ```C++
-inline void SR_TYPES_NS::uniform_int_distribution::param_type::set_b (
+inline constexpr auto uniform_int_distribution::param_type::set_b (
     const result_type & p_b
 ) 
 ```
@@ -229,7 +229,7 @@ inline void SR_TYPES_NS::uniform_int_distribution::param_type::set_b (
 ### function ~param\_type 
 
 ```C++
-SR_TYPES_NS::uniform_int_distribution::param_type::~param_type () = default
+uniform_int_distribution::param_type::~param_type () = default
 ```
 
 

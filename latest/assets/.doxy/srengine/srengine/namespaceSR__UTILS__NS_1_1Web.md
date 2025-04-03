@@ -230,7 +230,7 @@ enum SR_UTILS_NS::Web::CSSGradientSide {
 ### typedef CSSOptionalSizeValue 
 
 ```C++
-using SR_UTILS_NS::Web::CSSOptionalSizeValue =  CSSOptional<CSSSizeValue>;
+using SR_UTILS_NS::Web::CSSOptionalSizeValue = typedef CSSOptional<CSSSizeValue>;
 ```
 
 

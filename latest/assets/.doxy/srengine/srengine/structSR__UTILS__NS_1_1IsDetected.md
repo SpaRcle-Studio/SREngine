@@ -18,7 +18,7 @@
 Inherits the following classes: Details::Detector::value_t
 
 
-Inherited by the following classes: [SR\_UTILS\_NS::CheckOperatorUsable&lt; CheckerEqualityComparable, std::optional&lt; T &gt;, std::optional&lt; T &gt; &gt;](structSR__UTILS__NS_1_1CheckOperatorUsable_3_01CheckerEqualityComparable_00_01std_1_1optional_3_835c32e76e2a52d0e0f22fbe39d31aa3.md)
+Inherited by the following classes: [SR\_UTILS\_NS::CheckOperatorUsable](structSR__UTILS__NS_1_1CheckOperatorUsable.md)
 
 
 

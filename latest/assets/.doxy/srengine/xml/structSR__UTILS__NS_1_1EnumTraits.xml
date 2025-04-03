@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1EnumTraits" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::EnumTraits</compoundname>
     <templateparamlist>
@@ -22,9 +22,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="58" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="58" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structSR__UTILS__NS_1_1EnumTraits_1afc796d5984eefc6e601ae0e1ff2c42dc" prot="public" static="no">
+      <memberdef kind="typedef" id="structSR__UTILS__NS_1_1EnumTraits_1afda4c0f18e01d7e74b73b2fb1dd0ef61" prot="public" static="no">
         <type>typename std::conditional_t&lt; IsDeclaredInNamespace, const EnumResultType *, <ref refid="structCodegen_1_1EnumSelector" kindref="compound">Codegen::EnumSelector</ref>&lt; EnumType &gt; &gt;</type>
-        <definition>using SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::EnumSelectorType =  typename std::conditional_t&lt;IsDeclaredInNamespace, const EnumResultType*, Codegen::EnumSelector&lt;EnumType&gt;&gt;</definition>
+        <definition>using SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::EnumSelectorType =  typename std::conditional_t&lt;IsDeclaredInNamespace, const EnumResultType*, Codegen::EnumSelector&lt;EnumType&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>EnumSelectorType</name>
         <qualifiedname>SR_UTILS_NS::EnumTraits::EnumSelectorType</qualifiedname>
@@ -39,8 +39,8 @@
     </sectiondef>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1aaaf6710fe9fe916ca28bfc0b1fa94fb2" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::IsDeclaredInNamespace</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::IsDeclaredInNamespace</definition>
         <argsstring></argsstring>
         <name>IsDeclaredInNamespace</name>
         <qualifiedname>SR_UTILS_NS::EnumTraits::IsDeclaredInNamespace</qualifiedname>
@@ -54,8 +54,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="59" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1a626243576b7200973602dd64e0ebb044" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::IsEnum</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::IsEnum</definition>
         <argsstring></argsstring>
         <name>IsEnum</name>
         <qualifiedname>SR_UTILS_NS::EnumTraits::IsEnum</qualifiedname>
@@ -69,8 +69,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="61" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1a942394bf765d2c9c7fbc24f1dc012cac" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::IsFlags</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::IsFlags</definition>
         <argsstring></argsstring>
         <name>IsFlags</name>
         <qualifiedname>SR_UTILS_NS::EnumTraits::IsFlags</qualifiedname>
@@ -84,8 +84,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="62" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1a7039f73cc0827c40cdda0703f2f23417" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>size_t</type>
-        <definition>size_t SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::NumItems</definition>
+        <type>constexpr size_t</type>
+        <definition>constexpr size_t SR_UTILS_NS::EnumTraits&lt; EnumType &gt;::NumItems</definition>
         <argsstring></argsstring>
         <name>NumItems</name>
         <qualifiedname>SR_UTILS_NS::EnumTraits::NumItems</qualifiedname>
@@ -103,10 +103,22 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_UTILS_NS::EnumTraits&lt; EnumType &gt;</label>
+        <link refid="structSR__UTILS__NS_1_1EnumTraits"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>NumItems</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>size_t</label>
+      </node>
+    </collaborationgraph>
     <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="56" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="56" bodyend="64"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1EnumTraits_1ae5be3b6039a9afc8e400e37c0e1ef9a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>EnumResultType</name></member>
-      <member refid="structSR__UTILS__NS_1_1EnumTraits_1afc796d5984eefc6e601ae0e1ff2c42dc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>EnumSelectorType</name></member>
+      <member refid="structSR__UTILS__NS_1_1EnumTraits_1afda4c0f18e01d7e74b73b2fb1dd0ef61" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>EnumSelectorType</name></member>
       <member refid="structSR__UTILS__NS_1_1EnumTraits_1aaaf6710fe9fe916ca28bfc0b1fa94fb2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>IsDeclaredInNamespace</name></member>
       <member refid="structSR__UTILS__NS_1_1EnumTraits_1a626243576b7200973602dd64e0ebb044" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>IsEnum</name></member>
       <member refid="structSR__UTILS__NS_1_1EnumTraits_1a942394bf765d2c9c7fbc24f1dc012cac" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>IsFlags</name></member>

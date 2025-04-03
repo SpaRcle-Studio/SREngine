@@ -70,8 +70,8 @@ Here is a list of all namespaces with brief descriptions:
     * **namespace** [**Platform**](namespaceSR__UTILS__NS_1_1Platform.md)     
     * **namespace** [**Reflection**](namespaceSR__UTILS__NS_1_1Reflection.md)     
     * **namespace** [**SFINAE**](namespaceSR__UTILS__NS_1_1SFINAE.md)     
-    * **namespace** [**Serialization**](namespaceSR__UTILS__NS_1_1Serialization.md)     
-    * **namespace** [**SharedPointerTraits**](namespaceSR__UTILS__NS_1_1SharedPointerTraits.md)     
+    * **namespace** [**Serialization**](namespaceSR__UTILS__NS_1_1Serialization.md) _Default object makers for serialization._     
+    * **namespace** [**SharedPointerTraits**](namespaceSR__UTILS__NS_1_1SharedPointerTraits.md) 
     * **namespace** [**StoreUtils**](namespaceSR__UTILS__NS_1_1StoreUtils.md)     
     * **namespace** [**Tests**](namespaceSR__UTILS__NS_1_1Tests.md)     
     * **namespace** [**UI**](namespaceSR__UTILS__NS_1_1UI.md)     

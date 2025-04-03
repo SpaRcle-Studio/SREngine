@@ -39,8 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value-12)   = `true`<br> |
-|  bool | [**value**](#variable-value-22)  <br> |
+|  constexpr bool | [**value**](#variable-value)   = `true`<br> |
 
 
 
@@ -61,8 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**MakeDefault**](#function-makedefault-12) (std::set&lt; T, Less, Allocator &gt; & v) <br> |
-|  void | [**MakeDefault**](#function-makedefault-22) (T &) <br> |
+|  void | [**MakeDefault**](#function-makedefault) (std::set&lt; T, Less, Allocator &gt; & v) <br> |
 
 
 
@@ -94,23 +92,10 @@
 
 
 
-### variable value [1/2]
+### variable value 
 
 ```C++
-bool DefaultObjectMaker< std::set< T, Less, Allocator > >::value;
-```
-
-
-
-
-<hr>
-
-
-
-### variable value [2/2]
-
-```C++
-bool DefaultObjectMaker< T, void >::value;
+constexpr bool DefaultObjectMaker< std::set< T, Less, Allocator > >::value;
 ```
 
 
@@ -122,26 +107,11 @@ bool DefaultObjectMaker< T, void >::value;
 
 
 
-### function MakeDefault [1/2]
+### function MakeDefault 
 
 ```C++
 static inline void DefaultObjectMaker< std::set< T, Less, Allocator > >::MakeDefault (
     std::set< T, Less, Allocator > & v
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function MakeDefault [2/2]
-
-```C++
-static inline void DefaultObjectMaker< std::set< T, Less, Allocator > >::MakeDefault (
-    T &
 ) 
 ```
 

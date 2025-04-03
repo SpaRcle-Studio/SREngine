@@ -83,7 +83,6 @@ namespace SR_SRSL_NS {
     };
 
     SR_INLINE_STATIC const std::string SR_SRSL_MAIN_OUT_LAYER = "COLOR_INDEX_0"; 
-
     SR_INLINE_STATIC const std::set<std::string> SR_SRSL_DEFAULT_OUT_LAYERS = { 
             { "COLOR_INDEX_0" },
             { "COLOR_INDEX_1" },

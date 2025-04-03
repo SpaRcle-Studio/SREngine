@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Web::CSSOptionalEnum</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional" prot="public" virt="non-virtual">SR_UTILS_NS::Web::CSSOptional&lt; CSSOptionalEnumContainer&lt; T &gt; &gt;</basecompoundref>
@@ -317,7 +317,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>SR_UTILS_NS::Web::CSSOptional&lt; CSSOptionalEnumContainer&lt; T &gt; &gt;</label>
+        <label>SR_UTILS_NS::Web::CSSOptional&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -334,7 +334,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>SR_UTILS_NS::Web::CSSOptional&lt; CSSOptionalEnumContainer&lt; T &gt; &gt;</label>
+        <label>SR_UTILS_NS::Web::CSSOptional&lt; T &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -366,14 +366,14 @@
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a2b46f4732f9dac04ee9fd9940ac16195" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator T</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a6326f44507e905593901d23d37015f72" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator!=</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a2d4684470ab9849584beb8c02010bf0a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator!=</name></member>
-      <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1a299f61371a6a092191ebb0de0084c38b" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Web::CSSOptional&lt; CSSOptionalEnumContainer&lt; T &gt; &gt;::"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator!=</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1a299f61371a6a092191ebb0de0084c38b" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Web::CSSOptional::"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator!=</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a8c47da819b4067fee65e2dbbfcea7408" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a9b5643c5a6d45787a5dc5c05e3e1d528" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a3d5f09c820e21507f5c811aff6de35e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1ad30116cf6d44c7bcf6d32c4017672dc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a4b31b9a7661f0cf21861dc77e40da269" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator==</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1a860197e9e9fbcd07f927a5ea5231fb48" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator==</name></member>
-      <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1ac997e370cb9ad9d480975582eca71dd0" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Web::CSSOptional&lt; CSSOptionalEnumContainer&lt; T &gt; &gt;::"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1ac997e370cb9ad9d480975582eca71dd0" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Web::CSSOptional::"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>operator==</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptional_1a79735ec04573591a67b488607a978a08" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>SetAsDefault</name></member>
       <member refid="classSR__UTILS__NS_1_1Web_1_1CSSOptionalEnum_1ab207e04c3e049e093be1c5114796ad5f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Web::CSSOptionalEnum</scope><name>Super</name></member>
     </listofallmembers>

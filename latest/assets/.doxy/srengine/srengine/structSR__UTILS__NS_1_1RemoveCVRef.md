@@ -90,7 +90,7 @@
 ### typedef type 
 
 ```C++
-using SR_UTILS_NS::RemoveCVRef< T >::type =  std::remove_cv_t<std::remove_reference_t<T>>;
+using SR_UTILS_NS::RemoveCVRef< T >::type =  std::remove_cv_t<std::remove_reference_t<T> >;
 ```
 
 

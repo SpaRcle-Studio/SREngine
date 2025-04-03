@@ -59,7 +59,7 @@
 | ---: | :--- |
 |  SR\_NODISCARD constexpr std::optional&lt; std::string\_view &gt; | [**FindConstexprStringByHash**](#function-findconstexprstringbyhash) (uint64\_t hash) const<br> |
 |  constexpr | [**GlobalStringRegistry**](#function-globalstringregistry) () <br> |
-|  uint64\_t | [**Register**](#function-register) (std::string\_view str, uint64\_t hash) const<br> |
+|  constexpr uint64\_t | [**Register**](#function-register) (std::string\_view str, uint64\_t hash) const<br> |
 
 
 
@@ -152,7 +152,7 @@ inline constexpr SR_UTILS_NS::GlobalStringRegistry::GlobalStringRegistry ()
 ### function Register 
 
 ```C++
-inline uint64_t SR_UTILS_NS::GlobalStringRegistry::Register (
+inline constexpr uint64_t SR_UTILS_NS::GlobalStringRegistry::Register (
     std::string_view str,
     uint64_t hash
 ) const

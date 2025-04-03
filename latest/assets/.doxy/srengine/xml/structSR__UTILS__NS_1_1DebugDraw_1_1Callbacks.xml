@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::DebugDraw::Callbacks</compoundname>
     <sectiondef kind="public-attrib">
@@ -106,40 +106,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <collaborationgraph>
-      <node id="5">
-        <label>SR_HTYPES_NS::Function&lt; uint64_t(SR_HTYPES_NS::RawMesh *pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &amp;pos, const SR_MATH_NS::Quaternion &amp;rot, const SR_MATH_NS::FVector3 &amp;scale, const SR_MATH_NS::FColor &amp;color, float_t time)&gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1Function"/>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::Function&lt; uint64_t(uint64_t id, const SR_MATH_NS::FVector3 &amp;pos, const SR_MATH_NS::Quaternion &amp;rot, const SR_MATH_NS::FVector3 &amp;scale, const SR_MATH_NS::FColor &amp;color, float_t time)&gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1Function"/>
-      </node>
-      <node id="3">
-        <label>SR_HTYPES_NS::Function&lt; uint64_t(uint64_t id, const SR_MATH_NS::FVector3 &amp;start, const SR_MATH_NS::FVector3 &amp;end, const SR_MATH_NS::FColor &amp;color, float_t time)&gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1Function"/>
-      </node>
-      <node id="2">
-        <label>SR_HTYPES_NS::Function&lt; void(uint64_t id)&gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1Function"/>
-      </node>
-      <node id="1">
-        <label>SR_UTILS_NS::DebugDraw::Callbacks</label>
-        <link refid="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks"/>
-        <childnode refid="2" relation="usage">
-          <edgelabel>removeCallback</edgelabel>
-        </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>drawLineCallback</edgelabel>
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>drawCubeCallback</edgelabel>
-        </childnode>
-        <childnode refid="5" relation="usage">
-          <edgelabel>drawMeshCallback</edgelabel>
-        </childnode>
-      </node>
-    </collaborationgraph>
     <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" line="36" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" bodystart="36" bodyend="44"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1DebugDraw_1_1Callbacks_1a960b6a5e8fdcc139785141f908e0f48d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw::Callbacks</scope><name>drawCapsuleCallback</name></member>

@@ -59,8 +59,8 @@
 |  constexpr | [**native\_float\_parts**](#function-native_float_parts-24) (const FloatingPointType f) <br> |
 |  constexpr | [**native\_float\_parts**](#function-native_float_parts-34) (const [**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) & other) <br> |
 |  constexpr | [**native\_float\_parts**](#function-native_float_parts-44) ([**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) && other) noexcept<br> |
-|  [**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) & | [**operator=**](#function-operator) (const [**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) & other) noexcept<br> |
-|  [**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) & | [**operator=**](#function-operator_1) ([**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) && other) noexcept<br> |
+|  constexpr auto | [**operator=**](#function-operator) (const [**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) & other) noexcept<br> |
+|  constexpr auto | [**operator=**](#function-operator_1) ([**native\_float\_parts**](classSR__TYPES__NS_1_1detail_1_1native__float__parts.md) && other) noexcept<br> |
 |   | [**~native\_float\_parts**](#function-native_float_parts) () = default<br> |
 
 
@@ -182,7 +182,7 @@ inline constexpr SR_TYPES_NS::detail::native_float_parts::native_float_parts (
 ### function operator= 
 
 ```C++
-inline native_float_parts & SR_TYPES_NS::detail::native_float_parts::operator= (
+inline constexpr auto SR_TYPES_NS::detail::native_float_parts::operator= (
     const native_float_parts & other
 ) noexcept
 ```
@@ -197,7 +197,7 @@ inline native_float_parts & SR_TYPES_NS::detail::native_float_parts::operator= (
 ### function operator= 
 
 ```C++
-inline native_float_parts & SR_TYPES_NS::detail::native_float_parts::operator= (
+inline constexpr auto SR_TYPES_NS::detail::native_float_parts::operator= (
     native_float_parts && other
 ) noexcept
 ```

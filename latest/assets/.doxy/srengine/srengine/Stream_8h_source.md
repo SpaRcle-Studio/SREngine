@@ -35,7 +35,6 @@ namespace SR_HTYPES_NS {
         Stream& SR_FASTCALL operator=(Stream&& other) noexcept;
 
         operator bool() const noexcept; 
-
     public:
         SR_NODISCARD bool Valid() const noexcept { return m_data; }
 

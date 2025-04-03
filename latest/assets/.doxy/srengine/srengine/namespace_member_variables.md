@@ -120,7 +120,6 @@
 * **NoTypeInPackV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **None** ([**SR\_UTILS\_NS::UI**](namespaceSR__UTILS__NS_1_1UI.md))
 * **N\_HASH** ([**s\_s**](namespaces__s.md))
-* **numeric\_limits&lt; SR\_TYPES\_NS::uintwide\_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt; &gt;** ([**std**](namespacestd.md))
 
 
 ## p

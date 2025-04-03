@@ -17,7 +17,6 @@
 
 
 
-Inherited by the following classes: [SR\_TYPES\_NS::detail::iterator\_detail::reverse\_iterator](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md),  [SR\_TYPES\_NS::detail::iterator\_detail::reverse\_iterator](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md),  [SR\_TYPES\_NS::detail::iterator\_detail::reverse\_iterator](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md),  [SR\_TYPES\_NS::detail::iterator\_detail::reverse\_iterator](classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator.md)
 
 
 

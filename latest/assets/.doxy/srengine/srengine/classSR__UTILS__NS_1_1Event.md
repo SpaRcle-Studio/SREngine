@@ -18,6 +18,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::IEvent](classSR__UTILS__NS_1_1IEvent.md)
 
 
+Inherited by the following classes: [SR\_UTILS\_NS::InputHandler](classSR__UTILS__NS_1_1InputHandler.md)
 
 
 

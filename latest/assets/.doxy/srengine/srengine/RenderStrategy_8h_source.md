@@ -22,7 +22,6 @@
 
 #include <Utils/ECS/Transform.h>
 
-
 namespace SR_GTYPES_NS {
     class Mesh;
     class Shader;
@@ -79,7 +78,6 @@ namespace SR_GRAPH_NS {
         bool m_uniformsDirty = true;
 
     };*/
-
 
 
     /*class MeshRenderStage : public IRenderStage {

@@ -39,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  auto | [**conditional\_value**](#variable-conditional_value)   = `/* multi line expression */`<br> |
+|  constexpr auto | [**conditional\_value**](#variable-conditional_value)   = `/* multi line expression */`<br> |
 
 
 
@@ -90,7 +90,7 @@
 ### variable conditional\_value 
 
 ```C++
-auto SR_TYPES_NS::detail::verify_power_of_two_times_granularity_one_sixty_fourth< Width2 >::conditional_value;
+constexpr auto SR_TYPES_NS::detail::verify_power_of_two_times_granularity_one_sixty_fourth< Width2 >::conditional_value;
 ```
 
 

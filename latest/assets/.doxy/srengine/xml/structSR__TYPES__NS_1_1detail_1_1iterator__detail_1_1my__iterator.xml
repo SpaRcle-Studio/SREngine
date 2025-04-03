@@ -1,11 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1my__iterator" kind="struct" language="C++" prot="public">
     <compoundname>SR_TYPES_NS::detail::iterator_detail::my_iterator</compoundname>
-    <derivedcompoundref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator" prot="public" virt="non-virtual">SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; iterator &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator" prot="public" virt="non-virtual">SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; const_iterator &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator" prot="public" virt="non-virtual">SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; value_type * &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator" prot="public" virt="non-virtual">SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; const value_type * &gt;</derivedcompoundref>
     <templateparamlist>
       <param>
         <type>typename my_category</type>
@@ -101,7 +97,7 @@
     <sectiondef kind="public-func">
       <memberdef kind="function" id="structSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1my__iterator_1aba4e5fede4811806e70a579d2a457e72" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>constexpr</type>
-        <definition>SR_TYPES_NS::detail::iterator_detail::my_iterator&lt; my_category, my_value_type, my_difference_type, my_pointer_type, my_reference_type &gt;::my_iterator</definition>
+        <definition>constexpr SR_TYPES_NS::detail::iterator_detail::my_iterator&lt; my_category, my_value_type, my_difference_type, my_pointer_type, my_reference_type &gt;::my_iterator</definition>
         <argsstring>()=default</argsstring>
         <name>my_iterator</name>
         <qualifiedname>SR_TYPES_NS::detail::iterator_detail::my_iterator::my_iterator</qualifiedname>
@@ -118,36 +114,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="1">
-        <label>SR_TYPES_NS::detail::iterator_detail::my_iterator&lt; my_category, my_value_type, my_difference_type, my_pointer_type, my_reference_type &gt;</label>
-        <link refid="structSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1my__iterator"/>
-      </node>
-      <node id="5">
-        <label>SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; const value_type * &gt;</label>
-        <link refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; const_iterator &gt;</label>
-        <link refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; iterator &gt;</label>
-        <link refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_TYPES_NS::detail::iterator_detail::reverse_iterator&lt; value_type * &gt;</label>
-        <link refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1reverse__iterator"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
     <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="152" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="153" bodyend="161"/>
     <listofallmembers>
       <member refid="structSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1my__iterator_1a7c73a219a31396a797099ff06cb414a7" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::my_iterator</scope><name>difference_type</name></member>

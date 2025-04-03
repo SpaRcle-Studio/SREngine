@@ -6,7 +6,7 @@
 
 
 
-[**ClassList**](annotated.md) **>** [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md) **>** [**detail**](namespaceSR__TYPES__NS_1_1detail.md) **>** [**array\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1array__detail.md) **>** [**tuple\_size**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__size.md)
+[**ClassList**](annotated.md) **>** [**tuple\_size**](classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__size.md)
 
 
 

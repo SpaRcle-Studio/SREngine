@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__UTILS__NS_1_1Component" kind="class" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::Component</compoundname>
     <basecompoundref prot="public" virt="non-virtual">Entity</basecompoundref>
@@ -398,14 +398,14 @@
         <argsstring>()</argsstring>
         <name>OnAttached</name>
         <qualifiedname>SR_UTILS_NS::Component::OnAttached</qualifiedname>
+        <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a1a7a57c1c0b1adb4fa55378fa2d1db4f">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Animator_1ac68edbb2432cbce78f21b1925aaceecb">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1af7cab0877c6f06d9e32f40d58eb7b395">OnAttached</reimplementedby>
-        <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a1a7a57c1c0b1adb4fa55378fa2d1db4f">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1DirectionalLight_1ab9681129f321a3edc8b9cfd527ab0dd6">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ILightComponent_1a6106b0f1d3165399d07fa17f8fc3476a">OnAttached</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ac97064aed1cb1bb557b51bcc4d2098e2">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a2e51576a6cb34b150fbbd857a5eec3a3">OnAttached</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a80415b28eefa8c58dc1503fc65eb93e3">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a1549f428c9f7f1b02d23976a7b115643">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a4fe624ed0fc9a1a8d09ab900da73eaf6">OnAttached</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a877ed049746c1b4b786a9e475d543404">OnAttached</reimplementedby>
@@ -443,16 +443,16 @@
         <argsstring>()</argsstring>
         <name>OnDestroy</name>
         <qualifiedname>SR_UTILS_NS::Component::OnDestroy</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Animator_1a62bfaea86fe0af7ec65f1d1c2826a55e">OnDestroy</reimplementedby>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a849a5a2b8638c0937425ce1dd4fa4920">OnDestroy</reimplementedby>
+        <reimplementedby refid="classSR__CORE__UI__NS_1_1Button_1ada41d0409ffbf999d95613fcc685bd33">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a85b29bea3ae385e4cee15c407a7ca04a">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioSource_1ab046ab0a393a9df8d83f677eb633d912">OnDestroy</reimplementedby>
-        <reimplementedby refid="classSR__CORE__UI__NS_1_1Button_1ada41d0409ffbf999d95613fcc685bd33">OnDestroy</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Animator_1a62bfaea86fe0af7ec65f1d1c2826a55e">OnDestroy</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a849a5a2b8638c0937425ce1dd4fa4920">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ILightComponent_1a10ee3185e641149fe7adc6f38124d1af">OnDestroy</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1a096459bb0d2277cfab38e0d1a11c5f0b">OnDestroy</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a9fe3a665736d30d1af3f1d8a7ee892a5">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a1970aad1257d0a5d231fb34a1f3f56df">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1aae5701ca77fad95071cf9fbcd29b6192">OnDestroy</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1a096459bb0d2277cfab38e0d1a11c5f0b">OnDestroy</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a9fe3a665736d30d1af3f1d8a7ee892a5">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a37c006bf1edba7e91ba456edc91fc826">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Vehicle_1adaaee91ce5b761ea211a1e1c7892113a">OnDestroy</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a02b2a8f80b4e1e46b508aaf699fede9e">OnDestroy</reimplementedby>
@@ -478,10 +478,10 @@
         <qualifiedname>SR_UTILS_NS::Component::OnEnable</qualifiedname>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a287c3e62e709932ec272c5cfddeb90b1">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioSource_1a5b3174dc2e8773b605e28393aa381a7d">OnEnable</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a83f2194e19d57e2f224a250ab42e475e">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a60300722f479a824b9903f08ecd1ac82">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1IRenderComponent_1ae13cacd5b7be1e43cc46f79b4157d07e">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1acd546e323a875a9139aeb061de5a8be9">OnEnable</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a83f2194e19d57e2f224a250ab42e475e">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a5f07661c4a5634c6ca706569dc67d58b">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a8e720ddeb7afc36fc5747cd93bf526d9">OnEnable</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a51adb7870c6b6f32d68e9e18ad5f65ff">OnEnable</reimplementedby>
@@ -501,10 +501,10 @@
         <qualifiedname>SR_UTILS_NS::Component::OnDisable</qualifiedname>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioListener_1a34fd84a273f6feb514699ed686da9730">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1AudioSource_1a55509cd67b04b634c76188d5e5c3fc51">OnDisable</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1aee9f6f515d7d1865a82e4df375f27e45">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a314c3616df8aa102db40392e6b9e0658">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1IRenderComponent_1a341f5491cabb294266eec545684cc553">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a89241c5fbef2a125453e3c102a8abe5b">OnDisable</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1aee9f6f515d7d1865a82e4df375f27e45">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a84be4e404cda0202f7aa72549f8c6b90">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a0bc8bac603e6afa91912b0b6d31663a6">OnDisable</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1DebugLogComponent_1a2ed5d03e746a2f9308867f313863ac97">OnDisable</reimplementedby>
@@ -556,12 +556,12 @@
         <argsstring>(float_t dt)</argsstring>
         <name>Update</name>
         <qualifiedname>SR_UTILS_NS::Component::Update</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Animator_1af5e6c112f125ae5730cd9954d3633edd">Update</reimplementedby>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5dccf08ae83a9f1a8b16dc8b835f0823">Update</reimplementedby>
         <reimplementedby refid="classSR__CORE__UI__NS_1_1Button_1a99fab8cb20f560173e8d6f9718c81984">Update</reimplementedby>
         <reimplementedby refid="classSR__CORE__UI__NS_1_1IButton_1a2d77bdade1d08dfbea52c53d31070a89">Update</reimplementedby>
-        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ab7536799855608b8f9c19e88e9453a0c">Update</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Animator_1af5e6c112f125ae5730cd9954d3633edd">Update</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1a5dccf08ae83a9f1a8b16dc8b835f0823">Update</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Camera_1a4cbe75de74328d6615d636a811847cee">Update</reimplementedby>
+        <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ab7536799855608b8f9c19e88e9453a0c">Update</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1ac5f56aecdce13e617ad21d3f0d2ca808">Update</reimplementedby>
         <reimplementedby refid="classSR__SCRIPTING__NS_1_1Behaviour_1a317c3a1d17d3e1255b86fcfe10d0b976">Update</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1LookAtComponent_1a4175484c1f635692fea02d5952e2f806">Update</reimplementedby>
@@ -971,15 +971,15 @@
         <argsstring>() const</argsstring>
         <name>ExecuteInEditMode</name>
         <qualifiedname>SR_UTILS_NS::Component::ExecuteInEditMode</qualifiedname>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1BoneComponent_1acc21230e47c855f81a70d0e45fd5e562">ExecuteInEditMode</reimplementedby>
-        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ad6718d0d6a8ed2c22870b891b75af880">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1EditorCamera_1ad2a212f9950f6bc5cdf3f23dcc3acb57">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1EditorGizmo_1a89dc51a667ce45403c7d21ed346270bc">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__CORE__UI__NS_1_1IButton_1a702ca467575b79a375333756cb3f8bec">ExecuteInEditMode</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1BoneComponent_1acc21230e47c855f81a70d0e45fd5e562">ExecuteInEditMode</reimplementedby>
+        <reimplementedby refid="classSR__ANIMATIONS__NS_1_1Skeleton_1ad6718d0d6a8ed2c22870b891b75af880">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__NS_1_1ILightComponent_1aecf5343d51a2c3bf56c3799288d586d5">ExecuteInEditMode</reimplementedby>
+        <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Canvas_1ac9940dba08a320b73bca4113af9c6793">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__GRAPH__UI__NS_1_1Gizmo_1ada8ab8ef34bd9850e674eeaf2c500e88">ExecuteInEditMode</reimplementedby>
-        <reimplementedby refid="classSR__GTYPES__NS_1_1Mesh_1a22918d631dae5a7843f30de199b8963b">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1Rigidbody_1a4b0a3a17900c987f5a7a5b7e25d4ed41">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1CameraFlyMover_1ac65458bfe8984f235021b33a5494d63f">ExecuteInEditMode</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1LookAtComponent_1ab9fa19e244f446f928013fcfb403943b">ExecuteInEditMode</reimplementedby>
@@ -1514,67 +1514,47 @@
       <node id="2">
         <label>Entity</label>
       </node>
-      <node id="3">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="5" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
       <node id="1">
         <label>SR_UTILS_NS::Component</label>
         <link refid="classSR__UTILS__NS_1_1Component"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
         <childnode refid="3" relation="usage">
-          <edgelabel>m_sceneObject</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="4" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="5" relation="usage">
           <edgelabel>m_properties</edgelabel>
         </childnode>
       </node>
-      <node id="6">
+      <node id="3">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="7">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="9">
+      <node id="6">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="5">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="4">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

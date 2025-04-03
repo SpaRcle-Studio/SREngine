@@ -15,7 +15,7 @@
 
 
 
-Inherits the following classes: std::bool_constant< IsDetectedV< HasNullptrComparison, T > >,  std::false_type
+Inherits the following classes: std::false_type
 
 
 

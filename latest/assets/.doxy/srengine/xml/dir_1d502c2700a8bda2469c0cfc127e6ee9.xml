@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_1d502c2700a8bda2469c0cfc127e6ee9" kind="dir">
     <compoundname>Engine/Core/libs/Scripting/inc/Scripting</compoundname>
     <innerdir refid="dir_4050116e84419e1b243298aae3c93869">Engine/Core/libs/Scripting/inc/Scripting/Base</innerdir>

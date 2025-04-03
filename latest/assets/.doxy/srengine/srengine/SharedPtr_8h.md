@@ -48,10 +48,6 @@
 | class | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) <br> |
 | struct | [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) <br> |
 | class | [**SharedPtrDynamicDataCounter**](classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter.md) <br> |
-| struct | [**IsSharedPointer**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer.md) &lt;class, class&gt;<br> |
-| struct | [**IsSharedPointer&lt; T, std::void\_t&lt; typename T::SharedPointerType &gt; &gt;**](structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer_3_01T_00_01std_1_1void__t_3_01type8b5a899015c84ec6e1379d34fe0870f5.md) &lt;class T&gt;<br> |
-| struct | [**hash&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structstd_1_1hash_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
-| struct | [**less&lt; SR\_HTYPES\_NS::SharedPtr&lt; T &gt; &gt;**](structstd_1_1less_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 
 
 

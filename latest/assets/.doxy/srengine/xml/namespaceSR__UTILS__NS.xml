@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__UTILS__NS" kind="namespace" language="C++">
     <compoundname>SR_UTILS_NS</compoundname>
     <innerclass refid="structSR__UTILS__NS_1_1AnyVisitor" prot="public">SR_UTILS_NS::AnyVisitor</innerclass>
@@ -24,20 +24,6 @@
     <innerclass refid="classSR__UTILS__NS_1_1DebugDraw" prot="public">SR_UTILS_NS::DebugDraw</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1DebugLogComponent" prot="public">SR_UTILS_NS::DebugLogComponent</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1DefaultChecker" prot="public">SR_UTILS_NS::DefaultChecker</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultChecker_3_01SR__UTILS__NS_1_1StringAtom_01_4" prot="public">SR_UTILS_NS::DefaultChecker&lt; SR_UTILS_NS::StringAtom &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1array_3_01T_00_01N_01_4_01_4" prot="public">SR_UTILS_NS::DefaultChecker&lt; std::array&lt; T, N &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultChecker_3_01std_1_1optional_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::DefaultChecker&lt; std::optional&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01std_1_1enable__if__t_3_01SerializationTraits_3_f1ad6a1b8208027db52c5c5add79c61d" prot="public">SR_UTILS_NS::DefaultChecker&lt; T, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::HasEmpty &amp;&amp;!IsTypeFromStdArrayTemplateV&lt; T &gt; &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultChecker_3_01T_00_01typename_01std_1_1enable__if__t_3_01std_1_1is__5bc20061f0ddc01a3d078bd35df479a5" prot="public">SR_UTILS_NS::DefaultChecker&lt; T, typename std::enable_if_t&lt; std::is_default_constructible_v&lt; T &gt; &amp;&amp;CheckOperatorUsableV&lt; CheckerEqualityComparable, T, T &gt; &amp;&amp;!SerializationTraits&lt; T &gt;::HasEmpty &amp;&amp;!std::is_same_v&lt; T, SR_UTILS_NS::StringAtom &gt; &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker" prot="public">SR_UTILS_NS::DefaultObjectMaker</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01SR__UTILS__NS_1_1StringAtom_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; SR_UTILS_NS::StringAtom &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1optional_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; std::optional&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; std::set&lt; T, Less, Allocator &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1string_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; std::string &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1unordered__map_3_01T_00_01U_00_01Hash_00_0166c036aa51ea51240830509b4715eacb" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; std::unordered_map&lt; T, U, Hash, KeyEqual, Allocator &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1DefaultObjectMaker_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4" prot="public">SR_UTILS_NS::DefaultObjectMaker&lt; std::vector&lt; T, TOther... &gt; &gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1DefaultResourceReloader" prot="public">SR_UTILS_NS::DefaultResourceReloader</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1DetectedOr" prot="public">SR_UTILS_NS::DetectedOr</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1EntityController" prot="public">SR_UTILS_NS::EntityController</innerclass>
@@ -112,50 +98,8 @@
     <innerclass refid="classSR__UTILS__NS_1_1NonCopyable" prot="public">SR_UTILS_NS::NonCopyable</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1NonMovable" prot="public">SR_UTILS_NS::NonMovable</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor" prot="public">SR_UTILS_NS::ObjectDataAccessor</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01bool_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; bool &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01double__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; double_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01float__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; float_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_bcc0cde7fe2a1b6a6c918edb68e74246" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_863ff9278aaa6e199c62f71431dce0e6" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt;!SerializationTraits&lt; T &gt;::HasOriginType &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__HTYPES__NS_1_1UnicodeString_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_HTYPES_NS::UnicodeString &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1BVector3_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::BVector3 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1BVector4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::BVector4 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FSize &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FSize2_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FSize2 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector2_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector2 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector3_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector3 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector4 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1FVector6_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::FVector6 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector2_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector2 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector3_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector3 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector4 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1IVector6_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::IVector6 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1Quaternion_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::Quaternion &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector2_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector2 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector3_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector3 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector4 &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__MATH__NS_1_1UVector6_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_MATH_NS::UVector6 &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1Path_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_UTILS_NS::Path &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01SR__UTILS__NS_1_1StringAtom_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; SR_UTILS_NS::StringAtom &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1array_3_01T_00_01N_01_4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::array&lt; T, N &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int16__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::int16_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int32__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::int32_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int64__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::int64_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1int8__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::int8_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1map_3_01T_00_01U_00_01Compare_00_01Allocator_01_4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::map&lt; T, U, Compare, Allocator &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1optional_3_01T_01_4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::optional&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1pair_3_01T_00_01U_01_4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::pair&lt; T, U &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1set_3_01T_00_01Less_00_01Allocator_01_4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::set&lt; T, Less, Allocator &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1string_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::string &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint16__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::uint16_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint32__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::uint32_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint64__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::uint64_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1uint8__t_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::uint8_t &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01std_1_1vector_3_01T_00_01TOther_8_8_8_01_4_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; std::vector&lt; T, TOther... &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01IsSREnumV_3_01T_01_4_01_4_1_1type_01_4" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; T, typename std::enable_if&lt; IsSREnumV&lt; T &gt; &gt;::type &gt;</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessor_3_01T_00_01typename_01std_1_1enable__if_3_01Serializatb1990b5be6994cf28e51d156d88ddbc2" prot="public">SR_UTILS_NS::ObjectDataAccessor&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessorMathVector" prot="public">SR_UTILS_NS::ObjectDataAccessorMathVector</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1ObjectDataAccessorVector" prot="public">SR_UTILS_NS::ObjectDataAccessorVector</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1Overloaded" prot="public">SR_UTILS_NS::Overloaded</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Passkey" prot="public">SR_UTILS_NS::Passkey</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Path" prot="public">SR_UTILS_NS::Path</innerclass>
@@ -174,9 +118,6 @@
     <innerclass refid="classSR__UTILS__NS_1_1ResourcesHolder" prot="public">SR_UTILS_NS::ResourcesHolder</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ResourceType" prot="public">SR_UTILS_NS::ResourceType</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1ReversibleCommand" prot="public">SR_UTILS_NS::ReversibleCommand</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1SaveChecker" prot="public">SR_UTILS_NS::SaveChecker</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1SaveChecker_3_01SR__HTYPES__NS_1_1SharedPtr_3_01T_01_4_00_01std_1_1enable9d207a6623f032e90f18b6ab57d365d7" prot="public">SR_UTILS_NS::SaveChecker&lt; SR_HTYPES_NS::SharedPtr&lt; T &gt;, std::enable_if_t&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt; &gt;</innerclass>
-    <innerclass refid="structSR__UTILS__NS_1_1SaveChecker_3_01T_00_01typename_01std_1_1enable__if_3_01SerializationTrai86ff178b9c6ba98343a5edcb76ff7b5c" prot="public">SR_UTILS_NS::SaveChecker&lt; T, typename std::enable_if&lt; SerializationTraits&lt; T &gt;::IsSerializable &gt;::type &gt;</innerclass>
     <innerclass refid="classSR__UTILS__NS_1_1Serializable" prot="public">SR_UTILS_NS::Serializable</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SerializationId" prot="public">SR_UTILS_NS::SerializationId</innerclass>
     <innerclass refid="structSR__UTILS__NS_1_1SerializationNode" prot="public">SR_UTILS_NS::SerializationNode</innerclass>
@@ -655,14 +596,14 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" line="84" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/ResourceInfo.h" bodystart="84" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a4ee38485211b74a53d29969eefd38b18" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a0694a4a9cf90cf0b54e22dde7aaefd1f" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class T</type>
           </param>
         </templateparamlist>
         <type>decltype(std::declval&lt; const T &amp; &gt;().empty())</type>
-        <definition>using SR_UTILS_NS::HasMethodEmptyT =  decltype(std::declval&lt;const T&amp;&gt;().empty())</definition>
+        <definition>using SR_UTILS_NS::HasMethodEmptyT = typedef decltype(std::declval&lt;const T&amp;&gt;().empty())</definition>
         <argsstring></argsstring>
         <name>HasMethodEmptyT</name>
         <qualifiedname>SR_UTILS_NS::HasMethodEmptyT</qualifiedname>
@@ -674,14 +615,14 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" line="23" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/Serialization/Serialization.h" bodystart="23" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1aecf4c4626b149d02c6fc17452072aea8" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1af7366c17501e538017fa0af55a860083" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class T</type>
           </param>
         </templateparamlist>
         <type>std::remove_const_t&lt; std::remove_reference_t&lt; std::remove_const_t&lt; std::remove_volatile_t&lt; T &gt; &gt; &gt; &gt;</type>
-        <definition>using SR_UTILS_NS::RemoveQualifiersT =  std::remove_const_t&lt;std::remove_reference_t&lt;std::remove_const_t&lt;std::remove_volatile_t&lt;T&gt;&gt;&gt;&gt;</definition>
+        <definition>using SR_UTILS_NS::RemoveQualifiersT = typedef std::remove_const_t&lt;std::remove_reference_t&lt;std::remove_const_t&lt;std::remove_volatile_t&lt;T&gt; &gt;&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>RemoveQualifiersT</name>
         <qualifiedname>SR_UTILS_NS::RemoveQualifiersT</qualifiedname>
@@ -693,7 +634,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" line="162" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" bodystart="162" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1aebf55402410a7b3151a164df3813ebc1" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a6264b8791b5f460d93e46f2daa397260" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Alloc</type>
@@ -703,7 +644,7 @@
           </param>
         </templateparamlist>
         <type>typename std::allocator_traits&lt; Alloc &gt;::template rebind_alloc&lt; ValueType &gt;</type>
-        <definition>using SR_UTILS_NS::RebindAllocT =  typename std::allocator_traits&lt;Alloc&gt;::template rebind_alloc&lt;ValueType&gt;</definition>
+        <definition>using SR_UTILS_NS::RebindAllocT = typedef typename std::allocator_traits&lt;Alloc&gt;::template rebind_alloc&lt;ValueType&gt;</definition>
         <argsstring></argsstring>
         <name>RebindAllocT</name>
         <qualifiedname>SR_UTILS_NS::RebindAllocT</qualifiedname>
@@ -715,9 +656,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" line="165" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" bodystart="165" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a03dd5066fcd9b382b19c1846f87abd8e" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a6d6c7fcefa5595fc4b0a08b8bdc7fe61" prot="public" static="no">
         <type>uint64_t</type>
-        <definition>using SR_UTILS_NS::SRHashType =  uint64_t</definition>
+        <definition>using SR_UTILS_NS::SRHashType = typedef uint64_t</definition>
         <argsstring></argsstring>
         <name>SRHashType</name>
         <qualifiedname>SR_UTILS_NS::SRHashType</qualifiedname>
@@ -729,9 +670,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" line="167" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" bodystart="167" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a97da6192a196850b48e97dfb8146a249" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1aeb836600e154f4f82d233e9027a822c4" prot="public" static="no">
         <type>std::chrono::time_point&lt; std::chrono::steady_clock &gt;</type>
-        <definition>using SR_UTILS_NS::TimePointType =  std::chrono::time_point&lt;std::chrono::steady_clock&gt;</definition>
+        <definition>using SR_UTILS_NS::TimePointType = typedef std::chrono::time_point&lt;std::chrono::steady_clock&gt;</definition>
         <argsstring></argsstring>
         <name>TimePointType</name>
         <qualifiedname>SR_UTILS_NS::TimePointType</qualifiedname>
@@ -743,7 +684,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" line="175" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" bodystart="175" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ae9070c807c1080c90bacedb764cf8de6" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a0ef66a69a66f40fad33e05aa4e9f9f20" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>template&lt; class... &gt; class</type>
@@ -756,8 +697,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structSR__UTILS__NS_1_1Details_1_1Detector" kindref="compound">Details::Detector</ref>&lt; <ref refid="structSR__UTILS__NS_1_1Details_1_1Empty" kindref="compound">Details::Empty</ref>, void, Op, Args... &gt;::type</type>
-        <definition>using SR_UTILS_NS::DetectedT =  typename Details::Detector&lt;Details::Empty, void, Op, Args...&gt;::type</definition>
+        <type>typename Details::Detector&lt; Details::Empty, void, Op, Args... &gt;::type</type>
+        <definition>using SR_UTILS_NS::DetectedT = typedef typename Details::Detector&lt;Details::Empty, void, Op, Args...&gt;::type</definition>
         <argsstring></argsstring>
         <name>DetectedT</name>
         <qualifiedname>SR_UTILS_NS::DetectedT</qualifiedname>
@@ -769,14 +710,14 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="134" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="134" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a4bccb01ae3aa45102087700b7a041028" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a321a3bcd6723e0c4df9eb193d10d9989" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>decltype(std::declval&lt; const T &gt;()==nullptr)</type>
-        <definition>using SR_UTILS_NS::HasNullptrComparison =  decltype(std::declval&lt;const T&gt;() == nullptr)</definition>
+        <definition>using SR_UTILS_NS::HasNullptrComparison = typedef decltype(std::declval&lt;const T&gt;() == nullptr)</definition>
         <argsstring></argsstring>
         <name>HasNullptrComparison</name>
         <qualifiedname>SR_UTILS_NS::HasNullptrComparison</qualifiedname>
@@ -788,7 +729,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="137" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="137" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a003c882d7099d0045766e51cef9be8b5" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1abb356a99ac3f1d128beff9314de3c04f" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Default</type>
@@ -805,7 +746,7 @@
           </param>
         </templateparamlist>
         <type>typename <ref refid="structSR__UTILS__NS_1_1DetectedOr" kindref="compound">DetectedOr</ref>&lt; Default, Op, Args... &gt;::type</type>
-        <definition>using SR_UTILS_NS::DetectedOrT =  typename DetectedOr&lt;Default, Op, Args...&gt;::type</definition>
+        <definition>using SR_UTILS_NS::DetectedOrT = typedef typename DetectedOr&lt;Default, Op, Args...&gt;::type</definition>
         <argsstring></argsstring>
         <name>DetectedOrT</name>
         <qualifiedname>SR_UTILS_NS::DetectedOrT</qualifiedname>
@@ -817,7 +758,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="155" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="155" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a2a832b3cd4c5baaa7a7456d2952822b5" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a5182a0d24f4585602f1f2e9521df1a1c" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>size_t</type>
@@ -831,7 +772,7 @@
           </param>
         </templateparamlist>
         <type>typename decltype(Details::GetFromPackResolver&lt; Index, Types... &gt;())::type</type>
-        <definition>using SR_UTILS_NS::GetPromPackT =  typename decltype(Details::GetFromPackResolver&lt;Index, Types...&gt;())::type</definition>
+        <definition>using SR_UTILS_NS::GetPromPackT = typedef typename decltype(Details::GetFromPackResolver&lt;Index, Types...&gt;())::type</definition>
         <argsstring></argsstring>
         <name>GetPromPackT</name>
         <qualifiedname>SR_UTILS_NS::GetPromPackT</qualifiedname>
@@ -843,7 +784,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="241" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="241" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a5cb92e84d08eb03d8811743837d48563" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a007b43a03f2dedf7b8a6ac9f2439b3cb" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class T</type>
@@ -855,7 +796,7 @@
           </param>
         </templateparamlist>
         <type>typename <ref refid="structSR__UTILS__NS_1_1TypeValuePair" kindref="compound">TypeValuePair</ref>&lt; T, val &gt;::type</type>
-        <definition>using SR_UTILS_NS::TypeValuePairT =  typename TypeValuePair&lt;T, val&gt;::type</definition>
+        <definition>using SR_UTILS_NS::TypeValuePairT = typedef typename TypeValuePair&lt;T, val&gt;::type</definition>
         <argsstring></argsstring>
         <name>TypeValuePairT</name>
         <qualifiedname>SR_UTILS_NS::TypeValuePairT</qualifiedname>
@@ -867,14 +808,14 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="263" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="263" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1af7e8e4e036d2b912f3c0657ff60ac7e4" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a4f74ac361f1b016325d039cf0d069589" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class T</type>
           </param>
         </templateparamlist>
         <type>typename <ref refid="structSR__UTILS__NS_1_1RemoveCVRef" kindref="compound">RemoveCVRef</ref>&lt; T &gt;::type</type>
-        <definition>using SR_UTILS_NS::RemoveCVRefT =  typename RemoveCVRef&lt;T&gt;::type</definition>
+        <definition>using SR_UTILS_NS::RemoveCVRefT = typedef typename RemoveCVRef&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>RemoveCVRefT</name>
         <qualifiedname>SR_UTILS_NS::RemoveCVRefT</qualifiedname>
@@ -886,7 +827,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="298" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="298" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1a973c3dfd4e2639c6b3183e1591a7576a" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ab6e4b8bf34362b30d3fee943910879ce" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class X</type>
@@ -896,7 +837,7 @@
           </param>
         </templateparamlist>
         <type>decltype(std::declval&lt; const X &gt;()==std::declval&lt; const Y &gt;())</type>
-        <definition>using SR_UTILS_NS::CheckerEqualityComparable =  decltype(std::declval&lt;const X&gt;() == std::declval&lt;const Y&gt;())</definition>
+        <definition>using SR_UTILS_NS::CheckerEqualityComparable = typedef decltype(std::declval&lt;const X&gt;() == std::declval&lt;const Y&gt;())</definition>
         <argsstring></argsstring>
         <name>CheckerEqualityComparable</name>
         <qualifiedname>SR_UTILS_NS::CheckerEqualityComparable</qualifiedname>
@@ -908,7 +849,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" line="301" column="1" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/TypeTraits.h" bodystart="301" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1ada900dc387ce312d49c7ad7e521fb9ef" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceSR__UTILS__NS_1abfe04248b1bdd77eb2727aadf66df6a3" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class X</type>
@@ -918,7 +859,7 @@
           </param>
         </templateparamlist>
         <type>decltype(std::declval&lt; const X &gt;() - std::declval&lt; const Y &gt;())</type>
-        <definition>using SR_UTILS_NS::CheckerOperatorMinus =  decltype(std::declval&lt;const X&gt;() - std::declval&lt;const Y&gt;())</definition>
+        <definition>using SR_UTILS_NS::CheckerOperatorMinus = typedef decltype(std::declval&lt;const X&gt;() - std::declval&lt;const Y&gt;())</definition>
         <argsstring></argsstring>
         <name>CheckerOperatorMinus</name>
         <qualifiedname>SR_UTILS_NS::CheckerOperatorMinus</qualifiedname>
@@ -973,8 +914,8 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsAnyOfV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsAnyOfV</definition>
         <argsstring></argsstring>
         <name>IsAnyOfV</name>
         <qualifiedname>SR_UTILS_NS::IsAnyOfV</qualifiedname>
@@ -1008,8 +949,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/Hashes.h" line="194" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/Hashes.h" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="namespaceSR__UTILS__NS_1ae23b6e6adb1de11ffa9d427dcb34c976" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>uint64_t</type>
-        <definition>uint64_t SR_UTILS_NS::ConstexprStringsMaxEntries</definition>
+        <type>constexpr uint64_t</type>
+        <definition>constexpr uint64_t SR_UTILS_NS::ConstexprStringsMaxEntries</definition>
         <argsstring></argsstring>
         <name>ConstexprStringsMaxEntries</name>
         <qualifiedname>SR_UTILS_NS::ConstexprStringsMaxEntries</qualifiedname>
@@ -1028,8 +969,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsSTLVectorV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsSTLVectorV</definition>
         <argsstring></argsstring>
         <name>IsSTLVectorV</name>
         <qualifiedname>SR_UTILS_NS::IsSTLVectorV</qualifiedname>
@@ -1160,8 +1101,8 @@
             <type>class DerivedT</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsBaseOfV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsBaseOfV</definition>
         <argsstring></argsstring>
         <name>IsBaseOfV</name>
         <qualifiedname>SR_UTILS_NS::IsBaseOfV</qualifiedname>
@@ -1174,18 +1115,18 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" line="237" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/stdInclude.h" bodystart="237" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="namespaceSR__UTILS__NS_1abc22e77c752d3e5ac8c93ebe4819f7e9" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="namespaceSR__UTILS__NS_1abc22e77c752d3e5ac8c93ebe4819f7e9" prot="private" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsSharedPointerV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsSharedPointerV</definition>
         <argsstring></argsstring>
         <name>IsSharedPointerV</name>
         <qualifiedname>SR_UTILS_NS::IsSharedPointerV</qualifiedname>
-        <initializer>= <ref refid="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer" kindref="compound">SharedPointerTraits::IsSharedPointer</ref>&lt;T&gt;::value</initializer>
+        <initializer>= SharedPointerTraits::IsSharedPointer&lt;T&gt;::value</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1200,8 +1141,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsCompleteTypeV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsCompleteTypeV</definition>
         <argsstring></argsstring>
         <name>IsCompleteTypeV</name>
         <qualifiedname>SR_UTILS_NS::IsCompleteTypeV</qualifiedname>
@@ -1269,8 +1210,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsDetectedV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsDetectedV</definition>
         <argsstring></argsstring>
         <name>IsDetectedV</name>
         <qualifiedname>SR_UTILS_NS::IsDetectedV</qualifiedname>
@@ -1289,8 +1230,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::SupportsNullptrComparisonV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::SupportsNullptrComparisonV</definition>
         <argsstring></argsstring>
         <name>SupportsNullptrComparisonV</name>
         <qualifiedname>SR_UTILS_NS::SupportsNullptrComparisonV</qualifiedname>
@@ -1319,8 +1260,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsDetectedExactV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsDetectedExactV</definition>
         <argsstring></argsstring>
         <name>IsDetectedExactV</name>
         <qualifiedname>SR_UTILS_NS::IsDetectedExactV</qualifiedname>
@@ -1349,8 +1290,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsDetectedConvertibleV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsDetectedConvertibleV</definition>
         <argsstring></argsstring>
         <name>IsDetectedConvertibleV</name>
         <qualifiedname>SR_UTILS_NS::IsDetectedConvertibleV</qualifiedname>
@@ -1369,8 +1310,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsTemplateClassV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsTemplateClassV</definition>
         <argsstring></argsstring>
         <name>IsTemplateClassV</name>
         <qualifiedname>SR_UTILS_NS::IsTemplateClassV</qualifiedname>
@@ -1396,8 +1337,8 @@
             <defname>Tmpl2</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsSameClassTemplateV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsSameClassTemplateV</definition>
         <argsstring></argsstring>
         <name>IsSameClassTemplateV</name>
         <qualifiedname>SR_UTILS_NS::IsSameClassTemplateV</qualifiedname>
@@ -1421,8 +1362,8 @@
             <defname>Tmpl</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsTypeFromClassTemplateV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsTypeFromClassTemplateV</definition>
         <argsstring></argsstring>
         <name>IsTypeFromClassTemplateV</name>
         <qualifiedname>SR_UTILS_NS::IsTypeFromClassTemplateV</qualifiedname>
@@ -1441,8 +1382,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsEnumV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsEnumV</definition>
         <argsstring></argsstring>
         <name>IsEnumV</name>
         <qualifiedname>SR_UTILS_NS::IsEnumV</qualifiedname>
@@ -1461,8 +1402,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsSREnumV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsSREnumV</definition>
         <argsstring></argsstring>
         <name>IsSREnumV</name>
         <qualifiedname>SR_UTILS_NS::IsSREnumV</qualifiedname>
@@ -1486,8 +1427,8 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::HasTypeInPackV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::HasTypeInPackV</definition>
         <argsstring></argsstring>
         <name>HasTypeInPackV</name>
         <qualifiedname>SR_UTILS_NS::HasTypeInPackV</qualifiedname>
@@ -1511,8 +1452,8 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::PackOfSameTypeV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::PackOfSameTypeV</definition>
         <argsstring></argsstring>
         <name>PackOfSameTypeV</name>
         <qualifiedname>SR_UTILS_NS::PackOfSameTypeV</qualifiedname>
@@ -1536,8 +1477,8 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::NoTypeInPackV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::NoTypeInPackV</definition>
         <argsstring></argsstring>
         <name>NoTypeInPackV</name>
         <qualifiedname>SR_UTILS_NS::NoTypeInPackV</qualifiedname>
@@ -1561,8 +1502,8 @@
             <defname>val</defname>
           </param>
         </templateparamlist>
-        <type>auto</type>
-        <definition>auto SR_UTILS_NS::TypeValuePairV</definition>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_UTILS_NS::TypeValuePairV</definition>
         <argsstring></argsstring>
         <name>TypeValuePairV</name>
         <qualifiedname>SR_UTILS_NS::TypeValuePairV</qualifiedname>
@@ -1581,8 +1522,8 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::AlwaysFalseV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::AlwaysFalseV</definition>
         <argsstring></argsstring>
         <name>AlwaysFalseV</name>
         <qualifiedname>SR_UTILS_NS::AlwaysFalseV</qualifiedname>
@@ -1606,8 +1547,8 @@
             <defname>Pairs</defname>
           </param>
         </templateparamlist>
-        <type>auto</type>
-        <definition>auto SR_UTILS_NS::GetFirstOfTypeFromSequenceV</definition>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_UTILS_NS::GetFirstOfTypeFromSequenceV</definition>
         <argsstring></argsstring>
         <name>GetFirstOfTypeFromSequenceV</name>
         <qualifiedname>SR_UTILS_NS::GetFirstOfTypeFromSequenceV</qualifiedname>
@@ -1634,8 +1575,8 @@
             <type>class Y</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::CheckOperatorUsableV</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::CheckOperatorUsableV</definition>
         <argsstring></argsstring>
         <name>CheckOperatorUsableV</name>
         <qualifiedname>SR_UTILS_NS::CheckOperatorUsableV</qualifiedname>
@@ -2037,8 +1978,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>uint64_t</type>
-        <definition>uint64_t SR_UTILS_NS::CalculateHash</definition>
+        <type>constexpr uint64_t</type>
+        <definition>constexpr uint64_t SR_UTILS_NS::CalculateHash</definition>
         <argsstring>(const T &amp;value)</argsstring>
         <name>CalculateHash</name>
         <qualifiedname>SR_UTILS_NS::CalculateHash</qualifiedname>
@@ -2060,8 +2001,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>uint64_t</type>
-        <definition>uint64_t SR_UTILS_NS::HashCombine</definition>
+        <type>constexpr uint64_t</type>
+        <definition>constexpr uint64_t SR_UTILS_NS::HashCombine</definition>
         <argsstring>(const T &amp;value, uint64_t hash=0)</argsstring>
         <name>HashCombine</name>
         <qualifiedname>SR_UTILS_NS::HashCombine</qualifiedname>
@@ -2804,8 +2745,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>StandardType</type>
-        <definition>StandardType SR_UTILS_NS::GetStandardType</definition>
+        <type>constexpr StandardType</type>
+        <definition>constexpr StandardType SR_UTILS_NS::GetStandardType</definition>
         <argsstring>()</argsstring>
         <name>GetStandardType</name>
         <qualifiedname>SR_UTILS_NS::GetStandardType</qualifiedname>
@@ -2861,8 +2802,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsSTLVector</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsSTLVector</definition>
         <argsstring>()</argsstring>
         <name>IsSTLVector</name>
         <qualifiedname>SR_UTILS_NS::IsSTLVector</qualifiedname>
@@ -2875,8 +2816,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="273" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="273" bodyend="275"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1acfa422162b357ca0e1fa3f0c5d28531d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsMathSize</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsMathSize</definition>
         <argsstring>(const StandardType type)</argsstring>
         <name>IsMathSize</name>
         <qualifiedname>SR_UTILS_NS::IsMathSize</qualifiedname>
@@ -2898,8 +2839,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsMathSize</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsMathSize</definition>
         <argsstring>()</argsstring>
         <name>IsMathSize</name>
         <qualifiedname>SR_UTILS_NS::IsMathSize</qualifiedname>
@@ -2917,8 +2858,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsMathVector</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsMathVector</definition>
         <argsstring>()</argsstring>
         <name>IsMathVector</name>
         <qualifiedname>SR_UTILS_NS::IsMathVector</qualifiedname>
@@ -2931,8 +2872,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="290" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="290" bodyend="296"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a15be3038aec8a167410380002fdc664e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint8_t</type>
-        <definition>uint8_t SR_UTILS_NS::GetMathVectorDim</definition>
+        <type>constexpr uint8_t</type>
+        <definition>constexpr uint8_t SR_UTILS_NS::GetMathVectorDim</definition>
         <argsstring>(const StandardType type)</argsstring>
         <name>GetMathVectorDim</name>
         <qualifiedname>SR_UTILS_NS::GetMathVectorDim</qualifiedname>
@@ -2949,8 +2890,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="298" column="23" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="298" bodyend="315"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a9889adfa95b42053a02ad4ef93cbcaad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>uint8_t</type>
-        <definition>uint8_t SR_UTILS_NS::GetMathSizeDim</definition>
+        <type>constexpr uint8_t</type>
+        <definition>constexpr uint8_t SR_UTILS_NS::GetMathSizeDim</definition>
         <argsstring>(const StandardType type)</argsstring>
         <name>GetMathSizeDim</name>
         <qualifiedname>SR_UTILS_NS::GetMathSizeDim</qualifiedname>
@@ -2972,8 +2913,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>uint8_t</type>
-        <definition>uint8_t SR_UTILS_NS::GetMathSizeDim</definition>
+        <type>constexpr uint8_t</type>
+        <definition>constexpr uint8_t SR_UTILS_NS::GetMathSizeDim</definition>
         <argsstring>()</argsstring>
         <name>GetMathSizeDim</name>
         <qualifiedname>SR_UTILS_NS::GetMathSizeDim</qualifiedname>
@@ -2991,8 +2932,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>uint8_t</type>
-        <definition>uint8_t SR_UTILS_NS::GetMathVectorDim</definition>
+        <type>constexpr uint8_t</type>
+        <definition>constexpr uint8_t SR_UTILS_NS::GetMathVectorDim</definition>
         <argsstring>()</argsstring>
         <name>GetMathVectorDim</name>
         <qualifiedname>SR_UTILS_NS::GetMathVectorDim</qualifiedname>
@@ -3005,8 +2946,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="331" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="331" bodyend="333"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a1e69a33fb3eabdfb5dea89f0c707037b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>StandardType</type>
-        <definition>StandardType SR_UTILS_NS::GetMathVectorType</definition>
+        <type>constexpr StandardType</type>
+        <definition>constexpr StandardType SR_UTILS_NS::GetMathVectorType</definition>
         <argsstring>(const StandardType type)</argsstring>
         <name>GetMathVectorType</name>
         <qualifiedname>SR_UTILS_NS::GetMathVectorType</qualifiedname>
@@ -3028,8 +2969,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>StandardType</type>
-        <definition>StandardType SR_UTILS_NS::GetMathVectorType</definition>
+        <type>constexpr StandardType</type>
+        <definition>constexpr StandardType SR_UTILS_NS::GetMathVectorType</definition>
         <argsstring>()</argsstring>
         <name>GetMathVectorType</name>
         <qualifiedname>SR_UTILS_NS::GetMathVectorType</qualifiedname>
@@ -3042,8 +2983,8 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" line="351" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/TypeInfo.h" bodystart="351" bodyend="353"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__UTILS__NS_1a11b524b118947546904010f8b317ae73" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>StandardType</type>
-        <definition>StandardType SR_UTILS_NS::GetMathSizeType</definition>
+        <type>constexpr StandardType</type>
+        <definition>constexpr StandardType SR_UTILS_NS::GetMathSizeType</definition>
         <argsstring>(const StandardType type)</argsstring>
         <name>GetMathSizeType</name>
         <qualifiedname>SR_UTILS_NS::GetMathSizeType</qualifiedname>
@@ -3065,8 +3006,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>StandardType</type>
-        <definition>StandardType SR_UTILS_NS::GetMathSizeType</definition>
+        <type>constexpr StandardType</type>
+        <definition>constexpr StandardType SR_UTILS_NS::GetMathSizeType</definition>
         <argsstring>()</argsstring>
         <name>GetMathSizeType</name>
         <qualifiedname>SR_UTILS_NS::GetMathSizeType</qualifiedname>
@@ -3842,8 +3783,8 @@
             <defname>N2</defname>
           </param>
         </templateparamlist>
-        <type>auto</type>
-        <definition>auto SR_UTILS_NS::CompileTimeConcatStrings</definition>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_UTILS_NS::CompileTimeConcatStrings</definition>
         <argsstring>(const char(&amp;s1)[N1], const char(&amp;s2)[N2])</argsstring>
         <name>CompileTimeConcatStrings</name>
         <qualifiedname>SR_UTILS_NS::CompileTimeConcatStrings</qualifiedname>
@@ -3871,8 +3812,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>const char *</type>
-        <definition>const char * SR_UTILS_NS::GetCompileTimeTypeName</definition>
+        <type>constexpr const char *</type>
+        <definition>constexpr const char * SR_UTILS_NS::GetCompileTimeTypeName</definition>
         <argsstring>()</argsstring>
         <name>GetCompileTimeTypeName</name>
         <qualifiedname>SR_UTILS_NS::GetCompileTimeTypeName</qualifiedname>
@@ -3974,8 +3915,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsVolatile</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsVolatile</definition>
         <argsstring>()</argsstring>
         <name>IsVolatile</name>
         <qualifiedname>SR_UTILS_NS::IsVolatile</qualifiedname>
@@ -3993,8 +3934,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsLogical</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsLogical</definition>
         <argsstring>()</argsstring>
         <name>IsLogical</name>
         <qualifiedname>SR_UTILS_NS::IsLogical</qualifiedname>
@@ -4089,8 +4030,8 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_UTILS_NS::IsString</definition>
+        <type>constexpr bool</type>
+        <definition>constexpr bool SR_UTILS_NS::IsString</definition>
         <argsstring>()</argsstring>
         <name>IsString</name>
         <qualifiedname>SR_UTILS_NS::IsString</qualifiedname>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer" kind="struct" language="C++" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer" kind="struct" language="C++" prot="private">
     <compoundname>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
     <templateparamlist>
@@ -19,7 +19,6 @@
     <inheritancegraph>
       <node id="1">
         <label>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; class, class &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
@@ -30,7 +29,6 @@
     <collaborationgraph>
       <node id="1">
         <label>SR_UTILS_NS::SharedPointerTraits::IsSharedPointer&lt; class, class &gt;</label>
-        <link refid="structSR__UTILS__NS_1_1SharedPointerTraits_1_1IsSharedPointer"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>

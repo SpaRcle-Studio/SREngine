@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__HTYPES__NS_1_1SHA256_1_1Details" kind="namespace" language="C++">
     <compoundname>SR_HTYPES_NS::SHA256::Details</compoundname>
     <sectiondef kind="var">
       <memberdef kind="variable" id="MerkleTree_8h_1a6db4de1f5c389b0dfa02494831dcdf98" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>std::array&lt; uint32_t, 64 &gt;</type>
-        <definition>std::array&lt;uint32_t, 64&gt; SR_HTYPES_NS::SHA256::Details::sha256_constants</definition>
+        <type>constexpr std::array&lt; uint32_t, 64 &gt;</type>
+        <definition>constexpr std::array&lt;uint32_t, 64&gt; SR_HTYPES_NS::SHA256::Details::sha256_constants</definition>
         <argsstring></argsstring>
         <name>sha256_constants</name>
         <qualifiedname>SR_HTYPES_NS::SHA256::Details::sha256_constants</qualifiedname>

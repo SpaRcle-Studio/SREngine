@@ -58,7 +58,6 @@ namespace SR_UTILS_NS {
         }
 
         operator const std::string&() { return m_path; } 
-
         Path& operator=(const Path& path) {
             m_path = path.m_path;
 

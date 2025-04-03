@@ -34,7 +34,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef UnknownBuiltInIntegralType | [**local\_unknown\_builtin\_integral\_type**](#typedef-local_unknown_builtin_integral_type)  <br> |
-| typedef typename [**detail::uint\_type\_helper**](structSR__TYPES__NS_1_1detail_1_1uint__type__helper.md)&lt; std::numeric\_limits&lt; local\_unknown\_builtin\_integral\_type &gt;::is\_signed ? static\_cast&lt; size\_t &gt;(std::numeric\_limits&lt; local\_unknown\_builtin\_integral\_type &gt;::digits+1) :static\_cast&lt; size\_t &gt;(std::numeric\_limits&lt; local\_unknown\_builtin\_integral\_type &gt;::digits+0)&gt;::exact\_unsigned\_type | [**local\_unsigned\_conversion\_type**](#typedef-local_unsigned_conversion_type)  <br> |
+| typedef typename detail::uint\_type\_helper&lt; std::numeric\_limits&lt; local\_unknown\_builtin\_integral\_type &gt;::is\_signed ? static\_cast&lt; size\_t &gt;(std::numeric\_limits&lt; local\_unknown\_builtin\_integral\_type &gt;::digits+1) :static\_cast&lt; size\_t &gt;(std::numeric\_limits&lt; local\_unknown\_builtin\_integral\_type &gt;::digits+0)&gt;::exact\_unsigned\_type | [**local\_unsigned\_conversion\_type**](#typedef-local_unsigned_conversion_type)  <br> |
 
 
 
@@ -45,7 +45,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  unsigned\_fast\_type | [**value**](#variable-value)   = `/* multi line expression */`<br> |
+|  constexpr unsigned\_fast\_type | [**value**](#variable-value)   = `/* multi line expression */`<br> |
 
 
 
@@ -66,7 +66,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  local\_unknown\_builtin\_integral\_type | [**extract**](#function-extract) (InputIteratorLeft p\_limb, unsigned\_fast\_type limb\_count) <br> |
+|  constexpr auto | [**extract**](#function-extract) (InputIteratorLeft p\_limb, unsigned\_fast\_type limb\_count) <br> |
 
 
 
@@ -114,11 +114,7 @@ using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::digi
 ### typedef local\_unsigned\_conversion\_type 
 
 ```C++
-using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::digits_ratio< UnknownBuiltInIntegralType >::local_unsigned_conversion_type = 
-                typename detail::uint_type_helper<
-                std::numeric_limits<local_unknown_builtin_integral_type>::is_signed
-                ? static_cast<size_t>(std::numeric_limits<local_unknown_builtin_integral_type>::digits + 1)
-                : static_cast<size_t>(std::numeric_limits<local_unknown_builtin_integral_type>::digits + 0)>::exact_unsigned_type;
+using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::digits_ratio< UnknownBuiltInIntegralType >::local_unsigned_conversion_type =  typename detail::uint_type_helper< std::numeric_limits<local_unknown_builtin_integral_type>::is_signed ? static_cast<size_t>(std::numeric_limits<local_unknown_builtin_integral_type>::digits + 1) : static_cast<size_t>(std::numeric_limits<local_unknown_builtin_integral_type>::digits + 0)>::exact_unsigned_type;
 ```
 
 
@@ -133,7 +129,7 @@ using SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::digi
 ### variable value 
 
 ```C++
-unsigned_fast_type SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::digits_ratio< UnknownBuiltInIntegralType >::value;
+constexpr unsigned_fast_type SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsSigned >::digits_ratio< UnknownBuiltInIntegralType >::value;
 ```
 
 
@@ -149,7 +145,7 @@ unsigned_fast_type SR_TYPES_NS::uintwide_t< Width2, LimbType, AllocatorType, IsS
 
 ```C++
 template<typename InputIteratorLeft>
-static inline local_unknown_builtin_integral_type digits_ratio::extract (
+static inline constexpr auto digits_ratio::extract (
     InputIteratorLeft p_limb,
     unsigned_fast_type limb_count
 ) 

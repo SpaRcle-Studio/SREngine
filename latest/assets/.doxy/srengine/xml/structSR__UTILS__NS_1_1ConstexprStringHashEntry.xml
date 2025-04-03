@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1ConstexprStringHashEntry" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::ConstexprStringHashEntry</compoundname>
     <sectiondef kind="public-attrib">
@@ -35,7 +35,7 @@
     <sectiondef kind="public-func">
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ConstexprStringHashEntry_1a089433c8c9584171b9c94c599af49688" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>constexpr</type>
-        <definition>SR_UTILS_NS::ConstexprStringHashEntry::ConstexprStringHashEntry</definition>
+        <definition>constexpr SR_UTILS_NS::ConstexprStringHashEntry::ConstexprStringHashEntry</definition>
         <argsstring>()=default</argsstring>
         <name>ConstexprStringHashEntry</name>
         <qualifiedname>SR_UTILS_NS::ConstexprStringHashEntry::ConstexprStringHashEntry</qualifiedname>
@@ -49,7 +49,7 @@
       </memberdef>
       <memberdef kind="function" id="structSR__UTILS__NS_1_1ConstexprStringHashEntry_1abfdb389a3dcaad1de6d1e9870426729a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>constexpr</type>
-        <definition>SR_UTILS_NS::ConstexprStringHashEntry::ConstexprStringHashEntry</definition>
+        <definition>constexpr SR_UTILS_NS::ConstexprStringHashEntry::ConstexprStringHashEntry</definition>
         <argsstring>(std::string_view str, uint64_t hash)</argsstring>
         <name>ConstexprStringHashEntry</name>
         <qualifiedname>SR_UTILS_NS::ConstexprStringHashEntry::ConstexprStringHashEntry</qualifiedname>

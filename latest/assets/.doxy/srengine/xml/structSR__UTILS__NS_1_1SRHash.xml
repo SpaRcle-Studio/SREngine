@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structSR__UTILS__NS_1_1SRHash" kind="struct" language="C++" prot="public">
     <compoundname>SR_UTILS_NS::SRHash</compoundname>
     <basecompoundref refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash" prot="public" virt="non-virtual">SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, !std::is_const_v&lt; T &gt; &amp;&amp;!std::is_volatile_v&lt; T &gt; &amp;&amp;(std::is_enum_v&lt; T &gt;||std::is_integral_v&lt; T &gt;||std::is_pointer_v&lt; T &gt;)&gt;</basecompoundref>
@@ -10,7 +10,7 @@
     </templateparamlist>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structSR__UTILS__NS_1_1SRHash_1a3326460785b01ceeb16ed2cbe04309aa" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>uint64_t</type>
+        <type>constexpr uint64_t</type>
         <definition>static constexpr uint64_t SR_UTILS_NS::SRHash&lt; T &gt;::DoHash</definition>
         <argsstring>(const T &amp;value) noexcept</argsstring>
         <name>DoHash</name>
@@ -34,7 +34,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, !std::is_const_v&lt; T &gt; &amp;&amp;!std::is_volatile_v&lt; T &gt; &amp;&amp;(std::is_enum_v&lt; T &gt;||std::is_integral_v&lt; T &gt;||std::is_pointer_v&lt; T &gt;)&gt;</label>
+        <label>SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, Enabled &gt;</label>
         <link refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash"/>
       </node>
       <node id="1">
@@ -46,7 +46,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, !std::is_const_v&lt; T &gt; &amp;&amp;!std::is_volatile_v&lt; T &gt; &amp;&amp;(std::is_enum_v&lt; T &gt;||std::is_integral_v&lt; T &gt;||std::is_pointer_v&lt; T &gt;)&gt;</label>
+        <label>SR_UTILS_NS::SRConditionallyEnabledHash&lt; T, Enabled &gt;</label>
         <link refid="structSR__UTILS__NS_1_1SRConditionallyEnabledHash"/>
       </node>
       <node id="1">

@@ -56,7 +56,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  std::array&lt; char,((((N-1) &gt; &gt; 2) \*3)+1)&gt; | [**CompileTimeDecode**](#function-compiletimedecode) (const char(&) input) <br> |
+|  constexpr std::array&lt; char,((((N-1) &gt; &gt; 2) \*3)+1)&gt; | [**CompileTimeDecode**](#function-compiletimedecode) (const char(&) input) <br> |
 
 
 
@@ -94,7 +94,7 @@
 
 ```C++
 template<size_t N>
-std::array< char,((((N-1) > > 2) *3)+1)> SR_UTILS_NS::Base64::CompileTimeDecode (
+constexpr std::array< char,((((N-1) > > 2) *3)+1)> SR_UTILS_NS::Base64::CompileTimeDecode (
     const char(&) input
 ) 
 ```

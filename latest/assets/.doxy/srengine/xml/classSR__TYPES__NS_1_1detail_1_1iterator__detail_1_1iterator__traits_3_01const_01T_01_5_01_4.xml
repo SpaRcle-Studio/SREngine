@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4" kind="class" language="C++" prot="public">
     <compoundname>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</compoundname>
     <templateparamlist>
@@ -78,76 +78,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="144" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="144" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a22c38328f88bc7e95a33b6679275e723" prot="public" static="no">
-        <type>typename const T *::difference_type</type>
-        <definition>using SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::difference_type = </definition>
-        <argsstring></argsstring>
-        <name>difference_type</name>
-        <qualifiedname>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::difference_type</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="118" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="118" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a92b8d9f88d175415fc3e2ecfaa7b5e5d" prot="public" static="no">
-        <type>typename const T *::value_type</type>
-        <definition>using SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::value_type = </definition>
-        <argsstring></argsstring>
-        <name>value_type</name>
-        <qualifiedname>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::value_type</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="119" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="119" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a2a41106b6e6bb1bcec58ea76eefce716" prot="public" static="no">
-        <type>typename const T *::pointer</type>
-        <definition>using SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::pointer = </definition>
-        <argsstring></argsstring>
-        <name>pointer</name>
-        <qualifiedname>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::pointer</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="120" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="120" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1ad1a67d647509332282ecd633608232fd" prot="public" static="no">
-        <type>typename const T *::reference</type>
-        <definition>using SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::reference = </definition>
-        <argsstring></argsstring>
-        <name>reference</name>
-        <qualifiedname>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::reference</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="121" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="121" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a7a63f44a0d21c98bbbb77328202128fd" prot="public" static="no">
-        <type>typename const T *::iterator_category</type>
-        <definition>using SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::iterator_category = </definition>
-        <argsstring></argsstring>
-        <name>iterator_category</name>
-        <qualifiedname>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;::iterator_category</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="122" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="122" bodyend="-1"/>
-      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -156,15 +86,10 @@
     <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="137" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="138" bodyend="145"/>
     <listofallmembers>
       <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1abb7cb7d6f2d03036e7bc647a9141f00a" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>difference_type</name></member>
-      <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a22c38328f88bc7e95a33b6679275e723" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>difference_type</name></member>
       <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1aa435adb84acdde2b66fab20bb42540ac" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>iterator_category</name></member>
-      <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a7a63f44a0d21c98bbbb77328202128fd" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>iterator_category</name></member>
       <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1a9c14935e737c7343453e5a9a21b5fe2d" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>pointer</name></member>
-      <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a2a41106b6e6bb1bcec58ea76eefce716" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>pointer</name></member>
       <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1a1708efd69cb97d80f50176d7aef9f1c1" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>reference</name></member>
-      <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1ad1a67d647509332282ecd633608232fd" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>reference</name></member>
       <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_3_01const_01T_01_5_01_4_1aa83c7ae265b4b7846b09093fedc9a165" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>value_type</name></member>
-      <member refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits_1a92b8d9f88d175415fc3e2ecfaa7b5e5d" prot="public" virt="non-virtual"><scope>SR_TYPES_NS::detail::iterator_detail::iterator_traits&lt; const T * &gt;</scope><name>value_type</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

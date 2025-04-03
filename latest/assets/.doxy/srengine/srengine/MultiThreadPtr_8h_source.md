@@ -33,7 +33,6 @@ namespace SR_HTYPES_NS {
         MultiThreadPtr<T> &operator=(T *ptr);
 
         operator bool() const noexcept { return m_data && m_data->m_valid; } 
-
         T &operator*() const { return *m_ptr; }
         T *operator->() const { return m_ptr; }
 

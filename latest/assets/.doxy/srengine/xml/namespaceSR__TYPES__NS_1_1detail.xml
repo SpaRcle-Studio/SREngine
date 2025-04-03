@@ -1,27 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__TYPES__NS_1_1detail" kind="namespace" language="C++">
     <compoundname>SR_TYPES_NS::detail</compoundname>
     <innerclass refid="structSR__TYPES__NS_1_1detail_1_1allocator__dummy__unsafe" prot="public">SR_TYPES_NS::detail::allocator_dummy_unsafe</innerclass>
-    <innerclass refid="classSR__TYPES__NS_1_1detail_1_1dynamic__array" prot="public">SR_TYPES_NS::detail::dynamic_array</innerclass>
     <innerclass refid="classSR__TYPES__NS_1_1detail_1_1fixed__dynamic__array" prot="public">SR_TYPES_NS::detail::fixed_dynamic_array</innerclass>
     <innerclass refid="classSR__TYPES__NS_1_1detail_1_1fixed__static__array" prot="public">SR_TYPES_NS::detail::fixed_static_array</innerclass>
     <innerclass refid="classSR__TYPES__NS_1_1detail_1_1native__float__parts" prot="public">SR_TYPES_NS::detail::native_float_parts</innerclass>
-    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" prot="public">SR_TYPES_NS::detail::uint_type_helper</innerclass>
-    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B63fb5b46f0a854a3fab1d24dd63c093c" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(17))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(32)))&gt; &gt;</innerclass>
-    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(33))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(64)))&gt; &gt;</innerclass>
-    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(9))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(16)))&gt; &gt;</innerclass>
-    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491" prot="public">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(8)))&gt; &gt;</innerclass>
-    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two" prot="public">SR_TYPES_NS::detail::verify_power_of_two</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" prot="private">SR_TYPES_NS::detail::uint_type_helper</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B63fb5b46f0a854a3fab1d24dd63c093c" prot="private">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(17))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(32)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B7a78e65e0b63e6416c6fcf49f479b0b2" prot="private">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(33))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(64)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07B9690eca38ad16b6a63c1a5996945ca18" prot="private">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount &gt;=static_cast&lt; size_t &gt;(UINT8_C(9))) &amp;&amp;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(16)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper_3_01BitCount_00_01std_1_1enable__if__t_3_07Bf7e46a28771bbe653b06d7e6f6aa2491" prot="private">SR_TYPES_NS::detail::uint_type_helper&lt; BitCount, std::enable_if_t&lt;(BitCount&lt;=static_cast&lt; size_t &gt;(UINT8_C(8)))&gt; &gt;</innerclass>
+    <innerclass refid="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two" prot="private">SR_TYPES_NS::detail::verify_power_of_two</innerclass>
     <innerclass refid="structSR__TYPES__NS_1_1detail_1_1verify__power__of__two__times__granularity__one__sixty__fourth" prot="public">SR_TYPES_NS::detail::verify_power_of_two_times_granularity_one_sixty_fourth</innerclass>
     <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1array__detail">SR_TYPES_NS::detail::array_detail</innernamespace>
     <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1distance__detail">SR_TYPES_NS::detail::distance_detail</innernamespace>
     <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1iterator__detail">SR_TYPES_NS::detail::iterator_detail</innernamespace>
     <innernamespace refid="namespaceSR__TYPES__NS_1_1detail_1_1my__own">SR_TYPES_NS::detail::my_own</innernamespace>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="UintWide__t_8h_1a8eb02af7cfda74e23b94db6b392273a8" prot="public" static="no">
+      <memberdef kind="typedef" id="UintWide__t_8h_1a4447e46d183ec8d2fff0af1a3aa9518e" prot="private" static="no">
         <type>std::uint32_t</type>
-        <definition>using SR_TYPES_NS::detail::size_t =  std::uint32_t</definition>
+        <definition>using SR_TYPES_NS::detail::size_t = typedef std::uint32_t</definition>
         <argsstring></argsstring>
         <name>size_t</name>
         <qualifiedname>SR_TYPES_NS::detail::size_t</qualifiedname>
@@ -33,9 +32,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1110" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1110" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="UintWide__t_8h_1a528e4e7d75652011d04fefa5075b034d" prot="public" static="no">
+      <memberdef kind="typedef" id="UintWide__t_8h_1a8b1f41836cfee4ec038e4c7fef674176" prot="private" static="no">
         <type>std::int32_t</type>
-        <definition>using SR_TYPES_NS::detail::ptrdiff_t =  std::int32_t</definition>
+        <definition>using SR_TYPES_NS::detail::ptrdiff_t = typedef std::int32_t</definition>
         <argsstring></argsstring>
         <name>ptrdiff_t</name>
         <qualifiedname>SR_TYPES_NS::detail::ptrdiff_t</qualifiedname>
@@ -47,9 +46,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1111" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1111" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="UintWide__t_8h_1a3d823d86c643bdd4d0fd53a9be4c8bcc" prot="public" static="no">
-        <type>typename <ref refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kindref="compound">uint_type_helper</ref>&lt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; size_t &gt;::digits+0)&gt;::fast_unsigned_type</type>
-        <definition>using SR_TYPES_NS::detail::unsigned_fast_type =  typename uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;size_t   &gt;::digits + 0)&gt;::fast_unsigned_type</definition>
+      <memberdef kind="typedef" id="UintWide__t_8h_1a05d34a675da9f3c5ac887cb065bf4149" prot="private" static="no">
+        <type>typename uint_type_helper&lt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; size_t &gt;::digits+0)&gt;::fast_unsigned_type</type>
+        <definition>using SR_TYPES_NS::detail::unsigned_fast_type = typedef typename uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;size_t &gt;::digits + 0)&gt;::fast_unsigned_type</definition>
         <argsstring></argsstring>
         <name>unsigned_fast_type</name>
         <qualifiedname>SR_TYPES_NS::detail::unsigned_fast_type</qualifiedname>
@@ -61,9 +60,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1171" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1171" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="UintWide__t_8h_1a4221b85f498a1b26fbc4c45be90d5bbb" prot="public" static="no">
-        <type>typename <ref refid="structSR__TYPES__NS_1_1detail_1_1uint__type__helper" kindref="compound">uint_type_helper</ref>&lt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; ptrdiff_t &gt;::digits+1)&gt;::fast_signed_type</type>
-        <definition>using SR_TYPES_NS::detail::signed_fast_type =  typename uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;ptrdiff_t&gt;::digits + 1)&gt;::fast_signed_type</definition>
+      <memberdef kind="typedef" id="UintWide__t_8h_1aef45428377c146c3e3acf659461af6cd" prot="private" static="no">
+        <type>typename uint_type_helper&lt; static_cast&lt; size_t &gt;(std::numeric_limits&lt; ptrdiff_t &gt;::digits+1)&gt;::fast_signed_type</type>
+        <definition>using SR_TYPES_NS::detail::signed_fast_type = typedef typename uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;ptrdiff_t&gt;::digits + 1)&gt;::fast_signed_type</definition>
         <argsstring></argsstring>
         <name>signed_fast_type</name>
         <qualifiedname>SR_TYPES_NS::detail::signed_fast_type</qualifiedname>
@@ -83,9 +82,9 @@
             <type>typename ArithmeticType</type>
           </param>
         </templateparamlist>
-        <type>ArithmeticType</type>
-        <definition>ArithmeticType SR_TYPES_NS::detail::abs_unsafe</definition>
-        <argsstring>(ArithmeticType val)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::abs_unsafe</definition>
+        <argsstring>(ArithmeticType val) -&gt; ArithmeticType</argsstring>
         <name>abs_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::abs_unsafe</qualifiedname>
         <param>
@@ -109,9 +108,9 @@
             <type>typename ValueType</type>
           </param>
         </templateparamlist>
-        <type>void</type>
-        <definition>void SR_TYPES_NS::detail::fill_unsafe</definition>
-        <argsstring>(DestinationIterator first, DestinationIterator last, ValueType val)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::fill_unsafe</definition>
+        <argsstring>(DestinationIterator first, DestinationIterator last, ValueType val) -&gt; void</argsstring>
         <name>fill_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::fill_unsafe</qualifiedname>
         <param>
@@ -140,9 +139,9 @@
             <type>typename ArithmeticType</type>
           </param>
         </templateparamlist>
-        <type>ArithmeticType</type>
-        <definition>ArithmeticType SR_TYPES_NS::detail::max_unsafe</definition>
-        <argsstring>(const ArithmeticType &amp;left, const ArithmeticType &amp;right)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::max_unsafe</definition>
+        <argsstring>(const ArithmeticType &amp;left, const ArithmeticType &amp;right) -&gt; ArithmeticType</argsstring>
         <name>max_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::max_unsafe</qualifiedname>
         <param>
@@ -167,9 +166,9 @@
             <type>typename ArithmeticType</type>
           </param>
         </templateparamlist>
-        <type>ArithmeticType</type>
-        <definition>ArithmeticType SR_TYPES_NS::detail::min_unsafe</definition>
-        <argsstring>(const ArithmeticType &amp;left, const ArithmeticType &amp;right)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::min_unsafe</definition>
+        <argsstring>(const ArithmeticType &amp;left, const ArithmeticType &amp;right) -&gt; ArithmeticType</argsstring>
         <name>min_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::min_unsafe</qualifiedname>
         <param>
@@ -197,9 +196,9 @@
             <type>typename DestinationIterator</type>
           </param>
         </templateparamlist>
-        <type>DestinationIterator</type>
-        <definition>DestinationIterator SR_TYPES_NS::detail::copy_unsafe</definition>
-        <argsstring>(InputIterator first, InputIterator last, DestinationIterator dest)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::copy_unsafe</definition>
+        <argsstring>(InputIterator first, InputIterator last, DestinationIterator dest) -&gt; DestinationIterator</argsstring>
         <name>copy_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::copy_unsafe</qualifiedname>
         <param>
@@ -231,9 +230,9 @@
             <type>typename DestinationIterator</type>
           </param>
         </templateparamlist>
-        <type>DestinationIterator</type>
-        <definition>DestinationIterator SR_TYPES_NS::detail::copy_backward_unsafe</definition>
-        <argsstring>(InputIterator first, InputIterator last, DestinationIterator dest)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::copy_backward_unsafe</definition>
+        <argsstring>(InputIterator first, InputIterator last, DestinationIterator dest) -&gt; DestinationIterator</argsstring>
         <name>copy_backward_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::copy_backward_unsafe</qualifiedname>
         <param>
@@ -262,9 +261,9 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>void</type>
-        <definition>void SR_TYPES_NS::detail::swap_unsafe</definition>
-        <argsstring>(T &amp;left, T &amp;right)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::swap_unsafe</definition>
+        <argsstring>(T &amp;left, T &amp;right) -&gt; void</argsstring>
         <name>swap_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::swap_unsafe</qualifiedname>
         <param>
@@ -289,9 +288,9 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>void</type>
-        <definition>void SR_TYPES_NS::detail::swap_unsafe</definition>
-        <argsstring>(T &amp;&amp;left, T &amp;&amp;right)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::swap_unsafe</definition>
+        <argsstring>(T &amp;&amp;left, T &amp;&amp;right) -&gt; void</argsstring>
         <name>swap_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::swap_unsafe</qualifiedname>
         <param>
@@ -319,9 +318,9 @@
             <type>typename UnaryPredicate</type>
           </param>
         </templateparamlist>
-        <type>InputIt</type>
-        <definition>InputIt SR_TYPES_NS::detail::find_if_unsafe</definition>
-        <argsstring>(InputIt first, InputIt last, UnaryPredicate p)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::find_if_unsafe</definition>
+        <argsstring>(InputIt first, InputIt last, UnaryPredicate p) -&gt; InputIt</argsstring>
         <name>find_if_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::find_if_unsafe</qualifiedname>
         <param>
@@ -353,9 +352,9 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>ForwardIt</type>
-        <definition>ForwardIt SR_TYPES_NS::detail::lower_bound_unsafe</definition>
-        <argsstring>(ForwardIt first, ForwardIt last, const T &amp;value)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::lower_bound_unsafe</definition>
+        <argsstring>(ForwardIt first, ForwardIt last, const T &amp;value) -&gt; ForwardIt</argsstring>
         <name>lower_bound_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::lower_bound_unsafe</qualifiedname>
         <param>
@@ -387,9 +386,9 @@
             <type>class T</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_TYPES_NS::detail::binary_search_unsafe</definition>
-        <argsstring>(ForwardIt first, ForwardIt last, const T &amp;value)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::binary_search_unsafe</definition>
+        <argsstring>(ForwardIt first, ForwardIt last, const T &amp;value) -&gt; bool</argsstring>
         <name>binary_search_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::binary_search_unsafe</qualifiedname>
         <param>
@@ -418,9 +417,9 @@
             <type>class It</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="classSR__TYPES__NS_1_1detail_1_1iterator__detail_1_1iterator__traits" kindref="compound">iterator_detail::iterator_traits</ref>&lt; It &gt;::difference_type</type>
-        <definition>typename iterator_detail::iterator_traits&lt; It &gt;::difference_type SR_TYPES_NS::detail::distance_unsafe</definition>
-        <argsstring>(It first, It last)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::distance_unsafe</definition>
+        <argsstring>(It first, It last) -&gt; typename iterator_detail::iterator_traits&lt; It &gt;::difference_type</argsstring>
         <name>distance_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::distance_unsafe</qualifiedname>
         <param>
@@ -448,9 +447,9 @@
             <type>class InputIt2</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_TYPES_NS::detail::equal_unsafe</definition>
-        <argsstring>(InputIt1 first1, InputIt1 last1, InputIt2 first2)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::equal_unsafe</definition>
+        <argsstring>(InputIt1 first1, InputIt1 last1, InputIt2 first2) -&gt; bool</argsstring>
         <name>equal_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::equal_unsafe</qualifiedname>
         <param>
@@ -482,9 +481,9 @@
             <type>class InputIt2</type>
           </param>
         </templateparamlist>
-        <type>bool</type>
-        <definition>bool SR_TYPES_NS::detail::lexicographical_compare_unsafe</definition>
-        <argsstring>(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::lexicographical_compare_unsafe</definition>
+        <argsstring>(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2) -&gt; bool</argsstring>
         <name>lexicographical_compare_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::lexicographical_compare_unsafe</qualifiedname>
         <param>
@@ -517,9 +516,9 @@
             <type>typename IteratorType</type>
           </param>
         </templateparamlist>
-        <type>void</type>
-        <definition>void SR_TYPES_NS::detail::iter_swap_unsafe</definition>
-        <argsstring>(IteratorType a, IteratorType b)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::iter_swap_unsafe</definition>
+        <argsstring>(IteratorType a, IteratorType b) -&gt; void</argsstring>
         <name>iter_swap_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::iter_swap_unsafe</qualifiedname>
         <param>
@@ -547,9 +546,9 @@
             <type>class ForwardIt2</type>
           </param>
         </templateparamlist>
-        <type>ForwardIt2</type>
-        <definition>ForwardIt2 SR_TYPES_NS::detail::swap_ranges_unsafe</definition>
-        <argsstring>(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::swap_ranges_unsafe</definition>
+        <argsstring>(ForwardIt1 first1, ForwardIt1 last1, ForwardIt2 first2) -&gt; ForwardIt2</argsstring>
         <name>swap_ranges_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::swap_ranges_unsafe</qualifiedname>
         <param>
@@ -578,9 +577,9 @@
             <type>class UnsignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt;</type>
-        <definition>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt; SR_TYPES_NS::detail::clz_unsafe</definition>
-        <argsstring>(UnsignedIntegralType v) noexcept</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::clz_unsafe</definition>
+        <argsstring>(UnsignedIntegralType v) noexcept -&gt; std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt;</argsstring>
         <name>clz_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::clz_unsafe</qualifiedname>
         <param>
@@ -601,9 +600,9 @@
             <type>typename UnsignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt;</type>
-        <definition>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt; SR_TYPES_NS::detail::ctz_unsafe</definition>
-        <argsstring>(const UnsignedIntegralType v) noexcept</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::ctz_unsafe</definition>
+        <argsstring>(const UnsignedIntegralType v) noexcept -&gt; std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), unsigned &gt;</argsstring>
         <name>ctz_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::ctz_unsafe</qualifiedname>
         <param>
@@ -624,9 +623,9 @@
             <type>typename UnsignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), UnsignedIntegralType &gt;</type>
-        <definition>std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), UnsignedIntegralType &gt; SR_TYPES_NS::detail::gcd_unsafe</definition>
-        <argsstring>(UnsignedIntegralType u, UnsignedIntegralType v)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::gcd_unsafe</definition>
+        <argsstring>(UnsignedIntegralType u, UnsignedIntegralType v) -&gt; std::enable_if_t&lt;((std::is_integral&lt; UnsignedIntegralType &gt;::value) &amp;&amp;(std::is_unsigned&lt; UnsignedIntegralType &gt;::value)), UnsignedIntegralType &gt;</argsstring>
         <name>gcd_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::gcd_unsafe</qualifiedname>
         <param>
@@ -645,7 +644,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="505" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="505" bodyend="538"/>
       </memberdef>
-      <memberdef kind="function" id="UintWide__t_8h_1a88d537b8e86d7bd78307238507363a0b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="UintWide__t_8h_1a88d537b8e86d7bd78307238507363a0b" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename ForwardIterator</type>
@@ -654,9 +653,9 @@
             <type>typename OutputIterator</type>
           </param>
         </templateparamlist>
-        <type>OutputIterator</type>
-        <definition>OutputIterator SR_TYPES_NS::detail::import_export_helper</definition>
-        <argsstring>(ForwardIterator in, OutputIterator out, const signed_fast_type total_bits_to_use, const unsigned_fast_type chunk_size_in, const unsigned_fast_type chunk_size_out)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::import_export_helper</definition>
+        <argsstring>(ForwardIterator in, OutputIterator out, const signed_fast_type total_bits_to_use, const unsigned_fast_type chunk_size_in, const unsigned_fast_type chunk_size_out) -&gt; OutputIterator</argsstring>
         <name>import_export_helper</name>
         <qualifiedname>SR_TYPES_NS::detail::import_export_helper</qualifiedname>
         <param>
@@ -693,9 +692,9 @@
             <type>typename UnsignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::lsb_helper</definition>
-        <argsstring>(const UnsignedIntegralType &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::lsb_helper</definition>
+        <argsstring>(const UnsignedIntegralType &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>lsb_helper</name>
         <qualifiedname>SR_TYPES_NS::detail::lsb_helper</qualifiedname>
         <param>
@@ -716,9 +715,9 @@
             <type>typename UnsignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper</definition>
-        <argsstring>(const UnsignedIntegralType &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper</definition>
+        <argsstring>(const UnsignedIntegralType &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper</qualifiedname>
         <param>
@@ -736,9 +735,9 @@
       <memberdef kind="function" id="UintWide__t_8h_1a2adebca3d3836affe5471f6ff909261a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</definition>
-        <argsstring>(const std::uint32_t &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</definition>
+        <argsstring>(const std::uint32_t &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper&lt; std::uint32_t &gt;</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</qualifiedname>
         <param>
@@ -756,9 +755,9 @@
       <memberdef kind="function" id="UintWide__t_8h_1a065b244b06ac6002632d70b669d1b8c7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</definition>
-        <argsstring>(const std::uint16_t &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</definition>
+        <argsstring>(const std::uint16_t &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper&lt; std::uint16_t &gt;</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</qualifiedname>
         <param>
@@ -776,9 +775,9 @@
       <memberdef kind="function" id="UintWide__t_8h_1ab2c78817df92dc166457d5affec878c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</definition>
-        <argsstring>(const std::uint8_t &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</definition>
+        <argsstring>(const std::uint8_t &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper&lt; std::uint8_t &gt;</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</qualifiedname>
         <param>
@@ -802,9 +801,9 @@
             <type>typename SourceIterator</type>
           </param>
         </templateparamlist>
-        <type>DestinationIterator</type>
-        <definition>DestinationIterator SR_TYPES_NS::detail::strcpy_unsafe</definition>
-        <argsstring>(DestinationIterator dst, SourceIterator src)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::strcpy_unsafe</definition>
+        <argsstring>(DestinationIterator dst, SourceIterator src) -&gt; DestinationIterator</argsstring>
         <name>strcpy_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::strcpy_unsafe</qualifiedname>
         <param>
@@ -824,9 +823,9 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" line="1825" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/UintWide_t.h" bodystart="1825" bodyend="1830"/>
       </memberdef>
       <memberdef kind="function" id="UintWide__t_8h_1a982ba2e444fb0ca2c303551b766dc123" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::strlen_unsafe</definition>
-        <argsstring>(const char *p_str)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::strlen_unsafe</definition>
+        <argsstring>(const char *p_str) -&gt; unsigned_fast_type</argsstring>
         <name>strlen_unsafe</name>
         <qualifiedname>SR_TYPES_NS::detail::strlen_unsafe</qualifiedname>
         <param>
@@ -850,9 +849,9 @@
             <type>typename IntegralType</type>
           </param>
         </templateparamlist>
-        <type>InputIterator</type>
-        <definition>InputIterator SR_TYPES_NS::detail::advance_and_point</definition>
-        <argsstring>(InputIterator it, IntegralType n)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::advance_and_point</definition>
+        <argsstring>(InputIterator it, IntegralType n) -&gt; InputIterator</argsstring>
         <name>advance_and_point</name>
         <qualifiedname>SR_TYPES_NS::detail::advance_and_point</qualifiedname>
         <param>
@@ -881,9 +880,9 @@
             <defval>typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;UnsignedShortType&gt;::digits * 2)&gt;::exact_unsigned_type</defval>
           </param>
         </templateparamlist>
-        <type>UnsignedShortType</type>
-        <definition>UnsignedShortType SR_TYPES_NS::detail::make_lo</definition>
-        <argsstring>(const UnsignedLargeType &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::make_lo</definition>
+        <argsstring>(const UnsignedLargeType &amp;u) -&gt; UnsignedShortType</argsstring>
         <name>make_lo</name>
         <qualifiedname>SR_TYPES_NS::detail::make_lo</qualifiedname>
         <param>
@@ -908,9 +907,9 @@
             <defval>typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;UnsignedShortType&gt;::digits * 2)&gt;::exact_unsigned_type</defval>
           </param>
         </templateparamlist>
-        <type>UnsignedShortType</type>
-        <definition>UnsignedShortType SR_TYPES_NS::detail::make_hi</definition>
-        <argsstring>(const UnsignedLargeType &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::make_hi</definition>
+        <argsstring>(const UnsignedLargeType &amp;u) -&gt; UnsignedShortType</argsstring>
         <name>make_hi</name>
         <qualifiedname>SR_TYPES_NS::detail::make_hi</qualifiedname>
         <param>
@@ -935,9 +934,9 @@
             <defval>typename detail::uint_type_helper&lt;static_cast&lt;size_t&gt;(std::numeric_limits&lt;UnsignedShortType&gt;::digits * 2)&gt;::exact_unsigned_type</defval>
           </param>
         </templateparamlist>
-        <type>UnsignedLargeType</type>
-        <definition>UnsignedLargeType SR_TYPES_NS::detail::make_large</definition>
-        <argsstring>(const UnsignedShortType &amp;lo, const UnsignedShortType &amp;hi)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::make_large</definition>
+        <argsstring>(const UnsignedShortType &amp;lo, const UnsignedShortType &amp;hi) -&gt; UnsignedLargeType</argsstring>
         <name>make_large</name>
         <qualifiedname>SR_TYPES_NS::detail::make_large</qualifiedname>
         <param>
@@ -962,9 +961,9 @@
             <type>typename UnsignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value), UnsignedIntegralType &gt;</type>
-        <definition>std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value), UnsignedIntegralType &gt; SR_TYPES_NS::detail::negate</definition>
-        <argsstring>(UnsignedIntegralType u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::negate</definition>
+        <argsstring>(UnsignedIntegralType u) -&gt; std::enable_if_t&lt;(std::is_integral&lt; UnsignedIntegralType &gt;::value &amp;&amp;std::is_unsigned&lt; UnsignedIntegralType &gt;::value), UnsignedIntegralType &gt;</argsstring>
         <name>negate</name>
         <qualifiedname>SR_TYPES_NS::detail::negate</qualifiedname>
         <param>
@@ -985,9 +984,9 @@
             <type>typename SignedIntegralType</type>
           </param>
         </templateparamlist>
-        <type>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), SignedIntegralType &gt;</type>
-        <definition>std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), SignedIntegralType &gt; SR_TYPES_NS::detail::negate</definition>
-        <argsstring>(SignedIntegralType n)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::negate</definition>
+        <argsstring>(SignedIntegralType n) -&gt; std::enable_if_t&lt;(std::is_integral&lt; SignedIntegralType &gt;::value &amp;&amp;std::is_signed&lt; SignedIntegralType &gt;::value), SignedIntegralType &gt;</argsstring>
         <name>negate</name>
         <qualifiedname>SR_TYPES_NS::detail::negate</qualifiedname>
         <param>
@@ -1005,9 +1004,9 @@
       <memberdef kind="function" id="UintWide__t_8h_1a2adebca3d3836affe5471f6ff909261a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</definition>
-        <argsstring>(const std::uint32_t &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</definition>
+        <argsstring>(const std::uint32_t &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper&lt; std::uint32_t &gt;</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint32_t &gt;</qualifiedname>
         <param>
@@ -1025,9 +1024,9 @@
       <memberdef kind="function" id="UintWide__t_8h_1a065b244b06ac6002632d70b669d1b8c7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</definition>
-        <argsstring>(const std::uint16_t &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</definition>
+        <argsstring>(const std::uint16_t &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper&lt; std::uint16_t &gt;</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint16_t &gt;</qualifiedname>
         <param>
@@ -1045,9 +1044,9 @@
       <memberdef kind="function" id="UintWide__t_8h_1ab2c78817df92dc166457d5affec878c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type>unsigned_fast_type</type>
-        <definition>unsigned_fast_type SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</definition>
-        <argsstring>(const std::uint8_t &amp;u)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</definition>
+        <argsstring>(const std::uint8_t &amp;u) -&gt; unsigned_fast_type</argsstring>
         <name>msb_helper&lt; std::uint8_t &gt;</name>
         <qualifiedname>SR_TYPES_NS::detail::msb_helper&lt; std::uint8_t &gt;</qualifiedname>
         <param>
@@ -1068,9 +1067,9 @@
             <type>typename UnsignedShortType</type>
           </param>
         </templateparamlist>
-        <type>UnsignedShortType</type>
-        <definition>UnsignedShortType SR_TYPES_NS::detail::integer_gcd_reduce</definition>
-        <argsstring>(UnsignedShortType u, UnsignedShortType v)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::integer_gcd_reduce</definition>
+        <argsstring>(UnsignedShortType u, UnsignedShortType v) -&gt; UnsignedShortType</argsstring>
         <name>integer_gcd_reduce</name>
         <qualifiedname>SR_TYPES_NS::detail::integer_gcd_reduce</qualifiedname>
         <param>
@@ -1095,9 +1094,9 @@
             <type>typename IntegerType</type>
           </param>
         </templateparamlist>
-        <type>IntegerType</type>
-        <definition>IntegerType SR_TYPES_NS::detail::lcm_impl</definition>
-        <argsstring>(const IntegerType &amp;a, const IntegerType &amp;b)</argsstring>
+        <type>constexpr auto</type>
+        <definition>constexpr auto SR_TYPES_NS::detail::lcm_impl</definition>
+        <argsstring>(const IntegerType &amp;a, const IntegerType &amp;b) -&gt; IntegerType</argsstring>
         <name>lcm_impl</name>
         <qualifiedname>SR_TYPES_NS::detail::lcm_impl</qualifiedname>
         <param>

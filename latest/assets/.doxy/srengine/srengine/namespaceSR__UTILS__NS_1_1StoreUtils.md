@@ -95,7 +95,7 @@
 ### typedef Temp 
 
 ```C++
-using SR_UTILS_NS::StoreUtils::Temp =  Template<Storage::StorageType::Temp>;
+using SR_UTILS_NS::StoreUtils::Temp = typedef Template<Storage::StorageType::Temp>;
 ```
 
 
@@ -108,7 +108,7 @@ using SR_UTILS_NS::StoreUtils::Temp =  Template<Storage::StorageType::Temp>;
 ### typedef User 
 
 ```C++
-using SR_UTILS_NS::StoreUtils::User =  Template<Storage::StorageType::User>;
+using SR_UTILS_NS::StoreUtils::User = typedef Template<Storage::StorageType::User>;
 ```
 
 

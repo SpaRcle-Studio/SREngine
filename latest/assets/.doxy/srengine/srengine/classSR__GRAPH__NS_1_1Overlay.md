@@ -289,6 +289,16 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 ## Detailed Description
 
 
+
+ \| Base overlay \| Type of overlay \| [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md) renderer \| \| [**Overlay**](classSR__GRAPH__NS_1_1Overlay.md) -&gt; TypeOverlay -&gt; RendererTypeOverlay \| 
+
+
+### \| Overlay     -&gt; ImGuiOverlay   -&gt; VulkanImGuiOverlay  \|
+
+
+
+
+    
 ## Public Types Documentation
 
 

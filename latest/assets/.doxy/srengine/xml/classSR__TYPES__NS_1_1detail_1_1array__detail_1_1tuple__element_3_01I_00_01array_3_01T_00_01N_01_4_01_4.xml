@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__element_3_01I_00_01array_3_01T_00_01N_01_4_01_4" kind="class" language="C++" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__TYPES__NS_1_1detail_1_1array__detail_1_1tuple__element_3_01I_00_01array_3_01T_00_01N_01_4_01_4" kind="class" language="C++" prot="private">
     <compoundname>SR_TYPES_NS::detail::array_detail::tuple_element&lt; I, array&lt; T, N &gt; &gt;</compoundname>
     <templateparamlist>
       <param>

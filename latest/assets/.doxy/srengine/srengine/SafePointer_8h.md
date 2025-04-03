@@ -41,8 +41,6 @@
 | ---: | :--- |
 | class | [**SafePtr**](classSR__HTYPES__NS_1_1SafePtr.md) &lt;class T&gt;<br> |
 | struct | [**SafePtrDynamicData**](structSR__HTYPES__NS_1_1SafePtrDynamicData.md) <br> |
-| struct | [**hash&lt; SR\_HTYPES\_NS::SafePtr&lt; T &gt; &gt;**](structstd_1_1hash_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
-| struct | [**less&lt; SR\_HTYPES\_NS::SafePtr&lt; T &gt; &gt;**](structstd_1_1less_3_01SR__HTYPES__NS_1_1SafePtr_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 
 
 

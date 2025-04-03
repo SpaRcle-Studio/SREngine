@@ -54,7 +54,7 @@
 | Type | Name |
 | ---: | :--- |
 |  auto | [**format**](#function-format) ([**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) const & str, FormatContext & ctx) <br> |
-|  auto | [**parse**](#function-parse) (ParseContext & ctx) <br> |
+|  constexpr auto | [**parse**](#function-parse) (ParseContext & ctx) <br> |
 
 
 
@@ -109,7 +109,7 @@ inline auto fmt::formatter< SR_UTILS_NS::Path >::format (
 
 ```C++
 template<typename ParseContext>
-inline auto fmt::formatter< SR_UTILS_NS::Path >::parse (
+inline constexpr auto fmt::formatter< SR_UTILS_NS::Path >::parse (
     ParseContext & ctx
 ) 
 ```

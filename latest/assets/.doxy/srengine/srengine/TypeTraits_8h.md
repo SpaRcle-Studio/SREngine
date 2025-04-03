@@ -44,11 +44,6 @@
 | struct | [**CheckOperatorUsable**](structSR__UTILS__NS_1_1CheckOperatorUsable.md) &lt;Op, class X, class Y, typename&gt;<br> |
 | struct | [**CheckOperatorUsable&lt; CheckerEqualityComparable, std::optional&lt; T &gt;, std::optional&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1CheckOperatorUsable_3_01CheckerEqualityComparable_00_01std_1_1optional_3_835c32e76e2a52d0e0f22fbe39d31aa3.md) &lt;typename T&gt;<br> |
 | struct | [**CheckOperatorUsable&lt; Op, X, Y, std::enable\_if\_t&lt; std::is\_same\_v&lt; Y, std::nullptr\_t &gt; &&!SupportsNullptrComparisonV&lt; X &gt; &gt; &gt;**](structSR__UTILS__NS_1_1CheckOperatorUsable_3_01Op_00_01X_00_01Y_00_01std_1_1enable__if__t_3_01stc413c9f9798c835c9db20a200ab862b9.md) &lt;Op, class X, class Y&gt;<br> |
-| struct | [**Detector**](structSR__UTILS__NS_1_1Details_1_1Detector.md) &lt;class Default, class AlwaysVoid, Op, Args&gt;<br> |
-| struct | [**Detector&lt; Default, std::void\_t&lt; Op&lt; Args... &gt; &gt;, Op, Args... &gt;**](structSR__UTILS__NS_1_1Details_1_1Detector_3_01Default_00_01std_1_1void__t_3_01Op_3_01Args_8_8_86bb0dd47b703eedb0ac0acb502b0839c.md) &lt;class Default, Op, Args&gt;<br> |
-| struct | [**Empty**](structSR__UTILS__NS_1_1Details_1_1Empty.md) <br> |
-| struct | [**GetPromPack**](structSR__UTILS__NS_1_1Details_1_1GetPromPack.md) &lt;I, class T, Types&gt;<br> |
-| struct | [**GetPromPack&lt; 0, T, Types... &gt;**](structSR__UTILS__NS_1_1Details_1_1GetPromPack_3_010_00_01T_00_01Types_8_8_8_01_4.md) &lt;class T, Types&gt;<br> |
 | struct | [**DetectedOr**](structSR__UTILS__NS_1_1DetectedOr.md) &lt;class Default, Op, Args&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequence**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence.md) &lt;class T, class Pair, Pairs&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequence&lt; T, Pair &gt;**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4.md) &lt;class T, class Pair&gt;<br> |

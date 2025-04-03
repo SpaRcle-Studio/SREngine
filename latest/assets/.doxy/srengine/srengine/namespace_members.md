@@ -517,7 +517,6 @@
 * **None** ([**SR\_UTILS\_NS::UI**](namespaceSR__UTILS__NS_1_1UI.md))
 * **NodeToColor** ([**SR\_UTILS\_NS::Xml**](namespaceSR__UTILS__NS_1_1Xml.md))
 * **N\_HASH** ([**s\_s**](namespaces__s.md))
-* **numeric\_limits&lt; SR\_TYPES\_NS::uintwide\_t&lt; Width2, LimbType, AllocatorType, IsSigned &gt; &gt;** ([**std**](namespacestd.md))
 
 
 ## o
@@ -552,7 +551,7 @@
 * **perm** ([**SR\_MATH\_NS::NoiseTable**](namespaceSR__MATH__NS_1_1NoiseTable.md))
 * **PhysXPvdConnection** ([**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md))
 * **PxV3ToFV3** ([**SR\_PHYSICS\_UTILS\_NS**](namespaceSR__PHYSICS__UTILS__NS.md))
-* **ptrdiff\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **ptrdiff\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **pow** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **powm** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **PackOfSameTypeV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
@@ -699,8 +698,8 @@
 * **SR\_SRSL\_TYPE\_SIZE\_TABLE** ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * **SR\_SRSL\_TYPE\_STRINGS** ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * **swap** ([**SR\_TYPES\_NS::detail::array\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1array__detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md), [**util**](namespaceutil.md))
-* **signed\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
-* **size\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **signed\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
+* **size\_t** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **strcpy\_unsafe** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **strlen\_unsafe** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **swap\_ranges\_unsafe** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
@@ -792,7 +791,7 @@
 * **Unit** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **UnitMAX** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **UDP** ([**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md))
-* **unsigned\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
+* **unsigned\_fast\_type** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **uint1024\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **uint128\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **uint16384\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))

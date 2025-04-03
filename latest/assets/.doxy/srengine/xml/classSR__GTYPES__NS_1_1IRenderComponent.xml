@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classSR__GTYPES__NS_1_1IRenderComponent" kind="class" language="C++" prot="public">
     <compoundname>SR_GTYPES_NS::IRenderComponent</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1Component" prot="public" virt="non-virtual">SR_UTILS_NS::Component</basecompoundref>
@@ -7,7 +7,6 @@
     <derivedcompoundref refid="classSR__GRAPH__NS_1_1ILightComponent" prot="public" virt="non-virtual">SR_GRAPH_NS::ILightComponent</derivedcompoundref>
     <derivedcompoundref refid="classSR__GRAPH__UI__NS_1_1Gizmo" prot="public" virt="non-virtual">SR_GRAPH_UI_NS::Gizmo</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Mesh" prot="public" virt="non-virtual">SR_GTYPES_NS::Mesh</derivedcompoundref>
-    <includes refid="IRenderComponent_8h" local="no">IRenderComponent.h</includes>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1IRenderComponent_1a50b0e327e015ef46a6cd9be3ea5a2819" prot="private" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1Component" kindref="compound">SR_UTILS_NS::Component</ref></type>
@@ -148,7 +147,6 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>@hidden </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
@@ -293,67 +291,47 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
-        <label>SR_HTYPES_NS::SharedPtr&lt; SceneObject &gt;</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>SR_HTYPES_NS::SharedPtrBase</label>
-        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
-        <childnode refid="6" relation="usage">
-          <edgelabel>m_data</edgelabel>
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
-        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
-      </node>
       <node id="2">
         <label>SR_UTILS_NS::Component</label>
         <link refid="classSR__UTILS__NS_1_1Component"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
         <childnode refid="4" relation="usage">
-          <edgelabel>m_sceneObject</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
           <edgelabel>m_parent</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="5" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>m_properties</edgelabel>
         </childnode>
       </node>
-      <node id="7">
+      <node id="4">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="8">
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="10">
+      <node id="7">
         <label>SR_UTILS_NS::Property</label>
         <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="6">
         <label>SR_UTILS_NS::PropertyContainer</label>
         <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="5">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

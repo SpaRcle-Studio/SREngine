@@ -30,7 +30,6 @@
 | Type | Name |
 | ---: | :--- |
 | struct | [**EnumSelector**](structCodegen_1_1EnumSelector.md) &lt;typename EnumType&gt;<br> |
-| struct | [**SRClassMetaTemplate**](structCodegen_1_1SRClassMetaTemplate.md) &lt;class T&gt;<br> |
 
 
 
@@ -57,8 +56,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  size\_t | [**GetEnumItemsCount**](#function-getenumitemscount) (T) noexcept<br> |
-|  SR\_UTILS\_NS::EnumVariant | [**GetEnumVariant**](#function-getenumvariant) (T) noexcept<br> |
+|  constexpr size\_t | [**GetEnumItemsCount**](#function-getenumitemscount) (T) noexcept<br> |
+|  constexpr SR\_UTILS\_NS::EnumVariant | [**GetEnumVariant**](#function-getenumvariant) (T) noexcept<br> |
 
 
 
@@ -96,7 +95,7 @@
 
 ```C++
 template<typename T>
-size_t Codegen::GetEnumItemsCount (
+constexpr size_t Codegen::GetEnumItemsCount (
     T
 ) noexcept
 ```
@@ -112,7 +111,7 @@ size_t Codegen::GetEnumItemsCount (
 
 ```C++
 template<typename T>
-SR_UTILS_NS::EnumVariant Codegen::GetEnumVariant (
+constexpr SR_UTILS_NS::EnumVariant Codegen::GetEnumVariant (
     T
 ) noexcept
 ```

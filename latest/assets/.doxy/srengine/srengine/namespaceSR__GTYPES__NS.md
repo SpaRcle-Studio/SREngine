@@ -34,7 +34,7 @@
 | class | [**DebugWireframeMesh**](classSR__GTYPES__NS_1_1DebugWireframeMesh.md) <br> |
 | class | [**Font**](classSR__GTYPES__NS_1_1Font.md) <br> |
 | class | [**Framebuffer**](classSR__GTYPES__NS_1_1Framebuffer.md) <br> |
-| class | [**IRenderComponent**](classSR__GTYPES__NS_1_1IRenderComponent.md) <br>_@hidden_  |
+| class | [**IRenderComponent**](classSR__GTYPES__NS_1_1IRenderComponent.md) <br> |
 | class | [**IndexedMesh**](classSR__GTYPES__NS_1_1IndexedMesh.md) <br> |
 | class | [**Mesh**](classSR__GTYPES__NS_1_1Mesh.md) <br> |
 | class | [**Mesh3D**](classSR__GTYPES__NS_1_1Mesh3D.md) <br> |

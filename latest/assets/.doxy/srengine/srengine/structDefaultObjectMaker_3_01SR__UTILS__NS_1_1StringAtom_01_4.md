@@ -39,8 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  bool | [**value**](#variable-value-12)   = `true`<br> |
-|  bool | [**value**](#variable-value-22)  <br> |
+|  constexpr bool | [**value**](#variable-value)   = `true`<br> |
 
 
 
@@ -61,8 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**MakeDefault**](#function-makedefault-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & v) <br> |
-|  void | [**MakeDefault**](#function-makedefault-22) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &) <br> |
+|  void | [**MakeDefault**](#function-makedefault) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & v) <br> |
 
 
 
@@ -94,23 +92,10 @@
 
 
 
-### variable value [1/2]
+### variable value 
 
 ```C++
-bool DefaultObjectMaker< SR_UTILS_NS::StringAtom >::value;
-```
-
-
-
-
-<hr>
-
-
-
-### variable value [2/2]
-
-```C++
-bool DefaultObjectMaker< SR_UTILS_NS::StringAtom, void >::value;
+constexpr bool DefaultObjectMaker< SR_UTILS_NS::StringAtom >::value;
 ```
 
 
@@ -122,26 +107,11 @@ bool DefaultObjectMaker< SR_UTILS_NS::StringAtom, void >::value;
 
 
 
-### function MakeDefault [1/2]
+### function MakeDefault 
 
 ```C++
 static inline void DefaultObjectMaker< SR_UTILS_NS::StringAtom >::MakeDefault (
     SR_UTILS_NS::StringAtom & v
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function MakeDefault [2/2]
-
-```C++
-static inline void DefaultObjectMaker< SR_UTILS_NS::StringAtom >::MakeDefault (
-    SR_UTILS_NS::StringAtom &
 ) 
 ```
 

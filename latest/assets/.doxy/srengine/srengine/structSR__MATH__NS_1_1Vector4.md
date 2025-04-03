@@ -17,6 +17,7 @@
 
 
 
+Inherited by the following classes: [SR\_MATH\_NS::FColor](classSR__MATH__NS_1_1FColor.md)
 
 
 
@@ -111,10 +112,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitW**](#function-unitw) () <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
-|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitW**](#function-unitw) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
+|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
 
 
 
@@ -790,7 +791,7 @@ inline SR_FORCE_INLINE T & SR_MATH_NS::Vector4::operator[] (
 ### function UnitW 
 
 ```C++
-static inline Vector4 < T > SR_MATH_NS::Vector4::UnitW () 
+static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitW () 
 ```
 
 
@@ -803,7 +804,7 @@ static inline Vector4 < T > SR_MATH_NS::Vector4::UnitW ()
 ### function UnitX 
 
 ```C++
-static inline Vector4 < T > SR_MATH_NS::Vector4::UnitX () 
+static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitX () 
 ```
 
 
@@ -816,7 +817,7 @@ static inline Vector4 < T > SR_MATH_NS::Vector4::UnitX ()
 ### function UnitY 
 
 ```C++
-static inline Vector4 < T > SR_MATH_NS::Vector4::UnitY () 
+static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitY () 
 ```
 
 
@@ -829,7 +830,7 @@ static inline Vector4 < T > SR_MATH_NS::Vector4::UnitY ()
 ### function UnitZ 
 
 ```C++
-static inline Vector4 < T > SR_MATH_NS::Vector4::UnitZ () 
+static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitZ () 
 ```
 
 

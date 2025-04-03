@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="ShaderVariables_8h" kind="file" language="C++">
     <compoundname>ShaderVariables.h</compoundname>
     <includes refid="ShaderType_8h" local="no">Graphics/SRSL/ShaderType.h</includes>
@@ -1053,7 +1053,6 @@
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>SR_SRSL_MAIN_OUT_LAYER<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;COLOR_INDEX_0&quot;</highlight><highlight class="normal">;<sp/></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_INLINE_STATIC<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::set&lt;std::string&gt;<sp/>SR_SRSL_DEFAULT_OUT_LAYERS<sp/>=<sp/>{<sp/></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="stringliteral">&quot;COLOR_INDEX_0&quot;</highlight><highlight class="normal"><sp/>},</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="stringliteral">&quot;COLOR_INDEX_1&quot;</highlight><highlight class="normal"><sp/>},</highlight></codeline>
