@@ -17,7 +17,7 @@
 === "Fedora Dependencies."
 
     ```bash
-    dnf install cmake git ninja gcc gcc-c++ libX11-devel libXext-devel libXrandr-devel libXrender-devel libXinerama-devel libXcursor-devel gtk3-devel vulkan-devel vulkan-loader xorg-x11-server-Xwayland xcb-util-cursor-devel xcb-util-wm-devel libxcb-devel xcb-util-keysyms-devel python-numpy python-clang binutils-devel xcb-util-devel openal-devel
+    dnf install cmake git ninja-build gcc gcc-c++ libX11-devel libXext-devel libXrandr-devel libXrender-devel libXinerama-devel libXcursor-devel gtk3-devel vulkan-devel vulkan-loader xorg-x11-server-Xwayland xcb-util-cursor-devel xcb-util-wm-devel libxcb-devel xcb-util-keysyms-devel python-numpy python-clang binutils-devel xcb-util-devel openal-devel
     ```
 
 ## Building with Ninja.
