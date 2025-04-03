@@ -35,6 +35,9 @@ jobs:
       - name: Clone the submodules
         run: |
           git submodule update --init --recursive --depth 1 --jobs 4
+          git checkout gh-pages 
+          git pull -r --autostash 
+          git checkout dev
 
       - name: Configure Git Credentials
         run: |
