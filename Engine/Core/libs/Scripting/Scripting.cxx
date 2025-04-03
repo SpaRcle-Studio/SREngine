@@ -8,6 +8,9 @@
 #include "src/Scripting/Base/Script.cpp"
 #include "src/Scripting/Base/Behaviour.cpp"
 
+#include "src/Scripting/Cpp/ScriptSystem.cpp"
+#include "src/Scripting/Cpp/CppCompiler.cpp"
+
 //#include "src/Scripting/Impl/EvoScriptImpl.cpp"
 //#include "src/Scripting/Impl/EvoCompiler.cpp"
 //#include "src/Scripting/Impl/EvoBehaviour.cpp"

@@ -14,6 +14,8 @@
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
+#include <Scripting/Cpp/CppCompiler.h>
+
 #include <CoreAPI.h>
 #include <Codegen/SpaRcleAPI.generated.hpp>
 
@@ -66,6 +68,9 @@ int main(int argc, char** argv) {
             SR_ERROR("Failed to initialize application!");
             code = 3;
         }
+
+        SR_SCRIPTING_NS::CppCompiler::Ptr pCompiler = new SR_SCRIPTING_NS::CppCompiler();
+        pCompiler->Init();
 
         SpaRcleAPI::SpaRcleAPIRegister::Instance().RegisterAll();
         SpaRcleAPI::CoreAPI::Instance().Init(SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions());

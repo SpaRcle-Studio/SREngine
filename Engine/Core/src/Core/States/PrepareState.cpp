@@ -51,7 +51,7 @@ namespace SR_CORE_NS {
 
         const auto dt = GetContext().GetValue<float_t>("DeltaTime");
 
-        SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(dt);
+        SR_UTILS_NS::ResourceManager::Instance().PullWatchers();
 
         if (pEngine->IsNeedReloadResources()) {
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);

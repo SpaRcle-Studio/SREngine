@@ -266,6 +266,11 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Close() : closing game engine...");
 
+        if (m_editor && m_editor->Enabled()) {
+            SR_SYSTEM_LOG("Engine::Close() : saving editor gui...");
+            m_editor->Save();
+        }
+
         m_isRun = false;
 
         if (m_threadsWorker) {
@@ -279,7 +284,6 @@ namespace SR_CORE_NS {
 
         if (m_editor && m_editor->Enabled()) {
             SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
-            m_editor->Save();
             m_editor->Enable(false);
             m_input->Unregister(m_editor);
         }
