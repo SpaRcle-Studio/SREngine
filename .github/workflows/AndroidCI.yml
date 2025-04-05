@@ -36,14 +36,17 @@ jobs:
 
       - if: inputs.buildRelease == 'true'
         name: Building Release.
-        shell: bash
+        shell: powershell
         working-directory: ${{github.workspace}}
         run: |
-          echo "releaseSuccessful=false" >> "$GITHUB_ENV"
+          echo "releaseSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           cd Android
           echo "Install android SDK..."
           dir
           ./install_android_sdk.bat
           echo "Run build..."
-          ./build.bat
-          echo "releaseSuccessful=true" >> "$GITHUB_ENV"
+          $output = ./build.bat
+          $lastLine = $output[-1]
+          if ($lastLine -ne "BUILD FAILED") {
+            echo "releaseSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          }
