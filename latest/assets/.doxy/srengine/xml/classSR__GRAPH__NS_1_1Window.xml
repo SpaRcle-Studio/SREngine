@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="31" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1a7559d1c9b7ffe82295bda4894a517ed9" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Window" kindref="compound">Window</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="31" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="32" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1a89638d41a2b71259a1105ab7fc63544b" prot="public" static="no">
         <type>void *</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="32" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1aba1d0c2809db4ba7a89ec24febafb863" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(double_t xOffset, double_t yOffset)&gt;</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="34" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1aad6e9f0a012d94382d77d9ee110ce304" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(bool)&gt;</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="34" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="35" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1a2992f0f791479ec6f391e21db7d562bb" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(void)&gt;</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="35" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="36" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1a6ddfd94a4af285c4ae0067b1dff267c8" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(void)&gt;</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="36" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="37" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1a04a9fb954a34af4b3e83843535f52584" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SafePtr" kindref="compound">SR_HTYPES_NS::SafePtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContext</ref> &gt;</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="37" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="38" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Window_1a6308978acfc416057f8fea98d065852f" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(const SR_MATH_NS::UVector2 &amp;)&gt;</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="38" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="39" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="81" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="81" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="82" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Window_1a131aa727fc7da55899a36a6996c3898e" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="82" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="83" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Window_1a32ebc8ea5879e2f22c1ae1a19f4f044b" prot="private" static="no" mutable="no">
         <type>CloseCallback</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="84" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="85" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Window_1a352d2a3c31b8db9cebd749fab177a2a7" prot="private" static="no" mutable="no">
         <type>DrawCallback</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="85" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="86" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Window_1ad9146ea1b8a64dda0466422d27eb684a" prot="private" static="no" mutable="no">
         <type>ScrollCallback</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="86" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="87" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Window_1ad37658714ab884662d6da65e09a4fc1b" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="88" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="88" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="89" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -231,12 +231,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="40" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="41" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1aea8978a38680ff857845c9e879d8f58a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a5342f3e70b453731f51f4eb4ae0b2ad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_NS::Window::~Window</definition>
-        <argsstring>()</argsstring>
+        <argsstring>() override</argsstring>
         <name>~Window</name>
         <qualifiedname>SR_GRAPH_NS::Window::~Window</qualifiedname>
         <briefdescription>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="41" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1ab473adb8d653616b048a67b55f53a7e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="44" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1aa56b323f28af3637ba53ba90b381c22b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="46" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a804d57f4ce2bfa02977b2398598ca20f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -295,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="47" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a5c03bd9e0bcf983a36b7c6705337be92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="49" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1aa2d5a7664f22d643ba5ab776466cc7ce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::UVector2</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="53" column="43"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="54" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a7db36e22fed9fbd3c997452f216f9897" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="54" column="43"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="55" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a617b2d1998c16a5938802a5385e31b44" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="55" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="56" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1ad941d1c19bfced92bb270b2101173545" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="56" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="57" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a32662725529a69d0fd018ca1a8a4e66f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="57" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="58" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1af51eb0467156e136fb780a8e8f113deb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD WindowHandle</type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="58" column="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="59" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a6d15bad712cb09164e6339af05ea0adb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -407,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="59" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="60" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a7ccff6cbdc6a30720cb5f6b948ce612f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -421,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="60" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="61" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a9fa0342e181c4d22941835adbf06520f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="61" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="62" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a5ad6a969d3d57291935a0d1518535fd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="63" column="43"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="64" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1afc0a7c91c6bc5c43dd294e4842872188" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::IVector2</type>
@@ -471,7 +471,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="64" column="43"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="65" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1acc06769dc1006cc96a5ac7c634ef510f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="66" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a069232dbda466894fad998f2f03e2176" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -507,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="67" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1ab82b7ec1cd0be9f20cdcae1970b883ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -525,7 +525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="68" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="69" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a7cab14e5d9abcb987075957fdce07ba9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -543,7 +543,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="69" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="70" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1acd1ffac02b5e4959b7a825727fd370cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -561,7 +561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="70" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1a28a7d08f681802351a38e7a8a668c4b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -579,7 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="72" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="73" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1ab84cba3ea60b64bed4e62cc3716d4fb5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1BasicWindowImpl" kindref="compound">BasicWindowImpl</ref> *</type>
@@ -593,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="74" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="75" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="75" bodyend="75"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Window_1ac468e68e17f7e42152209886bcd490d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -612,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="76" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="76" bodyend="78"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="77" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="77" bodyend="79"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -662,7 +662,7 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="28" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="28" bodyend="90"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" line="29" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/Window.h" bodystart="29" bodyend="91"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>AutoFree</name></member>
@@ -746,7 +746,7 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1a89638d41a2b71259a1105ab7fc63544b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>WindowHandle</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtrBase</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Window_1aea8978a38680ff857845c9e879d8f58a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~Window</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Window_1a5342f3e70b453731f51f4eb4ae0b2ad4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~Window</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

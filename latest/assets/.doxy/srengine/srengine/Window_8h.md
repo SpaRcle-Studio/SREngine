@@ -15,6 +15,7 @@
 * `#include <Utils/Types/Function.h>`
 * `#include <Utils/Math/Vector2.h>`
 * `#include <Utils/Types/SafePointer.h>`
+* `#include <Utils/Types/SharedPtr.h>`
 * `#include <Graphics/Window/BasicWindowImpl.h>`
 
 

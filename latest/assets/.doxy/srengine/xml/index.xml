@@ -13037,7 +13037,7 @@
     <member refid="classSR__GRAPH__NS_1_1Window_1ad9146ea1b8a64dda0466422d27eb684a" kind="variable"><name>m_scrollCallback</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1ad37658714ab884662d6da65e09a4fc1b" kind="variable"><name>m_windowImpl</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1afbd9febd591d4946750a0643dd850874" kind="function"><name>Window</name></member>
-    <member refid="classSR__GRAPH__NS_1_1Window_1aea8978a38680ff857845c9e879d8f58a" kind="function"><name>~Window</name></member>
+    <member refid="classSR__GRAPH__NS_1_1Window_1a5342f3e70b453731f51f4eb4ae0b2ad4" kind="function"><name>~Window</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1ab473adb8d653616b048a67b55f53a7e9" kind="function"><name>Initialize</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1aa56b323f28af3637ba53ba90b381c22b" kind="function"><name>Open</name></member>
     <member refid="classSR__GRAPH__NS_1_1Window_1a804d57f4ce2bfa02977b2398598ca20f" kind="function"><name>Close</name></member>

@@ -20,6 +20,7 @@
 #include <Utils/Types/Function.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
 
 #include <Graphics/Window/BasicWindowImpl.h>
 
@@ -48,7 +49,7 @@ namespace SR_GRAPH_NS {
         using ResizeCallback = SR_HTYPES_NS::Function<void(const SR_MATH_NS::UVector2&)>;
     public:
         Window();
-        ~Window();
+        ~Window() override;
 
     public:
         bool Initialize(const std::string& name, const SR_MATH_NS::UVector2& size);

@@ -137,7 +137,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  void | [**SetResizeCallback**](#function-setresizecallback) (const ResizeCallback & callback) <br> |
 |  void | [**SetScrollCallback**](#function-setscrollcallback) (const ScrollCallback & callback) <br> |
 |   | [**Window**](#function-window) () <br> |
-|   | [**~Window**](#function-window) () <br> |
+|   | [**~Window**](#function-window) () override<br> |
 
 
 ## Public Functions inherited from SR_HTYPES_NS::SharedPtr
@@ -750,7 +750,7 @@ SR_GRAPH_NS::Window::Window ()
 ### function ~Window 
 
 ```C++
-SR_GRAPH_NS::Window::~Window () 
+SR_GRAPH_NS::Window::~Window () override
 ```
 
 
