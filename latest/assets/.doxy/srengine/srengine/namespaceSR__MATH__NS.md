@@ -144,9 +144,6 @@
 |  double\_t | [**SNoise**](#function-snoise) (double\_t x, double\_t y, double\_t z, double\_t t) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (SizeMetric, uint8\_t, Px, Percent) <br> |
 |   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (Axis, uint64\_t, None=0, X=1&lt;&lt; 0, Y=1&lt;&lt; 1, Z=1&lt;&lt; 2, XY=X\|Y, XZ=X\|Z, YZ=Y\|Z, XYZ=X\|Y\|Z) <br> |
-|  SR\_FORCE\_INLINE uint8\_t | [**TableIndex2D**](#function-tableindex2d) (int32\_t ix, int32\_t iy) <br> |
-|  SR\_FORCE\_INLINE uint8\_t | [**TableIndex3D**](#function-tableindex3d) (int32\_t ix, int32\_t iy, int32\_t iz) <br> |
-|  SR\_FORCE\_INLINE uint8\_t | [**TableIndex4D**](#function-tableindex4d) (int32\_t ix, int32\_t iy, int32\_t iz, int32\_t it) <br> |
 
 
 ## Public Static Functions
@@ -173,6 +170,9 @@
 |  SR\_FORCE\_INLINE double\_t | [**Lerp**](#function-lerp) (double\_t t, double\_t a, double\_t b) <br> |
 |  constexpr uint32\_t | [**RGBToHEX**](#function-rgbtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
 |  SR\_FORCE\_INLINE Unit | [**Sign**](#function-sign) (Unit value) <br> |
+|  uint8\_t | [**TableIndex2D**](#function-tableindex2d) (int32\_t ix, int32\_t iy) <br> |
+|  uint8\_t | [**TableIndex3D**](#function-tableindex3d) (int32\_t ix, int32\_t iy, int32\_t iz) <br> |
+|  uint8\_t | [**TableIndex4D**](#function-tableindex4d) (int32\_t ix, int32\_t iy, int32\_t iz, int32\_t it) <br> |
 
 
 
@@ -1064,57 +1064,6 @@ SR_MATH_NS::SR_ENUM_NS_STRUCT_T (
 
 
 <hr>
-
-
-
-### function TableIndex2D 
-
-```C++
-SR_FORCE_INLINE uint8_t SR_MATH_NS::TableIndex2D (
-    int32_t ix,
-    int32_t iy
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function TableIndex3D 
-
-```C++
-SR_FORCE_INLINE uint8_t SR_MATH_NS::TableIndex3D (
-    int32_t ix,
-    int32_t iy,
-    int32_t iz
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function TableIndex4D 
-
-```C++
-SR_FORCE_INLINE uint8_t SR_MATH_NS::TableIndex4D (
-    int32_t ix,
-    int32_t iy,
-    int32_t iz,
-    int32_t it
-) 
-```
-
-
-
-
-<hr>
 ## Public Static Functions Documentation
 
 
@@ -1433,6 +1382,57 @@ static constexpr uint32_t SR_MATH_NS::RGBToHEX (
 ```C++
 static SR_FORCE_INLINE Unit SR_MATH_NS::Sign (
     Unit value
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function TableIndex2D 
+
+```C++
+static uint8_t SR_MATH_NS::TableIndex2D (
+    int32_t ix,
+    int32_t iy
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function TableIndex3D 
+
+```C++
+static uint8_t SR_MATH_NS::TableIndex3D (
+    int32_t ix,
+    int32_t iy,
+    int32_t iz
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function TableIndex4D 
+
+```C++
+static uint8_t SR_MATH_NS::TableIndex4D (
+    int32_t ix,
+    int32_t iy,
+    int32_t iz,
+    int32_t it
 ) 
 ```
 

@@ -20,15 +20,15 @@
 #define SR_NOISE_TABLE_MASK 0xff
 
 namespace SR_MATH_NS {
-    SR_FORCE_INLINE uint8_t TableIndex2D(int32_t ix, int32_t iy) {
+    static uint8_t TableIndex2D(int32_t ix, int32_t iy) {
         return NoiseTable::perm[(ix + NoiseTable::perm[iy & SR_NOISE_TABLE_MASK]) & SR_NOISE_TABLE_MASK];
     }
 
-    SR_FORCE_INLINE uint8_t TableIndex3D(int32_t ix, int32_t iy, int32_t iz) {
+    static uint8_t TableIndex3D(int32_t ix, int32_t iy, int32_t iz) {
         return NoiseTable::perm[(ix + NoiseTable::perm[(iy + NoiseTable::perm[iz & SR_NOISE_TABLE_MASK]) & SR_NOISE_TABLE_MASK]) & SR_NOISE_TABLE_MASK];
     }
 
-    SR_FORCE_INLINE uint8_t TableIndex4D(int32_t ix, int32_t iy, int32_t iz, int32_t it) {
+    static uint8_t TableIndex4D(int32_t ix, int32_t iy, int32_t iz, int32_t it) {
         return NoiseTable::perm[(it + NoiseTable::perm[(ix + NoiseTable::perm[(iy + NoiseTable::perm[iz & SR_NOISE_TABLE_MASK]) & SR_NOISE_TABLE_MASK]) & SR_NOISE_TABLE_MASK]) & SR_NOISE_TABLE_MASK];
     }
 

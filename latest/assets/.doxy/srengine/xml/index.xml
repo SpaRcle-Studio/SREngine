@@ -13596,9 +13596,9 @@
     <member refid="Matrix4x4Utils_8h_1a3e60fc1e3eab9cd1636f460a0afa5294" kind="function"><name>GLMMultiplyMat4x4</name></member>
     <member refid="Matrix4x4Utils_8h_1acfbe00e5483ecd634fe8a5f89aa2f6a5" kind="function"><name>GLMMultiplyMat4x4</name></member>
     <member refid="Matrix4x4Utils_8h_1ab0862f51c1ed658154fe370aede89184" kind="function"><name>GLMRotateMat4x4</name></member>
-    <member refid="Noise_8h_1aa20bb04403fd6c1d71d6c0978c67e4de" kind="function"><name>TableIndex2D</name></member>
-    <member refid="Noise_8h_1af883f3ef1593bd5a949f8c3c74f87583" kind="function"><name>TableIndex3D</name></member>
-    <member refid="Noise_8h_1aada41280296fb257c6a2693133311922" kind="function"><name>TableIndex4D</name></member>
+    <member refid="Noise_8h_1a8a925a10a3f2bd3498867acad2ebfccc" kind="function"><name>TableIndex2D</name></member>
+    <member refid="Noise_8h_1a315dd3b56509407a4ec72f1322b7a65e" kind="function"><name>TableIndex3D</name></member>
+    <member refid="Noise_8h_1a72e7bbd7b7d42b0e96cef5a2a1d10283" kind="function"><name>TableIndex4D</name></member>
     <member refid="Noise_8h_1a8d142100ad7c0c2748eea6c3a6a8431c" kind="function"><name>NoiseTemplate</name></member>
     <member refid="Noise_8h_1a6dce9c64fcbeda90684a47a448d33dee" kind="function"><name>NoiseTemplate</name></member>
     <member refid="Noise_8h_1a8ddd9ae3c98b8f1390c6e61b82d1f1d5" kind="function"><name>NoiseTemplate</name></member>

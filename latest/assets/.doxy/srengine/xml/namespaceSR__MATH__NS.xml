@@ -1279,9 +1279,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" line="159" column="39" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Matrix4x4Utils.h" bodystart="159" bodyend="194"/>
       </memberdef>
-      <memberdef kind="function" id="Noise_8h_1aa20bb04403fd6c1d71d6c0978c67e4de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_FORCE_INLINE uint8_t</type>
-        <definition>SR_FORCE_INLINE uint8_t SR_MATH_NS::TableIndex2D</definition>
+      <memberdef kind="function" id="Noise_8h_1a8a925a10a3f2bd3498867acad2ebfccc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t SR_MATH_NS::TableIndex2D</definition>
         <argsstring>(int32_t ix, int32_t iy)</argsstring>
         <name>TableIndex2D</name>
         <qualifiedname>SR_MATH_NS::TableIndex2D</qualifiedname>
@@ -1299,11 +1299,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="15" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="15" bodyend="17"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="15" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="15" bodyend="17"/>
       </memberdef>
-      <memberdef kind="function" id="Noise_8h_1af883f3ef1593bd5a949f8c3c74f87583" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_FORCE_INLINE uint8_t</type>
-        <definition>SR_FORCE_INLINE uint8_t SR_MATH_NS::TableIndex3D</definition>
+      <memberdef kind="function" id="Noise_8h_1a315dd3b56509407a4ec72f1322b7a65e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t SR_MATH_NS::TableIndex3D</definition>
         <argsstring>(int32_t ix, int32_t iy, int32_t iz)</argsstring>
         <name>TableIndex3D</name>
         <qualifiedname>SR_MATH_NS::TableIndex3D</qualifiedname>
@@ -1325,11 +1325,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="19" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="19" bodyend="21"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="19" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="19" bodyend="21"/>
       </memberdef>
-      <memberdef kind="function" id="Noise_8h_1aada41280296fb257c6a2693133311922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_FORCE_INLINE uint8_t</type>
-        <definition>SR_FORCE_INLINE uint8_t SR_MATH_NS::TableIndex4D</definition>
+      <memberdef kind="function" id="Noise_8h_1a72e7bbd7b7d42b0e96cef5a2a1d10283" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>static uint8_t SR_MATH_NS::TableIndex4D</definition>
         <argsstring>(int32_t ix, int32_t iy, int32_t iz, int32_t it)</argsstring>
         <name>TableIndex4D</name>
         <qualifiedname>SR_MATH_NS::TableIndex4D</qualifiedname>
@@ -1355,7 +1355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="23" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="23" bodyend="25"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" line="23" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Noise.h" bodystart="23" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="Noise_8h_1a8d142100ad7c0c2748eea6c3a6a8431c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
