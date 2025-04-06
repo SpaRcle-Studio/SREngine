@@ -47,6 +47,6 @@ jobs:
           echo "Run build..."
           $output = ./build.bat
           $lastLine = $output[-1]
-          if ($lastLine -notmatch "BUILD FAILED") {
+          if ($lastLine -notmatch '(?i)BUILD FAILED') {
             echo "releaseSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
