@@ -165,7 +165,7 @@
     #define SR_FORCE_INLINE SR_INLINE
 #elif defined(SR_GCC)
     #define SR_FASTCALL
-    #define SR_FORCE_INLINE SR_INLINE
+    #define SR_FORCE_INLINE __attribute__((always_inline))
 #else
     #define SR_FASTCALL __fastcall
     #define SR_FORCE_INLINE __forceinline
