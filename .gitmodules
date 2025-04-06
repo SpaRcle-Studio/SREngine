@@ -10,9 +10,6 @@
 [submodule "Engine/Core/libs/Audio/libs/minimp3"]
 	path = Engine/Core/libs/Audio/libs/minimp3
 	url = https://github.com/lieff/minimp3
-[submodule "Engine/Core/libs/Audio/libs/libmodplug"]
-	path = Engine/Core/libs/Audio/libs/libmodplug
-	url = https://github.com/Konstanty/libmodplug
 [submodule "Engine/Core/libs/Physics/libs/bullet3"]
 	path = Engine/Core/libs/Physics/libs/bullet3
 	url = https://github.com/bulletphysics/bullet3
