@@ -2,6 +2,6 @@
 // Created by Monika on 24.05.2022.
 //
 
-#include "CharacterController.h"
+/*#include "CharacterController.h"
 
-REGISTER_BEHAVIOUR(CharacterController)
+REGISTER_BEHAVIOUR(CharacterController)*/

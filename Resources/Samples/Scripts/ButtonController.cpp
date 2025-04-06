@@ -2,7 +2,7 @@
 // Created by innerviewer on 2024-04-28.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 
 #include <Libraries/Debug.h>
@@ -29,4 +29,4 @@ public:
     }
 };
 
-REGISTER_BEHAVIOUR(ButtonController)
+REGISTER_BEHAVIOUR(ButtonController)*/

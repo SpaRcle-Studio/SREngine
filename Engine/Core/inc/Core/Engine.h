@@ -10,6 +10,8 @@
 
 #include <Graphics/Window/Window.h>
 
+#include <Scripting/Cpp/ScriptSystem.h>
+
 #include <Utils/Events/EventManager.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Types/Timer.h>
@@ -129,7 +131,8 @@ namespace SR_CORE_NS {
         float_t m_speed = 1.f;
         SR_UTILS_NS::TimePointType m_timeStart;
 
-        SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker = nullptr;
+        SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker;
+        SR_SCRIPTING_NS::ScriptSystem::Ptr m_scriptSystem;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;

@@ -2,7 +2,7 @@
 // Created by Monika on 14.07.2024.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 #include <Libraries/Math/Quaternion.h>
 
@@ -145,4 +145,4 @@ public:
     }
 };
 
-REGISTER_BEHAVIOUR(Raptoid)
+REGISTER_BEHAVIOUR(Raptoid)*/

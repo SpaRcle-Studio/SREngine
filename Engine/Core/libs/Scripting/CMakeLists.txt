@@ -122,6 +122,7 @@ endif()
 
 target_include_directories(Scripting PUBLIC inc)
 target_include_directories(Scripting PUBLIC libs/EvoScript/Core/inc)
+target_include_directories(Scripting PUBLIC ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Engine/Core/libs/Utils/libs/tree-sitter/lib/include)
 target_include_directories(Scripting PUBLIC libs)
 
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)

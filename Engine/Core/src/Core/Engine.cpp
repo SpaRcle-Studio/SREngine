@@ -51,63 +51,6 @@ namespace SR_CORE_NS {
     bool Engine::Create() {
         SR_INFO("Engine::Create() : registering all resources...");
 
-        /*static SR_UTILS_NS::Subscription s;
-
-        s = SR_UTILS_NS::Input::Instance().Subscribe(SR_UTILS_NS::StringAtom("Down"), [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
-            if (msg.GetInt("KeyCode") == static_cast<uint64_t>(SR_UTILS_NS::KeyCode::L)) {
-                SR_UTILS_NS::SRASerializer serializer;
-                serializer.SetUseTabs(true);
-                SR_UTILS_NS::Serialization::Save(serializer, GetScene()->GetRootSceneObjects(), SR_UTILS_NS::SerializationId::Create("SceneObjects"));
-                const SR_UTILS_NS::Path path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("scene.sra");
-                if (!serializer.SaveToFile(path)) {
-                    SR_ERROR("Engine::Create() : failed to save scene!");
-                }
-
-                SR_UTILS_NS::SRADeserializer deserializer;
-                deserializer.SetUseTabs(true);
-                if (!deserializer.LoadFromFile(path)) {
-                    SR_ERROR("Engine::Create() : failed to load scene!");
-                }
-
-                for (auto&& pSceneObject : GetScene()->GetRootSceneObjects()) {
-                    pSceneObject->Destroy();
-                }
-
-                std::vector<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>> sceneObjects;
-                SR_UTILS_NS::Serialization::Load(deserializer, sceneObjects, SR_UTILS_NS::SerializationId::Create("SceneObjects"));
-
-                auto&& copyPath = path.ConcatExt("copy.sra");
-                if (!deserializer.SaveToFile(copyPath)) {
-                    SR_ERROR("Engine::Create() : failed to save scene!");
-                }
-
-                if (path.GetFileHash() == copyPath.GetFileHash()) {
-                    SR_ERROR("Engine::Create() : files are not equal!");
-                    std::vector<std::string> source = SR_UTILS_NS::FileSystem::ReadAllLines(path);
-                    std::vector<std::string> copy = SR_UTILS_NS::FileSystem::ReadAllLines(copyPath);
-
-                    if (source.size() != copy.size()) {
-                        SR_ERROR("Engine::Create() : lines count are not equal!");
-                    }
-                    else {
-                        for (size_t i = 0; i < source.size(); i++) {
-                            if (source[i] != copy[i]) {
-                                SR_ERROR("Engine::Create() : lines are not equal at " + std::to_string(i) + "!");
-                                SR_ERROR("Engine::Create() : source: " + source[i]);
-                                SR_ERROR("Engine::Create() : copy: " + copy[i]);
-                            }
-                        }
-                    }
-                }
-
-                for (auto&& pSceneObject : sceneObjects) {
-                    GetScene()->RegisterSceneObject(pSceneObject);
-                }
-
-                s.Reset();
-            }
-        });*/
-
         if (!Resources::RegisterResources(GetThis())) {
             SR_ERROR("Engine::Create() : failed to register engine resources!");
             return false;
@@ -164,6 +107,8 @@ namespace SR_CORE_NS {
         }
 
         m_threadsWorker->GetContext().SetPointer(this);
+
+        m_scriptSystem = SR_SCRIPTING_NS::ScriptSystem::MakeShared();
 
         m_timeStart = Clock::now();
 
@@ -234,6 +179,11 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::Input::Instance().ResetMouse();
         });
 
+        if (!m_scriptSystem->Init()) {
+            SR_ERROR("Engine::Init() : failed to initialize script system!");
+            return false;
+        }
+
         m_isInit = true;
 
         return true;
@@ -302,6 +252,8 @@ namespace SR_CORE_NS {
                 delete pWindow;
             });
         }
+
+        m_scriptSystem.AutoFree();
 
         //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
 

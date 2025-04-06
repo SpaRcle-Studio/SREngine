@@ -155,8 +155,10 @@ namespace SR_CORE_NS {
 
             fullPath = fullPath.Concat("Resources");
             if (fullPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-                m_resourcesPath = fullPath;
-                return true;
+                if (fullPath.Concat("Engine").Exists(SR_UTILS_NS::Path::Type::Folder)) { /// Check is folder correct
+                    m_resourcesPath = fullPath;
+                    return true;
+                }
             }
         }
 

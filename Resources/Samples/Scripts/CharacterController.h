@@ -2,7 +2,7 @@
 // Created by Monika on 24.05.2022.
 //
 
-#ifndef SR_ENGINE_CHARACTER_CONTROLLER_H
+/*#ifndef SR_ENGINE_CHARACTER_CONTROLLER_H
 #define SR_ENGINE_CHARACTER_CONTROLLER_H
 
 #include <Libraries/Utils/Allocator.h>
@@ -60,4 +60,4 @@ private:
 
 };
 
-#endif //SR_ENGINE_CHARACTER_CONTROLLER_H
+#endif //SR_ENGINE_CHARACTER_CONTROLLER_H*/

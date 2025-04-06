@@ -2,7 +2,7 @@
 // Created by Monika on 26.02.2023.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 #include <Libraries/Math/Quaternion.h>
 
@@ -128,13 +128,13 @@ public:
             chunkPtr->GetTransform()->SetTranslation(position);
             //chunkHolder->AddChild(chunkPtr);
 
-            /*chunkPtr = scene->Instance(name);
-
-
-            if (!chunkPtr->GetComponent("Mesh3D")) {
-                auto pCube = Mesh::Load("Engine/Models/cube.obj", MeshType::Static)[0];
-                chunkPtr->AddComponent(DynamicCastMeshToComponent(pCube));
-            }*/
+            //chunkPtr = scene->Instance(name);
+//
+//
+            //if (!chunkPtr->GetComponent("Mesh3D")) {
+            //    auto pCube = Mesh::Load("Engine/Models/cube.obj", MeshType::Static)[0];
+            //    chunkPtr->AddComponent(DynamicCastMeshToComponent(pCube));
+            //}
         }
     }
 
@@ -199,3 +199,4 @@ private:
 };
 
 REGISTER_BEHAVIOUR(WorldGenerator)
+*/

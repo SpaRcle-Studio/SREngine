@@ -36,3 +36,4 @@ Build
 **/GTAGS
 venv
 .venv
+/Resources/CMakeLists.txt

@@ -2,7 +2,7 @@
 // Created by Monika on 12.02.2023.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 #include <Libraries/Math/Quaternion.h>
 
@@ -60,9 +60,9 @@ public:
             auto&& q = Quaternion(rotate);
 
             if (std::vector<RaycastHit> hits = Raycast3D::Cast(transform->GetTranslation(), (q * FVector3(0, 0, 1)), 100, 5); !hits.empty()) {
-                /*for (int i = 0; i < hits.size(); i++){
-                    std::cout << "Ray (" << i + 1 << ") hits something. Distance = "  << hits[i].distance << "\t Total hits = " << hits.size() << std::endl;
-                }*/
+               //for (int i = 0; i < hits.size(); i++){
+               //    std::cout << "Ray (" << i + 1 << ") hits something. Distance = "  << hits[i].distance << "\t Total hits = " << hits.size() << std::endl;
+               //}
                 hit = hits[0];
                 std::cout << "Ray hits something. Distance = "  << hit.distance << std::endl;
             }
@@ -77,11 +77,10 @@ public:
             transform->Rotate(FVector3(0, drag.x / 10, 0));
         }
 
-/*        if (auto&& pRigidbody = (Rigidbody*)hit.pHandler) {
-            if (auto&& pGameObject = pRigidbody->GetGameObject()) {
-                std::cout << "HIT on GameObject: '" << pGameObject->GetName() << "'\n";
-            }
-        }*/
+      // if (auto&& pRigidbody = (Rigidbody*)hit.pHandler) {
+      //      if (auto&& pGameObject = pRigidbody->GetGameObject()) {
+      //          std::cout << "HIT on GameObject: '" << pGameObject->GetName() << "'\n";
+      //      }
     }
 
     void OnCollisionEnter(const CollisionData& data) override {
@@ -106,4 +105,4 @@ private:
 
 };
 
-REGISTER_BEHAVIOUR(CharacterMove)
+REGISTER_BEHAVIOUR(CharacterMove)*/

@@ -2,7 +2,7 @@
 // Created by Monika on 12.02.2023.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 #include <Libraries/Math/Quaternion.h>
 
@@ -25,4 +25,4 @@ public:
     }
 };
 
-REGISTER_BEHAVIOUR(CameraUpDownMove)
+REGISTER_BEHAVIOUR(CameraUpDownMove)*/

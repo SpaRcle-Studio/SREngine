@@ -102,3 +102,10 @@ set(CMAKE_EXE_LINKER_FLAGS_PROFILE "")
 set(CMAKE_EXE_LINKER_FLAGS_CHECKED "")
 
 add_subdirectory(Engine)
+
+if (EXISTS ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/CMakeLists.txt)
+    message(STATUS "SpaRcle Engine: adding Resources subdirectory")
+    add_subdirectory(${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources)
+else()
+    message(STATUS "SpaRcle Engine: Resources subdirectory not found")
+endif()

@@ -1,6 +1,7 @@
 #include <vector>
 #include <optional>
 #include <iostream>
+#include <cstdint>
 
 namespace SpaRcleAPI {
     #include "ScriptHandle.h"

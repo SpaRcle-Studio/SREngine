@@ -2,7 +2,7 @@
 // Created by Monika on 26.02.2023.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 #include <Libraries/Math/Quaternion.h>
 
@@ -241,3 +241,4 @@ private:
 };
 
 REGISTER_BEHAVIOUR(Chunk)
+*/

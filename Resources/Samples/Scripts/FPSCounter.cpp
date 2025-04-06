@@ -2,7 +2,7 @@
 // Created by Monika on 05.10.2023.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 
 #include <Libraries/Debug.h>
@@ -23,4 +23,4 @@ public:
     }
 };
 
-REGISTER_BEHAVIOUR(FPSCounter)
+REGISTER_BEHAVIOUR(FPSCounter)*/

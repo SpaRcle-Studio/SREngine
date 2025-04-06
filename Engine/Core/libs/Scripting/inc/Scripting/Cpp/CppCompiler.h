@@ -9,6 +9,15 @@
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
+    struct CppCompilerContext {
+        SR_UTILS_NS::StringAtom moduleName;
+        SR_UTILS_NS::Path outFolder;
+        std::vector<SR_UTILS_NS::Path> includePaths;
+        std::vector<SR_UTILS_NS::Path> sourceFiles;
+        bool isDebug = false;
+        bool isShared = false;
+    };
+
     class CppCompiler : public SR_HTYPES_NS::SharedPtr<CppCompiler> {
         using Super = SR_HTYPES_NS::SharedPtr<CppCompiler>;
     public:
@@ -22,6 +31,9 @@ namespace SR_SCRIPTING_NS {
     public:
         SR_NODISCARD bool Init();
         SR_NODISCARD bool IsCompilerAvailable() const;
+        SR_NODISCARD std::string GetCompilerVersion() const;
+        SR_NODISCARD bool Compile(const CppCompilerContext& context);
+        SR_NODISCARD std::string_view GetDynamicModuleExtension() const;
 
     private:
         bool InstallMinGW();

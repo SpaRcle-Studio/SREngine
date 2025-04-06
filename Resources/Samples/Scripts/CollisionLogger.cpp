@@ -2,7 +2,7 @@
 // Created by innerviewer on 21.01.2023.
 //
 
-#include <Libraries/Utils/Allocator.h>
+/*#include <Libraries/Utils/Allocator.h>
 #include <Libraries/Types/Behaviour.h>
 
 #include <Libraries/Debug.h>
@@ -33,3 +33,4 @@ public:
 };
 
 REGISTER_BEHAVIOUR(CollisionLogger)
+*/
