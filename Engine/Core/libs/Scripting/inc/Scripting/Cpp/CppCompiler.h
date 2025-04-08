@@ -18,6 +18,10 @@ namespace SR_SCRIPTING_NS {
         bool isShared = false;
     };
 
+    enum class CppCompilerType {
+        Unknown, MinGW, GCC, Clang, MSVC
+    };
+
     class CppCompiler : public SR_HTYPES_NS::SharedPtr<CppCompiler> {
         using Super = SR_HTYPES_NS::SharedPtr<CppCompiler>;
     public:
@@ -33,13 +37,16 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool IsCompilerAvailable() const;
         SR_NODISCARD std::string GetCompilerVersion() const;
         SR_NODISCARD bool Compile(const CppCompilerContext& context);
-        SR_NODISCARD std::string_view GetDynamicModuleExtension() const;
 
     private:
         bool InstallMinGW();
 
+        SR_NODISCARD SR_UTILS_NS::Path FindMSVCCompilerPath() const;
+
     private:
-        SR_UTILS_NS::Path m_gccPath;
+        CppCompilerType m_compilerType = CppCompilerType::Unknown;
+        SR_UTILS_NS::Path m_cachePath;
+        SR_UTILS_NS::Path m_compilerPath;
         bool m_isInitialized = false;
 
     };

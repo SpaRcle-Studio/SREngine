@@ -8,6 +8,7 @@
 #include "src/Scripting/Base/Script.cpp"
 #include "src/Scripting/Base/Behaviour.cpp"
 
+#include "src/Scripting/Cpp/ModuleManager.cpp"
 #include "src/Scripting/Cpp/ScriptSystem.cpp"
 #include "src/Scripting/Cpp/CppCompiler.cpp"
 #include "src/Scripting/Cpp/CodeGenerator.cpp"

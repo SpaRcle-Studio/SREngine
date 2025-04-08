@@ -10,11 +10,13 @@
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
+    class CppCompiler;
+
     struct CppFileMetadata {
 
     };
 
-    struct CppModule {
+    struct CppCodegenModule {
         bool isCompiled = false;
         SR_UTILS_NS::Path path;
         CppScriptModuleInfo moduleInfo;
@@ -38,8 +40,10 @@ namespace SR_SCRIPTING_NS {
         bool Init();
 
         SR_NODISCARD bool IsNeedRecompile() const;
-        SR_NODISCARD const std::vector<CppModule>& GetModules() const { return m_modules; }
-        SR_NODISCARD CppModule* GetModule(SR_UTILS_NS::StringAtom moduleName);
+        SR_NODISCARD const std::vector<CppCodegenModule>& GetModules() const { return m_modules; }
+        SR_NODISCARD CppCodegenModule* GetModule(SR_UTILS_NS::StringAtom moduleName);
+
+        void SetCompiler(CppCompiler* compiler) { m_compiler = compiler; }
 
         void ProcessChangedModules(const std::set<SR_UTILS_NS::Path>& changedModules);
         void ProcessChangedCodeFiles(const std::set<SR_UTILS_NS::Path>& changedFiles);
@@ -50,16 +54,18 @@ namespace SR_SCRIPTING_NS {
 
     private:
         void RegenerateCmake();
+        void GenerateModule(const CppCodegenModule& module);
 
         SR_NODISCARD CppFileMetadata ParseFile(const SR_UTILS_NS::Path& path) const;
 
         void OnModuleChanged(SR_UTILS_NS::StringAtom moduleName);
-        void InitModuleSources(CppModule& module);
+        void InitModuleSources(CppCodegenModule& module);
 
         SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
 
     private:
-        std::vector<CppModule> m_modules;
+        CppCompiler* m_compiler = nullptr;
+        std::vector<CppCodegenModule> m_modules;
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
 

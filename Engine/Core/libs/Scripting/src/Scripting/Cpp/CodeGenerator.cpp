@@ -14,7 +14,7 @@ extern "C" {
 namespace SR_SCRIPTING_NS {
     void parse_comment(TSNode node, const std::string& source_code) {
         /// extract comment text
-        /// its not work:
+        /// doesn't work:
         /// std::string comment_text = ts_node_string(node);
 
 
@@ -142,7 +142,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& filePath : updatedCppFiles) {
-            auto&& pModuleIt = std::ranges::find_if(m_modules, [&filePath](const CppModule& module) {
+            auto&& pModuleIt = std::ranges::find_if(m_modules, [&filePath](const CppCodegenModule& module) {
                 return filePath.IsSubPath(module.path.GetFolder());
             });
 
@@ -153,7 +153,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& filePath : deletedFiles) {
-            auto&& pModuleIt = std::ranges::find_if(m_modules, [&filePath](const CppModule& module) {
+            auto&& pModuleIt = std::ranges::find_if(m_modules, [&filePath](const CppCodegenModule& module) {
                 return filePath.IsSubPath(module.path.GetFolder());
             });
 
@@ -182,7 +182,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool CppCodeGenerator::IsNeedRecompile() const {
-        return std::ranges::any_of(m_modules, [](const CppModule& module) {
+        return std::ranges::any_of(m_modules, [](const CppCodegenModule& module) {
             return !module.isCompiled;
         });
     }
@@ -217,12 +217,12 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            auto&& pModuleIt = std::ranges::find_if(m_modules, [&modulePath](const CppModule& module) {
+            auto&& pModuleIt = std::ranges::find_if(m_modules, [&modulePath](const CppCodegenModule& module) {
                 return module.path == modulePath;
             });
 
             if (pModuleIt == m_modules.end()) {
-                CppModule module;
+                CppCodegenModule module;
                 module.path = modulePath;
                 module.moduleInfo = moduleInfo;
                 m_modules.emplace_back(module);
@@ -237,7 +237,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         for (auto&& modulePath : deletedModules) {
-            auto&& pModuleIt = std::ranges::find_if(m_modules, [&modulePath](const CppModule& module) {
+            auto&& pModuleIt = std::ranges::find_if(m_modules, [&modulePath](const CppCodegenModule& module) {
                 return module.path == modulePath;
             });
 
@@ -266,6 +266,14 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE;
 
         RegenerateCmake();
+
+        for (auto&& module : m_modules) {
+            if (module.codeFiles.empty()) {
+                continue;
+            }
+
+            GenerateModule(module);
+        }
     }
 
     void CppCodeGenerator::RegenerateCmake() {
@@ -280,14 +288,12 @@ namespace SR_SCRIPTING_NS {
         cmakeContent += "# Modules \n\n";
 
         for (auto&& module : m_modules) {
-            if (module.codeFiles.empty()) {
-                continue;
-            }
             cmakeContent += "add_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
-            for (auto&& file : module.codeFiles) {
-                cmakeContent += "\t" + file.first.ToString() + "\n";
-            }
+
+            cmakeContent += "\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+
             cmakeContent += ")\n";
+
             cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC SpaRcleAPI)\n\n"_format(module.moduleInfo.moduleName);
         }
 
@@ -296,9 +302,6 @@ namespace SR_SCRIPTING_NS {
         for (auto&& module : m_modules) {
             for (auto&& dependency : GetDependenciesRecursive(module.moduleInfo.moduleName)) {
                 if (auto&& pDependencyModule = GetModule(dependency)) {
-                    if (pDependencyModule->codeFiles.empty()) {
-                        continue;
-                    }
                     cmakeContent += "target_link_libraries(SCRIPT_MODULE_{} SCRIPT_MODULE_{})\n"_format(module.moduleInfo.moduleName, dependency);
                     cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, pDependencyModule->path.GetFolder());
                 }
@@ -358,7 +361,7 @@ namespace SR_SCRIPTING_NS {
         return dependencies;
     }
 
-    CppModule* CppCodeGenerator::GetModule(SpaRcle::Utils::StringAtom moduleName) {
+    CppCodegenModule* CppCodeGenerator::GetModule(SR_UTILS_NS::StringAtom moduleName) {
         for (auto&& module : m_modules) {
             if (module.moduleInfo.moduleName == moduleName) {
                 return &module;
@@ -367,7 +370,7 @@ namespace SR_SCRIPTING_NS {
         return nullptr;
     }
 
-    void CppCodeGenerator::InitModuleSources(CppModule& module) {
+    void CppCodeGenerator::InitModuleSources(CppCodegenModule& module) {
         SR_UTILS_NS::FileSystem::ForEachFileInFolder(module.path.GetFolder(), true, [&module](const SR_UTILS_NS::Path& filePath) {
             if (filePath.IsFile()) {
                 if (ScriptSystem::ALLOWED_CPP_EXTENSIONS.find(filePath.GetExtensionView()) != ScriptSystem::ALLOWED_CPP_EXTENSIONS.end()) {
@@ -375,5 +378,46 @@ namespace SR_SCRIPTING_NS {
                 }
             }
         });
+    }
+
+    void CppCodeGenerator::GenerateModule(const CppCodegenModule& module) {
+        auto&& codegenFile = m_cacheFolder.Concat("Scripts/Codegen/{}.cxx"_format(module.moduleInfo.moduleName));
+        if (!codegenFile.Create()) {
+            SR_ERROR("CppCodeGenerator::GenerateModule() : failed to create codegen path!\n\tPath: {}", codegenFile);
+            return;
+        }
+
+        if (codegenFile.IsFile()) {
+            SR_PLATFORM_NS::Delete(codegenFile);
+        }
+
+        std::ofstream codegenFileStream(codegenFile.ToString());
+        if (codegenFileStream.is_open()) {
+            codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
+            codegenFileStream << "#ifdef SR_SCRIPT_AOT_ENABLED\n";
+            codegenFileStream << "\t#define SR_SCRIPT_EXTERN_DLL\n";
+            codegenFileStream << "#else\n";
+            codegenFileStream << "\t#define SR_SCRIPT_EXTERN_DLL extern \"C\" __declspec(dllexport) \n";
+            codegenFileStream << "#endif\n\n";
+
+            codegenFileStream << "SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleName() { \n\treturn \"" << module.moduleInfo.moduleName.ToStringRef() << "\";\n}\n\n";
+
+            std::string compilerVersion = m_compiler->GetCompilerVersion();
+            compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\r", "");
+            compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\n", "\\n");
+
+            codegenFileStream << "SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleCompilerVersion() { return \"" << compilerVersion << "\"; }\n\n";
+
+            for (auto&& file : module.codeFiles) {
+                if (file.first.GetExtensionView() == "cxx" || file.first.GetExtensionView() == "cpp") {
+                    codegenFileStream << "#include \"" << file.first.ToStringRef() << "\"\n";
+                }
+            }
+
+            codegenFileStream.close();
+        }
+        else {
+            SR_ERROR("CppCodeGenerator::GenerateModule() : failed to open file!\n\tPath: {}", codegenFile);
+        }
     }
 }

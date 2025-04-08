@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
             code = 3;
         }
 
-        SpaRcleAPI::SpaRcleAPIRegister::Instance().RegisterAll();
+        /*SpaRcleAPI::SpaRcleAPIRegister::Instance().RegisterAll();
         SpaRcleAPI::CoreAPI::Instance().Init(SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions());
         for (uint64_t i = 0; i < SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions(); ++i) {
             SpaRcleAPI::CoreAPI::Instance().SetFunction(i, SpaRcleAPI::SpaRcleAPIRegister::Instance().GetFunction(i));
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
         SpaRcleAPI::CoreAPI::Instance().SetScriptContextHandle(handle);
 
         RunScriptTest();
-        SpaRcleAPI::MemoryLeakChecker::Instance().CheckMemoryLeaks();
+        SpaRcleAPI::MemoryLeakChecker::Instance().CheckMemoryLeaks();*/
 
         if (code == 0 && !pLauncher->Execute()) {
             SR_ERROR("Failed to execute application!");

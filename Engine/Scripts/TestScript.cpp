@@ -2,7 +2,7 @@
 // Created by Monika on 26.03.2025.
 //
 
-#include "TestScript.h"
+/*#include "TestScript.h"
 
 #include <SpaRcle/Utils/Math/FVector3.h>
 #include <SpaRcle/Utils/Math/IVector3.h>
@@ -58,4 +58,4 @@ void RunScriptTest() {
     PrintVector3("castTest", castTest);
 
     std::cout << "Script test completed!" << std::endl;
-}
+}*/

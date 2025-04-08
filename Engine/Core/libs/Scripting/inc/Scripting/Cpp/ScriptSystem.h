@@ -7,6 +7,7 @@
 
 #include <Scripting/Cpp/CodeGenerator.h>
 #include <Scripting/Cpp/CppCompiler.h>
+#include <Scripting/Cpp/ModuleManager.h>
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Resources/FileSystemWatcher.h>
@@ -35,6 +36,8 @@ namespace SR_SCRIPTING_NS {
     public:
         SR_NODISCARD bool Init();
 
+        static std::string_view GetDynamicLibraryExtension();
+
     private:
         void HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType);
         void ThreadFunc();
@@ -51,7 +54,7 @@ namespace SR_SCRIPTING_NS {
         bool m_isInit = false;
         bool m_isCompilationEnabled = false;
 
-        std::shared_mutex m_mutex;
+        std::recursive_mutex m_mutex;
         SR_HTYPES_NS::Thread::Ptr m_thread;
 
         SR_UTILS_NS::Subscription m_fileChangedSubscription;
@@ -66,8 +69,11 @@ namespace SR_SCRIPTING_NS {
 
         /// thread owned parameters
 
+        SR_UTILS_NS::TimePointType m_lastFileSystemEvent;
+
         CppCompiler::Ptr m_compiler;
         CppCodeGenerator::Ptr m_codeGenerator;
+        ModuleManager::Ptr m_moduleManager;
 
         std::atomic<bool> m_threadRunning = false;
         std::atomic<bool> m_isCompiled = false;

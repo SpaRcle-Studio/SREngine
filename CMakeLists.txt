@@ -10,6 +10,46 @@ if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
 endif()
 
+function(find_windows_sdk SR_WINDOWS_SDK_DIR)
+    foreach(drive ${CMAKE_SYSTEM_NAME}:/ C D E F G H I J K L M N O P Q R S T U V W X Y Z)
+        set(sdk_path "${drive}:/Program Files (x86)/Windows Kits/10")
+        if(EXISTS ${sdk_path})
+            set(${SR_WINDOWS_SDK_DIR} ${sdk_path} PARENT_SCOPE)
+            return()
+        endif()
+    endforeach()
+    message(FATAL_ERROR "Windows SDK not found on any drive!")
+endfunction()
+
+function(find_latest_windows_sdk_version SR_WINDOWS_SDK_VERSION)
+    file(GLOB SDK_VERSIONS LIST_DIRECTORIES true "${SR_WINDOWS_SDK_DIR}/Include/*")
+
+    list(SORT SDK_VERSIONS)
+    list(GET SDK_VERSIONS -1 LATEST_SDK_DIR)
+
+    if (LATEST_SDK_DIR)
+        string(REGEX MATCH "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+" LATEST_SDK_VERSION ${LATEST_SDK_DIR})
+        set(${SR_WINDOWS_SDK_VERSION} ${LATEST_SDK_VERSION} PARENT_SCOPE)
+    else()
+        message(FATAL_ERROR "No valid Windows SDK versions found!")
+    endif()
+endfunction()
+
+if (MSVC)
+    get_filename_component(SR_MSVC_COMPILER_PATH "${CMAKE_CXX_COMPILER}" ABSOLUTE)
+    message(STATUS "SpaRcle Engine: MSVC compiler path: ${SR_MSVC_COMPILER_PATH}")
+    add_definitions(-DSR_MSVC_COMPILER_PATH="${SR_MSVC_COMPILER_PATH}")
+
+    find_windows_sdk(SR_WINDOWS_SDK_DIR)
+    find_latest_windows_sdk_version(SR_WINDOWS_SDK_VERSION)
+
+    message(STATUS "SpaRcle Engine: Windows SDK path is ${SR_WINDOWS_SDK_DIR}")
+    message(STATUS "SpaRcle Engine: Windows SDK version is ${SR_WINDOWS_SDK_VERSION}")
+
+    add_definitions(-DSR_WINDOWS_SDK_DIR="${SR_WINDOWS_SDK_DIR}")
+    add_definitions(-DSR_WINDOWS_SDK_VERSION="${SR_WINDOWS_SDK_VERSION}")
+endif()
+
 if (WIN32)
     set(SR_ENGINE_PLATFORM "Windows")
 elseif(ANDROID_NDK)

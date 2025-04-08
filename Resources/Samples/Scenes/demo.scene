@@ -4093,6 +4093,8 @@ ddddцццゔぅヾボ
 								8-o:ptr
 									9-v:entityId
 										10-i:4497561116748288258
+									9-v:isEnabled
+										10-b:false
 									9-o:material
 										10-v:type
 											11-s:UniqueMaterial

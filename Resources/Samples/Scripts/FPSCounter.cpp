@@ -24,3 +24,11 @@ public:
 };
 
 REGISTER_BEHAVIOUR(FPSCounter)*/
+
+#include <SpaRcle/Utils/Debug.h>
+
+void func() {
+    int i = 0;
+    ((void)i);
+    //std::cout << i << std::endl;
+}
