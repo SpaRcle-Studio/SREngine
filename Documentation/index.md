@@ -11,7 +11,7 @@ Roadmap:
     * [ ] Editor and GUI
     * [ ] Scripting
 - [ ] Scripting API 
-- [ ] Contributing
+- [x] Contributing
     * [ ] Pull Request Guidelines
     * [ ] Issue Guidelines
     * [ ] Coding Guidelines
