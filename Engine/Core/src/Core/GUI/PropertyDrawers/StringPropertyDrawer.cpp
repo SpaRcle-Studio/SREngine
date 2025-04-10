@@ -64,7 +64,7 @@ namespace SR_CORE_GUI_NS {
         else if (value.IsStringAtom()) {
             if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
                 std::string str = pStringAtom->ToString();
-                ImGui::InputText("##Input", str.data(), str.size());
+                ImGui::InputText("##Input", &str);
 
                 if (ImGui::IsItemDeactivatedAfterEdit()) {
                     SetMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));

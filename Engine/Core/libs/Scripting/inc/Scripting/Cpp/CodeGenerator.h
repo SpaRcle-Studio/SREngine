@@ -12,8 +12,22 @@
 namespace SR_SCRIPTING_NS {
     class CppCompiler;
 
-    struct CppFileMetadata {
+    struct CppCodegenBehaviour {
+        SR_UTILS_NS::StringAtom name;
+        std::vector<SR_UTILS_NS::StringAtom> namespaces;
 
+        std::string MakeNameWithNamespace() const {
+            std::string result;
+            for (const auto& ns : namespaces) {
+                result += ns.ToString() + "::";
+            }
+            result += name.ToString();
+            return result;
+        }
+    };
+
+    struct CppFileMetadata {
+        std::vector<CppCodegenBehaviour> behaviours;
     };
 
     struct CppCodegenModule {

@@ -149,10 +149,12 @@ namespace SR_SCRIPTING_NS {
 
             m_thread->Synchronize();
 
-            SR_LOCK_GUARD;
-
-            if (m_lastFileSystemEvent + std::chrono::milliseconds(200) > SR_HTYPES_NS::Time::Instance().Now()) {
-                continue;
+            {
+                SR_LOCK_GUARD;
+                if (m_lastFileSystemEvent + std::chrono::milliseconds(200) > SR_HTYPES_NS::Time::Instance().Now()) {
+                    m_hasModuleReloadRequest = false;
+                    continue;
+                }
             }
 
             switch (m_state) {
@@ -164,12 +166,22 @@ namespace SR_SCRIPTING_NS {
                     ThreadIdle();
                     break;
                 case State::CheckModules: {
-                    m_codeGenerator->ProcessChangedModules(SR_EXCHANGE(m_changedModules, {}));
+                    std::set<SR_UTILS_NS::Path> changedModules;
+                    {
+                        SR_LOCK_GUARD;
+                        changedModules = SR_EXCHANGE(m_changedModules, {});
+                    }
+                    m_codeGenerator->ProcessChangedModules(changedModules);
                     m_state = State::Codegen;
                     break;
                 }
                 case State::Codegen: {
-                    m_codeGenerator->ProcessChangedCodeFiles(SR_EXCHANGE(m_changedCppFiles, {}));
+                    std::set<SR_UTILS_NS::Path> changedCppFiles;
+                    {
+                        SR_LOCK_GUARD;
+                        changedCppFiles = SR_EXCHANGE(m_changedCppFiles, {});
+                    }
+                    m_codeGenerator->ProcessChangedCodeFiles(changedCppFiles);
                     if (m_codeGenerator->IsNeedRecompile()) {
                         m_codeGenerator->RegenerateChangedModules();
                         m_isCompiled = false;
@@ -188,6 +200,7 @@ namespace SR_SCRIPTING_NS {
                 case State::Reloading:
                     ReloadModules();
                     m_state = State::Idle;
+                    m_hasModuleReloadRequest = false;
                     break;
             }
         }
@@ -204,9 +217,12 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ScriptSystem::ThreadIdle() {
+        SR_LOCK_GUARD;
+
         /// first, check if we have any changes in the modules
         if (!m_changedModules.empty()) {
             m_state = State::CheckModules;
+            m_hasModuleReloadRequest = false;
             return;
         }
 
@@ -216,22 +232,24 @@ namespace SR_SCRIPTING_NS {
                 SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected file changes!");
                 m_state = State::Codegen;
             }
+            m_hasModuleReloadRequest = false;
             return;
         }
 
         /// after codegen we need to compile the code
         if (!m_isCompiled && m_isCompilationEnabled) {
             m_state = State::Compiling;
+            m_hasModuleReloadRequest = false;
             return;
         }
 
         if (m_hasModuleCopyErrors || m_hasCompileErrors) {
+            m_hasModuleReloadRequest = false;
             return;
         }
 
-        /// if all files are compiled we need to check if we have any changes in the c++ modules
-        if (!m_changedCppModules.empty()) {
-            SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected cpp module changes!");
+        if (m_hasModuleReloadRequest) {
+            SR_INFO("ScriptSystem::ThreadIdle() : script system thread detected module reload request!");
             m_state = State::Reloading;
             return;
         }
@@ -375,5 +393,30 @@ namespace SR_SCRIPTING_NS {
                 SRHalt("CppCompiler::Compile() : unknown platform!");
                 return "";
         }
+    }
+
+    void ScriptSystem::ReloadModulesIfNeeded() {
+        {
+            SR_TRACY_ZONE;
+            SR_LOCK_GUARD;
+
+            if (m_hasModuleReloadRequest || m_state != State::Idle) {
+                return;
+            }
+
+            if (m_hasModuleCopyErrors || m_hasCompileErrors) {
+                return;
+            }
+
+            if (m_changedCppModules.empty()) {
+                return;
+            }
+
+            m_hasModuleReloadRequest = true;
+        }
+
+        SR_TRACY_ZONE_N("Wait for module reload");
+
+        while (m_hasModuleReloadRequest);
     }
 }

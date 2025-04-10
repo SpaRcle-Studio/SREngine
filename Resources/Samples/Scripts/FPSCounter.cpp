@@ -27,8 +27,17 @@ REGISTER_BEHAVIOUR(FPSCounter)*/
 
 #include <SpaRcle/Utils/Debug.h>
 
-void func() {
-    int i = 0;
-    ((void)i);
-    //std::cout << i << std::endl;
+namespace Samples {
+    class FPSCounter : public CppBehaviour {
+        SR_SCRIPT_BEHAVIOUR_CLASS()
+    public:
+        void Update(float_t dt) override {
+
+        }
+
+    private:
+        /// @property
+        int m_fps = 0;
+
+    };
 }

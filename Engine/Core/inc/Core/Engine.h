@@ -103,6 +103,9 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
         SR_NODISCARD bool IsApplicationFocused() const;
+        SR_NODISCARD const SR_SCRIPTING_NS::ScriptSystem::Ptr& GetScriptSystem() const { return m_scriptSystem; }
+        SR_NODISCARD SR_SCRIPTING_NS::ScriptSystem::Ptr GetScriptSystem() { return m_scriptSystem; }
+
         /// @method
         SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
 

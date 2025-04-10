@@ -11,7 +11,7 @@ DepthTest true;
 [[uniform], [public]] vec4 color;
 [[uniform], [public]] sampler2D diffuse;
 
-[[ssbo(bones)]] mat4[] bones;
+[[ssbo(bones)], [restrict], [readonly]] mat4[] bones;
 [[ssbo(offsets)]] mat4[] boneOffsets;
 
 #include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>

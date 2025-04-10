@@ -36,6 +36,11 @@ namespace SR_SCRIPTING_NS {
     public:
         SR_NODISCARD bool Init();
 
+        SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
+        SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
+
+        void ReloadModulesIfNeeded();
+
         static std::string_view GetDynamicLibraryExtension();
 
     private:
@@ -79,6 +84,7 @@ namespace SR_SCRIPTING_NS {
         std::atomic<bool> m_isCompiled = false;
         std::atomic<bool> m_hasCompileErrors = false;
         std::atomic<bool> m_hasModuleCopyErrors = false;
+        std::atomic<bool> m_hasModuleReloadRequest = false;
         std::atomic<State> m_state = State::InitialAnalyse;
 
         std::set<SR_UTILS_NS::Path> m_changedCppFiles;

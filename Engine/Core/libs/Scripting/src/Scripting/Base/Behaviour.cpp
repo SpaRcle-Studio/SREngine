@@ -2,62 +2,18 @@
 // Created by Monika on 24.05.2022.
 //
 
+#include <Scripting/Base/Behaviour.h>
+#include <Scripting/Cpp/ScriptSystem.h>
+#include <Scripting/Cpp/ModuleManager.h>
+
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Resources/ResourceManager.h>
-
-#include <Scripting/Base/Behaviour.h>
-//#include <Scripting/Impl/EvoBehaviour.h>
+#include <Utils/World/Scene.h>
 
 #include <Codegen/Behaviour.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
-    /*IRawBehaviour* IRawBehaviour::Load(SR_UTILS_NS::Path path) {
-        SR_GLOBAL_LOCK
-
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        path = path.RemoveSubPath(resourceManager.GetResPath());
-
-        if (path.IsAbs()) {
-            SR_ERROR("IRawBehaviour::Load() : the behavior cannot be located outside of the resources folder! \n\tPath: " + path.ToString());
-            return nullptr;
-        }
-
-        IRawBehaviour* pBehaviour = nullptr;
-
-        if (path.GetExtensionView() == "cpp") {
-            //pBehaviour = new EvoBehaviour();
-        }
-        else {
-            SR_WARN("IRawBehaviour::Load() : unknown behaviour extension!\n\tExtension: \"{}\"", path.GetExtension());
-            return nullptr;
-        }
-
-        pBehaviour->SetId(path.ToStringRef(), false); // auto register
-
-        if (!pBehaviour->Load()) {
-            SR_WARN("Behaviour::Load() : failed to load behaviour! \n\tPath: " + path.ToString());
-        }
-
-        /// отложенная ручная регистрация
-        resourceManager.RegisterResource(pBehaviour);
-
-        return pBehaviour;
-    }
-
-    bool IRawBehaviour::Reload() {
-        SRHalt("Is not reloadeable! Use group reloader.");
-        return false;
-    }
-
-    void IRawBehaviour::OnReloadDone() {
-        m_component->OnBehaviourChanged();
-        IResource::OnReloadDone();
-    }*/
-
-    /// ----------------------------------------------------------------------------------------------------------------
-
     void Behaviour::Awake() {
         //if (m_rawBehaviour) { m_rawBehaviour->Awake(); }
         Super::Awake();
@@ -81,7 +37,7 @@ namespace SR_SCRIPTING_NS {
     void Behaviour::OnDestroy() {
         //if (m_rawBehaviour) { m_rawBehaviour->OnDestroy(); }
 
-        //SetRawBehaviour(SR_UTILS_NS::Path());
+        SetBehaviourName(SR_UTILS_NS::StringAtom());
 
         Super::OnDestroy();
 
@@ -91,6 +47,10 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnAttached() {
+        if (!m_cppBehaviour) {
+            SetBehaviourName(m_behaviourName);
+        }
+
         //if (m_rawBehaviour) { m_rawBehaviour->OnAttached(); }
         Super::OnAttached();
     }
@@ -165,22 +125,15 @@ namespace SR_SCRIPTING_NS {
         }
 
         OnBehaviourChanged();
-    }*/
+    }
 
-    void Behaviour::OnBehaviourChanged() {
+     void Behaviour::OnBehaviourChanged() {
         //if (m_rawBehaviour) {
         //    m_rawBehaviour->SetComponent(this);
         //}
 
-        /// чтобы скрипт занаво отработал логику после перезагрузки,
-        /// делаем такой маневр
-        m_isStarted = false;
-        m_isAwake = false;
 
-        if (HasParent()) {
-            GetParent()->SetDirty(true);
-        }
-    }
+    }*/
 
     void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
         Super::Save(serializer);
@@ -242,7 +195,46 @@ namespace SR_SCRIPTING_NS {
         return true;
     }
 
-    void Behaviour::Reload() {
-        //SetRawBehaviour(m_rawBehaviour->GetResourcePath());
+    void Behaviour::SetBehaviourName(SR_UTILS_NS::StringAtom name) {
+        if (auto&& pScriptSystem = GetScriptSystem()) {
+            if (m_cppBehaviour) {
+                pScriptSystem->GetModuleManager()->FreeBehaviourInstance(m_cppBehaviour);
+                m_cppBehaviour = nullptr;
+            }
+
+            if (!name.empty()) {
+                m_cppBehaviour = pScriptSystem->GetModuleManager()->AllocateBehaviourInstance(name);
+                m_cppBehaviour->SetReloadCallback(std::bind(&Behaviour::OnScriptReloaded, this));
+            }
+        }
+        else if (m_cppBehaviour) {
+            SRHalt("Behaviour::SetBehaviourName() : script system is not available, but C++ behaviour is set!");
+        }
+        m_behaviourName = name;
+    }
+
+    ScriptSystem* Behaviour::GetScriptSystem() const noexcept {
+        if (m_scriptSystem) {
+            return m_scriptSystem;
+        }
+
+        if (auto&& pScene = TryGetScene()) {
+            m_scriptSystem = pScene->GetDataStorage().GetPointer<ScriptSystem>();
+        }
+
+        return m_scriptSystem;
+    }
+
+    bool Behaviour::IsInstanceValid() const noexcept {
+        return m_cppBehaviour && m_cppBehaviour->GetInstance();
+    }
+
+    void Behaviour::OnScriptReloaded() {
+        m_isStarted = false;
+        m_isAwake = false;
+
+        if (HasParent()) {
+            GetParent()->SetDirty(true);
+        }
     }
 }

@@ -7,7 +7,7 @@
 
 #include <Physics/3D/Raycast3D.h>
 
-//#include <Scripting/Impl/EvoScriptManager.h>
+#include <Scripting/Cpp/ScriptSystem.h>
 
 #include <Graphics/Types/Camera.h>
 
@@ -81,6 +81,7 @@ namespace SR_CORE_NS {
 
         pScene->GetDataStorage().SetValue(pRenderScene);
         pScene->GetDataStorage().SetPointer(pRenderScene.Get());
+        pScene->GetDataStorage().SetPointer(pEngine->GetScriptSystem().Get());
         pScene->GetDataStorage().SetValue(pPhysicsScene);
 
         pSceneUpdater = pScene->GetSceneUpdater();

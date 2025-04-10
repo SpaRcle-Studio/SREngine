@@ -9,7 +9,9 @@
 namespace SR_SCRIPTING_NS {
     bool CppCompiler::Init() {
         if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
-            if (SR_PLATFORM_NS::IsRunningUnderDebugger() && SR_PLATFORM_NS::IsCompiledUnderMSVC()) {
+            /// You can change this value under debugger for disabling MSVC compiler
+            static std::atomic<bool> disableMSVC = false;
+            if (SR_PLATFORM_NS::IsRunningUnderDebugger() && SR_PLATFORM_NS::IsCompiledUnderMSVC() && !disableMSVC) {
                 m_compilerType = CppCompilerType::MSVC;
                 m_compilerPath = FindMSVCCompilerPath();
             }

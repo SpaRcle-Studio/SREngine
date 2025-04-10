@@ -684,6 +684,15 @@ sra format
 												12-s:Engine/Materials/default.mat
 									9-v:meshPath
 										10-s:Engine/Models/cube.obj
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:4396283777552644742
+									9-v:behaviourName
+										10-s:TestScript
 					5-v:name
 						6-s:Cube
 					5-o:transform

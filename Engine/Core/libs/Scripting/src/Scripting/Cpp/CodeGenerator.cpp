@@ -12,6 +12,69 @@ extern "C" {
 }
 
 namespace SR_SCRIPTING_NS {
+    bool HasScriptMacro(TSNode class_body, const std::string_view& source_code, std::string_view macroName) {
+        uint32_t child_count = ts_node_child_count(class_body);
+        for (uint32_t i = 0; i < child_count; ++i) {
+            TSNode child = ts_node_child(class_body, i);
+            auto&& type = std::string_view(ts_node_type(child));
+            if (type != "declaration") {
+                continue;
+            }
+            std::string_view code_snippet = source_code.substr(
+                ts_node_start_byte(child),
+                ts_node_end_byte(child) - ts_node_start_byte(child)
+            );
+            if (code_snippet.find(macroName) != std::string::npos) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void TraverseTree(TSNode node, const std::string_view& sourceCode, std::vector<std::string_view> namespaces, CppFileMetadata& fileMetadata) {
+        std::string type = ts_node_type(node);
+
+        if (type == "namespace_definition") {
+            TSNode name_node = ts_node_child_by_field_name(node, "name", 4);
+            if (ts_node_is_null(name_node)) {
+                return;
+            }
+
+            std::string_view namespaceName = sourceCode.substr(
+                ts_node_start_byte(name_node),
+                ts_node_end_byte(name_node) - ts_node_start_byte(name_node)
+            );
+
+            namespaces.emplace_back(namespaceName);
+        }
+        else if (type == "class_specifier") {
+            TSNode name_node = ts_node_child_by_field_name(node, "name", 4);
+            TSNode body_node = ts_node_child_by_field_name(node, "body", 4);
+
+            if (ts_node_is_null(name_node) || ts_node_is_null(body_node)) {
+                return;
+            }
+
+            std::string_view class_name = sourceCode.substr(
+                ts_node_start_byte(name_node),
+                ts_node_end_byte(name_node) - ts_node_start_byte(name_node)
+            );
+
+            if (HasScriptMacro(body_node, sourceCode, "SR_SCRIPT_BEHAVIOUR_CLASS")) {
+                CppCodegenBehaviour& behaviour = fileMetadata.behaviours.emplace_back();
+                behaviour.name = class_name;
+                for (auto&& ns : namespaces) {
+                    behaviour.namespaces.emplace_back(ns);
+                }
+            }
+        }
+
+        uint32_t count = ts_node_named_child_count(node);
+        for (uint32_t i = 0; i < count; ++i) {
+            TraverseTree(ts_node_named_child(node, i), sourceCode, namespaces, fileMetadata);
+        }
+    }
+
     void parse_comment(TSNode node, const std::string& source_code) {
         /// extract comment text
         /// doesn't work:
@@ -168,7 +231,23 @@ namespace SR_SCRIPTING_NS {
 
     CppFileMetadata CppCodeGenerator::ParseFile(const SR_UTILS_NS::Path& path) const {
         SR_TRACY_ZONE;
-        return CppFileMetadata();
+
+        CppFileMetadata fileMetadata;
+
+        std::string code = SR_UTILS_NS::FileSystem::ReadBinaryAsString(path);
+
+        TSParser *parser = ts_parser_new();
+        ts_parser_set_language(parser, tree_sitter_cpp());
+
+        TSTree *tree = ts_parser_parse_string(parser, nullptr, code.c_str(), code.size());
+        TSNode root = ts_tree_root_node(tree);
+
+        TraverseTree(root, code, {}, fileMetadata);
+
+        ts_tree_delete(tree);
+        ts_parser_delete(parser);
+
+        return fileMetadata;
     }
 
     void CppCodeGenerator::OnModuleCompiled(SR_UTILS_NS::StringAtom moduleName) {
@@ -270,6 +349,10 @@ namespace SR_SCRIPTING_NS {
         for (auto&& module : m_modules) {
             if (module.codeFiles.empty()) {
                 continue;
+            }
+
+            for (auto&& [filePath, fileMetadata] : module.codeFiles) {
+                fileMetadata = ParseFile(filePath);
             }
 
             GenerateModule(module);
@@ -394,25 +477,50 @@ namespace SR_SCRIPTING_NS {
         std::ofstream codegenFileStream(codegenFile.ToString());
         if (codegenFileStream.is_open()) {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
-            codegenFileStream << "#ifdef SR_SCRIPT_AOT_ENABLED\n";
-            codegenFileStream << "\t#define SR_SCRIPT_EXTERN_DLL\n";
-            codegenFileStream << "#else\n";
-            codegenFileStream << "\t#define SR_SCRIPT_EXTERN_DLL extern \"C\" __declspec(dllexport) \n";
-            codegenFileStream << "#endif\n\n";
 
-            codegenFileStream << "SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleName() { \n\treturn \"" << module.moduleInfo.moduleName.ToStringRef() << "\";\n}\n\n";
+            codegenFileStream << "#include <CoreAPI.h>\n\n";
 
             std::string compilerVersion = m_compiler->GetCompilerVersion();
             compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\r", "");
             compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\n", "\\n");
-
-            codegenFileStream << "SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleCompilerVersion() { return \"" << compilerVersion << "\"; }\n\n";
 
             for (auto&& file : module.codeFiles) {
                 if (file.first.GetExtensionView() == "cxx" || file.first.GetExtensionView() == "cpp") {
                     codegenFileStream << "#include \"" << file.first.ToStringRef() << "\"\n";
                 }
             }
+
+            if (!module.codeFiles.empty()) {
+                codegenFileStream << "\n";
+            }
+
+            bool hasBehaviours = false;
+            for (auto&& [filePath, fileMetadata] : module.codeFiles) {
+                for (auto&& behaviour : fileMetadata.behaviours) {
+                    codegenFileStream << "void* CodegenAllocateScriptBehaviour_{}() "_format(behaviour.name);
+                    codegenFileStream << "{ "<< "return new {}(); "_format(behaviour.MakeNameWithNamespace()) << "}\n";
+                }
+                hasBehaviours = !fileMetadata.behaviours.empty();
+            }
+
+            if (hasBehaviours) {
+                codegenFileStream << "\n";
+            }
+
+            codegenFileStream << "bool CodegenRegisterModule_{}_Module() "_format(module.moduleInfo.moduleName) << "{\n";
+            codegenFileStream << "\tSpaRcleAPI::CoreAPI::Instance()";
+            codegenFileStream << "\n\t\t.SetCompilerVersion(\"{}\")"_format(compilerVersion);
+            codegenFileStream << "\n\t\t.AddModule(\"{}\")"_format(module.moduleInfo.moduleName);
+            for (auto&& [filePath, fileMetadata] : module.codeFiles) {
+                for (auto&& behaviour : fileMetadata.behaviours) {
+                    codegenFileStream << "\n\t\t\t.AddBehaviour(\"{}\", &CodegenAllocateScriptBehaviour_{})"_format(behaviour.name, behaviour.name);
+                }
+            }
+            codegenFileStream << ";\n";
+            codegenFileStream << "\treturn true;\n";
+            codegenFileStream << "}\n\n";
+
+            codegenFileStream << "const bool CodegenRegisterModule_{}_Result = CodegenRegisterModule_{}_Module();"_format(module.moduleInfo.moduleName, module.moduleInfo.moduleName);
 
             codegenFileStream.close();
         }

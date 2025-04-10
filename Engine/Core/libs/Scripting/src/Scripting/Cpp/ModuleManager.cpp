@@ -29,8 +29,11 @@ namespace SR_SCRIPTING_NS {
         ScriptModule& module = *pIt;
 
         if (auto&& pLibraryHandle = module.GetModuleHandle()) {
+            auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
+            reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
+
             if (!SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle)) {
-                SR_ERROR("ModuleManager::ReloadModule() : failed to unload module!\n\tPath: " + path.ToString());
+                SRHalt("ModuleManager::ReloadModule() : failed to unload module! Something went wrong...\n\tPath: " + path.ToString());
                 return false;
             }
             else {
@@ -62,6 +65,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void* ModuleManager::LoadModule(const SR_UTILS_NS::Path& modulePath) {
+        SR_TRACY_ZONE;
+
         const SR_UTILS_NS::StringAtom moduleName = modulePath.GetBaseName();
         auto&& runtimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.{}"_format(moduleName, ScriptSystem::GetDynamicLibraryExtension()));
         auto&& pdbRuntimePath = m_cachePath.Concat("Scripts/Runtime/Modules/{}.pdb"_format(moduleName));
@@ -105,17 +110,24 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
+        auto&& pModulesCountFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModulesCount");
         auto&& pModuleNameFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModuleName");
         auto&& pModuleVersionFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModuleCompilerVersion");
+        auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
 
-        if (pModuleNameFunction && pModuleVersionFunction) {
-            const std::string_view scriptModuleName = reinterpret_cast<const char* (*)()>(pModuleNameFunction)();
+        if (pModuleNameFunction && pModuleVersionFunction && pModulesCountFunction && pDestroyScriptCoreAPI) {
+            const uint32_t countModules = reinterpret_cast<uint32_t(*)()>(pModulesCountFunction)();
+            if (countModules != 1) {
+                SR_ERROR("ModuleManager::LoadModule() : module count mismatch!\n\tExpected: 1\n\tActual: {}"_format(countModules));
+                goto unload_module;
+            }
+
+            const std::string_view scriptModuleName = reinterpret_cast<const char* (*)(uint32_t)>(pModuleNameFunction)(0);
             const std::string_view scriptCompilerVersion = reinterpret_cast<const char* (*)()>(pModuleVersionFunction)();
 
             if (scriptModuleName != moduleName) {
                 SR_ERROR("ModuleManager::LoadModule() : module name mismatch!\n\tExpected: {}\n\tActual: {}"_format(moduleName.ToString(), scriptModuleName));
-                SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
-                return nullptr;
+                goto unload_module;
             }
 
             if (m_lastCompilerVersion.empty()) {
@@ -123,8 +135,7 @@ namespace SR_SCRIPTING_NS {
             }
             else if (m_lastCompilerVersion != scriptCompilerVersion) {
                 SR_ERROR("ModuleManager::LoadModule() : module compiler version mismatch!\n\tExpected: {}\n\tActual: {}"_format(m_lastCompilerVersion, scriptCompilerVersion));
-                SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
-                return nullptr;
+                goto unload_module;
             }
         }
         else {
@@ -135,5 +146,50 @@ namespace SR_SCRIPTING_NS {
 
         SR_LOG("ModuleManager::LoadModule() : module {} is correct.", moduleName.ToString());
         return pLibraryHandle;
+
+    unload_module:
+        reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
+        SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
+        return nullptr;
+    }
+
+    CppBehaviourInstance* ModuleManager::AllocateBehaviourInstance(const SR_UTILS_NS::StringAtom& behaviourName) {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        auto&& pInstance = new CppBehaviourInstance();
+
+        pInstance->SetBehaviourName(behaviourName, SR_UTILS_NS::Passkey<ModuleManager>(this));
+
+        for (auto&& module : m_modules) {
+            if (module.HasBehaviour(behaviourName)) {
+
+                break;
+            }
+        }
+
+        if (m_behaviourInstances.count(pInstance) > 0) {
+            SRHalt("Memory address collision! Something went wrong...");
+            delete pInstance;
+            return nullptr;
+        }
+
+        m_behaviourInstances.insert(pInstance);
+        return pInstance;
+    }
+
+    void ModuleManager::FreeBehaviourInstance(CppBehaviourInstance* pInstance) {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        auto&& pIt = m_behaviourInstances.find(pInstance);
+
+        if (pIt != m_behaviourInstances.end()) {
+            delete *pIt;
+            m_behaviourInstances.erase(pIt);
+        }
+        else {
+            SRHalt("ModuleManager::FreeBehaviourInstance() : instance not found!");
+        }
     }
 }
