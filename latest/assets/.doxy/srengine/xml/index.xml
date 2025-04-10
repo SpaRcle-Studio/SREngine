@@ -3911,6 +3911,7 @@
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a0bdd790c680d0526bac96df4459dbb13" kind="function"><name>GenerateStage</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad0922e31901a83dada538d131562d398" kind="function"><name>GenerateVertexStage</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9f60c203567d812099c5ad4009b8a98f" kind="function"><name>GenerateFragmentStage</name></member>
+    <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a4b1b842d90a0109656e963985326e667" kind="function"><name>GenerateComputeStage</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a51378bfe0bfd54506e98fec3e1db1af2" kind="function"><name>GenerateRayGenStage</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1aab416cf922d27083c311dbcea1318126" kind="function"><name>GenerateRayIntersectionStage</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2ae6e82b6e65624d301724dc6d91308d" kind="function"><name>GenerateRayHitClosestStage</name></member>
@@ -3926,6 +3927,7 @@
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a2a03c19d8d66c4a7f5d088865f6b079a" kind="function"><name>GenerateLexicalTree</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e02f281bf4edebe3da97ee32221005" kind="function"><name>GenerateFunction</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a52017c7477dd19d49178e33af1a43f09" kind="function"><name>GenerateFunction</name></member>
+    <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a9030fd38f461fd824ae8f9f8cbe9cb7f" kind="function"><name>GenerateStructure</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1ad779109cd8002bd3398f65e82e6a6167" kind="function"><name>GenerateType</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a83e3d11a83598fa9c3c7ca2f6dfc0c23" kind="function"><name>GenerateName</name></member>
     <member refid="classSR__SRSL__NS_1_1GLSLCodeGenerator_1a5dfc09d4792c37e9aa48ddd0945e6433" kind="function"><name>GenerateForStatement</name></member>
@@ -10366,7 +10368,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a7513d0b8b0fce5533e507a0011b17b6a" kind="function"><name>~SRSLExpr</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a375c23fffc3e0ae7332056be829306f7" kind="function"><name>SRSLExpr</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLExpr_1aacf2ca3bd73877945d725fac28e9aeac" kind="function"><name>ToString</name></member>
-    <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a4670d60d1809837c15573a257528482e" kind="function"><name>CreateStringExpression</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" kind="function"><name>CreateStringExpression</name></member>
   </compound>
   <compound refid="classSR__SRSL__NS_1_1SRSLForStatement" kind="class"><name>SR_SRSL_NS::SRSLForStatement</name>
     <member refid="classSR__SRSL__NS_1_1SRSLForStatement_1aced44ca81dedaf1789c4808520bec7bc" kind="variable"><name>pVar</name></member>
@@ -10437,6 +10439,8 @@
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a9440e09ea12e628526dbda4f34341e0b" kind="enumvalue"><name>ForStatementCondition</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a80db93aa763f91a82ab50c6ef5dd9ba3" kind="enumvalue"><name>ForStatementExpression</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a95497c2ef3b2eb59e7572e7363f758e2" kind="enumvalue"><name>ForStatementBody</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a20f8b2efb809cd9be3df86e9145d1ac7" kind="enumvalue"><name>StructureStatement</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a509c7551f6ec2906dae3caa6a6e18485" kind="enumvalue"><name>StructureStatementBody</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a1c61cd60e8dc58cb18128ac5e6dd1b28" kind="variable"><name>m_lexicalTree</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a222a8fdc4197dd5702fef2b478177e7f" kind="variable"><name>m_decorators</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1adfb9fc55c379a8ca838fc3347fbb6413" kind="variable"><name>m_expr</name></member>
@@ -10640,6 +10644,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1ab43c003c0a7b79d4410532584ea4259c" kind="function"><name>FindField</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a125cbad047e9d7765d4e51b3a6d7a978" kind="function"><name>GetVertexType</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a2f66cfb3370392d89fc64e0150b7bcd3" kind="function"><name>GetType</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1abf1786880ceb791e6ff4a15ec9db3ce0" kind="function"><name>GetPath</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1afda0f34983ca0a55dcecdfdc2a99f2b1" kind="function"><name>GetAnalyzedTree</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a1fcff6a6a99ab4911469a07fd8568548" kind="function"><name>GetUseStack</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a69674d2db50ea80cd69cd1a161250930" kind="function"><name>GetUniformBlocks</name></member>
@@ -10658,6 +10663,12 @@
     <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct_1a1562109d725c64162e0a4bbdf0903c29" kind="variable"><name>name</name></member>
     <member refid="structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct_1a4f7719e66cf659c69097b9e0addb7bcd" kind="variable"><name>code</name></member>
   </compound>
+  <compound refid="classSR__SRSL__NS_1_1SRSLStructureStatement" kind="class"><name>SR_SRSL_NS::SRSLStructureStatement</name>
+    <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1aa5f01af049f8d962af1d6051f6100bcf" kind="variable"><name>pName</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1ac1697e43814676206f4815fccf0e3da6" kind="variable"><name>pLexicalTree</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1a4c468dd1fec28dc9a3fa0cc93c7dac12" kind="function"><name>SRSLStructureStatement</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLStructureStatement_1ad4160ea3e997ab1e5d01554f61c91ebc" kind="function"><name>~SRSLStructureStatement</name></member>
+  </compound>
   <compound refid="classSR__SRSL__NS_1_1SRSLTypeInfo" kind="class"><name>SR_SRSL_NS::SRSLTypeInfo</name>
     <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1af98358205759ba62c02fa881baab8591" kind="function"><name>GetDimension</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1a48b5a372397bd35b55c9b23ef154780e" kind="function"><name>GetDimension</name></member>
@@ -10672,6 +10683,10 @@
     <member refid="classSR__SRSL__NS_1_1SRSLTypeInfo_1afb7fe7a3cca767b4ca9cfb9e08f81372" kind="function"><name>Analyze</name></member>
   </compound>
   <compound refid="structSR__SRSL__NS_1_1SRSLUniformBlock" kind="struct"><name>SR_SRSL_NS::SRSLUniformBlock</name>
+    <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1a7743a77866d5be8373c40130f27c66af" kind="variable"><name>isReadOnly</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1a281bf68d5da2c0a9739c9876ff7b3ee6" kind="variable"><name>isVolatile</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1a8fce8fa17c09674d6699af400525a029" kind="variable"><name>isCoherent</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1a96ea37d7281fc0f2ed9cfac1a720ea04" kind="variable"><name>isRestrict</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1a641bbbb699d0f2076377fcda9a5a93c9" kind="variable"><name>size</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1af3d8554b3bd3baf0730b9c50d90911ac" kind="variable"><name>binding</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUniformBlock_1a6f88da8d83752b0874ffd7e98c9245a2" kind="variable"><name>fields</name></member>
@@ -10696,6 +10711,7 @@
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1aa9c218ff6fff75f58ff3f8f0c6aff253" kind="function"><name>IsVariableUsedInEntryPoints</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a880585c2faa0f37d2487689c47ab5875" kind="function"><name>IsVariableUsed</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a8201b130301ef473cdb0f8e50fb2d6f6" kind="function"><name>IsFunctionUsed</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a7dbf33f9ec1a12d54e7a0c602b1e14aa" kind="function"><name>IsStructUsed</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a00b3a1160d4395032c036a33644b9067" kind="function"><name>FindFunction</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1aabc324b3f9f7baec5885423f1d699586" kind="function"><name>ToString</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLUseStack_1a61de48b6cf15ec3a8f476d9b2f35fdd6" kind="function"><name>Concat</name></member>

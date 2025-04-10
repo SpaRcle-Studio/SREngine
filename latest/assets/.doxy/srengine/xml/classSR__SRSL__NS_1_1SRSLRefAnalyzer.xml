@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="51" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="52" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="36" column="40"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="37" column="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="39" column="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="40" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5247bd9f7f1adbc37f8e3ab6237d2793" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLFunction" kindref="compound">SRSLFunction</ref> *</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="40" column="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="41" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a0ce5b3ffc9b3c20d04584e6ec9e860bf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD SRSLUseStack::Ptr</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="41" column="40"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="42" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1aac832a391ea0622c1eb85f67902d0fb0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="43" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a506a1b2ab36299647b813b237dd9e79e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="44" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a910967c46528c0b91a353d73c8fd4ce1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="45" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1ada0b773f2f27ee64e23ad5c3c55d6e2e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="46" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5c17c53e7bf6d07287c1cb6d2186c5ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="47" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a110a0302116a99b8a5554f208fc90f74" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="48" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="49" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -311,7 +311,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="33" bodyend="53"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" line="34" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h" bodystart="34" bodyend="54"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a5f23d3edd622a199c8239ced6a2507f0" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>Analyze</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a910967c46528c0b91a353d73c8fd4ce1" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLRefAnalyzer</scope><name>AnalyzeArrayExpression</name></member>

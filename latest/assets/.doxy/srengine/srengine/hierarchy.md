@@ -226,6 +226,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
         * **class** [**SR\_SRSL\_NS::SRSLIfStatement**](classSR__SRSL__NS_1_1SRSLIfStatement.md) 
         * **class** [**SR\_SRSL\_NS::SRSLLexicalTree**](classSR__SRSL__NS_1_1SRSLLexicalTree.md) 
         * **class** [**SR\_SRSL\_NS::SRSLReturn**](classSR__SRSL__NS_1_1SRSLReturn.md) 
+        * **class** [**SR\_SRSL\_NS::SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md) 
         * **class** [**SR\_SRSL\_NS::SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) 
     * **class** [**SR\_SRSL\_NS::SRSLShader**](classSR__SRSL__NS_1_1SRSLShader.md) 
     * **class** [**SR\_UTILS\_NS::ClassDB**](classSR__UTILS__NS_1_1ClassDB.md) 

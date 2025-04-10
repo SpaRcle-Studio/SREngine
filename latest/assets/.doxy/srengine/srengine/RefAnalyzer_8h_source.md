@@ -29,6 +29,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD bool IsVariableUsedInEntryPoints(const std::string& name) const;
         SR_NODISCARD bool IsVariableUsed(const std::string& name) const;
         SR_NODISCARD bool IsFunctionUsed(const std::string& name) const;
+        SR_NODISCARD bool IsStructUsed(const std::string &name) const;
 
         SR_NODISCARD SRSLUseStack::Ptr FindFunction(const std::string& name) const;
 

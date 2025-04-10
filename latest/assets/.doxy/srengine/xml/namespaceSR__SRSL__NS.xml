@@ -28,6 +28,7 @@
     <innerclass refid="classSR__SRSL__NS_1_1SRSLReturn" prot="public">SR_SRSL_NS::SRSLReturn</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLSampler" prot="public">SR_SRSL_NS::SRSLSampler</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLShader" prot="public">SR_SRSL_NS::SRSLShader</innerclass>
+    <innerclass refid="classSR__SRSL__NS_1_1SRSLStructureStatement" prot="public">SR_SRSL_NS::SRSLStructureStatement</innerclass>
     <innerclass refid="classSR__SRSL__NS_1_1SRSLTypeInfo" prot="public">SR_SRSL_NS::SRSLTypeInfo</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLUniformBlock" prot="public">SR_SRSL_NS::SRSLUniformBlock</innerclass>
     <innerclass refid="structSR__SRSL__NS_1_1SRSLUseStack" prot="public">SR_SRSL_NS::SRSLUseStack</innerclass>

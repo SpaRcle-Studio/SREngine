@@ -65,6 +65,7 @@
 |  void | [**Concat**](#function-concat) (const SRSLUseStack::Ptr & pOther) <br> |
 |  SR\_NODISCARD SRSLUseStack::Ptr | [**FindFunction**](#function-findfunction) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**IsFunctionUsed**](#function-isfunctionused) (const std::string & name) const<br> |
+|  SR\_NODISCARD bool | [**IsStructUsed**](#function-isstructused) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**IsVariableUsed**](#function-isvariableused) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**IsVariableUsedInEntryPoints**](#function-isvariableusedinentrypoints) (const std::string & name) const<br> |
 |  SR\_NODISCARD std::set&lt; SR\_GRAPH\_NS::ShaderStage &gt; | [**IsVariableUsedInEntryPointsExt**](#function-isvariableusedinentrypointsext) (const std::string & name) const<br> |
@@ -179,6 +180,21 @@ SR_NODISCARD SRSLUseStack::Ptr SR_SRSL_NS::SRSLUseStack::FindFunction (
 
 ```C++
 SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsFunctionUsed (
+    const std::string & name
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function IsStructUsed 
+
+```C++
+SR_NODISCARD bool SR_SRSL_NS::SRSLUseStack::IsStructUsed (
     const std::string & name
 ) const
 ```

@@ -25,6 +25,7 @@ namespace SR_SRSL_NS {
             Decorators, Decorator, DecoratorArgs,
             Expression, Variable, Function, FunctionArgs, FunctionBody, IfStatement, IfStatementBody,
             ForStatement, ForStatementVariable, ForStatementCondition, ForStatementExpression, ForStatementBody,
+            StructureStatement, StructureStatementBody,
         };
     public:
         SR_NODISCARD std::pair<SRSLAnalyzedTree::Ptr, SRSLResult> Analyze(std::vector<Lexem>&& lexems);

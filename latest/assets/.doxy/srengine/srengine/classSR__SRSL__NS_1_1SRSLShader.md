@@ -80,6 +80,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD const std::map&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md), [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) \* &gt; & | [**GetConstants**](#function-getconstants) () const<br> |
 |  SR\_NODISCARD const SRShaderCreateInfo & | [**GetCreateInfo**](#function-getcreateinfo) () const<br> |
 |  SR\_NODISCARD const std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; & | [**GetIncludes**](#function-getincludes) () const<br> |
+|  SR\_NODISCARD [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**GetPath**](#function-getpath) () const<br> |
 |  SR\_NODISCARD const [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md) & | [**GetPushConstants**](#function-getpushconstants) () const<br> |
 |  SR\_NODISCARD const UniformBlocks & | [**GetSSBOBlocks**](#function-getssboblocks) () const<br> |
 |  SR\_NODISCARD const SRSLSamplers & | [**GetSamplers**](#function-getsamplers) () const<br> |
@@ -269,6 +270,19 @@ inline SR_NODISCARD const SRShaderCreateInfo & SR_SRSL_NS::SRSLShader::GetCreate
 
 ```C++
 inline SR_NODISCARD const std::vector< SR_UTILS_NS::StringAtom > & SR_SRSL_NS::SRSLShader::GetIncludes () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetPath 
+
+```C++
+inline SR_NODISCARD SR_UTILS_NS::Path SR_SRSL_NS::SRSLShader::GetPath () const
 ```
 
 

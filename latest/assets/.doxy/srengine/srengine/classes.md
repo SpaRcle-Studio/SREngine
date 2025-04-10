@@ -1615,6 +1615,8 @@
 ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * [**SRSLStruct**](structSR__GRAPH__NS_1_1SRSL_1_1SRSLStruct.md)
 ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
+* [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md)
+([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * [**SRSLTypeInfo**](classSR__SRSL__NS_1_1SRSLTypeInfo.md)
 ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * [**SRSLUniformBlock**](structSR__SRSL__NS_1_1SRSLUniformBlock.md)

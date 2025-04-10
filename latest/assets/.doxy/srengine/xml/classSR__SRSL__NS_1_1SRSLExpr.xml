@@ -254,14 +254,14 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a4670d60d1809837c15573a257528482e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
         <definition>static SRSLExpr * SR_SRSL_NS::SRSLExpr::CreateStringExpression</definition>
-        <argsstring>(std::string &amp;&amp;token)</argsstring>
+        <argsstring>(std::string token)</argsstring>
         <name>CreateStringExpression</name>
         <qualifiedname>SR_SRSL_NS::SRSLExpr::CreateStringExpression</qualifiedname>
         <param>
-          <type>std::string &amp;&amp;</type>
+          <type>std::string</type>
           <declname>token</declname>
         </param>
         <briefdescription>
@@ -318,7 +318,7 @@
     <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h" bodystart="22" bodyend="105"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a949356ada0ff620166cc3ce64b50e271" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>args</name></member>
-      <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a4670d60d1809837c15573a257528482e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>CreateStringExpression</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a10abfe2942b159d1dc2acd8b4cd7a020" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>CreateStringExpression</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a20c5abc9709e62dbc4046d77b11f6539" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>isArray</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a6837bec8f99611dc4e8530a79f1cec4c" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>isCall</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLExpr_1a65c1db3af48c3d106888fa4d3cb3b479" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLExpr</scope><name>isList</name></member>

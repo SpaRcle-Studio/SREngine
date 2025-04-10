@@ -11,6 +11,7 @@
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLIfStatement" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLIfStatement</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLLexicalTree" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLLexicalTree</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLReturn" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLReturn</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLStructureStatement" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLStructureStatement</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRSL__NS_1_1SRSLVariable" prot="public" virt="non-virtual">SR_SRSL_NS::SRSLVariable</derivedcompoundref>
     <includes refid="LexicalTree_8h" local="no">LexicalTree.h</includes>
     <sectiondef kind="public-func">
@@ -100,6 +101,12 @@
         </childnode>
       </node>
       <node id="11">
+        <label>SR_SRSL_NS::SRSLStructureStatement</label>
+        <link refid="classSR__SRSL__NS_1_1SRSLStructureStatement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
         <label>SR_SRSL_NS::SRSLVariable</label>
         <link refid="classSR__SRSL__NS_1_1SRSLVariable"/>
         <childnode refid="1" relation="public-inheritance">

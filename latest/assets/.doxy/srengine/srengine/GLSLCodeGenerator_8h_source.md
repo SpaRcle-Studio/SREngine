@@ -33,6 +33,7 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::optional<std::string> GenerateVertexStage();
         SR_NODISCARD std::optional<std::string> GenerateFragmentStage();
+        SR_NODISCARD std::optional<std::string> GenerateComputeStage();
 
         SR_NODISCARD std::optional<std::string> GenerateRayGenStage();
         SR_NODISCARD std::optional<std::string> GenerateRayIntersectionStage();
@@ -52,6 +53,8 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::string GenerateFunction(SRSLFunction* pFunction, int32_t deep) const;
         SR_NODISCARD std::string GenerateFunction(SRSLFunction* pFunction, int32_t deep, const std::string& preCode, const std::string& postCode) const;
+
+        SR_NODISCARD std::string GenerateStructure(SRSLStructureStatement* pStructure, int32_t deep) const;
 
         SR_NODISCARD std::string GenerateType(SRSLExpr* pExpr, int32_t deep) const;
         SR_NODISCARD std::string GenerateName(SRSLExpr* pExpr, int32_t deep) const;

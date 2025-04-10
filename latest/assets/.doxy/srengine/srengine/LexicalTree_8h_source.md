@@ -31,7 +31,7 @@ namespace SR_SRSL_NS {
     public:
         SRSLExpr() = default;
 
-        static SRSLExpr* CreateStringExpression(std::string&& token) {
+        static SRSLExpr* CreateStringExpression(std::string token) {
             auto&& pExpr = new SRSLExpr(std::move(token));
             pExpr->isString = true;
             return pExpr;
@@ -253,6 +253,15 @@ namespace SR_SRSL_NS {
         SRSLVariable* pVar = nullptr;
         SRSLExpr* pCondition = nullptr;
         SRSLExpr* pExpr = nullptr;
+        SRSLLexicalTree* pLexicalTree = nullptr;
+    };
+
+    class SRSLStructureStatement : public SRSLLexicalUnit {
+    public:
+        SRSLStructureStatement() = default;
+        ~SRSLStructureStatement() override;
+
+        SRSLExpr* pName = nullptr;
         SRSLLexicalTree* pLexicalTree = nullptr;
     };
 

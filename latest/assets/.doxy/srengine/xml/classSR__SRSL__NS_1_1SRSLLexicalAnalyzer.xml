@@ -113,13 +113,27 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a20f8b2efb809cd9be3df86e9145d1ac7" prot="private">
+          <name>StructureStatement</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57b9ab47bf5ba3b84470d43809287029a509c7551f6ec2906dae3caa6a6e18485" prot="private">
+          <name>StructureStatementBody</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="14" bodyend="18"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="14" bodyend="19"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -135,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="38" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="39" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a222a8fdc4197dd5702fef2b478177e7f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__SRSL__NS_1_1SRSLDecorators" kindref="compound">SRSLDecorators</ref> *</type>
@@ -150,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="40" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="41" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1adfb9fc55c379a8ca838fc3347fbb6413" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__SRSL__NS_1_1SRSLExpr" kindref="compound">SRSLExpr</ref> *</type>
@@ -165,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="41" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="42" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1af7adfcab9cb7f71401558ec79b5dd511" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__SRSL__NS_1_1SRSLResult" kindref="compound">SRSLResult</ref></type>
@@ -179,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="43" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="44" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aab3cdbd7bda72447f602d2fa85ea4fb9" prot="private" static="no" mutable="no">
         <type>std::list&lt; LXAState &gt;</type>
@@ -193,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="44" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="45" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a57254fe3716bf8fb6d91842eaa5da695" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> &gt;</type>
@@ -207,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="46" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="47" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a4c6b05a57847d1e8c8538a743c409104" prot="private" static="no" mutable="no">
         <type>int64_t</type>
@@ -222,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="47" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="48" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -242,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="20" column="32"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="21" column="32"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -258,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="23" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ae893e757cc7362f11ddcaa414831db7a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -272,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="25" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ab71e37ebd990479cc8864b551f84a678" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -286,7 +300,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="26" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="27" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1af1a1f3996d7aa80b431ed7e90f819e7f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -300,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="27" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1afcda9ae94406fb891ceb901565e6e773" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -324,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="28" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1ae9279d22b2a3578abc13fe30ce52490f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__SRSL__NS_1_1SRSLLexicalUnit" kindref="compound">SRSLLexicalUnit</ref> *</type>
@@ -338,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="30" column="38"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="31" column="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aaa337a290cc47a3661d30d4ca7921546" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -352,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="32" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="33" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a72694053fb0d284b369dc3bca56f06e5" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -366,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="33" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="34" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a5b5dc85fdbde580a2912e807090848c6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
@@ -384,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="34" column="34"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="35" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1a93a07bcc1377ffe5431a18c4476165e2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="structSR__SRSL__NS_1_1Lexem" kindref="compound">Lexem</ref> *</type>
@@ -398,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="35" column="34"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="36" column="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -453,7 +467,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="11" bodyend="49"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h" bodystart="11" bodyend="50"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1afc673be395be8ffea5987d14fba4a631" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>Analyze</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexicalAnalyzer_1aff486cc6d3f28d21d84279f629a9c3a7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexicalAnalyzer</scope><name>Clear</name></member>

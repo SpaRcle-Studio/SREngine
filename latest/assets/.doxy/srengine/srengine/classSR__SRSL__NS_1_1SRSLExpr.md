@@ -136,7 +136,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* | [**CreateStringExpression**](#function-createstringexpression) (std::string && token) <br> |
+|  [**SRSLExpr**](classSR__SRSL__NS_1_1SRSLExpr.md) \* | [**CreateStringExpression**](#function-createstringexpression) (std::string token) <br> |
 
 
 
@@ -447,7 +447,7 @@ inline SR_SRSL_NS::SRSLExpr::~SRSLExpr () override
 
 ```C++
 static inline SRSLExpr * SR_SRSL_NS::SRSLExpr::CreateStringExpression (
-    std::string && token
+    std::string token
 ) 
 ```
 

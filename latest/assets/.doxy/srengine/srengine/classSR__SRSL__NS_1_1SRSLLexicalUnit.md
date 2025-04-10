@@ -17,7 +17,7 @@ _минимальная лексическая единица_
 Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
-Inherited by the following classes: [SR\_SRSL\_NS::SRSLDecorator](classSR__SRSL__NS_1_1SRSLDecorator.md),  [SR\_SRSL\_NS::SRSLDecorators](classSR__SRSL__NS_1_1SRSLDecorators.md),  [SR\_SRSL\_NS::SRSLExpr](classSR__SRSL__NS_1_1SRSLExpr.md),  [SR\_SRSL\_NS::SRSLForStatement](classSR__SRSL__NS_1_1SRSLForStatement.md),  [SR\_SRSL\_NS::SRSLFunction](classSR__SRSL__NS_1_1SRSLFunction.md),  [SR\_SRSL\_NS::SRSLIfStatement](classSR__SRSL__NS_1_1SRSLIfStatement.md),  [SR\_SRSL\_NS::SRSLLexicalTree](classSR__SRSL__NS_1_1SRSLLexicalTree.md),  [SR\_SRSL\_NS::SRSLReturn](classSR__SRSL__NS_1_1SRSLReturn.md),  [SR\_SRSL\_NS::SRSLVariable](classSR__SRSL__NS_1_1SRSLVariable.md)
+Inherited by the following classes: [SR\_SRSL\_NS::SRSLDecorator](classSR__SRSL__NS_1_1SRSLDecorator.md),  [SR\_SRSL\_NS::SRSLDecorators](classSR__SRSL__NS_1_1SRSLDecorators.md),  [SR\_SRSL\_NS::SRSLExpr](classSR__SRSL__NS_1_1SRSLExpr.md),  [SR\_SRSL\_NS::SRSLForStatement](classSR__SRSL__NS_1_1SRSLForStatement.md),  [SR\_SRSL\_NS::SRSLFunction](classSR__SRSL__NS_1_1SRSLFunction.md),  [SR\_SRSL\_NS::SRSLIfStatement](classSR__SRSL__NS_1_1SRSLIfStatement.md),  [SR\_SRSL\_NS::SRSLLexicalTree](classSR__SRSL__NS_1_1SRSLLexicalTree.md),  [SR\_SRSL\_NS::SRSLReturn](classSR__SRSL__NS_1_1SRSLReturn.md),  [SR\_SRSL\_NS::SRSLStructureStatement](classSR__SRSL__NS_1_1SRSLStructureStatement.md),  [SR\_SRSL\_NS::SRSLVariable](classSR__SRSL__NS_1_1SRSLVariable.md)
 
 
 

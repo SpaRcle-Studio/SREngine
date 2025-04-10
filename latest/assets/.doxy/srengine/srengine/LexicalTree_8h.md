@@ -45,6 +45,7 @@
 | class | [**SRSLLexicalTree**](classSR__SRSL__NS_1_1SRSLLexicalTree.md) <br> |
 | class | [**SRSLLexicalUnit**](classSR__SRSL__NS_1_1SRSLLexicalUnit.md) <br>_минимальная лексическая единица_  |
 | class | [**SRSLReturn**](classSR__SRSL__NS_1_1SRSLReturn.md) <br> |
+| class | [**SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md) <br> |
 | class | [**SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md) <br> |
 
 
