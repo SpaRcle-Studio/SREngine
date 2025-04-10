@@ -1,14 +1,6 @@
 ShaderType Compute;
 
-PolygonMode Fill;
-CullMode Back;
-DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
-BlendEnabled true;
-DepthWrite false;
-DepthTest false;
-
-[THREADS(8, 8, 8)]
+[[THREADS(8, 8, 8)]]
 void compute() {
 
 }
