@@ -6,6 +6,17 @@
 #include <Scripting/Cpp/ScriptSystem.h>
 
 namespace SR_SCRIPTING_NS {
+    ModuleManager::~ModuleManager() {
+        SRAssert2(m_behaviourInstances.empty(), "ModuleManager::~ModuleManager() : behaviours not unloaded!");
+
+        for (auto&& module : m_modules) {
+            if (!UnloadModule(module)) {
+                SRHalt("ModuleManager::~ModuleManager() : failed to unload module!\n\tPath: " + module.GetPath().ToString());
+            }
+        }
+        m_modules.clear();
+    }
+
     bool ModuleManager::ReloadModule(const SR_UTILS_NS::Path& path) {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
@@ -28,22 +39,14 @@ namespace SR_SCRIPTING_NS {
 
         ScriptModule& module = *pIt;
 
-        if (auto&& pLibraryHandle = module.GetModuleHandle()) {
-            auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
-            reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
-
-            if (!SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle)) {
-                SRHalt("ModuleManager::ReloadModule() : failed to unload module! Something went wrong...\n\tPath: " + path.ToString());
-                return false;
-            }
-            else {
-                SR_LOG("ModuleManager::ReloadModule() : module \"" + path.ToString() + "\" unloaded.");
-            }
-            module.SetModuleHandle(nullptr);
+        if (!UnloadModule(module)) {
+            SR_ERROR("ModuleManager::ReloadModule() : failed to unload module!\n\tPath: " + path.ToString());
+            return false;
         }
 
         if (auto&& pLibraryHandle = LoadModule(path)) {
             module.SetModuleHandle(pLibraryHandle);
+            InitModule(module);
         }
         else {
             SR_ERROR("ModuleManager::ReloadModule() : failed to load module!\n\tPath: " + path.ToString());
@@ -113,9 +116,9 @@ namespace SR_SCRIPTING_NS {
         auto&& pModulesCountFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModulesCount");
         auto&& pModuleNameFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModuleName");
         auto&& pModuleVersionFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModuleCompilerVersion");
-        auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
+        auto&& pDestroyScriptCoreAPIFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
 
-        if (pModuleNameFunction && pModuleVersionFunction && pModulesCountFunction && pDestroyScriptCoreAPI) {
+        if (pModuleNameFunction && pModuleVersionFunction && pModulesCountFunction && pDestroyScriptCoreAPIFunction) {
             const uint32_t countModules = reinterpret_cast<uint32_t(*)()>(pModulesCountFunction)();
             if (countModules != 1) {
                 SR_ERROR("ModuleManager::LoadModule() : module count mismatch!\n\tExpected: 1\n\tActual: {}"_format(countModules));
@@ -148,7 +151,7 @@ namespace SR_SCRIPTING_NS {
         return pLibraryHandle;
 
     unload_module:
-        reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
+        reinterpret_cast<void(*)()>(pDestroyScriptCoreAPIFunction)();
         SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle);
         return nullptr;
     }
@@ -161,12 +164,7 @@ namespace SR_SCRIPTING_NS {
 
         pInstance->SetBehaviourName(behaviourName, SR_UTILS_NS::Passkey<ModuleManager>(this));
 
-        for (auto&& module : m_modules) {
-            if (module.HasBehaviour(behaviourName)) {
-
-                break;
-            }
-        }
+        AllocateBehaviourInternalInstance(pInstance);
 
         if (m_behaviourInstances.count(pInstance) > 0) {
             SRHalt("Memory address collision! Something went wrong...");
@@ -185,11 +183,119 @@ namespace SR_SCRIPTING_NS {
         auto&& pIt = m_behaviourInstances.find(pInstance);
 
         if (pIt != m_behaviourInstances.end()) {
+            FreeBehaviourInternalInstance(pInstance);
             delete *pIt;
             m_behaviourInstances.erase(pIt);
         }
         else {
             SRHalt("ModuleManager::FreeBehaviourInstance() : instance not found!");
         }
+    }
+
+    bool ModuleManager::InitModule(ScriptModule& module) {
+        module.ResetBehaviours();
+
+        void* pGetBehaviourNameFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(
+            module.GetModuleHandle(), "GetScriptModuleBehaviourName"
+        );
+
+        const uint32_t behavioursCount = reinterpret_cast<uint32_t(*)(uint32_t)>(SR_PLATFORM_NS::GetLibraryFunctionAddress(
+            module.GetModuleHandle(), "GetScriptModuleBehavioursCount"))(0);
+
+        for (uint32_t i = 0; i < behavioursCount; ++i) {
+            const std::string_view behaviourName = reinterpret_cast<const char* (*)(uint32_t, uint32_t)>(pGetBehaviourNameFunction)(0, i);
+            module.AddBehaviour(behaviourName);
+        }
+
+        for (auto&& pInstance : m_behaviourInstances) {
+            if (!pInstance->GetInstance()) {
+                AllocateBehaviourInternalInstance(pInstance);
+            }
+        }
+
+        return true;
+    }
+
+    ScriptModule* ModuleManager::FindModule(SR_UTILS_NS::StringAtom moduleName) {
+        auto&& pIt = std::ranges::find_if(m_modules, [&moduleName](const auto& module) {
+            return module.GetModuleName() == moduleName;
+        });
+        return pIt != m_modules.end() ? &(*pIt) : nullptr;
+    }
+
+    bool ModuleManager::HasBehaviour(SR_UTILS_NS::StringAtom behaviourName) const {
+        return std::ranges::any_of(m_modules, [&behaviourName](const auto& module) {
+            return module.HasBehaviour(behaviourName);
+        });
+    }
+
+    bool ModuleManager::UnloadModule(ScriptModule& module) {
+        auto&& pLibraryHandle = module.GetModuleHandle();
+        if (!pLibraryHandle) {
+            return true;
+        }
+
+        for (auto&& pInstance : m_behaviourInstances) {
+            if (pInstance->GetModuleName() == module.GetModuleName()) {
+                FreeBehaviourInternalInstance(pInstance);
+            }
+        }
+
+        auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
+        reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
+
+        if (!SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle)) {
+            SRHalt("ModuleManager::UnloadModule() : failed to unload module! Something went wrong...\n\tPath: " + module.GetPath().ToString());
+            return false;
+        }
+        else {
+            SR_LOG("ModuleManager::UnloadModule() : module \"" + module.GetPath().ToString() + "\" unloaded.");
+        }
+
+        module.SetModuleHandle(nullptr);
+
+        return true;
+    }
+
+    void ModuleManager::FreeBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
+        if (pInstance->GetInstance()) {
+            auto&& pModule = FindModule(pInstance->GetModuleName());
+            if (pModule) {
+                void* pFreeScriptBehaviourFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pModule->GetModuleHandle(), "FreeScriptBehaviour");
+                reinterpret_cast<void(*)(void*)>(pFreeScriptBehaviourFunction)(pInstance->GetInstance());
+            }
+            else {
+                SRHalt("ModuleManager::FreeBehaviourInternalInstance() : module \"{}\" not found!", pInstance->GetModuleName());
+            }
+        }
+        pInstance->SetModuleName(SR_UTILS_NS::StringAtom(), SR_UTILS_NS::Passkey<ModuleManager>(this));
+    }
+
+    bool ModuleManager::AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
+        const SR_UTILS_NS::StringAtom behaviourName = pInstance->GetBehaviourName();
+
+        for (auto&& module : m_modules) {
+            if (module.HasBehaviour(behaviourName)) {
+                void* pAllocateBehaviourFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(module.GetModuleHandle(), "AllocateScriptBehaviour");
+                void* pScriptBehaviour = reinterpret_cast<void*(*)(const char*)>(pAllocateBehaviourFunction)(behaviourName.c_str());
+
+                if (!pScriptBehaviour) {
+                    SRHalt("ModuleManager::AllocateBehaviourInternalInstance() : failed to allocate behaviour instance!\n\tBehaviour: {}", behaviourName);
+                    delete pInstance;
+                    return false;
+                }
+
+                pInstance->SetInstance(pScriptBehaviour, SR_UTILS_NS::Passkey<ModuleManager>(this));
+                pInstance->SetModuleName(module.GetModuleName(), SR_UTILS_NS::Passkey<ModuleManager>(this));
+
+                if (auto&& reloadCallback = pInstance->GetReloadCallback()) {
+                    reloadCallback();
+                }
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

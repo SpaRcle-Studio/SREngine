@@ -209,6 +209,8 @@ SR_SCRIPT_EXTERN_DLL void SetScriptFunction(uint64_t index, void* pFunction) { C
 SR_SCRIPT_EXTERN_DLL void SetScriptContextHandle(ScriptHandle handle) { CoreAPI::Instance().SetScriptContextHandle(handle); }
 SR_SCRIPT_EXTERN_DLL void DestroyScriptCoreAPI() { CoreAPI::Destroy(); }
 SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModulesCount() { return CoreAPI::Instance().GetCountModules(); }
+SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModuleBehavioursCount(uint32_t index) { return CoreAPI::Instance().GetScriptModule(index).behaviours.size(); }
+SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleBehaviourName(uint32_t moduleIndex, uint32_t behaviourIndex) { return CoreAPI::Instance().GetScriptModule(moduleIndex).behaviours[behaviourIndex].name; }
 SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleName(uint32_t index) { return CoreAPI::Instance().GetScriptModule(index).name; }
 SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleCompilerVersion() { return CoreAPI::Instance().GetCompilerVersion(); }
 SR_SCRIPT_EXTERN_DLL void* AllocateScriptBehaviour(const char* behaviourName) { return CoreAPI::Instance().AllocateBehaviour(behaviourName); }

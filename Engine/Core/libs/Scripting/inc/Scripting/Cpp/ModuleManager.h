@@ -26,6 +26,9 @@ namespace SR_SCRIPTING_NS {
             return m_behaviours.count(behaviourName) > 0;
         }
 
+        void ResetBehaviours() { m_behaviours.clear(); }
+        void AddBehaviour(SR_UTILS_NS::StringAtom behaviourName) { m_behaviours.insert(behaviourName); }
+
     private:
         SR_UTILS_NS::Path m_path;
         SR_UTILS_NS::StringAtom m_moduleName;
@@ -41,12 +44,15 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD void* GetInstance() const { return m_pInstance; }
         SR_NODISCARD const ReloadCallback& GetReloadCallback() const { return m_reloadCallback; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetModuleName() const { return m_moduleName; }
 
-        void SetBehaviourName(const SR_UTILS_NS::StringAtom& name, ManagerPasskey) { m_behaviourName = name; }
+        void SetBehaviourName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_behaviourName = name; }
+        void SetModuleName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_moduleName = name; }
         void SetInstance(void* pInstance, ManagerPasskey) { m_pInstance = pInstance; }
         void SetReloadCallback(const ReloadCallback& callback) { m_reloadCallback = callback; }
 
     private:
+        SR_UTILS_NS::StringAtom m_moduleName;
         SR_UTILS_NS::StringAtom m_behaviourName;
         void* m_pInstance = nullptr;
         ReloadCallback m_reloadCallback;
@@ -60,6 +66,8 @@ namespace SR_SCRIPTING_NS {
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
         { }
 
+        ~ModuleManager() override;
+
     public:
         bool Init();
 
@@ -68,8 +76,16 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD CppBehaviourInstance* AllocateBehaviourInstance(const SR_UTILS_NS::StringAtom& behaviourName);
         void FreeBehaviourInstance(CppBehaviourInstance* pInstance);
 
+        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom behaviourName) const;
+
     private:
+        bool AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance);
+        void FreeBehaviourInternalInstance(CppBehaviourInstance* pInstance);
+
         SR_NODISCARD void* LoadModule(const SR_UTILS_NS::Path& modulePath);
+        bool InitModule(ScriptModule& module);
+        bool UnloadModule(ScriptModule& module);
+        SR_NODISCARD ScriptModule* FindModule(SR_UTILS_NS::StringAtom moduleName);
 
     private:
         SR_UTILS_NS::Path m_resourcesPath;
