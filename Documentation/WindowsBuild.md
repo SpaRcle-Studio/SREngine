@@ -62,3 +62,5 @@
     - 5.9. In Project window right-click `SREngine` folder and click `Reload CMake Project`.
     
     - 5.10. Click `Run 'SREngine'` (Shift + F10).
+
+<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/images/clion%20toolchains.png">
