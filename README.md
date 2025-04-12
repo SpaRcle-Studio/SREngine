@@ -44,6 +44,9 @@ It aims to establish a strong base for game creation and is currently in the ear
  * tmp/* - temporary branches for dangerous experiments
  * release/* - branches for release candidates
 
+## How to build?
+See documentation
+
 ## [Documentation](https://docs.sparcles.dev/) 
 
 ## Used libraries
