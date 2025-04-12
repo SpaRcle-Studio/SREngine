@@ -37,3 +37,6 @@ Build
 venv
 .venv
 /Resources/CMakeLists.txt
+/Android/cmdline-tools.zip
+/Android/app/src/main/jniLibs
+/Android/app/src/main/obj
