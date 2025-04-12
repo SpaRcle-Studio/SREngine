@@ -11,16 +11,10 @@
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
 
-#include <Scripting/Mono/MonoTest.h>
-
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
 int main(int argc, char** argv) {
-#ifdef SR_ENGINE_MONO_SUPPORT
-    SR_SCRIPTING_NS::RunMonoTest();
-#endif
-
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
         return 10;

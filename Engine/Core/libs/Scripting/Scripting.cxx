@@ -13,5 +13,3 @@
 #include "src/Scripting/Impl/EvoBehaviour.cpp"
 #include "src/Scripting/Impl/EvoScriptManager.cpp"
 #include "src/Scripting/Impl/EvoScriptResourceReloader.cpp"
-
-#include "src/Scripting/Mono/MonoTest.cpp"
