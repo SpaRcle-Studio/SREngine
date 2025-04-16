@@ -7,8 +7,49 @@
 
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/PassKey.h>
+#include <Utils/ECS/SceneObject.h>
+
+#include <Codegen/ScriptHandle.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
+    class SpaRcleAPIRegister : public SR_UTILS_NS::Singleton<SpaRcleAPIRegister> {
+        SR_REGISTER_SINGLETON(SpaRcleAPIRegister)
+        using FunctionHandle = void*;
+    public:
+        SR_NODISCARD uint64_t GetCountFunctions() { return m_functionTable.size(); }
+        SR_NODISCARD void* GetFunction(uint64_t index) { return m_functionTable[index]; }
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override { return false; }
+
+        void OnMemoryAlloc() { m_allocationsCount++; }
+        void OnMemoryFree() { SRAssert(m_allocationsCount > 0); m_allocationsCount--; }
+        void CheckMemoryLeaks() {
+            if (m_allocationsCount > 0) {
+                SRHalt("Memory leak detected! Allocations count: {}", m_allocationsCount.load());
+            }
+        }
+
+    public:
+        void SetRegisterFunction(std::function<void(std::vector<FunctionHandle>&)> func) {
+            m_registerFunction = std::move(func);
+        }
+
+        void RegisterAPI() {
+            if (!m_isRegistered) {
+                if (m_registerFunction) {
+                    m_registerFunction(m_functionTable);
+                }
+                m_isRegistered = true;
+            }
+        }
+
+    private:
+        std::function<void(std::vector<FunctionHandle>&)> m_registerFunction;
+        std::vector<FunctionHandle> m_functionTable;
+        bool m_isRegistered = false;
+        std::atomic<uint64_t> m_allocationsCount = 0;
+
+    };
+
     class ModuleManager;
 
     class ScriptModule {
@@ -40,6 +81,9 @@ namespace SR_SCRIPTING_NS {
     class CppBehaviourInstance {
         using ReloadCallback = SR_HTYPES_NS::Function<void()>;
         using ManagerPasskey = SR_UTILS_NS::Passkey<ModuleManager>;
+        using VoidFunc = void(*)(void*);
+        using UpdateFunc = void(*)(void*, float_t);
+        using SetSceneObjectFunc = void(*)(void*, SpaRcleAPI::ScriptHandle);
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD void* GetInstance() const { return m_pInstance; }
@@ -49,12 +93,40 @@ namespace SR_SCRIPTING_NS {
         void SetBehaviourName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_behaviourName = name; }
         void SetModuleName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_moduleName = name; }
         void SetInstance(void* pInstance, ManagerPasskey) { m_pInstance = pInstance; }
+        void SetModuleHandle(void* pModuleHandle, ManagerPasskey) { m_pModuleHandle = pModuleHandle; }
         void SetReloadCallback(const ReloadCallback& callback) { m_reloadCallback = callback; }
+
+        void OnBehaviourUnloaded(ManagerPasskey);
+        void OnBehaviourLoaded(ManagerPasskey);
+
+        void Awake() { if (m_awakeFunc) { m_awakeFunc(m_pInstance); } }
+        void OnEnable() { if (m_onEnableFunc) { m_onEnableFunc(m_pInstance); } }
+        void OnDisable() { if (m_onDisableFunc) { m_onDisableFunc(m_pInstance); } }
+        void OnAttached() { if (m_onAttachedFunc) { m_onAttachedFunc(m_pInstance); } }
+        void OnDetached() { if (m_onDetachedFunc) { m_onDetachedFunc(m_pInstance); } }
+        void OnDestroy() { if (m_onDestroyFunc) { m_onDestroyFunc(m_pInstance); } }
+        void Start() { if (m_startFunc) { m_startFunc(m_pInstance); } }
+        void FixedUpdate() { if (m_fixedUpdateFunc) { m_fixedUpdateFunc(m_pInstance); } }
+        void Update(float_t dt) { if (m_updateFunc) { m_updateFunc(m_pInstance, dt); } }
+        void SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
+
+    private:
+        VoidFunc m_awakeFunc = nullptr;
+        VoidFunc m_onEnableFunc = nullptr;
+        VoidFunc m_onDisableFunc = nullptr;
+        VoidFunc m_onAttachedFunc = nullptr;
+        VoidFunc m_onDetachedFunc = nullptr;
+        VoidFunc m_onDestroyFunc = nullptr;
+        VoidFunc m_startFunc = nullptr;
+        VoidFunc m_fixedUpdateFunc = nullptr;
+        UpdateFunc m_updateFunc = nullptr;
+        SetSceneObjectFunc m_setSceneObjectFunc = nullptr;
 
     private:
         SR_UTILS_NS::StringAtom m_moduleName;
         SR_UTILS_NS::StringAtom m_behaviourName;
         void* m_pInstance = nullptr;
+        void* m_pModuleHandle = nullptr;
         ReloadCallback m_reloadCallback;
 
     };

@@ -5,6 +5,7 @@
 #include <cfloat>
 #include <cmath>
 #include <cstdio>
+#include <memory>
 
 #ifdef SR_SCRIPT_AOT_ENABLED
     #define SR_SCRIPT_EXTERN_DLL
@@ -108,12 +109,15 @@ namespace SpaRcleAPI {
 
         void Init(uint64_t countFunctions) { m_functionTable.resize(countFunctions); }
         void SetFunction(uint64_t index, FunctionHandle function) { m_functionTable[index] = function; }
-        void SetScriptContextHandle(ScriptHandle handle) { m_scriptContextHandle = handle; }
 
         ScriptModuleInfo& AddModule(const char* moduleName) {
             auto& module = m_scriptModules.emplace_back();
             module.name = moduleName;
             return module;
+        }
+
+        ScriptModuleInfo& GetLastModule() {
+            return m_scriptModules.back();
         }
 
         CoreAPI& SetCompilerVersion(const char* version) {
@@ -124,25 +128,88 @@ namespace SpaRcleAPI {
         SR_NODISCARD const char* GetCompilerVersion() const { return m_compilerVersion; }
         SR_NODISCARD uint32_t GetCountModules() const { return static_cast<uint32_t>(m_scriptModules.size()); }
         SR_NODISCARD ScriptModuleInfo& GetScriptModule(uint32_t index) { return m_scriptModules[index]; }
-        SR_NODISCARD ScriptHandle GetScriptContextHandle() const { return m_scriptContextHandle; }
         SR_NODISCARD FunctionHandle GetFunction(uint64_t index) const { return m_functionTable[index]; }
-
-        SR_NODISCARD CppBehaviour* AllocateBehaviour(const char* behaviourName) {
-            for (auto& module : m_scriptModules) {
-                for (auto& behaviour : module.behaviours) {
-                    if (strcmp(behaviour.name, behaviourName) == 0) {
-                        return reinterpret_cast<CppBehaviour*>(behaviour.allocateFunc());
-                    }
-                }
-            }
-            return nullptr;
-        }
+        SR_NODISCARD CppBehaviour* AllocateBehaviour(const char* behaviourName);
 
     private:
         const char* m_compilerVersion = nullptr;
         std::vector<ScriptModuleInfo> m_scriptModules;
         std::vector<FunctionHandle> m_functionTable;
-        ScriptHandle m_scriptContextHandle;
+
+    };
+
+    struct SharedPtrUnmanagedPassKey { };
+
+    template<typename T> class SharedPtr {
+    public:
+        SharedPtr() = default;
+
+        ~SharedPtr() {
+            auto&& pDeleteFunction = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_DELETE_FUNCTION_INDEX);
+            pDeleteFunction(m_handle);
+        }
+
+        SharedPtr(const ScriptHandle& handle)
+            : m_handle(handle)
+        {
+            auto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
+            pIncrementFunc(m_handle);
+        }
+
+        SharedPtr(const SharedPtr& other)
+            : m_handle(other.m_handle)
+            , m_initialized(other.m_initialized)
+        {
+            auto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
+            pIncrementFunc(m_handle);
+
+            memcpy(m_storage, other.m_storage, sizeof(T));
+        }
+
+        SharedPtr(SharedPtr&& other) noexcept
+            : m_handle(std::exchange(other.m_handle, {}))
+            , m_initialized(std::exchange(other.m_initialized, false))
+        {
+            memcpy(m_storage, other.m_storage, sizeof(T));
+        }
+
+        SharedPtr& operator=(const SharedPtr& other) {
+            if (this != &other) {
+                auto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(T::API_INCREMENT_FUNCTION_INDEX);
+                pIncrementFunc(other.m_handle);
+                m_handle = other.m_handle;
+                m_initialized = other.m_initialized;
+                memcpy(m_storage, other.m_storage, sizeof(T));
+            }
+            return *this;
+        }
+
+        SharedPtr& operator=(SharedPtr&& other) noexcept {
+            if (this != &other) {
+                m_handle = std::exchange(other.m_handle, {});
+                m_initialized = std::exchange(other.m_initialized, false);
+                memcpy(m_storage, other.m_storage, sizeof(T));
+            }
+            return *this;
+        }
+
+        T* operator->() { EnsureInitialized(); return Get(); }
+        T& operator*() { EnsureInitialized(); return *Get(); }
+
+    private:
+        T* Get() { return reinterpret_cast<T*>(&m_storage); }
+
+        void EnsureInitialized() {
+            if (!m_initialized) {
+                new (static_cast<void*>(Get())) T(m_handle, SharedPtrUnmanagedPassKey());
+                m_initialized = true;
+            }
+        }
+
+    private:
+        ScriptHandle m_handle;
+        alignas(T) std::byte m_storage[sizeof(T)];
+        bool m_initialized = false;
 
     };
 
@@ -172,32 +239,6 @@ namespace SpaRcleAPI {
         ScriptHandle m_handle;
 
     };
-
-    class CppBehaviour {
-    public:
-        CppBehaviour() = default;
-        virtual ~CppBehaviour() = default;
-
-        CppBehaviour(const CppBehaviour&) = delete;
-        CppBehaviour(CppBehaviour&&) = delete;
-
-        CppBehaviour& operator=(const CppBehaviour&) = delete;
-        CppBehaviour& operator=(CppBehaviour&&) = delete;
-
-    public:
-        virtual void Awake() { }
-        virtual void OnEnable() { }
-        virtual void OnDisable() { }
-        virtual void OnAttached() { }
-        virtual void OnDetached() { }
-        virtual void OnDestroy() { }
-        virtual void Start() { }
-        virtual void Update(float_t dt) { }
-        virtual void FixedUpdate() { }
-
-    private:
-
-    };
 }
 
 #define SR_SCRIPT_BEHAVIOUR_CLASS()
@@ -206,12 +247,23 @@ using namespace SpaRcleAPI;
 
 SR_SCRIPT_EXTERN_DLL void InitScriptCoreAPI(uint64_t countFunctions) { CoreAPI::Instance().Init(countFunctions); }
 SR_SCRIPT_EXTERN_DLL void SetScriptFunction(uint64_t index, void* pFunction) { CoreAPI::Instance().SetFunction(index, pFunction); }
-SR_SCRIPT_EXTERN_DLL void SetScriptContextHandle(ScriptHandle handle) { CoreAPI::Instance().SetScriptContextHandle(handle); }
 SR_SCRIPT_EXTERN_DLL void DestroyScriptCoreAPI() { CoreAPI::Destroy(); }
 SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModulesCount() { return CoreAPI::Instance().GetCountModules(); }
 SR_SCRIPT_EXTERN_DLL uint32_t GetScriptModuleBehavioursCount(uint32_t index) { return CoreAPI::Instance().GetScriptModule(index).behaviours.size(); }
 SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleBehaviourName(uint32_t moduleIndex, uint32_t behaviourIndex) { return CoreAPI::Instance().GetScriptModule(moduleIndex).behaviours[behaviourIndex].name; }
 SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleName(uint32_t index) { return CoreAPI::Instance().GetScriptModule(index).name; }
 SR_SCRIPT_EXTERN_DLL const char* GetScriptModuleCompilerVersion() { return CoreAPI::Instance().GetCompilerVersion(); }
+
 SR_SCRIPT_EXTERN_DLL void* AllocateScriptBehaviour(const char* behaviourName) { return CoreAPI::Instance().AllocateBehaviour(behaviourName); }
-SR_SCRIPT_EXTERN_DLL void FreeScriptBehaviour(void* pBehaviour) { delete reinterpret_cast<CppBehaviour*>(pBehaviour); }
+SR_SCRIPT_EXTERN_DLL void FreeScriptBehaviour(void* pBehaviour);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleSetBehaviourSceneObject(void* pInstance, ScriptHandle handle);
+
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourAwake(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourOnEnable(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourOnDisable(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourOnAttached(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourOnDetached(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourOnDestroy(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourStart(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourFixedUpdate(void* pInstance);
+SR_SCRIPT_EXTERN_DLL void ScriptModuleBehaviourUpdate(void* pInstance, float_t dt);

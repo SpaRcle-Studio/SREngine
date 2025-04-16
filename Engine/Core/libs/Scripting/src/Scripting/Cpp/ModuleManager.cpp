@@ -6,6 +6,43 @@
 #include <Scripting/Cpp/ScriptSystem.h>
 
 namespace SR_SCRIPTING_NS {
+    void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {
+        m_awakeFunc = nullptr;
+        m_onEnableFunc = nullptr;
+        m_onDisableFunc = nullptr;
+        m_onAttachedFunc = nullptr;
+        m_onDetachedFunc = nullptr;
+        m_onDestroyFunc = nullptr;
+        m_startFunc = nullptr;
+        m_fixedUpdateFunc = nullptr;
+        m_updateFunc = nullptr;
+        m_setSceneObjectFunc = nullptr;
+    }
+
+    void CppBehaviourInstance::OnBehaviourLoaded(ManagerPasskey) {
+        m_awakeFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourAwake");
+        m_onEnableFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourOnEnable");
+        m_onDisableFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourOnDisable");
+        m_onAttachedFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourOnAttached");
+        m_onDetachedFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourOnDetached");
+        m_onDestroyFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourOnDestroy");
+        m_startFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourStart");
+        m_fixedUpdateFunc = (VoidFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourFixedUpdate");
+        m_updateFunc = (UpdateFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleBehaviourUpdate");
+        m_setSceneObjectFunc = (SetSceneObjectFunc)SR_PLATFORM_NS::GetLibraryFunctionAddress(m_pModuleHandle, "ScriptModuleSetBehaviourSceneObject");
+    }
+
+    void CppBehaviourInstance::SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject) {
+        if (SRVerify(m_setSceneObjectFunc && m_pInstance)) {
+            SpaRcleAPI::ScriptHandle handle;
+            SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().OnMemoryAlloc();
+            handle.pRefCount = new uint32_t(0);
+            handle.isDestructible = false;
+            handle.pData = pSceneObject->GetRawPtr();
+            m_setSceneObjectFunc(m_pInstance, handle);
+        }
+    }
+
     ModuleManager::~ModuleManager() {
         SRAssert2(m_behaviourInstances.empty(), "ModuleManager::~ModuleManager() : behaviours not unloaded!");
 
@@ -199,12 +236,30 @@ namespace SR_SCRIPTING_NS {
             module.GetModuleHandle(), "GetScriptModuleBehaviourName"
         );
 
+        void* pInitScriptCoreAPIFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(
+            module.GetModuleHandle(), "InitScriptCoreAPI"
+        );
+
+        void* pSetScriptFunctionFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(
+            module.GetModuleHandle(), "SetScriptFunction"
+        );
+
         const uint32_t behavioursCount = reinterpret_cast<uint32_t(*)(uint32_t)>(SR_PLATFORM_NS::GetLibraryFunctionAddress(
             module.GetModuleHandle(), "GetScriptModuleBehavioursCount"))(0);
 
         for (uint32_t i = 0; i < behavioursCount; ++i) {
             const std::string_view behaviourName = reinterpret_cast<const char* (*)(uint32_t, uint32_t)>(pGetBehaviourNameFunction)(0, i);
             module.AddBehaviour(behaviourName);
+        }
+
+        SpaRcleAPIRegister::Instance().RegisterAPI();
+
+        const uint64_t countFunctions = SpaRcleAPIRegister::Instance().GetCountFunctions();
+
+        reinterpret_cast<void(*)(uint64_t)>(pInitScriptCoreAPIFunction)(countFunctions);
+        for (uint64_t i = 0; i < countFunctions; ++i) {
+            void* pFunction = SpaRcleAPIRegister::Instance().GetFunction(i);
+            reinterpret_cast<void(*)(uint64_t, void*)>(pSetScriptFunctionFunction)(i, pFunction);
         }
 
         for (auto&& pInstance : m_behaviourInstances) {
@@ -269,6 +324,9 @@ namespace SR_SCRIPTING_NS {
             }
         }
         pInstance->SetModuleName(SR_UTILS_NS::StringAtom(), SR_UTILS_NS::Passkey<ModuleManager>(this));
+        pInstance->OnBehaviourUnloaded(SR_UTILS_NS::Passkey<ModuleManager>(this));
+        pInstance->SetInstance(nullptr, SR_UTILS_NS::Passkey<ModuleManager>(this));
+        pInstance->SetModuleHandle(nullptr, SR_UTILS_NS::Passkey<ModuleManager>(this));
     }
 
     bool ModuleManager::AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
@@ -286,7 +344,9 @@ namespace SR_SCRIPTING_NS {
                 }
 
                 pInstance->SetInstance(pScriptBehaviour, SR_UTILS_NS::Passkey<ModuleManager>(this));
+                pInstance->SetModuleHandle(module.GetModuleHandle(), SR_UTILS_NS::Passkey<ModuleManager>(this));
                 pInstance->SetModuleName(module.GetModuleName(), SR_UTILS_NS::Passkey<ModuleManager>(this));
+                pInstance->OnBehaviourLoaded(SR_UTILS_NS::Passkey<ModuleManager>(this));
 
                 if (auto&& reloadCallback = pInstance->GetReloadCallback()) {
                     reloadCallback();

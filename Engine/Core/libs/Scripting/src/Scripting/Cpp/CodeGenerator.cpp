@@ -478,7 +478,7 @@ namespace SR_SCRIPTING_NS {
         if (codegenFileStream.is_open()) {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
-            codegenFileStream << "#include <CoreAPI.h>\n\n";
+            codegenFileStream << "#include \"{}\"\n\n"_format(m_resourcesFolder.Concat("SpaRcleAPI/CoreAPIImpl.cpp"));
 
             std::string compilerVersion = m_compiler->GetCompilerVersion();
             compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\r", "");
@@ -511,12 +511,16 @@ namespace SR_SCRIPTING_NS {
             codegenFileStream << "\tSpaRcleAPI::CoreAPI::Instance()";
             codegenFileStream << "\n\t\t.SetCompilerVersion(\"{}\")"_format(compilerVersion);
             codegenFileStream << "\n\t\t.AddModule(\"{}\")"_format(module.moduleInfo.moduleName);
+            codegenFileStream << ";\n";
+
             for (auto&& [filePath, fileMetadata] : module.codeFiles) {
                 for (auto&& behaviour : fileMetadata.behaviours) {
-                    codegenFileStream << "\n\t\t\t.AddBehaviour(\"{}\", &CodegenAllocateScriptBehaviour_{})"_format(behaviour.name, behaviour.name);
+                    codegenFileStream << "\tSpaRcleAPI::CoreAPI::Instance().GetLastModule()\n";
+                    codegenFileStream << "\t\t.AddBehaviour(\"{}\", &CodegenAllocateScriptBehaviour_{})"_format(behaviour.name, behaviour.name);
+                    codegenFileStream << ";\n";
                 }
             }
-            codegenFileStream << ";\n";
+
             codegenFileStream << "\treturn true;\n";
             codegenFileStream << "}\n\n";
 

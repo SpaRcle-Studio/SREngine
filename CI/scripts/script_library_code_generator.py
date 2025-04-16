@@ -77,7 +77,9 @@ def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflectio
     f.write(f'){' const;' if method.is_const else ';'}\n')
 
 
-def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_classes.ScriptableClass, constructor: reflection_classes.Constructor, code_structure: reflection_classes.CodeStructure):
+def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, increment_function_index: int, scriptable_class: reflection_classes.ScriptableClass,
+                             constructor: reflection_classes.Constructor, code_structure: reflection_classes.CodeStructure):
+
     f.write(f'{depth * '\t'}{'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{scriptable_class.alias}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in constructor.parameters]))
     f.write(') {\n')
@@ -90,7 +92,8 @@ def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, scri
     f.write(', '.join([(parameter.name + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
                        for parameter in constructor.parameters]))
     f.write(');\n')
-    f.write(f'{depth * '\t'}\t(*m_handle.pRefCount) += 1;\n')
+    f.write(f'{depth * '\t'}\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+    f.write(f'{depth * '\t'}\tpIncrementFunc(m_handle);\n')
 
     f.write(f'{depth * '\t'}}}\n')
 
@@ -152,42 +155,65 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
 
     depth += 1
 
+    # 0 - delete function
+    # 1 - increment function
+    # 2 - copy function
+    delete_function_index = function_index
+    increment_function_index = function_index + 1
+    copy_function_index = function_index + 2
+
+    function_index += 1 # increment function
+
     f.write(f'{depth * '\t'}class {scriptable_class.alias} {{\n')
     #f.write(f'{depth * '\t'}\tfriend class UnsafeRef<{scriptable_class.alias}>;\n')
+    f.write(f'{depth * '\t'}public:\n')
+    f.write(f'{depth * '\t'}\tstatic constexpr uint32_t API_DELETE_FUNCTION_INDEX = {delete_function_index};\n')
+    f.write(f'{depth * '\t'}\tstatic constexpr uint32_t API_INCREMENT_FUNCTION_INDEX = {increment_function_index};\n')
+    f.write(f'{depth * '\t'}\tstatic constexpr uint32_t API_COPY_FUNCTION_INDEX = {copy_function_index};\n\n')
     f.write(f'{depth * '\t'}public:\n')
     f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle) /** NOLINT **/ \n')
     f.write(f'{depth * '\t'}\t\t: m_handle(handle)\n')
     f.write(f'{depth * '\t'}\t{{\n')
-    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) += 1;\n')
+    f.write(f'{depth * '\t'}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+    f.write(f'{depth * '\t'}\t\tpIncrementFunc(m_handle);\n')
     f.write(f'{depth * '\t'}\t}}\n\n')
     #f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle, ScriptablePassKey<UnsafeRef<{scriptable_class.alias}>>)\n')
     #f.write(f'{depth * '\t'}\t\t: m_handle(handle) {{ }}\n\n')
-    f.write(f'{depth * '\t'}public:\n')
+
+    f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle, SharedPtrUnmanagedPassKey) \n')
+    f.write(f'{depth * '\t'}\t\t: m_handle(handle)\n')
+    f.write(f'{depth * '\t'}\t{{ }}\n\n')
 
     f.write(f'{depth * '\t'}\t~{scriptable_class.alias}() {{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
     f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t}}\n')
+    f.write(f'{depth * '\t'}\t}}\n\n')
+    f.write(f'{depth * '\t'}public:\n\n')
 
     if scriptable_class.has_copy_constructor:
         function_index += 1 # copy function
 
         f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}& other) {{\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_COPY_FUNCTION_INDEX);\n')
         f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
         f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
-        f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) += 1;\n')
+        f.write(f'{depth * '\t'}\t\tpIncrementFunc(m_handle);\n')
         f.write(f'{depth * '\t'}\t}}\n')
 
         f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}& other) {{\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_COPY_FUNCTION_INDEX);\n')
         f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
         f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
-        f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) += 1;\n')
+        f.write(f'{depth * '\t'}\t\tpIncrementFunc(m_handle);\n')
         f.write(f'{depth * '\t'}\t\treturn *this;\n')
         f.write(f'{depth * '\t'}\t}}\n')
+    else:
+        f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}&) = delete;\n')
+        f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}&&) = delete;\n')
 
     function_index += len(scriptable_class.constructors) + len(scriptable_class.operators) + len(scriptable_class.methods)
 
@@ -235,23 +261,56 @@ def generate_impl_cpp(logger: logger_utils.Logger, library_dir: str, code_struct
     with open(library_dir + '/CoreAPIImpl.cpp', 'w', encoding='utf-8') as f:
         f.write(f'{clang_utils.codegen_cpp_header_comment}')
 
+        f.write(f'#include <CppBehaviour.h>\n\n')
+
         function_index = 0
 
         for scriptable_class in code_structure.scriptable_classes:
             f.write(f'#include <{"/".join([namespace for namespace in scriptable_class.namespaces])}/{scriptable_class.alias}.h>\n')
 
-        f.write(f'\n')
+        f.write('''
+void FreeScriptBehaviour(void* pBehaviour) { delete reinterpret_cast<CppBehaviour*>(pBehaviour); }
+
+void ScriptModuleSetBehaviourSceneObject(void* pInstance, ScriptHandle handle) {
+    reinterpret_cast<CppBehaviour*>(pInstance)->sceneObject = handle;
+}
+
+void ScriptModuleBehaviourAwake(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->Awake(); }
+void ScriptModuleBehaviourOnEnable(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->OnEnable(); }
+void ScriptModuleBehaviourOnDisable(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->OnDisable(); }
+void ScriptModuleBehaviourOnAttached(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->OnAttached(); }
+void ScriptModuleBehaviourOnDetached(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->OnDetached(); }
+void ScriptModuleBehaviourOnDestroy(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->OnDestroy(); }
+void ScriptModuleBehaviourStart(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->Start(); }
+void ScriptModuleBehaviourFixedUpdate(void* pInstance) { reinterpret_cast<CppBehaviour*>(pInstance)->FixedUpdate(); }
+void ScriptModuleBehaviourUpdate(void* pInstance, float_t dt) { reinterpret_cast<CppBehaviour*>(pInstance)->Update(dt); }
+        \n''')
 
         f.write('namespace SpaRcleAPI {\n')
 
+        f.write('''\tSR_NODISCARD CppBehaviour* CoreAPI::AllocateBehaviour(const char* behaviourName) {
+        for (auto& module : m_scriptModules) {
+            for (auto& behaviour : module.behaviours) {
+                if (strcmp(behaviour.name, behaviourName) == 0) {
+                    return reinterpret_cast<CppBehaviour*>(behaviour.allocateFunc());
+                }
+            }
+        }
+        return nullptr;
+    }
+    \n''')
+
         for scriptable_class in code_structure.scriptable_classes:
+            increment_function_index = function_index + 1
+
             function_index += 1 # delete function
+            function_index += 1 # increment function
 
             if scriptable_class.has_copy_constructor:
                 function_index += 1 # copy function
 
             for constructor in scriptable_class.constructors:
-                generate_cpp_constructor(f, 1, function_index, scriptable_class, constructor, code_structure)
+                generate_cpp_constructor(f, 1, function_index, increment_function_index, scriptable_class, constructor, code_structure)
                 function_index += 1
 
             for operator in scriptable_class.operators:
@@ -263,6 +322,53 @@ def generate_impl_cpp(logger: logger_utils.Logger, library_dir: str, code_struct
                 function_index += 1
 
         f.write('}\n')
+
+
+def generate_behaviour_header(logger: logger_utils.Logger, repo_dir: str, library_dir: str):
+    header_file_path = f'{library_dir}/CppBehaviour.h'
+    logger.log_info(f'Generating core library file: {header_file_path}')
+
+    with open(header_file_path, 'w', encoding='utf-8') as f:
+        f.write(f'{clang_utils.codegen_cpp_header_comment}')
+
+        f.write(f'#ifndef SR_ENGINE_SPARCLE_API_CPP_BEHAVIOUR_H\n')
+        f.write(f'#define SR_ENGINE_SPARCLE_API_CPP_BEHAVIOUR_H\n\n')
+
+        f.write(f'#include <CoreAPI.h>\n')
+        f.write(f'#include <SpaRcle/Utils/SceneObject.h>\n\n')
+
+        f.write('namespace SpaRcleAPI {\n')
+
+        f.write('''\tclass CppBehaviour {
+    public:
+        CppBehaviour() = default;
+        virtual ~CppBehaviour() = default;
+
+        CppBehaviour(const CppBehaviour&) = delete;
+        CppBehaviour(CppBehaviour&&) = delete;
+
+        CppBehaviour& operator=(const CppBehaviour&) = delete;
+        CppBehaviour& operator=(CppBehaviour&&) = delete;
+
+    public:
+        virtual void Awake() { }
+        virtual void OnEnable() { }
+        virtual void OnDisable() { }
+        virtual void OnAttached() { }
+        virtual void OnDetached() { }
+        virtual void OnDestroy() { }
+        virtual void Start() { }
+        virtual void Update(float_t dt) { }
+        virtual void FixedUpdate() { }
+
+    public:
+        SharedPtr<SpaRcle::Utils::SceneObject> sceneObject;
+
+    };\n''')
+
+        f.write('}\n\n')
+
+        f.write(f'#endif /// SR_ENGINE_SPARCLE_API_CPP_BEHAVIOUR_H\n\n')
 
 
 def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: str, code_structure: reflection_classes.CodeStructure):
@@ -280,6 +386,7 @@ def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: st
 
     os.makedirs(library_dir + '/SpaRcle', exist_ok=True)
 
+    generate_behaviour_header(logger, repo_dir, library_dir)
     generate_core_api_fwd_decl(logger, library_dir, code_structure)
 
     with open(repo_dir + '/CI/Codegen/ScriptHandle.h', 'r', encoding='utf-8') as core_api_header:
@@ -327,6 +434,7 @@ def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: st
             generate_header_file(logger, f, function_index, scriptable_class, code_structure)
 
             function_index += 1 # delete function
+            function_index += 1 # increment function
 
             if scriptable_class.has_copy_constructor:
                 function_index += 1 # copy function

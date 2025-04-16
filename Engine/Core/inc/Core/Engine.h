@@ -5,7 +5,6 @@
 #ifndef SR_ENGINE_ENGINE_H
 #define SR_ENGINE_ENGINE_H
 
-#include <Core/EvoScriptAPI.h>
 #include <Core/EngineResources.h>
 
 #include <Graphics/Window/Window.h>

@@ -15,27 +15,27 @@
 
 namespace SR_SCRIPTING_NS {
     void Behaviour::Awake() {
-        //if (m_rawBehaviour) { m_rawBehaviour->Awake(); }
+        m_cppBehaviour->Awake();
         Super::Awake();
     }
 
     void Behaviour::OnEnable() {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnEnable(); }
+        m_cppBehaviour->OnEnable();
         Super::OnEnable();
     }
 
     void Behaviour::OnDisable() {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnDisable(); }
+        m_cppBehaviour->OnDisable();
         Super::OnDisable();
     }
 
     void Behaviour::Start() {
-        //if (m_rawBehaviour) { m_rawBehaviour->Start(); }
+        m_cppBehaviour->Start();
         Super::Start();
     }
 
     void Behaviour::OnDestroy() {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnDestroy(); }
+        m_cppBehaviour->OnDestroy();
 
         SetBehaviourName(SR_UTILS_NS::StringAtom());
 
@@ -51,89 +51,56 @@ namespace SR_SCRIPTING_NS {
             SetBehaviourName(m_behaviourName);
         }
 
-        //if (m_rawBehaviour) { m_rawBehaviour->OnAttached(); }
+        if (IsInstanceValid()) {
+            m_cppBehaviour->SetSceneObject(GetSceneObject());
+        }
+
+        m_cppBehaviour->OnAttached();
         Super::OnAttached();
     }
 
     void Behaviour::OnDetached() {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnDetached(); }
+        m_cppBehaviour->OnDetached();
         Super::OnDetached();
     }
 
     void Behaviour::Update(float_t dt) {
-        //if (m_rawBehaviour) { m_rawBehaviour->Update(dt); }
+        m_cppBehaviour->Update(dt);
         Super::Update(dt);
     }
 
     void Behaviour::FixedUpdate() {
-        //if (m_rawBehaviour) { m_rawBehaviour->FixedUpdate(); }
+        m_cppBehaviour->FixedUpdate();
         Super::FixedUpdate();
     }
 
     void Behaviour::OnTransformSet() {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnTransformSet(); }
         Super::OnTransformSet();
     }
 
     void Behaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnCollisionEnter(data); }
         Super::OnCollisionEnter(data);
     }
 
     void Behaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnCollisionExit(data); }
         Super::OnCollisionExit(data);
     }
 
     void Behaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnCollisionStay(data); }
         Super::OnCollisionStay(data);
     }
 
     void Behaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnTriggerEnter(data); }
         Super::OnTriggerEnter(data);
     }
 
     void Behaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnTriggerExit(data); }
         Super::OnTriggerExit(data);
     }
 
     void Behaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
-        //if (m_rawBehaviour) { m_rawBehaviour->OnTriggerStay(data); }
         Super::OnTriggerStay(data);
     }
-
-    /*SR_UTILS_NS::Path Behaviour::GetRawBehaviourPath() const noexcept {
-        return m_rawBehaviour ? m_rawBehaviour->GetResourcePath() : SR_UTILS_NS::Path();
-    }
-
-    void Behaviour::SetRawBehaviour(const SR_UTILS_NS::Path& path) {
-        if (m_rawBehaviour) {
-            m_rawBehaviour->SetComponent(nullptr);
-            m_rawBehaviour->RemoveUsePoint();
-            m_rawBehaviour = nullptr;
-        }
-
-        if (!path.empty()) {
-            m_rawBehaviour = IRawBehaviour::Load(path);
-        }
-
-        if (m_rawBehaviour) {
-            m_rawBehaviour->AddUsePoint();
-        }
-
-        OnBehaviourChanged();
-    }
-
-     void Behaviour::OnBehaviourChanged() {
-        //if (m_rawBehaviour) {
-        //    m_rawBehaviour->SetComponent(this);
-        //}
-
-
-    }*/
 
     void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
         Super::Save(serializer);
@@ -232,6 +199,10 @@ namespace SR_SCRIPTING_NS {
     void Behaviour::OnScriptReloaded() {
         m_isStarted = false;
         m_isAwake = false;
+
+        if (IsInstanceValid()) {
+            m_cppBehaviour->SetSceneObject(GetSceneObject());
+        }
 
         if (HasParent()) {
             GetParent()->SetDirty(true);

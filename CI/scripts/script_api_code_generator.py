@@ -46,7 +46,7 @@ def generate_args_unpacking_string(f: typing.IO, depth: int, code_structure: ref
 
 
 def generate_script_handle_allocation(f: typing.IO, depth: int, var_name: str, type_name: str, is_destructible: bool) -> None:
-    f.write(f'{"\t" * depth}MemoryLeakChecker::Instance().OnMemoryAlloc();\n')
+    f.write(f'{"\t" * depth}SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().OnMemoryAlloc();\n')
     f.write(f'{"\t" * depth}{var_name}.pData = {type_name};\n')
     f.write(f'{"\t" * depth}{var_name}.pRefCount = new uint32_t(0);\n')
     f.write(f'{"\t" * depth}{var_name}.isDestructible = {'true' if is_destructible else 'false'};\n')
@@ -131,14 +131,17 @@ def generate_operator(logger: logger_utils.Logger, f: typing.IO, depth: int, cla
 def generate_destroy_function(logger: logger_utils.Logger, f: typing.IO, depth: int, api_function_prefix, class_name_with_namespace):
     f.write(f'{'\t' * depth}/// {class_name_with_namespace} Destroy function\n')
     f.write(f'{'\t' * depth}void {api_function_prefix}_destroy({script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}) {{\n')
-    f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData) SR_UNLIKELY_ATTRIBUTE {{\n')
+    f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount) SR_UNLIKELY_ATTRIBUTE {{\n')
     f.write(f'{'\t' * (depth + 2)}return;\n')
     f.write(f'{'\t' * (depth + 1)}}}\n')
+
+    f.write(f'{'\t' * (depth + 1)}CodegenDecrementIfSharedPointer<{class_name_with_namespace}>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData);\n')
+
     f.write(f'{'\t' * (depth + 1)}SRAssert({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount && *{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount > 0);\n')
     f.write(f'{'\t' * (depth + 1)}if (--(*{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount) > 0) {{\n')
     f.write(f'{'\t' * (depth + 2)}return;\n')
     f.write(f'{'\t' * (depth + 1)}}}\n')
-    f.write(f'{'\t' * (depth + 1)}MemoryLeakChecker::Instance().OnMemoryFree();\n')
+    f.write(f'{'\t' * (depth + 1)}SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().OnMemoryFree();\n')
     f.write(f'{'\t' * (depth + 1)}delete {script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount;\n')
     f.write(f'{'\t' * (depth + 1)}{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount = nullptr;\n')
     f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.isDestructible) SR_UNLIKELY_ATTRIBUTE {{\n')
@@ -150,6 +153,20 @@ def generate_destroy_function(logger: logger_utils.Logger, f: typing.IO, depth: 
     f.write(f'{'\t' * (depth + 1)}}} else {{\n')
     f.write(f'{'\t' * (depth + 2)}SRHalt("ScriptHandle destructor called for non-destructible class");\n')
     f.write(f'{'\t' * (depth + 1)}}}\n')
+    f.write(f'{'\t' * depth}}}\n\n')
+
+
+def generate_increment_ref_count(logger: logger_utils.Logger, f: typing.IO, depth: int, api_function_prefix, class_name_with_namespace):
+    f.write(f'{'\t' * depth}/// {class_name_with_namespace} Increment reference count function\n')
+    f.write(f'{'\t' * depth}void {api_function_prefix}_increment_ref_count({script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}) {{\n')
+    f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount) SR_UNLIKELY_ATTRIBUTE {{\n')
+    f.write(f'{'\t' * (depth + 2)}return;\n')
+    f.write(f'{'\t' * (depth + 1)}}}\n')
+
+    f.write(f'{'\t' * (depth + 1)}++(*{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount);\n')
+
+    f.write(f'{'\t' * (depth + 1)}CodegenIncrementIfSharedPointer<{class_name_with_namespace}>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData);\n')
+
     f.write(f'{'\t' * depth}}}\n\n')
 
 
@@ -170,6 +187,7 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
     class_name_with_namespace = code_structure.correct_class_name(class_obj.alias)
 
     generate_destroy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
+    generate_increment_ref_count(logger, f, depth, api_function_prefix, class_name_with_namespace)
 
     if class_obj.has_copy_constructor:
         generate_copy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
@@ -219,31 +237,21 @@ def generate_script_handle_struct(f: typing.IO, repo_dir: str, depth: int):
 
 
 def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, depth: int, code_structure: reflection_classes.CodeStructure):
-    f.write(f'{"\t" * depth} class SpaRcleAPIRegister {{\n')
-    f.write(f'{"\t" * (depth + 1)}using FunctionHandle = void*;\n')
-    f.write(f'{"\t" * (depth + 0)}private:\n')
-    f.write(f'{"\t" * (depth + 1)}SpaRcleAPIRegister() = default;\n')
-    f.write(f'{"\t" * (depth + 1)}~SpaRcleAPIRegister() = default;\n\n')
-    f.write(f'{"\t" * (depth + 0)}public:\n')
-    f.write(f'{"\t" * (depth + 1)}static SpaRcleAPIRegister& Instance() {{\n')
-    f.write(f'{"\t" * (depth + 2)}static SpaRcleAPIRegister instance;\n')
-    f.write(f'{"\t" * (depth + 2)}return instance;\n')
-    f.write(f'{"\t" * (depth + 1)}}}\n\n')
-    f.write(f'{"\t" * (depth + 1)}SR_NODISCARD uint64_t GetCountFunctions() {{ return m_functionTable.size(); }}\n\n')
-    f.write(f'{"\t" * (depth + 1)}SR_NODISCARD void* GetFunction(uint64_t index) {{ return m_functionTable[index]; }}\n\n')
-    f.write(f'{"\t" * (depth + 1)}void RegisterAll() {{\n')
-    f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registering all scriptable classes...");\n')
+    f.write(f'{"\t" * (depth)}void APIRegisterCallback(std::vector<void*>& table) {{\n')
+    f.write(f'{"\t" * (depth + 1)}SR_INFO("APIRegisterCallback(): registering all scriptable classes...");\n')
 
     total_functions_count = 0
     for class_obj in code_structure.scriptable_classes:
         total_functions_count += 1 # destroy function
+        total_functions_count += 1 # increment function
         if class_obj.has_copy_constructor:
             total_functions_count += 1 # copy function
         total_functions_count += len(class_obj.constructors)
         total_functions_count += len(class_obj.operators)
         total_functions_count += len(class_obj.methods)
 
-    f.write(f'{"\t" * (depth + 2)}m_functionTable.reserve({total_functions_count});\n\n')
+    f.write(f'{"\t" * (depth + 1)}table.clear();\n')
+    f.write(f'{"\t" * (depth + 1)}table.reserve({total_functions_count});\n\n')
 
     function_index = 0
 
@@ -256,54 +264,55 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
         class_name_with_namespace = code_structure.correct_class_name(class_obj.alias)
         api_function_prefix = class_name_with_namespace.replace('::', '_')
 
-        f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registering {class_name_with_namespace} class...");\n')
-        add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_destroy);')
+        f.write(f'{"\t" * (depth + 1)}SR_INFO("APIRegisterCallback(): registering {class_name_with_namespace} class...");\n')
+        add_func_register(f, depth + 1, f'table.emplace_back({api_function_prefix}_destroy);')
+        add_func_register(f, depth + 1, f'table.emplace_back({api_function_prefix}_increment_ref_count);')
 
         if class_obj.has_copy_constructor:
-            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_copy);')
+            add_func_register(f, depth + 1, f'table.emplace_back({api_function_prefix}_copy);')
 
         for i, constructor in enumerate(class_obj.constructors):
-            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_constructor_{i});')
+            add_func_register(f, depth + 1, f'table.emplace_back({api_function_prefix}_constructor_{i});')
 
         for i, operator in enumerate(class_obj.operators):
-            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_operator_{operator.type.name}_{i});')
+            add_func_register(f, depth + 1, f'table.emplace_back({api_function_prefix}_operator_{operator.type.name}_{i});')
 
         for i, method in enumerate(class_obj.methods):
-            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_method_{method.name}_{i});')
+            add_func_register(f, depth + 1, f'table.emplace_back({api_function_prefix}_method_{method.name}_{i});')
 
-    f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registration done!");\n')
-    f.write(f'{"\t" * (depth + 1)}}}\n\n')
-    f.write(f'{"\t" * (depth + 0)}private:\n')
-    f.write(f'{"\t" * (depth + 1)}std::vector<FunctionHandle> m_functionTable;\n\n')
-    f.write(f'{"\t" * (depth + 0)}}};\n')
+    f.write(f'{"\t" * (depth + 1)}SR_INFO("APIRegisterCallback(): registration done!");\n')
+    f.write(f'{"\t" * (depth)}}}\n\n')
 
 
-def generate_memory_leak_checker(f: typing.IO, depth: int):
-    f.write(f'{"\t" * depth}/// Memory leak checker\n')
-    f.write(f'{"\t" * depth}class MemoryLeakChecker {{\n')
-    f.write(f'{"\t" * depth}private:\n')
-    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker() = default;\n')
-    f.write(f'{"\t" * (depth + 1)}~MemoryLeakChecker() = default;\n\n')
-    f.write(f'{"\t" * depth}public:\n')
-    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker(const MemoryLeakChecker&) = delete;\n')
-    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker& operator=(const MemoryLeakChecker&) = delete;\n\n')
-    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker(MemoryLeakChecker&&) = delete;\n')
-    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker& operator=(MemoryLeakChecker&&) = delete;\n\n')
-    f.write(f'{"\t" * depth}public:\n')
-    f.write(f'{"\t" * (depth + 1)}static MemoryLeakChecker& Instance() {{\n')
-    f.write(f'{"\t" * (depth + 2)}static MemoryLeakChecker instance;\n')
-    f.write(f'{"\t" * (depth + 2)}return instance;\n')
-    f.write(f'{"\t" * (depth + 1)}}}\n\n')
-    f.write(f'{"\t" * (depth + 1)}void OnMemoryAlloc() {{ m_allocationsCount++; }}\n')
-    f.write(f'{"\t" * (depth + 1)}void OnMemoryFree() {{ m_allocationsCount--; }}\n')
-    f.write(f'{"\t" * (depth + 1)}void CheckMemoryLeaks() {{\n')
-    f.write(f'{"\t" * (depth + 2)}if (m_allocationsCount > 0) {{\n')
-    f.write(f'{"\t" * (depth + 3)}SRHalt("Memory leak detected! Allocations count: {{}}", m_allocationsCount.load());\n')
-    f.write(f'{"\t" * (depth + 2)}}}\n')
-    f.write(f'{"\t" * (depth + 1)}}}\n\n')
-    f.write(f'{"\t" * depth}private:\n')
-    f.write(f'{"\t" * (depth + 1)}std::atomic<uint64_t> m_allocationsCount = 0;\n\n')
-    f.write(f'{"\t" * (depth + 0)}}};\n\n')
+def generate_shared_ptr_template_methods(f: typing.IO, depth: int):
+    f.write('''\ttemplate <typename T> void CodegenDecrementIfSharedPointer(void* rawPtr) {
+        if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {
+            dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(static_cast<T*>(rawPtr))->DecrementPointer();
+        }
+    }
+    
+    template <typename T> void CodegenIncrementIfSharedPointer(void* rawPtr) {
+        if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {
+            dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(static_cast<T*>(rawPtr))->IncrementPointer();
+        }
+    }\n\n''')
+
+
+def generate_script_handle_file(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str):
+    with open(f'{codegen_dir}/ScriptHandle.generated.hpp', 'w', encoding='utf-8') as f:
+        f.write(clang_utils.codegen_cpp_header_comment)
+
+        f.write('#ifndef SR_CODEGEN_SPARCLE_API_SCRIPT_HANDLE_GENERATED_HPP\n')
+        f.write('#define SR_CODEGEN_SPARCLE_API_SCRIPT_HANDLE_GENERATED_HPP\n\n')
+
+        f.write('#include <Utils/stdInclude.h>\n\n')
+
+        f.write('namespace SpaRcleAPI {\n')
+        generate_script_handle_struct(f, repo_dir, 0)
+        f.write('}\n\n')
+
+        f.write('#endif /// SR_CODEGEN_SPARCLE_API_SCRIPT_HANDLE_GENERATED_HPP\n')
+
 
 
 def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, code_structure: reflection_classes.CodeStructure):
@@ -313,6 +322,8 @@ def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, c
         os.remove(file)
 
     os.makedirs(f'{codegen_dir}/../ScriptAPI', exist_ok=True)
+
+    generate_script_handle_file(logger, repo_dir, codegen_dir)
 
     for i, class_obj in enumerate(code_structure.scriptable_classes):
         with open(f'{codegen_dir}/../ScriptAPI/{class_obj.alias}.generated.hpp', 'w', encoding='utf-8') as f:
@@ -328,6 +339,8 @@ def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, c
         f.write('#include <Utils/Debug.h>\n')
         f.write('#include <Utils/Common/StringFormat.h>\n\n')
 
+        f.write('#include <Codegen/ScriptHandle.generated.hpp>\n\n')
+
         if len(code_structure.scriptable_classes) > 0:
             f.write('/// Include all scriptable classes\n')
             include_set = set()
@@ -339,13 +352,11 @@ def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, c
 
         f.write('namespace SpaRcleAPI {\n')
 
-        generate_script_handle_struct(f, repo_dir, 0)
-
         f.write('\n')
 
         f.write('\tvoid* GetSpaRcleAPIDefaultRefPtr() { static uint64_t def; return &def; }\n\n')
 
-        generate_memory_leak_checker(f, 1)
+        generate_shared_ptr_template_methods(f, 1)
 
         for i, class_obj in enumerate(code_structure.scriptable_classes):
             f.write(f'\t#include <ScriptAPI/{class_obj.alias}.generated.hpp>\n')

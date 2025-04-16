@@ -14,12 +14,11 @@
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
-#include <CoreAPI.h>
 #include <Codegen/SpaRcleAPI.generated.hpp>
 
-#include "Scripts/TestScript.h"
-
 int main(int argc, char** argv) {
+    SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().SetRegisterFunction(std::bind(SpaRcleAPI::APIRegisterCallback, std::placeholders::_1));
+
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
         return 10;
@@ -67,25 +66,6 @@ int main(int argc, char** argv) {
             code = 3;
         }
 
-        /*SpaRcleAPI::SpaRcleAPIRegister::Instance().RegisterAll();
-        SpaRcleAPI::CoreAPI::Instance().Init(SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions());
-        for (uint64_t i = 0; i < SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions(); ++i) {
-            SpaRcleAPI::CoreAPI::Instance().SetFunction(i, SpaRcleAPI::SpaRcleAPIRegister::Instance().GetFunction(i));
-        }
-
-        SpaRcle::Core::ScriptableContext context;
-        context.pEngine = pLauncher->GetEngine().Get();
-
-        SpaRcleAPI::ScriptHandle handle;
-        handle.isDestructible = false;
-        handle.pData = &context;
-        handle.pRefCount = new uint32_t(0);
-
-        SpaRcleAPI::CoreAPI::Instance().SetScriptContextHandle(handle);
-
-        RunScriptTest();
-        SpaRcleAPI::MemoryLeakChecker::Instance().CheckMemoryLeaks();*/
-
         if (code == 0 && !pLauncher->Execute()) {
             SR_ERROR("Failed to execute application!");
             code = 4;
@@ -97,6 +77,7 @@ int main(int argc, char** argv) {
     }
 
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
+    SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().CheckMemoryLeaks();
 
     return code;
 }
