@@ -28,7 +28,7 @@ namespace SR_CORE_NS {
         ~Application();
 
     public:
-        bool PreInit(int argc, char** argv);
+        bool PreInit();
         bool EarlyInit();
         bool Init();
         bool Execute();
@@ -37,7 +37,7 @@ namespace SR_CORE_NS {
         void SwitchResourcesFolder(const SR_UTILS_NS::Path& path);
         void Reload();
 
-        virtual bool InitializeResourcesFolder(int argc, char** argv);
+        virtual bool InitializeResourcesFolder();
 
         SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
 

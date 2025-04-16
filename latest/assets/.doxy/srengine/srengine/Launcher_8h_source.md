@@ -28,10 +28,10 @@ namespace SR_CORE_NS {
     class Launcher : public SR_CORE_NS::Application {
         using Super = SR_CORE_NS::Application;
     public:
-        LauncherInitStatus InitLauncher(int argc, char** argv);
+        LauncherInitStatus InitLauncher();
 
     protected:
-        bool InitializeResourcesFolder(int argc, char** argv) override { return true; }
+        bool InitializeResourcesFolder() override { return true; }
 
     private:
         static bool UnpackAndExecute();

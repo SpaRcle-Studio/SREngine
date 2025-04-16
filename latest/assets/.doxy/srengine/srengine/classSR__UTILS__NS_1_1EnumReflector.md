@@ -82,6 +82,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; int64\_t &gt; | [**AtInternal**](#function-atinternal) (uint64\_t index) const<br> |
 |  uint64\_t | [**Count**](#function-count-12) () <br> |
 |   | [**EnumReflector**](#function-enumreflector) (EnumVariant enumVariant, const Integral \* values, size\_t count, const char \* name, const char \* body) <br> |
+|  void | [**ForEach**](#function-foreach-12) (Types::Function&lt; void(EnumType)&gt; func) <br> |
 |  EnumType | [**FromString**](#function-fromstring-14) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & value) <br> |
 |  bool | [**FromString**](#function-fromstring-24) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & value, EnumType & result) <br> |
 |  SR\_NODISCARD SR\_MAYBE\_UNUSED std::optional&lt; int64\_t &gt; | [**FromStringInternal**](#function-fromstringinternal) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & name) const<br> |
@@ -127,6 +128,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 |  SR\_NODISCARD EnumType | [**At**](#function-at-22) (uint64\_t index) <br> |
 |  SR\_NODISCARD int64\_t | [**AtAsInt**](#function-atasint-22) (uint64\_t index) <br> |
 |  SR\_NODISCARD uint64\_t | [**Count**](#function-count-22) () <br> |
+|  void | [**ForEach**](#function-foreach-22) ([**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(EnumType)&gt; func) <br> |
 |  SR\_NODISCARD EnumType | [**FromString**](#function-fromstring-34) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & value) <br> |
 |  SR\_NODISCARD bool | [**FromString**](#function-fromstring-44) (const [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & value, EnumType & result) <br> |
 |  SR\_NODISCARD EnumType | [**FromStringLowerCase**](#function-fromstringlowercase-22) (const std::string & value) <br> |
@@ -277,6 +279,22 @@ SR_UTILS_NS::EnumReflector::EnumReflector (
     size_t count,
     const char * name,
     const char * body
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ForEach [1/2]
+
+```C++
+template<typename EnumType>
+void SR_UTILS_NS::EnumReflector::ForEach (
+    Types::Function< void(EnumType)> func
 ) 
 ```
 
@@ -708,6 +726,22 @@ static SR_NODISCARD int64_t SR_UTILS_NS::EnumReflector::AtAsInt (
 ```C++
 template<typename EnumType>
 static SR_NODISCARD uint64_t SR_UTILS_NS::EnumReflector::Count () 
+```
+
+
+
+
+<hr>
+
+
+
+### function ForEach [2/2]
+
+```C++
+template<typename EnumType>
+static void SR_UTILS_NS::EnumReflector::ForEach (
+    SR_HTYPES_NS::Function < void(EnumType)> func
+) 
 ```
 
 

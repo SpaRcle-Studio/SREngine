@@ -475,14 +475,14 @@
     <member refid="classSR__CORE__NS_1_1Application_1add69171ec556c00ec2972be8fd210d6f" kind="variable"><name>m_engine</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1af85f31252d1349b8a520a785d95f8e99" kind="function"><name>Application</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a3b54ac854218deb82364ef38598f531a" kind="function"><name>~Application</name></member>
-    <member refid="classSR__CORE__NS_1_1Application_1a7e68329c6162c71b5e9c4b3136297fc5" kind="function"><name>PreInit</name></member>
+    <member refid="classSR__CORE__NS_1_1Application_1a6e037d3105baab40feeaaf2188dc7748" kind="function"><name>PreInit</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a89007c2cdb2d6e5e2005fb172e916866" kind="function"><name>EarlyInit</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a049d443ca8eda9edfb95d35eacffc69a" kind="function"><name>Init</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a760502cfa2fc0410344bd635c5ca10bb" kind="function"><name>Execute</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa42b8160f77905ef454f505d2ac07626" kind="function"><name>Close</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1abd83c37f0f456a64df9a2fa98917b766" kind="function"><name>SwitchResourcesFolder</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a217d9cb735fc113f9a9695afd38f9918" kind="function"><name>Reload</name></member>
-    <member refid="classSR__CORE__NS_1_1Application_1a7ff15ca2e24be199270671c0d9cc4c40" kind="function"><name>InitializeResourcesFolder</name></member>
+    <member refid="classSR__CORE__NS_1_1Application_1af11788fe8ed9084d885de749dc78614e" kind="function"><name>InitializeResourcesFolder</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1aa247936af48d33974b194ffbd338d44f" kind="function"><name>GetResourcesPath</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a6a769d0c294e35d7a0b890fc8756273d" kind="function"><name>InitResourceTypes</name></member>
     <member refid="classSR__CORE__NS_1_1Application_1a558ad35e83ba8c64731808d9f8b77643" kind="function"><name>InitLogger</name></member>
@@ -1383,6 +1383,17 @@
     <member refid="classSR__NETWORK__NS_1_1Client_1ae35faa53a0d6f897473799eaeac3eae2" kind="function"><name>Client</name></member>
     <member refid="classSR__NETWORK__NS_1_1Client_1a92781136f5c80bad943cd372bd35a082" kind="function"><name>Request</name></member>
     <member refid="classSR__NETWORK__NS_1_1Client_1a4103b1f31fd7165f18d277db5c327f1f" kind="function"><name>Ping</name></member>
+  </compound>
+  <compound refid="classSR__CORE__NS_1_1CLIManager" kind="class"><name>SR_CORE_NS::CLIManager</name>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1afe3c63ccedfdb799d851eb1f3a026d68" kind="variable"><name>m_options</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1a4572d23cf83045f519a8788de7aa0b86" kind="variable"><name>m_flags</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1abe7de1291ef2f5a98d5ceabd93962c6e" kind="function"><name>SR_REGISTER_SINGLETON</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1abd3aaf3af9f54ef57878f6207f8a0cf8" kind="function"><name>Init</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1aa3fea0e4acd3ee23b973e4af08416eed" kind="function"><name>GetOptionValue</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1a8c2c68e9b828152f591def72d323d08a" kind="function"><name>IsFlagPresent</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1aaf992bbdddf62e46d5ee257a51393c46" kind="function"><name>GetOptions</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1a2790e4322d11b09581b62641dc16d144" kind="function"><name>GetFlags</name></member>
+    <member refid="classSR__CORE__NS_1_1CLIManager_1a10fae521b63918503ee77e23ea8f2f2c" kind="function"><name>IsSingletonCanBeDestroyed</name></member>
   </compound>
   <compound refid="structSR__UTILS__NS_1_1CmdManager_1_1Cmd" kind="struct"><name>SR_UTILS_NS::CmdManager::Cmd</name>
     <member refid="structSR__UTILS__NS_1_1CmdManager_1_1Cmd_1afffa10edd1ff36220cbf3c5ea41693a4" kind="variable"><name>m_cmd</name></member>
@@ -3088,7 +3099,9 @@
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1a6a9aa25433f6f886bc8a9fadaa7f2aa3" kind="function"><name>Count</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1af5939234009d4293cd75bfd0d92b8fbd" kind="function"><name>GetName</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1a3c322b3f55a983359e876cfa199e2423" kind="function"><name>GetEnumVariant</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1ae7813ba7e9607a1000e74bf48dad0f20" kind="function"><name>ForEach</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1abccd71ca74107e84bc9d2d54770cc5d1" kind="function"><name>GetReflector</name></member>
+    <member refid="classSR__UTILS__NS_1_1EnumReflector_1aeef4e6e63c9c925cd850233bc2fefe97" kind="function"><name>ForEach</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1aacfa232f0557fe06a152ca935bd2220d" kind="function"><name>GetReflector</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1a5ede81cdb4d1a61ba3decf06693f1ede" kind="function"><name>Count</name></member>
     <member refid="classSR__UTILS__NS_1_1EnumReflector_1a36e37ce913c3b44d5fded790a3a421db" kind="function"><name>ToStringAtom</name></member>
@@ -11059,6 +11072,7 @@
     <member refid="classSR__UTILS__NS_1_1StringUtils_1a7764b552fa0a273e347478ded113c097" kind="function"><name>BackSubstring</name></member>
     <member refid="classSR__UTILS__NS_1_1StringUtils_1a124cfd0e414cc4cc570bb63907349cc7" kind="function"><name>GetExtensionFromFilePath</name></member>
     <member refid="classSR__UTILS__NS_1_1StringUtils_1a235062829bab358fb921b5e07e06e9b8" kind="function"><name>Reverse</name></member>
+    <member refid="classSR__UTILS__NS_1_1StringUtils_1acc52784e267978a7cb5e2d898be20cc6" kind="function"><name>ToKebabCase</name></member>
     <member refid="classSR__UTILS__NS_1_1StringUtils_1adb160aa774263788e3d38b0e10b24538" kind="function"><name>MakeVec2FromString</name></member>
     <member refid="classSR__UTILS__NS_1_1StringUtils_1a39833540af9083eff3dd14c22af24316" kind="function"><name>MakeVec3FromString</name></member>
     <member refid="classSR__UTILS__NS_1_1StringUtils_1ac2812b75b8fca7faab564c2f7d2690ad" kind="function"><name>FastStrLen</name></member>
@@ -11227,11 +11241,9 @@
     <member refid="classSR__CORE__NS_1_1TestManager_1a57253f102a53d5f29974dc4427ea0c10" kind="typedef"><name>Test</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1aef373849a7f747ed444dff592d671aa9" kind="variable"><name>m_engineTests</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1aac2c17a7fd3baecf7db336eaadbc79f0" kind="variable"><name>m_tests</name></member>
-    <member refid="classSR__CORE__NS_1_1TestManager_1a21df4a1602477d79d16e13ccf1c24f43" kind="variable"><name>m_argc</name></member>
-    <member refid="classSR__CORE__NS_1_1TestManager_1aea58b220a3f143d2032c6772468ae44a" kind="variable"><name>m_argv</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" kind="function"><name>AddTest</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" kind="function"><name>AddEngineTest</name></member>
-    <member refid="classSR__CORE__NS_1_1TestManager_1ad400a776427dc881f45a5ff4ad1cb499" kind="function"><name>RunAll</name></member>
+    <member refid="classSR__CORE__NS_1_1TestManager_1a96dfca32a385c2beeb855dc6022d6309" kind="function"><name>RunAll</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1a0b2d7272e354b1ec660416287dc9baea" kind="function"><name>IsSingletonCanBeDestroyed</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1aaa23d0a0f816d028825c6088dde8a40b" kind="function"><name>RunTest</name></member>
     <member refid="classSR__CORE__NS_1_1TestManager_1a6ae9a713d1579b05b4f011a694adc806" kind="function"><name>RunEngineTest</name></member>
@@ -13208,6 +13220,8 @@
     <member refid="SceneTools_8h_1aa8b2ff84ec70c0ece49bc053c93d89de" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
   </compound>
   <compound refid="namespaceSR__CORE__NS" kind="namespace"><name>SR_CORE_NS</name>
+    <member refid="namespaceSR__CORE__NS_1a0e334548ca299d3c9183583efbf7f988" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
+    <member refid="namespaceSR__CORE__NS_1af675ea75d8844e2a4221c98f61d22f44" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
     <member refid="namespaceSR__CORE__NS_1a1b7065090cb28cddf59270370fc79aa4" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
   </compound>
   <compound refid="namespaceSR__CORE__NS_1_1Commands" kind="namespace"><name>SR_CORE_NS::Commands</name>
@@ -14436,6 +14450,8 @@
   <compound refid="NNRenderPass_8h" kind="file"><name>NNRenderPass.h</name>
   </compound>
   <compound refid="Application_8h" kind="file"><name>Application.h</name>
+  </compound>
+  <compound refid="CLIManager_8h" kind="file"><name>CLIManager.h</name>
   </compound>
   <compound refid="Importers_8h" kind="file"><name>Importers.h</name>
   </compound>

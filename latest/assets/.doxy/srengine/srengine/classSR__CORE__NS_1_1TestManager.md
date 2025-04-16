@@ -115,7 +115,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**AddEngineTest**](#function-addenginetest) (const TestFn & test, const std::string & name) <br> |
 |  void | [**AddTest**](#function-addtest) (const TestFn & test, const std::string & name) <br> |
 | virtual bool | [**IsSingletonCanBeDestroyed**](#function-issingletoncanbedestroyed) () override const<br> |
-|  void | [**RunAll**](#function-runall) (int argc, char \*\* argv) <br> |
+|  void | [**RunAll**](#function-runall) () <br> |
 
 
 
@@ -345,10 +345,7 @@ Implements [*SR\_UTILS\_NS::SingletonBase::IsSingletonCanBeDestroyed*](classSR__
 ### function RunAll 
 
 ```C++
-void SR_CORE_NS::TestManager::RunAll (
-    int argc,
-    char ** argv
-) 
+void SR_CORE_NS::TestManager::RunAll () 
 ```
 
 

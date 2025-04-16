@@ -607,7 +607,7 @@
 * **SoundBuffer** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **SoundFormat** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **SoundSource** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
-* **SR\_ENUM\_NS\_STRUCT\_T** ([**SR\_CORE\_UI\_NS**](namespaceSR__CORE__UI__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_PTYPES\_NS**](namespaceSR__PTYPES__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **SR\_ENUM\_NS\_STRUCT\_T** ([**SR\_CORE\_NS**](namespaceSR__CORE__NS.md), [**SR\_CORE\_UI\_NS**](namespaceSR__CORE__UI__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_PTYPES\_NS**](namespaceSR__PTYPES__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SR\_ENUM\_NS\_CLASS** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md), [**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md), [**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md), [**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * **STYLE\_BOOL\_VALUES** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **STYLE\_COLORS** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))

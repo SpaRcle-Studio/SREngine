@@ -14,6 +14,7 @@
 * `#include <Utils/Common/HashManager.h>`
 * `#include <Utils/Types/Map.h>`
 * `#include <Utils/Types/StringAtom.h>`
+* `#include <Utils/Types/Function.h>`
 * `#include <Codegen/EnumsFwd.generated.hpp>`
 
 

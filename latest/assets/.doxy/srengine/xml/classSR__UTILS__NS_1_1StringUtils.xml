@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="444" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="444" bodyend="449"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="446" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="446" bodyend="451"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a73a08eca1465f6bec216ea3009989391" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_INLINE_STATIC void</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="451" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="451" bodyend="455"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="453" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="453" bodyend="457"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aed245a02bedfd644dacfbd13a32047d7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_INLINE_STATIC void</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="457" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="457" bodyend="461"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="459" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="459" bodyend="463"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -854,6 +854,24 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="275" column="28"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1acc52784e267978a7cb5e2d898be20cc6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string SR_UTILS_NS::StringUtils::ToKebabCase</definition>
+        <argsstring>(std::string_view str)</argsstring>
+        <name>ToKebabCase</name>
+        <qualifiedname>SR_UTILS_NS::StringUtils::ToKebabCase</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="277" column="28"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1adb160aa774263788e3d38b0e10b24538" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>glm::vec2</type>
         <definition>static glm::vec2 SR_UTILS_NS::StringUtils::MakeVec2FromString</definition>
@@ -878,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="277" column="26"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="279" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a39833540af9083eff3dd14c22af24316" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>glm::vec3</type>
@@ -904,7 +922,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="278" column="26"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="280" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ac2812b75b8fca7faab564c2f7d2690ad" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>unsigned long</type>
@@ -922,7 +940,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="280" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="280" bodyend="287"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="282" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="282" bodyend="289"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a01deeef52341ab51c501c2dfca18a62d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::pair&lt; std::string, std::string &gt;</type>
@@ -944,7 +962,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="289" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="289" bodyend="298"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="291" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="291" bodyend="300"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a960ed51be6d28d988671a57f16378f00" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; std::string_view &gt;</type>
@@ -966,7 +984,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="300" column="41"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="302" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a3a9a1d5842003220b43797f35aba7487" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; std::string_view &gt;</type>
@@ -988,7 +1006,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="301" column="41"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="303" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ac745f55777edd197c0609a8171d9a4f5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; std::string &gt;</type>
@@ -1010,7 +1028,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="302" column="41"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="304" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4546ef1cc6c47b383ea47fa7f96b5b40" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD char **</type>
@@ -1040,7 +1058,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="304" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="304" bodyend="347"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="306" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="306" bodyend="349"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a3db5b5c9c1b7f6b5b8aa1a741bb12d89" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1062,7 +1080,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="349" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="349" bodyend="351"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="351" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="351" bodyend="353"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1ac4f23d797031e8b0d04d62d23b2bff0d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD float *</type>
@@ -1092,7 +1110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="353" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="353" bodyend="400"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="355" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="355" bodyend="402"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a7cbf8490520be9eec6aadab57eb3d0d4" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD unsigned char</type>
@@ -1114,7 +1132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="402" column="50" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="402" bodyend="410"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="404" column="50" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="404" bodyend="412"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4bb44cb3cb35501f8f2e5b1d9f5e2e4c" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1140,7 +1158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="412" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="412" bodyend="426"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="414" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="414" bodyend="428"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a22220944dc39ea306bbf5ec1a0378d7c" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1171,7 +1189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="428" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="428" bodyend="442"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="430" column="51" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="430" bodyend="444"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4ad26c61964df8cb2cfdb74e1841a6b1" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1194,7 +1212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="463" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="463" bodyend="467"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="465" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="465" bodyend="469"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a6839f2a39ac37c39e99628ea8808c6ea" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1212,7 +1230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="468" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="468" bodyend="471"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="470" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="470" bodyend="473"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1aa494fec846acd477c992b0ca7cede81b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::wstring</type>
@@ -1230,7 +1248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="474" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="474" bodyend="478"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="476" column="42" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="476" bodyend="480"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a80dffe424dfb6df05936bf318720538a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1248,7 +1266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="481" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="481" bodyend="485"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="483" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="483" bodyend="487"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1StringUtils_1a4d0608a8778143b4f47c9849ba12ce44" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -1270,14 +1288,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="488" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="488" bodyend="494"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="490" column="41" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="490" bodyend="496"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="34" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="34" bodyend="504"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" line="34" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/StringUtils.h" bodystart="34" bodyend="506"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1a62130c06115998b877471380adfc3820" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>BackRead</name></member>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1a7764b552fa0a273e347478ded113c097" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>BackSubstring</name></member>
@@ -1330,6 +1348,7 @@
       <member refid="classSR__UTILS__NS_1_1StringUtils_1aa49fcc375d9f2d5ab463c96c8a8e1a86" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SubstringView</name></member>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1a565764c3c255fcd1c5ff2bcd3e868a03" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>SubstringView</name></member>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1a6d6cd17ab7cc9beb4750287c12d192e7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>Tab</name></member>
+      <member refid="classSR__UTILS__NS_1_1StringUtils_1acc52784e267978a7cb5e2d898be20cc6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToKebabCase</name></member>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1a31c718f0c4af35abd91d7c2d0dc86b34" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToLower</name></member>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1a73a08eca1465f6bec216ea3009989391" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToLowerRef</name></member>
       <member refid="classSR__UTILS__NS_1_1StringUtils_1aed245a02bedfd644dacfbd13a32047d7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::StringUtils</scope><name>ToUpperRef</name></member>

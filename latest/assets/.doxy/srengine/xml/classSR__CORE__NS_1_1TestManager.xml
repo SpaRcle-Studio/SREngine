@@ -62,36 +62,6 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="31" column="18" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="31" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1a21df4a1602477d79d16e13ccf1c24f43" prot="private" static="no" mutable="no">
-        <type>int</type>
-        <definition>int SR_CORE_NS::TestManager::m_argc</definition>
-        <argsstring></argsstring>
-        <name>m_argc</name>
-        <qualifiedname>SR_CORE_NS::TestManager::m_argc</qualifiedname>
-        <initializer>= 0</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="33" column="13" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="33" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__NS_1_1TestManager_1aea58b220a3f143d2032c6772468ae44a" prot="private" static="no" mutable="no">
-        <type>char **</type>
-        <definition>char** SR_CORE_NS::TestManager::m_argv</definition>
-        <argsstring></argsstring>
-        <name>m_argv</name>
-        <qualifiedname>SR_CORE_NS::TestManager::m_argv</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="34" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="34" bodyend="-1"/>
-      </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -138,20 +108,12 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="19" column="14" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="19" bodyend="19"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1ad400a776427dc881f45a5ff4ad1cb499" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1TestManager_1a96dfca32a385c2beeb855dc6022d6309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_CORE_NS::TestManager::RunAll</definition>
-        <argsstring>(int argc, char **argv)</argsstring>
+        <argsstring>()</argsstring>
         <name>RunAll</name>
         <qualifiedname>SR_CORE_NS::TestManager::RunAll</qualifiedname>
-        <param>
-          <type>int</type>
-          <declname>argc</declname>
-        </param>
-        <param>
-          <type>char **</type>
-          <declname>argv</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -266,7 +228,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="13" bodyend="35"/>
+    <location file="Engine/Core/inc/Core/Tests/TestManager.h" line="13" column="5" bodyfile="Engine/Core/inc/Core/Tests/TestManager.h" bodystart="13" bodyend="32"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddEngineTest</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddTest</name></member>
@@ -278,8 +240,6 @@
       <member refid="classSR__CORE__NS_1_1TestManager_1a0b2d7272e354b1ec660416287dc9baea" prot="public" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonCanBeDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>LockSingleton</name></member>
-      <member refid="classSR__CORE__NS_1_1TestManager_1a21df4a1602477d79d16e13ccf1c24f43" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_argc</name></member>
-      <member refid="classSR__CORE__NS_1_1TestManager_1aea58b220a3f143d2032c6772468ae44a" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_argv</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1aef373849a7f747ed444dff592d671aa9" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_engineTests</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_mutex</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1aac2c17a7fd3baecf7db336eaadbc79f0" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_tests</name></member>
@@ -287,7 +247,7 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>operator=</name></member>
-      <member refid="classSR__CORE__NS_1_1TestManager_1ad400a776427dc881f45a5ff4ad1cb499" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunAll</name></member>
+      <member refid="classSR__CORE__NS_1_1TestManager_1a96dfca32a385c2beeb855dc6022d6309" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunAll</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a6ae9a713d1579b05b4f011a694adc806" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunEngineTest</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1aaa23d0a0f816d028825c6088dde8a40b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunTest</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>ScopeLockSingleton</name></member>

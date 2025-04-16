@@ -198,6 +198,8 @@
 ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * [**Client**](classSR__NETWORK__NS_1_1Client.md)
 ([**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md))
+* [**CLIManager**](classSR__CORE__NS_1_1CLIManager.md)
+([**SR\_CORE\_NS**](namespaceSR__CORE__NS.md))
 * [**Cmd**](structSR__UTILS__NS_1_1CmdManager_1_1Cmd.md)
 * [**CmdManager**](classSR__UTILS__NS_1_1CmdManager.md)
 ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))

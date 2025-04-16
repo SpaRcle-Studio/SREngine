@@ -171,6 +171,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**ComponentContext**](structSR__CORE__GUI__NS_1_1Inspector_1_1ComponentContext.md)     
 * **namespace** [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md)     
     * **class** [**Application**](classSR__CORE__NS_1_1Application.md)     
+    * **class** [**CLIManager**](classSR__CORE__NS_1_1CLIManager.md)     
     * **class** [**ChunkSystemState**](classSR__CORE__NS_1_1ChunkSystemState.md)     
     * **namespace** [**Commands**](namespaceSR__CORE__NS_1_1Commands.md)     
         * **class** [**ChangeHierarchySelected**](classSR__CORE__NS_1_1Commands_1_1ChangeHierarchySelected.md)     

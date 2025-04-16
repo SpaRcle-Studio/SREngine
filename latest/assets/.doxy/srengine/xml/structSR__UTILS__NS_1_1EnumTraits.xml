@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="58" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="59" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structSR__UTILS__NS_1_1EnumTraits_1afda4c0f18e01d7e74b73b2fb1dd0ef61" prot="public" static="no">
         <type>typename std::conditional_t&lt; IsDeclaredInNamespace, const EnumResultType *, <ref refid="structCodegen_1_1EnumSelector" kindref="compound">Codegen::EnumSelector</ref>&lt; EnumType &gt; &gt;</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="60" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="61" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="59" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="60" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1a626243576b7200973602dd64e0ebb044" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr bool</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="61" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="62" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1a942394bf765d2c9c7fbc24f1dc012cac" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr bool</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="62" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="63" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__UTILS__NS_1_1EnumTraits_1a7039f73cc0827c40cdda0703f2f23417" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr size_t</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="63" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="64" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="64" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -115,7 +115,7 @@
         <label>size_t</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="56" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="56" bodyend="64"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" line="57" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/EnumReflector.h" bodystart="57" bodyend="65"/>
     <listofallmembers>
       <member refid="structSR__UTILS__NS_1_1EnumTraits_1ae5be3b6039a9afc8e400e37c0e1ef9a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>EnumResultType</name></member>
       <member refid="structSR__UTILS__NS_1_1EnumTraits_1afda4c0f18e01d7e74b73b2fb1dd0ef61" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EnumTraits</scope><name>EnumSelectorType</name></member>

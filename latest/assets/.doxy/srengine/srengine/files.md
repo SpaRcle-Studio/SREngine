@@ -9,6 +9,7 @@ Here is a list of all files with brief descriptions:
         * **dir** [**inc**](dir_9bceefd1de4616d8c4c29c5c810ccf2f.md)     
             * **dir** [**Core**](dir_69060d94e27077a49c91b4da0482ce5e.md)     
                 * **file** [**Application.h**](Application_8h.md)     
+                * **file** [**CLIManager.h**](CLIManager_8h.md)     
                 * **file** [**Engine.h**](Engine_8h.md)     
                 * **dir** [**AI**](dir_2e62089ef886dcbe0f6485ec2d2153d1.md)     
                     * **dir** [**NeuralNetwork**](dir_f4e0c33d9bf0cd8adf28f9bfb07e158e.md)     

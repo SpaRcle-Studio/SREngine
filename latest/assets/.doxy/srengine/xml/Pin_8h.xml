@@ -6,10 +6,10 @@
     <includes refid="Vector2_8h" local="no">Utils/Math/Vector2.h</includes>
     <includes refid="Icons_8h" local="no">Graphics/GUI/Icons.h</includes>
     <incdepgraph>
-      <node id="86">
+      <node id="87">
         <label>Graphics/GUI/Icons.h</label>
         <link refid="Icons_8h_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -17,9 +17,9 @@
         <link refid="Pin_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="65">
@@ -40,6 +40,8 @@
         <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -92,18 +94,16 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="86">
         <label>Utils/Math/Axis.h</label>
         <link refid="Axis_8h_source"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="81">
         <label>Utils/Math/Mathematics.h</label>
         <link refid="Mathematics_8h_source"/>
         <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
@@ -111,18 +111,26 @@
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
       </node>
-      <node id="79">
+      <node id="80">
         <label>Utils/Math/Vector2.h</label>
         <link refid="Vector2_8h_source"/>
-        <childnode refid="80" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="66">
         <label>Utils/Platform/Stacktrace.h</label>
         <link refid="Stacktrace_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>Utils/Types/Function.h</label>
+        <link refid="Function_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -282,7 +290,7 @@
         <childnode refid="64" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="79">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
       <node id="47">
@@ -357,19 +365,19 @@
       <node id="43">
         <label>functional</label>
       </node>
-      <node id="81">
+      <node id="82">
         <label>glm/glm.hpp</label>
       </node>
-      <node id="84">
+      <node id="85">
         <label>glm/gtc/quaternion.hpp</label>
       </node>
-      <node id="82">
+      <node id="83">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="83">
+      <node id="84">
         <label>glm/gtx/string_cast.hpp</label>
       </node>
-      <node id="87">
+      <node id="88">
         <label>imgui.h</label>
       </node>
       <node id="19">

@@ -13,6 +13,7 @@
     <innerdir refid="dir_d35469fe832a0ac18d8831284d386406">Engine/Core/inc/Core/Utils</innerdir>
     <innerdir refid="dir_61ddcda44ab5988dd2bd052e2f237885">Engine/Core/inc/Core/World</innerdir>
     <innerfile refid="Application_8h">Application.h</innerfile>
+    <innerfile refid="CLIManager_8h">CLIManager.h</innerfile>
     <innerfile refid="Engine_8h">Engine.h</innerfile>
     <innerfile refid="EngineCommands_8h">EngineCommands.h</innerfile>
     <innerfile refid="EngineMigrators_8h">EngineMigrators.h</innerfile>

@@ -106,8 +106,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  bool | [**Execute**](#function-execute) () <br> |
 |  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResourcesPath**](#function-getresourcespath) () const<br> |
 |  bool | [**Init**](#function-init) () <br> |
-| virtual bool | [**InitializeResourcesFolder**](#function-initializeresourcesfolder) (int argc, char \*\* argv) <br> |
-|  bool | [**PreInit**](#function-preinit) (int argc, char \*\* argv) <br> |
+| virtual bool | [**InitializeResourcesFolder**](#function-initializeresourcesfolder) () <br> |
+|  bool | [**PreInit**](#function-preinit) () <br> |
 |  void | [**Reload**](#function-reload) () <br> |
 |  void | [**SwitchResourcesFolder**](#function-switchresourcesfolder) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |   | [**~Application**](#function-application) () <br> |
@@ -350,10 +350,7 @@ bool SR_CORE_NS::Application::Init ()
 ### function InitializeResourcesFolder 
 
 ```C++
-virtual bool SR_CORE_NS::Application::InitializeResourcesFolder (
-    int argc,
-    char ** argv
-) 
+virtual bool SR_CORE_NS::Application::InitializeResourcesFolder () 
 ```
 
 
@@ -366,10 +363,7 @@ virtual bool SR_CORE_NS::Application::InitializeResourcesFolder (
 ### function PreInit 
 
 ```C++
-bool SR_CORE_NS::Application::PreInit (
-    int argc,
-    char ** argv
-) 
+bool SR_CORE_NS::Application::PreInit () 
 ```
 
 

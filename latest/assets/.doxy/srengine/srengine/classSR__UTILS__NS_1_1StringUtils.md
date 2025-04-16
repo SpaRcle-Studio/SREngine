@@ -115,6 +115,7 @@
 |  std::string\_view | [**SubstringView**](#function-substringview-12) (const std::string\_view & source, char symbol, uint32\_t offset=0) <br> |
 |  std::string\_view | [**SubstringView**](#function-substringview-22) (const std::string\_view & source, [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) substr, uint32\_t offset=0) <br> |
 |  std::string | [**Tab**](#function-tab) (std::string code, uint32\_t count=1) <br> |
+|  std::string | [**ToKebabCase**](#function-tokebabcase) (std::string\_view str) <br> |
 |  bool | [**is\_base64**](#function-is_base64) (unsigned char c) <br> |
 |  SR\_NODISCARD std::wstring | [**utf8\_to\_wstring**](#function-utf8_to_wstring) (const std::string & str) <br> |
 |  SR\_NODISCARD std::string | [**wstring\_to\_utf8**](#function-wstring_to_utf8) (const std::wstring & str) <br> |
@@ -1006,6 +1007,21 @@ static inline std::string_view SR_UTILS_NS::StringUtils::SubstringView (
 static std::string SR_UTILS_NS::StringUtils::Tab (
     std::string code,
     uint32_t count=1
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ToKebabCase 
+
+```C++
+static std::string SR_UTILS_NS::StringUtils::ToKebabCase (
+    std::string_view str
 ) 
 ```
 

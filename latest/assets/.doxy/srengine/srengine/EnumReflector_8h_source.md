@@ -19,6 +19,7 @@
 #include <Utils/Common/HashManager.h>
 #include <Utils/Types/Map.h>
 #include <Utils/Types/StringAtom.h>
+#include <Utils/Types/Function.h>
 
 #include <Codegen/EnumsFwd.generated.hpp>
 
@@ -86,6 +87,8 @@ namespace SR_UTILS_NS {
         ~EnumReflector() override;
 
     public:
+        template<typename EnumType> static void ForEach(SR_HTYPES_NS::Function<void(EnumType)> func);
+
         template<typename EnumType> SR_NODISCARD static EnumReflector* GetReflector();
         template<typename EnumType> SR_NODISCARD static uint64_t Count();
         template<typename EnumType> SR_NODISCARD static SR_UTILS_NS::StringAtom ToStringAtom(EnumType value);
@@ -328,6 +331,13 @@ namespace SR_UTILS_NS {
 
     template<typename EnumType> EnumVariant EnumReflector::GetEnumVariant() {
         return GetReflector<EnumType>()->GetEnumVariantInternal();
+    }
+
+    template <typename EnumType>
+    void EnumReflector::ForEach(Types::Function<void(EnumType)> func) {
+        for (auto&& item : GetReflector<EnumType>()->m_data->values) {
+            func(static_cast<EnumType>(item.value));
+        }
     }
 
     template<typename EnumType> EnumReflector* EnumReflector::GetReflector() {

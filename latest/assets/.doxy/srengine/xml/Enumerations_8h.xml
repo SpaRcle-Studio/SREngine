@@ -65,6 +65,8 @@
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>Engine/Core/libs/Utils/inc/Utils/Common/Enumerations.h</label>
@@ -119,6 +121,12 @@
       <node id="65">
         <label>Utils/Platform/Stacktrace.h</label>
         <link refid="Stacktrace_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>Utils/Types/Function.h</label>
+        <link refid="Function_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
@@ -278,7 +286,7 @@
         <childnode refid="63" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="78">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
       <node id="46">

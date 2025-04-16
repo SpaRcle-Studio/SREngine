@@ -16,7 +16,7 @@
       <node id="166">
         <label>Graphics/GUI/ImGUI.h</label>
         <link refid="ImGUI_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
@@ -30,9 +30,9 @@
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
-        </childnode>
         <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="157" relation="include">
         </childnode>
@@ -41,36 +41,36 @@
         <childnode refid="166" relation="include">
         </childnode>
       </node>
-      <node id="107">
+      <node id="108">
         <label>Utils/Common/AnyMarshal.h</label>
         <link refid="AnyMarshal_8h_source"/>
-        <childnode refid="108" relation="include">
-        </childnode>
         <childnode refid="109" relation="include">
         </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
       </node>
-      <node id="104">
+      <node id="105">
         <label>Utils/Common/AnyVisitor.h</label>
         <link refid="AnyVisitor_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="108">
+      <node id="109">
         <label>Utils/Common/BaseMarshal.h</label>
         <link refid="BaseMarshal_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="109" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="107" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
       <node id="77">
@@ -79,10 +79,10 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="111">
+      <node id="112">
         <label>Utils/Common/CastUtils.h</label>
         <link refid="CastUtils_8h_source"/>
-        <childnode refid="94" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
       </node>
       <node id="141">
@@ -103,6 +103,8 @@
         <childnode refid="71" relation="include">
         </childnode>
         <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
         </childnode>
       </node>
       <node id="82">
@@ -142,11 +144,11 @@
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
         </childnode>
       </node>
       <node id="85">
@@ -194,18 +196,18 @@
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="100" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="101" relation="include">
         </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
         <childnode refid="102" relation="include">
         </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
       </node>
-      <node id="100">
+      <node id="101">
         <label>Utils/Common/StringUtils.h</label>
         <link refid="StringUtils_8h_source"/>
         <childnode refid="7" relation="include">
@@ -220,23 +222,23 @@
         </childnode>
         <childnode refid="160" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>Utils/Common/ThreadUtils.h</label>
         <link refid="ThreadUtils_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="103">
+      <node id="104">
         <label>Utils/Common/TypeInfo.h</label>
         <link refid="Utils_2inc_2Utils_2Common_2TypeInfo_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
         <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
@@ -244,15 +246,15 @@
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="110">
+      <node id="111">
         <label>Utils/Debug.h</label>
         <link refid="Debug_8h_source"/>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
@@ -260,25 +262,25 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="111" relation="include">
+        <childnode refid="112" relation="include">
         </childnode>
       </node>
       <node id="139">
         <label>Utils/ECS/Component.h</label>
         <link refid="Component_8h_source"/>
-        <childnode refid="113" relation="include">
+        <childnode refid="114" relation="include">
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -298,7 +300,7 @@
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="145" relation="include">
         </childnode>
@@ -306,31 +308,31 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
         <childnode refid="146" relation="include">
         </childnode>
       </node>
-      <node id="113">
+      <node id="114">
         <label>Utils/ECS/Entity.h</label>
         <link refid="Entity_8h_source"/>
-        <childnode refid="114" relation="include">
+        <childnode refid="115" relation="include">
         </childnode>
         <childnode refid="131" relation="include">
         </childnode>
         <childnode refid="136" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="137" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
       </node>
       <node id="143">
         <label>Utils/ECS/EntityController.h</label>
         <link refid="EntityController_8h_source"/>
-        <childnode refid="113" relation="include">
+        <childnode refid="114" relation="include">
         </childnode>
       </node>
       <node id="131">
@@ -346,11 +348,11 @@
         <link refid="EntityRefUtils_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="114" relation="include">
+        <childnode refid="115" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -358,9 +360,9 @@
         <link refid="IComponentable_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
-        </childnode>
         <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
         </childnode>
         <childnode refid="139" relation="include">
         </childnode>
@@ -370,10 +372,10 @@
       <node id="164">
         <label>Utils/Events/Event.h</label>
         <link refid="Event_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
-      <node id="96">
+      <node id="97">
         <label>Utils/FileSystem/Path.h</label>
         <link refid="Path_8h_source"/>
         <childnode refid="8" relation="include">
@@ -384,7 +386,7 @@
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
       <node id="165">
@@ -432,7 +434,7 @@
       <node id="158">
         <label>Utils/Input/KeyCodes.h</label>
         <link refid="KeyCodes_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
       <node id="149">
@@ -452,7 +454,7 @@
       <node id="150">
         <label>Utils/Localization/Icu.h</label>
         <link refid="Icu_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
       <node id="151">
@@ -481,13 +483,13 @@
         <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="93">
+      <node id="94">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="105">
+      <node id="106">
         <label>Utils/Math/Size.h</label>
         <link refid="Size_8h_source"/>
         <childnode refid="80" relation="include">
@@ -508,7 +510,7 @@
         <link refid="Vector3_8h_source"/>
         <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
       </node>
       <node id="78">
@@ -519,7 +521,7 @@
         <childnode refid="79" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="100">
         <label>Utils/Math/Vector6.h</label>
         <link refid="Vector6_8h_source"/>
         <childnode refid="7" relation="include">
@@ -527,14 +529,14 @@
         <childnode refid="79" relation="include">
         </childnode>
       </node>
-      <node id="94">
+      <node id="95">
         <label>Utils/Platform/Platform.h</label>
         <link refid="Platform_8h_source"/>
         <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
         <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
       <node id="86">
@@ -550,9 +552,9 @@
       <node id="147">
         <label>Utils/Serialization/BaseSerialization.h</label>
         <link refid="BaseSerialization_8h_source"/>
-        <childnode refid="119" relation="include">
-        </childnode>
         <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
         </childnode>
         <childnode refid="148" relation="include">
         </childnode>
@@ -565,16 +567,16 @@
         <label>Utils/Serialization/DefaultObjectMakers.inl.h</label>
         <link refid="DefaultObjectMakers_8inl_8h_source"/>
       </node>
-      <node id="120">
+      <node id="121">
         <label>Utils/Serialization/Deserializer.h</label>
         <link refid="Deserializer_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
-      <node id="97">
+      <node id="98">
         <label>Utils/Serialization/ObjectDataAccessor.h</label>
         <link refid="ObjectDataAccessor_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="130">
@@ -591,12 +593,12 @@
         <label>Utils/Serialization/SaveCheckers.inl.h</label>
         <link refid="SaveCheckers_8inl_8h_source"/>
       </node>
-      <node id="114">
+      <node id="115">
         <label>Utils/Serialization/Serializable.h</label>
         <link refid="Serializable_8h_source"/>
-        <childnode refid="115" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="121" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
         <childnode refid="124" relation="include">
         </childnode>
@@ -604,19 +606,19 @@
       <node id="124">
         <label>Utils/Serialization/Serialization.h</label>
         <link refid="Serialization_8h_source"/>
-        <childnode refid="119" relation="include">
-        </childnode>
         <childnode refid="120" relation="include">
-        </childnode>
-        <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="121" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="105" relation="include">
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>
@@ -631,30 +633,30 @@
         <childnode refid="130" relation="include">
         </childnode>
       </node>
-      <node id="119">
+      <node id="120">
         <label>Utils/Serialization/Serializer.h</label>
         <link refid="Serializer_8h_source"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
-      <node id="116">
+      <node id="117">
         <label>Utils/TypeTraits/ClassDB.h</label>
         <link refid="ClassDB_8h_source"/>
         <childnode refid="85" relation="include">
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="117" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
       </node>
-      <node id="121">
+      <node id="122">
         <label>Utils/TypeTraits/Factory.h</label>
         <link refid="Factory_8h_source"/>
         <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
-        <childnode refid="118" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
       </node>
       <node id="137">
@@ -672,37 +674,37 @@
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
-      <node id="115">
+      <node id="116">
         <label>Utils/TypeTraits/SRClass.h</label>
         <link refid="SRClass_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="116" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
-        <childnode refid="118" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
       </node>
-      <node id="118">
+      <node id="119">
         <label>Utils/TypeTraits/SRClassMeta.h</label>
         <link refid="SRClassMeta_8h_source"/>
         <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="119" relation="include">
-        </childnode>
         <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
         </childnode>
       </node>
       <node id="138">
@@ -711,7 +713,7 @@
         <childnode refid="135" relation="include">
         </childnode>
       </node>
-      <node id="98">
+      <node id="99">
         <label>Utils/TypeTraits/TypeTraits.h</label>
         <link refid="TypeTraits_8h_source"/>
         <childnode refid="72" relation="include">
@@ -724,7 +726,7 @@
         </childnode>
         <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="145">
@@ -734,10 +736,10 @@
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
       </node>
-      <node id="123">
+      <node id="92">
         <label>Utils/Types/Function.h</label>
         <link refid="Function_8h_source"/>
         <childnode refid="8" relation="include">
@@ -758,7 +760,7 @@
         <link refid="Marshal_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
@@ -766,7 +768,7 @@
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="109" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -777,7 +779,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="117">
+      <node id="118">
         <label>Utils/Types/Mutex.h</label>
         <link refid="Mutex_8h_source"/>
         <childnode refid="85" relation="include">
@@ -788,7 +790,7 @@
         <link refid="ObjectPool_8h_source"/>
         <childnode refid="161" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -798,11 +800,11 @@
         <link refid="SafePointer_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
       </node>
       <node id="87">
@@ -814,36 +816,36 @@
       <node id="140">
         <label>Utils/Types/SafeVariable.h</label>
         <link refid="SafeVariable_8h_source"/>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="122">
+      <node id="123">
         <label>Utils/Types/SharedPtr.h</label>
         <link refid="SharedPtr_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="161">
         <label>Utils/Types/Stack.h</label>
         <link refid="Stack_8h_source"/>
-        <childnode refid="94" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
       </node>
-      <node id="109">
+      <node id="110">
         <label>Utils/Types/Stream.h</label>
         <link refid="Stream_8h_source"/>
         <childnode refid="8" relation="include">
@@ -862,22 +864,22 @@
       <node id="144">
         <label>Utils/Types/Thread.h</label>
         <link refid="Thread_8h_source"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="106">
+      <node id="107">
         <label>Utils/Types/UnicodeString.h</label>
         <link refid="UnicodeString_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="112">
+      <node id="113">
         <label>Utils/Types/Vector.h</label>
         <link refid="Vector_8h_source"/>
         <childnode refid="8" relation="include">
@@ -898,7 +900,7 @@
         <link refid="Observer_8h_source"/>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
@@ -914,7 +916,7 @@
         </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="71" relation="include">
         </childnode>
@@ -944,7 +946,7 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -1074,7 +1076,7 @@
       <node id="126">
         <label>Codegen/Enums.generated.hpp</label>
       </node>
-      <node id="92">
+      <node id="93">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
       <node id="49">
@@ -1140,13 +1142,13 @@
       <node id="90">
         <label>flat_hash_map/flat_hash_map.hpp</label>
       </node>
-      <node id="102">
+      <node id="103">
         <label>fmt/color.h</label>
       </node>
       <node id="76">
         <label>fmt/format.h</label>
       </node>
-      <node id="101">
+      <node id="102">
         <label>fmt/printf.h</label>
       </node>
       <node id="32">

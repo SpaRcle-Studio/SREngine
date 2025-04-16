@@ -107,20 +107,12 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/Application.h" line="18" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a7e68329c6162c71b5e9c4b3136297fc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a6e037d3105baab40feeaaf2188dc7748" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_CORE_NS::Application::PreInit</definition>
-        <argsstring>(int argc, char **argv)</argsstring>
+        <argsstring>()</argsstring>
         <name>PreInit</name>
         <qualifiedname>SR_CORE_NS::Application::PreInit</qualifiedname>
-        <param>
-          <type>int</type>
-          <declname>argc</declname>
-        </param>
-        <param>
-          <type>char **</type>
-          <declname>argv</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -217,20 +209,12 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/Application.h" line="28" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a7ff15ca2e24be199270671c0d9cc4c40" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1af11788fe8ed9084d885de749dc78614e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>virtual bool SR_CORE_NS::Application::InitializeResourcesFolder</definition>
-        <argsstring>(int argc, char **argv)</argsstring>
+        <argsstring>()</argsstring>
         <name>InitializeResourcesFolder</name>
         <qualifiedname>SR_CORE_NS::Application::InitializeResourcesFolder</qualifiedname>
-        <param>
-          <type>int</type>
-          <declname>argc</declname>
-        </param>
-        <param>
-          <type>char **</type>
-          <declname>argv</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -371,7 +355,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a049d443ca8eda9edfb95d35eacffc69a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Init</name></member>
-      <member refid="classSR__CORE__NS_1_1Application_1a7ff15ca2e24be199270671c0d9cc4c40" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>InitializeResourcesFolder</name></member>
+      <member refid="classSR__CORE__NS_1_1Application_1af11788fe8ed9084d885de749dc78614e" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>InitializeResourcesFolder</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a558ad35e83ba8c64731808d9f8b77643" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>InitLogger</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a6a769d0c294e35d7a0b890fc8756273d" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>InitResourceTypes</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a6b1ba970ebfd6659d2c5fbd689abbf52" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>m_applicationPath</name></member>
@@ -390,7 +374,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>operator==</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>PolymorphicCast</name></member>
-      <member refid="classSR__CORE__NS_1_1Application_1a7e68329c6162c71b5e9c4b3136297fc5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>PreInit</name></member>
+      <member refid="classSR__CORE__NS_1_1Application_1a6e037d3105baab40feeaaf2188dc7748" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>PreInit</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Ptr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>RecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>ReinterpretCast</name></member>
