@@ -18,7 +18,7 @@ namespace SR_CORE_NS {
         void AddTest(const TestFn& test, const std::string& name) { m_tests.insert(std::make_pair(name, test)); }
         void AddEngineTest(const TestFn& test, const std::string& name) { m_engineTests.insert(std::make_pair(name, test)); }
 
-        void RunAll(int argc, char** argv);
+        void RunAll();
 
         bool IsSingletonCanBeDestroyed() const override { return false; }
 
@@ -29,9 +29,6 @@ namespace SR_CORE_NS {
     private:
         std::map<std::string, TestFn> m_engineTests;
         std::map<std::string, TestFn> m_tests;
-
-        int m_argc = 0;
-        char** m_argv = nullptr;
     };
 }
 

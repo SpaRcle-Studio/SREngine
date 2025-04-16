@@ -31,6 +31,7 @@
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
 #include <Audio/RawSound.h>
+#include <Core/CLIManager.h>
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoScriptResourceReloader.h>
@@ -48,17 +49,15 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Debug::DestroySingleton();
     }
 
-    bool Application::PreInit(int argc, char** argv) {
+    bool Application::PreInit() {
         SR_PLATFORM_NS::InitializePlatform();
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
 
         m_applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
 
-        auto&& logDir = SR_UTILS_NS::Path(m_applicationPath);
-        if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argc + argv, "-logdir"); !folder.empty()) {
-            logDir = folder;
-        }
+        auto&& defaultLogDir = SR_UTILS_NS::Path(m_applicationPath);
+        SR_UTILS_NS::Path logDir = CLIManager::Instance().GetOptionValue(CLIOptions::LogDir).value_or(defaultLogDir);
 
         return InitLogger(logDir);
     }
@@ -275,7 +274,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::GetSingletonManager()->DestroyAll();
     }
 
-    bool Application::InitializeResourcesFolder(int argc, char** argv) {
+    bool Application::InitializeResourcesFolder() {
     #ifdef SR_ENGINE_FLATPAK_BUILD
         if (FindResourcesFolder()) {
             return true;
@@ -297,7 +296,9 @@ namespace SR_CORE_NS {
         SR_ERROR("Application::InitializeResourcesFolder() : necessary resources were not found. Please try reinstalling the application.");
         return false;
     #else
-        if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
+        if (auto&& folderArg = CLIManager::Instance().GetOptionValue(CLIOptions::Resources); folderArg.has_value()) {
+            auto&& folder = SR_UTILS_NS::Path(folderArg.value());
+
             if (!folder.Exists(SR_UTILS_NS::Path::Type::Folder)) {
                 SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");
             }
@@ -306,6 +307,7 @@ namespace SR_CORE_NS {
                 return true;
             }
         }
+
         if (!FindResourcesFolder()) {
             SR_LOG("Application::InitializeResourcesFolder() : failed to find resources folder!");
             return false;

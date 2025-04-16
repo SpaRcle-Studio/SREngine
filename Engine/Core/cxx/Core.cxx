@@ -35,6 +35,7 @@
 #include "../src/Core/EvoScriptAPI.cpp"
 #include "../src/Core/EngineResources.cpp"
 #include "../src/Core/EngineMigrators.cpp"
+#include "../src/Core/CLIManager.cpp"
 
 #include "../src/Core/Tests/TestManager.cpp"
 

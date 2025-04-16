@@ -8,8 +8,8 @@
 #include <Utils/Common/Compression.h>
 
 namespace SR_CORE_NS {
-    LauncherInitStatus Launcher::InitLauncher(int argc, char** argv) {
-        if (!PreInit(argc, argv)) {
+    LauncherInitStatus Launcher::InitLauncher() {
+        if (!PreInit()) {
             SR_PLATFORM_NS::WriteConsoleError("Launcher::Init() : failed to pre-initialize application!\n");
             return LauncherInitStatus::Error;
         }
@@ -22,9 +22,9 @@ namespace SR_CORE_NS {
         SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
         return LauncherInitStatus::Error;
     #else
-        if (Super::InitializeResourcesFolder(argc, argv)) {
+        if (Super::InitializeResourcesFolder()) {
             SR_LOG("Launcher::InitLauncher() : resources folder found.");
-            if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--delete-old-app")) {
+            if (CLIManager::Instance().IsFlagPresent(CLIFlags::DeleteOldApp)) {
                 DeleteOldApplication();
                 CloneResources();
             }
