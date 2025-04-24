@@ -46,6 +46,8 @@ namespace SR_SRSL_NS {
         std::string m_source;
         uint64_t m_offset = 0;
         uint16_t m_fileIndex = 0;
+        uint64_t m_line = 0;
+        uint64_t m_position = 0;
 
         Lexems m_lexems;
 

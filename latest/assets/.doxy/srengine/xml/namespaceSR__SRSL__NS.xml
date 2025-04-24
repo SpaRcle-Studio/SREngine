@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="16" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="16" bodyend="16"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="17" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="17" bodyend="17"/>
       </memberdef>
       <memberdef kind="variable" id="LexerUtils_8h_1afd9d3ba7fc039f8fee48f7d023d003eb" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>SR_INLINE constexpr char</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="18" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="18" bodyend="47"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="19" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="19" bodyend="48"/>
       </memberdef>
       <memberdef kind="variable" id="ShaderVariables_8h_1a4b60950877e7eb2b6a198f801bcd3a9f" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC const std::map&lt; std::string, std::string &gt;</type>
@@ -469,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="49" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="49" bodyend="71"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="50" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="50" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="LexerUtils_8h_1a16b813c5bad700909e83a7a92fb6dae9" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -487,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="73" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="73" bodyend="78"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="74" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="74" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="LexerUtils_8h_1a31255ba82bb94309c00d05f72e28797f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -594,7 +594,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="80" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" declline="80" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="81" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" declline="81" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="LexerUtils_8h_1ac32dfcae80095ece433df56bca4ece4f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -612,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="121" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="121" bodyend="153"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="122" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="122" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="LexerUtils_8h_1a387c58dfc215470aeae3656796875486" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -719,7 +719,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="155" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" declline="155" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="156" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" declline="156" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="LexerUtils_8h_1aac83e797f86a31497508ce153992675b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED SR_INLINE_STATIC std::string</type>
@@ -737,7 +737,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="284" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="284" bodyend="297"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="289" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="289" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="SRSL_2Shader_8h_1af6cfe1747f8e1a2f9338e936cba6c08d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

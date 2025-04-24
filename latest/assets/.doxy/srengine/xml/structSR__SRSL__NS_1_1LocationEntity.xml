@@ -17,7 +17,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="172" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="172" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="175" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a02caec6d91a02f84ab87f0822ee247a9" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::LocationEntity::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::position</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="176" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a295c846c7a7bd9c227a12308ed02083d" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::LocationEntity::line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <qualifiedname>SR_SRSL_NS::LocationEntity::line</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="177" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="177" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a3e0d91dd2da6fa4a3ed1eeb59a5ad4dc" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -32,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="173" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="173" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="178" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="178" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1LocationEntity_1a34a8e5639944b2344582c509d88a1745" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -47,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="174" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="174" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="179" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="179" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -63,12 +93,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="164" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="165" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="structSR__SRSL__NS_1_1LocationEntity_1a6db6cc1b80897479b87085c7cbb554c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structSR__SRSL__NS_1_1LocationEntity_1a7c3d0288a385823df02f3799bfd0084c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>SR_SRSL_NS::LocationEntity::LocationEntity</definition>
-        <argsstring>(uint64_t offset, uint64_t length, uint16_t fileIndex)</argsstring>
+        <argsstring>(uint64_t offset, uint64_t length, uint16_t fileIndex, uint64_t line, uint64_t position)</argsstring>
         <name>LocationEntity</name>
         <qualifiedname>SR_SRSL_NS::LocationEntity::LocationEntity</qualifiedname>
         <param>
@@ -83,13 +113,21 @@
           <type>uint16_t</type>
           <declname>fileIndex</declname>
         </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>position</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="166" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="166" bodyend="170"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="167" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="167" bodyend="173"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -108,13 +146,15 @@
         <link refid="structSR__SRSL__NS_1_1LocationEntity"/>
       </node>
     </inheritancegraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="163" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="163" bodyend="175"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="164" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="164" bodyend="180"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1LocationEntity_1a34a8e5639944b2344582c509d88a1745" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>fileIndex</name></member>
       <member refid="structSR__SRSL__NS_1_1LocationEntity_1a3e0d91dd2da6fa4a3ed1eeb59a5ad4dc" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>length</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a295c846c7a7bd9c227a12308ed02083d" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>line</name></member>
       <member refid="structSR__SRSL__NS_1_1LocationEntity_1a94cb2d4c434cda4ad94ca7bd318eb5c7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>LocationEntity</name></member>
-      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a6db6cc1b80897479b87085c7cbb554c7" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>LocationEntity</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a7c3d0288a385823df02f3799bfd0084c" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>LocationEntity</name></member>
       <member refid="structSR__SRSL__NS_1_1LocationEntity_1a9b1522c115181e4f27c6d347964d8dd4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>offset</name></member>
+      <member refid="structSR__SRSL__NS_1_1LocationEntity_1a02caec6d91a02f84ab87f0822ee247a9" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::LocationEntity</scope><name>position</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

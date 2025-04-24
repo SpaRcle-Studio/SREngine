@@ -5244,8 +5244,8 @@
     <member refid="structSR__SRSL__NS_1_1Lexem_1a1c96f4c0320104e3d3e07ac3e44c0cb8" kind="variable"><name>kind</name></member>
     <member refid="structSR__SRSL__NS_1_1Lexem_1ae5b91d92dba3bc9f49a85c6d6b1d55c8" kind="variable"><name>value</name></member>
     <member refid="structSR__SRSL__NS_1_1Lexem_1a10d40ca22484f30d0d754882507ac873" kind="function"><name>Lexem</name></member>
-    <member refid="structSR__SRSL__NS_1_1Lexem_1a5495415f7c0467946e098bc453712c83" kind="function"><name>Lexem</name></member>
-    <member refid="structSR__SRSL__NS_1_1Lexem_1a0f098436d4326439ecfa30c12e9a4e24" kind="function"><name>Lexem</name></member>
+    <member refid="structSR__SRSL__NS_1_1Lexem_1a56248f33aa23ade43e2373a2adc5dc38" kind="function"><name>Lexem</name></member>
+    <member refid="structSR__SRSL__NS_1_1Lexem_1aa0c66439b2b8ba92b51adcc914f11842" kind="function"><name>Lexem</name></member>
   </compound>
   <compound refid="classSR__PHYSICS__NS_1_1LibraryImpl" kind="class"><name>SR_PHYSICS_NS::LibraryImpl</name>
     <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a222cbc04d520e4137efec778854f65eb" kind="typedef"><name>Super</name></member>
@@ -5361,10 +5361,12 @@
   </compound>
   <compound refid="structSR__SRSL__NS_1_1LocationEntity" kind="struct"><name>SR_SRSL_NS::LocationEntity</name>
     <member refid="structSR__SRSL__NS_1_1LocationEntity_1a9b1522c115181e4f27c6d347964d8dd4" kind="variable"><name>offset</name></member>
+    <member refid="structSR__SRSL__NS_1_1LocationEntity_1a02caec6d91a02f84ab87f0822ee247a9" kind="variable"><name>position</name></member>
+    <member refid="structSR__SRSL__NS_1_1LocationEntity_1a295c846c7a7bd9c227a12308ed02083d" kind="variable"><name>line</name></member>
     <member refid="structSR__SRSL__NS_1_1LocationEntity_1a3e0d91dd2da6fa4a3ed1eeb59a5ad4dc" kind="variable"><name>length</name></member>
     <member refid="structSR__SRSL__NS_1_1LocationEntity_1a34a8e5639944b2344582c509d88a1745" kind="variable"><name>fileIndex</name></member>
     <member refid="structSR__SRSL__NS_1_1LocationEntity_1a94cb2d4c434cda4ad94ca7bd318eb5c7" kind="function"><name>LocationEntity</name></member>
-    <member refid="structSR__SRSL__NS_1_1LocationEntity_1a6db6cc1b80897479b87085c7cbb554c7" kind="function"><name>LocationEntity</name></member>
+    <member refid="structSR__SRSL__NS_1_1LocationEntity_1a7c3d0288a385823df02f3799bfd0084c" kind="function"><name>LocationEntity</name></member>
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1LockGuard" kind="class"><name>SR_HTYPES_NS::LockGuard</name>
     <member refid="classSR__HTYPES__NS_1_1LockGuard_1ad833a55ec809dc3709f48dd81c78bdd1" kind="variable"><name>m_mutex</name></member>
@@ -10423,6 +10425,8 @@
     <member refid="classSR__SRSL__NS_1_1SRSLLexer_1aec5de93718dd73e0b0fccc90244b66d6" kind="variable"><name>m_source</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ad4a240666db2777c21665897c22fdc9e" kind="variable"><name>m_offset</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a420fccf7af38228a667791a2c828fdff" kind="variable"><name>m_fileIndex</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ae189788bf80fcf95b39f5c393397e2f7" kind="variable"><name>m_line</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLLexer_1aa18b34290f66ace00ed00cf406d31166" kind="variable"><name>m_position</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a3adb019b79979fe640609ea11f20f494" kind="variable"><name>m_lexems</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ac67c54da7b3bf69da39f451d8e78bee0" kind="function"><name>~SRSLLexer</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ac3c2706b7651773672513891d403a726" kind="function"><name>Parse</name></member>
@@ -10524,6 +10528,8 @@
   <compound refid="structSR__SRSL__NS_1_1SRSLMessage" kind="struct"><name>SR_SRSL_NS::SRSLMessage</name>
     <member refid="structSR__SRSL__NS_1_1SRSLMessage_1ac96269215a61e97feb406b02adbeda21" kind="variable"><name>code</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLMessage_1abd1bb3218ca7e7bf72e2de3a42f22af4" kind="variable"><name>position</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a386100bd903b34605aa48ffa3f7b640c" kind="variable"><name>characterIndex</name></member>
+    <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a47ffe1bd70fb2735233b425a818261be" kind="variable"><name>line</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a3c9c726647ec659b9b66ff4dd8695672" kind="variable"><name>fileIndex</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLMessage_1ab38d68ccd6c1ea531af868f838bf5a70" kind="variable"><name>lexemKind</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a4025f625f8742a97030b66efb17de057" kind="variable"><name>description</name></member>
@@ -14981,6 +14987,10 @@
   </compound>
   <compound refid="RefAnalyzer_8h" kind="file"><name>RefAnalyzer.h</name>
   </compound>
+  <compound refid="SRSL_2Shader_8h" kind="file"><name>Shader.h</name>
+  </compound>
+  <compound refid="Types_2Shader_8h" kind="file"><name>Shader.h</name>
+  </compound>
   <compound refid="ShaderType_8h" kind="file"><name>ShaderType.h</name>
   </compound>
   <compound refid="ShaderVariables_8h" kind="file"><name>ShaderVariables.h</name>
@@ -15016,10 +15026,6 @@
   <compound refid="Mesh_8h" kind="file"><name>Mesh.h</name>
   </compound>
   <compound refid="RenderTexture_8h" kind="file"><name>RenderTexture.h</name>
-  </compound>
-  <compound refid="SRSL_2Shader_8h" kind="file"><name>Shader.h</name>
-  </compound>
-  <compound refid="Types_2Shader_8h" kind="file"><name>Shader.h</name>
   </compound>
   <compound refid="Skybox_8h" kind="file"><name>Skybox.h</name>
   </compound>
@@ -15120,6 +15126,23 @@
   <compound refid="RaycastImpl_8h" kind="file"><name>RaycastImpl.h</name>
   </compound>
   <compound refid="Rigidbody_8h" kind="file"><name>Rigidbody.h</name>
+  </compound>
+  <compound refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" kind="file"><name>Utils.h</name>
+  </compound>
+  <compound refid="Physics_2inc_2Physics_2Utils_2Utils_8h" kind="file"><name>Utils.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2Network_2Utils_8h" kind="file"><name>Utils.h</name>
+  </compound>
+  <compound refid="Utils_2inc_2Utils_2SRLM_2Utils_8h" kind="file"><name>Utils.h</name>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ad9f5f37108322174fee04e4dda9ffbe3" kind="define"><name>SR_LM_REGISTER_BASE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a522693765b1e3f2bfea835f4551e83db" kind="define"><name>SR_LM_REGISTER_TYPE_NO_META</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a306a04ac48ee7fdc2ba9f39506bececc" kind="define"><name>SR_LM_REGISTER_TYPE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1aed63a8801424c0100cf2ae8d405a6674" kind="define"><name>SR_LM_REGISTER_TYPE_GETTER_SETTER</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ac0d97fb0f171e8ff646fa3a7c73a218f" kind="define"><name>SR_LM_REGISTER_TYPE_SG_COPY</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a810f20ead43171167841f6a47e718a2a" kind="define"><name>SR_LM_REGISTER_TYPE_FULL</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a73a1df9f919b7be5e87298a48cf8f7c5" kind="define"><name>SR_LM_REGISTER_TYPE_FULL_MOVE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a8324e2800a57b5a9c86d6c322d973fb6" kind="define"><name>SR_INIT_LOGICAL_NODE</name></member>
+    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1af5b78d43b1e373fbc5b9c89d33b88520" kind="define"><name>SR_REGISTER_LOGICAL_NODE</name></member>
   </compound>
   <compound refid="Vehicle_8h" kind="file"><name>Vehicle.h</name>
   </compound>
@@ -15654,11 +15677,6 @@
     <member refid="TracyContext_8h_1a7a3929fc76fafc528f30502665fd5b97" kind="define"><name>SR_TRACY_DESTROY</name></member>
     <member refid="TracyContext_8h_1ac9207c6f17ec42b6ff48df050936f5f9" kind="define"><name>SR_TRACY_THREAD_NAME</name></member>
   </compound>
-  <compound refid="Reflection_2Property_8h" kind="file"><name>Property.h</name>
-  </compound>
-  <compound refid="TypeTraits_2Property_8h" kind="file"><name>Property.h</name>
-    <member refid="TypeTraits_2Property_8h_1a4aa0840f6f16f5a15a296ebe4dde3903" kind="define"><name>SR_REGISTER_TYPE_TRAITS_PROPERTY</name></member>
-  </compound>
   <compound refid="Value_8h" kind="file"><name>Value.h</name>
   </compound>
   <compound refid="ValueImpl_8h" kind="file"><name>ValueImpl.h</name>
@@ -15726,23 +15744,6 @@
   <compound refid="LogicalNodeManager_8h" kind="file"><name>LogicalNodeManager.h</name>
   </compound>
   <compound refid="LogicalNodes_8h" kind="file"><name>LogicalNodes.h</name>
-  </compound>
-  <compound refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="Physics_2inc_2Physics_2Utils_2Utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2Network_2Utils_8h" kind="file"><name>Utils.h</name>
-  </compound>
-  <compound refid="Utils_2inc_2Utils_2SRLM_2Utils_8h" kind="file"><name>Utils.h</name>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ad9f5f37108322174fee04e4dda9ffbe3" kind="define"><name>SR_LM_REGISTER_BASE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a522693765b1e3f2bfea835f4551e83db" kind="define"><name>SR_LM_REGISTER_TYPE_NO_META</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a306a04ac48ee7fdc2ba9f39506bececc" kind="define"><name>SR_LM_REGISTER_TYPE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1aed63a8801424c0100cf2ae8d405a6674" kind="define"><name>SR_LM_REGISTER_TYPE_GETTER_SETTER</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1ac0d97fb0f171e8ff646fa3a7c73a218f" kind="define"><name>SR_LM_REGISTER_TYPE_SG_COPY</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a810f20ead43171167841f6a47e718a2a" kind="define"><name>SR_LM_REGISTER_TYPE_FULL</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a73a1df9f919b7be5e87298a48cf8f7c5" kind="define"><name>SR_LM_REGISTER_TYPE_FULL_MOVE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1a8324e2800a57b5a9c86d6c322d973fb6" kind="define"><name>SR_INIT_LOGICAL_NODE</name></member>
-    <member refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_1af5b78d43b1e373fbc5b9c89d33b88520" kind="define"><name>SR_REGISTER_LOGICAL_NODE</name></member>
   </compound>
   <compound refid="stdInclude_8h" kind="file"><name>stdInclude.h</name>
     <member refid="stdInclude_8h_1a998e3f57e9efd36fa6a215ab654affa4" kind="define"><name>SR_GET_CLASS_NAME</name></member>
@@ -15863,6 +15864,11 @@
   <compound refid="Factory_8h" kind="file"><name>Factory.h</name>
   </compound>
   <compound refid="Properties_8h" kind="file"><name>Properties.h</name>
+  </compound>
+  <compound refid="Reflection_2Property_8h" kind="file"><name>Property.h</name>
+  </compound>
+  <compound refid="TypeTraits_2Property_8h" kind="file"><name>Property.h</name>
+    <member refid="TypeTraits_2Property_8h_1a4aa0840f6f16f5a15a296ebe4dde3903" kind="define"><name>SR_REGISTER_TYPE_TRAITS_PROPERTY</name></member>
   </compound>
   <compound refid="PropertyManager_8h" kind="file"><name>PropertyManager.h</name>
   </compound>

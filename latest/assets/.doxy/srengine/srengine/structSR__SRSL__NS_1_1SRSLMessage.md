@@ -35,10 +35,12 @@
 
 | Type | Name |
 | ---: | :--- |
+|  uint64\_t | [**characterIndex**](#variable-characterindex)   = `SR\_UINT64\_MAX`<br> |
 |  SRSLReturnCode | [**code**](#variable-code)   = `SRSLReturnCode::Unknown`<br> |
 |  std::string | [**description**](#variable-description)  <br> |
 |  uint16\_t | [**fileIndex**](#variable-fileindex)   = `SR\_UINT16\_MAX`<br> |
 |  LexemKind | [**lexemKind**](#variable-lexemkind)   = `LexemKind::Unknown`<br> |
+|  uint64\_t | [**line**](#variable-line)   = `SR\_UINT64\_MAX`<br> |
 |  uint64\_t | [**position**](#variable-position)   = `SR\_UINT64\_MAX`<br> |
 
 
@@ -98,6 +100,19 @@
 
 
 
+### variable characterIndex 
+
+```C++
+uint64_t SR_SRSL_NS::SRSLMessage::characterIndex;
+```
+
+
+
+
+<hr>
+
+
+
 ### variable code 
 
 ```C++
@@ -141,6 +156,19 @@ uint16_t SR_SRSL_NS::SRSLMessage::fileIndex;
 
 ```C++
 LexemKind SR_SRSL_NS::SRSLMessage::lexemKind;
+```
+
+
+
+
+<hr>
+
+
+
+### variable line 
+
+```C++
+uint64_t SR_SRSL_NS::SRSLMessage::line;
 ```
 
 

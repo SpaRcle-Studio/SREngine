@@ -92,6 +92,36 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="38" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="38" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexer_1ae189788bf80fcf95b39f5c393397e2f7" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::SRSLLexer::m_line</definition>
+        <argsstring></argsstring>
+        <name>m_line</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexer::m_line</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="39" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexer_1aa18b34290f66ace00ed00cf406d31166" prot="private" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::SRSLLexer::m_position</definition>
+        <argsstring></argsstring>
+        <name>m_position</name>
+        <qualifiedname>SR_SRSL_NS::SRSLLexer::m_position</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="40" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classSR__SRSL__NS_1_1SRSLLexer_1a3adb019b79979fe640609ea11f20f494" prot="private" static="no" mutable="no">
         <type>Lexems</type>
         <definition>Lexems SR_SRSL_NS::SRSLLexer::m_lexems</definition>
@@ -104,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="40" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="42" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="42" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -329,7 +359,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="11" bodyend="42"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="11" bodyend="44"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1af6379e2e449c97ed6e68c77a96f2fc3e" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Clear</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>DestroySingleton</name></member>
@@ -344,8 +374,10 @@
       <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>LockSingleton</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a420fccf7af38228a667791a2c828fdff" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_fileIndex</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a3adb019b79979fe640609ea11f20f494" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_lexems</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ae189788bf80fcf95b39f5c393397e2f7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_line</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_mutex</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ad4a240666db2777c21665897c22fdc9e" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_offset</name></member>
+      <member refid="classSR__SRSL__NS_1_1SRSLLexer_1aa18b34290f66ace00ed00cf406d31166" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_position</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1aec5de93718dd73e0b0fccc90244b66d6" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_source</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>NonCopyable</name></member>

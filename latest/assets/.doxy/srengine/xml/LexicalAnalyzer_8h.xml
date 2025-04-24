@@ -19,6 +19,8 @@
         </childnode>
         <childnode refid="105" relation="include">
         </childnode>
+        <childnode refid="107" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
@@ -116,6 +118,12 @@
         <childnode refid="72" relation="include">
         </childnode>
         <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>Utils/Common/StringAtomLiterals.h</label>
+        <link refid="StringAtomLiterals_8h_source"/>
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
       <node id="83">

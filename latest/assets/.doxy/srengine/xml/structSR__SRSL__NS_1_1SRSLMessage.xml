@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="241" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="241" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="244" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="244" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLMessage_1abd1bb3218ca7e7bf72e2de3a42f22af4" prot="public" static="no" mutable="no">
         <type>uint64_t</type>
@@ -31,7 +31,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="242" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="242" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="245" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLMessage_1a386100bd903b34605aa48ffa3f7b640c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::SRSLMessage::characterIndex</definition>
+        <argsstring></argsstring>
+        <name>characterIndex</name>
+        <qualifiedname>SR_SRSL_NS::SRSLMessage::characterIndex</qualifiedname>
+        <initializer>= SR_UINT64_MAX</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="246" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLMessage_1a47ffe1bd70fb2735233b425a818261be" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::SRSLMessage::line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <qualifiedname>SR_SRSL_NS::SRSLMessage::line</qualifiedname>
+        <initializer>= SR_UINT64_MAX</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="247" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="247" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLMessage_1a3c9c726647ec659b9b66ff4dd8695672" prot="public" static="no" mutable="no">
         <type>uint16_t</type>
@@ -46,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="243" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="243" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="248" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="248" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLMessage_1ab38d68ccd6c1ea531af868f838bf5a70" prot="public" static="no" mutable="no">
         <type>LexemKind</type>
@@ -61,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="244" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="244" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="249" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="249" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLMessage_1a4025f625f8742a97030b66efb17de057" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -75,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="245" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="245" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="250" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="250" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -96,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="196" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="196" bodyend="198"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="201" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="201" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLMessage_1affc43f9119fbc28b55745aa2914cad27" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -118,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="200" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="200" bodyend="205"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="205" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="205" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLMessage_1a5296eb537b167777126da24cd0531a33" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -140,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="207" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="207" bodyend="209"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="214" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="214" bodyend="216"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLMessage_1ae102ee90828a0ea83d3ca5ed7343d0f6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -162,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="211" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="211" bodyend="237"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="218" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="218" bodyend="240"/>
       </memberdef>
       <memberdef kind="function" id="structSR__SRSL__NS_1_1SRSLMessage_1a8f24f41c67e3007aace7d72b910d1c6f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &amp;</type>
@@ -180,19 +210,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="239" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="239" bodyend="239"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="242" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="242" bodyend="242"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="195" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="195" bodyend="247"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="200" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="200" bodyend="252"/>
     <listofallmembers>
+      <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a386100bd903b34605aa48ffa3f7b640c" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>characterIndex</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1ac96269215a61e97feb406b02adbeda21" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>code</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a4025f625f8742a97030b66efb17de057" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>description</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a3c9c726647ec659b9b66ff4dd8695672" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>fileIndex</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1ab38d68ccd6c1ea531af868f838bf5a70" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>lexemKind</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a47ffe1bd70fb2735233b425a818261be" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>line</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1abd1bb3218ca7e7bf72e2de3a42f22af4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>position</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a8f24f41c67e3007aace7d72b910d1c6f" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>SetDescription</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLMessage_1a6bc8f0f79cf52d74c4ba160e7f9e4093" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLMessage</scope><name>SRSLMessage</name></member>

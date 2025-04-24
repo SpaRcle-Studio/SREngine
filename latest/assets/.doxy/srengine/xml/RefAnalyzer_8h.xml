@@ -20,6 +20,8 @@
         </childnode>
         <childnode refid="104" relation="include">
         </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>Graphics/SRSL/LexicalTree.h</label>
@@ -109,6 +111,12 @@
         <childnode refid="73" relation="include">
         </childnode>
         <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>Utils/Common/StringAtomLiterals.h</label>
+        <link refid="StringAtomLiterals_8h_source"/>
+        <childnode refid="79" relation="include">
         </childnode>
       </node>
       <node id="82">

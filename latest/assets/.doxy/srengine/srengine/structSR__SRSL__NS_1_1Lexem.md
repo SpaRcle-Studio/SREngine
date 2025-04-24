@@ -52,7 +52,9 @@ See [SR\_SRSL\_NS::LocationEntity](structSR__SRSL__NS_1_1LocationEntity.md)
 | ---: | :--- |
 |  uint16\_t | [**fileIndex**](structSR__SRSL__NS_1_1LocationEntity.md#variable-fileindex)   = `0`<br> |
 |  uint64\_t | [**length**](structSR__SRSL__NS_1_1LocationEntity.md#variable-length)   = `0`<br> |
+|  uint64\_t | [**line**](structSR__SRSL__NS_1_1LocationEntity.md#variable-line)   = `0`<br> |
 |  uint64\_t | [**offset**](structSR__SRSL__NS_1_1LocationEntity.md#variable-offset)   = `0`<br> |
+|  uint64\_t | [**position**](structSR__SRSL__NS_1_1LocationEntity.md#variable-position)   = `0`<br> |
 
 
 
@@ -88,8 +90,8 @@ See [SR\_SRSL\_NS::LocationEntity](structSR__SRSL__NS_1_1LocationEntity.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**Lexem**](#function-lexem-13) () = default<br> |
-|   | [**Lexem**](#function-lexem-23) (uint64\_t offset, uint64\_t length, LexemKind kind, std::string && value, uint16\_t fileIndex) <br> |
-|   | [**Lexem**](#function-lexem-33) (uint64\_t offset, uint64\_t length, LexemKind kind, uint16\_t fileIndex) <br> |
+|   | [**Lexem**](#function-lexem-23) (uint64\_t offset, uint64\_t length, LexemKind kind, std::string && value, uint16\_t fileIndex, uint64\_t line, uint64\_t position) <br> |
+|   | [**Lexem**](#function-lexem-33) (uint64\_t offset, uint64\_t length, LexemKind kind, uint16\_t fileIndex, uint64\_t line, uint64\_t position) <br> |
 
 
 ## Public Functions inherited from SR_SRSL_NS::LocationEntity
@@ -99,7 +101,7 @@ See [SR\_SRSL\_NS::LocationEntity](structSR__SRSL__NS_1_1LocationEntity.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**LocationEntity**](structSR__SRSL__NS_1_1LocationEntity.md#function-locationentity-12) () = default<br> |
-|   | [**LocationEntity**](structSR__SRSL__NS_1_1LocationEntity.md#function-locationentity-22) (uint64\_t offset, uint64\_t length, uint16\_t fileIndex) <br> |
+|   | [**LocationEntity**](structSR__SRSL__NS_1_1LocationEntity.md#function-locationentity-22) (uint64\_t offset, uint64\_t length, uint16\_t fileIndex, uint64\_t line, uint64\_t position) <br> |
 
 
 
@@ -208,7 +210,9 @@ inline SR_SRSL_NS::Lexem::Lexem (
     uint64_t length,
     LexemKind kind,
     std::string && value,
-    uint16_t fileIndex
+    uint16_t fileIndex,
+    uint64_t line,
+    uint64_t position
 ) 
 ```
 
@@ -226,7 +230,9 @@ inline SR_SRSL_NS::Lexem::Lexem (
     uint64_t offset,
     uint64_t length,
     LexemKind kind,
-    uint16_t fileIndex
+    uint16_t fileIndex,
+    uint64_t line,
+    uint64_t position
 ) 
 ```
 

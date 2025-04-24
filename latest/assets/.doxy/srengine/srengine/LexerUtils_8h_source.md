@@ -21,6 +21,7 @@
 #include <Utils/Common/ToString.h>
 #include <Utils/Types/Regex.h>
 #include <Utils/Debug.h>
+#include <Utils/Common/StringAtomLiterals.h>
 
 namespace SR_SRSL_NS {
     static SR_INLINE constexpr char SRSL_SPACE_CHARS[] = { ' ', '\n', '\r', '\t' };
@@ -173,13 +174,17 @@ namespace SR_SRSL_NS {
     struct LocationEntity {
         LocationEntity() = default;
 
-        LocationEntity(uint64_t offset, uint64_t length, uint16_t fileIndex)
+        LocationEntity(uint64_t offset, uint64_t length, uint16_t fileIndex, uint64_t line, uint64_t position)
             : offset(offset)
             , length(length)
             , fileIndex(fileIndex)
+            , line(line)
+            , position(position)
         { }
 
         uint64_t offset = 0;
+        uint64_t position = 0;
+        uint64_t line = 0;
         uint64_t length = 0;
         uint16_t fileIndex = 0;
     };
@@ -187,14 +192,14 @@ namespace SR_SRSL_NS {
     struct Lexem : public LocationEntity {
         Lexem() = default;
 
-        Lexem(uint64_t offset, uint64_t length, LexemKind kind, std::string&& value, uint16_t fileIndex)
-            : LocationEntity(offset, length, fileIndex)
+        Lexem(uint64_t offset, uint64_t length, LexemKind kind, std::string&& value, uint16_t fileIndex, uint64_t line, uint64_t position)
+            : LocationEntity(offset, length, fileIndex, line, position)
             , kind(kind)
             , value(SR_UTILS_NS::Exchange(value, { }))
         { }
 
-        Lexem(uint64_t offset, uint64_t length, LexemKind kind, uint16_t fileIndex)
-            : LocationEntity(offset, length, fileIndex)
+        Lexem(uint64_t offset, uint64_t length, LexemKind kind, uint16_t fileIndex, uint64_t line, uint64_t position)
+            : LocationEntity(offset, length, fileIndex, line, position)
             , kind(kind)
         { }
 
@@ -209,7 +214,9 @@ namespace SR_SRSL_NS {
 
         SRSLMessage(SRSLReturnCode code, const Lexem& lexem)
             : code(code)
-            , position(lexem.offset)
+            , position(lexem.position)
+            , characterIndex(lexem.offset)
+            , line(lexem.line)
             , fileIndex(lexem.fileIndex)
             , lexemKind(lexem.kind)
         { }
@@ -226,16 +233,12 @@ namespace SR_SRSL_NS {
                     SRHalt("Invalid index!");
                 }
                 else {
-                    message += "\n" + std::string(tab, '\t') + "File: " + files[fileIndex].ToStringRef();
+                    message += "\n{}File: file:///{}:{}:{}"_format(std::string(tab, '\t'), files[fileIndex].ToStringRef(), line, position);
                 }
             }
 
             if (!description.empty()) {
                 message += "\n" + std::string(tab, '\t') + "Description: " + description;
-            }
-
-            if (position != SR_UINT64_MAX) {
-                message += "\n" + std::string(tab, '\t') + "Position: " + SR_UTILS_NS::ToString(position);
             }
 
             if (lexemKind != LexemKind::Unknown) {
@@ -250,6 +253,8 @@ namespace SR_SRSL_NS {
 
         SRSLReturnCode code = SRSLReturnCode::Unknown;
         uint64_t position = SR_UINT64_MAX;
+        uint64_t characterIndex = SR_UINT64_MAX;
+        uint64_t line = SR_UINT64_MAX;
         uint16_t fileIndex = SR_UINT16_MAX;
         LexemKind lexemKind = LexemKind::Unknown;
         std::string description;
