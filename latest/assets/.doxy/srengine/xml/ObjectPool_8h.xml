@@ -764,7 +764,7 @@
         <label>Engine/Core/inc/Core/GUI/WorldEdit.h</label>
         <link refid="WorldEdit_8h_source"/>
       </node>
-      <node id="137">
+      <node id="147">
         <label>Engine/Core/inc/Core/Settings/EditorSettings.h</label>
         <link refid="EditorSettings_8h_source"/>
       </node>
@@ -1262,6 +1262,14 @@
         <label>Engine/Core/libs/Graphics/inc/Graphics/Render/ScriptableRenderTechnique.h</label>
         <link refid="ScriptableRenderTechnique_8h_source"/>
       </node>
+      <node id="138">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/AssignExpander.h</label>
+        <link refid="AssignExpander_8h_source"/>
+      </node>
+      <node id="139">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Evaluator.h</label>
+        <link refid="Evaluator_8h_source"/>
+      </node>
       <node id="132">
         <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/GLSLCodeGenerator.h</label>
         <link refid="GLSLCodeGenerator_8h_source"/>
@@ -1276,13 +1284,67 @@
         <childnode refid="134" relation="include">
         </childnode>
       </node>
+      <node id="136">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h</label>
+        <link refid="Lexer_8h_source"/>
+      </node>
+      <node id="135">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h</label>
+        <link refid="LexerUtils_8h_source"/>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+      </node>
+      <node id="141">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalAnalyzer.h</label>
+        <link refid="LexicalAnalyzer_8h_source"/>
+      </node>
+      <node id="137">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexicalTree.h</label>
+        <link refid="LexicalTree_8h_source"/>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="140" relation="include">
+        </childnode>
+        <childnode refid="142" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+      </node>
+      <node id="140">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/MathExpression.h</label>
+        <link refid="MathExpression_8h_source"/>
+        <childnode refid="141" relation="include">
+        </childnode>
+      </node>
+      <node id="142">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/PreProcessor.h</label>
+        <link refid="PreProcessor_8h_source"/>
+      </node>
       <node id="133">
         <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/PseudoCodeGenerator.h</label>
         <link refid="PseudoCodeGenerator_8h_source"/>
       </node>
+      <node id="143">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/RefAnalyzer.h</label>
+        <link refid="RefAnalyzer_8h_source"/>
+        <childnode refid="134" relation="include">
+        </childnode>
+      </node>
       <node id="134">
         <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/Shader.h</label>
         <link refid="SRSL_2Shader_8h_source"/>
+      </node>
+      <node id="144">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/SRSL/TypeInfo.h</label>
+        <link refid="Graphics_2inc_2Graphics_2SRSL_2TypeInfo_8h_source"/>
       </node>
       <node id="103">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Framebuffer.h</label>
@@ -1346,7 +1408,7 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="138">
+      <node id="148">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Types/RenderTexture.h</label>
         <link refid="RenderTexture_8h_source"/>
       </node>
@@ -1380,41 +1442,41 @@
         <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="151">
+      <node id="161">
         <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
         <link refid="Rigidbody2D_8h_source"/>
       </node>
-      <node id="152">
+      <node id="162">
         <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
         <link refid="Rigidbody3D_8h_source"/>
-        <childnode refid="153" relation="include">
+        <childnode refid="163" relation="include">
         </childnode>
-        <childnode refid="154" relation="include">
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
-      <node id="148">
+      <node id="158">
         <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
         <link refid="Bullet3CollisionShape_8h_source"/>
       </node>
-      <node id="153">
+      <node id="163">
         <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
         <link refid="Bullet3Rigidbody3D_8h_source"/>
       </node>
-      <node id="147">
+      <node id="157">
         <label>Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</label>
         <link refid="CollisionShape_8h_source"/>
-        <childnode refid="148" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
-        <childnode refid="149" relation="include">
+        <childnode refid="159" relation="include">
         </childnode>
-        <childnode refid="150" relation="include">
+        <childnode refid="160" relation="include">
         </childnode>
       </node>
-      <node id="149">
+      <node id="159">
         <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
         <link refid="PhysXCollisionShape_8h_source"/>
       </node>
-      <node id="154">
+      <node id="164">
         <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
         <link refid="PhysXRigidbody3D_8h_source"/>
       </node>
@@ -1424,12 +1486,12 @@
         <childnode refid="82" relation="include">
         </childnode>
       </node>
-      <node id="150">
+      <node id="160">
         <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
         <link refid="Rigidbody_8h_source"/>
-        <childnode refid="151" relation="include">
+        <childnode refid="161" relation="include">
         </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="162" relation="include">
         </childnode>
       </node>
       <node id="108">
@@ -1451,7 +1513,7 @@
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
-        <childnode refid="146" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
       <node id="111">
@@ -1478,10 +1540,10 @@
         <childnode refid="117" relation="include">
         </childnode>
       </node>
-      <node id="139">
+      <node id="149">
         <label>Engine/Core/libs/Utils/inc/Utils/ECS/LayerManager.h</label>
         <link refid="LayerManager_8h_source"/>
-        <childnode refid="140" relation="include">
+        <childnode refid="150" relation="include">
         </childnode>
       </node>
       <node id="110">
@@ -1490,17 +1552,17 @@
         <childnode refid="111" relation="include">
         </childnode>
       </node>
-      <node id="140">
+      <node id="150">
         <label>Engine/Core/libs/Utils/inc/Utils/ECS/SceneObject.h</label>
         <link refid="SceneObject_8h_source"/>
         <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="151" relation="include">
         </childnode>
       </node>
-      <node id="142">
+      <node id="152">
         <label>Engine/Core/libs/Utils/inc/Utils/ECS/TagManager.h</label>
         <link refid="TagManager_8h_source"/>
         <childnode refid="111" relation="include">
@@ -1567,13 +1629,13 @@
         </childnode>
         <childnode refid="119" relation="include">
         </childnode>
-        <childnode refid="144" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="154" relation="include">
         </childnode>
         <childnode refid="145" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="155" relation="include">
         </childnode>
       </node>
       <node id="118">
@@ -1591,40 +1653,42 @@
         </childnode>
         <childnode refid="135" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="145" relation="include">
         </childnode>
-        <childnode refid="143" relation="include">
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="153" relation="include">
         </childnode>
       </node>
-      <node id="144">
+      <node id="154">
         <label>Engine/Core/libs/Utils/inc/Utils/Resources/ResourcesHolder.h</label>
         <link refid="ResourcesHolder_8h_source"/>
       </node>
-      <node id="135">
+      <node id="145">
         <label>Engine/Core/libs/Utils/inc/Utils/SRLM/LogicalMachine.h</label>
         <link refid="LogicalMachine_8h_source"/>
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="136">
+      <node id="146">
         <label>Engine/Core/libs/Utils/inc/Utils/Settings.h</label>
         <link refid="Settings_8h_source"/>
-        <childnode refid="137" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="138" relation="include">
+        <childnode refid="148" relation="include">
         </childnode>
-        <childnode refid="139" relation="include">
+        <childnode refid="149" relation="include">
         </childnode>
-        <childnode refid="142" relation="include">
+        <childnode refid="152" relation="include">
         </childnode>
       </node>
-      <node id="143">
+      <node id="153">
         <label>Engine/Core/libs/Utils/inc/Utils/Tests/AtlasBuilderTest.h</label>
         <link refid="libs_2Utils_2inc_2Utils_2Tests_2AtlasBuilderTest_8h_source"/>
       </node>
-      <node id="146">
+      <node id="156">
         <label>Engine/Core/libs/Utils/inc/Utils/Types/IRawMeshHolder.h</label>
         <link refid="IRawMeshHolder_8h_source"/>
         <childnode refid="53" relation="include">
@@ -1633,7 +1697,7 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
+        <childnode refid="157" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -1651,28 +1715,28 @@
         </childnode>
         <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="165" relation="include">
         </childnode>
       </node>
-      <node id="145">
+      <node id="155">
         <label>Engine/Core/libs/Utils/inc/Utils/Types/RawMesh.h</label>
         <link refid="RawMesh_8h_source"/>
       </node>
-      <node id="155">
+      <node id="165">
         <label>Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTML.h</label>
         <link refid="HTML_8h_source"/>
         <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="166" relation="include">
         </childnode>
       </node>
-      <node id="156">
+      <node id="166">
         <label>Engine/Core/libs/Utils/inc/Utils/Web/HTML/HTMLParser.h</label>
         <link refid="HTMLParser_8h_source"/>
         <childnode refid="120" relation="include">
         </childnode>
       </node>
-      <node id="141">
+      <node id="151">
         <label>Engine/Core/libs/Utils/inc/Utils/World/SceneCubeChunkLogic.h</label>
         <link refid="SceneCubeChunkLogic_8h_source"/>
       </node>

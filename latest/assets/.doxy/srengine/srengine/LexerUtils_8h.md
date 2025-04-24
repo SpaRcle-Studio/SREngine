@@ -15,6 +15,7 @@
 * `#include <Utils/Common/StringFormat.h>`
 * `#include <Utils/Common/ToString.h>`
 * `#include <Utils/Types/Regex.h>`
+* `#include <Utils/Resources/ResourceManager.h>`
 * `#include <Utils/Debug.h>`
 * `#include <Utils/Common/StringAtomLiterals.h>`
 

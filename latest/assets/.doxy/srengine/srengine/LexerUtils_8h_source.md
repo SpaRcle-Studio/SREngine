@@ -20,6 +20,7 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Common/ToString.h>
 #include <Utils/Types/Regex.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Debug.h>
 #include <Utils/Common/StringAtomLiterals.h>
 
@@ -233,7 +234,12 @@ namespace SR_SRSL_NS {
                     SRHalt("Invalid index!");
                 }
                 else {
-                    message += "\n{}File: file:///{}:{}:{}"_format(std::string(tab, '\t'), files[fileIndex].ToStringRef(), line, position);
+                    auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                #ifdef SR_WIN32
+                    message += "\n{}File: {}/{}:{}:{}"_format(std::string(tab, '\t'), resourcesPath, files[fileIndex].ToStringRef(), line, position);
+                #else
+                    message += "\n{}File: file:///{}/{}:{}:{}"_format(std::string(tab, '\t'), resourcesPath, files[fileIndex].ToStringRef(), line, position);
+                #endif
                 }
             }
 
