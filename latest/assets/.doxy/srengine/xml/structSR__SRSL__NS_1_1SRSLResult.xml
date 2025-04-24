@@ -3,6 +3,21 @@
   <compounddef id="structSR__SRSL__NS_1_1SRSLResult" kind="struct" language="C++" prot="public">
     <compoundname>SR_SRSL_NS::SRSLResult</compoundname>
     <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1a9691ee5b8ed501be03faf29fc28ecc7c" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t SR_SRSL_NS::SRSLResult::processedLexems</definition>
+        <argsstring></argsstring>
+        <name>processedLexems</name>
+        <qualifiedname>SR_SRSL_NS::SRSLResult::processedLexems</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="285" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="285" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1af1f9387c1d1a6037774c6a576e2104f5" prot="public" static="no" mutable="no">
         <type>std::list&lt; <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &gt;</type>
         <definition>std::list&lt;SRSLMessage&gt; SR_SRSL_NS::SRSLResult::warnings</definition>
@@ -15,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="285" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="285" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="286" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="286" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" prot="public" static="no" mutable="no">
         <type>std::list&lt; <ref refid="structSR__SRSL__NS_1_1SRSLMessage" kindref="compound">SRSLMessage</ref> &gt;</type>
@@ -29,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="286" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="286" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="287" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="287" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -176,13 +191,14 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="254" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="254" bodyend="287"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" line="254" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/LexerUtils.h" bodystart="254" bodyend="288"/>
     <listofallmembers>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1ada484d74464cbb4d0fd7e011059abfac" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>AddError</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>errors</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1ac13ab6683556f94b79df48a7c1e6011f" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>HasAny</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1ad562b23967669a1d7a55245110be2481" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>HasErrors</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1ab2ff371d065524c89d14e10c7998d124" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>HasWarnings</name></member>
+      <member refid="structSR__SRSL__NS_1_1SRSLResult_1a9691ee5b8ed501be03faf29fc28ecc7c" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>processedLexems</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1aaa3d70df2281d3ab064f0b5c243e54ac" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>SRSLResult</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1a3443579901304d99d74d7ffaf60c5347" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>SRSLResult</name></member>
       <member refid="structSR__SRSL__NS_1_1SRSLResult_1a98a8d013f98a7a004ae223c934bd115e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLResult</scope><name>SRSLResult</name></member>

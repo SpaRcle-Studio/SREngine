@@ -9429,6 +9429,7 @@
     <member refid="classSR__GTYPES__NS_1_1Shader_1aabf2c78dc169167ba3736ae4bf467fe7" kind="function"><name>AttachDescriptorSets</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a506e578c684c5556fb0f3c6013c687d6" kind="function"><name>BeginSharedUBO</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1abfc207502ce6c9b358f00fd04ca39873" kind="function"><name>EndSharedUBO</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Shader_1a4fc66490b2ead167a963e198d2b0bc36" kind="function"><name>ResetUBOToDefaults</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a45e1b1cf851a4e8cbd721915d6e4c8ca" kind="function"><name>GetAssociatedPath</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1a5512baf8eafe4a9958351fe93a2090e8" kind="function"><name>GetID</name></member>
     <member refid="classSR__GTYPES__NS_1_1Shader_1abc86cf7f4a390fbbcf9f41e5baa50f13" kind="function"><name>GetId</name></member>
@@ -10339,6 +10340,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a58fe73e285558bcb3d20b63a3bba1e76" kind="function"><name>Clear</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a6205fa4eb5951c6c8ece7286af8fd989" kind="function"><name>GetLeftSide</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a4adc75f553e841280ae66df7c4458de1" kind="function"><name>FindSemicolon</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a51d882234a12c8e01c60e9f547d5ff99" kind="function"><name>FindClosingBracket</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a58397080661571114ea0f927b9727b55" kind="function"><name>ProcessMain</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1a8541a79067f348e80e0dac4bb5e91ca4" kind="function"><name>ExpandDouble</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLAssignExpander_1abacfa7c090d44811da1b2933b28a4200" kind="function"><name>ExpandTriple</name></member>
@@ -10596,6 +10598,7 @@
     <member refid="classSR__SRSL__NS_1_1SRSLRefAnalyzer_1a110a0302116a99b8a5554f208fc90f74" kind="function"><name>AnalyzeEntryPoint</name></member>
   </compound>
   <compound refid="structSR__SRSL__NS_1_1SRSLResult" kind="struct"><name>SR_SRSL_NS::SRSLResult</name>
+    <member refid="structSR__SRSL__NS_1_1SRSLResult_1a9691ee5b8ed501be03faf29fc28ecc7c" kind="variable"><name>processedLexems</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLResult_1af1f9387c1d1a6037774c6a576e2104f5" kind="variable"><name>warnings</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLResult_1a22d6f399e78b535e963acd5981b5a336" kind="variable"><name>errors</name></member>
     <member refid="structSR__SRSL__NS_1_1SRSLResult_1aaa3d70df2281d3ab064f0b5c243e54ac" kind="function"><name>SRSLResult</name></member>
@@ -10641,10 +10644,11 @@
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a00644bfb3956c0734318f0c61d72beac" kind="variable"><name>m_samplers</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a3c24eee6078d9a5843582e7a981076a4" kind="function"><name>SRSLShader</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1aa041dfe0eae68941815a5c257f733cba" kind="function"><name>EvalExpressionFloat</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a09dc77243e960a7f8969e3f1e1c8a0b2" kind="function"><name>EvalExpressionInt</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a75cf09e6315baea51abea45be89adb87" kind="function"><name>EvalExpressionVec2</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a003f32b82dcd19da7585aefd2389211e" kind="function"><name>EvalExpressionVec3</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a52c8bda3307318f54fa3b2c95e6037e4" kind="function"><name>EvalExpressionVec4</name></member>
-    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a698b905305d53de6d17d220cf16cd7c7" kind="function"><name>EvalExpressionValue</name></member>
+    <member refid="classSR__SRSL__NS_1_1SRSLShader_1a62a63d2d0021a998b9755b17e6829dac" kind="function"><name>EvalExpressionValue</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1ab6983616d829c653d82d58e8ea6aa0dd" kind="function"><name>GenerateStages</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1af870e926424d5fe1daf7ce223dafafd7" kind="function"><name>SaveCache</name></member>
     <member refid="classSR__SRSL__NS_1_1SRSLShader_1a4bc5e24b9881a20a4d6bcf7e072f702d" kind="function"><name>GetHash</name></member>

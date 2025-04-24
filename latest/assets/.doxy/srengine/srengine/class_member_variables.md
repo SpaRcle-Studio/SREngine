@@ -1667,6 +1667,7 @@
 * **pDecorators** ([**SR\_SRSL\_NS::SRSLFunction**](classSR__SRSL__NS_1_1SRSLFunction.md), [**SR\_SRSL\_NS::SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md))
 * **pName** ([**SR\_SRSL\_NS::SRSLFunction**](classSR__SRSL__NS_1_1SRSLFunction.md), [**SR\_SRSL\_NS::SRSLStructureStatement**](classSR__SRSL__NS_1_1SRSLStructureStatement.md), [**SR\_SRSL\_NS::SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md))
 * **pType** ([**SR\_SRSL\_NS::SRSLFunction**](classSR__SRSL__NS_1_1SRSLFunction.md), [**SR\_SRSL\_NS::SRSLVariable**](classSR__SRSL__NS_1_1SRSLVariable.md))
+* **processedLexems** ([**SR\_SRSL\_NS::SRSLResult**](structSR__SRSL__NS_1_1SRSLResult.md))
 * **param\_a** ([**SR\_TYPES\_NS::uniform\_int\_distribution::param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md))
 * **param\_b** ([**SR\_TYPES\_NS::uniform\_int\_distribution::param\_type**](structSR__TYPES__NS_1_1uniform__int__distribution_1_1param__type.md))
 * **pInherits** ([**SR\_UTILS\_NS::ClassInfo**](structSR__UTILS__NS_1_1ClassInfo.md))

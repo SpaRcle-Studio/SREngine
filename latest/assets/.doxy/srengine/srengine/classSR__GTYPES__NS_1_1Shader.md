@@ -178,6 +178,7 @@ See [SR\_UTILS\_NS::IResource](classSR__UTILS__NS_1_1IResource.md)
 |  SR\_NODISCARD bool | [**IsBlendEnabled**](#function-isblendenabled) () const<br> |
 |  SR\_NODISCARD bool | [**IsSamplersValid**](#function-issamplersvalid) () const<br> |
 |  SR\_NODISCARD bool | [**Ready**](#function-ready) () const<br> |
+|  void | [**ResetUBOToDefaults**](#function-resetubotodefaults) () <br> |
 |  void SR\_FASTCALL | [**SetBool**](#function-setbool) (uint64\_t hashId, bool v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstBool**](#function-setconstbool) (uint64\_t hashId, bool v) noexcept<br> |
 |  void SR\_FASTCALL | [**SetConstFloat**](#function-setconstfloat) (uint64\_t hashId, float\_t v) noexcept<br> |
@@ -804,6 +805,19 @@ SR_NODISCARD bool SR_GTYPES_NS::Shader::IsSamplersValid () const
 
 ```C++
 SR_NODISCARD bool SR_GTYPES_NS::Shader::Ready () const
+```
+
+
+
+
+<hr>
+
+
+
+### function ResetUBOToDefaults 
+
+```C++
+void SR_GTYPES_NS::Shader::ResetUBOToDefaults () 
 ```
 
 

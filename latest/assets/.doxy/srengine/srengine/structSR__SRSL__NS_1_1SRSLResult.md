@@ -36,6 +36,7 @@
 | Type | Name |
 | ---: | :--- |
 |  std::list&lt; [**SRSLMessage**](structSR__SRSL__NS_1_1SRSLMessage.md) &gt; | [**errors**](#variable-errors)  <br> |
+|  uint64\_t | [**processedLexems**](#variable-processedlexems)   = `0`<br> |
 |  std::list&lt; [**SRSLMessage**](structSR__SRSL__NS_1_1SRSLMessage.md) &gt; | [**warnings**](#variable-warnings)  <br> |
 
 
@@ -102,6 +103,19 @@
 
 ```C++
 std::list<SRSLMessage> SR_SRSL_NS::SRSLResult::errors;
+```
+
+
+
+
+<hr>
+
+
+
+### variable processedLexems 
+
+```C++
+uint64_t SR_SRSL_NS::SRSLResult::processedLexems;
 ```
 
 

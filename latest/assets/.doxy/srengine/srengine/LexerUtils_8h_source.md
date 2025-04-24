@@ -292,6 +292,7 @@ namespace SR_SRSL_NS {
             return message;
         }
 
+        uint64_t processedLexems = 0;
         std::list<SRSLMessage> warnings;
         std::list<SRSLMessage> errors;
     };

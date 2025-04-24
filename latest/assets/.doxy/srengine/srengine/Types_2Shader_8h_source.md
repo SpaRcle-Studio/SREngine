@@ -68,6 +68,8 @@ namespace SR_GTYPES_NS {
         bool BeginSharedUBO();
         void EndSharedUBO();
 
+        void ResetUBOToDefaults();
+
     public:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_DEPRECATED SR_NODISCARD int32_t GetID();

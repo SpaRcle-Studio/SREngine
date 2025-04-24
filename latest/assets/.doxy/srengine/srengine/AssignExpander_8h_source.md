@@ -29,6 +29,7 @@ namespace SR_SRSL_NS {
 
         SR_NODISCARD std::vector<Lexem> GetLeftSide();
         SR_NODISCARD uint64_t FindSemicolon();
+        SR_NODISCARD uint64_t FindClosingBracket();
 
         void ProcessMain();
         void ExpandDouble();
