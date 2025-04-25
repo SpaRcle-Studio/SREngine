@@ -10,9 +10,9 @@ DepthTest true;
 
 [[uniform], [public]] vec3 sky_color = vec3(0.03, 0.05, 0.11);
 [[uniform], [public]] vec3 star_base_color = vec3(1.0, 1.0, 1.0);
-[[uniform], [public]] float star_hue_offset = 0.0;
+[[uniform], [public]] float star_hue_offset = 1.0;
 [[uniform], [public]] float star_intensity = 0.08;
-[[uniform], [public]] float star_twinkle_speed = 0.8;
+[[uniform], [public]] float star_twinkle_speed = 0.001;
 [[uniform], [public]] float star_twinkle_intensity = 0.2;
 [[uniform], [public]] float layer_scale = 60.0;
 [[uniform], [public]] float layer_scale_step = 1.0;
