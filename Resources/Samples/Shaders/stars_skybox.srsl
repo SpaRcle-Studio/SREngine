@@ -8,15 +8,15 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[public], [uniform]] vec3 sky_color = vec3(0.0, 0.0, 0.0);
-[[public], [uniform]] vec3 star_base_color = vec3(1.0, 1.0, 1.0);
-[[public], [uniform]] float star_hue_offset = 0.0;
-[[public], [uniform]] float star_intensity = 0.08;
-[[public], [uniform]] float star_twinkle_speed = 0.8;
-[[public], [uniform]] float star_twinkle_intensity = 0.2;
-[[public], [uniform]] float layer_scale = 20.0;
-[[public], [uniform]] float layer_scale_step = 10.0;
-[[public], [uniform]] int layers_count = 3;
+[[uniform], [public]] vec3 sky_color = vec3(0.03, 0.05, 0.11);
+[[uniform], [public]] vec3 star_base_color = vec3(1.0, 1.0, 1.0);
+[[uniform], [public]] float star_hue_offset = 0.0;
+[[uniform], [public]] float star_intensity = 0.08;
+[[uniform], [public]] float star_twinkle_speed = 0.8;
+[[uniform], [public]] float star_twinkle_intensity = 0.2;
+[[uniform], [public]] float layer_scale = 60.0;
+[[uniform], [public]] float layer_scale_step = 1.0;
+[[uniform], [public]] int layers_count = 1;
 
 [[const]] float PI = 3.14159265358979323846;
 [[const]] float TAU = 6.28318530717958647692;
@@ -27,7 +27,8 @@ vec3 hue(vec3 input_val, float offset, int range_index) {
 	vec4 p = mix(vec4(input_val.bg, k.wz), vec4(input_val.gb, k.xy), step(input_val.b, input_val.g));
 	vec4 q = mix(vec4(p.xyw, input_val.r), vec4(input_val.r, p.yzx), step(p.x, input_val.r));
 	float d = q.x - min(q.w, q.y);
-	float e = 1.e-10;
+	//float e = 1.e-10;
+	float e = 0.0000000001;
 	vec3 hsv = vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
 
 	//offset = (range_index == 0) ? offset / 360.0 : offset;
@@ -84,9 +85,10 @@ vec2 voronoi(vec3 x){
 
 void fragment() {
 	COLOR = vec4(0.0, 0.0, 0.0, 1.0);
+	COLOR.rgb = sky_color;
 
     for (int i = 0; i < layers_count; i++) {
-        vec3 pos = VIEW_DIRECTION * (layer_scale + float(i) * layer_scale_step);
+        vec3 pos = normalize(VERTEX) * (layer_scale + float(i) * layer_scale_step);
         vec2 layer = voronoi(pos);
 
         vec3 rand = hash(vec3(layer.y));
@@ -98,9 +100,6 @@ void fragment() {
         vec3 star_color = star * hue((COLOR.rgb + star_base_color), rand.y * star_hue_offset, 1);
 
         COLOR.rgb += star_color;
-
-        //COLOR.rgb += vec3(star, star, star);
-        //COLOR.rgb += hue((COLOR.rgb + star_base_color), rand.y * star_hue_offset, 1) * 100.0;
     }
 }
 
