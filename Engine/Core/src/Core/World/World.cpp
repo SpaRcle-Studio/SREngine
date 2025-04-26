@@ -25,11 +25,13 @@ namespace SR_CORE_NS {
         GameObjectPtr root;
 
         static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh, uint64_t materialIndex) {
-            if (pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex >= pRawMesh->GetAssimpScene()->mNumMaterials) {
+            const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
+
+            if (pScene->mMeshes[meshId]->mMaterialIndex >= pScene->mNumMaterials) {
                 return;
             }
 
-            aiMaterial* pMaterial = pRawMesh->GetAssimpScene()->mMaterials[pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex];
+            aiMaterial* pMaterial = pScene->mMaterials[pScene->mMeshes[meshId]->mMaterialIndex];
 
             aiString diffuseTexturePath;
             if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
@@ -45,9 +47,11 @@ namespace SR_CORE_NS {
         const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> GameObjectPtr {
             GameObjectPtr ptr = Scene::InstanceGameObject(node->mName.C_Str());
 
+            const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
+
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 const uint64_t meshId = node->mMeshes[i];
-                const int64_t countBones = pRawMesh->GetAssimpScene()->mMeshes[meshId]->mNumBones;
+                const int64_t countBones = pScene->mMeshes[meshId]->mNumBones;
                 const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
@@ -58,7 +62,7 @@ namespace SR_CORE_NS {
                         pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/default.mat"));
                     }
 
-                    processMaterial(pRawMesh, meshId, pMesh.Get(), pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex);
+                    processMaterial(pRawMesh, meshId, pMesh.Get(), pScene->mMeshes[meshId]->mMaterialIndex);
 
                     ptr->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
 
@@ -95,7 +99,7 @@ namespace SR_CORE_NS {
         SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton = nullptr;
 
         pRawMesh->Execute([&]() -> bool {
-            SRVerifyFalse(!(root = processNode(pRawMesh->GetAssimpScene()->mRootNode)).Valid());
+            SRVerifyFalse(!(root = processNode(static_cast<const aiScene*>(pRawMesh->GetAssimpScene())->mRootNode)).Valid());
             if (!skinnedMeshes.empty() && root) {
                 pSkeleton = Importers::ImportSkeletonFromRawMesh(pRawMesh);
             }

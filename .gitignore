@@ -40,3 +40,4 @@ venv
 /Android/cmdline-tools.zip
 /Android/app/src/main/jniLibs
 /Android/app/src/main/obj
+/CI/scripts/__pycache__

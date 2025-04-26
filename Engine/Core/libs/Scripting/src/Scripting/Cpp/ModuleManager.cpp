@@ -150,6 +150,10 @@ namespace SR_SCRIPTING_NS {
             return nullptr;
         }
 
+        if (m_pScriptSystem->IsUseEngineSourcesAPI()) {
+            return pLibraryHandle;
+        }
+
         auto&& pModulesCountFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModulesCount");
         auto&& pModuleNameFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModuleName");
         auto&& pModuleVersionFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "GetScriptModuleCompilerVersion");
@@ -232,6 +236,10 @@ namespace SR_SCRIPTING_NS {
     bool ModuleManager::InitModule(ScriptModule& module) {
         module.ResetBehaviours();
 
+        if (m_pScriptSystem->IsUseEngineSourcesAPI()) {
+            return true;
+        }
+
         void* pGetBehaviourNameFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(
             module.GetModuleHandle(), "GetScriptModuleBehaviourName"
         );
@@ -296,8 +304,10 @@ namespace SR_SCRIPTING_NS {
             }
         }
 
-        auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
-        reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
+        if (!m_pScriptSystem->IsUseEngineSourcesAPI()) {
+            auto&& pDestroyScriptCoreAPI = SR_PLATFORM_NS::GetLibraryFunctionAddress(pLibraryHandle, "DestroyScriptCoreAPI");
+            reinterpret_cast<void(*)()>(pDestroyScriptCoreAPI)();
+        }
 
         if (!SR_PLATFORM_NS::UnloadLibraryModule(pLibraryHandle)) {
             SRHalt("ModuleManager::UnloadModule() : failed to unload module! Something went wrong...\n\tPath: " + module.GetPath().ToString());
@@ -313,7 +323,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void ModuleManager::FreeBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
-        if (pInstance->GetInstance()) {
+        if (!m_pScriptSystem->IsUseEngineSourcesAPI() && pInstance->GetInstance()) {
             auto&& pModule = FindModule(pInstance->GetModuleName());
             if (pModule) {
                 void* pFreeScriptBehaviourFunction = SR_PLATFORM_NS::GetLibraryFunctionAddress(pModule->GetModuleHandle(), "FreeScriptBehaviour");
@@ -330,6 +340,10 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool ModuleManager::AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance) {
+        if (m_pScriptSystem->IsUseEngineSourcesAPI()) {
+            return true;
+        }
+
         const SR_UTILS_NS::StringAtom behaviourName = pInstance->GetBehaviourName();
 
         for (auto&& module : m_modules) {

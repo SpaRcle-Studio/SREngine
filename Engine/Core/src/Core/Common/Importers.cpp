@@ -16,7 +16,7 @@
 
 namespace SR_CORE_NS {
     bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton) {
-        const aiScene* pScene = pRawMesh->GetAssimpScene();
+        const aiScene* pScene = static_cast<const aiScene*>(pRawMesh->GetAssimpScene());
 
         if (!pScene->mRootNode) {
             return false;

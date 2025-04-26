@@ -11,6 +11,7 @@
 
 namespace SR_SCRIPTING_NS {
     class CppCompiler;
+    class ScriptSystem;
 
     struct CppCodegenBehaviour {
         SR_UTILS_NS::StringAtom name;
@@ -41,8 +42,9 @@ namespace SR_SCRIPTING_NS {
         using Super = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;
         constexpr static uint32_t MAX_INCLUDE_DEPTH = 64;
     public:
-        CppCodeGenerator()
+        explicit CppCodeGenerator(ScriptSystem* pScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+            , m_scriptSystem(pScriptSystem)
         { }
 
     public:
@@ -78,6 +80,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
 
     private:
+        ScriptSystem* m_scriptSystem = nullptr;
         CppCompiler* m_compiler = nullptr;
         std::vector<CppCodegenModule> m_modules;
         SR_UTILS_NS::Path m_resourcesFolder;

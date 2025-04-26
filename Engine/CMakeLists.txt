@@ -25,7 +25,7 @@ option(SR_ENGINE_FLATPAK_BUILD "" OFF)
 option(SR_ENGINE_USE_MONO_PREBUILD "" ON)
 
 if (WIN32 OR (UNIX AND NOT ANDROID_NDK))
-    option(SR_ENGINE_MONO_SUPPORT "" ON)
+    option(SR_ENGINE_MONO_SUPPORT "" OFF)
     add_compile_definitions(SR_ENGINE_MONO_SUPPORT)
 else()
     option(SR_ENGINE_MONO_SUPPORT "" OFF)

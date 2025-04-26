@@ -41,6 +41,11 @@ namespace SR_SCRIPTING_NS {
 
         m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
 
+        if (m_pScriptSystem->IsUseEngineSourcesAPI() && !FindEngineLibs()) {
+            SR_ERROR("CppCompiler::Init() : failed to find engine libs!");
+            return false;
+        }
+
         SR_LOG("CppCompiler::Init() : compiler path: " + m_compilerPath.ToString());
         SR_LOG("CppCompiler::Init() : compiler version: \n" + GetCompilerVersion());
 
@@ -116,7 +121,11 @@ namespace SR_SCRIPTING_NS {
         std::string customArgs;
 
         if (m_compilerType == CppCompilerType::MSVC) {
-            customArgs += "-nologo /std:c++17 /EHsc ";
+            customArgs += "-nologo /std:c++20 /EHsc ";
+            customArgs += "/DSR_ENGINE_SCRIPT_API_MODE ";
+        }
+        else {
+            customArgs += "-DSR_ENGINE_SCRIPT_API_MODE ";
         }
 
         const SR_UTILS_NS::PlatformType platform = SR_PLATFORM_NS::GetType();
@@ -126,6 +135,7 @@ namespace SR_SCRIPTING_NS {
                 outModulePath += context.isShared ? ".dll" : ".lib";
 
                 if (m_compilerType == CppCompilerType::MSVC) {
+                    customArgs += "/DWIN32 ";
                     if (context.isShared) {
                         customArgs += context.isDebug ? "/LDd " : "/LD ";
                     }
@@ -134,6 +144,7 @@ namespace SR_SCRIPTING_NS {
                     }
                 }
                 else {
+                    customArgs += "-DWIN32 ";
                     customArgs += "-shared ";
                 }
                 break;
@@ -215,6 +226,10 @@ namespace SR_SCRIPTING_NS {
             outArgs += "-o " + outModulePath + " ";
         }
 
+        for (auto&& lib : m_engineLibs) {
+            outArgs += " \"{}\" "_format(lib.ToString());
+        }
+
         std::string command = "{} {} {} {} {}"_format(
             m_compilerPath, customArgs, outArgs, sourceFiles, includePaths
         );
@@ -263,5 +278,43 @@ namespace SR_SCRIPTING_NS {
         SRHalt("MSVC compiler path is not defined!");
         return SR_UTILS_NS::Path();
     #endif
+    }
+
+    bool CppCompiler::FindEngineLibs() {
+        static std::vector<std::pair<std::string, std::string>> libs = {
+            //{"Engine/Core", "Core"},
+            //{"Engine/Core/libs/Graphics", "Graphics"},
+            {"Engine/Core/libs/Utils", "Utils"},
+            //{"Engine/Core/libs/Physics", "Physics"},
+            //{"Engine/Core/libs/Scripting", "Scripting"},
+            //{"Engine/Core/libs/Audio", "Audio"},
+        };
+
+        auto&& buildDir = m_pScriptSystem->GetBuildFolderPath();
+
+        for (auto&& [libPath, libName] : libs) {
+        #ifdef SR_WIN32
+            auto&& pathDebug = buildDir.Concat(libPath).Concat("{}d.lib"_format(libName));
+            auto&& pathRelease = buildDir.Concat(libPath).Concat("{}.lib"_format(libName));
+        #else
+            auto&& pathDebug = buildDir.Concat(libPath).Concat("lib{}d.a"_format(libName));
+            auto&& pathRelease = buildDir.Concat(libPath).Concat("lib{}.a"_format(libName));
+        #endif
+
+            if (SR_PLATFORM_NS::IsExists(pathRelease)) {
+                m_engineLibs.emplace_back(pathRelease);
+                continue;
+            }
+
+            if (SR_PLATFORM_NS::IsExists(pathDebug)) {
+                m_engineLibs.emplace_back(pathDebug);
+                continue;
+            }
+
+            SR_ERROR("CppCompiler::FindEngineLibs() : failed to find engine lib: {} or {}!", pathDebug, pathRelease);
+            return false;
+        }
+
+        return true;
     }
 }

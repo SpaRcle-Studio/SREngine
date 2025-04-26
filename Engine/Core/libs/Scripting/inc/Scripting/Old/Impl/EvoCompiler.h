@@ -14,7 +14,7 @@
 #include <Scripting/Compilation/Casting.h>
 
 namespace SR_SCRIPTING_NS {
-    class SR_DLL_EXPORT EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {
+    class SR_SCRIPTING_DLL_API EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {
     public:
         explicit EvoCompiler(std::string cachePath);
         ~EvoCompiler() override;
@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
 
     };
 
-    class SR_DLL_EXPORT GlobalEvoCompiler : public SR_UTILS_NS::Singleton<GlobalEvoCompiler>, public EvoCompiler  {
+    class SR_SCRIPTING_DLL_API GlobalEvoCompiler : public SR_UTILS_NS::Singleton<GlobalEvoCompiler>, public EvoCompiler  {
         SR_REGISTER_SINGLETON(GlobalEvoCompiler)
     protected:
         GlobalEvoCompiler();

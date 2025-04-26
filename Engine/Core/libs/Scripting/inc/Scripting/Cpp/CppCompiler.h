@@ -9,6 +9,8 @@
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
+    class ScriptSystem;
+
     struct CppCompilerContext {
         SR_UTILS_NS::StringAtom moduleName;
         SR_UTILS_NS::Path outFolder;
@@ -28,8 +30,9 @@ namespace SR_SCRIPTING_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCompiler>;
 
     public:
-        CppCompiler()
+        CppCompiler(ScriptSystem* pScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+            , m_pScriptSystem(pScriptSystem)
         { }
 
     public:
@@ -40,14 +43,17 @@ namespace SR_SCRIPTING_NS {
 
     private:
         bool InstallMinGW();
+        bool FindEngineLibs();
 
         SR_NODISCARD SR_UTILS_NS::Path FindMSVCCompilerPath() const;
 
     private:
+        std::vector<SR_UTILS_NS::Path> m_engineLibs;
         CppCompilerType m_compilerType = CppCompilerType::Unknown;
         SR_UTILS_NS::Path m_cachePath;
         SR_UTILS_NS::Path m_compilerPath;
         bool m_isInitialized = false;
+        ScriptSystem* m_pScriptSystem = nullptr;
 
     };
 }

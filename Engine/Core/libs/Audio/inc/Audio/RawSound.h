@@ -9,7 +9,7 @@
 #include <Audio/Decoders/IWaveDataProvider.h>
 
 namespace SR_AUDIO_NS {
-    class SR_DLL_EXPORT RawSound : public SR_UTILS_NS::IResource {
+    class SR_AUDIO_DLL_API RawSound : public SR_UTILS_NS::IResource {
     private:
         RawSound();
         ~RawSound() override;

@@ -5,6 +5,7 @@
 #include <Audio/Types/AudioListener.h>
 #include <Audio/SoundListener.h>
 #include <Audio/Impl/OpenALSoundListener.h>
+#include <Audio/SoundManager.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform.h>

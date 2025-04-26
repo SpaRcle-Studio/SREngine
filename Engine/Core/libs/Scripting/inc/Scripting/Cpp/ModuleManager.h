@@ -51,6 +51,7 @@ namespace SR_SCRIPTING_NS {
     };
 
     class ModuleManager;
+    class ScriptSystem;
 
     class ScriptModule {
     public:
@@ -134,8 +135,9 @@ namespace SR_SCRIPTING_NS {
     class ModuleManager : public SR_HTYPES_NS::SharedPtr<ModuleManager> {
         using Super = SR_HTYPES_NS::SharedPtr<ModuleManager>;
     public:
-        ModuleManager()
+        ModuleManager(ScriptSystem* pScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
+            , m_pScriptSystem(pScriptSystem)
         { }
 
         ~ModuleManager() override;
@@ -169,6 +171,7 @@ namespace SR_SCRIPTING_NS {
 
         std::vector<ScriptModule> m_modules;
         std::recursive_mutex m_mutex;
+        ScriptSystem* m_pScriptSystem = nullptr;
 
     };
 }

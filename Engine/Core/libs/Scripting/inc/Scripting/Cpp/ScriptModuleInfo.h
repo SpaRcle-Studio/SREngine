@@ -21,6 +21,8 @@ namespace SR_SCRIPTING_NS {
         ScriptLinkMode linkMode = ScriptLinkMode::Unknown;
         /// @property
         std::set<SR_UTILS_NS::StringAtom> dependencies;
+        /// @property
+        bool enabled = true;
 
     };
 }

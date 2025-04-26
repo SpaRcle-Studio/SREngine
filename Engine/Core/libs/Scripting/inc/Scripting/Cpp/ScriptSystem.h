@@ -38,7 +38,11 @@ namespace SR_SCRIPTING_NS {
 
         SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
+        SR_NODISCARD const std::vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
+        SR_NODISCARD const SR_UTILS_NS::Path& GetBuildFolderPath() const { return m_pathToEngineBuildRoot; }
+        SR_NODISCARD bool IsUseEngineSourcesAPI() const;
 
+        void SetUseEngineSourcesAPI(bool value);
         void ReloadModulesIfNeeded();
 
         static std::string_view GetDynamicLibraryExtension();
@@ -46,6 +50,7 @@ namespace SR_SCRIPTING_NS {
     private:
         void HandleFileSystemEvent(const SR_UTILS_NS::SubscriptionMessage& message, SR_UTILS_NS::FileSystemWatcher::EventType eventType);
         void ThreadFunc();
+        bool InitEngineSources();
 
         void InitialAnalyse();
         void ThreadIdle();
@@ -58,9 +63,10 @@ namespace SR_SCRIPTING_NS {
     private:
         bool m_isInit = false;
         bool m_isCompilationEnabled = false;
+        bool m_useEngineSourcesAPI = false;
 
         std::recursive_mutex m_mutex;
-        SR_HTYPES_NS::Thread::Ptr m_thread;
+        SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
 
         SR_UTILS_NS::Subscription m_fileChangedSubscription;
         SR_UTILS_NS::Subscription m_fileCreatedSubscription;
@@ -68,12 +74,15 @@ namespace SR_SCRIPTING_NS {
 
         /// shared parameters (read only)
 
+        SR_UTILS_NS::Path m_pathToEngineSourcesRoot;
+        SR_UTILS_NS::Path m_pathToEngineBuildRoot;
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
         SR_UTILS_NS::Path m_apiFolder;
 
         /// thread owned parameters
 
+        std::vector<SR_UTILS_NS::Path> m_engineSourcesIncludePaths;
         SR_UTILS_NS::TimePointType m_lastFileSystemEvent;
 
         CppCompiler::Ptr m_compiler;

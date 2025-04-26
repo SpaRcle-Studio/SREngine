@@ -90,35 +90,11 @@ add_library(Core STATIC
     ${CORE_ROOT_DIR}/cxx/States.cxx
 )
 
-if (SR_UTILS_STATIC_LIBRARY)
-    list(APPEND SR_CORE_LINK_LIBRARIES Utils)
-else()
-    list(APPEND SR_CORE_LINK_LIBRARIES Utils::lib)
-endif()
-
-if (SR_PHYSICS_STATIC_LIBRARY)
-    list(APPEND SR_CORE_LINK_LIBRARIES Physics)
-else()
-    list(APPEND SR_CORE_LINK_LIBRARIES Physics::lib)
-endif()
-
-if (SR_GRAPHICS_STATIC_LIBRARY)
-    list(APPEND SR_CORE_LINK_LIBRARIES Graphics)
-else()
-    list(APPEND SR_CORE_LINK_LIBRARIES Graphics::lib)
-endif()
-
-if (SR_AUDIO_STATIC_LIBRARY)
-    list(APPEND SR_CORE_LINK_LIBRARIES Audio)
-else()
-    list(APPEND SR_CORE_LINK_LIBRARIES Audio::lib)
-endif()
-
-if (SR_SCRIPTING_STATIC_LIBRARY)
-    list(APPEND SR_CORE_LINK_LIBRARIES Scripting)
-else()
-    list(APPEND SR_CORE_LINK_LIBRARIES Scripting::lib)
-endif()
+list(APPEND SR_CORE_LINK_LIBRARIES Utils)
+list(APPEND SR_CORE_LINK_LIBRARIES Physics)
+list(APPEND SR_CORE_LINK_LIBRARIES Graphics)
+list(APPEND SR_CORE_LINK_LIBRARIES Audio)
+list(APPEND SR_CORE_LINK_LIBRARIES Scripting)
 
 target_link_libraries(Core ${SR_CORE_LINK_LIBRARIES})
 

@@ -41,9 +41,16 @@ namespace SR_SCRIPTING_NS {
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_apiFolder = m_resourcesFolder.Concat("SpaRcleAPI");
 
+        if (IsUseEngineSourcesAPI()) {
+            if (!InitEngineSources()) {
+                SR_ERROR("ScriptSystem::Init() : failed to initialize engine sources!");
+                return false;
+            }
+        }
+
         m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
 
-        m_moduleManager = ModuleManager::MakeShared();
+        m_moduleManager = ModuleManager::MakeShared(this);
 
         if (!m_moduleManager->Init()) {
             SR_ERROR("ScriptSystem::Init() : failed to initialize module manager!");
@@ -53,8 +60,8 @@ namespace SR_SCRIPTING_NS {
         if (m_isCompilationEnabled) {
             SR_LOG("ScriptSystem::Init() : script compilation is enabled!");
 
-            m_compiler = CppCompiler::MakeShared();
-            m_codeGenerator = CppCodeGenerator::MakeShared();
+            m_compiler = CppCompiler::MakeShared(this);
+            m_codeGenerator = CppCodeGenerator::MakeShared(this);
 
             m_codeGenerator->SetCompiler(m_compiler.Get());
 
@@ -270,10 +277,12 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
+        std::vector<SR_UTILS_NS::Path> includePaths;
+
         m_hasCompileErrors = false;
 
         for (auto&& module : m_codeGenerator->GetModules()) {
-            if (module.isCompiled) {
+            if (module.isCompiled || !module.moduleInfo.enabled) {
                 continue;
             }
 
@@ -287,7 +296,16 @@ namespace SR_SCRIPTING_NS {
                 context.sourceFiles.emplace_back(filePath);
             }
 
-            context.includePaths.emplace_back(m_resourcesFolder.Concat("SpaRcleAPI"));
+            if (IsUseEngineSourcesAPI()) {
+                for (auto&& path : m_engineSourcesIncludePaths) {
+                    context.includePaths.emplace_back(path);
+                }
+                context.includePaths.emplace_back(m_pathToEngineBuildRoot.Concat("Codegen"));
+            }
+            else {
+                context.includePaths.emplace_back(m_resourcesFolder.Concat("SpaRcleAPI"));
+            }
+
             context.includePaths.emplace_back(module.path.GetFolder());
 
             if (!m_compiler->Compile(context)) {
@@ -418,5 +436,63 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE_N("Wait for module reload");
 
         while (m_hasModuleReloadRequest);
+    }
+
+    void ScriptSystem::SetUseEngineSourcesAPI(bool value) {
+        SRAssert2(!m_isInit, "ScriptSystem::SetUseEngineSourcesAPI() : cannot set engine sources API after initialization!");
+        m_useEngineSourcesAPI = value;
+    }
+
+    bool ScriptSystem::IsUseEngineSourcesAPI() const {
+        return m_useEngineSourcesAPI;
+    }
+
+    bool ScriptSystem::InitEngineSources() {
+        if (m_resourcesFolder.GetPrevious().Concat("Engine/Core").IsDir()) {
+            m_pathToEngineSourcesRoot = m_resourcesFolder.GetPrevious();
+        }
+        else {
+            SR_ERROR("ScriptSystem::InitEngineSources() : engine sources root not found!");
+            return false;
+        }
+
+        SR_LOG("ScriptSystem::InitEngineSources() : engine sources root: {}", m_pathToEngineSourcesRoot);
+
+        static std::vector<std::string_view> POSSIBLE_BUILD_FOLDER_NAMES = {
+            "cmake-build-debug", "cmake-build-release", "cmake-build", "build"
+        };
+
+        for (auto&& folderName : POSSIBLE_BUILD_FOLDER_NAMES) {
+            auto&& buildFolder = m_resourcesFolder.GetPrevious().Concat(folderName);
+            if (buildFolder.IsDir()) {
+                m_pathToEngineBuildRoot = buildFolder;
+                break;
+            }
+        }
+
+        if (!m_pathToEngineBuildRoot.IsDir()) {
+            SR_ERROR("ScriptSystem::InitEngineSources() : engine build folder not found!");
+            return false;
+        }
+
+        SR_LOG("ScriptSystem::InitEngineSources() : engine build folder: {}", m_pathToEngineBuildRoot);
+
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Audio/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Graphics/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Physics/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/inc"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/libs"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/libs/fmt/include"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Scripting/inc"));
+
+        for (auto&& path : m_engineSourcesIncludePaths) {
+            if (!path.IsDir()) {
+                SR_ERROR("ScriptSystem::InitEngineSources() : engine sources folder not found!\n\tPath: {}", path);
+                return false;
+            }
+        }
+
+        return true;
     }
 }
