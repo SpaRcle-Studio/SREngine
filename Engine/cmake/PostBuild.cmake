@@ -43,6 +43,8 @@ macro(SRCopyFileToApp dir file)
     SRCopyFileToAppInternal(${dir} "${file}d.dll")
 endmacro()
 
+#SRCopyFileToApp("Engine/Core/libs/Utils" "Utils")
+
 #SRCopyFileToApp("Engine/Core/libs/Graphics/EvoVulkan/Core" "EvoVulkan.dll")
 #SRCopyFileToApp("Engine/Core/libs/Graphics/EvoVulkan/Core" "EvoVulkand.dll")
 #
@@ -69,8 +71,6 @@ endmacro()
 #SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/release" "PhysXCommon.dll")
 #SRCopyFileToApp("Engine/Core/libs/Physics/extern/physx/bin/win.x86_64.vc142.md/release" "PhysXFoundation.dll")
 #
-
-SRCopyFileToApp("Engine/Core/libs/Utils" "Utils")
 
 #
 #SRCopyFileToApp("Engine/Core/libs/Audio/libs/OpenAL" "OpenAL32.dll")

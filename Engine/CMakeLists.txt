@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 project(SpaRcleEngine)
 
+if (ANDROID_NDK)
+    set(SR_EXECUTABLE_NAME "sparcle")
+else()
+    set(SR_EXECUTABLE_DIR "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Bin")
+    set(SR_EXECUTABLE_NAME "SREngine")
+endif()
+
+set(SR_EXECUTABLE_OUTPUT_FOLDER ${CMAKE_CURRENT_BINARY_DIR}/bin)
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TargetArchitecture.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/InstallPython.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Codegen.cmake)
@@ -62,8 +71,6 @@ define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
 set_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS "")
 
 if (ANDROID_NDK)
-    set(SR_EXECUTABLE_NAME "sparcle")
-
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
 
     add_library(${SR_EXECUTABLE_NAME} SHARED "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Android/app/src/main/cpp/main.cpp")
@@ -79,8 +86,6 @@ if (ANDROID_NDK)
         GLESv1_CM
     )
 else()
-    set(SR_EXECUTABLE_NAME "SREngine")
-
     set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "main.cpp")
 
     if (WIN32)
@@ -100,19 +105,20 @@ else()
     get_property(SR_EXECUTABLE_ARGS_CONTENT GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
     message(STATUS "SpaRcle Engine: adding executable arguments: ${SR_EXECUTABLE_ARGS_CONTENT}")
     add_executable(${SR_EXECUTABLE_NAME} ${SR_EXECUTABLE_ARGS_CONTENT})
+    set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SR_EXECUTABLE_DIR})
 
     #target_sources(${SR_EXECUTABLE_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/resource.rc")
 endif()
 
-add_custom_command(TARGET ${SR_EXECUTABLE_NAME}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND}
-    -DTARGET_NAME=Engine
-    -DTARGET_PATH=${CMAKE_BINARY_DIR}
-    -P ${CMAKE_SOURCE_DIR}/Engine/cmake/PostBuild.cmake
-    COMMENT "Running SpaRcle engine post-build script..."
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-)
+#add_custom_command(TARGET ${SR_EXECUTABLE_NAME}
+#    POST_BUILD
+#    COMMAND ${CMAKE_COMMAND}
+#    -DTARGET_NAME=Engine
+#    -DTARGET_PATH=${CMAKE_BINARY_DIR}
+#    -P ${CMAKE_SOURCE_DIR}/Engine/cmake/PostBuild.cmake
+#    COMMENT "Running SpaRcle engine post-build script..."
+#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+#)
 
 #target_link_libraries(${SR_EXECUTABLE_NAME} Scripts)
 target_link_libraries(${SR_EXECUTABLE_NAME} Core)
