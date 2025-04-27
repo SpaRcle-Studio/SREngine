@@ -1,0 +1,6 @@
+ShaderType Compute;
+
+[[THREADS(8, 8, 8)]]
+void compute() {
+
+}

@@ -1,3 +1,4 @@
+Zig.iml
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -41,3 +42,4 @@ venv
 /Android/app/src/main/jniLibs
 /Android/app/src/main/obj
 /CI/scripts/__pycache__
+site

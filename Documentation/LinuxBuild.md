@@ -1,24 +1,24 @@
 # Linux Build Guide.
 
-## Cloning repository and installing dependencies.
+## Dependencies.
 
-> [!IMPORTANT]
-> 1. ```Clone repository via the command "git clone https://github.com/SpaRcle-Studio/SREngine"```
-> 2. ```Switch to the "dev" (or another one) branch via the command "git checkout branch_name"```
-> 3. ```Run command "git submodule update --init --recursive" in repository folder```
-> 4. ```Install dependencies, see below.```
+=== "Arch Linux Dependencies."
 
-<details>
-<summary>Ubuntu Dependencies.</summary>
-    
+    ```bash
+    pacman -S cmake git ninja gcc xorg pkgconf gtk3 vulkan-headers vulkan-validation-layers vulkan-tools xcb-util-cursor python python-pip python-numpy
+    ```
+
+=== "Ubuntu Dependencies."
+
+    ```bash
     Not yet added. If you can help, please create a pull request.
-</details>
+    ```
 
-<details>
-<summary>Arch Linux Dependencies.</summary>
+=== "Fedora Dependencies."
 
-    cmake git ninja gcc xorg pkgconf gtk3 vulkan-headers vulkan-validation-layers vulkan-tools xcb-util-cursor python python-pip python-numpy
-</details>
+    ```bash
+    dnf install cmake git ninja-build gcc gcc-c++ libX11-devel libXext-devel libXrandr-devel libXrender-devel libXinerama-devel libXcursor-devel gtk3-devel vulkan-devel vulkan-loader xorg-x11-server-Xwayland xcb-util-cursor-devel xcb-util-wm-devel libxcb-devel xcb-util-keysyms-devel python-numpy python-clang binutils-devel xcb-util-devel openal-devel
+    ```
 
 ## Building with Ninja.
 
@@ -30,10 +30,6 @@
 
 ### Example.
 ```
-git clone https://github.com/SpaRcle-Studio/SREngine
-cd SREngine
-git checkout dev
-git submodule update --init --recursive
 mkdir build
 cd build
 cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug

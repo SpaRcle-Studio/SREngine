@@ -13,6 +13,7 @@
 #include "src/Scripting/Cpp/CppCompiler.cpp"
 #include "src/Scripting/Cpp/CodeGenerator.cpp"
 #include "src/Scripting/Cpp/ScriptModuleInfo.cpp"
+//#include "src/Scripting/Mono/MonoTest.cpp"
 
 //#include "src/Scripting/Impl/EvoScriptImpl.cpp"
 //#include "src/Scripting/Impl/EvoCompiler.cpp"

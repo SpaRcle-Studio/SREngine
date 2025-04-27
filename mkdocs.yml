@@ -1,0 +1,181 @@
+site_name: SpaRcle Engine Developer Documentation
+site_url: https://docs.sparcles.dev/
+site_author: SpaRcle Studio
+site_description: Cross-platform 2D/3D game engine in C++ with full control over the rendering pipeline.
+copyright: SpaRcle Studio, MIT, 2025
+
+theme:
+  name: material
+  #custom_dir: Documentation/overrides
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    - navigation.path
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: images/favicon-dark.ico
+  logo: images/logo.png
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+plugins:
+  - mike
+  - mkdoxy:
+      projects:
+        srengine:
+          src-dirs: Engine
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.h"
+            RECURSIVE: True
+            EXCLUDE_PATTERNS: "**/Core/libs/*/libs/**"
+            #EXCLUDE_PATTERNS: "**/Core/libs/**"
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+
+extra:
+  homepage: https://sparcles.dev/
+  version:
+    provider: mike
+    default: latest
+
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SpaRcle-Studio
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/RXndN43QF8
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@sparcle-studio
+    - icon: fontawesome/brands/twitch
+      link: https://www.twitch.tv/sparcledev
+
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: SpaRcle-Studio
+      repo: SREngine
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+  - Getting started:
+    - Installation: Installation.md
+    - Building:
+      - Building on Linux: LinuxBuild.md
+      - Building on Windows: WindowsBuild.md
+  #- API:
+  - Contributing: Contributing.md
+  #- Reference:
+  #    - srengine/functions.md
+  #    - srengine/macros.md
+  #    - srengine/variables.md
+  #    - srengine/links.md
+
+
+docs_dir: Documentation

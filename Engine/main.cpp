@@ -7,6 +7,7 @@
 
 #include <Core/Launcher.h>
 #include <Core/Tests/TestManager.h>
+#include <Core/CLIManager.h>
 
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
@@ -24,7 +25,9 @@ int main(int argc, char** argv) {
         return 10;
     }
 
-    if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--unit-tests")) {
+    SR_CORE_NS::CLIManager::Instance().Init(argc, argv);
+
+    if (SR_CORE_NS::CLIManager::Instance().IsFlagPresent(SR_CORE_NS::CLIFlags::UnitTests)) {
         SR_CORE_NS::TestManager::Instance().AddTest([]() {
             return SR_CORE_NS::Tests::AtlasBuilderTest::Run();
         }, "Atlas Builder Test");
@@ -37,7 +40,7 @@ int main(int argc, char** argv) {
             return SR_CORE_NS::Tests::CSSTest::Run();
         }, "CSS Test");
 
-        SR_CORE_NS::TestManager::Instance().RunAll(argc, argv);
+        SR_CORE_NS::TestManager::Instance().RunAll();
         return 0;
     }
 
@@ -46,7 +49,7 @@ int main(int argc, char** argv) {
     {
         SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
 
-        auto&& launcherInitStatus = pLauncher->InitLauncher(argc, argv);
+        auto&& launcherInitStatus = pLauncher->InitLauncher();
 
         if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
             SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");

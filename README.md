@@ -19,8 +19,8 @@ It aims to establish a strong base for game creation and is currently in the ear
 
 ## Screenshots
 
-<img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/6bf73c99-81a2-4a3e-ad28-4c788884eb38">
-<img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/32cfdbcb-5a0d-4a74-9501-539da40379e2">
+<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/images/srengine_yvtMUwNuKk.jpg">
+<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/images/srengine_niTal6JIQP.jpg">
 
 ## Supported compilers
 - [x] MSVC (stable)
@@ -33,7 +33,9 @@ It aims to establish a strong base for game creation and is currently in the ear
 - [x] Windows 10/11
 - [x] Linux X11
 - [ ] Linux Wayland
-- [ ] Android
+- [ ] Android (Only build supported)
+- [ ] iOS - not planned in near future
+- [ ] MacOS - not planned in near future
 
 ## Branches 
  * master - branch for releases
@@ -42,9 +44,10 @@ It aims to establish a strong base for game creation and is currently in the ear
  * tmp/* - temporary branches for dangerous experiments
  * release/* - branches for release candidates
 
-## Building
- * [Windows Build Guide.](Documentation/WindowsBuild.md)
- * [Linux Build Guide.](Documentation/LinuxBuild.md)
+## How to build?
+See documentation
+
+## [Documentation](https://docs.sparcles.dev/) 
 
 ## Used libraries
   * [ImGUI](https://github.com/ocornut/imgui)

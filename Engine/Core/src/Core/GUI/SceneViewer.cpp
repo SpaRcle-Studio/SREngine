@@ -257,7 +257,6 @@ namespace SR_CORE_GUI_NS {
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
         if(data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
             m_cursorLockOpt.emplace();
-            m_mousePos = data->m_position;
         }
     }
 
@@ -269,7 +268,6 @@ namespace SR_CORE_GUI_NS {
 
         if (data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
             m_cursorLockOpt = std::nullopt;
-            SR_PLATFORM_NS::SetMousePos({ static_cast<int32_t>(m_mousePos.x), static_cast<int32_t>(m_mousePos.y) });
             Super::OnMouseUp(data);
             return;
         }

@@ -156,6 +156,13 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::Input::Instance().SetMouseScroll(xOffset, yOffset);
         });
 
+        pWindow->SetFocusCallback([](bool focus) {
+            if (!focus) {
+                auto&& input = SR_UTILS_NS::Input::Instance();
+                input.ForceUnlockCursor();
+            }
+        });
+
         return pWindow;
     }
 
@@ -171,15 +178,6 @@ namespace SR_CORE_NS {
         }
 
         SR_INFO("Engine::Init() : initializing game engine...");
-
-        SR_UTILS_NS::Input::Instance().SetCursorLockCallback([this](){
-            auto&& pMainWindow = GetMainWindow();
-            auto&& resolution = pMainWindow->GetSize();
-            resolution /= 2;
-            SR_PLATFORM_NS::SetMousePos(pMainWindow->GetPosition() + resolution.Cast<int32_t>());
-            SR_UTILS_NS::Input::Instance().ResetMouse();
-        });
-
         if (!m_scriptSystem->Init()) {
             SR_ERROR("Engine::Init() : failed to initialize script system!");
             return false;
@@ -302,13 +300,6 @@ namespace SR_CORE_NS {
 
             if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                 SetGameMode(!IsGameMode());
-
-                if(IsGameMode()) {
-                    m_cursorLockOpt.emplace();
-                }
-                else {
-                    m_cursorLockOpt = std::nullopt;
-                }
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {

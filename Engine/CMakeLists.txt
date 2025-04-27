@@ -32,12 +32,13 @@ message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
 
 option(SR_ENGINE_USE_MONO_PREBUILD "" ON)
+option(SR_ENGINE_MONO_SUPPORT "" OFF)
 
 if (WIN32 OR (UNIX AND NOT ANDROID_NDK))
     option(SR_ENGINE_MONO_SUPPORT "" OFF)
     add_compile_definitions(SR_ENGINE_MONO_SUPPORT)
 else()
-    option(SR_ENGINE_MONO_SUPPORT "" OFF)
+    #option(SR_ENGINE_MONO_SUPPORT "" OFF)
 endif()
 
 if (SR_ENGINE_FLATPAK_BUILD)
@@ -47,6 +48,10 @@ endif()
 if (ANDROID_NDK)
     add_compile_options(-femulated-tls)
     add_link_options(-femulated-tls)
+endif()
+
+if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
+    set(SR_ENGINE_EXTENDED_NAME ON)
 endif()
 
 # TODO!
