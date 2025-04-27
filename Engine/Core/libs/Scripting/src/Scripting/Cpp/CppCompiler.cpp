@@ -123,9 +123,11 @@ namespace SR_SCRIPTING_NS {
         if (m_compilerType == CppCompilerType::MSVC) {
             customArgs += "-nologo /std:c++20 /EHsc ";
             customArgs += "/DSR_ENGINE_SCRIPT_API_MODE ";
+            customArgs += "/DFMT_HEADER_ONLY ";
         }
         else {
             customArgs += "-DSR_ENGINE_SCRIPT_API_MODE ";
+            customArgs += "-DFMT_HEADER_ONLY ";
         }
 
         const SR_UTILS_NS::PlatformType platform = SR_PLATFORM_NS::GetType();
@@ -285,6 +287,7 @@ namespace SR_SCRIPTING_NS {
             //{"Engine/Core", "Core"},
             //{"Engine/Core/libs/Graphics", "Graphics"},
             {"Engine/Core/libs/Utils", "Utils"},
+            //{"Engine/Core/libs/Utils/libs/fmt", "fmt"},
             //{"Engine/Core/libs/Physics", "Physics"},
             //{"Engine/Core/libs/Scripting", "Scripting"},
             //{"Engine/Core/libs/Audio", "Audio"},

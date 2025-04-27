@@ -5,6 +5,9 @@
 #include <Utils/Debug.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/SceneObject.h>
+#include <Utils/Types/RawMesh.h>
+
+#include <fmt/format.h>
 
 #include <Enum/SceneObjectType.hpp>
 
@@ -25,7 +28,7 @@
 
 
 
-namespace SpaRcle::Scripts::Engine {
+namespace SpaRcle::Scripts::SREngine {
     class TestComponent : public SpaRcle::Utils::Component {
         SR_CLASS()
     public:
@@ -36,6 +39,7 @@ namespace SpaRcle::Scripts::Engine {
 
 extern "C" __declspec(dllexport) void TestFunction() {
     SR_UTILS_NS::Debug::Instance().ScriptLog("TestFunction() called!");
-    //SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(SR_UTILS_NS::SceneObjectType::GameObject));
+    SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(SR_UTILS_NS::SceneObjectType::GameObject));
+    SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(2));
     SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: " + SR_UTILS_NS::EnumReflector::ToStringAtom(SR_UTILS_NS::SceneObjectType::GameObject).ToStringRef());
 }
