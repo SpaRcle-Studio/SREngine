@@ -25,7 +25,7 @@ public:
 
 REGISTER_BEHAVIOUR(FPSCounter)*/
 
-#include <CppBehaviour.h>
+/*#include <CppBehaviour.h>
 
 namespace Samples {
     class FPSCounter : public CppBehaviour {
@@ -40,4 +40,4 @@ namespace Samples {
         int m_fps = 0;
 
     };
-}
+}*/

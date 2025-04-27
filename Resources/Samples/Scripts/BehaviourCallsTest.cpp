@@ -2,7 +2,7 @@
 // Created by Monika on 12.04.2025.
 //
 
-#include <CppBehaviour.h>
+/*#include <CppBehaviour.h>
 
 namespace Samples {
     class BehaviourCallsTest : public CppBehaviour {
@@ -48,4 +48,4 @@ namespace Samples {
 
         }
     };
-}
+}*/

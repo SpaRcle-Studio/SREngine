@@ -812,11 +812,46 @@ def generate_enums_code(codegen_dir, enums):
                 if len(namespace_str) > 0:
                     namespace_str += '::'
 
+#                f.write(
+#f'''
+#SR_UTILS_NS::EnumReflector* SR_CODEGEN_ALLOCATE_ENUM_REFLECTOR({namespace_str}{enum_obj.name});
+#
+#SR_UTILS_NS::EnumReflector* SR_CODEGEN_ALLOCATE_ENUM_REFLECTOR({namespace_str}{enum_obj.name}) {{
+#    static {enum_obj.type} _detail_sval;
+#    _detail_sval = 0;
+#    struct _detail_val_t
+#    {{
+#        _detail_val_t(const _detail_val_t& rhs)
+#            : _val(rhs)
+#        {{ _detail_sval = _val + 1; }}
+#
+#        _detail_val_t({enum_obj.type} val) /** NOLINT(google-explicit-constructor) */
+#            : _val(val)
+#        {{  _detail_sval = _val + 1; }}
+#
+#        _detail_val_t()
+#            : _val(_detail_sval)
+#        {{ _detail_sval = _val + 1; }}
+#
+#        _detail_val_t& operator=(const _detail_val_t&) {{ return *this; }}
+#
+#        _detail_val_t& operator=({enum_obj.type}) {{ return *this; }}
+#        operator {enum_obj.type}() const {{ return _val; }}
+#        {enum_obj.type} _val;
+#    }} {enum_obj.va_args};
+#
+#    const {enum_obj.type} _detail_vals[] = {{ {enum_obj.va_args} }};
+#
+#    return new SR_UTILS_NS::EnumReflector(SR_UTILS_NS::EnumVariant::{enum_obj.variant}, _detail_vals, sizeof(_detail_vals) / sizeof({enum_obj.type}), "{enum_obj.name}", "({enum_obj.va_args})");
+#}}\n
+#'''
+#                )
+
                 f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
                 f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
                 f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
 
-                f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+                #f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
                 f.write(f'\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
 
                 #f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')

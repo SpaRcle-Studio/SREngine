@@ -237,6 +237,10 @@ namespace SR_SCRIPTING_NS {
         module.ResetBehaviours();
 
         if (m_pScriptSystem->IsUseEngineSourcesAPI()) {
+            auto&& pTestCallFunction = (void*(*)())SR_PLATFORM_NS::GetLibraryFunctionAddress(module.GetModuleHandle(), "TestFunction");
+            if (pTestCallFunction) {
+                pTestCallFunction();
+            }
             return true;
         }
 

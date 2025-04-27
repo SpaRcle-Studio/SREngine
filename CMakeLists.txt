@@ -10,6 +10,14 @@ if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
 endif()
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(SR_BUILD_DEBUG_MODE ON)
+    message(STATUS "SpaRcle Engine: Debug build mode enabled")
+else()
+    set(SR_BUILD_DEBUG_MODE OFF)
+    message(STATUS "SpaRcle Engine: Release build mode enabled")
+endif()
+
 function(find_windows_sdk SR_WINDOWS_SDK_DIR)
     foreach(drive ${CMAKE_SYSTEM_NAME}:/ C D E F G H I J K L M N O P Q R S T U V W X Y Z)
         set(sdk_path "${drive}:/Program Files (x86)/Windows Kits/10")
@@ -94,7 +102,7 @@ else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")
     endif()
 
-    if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if (UNIX AND SR_BUILD_DEBUG_MODE)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pie -no-pie -g3")
     endif()
 endif()
@@ -118,7 +126,7 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_UTILS_ASSIMP")
 
-set(SR_ENGINE_USE_MODULAR_BUILD OFF)
+set(SR_ENGINE_USE_MODULAR_BUILD ON)
 
 if (SR_ENGINE_USE_MODULAR_BUILD)
     set(SR_COMMON_STATIC_LIBRARY OFF)

@@ -131,7 +131,7 @@ class Method:
 
 
 class Enum:
-    def __init__(self, name, variant, count, type, enum_class, namespaces, source_path):
+    def __init__(self, name, variant, count, type, enum_class, namespaces, source_path, va_args):
         self.name = name
         self.variant = variant
         self.count = count
@@ -139,6 +139,7 @@ class Enum:
         self.type = type
         self.enum_class = enum_class
         self.source_path = os.path.normpath(source_path)
+        self.va_args = va_args
 
 
 class SpaRcleClass:

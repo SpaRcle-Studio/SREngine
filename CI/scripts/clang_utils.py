@@ -403,12 +403,13 @@ def process_property(property_obj, clang_child):
 
 def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
     if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
-        if parent_node.spelling.startswith('sr_detail_reflector_'):
+        if parent_node.spelling.startswith('CODEGEN_ENUM_DETAILS_FUNCTION_'):
             all_found = 0
             name = '(not found)'
             variant = '(not found)'
             enum_type = '(not found)'
             enum_class = '(not found)'
+            va_args = '(not found)'
             count = 0
 
             for function_part in parent_node.get_children():
@@ -455,6 +456,16 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
                                                     break
                                         break
                                     break
+                                if variable_name == 'CODEGEN_ENUM_VA_ARGS':
+                                    for child2 in child.get_children():
+                                        if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                                            for child3 in child2.get_children():
+                                                if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                                                    va_args = child3.spelling[2:-2]
+                                                    all_found += 1
+                                                    break
+                                        break
+                                    break
                                 if variable_name == 'CODEGEN_ENUM_CLASS':
                                     for child2 in child.get_children():
                                         if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
@@ -466,9 +477,9 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
                                         break
                                     break
 
-                if all_found == 5:
-                    print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}')
-                    enum_object = reflection_classes.Enum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name)
+                if all_found == 6:
+                    print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}, VA_ARGS: {va_args}')
+                    enum_object = reflection_classes.Enum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
                     code_structure.enums.append(enum_object)
                     break
 

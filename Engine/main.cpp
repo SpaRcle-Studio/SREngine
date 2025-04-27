@@ -17,11 +17,6 @@
 #include <Codegen/SpaRcleAPI.generated.hpp>
 
 int main(int argc, char** argv) {
-    SR_MATH_NS::FVector3 f;
-    SR_MATH_NS::FVector4 f22;
-    SR_MATH_NS::IVector3 f2;
-    SR_MATH_NS::IVector4 f222;
-
     SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().SetRegisterFunction(std::bind(SpaRcleAPI::APIRegisterCallback, std::placeholders::_1));
 
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
