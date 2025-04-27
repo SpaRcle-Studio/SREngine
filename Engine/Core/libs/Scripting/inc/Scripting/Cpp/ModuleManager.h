@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SCRIPTING_CPP_MODULE_MANAGER_H
 #define SR_ENGINE_SCRIPTING_CPP_MODULE_MANAGER_H
 
+#include <Scripting/macros.h>
+
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/PassKey.h>
 #include <Utils/ECS/SceneObject.h>

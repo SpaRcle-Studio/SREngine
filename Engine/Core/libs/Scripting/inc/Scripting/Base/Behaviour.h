@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 #define SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 
+#include <Scripting/macros.h>
+
 #include <Utils/ECS/Component.h>
 #include <Utils/Resources/IResource.h>
 

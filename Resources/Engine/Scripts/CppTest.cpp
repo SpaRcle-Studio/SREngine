@@ -7,8 +7,6 @@
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/Types/RawMesh.h>
 
-#include <fmt/format.h>
-
 #include <Enum/SceneObjectType.hpp>
 
 //#include <string>

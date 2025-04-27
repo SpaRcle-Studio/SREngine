@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SCRIPTING_CPP_SCRIPT_MODULE_INFO_H
 #define SR_ENGINE_SCRIPTING_CPP_SCRIPT_MODULE_INFO_H
 
+#include <Scripting/macros.h>
+
 #include <Utils/Serialization/Serializable.h>
 
 namespace SR_SCRIPTING_NS {

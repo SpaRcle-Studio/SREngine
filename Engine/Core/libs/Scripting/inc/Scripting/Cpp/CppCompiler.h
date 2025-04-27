@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SCRIPTING_CPP_COMPILER_H
 #define SR_ENGINE_SCRIPTING_CPP_COMPILER_H
 
+#include <Scripting/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SharedPtr.h>
 
