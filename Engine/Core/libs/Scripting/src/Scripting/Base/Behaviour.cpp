@@ -193,7 +193,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::IsInstanceValid() const noexcept {
-        return m_cppBehaviour && m_cppBehaviour->GetInstance();
+        //return m_cppBehaviour && m_cppBehaviour->GetInstance();
+        return m_cppBehaviour;
     }
 
     void Behaviour::OnScriptReloaded() {

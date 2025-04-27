@@ -7,6 +7,8 @@
 #include <Utils/ECS/SceneObject.h>
 #include <Utils/Types/RawMesh.h>
 
+#include <Scripting/Cpp/CppBehaviour.h>
+
 #include <Enum/SceneObjectType.hpp>
 
 //#include <string>
@@ -27,11 +29,15 @@
 
 
 namespace SpaRcle::Scripts::SREngine {
-    class TestComponent : public SpaRcle::Utils::Component {
+    /*class TestComponent : public SpaRcle::Utils::Component {
         SR_CLASS()
     public:
 
 
+    };*/
+
+    class TestBehaviour : public SpaRcle::Scripting::CppBehaviour {
+        SR_CLASS()
     };
 }
 

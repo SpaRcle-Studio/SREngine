@@ -40,9 +40,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD ModuleManager* GetModuleManager() { return m_moduleManager.Get(); }
         SR_NODISCARD const std::vector<SR_UTILS_NS::Path>& GetEngineSourcesIncludePaths() const { return m_engineSourcesIncludePaths; }
         SR_NODISCARD const SR_UTILS_NS::Path& GetBuildFolderPath() const { return m_pathToEngineBuildRoot; }
-        SR_NODISCARD bool IsUseEngineSourcesAPI() const;
 
-        void SetUseEngineSourcesAPI(bool value);
         void ReloadModulesIfNeeded();
 
         static std::string_view GetDynamicLibraryExtension();
@@ -63,7 +61,6 @@ namespace SR_SCRIPTING_NS {
     private:
         bool m_isInit = false;
         bool m_isCompilationEnabled = false;
-        bool m_useEngineSourcesAPI = false;
 
         std::recursive_mutex m_mutex;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;

@@ -79,6 +79,12 @@ message(STATUS "SpaRcle Engine: root build directory is ${SR_CMAKE_ROOT_BUILD_DI
 set(SR_CMAKE_ROOT_SOURCE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 message(STATUS "SpaRcle Engine: root source directory is ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}")
 
+set(SR_CMAKE_VENV_DIRECTORY "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/.venv")
+message(STATUS "SpaRcle Engine: venv directory is ${SR_CMAKE_VENV_DIRECTORY}")
+
+set(SR_CMAKE_RESOURCES_DIRECTORY "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources")
+message(STATUS "SpaRcle Engine: resources directory is ${SR_CMAKE_RESOURCES_DIRECTORY}")
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -163,9 +169,9 @@ set(CMAKE_EXE_LINKER_FLAGS_CHECKED "")
 
 add_subdirectory(Engine)
 
-if (EXISTS ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/CMakeLists.txt)
+if (EXISTS ${SR_CMAKE_RESOURCES_DIRECTORY}/CMakeLists.txt)
     message(STATUS "SpaRcle Engine: adding Resources subdirectory")
-    add_subdirectory(${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources)
+    add_subdirectory(${SR_CMAKE_RESOURCES_DIRECTORY})
 else()
     message(STATUS "SpaRcle Engine: Resources subdirectory not found")
 endif()

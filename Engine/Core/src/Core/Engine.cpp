@@ -109,7 +109,6 @@ namespace SR_CORE_NS {
         m_threadsWorker->GetContext().SetPointer(this);
 
         m_scriptSystem = SR_SCRIPTING_NS::ScriptSystem::MakeShared();
-        m_scriptSystem->SetUseEngineSourcesAPI(true);
 
         m_timeStart = Clock::now();
 

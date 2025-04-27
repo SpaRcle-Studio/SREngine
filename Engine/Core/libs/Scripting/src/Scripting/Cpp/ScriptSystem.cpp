@@ -41,11 +41,9 @@ namespace SR_SCRIPTING_NS {
         m_cacheFolder = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
         m_apiFolder = m_resourcesFolder.Concat("SpaRcleAPI");
 
-        if (IsUseEngineSourcesAPI()) {
-            if (!InitEngineSources()) {
-                SR_ERROR("ScriptSystem::Init() : failed to initialize engine sources!");
-                return false;
-            }
+        if (!InitEngineSources()) {
+            SR_ERROR("ScriptSystem::Init() : failed to initialize engine sources!");
+            return false;
         }
 
         m_isCompilationEnabled = SR_UTILS_NS::Features::Instance().Enabled("ScriptCompilation", true);
@@ -296,15 +294,10 @@ namespace SR_SCRIPTING_NS {
                 context.sourceFiles.emplace_back(filePath);
             }
 
-            if (IsUseEngineSourcesAPI()) {
-                for (auto&& path : m_engineSourcesIncludePaths) {
-                    context.includePaths.emplace_back(path);
-                }
-                context.includePaths.emplace_back(m_pathToEngineBuildRoot.Concat("Codegen"));
+            for (auto&& path : m_engineSourcesIncludePaths) {
+                context.includePaths.emplace_back(path);
             }
-            else {
-                context.includePaths.emplace_back(m_resourcesFolder.Concat("SpaRcleAPI"));
-            }
+            context.includePaths.emplace_back(m_pathToEngineBuildRoot.Concat("Codegen"));
 
             context.includePaths.emplace_back(module.path.GetFolder());
 
@@ -436,15 +429,6 @@ namespace SR_SCRIPTING_NS {
         SR_TRACY_ZONE_N("Wait for module reload");
 
         while (m_hasModuleReloadRequest);
-    }
-
-    void ScriptSystem::SetUseEngineSourcesAPI(bool value) {
-        SRAssert2(!m_isInit, "ScriptSystem::SetUseEngineSourcesAPI() : cannot set engine sources API after initialization!");
-        m_useEngineSourcesAPI = value;
-    }
-
-    bool ScriptSystem::IsUseEngineSourcesAPI() const {
-        return m_useEngineSourcesAPI;
     }
 
     bool ScriptSystem::InitEngineSources() {

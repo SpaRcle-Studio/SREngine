@@ -67,26 +67,20 @@ if __name__ == "__main__":
     logger.log_info(f'Root build directory: {root_build_dir}')
     logger.log_info(f'Script API library directory: {script_api_library_dir}')
 
-    lib_path = os.path.join(os.path.dirname(clang_utils.clang.cindex.__file__), 'native')
     is_unix = sys.platform.startswith('linux') or sys.platform.startswith('darwin')
-    lib_file = ''
-
     logger.log_info(f'Platform: {sys.platform}')
 
-    if is_unix:
-        lib_file = os.path.join(lib_path, 'libclang.so')
-    else:
-        lib_file = os.path.join(lib_path, 'libclang.dll')
-    
-    lib_file = os.path.join(lib_path, lib_file)
+    lib_file = ''
 
+    if is_unix:
+        lib_file = os.path.join(f'{repo_dir}/Resources/Engine/Utilities', 'libclang.so')
+    else:
+        lib_file = os.path.join(f'{repo_dir}/Resources/Engine/Utilities', 'libclang.dll')
+    
     logger.log_info(f'libclang path: {lib_file}')
 
     if not os.path.isfile(lib_file):
-        if is_unix:
-            logger.log_fatal_error('libclang not found! Try to install libclang, e.g. "pip install libclang".')
-        else:
-            logger.log_fatal_error('libclang not found! Your .venv is broken.')
+        logger.log_fatal_error(f'libclang not found! Your resources folder is broken. lib path: {lib_file}')
 
     logger.log_info(f'Using libclang: {lib_file}')
     clang_utils.clang.cindex.Config.set_library_file(lib_file)

@@ -377,16 +377,11 @@ namespace SR_SCRIPTING_NS {
 
             cmakeContent += ")\n";
 
-            if (m_scriptSystem->IsUseEngineSourcesAPI()) {
-                for (auto&& engineIncludeDir : m_scriptSystem->GetEngineSourcesIncludePaths()) {
-                    cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
-                }
+            for (auto&& engineIncludeDir : m_scriptSystem->GetEngineSourcesIncludePaths()) {
+                cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
+            }
 
-                cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_scriptSystem->GetBuildFolderPath().Concat("Codegen"));
-            }
-            else {
-                cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC SpaRcleAPI)\n\n"_format(module.moduleInfo.moduleName);
-            }
+            cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, m_scriptSystem->GetBuildFolderPath().Concat("Codegen"));
         }
 
         cmakeContent += "# Dependencies \n\n";
@@ -487,10 +482,6 @@ namespace SR_SCRIPTING_NS {
         if (codegenFileStream.is_open()) {
             codegenFileStream << "/// " << SR_CODEGEN_HEADER_COMMENT << "\n\n";
 
-            if (!m_scriptSystem->IsUseEngineSourcesAPI()) {
-                codegenFileStream << "#include \"{}\"\n\n"_format(m_resourcesFolder.Concat("SpaRcleAPI/CoreAPIImpl.cpp"));
-            }
-
             for (auto&& file : module.codeFiles) {
                 if (file.first.GetExtensionView() == "cxx" || file.first.GetExtensionView() == "cpp") {
                     codegenFileStream << "#include \"" << file.first.ToStringRef() << "\"\n";
@@ -514,7 +505,7 @@ namespace SR_SCRIPTING_NS {
                 codegenFileStream << "\n";
             }
 
-            if (!m_scriptSystem->IsUseEngineSourcesAPI()) {
+            /*if (!m_scriptSystem->IsUseEngineSourcesAPI()) {
                 std::string compilerVersion = m_compiler->GetCompilerVersion();
                 compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\r", "");
                 compilerVersion = SR_UTILS_NS::StringUtils::ReplaceAll<std::string>(compilerVersion, "\n", "\\n");
@@ -537,7 +528,7 @@ namespace SR_SCRIPTING_NS {
                 codegenFileStream << "}\n\n";
 
                 codegenFileStream << "const bool CodegenRegisterModule_{}_Result = CodegenRegisterModule_{}_Module();"_format(module.moduleInfo.moduleName, module.moduleInfo.moduleName);
-            }
+            }*/
 
             codegenFileStream.close();
         }

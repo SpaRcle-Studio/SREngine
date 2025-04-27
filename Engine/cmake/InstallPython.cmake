@@ -34,13 +34,10 @@ if (UNIX AND NOT ANDROID_NDK)
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output
     )
-elseif(EXISTS "${SR_PYTHON_INSTALL_DIR}/python.exe")
-    set(SR_PYTHON_EXECUTABLE "${SR_PYTHON_INSTALL_DIR}/python.exe")
-    message(STATUS "InstallPython: Python found: ${SR_PYTHON_EXECUTABLE}")
 elseif (NOT SR_PYTHON_EXECUTABLE)
     message(STATUS "InstallPython: Python not found.")
 
-    set(SR_PYTHON_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/python")
+    set(SR_PYTHON_INSTALL_DIR "${SR_CMAKE_VENV_DIRECTORY}/python")
 
     #set(SR_PYTHON_VERSION "3.13.0")
     #set(SR_PYTHON_ZIP "python-${SR_PYTHON_VERSION}-amd64.exe")
@@ -131,15 +128,20 @@ if (NOT UNIX OR ANDROID_NDK)
     message(STATUS "InstallPython: installing Python packages...")
 
     execute_process(
-        COMMAND "${SR_PYTHON_EXECUTABLE}" -m pip install clang==17.0.6 libclang==18.1.1
+        COMMAND "${SR_PYTHON_EXECUTABLE}" -m pip install clang==17.0.6 libclang==18.1.1 pyinstaller==6.13.0
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output
     )
 
+    set(SR_PYTHON_PY_INSTALLER "${SR_PYTHON_EXECUTABLE} -m PyInstaller")
+    message(STATUS "InstallPython: PyInstaller: ${SR_PYTHON_PY_INSTALLER}")
+
     if (NOT result EQUAL "0")
         message(FATAL_ERROR "InstallPython: failed to install Python packages! ${error_output}")
-    endif ()
+    else()
+        message(STATUS "InstallPython: python packages installed successfully.")
+    endif()
 endif()
 
 message(STATUS "InstallPython: checking python version...")

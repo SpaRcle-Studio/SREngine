@@ -41,7 +41,7 @@ namespace SR_SCRIPTING_NS {
 
         m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
 
-        if (m_pScriptSystem->IsUseEngineSourcesAPI() && !FindEngineLibs()) {
+        if (!FindEngineLibs()) {
             SR_ERROR("CppCompiler::Init() : failed to find engine libs!");
             return false;
         }
@@ -287,9 +287,9 @@ namespace SR_SCRIPTING_NS {
             //{"Engine/Core", "Core"},
             //{"Engine/Core/libs/Graphics", "Graphics"},
             {"Engine/Core/libs/Utils", "Utils"},
+            {"Engine/Core/libs/Scripting", "Scripting"},
             //{"Engine/Core/libs/Utils/libs/fmt", "fmt"},
             //{"Engine/Core/libs/Physics", "Physics"},
-            //{"Engine/Core/libs/Scripting", "Scripting"},
             //{"Engine/Core/libs/Audio", "Audio"},
         };
 

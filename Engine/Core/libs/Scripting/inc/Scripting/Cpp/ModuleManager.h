@@ -89,47 +89,30 @@ namespace SR_SCRIPTING_NS {
         using SetSceneObjectFunc = void(*)(void*, SpaRcleAPI::ScriptHandle);
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
-        SR_NODISCARD void* GetInstance() const { return m_pInstance; }
         SR_NODISCARD const ReloadCallback& GetReloadCallback() const { return m_reloadCallback; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetModuleName() const { return m_moduleName; }
 
         void SetBehaviourName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_behaviourName = name; }
         void SetModuleName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_moduleName = name; }
-        void SetInstance(void* pInstance, ManagerPasskey) { m_pInstance = pInstance; }
-        void SetModuleHandle(void* pModuleHandle, ManagerPasskey) { m_pModuleHandle = pModuleHandle; }
         void SetReloadCallback(const ReloadCallback& callback) { m_reloadCallback = callback; }
 
         void OnBehaviourUnloaded(ManagerPasskey);
         void OnBehaviourLoaded(ManagerPasskey);
 
-        void Awake() { if (m_awakeFunc) { m_awakeFunc(m_pInstance); } }
-        void OnEnable() { if (m_onEnableFunc) { m_onEnableFunc(m_pInstance); } }
-        void OnDisable() { if (m_onDisableFunc) { m_onDisableFunc(m_pInstance); } }
-        void OnAttached() { if (m_onAttachedFunc) { m_onAttachedFunc(m_pInstance); } }
-        void OnDetached() { if (m_onDetachedFunc) { m_onDetachedFunc(m_pInstance); } }
-        void OnDestroy() { if (m_onDestroyFunc) { m_onDestroyFunc(m_pInstance); } }
-        void Start() { if (m_startFunc) { m_startFunc(m_pInstance); } }
-        void FixedUpdate() { if (m_fixedUpdateFunc) { m_fixedUpdateFunc(m_pInstance); } }
-        void Update(float_t dt) { if (m_updateFunc) { m_updateFunc(m_pInstance, dt); } }
+        void Awake() { }
+        void OnEnable() { }
+        void OnDisable() { }
+        void OnAttached() { }
+        void OnDetached() { }
+        void OnDestroy() { }
+        void Start() { }
+        void FixedUpdate() { }
+        void Update(float_t dt) { }
         void SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
-
-    private:
-        VoidFunc m_awakeFunc = nullptr;
-        VoidFunc m_onEnableFunc = nullptr;
-        VoidFunc m_onDisableFunc = nullptr;
-        VoidFunc m_onAttachedFunc = nullptr;
-        VoidFunc m_onDetachedFunc = nullptr;
-        VoidFunc m_onDestroyFunc = nullptr;
-        VoidFunc m_startFunc = nullptr;
-        VoidFunc m_fixedUpdateFunc = nullptr;
-        UpdateFunc m_updateFunc = nullptr;
-        SetSceneObjectFunc m_setSceneObjectFunc = nullptr;
 
     private:
         SR_UTILS_NS::StringAtom m_moduleName;
         SR_UTILS_NS::StringAtom m_behaviourName;
-        void* m_pInstance = nullptr;
-        void* m_pModuleHandle = nullptr;
         ReloadCallback m_reloadCallback;
 
     };

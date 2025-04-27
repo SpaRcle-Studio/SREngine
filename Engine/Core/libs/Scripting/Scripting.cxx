@@ -4,15 +4,16 @@
 
 #include <Utils/macros.h>
 
-#include "src/Scripting/Base/Compiler.cpp"
 #include "src/Scripting/Base/Script.cpp"
 #include "src/Scripting/Base/Behaviour.cpp"
 
+#include "src/Scripting/Cpp/CppBehaviour.cpp"
 #include "src/Scripting/Cpp/ModuleManager.cpp"
 #include "src/Scripting/Cpp/ScriptSystem.cpp"
 #include "src/Scripting/Cpp/CppCompiler.cpp"
 #include "src/Scripting/Cpp/CodeGenerator.cpp"
 #include "src/Scripting/Cpp/ScriptModuleInfo.cpp"
+
 //#include "src/Scripting/Mono/MonoTest.cpp"
 
 //#include "src/Scripting/Impl/EvoScriptImpl.cpp"

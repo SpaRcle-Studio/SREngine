@@ -43,3 +43,6 @@ venv
 /Android/app/src/main/obj
 /CI/scripts/__pycache__
 site
+/Resources/Engine/Utilities/codegen.exe
+/Resources/Engine/Utilities/libclang.dll
+/Resources/Engine/Utilities/libclang.so
