@@ -33,9 +33,10 @@ namespace SR_SCRIPTING_NS {
 
     struct CppCodegenModule {
         bool isCompiled = false;
+        bool isNeedCodegen = true;
         SR_UTILS_NS::Path path;
         CppScriptModuleInfo moduleInfo;
-        std::map<SR_UTILS_NS::Path, CppFileMetadata> codeFiles;
+        std::set<SR_UTILS_NS::Path> codeFiles;
     };
 
     class CppCodeGenerator : public SR_HTYPES_NS::SharedPtr<CppCodeGenerator> {
@@ -44,15 +45,13 @@ namespace SR_SCRIPTING_NS {
     public:
         explicit CppCodeGenerator(ScriptSystem* pScriptSystem)
             : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-            , m_scriptSystem(pScriptSystem)
+            , m_pScriptSystem(pScriptSystem)
         { }
 
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<CppCodeGenerator>;
 
     public:
-        bool ParseScripts();
-
         bool Init();
 
         SR_NODISCARD bool IsNeedRecompile() const;
@@ -72,19 +71,18 @@ namespace SR_SCRIPTING_NS {
         void RegenerateCmake();
         void GenerateModule(const CppCodegenModule& module);
 
-        SR_NODISCARD CppFileMetadata ParseFile(const SR_UTILS_NS::Path& path) const;
-
         void OnModuleChanged(SR_UTILS_NS::StringAtom moduleName);
         void InitModuleSources(CppCodegenModule& module);
 
         SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetDependenciesRecursive(SR_UTILS_NS::StringAtom moduleName) const;
 
     private:
-        ScriptSystem* m_scriptSystem = nullptr;
+        ScriptSystem* m_pScriptSystem = nullptr;
         CppCompiler* m_compiler = nullptr;
         std::vector<CppCodegenModule> m_modules;
         SR_UTILS_NS::Path m_resourcesFolder;
         SR_UTILS_NS::Path m_cacheFolder;
+        SR_UTILS_NS::Path m_codegenExecutablePath;
 
     };
 }

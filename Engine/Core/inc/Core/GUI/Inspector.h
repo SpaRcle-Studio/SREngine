@@ -51,6 +51,8 @@ namespace SR_CORE_GUI_NS {
         void InspectLayer(SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback);
         void DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
 
+        void InitCategories();
+
     private:
         void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);
 

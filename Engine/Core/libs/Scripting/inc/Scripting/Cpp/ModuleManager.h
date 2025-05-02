@@ -11,8 +11,6 @@
 #include <Utils/Common/PassKey.h>
 #include <Utils/ECS/SceneObject.h>
 
-#include <Codegen/ScriptHandle.generated.hpp>
-
 namespace SR_SCRIPTING_NS {
     class SpaRcleAPIRegister : public SR_UTILS_NS::Singleton<SpaRcleAPIRegister> {
         SR_REGISTER_SINGLETON(SpaRcleAPIRegister)
@@ -86,7 +84,6 @@ namespace SR_SCRIPTING_NS {
         using ManagerPasskey = SR_UTILS_NS::Passkey<ModuleManager>;
         using VoidFunc = void(*)(void*);
         using UpdateFunc = void(*)(void*, float_t);
-        using SetSceneObjectFunc = void(*)(void*, SpaRcleAPI::ScriptHandle);
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD const ReloadCallback& GetReloadCallback() const { return m_reloadCallback; }

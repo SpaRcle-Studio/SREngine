@@ -17,6 +17,11 @@ class Logger:
     def __init__(self):
         self.log_file = ""
         self.log_prefix = "[SpaRcle Codegen]"
+        self.module_name = ""
+
+    def set_module_name(self, module_name):
+        self.module_name = module_name
+        self.log_prefix = f"[SpaRcle Codegen] [{module_name}]"
 
     def create_log_file(self, log_file):
         self.log_file = log_file.replace("/", "\\")

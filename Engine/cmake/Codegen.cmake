@@ -52,7 +52,8 @@ macro(SRCodegen)
         --codegen_dir "${SR_CMAKE_ROOT_BUILD_DIRECTORY}"
         --root_build_dir "${SR_CMAKE_ROOT_BUILD_DIRECTORY}"
         --repo_dir "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}"
-        --script_api_library_dir "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/SpaRcleAPI"
+        --lib_clang_dir "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
+        --module_name "Application"
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output

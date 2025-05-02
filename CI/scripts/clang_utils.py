@@ -1,5 +1,5 @@
 import sys, os, subprocess, re, copy
-import reflection_classes, logger_utils, sparcle_utils, cpp_operator, script_codegen_utils
+import reflection_classes, logger_utils, sparcle_utils, cpp_operator, script_codegen_utils, codegen_context
 
 try:
     import clang.cindex
@@ -131,32 +131,40 @@ def normalize_path(path):
     return os.path.normpath(path)
 
 
-def get_engine_include_args(repo_path, repo_build_dir):
+def get_engine_include_args(context: codegen_context.CodegenContext):
+    engine_root = ''
+    if context.is_script:
+        engine_root = context.help_sources_dir
+    else:
+        engine_root = context.analyze_dir + '/Engine'
+
     includes = [
-        f'{repo_path}/Engine/Core/inc',
-        f'{repo_path}/Engine/Core/libs',
-        f'{repo_path}/Engine/Core/libs/Utils/inc',
-        f'{repo_path}/Engine/Core/libs/Utils/libs',
-        f'{repo_path}/Engine/Core/libs/Utils/libs/openssl/include',
-        f'{repo_path}/Engine/Core/libs/Utils/libs/litehtml/include',
-        f'{repo_path}/Engine/Core/libs/Utils/libs/cppcoro/include',
-        f'{repo_path}/Engine/Core/libs/Utils/libs/assimp/include',
-        f'{repo_path}/Engine/Core/libs/Utils/libs/fmt/include',
-        f'{repo_path}/Engine/Core/libs/Scripting/inc',
-        f'{repo_path}/Engine/Core/libs/Scripting/libs',
-        f'{repo_path}/Engine/Core/libs/Scripting/libs/EvoScript/Core/inc',
-        f'{repo_path}/Engine/Core/libs/Audio/inc',
-        f'{repo_path}/Engine/Core/libs/Audio/libs',
-        f'{repo_path}/Engine/Core/libs/Audio/libs/libmodplug/src',
-        f'{repo_path}/Engine/Core/libs/Physics/inc',
-        f'{repo_path}/Engine/Core/libs/Physics/libs',
-        f'{repo_path}/Engine/Core/libs/Graphics/inc',
-        f'{repo_path}/Engine/Core/libs/Graphics/libs',
-        f'{repo_path}/Engine/Core/libs/Graphics/libs/imgui',
-        f'{repo_path}/Engine/Core/libs/Graphics/libs/EvoVulkan/Core/inc',
-        f'{repo_build_dir}/Engine/Core/libs/Utils/libs/assimp/include',
-        f'{repo_build_dir}',
+        f'{engine_root}/Core/inc',
+        f'{engine_root}/Core/libs',
+        f'{engine_root}/Core/libs/Utils/inc',
+        f'{engine_root}/Core/libs/Scripting/inc',
+        f'{engine_root}/Core/libs/Audio/inc',
+        f'{engine_root}/Core/libs/Physics/inc',
+        f'{engine_root}/Core/libs/Graphics/inc',
     ]
+
+    if not context.is_script:
+        includes.append(f'{engine_root}/Core/libs/Audio/libs')
+        includes.append(f'{engine_root}/Core/libs/Audio/libs/libmodplug/src')
+        includes.append(f'{engine_root}/Core/libs/Graphics/libs/EvoVulkan/Core/inc')
+        includes.append(f'{engine_root}/Core/libs/Graphics/libs')
+        includes.append(f'{engine_root}/Core/libs/Graphics/libs/imgui')
+        includes.append(f'{engine_root}/Core/libs/Physics/libs')
+        includes.append(f'{engine_root}/Core/libs/Utils/libs')
+        includes.append(f'{engine_root}/Core/libs/Utils/libs/openssl/include')
+        includes.append(f'{engine_root}/Core/libs/Utils/libs/litehtml/include')
+        includes.append(f'{engine_root}/Core/libs/Utils/libs/cppcoro/include')
+        includes.append(f'{engine_root}/Core/libs/Utils/libs/assimp/include')
+        includes.append(f'{engine_root}/Core/libs/Utils/libs/fmt/include')
+        includes.append(f'{engine_root}/Core/libs/Scripting/libs')
+
+        includes.append(f'{context.build_dir}/Engine/Core/libs/Utils/libs/assimp/include')
+        includes.append(f'{context.build_dir}')
 
     include_args = [f'-I{ os.path.abspath(normalize_path(inc))}' for inc in includes]
     return include_args
@@ -486,7 +494,7 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
         return
 
 
-def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
+def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help_source):
     is_class_or_struct = parent_node.kind == clang.cindex.CursorKind.CLASS_DECL or parent_node.kind == clang.cindex.CursorKind.STRUCT_DECL
     if is_class_or_struct and parent_node.is_definition():
         if not has_static_function(parent_node, 'GetMetaStatic'):
@@ -495,6 +503,13 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
         # Нашли класс
         class_name = parent_node.spelling
         class_obj = reflection_classes.SpaRcleClass(class_name, namespaces)
+        class_obj.path = parent_node.location.file.name
+
+        if is_help_source:
+            class_obj.is_help_source = True
+            code_structure.sparcle_classes.append(class_obj)
+            return
+
         class_obj.inspector = extract_special_tag_comment_data(parent_node, 'inspector')
 
         # format @version(year.month.day) or @version(any number). convert @version(2025.12.31) to 20251231
@@ -507,8 +522,6 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
         class_obj.category = extract_special_tag_comment_data(parent_node, 'category')
 
         class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
-
-        class_obj.path = parent_node.location.file.name
 
         if class_obj.inspector:
             print(f'Found class inspector: {class_obj.inspector}')
@@ -663,11 +676,16 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             code_structure.add_scriptable_class(class_obj)
 
 
-def parse_header_tree(logger, file_path, deep, parent_node, code_structure, namespaces):
+def parse_header_tree(logger, file_path, deep, parent_node, code_structure, namespaces, context: codegen_context.CodegenContext):
+    is_help_source = False
+    if context.help_sources_dir != '' and parent_node.location.file:
+        is_help_source = context.help_sources_dir in parent_node.location.file.name.replace("\\", "/")
+
     try:
-        parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
-        parse_sparcle_class(logger, parent_node, code_structure, namespaces)
-        parse_scriptable_class(logger, parent_node, code_structure, namespaces)
+        if not is_help_source:
+            parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
+        parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help_source)
+        #parse_scriptable_class(logger, parent_node, code_structure, namespaces)
 
         new_namespace = namespaces
         # Проверяем, является ли текущий узел пространством имен
@@ -677,7 +695,7 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
 
         # Рекурсивный обход других узлов
         for child in parent_node.get_children():
-            parse_header_tree(logger, file_path, deep + 1, child, code_structure, new_namespace)
+            parse_header_tree(logger, file_path, deep + 1, child, code_structure, new_namespace, context)
 
     except Exception as e:
         if str(e).startswith('Unknown template argument kind'):
@@ -685,7 +703,7 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
         logger.log_fatal_error(f'Error parse_tree: {e}')
 
 
-def parse_header_file(logger: logger_utils.Logger, file_path, include_args):
+def parse_header_file(logger: logger_utils.Logger, file_path, include_args, context: codegen_context.CodegenContext):
     code_structure = reflection_classes.CodeStructure(logger)
 
     # Передаем каждый путь как отдельный аргумент
@@ -704,7 +722,7 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args):
 
     # Проходим по узлам файла
     for node in translation_unit.cursor.get_children():
-        parse_header_tree(logger, file_path, 0, node, code_structure, [])
+        parse_header_tree(logger, file_path, 0, node, code_structure, [], context)
 
     return code_structure
 

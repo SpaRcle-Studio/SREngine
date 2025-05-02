@@ -15,10 +15,10 @@
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
-#include <Codegen/SpaRcleAPI.generated.hpp>
+#include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
 
 int main(int argc, char** argv) {
-    SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().SetRegisterFunction(std::bind(SpaRcleAPI::APIRegisterCallback, std::placeholders::_1));
+    Codegen::RegisterModule_Application();
 
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
@@ -80,7 +80,6 @@ int main(int argc, char** argv) {
     }
 
     SR_HTYPES_NS::SharedPtrDynamicDataCounter::CheckMemoryLeaks();
-    SR_SCRIPTING_NS::SpaRcleAPIRegister::Instance().CheckMemoryLeaks();
 
     return code;
 }

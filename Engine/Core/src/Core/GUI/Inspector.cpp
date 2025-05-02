@@ -34,33 +34,7 @@ namespace SR_CORE_GUI_NS {
         , m_hierarchy(hierarchy)
     {
         m_pPointerDrawer = SR_CORE_GUI_NS::PropertyDrawerBase::MakeShared<PointerPropertyDrawer>();
-
-        m_availableComponents = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
-
-        std::erase_if(m_availableComponents, [](auto&& name) {
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
-            return pMeta->IsAbstract() || pMeta->IsHidden();
-        });
-
-        for (auto&& name : m_availableComponents) {
-            auto&& category = SR_UTILS_NS::Factory::Instance().GetType(name)->GetCategory();
-            if (category.empty()) {
-                m_componentsCategories.categories["Misc"].components.emplace_back(name);
-            }
-            else {
-                ComponentCategory* pCategory = nullptr;
-                for (auto&& cat : category) {
-                    if (pCategory) {
-                        pCategory = &pCategory->categories[cat];
-                    }
-                    else {
-                        pCategory = &m_componentsCategories.categories[cat];
-                    }
-                }
-                SRAssert(pCategory);
-                pCategory->components.emplace_back(name);
-            }
-        }
+        InitCategories();
     }
 
     void Inspector::Draw() {
@@ -322,6 +296,9 @@ namespace SR_CORE_GUI_NS {
                 m_componentSearchOpened = true;
             }
 
+            if (ImGui::Button("Reload")) {
+                InitCategories();
+            }
             ImGui::InputText("##search", &m_componentSearchBuffer);
             ImGui::PopItemWidth();
 
@@ -643,5 +620,36 @@ namespace SR_CORE_GUI_NS {
                 callback(layers[layerIndex]);
             }
         });
+    }
+
+    void Inspector::InitCategories() {
+        m_availableComponents = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
+
+        std::erase_if(m_availableComponents, [](auto&& name) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+            return pMeta->IsAbstract() || pMeta->IsHidden();
+        });
+
+        m_componentsCategories = ComponentCategory();
+
+        for (auto&& name : m_availableComponents) {
+            auto&& category = SR_UTILS_NS::Factory::Instance().GetType(name)->GetCategory();
+            if (category.empty()) {
+                m_componentsCategories.categories["Misc"].components.emplace_back(name);
+            }
+            else {
+                ComponentCategory* pCategory = nullptr;
+                for (auto&& cat : category) {
+                    if (pCategory) {
+                        pCategory = &pCategory->categories[cat];
+                    }
+                    else {
+                        pCategory = &m_componentsCategories.categories[cat];
+                    }
+                }
+                SRAssert(pCategory);
+                pCategory->components.emplace_back(name);
+            }
+        }
     }
 }

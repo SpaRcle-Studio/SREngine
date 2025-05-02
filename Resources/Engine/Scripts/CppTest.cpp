@@ -29,15 +29,16 @@
 
 
 namespace SpaRcle::Scripts::SREngine {
-    /*class TestComponent : public SpaRcle::Utils::Component {
+    class ScriptTestComponent : public SpaRcle::Utils::Component {
         SR_CLASS()
     public:
-
-
-    };*/
+    };
 
     class TestBehaviour : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()
+
+        /// @property
+        int privateInt = 0;
     };
 }
 
@@ -47,3 +48,5 @@ extern "C" __declspec(dllexport) void TestFunction() {
     SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(2));
     SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: " + SR_UTILS_NS::EnumReflector::ToStringAtom(SR_UTILS_NS::SceneObjectType::GameObject).ToStringRef());
 }
+
+#include <Codegen/CppTest.generated.hpp>

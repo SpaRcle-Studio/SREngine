@@ -153,6 +153,7 @@ class SpaRcleClass:
         self.variables = []
         self.path = None
         self.inherited_classes = []
+        self.is_help_source = False
 
     def add_variable(self, variable):
         self.variables.append(variable)

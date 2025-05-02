@@ -1,12 +1,12 @@
 import os
 from glob import glob
 
-import reflection_classes, sparcle_utils, clang_utils
+import reflection_classes, sparcle_utils, clang_utils, codegen_context, logger_utils
 
 
-def generate_all_includes_cxx(codegen_directory, repo_path) -> str:
+def generate_all_includes_cxx(context: codegen_context.CodegenContext) -> str:
     collected_files = []
-    patterns = ['*.h']
+
     include_dirs = [
         'Engine/Core/libs/Utils/inc/Utils',
         'Engine/Core/libs/Graphics/inc/Graphics',
@@ -16,22 +16,31 @@ def generate_all_includes_cxx(codegen_directory, repo_path) -> str:
         'Engine/Core/inc',
     ]
 
+    if context.is_script:
+        patterns = ['*.h', '*.hpp', '*.cpp']
+        include_dirs.append(context.analyze_dir)
+    else:
+        patterns = ['*.h']
+
     # Преобразуем пути в include_dirs для разных ОС
     include_dirs = [sparcle_utils.normalize_path(dir) for dir in include_dirs]
 
-    print(f'repo path: {os.path.abspath(repo_path)}')
+    print(f'repo path: {os.path.abspath(context.analyze_dir)}')
     print('collect files...\n')
 
-    for dir_path, _, _ in os.walk(repo_path):
+    for dir_path, _, _ in os.walk(context.analyze_dir):
         for pattern in patterns:
             for file in glob(os.path.join(dir_path, pattern)):
                 normalized_file = sparcle_utils.normalize_path(file)
-                if any((inc_dir in normalized_file) for inc_dir in include_dirs):
+                if context.is_script:
                     collected_files.append(normalized_file)
+                else:
+                    if any((inc_dir in normalized_file) for inc_dir in include_dirs):
+                        collected_files.append(normalized_file)
 
     print(f'collected files: {len(collected_files)}\n')
 
-    cached_file = os.path.abspath(sparcle_utils.normalize_path(f'{codegen_directory}/Codegen/Codegen/AllIncludes.cxx'))
+    cached_file = os.path.abspath(sparcle_utils.normalize_path(f'{context.codegen_dir}/AllIncludes.cxx'))
 
     # Получаем директорию из пути к файлу
     directory = os.path.dirname(cached_file)
@@ -310,7 +319,7 @@ def generate_class_meta_load(f, class_obj, tabs):
 
         f.write('\t' * tabs + f'}}\n')
 
-    f.write('\t' * tabs + f'return true;')
+    f.write('\t' * tabs + f'return true;\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -433,7 +442,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + '}\n\n')
 
     f.write('\t' * (tabs - 1) + f'private:\n')
-    f.write('\t' * tabs + f'static inline const bool SR_CODEGEN_REGISTER_FACTORY = SR_UTILS_NS::Factory::Instance().Register<{class_name}>();\n\n')
+    #f.write('\t' * tabs + f'static inline const bool SR_CODEGEN_REGISTER_FACTORY = SR_UTILS_NS::Factory::Instance().Register<{class_name}>();\n\n')
 
     f.write('\t' * tabs + f'/// Bindings for class {class_obj.name}\n')
 
@@ -539,6 +548,14 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
 
     tabs -= 1
     f.write('\t' * tabs + '};\n\n')
+
+    f.write(f'\t' * tabs + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void RegisterClassMeta_{class_obj.name}() {{\n')
+    f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Register<{class_name}>();\n')
+    f.write(f'\t' * tabs + f'}}\n\n')
+
+    f.write(f'\t' * tabs + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void UnregisterClassMeta_{class_obj.name}() {{\n')
+    f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Unregister<{class_name}>();\n')
+    f.write(f'\t' * tabs + f'}}\n\n')
 
     #for inherited_class in class_obj.inherited_classes:
     #    inherited_class_formated = inherited_class.split('::')[-1]
@@ -867,7 +884,93 @@ def generate_enums_code(codegen_dir, enums):
 
                 f.write(f'\n#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n')
 
-def generate_classes_code(codegen_dir, class_structures):
+
+def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, class_structures):
+    logger.log_info(f'Generating meta module core code to {context.codegen_dir}...')
+
+    full_path = os.path.normpath(f'{context.codegen_dir}/SpaRcleModule{context.module_name}Core.generated.hpp')
+    with open(full_path, 'w', encoding='utf8') as f:
+        f.write(clang_utils.codegen_cpp_header_comment)
+
+        f.write(f'#ifndef SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP\n')
+        f.write(f'#define SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP\n\n')
+
+        f.write(f'#include <Utils/stdInclude.h>\n\n')
+
+        f.write(f'namespace Codegen {{\n')
+
+        tabs = 1
+
+        for class_obj in class_structures:
+            if not class_obj.is_help_source:
+                f.write(f'{tabs * "\t"}extern "C" SR_CODEGEN_DLL_API_IMPORT void RegisterClassMeta_{class_obj.name}();\n')
+                f.write(f'{tabs * "\t"}extern "C" SR_CODEGEN_DLL_API_IMPORT void UnregisterClassMeta_{class_obj.name}();\n')
+
+        ############################### register #################################
+        f.write(f'\n{tabs * "\t"}void RegisterModule_{context.module_name}() {{\n')
+
+        tabs += 1
+
+        for class_obj in class_structures:
+            if not class_obj.is_help_source:
+                f.write(f'{tabs * "\t"}RegisterClassMeta_{class_obj.name}();\n')
+
+        tabs -= 1
+
+        f.write(f'{tabs * "\t"}}}\n')
+
+        ############################### unregister #################################
+        f.write(f'\n{tabs * "\t"}void UnregisterModule_{context.module_name}() {{\n')
+
+        tabs += 1
+
+        for class_obj in class_structures:
+            if not class_obj.is_help_source:
+                f.write(f'{tabs * "\t"}UnregisterClassMeta_{class_obj.name}();\n')
+
+        tabs -= 1
+
+        f.write(f'{tabs * "\t"}}}\n')
+
+        f.write(f'}}\n\n')
+
+        f.write(f'#if defined(SR_WIN32) && defined(SR_ENGINE_SCRIPT_API_MODE)')
+        f.write(f'''
+    bool __stdcall DllMain(void* hModule, unsigned long ulReasonForCall, void* lpReserved) {{
+        switch (ulReasonForCall) {{
+        case 1: /// DLL_PROCESS_ATTACH
+            Codegen::RegisterModule_{context.module_name}();
+            break;
+        case 0: /// DLL_PROCESS_DETACH
+            Codegen::UnregisterModule_{context.module_name}();
+            break;
+        }}
+        return true;
+    }}\n''')
+
+        f.write('#endif\n\n')
+
+        f.write(f'#if defined(SR_LINUX) && defined(SR_ENGINE_SCRIPT_API_MODE)')
+        f.write(f'''
+    __attribute__((constructor))
+    void OnLibraryLoad() {{
+        Codegen::RegisterModule_{context.module_name}();
+    }}
+    
+    __attribute__((destructor))
+    void OnLibraryUnload() {{
+        Codegen::UnregisterModule_{context.module_name}();
+    }}\n''')
+        f.write('#endif\n\n')
+
+        f.write(f'#endif // SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP\n')
+
+
+def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, class_structures):
+    logger.log_info(f'Generating classes code...')
+
+    generate_meta_module_core_code(logger, context, class_structures)
+
     file_map = {}
     for class_obj in class_structures:
         if not class_obj.path:
@@ -879,7 +982,7 @@ def generate_classes_code(codegen_dir, class_structures):
         if os.path.exists(file_name):
             raise Exception(f'Absolute path is not allowed: {file_name}, source: {class_obj.path}')
 
-        file_name = file_name[:-2] # remove .h
+        file_name, ext = os.path.splitext(file_name)
 
         if file_name not in file_map:
             file_map[file_name] = []
@@ -887,20 +990,36 @@ def generate_classes_code(codegen_dir, class_structures):
         else:
             file_map[file_name].append(class_obj)
 
-    if not os.path.exists(codegen_dir):
-        os.makedirs(codegen_dir)
+    if not os.path.exists(context.codegen_dir):
+        os.makedirs(context.codegen_dir)
 
-    if not os.path.exists(codegen_dir):
-        raise Exception(f'Failed to create directory: {codegen_dir}')
+    if not os.path.exists(context.codegen_dir):
+        raise Exception(f'Failed to create directory: {context.codegen_dir}')
 
     for file_name, class_objs in file_map.items():
-        full_path = os.path.normpath(f'{codegen_dir}/{file_name}.generated.hpp')
+        has_non_help_source = False
+        for class_obj in class_objs:
+            if not class_obj.is_help_source:
+                has_non_help_source = True
+                break
+
+        if not has_non_help_source:
+            continue
+
+        full_path = os.path.normpath(f'{context.codegen_dir}/{file_name}.generated.hpp')
         with open(full_path, 'w', encoding='utf8') as f:
             f.write(clang_utils.codegen_cpp_header_comment)
             f.write(f'#ifndef SR_CODEGEN_{file_name.upper()}_HPP\n')
             f.write(f'#define SR_CODEGEN_{file_name.upper()}_HPP\n\n')
             for class_obj in class_objs:
-                f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"\n\n')
+                if class_obj.is_help_source:
+                    continue
+
+                _, ext = os.path.splitext(class_obj.path)
+
+                if ext == '.h':
+                    f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"\n\n')
+
                 f.write(f'#include <Utils/Reflection/Property.h>\n')
                 f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write(f'#include <Utils/TypeTraits/SRClass.h>\n')

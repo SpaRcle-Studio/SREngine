@@ -11,7 +11,9 @@ if __name__ == "__main__":
     is_unix = sys.platform.startswith('linux') or sys.platform.startswith('darwin')
     lib_file = ''
 
-    print(f'Platform: {sys.platform}')
+    prefix = '[SpaRcle libclang copy script]'
+
+    print(f'{prefix} Platform: {sys.platform}')
 
     if is_unix:
         lib_file = os.path.join(lib_path, 'libclang.so')
@@ -20,21 +22,21 @@ if __name__ == "__main__":
 
     lib_file = os.path.join(lib_path, lib_file)
 
-    print(f'libclang path: {lib_file}')
+    print(f'{prefix} libclang path: {lib_file}')
 
     if not os.path.isfile(lib_file):
-        print('libclang not found!')
+        print(f'{prefix} libclang not found!')
         exit(1)
     else:
-        print('libclang found!')
+        print(f'{prefix} libclang found!')
 
     target_folder = os.path.join(os.path.abspath(args.repo_dir), 'Resources', 'Engine', 'Utilities')
     target_file = os.path.join(target_folder, os.path.basename(lib_file))
 
     if os.path.isfile(target_file):
-        print(f'libclang already exists in {target_folder}, skipping copy')
+        print(f'{prefix} libclang already exists in {target_folder}, skipping copy')
         exit(0)
 
-    print(f'Copying {lib_file} to {target_file}')
+    print(f'{prefix} Copying {lib_file} to {target_file}')
     shutil.copyfile(lib_file, target_file)
-    print('Copy completed!')
+    print(f'{prefix} Copy completed!')

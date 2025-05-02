@@ -113,6 +113,10 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
+        if (path.GetBaseNameView() == "libclang") {
+            return;
+        }
+
         SR_LOCK_GUARD;
 
         if (m_changedCppFiles.count(path) > 0 || m_changedModules.count(path) > 0 || m_changedCppModules.count(path) > 0) {
@@ -290,7 +294,7 @@ namespace SR_SCRIPTING_NS {
             context.isDebug = true;
             context.isShared = true;
 
-            for (auto&& [filePath, metadata] : module.codeFiles) {
+            for (auto&& filePath : module.codeFiles) {
                 context.sourceFiles.emplace_back(filePath);
             }
 
@@ -300,6 +304,7 @@ namespace SR_SCRIPTING_NS {
             context.includePaths.emplace_back(m_pathToEngineBuildRoot.Concat("Codegen"));
 
             context.includePaths.emplace_back(module.path.GetFolder());
+            context.includePaths.emplace_back(context.outFolder.Concat("Codegen"));
 
             if (!m_compiler->Compile(context)) {
                 SR_ERROR("ScriptSystem::CompileModules() : failed to compile modules!");
@@ -467,6 +472,7 @@ namespace SR_SCRIPTING_NS {
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Physics/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/inc"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/libs"));
+        m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/libs/entt/src"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Utils/libs/fmt/include"));
         m_engineSourcesIncludePaths.emplace_back(m_pathToEngineSourcesRoot.Concat("Engine/Core/libs/Scripting/inc"));
 
