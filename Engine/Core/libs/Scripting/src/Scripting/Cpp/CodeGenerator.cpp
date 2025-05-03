@@ -185,11 +185,19 @@ namespace SR_SCRIPTING_NS {
         cmakeContent += "# Modules \n\n";
 
         for (auto&& module : m_modules) {
-            cmakeContent += "add_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "if (ANDROID_NDK)\n";
 
-            cmakeContent += "\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\tadd_library(SCRIPT_MODULE_{} STATIC\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t)\n";
 
-            cmakeContent += ")\n";
+            cmakeContent += "else()\n";
+
+            cmakeContent += "\tadd_library(SCRIPT_MODULE_{} SHARED\n"_format(module.moduleInfo.moduleName);
+            cmakeContent += "\t\t{}/{}.cxx\n"_format(m_cacheFolder.Concat("Scripts/Codegen"), module.moduleInfo.moduleName);
+            cmakeContent += "\t)\n";
+
+            cmakeContent += "endif()\n";
 
             for (auto&& engineIncludeDir : m_pScriptSystem->GetEngineSourcesIncludePaths()) {
                 cmakeContent += "target_include_directories(SCRIPT_MODULE_{} PUBLIC {})\n"_format(module.moduleInfo.moduleName, engineIncludeDir);
