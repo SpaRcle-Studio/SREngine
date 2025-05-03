@@ -25,6 +25,7 @@ macro(SRCodegen)
     execute_process(
         COMMAND ${SR_PYTHON_EXECUTABLE} -m PyInstaller --onefile ${SR_CODEGEN_SCRIPT_PATH}
         --distpath "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
+        --paths "${PROJECT_SOURCE_DIR}/../CI/scripts"
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output
