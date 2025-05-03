@@ -1,7 +1,12 @@
 import sys, os, subprocess, re, argparse, codegen_context
 from glob import glob
 
-import sparcle_utils, reflection_classes, clang_utils, meta_code_generator, script_api_code_generator, logger_utils
+import sparcle_utils
+import logger_utils
+import reflection_classes
+import clang_utils
+import meta_code_generator
+import script_api_code_generator
 import script_library_code_generator
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:

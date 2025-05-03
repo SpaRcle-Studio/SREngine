@@ -1,5 +1,5 @@
-set(SR_CODEGEN_SCRIPT_PATH "${PROJECT_SOURCE_DIR}/../CI/scripts/codegen.py")
-set(SR_COPY_LIBCLANG_SCRIPT_PATH "${PROJECT_SOURCE_DIR}/../CI/scripts/copy_libclang_to_resources.py")
+set(SR_CODEGEN_SCRIPT_PATH "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/codegen.py")
+set(SR_COPY_LIBCLANG_SCRIPT_PATH "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts/copy_libclang_to_resources.py")
 
 macro(SRCodegen)
     message(STATUS "Copy libclang to ${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities")
@@ -34,7 +34,7 @@ macro(SRCodegen)
     execute_process(
         COMMAND ${SR_PYTHON_EXECUTABLE} -m PyInstaller --onefile ${SR_CODEGEN_SCRIPT_PATH}
         --distpath "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
-        --paths "${PROJECT_SOURCE_DIR}/../CI/scripts"
+        --paths "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts"
         ${__PYINSTALLER_HIDDEN_IMPORTS}
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
