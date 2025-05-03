@@ -3,11 +3,11 @@ from glob import glob
 
 import sparcle_utils
 import logger_utils
-import reflection_classes
 import clang_utils
 import meta_code_generator
 import script_api_code_generator
 import script_library_code_generator
+import reflection_classes
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
     logger.log_info('Create cxx file with all includes...')

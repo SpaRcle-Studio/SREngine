@@ -22,20 +22,10 @@ macro(SRCodegen)
 
     message(STATUS "Compiling codegen script: ${SR_CODEGEN_SCRIPT_PATH}")
 
-    set(__PYINSTALLER_HIDDEN_IMPORTS
-        --hidden-import=reflection_classes
-        --hidden-import=clang_utils
-        --hidden-import=meta_code_generator
-        --hidden-import=script_api_code_generator
-        --hidden-import=logger_utils
-        --hidden-import=script_library_code_generator
-    )
-
     execute_process(
         COMMAND ${SR_PYTHON_EXECUTABLE} -m PyInstaller --onefile ${SR_CODEGEN_SCRIPT_PATH}
         --distpath "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
         --paths "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/CI/scripts"
-        ${__PYINSTALLER_HIDDEN_IMPORTS}
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output
