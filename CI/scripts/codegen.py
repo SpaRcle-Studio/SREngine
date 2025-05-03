@@ -1,13 +1,14 @@
-import sys, os, subprocess, re, argparse, codegen_context
+import sys, os, subprocess, re, argparse
 from glob import glob
 
+import reflection_classes
 import sparcle_utils
+import codegen_context
 import logger_utils
 import clang_utils
 import meta_code_generator
 import script_api_code_generator
 import script_library_code_generator
-import reflection_classes
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
     logger.log_info('Create cxx file with all includes...')

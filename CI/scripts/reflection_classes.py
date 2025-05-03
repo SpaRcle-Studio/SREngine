@@ -1,4 +1,9 @@
-import os, cpp_operator, logger_utils, script_codegen_utils, sparcle_utils
+import os
+
+import cpp_operator
+import logger_utils
+import script_codegen_utils
+import sparcle_utils
 
 
 class CPPType:
