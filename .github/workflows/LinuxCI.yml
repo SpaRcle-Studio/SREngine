@@ -44,13 +44,13 @@ jobs:
           # Проверка на успех после установки
           echo "All ubuntu dependencies installed successfully."
 
-          #sudo add-apt-repository universe
-          #sudo apt update -y
-          #sudo apt upgrade -y
-          #sudo apt-get install -y $DEPENDENCIES
+          # sudo add-apt-repository universe
+          # sudo apt update -y
+          # sudo apt upgrade -y
+          # sudo apt-get install -y $DEPENDENCIES
 
-          sudo pip install numpy
-          sudo pip install clang
+          # sudo pip install numpy
+          # sudo pip install clang
         env:
           DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
 
