@@ -4,6 +4,9 @@
 
 #include <Core/CLIManager.h>
 
+#include <Enum/CLIFlags.hpp>
+#include <Enum/CLIOptions.hpp>
+
 namespace SR_CORE_NS {
     void CLIManager::Init(int argc, char** argv) {
         auto&& rawOptions = SR_UTILS_NS::EnumReflector::GetNames<CLIOptions>();
@@ -23,7 +26,7 @@ namespace SR_CORE_NS {
         for (int i = 1; i < argc; ++i) {
             std::string arg = argv[i];
 
-            if (flags.contains(arg)) {
+            if (flags.count(arg) > 0) {
                 // Check if a value follows the flag
                 if (i + 1 < argc && std::string(argv[i + 1]).rfind("--", 0) != 0) {
                     SR_PLATFORM_NS::WriteConsoleWarn(SR_FORMAT("CLIManager::Init() : unexpected value for flag '{}': '{}'"
@@ -35,7 +38,7 @@ namespace SR_CORE_NS {
                     m_flags |= flags.find(arg)->second;
                 }
             }
-            else if (options.contains(arg)) {
+            else if (options.count(arg) > 0) {
                 if (i + 1 < argc && std::string(argv[i + 1]).rfind("--", 0) != 0) {
                     m_options[options.find(arg)->second] = argv[i + 1];
                     ++i; // Skip the value
