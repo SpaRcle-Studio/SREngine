@@ -8,8 +8,12 @@ android {
 
     sourceSets {
         main {
+			java.srcDirs = []
             manifest.srcFile 'src/main/AndroidManifest.xml'
         }
+		release {
+			java.srcDirs = []
+		}
     }
 
     defaultConfig {
@@ -60,7 +64,7 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path file('../../CMakeLists.txt')
+            path file('../../../CMakeLists.txt')
             version "3.30.3"
         }
     }

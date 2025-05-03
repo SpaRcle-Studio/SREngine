@@ -78,7 +78,7 @@ set_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS "")
 if (ANDROID_NDK)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
 
-    add_library(${SR_EXECUTABLE_NAME} SHARED "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Android/app/src/main/cpp/main.cpp")
+    add_library(${SR_EXECUTABLE_NAME} SHARED "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Platform/Android/app/src/main/cpp/main.cpp")
 
     set_target_properties(sparcle PROPERTIES DEBUG_POSTFIX "")
 

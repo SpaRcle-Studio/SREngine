@@ -1,6 +1,6 @@
 echo off
 
-set SOURCE_RESOURCES_FOLDER="../Resources"
+set SOURCE_RESOURCES_FOLDER="../../Resources"
 set DESTINATION_RESOURCES_FOLDER="app/src/main/assets"
 
 del /s /q %DESTINATION_RESOURCES_FOLDER%

@@ -20,10 +20,10 @@ _deps
 /Resources/Scripts/Libraries/Standard/
 /Resources/Scripts/Libraries/
 /Resources/Cache
-/Android/.gradle
-/Android/app/build
-/Android/app/.cxx
-/Android/android-sdk
+/Platform/Android/.gradle
+/Platform/Android/app/build
+/Platform/Android/app/.cxx
+/Platform/Android/android-sdk
 out
 .vs
 Build
@@ -46,5 +46,5 @@ site
 /Resources/Engine/Utilities/codegen.exe
 /Resources/Engine/Utilities/libclang.dll
 /Resources/Engine/Utilities/libclang.so
-/Android/app/codegen.spec
+/Platform/Android/app/codegen.spec
 /Engine/appicon.aps
