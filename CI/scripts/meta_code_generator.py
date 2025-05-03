@@ -50,7 +50,7 @@ def generate_all_includes_cxx(context: codegen_context.CodegenContext) -> str:
         os.makedirs(directory)  # Создает директории рекурсивно
 
     with open(f'{cached_file}', 'w', encoding='utf8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write(
             '#define WIN32\n'
             '\n'
@@ -73,7 +73,7 @@ def generate_stub_vulkan_h(codegen_directory):
     os.makedirs(os.path.dirname(vulkan_h), exist_ok=True)
 
     with open(vulkan_h, 'w', encoding='utf8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write('// Stub file for clang code analyzer.\n')
 
 def generate_class_meta_properties(f, class_structures, class_obj, tabs):
@@ -570,7 +570,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
 def generate_enums_code(codegen_dir, enums):
     basic_full_path = os.path.normpath(f'{codegen_dir}/EnumsFwd.generated.hpp')
     with open(basic_full_path, 'w', encoding='utf8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write(f'#ifndef SR_CODEGEN_ENUMS_BASIC_HPP\n')
         f.write(f'#define SR_CODEGEN_ENUMS_BASIC_HPP\n\n')
 
@@ -593,7 +593,7 @@ def generate_enums_code(codegen_dir, enums):
 
     full_path = os.path.normpath(f'{codegen_dir}/Enums.generated.hpp')
     with open(full_path, 'w', encoding='utf8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write(f'#include "EnumsFwd.generated.hpp"\n\n')
         f.write(f'#ifndef SR_CODEGEN_ENUMS_HPP\n')
         f.write(f'#define SR_CODEGEN_ENUMS_HPP\n\n')
@@ -814,7 +814,7 @@ def generate_enums_code(codegen_dir, enums):
             with open(enum_gen_path, 'w', encoding='utf8') as f:
                 caps_enum_name = enum_obj.name.upper()
 
-                f.write(clang_utils.codegen_cpp_header_comment)
+                f.write(sparcle_utils.codegen_cpp_header_comment)
                 f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n')
                 f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n\n')
 
@@ -890,7 +890,7 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
     full_path = os.path.normpath(f'{context.codegen_dir}/SpaRcleModule{context.module_name}Core.generated.hpp')
     with open(full_path, 'w', encoding='utf8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
 
         f.write(f'#ifndef SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP\n')
         f.write(f'#define SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP\n\n')
@@ -1008,7 +1008,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
 
         full_path = os.path.normpath(f'{context.codegen_dir}/{file_name}.generated.hpp')
         with open(full_path, 'w', encoding='utf8') as f:
-            f.write(clang_utils.codegen_cpp_header_comment)
+            f.write(sparcle_utils.codegen_cpp_header_comment)
             f.write(f'#ifndef SR_CODEGEN_{file_name.upper()}_HPP\n')
             f.write(f'#define SR_CODEGEN_{file_name.upper()}_HPP\n\n')
             for class_obj in class_objs:

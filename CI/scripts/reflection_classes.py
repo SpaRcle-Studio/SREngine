@@ -1,4 +1,4 @@
-import os, cpp_operator, clang_utils, logger_utils, script_codegen_utils
+import os, cpp_operator, logger_utils, script_codegen_utils, sparcle_utils
 
 
 class CPPType:
@@ -22,7 +22,7 @@ class CPPType:
         if self.name.endswith('&') or self.name.endswith('*') or self.name.endswith(' '):
             raise ValueError(f'Invalid type name: \"{name}\", processed name: \"{self.name}\"')
 
-        self.is_trivial: bool = clang_utils.is_trivial_type(self.name)
+        self.is_trivial: bool = sparcle_utils.is_trivial_type(self.name)
 
     def get_full_type(self) -> str:
         return f'{"const " if self.is_const else ""}{self.name}{" &" if self.is_ref else ""}{"*" if self.is_pointer else ""}'
@@ -198,17 +198,17 @@ class ScriptableClass:
     def replace_type(self, logger: logger_utils.Logger, old_type: str, new_type: str):
         for constructor in self.constructors:
             for parameter in constructor.parameters:
-                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
+                parameter.set_type(sparcle_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
 
         for method in self.methods:
             for parameter in method.parameters:
-                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
-            method.return_type = CPPType(clang_utils.replace_type_templated_name(logger, method.return_type.get_full_type(), old_type, new_type))
+                parameter.set_type(sparcle_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
+            method.return_type = CPPType(sparcle_utils.replace_type_templated_name(logger, method.return_type.get_full_type(), old_type, new_type))
 
         for operator in self.operators:
             for parameter in operator.parameters:
-                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
-            operator.return_type = CPPType(clang_utils.replace_type_templated_name(logger, operator.return_type.get_full_type(), old_type, new_type))
+                parameter.set_type(sparcle_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
+            operator.return_type = CPPType(sparcle_utils.replace_type_templated_name(logger, operator.return_type.get_full_type(), old_type, new_type))
 
 
     def add_constructor(self, constructor: Constructor):

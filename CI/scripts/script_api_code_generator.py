@@ -1,11 +1,11 @@
 import typing, os
-import reflection_classes, clang_utils, logger_utils, cpp_operator, script_codegen_utils
+import reflection_classes, clang_utils, logger_utils, cpp_operator, script_codegen_utils, sparcle_utils
 
 from glob import glob
 
 
 def generate_type_string(type_name: str) -> str:
-    if clang_utils.is_trivial_type(type_name):
+    if sparcle_utils.is_trivial_type(type_name):
         return type_name
     else:
         return script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME
@@ -300,7 +300,7 @@ def generate_shared_ptr_template_methods(f: typing.IO, depth: int):
 
 def generate_script_handle_file(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str):
     with open(f'{codegen_dir}/ScriptHandle.generated.hpp', 'w', encoding='utf-8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
 
         f.write('#ifndef SR_CODEGEN_SPARCLE_API_SCRIPT_HANDLE_GENERATED_HPP\n')
         f.write('#define SR_CODEGEN_SPARCLE_API_SCRIPT_HANDLE_GENERATED_HPP\n\n')
@@ -327,11 +327,11 @@ def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, c
 
     for i, class_obj in enumerate(code_structure.scriptable_classes):
         with open(f'{codegen_dir}/../ScriptAPI/{class_obj.alias}.generated.hpp', 'w', encoding='utf-8') as f:
-            f.write(clang_utils.codegen_cpp_header_comment)
+            f.write(sparcle_utils.codegen_cpp_header_comment)
             generate_scriptable_class(logger, f, 0, code_structure, class_obj)
 
     with open(f'{codegen_dir}/SpaRcleAPI.generated.hpp', 'w', encoding='utf-8') as f:
-        f.write(clang_utils.codegen_cpp_header_comment)
+        f.write(sparcle_utils.codegen_cpp_header_comment)
 
         f.write('#ifndef SR_CODEGEN_SPARCLE_API_GENERATED_HPP\n')
         f.write('#define SR_CODEGEN_SPARCLE_API_GENERATED_HPP\n\n')
