@@ -42,10 +42,19 @@ macro(SRCodegen)
         message(FATAL_ERROR "Codegen script compilation failed with error:\n${error_output}")
     endif()
 
+    if (NOT EXISTS "${SR_CODEGEN_EXECUTABLE_SCRIPT}")
+        message(FATAL_ERROR "Codegen script not found at: ${SR_CODEGEN_EXECUTABLE_SCRIPT}")
+    endif()
+
     # code generation script
 
-    message(STATUS "Running codegen script: ${SR_CODEGEN_SCRIPT_PATH}")
-    message(STATUS "Codegen script args: \"${SR_PYTHON_EXECUTABLE} ${SR_CODEGEN_SCRIPT_PATH} ${SR_CMAKE_ROOT_BUILD_DIRECTORY} ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}\"")
+    message(STATUS "Running codegen script: ${SR_CODEGEN_EXECUTABLE_SCRIPT}")
+    message(STATUS "Codegen script args: ${SR_CODEGEN_EXECUTABLE_SCRIPT}
+        --codegen_dir ${SR_CMAKE_ROOT_BUILD_DIRECTORY}
+        --root_build_dir ${SR_CMAKE_ROOT_BUILD_DIRECTORY}
+        --repo_dir ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}
+        --lib_clang_dir ${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities
+        --module_name \"Application\"")
 
     execute_process(
         COMMAND ${SR_CODEGEN_EXECUTABLE_SCRIPT}
