@@ -28,8 +28,8 @@ out
 .vs
 Build
 /CMakeSettings.json
-/Android/app/src/main/assets
-/Android/local.properties
+/Platform/Android/app/src/main/assets
+/Platform/Android/local.properties
 .cache/
 **/#*#
 **/GPATH
@@ -38,9 +38,9 @@ Build
 venv
 .venv
 /Resources/CMakeLists.txt
-/Android/cmdline-tools.zip
-/Android/app/src/main/jniLibs
-/Android/app/src/main/obj
+/Platform/Android/cmdline-tools.zip
+/Platform/Android/app/src/main/jniLibs
+/Platform/Android/app/src/main/obj
 /CI/scripts/__pycache__
 site
 /Resources/Engine/Utilities/codegen.exe

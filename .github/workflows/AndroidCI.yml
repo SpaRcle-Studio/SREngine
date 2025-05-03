@@ -40,7 +40,7 @@ jobs:
         working-directory: ${{github.workspace}}
         run: |
           echo "releaseSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
-          cd Android
+          cd Platform/Android
           echo "Install android SDK..."
           dir
           ./install_android_sdk.bat
