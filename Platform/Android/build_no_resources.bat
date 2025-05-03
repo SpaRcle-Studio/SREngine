@@ -1,10 +1,9 @@
-echo off
-
+@echo off
 cls
 
 set APK_FOLDER=app/build/outputs/apk/release
-set APK_UNSIGNED_FILE=%APK_FOLDER%/app-release-unsigned.apk
-set APK_SIGNED_FILE=%APK_FOLDER%/app-release-signed.apk
+set APK_UNSIGNED_FILE=%APK_FOLDER%\app-release-unsigned.apk
+set APK_SIGNED_FILE=%APK_FOLDER%\app-release-signed.apk
 set PLATFORM_TOOLS=platform-tools
 set GRADLEW=gradlew.bat
 set APP_NAME=com.monika.sparcle
@@ -14,33 +13,34 @@ del /s /q "%APK_FOLDER%"
 
 rem --------------------------------------------------------------------------------------------------------
 if exist "C:\Program Files\Java\jdk-11.0.6\bin\javaw.exe" (
-  set JAVA_HOME="C:\Program Files\Java\jdk-11.0.6"
-  echo | set /p ANDROID_SDK_ROOT = "C:\Program Files\Java\jdk-11.0.6"
+  set JAVA_HOME=C:\Program Files\Java\jdk-11.0.6
+  echo | set /p ANDROID_SDK_ROOT = C:\Program Files\Java\jdk-11.0.6
 ) 
 echo Java home is: %JAVA_HOME%
 rem --------------------------------------------------------------------------------------------------------
 
-"cmd /c accept_licenses.bat"
+call accept_licenses.bat
+if errorlevel 1 goto LABEL_FAIL
 
 echo Build application
+call %GRADLEW% assembleRelease
+if errorlevel 1 goto LABEL_FAIL
 
-"cmd /c %GRADLEW% assembleRelease"
-
-if not exist %APK_UNSIGNED_FILE% (
-	goto LABEL_FAIL
+if not exist "%APK_UNSIGNED_FILE%" (
+    echo Unsigned APK not found!
+    goto LABEL_FAIL
 )
 
 echo Sign apk...
-"cmd /c sign_apk.bat"
+call sign_apk.bat
+if errorlevel 1 goto LABEL_FAIL
 
 goto LABEL_SUCCESS
 
 :LABEL_FAIL
-	echo BUILD FAILED
-	goto LABEL_EXIT
+    echo BUILD FAILED
+    exit /b 1
 
 :LABEL_SUCCESS
-	echo BUILD SUCCESSFUL
-	goto LABEL_EXIT
-
-:LABEL_EXIT
+    echo BUILD SUCCESSFUL
+    exit /b 0

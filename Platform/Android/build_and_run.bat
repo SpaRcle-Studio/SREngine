@@ -1,24 +1,24 @@
-echo off
+@echo off
 chcp 65001
 
 echo Build application...
-"cmd /c build.bat assembleRelease"
+cmd /c build.bat assembleRelease
+if errorlevel 1 goto LABEL_FAIL
 
 echo Install apk...
-"cmd /c install_app.bat"
+cmd /c install_app.bat
+if errorlevel 1 goto LABEL_FAIL
 
 echo Run application...
-"cmd /c run_application.bat assembleRelease"
+cmd /c run_application.bat assembleRelease
+if errorlevel 1 goto LABEL_FAIL
 
 goto LABEL_SUCCESS
 
 :LABEL_FAIL
-	echo BUILD FAILED
-	goto LABEL_EXIT
+    echo BUILD FAILED
+    exit /b 1
 
 :LABEL_SUCCESS
-	echo BUILD SUCCESSFUL
-	goto LABEL_EXIT
-
-:LABEL_EXIT
-	pause
+    echo BUILD SUCCESSFUL
+    exit /b 0

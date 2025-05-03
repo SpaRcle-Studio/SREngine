@@ -1,3 +1,5 @@
+@echo off
+
 set APK_FOLDER=app/build/outputs/apk/release
 set APK_SIGNED_FILE=%APK_FOLDER%/app-release-signed.apk
 set PLATFORM_TOOLS=platform-tools

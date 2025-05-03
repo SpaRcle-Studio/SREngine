@@ -44,9 +44,14 @@ jobs:
           echo "Install android SDK..."
           dir
           ./install_android_sdk.bat
+          
           echo "Run build..."
-          $output = ./build.bat
-          $lastLine = $output[-1]
-          if ($lastLine -notmatch '(?i)BUILD FAILED') {
-            echo "releaseSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          ./build.bat
+          
+          if ($LASTEXITCODE -eq 0) {
+              echo "releaseSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          } 
+          else {
+              Write-Error "Build failed with exit code $LASTEXITCODE"
+              exit 1
           }

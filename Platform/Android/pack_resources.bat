@@ -1,4 +1,4 @@
-echo off
+@echo off
 
 set SOURCE_RESOURCES_FOLDER="../../Resources"
 set DESTINATION_RESOURCES_FOLDER="app/src/main/assets"
