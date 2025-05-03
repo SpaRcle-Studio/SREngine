@@ -48,3 +48,4 @@ site
 /Resources/Engine/Utilities/libclang.so
 /Platform/Android/app/codegen.spec
 /Engine/appicon.aps
+/Platform/Emscripten/emsdk
