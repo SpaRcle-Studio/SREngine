@@ -55,7 +55,7 @@ def make_correct_type_for_api(code_structure: reflection_utils.CPPCodeStructure,
 
 
 def generate_header_constructor(f: typing.IO, depth: int, scriptable_class: reflection_utils.ScriptableClass, constructor: reflection_utils.CPPConstructor, code_structure: reflection_utils.CPPCodeStructure):
-    f.write(f'{depth * '\t'}\t{scriptable_class.alias}(')
+    f.write(f'{depth * "\t"}\t{scriptable_class.alias}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in constructor.parameters]))
     f.write(');\n')
 
@@ -63,7 +63,7 @@ def generate_header_constructor(f: typing.IO, depth: int, scriptable_class: refl
 def generate_header_operator(f: typing.IO, depth: int, scriptable_class: reflection_utils.ScriptableClass, operator: reflection_utils.CPPOperator, code_structure: reflection_utils.CPPCodeStructure):
     return_type = make_correct_type_for_library(code_structure, operator.return_type)
 
-    f.write(f'{depth * '\t'}\t{return_type} {str(operator.type)}(')
+    f.write(f'{depth * "\t"}\t{return_type} {str(operator.type)}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in operator.parameters]))
     f.write(f'){' const;' if operator.is_const else ';'}\n')
 
@@ -72,7 +72,7 @@ def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflectio
     return_type = make_correct_type_for_library(code_structure, method.return_type, True)
     nodiscard_attr = '[[nodiscard]] ' if method.return_type != 'void' and method.is_const else ''
 
-    f.write(f'{depth * '\t'}\t{nodiscard_attr}{return_type} {method.name}(')
+    f.write(f'{depth * "\t"}\t{nodiscard_attr}{return_type} {method.name}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in method.parameters]))
     f.write(f'){' const;' if method.is_const else ';'}\n')
 
@@ -80,67 +80,67 @@ def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflectio
 def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, increment_function_index: int, scriptable_class: reflection_utils.ScriptableClass,
                              constructor: reflection_utils.CPPConstructor, code_structure: reflection_utils.CPPCodeStructure):
 
-    f.write(f'{depth * '\t'}{'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{scriptable_class.alias}(')
+    f.write(f'{depth * "\t"}{'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{scriptable_class.alias}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in constructor.parameters]))
     f.write(') {\n')
 
     operator_fn = f'{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} (*)('
     operator_fn += ', '.join([f'{make_correct_type_for_api(code_structure, parameter.cpp_type)}' for parameter in constructor.parameters]) + ')'
 
-    f.write(f'{depth * '\t'}\tauto&& pConstructorFunc = ({operator_fn})CoreAPI::Instance().GetFunction({function_index});\n')
-    f.write(f'{depth * '\t'}\tm_handle = pConstructorFunc(')
+    f.write(f'{depth * "\t"}\tauto&& pConstructorFunc = ({operator_fn})CoreAPI::Instance().GetFunction({function_index});\n')
+    f.write(f'{depth * "\t"}\tm_handle = pConstructorFunc(')
     f.write(', '.join([(parameter.name + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
                        for parameter in constructor.parameters]))
     f.write(');\n')
-    f.write(f'{depth * '\t'}\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
-    f.write(f'{depth * '\t'}\tpIncrementFunc(m_handle);\n')
+    f.write(f'{depth * "\t"}\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+    f.write(f'{depth * "\t"}\tpIncrementFunc(m_handle);\n')
 
-    f.write(f'{depth * '\t'}}}\n')
+    f.write(f'{depth * "\t"}}}\n')
 
 
 def generate_cpp_operator(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_utils.ScriptableClass, operator: reflection_utils.CPPOperator, code_structure: reflection_utils.CPPCodeStructure):
     return_type_lib = make_correct_type_for_library(code_structure, operator.return_type)
 
-    f.write(f'{depth * '\t'}{return_type_lib} {'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{str(operator.type)}(')
+    f.write(f'{depth * "\t"}{return_type_lib} {'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{str(operator.type)}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in operator.parameters]))
-    f.write(f') {'const ' if operator.is_const else ''}{{\n')
+    f.write(f') {"const " if operator.is_const else ''}{{\n')
 
     if operator.type in cpp_operator.OPERATORS_WITH_ASSIGNMENT:
-        f.write(f'{depth * '\t'}\tauto&& pOperatorFunc = (void (*)(ScriptHandle, {make_correct_type_for_api(code_structure, operator.parameters[0].cpp_type)}))CoreAPI::Instance().GetFunction({function_index});\n')
-        f.write(f'{depth * '\t'}\tpOperatorFunc(m_handle, {operator.parameters[0].name}' + ('.GetScriptHandle()' if not operator.parameters[0].cpp_type.is_trivial else '') + ');\n')
-        f.write(f'{depth * '\t'}\treturn *this;\n')
+        f.write(f'{depth * "\t"}\tauto&& pOperatorFunc = (void (*)(ScriptHandle, {make_correct_type_for_api(code_structure, operator.parameters[0].cpp_type)}))CoreAPI::Instance().GetFunction({function_index});\n')
+        f.write(f'{depth * "\t"}\tpOperatorFunc(m_handle, {operator.parameters[0].name}' + ('.GetScriptHandle()' if not operator.parameters[0].cpp_type.is_trivial else '') + ');\n')
+        f.write(f'{depth * "\t"}\treturn *this;\n')
     else:
         operator_func_args = f'{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}' + ''.join([f', {make_correct_type_for_api(code_structure, parameter.cpp_type)}' for parameter in operator.parameters])
 
         return_type_api = make_correct_type_for_api(code_structure, operator.return_type)
-        f.write(f'{depth * '\t'}\tauto&& pOperatorFunc = ({return_type_api} (*)({operator_func_args}))CoreAPI::Instance().GetFunction({function_index});\n')
+        f.write(f'{depth * "\t"}\tauto&& pOperatorFunc = ({return_type_api} (*)({operator_func_args}))CoreAPI::Instance().GetFunction({function_index});\n')
 
-        f.write(f'{depth * '\t'}\treturn pOperatorFunc(m_handle')
+        f.write(f'{depth * "\t"}\treturn pOperatorFunc(m_handle')
         f.write(''.join([(f', {parameter.name}' + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
                          for parameter in operator.parameters]))
         f.write(');\n')
 
-    f.write(f'{depth * '\t'}}}\n')
+    f.write(f'{depth * "\t"}}}\n')
 
 
 def generate_cpp_method(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_utils.ScriptableClass, method: reflection_utils.CPPMethod, code_structure: reflection_utils.CPPCodeStructure):
     return_type_lib = make_correct_type_for_library(code_structure, method.return_type, True)
     return_type_api = make_correct_type_for_api(code_structure, method.return_type)
 
-    f.write(f'{depth * '\t'}{return_type_lib} {'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{method.name}(')
+    f.write(f'{depth * "\t"}{return_type_lib} {"::".join(scriptable_class.namespaces)}::{scriptable_class.alias}::{method.name}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in method.parameters]))
-    f.write(f') {'const ' if method.is_const else ''}{{\n')
+    f.write(f') {"const " if method.is_const else ''}{{\n')
 
     method_func_args = f'{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}' + ''.join([f', {make_correct_type_for_api(code_structure, parameter.cpp_type)}' for parameter in method.parameters])
 
-    f.write(f'{depth * '\t'}\tauto&& pMethodFunc = ({return_type_api} (*)({method_func_args}))CoreAPI::Instance().GetFunction({function_index});\n')
+    f.write(f'{depth * "\t"}\tauto&& pMethodFunc = ({return_type_api} (*)({method_func_args}))CoreAPI::Instance().GetFunction({function_index});\n')
 
-    f.write(f'{depth * '\t'}\treturn pMethodFunc(m_handle')
+    f.write(f'{depth * "\t"}\treturn pMethodFunc(m_handle')
     f.write(''.join([(f', {parameter.name}' + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
                      for parameter in method.parameters]))
     f.write(');\n')
 
-    f.write(f'{depth * '\t'}}}\n')
+    f.write(f'{depth * "\t"}}}\n')
 
 
 def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_index: int, scriptable_class: reflection_utils.ScriptableClass, code_structure: reflection_utils.CPPCodeStructure):
@@ -148,10 +148,10 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
 
     depth = 0
 
-    f.write(f'{depth * '\t'}#include <CoreAPI.h>\n')
-    f.write(f'{depth * '\t'}#include <CoreAPIFwd.h>\n\n')
+    f.write(f'{depth * "\t"}#include <CoreAPI.h>\n')
+    f.write(f'{depth * "\t"}#include <CoreAPIFwd.h>\n\n')
 
-    f.write(f'{depth * '\t'}namespace SpaRcleAPI::{namespace_str} {{\n')
+    f.write(f'{depth * "\t"}namespace SpaRcleAPI::{namespace_str} {{\n')
 
     depth += 1
 
@@ -164,56 +164,56 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
 
     function_index += 1 # increment function
 
-    f.write(f'{depth * '\t'}class {scriptable_class.alias} {{\n')
-    #f.write(f'{depth * '\t'}\tfriend class UnsafeRef<{scriptable_class.alias}>;\n')
-    f.write(f'{depth * '\t'}public:\n')
-    f.write(f'{depth * '\t'}\tstatic constexpr uint32_t API_DELETE_FUNCTION_INDEX = {delete_function_index};\n')
-    f.write(f'{depth * '\t'}\tstatic constexpr uint32_t API_INCREMENT_FUNCTION_INDEX = {increment_function_index};\n')
-    f.write(f'{depth * '\t'}\tstatic constexpr uint32_t API_COPY_FUNCTION_INDEX = {copy_function_index};\n\n')
-    f.write(f'{depth * '\t'}public:\n')
-    f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle) /** NOLINT **/ \n')
-    f.write(f'{depth * '\t'}\t\t: m_handle(handle)\n')
-    f.write(f'{depth * '\t'}\t{{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
-    f.write(f'{depth * '\t'}\t\tpIncrementFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t}}\n\n')
-    #f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle, ScriptablePassKey<UnsafeRef<{scriptable_class.alias}>>)\n')
-    #f.write(f'{depth * '\t'}\t\t: m_handle(handle) {{ }}\n\n')
+    f.write(f'{depth * "\t"}class {scriptable_class.alias} {{\n')
+    #f.write(f'{depth * "\t"}\tfriend class UnsafeRef<{scriptable_class.alias}>;\n')
+    f.write(f'{depth * "\t"}public:\n')
+    f.write(f'{depth * "\t"}\tstatic constexpr uint32_t API_DELETE_FUNCTION_INDEX = {delete_function_index};\n')
+    f.write(f'{depth * "\t"}\tstatic constexpr uint32_t API_INCREMENT_FUNCTION_INDEX = {increment_function_index};\n')
+    f.write(f'{depth * "\t"}\tstatic constexpr uint32_t API_COPY_FUNCTION_INDEX = {copy_function_index};\n\n')
+    f.write(f'{depth * "\t"}public:\n')
+    f.write(f'{depth * "\t"}\t{scriptable_class.alias}(const ScriptHandle& handle) /** NOLINT **/ \n')
+    f.write(f'{depth * "\t"}\t\t: m_handle(handle)\n')
+    f.write(f'{depth * "\t"}\t{{\n')
+    f.write(f'{depth * "\t"}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+    f.write(f'{depth * "\t"}\t\tpIncrementFunc(m_handle);\n')
+    f.write(f'{depth * "\t"}\t}}\n\n')
+    #f.write(f'{depth * "\t"}\t{scriptable_class.alias}(const ScriptHandle& handle, ScriptablePassKey<UnsafeRef<{scriptable_class.alias}>>)\n')
+    #f.write(f'{depth * "\t"}\t\t: m_handle(handle) {{ }}\n\n')
 
-    f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle, SharedPtrUnmanagedPassKey) \n')
-    f.write(f'{depth * '\t'}\t\t: m_handle(handle)\n')
-    f.write(f'{depth * '\t'}\t{{ }}\n\n')
+    f.write(f'{depth * "\t"}\t{scriptable_class.alias}(const ScriptHandle& handle, SharedPtrUnmanagedPassKey) \n')
+    f.write(f'{depth * "\t"}\t\t: m_handle(handle)\n')
+    f.write(f'{depth * "\t"}\t{{ }}\n\n')
 
-    f.write(f'{depth * '\t'}\t~{scriptable_class.alias}() {{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
-    f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t}}\n\n')
-    f.write(f'{depth * '\t'}public:\n\n')
+    f.write(f'{depth * "\t"}\t~{scriptable_class.alias}() {{\n')
+    f.write(f'{depth * "\t"}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
+    f.write(f'{depth * "\t"}\t\tpDeleteFunc(m_handle);\n')
+    f.write(f'{depth * "\t"}\t}}\n\n')
+    f.write(f'{depth * "\t"}public:\n\n')
 
     if scriptable_class.has_copy_constructor:
         function_index += 1 # copy function
 
-        f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}& other) {{\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_COPY_FUNCTION_INDEX);\n')
-        f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-        f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
-        f.write(f'{depth * '\t'}\t\tpIncrementFunc(m_handle);\n')
-        f.write(f'{depth * '\t'}\t}}\n')
+        f.write(f'{depth * "\t"}\t{scriptable_class.alias}(const {scriptable_class.alias}& other) {{\n')
+        f.write(f'{depth * "\t"}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
+        f.write(f'{depth * "\t"}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+        f.write(f'{depth * "\t"}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_COPY_FUNCTION_INDEX);\n')
+        f.write(f'{depth * "\t"}\t\tpDeleteFunc(m_handle);\n')
+        f.write(f'{depth * "\t"}\t\tm_handle = pCopyFunc(other.m_handle);\n')
+        f.write(f'{depth * "\t"}\t\tpIncrementFunc(m_handle);\n')
+        f.write(f'{depth * "\t"}\t}}\n')
 
-        f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}& other) {{\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
-        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_COPY_FUNCTION_INDEX);\n')
-        f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-        f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
-        f.write(f'{depth * '\t'}\t\tpIncrementFunc(m_handle);\n')
-        f.write(f'{depth * '\t'}\t\treturn *this;\n')
-        f.write(f'{depth * '\t'}\t}}\n')
+        f.write(f'{depth * "\t"}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}& other) {{\n')
+        f.write(f'{depth * "\t"}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_DELETE_FUNCTION_INDEX);\n')
+        f.write(f'{depth * "\t"}\t\tauto&& pIncrementFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_INCREMENT_FUNCTION_INDEX);\n')
+        f.write(f'{depth * "\t"}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction(API_COPY_FUNCTION_INDEX);\n')
+        f.write(f'{depth * "\t"}\t\tpDeleteFunc(m_handle);\n')
+        f.write(f'{depth * "\t"}\t\tm_handle = pCopyFunc(other.m_handle);\n')
+        f.write(f'{depth * "\t"}\t\tpIncrementFunc(m_handle);\n')
+        f.write(f'{depth * "\t"}\t\treturn *this;\n')
+        f.write(f'{depth * "\t"}\t}}\n')
     else:
-        f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}&) = delete;\n')
-        f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}&&) = delete;\n')
+        f.write(f'{depth * "\t"}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}&) = delete;\n')
+        f.write(f'{depth * "\t"}\t{scriptable_class.alias}(const {scriptable_class.alias}&&) = delete;\n')
 
     function_index += len(scriptable_class.constructors) + len(scriptable_class.operators) + len(scriptable_class.methods)
 
@@ -226,18 +226,18 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
     for method in scriptable_class.methods:
         generate_header_method(f, depth, scriptable_class, method, code_structure)
 
-    f.write(f'{depth * '\t'}public:\n')
-    f.write(f'{depth * '\t'}\t[[nodiscard]] const ScriptHandle& GetScriptHandle() const {{ return m_handle; }}\n')
-    f.write(f'{depth * '\t'}\tScriptHandle& GetScriptHandle() {{ return m_handle; }}\n\n')
+    f.write(f'{depth * "\t"}public:\n')
+    f.write(f'{depth * "\t"}\t[[nodiscard]] const ScriptHandle& GetScriptHandle() const {{ return m_handle; }}\n')
+    f.write(f'{depth * "\t"}\tScriptHandle& GetScriptHandle() {{ return m_handle; }}\n\n')
 
-    f.write(f'{depth * '\t'}private:\n')
-    f.write(f'{depth * '\t'}\tScriptHandle m_handle;\n\n')
+    f.write(f'{depth * "\t"}private:\n')
+    f.write(f'{depth * "\t"}\tScriptHandle m_handle;\n\n')
 
-    f.write(f'\n{depth * '\t'}}};\n')
+    f.write(f'\n{depth * "\t"}}};\n')
 
     depth -= 1
 
-    f.write(f'{depth * '\t'}}}\n')
+    f.write(f'{depth * "\t"}}}\n')
 
 
 def generate_core_api_fwd_decl(logger: logger_utils.Logger, library_dir: str, code_structure: reflection_utils.CPPCodeStructure):

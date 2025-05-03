@@ -64,12 +64,13 @@ class CPPOperator:
     def __str__(self):
         return f'Operator: {self.type}, Return type: {self.return_type}, Parameters: {self.parameters}'
 
+
 class CPPConstructor:
     def __init__(self):
         self.parameters: list[CPPParameter] = []
 
     def __str__(self):
-        return f'Constructor: {', '.join([str(param) for param in self.parameters])}'
+        return f'Constructor: {", ".join([str(param) for param in self.parameters])}'
 
     def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)

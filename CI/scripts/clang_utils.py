@@ -1,9 +1,10 @@
 import os, subprocess, copy
+
+import reflection_utils
 import logger_utils
 import sparcle_utils
 import cpp_operator
 import codegen_context
-import reflection_utils
 
 try:
     import clang.cindex

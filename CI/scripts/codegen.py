@@ -1,12 +1,11 @@
 import sys, os, argparse
 from glob import glob
 
+import clang_utils
 import sparcle_utils
 import codegen_context
 import logger_utils
-import clang_utils
 import meta_code_generator
-
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
     logger.log_info('Create cxx file with all includes...')
@@ -37,7 +36,6 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
 
     #script_api_code_generator.generate_api(logger, repo_dir, codegen_dir, code_structures)
     #script_library_code_generator.generate_library(logger, repo_dir, script_api_library_dir, code_structures)
-
     return True
 
 
