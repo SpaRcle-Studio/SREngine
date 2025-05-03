@@ -4,9 +4,6 @@
 
 #include <Core/CLIManager.h>
 
-#include <Enum/CLIFlags.hpp>
-#include <Enum/CLIOptions.hpp>
-
 namespace SR_CORE_NS {
     void CLIManager::Init(int argc, char** argv) {
         auto&& rawOptions = SR_UTILS_NS::EnumReflector::GetNames<CLIOptions>();

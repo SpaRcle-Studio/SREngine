@@ -11,7 +11,9 @@ else()
     add_library(Scripting SHARED Scripting.cxx)
     add_library(Scripting::lib ALIAS Scripting)
 
-    target_compile_options(Scripting PRIVATE -fPIC)
+    if (UNIX)
+        target_compile_options(Scripting PRIVATE -fPIC)
+    endif()
 
     target_link_libraries(Scripting PUBLIC Utils)
 
