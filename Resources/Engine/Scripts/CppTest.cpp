@@ -42,7 +42,7 @@ namespace SpaRcle::Scripts::SREngine {
     };
 }
 
-extern "C" __declspec(dllexport) void TestFunction() {
+extern "C" SR_DLL_API_EXPORT void TestFunction() {
     SR_UTILS_NS::Debug::Instance().ScriptLog("TestFunction() called!");
     SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(SR_UTILS_NS::SceneObjectType::GameObject));
     SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(2));

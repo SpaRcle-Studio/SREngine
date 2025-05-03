@@ -610,7 +610,7 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
 
                 for template_replacement in template_variant[1]:
                     full_template_name = sparcle_utils.replace_type_templated_name(full_template_name, template_replacement[0], template_replacement[1])
-                    class_obj_template.replace_type(logger, template_replacement[0], template_replacement[1])
+                    class_obj_template.replace_type(template_replacement[0], template_replacement[1])
                 code_structure.add_scriptable_class(class_obj_template)
 
                 code_structure.add_class_name_correction(full_template_name, '::'.join(namespaces) + f'::{class_obj_template.alias}')
@@ -646,7 +646,7 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
 
 
 def parse_header_file(logger: logger_utils.Logger, file_path, include_args, context: codegen_context.CodegenContext):
-    code_structure = reflection_utils.CPPCodeStructure(logger)
+    code_structure = reflection_utils.CPPCodeStructure()
 
     # Передаем каждый путь как отдельный аргумент
     args = include_args

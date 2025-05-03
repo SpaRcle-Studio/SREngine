@@ -14,6 +14,7 @@ def normalize_path(path):
     """Нормализует слеши в путях для различных ОС."""
     return os.path.normpath(path)
 
+
 def make_serialize_property_name(name):
     if name.startswith('m_'):
         name = name[2:]

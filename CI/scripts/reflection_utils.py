@@ -1,7 +1,4 @@
-import os
-
 import cpp_operator
-import logger_utils
 import sparcle_utils
 
 
@@ -142,7 +139,7 @@ class CPPEnum:
         self.namespaces = namespaces
         self.type = type
         self.enum_class = enum_class
-        self.source_path = os.path.normpath(source_path)
+        self.source_path = sparcle_utils.normalize_path(source_path)
         self.va_args = va_args
 
 
@@ -199,7 +196,7 @@ class ScriptableClass:
         self.has_copy_constructor = False
 
 
-    def replace_type(self, logger: logger_utils.Logger, old_type: str, new_type: str):
+    def replace_type(self, old_type: str, new_type: str):
         for constructor in self.constructors:
             for parameter in constructor.parameters:
                 parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
@@ -228,22 +225,21 @@ class ScriptableClass:
 
 
 class CPPCodeStructure:
-    def __init__(self, logger: logger_utils.Logger):
+    def __init__(self):
         self.sparcle_classes: list[SpaRcleClass] = []
         self.scriptable_classes: list[ScriptableClass] = []
         self.enums: list[CPPEnum] = []
         # example class name StringAtom and full name is SpaRcle::Utils::StringAtom
         self.class_names_table: dict[str, str] = {}
-        self.logger = logger
 
     def add_scriptable_class(self, scriptable_class: ScriptableClass):
-        self.logger.log_debug(f'Add scriptable class: {scriptable_class.name}, alias: {scriptable_class.alias}')
+        #self.logger.log_debug(f'Add scriptable class: {scriptable_class.name}, alias: {scriptable_class.alias}')
         self.scriptable_classes.append(scriptable_class)
 
     def add_class_name_correction(self, class_name: str, full_class_name: str):
         # add class name to class_namespaces_table
         self.class_names_table[class_name] = full_class_name
-        self.logger.log_debug(f'Add class name to class_names_table: {class_name} -> {full_class_name}')
+        #self.logger.log_debug(f'Add class name to class_names_table: {class_name} -> {full_class_name}')
 
     def correct_class_name(self, class_name: str) -> str:
         # use class_names_table to get full class name
