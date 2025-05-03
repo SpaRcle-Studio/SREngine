@@ -11,9 +11,13 @@ on:
         type: string
 
 jobs:
-  Preparing:
-    name: Build.
+  build:
+    name: Build (${{ matrix.arch }})
     runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [arm64-v8a, x86_64]
+
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v4
@@ -35,19 +39,19 @@ jobs:
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
 
       - if: inputs.buildRelease == 'true'
-        name: Building Release.
+        name: Building Release (${{ matrix.arch }})
         shell: powershell
-        working-directory: ${{github.workspace}}
+        working-directory: ${{ github.workspace }}
         run: |
           echo "releaseSuccessful=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           cd Platform/Android
           echo "Install android SDK..."
           dir
           ./install_android_sdk.bat
-          
-          echo "Run build..."
-          ./build.bat
-          
+
+          echo "Run build for architecture: ${{ matrix.arch }}"
+          ./build.bat ${{ matrix.arch }}
+
           if ($LASTEXITCODE -eq 0) {
               echo "releaseSuccessful=true" | Out-File -FilePath $env:GITHUB_ENV -Append
           } 

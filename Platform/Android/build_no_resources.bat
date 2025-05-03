@@ -1,6 +1,15 @@
 @echo off
 cls
 
+set ARCH=%1
+
+if "%ARCH%"=="" (
+    echo No architecture specified. Using default: arm64-v8a, x86_64
+    set ARCH=arm64-v8a,x86_64
+)
+
+echo Selected architecture: %ARCH%
+
 set APK_FOLDER=app/build/outputs/apk/release
 set APK_UNSIGNED_FILE=%APK_FOLDER%\app-release-unsigned.apk
 set APK_SIGNED_FILE=%APK_FOLDER%\app-release-signed.apk
@@ -23,7 +32,7 @@ call accept_licenses.bat
 if errorlevel 1 goto LABEL_FAIL
 
 echo Build application
-call %GRADLEW% assembleRelease
+call %GRADLEW% assembleRelease -Parchs=%ARCH%
 if errorlevel 1 goto LABEL_FAIL
 
 if not exist "%APK_UNSIGNED_FILE%" (

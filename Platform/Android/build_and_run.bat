@@ -1,8 +1,10 @@
 @echo off
 chcp 65001
 
+set ARCH=%1
+
 echo Build application...
-cmd /c build.bat assembleRelease
+cmd /c build.bat %ARCH%
 if errorlevel 1 goto LABEL_FAIL
 
 echo Install apk...
