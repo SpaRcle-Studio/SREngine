@@ -11,6 +11,8 @@ else()
     add_library(Scripting SHARED Scripting.cxx)
     add_library(Scripting::lib ALIAS Scripting)
 
+    target_compile_options(Scripting PRIVATE -fPIC)
+
     target_link_libraries(Scripting PUBLIC Utils)
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Scripting)
