@@ -1,7 +1,6 @@
-import sys, os, subprocess, re, argparse
+import sys, os, argparse
 from glob import glob
 
-import reflection_classes
 import sparcle_utils
 import codegen_context
 import logger_utils
@@ -19,7 +18,7 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
     include_args = clang_utils.get_engine_include_args(context)
 
     logger.log_info(f'Parsing all includes cxx file: {all_includes_cxx_path}')
-    code_structures: reflection_classes.CPPCodeStructure = clang_utils.parse_header_file(logger, all_includes_cxx_path, include_args, context)
+    code_structures = clang_utils.parse_header_file(logger, all_includes_cxx_path, include_args, context)
 
     logger.log_info('Remove old generated files...')
 

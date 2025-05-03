@@ -1,7 +1,7 @@
 import os
 from glob import glob
 
-import reflection_classes
+import reflection_utils
 import sparcle_utils
 import codegen_context
 import logger_utils
@@ -157,7 +157,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     f.write('\t' * (tabs + 1) + 'return properties;\n')
     f.write('\t' * tabs + '}\n\n')
 
-def generate_class_meta_get_base_metas(f, class_structures, class_obj: reflection_classes.SpaRcleClass, tabs):
+def generate_class_meta_get_base_metas(f, class_structures, class_obj: reflection_utils.SpaRcleClass, tabs):
     if len(class_obj.inherited_classes) == 0:
         return
 
@@ -186,7 +186,7 @@ def generate_class_meta_get_base_metas(f, class_structures, class_obj: reflectio
     f.write('\t' * tabs + '}\n\n')
 
 
-def generate_class_meta_save(f, class_obj: reflection_classes.SpaRcleClass, tabs):
+def generate_class_meta_save(f, class_obj: reflection_utils.SpaRcleClass, tabs):
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
     if len(class_obj.variables) == 0:
