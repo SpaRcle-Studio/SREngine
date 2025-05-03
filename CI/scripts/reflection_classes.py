@@ -2,7 +2,6 @@ import os
 
 import cpp_operator
 import logger_utils
-import script_codegen_utils
 import sparcle_utils
 
 
@@ -34,14 +33,14 @@ class CPPType:
 
 
     def get_handle_or_full_type(self) -> str:
-        return self.get_full_type() if self.is_trivial else f'{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}'
+        return self.get_full_type() if self.is_trivial else f'{sparcle_utils.script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}'
 
 
     def __str__(self):
         return f'CPPType: {self.name}, Is const: {self.is_const}, Is ref: {self.is_ref}, Is trivial: {self.is_trivial}'
 
 
-class Parameter:
+class CPPParameter:
     def __init__(self, name: str, type_name: str):
         self.name: str = name
         self.cpp_type: CPPType = CPPType(type_name)
@@ -55,31 +54,31 @@ class Parameter:
         return f'Parameter: {self.name}, Type: {self.cpp_type}'
 
 
-class Operator:
+class CPPOperator:
     def __init__(self, op_type: cpp_operator.OperatorType, return_type: str):
         self.type: cpp_operator.OperatorType = op_type
         self.return_type: CPPType = CPPType(return_type)
-        self.parameters: list[Parameter] = []
+        self.parameters: list[CPPParameter] = []
         self.is_const = False
 
-    def add_parameter(self, parameter: Parameter):
+    def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)
 
     def __str__(self):
         return f'Operator: {self.type}, Return type: {self.return_type}, Parameters: {self.parameters}'
 
-class Constructor:
+class CPPConstructor:
     def __init__(self):
-        self.parameters: list[Parameter] = []
+        self.parameters: list[CPPParameter] = []
 
     def __str__(self):
         return f'Constructor: {', '.join([str(param) for param in self.parameters])}'
 
-    def add_parameter(self, parameter: Parameter):
+    def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)
 
 
-class Property:
+class CPPProperty:
     def __init__(self, name, type_name):
         self.name = name
         self.display_name = name
@@ -121,21 +120,21 @@ class Property:
         self.custom_args[key] = value
 
 
-class Method:
+class CPPMethod:
     def __init__(self, name: str, return_type: str):
         self.name: str = name
         self.return_type: CPPType = CPPType(return_type)
-        self.parameters: list[Parameter] = []
+        self.parameters: list[CPPParameter] = []
         self.is_const = False
 
-    def add_parameter(self, parameter: Parameter):
+    def add_parameter(self, parameter: CPPParameter):
         self.parameters.append(parameter)
 
     def __str__(self):
         return f'Method: {self.name}, Return type: {self.return_type}, Parameters: {self.parameters}'
 
 
-class Enum:
+class CPPEnum:
     def __init__(self, name, variant, count, type, enum_class, namespaces, source_path, va_args):
         self.name = name
         self.variant = variant
@@ -192,9 +191,9 @@ class ScriptableClass:
         else:
             self.alias = alias
 
-        self.constructors: list[Constructor] = []
-        self.methods: list[Method] = []
-        self.operators: list[Operator] = []
+        self.constructors: list[CPPConstructor] = []
+        self.methods: list[CPPMethod] = []
+        self.operators: list[CPPOperator] = []
         self.path = None
         self.has_default_constructor = False
         self.has_copy_constructor = False
@@ -203,36 +202,36 @@ class ScriptableClass:
     def replace_type(self, logger: logger_utils.Logger, old_type: str, new_type: str):
         for constructor in self.constructors:
             for parameter in constructor.parameters:
-                parameter.set_type(sparcle_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
+                parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
 
         for method in self.methods:
             for parameter in method.parameters:
-                parameter.set_type(sparcle_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
-            method.return_type = CPPType(sparcle_utils.replace_type_templated_name(logger, method.return_type.get_full_type(), old_type, new_type))
+                parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
+            method.return_type = CPPType(sparcle_utils.replace_type_templated_name(method.return_type.get_full_type(), old_type, new_type))
 
         for operator in self.operators:
             for parameter in operator.parameters:
-                parameter.set_type(sparcle_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
-            operator.return_type = CPPType(sparcle_utils.replace_type_templated_name(logger, operator.return_type.get_full_type(), old_type, new_type))
+                parameter.set_type(sparcle_utils.replace_type_templated_name(parameter.cpp_type.get_full_type(), old_type, new_type))
+            operator.return_type = CPPType(sparcle_utils.replace_type_templated_name(operator.return_type.get_full_type(), old_type, new_type))
 
 
-    def add_constructor(self, constructor: Constructor):
+    def add_constructor(self, constructor: CPPConstructor):
         self.constructors.append(constructor)
 
 
-    def add_method(self, method: Method):
+    def add_method(self, method: CPPMethod):
         self.methods.append(method)
 
 
-    def add_operator(self, operator: Operator):
+    def add_operator(self, operator: CPPOperator):
         self.operators.append(operator)
 
 
-class CodeStructure:
+class CPPCodeStructure:
     def __init__(self, logger: logger_utils.Logger):
         self.sparcle_classes: list[SpaRcleClass] = []
         self.scriptable_classes: list[ScriptableClass] = []
-        self.enums: list[Enum] = []
+        self.enums: list[CPPEnum] = []
         # example class name StringAtom and full name is SpaRcle::Utils::StringAtom
         self.class_names_table: dict[str, str] = {}
         self.logger = logger

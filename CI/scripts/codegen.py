@@ -7,8 +7,7 @@ import codegen_context
 import logger_utils
 import clang_utils
 import meta_code_generator
-import script_api_code_generator
-import script_library_code_generator
+
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
     logger.log_info('Create cxx file with all includes...')
@@ -20,7 +19,7 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
     include_args = clang_utils.get_engine_include_args(context)
 
     logger.log_info(f'Parsing all includes cxx file: {all_includes_cxx_path}')
-    code_structures: reflection_classes.CodeStructure = clang_utils.parse_header_file(logger, all_includes_cxx_path, include_args, context)
+    code_structures: reflection_classes.CPPCodeStructure = clang_utils.parse_header_file(logger, all_includes_cxx_path, include_args, context)
 
     logger.log_info('Remove old generated files...')
 

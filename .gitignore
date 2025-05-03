@@ -46,3 +46,5 @@ site
 /Resources/Engine/Utilities/codegen.exe
 /Resources/Engine/Utilities/libclang.dll
 /Resources/Engine/Utilities/libclang.so
+/Android/app/codegen.spec
+/Engine/appicon.aps

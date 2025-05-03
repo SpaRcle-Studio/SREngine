@@ -1,5 +1,5 @@
 import typing, os, re
-import reflection_classes, clang_utils, logger_utils, cpp_operator, script_api_code_generator, script_codegen_utils
+import reflection_classes, clang_utils, logger_utils, cpp_operator, script_codegen_utils
 
 
 def delete_old_library(logger: logger_utils.Logger, library_dir: str):
@@ -41,26 +41,26 @@ def delete_old_library(logger: logger_utils.Logger, library_dir: str):
         logger.log_info(f'Old library directory deleted.')
 
 
-def make_correct_type_for_library(code_structure: reflection_classes.CodeStructure, cpp_type: reflection_classes.CPPType, is_return_type = False) -> str:
+def make_correct_type_for_library(code_structure: reflection_classes.CPPCodeStructure, cpp_type: reflection_classes.CPPType, is_return_type = False) -> str:
     full_type_name = code_structure.correct_class_name(cpp_type.name)
     if cpp_type.is_ref and is_return_type and not cpp_type.is_trivial:
         return f'UnsafeRef<{full_type_name}>'
     return f'{"const " if cpp_type.is_const else ""}{full_type_name}{" &" if cpp_type.is_ref else ""}{"*" if cpp_type.is_pointer else ""}'
 
 
-def make_correct_type_for_api(code_structure: reflection_classes.CodeStructure, cpp_type: reflection_classes.CPPType) -> str:
+def make_correct_type_for_api(code_structure: reflection_classes.CPPCodeStructure, cpp_type: reflection_classes.CPPType) -> str:
     if cpp_type.is_trivial:
         return make_correct_type_for_library(code_structure, cpp_type)
     return script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME
 
 
-def generate_header_constructor(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, constructor: reflection_classes.Constructor, code_structure: reflection_classes.CodeStructure):
+def generate_header_constructor(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, constructor: reflection_classes.CPPConstructor, code_structure: reflection_classes.CPPCodeStructure):
     f.write(f'{depth * '\t'}\t{scriptable_class.alias}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in constructor.parameters]))
     f.write(');\n')
 
 
-def generate_header_operator(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, operator: reflection_classes.Operator, code_structure: reflection_classes.CodeStructure):
+def generate_header_operator(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, operator: reflection_classes.CPPOperator, code_structure: reflection_classes.CPPCodeStructure):
     return_type = make_correct_type_for_library(code_structure, operator.return_type)
 
     f.write(f'{depth * '\t'}\t{return_type} {str(operator.type)}(')
@@ -68,7 +68,7 @@ def generate_header_operator(f: typing.IO, depth: int, scriptable_class: reflect
     f.write(f'){' const;' if operator.is_const else ';'}\n')
 
 
-def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, method: reflection_classes.Method, code_structure: reflection_classes.CodeStructure):
+def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, method: reflection_classes.CPPMethod, code_structure: reflection_classes.CPPCodeStructure):
     return_type = make_correct_type_for_library(code_structure, method.return_type, True)
     nodiscard_attr = '[[nodiscard]] ' if method.return_type != 'void' and method.is_const else ''
 
@@ -78,7 +78,7 @@ def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflectio
 
 
 def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, increment_function_index: int, scriptable_class: reflection_classes.ScriptableClass,
-                             constructor: reflection_classes.Constructor, code_structure: reflection_classes.CodeStructure):
+                             constructor: reflection_classes.CPPConstructor, code_structure: reflection_classes.CPPCodeStructure):
 
     f.write(f'{depth * '\t'}{'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{scriptable_class.alias}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in constructor.parameters]))
@@ -98,7 +98,7 @@ def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, incr
     f.write(f'{depth * '\t'}}}\n')
 
 
-def generate_cpp_operator(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_classes.ScriptableClass, operator: reflection_classes.Operator, code_structure: reflection_classes.CodeStructure):
+def generate_cpp_operator(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_classes.ScriptableClass, operator: reflection_classes.CPPOperator, code_structure: reflection_classes.CPPCodeStructure):
     return_type_lib = make_correct_type_for_library(code_structure, operator.return_type)
 
     f.write(f'{depth * '\t'}{return_type_lib} {'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{str(operator.type)}(')
@@ -123,7 +123,7 @@ def generate_cpp_operator(f: typing.IO, depth: int, function_index: int, scripta
     f.write(f'{depth * '\t'}}}\n')
 
 
-def generate_cpp_method(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_classes.ScriptableClass, method: reflection_classes.Method, code_structure: reflection_classes.CodeStructure):
+def generate_cpp_method(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_classes.ScriptableClass, method: reflection_classes.CPPMethod, code_structure: reflection_classes.CPPCodeStructure):
     return_type_lib = make_correct_type_for_library(code_structure, method.return_type, True)
     return_type_api = make_correct_type_for_api(code_structure, method.return_type)
 
@@ -143,7 +143,7 @@ def generate_cpp_method(f: typing.IO, depth: int, function_index: int, scriptabl
     f.write(f'{depth * '\t'}}}\n')
 
 
-def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_index: int, scriptable_class: reflection_classes.ScriptableClass, code_structure: reflection_classes.CodeStructure):
+def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_index: int, scriptable_class: reflection_classes.ScriptableClass, code_structure: reflection_classes.CPPCodeStructure):
     namespace_str = '::'.join(scriptable_class.namespaces)
 
     depth = 0
@@ -240,9 +240,9 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
     f.write(f'{depth * '\t'}}}\n')
 
 
-def generate_core_api_fwd_decl(logger: logger_utils.Logger, library_dir: str, code_structure: reflection_classes.CodeStructure):
+def generate_core_api_fwd_decl(logger: logger_utils.Logger, library_dir: str, code_structure: reflection_classes.CPPCodeStructure):
     with open(library_dir + '/CoreAPIFwd.h', 'w', encoding='utf-8') as f:
-        f.write(f'{clang_utils.codegen_cpp_header_comment}')
+        f.write(f'{reflection_classes.sparcle_utils.codegen_cpp_header_comment}')
 
         f.write(f'#ifndef SR_ENGINE_SPARCLE_API_FWD_H\n')
         f.write(f'#define SR_ENGINE_SPARCLE_API_FWD_H\n\n')
@@ -255,11 +255,11 @@ def generate_core_api_fwd_decl(logger: logger_utils.Logger, library_dir: str, co
         f.write(f'\n#endif /// SR_ENGINE_SPARCLE_API_FWD_H\n')
 
 
-def generate_impl_cpp(logger: logger_utils.Logger, library_dir: str, code_structure: reflection_classes.CodeStructure):
+def generate_impl_cpp(logger: logger_utils.Logger, library_dir: str, code_structure: reflection_classes.CPPCodeStructure):
     logger.log_info(f'Generating core library cpp file: {library_dir}/CoreAPIImpl.cpp')
 
     with open(library_dir + '/CoreAPIImpl.cpp', 'w', encoding='utf-8') as f:
-        f.write(f'{clang_utils.codegen_cpp_header_comment}')
+        f.write(f'{reflection_classes.sparcle_utils.codegen_cpp_header_comment}')
 
         f.write(f'#include <CppBehaviour.h>\n\n')
 
@@ -329,7 +329,7 @@ def generate_behaviour_header(logger: logger_utils.Logger, repo_dir: str, librar
     logger.log_info(f'Generating core library file: {header_file_path}')
 
     with open(header_file_path, 'w', encoding='utf-8') as f:
-        f.write(f'{clang_utils.codegen_cpp_header_comment}')
+        f.write(f'{reflection_classes.sparcle_utils.codegen_cpp_header_comment}')
 
         f.write(f'#ifndef SR_ENGINE_SPARCLE_API_CPP_BEHAVIOUR_H\n')
         f.write(f'#define SR_ENGINE_SPARCLE_API_CPP_BEHAVIOUR_H\n\n')
@@ -371,7 +371,7 @@ def generate_behaviour_header(logger: logger_utils.Logger, repo_dir: str, librar
         f.write(f'#endif /// SR_ENGINE_SPARCLE_API_CPP_BEHAVIOUR_H\n\n')
 
 
-def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: str, code_structure: reflection_classes.CodeStructure):
+def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: str, code_structure: reflection_classes.CPPCodeStructure):
     logger.log_info('Start generating script library...')
     logger.log_info(f'Library directory: {library_dir}')
 
@@ -392,13 +392,13 @@ def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: st
     with open(repo_dir + '/CI/Codegen/ScriptHandle.h', 'r', encoding='utf-8') as core_api_header:
         with open(library_dir + '/ScriptHandle.h', 'w', encoding='utf-8') as f:
             logger.log_info(f'Generating core library file: {library_dir}/SpaRcle/ScriptHandle.h')
-            f.write(f'{clang_utils.codegen_cpp_header_comment}')
+            f.write(f'{reflection_classes.sparcle_utils.codegen_cpp_header_comment}')
             for line in core_api_header:
                 f.write(line)
 
     with open(library_dir + '/CoreAPI.h', 'w', encoding='utf-8') as f:
         logger.log_info(f'Generating core library file: {library_dir}/CoreAPI.h')
-        f.write(f'{clang_utils.codegen_cpp_header_comment}')
+        f.write(f'{reflection_classes.sparcle_utils.codegen_cpp_header_comment}')
 
         include_guard_name = 'SR_ENGINE_SPARCLE_API_' + re.sub(r'(?<!^)(?=[A-Z])', '_', 'CoreAPI').upper() + '_H'
 
@@ -423,7 +423,7 @@ def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: st
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
         with open(file_path + '.h', 'w', encoding='utf-8') as f:
-            f.write(f'{clang_utils.codegen_cpp_header_comment}')
+            f.write(f'{reflection_classes.sparcle_utils.codegen_cpp_header_comment}')
 
             # upper string and split words by '_' (For example: source StringAtom -> SR_ENGINE_SPARCLE_API_STRING_ATOM_H)
             include_guard_name = 'SR_ENGINE_SPARCLE_API_' + re.sub(r'(?<!^)(?=[A-Z])', '_', scriptable_class.alias).upper() + '_H'

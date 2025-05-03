@@ -1,8 +1,7 @@
-import sys, os, subprocess, re, copy
+import os, subprocess, copy
 import logger_utils
 import sparcle_utils
 import cpp_operator
-import script_codegen_utils
 import codegen_context
 import reflection_classes
 
@@ -297,7 +296,7 @@ def is_class_inherited_from(class_node, class_name):
     return False
 
 
-def process_property(property_obj, clang_child):
+def process_property(property_obj: reflection_classes.CPPProperty, clang_child):
     property_obj.change_callback = extract_special_tag_comment_data(clang_child, 'onChanged')
     property_obj.setter = extract_special_tag_comment_data(clang_child, 'setter')
     property_obj.getter = extract_special_tag_comment_data(clang_child, 'getter')
@@ -430,7 +429,7 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
 
                 if all_found == 6:
                     print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}, VA_ARGS: {va_args}')
-                    enum_object = reflection_classes.Enum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
+                    enum_object = reflection_classes.CPPEnum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
                     code_structure.enums.append(enum_object)
                     break
 
@@ -481,7 +480,7 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
                 virtual_property = extract_special_tag_comment_data(child, 'virtualProperty')
                 if virtual_property:
                     print(f'Found virtual property: {virtual_property}')
-                    property_obj = reflection_classes.Property(virtual_property, 'Unknown')
+                    property_obj = reflection_classes.CPPProperty(virtual_property, 'Unknown')
                     property_obj.virtual = True
                     process_property(property_obj, child)
                     class_obj.add_variable(property_obj)
@@ -489,7 +488,7 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
             elif child.kind == clang.cindex.CursorKind.FIELD_DECL and is_property_comment(child):
                 variable_name = child.spelling
                 variable_type = extract_property_type(child)
-                property_obj = reflection_classes.Property(variable_name, variable_type)
+                property_obj = reflection_classes.CPPProperty(variable_name, variable_type)
                 print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
                 process_property(property_obj, child)
                 class_obj.add_variable(property_obj)
@@ -497,12 +496,12 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
             #elif child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
             #    method_name = child.spelling
             #    method_return_type = child.result_type.spelling
-            #    method_obj = reflection_classes.Method(method_name, method_return_type)
+            #    method_obj = reflection_classes.CPPMethod(method_name, method_return_type)
             #    for param in child.get_children():
             #        if param.kind == clang.cindex.CursorKind.PARM_DECL:
             #            param_name = param.spelling
             #            param_type = param.type.spelling
-            #            method_obj.add_parameter(reflection_classes.Property(param_name, param_type))
+            #            method_obj.add_parameter(reflection_classes.CPPProperty(param_name, param_type))
             #
             #    class_obj.add_method(method_obj)
 
@@ -560,7 +559,7 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             if child.kind == clang.cindex.CursorKind.CONSTRUCTOR:
                 if has_special_tag_comment(child, 'constructor'):
                     logger.log_debug(f'Found scriptable constructor: {child.spelling}')
-                    constructor = reflection_classes.Constructor()
+                    constructor = reflection_classes.CPPConstructor()
 
                     # find all parameters
                     for param in child.get_children():
@@ -568,7 +567,7 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
                             param_name = param.spelling
                             param_type = param.type.spelling
                             logger.log_debug(f'Found scriptable constructor parameter: {param_name}, Type: {param_type}')
-                            constructor.add_parameter(reflection_classes.Parameter(param_name, param_type))
+                            constructor.add_parameter(reflection_classes.CPPParameter(param_name, param_type))
 
                     class_obj.add_constructor(constructor)
 
@@ -576,14 +575,14 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             elif child.kind == clang.cindex.CursorKind.CXX_METHOD and child.spelling.startswith('operator'):
                 if has_special_tag_comment(child, 'operator'):
                     logger.log_debug(f'Found scriptable operator: {child.spelling}, return type {child.result_type.spelling}')
-                    operator = reflection_classes.Operator(cpp_operator.OperatorType.from_string(child.spelling), child.result_type.spelling)
+                    operator = reflection_classes.CPPOperator(cpp_operator.OperatorType.from_string(child.spelling), child.result_type.spelling)
                     operator.is_const = child.is_const_method()
 
                     # find all parameters
                     for param in child.get_children():
                         if param.kind == clang.cindex.CursorKind.PARM_DECL:
                             logger.log_debug(f'Found scriptable operator parameter: {param.spelling}, Type: {param.type.spelling}')
-                            operator.add_parameter(reflection_classes.Parameter(param.spelling, param.type.spelling))
+                            operator.add_parameter(reflection_classes.CPPParameter(param.spelling, param.type.spelling))
 
                     class_obj.add_operator(operator)
 
@@ -591,14 +590,14 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             elif child.kind == clang.cindex.CursorKind.CXX_METHOD:
                 if has_special_tag_comment(child, 'method'):
                     logger.log_debug(f'Found scriptable method: {child.spelling}, return type {child.result_type.spelling}')
-                    method = reflection_classes.Method(child.spelling, child.result_type.spelling)
+                    method = reflection_classes.CPPMethod(child.spelling, child.result_type.spelling)
                     method.is_const = child.is_const_method()
 
                     # find all parameters
                     for param in child.get_children():
                         if param.kind == clang.cindex.CursorKind.PARM_DECL:
                             logger.log_debug(f'Found scriptable method parameter: {param.spelling}, Type: {param.type.spelling}')
-                            method.add_parameter(reflection_classes.Parameter(param.spelling, param.type.spelling))
+                            method.add_parameter(reflection_classes.CPPParameter(param.spelling, param.type.spelling))
 
                     class_obj.add_method(method)
 
@@ -610,7 +609,7 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
                 full_template_name = f'{parent_node.spelling}<' + f', '.join([template_replacement[0] for template_replacement in template_variant[1]]) + '>'
 
                 for template_replacement in template_variant[1]:
-                    full_template_name = sparcle_utils.replace_type_templated_name(logger, full_template_name, template_replacement[0], template_replacement[1])
+                    full_template_name = sparcle_utils.replace_type_templated_name(full_template_name, template_replacement[0], template_replacement[1])
                     class_obj_template.replace_type(logger, template_replacement[0], template_replacement[1])
                 code_structure.add_scriptable_class(class_obj_template)
 
@@ -647,7 +646,7 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
 
 
 def parse_header_file(logger: logger_utils.Logger, file_path, include_args, context: codegen_context.CodegenContext):
-    code_structure = reflection_classes.CodeStructure(logger)
+    code_structure = reflection_classes.CPPCodeStructure(logger)
 
     # Передаем каждый путь как отдельный аргумент
     args = include_args

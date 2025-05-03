@@ -1,7 +1,10 @@
 import os
 from glob import glob
 
-import reflection_classes, sparcle_utils, clang_utils, codegen_context, logger_utils
+import reflection_classes
+import sparcle_utils
+import codegen_context
+import logger_utils
 
 
 def generate_all_includes_cxx(context: codegen_context.CodegenContext) -> str:
