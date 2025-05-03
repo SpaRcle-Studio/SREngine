@@ -5,48 +5,73 @@
 #include <Scripting/Cpp/CppCompiler.h>
 
 #include <Utils/Platform/Platform.h>
+#include <Utils/Platform/MessageBox.h>
+#include <Utils/FileSystem/FileDialog.h>
+
+#include <Enum/CppCompilerType.hpp>
+
+#include <Codegen/CppCompiler.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
-    bool CppCompiler::Init() {
-        if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
-            /// You can change this value under debugger for disabling MSVC compiler
-            static std::atomic<bool> disableMSVC = false;
-            if (SR_PLATFORM_NS::IsRunningUnderDebugger() && SR_PLATFORM_NS::IsCompiledUnderMSVC() && !disableMSVC) {
-                m_compilerType = CppCompilerType::MSVC;
-                m_compilerPath = FindMSVCCompilerPath();
-            }
-            else {
-                m_compilerType = CppCompilerType::MinGW;
+    static std::string_view CPP_COMPILER_SETTINGS_PATH = "Scripts/CppCompilerSettings.sra";
 
-                auto&& cache = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-                m_compilerPath = cache.Concat("mingw/mingw64/bin").Concat("g++.exe");
+    CppCompiler::~CppCompiler() = default;
+
+    void CppCompiler::SaveSettings() {
+        const SR_UTILS_NS::Path settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
+        SR_LOG("CppCompiler::SaveSettings() : save settings to file: {}", settingsPath);
+        SR_UTILS_NS::SRASerializer serializer;
+        serializer.SetUseTabs(true);
+        m_settings.Save(serializer);
+        if (!serializer.SaveToFile(settingsPath)) {
+            SR_WARN("CppCompiler::SaveSettings() : failed to save settings file: {}", settingsPath);
+        }
+    }
+
+    bool CppCompiler::Init() {
+        m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        m_resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+        auto&& settingsPath = m_cachePath.Concat(CPP_COMPILER_SETTINGS_PATH);
+        if (SR_PLATFORM_NS::IsExists(settingsPath)) {
+            SR_UTILS_NS::SRADeserializer deserializer;
+            if (!deserializer.LoadFromFile(settingsPath)) {
+                SR_WARN("CppCompiler::Init() : failed to load settings file: {}", settingsPath);
+            }
+            m_settings.Load(deserializer);
+        }
+
+        if (!IsCompilerAvailable()) {
+            if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
+                if (!FindWindowsCompiler()) {
+                    SR_ERROR("CppCompiler::Init() : failed to find windows compiler!");
+                    return false;
+                }
+            }
+            else if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Linux) {
+                m_settings.compilerType = CppCompilerType::GCC;
+                m_settings.compilerPath = "/usr/bin/g++";
 
                 if (!IsCompilerAvailable()) {
-                    if (!InstallMinGW()) {
-                        SR_ERROR("CppCompiler::Init() : failed to install MinGW!");
-                        return false;
-                    }
+                    SR_ERROR("CppCompiler::Init() : g++ compiler not found by path {}! Please install g++ by command: sudo apt install g++", m_settings.compilerPath);
+                    return false;
                 }
             }
         }
-        else if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Linux) {
-            m_compilerType = CppCompilerType::GCC;
-
-            m_compilerPath = "/usr/bin/g++";
-            if (!IsCompilerAvailable()) {
-                SR_ERROR("CppCompiler::Init() : g++ compiler not found by path {}! Please install g++ by command: sudo apt install g++", m_compilerPath);
-                return false;
-            }
-        }
-
-        m_cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
 
         if (!FindEngineLibs()) {
             SR_ERROR("CppCompiler::Init() : failed to find engine libs!");
             return false;
         }
 
-        SR_LOG("CppCompiler::Init() : compiler path: " + m_compilerPath.ToString());
+        if (!ValidateCompilerAndOS()) {
+            SR_ERROR("CppCompiler::Init() : compiler or OS are not compatible!");
+            return false;
+        }
+
+        SaveSettings();
+
+        SR_LOG("CppCompiler::Init() : compiler path: " + m_settings.compilerPath.ToString());
         SR_LOG("CppCompiler::Init() : compiler version: \n" + GetCompilerVersion());
 
         m_isInitialized = true;
@@ -55,7 +80,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool CppCompiler::IsCompilerAvailable() const {
-        return SR_PLATFORM_NS::IsExists(m_compilerPath);
+        return SR_PLATFORM_NS::IsExists(m_settings.compilerPath);
     }
 
     bool CppCompiler::InstallMinGW() {
@@ -92,12 +117,12 @@ namespace SR_SCRIPTING_NS {
     std::string CppCompiler::GetCompilerVersion() const {
         std::string version;
 
-        if (m_compilerType == CppCompilerType::MSVC) {
-            std::string command = m_compilerPath.ToString();
+        if (m_settings.compilerType == CppCompilerType::MSVC) {
+            std::string command = m_settings.compilerPath.ToString();
             version = SR_PLATFORM_NS::ExecuteCommand(command);
         }
         else {
-            std::string command = m_compilerPath.ToString() + " --version";
+            std::string command = m_settings.compilerPath.ToString() + " --version";
             version = SR_PLATFORM_NS::ExecuteCommand(command);
         }
 
@@ -120,7 +145,7 @@ namespace SR_SCRIPTING_NS {
 
         std::string customArgs;
 
-        if (m_compilerType == CppCompilerType::MSVC) {
+        if (m_settings.compilerType == CppCompilerType::MSVC) {
             customArgs += "-nologo /std:c++20 /EHsc ";
             customArgs += "/DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "/DFMT_HEADER_ONLY ";
@@ -136,7 +161,7 @@ namespace SR_SCRIPTING_NS {
             case SR_UTILS_NS::PlatformType::Windows:
                 outModulePath += context.isShared ? ".dll" : ".lib";
 
-                if (m_compilerType == CppCompilerType::MSVC) {
+                if (m_settings.compilerType == CppCompilerType::MSVC) {
                     customArgs += "/DWIN32 ";
                     if (context.isShared) {
                         customArgs += context.isDebug ? "/LDd " : "/LD ";
@@ -161,7 +186,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (context.isDebug) {
-            if (m_compilerType == CppCompilerType::MSVC) {
+            if (m_settings.compilerType == CppCompilerType::MSVC) {
                 customArgs += "/Zi /Od ";
             }
             else {
@@ -173,7 +198,7 @@ namespace SR_SCRIPTING_NS {
             }
         }
         else {
-            if (m_compilerType == CppCompilerType::MSVC) {
+            if (m_settings.compilerType == CppCompilerType::MSVC) {
                 customArgs += "/O2 ";
             }
             else {
@@ -195,9 +220,9 @@ namespace SR_SCRIPTING_NS {
 
         std::string outArgs;
 
-        if (m_compilerType == CppCompilerType::MSVC) {
+        if (m_settings.compilerType == CppCompilerType::MSVC) {
             outArgs += "/Fe" + outModulePath + " ";
-            std::string msvcInclude = m_compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("include");
+            std::string msvcInclude = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("include");
             includePaths += "/I\"" + msvcInclude + "\" ";
 
             std::string windowsKitsUmLibs;
@@ -212,7 +237,7 @@ namespace SR_SCRIPTING_NS {
             SRHalt("CppCompiler::Compile() : windows latest SDK dir is not defined!");
         #endif
 
-            std::string msvcLibs = m_compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("lib/x64").ToString();
+            std::string msvcLibs = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().Concat("lib/x64").ToString();
 
             sourceFiles += " \"{}/libcpmtd.lib\" "_format(msvcLibs);
             sourceFiles += " \"{}/LIBCMTD.lib\" "_format(msvcLibs);
@@ -233,10 +258,10 @@ namespace SR_SCRIPTING_NS {
         }
 
         std::string command = "{} {} {} {} {}"_format(
-            m_compilerPath, customArgs, outArgs, sourceFiles, includePaths
+            m_settings.compilerPath, customArgs, outArgs, sourceFiles, includePaths
         );
 
-        if (m_compilerType == CppCompilerType::MSVC) {
+        if (m_settings.compilerType == CppCompilerType::MSVC) {
             //command += " /LIBPATH:\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.42.34433/lib/x64\"";
             if (context.isDebug) {
                 command += " /link /DEBUG /PDB:" + outPdbPath;
@@ -261,7 +286,7 @@ namespace SR_SCRIPTING_NS {
             SR_LOG("CppCompiler::Compile() : \"{}\" module compilation succeeded!", context.moduleName);
         }
 
-        if (m_compilerType == CppCompilerType::MSVC) {
+        if (m_settings.compilerType == CppCompilerType::MSVC) {
             if (SR_PLATFORM_NS::IsExists(outPdbPath)) {
                 if (!SR_PLATFORM_NS::Copy(outPdbPath, outPdbPath + ".protected")) {
                     SR_ERROR("CppCompiler::Compile() : failed to copy PDB file!");
@@ -273,7 +298,7 @@ namespace SR_SCRIPTING_NS {
         return !hasErrors;
     }
 
-    SR_UTILS_NS::Path CppCompiler::FindMSVCCompilerPath() const {
+    SR_UTILS_NS::Path CppCompiler::GetBuiltInMSVCCompilerPath() const {
     #ifdef SR_MSVC_COMPILER_PATH
         return SR_MSVC_COMPILER_PATH;
     #else
@@ -315,6 +340,142 @@ namespace SR_SCRIPTING_NS {
             }
 
             SR_ERROR("CppCompiler::FindEngineLibs() : failed to find engine lib: {} or {}!", pathDebug, pathRelease);
+            return false;
+        }
+
+        return true;
+    }
+
+    bool CppCompiler::FindWindowsCompiler() {
+        if (!SR_PLATFORM_NS::IsCompiledUnderMSVC()) {
+            SR_ERROR("CppCompiler::FindWindowsCompiler() : windows application not compiled under MSVC!");
+            return false;
+        }
+
+        m_settings.compilerType = CppCompilerType::MSVC;
+        m_settings.useBuiltInCompiler = false;
+
+        const auto builtInCompilerPath = GetBuiltInMSVCCompilerPath();
+        if (SR_PLATFORM_NS::IsExists(builtInCompilerPath)) {
+            const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
+                "Choose compiler",
+                "MSVC built-in compiler is available. Do you want to use it? Use only if you are developer.",
+                SR_PLATFORM_NS::MessageBoxType::YesNo,
+                SR_PLATFORM_NS::MessageBoxIconType::Question,
+                SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
+            );
+            if (result == SR_PLATFORM_NS::MessageBoxResultType::YesOk) {
+                m_settings.useBuiltInCompiler = true;
+                m_settings.compilerPath = builtInCompilerPath;
+                return true;
+            }
+        }
+
+        const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
+            "MSVC compiler not set",
+            "Do you want to select existing compiler? (Yes). Or you want to install it? (No)",
+            SR_PLATFORM_NS::MessageBoxType::YesNoCancel,
+            SR_PLATFORM_NS::MessageBoxIconType::Question,
+            SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
+        );
+
+        if (result == SR_PLATFORM_NS::MessageBoxResultType::Cancel) {
+            SR_ERROR("CppCompiler::FindWindowsCompiler() : user canceled compiler selection!");
+            return false;
+        }
+
+        if (result == SR_PLATFORM_NS::MessageBoxResultType::No) {
+            SR_PLATFORM_NS::ShowMessageBox(
+                "Compiler installation",
+                "After press OK button, compiler installer will be launched, and current application will be closed. Please, restart application after installation.",
+                SR_PLATFORM_NS::MessageBoxType::Ok,
+                SR_PLATFORM_NS::MessageBoxIconType::Info,
+                SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
+            );
+            auto&& pathToVSBuildToolsInstaller = m_resourcesPath.Concat("Engine/Utilities/vs_BuildTools.exe");
+            SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : path to VS Build Tools installer: " + pathToVSBuildToolsInstaller.ToStringRef());
+            SR_SYSTEM_LOG("CppCompiler::FindWindowsCompiler() : engine will be terminated after installer launched!");
+            SR_PLATFORM_NS::ExecuteCommand(pathToVSBuildToolsInstaller.ToStringRef());
+            SR_PLATFORM_NS::Terminate(false);
+        }
+
+        if (result == SR_PLATFORM_NS::MessageBoxResultType::YesOk) {
+            SR_LOG("CppCompiler::FindWindowsCompiler() : requesting compiler path from user...");
+            m_settings.compilerPath = SR_UTILS_NS::FileDialog::Instance().OpenDialog(m_resourcesPath, { { "cl.exe msvc compiler", "exe" } });
+            if (!IsCompilerAvailable()) {
+                SR_ERROR("CppCompiler::FindWindowsCompiler() : invalid compiler path!");
+                SR_PLATFORM_NS::ShowMessageBox(
+                    "Invalid compiler",
+                    "Please select valid MSVC (cl.exe) compiler!",
+                    SR_PLATFORM_NS::MessageBoxType::Ok,
+                    SR_PLATFORM_NS::MessageBoxIconType::Error,
+                    SR_PLATFORM_NS::MessageBoxDefaultButtonType::YesOk
+                );
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool CppCompiler::ValidateCompilerAndOS() {
+        if (m_settings.compilerType == CppCompilerType::MSVC) {
+            if (SR_PLATFORM_NS::GetType() != SR_UTILS_NS::PlatformType::Windows) {
+                SR_ERROR("CppCompiler::ValidateCompilerAndOS() : MSVC compiler is not available on this platform!");
+                return false;
+            }
+            if (!SR_PLATFORM_NS::IsCompiledUnderMSVC()) {
+                SR_ERROR("CppCompiler::ValidateCompilerAndOS() : application is not compiled under MSVC, but MSVC compiler is selected!");
+                return false;
+            }
+
+            if (m_settings.compilerPath.GetBaseNameAndExt() != "cl.exe") {
+                SR_ERROR("CppCompiler::ValidateCompilerAndOS() : invalid MSVC compiler path! Path: {}", m_settings.compilerPath);
+                return false;
+            }
+
+            const std::string buildInCompilerVersion = GetBuiltInMSVCCompilerPath().GetPrevious().GetPrevious().GetPrevious().GetPrevious().GetBaseNameAndExt();
+            const std::string currentCompilerVersion = m_settings.compilerPath.GetPrevious().GetPrevious().GetPrevious().GetPrevious().GetBaseNameAndExt();
+
+            if (buildInCompilerVersion != currentCompilerVersion) {
+                const std::string mismatchCompilerLogMessage = "CppCompiler::ValidateCompilerAndOS() : built-in compiler version is not equal to current compiler version! "
+                                                               "Undefined behaviour possible!\n\tBuilt-in: {}\n\tCurrent: {}"_format(buildInCompilerVersion, currentCompilerVersion);
+
+                if (!m_settings.ignoreCompilerVersion) {
+                    SR_WARN(mismatchCompilerLogMessage);
+
+                    const std::string message = "Do you want to continue? Continuing may cause undefined behaviour. Use on your own risk. Built-in version: {}, current version: {}"_format(
+                        buildInCompilerVersion, currentCompilerVersion
+                    );
+
+                    const auto&& result = SR_PLATFORM_NS::ShowMessageBox(
+                        "MSVC compiler version mismatch",
+                        message,
+                        SR_PLATFORM_NS::MessageBoxType::YesNo,
+                        SR_PLATFORM_NS::MessageBoxIconType::Warning,
+                        SR_PLATFORM_NS::MessageBoxDefaultButtonType::No
+                    );
+
+                    if (result == SR_PLATFORM_NS::MessageBoxResultType::No) {
+                        return false;
+                    }
+                    m_settings.ignoreCompilerVersion = true;
+                }
+                else {
+                    SR_INFO(mismatchCompilerLogMessage);
+                }
+
+                SR_INFO("CppCompiler::ValidateCompilerAndOS() : user accepted to continue with different compiler version!");
+            }
+        }
+        else if (m_settings.compilerType == CppCompilerType::GCC) {
+            if (SR_PLATFORM_NS::GetType() != SR_UTILS_NS::PlatformType::Linux) {
+                SR_ERROR("CppCompiler::ValidateCompilerAndOS() : GCC compiler is not available on this platform!");
+                return false;
+            }
+        }
+        else {
+            SR_ERROR("CppCompiler::ValidateCompilerAndOS() : unsupported compiler type! Type: {}", m_settings.compilerType);
             return false;
         }
 

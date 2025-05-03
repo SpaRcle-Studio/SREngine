@@ -22,8 +22,23 @@ namespace SR_SCRIPTING_NS {
         bool isShared = false;
     };
 
-    enum class CppCompilerType {
+    SR_ENUM_NS_CLASS_T(CppCompilerType, uint8_t,
         Unknown, MinGW, GCC, Clang, MSVC
+    )
+
+    struct CppCompilerSettings : public SR_UTILS_NS::Serializable {
+        SR_STRUCT()
+
+        /// @property
+        CppCompilerType compilerType = CppCompilerType::Unknown;
+        /// @property
+        bool useBuiltInCompiler = false;
+        /// @property
+        bool ignoreCompilerVersion = false;
+        /// @property
+        bool ignoreOSVersion = false;
+        /// @property
+        SR_UTILS_NS::Path compilerPath;
     };
 
     class CppCompiler : public SR_HTYPES_NS::SharedPtr<CppCompiler> {
@@ -37,6 +52,8 @@ namespace SR_SCRIPTING_NS {
             , m_pScriptSystem(pScriptSystem)
         { }
 
+        ~CppCompiler() override;
+
     public:
         SR_NODISCARD bool Init();
         SR_NODISCARD bool IsCompilerAvailable() const;
@@ -46,14 +63,18 @@ namespace SR_SCRIPTING_NS {
     private:
         bool InstallMinGW();
         bool FindEngineLibs();
+        bool FindWindowsCompiler();
 
-        SR_NODISCARD SR_UTILS_NS::Path FindMSVCCompilerPath() const;
+        bool ValidateCompilerAndOS();
+        void SaveSettings();
+
+        SR_NODISCARD SR_UTILS_NS::Path GetBuiltInMSVCCompilerPath() const;
 
     private:
+        CppCompilerSettings m_settings;
         std::vector<SR_UTILS_NS::Path> m_engineLibs;
-        CppCompilerType m_compilerType = CppCompilerType::Unknown;
         SR_UTILS_NS::Path m_cachePath;
-        SR_UTILS_NS::Path m_compilerPath;
+        SR_UTILS_NS::Path m_resourcesPath;
         bool m_isInitialized = false;
         ScriptSystem* m_pScriptSystem = nullptr;
 
