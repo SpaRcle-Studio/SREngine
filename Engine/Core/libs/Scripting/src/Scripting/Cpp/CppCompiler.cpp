@@ -424,6 +424,7 @@ namespace SR_SCRIPTING_NS {
                 SR_ERROR("CppCompiler::ValidateCompilerAndOS() : MSVC compiler is not available on this platform!");
                 return false;
             }
+
             if (!SR_PLATFORM_NS::IsCompiledUnderMSVC()) {
                 SR_ERROR("CppCompiler::ValidateCompilerAndOS() : application is not compiled under MSVC, but MSVC compiler is selected!");
                 return false;
