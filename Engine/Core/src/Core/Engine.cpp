@@ -36,8 +36,6 @@
 
 //#include <Scripting/Impl/EvoScriptManager.h>
 
-test build fail
-
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
