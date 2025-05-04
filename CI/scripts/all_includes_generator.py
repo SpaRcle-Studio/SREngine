@@ -111,24 +111,6 @@ def get_engine_include_args(context: codegen_context.CodegenContext):
         f'{engine_root}/Core/libs/Graphics/inc',
     ]
 
-    #if not context.is_script:
-    #    includes.append(f'{engine_root}/Core/libs/Audio/libs')
-    #    includes.append(f'{engine_root}/Core/libs/Audio/libs/libmodplug/src')
-    #    includes.append(f'{engine_root}/Core/libs/Graphics/libs/EvoVulkan/Core/inc')
-    #    includes.append(f'{engine_root}/Core/libs/Graphics/libs')
-    #    includes.append(f'{engine_root}/Core/libs/Graphics/libs/imgui')
-    #    includes.append(f'{engine_root}/Core/libs/Physics/libs')
-    #    includes.append(f'{engine_root}/Core/libs/Utils/libs')
-    #    includes.append(f'{engine_root}/Core/libs/Utils/libs/openssl/include')
-    #    includes.append(f'{engine_root}/Core/libs/Utils/libs/litehtml/include')
-    #    includes.append(f'{engine_root}/Core/libs/Utils/libs/cppcoro/include')
-    #    includes.append(f'{engine_root}/Core/libs/Utils/libs/assimp/include')
-    #    includes.append(f'{engine_root}/Core/libs/Utils/libs/fmt/include')
-    #    includes.append(f'{engine_root}/Core/libs/Scripting/libs')
-
-    #    includes.append(f'{context.build_dir}/Engine/Core/libs/Utils/libs/assimp/include')
-    #    includes.append(f'{context.build_dir}')
-
     include_args = [f'-I{ sparcle_utils.normalize_path(os.path.abspath(inc))}' for inc in includes]
     return include_args
 

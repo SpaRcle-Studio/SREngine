@@ -644,14 +644,14 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     logger.log_info(f'Valid files: {valid_files}')
 
     for node in translation_unit.cursor.get_children():
-        try:
-            node_file = sparcle_utils.normalize_path(os.path.abspath(node.location.file.name))
-        except AttributeError:
-            continue # у узла нет привязки к файлу
-
-        if node_file not in valid_files:
-            logger.log_info(f'Skip file: {node_file}')
-            continue # этот файл не входит в список для кодгена
+        #try:
+        #    node_file = sparcle_utils.normalize_path(os.path.abspath(node.location.file.name))
+        #except AttributeError:
+        #    continue # у узла нет привязки к файлу
+        #
+        #if node_file not in valid_files:
+        #    logger.log_info(f'Skip file: {node_file}')
+        #    continue # этот файл не входит в список для кодгена
 
         parse_header_tree(logger, file_path, 0, node, code_structure, [], context)
 
