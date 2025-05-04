@@ -644,6 +644,13 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     logger.log_info(f'Valid files: {valid_files}')
 
     for node in translation_unit.cursor.get_children():
+        location = ''
+        try:
+            location = node.location.file.name
+        except AttributeError:
+            pass
+
+        logger.log_info(f'Found node: {node.spelling}, {node.kind}, {location}')
         #try:
         #    node_file = sparcle_utils.normalize_path(os.path.abspath(node.location.file.name))
         #except AttributeError:
