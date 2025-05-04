@@ -1,20 +1,26 @@
 import sys, os, argparse
 from glob import glob
+from time import perf_counter
 
 import clang_utils
 import sparcle_utils
 import codegen_context
 import logger_utils
 import meta_code_generator
+import all_includes_generator
+
 
 def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -> bool:
     logger.log_info('Create cxx file with all includes...')
 
     meta_code_generator.generate_stub_vulkan_h(context.codegen_dir)
-    all_includes_cxx_path = meta_code_generator.generate_all_includes_cxx(context)
+    start = perf_counter()
+    all_includes_cxx_path = all_includes_generator.generate_all_includes_cxx(logger, context)
+    end = perf_counter()
     logger.log_info(f'All includes cxx file: {all_includes_cxx_path}')
+    logger.log_info(f'All includes cxx file generation time: {end - start:.2f} sec')
 
-    include_args = clang_utils.get_engine_include_args(context)
+    include_args = all_includes_generator.get_engine_include_args(context)
 
     logger.log_info(f'Parsing all includes cxx file: {all_includes_cxx_path}')
     code_structures = clang_utils.parse_header_file(logger, all_includes_cxx_path, include_args, context)
@@ -28,11 +34,17 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
     logger.log_info('Generate new files...')
 
     logger.log_info(f'Count of sparcle classes: {len(code_structures.sparcle_classes)}')
-    #logger.log_info(f'Count of scriptable classes: {len(code_structures.scriptable_classes)}')
     logger.log_info(f'Count of enums: {len(code_structures.enums)}')
 
+    start = perf_counter()
     meta_code_generator.generate_classes_code(logger, context, code_structures.sparcle_classes)
-    meta_code_generator.generate_enums_code(context.codegen_dir, code_structures.enums)
+    end = perf_counter()
+    logger.log_info(f'Classes code generation time: {end - start:.2f} sec')
+
+    start = perf_counter()
+    meta_code_generator.generate_enums_code(logger, context, code_structures.enums)
+    end = perf_counter()
+    logger.log_info(f'Enums code generation time: {end - start:.2f} sec')
 
     #script_api_code_generator.generate_api(logger, repo_dir, codegen_dir, code_structures)
     #script_library_code_generator.generate_library(logger, repo_dir, script_api_library_dir, code_structures)
@@ -44,22 +56,21 @@ if __name__ == "__main__":
     parser.add_argument("--codegen_dir", required=True, help="Codegen directory")
     parser.add_argument("--repo_dir", required=True, help="Path to the root repo")
     parser.add_argument("--root_build_dir", required=True, help="Root build directory")
-    parser.add_argument("--lib_clang_dir", required=True, help="Folder with libclang")
+    parser.add_argument("--config_dir", required=True, help="Folder with libclang and config files")
     parser.add_argument("--module_name", required=True, help="Module name")
     parser.add_argument("--is_script", action='store_true', help="Is script")
     parser.add_argument("--help_sources_dir", required=False, help="Help sources directory")
     args = parser.parse_args()
 
-    lib_clang_dir = os.path.abspath(args.lib_clang_dir).replace("\\", "/")
-
     context = codegen_context.CodegenContext()
+    context.config_dir = os.path.abspath(args.config_dir).replace("\\", "/")
     context.build_dir = os.path.abspath(args.root_build_dir).replace("\\", "/")
     context.module_name = args.module_name
     context.analyze_dir = os.path.abspath(args.repo_dir).replace("\\", "/")
     context.is_script = args.is_script
     context.help_sources_dir = os.path.abspath(args.help_sources_dir).replace("\\", "/") if args.help_sources_dir else ""
 
-    logger_utils.Logger.DEBUG = True
+    logger_utils.Logger.DEBUG = False
     logger_utils.init_utf8_console()
 
     logger = logger_utils.Logger()
@@ -80,9 +91,9 @@ if __name__ == "__main__":
     lib_file = ''
 
     if is_unix:
-        lib_file = os.path.join(f'{lib_clang_dir}', 'libclang.so')
+        lib_file = os.path.join(f'{context.config_dir}', 'libclang.so')
     else:
-        lib_file = os.path.join(f'{lib_clang_dir}', 'libclang.dll')
+        lib_file = os.path.join(f'{context.config_dir}', 'libclang.dll')
     
     logger.log_info(f'libclang path: {lib_file}')
 

@@ -50,6 +50,8 @@ namespace SR_SCRIPTING_NS {
         void OnTriggerExit(const SR_UTILS_NS::CollisionData& data) override;
         void OnTriggerStay(const SR_UTILS_NS::CollisionData& data) override;
 
+        SR_NODISCARD bool ExecuteInEditMode() const override;
+
     private:
         void SetBehaviourName(SR_UTILS_NS::StringAtom name);
         void OnScriptReloaded();

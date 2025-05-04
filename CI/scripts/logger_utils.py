@@ -12,7 +12,7 @@ def log_decorator(enabled):
 
 
 class Logger:
-    DEBUG = True
+    DEBUG = False
 
     def __init__(self):
         self.log_file = ""

@@ -692,7 +692,7 @@ sra format
 									9-v:entityId
 										10-i:4396283777552644742
 									9-v:behaviourName
-										10-s:BehaviourCallsTest
+										10-s:TestBehaviour
 					5-v:name
 						6-s:Cube
 					5-o:transform

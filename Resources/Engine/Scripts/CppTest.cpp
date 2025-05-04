@@ -11,42 +11,33 @@
 
 #include <Enum/SceneObjectType.hpp>
 
-//#include <string>
-//
-//#include <SpaRcle/Utils/Debug.h>
-//
-//namespace Core {
-//    /// @behaviour
-//    class TestBehaviour {
-//
-//    private:
-//        /// @property
-//        std::string m_name;
-//
-//    };
-//}
-
-
-
 namespace SpaRcle::Scripts::SREngine {
-    class ScriptTestComponent : public SpaRcle::Utils::Component {
-        SR_CLASS()
-    public:
-    };
-
     class TestBehaviour : public SpaRcle::Scripting::CppBehaviour {
         SR_CLASS()
+    public:
+        SR_NODISCARD bool ExecuteInEditMode() const noexcept override { return true; }
 
+    public:
+        void Update(float_t dt) override {
+            if (logInterval > 0.f) {
+                logInterval -= dt;
+                return;
+            }
+            logInterval = 1.f;
+            SR_LOG("TestBehaviour::Update() : dt log 2 = {}", dt);
+        }
+
+    private:
         /// @property
         int privateInt = 0;
-    };
-}
+        /// @property
+        int privateInt2 = 0;
+        /// @property
+        int privateInt32 = 0;
 
-extern "C" SR_DLL_API_EXPORT void TestFunction() {
-    SR_UTILS_NS::Debug::Instance().ScriptLog("TestFunction() called!");
-    SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(SR_UTILS_NS::SceneObjectType::GameObject));
-    SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: {}"_format(2));
-    SR_UTILS_NS::Debug::Instance().ScriptLog("Enum value: " + SR_UTILS_NS::EnumReflector::ToStringAtom(SR_UTILS_NS::SceneObjectType::GameObject).ToStringRef());
+        float_t logInterval = 0.f;
+
+    };
 }
 
 #include <Codegen/CppTest.generated.hpp>

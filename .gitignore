@@ -49,3 +49,4 @@ site
 /Platform/Android/app/codegen.spec
 /Engine/appicon.aps
 /Platform/Emscripten/emsdk
+/Resources/Engine/Utilities/engine-code-structure.pkl

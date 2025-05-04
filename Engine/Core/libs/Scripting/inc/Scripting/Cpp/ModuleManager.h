@@ -11,45 +11,9 @@
 #include <Utils/Common/PassKey.h>
 #include <Utils/ECS/SceneObject.h>
 
+#include <Scripting/Cpp/CppBehaviour.h>
+
 namespace SR_SCRIPTING_NS {
-    class SpaRcleAPIRegister : public SR_UTILS_NS::Singleton<SpaRcleAPIRegister> {
-        SR_REGISTER_SINGLETON(SpaRcleAPIRegister)
-        using FunctionHandle = void*;
-    public:
-        SR_NODISCARD uint64_t GetCountFunctions() { return m_functionTable.size(); }
-        SR_NODISCARD void* GetFunction(uint64_t index) { return m_functionTable[index]; }
-        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override { return false; }
-
-        void OnMemoryAlloc() { m_allocationsCount++; }
-        void OnMemoryFree() { SRAssert(m_allocationsCount > 0); m_allocationsCount--; }
-        void CheckMemoryLeaks() {
-            if (m_allocationsCount > 0) {
-                SRHalt("Memory leak detected! Allocations count: {}", m_allocationsCount.load());
-            }
-        }
-
-    public:
-        void SetRegisterFunction(std::function<void(std::vector<FunctionHandle>&)> func) {
-            m_registerFunction = std::move(func);
-        }
-
-        void RegisterAPI() {
-            if (!m_isRegistered) {
-                if (m_registerFunction) {
-                    m_registerFunction(m_functionTable);
-                }
-                m_isRegistered = true;
-            }
-        }
-
-    private:
-        std::function<void(std::vector<FunctionHandle>&)> m_registerFunction;
-        std::vector<FunctionHandle> m_functionTable;
-        bool m_isRegistered = false;
-        std::atomic<uint64_t> m_allocationsCount = 0;
-
-    };
-
     class ModuleManager;
     class ScriptSystem;
 
@@ -64,17 +28,9 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD const SR_UTILS_NS::StringAtom& GetModuleName() const { return m_moduleName; }
         void SetModuleName(const SR_UTILS_NS::StringAtom& name) { m_moduleName = name; }
 
-        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom behaviourName) const {
-            return m_behaviours.count(behaviourName) > 0;
-        }
-
-        void ResetBehaviours() { m_behaviours.clear(); }
-        void AddBehaviour(SR_UTILS_NS::StringAtom behaviourName) { m_behaviours.insert(behaviourName); }
-
     private:
         SR_UTILS_NS::Path m_path;
         SR_UTILS_NS::StringAtom m_moduleName;
-        std::set<SR_UTILS_NS::StringAtom> m_behaviours;
         void* m_moduleHandle = nullptr;
 
     };
@@ -82,8 +38,6 @@ namespace SR_SCRIPTING_NS {
     class CppBehaviourInstance {
         using ReloadCallback = SR_HTYPES_NS::Function<void()>;
         using ManagerPasskey = SR_UTILS_NS::Passkey<ModuleManager>;
-        using VoidFunc = void(*)(void*);
-        using UpdateFunc = void(*)(void*, float_t);
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD const ReloadCallback& GetReloadCallback() const { return m_reloadCallback; }
@@ -94,20 +48,28 @@ namespace SR_SCRIPTING_NS {
         void SetReloadCallback(const ReloadCallback& callback) { m_reloadCallback = callback; }
 
         void OnBehaviourUnloaded(ManagerPasskey);
-        void OnBehaviourLoaded(ManagerPasskey);
 
-        void Awake() { }
-        void OnEnable() { }
-        void OnDisable() { }
-        void OnAttached() { }
-        void OnDetached() { }
-        void OnDestroy() { }
-        void Start() { }
-        void FixedUpdate() { }
-        void Update(float_t dt) { }
+        void Awake() { if (m_pBehaviour) { m_pBehaviour->Awake(); } }
+        void OnEnable() { if (m_pBehaviour) { m_pBehaviour->OnEnable(); } }
+        void OnDisable() { if (m_pBehaviour) { m_pBehaviour->OnDisable(); } }
+        void OnAttached() { if (m_pBehaviour) { m_pBehaviour->OnAttached(); } }
+        void OnDetached() { if (m_pBehaviour) { m_pBehaviour->OnDetached(); } }
+        void OnDestroy() { if (m_pBehaviour) { m_pBehaviour->OnDestroy(); } }
+        void Start() { if (m_pBehaviour) { m_pBehaviour->Start(); } }
+        void FixedUpdate() { if (m_pBehaviour) { m_pBehaviour->FixedUpdate(); } }
+        void Update(float_t dt) { if (m_pBehaviour) { m_pBehaviour->Update(dt); } }
+
         void SetSceneObject(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject);
 
+        SR_NODISCARD bool IsValid() const { return m_pBehaviour; }
+        SR_NODISCARD bool ExecuteInEditMode() const;
+
+        void SetInstance(const SR_HTYPES_NS::SharedPtr<CppBehaviour>& pBehaviour, ManagerPasskey) {
+            m_pBehaviour = pBehaviour;
+        }
+
     private:
+        SR_SCRIPTING_NS::CppBehaviour::Ptr m_pBehaviour;
         SR_UTILS_NS::StringAtom m_moduleName;
         SR_UTILS_NS::StringAtom m_behaviourName;
         ReloadCallback m_reloadCallback;
@@ -132,15 +94,14 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD CppBehaviourInstance* AllocateBehaviourInstance(const SR_UTILS_NS::StringAtom& behaviourName);
         void FreeBehaviourInstance(CppBehaviourInstance* pInstance);
 
-        SR_NODISCARD bool HasBehaviour(SR_UTILS_NS::StringAtom behaviourName) const;
-
     private:
         bool AllocateBehaviourInternalInstance(CppBehaviourInstance* pInstance);
         void FreeBehaviourInternalInstance(CppBehaviourInstance* pInstance);
 
         SR_NODISCARD void* LoadModule(const SR_UTILS_NS::Path& modulePath);
-        bool InitModule(ScriptModule& module);
         bool UnloadModule(ScriptModule& module);
+        void OnModuleLoaded(ScriptModule& module);
+
         SR_NODISCARD ScriptModule* FindModule(SR_UTILS_NS::StringAtom moduleName);
 
     private:

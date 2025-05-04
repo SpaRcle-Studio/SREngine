@@ -156,16 +156,21 @@ namespace SR_SCRIPTING_NS {
             }
 
             const SR_UTILS_NS::Path buildDir = m_cacheFolder.Concat("Scripts/Modules/{}"_format(module.moduleInfo.moduleName));
-            const SR_UTILS_NS::Path libClangFolder = m_resourcesFolder.Concat("Engine/Utilities");
+            const SR_UTILS_NS::Path configFolder = m_resourcesFolder.Concat("Engine/Utilities");
 
-            const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --lib_clang_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
-                m_codegenExecutablePath, buildDir, buildDir, module.path.GetFolder(), libClangFolder, module.moduleInfo.moduleName, m_pScriptSystem->GetEngineSourcesPath().Concat("Engine")
+            const std::string command = "{} --codegen_dir \"{}\" --root_build_dir \"{}\" --repo_dir \"{}\" --config_dir \"{}\" --module_name \"{}\" --is_script --help_sources_dir \"{}\""_format(
+                m_codegenExecutablePath, buildDir, buildDir, module.path.GetFolder(), configFolder, module.moduleInfo.moduleName, m_pScriptSystem->GetEngineSourcesPath().Concat("Engine")
             );
 
             SR_LOG("CppCodeGenerator::RegenerateChangedModules() : generating module...\n\tModule: {}\n\tCommand: {}", module.moduleInfo.moduleName, command);
+            const SR_UTILS_NS::TimePointType startTime = SR_HTYPES_NS::Time::Instance().Now();
             std::string result = SR_PLATFORM_NS::ExecuteCommand(command);
 
+            const SR_UTILS_NS::TimePointType endTime = SR_HTYPES_NS::Time::Instance().Now();
+            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+
             SR_LOG("CppCodeGenerator::RegenerateChangedModules() : codegen result:\n{}", result);
+            SR_LOG("CppCodeGenerator::RegenerateChangedModules() : codegen duration: {} ms", duration);
 
             GenerateModule(module);
 

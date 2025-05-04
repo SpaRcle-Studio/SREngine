@@ -54,7 +54,7 @@ macro(SRCodegen)
         --codegen_dir ${SR_CMAKE_ROOT_BUILD_DIRECTORY}
         --root_build_dir ${SR_CMAKE_ROOT_BUILD_DIRECTORY}
         --repo_dir ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}
-        --lib_clang_dir ${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities
+        --config_dir ${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities
         --module_name \"Application\"")
 
     execute_process(
@@ -62,7 +62,7 @@ macro(SRCodegen)
         --codegen_dir "${SR_CMAKE_ROOT_BUILD_DIRECTORY}"
         --root_build_dir "${SR_CMAKE_ROOT_BUILD_DIRECTORY}"
         --repo_dir "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}"
-        --lib_clang_dir "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
+        --config_dir "${SR_CMAKE_RESOURCES_DIRECTORY}/Engine/Utilities"
         --module_name "Application"
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output

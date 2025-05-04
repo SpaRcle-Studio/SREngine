@@ -5,6 +5,10 @@ import logger_utils
 import sparcle_utils
 import cpp_operator
 import codegen_context
+import pickle
+
+from pathlib import Path
+from time import perf_counter
 
 try:
     import clang.cindex
@@ -72,45 +76,6 @@ def has_copy_constructor(cls):
 
     # Если нет других конструкторов -> компилятор его создаст
     return not has_other_ctors
-
-
-def get_engine_include_args(context: codegen_context.CodegenContext):
-    engine_root = ''
-    if context.is_script:
-        engine_root = context.help_sources_dir
-    else:
-        engine_root = context.analyze_dir + '/Engine'
-
-    includes = [
-        f'{engine_root}/Core/inc',
-        f'{engine_root}/Core/libs',
-        f'{engine_root}/Core/libs/Utils/inc',
-        f'{engine_root}/Core/libs/Scripting/inc',
-        f'{engine_root}/Core/libs/Audio/inc',
-        f'{engine_root}/Core/libs/Physics/inc',
-        f'{engine_root}/Core/libs/Graphics/inc',
-    ]
-
-    if not context.is_script:
-        includes.append(f'{engine_root}/Core/libs/Audio/libs')
-        includes.append(f'{engine_root}/Core/libs/Audio/libs/libmodplug/src')
-        includes.append(f'{engine_root}/Core/libs/Graphics/libs/EvoVulkan/Core/inc')
-        includes.append(f'{engine_root}/Core/libs/Graphics/libs')
-        includes.append(f'{engine_root}/Core/libs/Graphics/libs/imgui')
-        includes.append(f'{engine_root}/Core/libs/Physics/libs')
-        includes.append(f'{engine_root}/Core/libs/Utils/libs')
-        includes.append(f'{engine_root}/Core/libs/Utils/libs/openssl/include')
-        includes.append(f'{engine_root}/Core/libs/Utils/libs/litehtml/include')
-        includes.append(f'{engine_root}/Core/libs/Utils/libs/cppcoro/include')
-        includes.append(f'{engine_root}/Core/libs/Utils/libs/assimp/include')
-        includes.append(f'{engine_root}/Core/libs/Utils/libs/fmt/include')
-        includes.append(f'{engine_root}/Core/libs/Scripting/libs')
-
-        includes.append(f'{context.build_dir}/Engine/Core/libs/Utils/libs/assimp/include')
-        includes.append(f'{context.build_dir}')
-
-    include_args = [f'-I{ os.path.abspath(sparcle_utils.normalize_path(inc))}' for inc in includes]
-    return include_args
 
 
 def preprocess_cpp(source, output, include_args):
@@ -217,7 +182,7 @@ def debug_extract_property_default_value(cursor, deep=0):
     tokens = list(cursor.get_tokens())
     token_strs = [token.spelling for token in tokens]
 
-    print(f'[{deep}][Debug] Extract default value for {cursor.kind} \"{cursor.spelling}\" \"{cursor.type.spelling}\", {token_strs}')
+    #print(f'[{deep}][Debug] Extract default value for {cursor.kind} \"{cursor.spelling}\" \"{cursor.type.spelling}\", {token_strs}')
 
     for child in cursor.get_children():
         debug_extract_property_default_value(child, deep + 1)
@@ -233,7 +198,7 @@ def extract_property_default_value(cursor):
     tokens = list(cursor.get_tokens())
     token_strs = [token.spelling for token in tokens]
 
-    print(f'Extract default value for {cursor.spelling}, {token_strs}')
+    #print(f'Extract default value for {cursor.spelling}, {token_strs}')
 
     for child in cursor.get_children():
         tokens = list(child.get_tokens())
@@ -271,7 +236,7 @@ def extract_property_default_value(cursor):
                     expression += token.spelling
                 return expression
 
-    print(f'Default value not found for {cursor.spelling}')
+    #print(f'Default value not found for {cursor.spelling}')
     return None
 
 
@@ -348,8 +313,8 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
 
     if not property_obj.default_value:
         property_obj.default_value = extract_property_default_value(clang_child)
-        if property_obj.default_value:
-            print(f'Found default value: {property_obj.default_value}')
+        #if property_obj.default_value:
+        #    print(f'Found default value: {property_obj.default_value}')
 
 
 def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
@@ -429,7 +394,7 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
                                     break
 
                 if all_found == 6:
-                    print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}, VA_ARGS: {va_args}')
+                    #print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}, VA_ARGS: {va_args}')
                     enum_object = reflection_utils.CPPEnum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
                     code_structure.enums.append(enum_object)
                     break
@@ -437,7 +402,7 @@ def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
         return
 
 
-def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help_source):
+def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
     is_class_or_struct = parent_node.kind == clang.cindex.CursorKind.CLASS_DECL or parent_node.kind == clang.cindex.CursorKind.STRUCT_DECL
     if is_class_or_struct and parent_node.is_definition():
         if not has_static_function(parent_node, 'GetMetaStatic'):
@@ -448,10 +413,10 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
         class_obj = reflection_utils.SpaRcleClass(class_name, namespaces)
         class_obj.path = parent_node.location.file.name
 
-        if is_help_source:
-            class_obj.is_help_source = True
-            code_structure.sparcle_classes.append(class_obj)
-            return
+        #if is_help_source:
+        #    class_obj.is_help_source = True
+        #    code_structure.sparcle_classes.append(class_obj)
+        #    return
 
         class_obj.inspector = extract_special_tag_comment_data(parent_node, 'inspector')
 
@@ -467,7 +432,8 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
         class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
 
         if class_obj.inspector:
-            print(f'Found class inspector: {class_obj.inspector}')
+            #print(f'Found class inspector: {class_obj.inspector}')
+            pass
 
         # Перебираем все поля класса
         for child in parent_node.get_children():
@@ -480,7 +446,7 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
             if child.kind == clang.cindex.CursorKind.TYPEDEF_DECL:
                 virtual_property = extract_special_tag_comment_data(child, 'virtualProperty')
                 if virtual_property:
-                    print(f'Found virtual property: {virtual_property}')
+                    #print(f'Found virtual property: {virtual_property}')
                     property_obj = reflection_utils.CPPProperty(virtual_property, 'Unknown')
                     property_obj.virtual = True
                     process_property(property_obj, child)
@@ -490,7 +456,7 @@ def parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help
                 variable_name = child.spelling
                 variable_type = extract_property_type(child)
                 property_obj = reflection_utils.CPPProperty(variable_name, variable_type)
-                print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
+                #print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
                 process_property(property_obj, child)
                 class_obj.add_variable(property_obj)
 
@@ -620,15 +586,15 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
 
 
 def parse_header_tree(logger, file_path, deep, parent_node, code_structure, namespaces, context: codegen_context.CodegenContext):
-    is_help_source = False
-    if context.help_sources_dir != '' and parent_node.location.file:
-        is_help_source = context.help_sources_dir in parent_node.location.file.name.replace("\\", "/")
+    #is_help_source = False
+    #if context.help_sources_dir != '' and parent_node.location.file:
+    #    is_help_source = context.help_sources_dir in parent_node.location.file.name.replace("\\", "/")
 
     try:
-        if not is_help_source:
-            parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
-        parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help_source)
-        #parse_scriptable_class(logger, parent_node, code_structure, namespaces)
+        #if not is_help_source:
+        parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
+        #parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help_source)
+        parse_sparcle_class(logger, parent_node, code_structure, namespaces)
 
         new_namespace = namespaces
         # Проверяем, является ли текущий узел пространством имен
@@ -648,24 +614,48 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
 
 def parse_header_file(logger: logger_utils.Logger, file_path, include_args, context: codegen_context.CodegenContext):
     code_structure = reflection_utils.CPPCodeStructure()
+    cache_file = os.path.join(context.config_dir, 'engine-code-structure.pkl')
+    if context.is_script and os.path.isfile(cache_file):
+        with open(cache_file, 'rb') as f:
+            code_structure = pickle.load(f)
+            code_structure.set_sources_as_help()
 
-    # Передаем каждый путь как отдельный аргумент
     args = include_args
     args += ['-fsyntax-only', '-x', 'c++', '-std=c++20']
 
+    start = perf_counter()
+
     index = clang.cindex.Index.create()
-    translation_unit = index.parse(file_path, args=args)
+    translation_unit = index.parse(
+        file_path,
+        args=args
+        #options=clang.cindex.TranslationUnit.PARSE_INCOMPLETE
+    )
 
-    #print('check diagnostics...')
-    #if translation_unit.diagnostics:
-    #    for diagnostic in translation_unit.diagnostics:
-    #        if 'warning: ' in str(diagnostic):
-    #            continue
-    #        print(diagnostic)
+    end = perf_counter()
+    logger.log_info(f'Parse AST tree time: {end - start:.2f} sec')
 
-    # Проходим по узлам файла
+    start = perf_counter()
+
+    valid_files = set(Path(f).resolve() for f in context.files_for_codegen)
+
     for node in translation_unit.cursor.get_children():
+        try:
+            node_file = Path(node.location.file.name).resolve()
+        except AttributeError:
+            continue # у узла нет привязки к файлу
+
+        if node_file not in valid_files:
+            continue # этот файл не входит в список для кодгена
+
         parse_header_tree(logger, file_path, 0, node, code_structure, [], context)
+
+    end = perf_counter()
+    logger.log_info(f'Analyze AST tree time: {end - start:.2f} sec')
+
+    if not context.is_script:
+        with open(cache_file, 'wb') as f:
+            pickle.dump(code_structure, f)
 
     return code_structure
 

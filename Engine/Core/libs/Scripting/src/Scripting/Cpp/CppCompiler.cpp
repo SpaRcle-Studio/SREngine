@@ -270,11 +270,17 @@ namespace SR_SCRIPTING_NS {
 
         SR_LOG("CppCompiler::Compile() : command: " + command);
 
+        const SR_UTILS_NS::TimePointType startTime = SR_HTYPES_NS::Time::Instance().Now();
+
         const std::string result = SR_PLATFORM_NS::ExecuteCommand(command);
         const bool hasErrors =
                 result.find("compilation terminated") != std::string::npos ||
                 result.find("fatal error") != std::string::npos ||
                 result.find("error") != std::string::npos;
+
+        const SR_UTILS_NS::TimePointType endTime = SR_HTYPES_NS::Time::Instance().Now();
+        const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+        SR_LOG("CppCompiler::Compile() : compilation time: {} ms", duration);
 
         if (hasErrors) {
             SR_ERROR("CppCompiler::Compile() : \"{}\" module compilation failed!\n{}", context.moduleName, result);

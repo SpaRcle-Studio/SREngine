@@ -4,7 +4,6 @@
 
 #include <Utils/macros.h>
 
-#include "src/Scripting/Base/Script.cpp"
 #include "src/Scripting/Base/Behaviour.cpp"
 
 #include "src/Scripting/Cpp/CppBehaviour.cpp"

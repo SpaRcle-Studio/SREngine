@@ -7,70 +7,6 @@ import codegen_context
 import logger_utils
 
 
-def generate_all_includes_cxx(context: codegen_context.CodegenContext) -> str:
-    collected_files = []
-
-    include_dirs = [
-        'Engine/Core/libs/Utils/inc/Utils',
-        'Engine/Core/libs/Graphics/inc/Graphics',
-        'Engine/Core/libs/Audio/inc/Audio',
-        'Engine/Core/libs/Physics/inc/Physics',
-        'Engine/Core/libs/Scripting/inc/Scripting',
-        'Engine/Core/inc',
-    ]
-
-    if context.is_script:
-        patterns = ['*.h', '*.hpp', '*.cpp']
-        include_dirs.append(context.analyze_dir)
-    else:
-        patterns = ['*.h']
-
-    # Преобразуем пути в include_dirs для разных ОС
-    include_dirs = [sparcle_utils.normalize_path(dir) for dir in include_dirs]
-
-    print(f'repo path: {os.path.abspath(context.analyze_dir)}')
-    print('collect files...\n')
-
-    for dir_path, _, _ in os.walk(context.analyze_dir):
-        for pattern in patterns:
-            for file in glob(os.path.join(dir_path, pattern)):
-                normalized_file = sparcle_utils.normalize_path(file)
-                if context.is_script:
-                    collected_files.append(normalized_file)
-                else:
-                    if any((inc_dir in normalized_file) for inc_dir in include_dirs):
-                        collected_files.append(normalized_file)
-
-    print(f'collected files: {len(collected_files)}' + '\n')
-
-    cached_file = os.path.abspath(sparcle_utils.normalize_path(f'{context.codegen_dir}/AllIncludes.cxx'))
-
-    # Получаем директорию из пути к файлу
-    directory = os.path.dirname(cached_file)
-
-    # Проверяем, существует ли директория, и создаем ее, если нет
-    if not os.path.exists(directory):
-        os.makedirs(directory)  # Создает директории рекурсивно
-
-    with open(f'{cached_file}', 'w', encoding='utf8') as f:
-        f.write(sparcle_utils.codegen_cpp_header_comment)
-        f.write(
-            '#define WIN32\n'
-            '\n'
-            '#include <vector>\n'
-            '#include <set>\n'
-            '#include <map>\n'
-            '#include <string>\n'
-            '#include <string_view>\n'
-            '\n'
-        )
-        for file in collected_files:
-            f.write(f'#include "{os.path.abspath(file)}"' + '\n')
-
-    print(f'Parsing header file: {cached_file}' + '\n')
-    return cached_file
-
-
 def generate_stub_vulkan_h(codegen_directory):
     vulkan_h = os.path.abspath(sparcle_utils.normalize_path(f'{codegen_directory}/vulkan/vulkan.h'))
     os.makedirs(os.path.dirname(vulkan_h), exist_ok=True)
@@ -328,7 +264,7 @@ def generate_class_meta_load(f, class_obj, tabs):
     f.write('\t' * tabs + '}\n\n')
     pass
 
-def generate_class_meta(f, class_structures, class_obj, tabs):
+def generate_class_meta(f, context: codegen_context.CodegenContext, class_structures, class_obj, tabs):
     if len(class_obj.inherited_classes) > 0:
         f.write('\t' * tabs + f'/// Include inherited classes.\n')
         for inherited_class in class_obj.inherited_classes:
@@ -553,7 +489,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + '};\n\n')
 
     f.write(f'\t' * tabs + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void RegisterClassMeta_{class_obj.name}() {{' + '\n')
-    f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Register<{class_name}>();' + '\n')
+    f.write(f'\t' * (tabs + 1) + f'SR_UTILS_NS::Factory::Instance().Register<{class_name}>("{context.module_name}");' + '\n')
     f.write(f'\t' * tabs + f'}}\n\n')
 
     f.write(f'\t' * tabs + f'extern "C" SR_CODEGEN_DLL_API_EXPORT void UnregisterClassMeta_{class_obj.name}() {{' + '\n')
@@ -570,8 +506,8 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + '}\n\n')
     pass
 
-def generate_enums_code(codegen_dir, enums):
-    basic_full_path = os.path.normpath(f'{codegen_dir}/EnumsFwd.generated.hpp')
+def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
+    basic_full_path = os.path.normpath(f'{context.codegen_dir}/EnumsFwd.generated.hpp')
     with open(basic_full_path, 'w', encoding='utf8') as f:
         f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write('#ifndef SR_CODEGEN_ENUMS_BASIC_HPP\n')
@@ -594,7 +530,7 @@ def generate_enums_code(codegen_dir, enums):
 
         f.write('#endif\n')
 
-    full_path = os.path.normpath(f'{codegen_dir}/Enums.generated.hpp')
+    full_path = os.path.normpath(f'{context.codegen_dir}/Enums.generated.hpp')
     with open(full_path, 'w', encoding='utf8') as f:
         f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write(f'#include "EnumsFwd.generated.hpp"\n\n')
@@ -803,16 +739,16 @@ def generate_enums_code(codegen_dir, enums):
 
         f.write('\n#endif // SR_CODEGEN_ENUMS_HPP\n')
 
-        print(f'Remove old enum files: {codegen_dir}/../Enum/*.hpp')
+        logger.log_info(f'Remove old enum files: {context.codegen_dir}/../Enum/*.hpp')
 
-        for file in glob(f'{codegen_dir}/../Enum/*.hpp'):
+        for file in glob(f'{context.codegen_dir}/../Enum/*.hpp'):
             os.remove(file)
 
-        print(f'Generating new enum files: {codegen_dir}/../Enum/*.hpp')
+        logger.log_info(f'Generating new enum files: {context.codegen_dir}/../Enum/*.hpp')
 
         # formatting
         for enum_obj in enums:
-            enum_gen_path = os.path.normpath(f'{codegen_dir}/../Enum/{enum_obj.name}.hpp')
+            enum_gen_path = os.path.normpath(f'{context.codegen_dir}/../Enum/{enum_obj.name}.hpp')
             os.makedirs(os.path.dirname(enum_gen_path), exist_ok=True)
             with open(enum_gen_path, 'w', encoding='utf8') as f:
                 caps_enum_name = enum_obj.name.upper()
@@ -1032,7 +968,7 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
 
                 tabs = 0
 
-                generate_class_meta(f, class_structures, class_obj, tabs)
+                generate_class_meta(f, context, class_structures, class_obj, tabs)
 
                 if len(class_obj.namespaces) > 0:
                     tabs = 1

@@ -113,7 +113,7 @@ class CPPProperty:
         if value.startswith(': '):
             value = value[2:]
 
-        print(f'Add custom arg to prop \"{self.name}\": \"{arg}\", key: \"{key}\", value: \"{value}\"')
+        #print(f'Add custom arg to prop \"{self.name}\": \"{arg}\", key: \"{key}\", value: \"{value}\"')
 
         self.custom_args[key] = value
 
@@ -251,3 +251,7 @@ class CPPCodeStructure:
             class_name = self.class_names_table[class_name]
 
         return class_name
+
+    def set_sources_as_help(self):
+        for sparcle_class in self.sparcle_classes:
+            sparcle_class.is_help_source = True

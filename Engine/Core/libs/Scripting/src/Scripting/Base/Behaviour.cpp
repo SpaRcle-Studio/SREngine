@@ -193,8 +193,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::IsInstanceValid() const noexcept {
-        //return m_cppBehaviour && m_cppBehaviour->GetInstance();
-        return m_cppBehaviour;
+        return m_cppBehaviour && m_cppBehaviour->IsValid();
     }
 
     void Behaviour::OnScriptReloaded() {
@@ -208,5 +207,9 @@ namespace SR_SCRIPTING_NS {
         if (HasParent()) {
             GetParent()->SetDirty(true);
         }
+    }
+
+    bool Behaviour::ExecuteInEditMode() const {
+        return m_cppBehaviour && m_cppBehaviour->ExecuteInEditMode();
     }
 }
