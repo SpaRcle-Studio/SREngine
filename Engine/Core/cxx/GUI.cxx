@@ -38,3 +38,4 @@
 #include "../src/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/BehaviourPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.cpp"

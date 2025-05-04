@@ -22,7 +22,7 @@ namespace SpaRcle::Scripts::SREngine {
             if (logInterval > 0.f) {
                 logInterval -= dt;
                 return;
-            } 
+            }
             logInterval = 1.f;
             SR_DEBUG_LOG("TestBehaviour::Update() : dt log 2 = {}", dt);
         }

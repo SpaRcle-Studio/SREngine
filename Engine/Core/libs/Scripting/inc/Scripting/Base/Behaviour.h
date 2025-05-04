@@ -30,6 +30,9 @@ namespace SR_SCRIPTING_NS {
         void Save(SR_UTILS_NS::ISerializer& serializer) const override;
         bool Load(SR_UTILS_NS::IDeserializer& deserializer) override;
 
+        SR_NODISCARD bool IsInstanceValid() const noexcept;
+        SR_NODISCARD bool ExecuteInEditMode() const override;
+
     private:
         void Awake() override;
         void OnEnable() override;
@@ -50,24 +53,18 @@ namespace SR_SCRIPTING_NS {
         void OnTriggerExit(const SR_UTILS_NS::CollisionData& data) override;
         void OnTriggerStay(const SR_UTILS_NS::CollisionData& data) override;
 
-        SR_NODISCARD bool ExecuteInEditMode() const override;
-
     private:
         void SetBehaviourName(SR_UTILS_NS::StringAtom name);
         void OnScriptReloaded();
 
         SR_NODISCARD ScriptSystem* GetScriptSystem() const noexcept;
-        SR_NODISCARD bool IsInstanceValid() const noexcept;
 
     private:
         mutable ScriptSystem* m_scriptSystem = nullptr;
         CppBehaviourInstance* m_cppBehaviour = nullptr;
 
-        /// @property @setter(SetBehaviourName)
+        /// @property @setter(SetBehaviourName) @inspector(BehaviourNamePropertyDrawer)
         SR_UTILS_NS::StringAtom m_behaviourName;
-
-        /// @virtualProperty(isInstanceValid) @dontSave @readOnly @getter(IsInstanceValid)
-        SR_VIRTUAL_PROPERTY
 
     };
 }

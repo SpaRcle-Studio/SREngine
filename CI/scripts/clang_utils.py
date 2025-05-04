@@ -318,88 +318,88 @@ def process_property(property_obj: reflection_utils.CPPProperty, clang_child):
 
 
 def parse_sparcle_enum(logger, parent_node, code_structure, namespaces):
-    if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
-        if parent_node.spelling.startswith('CODEGEN_ENUM_DETAILS_FUNCTION_'):
-            all_found = 0
-            name = '(not found)'
-            variant = '(not found)'
-            enum_type = '(not found)'
-            enum_class = '(not found)'
-            va_args = '(not found)'
-            count = 0
-
-            for function_part in parent_node.get_children():
-                if function_part.kind == clang.cindex.CursorKind.COMPOUND_STMT:
-                    for function_body in function_part.get_children():
-                        if function_body.kind ==  clang.cindex.CursorKind.DECL_STMT:
-                            for child in function_body.get_children():
-                                variable_name = child.spelling
-                                if variable_name == 'CODEGEN_ENUM_VARIANT':
-                                    for child2 in child.get_children():
-                                        if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
-                                            variant = child2.spelling
-                                            all_found += 1
-                                    break
-                                if variable_name == 'CODEGEN_ENUM_COUNT':
-                                    for child2 in child.get_children():
-                                        if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
-                                            for child3 in child2.get_children():
-                                                if child3.kind == clang.cindex.CursorKind.INTEGER_LITERAL:
-                                                    tokens = list(child2.get_tokens())
-                                                    count = int(tokens[0].spelling)
-                                                    all_found += 1
-                                                    break
-                                            break
-                                    break
-                                if variable_name == 'CODEGEN_ENUM_NAME':
-                                    # extract const char* value
-                                    for child2 in child.get_children():
-                                        if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
-                                            for child3 in child2.get_children():
-                                                if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
-                                                    name = child3.spelling[1:-1]
-                                                    all_found += 1
-                                                    break
-                                        break
-                                    break
-                                if variable_name == 'CODEGEN_ENUM_TYPE':
-                                    for child2 in child.get_children():
-                                        if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
-                                            for child3 in child2.get_children():
-                                                if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
-                                                    enum_type = child3.spelling[1:-1]
-                                                    all_found += 1
-                                                    break
-                                        break
-                                    break
-                                if variable_name == 'CODEGEN_ENUM_VA_ARGS':
-                                    for child2 in child.get_children():
-                                        if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
-                                            for child3 in child2.get_children():
-                                                if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
-                                                    va_args = child3.spelling[2:-2]
-                                                    all_found += 1
-                                                    break
-                                        break
-                                    break
-                                if variable_name == 'CODEGEN_ENUM_CLASS':
-                                    for child2 in child.get_children():
-                                        if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
-                                            for child3 in child2.get_children():
-                                                if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
-                                                    enum_class = child3.spelling[1:-1]
-                                                    all_found += 1
-                                                    break
-                                        break
-                                    break
-
-                if all_found == 6:
-                    #print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}, VA_ARGS: {va_args}')
-                    enum_object = reflection_utils.CPPEnum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
-                    code_structure.enums.append(enum_object)
-                    break
-
+    if parent_node.kind != clang.cindex.CursorKind.STRUCT_DECL or not parent_node.is_definition():
         return
+
+    if not parent_node.spelling.startswith('CODEGEN_ENUM_DETAILS_STRUCT_'):
+        return
+
+    all_found = 0
+    name = '(not found)'
+    variant = '(not found)'
+    enum_type = '(not found)'
+    enum_class = '(not found)'
+    va_args = '(not found)'
+    count = 0
+
+    for child in parent_node.get_children():
+        if child.kind != clang.cindex.CursorKind.FIELD_DECL:
+            continue
+
+        if child.spelling == 'CODEGEN_ENUM_VARIANT':
+            for child2 in child.get_children():
+                if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
+                    variant = child2.spelling
+                    all_found += 1
+            continue
+
+        if child.spelling == 'CODEGEN_ENUM_COUNT':
+            for child2 in child.get_children():
+                if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                    for child3 in child2.get_children():
+                        if child3.kind == clang.cindex.CursorKind.INTEGER_LITERAL:
+                            tokens = list(child2.get_tokens())
+                            count = int(tokens[0].spelling)
+                            all_found += 1
+                    break
+            continue
+
+        if child.spelling == 'CODEGEN_ENUM_NAME':
+            # extract const char* value
+            for child2 in child.get_children():
+                if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                    for child3 in child2.get_children():
+                        if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                            name = child3.spelling[1:-1]
+                            all_found += 1
+                    break
+            continue
+
+        if child.spelling == 'CODEGEN_ENUM_TYPE':
+            for child2 in child.get_children():
+                if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                    for child3 in child2.get_children():
+                        if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                            enum_type = child3.spelling[1:-1]
+                            all_found += 1
+                    break
+            continue
+
+        if child.spelling == 'CODEGEN_ENUM_VA_ARGS':
+            for child2 in child.get_children():
+                if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                    for child3 in child2.get_children():
+                        if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                            va_args = child3.spelling[2:-2]
+                            all_found += 1
+                    break
+            continue
+
+        if child.spelling == 'CODEGEN_ENUM_CLASS':
+            for child2 in child.get_children():
+                if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                    for child3 in child2.get_children():
+                        if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                            enum_class = child3.spelling[1:-1]
+                            all_found += 1
+                    break
+            continue
+
+    if all_found == 6:
+        enum_object = reflection_utils.CPPEnum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name, va_args)
+        code_structure.enums.append(enum_object)
+    else:
+        logger.log_fatal_error(f'Error: enum {parent_node.spelling} not found all fields! Found {all_found} of 6!')
 
 
 def parse_sparcle_class(logger, parent_node, code_structure, namespaces):
@@ -647,8 +647,8 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     index = clang.cindex.Index.create()
     translation_unit = index.parse(
         file_path,
-        args=args
-        #options=clang.cindex.TranslationUnit.PARSE_INCOMPLETE
+        args=args,
+        options=clang.cindex.TranslationUnit.PARSE_SKIP_FUNCTION_BODIES
     )
 
     end = perf_counter()
