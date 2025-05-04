@@ -12,7 +12,7 @@ DEFAULT_CPP_TRIVIAL_TYPES = [
 
 def normalize_path(path):
     """Нормализует слеши в путях для различных ОС."""
-    return os.path.normpath(path)
+    return os.path.normpath(path).replace('\\', '/')
 
 
 def make_serialize_property_name(name):

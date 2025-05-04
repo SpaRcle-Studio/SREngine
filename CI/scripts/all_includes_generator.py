@@ -76,10 +76,11 @@ def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenC
 
     for dir_path, _, _ in os.walk(context.analyze_dir):
         for file_path in glob(os.path.join(dir_path, '*.*'), recursive=False):
+            file_path = sparcle_utils.normalize_path(file_path)
             if any((check_dir in file_path) for check_dir in excludes):
                 continue
             if any((check_dir in file_path) for check_dir in includes):
-                collected_files.append(sparcle_utils.normalize_path(file_path))
+                collected_files.append(file_path)
 
 
     files_for_codegen = []
