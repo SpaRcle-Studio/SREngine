@@ -85,10 +85,6 @@ def collect_files(logger: logger_utils.Logger, context: codegen_context.CodegenC
 
     files_for_codegen = []
     for file_path in collected_files:
-        if file_path.endswith('macros.h'):
-            files_for_codegen.append(file_path)
-            continue
-
         with open(file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 if any(token in line for token in TARGET_TOKENS):

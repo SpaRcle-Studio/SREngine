@@ -585,7 +585,17 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             code_structure.add_scriptable_class(class_obj)
 
 
-def parse_header_tree(logger, file_path, deep, parent_node, code_structure, namespaces, context: codegen_context.CodegenContext):
+def parse_header_tree(logger, deep, parent_node, code_structure, namespaces, context: codegen_context.CodegenContext):
+    if not parent_node.location.file:
+        return
+
+    #if sparcle_utils.normalize_path(parent_node.location.file.name) not in context.valid_files_for_codegen:
+    #    for child in parent_node.get_children():
+    #        parse_header_tree(logger, deep + 1, child, code_structure, namespaces, context)
+    #    return
+
+    #context.codegen_stack_trace.append(f'[{deep}] {parent_node.spelling} ({parent_node.kind}), {location}')
+
     #is_help_source = False
     #if context.help_sources_dir != '' and parent_node.location.file:
     #    is_help_source = context.help_sources_dir in parent_node.location.file.name.replace("\\", "/")
@@ -595,6 +605,10 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
     #        return
 
     try:
+        #if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
+        #    if parent_node.spelling.startswith('CODEGEN_ENUM_DETAILS_FUNCTION_'):
+        #        logger.log_info(f'{context.codegen_stack_trace}')
+
         #if not is_help_source:
         parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
         #parse_sparcle_class(logger, parent_node, code_structure, namespaces, is_help_source)
@@ -608,12 +622,14 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
 
         # Рекурсивный обход других узлов
         for child in parent_node.get_children():
-            parse_header_tree(logger, file_path, deep + 1, child, code_structure, new_namespace, context)
+            parse_header_tree(logger, deep + 1, child, code_structure, new_namespace, context)
 
     except Exception as e:
         if str(e).startswith('Unknown template argument kind'):
             return
         logger.log_fatal_error(f'Error parse_tree: {e}')
+
+    #context.codegen_stack_trace.pop()
 
 
 def parse_header_file(logger: logger_utils.Logger, file_path, include_args, context: codegen_context.CodegenContext):
@@ -646,26 +662,7 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     context.valid_files_for_codegen = set(sparcle_utils.normalize_path(os.path.abspath(f)) for f in context.files_for_codegen)
 
     for node in translation_unit.cursor.get_children():
-        location = ''
-        try:
-            location = node.location.file.name
-        except AttributeError:
-            pass
-
-        logger.log_info(f'Found node: {node.spelling}, {node.kind}, {location}')
-
-        try:
-            node_file = sparcle_utils.normalize_path(os.path.abspath(node.location.file.name))
-        except AttributeError:
-            continue # у узла нет привязки к файлу
-
-        if node_file not in context.valid_files_for_codegen:
-            logger.log_info(f'Skip file: {node_file}')
-            continue # этот файл не входит в список для кодгена
-
-        logger.log_info(f'Parse node: {node.spelling}, {node.kind}, {location}')
-
-        parse_header_tree(logger, file_path, 0, node, code_structure, [], context)
+        parse_header_tree(logger, 0, node, code_structure, [], context)
 
     end = perf_counter()
     logger.log_info(f'Analyze AST tree time: {end - start:.2f} sec')

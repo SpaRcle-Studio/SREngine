@@ -9,3 +9,4 @@ class CodegenContext:
         self.is_script = False
         self.files_for_codegen = []
         self.valid_files_for_codegen = set()
+        self.codegen_stack_trace = []
