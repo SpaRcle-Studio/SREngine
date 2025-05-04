@@ -137,18 +137,9 @@ def generate_all_includes_cxx(logger: logger_utils.Logger, context: codegen_cont
     with open(f'{cached_file}', 'w', encoding='utf8') as f:
         f.write(sparcle_utils.codegen_cpp_header_comment)
 
+        f.write('#define SR_ENGINE_CODEGEN_CLANG_PARSE_MODE\n\n')
+
         for file in context.files_for_codegen:
             f.write(f'#include "{os.path.abspath(file)}"' + '\n')
-
-        #f.write(
-        #    '\n#define WIN32\n'
-        #    '\n'
-        #    '#include <vector>\n'
-        #    '#include <set>\n'
-        #    '#include <map>\n'
-        #    '#include <string>\n'
-        #    '#include <string_view>\n'
-        #    '\n'
-        #)
 
     return cached_file

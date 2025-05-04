@@ -249,7 +249,11 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            AllocateBehaviourInternalInstance(pInstance);
+            if (AllocateBehaviourInternalInstance(pInstance)) {
+                if (pInstance->GetReloadCallback()) {
+                    pInstance->GetReloadCallback()();
+                }
+            }
         }
     }
 }
