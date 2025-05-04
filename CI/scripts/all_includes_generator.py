@@ -129,7 +129,7 @@ def get_engine_include_args(context: codegen_context.CodegenContext):
     #    includes.append(f'{context.build_dir}/Engine/Core/libs/Utils/libs/assimp/include')
     #    includes.append(f'{context.build_dir}')
 
-    include_args = [f'-I{ os.path.abspath(sparcle_utils.normalize_path(inc))}' for inc in includes]
+    include_args = [f'-I{ sparcle_utils.normalize_path(os.path.abspath(inc))}' for inc in includes]
     return include_args
 
 

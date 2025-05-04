@@ -623,6 +623,8 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     args = include_args
     args += ['-fsyntax-only', '-x', 'c++', '-std=c++20']
 
+    logger.log_info(f'Clang args: {args}')
+
     start = perf_counter()
 
     index = clang.cindex.Index.create()
