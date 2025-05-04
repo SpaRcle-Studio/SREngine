@@ -22,7 +22,7 @@ namespace SR_SCRIPTING_NS {
     class CppBehaviourInstance;
     class Behaviour;
 
-    /// @category(Scripting)
+    /// @category(Scripting) @inspector(BehaviourPropertyDrawer)
     class Behaviour final : public SR_UTILS_NS::Component {
         SR_CLASS()
         using Super = SR_UTILS_NS::Component;

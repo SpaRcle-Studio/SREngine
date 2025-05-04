@@ -1,2 +1,0 @@
-add_library(Scripts STATIC ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/SpaRcleAPI/CoreAPIImpl.cpp TestScript.cpp)
-target_include_directories(Scripts PRIVATE ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/SpaRcleAPI)

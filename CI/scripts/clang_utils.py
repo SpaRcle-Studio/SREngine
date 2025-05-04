@@ -637,11 +637,11 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
 
     start = perf_counter()
 
-    valid_files = set(Path(f).resolve() for f in context.files_for_codegen)
+    valid_files = set(str(Path(f).resolve()).replace('\\', '/') for f in context.files_for_codegen)
 
     for node in translation_unit.cursor.get_children():
         try:
-            node_file = Path(node.location.file.name).resolve()
+            node_file = str(Path(node.location.file.name).resolve()).replace('\\', '/')
         except AttributeError:
             continue # у узла нет привязки к файлу
 
