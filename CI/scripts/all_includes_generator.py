@@ -140,15 +140,15 @@ def generate_all_includes_cxx(logger: logger_utils.Logger, context: codegen_cont
         for file in context.files_for_codegen:
             f.write(f'#include "{os.path.abspath(file)}"' + '\n')
 
-        f.write(
-            '\n#define WIN32\n'
-            '\n'
-            '#include <vector>\n'
-            '#include <set>\n'
-            '#include <map>\n'
-            '#include <string>\n'
-            '#include <string_view>\n'
-            '\n'
-        )
+        #f.write(
+        #    '\n#define WIN32\n'
+        #    '\n'
+        #    '#include <vector>\n'
+        #    '#include <set>\n'
+        #    '#include <map>\n'
+        #    '#include <string>\n'
+        #    '#include <string_view>\n'
+        #    '\n'
+        #)
 
     return cached_file

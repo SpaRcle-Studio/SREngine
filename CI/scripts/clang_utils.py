@@ -585,8 +585,30 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             code_structure.add_scriptable_class(class_obj)
 
 
+NOT_ALLOWED_NAMESPACES = { 'std', 'stdext', 'ax' }
+
+ALLOWED_NODE_KINDS = {
+    clang.cindex.CursorKind.CLASS_DECL, clang.cindex.CursorKind.STRUCT_DECL,
+    clang.cindex.CursorKind.CLASS_TEMPLATE, clang.cindex.CursorKind.CLASS_TEMPLATE_PARTIAL_SPECIALIZATION,
+    clang.cindex.CursorKind.NAMESPACE, clang.cindex.CursorKind.NAMESPACE_REF,
+    clang.cindex.CursorKind.FUNCTION_DECL
+}
+
 def parse_header_tree(logger, deep, parent_node, code_structure, namespaces, context: codegen_context.CodegenContext):
     if not parent_node.location.file:
+        return
+
+    try:
+        if parent_node.kind not in ALLOWED_NODE_KINDS:
+            return
+
+        # not working on fucking linux :(
+        # optimization gives ~0.15 sec
+        #if parent_node.kind == clang.cindex.CursorKind.NAMESPACE:
+        #    if parent_node.spelling in NOT_ALLOWED_NAMESPACES:
+        #        return
+
+    except ValueError:
         return
 
     if sparcle_utils.normalize_path(parent_node.location.file.name) not in context.valid_files_for_codegen:
@@ -594,24 +616,17 @@ def parse_header_tree(logger, deep, parent_node, code_structure, namespaces, con
             parse_header_tree(logger, deep + 1, child, code_structure, namespaces, context)
         return
 
-    try:
-        parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
-        parse_sparcle_class(logger, parent_node, code_structure, namespaces)
+    parse_sparcle_enum(logger, parent_node, code_structure, namespaces)
+    parse_sparcle_class(logger, parent_node, code_structure, namespaces)
 
-        new_namespace = namespaces
-        # Проверяем, является ли текущий узел пространством имен
-        if parent_node.kind == clang.cindex.CursorKind.NAMESPACE:
-            if not parent_node.spelling == 'std':
-                new_namespace = namespaces + [parent_node.spelling]
+    # Проверяем, является ли текущий узел пространством имен
+    if parent_node.kind == clang.cindex.CursorKind.NAMESPACE:
+        #if not parent_node.spelling == 'std':
+        namespaces = namespaces + [parent_node.spelling]
 
-        # Рекурсивный обход других узлов
-        for child in parent_node.get_children():
-            parse_header_tree(logger, deep + 1, child, code_structure, new_namespace, context)
-
-    except Exception as e:
-        if str(e).startswith('Unknown template argument kind'):
-            return
-        logger.log_fatal_error(f'Error parse_tree: {e}')
+    # Рекурсивный обход других узлов
+    for child in parent_node.get_children():
+        parse_header_tree(logger, deep + 1, child, code_structure, namespaces, context)
 
 
 def parse_header_file(logger: logger_utils.Logger, file_path, include_args, context: codegen_context.CodegenContext):
@@ -642,6 +657,7 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     start = perf_counter()
 
     context.valid_files_for_codegen = set(sparcle_utils.normalize_path(os.path.abspath(f)) for f in context.files_for_codegen)
+    logger.log_info(f'Valid files for codegen: {len(context.valid_files_for_codegen)}')
 
     for node in translation_unit.cursor.get_children():
         parse_header_tree(logger, 0, node, code_structure, [], context)
