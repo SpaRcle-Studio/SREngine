@@ -8,3 +8,4 @@ class CodegenContext:
         self.help_sources_dir = ''
         self.is_script = False
         self.files_for_codegen = []
+        self.valid_files_for_codegen = set()
