@@ -662,6 +662,9 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
     context.valid_files_for_codegen = set(sparcle_utils.normalize_path(os.path.abspath(f)) for f in context.files_for_codegen)
 
     for node in translation_unit.cursor.get_children():
+        location = node.location.file.name if node.location.file else ''
+        logger.log_info(f'{node.spelling} ({node.kind}), {location}')
+
         parse_header_tree(logger, 0, node, code_structure, [], context)
 
     end = perf_counter()
