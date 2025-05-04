@@ -590,9 +590,9 @@ def parse_header_tree(logger, file_path, deep, parent_node, code_structure, name
     #if context.help_sources_dir != '' and parent_node.location.file:
     #    is_help_source = context.help_sources_dir in parent_node.location.file.name.replace("\\", "/")
 
-    if parent_node.location.file:
-        if sparcle_utils.normalize_path(parent_node.location.file.name) not in context.valid_files_for_codegen:
-            return
+    #if parent_node.location.file:
+    #    if sparcle_utils.normalize_path(parent_node.location.file.name) not in context.valid_files_for_codegen:
+    #        return
 
     try:
         #if not is_help_source:
@@ -645,15 +645,14 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
 
     context.valid_files_for_codegen = set(sparcle_utils.normalize_path(os.path.abspath(f)) for f in context.files_for_codegen)
 
-    #logger.log_info(f'Valid files: {context.valid_files_for_codegen}')
-
     for node in translation_unit.cursor.get_children():
-        #location = ''
-        #try:
-        #    location = node.location.file.name
-        #except AttributeError:
-        #    pass
-        #
+        location = ''
+        try:
+            location = node.location.file.name
+        except AttributeError:
+            pass
+
+        logger.log_info(f'Found node: {node.spelling}, {node.kind}, {location}')
 
         try:
             node_file = sparcle_utils.normalize_path(os.path.abspath(node.location.file.name))
@@ -661,10 +660,10 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args, cont
             continue # у узла нет привязки к файлу
 
         if node_file not in context.valid_files_for_codegen:
-            #logger.log_info(f'Skip file: {node_file}')
+            logger.log_info(f'Skip file: {node_file}')
             continue # этот файл не входит в список для кодгена
 
-        #logger.log_info(f'Found node: {node.spelling}, {node.kind}, {node_file}')
+        logger.log_info(f'Parse node: {node.spelling}, {node.kind}, {location}')
 
         parse_header_tree(logger, file_path, 0, node, code_structure, [], context)
 
