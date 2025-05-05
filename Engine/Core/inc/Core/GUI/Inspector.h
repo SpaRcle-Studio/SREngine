@@ -87,6 +87,7 @@ namespace SR_CORE_GUI_NS {
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentsSerializer;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;
         SR_UTILS_NS::Component::Ptr m_editableComponent;
+        SR_UTILS_NS::Subscription m_moduleReloadSubscription;
 
     };
 }

@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 #define SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 
-#include <Scripting/macros.h>
+#include <Scripting/Cpp/ModuleManager.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Resources/IResource.h>
@@ -20,6 +20,7 @@ namespace SR_UTILS_NS {
 namespace SR_SCRIPTING_NS {
     class ScriptSystem;
     class CppBehaviourInstance;
+    class CppBehaviour;
     class Behaviour;
 
     /// @category(Scripting) @inspector(BehaviourPropertyDrawer)
@@ -32,6 +33,19 @@ namespace SR_SCRIPTING_NS {
 
         SR_NODISCARD bool IsInstanceValid() const noexcept;
         SR_NODISCARD bool ExecuteInEditMode() const override;
+
+        template<typename T = CppBehaviour> T* GetBehaviour() {
+            if (!m_cppBehaviour) {
+                return nullptr;
+            }
+
+            if constexpr (std::is_same_v<T, CppBehaviour>) {
+                return m_cppBehaviour->GetBehaviour().Get();
+            }
+            else {
+                return dynamic_cast<T*>(m_cppBehaviour->GetBehaviour().Get());
+            }
+        }
 
     private:
         void Awake() override;

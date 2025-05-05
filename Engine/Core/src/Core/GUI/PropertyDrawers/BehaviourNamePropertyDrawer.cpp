@@ -4,9 +4,18 @@
 
 #include <Core/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.h>
 
+#include <Utils/Events/Broadcaster.h>
+
 #include <Codegen/BehaviourNamePropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
+    BehaviourNamePropertyDrawer::BehaviourNamePropertyDrawer() {
+        ReInitNames();
+        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) {
+            ReInitNames();
+        });
+    }
+
     PropertyDrawerFeedback BehaviourNamePropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
@@ -36,20 +45,56 @@ namespace SR_CORE_GUI_NS {
 
         if (value.IsStringAtom()) {
             if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
-                std::string str = pStringAtom->ToString();
-                const bool isValid = pBehaviour->IsInstanceValid();
-                if (!isValid) {
+                const bool markAsInvalid = !pBehaviour->IsInstanceValid();
+                if (markAsInvalid) {
                     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.f, 0.f, 0.f, 1.f));
                 }
 
-                ImGui::InputText("##Input", &str);
+                std::optional<uint64_t> selectedIndex = GetSelectedIndex(*pStringAtom);
 
-                if (!isValid) {
-                    ImGui::PopStyleColor();
+                const char* pPrevValue = selectedIndex ? m_existingNames[selectedIndex.value()].c_str() : pStringAtom->c_str();
+                if (ImGui::BeginCombo("##Combo", pPrevValue, ImGuiComboFlags_NoArrowButton)) {
+                    if (markAsInvalid) {
+                        ImGui::PopStyleColor();
+                    }
+
+                    if (!m_comboOpened) {
+                        ImGui::SetKeyboardFocusHere();
+                        m_comboOpened = true;
+                    }
+
+                    if (ImGui::InputText("##Search", &m_searchBuffer)) {
+                        SR_NOOP;
+                    }
+
+                    for (uint64_t i = 0; i < m_existingNames.size(); ++i) {
+                        if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, m_existingNames[i])) {
+                            continue;
+                        }
+
+                        bool isSelected = (selectedIndex == i);
+                        if (ImGui::Selectable(m_existingNames[i].c_str(), isSelected)) {
+                            selectedIndex = i;
+                            m_searchBuffer = m_existingNames[i];
+                            ImGui::CloseCurrentPopup();
+                        }
+
+                        if (isSelected) {
+                            ImGui::SetItemDefaultFocus();
+                        }
+                    }
+                    ImGui::EndCombo();
+                }
+                else {
+                    if (markAsInvalid) {
+                        ImGui::PopStyleColor();
+                    }
+                    m_comboOpened = false;
+                    m_searchBuffer.clear();
                 }
 
-                if (ImGui::IsItemDeactivatedAfterEdit()) {
-                    SetMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));
+                if (selectedIndex && *pStringAtom != m_existingNames[selectedIndex.value()]) {
+                    SetMappedValue(context, feedback, pStringAtom, m_existingNames[selectedIndex.value()]);
                 }
             }
             else {
@@ -79,5 +124,15 @@ namespace SR_CORE_GUI_NS {
         std::erase_if(m_existingNames, [factory](const auto& name) {
             return factory.IsAbstract(name);
         });
+    }
+
+    std::optional<uint32_t> BehaviourNamePropertyDrawer::GetSelectedIndex(SR_UTILS_NS::StringAtom name) const {
+        for (uint32_t i = 0; i < m_existingNames.size(); ++i) {
+            if (m_existingNames[i] == name) {
+                return i;
+            }
+        }
+
+        return std::nullopt;
     }
 }

@@ -5,6 +5,8 @@
 #include <Scripting/Cpp/ModuleManager.h>
 #include <Scripting/Cpp/ScriptSystem.h>
 
+#include <Utils/Events/Broadcaster.h>
+
 namespace SR_SCRIPTING_NS {
     void CppBehaviourInstance::OnBehaviourUnloaded(ManagerPasskey) {
         m_pBehaviour.AutoFree();
@@ -255,5 +257,7 @@ namespace SR_SCRIPTING_NS {
                 }
             }
         }
+
+        SR_UTILS_NS::Broadcaster::Instance().Broadcast(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID);
     }
 }

@@ -19,11 +19,11 @@ namespace SpaRcle::Scripts::SREngine {
 
     public:
         void Update(float_t dt) override {
-            if (logInterval > 0.f) {
-                logInterval -= dt;
+            if (deltaTime > 0.f) {
+                deltaTime -= dt;
                 return;
             }
-            logInterval = 1.f;
+            deltaTime = logInterval;
             SR_DEBUG_LOG("TestBehaviour::Update() : dt log 2 = {}", dt);
         }
 
@@ -35,7 +35,10 @@ namespace SpaRcle::Scripts::SREngine {
         /// @property
         int privateInt32 = 0;
 
-        float_t logInterval = 0.f;
+        /// @property @readOnly @dontSave
+        float_t deltaTime = 0.f;
+        /// @property
+        float_t logInterval = 1.f;
 
     };
 }

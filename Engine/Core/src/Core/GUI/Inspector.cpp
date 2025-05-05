@@ -12,6 +12,7 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StoreUtils.h>
+#include <Utils/Events/Broadcaster.h>
 
 #include <Scripting/Base/Behaviour.h>
 
@@ -35,6 +36,9 @@ namespace SR_CORE_GUI_NS {
     {
         m_pPointerDrawer = SR_CORE_GUI_NS::PropertyDrawerBase::MakeShared<PointerPropertyDrawer>();
         InitCategories();
+        m_moduleReloadSubscription = SR_UTILS_NS::Broadcaster::Instance().Subscribe(SR_UTILS_NS::Events::EVENT_ON_SCRIPT_MODULE_RELOADED_ID, [this](auto&& msg) {
+            InitCategories();
+        });
     }
 
     void Inspector::Draw() {
@@ -296,9 +300,6 @@ namespace SR_CORE_GUI_NS {
                 m_componentSearchOpened = true;
             }
 
-            if (ImGui::Button("Reload")) {
-                InitCategories();
-            }
             ImGui::InputText("##search", &m_componentSearchBuffer);
             ImGui::PopItemWidth();
 

@@ -42,6 +42,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
         SR_NODISCARD const ReloadCallback& GetReloadCallback() const { return m_reloadCallback; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetModuleName() const { return m_moduleName; }
+        SR_NODISCARD CppBehaviour::Ptr& GetBehaviour() { return m_pBehaviour; }
 
         void SetBehaviourName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_behaviourName = name; }
         void SetModuleName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_moduleName = name; }

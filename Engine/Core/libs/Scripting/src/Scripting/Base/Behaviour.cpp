@@ -15,27 +15,37 @@
 
 namespace SR_SCRIPTING_NS {
     void Behaviour::Awake() {
-        m_cppBehaviour->Awake();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->Awake();
+        }
         Super::Awake();
     }
 
     void Behaviour::OnEnable() {
-        m_cppBehaviour->OnEnable();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->OnEnable();
+        }
         Super::OnEnable();
     }
 
     void Behaviour::OnDisable() {
-        m_cppBehaviour->OnDisable();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->OnDisable();
+        }
         Super::OnDisable();
     }
 
     void Behaviour::Start() {
-        m_cppBehaviour->Start();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->Start();
+        }
         Super::Start();
     }
 
     void Behaviour::OnDestroy() {
-        m_cppBehaviour->OnDestroy();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->OnDestroy();
+        }
 
         SetBehaviourName(SR_UTILS_NS::StringAtom());
 
@@ -53,24 +63,30 @@ namespace SR_SCRIPTING_NS {
 
         if (IsInstanceValid()) {
             m_cppBehaviour->SetSceneObject(GetSceneObject());
+            m_cppBehaviour->OnAttached();
         }
 
-        m_cppBehaviour->OnAttached();
         Super::OnAttached();
     }
 
     void Behaviour::OnDetached() {
-        m_cppBehaviour->OnDetached();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->OnDetached();
+        }
         Super::OnDetached();
     }
 
     void Behaviour::Update(float_t dt) {
-        m_cppBehaviour->Update(dt);
+        if (m_cppBehaviour) {
+            m_cppBehaviour->Update(dt);
+        }
         Super::Update(dt);
     }
 
     void Behaviour::FixedUpdate() {
-        m_cppBehaviour->FixedUpdate();
+        if (m_cppBehaviour) {
+            m_cppBehaviour->FixedUpdate();
+        }
         Super::FixedUpdate();
     }
 
