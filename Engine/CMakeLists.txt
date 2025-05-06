@@ -70,9 +70,12 @@ if (SR_TRACY_ENABLE)
 endif()
 
 add_subdirectory(Core)
-#add_subdirectory(Scripts)
 
-define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
+define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS
+    BRIEF_DOCS "Executable arguments"
+    FULL_DOCS "List of command line arguments to be passed to the engine executable"
+)
+
 set_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS "")
 
 if (ANDROID_NDK)
