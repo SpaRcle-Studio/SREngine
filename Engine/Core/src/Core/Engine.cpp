@@ -179,7 +179,6 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Init() : initializing game engine...");
         if (!m_scriptSystem->Init()) {
             SR_ERROR("Engine::Init() : failed to initialize script system!");
-            return false;
         }
 
         m_isInit = true;
