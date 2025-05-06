@@ -45,7 +45,7 @@ else()
     add_library(Audio::lib ALIAS Audio)
 
     if (UNIX)
-        target_compile_options(Scripting PRIVATE -fPIC)
+        target_compile_options(Audio PRIVATE -fPIC)
     endif()
 
     target_link_libraries(Audio PUBLIC Utils)
