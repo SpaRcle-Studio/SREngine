@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SOUNDCONTEXT_H
 #define SR_ENGINE_SOUNDCONTEXT_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 #include <Audio/SoundFormat.h>
 

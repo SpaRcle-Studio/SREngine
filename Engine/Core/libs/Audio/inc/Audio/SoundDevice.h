@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SOUNDDEVICE_H
 #define SR_ENGINE_SOUNDDEVICE_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 #include <Audio/AudioLibrary.h>
 

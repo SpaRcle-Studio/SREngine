@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_LISTENERDATA_H
 #define SR_ENGINE_LISTENERDATA_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector6.h>

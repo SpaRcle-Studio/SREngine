@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SOUND_H
 #define SR_ENGINE_SOUND_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Resources/IResource.h>
 #include <Audio/PlayParams.h>
 

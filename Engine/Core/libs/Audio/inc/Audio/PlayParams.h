@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_PLAYPARAMS_H
 #define SR_ENGINE_PLAYPARAMS_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector6.h>
 

@@ -3,6 +3,8 @@ project(Audio)
 
 set(CMAKE_CXX_STANDARD 20)
 
+option(SR_AUDIO_DLL_EXPORTS "" ON)
+
 add_definitions(
     -DMODPLUG_STATIC
     -DFLAC__NO_DLL
@@ -39,11 +41,24 @@ if (SR_AUDIO_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Audio SHARED Audio.cxx inc/Audio/Types/AudioListener.h src/Audio/Types/AudioListener.cpp)
+    add_library(Audio SHARED Audio.cxx)
     add_library(Audio::lib ALIAS Audio)
+
+    if (UNIX)
+        target_compile_options(Scripting PRIVATE -fPIC)
+    endif()
+
+    target_link_libraries(Audio PUBLIC Utils)
+
+    SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Audio)
 endif()
 
-target_link_libraries(Audio modplug OpenAL)
+if (SR_AUDIO_DLL_EXPORTS)
+    message("Audio will be using DLL exports")
+    target_compile_definitions(Audio PUBLIC SR_AUDIO_DLL_EXPORTS)
+endif()
+
+target_link_libraries(Audio PUBLIC modplug OpenAL)
 
 target_include_directories(Audio PUBLIC inc)
 target_include_directories(Audio PUBLIC libs)

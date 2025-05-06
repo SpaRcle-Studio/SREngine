@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SOUNDLISTENER_H
 #define SR_ENGINE_SOUNDLISTENER_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Enumerations.h>
 

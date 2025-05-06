@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SOUNDMANAGER_H
 #define SR_ENGINE_SOUNDMANAGER_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
 

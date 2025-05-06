@@ -319,9 +319,9 @@ namespace SR_SCRIPTING_NS {
             //{"Engine/Core/libs/Graphics", "Graphics"},
             {"Engine/Core/libs/Utils", "Utils"},
             {"Engine/Core/libs/Scripting", "Scripting"},
+            {"Engine/Core/libs/Audio", "Audio"}
             //{"Engine/Core/libs/Utils/libs/fmt", "fmt"},
-            //{"Engine/Core/libs/Physics", "Physics"},
-            //{"Engine/Core/libs/Audio", "Audio"},
+            //{"Engine/Core/libs/Physics", "Physics"}
         };
 
         auto&& buildDir = m_pScriptSystem->GetBuildFolderPath();

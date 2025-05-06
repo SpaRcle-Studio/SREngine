@@ -5,11 +5,13 @@
 #ifndef SR_ENGINE_RAWSOUND_H
 #define SR_ENGINE_RAWSOUND_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Resources/IResource.h>
 #include <Audio/Decoders/IWaveDataProvider.h>
 
 namespace SR_AUDIO_NS {
-    class SR_AUDIO_DLL_API RawSound : public SR_UTILS_NS::IResource {
+    class RawSound : public SR_UTILS_NS::IResource {
     private:
         RawSound();
         ~RawSound() override;

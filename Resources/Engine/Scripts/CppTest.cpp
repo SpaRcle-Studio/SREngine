@@ -8,7 +8,7 @@
 #include <Utils/Types/RawMesh.h>
 
 #include <Scripting/Cpp/CppBehaviour.h>
-
+#include <Audio/Sound.h>
 #include <Enum/SceneObjectType.hpp>
 
 namespace SpaRcle::Scripts::SREngine {
@@ -18,6 +18,11 @@ namespace SpaRcle::Scripts::SREngine {
         SR_NODISCARD bool ExecuteInEditMode() const noexcept override { return true; }
 
     public:
+        void Start() override {
+            auto sound = SR_AUDIO_NS::Sound::Load("Editor/Audio/music.mp3");
+            sound->Play();
+            sound->CheckResourceUsage();
+        }
         void Update(float_t dt) override {
             if (deltaTime > 0.f) {
                 deltaTime -= dt;

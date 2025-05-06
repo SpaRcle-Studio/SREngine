@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_SOUNDFORMAT_H
 #define SR_ENGINE_SOUNDFORMAT_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_AUDIO_NS {
