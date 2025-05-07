@@ -167,6 +167,11 @@ namespace SR_CORE_NS {
     void EngineScene::Update(float_t dt) {
         SR_TRACY_ZONE;
 
+        if (dt < 0.f) {
+            SR_WARN("EngineScene::Update() : delta time is negative! Reset it... dt: {}", dt);
+            dt = 0.f;
+        }
+
         pScene->GetLogicBase()->Prepare();
         pScene->Prepare();
 
@@ -187,6 +192,11 @@ namespace SR_CORE_NS {
         constexpr float_t maxDeltaTime = 10.f; /// seconds
         if (m_accumulator > maxDeltaTime) {
             SR_WARN("EngineScene::Update() : delta time is too big! Reset it... Accumulator: {}. Max delta time: {}", m_accumulator, maxDeltaTime);
+            m_accumulator = 0.f;
+        }
+
+        if (m_accumulator < 0.f) {
+            SR_WARN("EngineScene::Update() : delta time is negative! Reset it... Accumulator: {}", m_accumulator);
             m_accumulator = 0.f;
         }
 
