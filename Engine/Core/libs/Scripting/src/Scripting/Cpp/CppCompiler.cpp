@@ -314,13 +314,18 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool CppCompiler::FindEngineLibs() {
+        if (m_settings.compilerType != CppCompilerType::MSVC) {
+            /// При сборке .so не создается и не нужен .a
+            /// Когда собираем .dll, то .lib нужен
+            return true;
+        }
+
         static std::vector<std::pair<std::string, std::string>> libs = {
             //{"Engine/Core", "Core"},
             //{"Engine/Core/libs/Graphics", "Graphics"},
             {"Engine/Core/libs/Utils", "Utils"},
             {"Engine/Core/libs/Scripting", "Scripting"},
             {"Engine/Core/libs/Audio", "Audio"}
-            //{"Engine/Core/libs/Utils/libs/fmt", "fmt"},
             //{"Engine/Core/libs/Physics", "Physics"}
         };
 
