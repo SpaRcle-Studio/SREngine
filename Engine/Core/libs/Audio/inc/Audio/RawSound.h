@@ -8,9 +8,10 @@
 #include <Audio/macros.h>
 
 #include <Utils/Resources/IResource.h>
-#include <Audio/Decoders/IWaveDataProvider.h>
 
 namespace SR_AUDIO_NS {
+    class IWaveDataProvider;
+
     class RawSound : public SR_UTILS_NS::IResource {
     private:
         RawSound();
@@ -35,7 +36,7 @@ namespace SR_AUDIO_NS {
         bool Reload() override;
 
     private:
-        IWaveDataProvider::Ptr m_dataProvider;
+        std::shared_ptr<IWaveDataProvider> m_dataProvider;
 
     };
 }
