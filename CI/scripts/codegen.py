@@ -63,23 +63,26 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     context = codegen_context.CodegenContext()
-    context.config_dir = os.path.abspath(args.config_dir).replace("\\", "/")
-    context.build_dir = os.path.abspath(args.root_build_dir).replace("\\", "/")
-    context.module_name = args.module_name
-    context.analyze_dir = os.path.abspath(args.repo_dir).replace("\\", "/")
+    context.config_dir = os.path.abspath(args.config_dir.replace('\"', '')).replace("\\", "/")
+    context.build_dir = os.path.abspath(args.root_build_dir.replace('\"', '')).replace("\\", "/")
+    context.module_name = args.module_name.replace('\"', '')
+    context.analyze_dir = os.path.abspath(args.repo_dir.replace('\"', '')).replace("\\", "/")
     context.is_script = args.is_script
-    context.help_sources_dir = os.path.abspath(args.help_sources_dir).replace("\\", "/") if args.help_sources_dir else ""
+    context.help_sources_dir = os.path.abspath(args.help_sources_dir.replace('\"', '')).replace("\\", "/") if args.help_sources_dir else ""
 
     logger_utils.Logger.DEBUG = False
     logger_utils.init_utf8_console()
 
     logger = logger_utils.Logger()
-    logger.set_module_name(args.module_name)
+    logger.set_module_name(context.module_name )
     logger.create_log_file(os.path.join(context.build_dir, 'codegen.log'))
 
-    logger.log_info('Start script...')
+    logger.log_info('Start codegen...')
 
-    context.codegen_dir = sparcle_utils.normalize_path(os.path.abspath(args.codegen_dir) + '/Codegen/Codegen') # double "Codegen" for cmake pretty include
+    if context.is_script:
+        logger.log_info('Script mode enabled!')
+
+    context.codegen_dir = sparcle_utils.normalize_path(os.path.abspath(args.codegen_dir.replace('\"', '')) + '/Codegen/Codegen') # double "Codegen" for cmake pretty include
 
     logger.log_info(f'Codegen directory: {context.codegen_dir}')
     logger.log_info(f'Analyze directory: {context.analyze_dir}')
@@ -106,4 +109,4 @@ if __name__ == "__main__":
     if not main(logger, context):
         input()
 
-    logger.log_info('End script...')
+    logger.log_info('End codegen...')
