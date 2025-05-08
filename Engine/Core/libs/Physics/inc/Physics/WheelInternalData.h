@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_WHEELINTERNALDATA_H
 #define SR_ENGINE_WHEELINTERNALDATA_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_PTYPES_NS {

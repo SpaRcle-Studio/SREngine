@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_VEHICLE_H
 #define SR_ENGINE_VEHICLE_H
 
+#include <Physics/macros.h>
+
 #include <Physics/PhysicsLib.h>
 #include <Physics/VehicleInternalData.h>
 

@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_PHYSICSSCENE_H
 #define SR_ENGINE_PHYSICSSCENE_H
 
+#include <Physics/macros.h>
+
 #include <Physics/PhysicsLib.h>
 #include <Utils/Types/SafePointer.h>
 

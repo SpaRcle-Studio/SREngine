@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_RAYCASTIMPL_H
 #define SR_ENGINE_RAYCASTIMPL_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/RaycastHit.h>
 

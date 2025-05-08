@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_RAYCAST_H
 #define SR_ENGINE_RAYCAST_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Common/RaycastHit.h>
 
 namespace SR_PHYSICS_NS {

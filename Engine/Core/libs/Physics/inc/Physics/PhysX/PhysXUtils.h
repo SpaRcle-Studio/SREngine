@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_PHYSXUTILS_H
 #define SR_ENGINE_PHYSXUTILS_H
 
+#include <Physics/macros.h>
+
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
 

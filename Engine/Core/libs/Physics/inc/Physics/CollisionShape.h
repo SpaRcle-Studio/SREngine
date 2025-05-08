@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 #define SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Serialization/Serializable.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>

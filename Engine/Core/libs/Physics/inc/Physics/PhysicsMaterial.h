@@ -5,6 +5,8 @@
 #ifndef SR_ENGINE_PHYSICSMATERIAL_H
 #define SR_ENGINE_PHYSICSMATERIAL_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Resources/IResource.h>
 #include <Utils/Common/Enumerations.h>
 

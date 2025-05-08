@@ -3,6 +3,8 @@ project(Physics)
 
 set(CMAKE_CXX_STANDARD 20)
 
+option(SR_PHYSICS_DLL_EXPORTS "" ON)
+
 add_definitions(
     -DMODPLUG_STATIC
     -DFLAC__NO_DLL
@@ -148,9 +150,22 @@ if (SR_PHYSICS_STATIC_LIBRARY)
 else()
     add_library(Physics SHARED Physics.cxx)
     add_library(Physics::lib ALIAS Physics)
+
+    if (UNIX)
+        target_compile_options(Physics PRIVATE -fPIC)
+    endif()
+
+    target_link_libraries(Physics PUBLIC Utils)
+
+    SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Physics)
 endif()
 
-target_link_libraries(Physics ${SR_PHYSICS_LINK_LIBRARIES})
+if (SR_PHYSICS_DLL_EXPORTS)
+    message("Physics will be using DLL exports")
+    target_compile_definitions(Physics PUBLIC SR_PHYSICS_DLL_EXPORTS)
+endif()
+
+target_link_libraries(Physics PUBLIC ${SR_PHYSICS_LINK_LIBRARIES})
 
 target_include_directories(Physics PUBLIC inc)
 target_include_directories(Physics PUBLIC libs)
