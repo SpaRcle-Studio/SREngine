@@ -19,9 +19,9 @@ namespace SpaRcle::Scripts::SREngine {
 
     public:
         void Start() override {
-            auto sound = SR_AUDIO_NS::Sound::Load("Editor/Audio/music.mp3");
-            sound->Play();
-            sound->CheckResourceUsage();
+            //auto sound = SR_AUDIO_NS::Sound::Load("Editor/Audio/music.mp3");
+            //sound->Play();
+            //sound->CheckResourceUsage();
         }
         void Update(float_t dt) override {
             if (deltaTime > 0.f) {

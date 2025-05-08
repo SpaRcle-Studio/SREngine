@@ -189,7 +189,7 @@ namespace SR_CORE_NS {
             m_accumulator += SR_MIN(dt, m_updateFrequency);
         }
 
-        constexpr float_t maxDeltaTime = 10.f; /// seconds
+        constexpr float_t maxDeltaTime = 60.f; /// seconds
         if (m_accumulator > maxDeltaTime) {
             SR_WARN("EngineScene::Update() : delta time is too big! Reset it... Accumulator: {}. Max delta time: {}", m_accumulator, maxDeltaTime);
             m_accumulator = 0.f;

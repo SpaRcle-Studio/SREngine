@@ -153,6 +153,8 @@ namespace SR_SCRIPTING_NS {
         else {
             customArgs += "-DSR_ENGINE_SCRIPT_API_MODE ";
             customArgs += "-DFMT_HEADER_ONLY ";
+            customArgs += "-std=c++20 ";
+            customArgs += "-Wno-deprecated -Wno-unused-variable -Wno-parentheses -Wno-deprecated-declarations -Wno-reorder -Wno-unused-function -Wno-attributes -Wno-delete-incomplete -Wno-sign-compare -Wno-unused-function -Wno-overloaded-virtual -Wno-comment -Wno-template-body ";
         }
 
         const SR_UTILS_NS::PlatformType platform = SR_PLATFORM_NS::GetType();
@@ -215,7 +217,12 @@ namespace SR_SCRIPTING_NS {
 
         std::string includePaths;
         for (auto&& includePath : context.includePaths) {
-            includePaths += "-I\"" + includePath.ToStringRef() + "\" ";
+            if (SR_PLATFORM_NS::GetType() == SR_UTILS_NS::PlatformType::Windows) {
+                includePaths += "-I\"" + includePath.ToStringRef() + "\" ";
+            }
+            else {
+                includePaths += "-I" + includePath.ToStringRef() + " ";
+            }
         }
 
         std::string outArgs;
