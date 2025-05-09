@@ -31,7 +31,7 @@ namespace SR_SCRIPTING_NS {
         SRAssert2(m_behaviourInstances.empty(), "ModuleManager::~ModuleManager() : behaviours not unloaded!");
 
         for (auto&& module : m_modules) {
-            if (!UnloadModule(module)) {
+            if (!UnloadModule(module, false)) {
                 SRHalt("ModuleManager::~ModuleManager() : failed to unload module!\n\tPath: " + module.GetPath().ToString());
             }
         }
@@ -60,7 +60,7 @@ namespace SR_SCRIPTING_NS {
 
         ScriptModule& module = *pIt;
 
-        if (!UnloadModule(module)) {
+        if (!UnloadModule(module, true)) {
             SR_ERROR("ModuleManager::ReloadModule() : failed to unload module!\n\tPath: " + path.ToString());
             return false;
         }
@@ -181,7 +181,7 @@ namespace SR_SCRIPTING_NS {
         return pIt != m_modules.end() ? &(*pIt) : nullptr;
     }
 
-    bool ModuleManager::UnloadModule(ScriptModule& module) {
+    bool ModuleManager::UnloadModule(ScriptModule& module, bool willBeReloaded) {
         auto&& pLibraryHandle = module.GetModuleHandle();
         if (!pLibraryHandle) {
             return true;
@@ -189,6 +189,9 @@ namespace SR_SCRIPTING_NS {
 
         for (auto&& pInstance : m_behaviourInstances) {
             if (pInstance->GetModuleName() == module.GetModuleName()) {
+                if (willBeReloaded && pInstance->GetPreReloadCallback()) {
+                    pInstance->GetPreReloadCallback()();
+                }
                 FreeBehaviourInternalInstance(pInstance);
             }
         }
@@ -252,8 +255,8 @@ namespace SR_SCRIPTING_NS {
             }
 
             if (AllocateBehaviourInternalInstance(pInstance)) {
-                if (pInstance->GetReloadCallback()) {
-                    pInstance->GetReloadCallback()();
+                if (pInstance->GetLoadedCallback()) {
+                    pInstance->GetLoadedCallback()();
                 }
             }
         }

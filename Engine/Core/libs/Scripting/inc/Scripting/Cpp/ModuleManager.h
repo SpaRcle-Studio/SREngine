@@ -36,17 +36,21 @@ namespace SR_SCRIPTING_NS {
     };
 
     class CppBehaviourInstance {
-        using ReloadCallback = SR_HTYPES_NS::Function<void()>;
+        using LoadedCallback = SR_HTYPES_NS::Function<void()>;
+        using PreReloadCalback = SR_HTYPES_NS::Function<void()>;
         using ManagerPasskey = SR_UTILS_NS::Passkey<ModuleManager>;
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetBehaviourName() const { return m_behaviourName; }
-        SR_NODISCARD const ReloadCallback& GetReloadCallback() const { return m_reloadCallback; }
+        SR_NODISCARD const LoadedCallback& GetLoadedCallback() const { return m_loadedCallback; }
+        SR_NODISCARD const PreReloadCalback& GetPreReloadCallback() const { return m_preReloadCallback; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetModuleName() const { return m_moduleName; }
         SR_NODISCARD CppBehaviour::Ptr& GetBehaviour() { return m_pBehaviour; }
+        SR_NODISCARD const CppBehaviour::Ptr& GetBehaviour() const { return m_pBehaviour; }
 
         void SetBehaviourName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_behaviourName = name; }
         void SetModuleName(SR_UTILS_NS::StringAtom name, ManagerPasskey) { m_moduleName = name; }
-        void SetReloadCallback(const ReloadCallback& callback) { m_reloadCallback = callback; }
+        void SetLoadedCallback(const LoadedCallback& callback) { m_loadedCallback = callback; }
+        void SetPreReloadCallback(const PreReloadCalback& callback) { m_preReloadCallback = callback; }
 
         void OnBehaviourUnloaded(ManagerPasskey);
 
@@ -73,7 +77,8 @@ namespace SR_SCRIPTING_NS {
         SR_SCRIPTING_NS::CppBehaviour::Ptr m_pBehaviour;
         SR_UTILS_NS::StringAtom m_moduleName;
         SR_UTILS_NS::StringAtom m_behaviourName;
-        ReloadCallback m_reloadCallback;
+        PreReloadCalback m_preReloadCallback;
+        LoadedCallback m_loadedCallback;
 
     };
 
@@ -100,7 +105,7 @@ namespace SR_SCRIPTING_NS {
         void FreeBehaviourInternalInstance(CppBehaviourInstance* pInstance);
 
         SR_NODISCARD void* LoadModule(const SR_UTILS_NS::Path& modulePath);
-        bool UnloadModule(ScriptModule& module);
+        bool UnloadModule(ScriptModule& module, bool willBeReloaded);
         void OnModuleLoaded(ScriptModule& module);
 
         SR_NODISCARD ScriptModule* FindModule(SR_UTILS_NS::StringAtom moduleName);

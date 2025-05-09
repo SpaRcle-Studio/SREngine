@@ -29,7 +29,7 @@ namespace SpaRcle::Scripts::SREngine {
                 return;
             }
             deltaTime = logInterval;
-            SR_DEBUG_LOG("TestBehaviour::Update() : dt log 2 = {}", dt);
+            //SR_DEBUG_LOG("TestBehaviour::Update() : dt log 2 = {}", dt);
         }
 
     private:

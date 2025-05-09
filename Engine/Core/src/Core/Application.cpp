@@ -252,6 +252,8 @@ namespace SR_CORE_NS {
             delete pEngine;
         });
 
+        SR_SCRIPTING_NS::ScriptSystem::DestroySingleton();
+
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
         SR_CORE_NS::EditorSettings::DestroySettings();

@@ -9,12 +9,14 @@
 #include <Scripting/Cpp/CppCompiler.h>
 #include <Scripting/Cpp/ModuleManager.h>
 
+#include <Utils/Common/Singleton.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Resources/FileSystemWatcher.h>
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_SCRIPTING_NS {
-    class ScriptSystem : public SR_HTYPES_NS::SharedPtr<ScriptSystem> {
+    class ScriptSystem : public SR_UTILS_NS::Singleton<ScriptSystem> {
+        SR_REGISTER_SINGLETON(ScriptSystem)
         using Super = SR_HTYPES_NS::SharedPtr<ScriptSystem>;
         enum class State {
             InitialAnalyse, Idle, CheckModules, Codegen, Compiling, Reloading
@@ -26,14 +28,12 @@ namespace SR_SCRIPTING_NS {
         const static inline std::set<std::string_view> ALLOWED_CPP_MODULE_EXTENSIONS = { "dll", "so" };
         const static inline SR_UTILS_NS::StringAtom ENGINE_MODULE_FILE_NAME = ".module";
 
-    public:
-        ScriptSystem()
-            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
-        { }
-
+    private:
+        ScriptSystem() = default;
         ~ScriptSystem() override;
 
     public:
+        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
         SR_NODISCARD bool Init();
 
         SR_NODISCARD const ModuleManager* GetModuleManager() const { return m_moduleManager.Get(); }

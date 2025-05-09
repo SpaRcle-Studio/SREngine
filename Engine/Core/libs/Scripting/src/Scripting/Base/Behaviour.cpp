@@ -66,6 +66,8 @@ namespace SR_SCRIPTING_NS {
             m_cppBehaviour->OnAttached();
         }
 
+        TryLoadBehaviourData();
+
         Super::OnAttached();
     }
 
@@ -121,22 +123,12 @@ namespace SR_SCRIPTING_NS {
     void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
         Super::Save(serializer);
 
-        /*if (m_rawBehaviour) {
-            auto&& properties = m_rawBehaviour->GetProperties();
-
-            serializer.BeginArray(properties.size(), SR_UTILS_NS::SerializationId::Create("properties"));
-
-            for (auto&& propertyId : properties) {
-                serializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"));
-
-                serializer.WriteString(propertyId, SR_UTILS_NS::SerializationId::Create("id"));
-                serializer.WriteAny(m_rawBehaviour->GetProperty(propertyId), SR_UTILS_NS::SerializationId::Create("value"));
-
-                serializer.EndItem();
-            }
-
-            serializer.EndArray();
-        }*/
+        if (IsInstanceValid()) {
+            static const auto dataId = SR_UTILS_NS::SerializationId::Create("data");
+            serializer.BeginObject(dataId);
+            m_cppBehaviour->GetBehaviour()->Save(serializer);
+            serializer.EndObject();
+        }
     }
 
     bool Behaviour::Load(SR_UTILS_NS::IDeserializer& deserializer) {
@@ -144,81 +136,51 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        /*if (!m_rawBehaviour) {
-            return true;
-        }
-
-        auto&& properties = m_rawBehaviour->GetProperties();
-
-        const uint64_t size = deserializer.BeginArray(SR_UTILS_NS::SerializationId::Create("properties"));
-
-        if (size > 0) {
-            uint64_t index = 0;
-
-            while (deserializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"), index)) {
-                std::string propertyId;
-                deserializer.ReadString(propertyId, SR_UTILS_NS::SerializationId::Create("id"));
-
-                for (auto&& property : properties) {
-                    if (property == propertyId) {
-                        std::any value;
-                        deserializer.ReadAny(value, SR_UTILS_NS::SerializationId::Create("value"));
-                        m_rawBehaviour->SetProperty(property, value);
-                        break;
-                    }
-                }
-
-                deserializer.EndItem();
-                index++;
+        static const auto dataId = SR_UTILS_NS::SerializationId::Create("data");
+        if (deserializer.BeginObject(dataId)) {
+            if (IsInstanceValid()) {
+                m_cppBehaviour->GetBehaviour()->Load(deserializer);
+                m_serializationNode = std::nullopt;
             }
-
-            deserializer.EndArray();
-        }*/
+            else {
+                auto&& impl = dynamic_cast<SR_UTILS_NS::IBaseSerialization&>(deserializer);
+                m_serializationNode = impl.GetWalkNode();
+            }
+            deserializer.EndObject();
+        }
 
         return true;
     }
 
     void Behaviour::SetBehaviourName(SR_UTILS_NS::StringAtom name) {
-        if (auto&& pScriptSystem = GetScriptSystem()) {
-            if (m_cppBehaviour) {
-                pScriptSystem->GetModuleManager()->FreeBehaviourInstance(m_cppBehaviour);
-                m_cppBehaviour = nullptr;
-            }
+        auto&& scriptSystem = SR_SCRIPTING_NS::ScriptSystem::Instance();
 
-            if (!name.empty()) {
-                m_cppBehaviour = pScriptSystem->GetModuleManager()->AllocateBehaviourInstance(name);
-                m_cppBehaviour->SetReloadCallback(std::bind(&Behaviour::OnScriptReloaded, this));
-            }
+        if (m_cppBehaviour) {
+            scriptSystem.GetModuleManager()->FreeBehaviourInstance(m_cppBehaviour);
+            m_cppBehaviour = nullptr;
         }
-        else if (m_cppBehaviour) {
-            SRHalt("Behaviour::SetBehaviourName() : script system is not available, but C++ behaviour is set!");
+
+        if (!name.empty()) {
+            m_cppBehaviour = scriptSystem.GetModuleManager()->AllocateBehaviourInstance(name);
+            m_cppBehaviour->SetPreReloadCallback(std::bind(&Behaviour::OnBehaviourPreReload, this));
+            m_cppBehaviour->SetLoadedCallback(std::bind(&Behaviour::OnBehaviourLoaded, this));
         }
         m_behaviourName = name;
-    }
-
-    ScriptSystem* Behaviour::GetScriptSystem() const noexcept {
-        if (m_scriptSystem) {
-            return m_scriptSystem;
-        }
-
-        if (auto&& pScene = TryGetScene()) {
-            m_scriptSystem = pScene->GetDataStorage().GetPointer<ScriptSystem>();
-        }
-
-        return m_scriptSystem;
     }
 
     bool Behaviour::IsInstanceValid() const noexcept {
         return m_cppBehaviour && m_cppBehaviour->IsValid();
     }
 
-    void Behaviour::OnScriptReloaded() {
+    void Behaviour::OnBehaviourLoaded() {
         m_isStarted = false;
         m_isAwake = false;
 
         if (IsInstanceValid()) {
             m_cppBehaviour->SetSceneObject(GetSceneObject());
         }
+
+        TryLoadBehaviourData();
 
         if (HasParent()) {
             GetParent()->SetDirty(true);
@@ -227,5 +189,24 @@ namespace SR_SCRIPTING_NS {
 
     bool Behaviour::ExecuteInEditMode() const {
         return m_cppBehaviour && m_cppBehaviour->ExecuteInEditMode();
+    }
+
+    void Behaviour::TryLoadBehaviourData() {
+        if (m_serializationNode && IsInstanceValid()) {
+            SR_UTILS_NS::SRADeserializer deserializer;
+            if (!deserializer.LoadFromNode(std::move(*m_serializationNode))) {
+                SRHalt("Impossible situation!");
+            }
+            m_cppBehaviour->GetBehaviour()->Load(deserializer);
+            m_serializationNode = std::nullopt;
+        }
+    }
+
+    void Behaviour::OnBehaviourPreReload() {
+        if (IsInstanceValid()) {
+            SR_UTILS_NS::SRASerializer serializer;
+            m_cppBehaviour->GetBehaviour()->Save(serializer);
+            m_serializationNode = serializer.GetWalkNode();
+        }
     }
 }

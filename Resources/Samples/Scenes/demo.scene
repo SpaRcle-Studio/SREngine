@@ -697,6 +697,45 @@ sra format
 										10-i:4396283777552644742
 									9-v:behaviourName
 										10-s:TestBehaviour
+									9-o:data
+										10-v:privateInt
+											11-i:111
+										10-v:privateInt2
+											11-i:222
+										10-v:privateInt32
+											11-i:333
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:2306302067828062668
+									9-v:behaviourName
+										10-s:TestBehaviour
+									9-o:data
+										10-v:privateInt
+											11-i:111
+										10-v:privateInt2
+											11-i:222
+										10-v:privateInt32
+											11-i:21
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Behaviour
+								8-o:ptr
+									9-v:entityId
+										10-i:3943996598505795885
+									9-v:behaviourName
+										10-s:TestBehaviour
+									9-o:data
+										10-v:privateInt
+											11-i:111
+										10-v:privateInt2
+											11-i:316
+										10-v:privateInt32
+											11-i:333
 					5-v:name
 						6-s:Cube
 					5-o:transform

@@ -57,7 +57,7 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
         }
 
-        pEngine->GetScriptSystem()->ReloadModulesIfNeeded();
+        SR_SCRIPTING_NS::ScriptSystem::Instance().ReloadModulesIfNeeded();
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

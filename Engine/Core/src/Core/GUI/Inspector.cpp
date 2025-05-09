@@ -455,6 +455,16 @@ namespace SR_CORE_GUI_NS {
                 SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
             }
 
+            if (ImGui::MenuItem("Cut")) {
+                SR_UTILS_NS::SRASerializer serializer;
+                SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
+                std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+                SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
+
+                m_onBeforeChangeCallback(false);
+                pParent->RemoveComponent(pComponent);
+            }
+
             if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
                 if (ImGui::MenuItem("Paste (replace)")) {
                     clipboard.erase(0, strlen(serializeId.GetName()));

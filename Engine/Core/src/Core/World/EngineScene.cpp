@@ -81,7 +81,6 @@ namespace SR_CORE_NS {
 
         pScene->GetDataStorage().SetValue(pRenderScene);
         pScene->GetDataStorage().SetPointer(pRenderScene.Get());
-        pScene->GetDataStorage().SetPointer(pEngine->GetScriptSystem().Get());
         pScene->GetDataStorage().SetValue(pPhysicsScene);
 
         pSceneUpdater = pScene->GetSceneUpdater();

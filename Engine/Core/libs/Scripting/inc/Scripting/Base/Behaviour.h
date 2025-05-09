@@ -69,13 +69,13 @@ namespace SR_SCRIPTING_NS {
 
     private:
         void SetBehaviourName(SR_UTILS_NS::StringAtom name);
-        void OnScriptReloaded();
-
-        SR_NODISCARD ScriptSystem* GetScriptSystem() const noexcept;
+        void OnBehaviourPreReload();
+        void OnBehaviourLoaded();
+        void TryLoadBehaviourData();
 
     private:
-        mutable ScriptSystem* m_scriptSystem = nullptr;
         CppBehaviourInstance* m_cppBehaviour = nullptr;
+        std::optional<SR_UTILS_NS::SerializationNode> m_serializationNode;
 
         /// @property @setter(SetBehaviourName) @inspector(BehaviourNamePropertyDrawer)
         SR_UTILS_NS::StringAtom m_behaviourName;

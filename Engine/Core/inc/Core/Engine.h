@@ -102,8 +102,6 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
         SR_NODISCARD bool IsApplicationFocused() const;
-        SR_NODISCARD const SR_SCRIPTING_NS::ScriptSystem::Ptr& GetScriptSystem() const { return m_scriptSystem; }
-        SR_NODISCARD SR_SCRIPTING_NS::ScriptSystem::Ptr GetScriptSystem() { return m_scriptSystem; }
 
         /// @method
         SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
@@ -134,7 +132,6 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::TimePointType m_timeStart;
 
         SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker;
-        SR_SCRIPTING_NS::ScriptSystem::Ptr m_scriptSystem;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;

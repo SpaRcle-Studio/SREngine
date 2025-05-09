@@ -108,8 +108,6 @@ namespace SR_CORE_NS {
 
         m_threadsWorker->GetContext().SetPointer(this);
 
-        m_scriptSystem = SR_SCRIPTING_NS::ScriptSystem::MakeShared();
-
         m_timeStart = Clock::now();
 
         m_isCreate = true;
@@ -177,8 +175,11 @@ namespace SR_CORE_NS {
         }
 
         SR_INFO("Engine::Init() : initializing game engine...");
-        if (!m_scriptSystem->Init()) {
-            SR_ERROR("Engine::Init() : failed to initialize script system!");
+
+        if (!SR_SCRIPTING_NS::ScriptSystem::Instance().IsInitialized()) {
+            if (!SR_SCRIPTING_NS::ScriptSystem::Instance().Init()) {
+                SR_ERROR("Engine::Init() : failed to initialize script system!");
+            }
         }
 
         m_isInit = true;
@@ -249,8 +250,6 @@ namespace SR_CORE_NS {
                 delete pWindow;
             });
         }
-
-        m_scriptSystem.AutoFree();
 
         //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
 
