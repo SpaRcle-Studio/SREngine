@@ -731,10 +731,11 @@ def generate_enums_header(logger: logger_utils.Logger, context: codegen_context.
 
         f.write('\n#endif // SR_CODEGEN_ENUMS_HPP\n')
 
-    with open(full_path, 'r', encoding='utf8') as old_f:
-        if str(f) == old_f.read():
-            logger.log_info('Enums.generated.hpp is up to date')
-            return
+    if os.path.isfile(full_path):
+        with open(full_path, 'r', encoding='utf8') as old_f:
+            if str(f) == old_f.read():
+                logger.log_info('Enums.generated.hpp is up to date')
+                return
 
     with open(full_path, 'w', encoding='utf8') as new_f:
         new_f.write(str(f))
