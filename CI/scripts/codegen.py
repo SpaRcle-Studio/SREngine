@@ -25,14 +25,6 @@ def main(logger: logger_utils.Logger, context: codegen_context.CodegenContext) -
     logger.log_info(f'Parsing all includes cxx file: {all_includes_cxx_path}')
     code_structures = clang_utils.parse_header_file(logger, all_includes_cxx_path, include_args, context)
 
-    logger.log_info('Remove old generated files...')
-
-    # delete old files
-    for file in glob(f'{context.codegen_dir}/*.hpp'):
-        os.remove(file)
-
-    logger.log_info('Generate new files...')
-
     logger.log_info(f'Count of sparcle classes: {len(code_structures.sparcle_classes)}')
     logger.log_info(f'Count of enums: {len(code_structures.enums)}')
 

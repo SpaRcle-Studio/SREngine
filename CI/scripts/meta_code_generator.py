@@ -506,9 +506,12 @@ def generate_class_meta(f, context: codegen_context.CodegenContext, class_struct
     f.write('\t' * tabs + '}\n\n')
     pass
 
-def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
+
+def generate_enums_fwd_header(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
     basic_full_path = os.path.normpath(f'{context.codegen_dir}/EnumsFwd.generated.hpp')
-    with open(basic_full_path, 'w', encoding='utf8') as f:
+    f = sparcle_utils.StringStream()
+
+    if True:
         f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write('#ifndef SR_CODEGEN_ENUMS_BASIC_HPP\n')
         f.write('#define SR_CODEGEN_ENUMS_BASIC_HPP\n\n')
@@ -530,8 +533,20 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
 
         f.write('#endif\n')
 
+    if os.path.isfile(basic_full_path):
+        with open(basic_full_path, 'r', encoding='utf8') as old_f:
+            if str(f) == old_f.read():
+                logger.log_info('EnumsFwd.generated.hpp is up to date')
+                return
+
+    with open(basic_full_path, 'w', encoding='utf8') as new_f:
+        new_f.write(str(f))
+
+
+def generate_enums_header(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
     full_path = os.path.normpath(f'{context.codegen_dir}/Enums.generated.hpp')
-    with open(full_path, 'w', encoding='utf8') as f:
+    f = sparcle_utils.StringStream()
+    if True:
         f.write(sparcle_utils.codegen_cpp_header_comment)
         f.write(f'#include "EnumsFwd.generated.hpp"\n\n')
         f.write(f'#ifndef SR_CODEGEN_ENUMS_HPP\n')
@@ -714,121 +729,92 @@ def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.Co
 
         f.write('\n')
 
-        #for enum_obj in enums:
-        #    namespace_str = ''
-        #    if len(enum_obj.namespaces) > 0:
-        #        namespace_str = '::'.join(enum_obj.namespaces)
-        #
-        #    if len(namespace_str) > 0:
-        #        namespace_str += '::'
-        #
-        #    f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
-        #    f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
-        #    f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
-        #
-        #    f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
-        #    f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
-        #    f.write(f'\t\t}} else {{\n')
-        #    f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
-        #    #f.write(f'\t\t\tstatic_assert(SR_UTILS_NS::AlwaysFalseV<{namespace_str}{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
-        #    f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
-        #    f.write(f'\t\t}}\n')
-
-        #    f.write(f'\t}}\n')
-        #    f.write(f'}};\n')
-
         f.write('\n#endif // SR_CODEGEN_ENUMS_HPP\n')
 
-        logger.log_info(f'Remove old enum files: {context.codegen_dir}/../Enum/*.hpp')
+    with open(full_path, 'r', encoding='utf8') as old_f:
+        if str(f) == old_f.read():
+            logger.log_info('Enums.generated.hpp is up to date')
+            return
 
-        for file in glob(f'{context.codegen_dir}/../Enum/*.hpp'):
+    with open(full_path, 'w', encoding='utf8') as new_f:
+        new_f.write(str(f))
+
+
+def generate_enums_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, enums):
+    logger.log_info(f'Generating enums utility code...')
+
+    generate_enums_fwd_header(logger, context, enums)
+    generate_enums_header(logger, context, enums)
+
+    logger.log_info(f'Generating enum files...')
+
+    os.makedirs(os.path.normpath(f'{context.codegen_dir}/../Enum'), exist_ok=True)
+
+    generated_files = set()
+    generated = 0
+    skipped = 0
+
+    for enum_obj in enums:
+        generated_files.add(f'{enum_obj.name}.hpp')
+        f = sparcle_utils.StringStream()
+
+        if True:
+            caps_enum_name = enum_obj.name.upper()
+
+            f.write(sparcle_utils.codegen_cpp_header_comment)
+            f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
+            f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n\n')
+
+            f.write(f'#include \"{enum_obj.source_path}\"' + '\n\n')
+
+            f.write('#include <Codegen/Enums.generated.hpp>\n\n')
+
+            namespace_str = ''
+            if len(enum_obj.namespaces) > 0:
+                namespace_str = '::'.join(enum_obj.namespaces)
+
+            if len(namespace_str) > 0:
+                namespace_str += '::'
+
+            f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{' + '\n')
+            f.write('\tconstexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }\n')
+            f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{' + '\n')
+
+            f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");' + '\n')
+            f.write('\t\treturn fmt::format_to(ctx.out(), "{}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());' + '\n')
+
+            f.write('\t}\n')
+            f.write('};\n')
+
+            f.write('\n' + f'#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
+
+        enum_gen_path = os.path.normpath(f'{context.codegen_dir}/../Enum/{enum_obj.name}.hpp')
+        if os.path.isfile(enum_gen_path):
+            with open(enum_gen_path, 'r', encoding='utf8') as old_f:
+                if str(f) == old_f.read():
+                    skipped += 1
+                    continue
+
+        with open(enum_gen_path, 'w', encoding='utf8') as new_f:
+            generated += 1
+            new_f.write(str(f))
+
+    # delete not used files
+    for file in glob(f'{context.codegen_dir}/../Enum/*.hpp', recursive=False):
+        if os.path.basename(file) not in generated_files:
+            logger.log_info(f'Remove old enum codegen file: {file}')
             os.remove(file)
 
-        logger.log_info(f'Generating new enum files: {context.codegen_dir}/../Enum/*.hpp')
-
-        # formatting
-        for enum_obj in enums:
-            enum_gen_path = os.path.normpath(f'{context.codegen_dir}/../Enum/{enum_obj.name}.hpp')
-            os.makedirs(os.path.dirname(enum_gen_path), exist_ok=True)
-            with open(enum_gen_path, 'w', encoding='utf8') as f:
-                caps_enum_name = enum_obj.name.upper()
-
-                f.write(sparcle_utils.codegen_cpp_header_comment)
-                f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
-                f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n\n')
-
-                f.write(f'#include \"{enum_obj.source_path}\"' + '\n\n')
-
-                f.write('#include <Codegen/Enums.generated.hpp>\n\n')
-
-                namespace_str = ''
-                if len(enum_obj.namespaces) > 0:
-                    namespace_str = '::'.join(enum_obj.namespaces)
-
-                if len(namespace_str) > 0:
-                    namespace_str += '::'
-
-#                f.write(
-#f'''
-#SR_UTILS_NS::EnumReflector* SR_CODEGEN_ALLOCATE_ENUM_REFLECTOR({namespace_str}{enum_obj.name});
-#
-#SR_UTILS_NS::EnumReflector* SR_CODEGEN_ALLOCATE_ENUM_REFLECTOR({namespace_str}{enum_obj.name}) {{
-#    static {enum_obj.type} _detail_sval;
-#    _detail_sval = 0;
-#    struct _detail_val_t
-#    {{
-#        _detail_val_t(const _detail_val_t& rhs)
-#            : _val(rhs)
-#        {{ _detail_sval = _val + 1; }}
-#
-#        _detail_val_t({enum_obj.type} val) /** NOLINT(google-explicit-constructor) */
-#            : _val(val)
-#        {{  _detail_sval = _val + 1; }}
-#
-#        _detail_val_t()
-#            : _val(_detail_sval)
-#        {{ _detail_sval = _val + 1; }}
-#
-#        _detail_val_t& operator=(const _detail_val_t&) {{ return *this; }}
-#
-#        _detail_val_t& operator=({enum_obj.type}) {{ return *this; }}
-#        operator {enum_obj.type}() const {{ return _val; }}
-#        {enum_obj.type} _val;
-#    }} {enum_obj.va_args};
-#
-#    const {enum_obj.type} _detail_vals[] = {{ {enum_obj.va_args} }};
-#
-#    return new SR_UTILS_NS::EnumReflector(SR_UTILS_NS::EnumVariant::{enum_obj.variant}, _detail_vals, sizeof(_detail_vals) / sizeof({enum_obj.type}), "{enum_obj.name}", "({enum_obj.va_args})");
-#}}\n
-#'''
-#                )
-
-                f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{' + '\n')
-                f.write('\tconstexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }\n')
-                f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{' + '\n')
-
-                f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");' + '\n')
-                f.write('\t\treturn fmt::format_to(ctx.out(), "{}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());' + '\n')
-
-                #f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
-                #f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
-                #f.write(f'\t\t}} else {{\n')
-                #f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
-                #f.write(f'\t\t\tstatic_assert(SR_UTILS_NS::AlwaysFalseV<{namespace_str}{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
-                #f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
-                #f.write(f'\t\t}}\n')
-
-                f.write('\t}\n')
-                f.write('};\n')
-
-                f.write('\n' + f'#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP' + '\n')
+    logger.log_info(f'Enum files generated: {generated}, skipped: {skipped}')
 
 
 def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, class_structures):
     logger.log_info(f'Generating meta module core code to {context.codegen_dir}...')
 
     full_path = os.path.normpath(f'{context.codegen_dir}/SpaRcleModule{context.module_name}Core.generated.hpp')
-    with open(full_path, 'w', encoding='utf8') as f:
+    f = sparcle_utils.StringStream()
+
+    if True:
         f.write(sparcle_utils.codegen_cpp_header_comment)
 
         f.write(f'#ifndef SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n')
@@ -904,6 +890,16 @@ def generate_meta_module_core_code(logger: logger_utils.Logger, context: codegen
 
         f.write(f'#endif // SR_CODEGEN_SPARCLE_MODULE_{context.module_name.upper()}_CORE_HPP' + '\n')
 
+    if os.path.isfile(context.codegen_dir):
+        with open(full_path, 'w', encoding='utf8') as old_f:
+            if old_f.read() == str(f):
+                logger.log_info(f'Core module is already up to date.')
+                return
+
+    with open(full_path, 'w', encoding='utf8') as new_f:
+        new_f.write(str(f))
+
+
 
 def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.CodegenContext, class_structures):
     logger.log_info(f'Generating classes code...')
@@ -935,6 +931,15 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
     if not os.path.exists(context.codegen_dir):
         raise Exception(f'Failed to create directory: {context.codegen_dir}')
 
+    generated_files = {
+        f'SpaRcleModule{context.module_name}Core.generated.hpp',
+        'Enums.generated.hpp',
+        'EnumsFwd.generated.hpp'
+    }
+
+    skipped = 0
+    generated = 0
+
     for file_name, class_objs in file_map.items():
         has_non_help_source = False
         for class_obj in class_objs:
@@ -945,8 +950,11 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
         if not has_non_help_source:
             continue
 
-        full_path = os.path.normpath(f'{context.codegen_dir}/{file_name}.generated.hpp')
-        with open(full_path, 'w', encoding='utf8') as f:
+        generated_files.add(f'{file_name}.generated.hpp')
+
+        f = sparcle_utils.StringStream()
+
+        if True:
             f.write(sparcle_utils.codegen_cpp_header_comment)
             f.write(f'#ifndef SR_CODEGEN_{file_name.upper()}_HPP' + '\n')
             f.write(f'#define SR_CODEGEN_{file_name.upper()}_HPP' + '\n\n')
@@ -1004,3 +1012,24 @@ def generate_classes_code(logger: logger_utils.Logger, context: codegen_context.
                     f.write('}\n')
             f.write('\n')
             f.write(f'#endif // SR_CODEGEN_{file_name.upper()}_HPP' + '\n')
+
+        full_path = os.path.normpath(f'{context.codegen_dir}/{file_name}.generated.hpp')
+        if os.path.isfile(full_path):
+            # compare data
+            with open(full_path, 'r', encoding='utf8') as old_f:
+                old_data = old_f.read()
+                if old_data == str(f):
+                    skipped += 1
+                    continue
+
+        with open(full_path, 'w', encoding='utf8') as new_f:
+            new_f.write(str(f))
+            generated += 1
+
+    # delete not used files
+    for file in glob(f'{context.codegen_dir}/*.generated.hpp', recursive=False):
+        if os.path.basename(file) not in generated_files:
+            logger.log_info(f'Remove old codegen file: {file}')
+            os.remove(file)
+
+    logger.log_info(f'Codegen files generated: {generated}, skipped: {skipped}')

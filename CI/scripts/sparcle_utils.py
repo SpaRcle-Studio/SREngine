@@ -10,6 +10,17 @@ DEFAULT_CPP_TRIVIAL_TYPES = [
 ]
 
 
+class StringStream:
+    def __init__(self):
+        self._buffer = ''
+
+    def write(self, data):
+        self._buffer += data
+
+    def __str__(self):
+        return self._buffer
+
+
 def normalize_path(path):
     """Нормализует слеши в путях для различных ОС."""
     return os.path.normpath(path).replace('\\', '/')
