@@ -16,12 +16,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" line="16" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" line="17" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1EvoScriptImpl_1a32728b18fe4f70ff322a4832f8e82d24" prot="private" static="no" mutable="no">
-        <type>EvoScript::Script *</type>
+        <type><ref refid="classEvoScript_1_1Script" kindref="compound">EvoScript::Script</ref> *</type>
         <definition>EvoScript::Script* SR_SCRIPTING_NS::EvoScriptImpl::m_script</definition>
         <argsstring></argsstring>
         <name>m_script</name>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" line="28" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" line="29" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" line="18" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" bodystart="18" bodyend="20"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" line="19" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" bodystart="19" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoScriptImpl_1a98b920a950b39ba01f5656d0901ac138" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" line="22" column="9"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1EvoScriptImpl_1a498d7cd4747d8eeac3d30d28cb71cd9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" line="25" column="14"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" line="26" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -118,7 +118,7 @@
         <label>Script</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" line="15" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptImpl.h" bodystart="15" bodyend="30"/>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" line="16" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptImpl.h" bodystart="16" bodyend="31"/>
     <listofallmembers>
       <member refid="classSR__SCRIPTING__NS_1_1EvoScriptImpl_1a498d7cd4747d8eeac3d30d28cb71cd9c" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoScriptImpl</scope><name>Compile</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoScriptImpl_1ad2835e72496dfb4044807f2a726849b4" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::EvoScriptImpl</scope><name>EvoScriptImpl</name></member>

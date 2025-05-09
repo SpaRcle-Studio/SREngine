@@ -18,7 +18,7 @@
 #include <Utils/Debug.h>
 
 namespace SR_HTYPES_NS {
-    template<typename T> class SR_DLL_EXPORT SafeGateArray {
+    template<typename T> class SR_COMMON_DLL_API SafeGateArray {
     public:
         SafeGateArray() = default;
 

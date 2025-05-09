@@ -23,6 +23,8 @@
 #include <Utils/Math/Vector2.h>
 #include <Utils/Common/NonCopyable.h>
 
+#ifndef SR_ENGINE_CODEGEN_CLANG_PARSE_MODE
+
 #include <assimp/contrib/pugixml/src/pugixml.hpp>
 
 namespace SR_UTILS_NS::Xml {
@@ -33,41 +35,24 @@ namespace SR_UTILS_NS::Xml {
 
     static int32_t g_xml_last_error = 0;
 
-    class SR_DLL_EXPORT Attribute {
+    class SR_COMMON_DLL_API Attribute {
     public:
-        Attribute()
-            : m_attribute()
-            , m_valid(false)
-        { }
+        Attribute();
+        ~Attribute();
 
-        explicit Attribute(const pugi::xml_attribute &attribute) {
-            m_attribute = attribute;
-            m_valid = !m_attribute.empty();
-        }
+        explicit Attribute(const pugi::xml_attribute &attribute);
 
     private:
         pugi::xml_attribute m_attribute;
         bool m_valid;
 
     private:
-        SR_NODISCARD bool CheckError(const std::string &msg) const {
-            if (m_valid) {
-                return true;
-            }
-            else {
-                SRAssert2(false, msg);
-                g_xml_last_error = -1;
-                return false;
-            }
-        }
+        SR_NODISCARD bool CheckError(const std::string &msg) const;
 
     public:
-        explicit operator bool() const {
-            return Valid();
-        }
+        explicit operator bool() const;
 
-        SR_NODISCARD bool Valid() const { return m_valid; }
-
+        SR_NODISCARD bool Valid() const;
         SR_NODISCARD std::string ToString() const;
         SR_NODISCARD int32_t ToInt() const;
         SR_NODISCARD uint32_t ToUInt() const;
@@ -86,74 +71,33 @@ namespace SR_UTILS_NS::Xml {
         SR_NODISCARD bool ToBool(bool def) const;
     };
 
-    class SR_DLL_EXPORT Node {
+    class SR_COMMON_DLL_API Node {
         friend class Document;
 
     public:
         Node();
-
-        explicit Node(pugi::xml_node node) {
-            m_node = node;
-            m_valid = !m_node.empty();
-        }
+        explicit Node(pugi::xml_node node);
+        ~Node();
 
     public:
-        static Node Empty() {
-            return Node();
-        }
+        static Node Empty();
 
     public:
-        explicit operator bool() const {
-            return Valid();
-        }
+        explicit operator bool() const;
 
     public:
-        SR_NODISCARD bool Valid() const {
-            return m_valid;
-        }
-
-        SR_NODISCARD std::string Name() const {
-            if (!m_valid) {
-                SRAssert2(false, "Node::Name() : node is not valid!");
-                g_xml_last_error = -4;
-                return {};
-            }
-
-            return m_node.name();
-        }
-
-        SR_NODISCARD std::string_view NameView() const {
-            if (!m_valid) {
-                SRAssert2(false, "Node::Name() : node is not valid!");
-                g_xml_last_error = -4;
-                return {};
-            }
-
-            return m_node.name();
-        }
-
+        SR_NODISCARD bool Valid() const;
+        SR_NODISCARD std::string Name() const;
+        SR_NODISCARD std::string_view NameView() const;
         SR_NODISCARD Document ToDocument() const;
-        SR_NODISCARD Attribute GetAttribute(const std::string &name) const {
-            if (!m_valid) {
-                SRAssert2(false, "Node::GetAttribute() : node is not valid!");
-                g_xml_last_error = -4;
-                return Attribute();
-            }
-
-            return Attribute(m_node.attribute(name.c_str()));
-        }
-
-        SR_NODISCARD Attribute TryGetAttribute(const std::string &name) const {
-            return m_valid ? Attribute(m_node.attribute(name.c_str())) : Attribute();
-        }
+        SR_NODISCARD Attribute GetAttribute(const std::string &name) const;
+        SR_NODISCARD Attribute TryGetAttribute(const std::string &name) const;
 
         template<typename T> SR_NODISCARD T TryGetAttribute(const T& def) const {
             return m_valid ? GetAttribute<T>() : def;
         }
 
-        SR_NODISCARD bool HasAttribute(const std::string &name) const {
-            return m_valid ? !m_node.attribute(name.c_str()).empty() : false;
-        }
+        SR_NODISCARD bool HasAttribute(const std::string &name) const;
 
         SR_NODISCARD std::vector<Node> TryGetNodes() const;
         SR_NODISCARD std::vector<Node> TryGetNodes(const std::string &name) const;
@@ -413,74 +357,17 @@ namespace SR_UTILS_NS::Xml {
             return !hasErrors;
         }
 
-        template<typename T> bool AppendAttribute(const std::string &name, const T &value) {
-            if (!m_valid) {
-                SRAssert2(false, "Node::AddAttribute() : node is not valid!");
-                g_xml_last_error = -2;
-                return false;
-            }
-
-            auto attrib = m_node.append_attribute(name.c_str());
-            if (attrib.empty())
-                return false;
-
-            if constexpr (std::is_same<T, std::string>() || std::is_same<T, SR_UTILS_NS::StringAtom>()) {
-                attrib.set_value(value.c_str());
-            }
-            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
-                attrib.set_value(value.CStr());
-            }
-            else if constexpr (std::is_same<T, std::string_view>()) {
-                attrib.set_value(value.data());
-            }
-            else {
-                attrib.set_value(value);
-            }
-
-            return true;
-        }
-
-        template<typename T, typename U> bool AppendAttributeDef(const std::string &name, const T &value, const U& def) {
-            if (!m_valid) {
-                SRAssert2(false, "Node::AddAttribute() : node is not valid!");
-                g_xml_last_error = -2;
-                return false;
-            }
-
-            if (value != def) {
-                auto attrib = m_node.append_attribute(name.c_str());
-                if (attrib.empty())
-                    return false;
-
-                if constexpr (std::is_same<T, std::string>()) {
-                    attrib.set_value(value.c_str());
-                } else {
-                    attrib.set_value(value);
-                }
-            }
-
-            return true;
-        }
+        template<typename T> bool AppendAttribute(const std::string &name, const T &value);
+        template<typename T, typename U> bool AppendAttributeDef(const std::string &name, const T &value, const U& def);
 
         Node AppendChild(const std::string &name);
         Node AppendChild(const Node &node);
 
-        Node AppendNode(const std::string &name) { return AppendChild(name); }
-        Node AppendNode(const Node &node) { return AppendChild(node); }
+        Node AppendNode(const std::string &name);
+        Node AppendNode(const Node &node);
 
-        SR_NODISCARD Node TryGetNode(const std::string &name) const {
-            return m_valid ? Node(m_node.child(name.c_str())) : Node();
-        }
-
-        SR_NODISCARD Node GetNode(const std::string &name) const {
-            if (!m_valid) {
-                SRAssert2(false, "Node::GetNode() : node is not valid!");
-                g_xml_last_error = -2;
-                return Node();
-            }
-
-            return Node(m_node.child(name.c_str()));
-        }
+        SR_NODISCARD Node TryGetNode(const std::string &name) const;
+        SR_NODISCARD Node GetNode(const std::string &name) const;
 
     private:
         pugi::xml_node m_node;
@@ -488,103 +375,36 @@ namespace SR_UTILS_NS::Xml {
 
     };
 
-    class SR_DLL_EXPORT Document : public NonCopyable {
+    class SR_COMMON_DLL_API Document : public NonCopyable {
     public:
-        Document() {
-            m_valid = false;
-        }
+        Document();
+        Document(Document&& document) noexcept;
+        ~Document() override;
 
-        Document(Document&& document) noexcept
-            : m_document(std::exchange(document.m_document, {}))
-            , m_valid(std::exchange(document.m_valid, {}))
-            , m_path(std::exchange(document.m_path, {}))
-        { }
-
-        ~Document() override {
-            if (m_document) {
-                delete m_document;
-            }
-        }
-
-        Document& operator=(Document&& document) noexcept {
-            m_document = std::exchange(document.m_document, {});
-            m_valid = std::exchange(document.m_valid, {});
-            m_path = std::exchange(document.m_path, {});
-            return *this;
-        }
+        Document& operator=(Document&& document) noexcept;
 
     private:
         pugi::xml_document* m_document = nullptr;
         bool m_valid;
         std::string m_path;
+
     public:
-        static Document Empty() {
-            return Document();
-        }
-
-        static Document New() {
-            auto xml = Document();
-            xml.m_valid = true;
-            xml.m_path = "None";
-            xml.m_document = new pugi::xml_document();
-            return xml;
-        }
-
+        static Document Empty();
+        static Document New();
         static Document Load(const SR_UTILS_NS::Path &path);
-
-        static int32_t GetLastError() {
-            auto last = Xml::g_xml_last_error;
-            Xml::g_xml_last_error = 0;
-            return last;
-        }
+        static int32_t GetLastError();
 
     public:
-        Xml::Node AppendChild(const std::string& name) {
-            if (!m_valid) {
-                SRAssert2(false,"Document::AppendChild() : document is not valid!");
-                g_xml_last_error = -2;
-                return Node();
-            }
-
-            auto node = m_document->append_child(name.c_str());
-            return Node(node);
-        }
-
-        bool Save(const SR_UTILS_NS::Path& path) const { 
-            if (!path.Exists()) {
-                path.Create();
-            }
-
-            if (!m_document->save_file(path.CStr())) {
-                SR_ERROR("Document::Save() : failed save to file!\n\tPath: " + path.ToString());
-                return false;
-            }
-
-            return true;
-        }
+        Xml::Node AppendChild(const std::string& name);
+        bool Save(const SR_UTILS_NS::Path& path) const; 
 
         SR_NODISCARD std::string Dump() const;
+        SR_NODISCARD Node Root() const;
+        SR_NODISCARD Node TryRoot() const;
+        SR_NODISCARD Node DocumentElement() const;
+        SR_NODISCARD bool Valid() const;
 
-        SR_NODISCARD Node Root() const {
-            return Node(m_document->root());
-        }
-
-        SR_NODISCARD Node TryRoot() const {
-            if (!Valid())
-                return Node();
-
-            return Node(m_document->root());
-        }
-
-        SR_NODISCARD Node DocumentElement() const {
-            return Node(m_document->document_element());
-        }
-
-        SR_NODISCARD bool Valid() const { return m_valid; }
-
-        operator bool() const { 
-            return Valid();
-        }
+        operator bool() const; 
     };
 
     template<bool NeedConvert> static SR_MATH_NS::FColor NodeToColor(const Xml::Node& node) {
@@ -606,14 +426,59 @@ namespace SR_UTILS_NS::Xml {
         }
     }
 
-    SR_MAYBE_UNUSED static void AppendColorNode(Xml::Node& node, const SR_MATH_NS::FColor& color) {
-        node.AppendChild("Color")
-            .NAppendAttribute("r", color.r * 255.f)
-            .NAppendAttribute("g", color.g * 255.f)
-            .NAppendAttribute("b", color.b * 255.f)
-            .NAppendAttribute("a", color.a * 255.f);
+    SR_MAYBE_UNUSED void AppendColorNode(Xml::Node& node, const SR_MATH_NS::FColor& color);
+
+    template<typename T, typename U>
+    bool Xml::Node::AppendAttributeDef(const std::string &name, const T &value, const U &def)  {
+        if (!m_valid) {
+            SRAssert2(false, "Node::AddAttribute() : node is not valid!");
+            g_xml_last_error = -2;
+            return false;
+        }
+
+        if (value != def) {
+            auto attrib = m_node.append_attribute(name.c_str());
+            if (attrib.empty())
+                return false;
+
+            if constexpr (std::is_same<T, std::string>()) {
+                attrib.set_value(value.c_str());
+            } else {
+                attrib.set_value(value);
+            }
+        }
+
+        return true;
+    }
+
+    template<typename T> bool Xml::Node::AppendAttribute(const std::string &name, const T &value) {
+        if (!m_valid) {
+            SRAssert2(false, "Node::AddAttribute() : node is not valid!");
+            g_xml_last_error = -2;
+            return false;
+        }
+
+        auto attrib = m_node.append_attribute(name.c_str());
+        if (attrib.empty())
+            return false;
+
+        if constexpr (std::is_same<T, std::string>() || std::is_same<T, SR_UTILS_NS::StringAtom>()) {
+            attrib.set_value(value.c_str());
+        }
+        else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+            attrib.set_value(value.CStr());
+        }
+        else if constexpr (std::is_same<T, std::string_view>()) {
+            attrib.set_value(value.data());
+        }
+        else {
+            attrib.set_value(value);
+        }
+
+        return true;
     }
 }
+#endif
 
 #endif //SR_COMMON_XML_H
 ```

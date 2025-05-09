@@ -15,6 +15,12 @@
 #ifndef SR_ENGINE_LISTENERDATA_H
 #define SR_ENGINE_LISTENERDATA_H
 
+#include <Audio/macros.h>
+
+#include <Utils/Common/Enumerations.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector6.h>
+
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(ListenerDistanceModel, uint8_t,
        None,

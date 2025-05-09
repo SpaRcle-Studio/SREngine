@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_FRAME_BUFFER_FEATURES_H
 #define SR_ENGINE_FRAME_BUFFER_FEATURES_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Debug.h>
 
 namespace SR_GRAPH_NS {

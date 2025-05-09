@@ -7,6 +7,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="11" column="1"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="13" column="1"/>
   </compounddef>
 </doxygen>

@@ -849,7 +849,7 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>GetStrongStorage</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a3e6adeaf3ce1181338c66e1caf57cab6" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>GetTextureSize</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>GetWeakStorage</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a2e73cf16d0d7039bd0f1416ae0e17a9b" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>IEvent</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1a44342ba62f3a35d4c4dfa2c4b16aab" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>Init</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>InputHandler</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ab9dde2f2f151ebf9d0a532437509e809" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>IsFocused</name></member>
@@ -878,7 +878,7 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_widgetFlags</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a9a354b9745b4300b47c33c666b9c7cec" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_window</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a80173e977e3b15f3e1357a69b6211547" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_windowSize</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>NonCopyable</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ac210dc06e0ed6fda17809b2cb59d05ae" prot="private" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>OnClose</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a22a8111c91cb3d13734681a8287dca0e" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>OnKeyDown</name></member>
@@ -916,9 +916,9 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>Widget</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1aed4c736bb679f1bf221c506a917606f4" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>WindowPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~Event</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~IEvent</name></member>
-      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~InputHandler</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~NonCopyable</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a67ebf2392234966924caba0c5319f87d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~SceneViewer</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>~Widget</name></member>
     </listofallmembers>

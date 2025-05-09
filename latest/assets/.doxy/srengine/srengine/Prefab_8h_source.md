@@ -29,7 +29,7 @@ namespace SR_WORLD_NS {
 namespace SR_UTILS_NS {
     class SceneObject;
 
-    class SR_DLL_EXPORT Prefab : public IResource {
+    class SR_COMMON_DLL_API Prefab : public IResource {
     public:
         using SceneObjectPtr = SR_HTYPES_NS::SharedPtr<SceneObject>;
         using ScenePtr = SR_WORLD_NS::Scene*;

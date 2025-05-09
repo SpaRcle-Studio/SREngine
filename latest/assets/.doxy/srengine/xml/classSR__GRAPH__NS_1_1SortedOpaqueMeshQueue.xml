@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="65" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="67" column="9"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -59,7 +59,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="63" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="63" bodyend="67"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="65" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="65" bodyend="69"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a787f40059af8e6a067539a0de045f2f6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>Add</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ac852b9646ef66f469e20916b8552699c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>begin</name></member>
@@ -76,7 +76,7 @@
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ae90b4f5960c943c7a92bddf23cdd887e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>m_queue</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a24f032b79d28544f12f24a116f9e3364" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>m_target</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a381e45e5ffa8d8f21d406cd901fbe75d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1adbb75be0b3a04f7cc55053f50bba4f1f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>Remove</name></member>
@@ -87,7 +87,7 @@
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a9d5d04abc93535f8fd257240fa310f90" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>Sort</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a658703271f1b0051870a3f025c5e9739" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>SortedMeshQueue</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a28c25194ff3a8dfa64da5bad7362a125" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>SortInternal</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a39b6f38808fa44ded240c807fcee2175" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>~SortedMeshQueue</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedOpaqueMeshQueue_1ae95e2b86637ef01ead391dd30250b2df" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedOpaqueMeshQueue</scope><name>~SortedOpaqueMeshQueue</name></member>
     </listofallmembers>

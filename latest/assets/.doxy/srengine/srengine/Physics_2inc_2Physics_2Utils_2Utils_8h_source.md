@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_PHYSICS_UTILS_H
 #define SR_ENGINE_PHYSICS_UTILS_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Common/Measurement.h>
 
 namespace SR_PHYSICS_NS {

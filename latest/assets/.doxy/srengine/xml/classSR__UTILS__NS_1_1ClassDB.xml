@@ -240,9 +240,9 @@
       <member refid="classSR__UTILS__NS_1_1ClassDB_1ac9db36ae9b4ebc671d5bf7263e7d70e9" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>m_inheritance</name></member>
       <member refid="classSR__UTILS__NS_1_1ClassDB_1a577bcda0fbf547722377851e15c44a13" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>m_inheritanceResolved</name></member>
       <member refid="classSR__UTILS__NS_1_1ClassDB_1ae8ddcb1803358d615d376152e7995093" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>m_mutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonMovable_1a25bb4f689b48fad2b2e493f9b2274c49" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>NonMovable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1ae406899a3fa845993a32b8f1de7a6f18" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>NonMovable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonMovable_1a2d0d6428df71a6a554958c6de2fbed3b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>NonMovable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_UTILS_NS::ClassDB</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonMovable_1a0e56b9081c63c4d8dcc688f7207e8bdb" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonMovable::"><scope>SR_UTILS_NS::ClassDB</scope><name>operator=</name></member>
@@ -251,8 +251,8 @@
       <member refid="classSR__UTILS__NS_1_1ClassDB_1a8a1da1bfa4cd78636960188bfa1e9c06" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>RegisterProperty</name></member>
       <member refid="classSR__UTILS__NS_1_1ClassDB_1a9b87d21749b09e6399cfc921a1c814e3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>ResolveInheritance</name></member>
       <member refid="classSR__UTILS__NS_1_1ClassDB_1a445fcd38f970fb0bf5741dde0f1b6099" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>~ClassDB</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>~NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonMovable_1ae0eaa729ca400949f6d5cf3bb94ea441" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>~NonMovable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1a890edde24abfd71a81881284bf2bd561" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ClassDB</scope><name>~NonMovable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

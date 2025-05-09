@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classEvoScript_1_1CMakeCodeGen" kind="class" language="C++" prot="public">
+    <compoundname>EvoScript::CMakeCodeGen</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEvoScript_1_1CMakeCodeGen_1a6262e3fff4e4d3627421f14a37fcfdbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EvoScript::CMakeCodeGen::CMakeCodeGen</definition>
+        <argsstring>()=delete</argsstring>
+        <name>CMakeCodeGen</name>
+        <qualifiedname>EvoScript::CMakeCodeGen::CMakeCodeGen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" line="13" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1CMakeCodeGen_1a384b8dfb7a6bc22ce37273707d9ce661" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EvoScript::CMakeCodeGen::~CMakeCodeGen</definition>
+        <argsstring>()=delete</argsstring>
+        <name>~CMakeCodeGen</name>
+        <qualifiedname>EvoScript::CMakeCodeGen::~CMakeCodeGen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" line="14" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classEvoScript_1_1CMakeCodeGen_1a83226af68b11716ba2bc0d30ed2dcaa7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool EvoScript::CMakeCodeGen::Generate</definition>
+        <argsstring>(const std::string &amp;resourcesPath)</argsstring>
+        <name>Generate</name>
+        <qualifiedname>EvoScript::CMakeCodeGen::Generate</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>resourcesPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" line="17" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classEvoScript_1_1CMakeCodeGen_1a403bc07d842dad9b2990e6d0bb1f74e2" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool EvoScript::CMakeCodeGen::GenerateCMakeLists</definition>
+        <argsstring>(const std::string &amp;resourcesPath)</argsstring>
+        <name>GenerateCMakeLists</name>
+        <qualifiedname>EvoScript::CMakeCodeGen::GenerateCMakeLists</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>resourcesPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" line="20" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1CMakeCodeGen_1aa9bf9148e73f187eda47013e90360a6e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool EvoScript::CMakeCodeGen::GenerateCxxFile</definition>
+        <argsstring>(const std::string &amp;resourcesPath)</argsstring>
+        <name>GenerateCxxFile</name>
+        <qualifiedname>EvoScript::CMakeCodeGen::GenerateCxxFile</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>resourcesPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" line="21" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" line="11" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/CMakeCodeGen.h" bodystart="11" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classEvoScript_1_1CMakeCodeGen_1a6262e3fff4e4d3627421f14a37fcfdbf" prot="public" virt="non-virtual"><scope>EvoScript::CMakeCodeGen</scope><name>CMakeCodeGen</name></member>
+      <member refid="classEvoScript_1_1CMakeCodeGen_1a83226af68b11716ba2bc0d30ed2dcaa7" prot="public" virt="non-virtual"><scope>EvoScript::CMakeCodeGen</scope><name>Generate</name></member>
+      <member refid="classEvoScript_1_1CMakeCodeGen_1a403bc07d842dad9b2990e6d0bb1f74e2" prot="private" virt="non-virtual"><scope>EvoScript::CMakeCodeGen</scope><name>GenerateCMakeLists</name></member>
+      <member refid="classEvoScript_1_1CMakeCodeGen_1aa9bf9148e73f187eda47013e90360a6e" prot="private" virt="non-virtual"><scope>EvoScript::CMakeCodeGen</scope><name>GenerateCxxFile</name></member>
+      <member refid="classEvoScript_1_1CMakeCodeGen_1a384b8dfb7a6bc22ce37273707d9ce661" prot="public" virt="non-virtual"><scope>EvoScript::CMakeCodeGen</scope><name>~CMakeCodeGen</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -400,7 +400,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1ada14e567a9876f9f517ff71630a10f2b" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>m_parent</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine_1ad63e03cafccb9ff13860925b0715a17c" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>m_states</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a644f640970bdda9479af7b1c5ab8e5bb" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>m_stringTable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>operator=</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a9fc86dd40c76eed20355a049067b9817" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>SetAnimationDataSetParent</name></member>
@@ -414,7 +414,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine_1afba559c1e0bd0ad74733f4c85a335944" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>UpdateTransition</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateMachine_1a8ca5f89f1a34a1906504a93d48ece52b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>~AnimationStateMachine</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a58fa101351f7dd3f658d83faa496f722" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>~IAnimationDataSet</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateMachine</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

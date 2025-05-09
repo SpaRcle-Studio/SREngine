@@ -227,12 +227,12 @@
       <member refid="classSR__HTYPES__NS_1_1DictionaryEntry_1a49bbd607b89eee0e5a45f7c1be2cdc73" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>m_keySize</name></member>
       <member refid="classSR__HTYPES__NS_1_1DictionaryEntry_1a9ef17d0f3f037d05c8c3b95a6ade2b20" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>m_value</name></member>
       <member refid="classSR__HTYPES__NS_1_1DictionaryEntry_1aedf105e05d99c119b167d8dec4b67be7" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>m_valueSize</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1DictionaryEntry_1a2178f15fe42cc85e7e4203b17dc3a642" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>Super</name></member>
       <member refid="classSR__HTYPES__NS_1_1DictionaryEntry_1ade60af20cc870baf6b7f8aaaea25534b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>~DictionaryEntry</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::DictionaryEntry</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

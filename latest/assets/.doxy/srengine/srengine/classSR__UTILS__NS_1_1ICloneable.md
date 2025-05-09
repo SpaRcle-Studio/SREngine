@@ -52,7 +52,7 @@
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD [**ICloneable**](classSR__UTILS__NS_1_1ICloneable.md) \* | [**Clone**](#function-clone) () const = 0<br> |
-| virtual  | [**~ICloneable**](#function-icloneable) () = default<br> |
+| virtual  | [**~ICloneable**](#function-icloneable) () <br> |
 
 
 
@@ -81,7 +81,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**ICloneable**](#function-icloneable) () = default<br> |
+|   | [**ICloneable**](#function-icloneable) () <br> |
 | virtual void | [**OnCloned**](#function-oncloned) () <br> |
 
 
@@ -108,7 +108,7 @@ virtual SR_NODISCARD ICloneable * SR_UTILS_NS::ICloneable::Clone () const = 0
 ### function ~ICloneable 
 
 ```C++
-virtual SR_UTILS_NS::ICloneable::~ICloneable () = default
+virtual SR_UTILS_NS::ICloneable::~ICloneable () 
 ```
 
 
@@ -123,7 +123,7 @@ virtual SR_UTILS_NS::ICloneable::~ICloneable () = default
 ### function ICloneable 
 
 ```C++
-constexpr SR_UTILS_NS::ICloneable::ICloneable () = default
+SR_UTILS_NS::ICloneable::ICloneable () 
 ```
 
 
@@ -136,7 +136,7 @@ constexpr SR_UTILS_NS::ICloneable::ICloneable () = default
 ### function OnCloned 
 
 ```C++
-inline virtual void SR_UTILS_NS::ICloneable::OnCloned () 
+virtual void SR_UTILS_NS::ICloneable::OnCloned () 
 ```
 
 

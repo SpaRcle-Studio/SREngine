@@ -21,28 +21,23 @@
 #include <Utils/Input/InputDevice.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT InputHandler : public Event<InputDeviceData*> {
+    class SR_COMMON_DLL_API InputHandler : public Event<InputDeviceData*> {
     protected:
-        InputHandler()
-            : Event(typeid(InputHandler).name())
-        { }
-
-        ~InputHandler() override = default;
+        InputHandler();
+        ~InputHandler() override;
 
     public:
-        virtual void OnMouseMove(const MouseInputData* data) { }
-        virtual void OnMousePress(const MouseInputData* data) { }
-        virtual void OnMouseDown(const MouseInputData* data) { }
-        virtual void OnMouseUp(const MouseInputData* data) { }
+        virtual void OnMouseMove(const MouseInputData* data);
+        virtual void OnMousePress(const MouseInputData* data);
+        virtual void OnMouseDown(const MouseInputData* data);
+        virtual void OnMouseUp(const MouseInputData* data);
 
-        virtual void OnKeyPress(const KeyboardInputData* data) { }
-        virtual void OnKeyDown(const KeyboardInputData* data) { }
-        virtual void OnKeyUp(const KeyboardInputData* data) { }
+        virtual void OnKeyPress(const KeyboardInputData* data);
+        virtual void OnKeyDown(const KeyboardInputData* data);
+        virtual void OnKeyUp(const KeyboardInputData* data);
 
     protected:
-        bool IsKeyPressed(KeyCode code) {
-            return Input::Instance().GetKey(code);
-        }
+        bool IsKeyPressed(KeyCode code);
 
     private:
         void Trigger(InputDeviceData* inputDeviceData) override;

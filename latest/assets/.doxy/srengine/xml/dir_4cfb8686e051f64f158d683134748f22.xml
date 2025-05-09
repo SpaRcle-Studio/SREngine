@@ -2,6 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_4cfb8686e051f64f158d683134748f22" kind="dir">
     <compoundname>Engine/Core/inc/Core/GUI/PropertyDrawers</compoundname>
+    <innerfile refid="BehaviourNamePropertyDrawer_8h">BehaviourNamePropertyDrawer.h</innerfile>
+    <innerfile refid="BehaviourPropertyDrawer_8h">BehaviourPropertyDrawer.h</innerfile>
     <innerfile refid="BitMapPropertyDrawer_8h">BitMapPropertyDrawer.h</innerfile>
     <innerfile refid="EnumPropertyDrawer_8h">EnumPropertyDrawer.h</innerfile>
     <innerfile refid="MaterialDataPropertyDrawer_8h">MaterialDataPropertyDrawer.h</innerfile>

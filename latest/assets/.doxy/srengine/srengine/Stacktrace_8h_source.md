@@ -18,9 +18,9 @@
 #include <Utils/stdInclude.h>
 
 namespace SR_UTILS_NS {
-    extern SR_DLL_EXPORT void DisableStacktrace();
-    extern SR_DLL_EXPORT std::string GetStacktrace();
-    extern SR_DLL_EXPORT void StacktraceInit();
+    extern SR_COMMON_DLL_API void DisableStacktrace();
+    extern SR_COMMON_DLL_API std::string GetStacktrace();
+    extern SR_COMMON_DLL_API void StacktraceInit();
 }
 
 #endif //SR_ENGINE_UTILS_STACKTRACE_H

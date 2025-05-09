@@ -205,8 +205,8 @@ See [SR\_UTILS\_NS::IEvent](classSR__UTILS__NS_1_1IEvent.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () = default<br> |
-| virtual  | [**~IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () = default<br> |
+|   | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () <br> |
+| virtual  | [**~IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () <br> |
 
 
 
@@ -223,7 +223,7 @@ See [SR\_UTILS\_NS::IEvent](classSR__UTILS__NS_1_1IEvent.md)
 ### function OnKeyDown 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnKeyDown (
+virtual void SR_UTILS_NS::InputHandler::OnKeyDown (
     const KeyboardInputData * data
 ) 
 ```
@@ -238,7 +238,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnKeyDown (
 ### function OnKeyPress 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnKeyPress (
+virtual void SR_UTILS_NS::InputHandler::OnKeyPress (
     const KeyboardInputData * data
 ) 
 ```
@@ -253,7 +253,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnKeyPress (
 ### function OnKeyUp 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnKeyUp (
+virtual void SR_UTILS_NS::InputHandler::OnKeyUp (
     const KeyboardInputData * data
 ) 
 ```
@@ -268,7 +268,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnKeyUp (
 ### function OnMouseDown 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnMouseDown (
+virtual void SR_UTILS_NS::InputHandler::OnMouseDown (
     const MouseInputData * data
 ) 
 ```
@@ -283,7 +283,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnMouseDown (
 ### function OnMouseMove 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnMouseMove (
+virtual void SR_UTILS_NS::InputHandler::OnMouseMove (
     const MouseInputData * data
 ) 
 ```
@@ -298,7 +298,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnMouseMove (
 ### function OnMousePress 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnMousePress (
+virtual void SR_UTILS_NS::InputHandler::OnMousePress (
     const MouseInputData * data
 ) 
 ```
@@ -313,7 +313,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnMousePress (
 ### function OnMouseUp 
 
 ```C++
-inline virtual void SR_UTILS_NS::InputHandler::OnMouseUp (
+virtual void SR_UTILS_NS::InputHandler::OnMouseUp (
     const MouseInputData * data
 ) 
 ```
@@ -330,7 +330,7 @@ inline virtual void SR_UTILS_NS::InputHandler::OnMouseUp (
 ### function InputHandler 
 
 ```C++
-inline SR_UTILS_NS::InputHandler::InputHandler () 
+SR_UTILS_NS::InputHandler::InputHandler () 
 ```
 
 
@@ -343,7 +343,7 @@ inline SR_UTILS_NS::InputHandler::InputHandler ()
 ### function IsKeyPressed 
 
 ```C++
-inline bool SR_UTILS_NS::InputHandler::IsKeyPressed (
+bool SR_UTILS_NS::InputHandler::IsKeyPressed (
     KeyCode code
 ) 
 ```

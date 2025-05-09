@@ -41,7 +41,7 @@ namespace SR_WORLD_NS {
     class SceneLogic;
     class SceneUpdater;
 
-    class SR_DLL_EXPORT Scene : public SR_UTILS_NS::IComponentable {
+    class SR_COMMON_DLL_API Scene : public SR_UTILS_NS::IComponentable {
         SR_CLASS()
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<Scene>;
@@ -81,8 +81,8 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Path GetPath() const { return m_path; }
         SR_NODISCARD Path GetAbsPath() const;
         SR_NODISCARD bool IsPrefab() const noexcept override;
-        SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
-        SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
+        SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage();
+        SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const;
         SR_NODISCARD SR_INLINE SceneUpdater* GetSceneUpdater() const { return m_sceneUpdater; }
         SR_NODISCARD SR_INLINE SceneLogicPtr GetLogicBase() const { return m_logic; }
         SR_NODISCARD const SR_UTILS_NS::EntityController::Ptr& GetEntityController() const { return m_pEntityController; }

@@ -44,6 +44,41 @@ namespace SR_UTILS_NS {
             : id(id)
             , type(type)
         { }
+
+        SerializationNode(SerializationNode&& other) noexcept
+            : id(other.id)
+            , type(other.type)
+            , string(std::move(other.string))
+            , data(other.data)
+            , children(std::move(other.children))
+        { }
+
+        SerializationNode(const SerializationNode& other)
+            : id(other.id)
+            , type(other.type)
+            , string(other.string)
+            , data(other.data)
+            , children(other.children)
+        { }
+
+        SerializationNode& operator=(SerializationNode&& other) noexcept {
+            id = other.id;
+            type = other.type;
+            string = std::move(other.string);
+            data = other.data;
+            children = std::move(other.children);
+            return *this;
+        }
+
+        SerializationNode& operator=(const SerializationNode& other) {
+            id = other.id;
+            type = other.type;
+            string = other.string;
+            data = other.data;
+            children = other.children;
+            return *this;
+        }
+
         SerializationId id;
         SerializationDataType type = SerializationDataType::Unknown;
         std::string string;

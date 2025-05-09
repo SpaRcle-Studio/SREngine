@@ -173,14 +173,14 @@
       <member refid="classSR__UTILS__NS_1_1IResourceReloader_1af05424930ddac6c779e965d1135e1746" prot="public" virt="virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>IsResourceSuitableForReload</name></member>
       <member refid="classSR__CORE__NS_1_1GraphicsResourceReloader_1a2dc9f5d632e61c11004619e153af5622" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>m_contextGetter</name></member>
       <member refid="classSR__UTILS__NS_1_1IResourceReloader_1ac8072b6db672cf9c8b2dddb671c43340" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>m_mutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>NonCopyable</name></member>
       <member refid="classSR__CORE__NS_1_1GraphicsResourceReloader_1ae72b88d70dc21f29a817777adc214a67" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>OnResourceReloaded</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>operator=</name></member>
       <member refid="classSR__CORE__NS_1_1GraphicsResourceReloader_1a89fa096272f13d70ee5faff1c7d92507" prot="public" virt="virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>Reload</name></member>
       <member refid="classSR__CORE__NS_1_1GraphicsResourceReloader_1a43d5ed03834ece2bd76ef2a06c2587c7" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>RenderContextPtr</name></member>
       <member refid="classSR__CORE__NS_1_1GraphicsResourceReloader_1af4f0f6b8336f437ea572a9d94f8563ac" prot="private" virt="non-virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>Super</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_NS::GraphicsResourceReloader</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_AUDIOLIBRARY_H
 #define SR_ENGINE_AUDIOLIBRARY_H
 
+#include <Audio/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_AUDIO_NS {

@@ -19,7 +19,7 @@
 #include <Utils/Math/Quaternion.h>
 
 namespace SR_MATH_NS {
-    template<typename T> struct SR_DLL_EXPORT Vector3 {
+    template<typename T> struct Vector3 {
     public:
         using ValueType = T;
 
@@ -33,40 +33,44 @@ namespace SR_MATH_NS {
             T coord[3] = { 0 };
         };
     public:
-        constexpr SR_FORCE_INLINE Vector3() {
-            x = 0;
-            y = 0;
-            z = 0;
+        Vector3();
+
+        Vector3(const Vector3<T>& vec) {
+            x = vec.x;
+            y = vec.y;
+            z = vec.z;
         }
 
-        template<typename U> constexpr SR_FORCE_INLINE explicit Vector3(const Vector3<U>& vec) {
+        template<typename U> explicit Vector3(const Vector3<U>& vec) {
             x = static_cast<T>(vec.x);
             y = static_cast<T>(vec.y);
             z = static_cast<T>(vec.z);
         }
 
-        template<typename U> constexpr SR_FORCE_INLINE explicit Vector3(const Vector2<U>& vec, U value) {
+        template<typename U> explicit Vector3(const Vector2<U>& vec, U value) {
             x = static_cast<T>(vec.x);
             y = static_cast<T>(vec.y);
             z = static_cast<T>(value);
         }
 
-        SR_FORCE_INLINE constexpr explicit Vector3(const float* vec) {
+        explicit Vector3(const float* vec) {
             x = (Unit)vec[0];
             y = (Unit)vec[1];
             z = (Unit)vec[2];
         }
-        SR_FORCE_INLINE constexpr explicit Vector3(const uint8_t* axis) {
+        explicit Vector3(const uint8_t* axis) {
             x = (Unit)axis[0];
             y = (Unit)axis[1];
             z = (Unit)axis[2];
         }
-        SR_FORCE_INLINE constexpr Vector3(T p_x, T p_y, T p_z) {
+
+        Vector3(T p_x, T p_y, T p_z) {
             x = p_x;
             y = p_y;
             z = p_z;
         }
-        SR_FORCE_INLINE constexpr Vector3(T p) {
+
+        Vector3(T p) {
             x = p;
             y = p;
             z = p;
@@ -89,18 +93,18 @@ namespace SR_MATH_NS {
             return Vector3<T>(static_cast<T>(value), static_cast<T>(v.x), static_cast<T>(v.y));
         }
 
-        static constexpr Vector3<T> Zero() { return Vector3(static_cast<T>(0)); }
-        static constexpr Vector3<T> One() { return Vector3(static_cast<T>(1)); }
+        static Vector3<T> Zero() { return Vector3(static_cast<T>(0)); }
+        static Vector3<T> One() { return Vector3(static_cast<T>(1)); }
 
-        static constexpr Vector3<T> UnitX() { return Vector3(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0)); }
-        static constexpr Vector3<T> UnitY() { return Vector3(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0)); }
-        static constexpr Vector3<T> UnitZ() { return Vector3(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1)); }
+        static Vector3<T> UnitX() { return Vector3(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0)); }
+        static Vector3<T> UnitY() { return Vector3(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0)); }
+        static Vector3<T> UnitZ() { return Vector3(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1)); }
 
-        static constexpr Vector3<T> Right() { return UnitX(); }
-        static constexpr Vector3<T> Up() { return UnitY(); }
-        static constexpr Vector3<T> Forward() { return UnitZ(); }
+        static Vector3<T> Right() { return UnitX(); }
+        static Vector3<T> Up() { return UnitY(); }
+        static Vector3<T> Forward() { return UnitZ(); }
 
-        static constexpr Vector3<T> AxisByIndex(uint8_t axis) {
+        static Vector3<T> AxisByIndex(uint8_t axis) {
             switch (axis) {
                 case 0: return UnitX();
                 case 1: return UnitY();
@@ -116,15 +120,21 @@ namespace SR_MATH_NS {
 
     public:
         template<typename U> SR_NODISCARD Vector3<U> SR_FASTCALL Cast() const noexcept { return Vector3<U>(
-                    static_cast<U>(x),
-                    static_cast<U>(y),
-                    static_cast<U>(z)
+                static_cast<U>(x), static_cast<U>(y), static_cast<U>(z)
             );
         }
+
+        SR_NODISCARD Vector3<int32_t> CastToInt() const noexcept { return Cast<int32_t>(); }
+        SR_NODISCARD Vector3<float_t> CastToFloat() const noexcept { return Cast<float_t>(); }
+        SR_NODISCARD Vector3<uint32_t> CastToUInt() const noexcept { return Cast<uint32_t>(); }
 
         SR_NODISCARD T X() const noexcept { return x; }
         SR_NODISCARD T Y() const noexcept { return y; }
         SR_NODISCARD T Z() const noexcept { return z; }
+
+        SR_NODISCARD T& X() noexcept { return x; }
+        SR_NODISCARD T& Y() noexcept { return y; }
+        SR_NODISCARD T& Z() noexcept { return z; }
 
         SR_NODISCARD Vector2<T> XY() const { return Vector2<T>(x, y); }
         SR_NODISCARD Vector2<T> XZ() const { return Vector2<T>(x, z); }
@@ -143,16 +153,11 @@ namespace SR_MATH_NS {
             );
         }
 
-        SR_NODISCARD T Max() const {
-            return x > y && x > z ? x : y > x && y > z ? y : z;
-        }
+        SR_NODISCARD T Max() const { return x > y && x > z ? x : y > x && y > z ? y : z; }
+        SR_NODISCARD T Min() const { return x < y && x < z ? x : y < x && y < z ? y : z; }
 
-        SR_NODISCARD T Min() const {
-            return x < y && x < z ? x : y < x && y < z ? y : z;
-        }
-
-        SR_NODISCARD Vector3 Max3() const { return Vector3(Max()); }
-        SR_NODISCARD Vector3 Min3() const { return Vector3(Min()); }
+        SR_NODISCARD Vector3<T> Max3() const { return Vector3<T>(Max()); }
+        SR_NODISCARD Vector3<T> Min3() const { return Vector3<T>(Min()); }
 
         SR_NODISCARD bool Empty() const {
             return (x == 0 && y == 0 && z == 0);
@@ -215,31 +220,52 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD T SqrMagnitude() const { return x * x + y * y + z * z; }
 
-        SR_NODISCARD T Angle(const Vector3& to) const {
-
-            const T denominator = static_cast<T>(sqrt(SqrMagnitude() * to.SqrMagnitude()));
-            if (denominator < static_cast<T>(SR_EPSILON_NORMAL_SQRT)) {
-                return static_cast<T>(0);
+        SR_NODISCARD T Angle(const Vector3<T>& to) const {
+            if constexpr (std::is_same_v<T, bool>) {
+                return static_cast<T>(0); 
             }
+            else {
 
-            const T dot = SR_CLAMP(Dot(to) / denominator, static_cast<T>(-1), static_cast<T>(1));
-            return static_cast<T>(std::acos(dot) * SR_RAD_2_DEG);
+                const T denominator = static_cast<T>(sqrt(SqrMagnitude() * to.SqrMagnitude()));
+                if (denominator < static_cast<T>(SR_EPSILON_NORMAL_SQRT)) {
+                    return static_cast<T>(0);
+                }
+
+                const T dot = SR_CLAMP(Dot(to) / denominator, static_cast<T>(-1), static_cast<T>(1));
+                return static_cast<T>(std::acos(dot) * SR_RAD_2_DEG);
+            }
         }
 
-        SR_NODISCARD Vector3 ProjectOnPlane(const Vector3& planeNormal) const {
-            const T sqrMag = planeNormal.Dot(planeNormal);
+        /*SR_NODISCARD Vector3<T> Angle(const Vector3<T>& vector3) {
+            Vector3 angle;
 
-            if (sqrMag < SR_EPSILON) {
-                return *this;
+            angle.x = (T)(std::atan2(vector3.y, vector3.z) - atan2(y, z));
+            angle.y = (T)(std::atan2(vector3.x, vector3.z) - atan2(x, z));
+            angle.z = (T)(std::atan2(vector3.y, vector3.x) - atan2(y, x));
+
+            Vector3 degrees = Vector3(T(180)) * angle / SR_PI;
+            return (Vector3(T(360)) + degrees.Round()) % Vector3(T(360));
+        }*/
+
+        SR_NODISCARD Vector3<T> ProjectOnPlane(const Vector3<T>& planeNormal) const {
+            if constexpr (std::is_same_v<T, bool>) {
+                return static_cast<T>(0); 
             }
+            else {
+                const T sqrMag = planeNormal.Dot(planeNormal);
 
-            auto&& dot = Dot(planeNormal);
+                if (sqrMag < SR_EPSILON) {
+                    return *this;
+                }
 
-            return Vector3(
-                x - planeNormal.x * dot / sqrMag,
-                y - planeNormal.y * dot / sqrMag,
-                z - planeNormal.z * dot / sqrMag
-           );
+                auto &&dot = Dot(planeNormal);
+
+                return Vector3(
+                        x - planeNormal.x * dot / sqrMag,
+                        y - planeNormal.y * dot / sqrMag,
+                        z - planeNormal.z * dot / sqrMag
+                );
+            }
         }
 
         SR_NODISCARD T SignedAngle(const Vector3& to, const Vector3& axis) const {
@@ -260,17 +286,6 @@ namespace SR_MATH_NS {
             const Unit angle = acos(axis.Dot(direction));
 
             return Quaternion(crossAxis, angle);
-        }
-
-        SR_NODISCARD Vector3 Angle(const Vector3& vector3) {
-            Vector3 angle;
-
-            angle.x = (T)(std::atan2(vector3.y, vector3.z) - atan2(y, z));
-            angle.y = (T)(std::atan2(vector3.x, vector3.z) - atan2(x, z));
-            angle.z = (T)(std::atan2(vector3.y, vector3.x) - atan2(y, x));
-
-            Vector3 degrees = Vector3(T(180)) * angle / SR_PI;
-            return (Vector3(T(360)) + degrees.Round()) % Vector3(T(360));
         }
 
         SR_NODISCARD std::string ToString() const {
@@ -369,8 +384,13 @@ namespace SR_MATH_NS {
             return static_cast<float>(x) == SR_NAN || static_cast<float>(y) == SR_NAN || static_cast<float>(z) == SR_NAN;
         }
 
-        SR_NODISCARD Vector3 Inverse() const {
-            return Vector3(-x, -y, -z);
+        SR_NODISCARD Vector3<T> Inverse() const {
+            if constexpr (std::is_same_v<T, bool>) {
+                return static_cast<T>(0); 
+            }
+            else {
+                return Vector3(-x, -y, -z);
+            }
         }
 
         SR_NODISCARD Vector3 SR_FASTCALL InverseAxis(Axis axis) const {
@@ -440,47 +460,56 @@ namespace SR_MATH_NS {
             return v;
         }
 
-        SR_NODISCARD SR_FORCE_INLINE Vector3 SR_FASTCALL Lerp(const Vector3& vector3, Unit t) const noexcept {
-        #if SR_SIMD_SUPPORT
-            const __m128 t_vec = _mm_set1_ps(t);
-            const __m128 this_vec = _mm_set_ps(0.0f, z, y, x); // Вектор this, добавляем 0.0f для выравнивания
-            const __m128 other_vec = _mm_set_ps(0.0f, vector3.z, vector3.y, vector3.x); // Вектор vector3, добавляем 0.0f для выравнивания
+        SR_NODISCARD SR_FORCE_INLINE Vector3<T> SR_FASTCALL Lerp(const Vector3<T>& vector3, float_t t) const noexcept {
+            if constexpr (!std::is_same_v<T, float_t>) {
+                return *this;
+            }
+            else {
+            #if SR_SIMD_SUPPORT
+                const __m128 t_vec = _mm_set1_ps(t);
+                const __m128 this_vec = _mm_set_ps(0.0f, z, y, x); // Вектор this, добавляем 0.0f для выравнивания
+                const __m128 other_vec = _mm_set_ps(0.0f, vector3.z, vector3.y, vector3.x); // Вектор vector3, добавляем 0.0f для выравнивания
 
-            const __m128 diff_vec = _mm_sub_ps(other_vec, this_vec); // vector3 - *this
-            const __m128 mul_vec = _mm_mul_ps(diff_vec, t_vec); // (vector3 - *this) * t
-            const __m128 result_vec = _mm_add_ps(this_vec, mul_vec); // *this + ((vector3 - *this) * t)
+                const __m128 diff_vec = _mm_sub_ps(other_vec, this_vec); // vector3 - *this
+                const __m128 mul_vec = _mm_mul_ps(diff_vec, t_vec); // (vector3 - *this) * t
+                const __m128 result_vec = _mm_add_ps(this_vec, mul_vec); // *this + ((vector3 - *this) * t)
 
-            alignas(16) float result_array[4];
-            _mm_store_ps(result_array, result_vec); // Сохраняем результат в массив
+                alignas(16) float result_array[4];
+                _mm_store_ps(result_array, result_vec); // Сохраняем результат в массив
 
-            return { result_array[0], result_array[1], result_array[2] }; // Извлекаем значения из массива
-        #else
-            return static_cast<Vector3>(*this + (vector3 - *this) * t);
-        #endif
+                return { result_array[0], result_array[1], result_array[2] }; // Извлекаем значения из массива
+            #else
+                return static_cast<Vector3>(*this + (vector3 - *this) * t);
+            #endif
+            }
         }
 
-        SR_NODISCARD Vector3 Normalized() const {
+        SR_NODISCARD Vector3<T> Normalized() const {
             return Normalize();
         }
 
-        SR_NODISCARD Vector3 Normalize() const {
-            auto&& value = x * x + y * y + z * z;
+        SR_NODISCARD Vector3<T> Normalize() const {
+            if constexpr (std::is_same_v<T, bool>) {
+                return *this; 
+            }
+            else {
+                auto&& value = x * x + y * y + z * z;
 
-            if (value > 0) {
-                T len = static_cast<T>(std::sqrt(value));
+                if (value > 0) {
+                    const T len = static_cast<T>(std::sqrt(value));
+                    Vector3 vec3 = *this;
 
-                Vector3 vec3 = *this;
+                    if (len != static_cast<T>(0.)) {
+                        vec3.x /= len;
+                        vec3.y /= len;
+                        vec3.z /= len;
+                    }
 
-                if (len != static_cast<T>(0.)) {
-                    vec3.x /= len;
-                    vec3.y /= len;
-                    vec3.z /= len;
+                    return vec3;
                 }
 
-                return vec3;
+                return *this;
             }
-
-            return *this;
         }
 
         SR_NODISCARD T SquaredNorm() const noexcept {
@@ -497,11 +526,11 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Quaternion ToQuat() const;
 
-        SR_FORCE_INLINE constexpr const T &operator[](int p_axis) const {
+        SR_FORCE_INLINE const T &operator[](int p_axis) const {
             return coord[p_axis];
         }
 
-        SR_FORCE_INLINE constexpr T &operator[](int p_axis) {
+        SR_FORCE_INLINE T &operator[](int p_axis) {
             return coord[p_axis];
         }
 
@@ -521,19 +550,19 @@ namespace SR_MATH_NS {
                     z == from ? to : z);
         }
 
-        SR_NODISCARD Vector3 Abs() const {
-            return Vector3(static_cast<T>(abs(x)), static_cast<T>(abs(y)), static_cast<T>(abs(z)));
+        SR_NODISCARD Vector3<T> Abs() const {
+            return Vector3(static_cast<T>(SR_ABS(x)), static_cast<T>(SR_ABS(y)), static_cast<T>(SR_ABS(z)));
         }
 
-        SR_NODISCARD Vector3 Sin() const {
+        SR_NODISCARD Vector3<T> Sin() const {
             return Vector3(static_cast<T>(sin(x)), static_cast<T>(sin(y)), static_cast<T>(sin(z)));
         }
 
-        SR_NODISCARD Vector3 Cos() const {
+        SR_NODISCARD Vector3<T> Cos() const {
             return Vector3(static_cast<T>(cos(x)), static_cast<T>(cos(y)), static_cast<T>(cos(z)));
         }
 
-        SR_NODISCARD Vector3 Round() const {
+        SR_NODISCARD Vector3<T> Round() const {
             return Vector3(static_cast<T>(std::round(x)), static_cast<T>(std::round(y)), static_cast<T>(std::round(z)));
         }
 
@@ -541,9 +570,9 @@ namespace SR_MATH_NS {
             return Vector3(FixAxis(x), FixAxis(y), FixAxis(z));
         }
 
-        SR_NODISCARD T Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
+        SR_NODISCARD T Dot(const Vector3<T>& p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
 
-        SR_NODISCARD Vector3 Cross(const Vector3 &p_b) const {
+        SR_NODISCARD Vector3<T> Cross(const Vector3<T>& p_b) const {
             Vector3 ret(
                     (y * p_b.z) - (z * p_b.y),
                     (z * p_b.x) - (x * p_b.z),
@@ -554,16 +583,26 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Vector3<T> Rotate(const Quaternion& q) const;
 
-        template<typename U> SR_FORCE_INLINE Vector3 &operator+=(const Vector3<U> &p_v){
-            x += p_v.x;
-            y += p_v.y;
-            z += p_v.z;
+        template<typename U> SR_FORCE_INLINE Vector3<T>& SR_FASTCALL TemplateOperatorPlusAssign(const Vector3<U> &p_v){
+            if constexpr (!std::is_same_v<T, bool>) {
+                x += static_cast<T>(p_v.x);
+                y += static_cast<T>(p_v.y);
+                z += static_cast<T>(p_v.z);
+            }
             return *this;
         }
 
-        template<typename U> SR_FORCE_INLINE Vector3 SR_FASTCALL operator+(const Vector3<U> &p_v) const noexcept {
-            return Vector3(x + p_v.x, y + p_v.y, z + p_v.z);
+        SR_FORCE_INLINE Vector3<T>& SR_FASTCALL operator+=(const Vector3<float_t>& p_v) { return TemplateOperatorPlusAssign(p_v); }
+        SR_FORCE_INLINE Vector3<T>& SR_FASTCALL operator+=(const Vector3<int32_t>& p_v) { return TemplateOperatorPlusAssign(p_v); }
+        SR_FORCE_INLINE Vector3<T>& SR_FASTCALL operator+=(const Vector3<uint32_t>& p_v) { return TemplateOperatorPlusAssign(p_v); }
+
+        template<typename U> SR_FORCE_INLINE Vector3<T> SR_FASTCALL TemplateOperatorPlus(const Vector3<U>& p_v) const noexcept {
+            return Vector3<T>(x + static_cast<T>(p_v.x), y + static_cast<T>(p_v.y), z + static_cast<T>(p_v.z));
         }
+
+        SR_FORCE_INLINE Vector3<T> SR_FASTCALL operator+(const Vector3<float_t>& p_v) const noexcept { return TemplateOperatorPlus(p_v); }
+        SR_FORCE_INLINE Vector3<T> SR_FASTCALL operator+(const Vector3<int32_t>& p_v) const noexcept { return TemplateOperatorPlus(p_v); }
+        SR_FORCE_INLINE Vector3<T> SR_FASTCALL operator+(const Vector3<uint32_t>& p_v) const noexcept { return TemplateOperatorPlus(p_v); }
 
         template<typename U> SR_FORCE_INLINE Vector3 operator%(const Vector3<U> &p_v) const {
             return Vector3(
@@ -635,16 +674,23 @@ namespace SR_MATH_NS {
         template<typename U> SR_FORCE_INLINE bool operator==(U p_scalar) const { return *this == Vector3<U>(p_scalar); }
         template<typename U> SR_FORCE_INLINE bool operator!=(U p_scalar) const { return *this != Vector3<U>(p_scalar); }
 
-        SR_FORCE_INLINE Vector3 operator-() const { return Vector3(-x, -y, -z); }
-        SR_FORCE_INLINE Vector3 operator+() const { return *this; }
+        SR_FORCE_INLINE Vector3<T> operator-() const {
+            if constexpr (std::is_same_v<T, bool>) {
+                return *this;
+            }
+            else {
+                return Vector3(-x, -y, -z);
+            }
+        }
+        SR_FORCE_INLINE Vector3<T> operator+() const { return *this; }
 
-        SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return SR_EQUALS(x, p_v.x) && SR_EQUALS(y, p_v.y) && SR_EQUALS(z, p_v.z); }
-        SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const { return !SR_EQUALS(x, p_v.x) || !SR_EQUALS(y, p_v.y) || !SR_EQUALS(z, p_v.z); }
+        SR_FORCE_INLINE bool operator==(const Vector3<T>& p_v) const { return SR_EQUALS(x, p_v.x) && SR_EQUALS(y, p_v.y) && SR_EQUALS(z, p_v.z); }
+        SR_FORCE_INLINE bool operator!=(const Vector3<T>& p_v) const { return !SR_EQUALS(x, p_v.x) || !SR_EQUALS(y, p_v.y) || !SR_EQUALS(z, p_v.z); }
 
-        SR_FORCE_INLINE bool operator<=(const Vector3 &p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
-        SR_FORCE_INLINE bool operator>=(const Vector3 &p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
-        SR_FORCE_INLINE bool operator<(const Vector3 &p_v) const { return x < p_v.x && y < p_v.y && z < p_v.z; }
-        SR_FORCE_INLINE bool operator>(const Vector3 &p_v) const { return x > p_v.x && y > p_v.y && z > p_v.z; }
+        SR_FORCE_INLINE bool operator<=(const Vector3<T>& p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
+        SR_FORCE_INLINE bool operator>=(const Vector3<T>& p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
+        SR_FORCE_INLINE bool operator<(const Vector3<T>& p_v) const { return x < p_v.x && y < p_v.y && z < p_v.z; }
+        SR_FORCE_INLINE bool operator>(const Vector3<T>& p_v) const { return x > p_v.x && y > p_v.y && z > p_v.z; }
 
     public:
         SR_NODISCARD glm::vec3 ToGLM() const noexcept {
@@ -675,6 +721,25 @@ namespace SR_MATH_NS {
         }
     };
 
+    typedef Vector3<Unit> FVector3;
+    typedef Vector3<int32_t> IVector3;
+    typedef Vector3<uint32_t> UVector3;
+    typedef Vector3<bool> BVector3;
+
+    SR_INLINE static const FVector3 InfinityFV3 = FVector3 { UnitMAX, UnitMAX, UnitMAX };
+    SR_INLINE static const FVector3 CmpEpsilonFV3 = FVector3 {
+            static_cast<Unit>(CMP_EPSILON),
+            static_cast<Unit>(CMP_EPSILON),
+            static_cast<Unit>(CMP_EPSILON),
+    };
+
+    template<typename T> Vector3<T>::Vector3() {
+        x = 0;
+        y = 0;
+        z = 0;
+    }
+
+#ifdef SR_COMMON_DLL_EXPORTS
     // bool inRads
     template<typename T>
     Quaternion Vector3<T>::ToQuat() const {
@@ -696,18 +761,7 @@ namespace SR_MATH_NS {
                + v * (s*s - Dot(u, u))
                + Cross(u, v) * 2.0f * s;
     }
-
-    typedef Vector3<Unit> FVector3;
-    typedef Vector3<int32_t> IVector3;
-    typedef Vector3<uint32_t> UVector3;
-    typedef Vector3<bool> BVector3;
-
-    SR_INLINE static const FVector3 InfinityFV3 = FVector3 { UnitMAX, UnitMAX, UnitMAX };
-    SR_INLINE static const FVector3 CmpEpsilonFV3 = FVector3 {
-            static_cast<Unit>(CMP_EPSILON),
-            static_cast<Unit>(CMP_EPSILON),
-            static_cast<Unit>(CMP_EPSILON),
-    };
+#endif
 }
 
 namespace std {

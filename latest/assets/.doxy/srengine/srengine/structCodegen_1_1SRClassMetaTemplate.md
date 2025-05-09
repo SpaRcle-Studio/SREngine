@@ -92,7 +92,7 @@ See [SR\_UTILS\_NS::SRClassMeta](classSR__UTILS__NS_1_1SRClassMeta.md)
 |  SR\_NODISCARD bool | [**IsInherited**](classSR__UTILS__NS_1_1SRClassMeta.md#function-isinherited) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) baseClass) noexcept const<br> |
 | virtual bool | [**Load**](classSR__UTILS__NS_1_1SRClassMeta.md#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer, [**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md) & obj) const<br> |
 | virtual void | [**Save**](classSR__UTILS__NS_1_1SRClassMeta.md#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer, const [**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md) & obj) const<br> |
-| virtual  | [**~SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md#function-srclassmeta) () = default<br> |
+| virtual  | [**~SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md#function-srclassmeta) () <br> |
 
 
 

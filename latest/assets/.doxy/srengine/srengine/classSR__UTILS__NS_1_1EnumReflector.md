@@ -195,8 +195,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -401,7 +401,7 @@ EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariant ()
 ### function GetEnumVariantInternal 
 
 ```C++
-inline SR_NODISCARD SR_MAYBE_UNUSED EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariantInternal () const
+SR_NODISCARD SR_MAYBE_UNUSED EnumVariant SR_UTILS_NS::EnumReflector::GetEnumVariantInternal () const
 ```
 
 
@@ -414,7 +414,7 @@ inline SR_NODISCARD SR_MAYBE_UNUSED EnumVariant SR_UTILS_NS::EnumReflector::GetE
 ### function GetHashNameInternal 
 
 ```C++
-inline SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetHashNameInternal () const
+SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetHashNameInternal () const
 ```
 
 
@@ -488,7 +488,7 @@ uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSize ()
 ### function GetIntegralTypeSizeInternal 
 
 ```C++
-inline SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal () const
+SR_NODISCARD SR_MAYBE_UNUSED uint64_t SR_UTILS_NS::EnumReflector::GetIntegralTypeSizeInternal () const
 ```
 
 
@@ -515,7 +515,7 @@ SR_UTILS_NS::StringAtom SR_UTILS_NS::EnumReflector::GetName ()
 ### function GetNameInternal 
 
 ```C++
-inline SR_NODISCARD SR_MAYBE_UNUSED const SR_UTILS_NS::StringAtom & SR_UTILS_NS::EnumReflector::GetNameInternal () const
+SR_NODISCARD SR_MAYBE_UNUSED const SR_UTILS_NS::StringAtom & SR_UTILS_NS::EnumReflector::GetNameInternal () const
 ```
 
 
@@ -558,7 +558,7 @@ std::vector< SR_UTILS_NS::StringAtom > SR_UTILS_NS::EnumReflector::GetNamesFilte
 ### function GetNamesInternal 
 
 ```C++
-inline SR_NODISCARD SR_MAYBE_UNUSED const std::vector< SR_UTILS_NS::StringAtom > & SR_UTILS_NS::EnumReflector::GetNamesInternal () const
+SR_NODISCARD SR_MAYBE_UNUSED const std::vector< SR_UTILS_NS::StringAtom > & SR_UTILS_NS::EnumReflector::GetNamesInternal () const
 ```
 
 

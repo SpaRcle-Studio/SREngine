@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="137" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="137" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="139" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1ade4d036b36ccc03adc155363ea54ed00" prot="private" static="no" mutable="no">
         <type>Memory::ShaderProgramManager &amp;</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="138" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="138" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="140" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a075588b1f1744fb476cbd8b7bf2ed635" prot="private" static="no" mutable="no">
         <type>ShaderProgram</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="140" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="140" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="142" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a7efaf71127fa3ed02bf825e15587c573" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="142" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="142" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="144" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a1a8cfb19e2bfbb97b662d8aff637bdc3" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="143" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="143" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="145" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a8c798790d7d067ee625b5bc4ba5034d3" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="144" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="144" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="146" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1ab8409c3706e8c0b8847267a0d2f065fb" prot="private" static="no" mutable="no">
         <type>SRShaderCreateInfo</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="146" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="146" bodyend="146"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="148" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="148" bodyend="148"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1adef8f431321cd65ecf4121107b92869b" prot="private" static="no" mutable="no">
         <type>std::pair&lt; int32_t, bool &gt;</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="148" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="148" bodyend="148"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="150" column="19" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="150" bodyend="150"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1ad9454178092b54fdf31e8259b57a15d9" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="150" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="150" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="152" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="152" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a6f3403259c3254fcc9c02510e278e8ff" prot="private" static="no" mutable="no">
         <type>Memory::ShaderUBOBlock</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="151" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="151" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="153" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="153" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a94af3829774b58650bdb770d252ffb11" prot="private" static="no" mutable="no">
         <type>Memory::ShaderUBOBlock</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="152" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="152" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="154" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a6dd93ef8993011b2e76b7c23bde354db" prot="private" static="no" mutable="no">
         <type>Memory::ShaderUBOBlock</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="153" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="153" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="155" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1acaa710128b6346c13afe8ea7a66cdd53" prot="private" static="no" mutable="no">
         <type>ShaderSamplers</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="154" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="154" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="156" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1ac047f10bb997a687f0152f8236314d6a" prot="private" static="no" mutable="no">
         <type>ShaderProperties</type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="155" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="155" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="157" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1ad00b4043b418737710487395fdcc84e6" prot="private" static="no" mutable="no">
         <type>SSBOBindings</type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="156" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="156" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="158" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="158" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1a3faa2899d6eea5e135dc65c58f4bbae5" prot="private" static="no" mutable="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="classSR__GTYPES__NS_1_1Texture" kindref="compound">Texture</ref> * &gt;</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="157" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="157" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="159" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Shader_1aa49e5643508c25fa02cce097da891c04" prot="private" static="no" mutable="no">
         <type>SR_SRSL_NS::ShaderType</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="159" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="159" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="161" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="161" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="134" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="136" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -886,6 +886,28 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="99" column="26"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a141487ac4ceedb33a2a8e1127663af03" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_GTYPES_NS::Shader::SetColor</definition>
+        <argsstring>(uint64_t hashId, const SR_MATH_NS::FColor &amp;v) noexcept</argsstring>
+        <name>SetColor</name>
+        <qualifiedname>SR_GTYPES_NS::Shader::SetColor</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="100" column="26"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a4237aa67a5a7d0c487387c8caed14235" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
         <definition>void SR_FASTCALL SR_GTYPES_NS::Shader::SetRect</definition>
@@ -906,7 +928,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="100" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="101" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a22830f3e8cfa165343749d759cfb35a2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -928,7 +950,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="101" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="102" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1ad5de1e27f9bd283cf412855a6591bf6c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -950,7 +972,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="102" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="103" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a3e59357fb34efd4008489a963995a9e5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -972,7 +994,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="104" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="105" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a0dda4dc07e381feac03ad5a0592e812d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -994,7 +1016,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="105" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="106" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a32869593d8b3de9bd56321dd3c99e658" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1016,7 +1038,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="106" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="107" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a0f89015744d62bdc8c7a1bbbf7b004aa" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1038,7 +1060,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="107" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="108" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a1f0482d502b8558651398084a10c1dfb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1060,7 +1082,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="108" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="109" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a7dadb1bf21b29ecf72f27edd0b3ebd37" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void SR_FASTCALL</type>
+        <definition>void SR_FASTCALL SR_GTYPES_NS::Shader::SetConstColor</definition>
+        <argsstring>(uint64_t hashId, const SR_MATH_NS::FColor &amp;v) noexcept</argsstring>
+        <name>SetConstColor</name>
+        <qualifiedname>SR_GTYPES_NS::Shader::SetConstColor</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>hashId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="110" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a5d44147efc5ebd82616266fbf1a1686b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1082,7 +1126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="109" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="111" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a9d2b2ddca1dff7bd29e4faf6dbea85d7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1104,7 +1148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="110" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="112" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a6740d42bf9a20cdd524ddb58b306c25f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1126,7 +1170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="111" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="113" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a0f18202442ce43daee0c5a4da28de93c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1148,7 +1192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="113" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="115" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a0b1da0cc95eaaeab8c08741ade7e69ea" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1170,7 +1214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="114" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="116" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a76140dfdc2500cc12eecbdb2b0a29f3c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void SR_FASTCALL</type>
@@ -1192,7 +1236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="115" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="117" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1ac99a51be8a8f1e3b903a058848f04233" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1214,7 +1258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="117" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="119" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a257ebfb686f1d75a666023d288d2414e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -1228,7 +1272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="119" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="121" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="121" bodyend="121"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -1245,7 +1289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="122" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="124" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1ac2295fe6df5ab104f4bf5ff057792eac" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1260,7 +1304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="123" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="125" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a35e3d9350ffdad6bb90fe4715f3fc476" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1275,7 +1319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="125" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="127" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a6626d1907c9de6985f91015eb5e56a55" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1290,7 +1334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="126" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="128" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a969832da4bf63e53549fcd44dfa7f1f7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -1305,7 +1349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="128" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="130" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1af0917129452f117957e2736ecd77a8db" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1323,7 +1367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="130" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="132" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Shader_1a991440d68bf6366db1cc5b1538ed3ec0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1337,7 +1381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="131" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="133" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1422,15 +1466,15 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="33" bodyend="161"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Shader.h" bodystart="33" bodyend="163"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AddUsePoint</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1aabf2c78dc169167ba3736ae4bf467fe7" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>AttachDescriptorSets</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a506e578c684c5556fb0f3c6013c687d6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>BeginSharedUBO</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ac99a51be8a8f1e3b903a058848f04233" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>BindSSBO</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Broadcast</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>CheckResourceUsage</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>CopyResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>DeleteResource</name></member>
@@ -1511,12 +1555,14 @@
       <member refid="classSR__GTYPES__NS_1_1Shader_1a94af3829774b58650bdb770d252ffb11" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_uniformSharedBlock</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1adef8f431321cd65ecf4121107b92869b" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_virtualUBO</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>m_watchers</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>NonCopyable</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a969832da4bf63e53549fcd44dfa7f1f7" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>OnReloadDone</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>OnResourceRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Shader</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Shader</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Shader</scope><name>operator=</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a8f3b6ec20eb27579b9876af3b98a0083" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Ptr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a6aede1af04731ba7ed203d822199b5a6" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Ready</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Reload</name></member>
@@ -1528,7 +1574,9 @@
       <member refid="classSR__GTYPES__NS_1_1Shader_1a4fc66490b2ead167a963e198d2b0bc36" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>ResetUBOToDefaults</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1ac2295fe6df5ab104f4bf5ff057792eac" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>ReviveResource</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a3cbde9a2dcf1f8ca917b7cc6322bd544" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetBool</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Shader_1a141487ac4ceedb33a2a8e1127663af03" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetColor</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a3e59357fb34efd4008489a963995a9e5" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetConstBool</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Shader_1a7dadb1bf21b29ecf72f27edd0b3ebd37" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetConstColor</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a0dda4dc07e381feac03ad5a0592e812d" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetConstFloat</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a32869593d8b3de9bd56321dd3c99e658" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetConstInt</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a6740d42bf9a20cdd524ddb58b306c25f" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SetConstIVec2</name></member>
@@ -1558,6 +1606,9 @@
       <member refid="classSR__GTYPES__NS_1_1Shader_1a7bd3b986354c80acd5aadde8777dfa6a" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>StartWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>StopWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Subscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a6626d1907c9de6985f91015eb5e56a55" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Unload</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a991440d68bf6366db1cc5b1538ed3ec0" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>UnloadDefaultSamplers</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Unsubscribe</name></member>
@@ -1566,7 +1617,7 @@
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>UpdateResources</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1acac6102c3bec6a8b927ae4e49bc894c4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>Use</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>~IResource</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__GTYPES__NS_1_1Shader_1a0d8212208e4a7361361fc81a9fa1f3ec" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Shader</scope><name>~Shader</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Shader</scope><name>~SubscriptionHolder</name></member>

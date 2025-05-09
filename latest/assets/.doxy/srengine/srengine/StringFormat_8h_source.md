@@ -22,10 +22,6 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Common/StringUtils.h>
 
-#include <fmt/format.h>
-#include <fmt/printf.h>
-#include <fmt/color.h>
-
 namespace SR_UTILS_NS {
 
     SR_NODISCARD SR_INLINE_STATIC uint8_t HexCharToUInt8(const char c) {

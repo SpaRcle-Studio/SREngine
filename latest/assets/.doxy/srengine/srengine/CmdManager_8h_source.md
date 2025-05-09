@@ -23,13 +23,13 @@ namespace SR_UTILS_NS {
         Sync, Async, Force
     };
 
-    class SR_DLL_EXPORT CmdManager : SR_UTILS_NS::NonCopyable {
+    class SR_COMMON_DLL_API CmdManager : SR_UTILS_NS::NonCopyable {
     private:
         enum class CmdType {
             Redo, Undo, Execute, Store
         };
 
-        struct SR_DLL_EXPORT Cmd {
+        struct SR_COMMON_DLL_API Cmd {
             ReversibleCommand* m_cmd;
             CmdType m_type;
         };

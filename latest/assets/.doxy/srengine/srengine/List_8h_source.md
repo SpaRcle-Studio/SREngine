@@ -18,7 +18,7 @@
 #include <Utils/Debug.h>
 
 namespace SR_HTYPES_NS {
-    template <typename T> class SR_DLL_EXPORT List {
+    template <typename T> class List {
     private:
         std::vector<T> self = std::vector<T>();
         std::mutex m_mutex = std::mutex();

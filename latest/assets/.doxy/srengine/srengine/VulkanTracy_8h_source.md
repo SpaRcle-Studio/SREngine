@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_VULKAN_TRACY_H
 #define SR_ENGINE_GRAPHICS_VULKAN_TRACY_H
 
+#include <Graphics/macros.h>
+
 #if defined(SR_TRACY_ENABLE) && defined(SR_USE_VULKAN)
     #include <Utils/Profile/TracyContext.h>
 

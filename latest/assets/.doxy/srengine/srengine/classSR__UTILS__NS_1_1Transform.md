@@ -178,8 +178,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | virtual void | [**Rotate**](#function-rotate-13) (const SR\_MATH\_NS::FVector3 & eulers) <br> |
 | virtual void | [**Rotate**](#function-rotate-23) (const [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) <br> |
 | virtual void | [**Rotate**](#function-rotate-33) (SR\_MATH\_NS::Unit x, SR\_MATH\_NS::Unit y, SR\_MATH\_NS::Unit z) <br> |
-| virtual void | [**RotateAround**](#function-rotatearound) (const Math::FVector3 & point, const Math::FVector3 & eulers) <br> |
-| virtual void | [**RotateAroundParent**](#function-rotatearoundparent) (const Math::FVector3 & eulers) <br> |
+| virtual void | [**RotateAround**](#function-rotatearound) (const SR\_MATH\_NS::FVector3 & point, const SR\_MATH\_NS::FVector3 & eulers) <br> |
+| virtual void | [**RotateAroundParent**](#function-rotatearoundparent) (const SR\_MATH\_NS::FVector3 & eulers) <br> |
 | virtual void | [**Scale**](#function-scale-12) (const SR\_MATH\_NS::FVector3 & scale) <br> |
 | virtual void | [**Scale**](#function-scale-22) (SR\_MATH\_NS::Unit x, SR\_MATH\_NS::Unit y, SR\_MATH\_NS::Unit z) <br> |
 |  void | [**SetGameObject**](#function-setgameobject) ([**GameObject**](classSR__UTILS__NS_1_1GameObject.md) \* pGameObject) <br> |
@@ -230,7 +230,6 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
-| virtual void | [**InitializeClass**](classSR__UTILS__NS_1_1SRClass.md#function-initializeclass) () noexcept<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
 
@@ -242,6 +241,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | ---: | :--- |
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-12) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(T \*ptr)&gt; & freeFun) <br> |
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-22) () <br> |
+| virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-decrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**DynamicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-dynamiccast) () const<br> |
 |  SR\_NODISCARD const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
 |  SR\_NODISCARD T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
@@ -251,6 +251,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
+| virtual void | [**IncrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-incrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**PolymorphicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-polymorphiccast) () const<br> |
 |  SR\_NODISCARD bool | [**RecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-recursivelockifvalid) () noexcept const<br> |
 |  U | [**ReinterpretCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-reinterpretcast) () <br> |
@@ -282,14 +283,16 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 | Type | Name |
 | ---: | :--- |
+| virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-decrementpointer) () = 0<br> |
 |  const [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* | [**GetPtrData**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-getptrdata-12) () const<br> |
 |  [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* | [**GetPtrData**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-getptrdata-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
 | virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-getsrclass) () const = 0<br> |
+| virtual void | [**IncrementPointer**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-incrementpointer) () = 0<br> |
 | virtual void | [**Reset**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-reset) () = 0<br> |
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
-|   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () = default<br> |
+|   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
-| virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () = default<br> |
+| virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
 
@@ -547,7 +550,7 @@ SR_NODISCARD Transform * SR_UTILS_NS::Transform::GetParentTransform () const
 ### function GetQuaternion 
 
 ```C++
-inline virtual SR_NODISCARD SR_MATH_NS::Quaternion SR_UTILS_NS::Transform::GetQuaternion () const
+virtual SR_NODISCARD SR_MATH_NS::Quaternion SR_UTILS_NS::Transform::GetQuaternion () const
 ```
 
 
@@ -560,7 +563,7 @@ inline virtual SR_NODISCARD SR_MATH_NS::Quaternion SR_UTILS_NS::Transform::GetQu
 ### function GetRotation 
 
 ```C++
-inline virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetRotation () const
+virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetRotation () const
 ```
 
 
@@ -573,7 +576,7 @@ inline virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetRota
 ### function GetScale 
 
 ```C++
-inline virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetScale () const
+virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetScale () const
 ```
 
 
@@ -599,7 +602,7 @@ virtual SR_NODISCARD SR_MATH_NS::FVector2 SR_UTILS_NS::Transform::GetScale2D () 
 ### function GetSkew 
 
 ```C++
-inline virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetSkew () const
+virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetSkew () const
 ```
 
 
@@ -612,7 +615,7 @@ inline virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetSkew
 ### function GetTranslation 
 
 ```C++
-inline virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetTranslation () const
+virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::GetTranslation () const
 ```
 
 
@@ -730,7 +733,7 @@ virtual void SR_UTILS_NS::Transform::GlobalTranslate (
 ### function LookAt [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::LookAt (
+virtual void SR_UTILS_NS::Transform::LookAt (
     const SR_MATH_NS::FVector3 & position
 ) 
 ```
@@ -745,7 +748,7 @@ inline virtual void SR_UTILS_NS::Transform::LookAt (
 ### function LookAt [2/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::LookAt (
+virtual void SR_UTILS_NS::Transform::LookAt (
     const SR_MATH_NS::FVector3 & position,
     LookAtAxis axis
 ) 
@@ -787,7 +790,7 @@ virtual SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::Transform::Right () const
 ### function Rotate [1/3]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::Rotate (
+virtual void SR_UTILS_NS::Transform::Rotate (
     const SR_MATH_NS::FVector3 & eulers
 ) 
 ```
@@ -802,7 +805,7 @@ inline virtual void SR_UTILS_NS::Transform::Rotate (
 ### function Rotate [2/3]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::Rotate (
+virtual void SR_UTILS_NS::Transform::Rotate (
     const SR_MATH_NS::Quaternion & q
 ) 
 ```
@@ -834,9 +837,9 @@ virtual void SR_UTILS_NS::Transform::Rotate (
 ### function RotateAround 
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::RotateAround (
-    const Math::FVector3 & point,
-    const Math::FVector3 & eulers
+virtual void SR_UTILS_NS::Transform::RotateAround (
+    const SR_MATH_NS::FVector3 & point,
+    const SR_MATH_NS::FVector3 & eulers
 ) 
 ```
 
@@ -850,8 +853,8 @@ inline virtual void SR_UTILS_NS::Transform::RotateAround (
 ### function RotateAroundParent 
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::RotateAroundParent (
-    const Math::FVector3 & eulers
+virtual void SR_UTILS_NS::Transform::RotateAroundParent (
+    const SR_MATH_NS::FVector3 & eulers
 ) 
 ```
 
@@ -865,7 +868,7 @@ inline virtual void SR_UTILS_NS::Transform::RotateAroundParent (
 ### function Scale [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::Scale (
+virtual void SR_UTILS_NS::Transform::Scale (
     const SR_MATH_NS::FVector3 & scale
 ) 
 ```
@@ -912,7 +915,7 @@ void SR_UTILS_NS::Transform::SetGameObject (
 ### function SetGlobalRotation [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetGlobalRotation (
+virtual void SR_UTILS_NS::Transform::SetGlobalRotation (
     const SR_MATH_NS::FVector3 & eulers
 ) 
 ```
@@ -927,7 +930,7 @@ inline virtual void SR_UTILS_NS::Transform::SetGlobalRotation (
 ### function SetGlobalRotation [2/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetGlobalRotation (
+virtual void SR_UTILS_NS::Transform::SetGlobalRotation (
     const SR_MATH_NS::Quaternion & quaternion
 ) 
 ```
@@ -942,7 +945,7 @@ inline virtual void SR_UTILS_NS::Transform::SetGlobalRotation (
 ### function SetGlobalTranslation 
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetGlobalTranslation (
+virtual void SR_UTILS_NS::Transform::SetGlobalTranslation (
     const SR_MATH_NS::FVector3 & translation
 ) 
 ```
@@ -957,7 +960,7 @@ inline virtual void SR_UTILS_NS::Transform::SetGlobalTranslation (
 ### function SetMatrix 
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetMatrix (
+virtual void SR_UTILS_NS::Transform::SetMatrix (
     const std::optional< SR_MATH_NS::FVector3 > & translation,
     const std::optional< SR_MATH_NS::Quaternion > & rotation,
     const std::optional< SR_MATH_NS::FVector3 > & scale
@@ -974,7 +977,7 @@ inline virtual void SR_UTILS_NS::Transform::SetMatrix (
 ### function SetRotation [1/3]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetRotation (
+virtual void SR_UTILS_NS::Transform::SetRotation (
     const SR_MATH_NS::FVector3 & euler
 ) 
 ```
@@ -989,7 +992,7 @@ inline virtual void SR_UTILS_NS::Transform::SetRotation (
 ### function SetRotation [2/3]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetRotation (
+virtual void SR_UTILS_NS::Transform::SetRotation (
     const SR_MATH_NS::Quaternion & quaternion
 ) 
 ```
@@ -1021,7 +1024,7 @@ virtual void SR_UTILS_NS::Transform::SetRotation (
 ### function SetScale [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetScale (
+virtual void SR_UTILS_NS::Transform::SetScale (
     const SR_MATH_NS::FVector3 & scale
 ) 
 ```
@@ -1053,7 +1056,7 @@ virtual void SR_UTILS_NS::Transform::SetScale (
 ### function SetSkew [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetSkew (
+virtual void SR_UTILS_NS::Transform::SetSkew (
     const SR_MATH_NS::FVector3 & skew
 ) 
 ```
@@ -1085,7 +1088,7 @@ virtual void SR_UTILS_NS::Transform::SetSkew (
 ### function SetTranslation [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetTranslation (
+virtual void SR_UTILS_NS::Transform::SetTranslation (
     const SR_MATH_NS::FVector3 & translation
 ) 
 ```
@@ -1117,7 +1120,7 @@ virtual void SR_UTILS_NS::Transform::SetTranslation (
 ### function SetTranslationAndRotation 
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::SetTranslationAndRotation (
+virtual void SR_UTILS_NS::Transform::SetTranslationAndRotation (
     const SR_MATH_NS::FVector3 & translation,
     const SR_MATH_NS::FVector3 & euler
 ) 
@@ -1146,7 +1149,7 @@ SR_UTILS_NS::Transform::Transform ()
 ### function Translate [1/2]
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::Translate (
+virtual void SR_UTILS_NS::Transform::Translate (
     const SR_MATH_NS::FVector3 & translation
 ) 
 ```
@@ -1247,7 +1250,7 @@ virtual SR_NODISCARD bool SR_UTILS_NS::Transform::IsDirty () noexcept const
 ### function UpdateMatrix 
 
 ```C++
-inline virtual void SR_UTILS_NS::Transform::UpdateMatrix () const
+virtual void SR_UTILS_NS::Transform::UpdateMatrix () const
 ```
 
 

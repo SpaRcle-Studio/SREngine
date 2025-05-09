@@ -232,11 +232,11 @@
       <node id="5">
         <label>Entity</label>
       </node>
-      <node id="13">
+      <node id="11">
         <label>SR_MATH_NS::Quaternion</label>
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
-      <node id="14">
+      <node id="12">
         <label>SR_PHYSICS_NS::LibraryImpl</label>
         <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
         <childnode refid="10" relation="public-inheritance">
@@ -248,10 +248,10 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="13">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -259,21 +259,21 @@
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>m_center</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_impl</edgelabel>
         </childnode>
-        <childnode refid="14" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>m_library</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_rotation</edgelabel>
         </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
@@ -283,7 +283,7 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="9">
         <label>SR_PTYPES_NS::RigidbodyImpl</label>
         <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
         <childnode refid="10" relation="public-inheritance">
@@ -291,10 +291,10 @@
         <childnode refid="3" relation="usage">
           <edgelabel>m_rigidbody</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_rigidbodyRotation</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>m_rigidbodyTranslation</edgelabel>
         </childnode>
       </node>
@@ -309,9 +309,6 @@
         <childnode refid="7" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="6">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -319,14 +316,14 @@
         <childnode refid="5" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="14">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
-        <childnode refid="18" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
-        <childnode refid="19" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -335,29 +332,17 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="9">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
+      <node id="15">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
         <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="17">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="18">
+      <node id="16">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
@@ -367,7 +352,7 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="8">
         <label>SR_MATH_NS::Vector3&lt; Unit &gt;</label>
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
@@ -382,6 +367,7 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>CheckActivity</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a6f8dd5e7fd02e9ef4069b283631ca0c0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>ClearForces</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a399c77c103e176a04ad7781b72c314ee" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>Component</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>Detach</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4b0a3a17900c987f5a7a5b7e25d4ed41" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>ExecuteInEditMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>FixedUpdate</name></member>
@@ -392,8 +378,6 @@
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad47d428ca458072a49ece50e0cbdaaf0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetCenter</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4cc2f1afea660661f0868ec2865af99b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetCenterDirection</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8ff4e09efeb16c0cb212f54a11e47afe" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetCollisionShape</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetComponentProperties</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetComponentProperties</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetGameObject</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D_1aafe3d59580f68aeb6eb44074b8d75bcd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetHandle</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ad030330291748075ebb435a67d654a5a" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>GetImpl</name></member>
@@ -417,20 +401,20 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>HasScene</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D_1a8822eb76bbb24a7ff671a3c901e7a9d9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>InitBody</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsActive</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsAttached</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsAwake</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a673709aff2f5f806291d34c309fa104b" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsBodyDirty</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsComponentLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsComponentValid</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a8dc1dc6d573773758afa15c305261d00" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsDebugEnabled</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsEnabled</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ab1e9d4cd70f235b9f1a4f6e8cce09caf" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsMatrixDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsPausedMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsPlayingMode</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a57b2e63bbbc6bb1d272470da5d92952e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsShapeDirty</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1ab45a2e1491e7f2c5444f5f1699557866" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsShapeSupported</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsStarted</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1adc9677e981f2184c1382c1686b7605fb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsStatic</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1aa9481f582333acf391072a0091ff88cd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsTrigger</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>IsUpdatable</name></member>
@@ -458,7 +442,6 @@
       <member refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D_1a93d01f53b0449c1bac91d63cd94b69c1" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_motionState</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_parent</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a5791f0b028bda41452be41ab59d8beca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_physicsScene</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_properties</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3Rigidbody3D_1ae07003d68903364df0bbadb2fd831651" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_rigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a4928c92a79aa48c51ac74947733f789d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_rotation</name></member>
       <member refid="classSR__PTYPES__NS_1_1Rigidbody_1a690813a298023a0a2ce8f8229e44d9ab" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3Rigidbody3D</scope><name>m_scale</name></member>

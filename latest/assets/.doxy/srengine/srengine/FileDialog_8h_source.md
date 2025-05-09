@@ -16,7 +16,7 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT FileDialog : public Singleton<FileDialog> {
+    class SR_COMMON_DLL_API FileDialog : public Singleton<FileDialog> {
         SR_REGISTER_SINGLETON(FileDialog)
         using Filter = std::vector<std::pair<StringAtom, StringAtom>>;
     protected:

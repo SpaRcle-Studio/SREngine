@@ -4,6 +4,8 @@
     <compoundname>SR_CORE_GUI_NS</compoundname>
     <innerclass refid="classSR__CORE__GUI__NS_1_1About" prot="public">SR_CORE_GUI_NS::About</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1AnimatorEditor" prot="public">SR_CORE_GUI_NS::AnimatorEditor</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</innerclass>
+    <innerclass refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer" prot="public">SR_CORE_GUI_NS::BehaviourPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer" prot="public">SR_CORE_GUI_NS::BitMapPropertyDrawer</innerclass>
     <innerclass refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" prot="public">SR_CORE_GUI_NS::BoolPropertyDrawer</innerclass>
     <innerclass refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" prot="public">SR_CORE_GUI_NS::DrawPropertyContext</innerclass>
@@ -299,6 +301,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Engine.h" line="46" column="1"/>
+    <location file="Engine/Core/inc/Core/Engine.h" line="48" column="1"/>
   </compounddef>
 </doxygen>

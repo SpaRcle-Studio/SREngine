@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="21" column="25"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="23" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1aa64f432a95e09e4c0f5ce1b44e03c4b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>double_t</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="22" column="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="24" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1a946f83df828daf40352e19d24ed16139" prot="private" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>int32_t</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="23" column="25"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="25" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1ae2d2fc75322d3a72b70250584931e152" prot="private" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="24" column="22"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="26" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -139,16 +139,16 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="20" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" bodystart="20" bodyend="25"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="22" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" bodystart="22" bodyend="27"/>
     <listofallmembers>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1a8d37b0de165fe0e34d3f75c9c2bbc350" prot="private" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>Calculate</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1aa64f432a95e09e4c0f5ce1b44e03c4b9" prot="private" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>Calculate</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1a946f83df828daf40352e19d24ed16139" prot="private" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>Calculate</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationInterpolationFunction_1ae2d2fc75322d3a72b70250584931e152" prot="private" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>Calculate</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationInterpolationFunction</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

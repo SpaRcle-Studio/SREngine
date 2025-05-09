@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="13" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="15" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTypes_1_1DynamicTextureDescriptorSet_1a917cad3733a9c357f5948e3375dc15dd" prot="public" static="no" mutable="no">
         <type>VkDescriptorSet</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="14" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="16" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1VulkanTypes_1_1DynamicTextureDescriptorSet_1ac61da4a6928f8a0297a4d2023fa05c9a" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="15" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="17" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -59,14 +59,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="17" bodyend="17"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="19" bodyend="19"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="12" bodyend="18"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Vulkan/DynamicTextureDescriptorSet.h" bodystart="14" bodyend="20"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1VulkanTypes_1_1DynamicTextureDescriptorSet_1a917cad3733a9c357f5948e3375dc15dd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTypes::DynamicTextureDescriptorSet</scope><name>m_descriptor</name></member>
       <member refid="structSR__GRAPH__NS_1_1VulkanTypes_1_1DynamicTextureDescriptorSet_1a40f7eae561683e2a1b67dfcce179ee7c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanTypes::DynamicTextureDescriptorSet</scope><name>m_textureID</name></member>

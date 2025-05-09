@@ -315,7 +315,7 @@
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1abc65a63eacb6492ba4f39c458a56506e" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_isEndOfStream</name></member>
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1ac03869f156186054259a4466cb9cd7d7" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>m_ModPlugFile</name></member>
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a88d5b444f0280bce2808291bc693d7f9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>ModPlugDataProvider</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>operator=</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a23590a109d5a88509df288eb48877ccb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>Ptr</name></member>
@@ -323,7 +323,7 @@
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1a9196fb87f84b0395d20d814ed93540a5" prot="public" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>StreamWaveData</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8931d5989f2b446efc900c6c75d00b27" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~IWaveDataProvider</name></member>
       <member refid="classSR__AUDIO__NS_1_1ModPlugDataProvider_1af3ea5e569588f2e078a68cc637c9947a" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~ModPlugDataProvider</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::ModPlugDataProvider</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

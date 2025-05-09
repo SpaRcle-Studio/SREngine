@@ -6,6 +6,7 @@
     <innerdir refid="dir_5facaa05c86060793c747e3dfab17af4">Engine/Core/inc/Core/Common</innerdir>
     <innerdir refid="dir_44a92b6c7b958f78c0d3d9d4e761e8ae">Engine/Core/inc/Core/GUI</innerdir>
     <innerdir refid="dir_0e3ce5cc06992fb9707a8ab8405e349d">Engine/Core/inc/Core/Parsers</innerdir>
+    <innerdir refid="dir_7ce46455ccb3010cb58ed75f07d53122">Engine/Core/inc/Core/Scripting</innerdir>
     <innerdir refid="dir_bcd9d448ba2ac473eba0fd9099274e65">Engine/Core/inc/Core/Settings</innerdir>
     <innerdir refid="dir_f0262115118909cf3466cd1f262a40c2">Engine/Core/inc/Core/States</innerdir>
     <innerdir refid="dir_a438f77ea296cf9ed84cc5f25e2e6a4d">Engine/Core/inc/Core/Tests</innerdir>

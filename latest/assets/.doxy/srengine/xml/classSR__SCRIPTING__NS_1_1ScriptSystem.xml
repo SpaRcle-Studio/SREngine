@@ -1,0 +1,959 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__SCRIPTING__NS_1_1ScriptSystem" kind="class" language="C++" prot="public">
+    <compoundname>SR_SCRIPTING_NS::ScriptSystem</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Singleton" prot="public" virt="non-virtual">SR_UTILS_NS::Singleton&lt; ScriptSystem &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2c" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>State</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::State</qualifiedname>
+        <enumvalue id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2ca2cd5e8bae007215c983f62e85db4cb08" prot="private">
+          <name>InitialAnalyse</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2cae599161956d626eda4cb0a5ffb85271c" prot="private">
+          <name>Idle</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2ca5cd346e7e3987b6d4c7d632084f0db81" prot="private">
+          <name>CheckModules</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2ca607be0b9475c0b77cbc25dff3b36e49b" prot="private">
+          <name>Codegen</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2cac96b4a8750d3ff3116a6f8be2e900926" prot="private">
+          <name>Compiling</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2ca1046222ea676e1c79b0f8d955cf3a55c" prot="private">
+          <name>Reloading</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="21" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6556e75d4bcffcb8cf870ee9a452ac60" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__SCRIPTING__NS_1_1ScriptSystem" kindref="compound">ScriptSystem</ref> &gt;</type>
+        <definition>using SR_SCRIPTING_NS::ScriptSystem::Super =  SR_HTYPES_NS::SharedPtr&lt;ScriptSystem&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="20" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a17bc10d4e7983465f858cd30abdbd39d" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__SCRIPTING__NS_1_1ScriptSystem" kindref="compound">ScriptSystem</ref> &gt;</type>
+        <definition>using SR_SCRIPTING_NS::ScriptSystem::Ptr =  SR_HTYPES_NS::SharedPtr&lt;ScriptSystem&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="25" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a3fea942016d8a2bacbb67bf3db961c25" prot="public" static="yes" mutable="no">
+        <type>const std::set&lt; std::string_view &gt;</type>
+        <definition>const std::set&lt;std::string_view&gt; SR_SCRIPTING_NS::ScriptSystem::ALLOWED_CPP_EXTENSIONS</definition>
+        <argsstring></argsstring>
+        <name>ALLOWED_CPP_EXTENSIONS</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ALLOWED_CPP_EXTENSIONS</qualifiedname>
+        <initializer>= { &quot;cpp&quot;, &quot;h&quot;, &quot;hpp&quot;, &quot;cxx&quot; }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="27" column="38" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a3efeea587d6f6d26ccb221517c8d765a" prot="public" static="yes" mutable="no">
+        <type>const std::set&lt; std::string_view &gt;</type>
+        <definition>const std::set&lt;std::string_view&gt; SR_SCRIPTING_NS::ScriptSystem::ALLOWED_CPP_MODULE_EXTENSIONS</definition>
+        <argsstring></argsstring>
+        <name>ALLOWED_CPP_MODULE_EXTENSIONS</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ALLOWED_CPP_MODULE_EXTENSIONS</qualifiedname>
+        <initializer>= { &quot;dll&quot;, &quot;so&quot; }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="28" column="38" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ac00d849beebce61edd2437d0eec08cba" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>const SR_UTILS_NS::StringAtom SR_SCRIPTING_NS::ScriptSystem::ENGINE_MODULE_FILE_NAME</definition>
+        <argsstring></argsstring>
+        <name>ENGINE_MODULE_FILE_NAME</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ENGINE_MODULE_FILE_NAME</qualifiedname>
+        <initializer>= &quot;.module&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="29" column="53" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0c46989d1852fa4f5c681934775496d7" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::ScriptSystem::m_isInit</definition>
+        <argsstring></argsstring>
+        <name>m_isInit</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_isInit</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="63" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af512a870044bfe10d49e8e1ab40e00fe" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::ScriptSystem::m_isCompilationEnabled</definition>
+        <argsstring></argsstring>
+        <name>m_isCompilationEnabled</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_isCompilationEnabled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="64" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a560f39420fb93cd61d3b25e186123e6d" prot="private" static="no" mutable="no">
+        <type>std::recursive_mutex</type>
+        <definition>std::recursive_mutex SR_SCRIPTING_NS::ScriptSystem::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_mutex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="66" column="30" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5fc8ae038c62c8899fc1e8a9eed016cd" prot="private" static="no" mutable="no">
+        <type>SR_HTYPES_NS::Thread::Ptr</type>
+        <definition>SR_HTYPES_NS::Thread::Ptr SR_SCRIPTING_NS::ScriptSystem::m_thread</definition>
+        <argsstring></argsstring>
+        <name>m_thread</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_thread</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="67" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11363cb5955eed6576ba66823fddd16e" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_SCRIPTING_NS::ScriptSystem::m_fileChangedSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_fileChangedSubscription</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_fileChangedSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="69" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a62fd35c4c5743efd1cf3e9ac29395557" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_SCRIPTING_NS::ScriptSystem::m_fileCreatedSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_fileCreatedSubscription</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_fileCreatedSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="70" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a06dc6e078da00f2e13ecbbc3d9b53c7b" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_SCRIPTING_NS::ScriptSystem::m_fileDeletedSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_fileDeletedSubscription</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_fileDeletedSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="71" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a1e44ab3cc4f56b07b9e23959bf9043f1" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ScriptSystem::m_pathToEngineSourcesRoot</definition>
+        <argsstring></argsstring>
+        <name>m_pathToEngineSourcesRoot</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_pathToEngineSourcesRoot</qualifiedname>
+        <briefdescription>
+<para>shared parameters (read only) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="75" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a465bb3c96fdb74e494b74b130fa00e1c" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ScriptSystem::m_pathToEngineBuildRoot</definition>
+        <argsstring></argsstring>
+        <name>m_pathToEngineBuildRoot</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_pathToEngineBuildRoot</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="76" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8d7f6e3eab9dda95b172ca26f5461599" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ScriptSystem::m_resourcesFolder</definition>
+        <argsstring></argsstring>
+        <name>m_resourcesFolder</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_resourcesFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="77" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4190d4f26339fbf2faa10e741b84f262" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ScriptSystem::m_cacheFolder</definition>
+        <argsstring></argsstring>
+        <name>m_cacheFolder</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_cacheFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="78" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a7f6bf9dde83bcc6688c8b893fe3efa48" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ScriptSystem::m_apiFolder</definition>
+        <argsstring></argsstring>
+        <name>m_apiFolder</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_apiFolder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="79" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0bcc431a4522887c4576576b201a6d16" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
+        <definition>std::vector&lt;SR_UTILS_NS::Path&gt; SR_SCRIPTING_NS::ScriptSystem::m_engineSourcesIncludePaths</definition>
+        <argsstring></argsstring>
+        <name>m_engineSourcesIncludePaths</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_engineSourcesIncludePaths</qualifiedname>
+        <briefdescription>
+<para>thread owned parameters </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="83" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a34b8a58dc1196ea8635c55c98bb84bd8" prot="private" static="no" mutable="no">
+        <type>SR_UTILS_NS::TimePointType</type>
+        <definition>SR_UTILS_NS::TimePointType SR_SCRIPTING_NS::ScriptSystem::m_lastFileSystemEvent</definition>
+        <argsstring></argsstring>
+        <name>m_lastFileSystemEvent</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_lastFileSystemEvent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="84" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a67c5e8a345c177785f0ee34133dd6676" prot="private" static="no" mutable="no">
+        <type>CppCompiler::Ptr</type>
+        <definition>CppCompiler::Ptr SR_SCRIPTING_NS::ScriptSystem::m_compiler</definition>
+        <argsstring></argsstring>
+        <name>m_compiler</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_compiler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="86" column="26" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0d8deef3dd4832a184c31638d2088446" prot="private" static="no" mutable="no">
+        <type>CppCodeGenerator::Ptr</type>
+        <definition>CppCodeGenerator::Ptr SR_SCRIPTING_NS::ScriptSystem::m_codeGenerator</definition>
+        <argsstring></argsstring>
+        <name>m_codeGenerator</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_codeGenerator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="87" column="31" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a44315a0e555895e532751afc8cf68809" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">ModuleManager::Ptr</ref></type>
+        <definition>ModuleManager::Ptr SR_SCRIPTING_NS::ScriptSystem::m_moduleManager</definition>
+        <argsstring></argsstring>
+        <name>m_moduleManager</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_moduleManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="88" column="28" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8118e9abff87e7b55e06e70a5bfa6bb9" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_SCRIPTING_NS::ScriptSystem::m_threadRunning</definition>
+        <argsstring></argsstring>
+        <name>m_threadRunning</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_threadRunning</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="90" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ade34756347f0532aec047422e8297abf" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_SCRIPTING_NS::ScriptSystem::m_isCompiled</definition>
+        <argsstring></argsstring>
+        <name>m_isCompiled</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_isCompiled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="91" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0ec11fd3a6cba76c210b354efd3e5d9f" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_SCRIPTING_NS::ScriptSystem::m_hasCompileErrors</definition>
+        <argsstring></argsstring>
+        <name>m_hasCompileErrors</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_hasCompileErrors</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="92" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1afa6b27fd4dd710b520f9e0b8cbc0a2a5" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_SCRIPTING_NS::ScriptSystem::m_hasModuleCopyErrors</definition>
+        <argsstring></argsstring>
+        <name>m_hasModuleCopyErrors</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_hasModuleCopyErrors</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="93" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1aff3ddb46a22dce0440e47cebc1828e0f" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; SR_SCRIPTING_NS::ScriptSystem::m_hasModuleReloadRequest</definition>
+        <argsstring></argsstring>
+        <name>m_hasModuleReloadRequest</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_hasModuleReloadRequest</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="94" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1acb7c74d0a15952b785efe2e53584ebf2" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; State &gt;</type>
+        <definition>std::atomic&lt;State&gt; SR_SCRIPTING_NS::ScriptSystem::m_state</definition>
+        <argsstring></argsstring>
+        <name>m_state</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_state</qualifiedname>
+        <initializer>= State::InitialAnalyse</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="95" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a59f60fe9be7174ee1965dd5560069f06" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::Path&gt; SR_SCRIPTING_NS::ScriptSystem::m_changedCppFiles</definition>
+        <argsstring></argsstring>
+        <name>m_changedCppFiles</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_changedCppFiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="97" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4354ce231d22ad087eed3921e439bc08" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::Path&gt; SR_SCRIPTING_NS::ScriptSystem::m_changedCppModules</definition>
+        <argsstring></argsstring>
+        <name>m_changedCppModules</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_changedCppModules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="98" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1adb148fb7bb50a3e821dec2d7b26067d7" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::Path&gt; SR_SCRIPTING_NS::ScriptSystem::m_changedModules</definition>
+        <argsstring></argsstring>
+        <name>m_changedModules</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_changedModules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="99" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a2bcb8f06b9d6bf73eebd6e35f4b74396" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::StringAtom&gt; SR_SCRIPTING_NS::ScriptSystem::m_modulesToCopy</definition>
+        <argsstring></argsstring>
+        <name>m_modulesToCopy</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::m_modulesToCopy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="101" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ac6ddb638fc0eebd86f9e8de71d62e6d6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::ScriptSystem::ScriptSystem</definition>
+        <argsstring>()=default</argsstring>
+        <name>ScriptSystem</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ScriptSystem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="32" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0ff10b9f4b3b2802de069c966d0f9156" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::ScriptSystem::~ScriptSystem</definition>
+        <argsstring>() override</argsstring>
+        <name>~ScriptSystem</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::~ScriptSystem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1aa3c63ddb0e0b2aebd015350877d42103" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::HandleFileSystemEvent</definition>
+        <argsstring>(const SR_UTILS_NS::SubscriptionMessage &amp;message, SR_UTILS_NS::FileSystemWatcher::EventType eventType)</argsstring>
+        <name>HandleFileSystemEvent</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::HandleFileSystemEvent</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1SubscriptionMessage" kindref="compound">SR_UTILS_NS::SubscriptionMessage</ref> &amp;</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>SR_UTILS_NS::FileSystemWatcher::EventType</type>
+          <declname>eventType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="50" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1adae49e173f30ac54d1c53fc809f7d4be" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::ThreadFunc</definition>
+        <argsstring>()</argsstring>
+        <name>ThreadFunc</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ThreadFunc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11f97a4259b47f0eea630f469bd38b0c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::ScriptSystem::InitEngineSources</definition>
+        <argsstring>()</argsstring>
+        <name>InitEngineSources</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::InitEngineSources</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a34771b98c48d9a4e24e97884856a2187" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::InitialAnalyse</definition>
+        <argsstring>()</argsstring>
+        <name>InitialAnalyse</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::InitialAnalyse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5ae00b594532c2c43024b77982fccd06" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::ThreadIdle</definition>
+        <argsstring>()</argsstring>
+        <name>ThreadIdle</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ThreadIdle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ab70bc0b38b0231cf05b2d7c64b8091dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::CompileModules</definition>
+        <argsstring>()</argsstring>
+        <name>CompileModules</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::CompileModules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="56" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ab3e87bff908127c953a48690d49968e9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::CopyModules</definition>
+        <argsstring>()</argsstring>
+        <name>CopyModules</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::CopyModules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af5eecfcc97969de6675ea11e5beea26a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::ReloadModules</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadModules</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ReloadModules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="58" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a2e0b7c4e7ae5e0a9337a7cb85cf7c512" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::ResetSubscriptions</definition>
+        <argsstring>()</argsstring>
+        <name>ResetSubscriptions</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ResetSubscriptions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="60" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1aa52a8eca28da80410a3439af2ba77ece" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SCRIPTING_NS::ScriptSystem::IsInitialized</definition>
+        <argsstring>() const</argsstring>
+        <name>IsInitialized</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::IsInitialized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="36" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a99534292ab8c99a8b6ce8066975b3389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SCRIPTING_NS::ScriptSystem::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="37" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ae2fa5669f4342cf044ae61662ae246ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__SCRIPTING__NS_1_1ModuleManager" kindref="compound">ModuleManager</ref> *</type>
+        <definition>SR_NODISCARD const ModuleManager * SR_SCRIPTING_NS::ScriptSystem::GetModuleManager</definition>
+        <argsstring>() const</argsstring>
+        <name>GetModuleManager</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetModuleManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="39" column="42" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a12e298ef97423c477e698859c3ef8275" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SCRIPTING__NS_1_1ModuleManager" kindref="compound">ModuleManager</ref> *</type>
+        <definition>SR_NODISCARD ModuleManager * SR_SCRIPTING_NS::ScriptSystem::GetModuleManager</definition>
+        <argsstring>()</argsstring>
+        <name>GetModuleManager</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetModuleManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="40" column="36" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a707955a08e2d7e2cea1ad0abd63c376e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const std::vector&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const std::vector&lt; SR_UTILS_NS::Path &gt; &amp; SR_SCRIPTING_NS::ScriptSystem::GetEngineSourcesIncludePaths</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEngineSourcesIncludePaths</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetEngineSourcesIncludePaths</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="41" column="40" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6aa1cf94a151439af0c9eefe8e362b8e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_UTILS_NS::Path &amp; SR_SCRIPTING_NS::ScriptSystem::GetBuildFolderPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetBuildFolderPath</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetBuildFolderPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="42" column="46" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e135850566cb6f313d12f370422ded" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+        <definition>SR_NODISCARD const SR_UTILS_NS::Path &amp; SR_SCRIPTING_NS::ScriptSystem::GetEngineSourcesPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEngineSourcesPath</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetEngineSourcesPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="43" column="46" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1a65c87a598484baa44f29dab43bc17fdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ScriptSystem::ReloadModulesIfNeeded</definition>
+        <argsstring>()</argsstring>
+        <name>ReloadModulesIfNeeded</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::ReloadModulesIfNeeded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="45" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ScriptSystem_1ace2d87e558dfd99248921e8c206fc3d7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>static std::string_view SR_SCRIPTING_NS::ScriptSystem::GetDynamicLibraryExtension</definition>
+        <argsstring>()</argsstring>
+        <name>GetDynamicLibraryExtension</name>
+        <qualifiedname>SR_SCRIPTING_NS::ScriptSystem::GetDynamicLibraryExtension</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="47" column="33"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::ScriptSystem</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ScriptSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::ScriptSystem</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ScriptSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ENGINE_MODULE_FILE_NAME</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SingletonBase</label>
+        <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" line="18" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptSystem.h" bodystart="18" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a3fea942016d8a2bacbb67bf3db961c25" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ALLOWED_CPP_EXTENSIONS</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a3efeea587d6f6d26ccb221517c8d765a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ALLOWED_CPP_MODULE_EXTENSIONS</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ab70bc0b38b0231cf05b2d7c64b8091dd" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>CompileModules</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ab3e87bff908127c953a48690d49968e9" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>CopyModules</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ac00d849beebce61edd2437d0eec08cba" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ENGINE_MODULE_FILE_NAME</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6aa1cf94a151439af0c9eefe8e362b8e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetBuildFolderPath</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ace2d87e558dfd99248921e8c206fc3d7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetDynamicLibraryExtension</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a707955a08e2d7e2cea1ad0abd63c376e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetEngineSourcesIncludePaths</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e135850566cb6f313d12f370422ded" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetEngineSourcesPath</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ae2fa5669f4342cf044ae61662ae246ff" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetModuleManager</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a12e298ef97423c477e698859c3ef8275" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetModuleManager</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>GetSingletonName</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1aa3c63ddb0e0b2aebd015350877d42103" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>HandleFileSystemEvent</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a99534292ab8c99a8b6ce8066975b3389" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>Init</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11f97a4259b47f0eea630f469bd38b0c" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>InitEngineSources</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a34771b98c48d9a4e24e97884856a2187" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>InitialAnalyse</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>InitSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>Instance</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1aa52a8eca28da80410a3439af2ba77ece" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>IsInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>IsSingletonCanBeDestroyed</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>LockSingleton</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a7f6bf9dde83bcc6688c8b893fe3efa48" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_apiFolder</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4190d4f26339fbf2faa10e741b84f262" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_cacheFolder</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a59f60fe9be7174ee1965dd5560069f06" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_changedCppFiles</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a4354ce231d22ad087eed3921e439bc08" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_changedCppModules</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1adb148fb7bb50a3e821dec2d7b26067d7" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_changedModules</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0d8deef3dd4832a184c31638d2088446" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_codeGenerator</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a67c5e8a345c177785f0ee34133dd6676" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_compiler</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0bcc431a4522887c4576576b201a6d16" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_engineSourcesIncludePaths</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a11363cb5955eed6576ba66823fddd16e" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_fileChangedSubscription</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a62fd35c4c5743efd1cf3e9ac29395557" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_fileCreatedSubscription</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a06dc6e078da00f2e13ecbbc3d9b53c7b" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_fileDeletedSubscription</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0ec11fd3a6cba76c210b354efd3e5d9f" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_hasCompileErrors</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1afa6b27fd4dd710b520f9e0b8cbc0a2a5" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_hasModuleCopyErrors</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1aff3ddb46a22dce0440e47cebc1828e0f" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_hasModuleReloadRequest</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1af512a870044bfe10d49e8e1ab40e00fe" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_isCompilationEnabled</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ade34756347f0532aec047422e8297abf" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_isCompiled</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0c46989d1852fa4f5c681934775496d7" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_isInit</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a34b8a58dc1196ea8635c55c98bb84bd8" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_lastFileSystemEvent</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a44315a0e555895e532751afc8cf68809" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_moduleManager</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a2bcb8f06b9d6bf73eebd6e35f4b74396" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_modulesToCopy</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a560f39420fb93cd61d3b25e186123e6d" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_mutex</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a465bb3c96fdb74e494b74b130fa00e1c" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_pathToEngineBuildRoot</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a1e44ab3cc4f56b07b9e23959bf9043f1" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_pathToEngineSourcesRoot</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8d7f6e3eab9dda95b172ca26f5461599" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_resourcesFolder</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1acb7c74d0a15952b785efe2e53584ebf2" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_state</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5fc8ae038c62c8899fc1e8a9eed016cd" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_thread</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a8118e9abff87e7b55e06e70a5bfa6bb9" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>m_threadRunning</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>OnSingletonDestroy</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>operator=</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a17bc10d4e7983465f858cd30abdbd39d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>Ptr</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1af5eecfcc97969de6675ea11e5beea26a" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ReloadModules</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a65c87a598484baa44f29dab43bc17fdd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ReloadModulesIfNeeded</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a2e0b7c4e7ae5e0a9337a7cb85cf7c512" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ResetSubscriptions</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1ac6ddb638fc0eebd86f9e8de71d62e6d6" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ScriptSystem</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>SingletonBase</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1af4e44ea88d5d49320b46ee2fbd5ffe2c" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>State</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a6556e75d4bcffcb8cf870ee9a452ac60" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>Super</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1adae49e173f30ac54d1c53fc809f7d4be" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ThreadFunc</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a5ae00b594532c2c43024b77982fccd06" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>ThreadIdle</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ScriptSystem_1a0ff10b9f4b3b2802de069c966d0f9156" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~ScriptSystem</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ScriptSystem</scope><name>~SingletonBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

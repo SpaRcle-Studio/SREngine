@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a518adc7bcd8bebe76d1e01fe85f73f79" prot="public" static="no">
         <type><ref refid="classSR__GTYPES__NS_1_1Shader" kindref="compound">SR_GTYPES_NS::Shader</ref> *</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1acf7fa76241326ee2ca43cc84db726ea2" prot="public" static="no">
         <type>std::vector&lt; MeshPtr &gt;::iterator</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1ae5262e32be328e22226eb311f69a861d" prot="public" static="no">
         <type>std::vector&lt; MeshPtr &gt;::const_iterator</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1ad402708b56030627bc381c5b8e2905ce" prot="public" static="no">
         <type>std::vector&lt; MeshPtr &gt;::reverse_iterator</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a5dfd87df1c2f036ad0146696d6af1df4" prot="public" static="no">
         <type>std::vector&lt; MeshPtr &gt;::const_reverse_iterator</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="56" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="58" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a24f032b79d28544f12f24a116f9e3364" prot="protected" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="57" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="59" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1ae90b4f5960c943c7a92bddf23cdd887e" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; MeshPtr &gt;</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="58" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="60" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1aec4e8859d4191acbab2a2c6af37aaab8" prot="protected" static="no" mutable="no">
         <type>MeshPtr *</type>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="59" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="59" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="61" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="28" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a39b6f38808fa44ded240c807fcee2175" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="29" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1ac852b9646ef66f469e20916b8552699c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD Iterator</type>
@@ -192,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="32" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="34" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a0fe9e24c5c4570ca2f84f73147b73794" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD Iterator</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="33" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="35" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a924206ba5616a36b4f71d9046d351608" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD ConstIterator</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="35" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="37" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1ad4357379ad02c8cc8f7807ec25e6ccfe" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD ConstIterator</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="36" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="38" column="36" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a7fa09b035cc11fba28bc95dda30a515f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="38" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="40" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1adf6bff62eb6ee9c7a2e7c0f3840098e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; MeshPtr &gt; &amp;</type>
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="40" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="42" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a6ba841274d25372fdd237a361d9b4d63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="42" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a787f40059af8e6a067539a0de045f2f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -298,7 +298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="44" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1adbb75be0b3a04f7cc55053f50bba4f1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="45" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="47" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1af10c9580eb50e68b0ef71e2490f170d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -330,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="47" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1SortedMeshQueue_1a9d5d04abc93535f8fd257240fa310f90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="50" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="52" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -369,7 +369,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="53" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="55" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -412,7 +412,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="18" bodyend="61"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" line="20" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/SortedMeshQueue.h" bodystart="20" bodyend="63"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a787f40059af8e6a067539a0de045f2f6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>Add</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ac852b9646ef66f469e20916b8552699c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>begin</name></member>
@@ -429,7 +429,7 @@
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1ae90b4f5960c943c7a92bddf23cdd887e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>m_queue</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a24f032b79d28544f12f24a116f9e3364" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>m_target</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a381e45e5ffa8d8f21d406cd901fbe75d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1adbb75be0b3a04f7cc55053f50bba4f1f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>Remove</name></member>
@@ -440,7 +440,7 @@
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a9d5d04abc93535f8fd257240fa310f90" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>Sort</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a658703271f1b0051870a3f025c5e9739" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>SortedMeshQueue</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a28c25194ff3a8dfa64da5bad7362a125" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>SortInternal</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1SortedMeshQueue_1a39b6f38808fa44ded240c807fcee2175" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SortedMeshQueue</scope><name>~SortedMeshQueue</name></member>
     </listofallmembers>
   </compounddef>

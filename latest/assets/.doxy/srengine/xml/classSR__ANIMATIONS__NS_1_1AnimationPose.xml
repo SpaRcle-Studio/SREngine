@@ -135,12 +135,12 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationPose_1afd39d2a671dced21f26fe45997e1ff02" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>GetGameObjects</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationPose_1ac8d0bd45de8c0dcb437ec5815771660d" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>Index</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationPose_1a9bcf00644704c7fdabb4b5b4cd046934" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>m_gameObjects</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>operator=</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationPose_1ad123ca3887aaabf431042322dd9c6dc8" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>SetGameObjectsCount</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationPose_1a3d709a3100fd2fba238596eb72a3c965" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>~AnimationPose</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationPose</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

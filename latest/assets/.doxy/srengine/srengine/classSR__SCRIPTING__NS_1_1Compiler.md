@@ -149,8 +149,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -217,5 +217,5 @@ SR_SCRIPTING_NS::Compiler::Compiler () = default
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Base/Compiler.h`
+The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Compiler.h`
 

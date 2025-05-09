@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_LIBRARYIMPL_H
 #define SR_ENGINE_LIBRARYIMPL_H
 
+#include <Physics/macros.h>
+
 #include <Physics/Utils/Utils.h>
 
 namespace SR_PTYPES_NS {

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_RENDER_PREDICATES_H
 #define SR_ENGINE_GRAPHICS_RENDER_PREDICATES_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Types/StringAtom.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 

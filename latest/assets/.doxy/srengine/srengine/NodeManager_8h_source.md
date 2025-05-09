@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_NODEMANAGER_H
 #define SR_ENGINE_NODEMANAGER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
 

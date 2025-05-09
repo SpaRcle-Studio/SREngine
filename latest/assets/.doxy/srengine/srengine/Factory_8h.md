@@ -11,6 +11,7 @@
 
 
 * `#include <Utils/Common/Singleton.h>`
+* `#include <Utils/Common/StringAtomLiterals.h>`
 * `#include <Utils/Types/SharedPtr.h>`
 * `#include <Utils/TypeTraits/SRClassMeta.h>`
 

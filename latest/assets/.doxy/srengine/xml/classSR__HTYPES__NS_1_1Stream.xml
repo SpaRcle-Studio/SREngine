@@ -66,10 +66,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a40a612e79e81d8281e080f25b8147ae4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a57b01f768650419f27f8aaa401245cd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_HTYPES_NS::Stream::Stream</definition>
-        <argsstring>()=default</argsstring>
+        <argsstring>()</argsstring>
         <name>Stream</name>
         <qualifiedname>SR_HTYPES_NS::Stream::Stream</qualifiedname>
         <briefdescription>
@@ -240,7 +240,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="27" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1aa48f5c80bd649fe933c1fc43adf98a6f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1aa48f5c80bd649fe933c1fc43adf98a6f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
         <definition>SR_NODISCARD bool SR_HTYPES_NS::Stream::Valid</definition>
         <argsstring>() const noexcept</argsstring>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="30" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="30" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a71c3038aef446a0a7da32b25986fa188" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::string</type>
@@ -297,7 +297,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="34" column="34"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a75ab45c65a93cc3841deb3dca42e2800" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a75ab45c65a93cc3841deb3dca42e2800" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
         <definition>SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetPosition</definition>
         <argsstring>() const noexcept</argsstring>
@@ -309,9 +309,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="36" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="36" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a3972e2ab908befb9e177f9fc52a02961" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a3972e2ab908befb9e177f9fc52a02961" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
         <definition>SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::Size</definition>
         <argsstring>() const noexcept</argsstring>
@@ -323,9 +323,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="37" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="37" bodyend="37"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="37" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a064cccd102a613a72b8b7c4ba7619bed" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a064cccd102a613a72b8b7c4ba7619bed" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
         <definition>SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetCapacity</definition>
         <argsstring>() const noexcept</argsstring>
@@ -337,9 +337,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="38" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="38" column="31"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a83e706b09d2997f9c35173ae01a136d9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a83e706b09d2997f9c35173ae01a136d9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const char *</type>
         <definition>SR_NODISCARD const char * SR_HTYPES_NS::Stream::View</definition>
         <argsstring>() const noexcept</argsstring>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="40" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="40" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1af6e2cd628f5d367190b0da045d0e8a27" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">Stream</ref> &amp;SR_FASTCALL</type>
@@ -419,7 +419,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="44" column="28"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1aa60ea0d6b4a473d9058a3567c6758fc0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1aa60ea0d6b4a473d9058a3567c6758fc0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">Stream</ref> &amp;SR_FASTCALL</type>
         <definition>Stream &amp;SR_FASTCALL SR_HTYPES_NS::Stream::write</definition>
         <argsstring>(const void *pSrc, uint64_t count) noexcept</argsstring>
@@ -439,9 +439,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="46" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="46" bodyend="46"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="46" column="28"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1af076a43886f6053dc9716909aaa65721" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1af076a43886f6053dc9716909aaa65721" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1Stream" kindref="compound">Stream</ref> &amp;SR_FASTCALL</type>
         <definition>Stream &amp;SR_FASTCALL SR_HTYPES_NS::Stream::read</definition>
         <argsstring>(void *pDst, uint64_t count) noexcept</argsstring>
@@ -461,7 +461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="47" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" bodystart="47" bodyend="47"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Stream.h" line="47" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Stream_1a5f6d2393491a10b2a62503bb010496f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -614,7 +614,7 @@
       <member refid="classSR__HTYPES__NS_1_1Stream_1a20ca79f6ec42666b700ed22cc898dd5a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>SetPosition</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a3972e2ab908befb9e177f9fc52a02961" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Size</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a42038b671bbab79fa5e52ffbbc7f5818" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Skip</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Stream_1a40a612e79e81d8281e080f25b8147ae4" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Stream</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Stream_1a57b01f768650419f27f8aaa401245cd9" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a3d5e03ab8fa262737b17b6f699fd684d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1adf0bef43f21dec11ff2377b08b07091e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Stream</name></member>
       <member refid="classSR__HTYPES__NS_1_1Stream_1a17248b8375d22c877900d1b8f2832b48" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stream</scope><name>Stream</name></member>

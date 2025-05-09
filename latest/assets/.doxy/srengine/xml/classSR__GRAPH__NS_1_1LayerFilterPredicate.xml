@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="18" column="17"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="20" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a7df1b05f16b3a2bdf9b1a3631677872d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD bool</type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="19" column="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="21" column="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -78,7 +78,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="16" bodyend="20"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="18" bodyend="22"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a7df1b05f16b3a2bdf9b1a3631677872d" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::LayerFilterPredicate</scope><name>IsLayerAllowed</name></member>
       <member refid="classSR__GRAPH__NS_1_1LayerFilterPredicate_1a6b18e07119f3243cf46f63a45c08c0dd" prot="public" virt="virtual"><scope>SR_GRAPH_NS::LayerFilterPredicate</scope><name>~LayerFilterPredicate</name></member>

@@ -22,7 +22,7 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
-    class SR_DLL_EXPORT Transform2D : public Transform {
+    class SR_COMMON_DLL_API Transform2D : public Transform {
         SR_CLASS()
         friend class GameObject;
     public:

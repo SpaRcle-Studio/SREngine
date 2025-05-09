@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="96" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="98" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SSBOBinding_1ab13602f34835f660606c4e0750977bae" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="97" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="97" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="99" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1SSBOBinding_1a42bca45d43b1d1cd0f6f9894968560a5" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="98" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="98" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="100" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="100" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -65,7 +65,7 @@
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="95" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="95" bodyend="99"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="97" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="97" bodyend="101"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1SSBOBinding_1ab13602f34835f660606c4e0750977bae" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSBOBinding</scope><name>binding</name></member>
       <member refid="structSR__GRAPH__NS_1_1SSBOBinding_1a1d86558a4f915228223615af736b03a7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::SSBOBinding</scope><name>name</name></member>

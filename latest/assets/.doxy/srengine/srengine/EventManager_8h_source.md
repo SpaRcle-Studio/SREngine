@@ -21,7 +21,7 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT EventManager : public Singleton<EventManager> {
+    class EventManager : public Singleton<EventManager> {
         SR_REGISTER_SINGLETON(EventManager)
     private:
         ~EventManager() override = default;

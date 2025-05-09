@@ -529,7 +529,7 @@
       <member refid="structSR__CORE__NS_1_1EngineScene_1a224fb872f69bfb84055fd5d956e8aebf" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>m_accumulator</name></member>
       <member refid="structSR__CORE__NS_1_1EngineScene_1a3d73bd722e4271ba9e8992a29d4f977b" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>m_speed</name></member>
       <member refid="structSR__CORE__NS_1_1EngineScene_1ad5d82203be6cbb37aa65dff5e2abf044" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>m_updateFrequency</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::EngineScene</scope><name>operator=</name></member>
       <member refid="structSR__CORE__NS_1_1EngineScene_1a6f4543e73bc540f413c890d07ed112f6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>pEngine</name></member>
@@ -552,7 +552,7 @@
       <member refid="structSR__CORE__NS_1_1EngineScene_1a2bbf59f03eff248276333ec20cae4943" prot="private" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>UpdateFrequency</name></member>
       <member refid="structSR__CORE__NS_1_1EngineScene_1ac9e0a060761532fc0e380b8ce9fd19d9" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>UpdateMainCamera</name></member>
       <member refid="structSR__CORE__NS_1_1EngineScene_1adcc9e3c8893ebb5c230d3ef57c8e38d0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::EngineScene</scope><name>~EngineScene</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_NS::EngineScene</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_NS::EngineScene</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

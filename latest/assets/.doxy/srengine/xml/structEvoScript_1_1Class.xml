@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structEvoScript_1_1Class" kind="struct" language="C++" prot="public">
+    <compoundname>EvoScript::Class</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structEvoScript_1_1Class_1ac5246014935876639082fc4fe7424ed5" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Class::m_header</definition>
+        <argsstring></argsstring>
+        <name>m_header</name>
+        <qualifiedname>EvoScript::Class::m_header</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="21" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Class_1a1216bc33077233ce6905b73eb7d78b11" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Class::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>EvoScript::Class::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="22" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Class_1aa77903a06a848b75af352d873e376854" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structEvoScript_1_1Property" kindref="compound">Property</ref> &gt;</type>
+        <definition>std::vector&lt;Property&gt; EvoScript::Class::m_properties</definition>
+        <argsstring></argsstring>
+        <name>m_properties</name>
+        <qualifiedname>EvoScript::Class::m_properties</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="23" column="25" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Class_1acce2b9e1f1c2fbedb4a8d1e6bf501bc4" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structEvoScript_1_1Method" kindref="compound">Method</ref> &gt;</type>
+        <definition>std::vector&lt;Method&gt; EvoScript::Class::m_methods</definition>
+        <argsstring></argsstring>
+        <name>m_methods</name>
+        <qualifiedname>EvoScript::Class::m_methods</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="24" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Class_1a25db8992e5f03fa15a3c5a2a012e3c29" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structEvoScript_1_1InheritClass" kindref="compound">InheritClass</ref> &gt;</type>
+        <definition>std::vector&lt;InheritClass&gt; EvoScript::Class::m_inherit</definition>
+        <argsstring></argsstring>
+        <name>m_inherit</name>
+        <qualifiedname>EvoScript::Class::m_inherit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="25" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structEvoScript_1_1Class_1a16605b7b6b357f3169506f913854bff4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Class::GetAsIncomplete</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAsIncomplete</name>
+        <qualifiedname>EvoScript::Class::GetAsIncomplete</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="27" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="27" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="structEvoScript_1_1Class_1a724dda69900c1c5e3e2182f22c03099c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Class::GetInherit</definition>
+        <argsstring>() const</argsstring>
+        <name>GetInherit</name>
+        <qualifiedname>EvoScript::Class::GetInherit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="31" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="31" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structEvoScript_1_1Class_1a4e4daf7177a3595f6e38a7a199161744" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Class::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>EvoScript::Class::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>Запрещаем копировать, удалять и создававайть экземпляры класса</para>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="35" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="35" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" line="20" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/EvoClass.h" bodystart="20" bodyend="87"/>
+    <listofallmembers>
+      <member refid="structEvoScript_1_1Class_1a16605b7b6b357f3169506f913854bff4" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>GetAsIncomplete</name></member>
+      <member refid="structEvoScript_1_1Class_1a724dda69900c1c5e3e2182f22c03099c" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>GetInherit</name></member>
+      <member refid="structEvoScript_1_1Class_1ac5246014935876639082fc4fe7424ed5" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>m_header</name></member>
+      <member refid="structEvoScript_1_1Class_1a25db8992e5f03fa15a3c5a2a012e3c29" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>m_inherit</name></member>
+      <member refid="structEvoScript_1_1Class_1acce2b9e1f1c2fbedb4a8d1e6bf501bc4" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>m_methods</name></member>
+      <member refid="structEvoScript_1_1Class_1a1216bc33077233ce6905b73eb7d78b11" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>m_name</name></member>
+      <member refid="structEvoScript_1_1Class_1aa77903a06a848b75af352d873e376854" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>m_properties</name></member>
+      <member refid="structEvoScript_1_1Class_1a4e4daf7177a3595f6e38a7a199161744" prot="public" virt="non-virtual"><scope>EvoScript::Class</scope><name>ToString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

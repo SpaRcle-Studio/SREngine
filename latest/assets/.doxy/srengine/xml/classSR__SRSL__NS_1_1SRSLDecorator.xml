@@ -147,13 +147,13 @@
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLDecorator_1a08640b3ae1edce1c11c18bf6dbdd1e85" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>args</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLDecorator_1aea8c07559cd7b6381caad100d08b9e53" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>name</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>operator=</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLDecorator_1a94210536ee461ddcad82faf9b365a875" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>SRSLDecorator</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLDecorator_1a6a9c2d7e8948975a18ea378657ab1353" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>SRSLDecorator</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLDecorator_1a2244e0906261a7baba505eae143613b6" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>ToString</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>~NonCopyable</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLDecorator_1af0c86457d7c6712685c488f9239804f1" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLDecorator</scope><name>~SRSLDecorator</name></member>
     </listofallmembers>
   </compounddef>

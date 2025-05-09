@@ -72,6 +72,7 @@
 | struct | [**SupportsNullptrComparison&lt; SR\_MATH\_NS::Vector3&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector3_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**SupportsNullptrComparison&lt; SR\_MATH\_NS::Vector4&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector4_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**SupportsNullptrComparison&lt; SR\_MATH\_NS::Vector6&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector6_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
+| struct | [**SupportsNullptrComparison&lt; SR\_UTILS\_NS::StringAtom &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
 | struct | [**TypeValuePair**](structSR__UTILS__NS_1_1TypeValuePair.md) &lt;class T, val&gt;<br> |
 
 

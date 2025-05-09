@@ -62,60 +62,69 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_DLL\_EXPORT void | [**ClearClipboard**](#function-clearclipboard) () <br> |
-|  SR\_DLL\_EXPORT void | [**ConfineCursor**](#function-confinecursor) () <br> |
-|  SR\_DLL\_EXPORT bool | [**Copy**](#function-copy) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & from, const [**Path**](classSR__UTILS__NS_1_1Path.md) & to) <br> |
-|  SR\_DLL\_EXPORT void | [**CopyFilesToClipboard**](#function-copyfilestoclipboard) (std::list&lt; [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) &gt; paths) <br> |
-|  SR\_DLL\_EXPORT void | [**CopyPermissions**](#function-copypermissions) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & source, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & destination) <br> |
-|  SR\_DLL\_EXPORT bool | [**CreateFolder**](#function-createfolder) (const std::string & path) <br> |
-|  SR\_DLL\_EXPORT bool | [**Delete**](#function-delete) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT bool | [**FileIsHidden**](#function-fileishidden) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetAllInDirectory**](#function-getallindirectory) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & dir) <br> |
-|  SR\_DLL\_EXPORT [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationDirectory**](#function-getapplicationdirectory) () <br> |
-|  SR\_DLL\_EXPORT [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationName**](#function-getapplicationname) () <br> |
-|  SR\_DLL\_EXPORT [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationPath**](#function-getapplicationpath) () <br> |
-|  SR\_DLL\_EXPORT std::string | [**GetClipboardText**](#function-getclipboardtext) () <br> |
-|  SR\_DLL\_EXPORT uint16\_t | [**GetCurrentProcessId**](#function-getcurrentprocessid) () <br> |
-|  SR\_DLL\_EXPORT [**FileMetadata**](structSR__UTILS__NS_1_1Platform_1_1FileMetadata.md) | [**GetFileMetadata**](#function-getfilemetadata) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & file) <br> |
-|  SR\_DLL\_EXPORT std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetInDirectory**](#function-getindirectory) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & dir, Path::Type type) <br> |
-|  SR\_DLL\_EXPORT void \* | [**GetInstance**](#function-getinstance) () <br> |
-|  SR\_DLL\_EXPORT SR\_MATH\_NS::FVector2 | [**GetMousePos**](#function-getmousepos) () <br> |
-|  SR\_DLL\_EXPORT [**MouseState**](structSR__UTILS__NS_1_1Platform_1_1MouseState.md) | [**GetMouseState**](#function-getmousestate) () <br> |
-|  SR\_DLL\_EXPORT uint64\_t | [**GetProcessUsedMemory**](#function-getprocessusedmemory) () <br> |
-|  SR\_DLL\_EXPORT double\_t | [**GetScreenDPI**](#function-getscreendpi) () <br> |
-|  SR\_DLL\_EXPORT SR\_MATH\_NS::UVector2 | [**GetScreenResolution**](#function-getscreenresolution) () <br> |
-|  SR\_DLL\_EXPORT std::vector&lt; SR\_MATH\_NS::UVector2 &gt; | [**GetScreenResolutions**](#function-getscreenresolutions) () <br> |
-|  SR\_DLL\_EXPORT bool | [**GetSystemKeyboardState**](#function-getsystemkeyboardstate) (uint8\_t \* pKeyCodes) <br> |
-|  SR\_DLL\_EXPORT PlatformType | [**GetType**](#function-gettype) () <br> |
-|  SR\_DLL\_EXPORT void | [**InitSegmentationHandler**](#function-initsegmentationhandler) () <br> |
-|  SR\_DLL\_EXPORT void | [**InitializePlatform**](#function-initializeplatform) () <br> |
-|  SR\_DLL\_EXPORT bool | [**IsAbsolutePath**](#function-isabsolutepath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT bool | [**IsConsoleFocused**](#function-isconsolefocused) () <br> |
-|  SR\_DLL\_EXPORT bool | [**IsExists**](#function-isexists) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT bool | [**IsFileDeletable**](#function-isfiledeletable) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT bool | [**IsRunningUnderDebugger**](#function-isrunningunderdebugger) () <br> |
-|  SR\_DLL\_EXPORT void | [**OpenFile**](#function-openfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, const std::string & args) <br> |
-|  SR\_DLL\_EXPORT void | [**OpenWithAssociatedApp**](#function-openwithassociatedapp) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & filepath) <br> |
-|  SR\_DLL\_EXPORT void | [**PasteFilesFromClipboard**](#function-pastefilesfromclipboard) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & topath) <br> |
-|  SR\_DLL\_EXPORT std::optional&lt; std::string &gt; | [**ReadFile**](#function-readfile) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT void | [**ReleaseCursorConfinement**](#function-releasecursorconfinement) () <br> |
-|  SR\_DLL\_EXPORT void | [**SelfOpen**](#function-selfopen) () <br> |
-|  SR\_DLL\_EXPORT void | [**SetCurrentProcessDirectory**](#function-setcurrentprocessdirectory) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & directory) <br> |
-|  SR\_DLL\_EXPORT void | [**SetCursorVisible**](#function-setcursorvisible) (bool isVisible) <br> |
-|  SR\_DLL\_EXPORT void | [**SetEnvironmentVar**](#function-setenvironmentvar) (const std::string\_view & name, const std::string\_view & value) <br> |
-|  SR\_DLL\_EXPORT void | [**SetInstance**](#function-setinstance) (void \* pInstance) <br> |
-|  SR\_DLL\_EXPORT void | [**SetMousePos**](#function-setmousepos) (const SR\_MATH\_NS::IVector2 & pos) <br> |
-|  SR\_DLL\_EXPORT void | [**SetThreadPriority**](#function-setthreadpriority) (void \* nativeHandle, ThreadPriority priority) <br> |
-|  SR\_DLL\_EXPORT void | [**Sleep**](#function-sleep) (uint64\_t milliseconds) <br> |
-|  SR\_NORETURN SR\_DLL\_EXPORT void | [**Terminate**](#function-terminate) () <br> |
-|  SR\_DLL\_EXPORT void | [**TextToClipboard**](#function-texttoclipboard) (const std::string & text) <br> |
-|  SR\_DLL\_EXPORT void | [**Unzip**](#function-unzip) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & source, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & destination, bool replace=true) <br> |
-|  SR\_DLL\_EXPORT bool | [**WaitAndDelete**](#function-waitanddelete) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
-|  SR\_DLL\_EXPORT void | [**WriteConsoleError**](#function-writeconsoleerror) (const std::string & msg) <br> |
-|  SR\_DLL\_EXPORT void | [**WriteConsoleLog**](#function-writeconsolelog) (const std::string & msg) <br> |
-|  SR\_DLL\_EXPORT void | [**WriteConsoleWarn**](#function-writeconsolewarn) (const std::string & msg) <br> |
+|  SR\_COMMON\_DLL\_API void | [**ClearClipboard**](#function-clearclipboard) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**ConfineCursor**](#function-confinecursor) () <br> |
+|  SR\_COMMON\_DLL\_API bool | [**Copy**](#function-copy) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & from, const [**Path**](classSR__UTILS__NS_1_1Path.md) & to) <br> |
+|  SR\_COMMON\_DLL\_API void | [**CopyFilesToClipboard**](#function-copyfilestoclipboard) (std::list&lt; [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) &gt; paths) <br> |
+|  SR\_COMMON\_DLL\_API void | [**CopyPermissions**](#function-copypermissions) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & source, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & destination) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**CreateFolder**](#function-createfolder) (const std::string & path) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**Delete**](#function-delete) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**DownloadFile**](#function-downloadfile) (const std::string & url, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & outputPath) <br> |
+|  SR\_COMMON\_DLL\_API std::string | [**ExecuteCommand**](#function-executecommand) (const std::string & command, const std::vector&lt; std::string &gt; & env={}) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**FileIsHidden**](#function-fileishidden) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetAllInDirectory**](#function-getallindirectory) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & dir) <br> |
+|  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationDirectory**](#function-getapplicationdirectory) () <br> |
+|  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationName**](#function-getapplicationname) () <br> |
+|  SR\_COMMON\_DLL\_API [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetApplicationPath**](#function-getapplicationpath) () <br> |
+|  SR\_COMMON\_DLL\_API std::string | [**GetClipboardText**](#function-getclipboardtext) () <br> |
+|  SR\_COMMON\_DLL\_API uint16\_t | [**GetCurrentProcessId**](#function-getcurrentprocessid) () <br> |
+|  SR\_COMMON\_DLL\_API [**FileMetadata**](structSR__UTILS__NS_1_1Platform_1_1FileMetadata.md) | [**GetFileMetadata**](#function-getfilemetadata) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & file) <br> |
+|  SR\_COMMON\_DLL\_API std::list&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetInDirectory**](#function-getindirectory) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & dir, Path::Type type) <br> |
+|  SR\_COMMON\_DLL\_API void \* | [**GetInstance**](#function-getinstance) () <br> |
+|  SR\_COMMON\_DLL\_API void \* | [**GetLibraryFunctionAddress**](#function-getlibraryfunctionaddress) (void \* pLibrary, const char \* pFunctionName) <br> |
+|  SR\_COMMON\_DLL\_API SR\_MATH\_NS::FVector2 | [**GetMousePos**](#function-getmousepos) () <br> |
+|  SR\_COMMON\_DLL\_API [**MouseState**](structSR__UTILS__NS_1_1Platform_1_1MouseState.md) | [**GetMouseState**](#function-getmousestate) () <br> |
+|  SR\_COMMON\_DLL\_API uint64\_t | [**GetProcessUsedMemory**](#function-getprocessusedmemory) () <br> |
+|  SR\_COMMON\_DLL\_API double\_t | [**GetScreenDPI**](#function-getscreendpi) () <br> |
+|  SR\_COMMON\_DLL\_API SR\_MATH\_NS::UVector2 | [**GetScreenResolution**](#function-getscreenresolution) () <br> |
+|  SR\_COMMON\_DLL\_API std::vector&lt; SR\_MATH\_NS::UVector2 &gt; | [**GetScreenResolutions**](#function-getscreenresolutions) () <br> |
+|  SR\_COMMON\_DLL\_API bool | [**GetSystemKeyboardState**](#function-getsystemkeyboardstate) (uint8\_t \* pKeyCodes) <br> |
+|  SR\_COMMON\_DLL\_API PlatformType | [**GetType**](#function-gettype) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**InitSegmentationHandler**](#function-initsegmentationhandler) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**InitializePlatform**](#function-initializeplatform) () <br> |
+|  SR\_COMMON\_DLL\_API bool | [**IsAbsolutePath**](#function-isabsolutepath) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**IsExists**](#function-isexists) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**IsFileDeletable**](#function-isfiledeletable) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**IsRunningUnderDebugger**](#function-isrunningunderdebugger) () <br> |
+|  SR\_COMMON\_DLL\_API void \* | [**LoadLibraryModule**](#function-loadlibrarymodule) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API void | [**OpenFile**](#function-openfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, const std::string & args) <br> |
+|  SR\_COMMON\_DLL\_API void | [**OpenWithAssociatedApp**](#function-openwithassociatedapp) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & filepath) <br> |
+|  SR\_COMMON\_DLL\_API void | [**PasteFilesFromClipboard**](#function-pastefilesfromclipboard) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & topath) <br> |
+|  SR\_COMMON\_DLL\_API std::optional&lt; std::string &gt; | [**ReadFile**](#function-readfile) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API void | [**ReleaseCursorConfinement**](#function-releasecursorconfinement) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**SelfOpen**](#function-selfopen) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**SetCurrentProcessDirectory**](#function-setcurrentprocessdirectory) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & directory) <br> |
+|  SR\_COMMON\_DLL\_API void | [**SetCursorVisible**](#function-setcursorvisible) (bool isVisible) <br> |
+|  SR\_COMMON\_DLL\_API void | [**SetEnvironmentVar**](#function-setenvironmentvar) (const std::string\_view & name, const std::string\_view & value) <br> |
+|  SR\_COMMON\_DLL\_API void | [**SetInstance**](#function-setinstance) (void \* pInstance) <br> |
+|  SR\_COMMON\_DLL\_API void | [**SetMousePos**](#function-setmousepos) (const SR\_MATH\_NS::IVector2 & pos) <br> |
+|  SR\_COMMON\_DLL\_API void | [**SetThreadPriority**](#function-setthreadpriority) (void \* nativeHandle, ThreadPriority priority) <br> |
+|  SR\_COMMON\_DLL\_API void | [**Sleep**](#function-sleep) (uint64\_t milliseconds) <br> |
+|  SR\_NORETURN SR\_COMMON\_DLL\_API void | [**Terminate**](#function-terminate) (bool isError=true) <br> |
+|  SR\_COMMON\_DLL\_API void | [**TextToClipboard**](#function-texttoclipboard) (const std::string & text) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**UnloadLibraryModule**](#function-unloadlibrarymodule) (void \* pLibrary) <br> |
+|  SR\_COMMON\_DLL\_API void | [**Unzip**](#function-unzip) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & source, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & destination, bool replace=true) <br> |
+|  SR\_COMMON\_DLL\_API bool | [**WaitAndDelete**](#function-waitanddelete) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
+|  SR\_COMMON\_DLL\_API void | [**WriteConsoleError**](#function-writeconsoleerror) (const std::string & msg) <br> |
+|  SR\_COMMON\_DLL\_API void | [**WriteConsoleLog**](#function-writeconsolelog) (const std::string & msg) <br> |
+|  SR\_COMMON\_DLL\_API void | [**WriteConsoleWarn**](#function-writeconsolewarn) (const std::string & msg) <br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  bool | [**IsCompiledUnderMSVC**](#function-iscompiledundermsvc) () <br> |
 
 
 
@@ -165,7 +174,7 @@ std::mutex SR_UTILS_NS::Platform::g_platformLogMutex;
 ### function ClearClipboard 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::ClearClipboard () 
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::ClearClipboard () 
 ```
 
 
@@ -178,7 +187,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::ClearClipboard ()
 ### function ConfineCursor 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::ConfineCursor () 
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::ConfineCursor () 
 ```
 
 
@@ -191,7 +200,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::ConfineCursor ()
 ### function Copy 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::Copy (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::Copy (
     const Path & from,
     const Path & to
 ) 
@@ -207,7 +216,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::Copy (
 ### function CopyFilesToClipboard 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::CopyFilesToClipboard (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::CopyFilesToClipboard (
     std::list< SR_UTILS_NS::Path > paths
 ) 
 ```
@@ -222,7 +231,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::CopyFilesToClipboard (
 ### function CopyPermissions 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::CopyPermissions (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::CopyPermissions (
     const SR_UTILS_NS::Path & source,
     const SR_UTILS_NS::Path & destination
 ) 
@@ -238,7 +247,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::CopyPermissions (
 ### function CreateFolder 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::CreateFolder (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::CreateFolder (
     const std::string & path
 ) 
 ```
@@ -253,8 +262,40 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::CreateFolder (
 ### function Delete 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::Delete (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::Delete (
     const Path & path
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function DownloadFile 
+
+```C++
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::DownloadFile (
+    const std::string & url,
+    const SR_UTILS_NS::Path & outputPath
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ExecuteCommand 
+
+```C++
+SR_COMMON_DLL_API std::string SR_UTILS_NS::Platform::ExecuteCommand (
+    const std::string & command,
+    const std::vector< std::string > & env={}
 ) 
 ```
 
@@ -268,7 +309,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::Delete (
 ### function FileIsHidden 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::FileIsHidden (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::FileIsHidden (
     const Path & path
 ) 
 ```
@@ -283,7 +324,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::FileIsHidden (
 ### function GetAllInDirectory 
 
 ```C++
-SR_DLL_EXPORT std::list< Path > SR_UTILS_NS::Platform::GetAllInDirectory (
+SR_COMMON_DLL_API std::list< Path > SR_UTILS_NS::Platform::GetAllInDirectory (
     const Path & dir
 ) 
 ```
@@ -298,7 +339,7 @@ SR_DLL_EXPORT std::list< Path > SR_UTILS_NS::Platform::GetAllInDirectory (
 ### function GetApplicationDirectory 
 
 ```C++
-SR_DLL_EXPORT Path SR_UTILS_NS::Platform::GetApplicationDirectory () 
+SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationDirectory () 
 ```
 
 
@@ -311,7 +352,7 @@ SR_DLL_EXPORT Path SR_UTILS_NS::Platform::GetApplicationDirectory ()
 ### function GetApplicationName 
 
 ```C++
-SR_DLL_EXPORT Path SR_UTILS_NS::Platform::GetApplicationName () 
+SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationName () 
 ```
 
 
@@ -324,7 +365,7 @@ SR_DLL_EXPORT Path SR_UTILS_NS::Platform::GetApplicationName ()
 ### function GetApplicationPath 
 
 ```C++
-SR_DLL_EXPORT Path SR_UTILS_NS::Platform::GetApplicationPath () 
+SR_COMMON_DLL_API Path SR_UTILS_NS::Platform::GetApplicationPath () 
 ```
 
 
@@ -337,7 +378,7 @@ SR_DLL_EXPORT Path SR_UTILS_NS::Platform::GetApplicationPath ()
 ### function GetClipboardText 
 
 ```C++
-SR_DLL_EXPORT std::string SR_UTILS_NS::Platform::GetClipboardText () 
+SR_COMMON_DLL_API std::string SR_UTILS_NS::Platform::GetClipboardText () 
 ```
 
 
@@ -350,7 +391,7 @@ SR_DLL_EXPORT std::string SR_UTILS_NS::Platform::GetClipboardText ()
 ### function GetCurrentProcessId 
 
 ```C++
-SR_DLL_EXPORT uint16_t SR_UTILS_NS::Platform::GetCurrentProcessId () 
+SR_COMMON_DLL_API uint16_t SR_UTILS_NS::Platform::GetCurrentProcessId () 
 ```
 
 
@@ -363,7 +404,7 @@ SR_DLL_EXPORT uint16_t SR_UTILS_NS::Platform::GetCurrentProcessId ()
 ### function GetFileMetadata 
 
 ```C++
-SR_DLL_EXPORT FileMetadata SR_UTILS_NS::Platform::GetFileMetadata (
+SR_COMMON_DLL_API FileMetadata SR_UTILS_NS::Platform::GetFileMetadata (
     const Path & file
 ) 
 ```
@@ -378,7 +419,7 @@ SR_DLL_EXPORT FileMetadata SR_UTILS_NS::Platform::GetFileMetadata (
 ### function GetInDirectory 
 
 ```C++
-SR_DLL_EXPORT std::list< Path > SR_UTILS_NS::Platform::GetInDirectory (
+SR_COMMON_DLL_API std::list< Path > SR_UTILS_NS::Platform::GetInDirectory (
     const Path & dir,
     Path::Type type
 ) 
@@ -394,7 +435,23 @@ SR_DLL_EXPORT std::list< Path > SR_UTILS_NS::Platform::GetInDirectory (
 ### function GetInstance 
 
 ```C++
-SR_DLL_EXPORT void * SR_UTILS_NS::Platform::GetInstance () 
+SR_COMMON_DLL_API void * SR_UTILS_NS::Platform::GetInstance () 
+```
+
+
+
+
+<hr>
+
+
+
+### function GetLibraryFunctionAddress 
+
+```C++
+SR_COMMON_DLL_API void * SR_UTILS_NS::Platform::GetLibraryFunctionAddress (
+    void * pLibrary,
+    const char * pFunctionName
+) 
 ```
 
 
@@ -407,7 +464,7 @@ SR_DLL_EXPORT void * SR_UTILS_NS::Platform::GetInstance ()
 ### function GetMousePos 
 
 ```C++
-SR_DLL_EXPORT SR_MATH_NS::FVector2 SR_UTILS_NS::Platform::GetMousePos () 
+SR_COMMON_DLL_API SR_MATH_NS::FVector2 SR_UTILS_NS::Platform::GetMousePos () 
 ```
 
 
@@ -420,7 +477,7 @@ SR_DLL_EXPORT SR_MATH_NS::FVector2 SR_UTILS_NS::Platform::GetMousePos ()
 ### function GetMouseState 
 
 ```C++
-SR_DLL_EXPORT MouseState SR_UTILS_NS::Platform::GetMouseState () 
+SR_COMMON_DLL_API MouseState SR_UTILS_NS::Platform::GetMouseState () 
 ```
 
 
@@ -433,7 +490,7 @@ SR_DLL_EXPORT MouseState SR_UTILS_NS::Platform::GetMouseState ()
 ### function GetProcessUsedMemory 
 
 ```C++
-SR_DLL_EXPORT uint64_t SR_UTILS_NS::Platform::GetProcessUsedMemory () 
+SR_COMMON_DLL_API uint64_t SR_UTILS_NS::Platform::GetProcessUsedMemory () 
 ```
 
 
@@ -446,7 +503,7 @@ SR_DLL_EXPORT uint64_t SR_UTILS_NS::Platform::GetProcessUsedMemory ()
 ### function GetScreenDPI 
 
 ```C++
-SR_DLL_EXPORT double_t SR_UTILS_NS::Platform::GetScreenDPI () 
+SR_COMMON_DLL_API double_t SR_UTILS_NS::Platform::GetScreenDPI () 
 ```
 
 
@@ -459,7 +516,7 @@ SR_DLL_EXPORT double_t SR_UTILS_NS::Platform::GetScreenDPI ()
 ### function GetScreenResolution 
 
 ```C++
-SR_DLL_EXPORT SR_MATH_NS::UVector2 SR_UTILS_NS::Platform::GetScreenResolution () 
+SR_COMMON_DLL_API SR_MATH_NS::UVector2 SR_UTILS_NS::Platform::GetScreenResolution () 
 ```
 
 
@@ -472,7 +529,7 @@ SR_DLL_EXPORT SR_MATH_NS::UVector2 SR_UTILS_NS::Platform::GetScreenResolution ()
 ### function GetScreenResolutions 
 
 ```C++
-SR_DLL_EXPORT std::vector< SR_MATH_NS::UVector2 > SR_UTILS_NS::Platform::GetScreenResolutions () 
+SR_COMMON_DLL_API std::vector< SR_MATH_NS::UVector2 > SR_UTILS_NS::Platform::GetScreenResolutions () 
 ```
 
 
@@ -485,7 +542,7 @@ SR_DLL_EXPORT std::vector< SR_MATH_NS::UVector2 > SR_UTILS_NS::Platform::GetScre
 ### function GetSystemKeyboardState 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::GetSystemKeyboardState (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::GetSystemKeyboardState (
     uint8_t * pKeyCodes
 ) 
 ```
@@ -500,7 +557,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::GetSystemKeyboardState (
 ### function GetType 
 
 ```C++
-SR_DLL_EXPORT PlatformType SR_UTILS_NS::Platform::GetType () 
+SR_COMMON_DLL_API PlatformType SR_UTILS_NS::Platform::GetType () 
 ```
 
 
@@ -513,7 +570,7 @@ SR_DLL_EXPORT PlatformType SR_UTILS_NS::Platform::GetType ()
 ### function InitSegmentationHandler 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::InitSegmentationHandler () 
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::InitSegmentationHandler () 
 ```
 
 
@@ -526,7 +583,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::InitSegmentationHandler ()
 ### function InitializePlatform 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::InitializePlatform () 
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::InitializePlatform () 
 ```
 
 
@@ -539,22 +596,9 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::InitializePlatform ()
 ### function IsAbsolutePath 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsAbsolutePath (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsAbsolutePath (
     const Path & path
 ) 
-```
-
-
-
-
-<hr>
-
-
-
-### function IsConsoleFocused 
-
-```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsConsoleFocused () 
 ```
 
 
@@ -567,7 +611,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsConsoleFocused ()
 ### function IsExists 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsExists (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsExists (
     const Path & path
 ) 
 ```
@@ -582,7 +626,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsExists (
 ### function IsFileDeletable 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsFileDeletable (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsFileDeletable (
     const SR_UTILS_NS::Path & path
 ) 
 ```
@@ -597,7 +641,22 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsFileDeletable (
 ### function IsRunningUnderDebugger 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsRunningUnderDebugger () 
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::IsRunningUnderDebugger () 
+```
+
+
+
+
+<hr>
+
+
+
+### function LoadLibraryModule 
+
+```C++
+SR_COMMON_DLL_API void * SR_UTILS_NS::Platform::LoadLibraryModule (
+    const Path & path
+) 
 ```
 
 
@@ -610,7 +669,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::IsRunningUnderDebugger ()
 ### function OpenFile 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::OpenFile (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::OpenFile (
     const SR_UTILS_NS::Path & path,
     const std::string & args
 ) 
@@ -626,7 +685,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::OpenFile (
 ### function OpenWithAssociatedApp 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::OpenWithAssociatedApp (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::OpenWithAssociatedApp (
     const Path & filepath
 ) 
 ```
@@ -641,7 +700,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::OpenWithAssociatedApp (
 ### function PasteFilesFromClipboard 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::PasteFilesFromClipboard (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::PasteFilesFromClipboard (
     const SR_UTILS_NS::Path & topath
 ) 
 ```
@@ -656,7 +715,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::PasteFilesFromClipboard (
 ### function ReadFile 
 
 ```C++
-SR_DLL_EXPORT std::optional< std::string > SR_UTILS_NS::Platform::ReadFile (
+SR_COMMON_DLL_API std::optional< std::string > SR_UTILS_NS::Platform::ReadFile (
     const Path & path
 ) 
 ```
@@ -671,7 +730,7 @@ SR_DLL_EXPORT std::optional< std::string > SR_UTILS_NS::Platform::ReadFile (
 ### function ReleaseCursorConfinement 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::ReleaseCursorConfinement () 
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::ReleaseCursorConfinement () 
 ```
 
 
@@ -684,7 +743,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::ReleaseCursorConfinement ()
 ### function SelfOpen 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SelfOpen () 
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SelfOpen () 
 ```
 
 
@@ -697,7 +756,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SelfOpen ()
 ### function SetCurrentProcessDirectory 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetCurrentProcessDirectory (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetCurrentProcessDirectory (
     const SR_UTILS_NS::Path & directory
 ) 
 ```
@@ -712,7 +771,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetCurrentProcessDirectory (
 ### function SetCursorVisible 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetCursorVisible (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetCursorVisible (
     bool isVisible
 ) 
 ```
@@ -727,7 +786,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetCursorVisible (
 ### function SetEnvironmentVar 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetEnvironmentVar (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetEnvironmentVar (
     const std::string_view & name,
     const std::string_view & value
 ) 
@@ -743,7 +802,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetEnvironmentVar (
 ### function SetInstance 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetInstance (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetInstance (
     void * pInstance
 ) 
 ```
@@ -758,7 +817,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetInstance (
 ### function SetMousePos 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetMousePos (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetMousePos (
     const SR_MATH_NS::IVector2 & pos
 ) 
 ```
@@ -773,7 +832,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetMousePos (
 ### function SetThreadPriority 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetThreadPriority (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::SetThreadPriority (
     void * nativeHandle,
     ThreadPriority priority
 ) 
@@ -789,7 +848,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::SetThreadPriority (
 ### function Sleep 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::Sleep (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::Sleep (
     uint64_t milliseconds
 ) 
 ```
@@ -804,7 +863,9 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::Sleep (
 ### function Terminate 
 
 ```C++
-SR_NORETURN SR_DLL_EXPORT void SR_UTILS_NS::Platform::Terminate () 
+SR_NORETURN SR_COMMON_DLL_API void SR_UTILS_NS::Platform::Terminate (
+    bool isError=true
+) 
 ```
 
 
@@ -817,8 +878,23 @@ SR_NORETURN SR_DLL_EXPORT void SR_UTILS_NS::Platform::Terminate ()
 ### function TextToClipboard 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::TextToClipboard (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::TextToClipboard (
     const std::string & text
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function UnloadLibraryModule 
+
+```C++
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::UnloadLibraryModule (
+    void * pLibrary
 ) 
 ```
 
@@ -832,7 +908,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::TextToClipboard (
 ### function Unzip 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::Unzip (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::Unzip (
     const SR_UTILS_NS::Path & source,
     const SR_UTILS_NS::Path & destination,
     bool replace=true
@@ -849,7 +925,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::Unzip (
 ### function WaitAndDelete 
 
 ```C++
-SR_DLL_EXPORT bool SR_UTILS_NS::Platform::WaitAndDelete (
+SR_COMMON_DLL_API bool SR_UTILS_NS::Platform::WaitAndDelete (
     const Path & path
 ) 
 ```
@@ -864,7 +940,7 @@ SR_DLL_EXPORT bool SR_UTILS_NS::Platform::WaitAndDelete (
 ### function WriteConsoleError 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::WriteConsoleError (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::WriteConsoleError (
     const std::string & msg
 ) 
 ```
@@ -879,7 +955,7 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::WriteConsoleError (
 ### function WriteConsoleLog 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::WriteConsoleLog (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::WriteConsoleLog (
     const std::string & msg
 ) 
 ```
@@ -894,9 +970,24 @@ SR_DLL_EXPORT void SR_UTILS_NS::Platform::WriteConsoleLog (
 ### function WriteConsoleWarn 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::Platform::WriteConsoleWarn (
+SR_COMMON_DLL_API void SR_UTILS_NS::Platform::WriteConsoleWarn (
     const std::string & msg
 ) 
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function IsCompiledUnderMSVC 
+
+```C++
+static bool SR_UTILS_NS::Platform::IsCompiledUnderMSVC () 
 ```
 
 

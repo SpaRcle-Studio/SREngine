@@ -125,19 +125,14 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD Mutex & | [**GetMutex**](#function-getmutex) () <br> |
+|   | [**FileWatcher**](#function-filewatcher) ([**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) path) <br> |
 |  SR\_NODISCARD std::string | [**GetName**](#function-getname) () noexcept const<br> |
 |  SR\_NODISCARD const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetPath**](#function-getpath) () noexcept const<br> |
-|  void | [**Init**](#function-init) () <br> |
-|  SR\_NODISCARD bool | [**IsActive**](#function-isactive) () noexcept const<br> |
-|  SR\_NODISCARD bool | [**IsDirty**](#function-isdirty) () noexcept const<br> |
-|  SR\_NODISCARD bool | [**IsPaused**](#function-ispaused) () noexcept const<br> |
 |  void | [**Pause**](#function-pause) () <br> |
 |  void | [**Resume**](#function-resume) () <br> |
 |  void | [**SetCallBack**](#function-setcallback) (CallBack callBack) <br> |
 |  void | [**SetName**](#function-setname) (std::string name) <br> |
-|  void | [**Signal**](#function-signal) () <br> |
-|  void | [**Stop**](#function-stop) () <br> |
+|   | [**~FileWatcher**](#function-filewatcher) () override<br> |
 
 
 ## Public Functions inherited from SR_HTYPES_NS::SharedPtr
@@ -148,6 +143,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | ---: | :--- |
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-12) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(T \*ptr)&gt; & freeFun) <br> |
 |  bool | [**AutoFree**](classSR__HTYPES__NS_1_1SharedPtr.md#function-autofree-22) () <br> |
+| virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-decrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**DynamicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-dynamiccast) () const<br> |
 |  SR\_NODISCARD const T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-12) () const<br> |
 |  SR\_NODISCARD T \* | [**Get**](classSR__HTYPES__NS_1_1SharedPtr.md#function-get-22) () <br> |
@@ -157,6 +153,7 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  SR\_NODISCARD [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**GetThis**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getthis) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-12) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE T &SR\_FASTCALL | [**GetUncheckedRef**](classSR__HTYPES__NS_1_1SharedPtr.md#function-getuncheckedref-22) () <br> |
+| virtual void | [**IncrementPointer**](classSR__HTYPES__NS_1_1SharedPtr.md#function-incrementpointer) () override<br> |
 |  [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; U &gt; | [**PolymorphicCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-polymorphiccast) () const<br> |
 |  SR\_NODISCARD bool | [**RecursiveLockIfValid**](classSR__HTYPES__NS_1_1SharedPtr.md#function-recursivelockifvalid) () noexcept const<br> |
 |  U | [**ReinterpretCast**](classSR__HTYPES__NS_1_1SharedPtr.md#function-reinterpretcast) () <br> |
@@ -188,14 +185,16 @@ See [SR\_HTYPES\_NS::SharedPtrBase](classSR__HTYPES__NS_1_1SharedPtrBase.md)
 
 | Type | Name |
 | ---: | :--- |
+| virtual void | [**DecrementPointer**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-decrementpointer) () = 0<br> |
 |  const [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* | [**GetPtrData**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-getptrdata-12) () const<br> |
 |  [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* | [**GetPtrData**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-getptrdata-22) () <br>_NOLINT(modernize-use-nodiscard)_  |
 | virtual SR\_NODISCARD SRClass \* | [**GetSRClass**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-getsrclass) () const = 0<br> |
+| virtual void | [**IncrementPointer**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-incrementpointer) () = 0<br> |
 | virtual void | [**Reset**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-reset) () = 0<br> |
 | virtual void | [**SetPointerFromBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-setpointerfrombase) ([**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) \* pBase) = 0<br> |
-|   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () = default<br> |
+|   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-12) () <br> |
 |   | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase-22) ([**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) \* data) <br> |
-| virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () = default<br> |
+| virtual  | [**~SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md#function-sharedptrbase) () <br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::NonCopyable
@@ -323,8 +322,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -355,10 +354,12 @@ using SR_UTILS_NS::FileWatcher::Ptr =  SR_HTYPES_NS::SharedPtr<FileWatcher>;
 
 
 
-### function GetMutex 
+### function FileWatcher 
 
 ```C++
-inline SR_NODISCARD Mutex & SR_UTILS_NS::FileWatcher::GetMutex () 
+explicit SR_UTILS_NS::FileWatcher::FileWatcher (
+    SR_UTILS_NS::Path path
+) 
 ```
 
 
@@ -385,58 +386,6 @@ SR_NODISCARD std::string SR_UTILS_NS::FileWatcher::GetName () noexcept const
 
 ```C++
 SR_NODISCARD const SR_UTILS_NS::Path & SR_UTILS_NS::FileWatcher::GetPath () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function Init 
-
-```C++
-void SR_UTILS_NS::FileWatcher::Init () 
-```
-
-
-
-
-<hr>
-
-
-
-### function IsActive 
-
-```C++
-SR_NODISCARD bool SR_UTILS_NS::FileWatcher::IsActive () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function IsDirty 
-
-```C++
-SR_NODISCARD bool SR_UTILS_NS::FileWatcher::IsDirty () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function IsPaused 
-
-```C++
-SR_NODISCARD bool SR_UTILS_NS::FileWatcher::IsPaused () noexcept const
 ```
 
 
@@ -502,23 +451,10 @@ void SR_UTILS_NS::FileWatcher::SetName (
 
 
 
-### function Signal 
+### function ~FileWatcher 
 
 ```C++
-void SR_UTILS_NS::FileWatcher::Signal () 
-```
-
-
-
-
-<hr>
-
-
-
-### function Stop 
-
-```C++
-void SR_UTILS_NS::FileWatcher::Stop () 
+SR_UTILS_NS::FileWatcher::~FileWatcher () override
 ```
 
 

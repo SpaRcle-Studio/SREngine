@@ -10,8 +10,9 @@
 
 
 
-* `#include <Core/EvoScriptAPI.h>`
 * `#include <Core/EngineResources.h>`
+* `#include <Graphics/Window/Window.h>`
+* `#include <Scripting/Cpp/ScriptSystem.h>`
 * `#include <Utils/Events/EventManager.h>`
 * `#include <Utils/Types/Time.h>`
 * `#include <Utils/Types/Timer.h>`
@@ -55,7 +56,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Engine**](classSR__CORE__NS_1_1Engine.md) <br> |
+| class | [**Engine**](classSR__CORE__NS_1_1Engine.md) <br>_@scriptableClass_  |
 
 
 

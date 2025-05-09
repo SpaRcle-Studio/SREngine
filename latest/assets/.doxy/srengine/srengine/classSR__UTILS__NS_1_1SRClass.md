@@ -53,7 +53,6 @@ Inherited by the following classes: [SR\_CORE\_GUI\_NS::PropertyDrawerBase](clas
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](#function-getmeta) () noexcept const = 0<br> |
-| virtual void | [**InitializeClass**](#function-initializeclass) () noexcept<br> |
 | virtual  | [**~SRClass**](#function-srclass) () = default<br> |
 
 
@@ -101,19 +100,6 @@ Inherited by the following classes: [SR\_CORE\_GUI\_NS::PropertyDrawerBase](clas
 
 ```C++
 virtual SR_NODISCARD const SR_UTILS_NS::SRClassMeta * SR_UTILS_NS::SRClass::GetMeta () noexcept const = 0
-```
-
-
-
-
-<hr>
-
-
-
-### function InitializeClass 
-
-```C++
-inline virtual void SR_UTILS_NS::SRClass::InitializeClass () noexcept
 ```
 
 

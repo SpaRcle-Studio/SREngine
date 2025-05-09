@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_7c26f9091b44a892879dd4e8d1d7c144" kind="dir">
+    <compoundname>Engine/Core/libs/Scripting/inc/Scripting/Old</compoundname>
+    <innerdir refid="dir_851141f4261c6b16b58da121ff8aacd8">Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation</innerdir>
+    <innerdir refid="dir_cd3992da172c967afbd6efc49fe8c3a7">Engine/Core/libs/Scripting/inc/Scripting/Old/Impl</innerdir>
+    <innerdir refid="dir_04907cd073aeacf0a44a00b3a87fc81c">Engine/Core/libs/Scripting/inc/Scripting/Old/Tools</innerdir>
+    <innerfile refid="Compiler_8h">Compiler.h</innerfile>
+    <innerfile refid="IState_8h">IState.h</innerfile>
+    <innerfile refid="Script_8h">Script.h</innerfile>
+    <innerfile refid="ScriptHolder_8h">ScriptHolder.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/"/>
+  </compounddef>
+</doxygen>

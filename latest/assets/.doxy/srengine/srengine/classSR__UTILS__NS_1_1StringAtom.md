@@ -8,8 +8,9 @@
 
 
 
+_@scriptableClass_ 
 
-
+* `#include <StringAtom.h>`
 
 
 
@@ -53,37 +54,36 @@
 | ---: | :--- |
 |  void | [**Clear**](#function-clear) () <br> |
 |  SR\_NODISCARD bool | [**Contains**](#function-contains) (const char \* str) const<br> |
-|  SR\_NODISCARD bool | [**Empty**](#function-empty) () const<br> |
+|  SR\_NODISCARD bool | [**Empty**](#function-empty) () const<br>_@method_  |
 |  SR\_NODISCARD uint64\_t | [**GetHash**](#function-gethash) () const<br> |
-|  SR\_NODISCARD uint64\_t | [**Size**](#function-size) () const<br> |
-|   | [**StringAtom**](#function-stringatom-16) () <br> |
-|   | [**StringAtom**](#function-stringatom-26) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & str) = default<br> |
+|  SR\_NODISCARD uint64\_t | [**Size**](#function-size) () const<br>_@method_  |
+|   | [**StringAtom**](#function-stringatom-16) () <br>_@constructor_  |
+|   | [**StringAtom**](#function-stringatom-26) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & other) = default<br> |
 |   | [**StringAtom**](#function-stringatom-36) ([**StringHashInfo**](structSR__UTILS__NS_1_1StringHashInfo.md) \* pInfo) <br> |
-|   | [**StringAtom**](#function-stringatom-46) (const char \* str) <br>_NOLINT._  |
+|   | [**StringAtom**](#function-stringatom-46) (const char \* str) <br>_@constructor_  |
 |   | [**StringAtom**](#function-stringatom-56) (const std::string & str) <br>_NOLINT._  |
 |   | [**StringAtom**](#function-stringatom-66) (std::string\_view str) <br>_NOLINT._  |
-|  SR\_NODISCARD const char \* | [**ToCStr**](#function-tocstr) () const<br> |
+|  SR\_NODISCARD const char \* | [**ToCStr**](#function-tocstr) () const<br>_@method_  |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
 |  SR\_NODISCARD const std::string & | [**ToStringRef**](#function-tostringref) () const<br> |
 |  SR\_NODISCARD std::string\_view | [**ToStringView**](#function-tostringview) () const<br> |
-|  SR\_NODISCARD const char \* | [**c\_str**](#function-c_str) () const<br> |
+|  SR\_NODISCARD const char \* | [**c\_str**](#function-c_str) () const<br>_@method_  |
 |  void | [**clear**](#function-clear) () <br> |
-|  SR\_NODISCARD const char \* | [**data**](#function-data) () const<br> |
-|  SR\_NODISCARD bool | [**empty**](#function-empty) () const<br> |
+|  SR\_NODISCARD const char \* | [**data**](#function-data) () const<br>_@method_  |
+|  SR\_NODISCARD bool | [**empty**](#function-empty) () const<br>_@method_  |
 |   | [**string &**](#function-string-&) () noexcept const<br>_NOLINT._  |
 |   | [**string\_view**](#function-string_view) () noexcept const<br>_NOLINT._  |
-|  SR\_NODISCARD SR\_FORCE\_INLINE | [**operator uint64\_t**](#function-operator-uint64_t) () noexcept const<br> |
-|  void | [**operator()**](#function-operator()-12) (const std::string & str) <br> |
-|  void | [**operator()**](#function-operator()-22) (const char \* str) <br> |
-|  bool | [**operator&lt;**](#function-operator) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & other) noexcept const<br> |
-|  bool | [**operator&lt;**](#function-operator_1) (uint64\_t hash) noexcept const<br> |
+|  SR\_NODISCARD | [**operator uint64\_t**](#function-operator-uint64_t) () noexcept const<br> |
+|  bool | [**operator&lt;**](#function-operator) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & other) noexcept const<br>_@operator_  |
+|  bool | [**operator&lt;**](#function-operator_1) (uint64\_t hash) noexcept const<br>_@operator_  |
 |  [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & | [**operator=**](#function-operator_2) (const std::string & str) <br> |
-|  [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & | [**operator=**](#function-operator_3) (const char \* str) <br> |
-|  bool | [**operator==**](#function-operator_4) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & rhs) noexcept const<br>_NOLINT._  |
+|  [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & | [**operator=**](#function-operator_3) (const char \* str) <br>_@operator_  |
+|  bool | [**operator==**](#function-operator_4) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) & rhs) noexcept const<br>_@operator_  |
 |  bool | [**operator==**](#function-operator_5) (const std::string & rhs) noexcept const<br> |
-|  bool | [**operator==**](#function-operator_6) (const char \* rhs) noexcept const<br> |
-|  SR\_NODISCARD char | [**operator[]**](#function-operator_7) (size\_t index) noexcept const<br> |
-|  SR\_NODISCARD uint64\_t | [**size**](#function-size) () const<br> |
+|  bool | [**operator==**](#function-operator_6) (const std::string\_view & rhs) noexcept const<br> |
+|  bool | [**operator==**](#function-operator_7) (const char \* rhs) noexcept const<br>_@operator_  |
+|  SR\_NODISCARD char | [**operator[]**](#function-operator_8) (size\_t index) noexcept const<br>_@operator_  |
+|  SR\_NODISCARD uint64\_t | [**size**](#function-size) () const<br>_@method_  |
 
 
 
@@ -147,6 +147,7 @@ SR_NODISCARD bool SR_UTILS_NS::StringAtom::Contains (
 
 ### function Empty 
 
+_@method_ 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::StringAtom::Empty () const
 ```
@@ -173,6 +174,7 @@ SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::GetHash () const
 
 ### function Size 
 
+_@method_ 
 ```C++
 SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::Size () const
 ```
@@ -186,6 +188,7 @@ SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::Size () const
 
 ### function StringAtom [1/6]
 
+_@constructor_ 
 ```C++
 SR_UTILS_NS::StringAtom::StringAtom () 
 ```
@@ -201,7 +204,7 @@ SR_UTILS_NS::StringAtom::StringAtom ()
 
 ```C++
 SR_UTILS_NS::StringAtom::StringAtom (
-    const StringAtom & str
+    const StringAtom & other
 ) = default
 ```
 
@@ -229,7 +232,7 @@ SR_UTILS_NS::StringAtom::StringAtom (
 
 ### function StringAtom [4/6]
 
-_NOLINT._ 
+_@constructor_ 
 ```C++
 SR_UTILS_NS::StringAtom::StringAtom (
     const char * str
@@ -238,6 +241,10 @@ SR_UTILS_NS::StringAtom::StringAtom (
 
 
 
+NOLINT 
+
+
+        
 
 <hr>
 
@@ -277,6 +284,7 @@ SR_UTILS_NS::StringAtom::StringAtom (
 
 ### function ToCStr 
 
+_@method_ 
 ```C++
 SR_NODISCARD const char * SR_UTILS_NS::StringAtom::ToCStr () const
 ```
@@ -329,6 +337,7 @@ SR_NODISCARD std::string_view SR_UTILS_NS::StringAtom::ToStringView () const
 
 ### function c\_str 
 
+_@method_ 
 ```C++
 SR_NODISCARD const char * SR_UTILS_NS::StringAtom::c_str () const
 ```
@@ -343,7 +352,7 @@ SR_NODISCARD const char * SR_UTILS_NS::StringAtom::c_str () const
 ### function clear 
 
 ```C++
-inline void SR_UTILS_NS::StringAtom::clear () 
+void SR_UTILS_NS::StringAtom::clear () 
 ```
 
 
@@ -355,6 +364,7 @@ inline void SR_UTILS_NS::StringAtom::clear ()
 
 ### function data 
 
+_@method_ 
 ```C++
 SR_NODISCARD const char * SR_UTILS_NS::StringAtom::data () const
 ```
@@ -368,6 +378,7 @@ SR_NODISCARD const char * SR_UTILS_NS::StringAtom::data () const
 
 ### function empty 
 
+_@method_ 
 ```C++
 SR_NODISCARD bool SR_UTILS_NS::StringAtom::empty () const
 ```
@@ -410,37 +421,7 @@ SR_UTILS_NS::StringAtom::string_view () noexcept const
 ### function operator uint64\_t 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE SR_UTILS_NS::StringAtom::operator uint64_t () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function operator() [1/2]
-
-```C++
-void SR_UTILS_NS::StringAtom::operator() (
-    const std::string & str
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function operator() [2/2]
-
-```C++
-void SR_UTILS_NS::StringAtom::operator() (
-    const char * str
-) 
+SR_NODISCARD SR_UTILS_NS::StringAtom::operator uint64_t () noexcept const
 ```
 
 
@@ -452,6 +433,7 @@ void SR_UTILS_NS::StringAtom::operator() (
 
 ### function operator&lt; 
 
+_@operator_ 
 ```C++
 bool SR_UTILS_NS::StringAtom::operator< (
     const StringAtom & other
@@ -467,6 +449,7 @@ bool SR_UTILS_NS::StringAtom::operator< (
 
 ### function operator&lt; 
 
+_@operator_ 
 ```C++
 bool SR_UTILS_NS::StringAtom::operator< (
     uint64_t hash
@@ -497,6 +480,7 @@ StringAtom & SR_UTILS_NS::StringAtom::operator= (
 
 ### function operator= 
 
+_@operator_ 
 ```C++
 StringAtom & SR_UTILS_NS::StringAtom::operator= (
     const char * str
@@ -512,7 +496,7 @@ StringAtom & SR_UTILS_NS::StringAtom::operator= (
 
 ### function operator== 
 
-_NOLINT._ 
+_@operator_ 
 ```C++
 bool SR_UTILS_NS::StringAtom::operator== (
     const StringAtom & rhs
@@ -521,6 +505,10 @@ bool SR_UTILS_NS::StringAtom::operator== (
 
 
 
+NOLINT 
+
+
+        
 
 <hr>
 
@@ -545,6 +533,22 @@ bool SR_UTILS_NS::StringAtom::operator== (
 
 ```C++
 bool SR_UTILS_NS::StringAtom::operator== (
+    const std::string_view & rhs
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator== 
+
+_@operator_ 
+```C++
+bool SR_UTILS_NS::StringAtom::operator== (
     const char * rhs
 ) noexcept const
 ```
@@ -558,6 +562,7 @@ bool SR_UTILS_NS::StringAtom::operator== (
 
 ### function operator[] 
 
+_@operator_ 
 ```C++
 SR_NODISCARD char SR_UTILS_NS::StringAtom::operator[] (
     size_t index
@@ -573,6 +578,7 @@ SR_NODISCARD char SR_UTILS_NS::StringAtom::operator[] (
 
 ### function size 
 
+_@method_ 
 ```C++
 SR_NODISCARD uint64_t SR_UTILS_NS::StringAtom::size () const
 ```

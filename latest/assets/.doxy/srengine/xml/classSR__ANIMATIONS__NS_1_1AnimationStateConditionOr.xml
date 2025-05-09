@@ -185,14 +185,14 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a5e8fef2d8e3e4246408b307594fe44e9" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>IsSuitable</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1a6d2683429660743a8a3056f77c3a68b3" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>Load</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a2f565dc6b166ad4b38870393f074bd16" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>m_conditions</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>operator=</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a42498b30339e2ff87699e1b323d800d1" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>Reset</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a4785c97e64589a85de80e90c7299d45a" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>Super</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateCondition_1ab86dde34a9e1b38837f33f52cbd9b75a" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>Update</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateConditionOr_1a086686c01b45e9a7a6a6b295ca6574df" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>~AnimationStateConditionOr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateConditionOr</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

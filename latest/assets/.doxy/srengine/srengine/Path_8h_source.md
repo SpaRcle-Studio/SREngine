@@ -25,7 +25,7 @@ namespace SR_UTILS_NS {
     class IDeserializer;
     class ISerializer;
 
-    class SR_DLL_EXPORT Path {
+    class SR_COMMON_DLL_API Path {
     public:
         enum class Type {
             Undefined, File, Folder
@@ -40,57 +40,17 @@ namespace SR_UTILS_NS {
         Path(std::string_view path);
         Path(std::wstring path);
 
-        Path(Path&& path) noexcept
-            : m_path(SR_UTILS_NS::Exchange(path.m_path, {}))
-            , m_name(std::exchange(path.m_name, {}))
-            , m_ext(std::exchange(path.m_ext, {}))
-            , m_hash(std::exchange(path.m_hash, {}))
-            , m_type(std::exchange(path.m_type, {}))
-        { }
+        Path(Path&& path) noexcept;
+        ~Path();
 
-        Path& operator=(Path&& path) noexcept {
-            m_path = std::exchange(path.m_path, {});
-            m_name = std::exchange(path.m_name, {});
-            m_ext = std::exchange(path.m_ext, {});
-            m_hash = std::exchange(path.m_hash, {});
-            m_type = std::exchange(path.m_type, {});
-            return *this;
-        }
-
-        operator const std::string&() { return m_path; } 
-        Path& operator=(const Path& path) {
-            m_path = path.m_path;
-
-            ExtractNameAndExt();
-
-            m_hash = path.m_hash;
-            m_type = path.m_type;
-
-            return *this;
-        }
-
-        bool operator==(const Path& path) const noexcept {
-            return m_path == path.ToStringRef();
-        }
-
-        char operator[](size_t index) const noexcept {
-            if (index >= m_path.size()) {
-                 std::cerr << "Path::operator[] : index is out of range!\n";
-                 SR_MAKE_BREAKPOINT;
-                 return char();
-            }
-            return m_path[index];
-        }
-
-        char& operator[](size_t index) noexcept {
-            if (index >= m_path.size()) {
-                std::cerr << "Path::operator[] : index is out of range!\n";
-                SR_MAKE_BREAKPOINT;
-                static char def = char();
-                return def;
-            }
-            return m_path[index];
-        }
+        Path& operator=(Path&& path) noexcept;
+        operator const std::string&(); 
+        Path& operator=(const Path& path);
+        bool operator==(const Path& path) const noexcept;
+        char operator[](size_t index) const noexcept;
+        char& operator[](size_t index) noexcept;
+        bool operator<(const Path& path) const noexcept;
+        bool operator>(const Path& path) const noexcept;
 
     public:
         void Save(ISerializer& serializer, const SerializationId& id) const;
@@ -113,18 +73,21 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint64_t GetFileHash() const;
         SR_NODISCARD uint64_t GetFolderHash(uint64_t deep = SR_UINT64_MAX) const;
         SR_NODISCARD const char* CStr() const;
-        SR_NODISCARD const char* c_str() const { return CStr(); }
+        SR_NODISCARD const char* c_str() const;
 
         SR_NODISCARD Path GetPrevious() const;
         SR_NODISCARD Path GetFolder() const;
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path EmplaceFront(const std::string& str) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
+        SR_NODISCARD Path ConcatExt(const std::string_view& ext) const;
+        SR_NODISCARD Path ConcatExt(const char* ext) const;
+        SR_NODISCARD Path ConcatExt(SR_UTILS_NS::StringAtom ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
         SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;
-        SR_NODISCARD bool empty() const { return IsEmpty(); }
+        SR_NODISCARD bool empty() const;
         SR_NODISCARD bool IsSubPath(const Path& subPath) const;
         SR_NODISCARD bool Contains(const std::string& str) const;
         SR_NODISCARD bool IsHidden() const;
@@ -161,8 +124,8 @@ namespace SR_UTILS_NS {
         std::string m_path;
         std::string_view m_name;
         std::string_view m_ext;
-        uint64_t    m_hash;
-        Type        m_type;
+        uint64_t m_hash;
+        Type m_type;
 
     };
 }

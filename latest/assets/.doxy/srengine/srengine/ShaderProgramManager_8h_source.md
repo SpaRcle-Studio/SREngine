@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GRAPH_NS::Memory {
-    struct SR_DLL_EXPORT VirtualProgramInfo : public SR_UTILS_NS::NonCopyable {
+    struct SR_RENDERER_DLL_API VirtualProgramInfo : public SR_UTILS_NS::NonCopyable {
         using Identifier = uint64_t;
         using ShaderProgram = int32_t;
     public:
@@ -113,7 +113,7 @@ namespace SR_GRAPH_NS::Memory {
 
     };
 
-    class SR_DLL_EXPORT ShaderProgramManager : public SR_UTILS_NS::Singleton<ShaderProgramManager> {
+    class SR_RENDERER_DLL_API ShaderProgramManager : public SR_UTILS_NS::Singleton<ShaderProgramManager> {
         SR_REGISTER_SINGLETON(ShaderProgramManager)
     public:
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;

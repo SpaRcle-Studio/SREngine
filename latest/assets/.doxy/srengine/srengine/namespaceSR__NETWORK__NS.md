@@ -38,6 +38,7 @@
 | class | [**Client**](classSR__NETWORK__NS_1_1Client.md) <br> |
 | class | [**Context**](classSR__NETWORK__NS_1_1Context.md) <br> |
 | class | [**DataPackage**](classSR__NETWORK__NS_1_1DataPackage.md) <br> |
+| class | [**FileDownloader**](classSR__NETWORK__NS_1_1FileDownloader.md) <br> |
 | class | [**ICMPHeader**](classSR__NETWORK__NS_1_1ICMPHeader.md) <br> |
 | class | [**IMessage**](classSR__NETWORK__NS_1_1IMessage.md) <br> |
 | class | [**IMessageData**](classSR__NETWORK__NS_1_1IMessageData.md) <br> |

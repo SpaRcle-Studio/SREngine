@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GUI_UTILS_H
 #define SR_ENGINE_GUI_UTILS_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Rect.h>

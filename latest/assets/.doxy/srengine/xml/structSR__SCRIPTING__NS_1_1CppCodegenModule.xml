@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__SCRIPTING__NS_1_1CppCodegenModule" kind="struct" language="C++" prot="public">
+    <compoundname>SR_SCRIPTING_NS::CppCodegenModule</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1aff0fa1cf3136719370234568e4da9c83" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::CppCodegenModule::isCompiled</definition>
+        <argsstring></argsstring>
+        <name>isCompiled</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::isCompiled</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="35" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ac6abe462c0890786770d45d728d999e9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::CppCodegenModule::isNeedCodegen</definition>
+        <argsstring></argsstring>
+        <name>isNeedCodegen</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::isNeedCodegen</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="36" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a18a10845f9837669672bd28e6c5c2062" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::CppCodegenModule::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="37" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ab2d7c901c88094534fa2ef13728729d5" prot="public" static="no" mutable="no">
+        <type><ref refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo" kindref="compound">CppScriptModuleInfo</ref></type>
+        <definition>CppScriptModuleInfo SR_SCRIPTING_NS::CppCodegenModule::moduleInfo</definition>
+        <argsstring></argsstring>
+        <name>moduleInfo</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::moduleInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="38" column="29" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a352ec73eb73fa64387e43d7338d91c0d" prot="public" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::Path&gt; SR_SCRIPTING_NS::CppCodegenModule::codeFiles</definition>
+        <argsstring></argsstring>
+        <name>codeFiles</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppCodegenModule::codeFiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="39" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::CppCodegenModule</label>
+        <link refid="structSR__SCRIPTING__NS_1_1CppCodegenModule"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>path</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>moduleInfo</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SCRIPTING_NS::CppScriptModuleInfo</label>
+        <link refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>moduleName</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Path</label>
+        <link refid="classSR__UTILS__NS_1_1Path"/>
+      </node>
+      <node id="5">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" line="34" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CodeGenerator.h" bodystart="34" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a352ec73eb73fa64387e43d7338d91c0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>codeFiles</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1aff0fa1cf3136719370234568e4da9c83" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>isCompiled</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ac6abe462c0890786770d45d728d999e9" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>isNeedCodegen</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1ab2d7c901c88094534fa2ef13728729d5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>moduleInfo</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppCodegenModule_1a18a10845f9837669672bd28e6c5c2062" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppCodegenModule</scope><name>path</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

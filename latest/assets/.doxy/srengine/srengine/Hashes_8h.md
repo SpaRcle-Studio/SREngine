@@ -12,8 +12,6 @@
 
 * `#include <Utils/stdInclude.h>`
 * `#include <Utils/Types/MerkleTree.h>`
-* `#include <openssl/sha.h>`
-* `#include <xxHash/xxhash.h>`
 
 
 

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="294" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="294" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="296" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="296" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo_1a75d5bb696377fd2ff54722fd785dfffe" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::pair&lt; Vertices::Attribute, size_t &gt; &gt;</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="295" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="295" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="297" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="297" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo_1ac10e95f44de1278402dd972b243abfc5" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::pair&lt; Vertices::Attribute, size_t &gt; &gt;</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="296" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="296" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="298" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="298" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo_1af86610fd50d48702022a2319bdcc34da" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -57,14 +57,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="297" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="297" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="299" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="299" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="293" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="293" bodyend="298"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="295" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="295" bodyend="300"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo_1a75d5bb696377fd2ff54722fd785dfffe" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::VertexInfo</scope><name>m_attributes</name></member>
       <member refid="structSR__GRAPH__NS_1_1Vertices_1_1VertexInfo_1a1f1ff9dd5d3e90f085120d6073825630" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Vertices::VertexInfo</scope><name>m_descriptions</name></member>

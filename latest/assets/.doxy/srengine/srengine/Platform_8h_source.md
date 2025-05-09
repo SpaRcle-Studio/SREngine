@@ -26,6 +26,14 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_UTILS_NS::Platform {
+    static bool IsCompiledUnderMSVC() {
+    #ifdef SR_MSVC
+        return true;
+    #else
+        return false;
+    #endif
+    }
+
     struct FileMetadata {
         uint64_t lastWriteTime = SR_UINT64_MAX;
     };
@@ -37,63 +45,66 @@ namespace SR_UTILS_NS::Platform {
 
     extern std::mutex g_platformLogMutex;
 
-    SR_NORETURN SR_DLL_EXPORT extern void Terminate();
+    SR_NORETURN SR_COMMON_DLL_API extern void Terminate(bool isError = true);
 
-    SR_DLL_EXPORT extern void InitializePlatform();
-    SR_DLL_EXPORT extern void InitSegmentationHandler();
-    SR_DLL_EXPORT extern void SetInstance(void* pInstance);
-    SR_DLL_EXPORT extern void* GetInstance();
-    SR_DLL_EXPORT extern PlatformType GetType();
+    SR_COMMON_DLL_API extern void InitializePlatform();
+    SR_COMMON_DLL_API extern void InitSegmentationHandler();
+    SR_COMMON_DLL_API extern void SetInstance(void* pInstance);
+    SR_COMMON_DLL_API extern void* GetInstance();
+    SR_COMMON_DLL_API extern PlatformType GetType();
 
-    SR_DLL_EXPORT extern void SetEnvironmentVar(const std::string_view& name, const std::string_view& value);
-    SR_DLL_EXPORT extern std::optional<std::string> ReadFile(const Path& path);
-    SR_DLL_EXPORT extern void TextToClipboard(const std::string& text);
-    SR_DLL_EXPORT extern void CopyFilesToClipboard(std::list<SR_UTILS_NS::Path> paths);
-    SR_DLL_EXPORT extern void SetCurrentProcessDirectory(const SR_UTILS_NS::Path& directory);
-    SR_DLL_EXPORT extern void PasteFilesFromClipboard(const SR_UTILS_NS::Path& topath);
-    SR_DLL_EXPORT extern void ClearClipboard();
-    SR_DLL_EXPORT extern void Sleep(uint64_t milliseconds);
-    SR_DLL_EXPORT extern void WriteConsoleLog(const std::string& msg);
-    SR_DLL_EXPORT extern void WriteConsoleError(const std::string& msg);
-    SR_DLL_EXPORT extern void WriteConsoleWarn(const std::string& msg);
-    SR_DLL_EXPORT extern void SelfOpen();
-    SR_DLL_EXPORT extern void OpenFile(const SR_UTILS_NS::Path& path, const std::string& args);
-    SR_DLL_EXPORT extern void Unzip(const SR_UTILS_NS::Path& source, const SR_UTILS_NS::Path& destination, bool replace = true);
-    SR_DLL_EXPORT extern void OpenWithAssociatedApp(const Path& filepath);
-    SR_DLL_EXPORT extern bool CreateFolder(const std::string& path);
-    SR_DLL_EXPORT extern bool Copy(const Path& from, const Path& to);
-    SR_DLL_EXPORT extern bool Delete(const Path& path);
-    SR_DLL_EXPORT extern bool WaitAndDelete(const Path& path);
-    SR_DLL_EXPORT extern bool IsConsoleFocused();
+    SR_COMMON_DLL_API extern std::string ExecuteCommand(const std::string& command, const std::vector<std::string>& env = {});
+    SR_COMMON_DLL_API extern void SetEnvironmentVar(const std::string_view& name, const std::string_view& value);
+    SR_COMMON_DLL_API extern std::optional<std::string> ReadFile(const Path& path);
+    SR_COMMON_DLL_API extern void TextToClipboard(const std::string& text);
+    SR_COMMON_DLL_API extern void CopyFilesToClipboard(std::list<SR_UTILS_NS::Path> paths);
+    SR_COMMON_DLL_API extern void SetCurrentProcessDirectory(const SR_UTILS_NS::Path& directory);
+    SR_COMMON_DLL_API extern void PasteFilesFromClipboard(const SR_UTILS_NS::Path& topath);
+    SR_COMMON_DLL_API extern void ClearClipboard();
+    SR_COMMON_DLL_API extern void Sleep(uint64_t milliseconds);
+    SR_COMMON_DLL_API extern void WriteConsoleLog(const std::string& msg);
+    SR_COMMON_DLL_API extern void WriteConsoleError(const std::string& msg);
+    SR_COMMON_DLL_API extern void WriteConsoleWarn(const std::string& msg);
+    SR_COMMON_DLL_API extern void SelfOpen();
+    SR_COMMON_DLL_API extern void OpenFile(const SR_UTILS_NS::Path& path, const std::string& args);
+    SR_COMMON_DLL_API extern void Unzip(const SR_UTILS_NS::Path& source, const SR_UTILS_NS::Path& destination, bool replace = true);
+    SR_COMMON_DLL_API extern void OpenWithAssociatedApp(const Path& filepath);
+    SR_COMMON_DLL_API extern bool CreateFolder(const std::string& path);
+    SR_COMMON_DLL_API extern bool Copy(const Path& from, const Path& to);
+    SR_COMMON_DLL_API extern bool Delete(const Path& path);
+    SR_COMMON_DLL_API extern bool WaitAndDelete(const Path& path);
+    SR_COMMON_DLL_API extern bool DownloadFile(const std::string& url, const SR_UTILS_NS::Path& outputPath);
+    SR_COMMON_DLL_API extern void* LoadLibraryModule(const Path& path);
+    SR_COMMON_DLL_API extern bool UnloadLibraryModule(void* pLibrary);
+    SR_COMMON_DLL_API extern void* GetLibraryFunctionAddress(void* pLibrary, const char* pFunctionName);
 
-    SR_DLL_EXPORT extern uint64_t GetProcessUsedMemory();
-    SR_DLL_EXPORT extern uint16_t GetCurrentProcessId();
-    SR_DLL_EXPORT extern SR_MATH_NS::FVector2 GetMousePos();
-    SR_DLL_EXPORT extern MouseState GetMouseState();
-    SR_DLL_EXPORT extern bool GetSystemKeyboardState(uint8_t* pKeyCodes);
-    SR_DLL_EXPORT extern std::string GetClipboardText();
-    SR_DLL_EXPORT extern Path GetApplicationPath();
-    SR_DLL_EXPORT extern Path GetApplicationDirectory();
-    SR_DLL_EXPORT extern Path GetApplicationName();
-    SR_DLL_EXPORT extern std::list<Path> GetInDirectory(const Path& dir, Path::Type type);
-    SR_DLL_EXPORT extern std::list<Path> GetAllInDirectory(const Path& dir);
-    SR_DLL_EXPORT extern FileMetadata GetFileMetadata(const Path& file);
-    SR_DLL_EXPORT extern SR_MATH_NS::UVector2 GetScreenResolution();
-    SR_DLL_EXPORT extern double_t GetScreenDPI();
-    SR_DLL_EXPORT extern std::vector<SR_MATH_NS::UVector2> GetScreenResolutions();
-    SR_DLL_EXPORT extern bool FileIsHidden(const Path& path);
-    SR_DLL_EXPORT extern bool IsExists(const Path& path);
-    SR_DLL_EXPORT extern bool IsAbsolutePath(const Path& path);
-    SR_DLL_EXPORT extern bool IsRunningUnderDebugger();
-    SR_DLL_EXPORT extern bool IsFileDeletable(const SR_UTILS_NS::Path& path);
+    SR_COMMON_DLL_API extern uint64_t GetProcessUsedMemory();
+    SR_COMMON_DLL_API extern uint16_t GetCurrentProcessId();
+    SR_COMMON_DLL_API extern SR_MATH_NS::FVector2 GetMousePos();
+    SR_COMMON_DLL_API extern MouseState GetMouseState();
+    SR_COMMON_DLL_API extern bool GetSystemKeyboardState(uint8_t* pKeyCodes);
+    SR_COMMON_DLL_API extern std::string GetClipboardText();
+    SR_COMMON_DLL_API extern Path GetApplicationPath();
+    SR_COMMON_DLL_API extern Path GetApplicationDirectory();
+    SR_COMMON_DLL_API extern Path GetApplicationName();
+    SR_COMMON_DLL_API extern std::list<Path> GetInDirectory(const Path& dir, Path::Type type);
+    SR_COMMON_DLL_API extern std::list<Path> GetAllInDirectory(const Path& dir);
+    SR_COMMON_DLL_API extern FileMetadata GetFileMetadata(const Path& file);
+    SR_COMMON_DLL_API extern SR_MATH_NS::UVector2 GetScreenResolution();
+    SR_COMMON_DLL_API extern double_t GetScreenDPI();
+    SR_COMMON_DLL_API extern std::vector<SR_MATH_NS::UVector2> GetScreenResolutions();
+    SR_COMMON_DLL_API extern bool FileIsHidden(const Path& path);
+    SR_COMMON_DLL_API extern bool IsExists(const Path& path);
+    SR_COMMON_DLL_API extern bool IsAbsolutePath(const Path& path);
+    SR_COMMON_DLL_API extern bool IsRunningUnderDebugger();
+    SR_COMMON_DLL_API extern bool IsFileDeletable(const SR_UTILS_NS::Path& path);
 
-    SR_DLL_EXPORT extern void SetMousePos(const SR_MATH_NS::IVector2& pos);
-    SR_DLL_EXPORT extern void SetCursorVisible(bool isVisible);
-    SR_DLL_EXPORT extern void ConfineCursor(); // TODO: add ability to confine cursor to a specific window
-    SR_DLL_EXPORT extern void ReleaseCursorConfinement(); // TODO: add ability to confine cursor to a specific window
-    SR_DLL_EXPORT extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
-    SR_DLL_EXPORT extern void CopyPermissions(const SR_UTILS_NS::Path& source, const SR_UTILS_NS::Path& destination);
-
+    SR_COMMON_DLL_API extern void SetMousePos(const SR_MATH_NS::IVector2& pos);
+    SR_COMMON_DLL_API extern void SetCursorVisible(bool isVisible);
+    SR_COMMON_DLL_API extern void ConfineCursor(); // TODO: add ability to confine cursor to a specific window
+    SR_COMMON_DLL_API extern void ReleaseCursorConfinement(); // TODO: add ability to confine cursor to a specific window
+    SR_COMMON_DLL_API extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);
+    SR_COMMON_DLL_API extern void CopyPermissions(const SR_UTILS_NS::Path& source, const SR_UTILS_NS::Path& destination);
 }
 #endif //SR_ENGINE_UTILS_PLATFORM_H
 ```

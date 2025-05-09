@@ -739,7 +739,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a7c5c72ae1ff37fbe4fd194ae9103aaf0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>m_reRegisterMeshes</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a7e2d6e33c3324ab33957bc45650517d0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>MarkUniformsDirty</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a1afa46e70b58b0a8c29edf5b902cd63a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>MeshPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a161df9e468f220eea4f2c05b55f279ed" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>OnResourceReloaded</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>operator=</name></member>
@@ -755,7 +755,7 @@
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a771c15106a9e0117377e6fbe034ad8af" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a41f41531370f23a91d8fca9e43cba400" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>UnRegisterMesh</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1a9b0d0ecbb5418d32b12d67e3a3d44ee9" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>UnRegisterMesh</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1RenderStrategy_1aa6919b0f1d4a7aee6a09fb6ef7c009fb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::RenderStrategy</scope><name>~RenderStrategy</name></member>
     </listofallmembers>
   </compounddef>

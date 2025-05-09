@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_MATERIAL_TYPE_H
 #define SR_ENGINE_GRAPHICS_MATERIAL_TYPE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS {

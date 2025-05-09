@@ -124,6 +124,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  T \* | [**Find**](#function-find-23) (const std::string & id) <br> |
 |  T \* | [**Find**](#function-find-33) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetCachePath**](#function-getcachepath) () const<br> |
+|  SR\_NODISCARD [**FileSystemWatcher::Ptr**](classSR__HTYPES__NS_1_1SharedPtr.md) | [**GetFileSystemWatcher**](#function-getfilesystemwatcher) () const<br> |
 |  SR\_NODISCARD [**Path**](classSR__UTILS__NS_1_1Path.md) | [**GetResPath**](#function-getrespath) () const<br> |
 |  SR\_NODISCARD const [**Path**](classSR__UTILS__NS_1_1Path.md) & | [**GetResPathRef**](#function-getrespathref) () const<br> |
 |  SR\_NODISCARD std::string\_view | [**GetTypeName**](#function-gettypename) (Hash hashName) const<br> |
@@ -131,9 +132,9 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**InspectResources**](#function-inspectresources) (const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const ResourcesTypes &)&gt; & callback) <br> |
 |  SR\_NODISCARD bool | [**IsLastResource**](#function-islastresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* resource) <br> |
 |  SR\_NODISCARD bool | [**IsUsePointStackTraceProfilingEnabled**](#function-isusepointstacktraceprofilingenabled) () const<br> |
-|  SR\_NODISCARD bool | [**IsWatchingEnabled**](#function-iswatchingenabled) () const<br> |
 | virtual void | [**OnSingletonDestroy**](#function-onsingletondestroy) () override<br> |
 |  void | [**PrintMemoryDump**](#function-printmemorydump) () <br> |
+|  void | [**PullWatchers**](#function-pullwatchers) () <br> |
 |  bool | [**RegisterReloader**](#function-registerreloader-12) (Args &&... args) <br> |
 |  void | [**RegisterResource**](#function-registerresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br>_Register resource in resource manager._  |
 |  bool | [**RegisterType**](#function-registertype-12) () <br> |
@@ -141,10 +142,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**ReloadResources**](#function-reloadresources) (float\_t dt) <br>_Проверить хэши ресурсов и перезагрузить их, если это требуется_  |
 |  bool | [**ReviveResource**](#function-reviveresource) ([**IResource**](classSR__UTILS__NS_1_1IResource.md) \* pResource) <br> |
 |  bool | [**Run**](#function-run) () <br> |
-|  void | [**SetWatchingEnabled**](#function-setwatchingenabled) (bool enabled) <br> |
-|  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**FileWatcher**](classSR__UTILS__NS_1_1FileWatcher.md) &gt; | [**StartWatch**](#function-startwatch) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path) <br> |
 |  void | [**Synchronize**](#function-synchronize) (bool force) <br> |
-|  void | [**UpdateWatchers**](#function-updatewatchers) (float\_t dt) <br> |
 
 
 
@@ -178,7 +176,7 @@ See [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_1Singleton.md)
 | ---: | :--- |
 |  SR\_MAYBE\_UNUSED void | [**DestroySingleton**](classSR__UTILS__NS_1_1Singleton.md#function-destroysingleton) () <br> |
 |  SR\_MAYBE\_UNUSED std::recursive\_mutex & | [**GetMutex**](classSR__UTILS__NS_1_1Singleton.md#function-getmutex) () noexcept<br> |
-|  SR\_MAYBE\_UNUSED T & | [**Instance**](classSR__UTILS__NS_1_1Singleton.md#function-instance) () noexcept<br>_TODO: (Multi-threading) Refactor Singleton::Instance()._  |
+|  SR\_MAYBE\_UNUSED T & | [**Instance**](classSR__UTILS__NS_1_1Singleton.md#function-instance) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsSingletonInitialized**](classSR__UTILS__NS_1_1Singleton.md#function-issingletoninitialized) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED void | [**LockSingleton**](classSR__UTILS__NS_1_1Singleton.md#function-locksingleton) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED static SR\_NODISCARD [**SR\_HTYPES\_NS::SingletonRecursiveLockGuard**](classSR__HTYPES__NS_1_1SingletonRecursiveLockGuard.md)&lt; [**Singleton**](classSR__UTILS__NS_1_1Singleton.md)&lt; T &gt; \* &gt; | [**ScopeLockSingleton**](classSR__UTILS__NS_1_1Singleton.md#function-scopelocksingleton) () <br> |
@@ -298,7 +296,7 @@ See [SR\_UTILS\_NS::SingletonBase](classSR__UTILS__NS_1_1SingletonBase.md)
 | virtual void | [**InitSingleton**](classSR__UTILS__NS_1_1SingletonBase.md#function-initsingleton) () <br> |
 | virtual bool | [**IsSingletonCanBeDestroyed**](classSR__UTILS__NS_1_1SingletonBase.md#function-issingletoncanbedestroyed) () const<br> |
 | virtual void | [**OnSingletonDestroy**](classSR__UTILS__NS_1_1SingletonBase.md#function-onsingletondestroy) () <br> |
-|   | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md#function-singletonbase) () = default<br> |
+|   | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md#function-singletonbase) () <br> |
 
 
 ## Protected Functions inherited from SR_UTILS_NS::NonCopyable
@@ -307,8 +305,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -445,7 +443,20 @@ inline T * SR_UTILS_NS::ResourceManager::Find (
 ### function GetCachePath 
 
 ```C++
-inline SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetCachePath () const
+SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetCachePath () const
+```
+
+
+
+
+<hr>
+
+
+
+### function GetFileSystemWatcher 
+
+```C++
+inline SR_NODISCARD FileSystemWatcher::Ptr SR_UTILS_NS::ResourceManager::GetFileSystemWatcher () const
 ```
 
 
@@ -458,7 +469,7 @@ inline SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetCachePath () const
 ### function GetResPath 
 
 ```C++
-inline SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetResPath () const
+SR_NODISCARD Path SR_UTILS_NS::ResourceManager::GetResPath () const
 ```
 
 
@@ -554,19 +565,6 @@ inline SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsUsePointStackTraceProfi
 
 
 
-### function IsWatchingEnabled 
-
-```C++
-SR_NODISCARD bool SR_UTILS_NS::ResourceManager::IsWatchingEnabled () const
-```
-
-
-
-
-<hr>
-
-
-
 ### function OnSingletonDestroy 
 
 ```C++
@@ -586,6 +584,19 @@ Implements [*SR\_UTILS\_NS::SingletonBase::OnSingletonDestroy*](classSR__UTILS__
 
 ```C++
 void SR_UTILS_NS::ResourceManager::PrintMemoryDump () 
+```
+
+
+
+
+<hr>
+
+
+
+### function PullWatchers 
+
+```C++
+void SR_UTILS_NS::ResourceManager::PullWatchers () 
 ```
 
 
@@ -711,56 +722,11 @@ bool SR_UTILS_NS::ResourceManager::Run ()
 
 
 
-### function SetWatchingEnabled 
-
-```C++
-inline void SR_UTILS_NS::ResourceManager::SetWatchingEnabled (
-    bool enabled
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function StartWatch 
-
-```C++
-SR_NODISCARD SR_HTYPES_NS::SharedPtr < FileWatcher > SR_UTILS_NS::ResourceManager::StartWatch (
-    const Path & path
-) 
-```
-
-
-
-
-<hr>
-
-
-
 ### function Synchronize 
 
 ```C++
 void SR_UTILS_NS::ResourceManager::Synchronize (
     bool force
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function UpdateWatchers 
-
-```C++
-void SR_UTILS_NS::ResourceManager::UpdateWatchers (
-    float_t dt
 ) 
 ```
 

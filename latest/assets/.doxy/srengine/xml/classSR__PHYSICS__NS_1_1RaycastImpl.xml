@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="16" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="18" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="26" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="28" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="19" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="19" bodyend="21"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="21" column="18" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="21" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1RaycastImpl_1a742e4cba46294b59f9534cc7b451b9a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="23" column="9"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="25" column="9"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -138,15 +138,15 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="14" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="14" bodyend="27"/>
+    <location file="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" line="16" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h" bodystart="16" bodyend="29"/>
     <listofallmembers>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1a9d60b6513b7139e456732335e6c58c68" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>m_world</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>operator=</name></member>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1aad46f59907f00c14ddef9a9731b30e7b" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>RaycastHits</name></member>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1a3c6cda8bd18e0cae3d2c916514ff8126" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>RaycastImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>~NonCopyable</name></member>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1a742e4cba46294b59f9534cc7b451b9a4" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::RaycastImpl</scope><name>~RaycastImpl</name></member>
     </listofallmembers>
   </compounddef>

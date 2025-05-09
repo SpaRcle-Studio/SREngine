@@ -44,7 +44,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md) &lt;class T&gt;<br> |
+| class | [**SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md) &lt;class T&gt;<br>_SR\_COMMON\_DLL\_API._  |
 | class | [**SharedPtrBase**](classSR__HTYPES__NS_1_1SharedPtrBase.md) <br> |
 | struct | [**SharedPtrDynamicData**](structSR__HTYPES__NS_1_1SharedPtrDynamicData.md) <br> |
 | class | [**SharedPtrDynamicDataCounter**](classSR__HTYPES__NS_1_1SharedPtrDynamicDataCounter.md) <br> |

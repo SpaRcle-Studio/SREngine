@@ -18,7 +18,7 @@
 #include <Utils/Math/Vector3.h>
 
 namespace SR_UTILS_NS {
-    struct CollisionData {
+    struct SR_COMMON_DLL_API CollisionData {
         void* pHandler = nullptr;
         SR_MATH_NS::FVector3 point;
         SR_MATH_NS::FVector3 impulse;

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_FRAMEBUFFERQUEUE_H
 #define SR_ENGINE_FRAMEBUFFERQUEUE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Debug.h>
 
 namespace SR_GTYPES_NS {

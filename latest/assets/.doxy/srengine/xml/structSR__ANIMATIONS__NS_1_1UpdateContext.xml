@@ -185,9 +185,6 @@
         <childnode refid="11" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="10">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -202,18 +199,6 @@
       <node id="6">
         <label>SR_UTILS_NS::Path</label>
         <link refid="classSR__UTILS__NS_1_1Path"/>
-      </node>
-      <node id="13">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="11">
         <label>SR_WORLD_NS::Scene</label>

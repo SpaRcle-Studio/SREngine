@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_851141f4261c6b16b58da121ff8aacd8" kind="dir">
+    <compoundname>Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation</compoundname>
+    <innerfile refid="AddressTableGen_8h">AddressTableGen.h</innerfile>
+    <innerfile refid="Casting_8h">Casting.h</innerfile>
+    <innerfile refid="CMakeCodeGen_8h">CMakeCodeGen.h</innerfile>
+    <innerfile refid="Compilation_2Compiler_8h">Compiler.h</innerfile>
+    <innerfile refid="EvoClass_8h">EvoClass.h</innerfile>
+    <innerfile refid="Method_8h">Method.h</innerfile>
+    <innerfile refid="Typedefs_8h">Typedefs.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/"/>
+  </compounddef>
+</doxygen>

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_DESCRIPTORS_H
 #define SR_ENGINE_DESCRIPTORS_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/macros.h>
 
 namespace SR_GRAPH_NS {

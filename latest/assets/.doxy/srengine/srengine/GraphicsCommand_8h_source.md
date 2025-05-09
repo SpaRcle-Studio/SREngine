@@ -15,6 +15,7 @@
 #ifndef SR_ENGINE_GRAPHICSCOMMAND_H
 #define SR_ENGINE_GRAPHICSCOMMAND_H
 
+#include <Graphics/macros.h>
 
 class GraphicsCommand {
 

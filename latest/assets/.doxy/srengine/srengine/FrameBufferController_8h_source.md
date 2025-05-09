@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_FRAME_BUFFER_CONTROLLER_H
 #define SR_ENGINE_FRAME_BUFFER_CONTROLLER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/SharedPtr.h>

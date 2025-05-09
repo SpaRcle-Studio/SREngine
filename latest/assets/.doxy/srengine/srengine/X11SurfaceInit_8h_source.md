@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_X11SURFACEINIT_H
 #define SR_ENGINE_X11SURFACEINIT_H
 
+#include <Graphics/macros.h>
+
 #include <EvoVulkan/macros.h>
 
 #include <Utils/Types/SafePointer.h>

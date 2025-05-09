@@ -8,8 +8,9 @@
 
 
 
+_@scriptableClass_ 
 
-
+* `#include <Debug.h>`
 
 
 
@@ -120,6 +121,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 | ---: | :--- |
 |  bool | [**Assert**](#function-assert) (const std::string & msg) <br> |
 |  bool | [**AssertOnceCheck**](#function-assertoncecheck) (const std::string & msg) <br> |
+|   | [**Debug**](#function-debug) () <br> |
 |  void | [**Error**](#function-error) (const std::string & msg) <br> |
 |  SR\_NODISCARD Level | [**GetLevel**](#function-getlevel) () <br> |
 |  void | [**Graph**](#function-graph) (const std::string & msg) <br> |
@@ -127,7 +129,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**Init**](#function-init) (const std::string & log\_path, bool ShowUsedMemory, Theme colorTheme=Theme::Light) <br> |
 |  SR\_NODISCARD bool | [**IsInitialized**](#function-isinitialized) () const<br> |
 |  void | [**Log**](#function-log) (const std::string & msg) <br> |
-|  void | [**MakeCrash**](#function-makecrash) () <br> |
+|  void | [**MakeCrash**](#function-makecrash) () <br>_@method_  |
 | virtual void | [**OnSingletonDestroy**](#function-onsingletondestroy) () override<br> |
 |  void | [**Print**](#function-print) (std::string msg, DebugLogType type) <br> |
 |  void | [**Script**](#function-script) (const std::string & msg) <br> |
@@ -137,7 +139,7 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 |  void | [**Shader**](#function-shader) (const std::string & msg) <br> |
 |  void | [**Success**](#function-success) (const std::string & msg) <br> |
 |  void | [**System**](#function-system) (const std::string & msg) <br> |
-|  void | [**TestPrint**](#function-testprint) () <br> |
+|  void | [**TestPrint**](#function-testprint) () <br>_@method_  |
 |  void | [**Vulkan**](#function-vulkan) (const std::string & msg) <br> |
 |  void | [**VulkanError**](#function-vulkanerror) (const std::string & msg) <br> |
 |  void | [**VulkanLog**](#function-vulkanlog) (const std::string & msg) <br> |
@@ -176,7 +178,7 @@ See [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_1Singleton.md)
 | ---: | :--- |
 |  SR\_MAYBE\_UNUSED void | [**DestroySingleton**](classSR__UTILS__NS_1_1Singleton.md#function-destroysingleton) () <br> |
 |  SR\_MAYBE\_UNUSED std::recursive\_mutex & | [**GetMutex**](classSR__UTILS__NS_1_1Singleton.md#function-getmutex) () noexcept<br> |
-|  SR\_MAYBE\_UNUSED T & | [**Instance**](classSR__UTILS__NS_1_1Singleton.md#function-instance) () noexcept<br>_TODO: (Multi-threading) Refactor Singleton::Instance()._  |
+|  SR\_MAYBE\_UNUSED T & | [**Instance**](classSR__UTILS__NS_1_1Singleton.md#function-instance) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsSingletonInitialized**](classSR__UTILS__NS_1_1Singleton.md#function-issingletoninitialized) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED void | [**LockSingleton**](classSR__UTILS__NS_1_1Singleton.md#function-locksingleton) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED static SR\_NODISCARD [**SR\_HTYPES\_NS::SingletonRecursiveLockGuard**](classSR__HTYPES__NS_1_1SingletonRecursiveLockGuard.md)&lt; [**Singleton**](classSR__UTILS__NS_1_1Singleton.md)&lt; T &gt; \* &gt; | [**ScopeLockSingleton**](classSR__UTILS__NS_1_1Singleton.md#function-scopelocksingleton) () <br> |
@@ -296,7 +298,7 @@ See [SR\_UTILS\_NS::SingletonBase](classSR__UTILS__NS_1_1SingletonBase.md)
 | virtual void | [**InitSingleton**](classSR__UTILS__NS_1_1SingletonBase.md#function-initsingleton) () <br> |
 | virtual bool | [**IsSingletonCanBeDestroyed**](classSR__UTILS__NS_1_1SingletonBase.md#function-issingletoncanbedestroyed) () const<br> |
 | virtual void | [**OnSingletonDestroy**](classSR__UTILS__NS_1_1SingletonBase.md#function-onsingletondestroy) () <br> |
-|   | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md#function-singletonbase) () = default<br> |
+|   | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md#function-singletonbase) () <br> |
 
 
 ## Protected Functions inherited from SR_UTILS_NS::NonCopyable
@@ -305,8 +307,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -362,7 +364,7 @@ enum SR_UTILS_NS::Debug::Theme {
 ### function Assert 
 
 ```C++
-inline bool SR_UTILS_NS::Debug::Assert (
+bool SR_UTILS_NS::Debug::Assert (
     const std::string & msg
 ) 
 ```
@@ -389,10 +391,23 @@ bool SR_UTILS_NS::Debug::AssertOnceCheck (
 
 
 
+### function Debug 
+
+```C++
+SR_UTILS_NS::Debug::Debug () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Error 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Error (
+void SR_UTILS_NS::Debug::Error (
     const std::string & msg
 ) 
 ```
@@ -407,7 +422,7 @@ inline void SR_UTILS_NS::Debug::Error (
 ### function GetLevel 
 
 ```C++
-inline SR_NODISCARD Level SR_UTILS_NS::Debug::GetLevel () 
+SR_NODISCARD Level SR_UTILS_NS::Debug::GetLevel () 
 ```
 
 
@@ -420,7 +435,7 @@ inline SR_NODISCARD Level SR_UTILS_NS::Debug::GetLevel ()
 ### function Graph 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Graph (
+void SR_UTILS_NS::Debug::Graph (
     const std::string & msg
 ) 
 ```
@@ -435,7 +450,7 @@ inline void SR_UTILS_NS::Debug::Graph (
 ### function Info 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Info (
+void SR_UTILS_NS::Debug::Info (
     const std::string & msg
 ) 
 ```
@@ -467,7 +482,7 @@ void SR_UTILS_NS::Debug::Init (
 ### function IsInitialized 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Debug::IsInitialized () const
+SR_NODISCARD bool SR_UTILS_NS::Debug::IsInitialized () const
 ```
 
 
@@ -480,7 +495,7 @@ inline SR_NODISCARD bool SR_UTILS_NS::Debug::IsInitialized () const
 ### function Log 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Log (
+void SR_UTILS_NS::Debug::Log (
     const std::string & msg
 ) 
 ```
@@ -494,6 +509,7 @@ inline void SR_UTILS_NS::Debug::Log (
 
 ### function MakeCrash 
 
+_@method_ 
 ```C++
 void SR_UTILS_NS::Debug::MakeCrash () 
 ```
@@ -539,7 +555,7 @@ void SR_UTILS_NS::Debug::Print (
 ### function Script 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Script (
+void SR_UTILS_NS::Debug::Script (
     const std::string & msg
 ) 
 ```
@@ -554,7 +570,7 @@ inline void SR_UTILS_NS::Debug::Script (
 ### function ScriptError 
 
 ```C++
-inline void SR_UTILS_NS::Debug::ScriptError (
+void SR_UTILS_NS::Debug::ScriptError (
     const std::string & msg
 ) 
 ```
@@ -569,7 +585,7 @@ inline void SR_UTILS_NS::Debug::ScriptError (
 ### function ScriptLog 
 
 ```C++
-inline void SR_UTILS_NS::Debug::ScriptLog (
+void SR_UTILS_NS::Debug::ScriptLog (
     const std::string & msg
 ) 
 ```
@@ -584,7 +600,7 @@ inline void SR_UTILS_NS::Debug::ScriptLog (
 ### function SetLevel 
 
 ```C++
-inline void SR_UTILS_NS::Debug::SetLevel (
+void SR_UTILS_NS::Debug::SetLevel (
     Level level
 ) 
 ```
@@ -599,7 +615,7 @@ inline void SR_UTILS_NS::Debug::SetLevel (
 ### function Shader 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Shader (
+void SR_UTILS_NS::Debug::Shader (
     const std::string & msg
 ) 
 ```
@@ -614,7 +630,7 @@ inline void SR_UTILS_NS::Debug::Shader (
 ### function Success 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Success (
+void SR_UTILS_NS::Debug::Success (
     const std::string & msg
 ) 
 ```
@@ -629,7 +645,7 @@ inline void SR_UTILS_NS::Debug::Success (
 ### function System 
 
 ```C++
-inline void SR_UTILS_NS::Debug::System (
+void SR_UTILS_NS::Debug::System (
     const std::string & msg
 ) 
 ```
@@ -643,6 +659,7 @@ inline void SR_UTILS_NS::Debug::System (
 
 ### function TestPrint 
 
+_@method_ 
 ```C++
 void SR_UTILS_NS::Debug::TestPrint () 
 ```
@@ -657,7 +674,7 @@ void SR_UTILS_NS::Debug::TestPrint ()
 ### function Vulkan 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Vulkan (
+void SR_UTILS_NS::Debug::Vulkan (
     const std::string & msg
 ) 
 ```
@@ -672,7 +689,7 @@ inline void SR_UTILS_NS::Debug::Vulkan (
 ### function VulkanError 
 
 ```C++
-inline void SR_UTILS_NS::Debug::VulkanError (
+void SR_UTILS_NS::Debug::VulkanError (
     const std::string & msg
 ) 
 ```
@@ -687,7 +704,7 @@ inline void SR_UTILS_NS::Debug::VulkanError (
 ### function VulkanLog 
 
 ```C++
-inline void SR_UTILS_NS::Debug::VulkanLog (
+void SR_UTILS_NS::Debug::VulkanLog (
     const std::string & msg
 ) 
 ```
@@ -702,7 +719,7 @@ inline void SR_UTILS_NS::Debug::VulkanLog (
 ### function Warn 
 
 ```C++
-inline void SR_UTILS_NS::Debug::Warn (
+void SR_UTILS_NS::Debug::Warn (
     const std::string & msg
 ) 
 ```

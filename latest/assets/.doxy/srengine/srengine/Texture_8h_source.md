@@ -73,7 +73,6 @@ namespace SR_GTYPES_NS {
 
     private:
         TextureData::Ptr m_textureData;
-        RenderContextPtr m_context = { };
 
         int32_t m_id = SR_ID_INVALID;
 

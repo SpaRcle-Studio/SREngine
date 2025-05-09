@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="440" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="440" bodyend="446"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="442" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="442" bodyend="448"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="439" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="439" bodyend="447"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="441" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="441" bodyend="449"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1SimpleVertex_01_4_1a4b00fcbce9026118393bea9f82c57102" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_GRAPH_NS::Vertices::SimpleVertex &gt;</scope><name>operator()</name></member>
     </listofallmembers>

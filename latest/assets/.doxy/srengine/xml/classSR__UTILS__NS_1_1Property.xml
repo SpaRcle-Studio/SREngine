@@ -790,7 +790,7 @@
       <member refid="classSR__UTILS__NS_1_1Property_1afdf203b715fe62050253dbb52ab7a587" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>MarshalPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a44d961f66cc045a9946b22c6a76853f9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>MarshalRef</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a7638578d661dfc1fb0b836340617520b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>MarshalUniquePtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a9205ba3a3a6091df74becd464636600f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::Property</scope><name>operator=</name></member>
@@ -807,7 +807,7 @@
       <member refid="classSR__UTILS__NS_1_1Property_1a1c10f300f030edd5bb5f032c0fb33580" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>SetReadOnly</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a02319afa5aa0a16b2b294dd0e2fbd4bc" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>SetSameLine</name></member>
       <member refid="classSR__UTILS__NS_1_1Property_1a44ce1cb0781ff4b7621146e393325fcd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Property</scope><name>SetWidth</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Property</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Property</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

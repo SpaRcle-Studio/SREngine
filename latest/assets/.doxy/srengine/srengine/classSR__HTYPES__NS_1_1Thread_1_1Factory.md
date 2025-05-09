@@ -122,7 +122,7 @@ SR_NODISCARD SR_DEPRECATED_EX("Not safe, use Create(Ptr& pThread, Functor&& fn, 
 
 ```C++
 template<class Functor, typename... Args>
-inline bool SR_HTYPES_NS::Thread::Factory::Create (
+bool SR_HTYPES_NS::Thread::Factory::Create (
     Ptr & pThread,
     Functor && fn,
     Args &&... args
@@ -219,7 +219,7 @@ SR_NODISCARD Ptr SR_HTYPES_NS::Thread::Factory::TryGetThisThread ()
 ### function Factory 
 
 ```C++
-inline SR_HTYPES_NS::Thread::Factory::Factory () 
+SR_HTYPES_NS::Thread::Factory::Factory () 
 ```
 
 
@@ -233,23 +233,6 @@ inline SR_HTYPES_NS::Thread::Factory::Factory ()
 
 ```C++
 SR_HTYPES_NS::Thread::Factory::~Factory () override
-```
-
-
-
-
-<hr>## Friends Documentation
-
-
-
-
-
-### friend Factory 
-
-```C++
-class SR_HTYPES_NS::Thread::Factory::Factory (
-    Thread::Factory
-) 
 ```
 
 

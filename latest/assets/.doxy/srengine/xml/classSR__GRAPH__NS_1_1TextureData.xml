@@ -463,6 +463,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1aa1e6f112a8fc24adfb647c5c9ce7cecc" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Create</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a62900dae4128e47dc9a30a8e8d9a7d65" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>DeleterFn</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Get</name></member>
@@ -483,6 +484,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a52a41492029542ee1c6fbf62f8bbe55d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>GetWidth</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a7050c3f0775da8947c3567c27db871c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Load</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a69c96b8dc2257aa21c2b06c73bec9893" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>m_channels</name></member>
@@ -516,7 +518,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1ab962eec7f9221484604ba7948d9afe66" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Super</name></member>
@@ -525,7 +527,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1TextureData_1a9abbdd4368e49cf05a39b34325f82411" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::TextureData</scope><name>~TextureData</name></member>
     </listofallmembers>
   </compounddef>

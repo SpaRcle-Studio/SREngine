@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="44" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="43" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1ae19c563deb541d21473002b1bc92c0bc" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="45" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="44" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a5661f223ba4b3cde7630314cb163c289" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="48" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="47" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a4eb6a8c8b95dde264f0f7f32f599b3b6" prot="private" static="no" mutable="no">
         <type>LookAtAxis</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="50" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="49" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a787ed5e4c843406707313f0e37855127" prot="private" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="52" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="52" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="51" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a43af51bfeacf3e7665f6018b9d9e9619" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="54" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="53" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1a3360decd4955f9e6a3d77fcb2938deb5" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="56" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="55" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1LookAtComponent_1ab770b10f32f8e88ccf3f3d9fd9578584" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="58" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="57" column="17" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -302,7 +302,7 @@
         <argsstring>() const override</argsstring>
         <name>ExecuteInEditMode</name>
         <qualifiedname>SR_UTILS_NS::LookAtComponent::ExecuteInEditMode</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1Component_1a18af2c953acad770e70af93a16882340">ExecuteInEditMode</reimplements>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a51e106ce1c788f4452dbee8ee484a51c">ExecuteInEditMode</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -325,20 +325,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="34" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="34" bodyend="34"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a4d0c321cb836551dba29bc8035c52f68" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_MATH_NS::IVector3</type>
-        <definition>SR_NODISCARD SR_MATH_NS::IVector3 SR_UTILS_NS::LookAtComponent::GetAngle</definition>
-        <argsstring>() const</argsstring>
-        <name>GetAngle</name>
-        <qualifiedname>SR_UTILS_NS::LookAtComponent::GetAngle</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="35" column="43"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a5c539d9cfbad44ee86f0355c9bbc7fcf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
         <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_UTILS_NS::LookAtComponent::GetOffset</definition>
@@ -351,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="36" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="35" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1ad64c79ba2d98e425779d9408ec934df9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -365,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="37" column="43"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="36" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a73ed0656b09848c2b10c188b184808a5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -379,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="38" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="37" column="43" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1affaa5757e4bf01274493ce1452c7767a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1EntityRef" kindref="compound">SR_UTILS_NS::EntityRef</ref> &amp;</type>
@@ -393,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="39" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="38" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="38" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a09fed0a61caff6f19940cc9785f9eb40" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD float_t</type>
@@ -407,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="40" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="40" bodyend="40"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="39" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1LookAtComponent_1a24d1ea86f1bc477a6025fb58d4e0fd0e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD LookAtAxis</type>
@@ -421,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="41" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="41" bodyend="41"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="40" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="40" bodyend="40"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -460,9 +446,6 @@
         <childnode refid="5" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="4">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -476,22 +459,6 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="7" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="5">
         <label>SR_WORLD_NS::Scene</label>
         <link refid="classSR__WORLD__NS_1_1Scene"/>
@@ -499,21 +466,19 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="15" bodyend="60"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Game/LookAtComponent.h" bodystart="15" bodyend="59"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Component_1a0e0d59e3229d2d3739237ac3c125d45d" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>Awake</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ab8965e3b9cb919bc20a09ea01bec975c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>BaseComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>CheckActivity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a399c77c103e176a04ad7781b72c314ee" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>Component</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>Detach</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1ab9fa19e244f446f928013fcfb403943b" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>ExecuteInEditMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>FixedUpdate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GameObjectPtr</name></member>
-      <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a4d0c321cb836551dba29bc8035c52f68" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetAngle</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a24d1ea86f1bc477a6025fb58d4e0fd0e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetAxis</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetBarycenter</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetComponentProperties</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetComponentProperties</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a09fed0a61caff6f19940cc9785f9eb40" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetDelay</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a73ed0656b09848c2b10c188b184808a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetDirection</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetGameObject</name></member>
@@ -529,15 +494,15 @@
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1ad64c79ba2d98e425779d9408ec934df9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>GetUp</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>HasScene</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsActive</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsAttached</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsAwake</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsComponentLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsComponentValid</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsPausedMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsPlayingMode</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsStarted</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>IsUpdatable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>LateUpdate</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a54ee7a0f7495b1c320232e2545d281b9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>LookAtComponent</name></member>
@@ -555,7 +520,6 @@
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a43af51bfeacf3e7665f6018b9d9e9619" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_mirror</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1a787ed5e4c843406707313f0e37855127" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_offset</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_parent</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_properties</name></member>
       <member refid="classSR__UTILS__NS_1_1LookAtComponent_1ae19c563deb541d21473002b1bc92c0bc" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_reached</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_scene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::LookAtComponent</scope><name>m_sceneObject</name></member>

@@ -11,6 +11,7 @@
     <innerclass refid="classSR__NETWORK__NS_1_1Client" prot="public">SR_NETWORK_NS::Client</innerclass>
     <innerclass refid="classSR__NETWORK__NS_1_1Context" prot="public">SR_NETWORK_NS::Context</innerclass>
     <innerclass refid="classSR__NETWORK__NS_1_1DataPackage" prot="public">SR_NETWORK_NS::DataPackage</innerclass>
+    <innerclass refid="classSR__NETWORK__NS_1_1FileDownloader" prot="public">SR_NETWORK_NS::FileDownloader</innerclass>
     <innerclass refid="classSR__NETWORK__NS_1_1ICMPHeader" prot="public">SR_NETWORK_NS::ICMPHeader</innerclass>
     <innerclass refid="classSR__NETWORK__NS_1_1IMessage" prot="public">SR_NETWORK_NS::IMessage</innerclass>
     <innerclass refid="classSR__NETWORK__NS_1_1IMessageData" prot="public">SR_NETWORK_NS::IMessageData</innerclass>

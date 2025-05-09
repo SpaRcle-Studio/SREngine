@@ -110,11 +110,11 @@
       <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1a89015729612481db39f8e82ad948440c" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>m_bitsPerSample</name></member>
       <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1ad2555e7de155fac872201ec81b13538d" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>m_numChannels</name></member>
       <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1af12f8b106d3f6bd208c75ce2539a1ad0" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>m_samplesPerSecond</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>operator=</name></member>
       <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1a5897e99222d91843c5ba9d07925aa4e0" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>WaveDataFormat</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>~NonCopyable</name></member>
       <member refid="classSR__AUDIO__NS_1_1WaveDataFormat_1a76865249b697a55f2a6d2c222aba3c44" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::WaveDataFormat</scope><name>~WaveDataFormat</name></member>
     </listofallmembers>
   </compounddef>

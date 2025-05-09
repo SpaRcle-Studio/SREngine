@@ -232,33 +232,33 @@
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1TestManager_1ab2f12bfd2f46ab1ef72b285b171a563e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddEngineTest</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a28d635404f453c8a84f630873c66847c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>AddTest</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>DestroySingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_CORE_NS::TestManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Instance</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a0b2d7272e354b1ec660416287dc9baea" prot="public" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1aef373849a7f747ed444dff592d671aa9" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_engineTests</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_mutex</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1aac2c17a7fd3baecf7db336eaadbc79f0" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>m_tests</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>operator=</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a96dfca32a385c2beeb855dc6022d6309" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunAll</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a6ae9a713d1579b05b4f011a694adc806" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunEngineTest</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1aaa23d0a0f816d028825c6088dde8a40b" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>RunTest</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>SingletonBase</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a57253f102a53d5f29974dc4427ea0c10" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>Test</name></member>
       <member refid="classSR__CORE__NS_1_1TestManager_1a77548d70a673e543b3ac33404c497a57" prot="private" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>TestFn</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_NS::TestManager</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::TestManager</scope><name>~SingletonBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

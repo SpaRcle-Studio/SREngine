@@ -18,18 +18,16 @@
 #include <Utils/stdInclude.h>
 #include <Utils/Common/Hashes.h>
 
-#include <fmt/format.h>
-
 namespace SR_UTILS_NS {
     class StringHashInfo;
 
-    class SR_DLL_EXPORT StringAtom {
-        SR_INLINE_STATIC std::string DEFAULT = std::string();
+    class SR_COMMON_DLL_API StringAtom {
+        static std::string DEFAULT;
         static StringHashInfo* DEFAULT_STRING_INFO;
     public:
         StringAtom();
 
-        StringAtom(const StringAtom& str) = default;
+        StringAtom(const StringAtom& other) = default;
 
         StringAtom(StringHashInfo* pInfo); 
         StringAtom(const char* str); 
@@ -41,16 +39,15 @@ namespace SR_UTILS_NS {
         operator std::string_view() const noexcept; 
         bool operator==(const StringAtom& rhs) const noexcept;
         bool operator==(const std::string& rhs) const noexcept;
+        bool operator==(const std::string_view& rhs) const noexcept;
         bool operator==(const char* rhs) const noexcept;
         StringAtom& operator=(const std::string& str);
         StringAtom& operator=(const char* str);
-        void operator()(const std::string& str);
-        void operator()(const char* str);
 
         bool operator<(const StringAtom& other) const noexcept;
         bool operator<(uint64_t hash) const noexcept;
 
-        SR_NODISCARD SR_FORCE_INLINE operator uint64_t() const noexcept { return GetHash(); }
+        SR_NODISCARD operator uint64_t() const noexcept;
 
         SR_NODISCARD char operator[](size_t index) const noexcept;
 
@@ -68,10 +65,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const std::string& ToStringRef() const;
         SR_NODISCARD std::string_view ToStringView() const;
 
-        void clear() {
-            Clear();
-        }
-
+        void clear();
         void Clear();
 
     private:

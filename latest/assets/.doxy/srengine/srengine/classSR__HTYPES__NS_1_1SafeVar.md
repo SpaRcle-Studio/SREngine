@@ -70,11 +70,11 @@ Inherits the following classes: NonCopyable
 |  void | [**Unlock**](#function-unlock) () noexcept const<br> |
 |   | [**operator bool**](#function-operator-bool) () noexcept const<br>_NOLINT._  |
 |   | [**operator const T &**](#function-operator-const-t-&) () noexcept const<br> |
-|  SR\_NODISCARD SR\_INLINE bool | [**operator!=**](#function-operator) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
+|  SR\_NODISCARD bool | [**operator!=**](#function-operator) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
 |  T & | [**operator\***](#function-operator_1) () noexcept const<br>_NOLINT._  |
 |  T | [**operator-&gt;**](#function-operator_2) () noexcept const<br> |
 |  [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & | [**operator=**](#function-operator_3) (const T & data) <br> |
-|  SR\_NODISCARD SR\_INLINE bool | [**operator==**](#function-operator_4) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
+|  SR\_NODISCARD bool | [**operator==**](#function-operator_4) (const [**SafeVar**](classSR__HTYPES__NS_1_1SafeVar.md)&lt; T &gt; & right) noexcept const<br> |
 
 
 
@@ -205,7 +205,7 @@ void SR_HTYPES_NS::SafeVar::Do (
 ### function Get [1/2]
 
 ```C++
-inline SR_NODISCARD T & SR_HTYPES_NS::SafeVar::Get () noexcept
+SR_NODISCARD T & SR_HTYPES_NS::SafeVar::Get () noexcept
 ```
 
 
@@ -218,7 +218,7 @@ inline SR_NODISCARD T & SR_HTYPES_NS::SafeVar::Get () noexcept
 ### function Get [2/2]
 
 ```C++
-inline SR_NODISCARD const T & SR_HTYPES_NS::SafeVar::Get () noexcept const
+SR_NODISCARD const T & SR_HTYPES_NS::SafeVar::Get () noexcept const
 ```
 
 
@@ -312,7 +312,7 @@ void SR_HTYPES_NS::SafeVar::Unlock () noexcept const
 
 _NOLINT._ 
 ```C++
-inline SR_HTYPES_NS::SafeVar::operator bool () noexcept const
+SR_HTYPES_NS::SafeVar::operator bool () noexcept const
 ```
 
 
@@ -325,7 +325,7 @@ inline SR_HTYPES_NS::SafeVar::operator bool () noexcept const
 ### function operator const T & 
 
 ```C++
-inline SR_HTYPES_NS::SafeVar::operator const T & () noexcept const
+SR_HTYPES_NS::SafeVar::operator const T & () noexcept const
 ```
 
 
@@ -338,7 +338,7 @@ inline SR_HTYPES_NS::SafeVar::operator const T & () noexcept const
 ### function operator!= 
 
 ```C++
-inline SR_NODISCARD SR_INLINE bool SR_HTYPES_NS::SafeVar::operator!= (
+SR_NODISCARD bool SR_HTYPES_NS::SafeVar::operator!= (
     const SafeVar < T > & right
 ) noexcept const
 ```
@@ -354,7 +354,7 @@ inline SR_NODISCARD SR_INLINE bool SR_HTYPES_NS::SafeVar::operator!= (
 
 _NOLINT._ 
 ```C++
-inline T & SR_HTYPES_NS::SafeVar::operator* () noexcept const
+T & SR_HTYPES_NS::SafeVar::operator* () noexcept const
 ```
 
 
@@ -367,7 +367,7 @@ inline T & SR_HTYPES_NS::SafeVar::operator* () noexcept const
 ### function operator-&gt; 
 
 ```C++
-inline T SR_HTYPES_NS::SafeVar::operator-> () noexcept const
+T SR_HTYPES_NS::SafeVar::operator-> () noexcept const
 ```
 
 
@@ -395,7 +395,7 @@ SafeVar < T > & SR_HTYPES_NS::SafeVar::operator= (
 ### function operator== 
 
 ```C++
-inline SR_NODISCARD SR_INLINE bool SR_HTYPES_NS::SafeVar::operator== (
+SR_NODISCARD bool SR_HTYPES_NS::SafeVar::operator== (
     const SafeVar < T > & right
 ) noexcept const
 ```

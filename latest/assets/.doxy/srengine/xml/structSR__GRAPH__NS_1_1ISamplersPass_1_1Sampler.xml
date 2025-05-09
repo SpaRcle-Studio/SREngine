@@ -251,7 +251,7 @@
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a2c334c19ee5a0fe0483025b3aa033a4e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>fboName</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ac0eb94fde491bdccab0b406c6d3d20b7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>id</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a36a3b486c568dd637bd7664527f648cb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>index</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>NonCopyable</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a0c29d4745694de751ea6d2f404e45a20" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>operator=</name></member>
@@ -259,7 +259,7 @@
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1ab225fe44556cd912294c79b1c014ba50" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>Sampler</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1adf1c9cbcf06c604821544edae7761a09" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>Sampler</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a5594f24a47c3a97a22cad3493f20de48" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>textureId</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>~NonCopyable</name></member>
       <member refid="structSR__GRAPH__NS_1_1ISamplersPass_1_1Sampler_1a58ee8f437655a5fb7f8a11b15941faf4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ISamplersPass::Sampler</scope><name>~Sampler</name></member>
     </listofallmembers>
   </compounddef>

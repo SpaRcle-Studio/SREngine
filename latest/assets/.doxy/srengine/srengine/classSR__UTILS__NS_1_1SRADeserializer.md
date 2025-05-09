@@ -144,6 +144,7 @@ See [SR\_UTILS\_NS::IDeserializer](classSR__UTILS__NS_1_1IDeserializer.md)
 | virtual SR\_NODISCARD bool | [**AllowReAllocPointer**](#function-allowreallocpointer) ([**ReAllocPointerReason**](classSR__UTILS__NS_1_1IDeserializer.md#enum-reallocpointerreason) reason) noexcept override const<br> |
 | virtual SR\_NODISCARD bool | [**IsPreserveMode**](#function-ispreservemode) () noexcept override const<br> |
 | virtual SR\_NODISCARD bool | [**LoadFromFile**](#function-loadfromfile) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) override<br> |
+|  SR\_NODISCARD bool | [**LoadFromNode**](#function-loadfromnode) ([**SR\_UTILS\_NS::SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) && node) <br> |
 | virtual SR\_NODISCARD bool | [**LoadFromString**](#function-loadfromstring) (const std::string & str) override<br> |
 | virtual void | [**ReportError**](#function-reporterror) (const std::string & message) override<br> |
 | virtual SR\_NODISCARD bool | [**ShouldSetDefaults**](#function-shouldsetdefaults-12) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & name) noexcept override const<br> |
@@ -461,6 +462,21 @@ virtual SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::LoadFromFile (
 
 
 Implements [*SR\_UTILS\_NS::IDeserializer::LoadFromFile*](classSR__UTILS__NS_1_1IDeserializer.md#function-loadfromfile)
+
+
+<hr>
+
+
+
+### function LoadFromNode 
+
+```C++
+SR_NODISCARD bool SR_UTILS_NS::SRADeserializer::LoadFromNode (
+    SR_UTILS_NS::SerializationNode && node
+) 
+```
+
+
 
 
 <hr>

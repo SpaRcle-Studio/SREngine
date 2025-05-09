@@ -25,7 +25,7 @@ namespace SR_HTYPES_NS {
 }
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT DebugDraw : public Singleton<DebugDraw> {
+    class DebugDraw : public Singleton<DebugDraw> {
         SR_REGISTER_SINGLETON(DebugDraw)
     public:
         using RemoveCallback = SR_HTYPES_NS::Function<void(uint64_t id)>;
@@ -47,10 +47,10 @@ namespace SR_UTILS_NS {
         };
 
         static constexpr float_t DEFAULT_DURATION = 10.f;
-        static constexpr SR_MATH_NS::FColor DEFAULT_COLOR = SR_MATH_NS::FColor(255, 255, 255, 255);
-        static constexpr SR_MATH_NS::FVector3 DEFAULT_POSITION = SR_MATH_NS::FVector3::Zero();
-        static constexpr SR_MATH_NS::FVector3 DEFAULT_SCALE = SR_MATH_NS::FVector3::One();
-        static constexpr SR_MATH_NS::Quaternion DEFAULT_QUATERNION = SR_MATH_NS::Quaternion::Identity();
+        SR_INLINE static SR_MATH_NS::FColor DEFAULT_COLOR = SR_MATH_NS::FColor(255, 255, 255, 255);
+        SR_INLINE static SR_MATH_NS::FVector3 DEFAULT_POSITION = SR_MATH_NS::FVector3::Zero();
+        SR_INLINE static SR_MATH_NS::FVector3 DEFAULT_SCALE = SR_MATH_NS::FVector3::One();
+        SR_INLINE static SR_MATH_NS::Quaternion DEFAULT_QUATERNION = SR_MATH_NS::Quaternion::Identity();
 
     public:
         void SetCallbacks(void* pUserIdentifier, Callbacks callbacks);

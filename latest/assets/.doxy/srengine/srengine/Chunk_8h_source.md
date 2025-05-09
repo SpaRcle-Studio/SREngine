@@ -35,7 +35,7 @@ namespace SR_WORLD_NS {
     #define SRChunkAllocArgs SR_WORLD_NS::Observer* observer, SR_WORLD_NS::Region* region, const SR_MATH_NS::IVector3& position, const SR_MATH_NS::IVector2& size
     #define SRChunkAllocVArgs observer, region, position, size
 
-    class SR_DLL_EXPORT Chunk : public NonCopyable {
+    class SR_COMMON_DLL_API Chunk : public NonCopyable {
         using ScenePtr = SR_HTYPES_NS::SharedPtr<Scene>;
     protected:
         Chunk(SRChunkAllocArgs);

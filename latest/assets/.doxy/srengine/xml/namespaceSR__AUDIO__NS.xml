@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="14" bodyend="20"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="16" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="16" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="11" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="11" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="13" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SoundFormat_8h_1a22735a81fd5d0bd889561b3d3891ecf4" prot="public" static="no">
         <type>void *</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="12" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="14" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="SoundManager_8h_1ad93e426f89b62b0045fd60bef1aa325a" prot="public" static="no">
         <type>std::string</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="21" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" line="23" column="5" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundManager.h" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="15" column="46" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" line="17" column="46" bodyfile="Engine/Core/libs/Audio/inc/Audio/Types/AudioSource.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" line="11" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" declline="11" declcolumn="5"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" line="13" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" declline="13" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="IWaveDataProvider_8h_1a4bd0793c71902314f2652edb23155e20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>IWaveDataProvider::Ptr</type>
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/ListenerData.h" line="9" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/ListenerData.h" declline="9" declcolumn="5"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/ListenerData.h" line="15" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/ListenerData.h" declline="15" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="PlayParams_8h_1a0ef26970615003fc522eaa82b0f80a3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -669,7 +669,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="15" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" declline="15" declcolumn="5"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="17" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" declline="17" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="PlayParams_8h_1aa5a54ad9500e6699ad25450514979d5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -698,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="59" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" declline="59" declcolumn="5"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="61" column="5" declfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" declline="61" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="SoundFormat_8h_1a5aceca23c8f083039ae4fc7530431deb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SoundFormat</type>
@@ -720,13 +720,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="22" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="22" bodyend="40"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" line="24" column="24" bodyfile="Engine/Core/libs/Audio/inc/Audio/SoundFormat.h" bodystart="24" bodyend="42"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" line="10" column="1"/>
+    <location file="Engine/Core/libs/Audio/inc/Audio/AudioLibrary.h" line="12" column="1"/>
   </compounddef>
 </doxygen>

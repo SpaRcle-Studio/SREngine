@@ -61,6 +61,7 @@
 | ---: | :--- |
 |  bool | [**CreatePath**](#function-createpath) (std::string path, uint32\_t offset=0) <br> |
 |  const char \* | [**FileMapView**](#function-filemapview) (std::string path) <br> |
+|  void | [**ForEachFileInFolder**](#function-foreachfileinfolder) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path, bool recursive, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const [**Path**](classSR__UTILS__NS_1_1Path.md) &)&gt; & func) <br> |
 |  uint64\_t | [**GetFileHash**](#function-getfilehash) (const std::string & path) <br> |
 |  uint64\_t | [**GetFolderHash**](#function-getfolderhash) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & path, uint64\_t deep=SR\_UINT64\_MAX) <br> |
 |  char \* | [**Load**](#function-load) (std::string path) <br> |
@@ -165,6 +166,23 @@ static const char * SR_UTILS_NS::FileSystem::FileMapView (
 
 
 
+### function ForEachFileInFolder 
+
+```C++
+static void SR_UTILS_NS::FileSystem::ForEachFileInFolder (
+    const Path & path,
+    bool recursive,
+    const SR_HTYPES_NS::Function < void(const Path &)> & func
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GetFileHash 
 
 ```C++
@@ -229,7 +247,7 @@ static std::string SR_UTILS_NS::FileSystem::NormalizePath (
 ### function ReadAllLines 
 
 ```C++
-static inline std::vector< std::string > SR_UTILS_NS::FileSystem::ReadAllLines (
+static std::vector< std::string > SR_UTILS_NS::FileSystem::ReadAllLines (
     const SR_UTILS_NS::Path & path
 ) 
 ```

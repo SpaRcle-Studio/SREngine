@@ -362,16 +362,16 @@
     <location file="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/SRSL/Lexer.h" bodystart="11" bodyend="44"/>
     <listofallmembers>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1af6379e2e449c97ed6e68c77a96f2fc3e" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Clear</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>DestroySingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>GetSingletonName</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a8b5863abda5eeb45c0b4fd5df20177e8" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>InBounds</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a4c3aa9c74b2c5c9fae9fffe36453b600" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Lexems</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>LockSingleton</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a420fccf7af38228a667791a2c828fdff" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_fileIndex</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a3adb019b79979fe640609ea11f20f494" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_lexems</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ae189788bf80fcf95b39f5c393397e2f7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_line</name></member>
@@ -379,7 +379,7 @@
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ad4a240666db2777c21665897c22fdc9e" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_offset</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1aa18b34290f66ace00ed00cf406d31166" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_position</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1aec5de93718dd73e0b0fccc90244b66d6" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>m_source</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>operator=</name></member>
@@ -389,16 +389,16 @@
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a02a3c2cef4e24dfdacc68a283d287b78" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>ProcessedLexem</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a726d7f35d5fb89eb45193ac593507113" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>ProcessIdentifier</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1abbdb83cbf43ef13d8d67d86314673623" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>ProcessLexem</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>SingletonBase</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a2f29e0ba2647043b9c7c886f66109423" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>SkipComment</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1a7711e10470297fa17a363b7e2b5953c5" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>SkipSpaces</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ae817f422e0289f05c4603558929845e2" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>SourceCode</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>~SingletonBase</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLLexer_1ac67c54da7b3bf69da39f451d8e78bee0" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLLexer</scope><name>~SRSLLexer</name></member>
     </listofallmembers>
   </compounddef>

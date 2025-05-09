@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 
 
-Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATIONS__NS_1_1Bone.md),  [SR\_GRAPH\_NS::BaseMaterial](classSR__GRAPH__NS_1_1BaseMaterial.md),  [SR\_GRAPH\_NS::MaterialData](classSR__GRAPH__NS_1_1MaterialData.md),  [SR\_GRAPH\_NS::MaterialShaderData](structSR__GRAPH__NS_1_1MaterialShaderData.md),  [SR\_GRAPH\_NS::MaterialShaderProperty](structSR__GRAPH__NS_1_1MaterialShaderProperty.md),  [SR\_PTYPES\_NS::CollisionShape](classSR__PTYPES__NS_1_1CollisionShape.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRefUtils::PathItem](structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem.md),  [SR\_UTILS\_NS::Tests::ReflectionTestComponentDataBase](structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentDataBase.md),  [SR\_UTILS\_NS::Tests::ReflectionTestComponentLogicBase](classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase.md),  [SR\_UTILS\_NS::Transform](classSR__UTILS__NS_1_1Transform.md),  [SR\_WORLD\_NS::SceneLogic](classSR__WORLD__NS_1_1SceneLogic.md)
+Inherited by the following classes: [SR\_ANIMATIONS\_NS::Bone](structSR__ANIMATIONS__NS_1_1Bone.md),  [SR\_GRAPH\_NS::BaseMaterial](classSR__GRAPH__NS_1_1BaseMaterial.md),  [SR\_GRAPH\_NS::MaterialData](classSR__GRAPH__NS_1_1MaterialData.md),  [SR\_GRAPH\_NS::MaterialShaderData](structSR__GRAPH__NS_1_1MaterialShaderData.md),  [SR\_GRAPH\_NS::MaterialShaderProperty](structSR__GRAPH__NS_1_1MaterialShaderProperty.md),  [SR\_PTYPES\_NS::CollisionShape](classSR__PTYPES__NS_1_1CollisionShape.md),  [SR\_SCRIPTING\_NS::CppBehaviour](classSR__SCRIPTING__NS_1_1CppBehaviour.md),  [SR\_SCRIPTING\_NS::CppScriptModuleInfo](structSR__SCRIPTING__NS_1_1CppScriptModuleInfo.md),  [SR\_UTILS\_NS::EntityRef](classSR__UTILS__NS_1_1EntityRef.md),  [SR\_UTILS\_NS::EntityRefUtils::PathItem](structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem.md),  [SR\_UTILS\_NS::Tests::ReflectionTestComponentDataBase](structSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentDataBase.md),  [SR\_UTILS\_NS::Tests::ReflectionTestComponentLogicBase](classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase.md),  [SR\_UTILS\_NS::Transform](classSR__UTILS__NS_1_1Transform.md),  [SR\_WORLD\_NS::SceneLogic](classSR__WORLD__NS_1_1SceneLogic.md)
 
 
 
@@ -97,7 +97,6 @@ See [SR\_UTILS\_NS::SRClass](classSR__UTILS__NS_1_1SRClass.md)
 | Type | Name |
 | ---: | :--- |
 | virtual SR\_NODISCARD const [**SR\_UTILS\_NS::SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetMeta**](classSR__UTILS__NS_1_1SRClass.md#function-getmeta) () noexcept const = 0<br> |
-| virtual void | [**InitializeClass**](classSR__UTILS__NS_1_1SRClass.md#function-initializeclass) () noexcept<br> |
 | virtual  | [**~SRClass**](classSR__UTILS__NS_1_1SRClass.md#function-srclass) () = default<br> |
 
 

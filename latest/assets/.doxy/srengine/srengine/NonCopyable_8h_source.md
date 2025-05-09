@@ -18,10 +18,10 @@
 #include <Utils/stdInclude.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT NonCopyable {
+    class SR_COMMON_DLL_API NonCopyable {
     protected:
-        constexpr NonCopyable() = default;
-        virtual ~NonCopyable() = default;
+        NonCopyable();
+        virtual ~NonCopyable();
 
     public:
         NonCopyable(const NonCopyable&) = delete;
@@ -29,10 +29,10 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT NonMovable {
+    class SR_COMMON_DLL_API NonMovable {
     protected:
-        constexpr NonMovable() = default;
-        virtual ~NonMovable() = default;
+        NonMovable();
+        virtual ~NonMovable();
 
     public:
         NonMovable(NonMovable&&) = delete;
@@ -40,13 +40,13 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT ICloneable {
+    class SR_COMMON_DLL_API ICloneable {
     protected:
-        constexpr ICloneable() = default;
-        virtual void OnCloned() { }
+        ICloneable();
+        virtual void OnCloned();
 
     public:
-        virtual ~ICloneable() = default;
+        virtual ~ICloneable();
         SR_NODISCARD virtual ICloneable* Clone() const = 0;
 
     };

@@ -2796,6 +2796,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ac8b7ed3a20ed6d9f300efe0b6b242596" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ClearColors</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3fd9d3969b83c1b508038b9fb3bab779" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ClearDepthBuffer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0ec232f2d1107da2ae71a79a3ae338f6" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>ClearFrameBuffersQueue</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a694487ecd06628b6ab9fb862a70f5ef2" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Destroy</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1aa4c43b8c64e45dd323004add80803343" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>DestroyOverlay</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a3b31c5d7b5267cccbf8d19bd3d8caec7" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Draw</name></member>
@@ -2858,6 +2859,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ad9efb5541bc7b8807cf7ba3f99e29ed8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetVendor</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a51941df6ae1f07e74f1fdd9a99f31851" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetVersion</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a1be1c9aa13fe7ea42f49e2255079a7ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>GetWindow</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a338ba61680c6bbb6c2825d1a97587267" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Init</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a9c1e851dd9aa1d7e1b765e91cc3027d8" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>InitOverlay</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1ae0ca88d622eb9385c8d3495c7a6a3e46" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>IsDirty</name></member>
@@ -2942,7 +2944,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1abdfa547f1e9dba855ebb3b2baf48c326" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>Super</name></member>
@@ -2959,7 +2961,7 @@
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1a0b7d68be8cf3c74bd1b4ee64daf4222d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>WindowPtr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Pipeline_1afdad4a4a7a09b3b1d7cd3bf39af69771" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~Pipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Pipeline</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

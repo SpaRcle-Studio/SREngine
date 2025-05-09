@@ -447,62 +447,57 @@ struct ObjectDataAccessor<std::map<T, U, Compare, Allocator>> {
 
 template<typename T, typename Less, typename Allocator>
 struct ObjectDataAccessor<std::set<T, Less, Allocator>> {
+private:
+    SR_CONSTEXPR static SerializationId itemId = SerializationId::Create("i");
+    SR_CONSTEXPR static SerializationId dataId = SerializationId::Create("d");
+
+public:
     using SetType = std::set<T, Less, Allocator>;
     using ValueType = typename SetType::value_type;
 
     static void Save(ISerializer& serializer, const SetType& value, const SerializationId& id) {
-        serializer.BeginArray(value.size(), id);
+        uint64_t count = 0;
 
         for (auto&& item : value) {
-            SR_CONSTEXPR SerializationId itemId = SerializationId::Create("item");
-            Serialization::Save(serializer, item.second, itemId);
+            if (SR_UTILS_NS::Serialization::CanBeSaved(item)) {
+                ++count;
+            }
+        }
+
+        serializer.BeginArray(count, id);
+
+        for (auto&& item : value) {
+            if (!SR_UTILS_NS::Serialization::CanBeSaved(item)) {
+                continue;
+            }
+            serializer.BeginItem(itemId);
+            Serialization::Save(serializer, item, dataId);
+            serializer.EndItem();
         }
 
         serializer.EndArray();
     }
 
-    template<typename SetT>
-    static void Load(IDeserializer& deserializer, SetT& value, const SerializationId& id) {
+    static void Load(IDeserializer& deserializer, SetType& value, const SerializationId& id) {
         const uint64_t size = deserializer.BeginArray(id);
-
-        if (!deserializer.IsPreserveMode()) {
-            value.clear();
-        }
-        else if (deserializer.ShouldSetDefaults()) {
-            for (auto it = value.begin(); it != value.end();) {
-                if (deserializer.ShouldSetDefaults(SerializationId(it->first.c_str(), 0))) {
-                    it = value.erase(it);
-                }
-                else {
-                    ++it;
-                }
-            }
+        if (size == 0) {
+            return;
         }
 
-        if constexpr (SR_UTILS_NS::IsDetectedV<Details::ReserveMethodT, SetT>) {
-            value.reserve(size + value.size());
+        value.clear();
+
+        uint64_t index = 0;
+
+        while (deserializer.BeginItem(itemId, index)) {
+            auto&& item = T();
+            Serialization::Load(deserializer, item, dataId);
+            if (SR_UTILS_NS::Serialization::IsValidValue(item)) {
+                value.insert(std::move(item));
+            }
+
+            deserializer.EndItem();
+            index++;
         }
-
-        /*while (deserializer.NextItem(id)) {
-            if (deserializer.IsPreserveMode()) {
-                deserializer.BeginObject(id);
-                T item = {};
-                Serialization::Load(deserializer, item, SerializationId::Create("item"));
-                if (IsValidValue(item)) {
-                    value.insert(std::move(item));
-                }
-                deserializer.EndObject();
-            }
-            else {
-                T item;
-
-                Serialization::Load(deserializer, item, id);
-
-                if (IsValidValue(item)) {
-                    value.insert(std::move(item));
-                }
-            }
-        }*/
 
         deserializer.EndArray();
     }

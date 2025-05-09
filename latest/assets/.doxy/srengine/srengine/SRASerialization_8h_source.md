@@ -50,6 +50,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD bool LoadFromFile(const SR_UTILS_NS::Path& path) override;
         SR_NODISCARD bool LoadFromString(const std::string& str) override;
+        SR_NODISCARD bool LoadFromNode(SR_UTILS_NS::SerializationNode&& node);
 
         SR_NODISCARD bool ShouldSetDefaults(const SerializationId& name) const noexcept override { return true; }
         SR_NODISCARD bool ShouldSetDefaults() const noexcept override { return true; }

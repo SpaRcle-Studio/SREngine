@@ -78,6 +78,6 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Engine.h" line="37" column="1"/>
+    <location file="Engine/Core/inc/Core/Engine.h" line="39" column="1"/>
   </compounddef>
 </doxygen>

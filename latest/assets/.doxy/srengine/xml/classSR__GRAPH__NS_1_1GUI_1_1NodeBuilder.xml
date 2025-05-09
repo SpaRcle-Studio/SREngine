@@ -468,14 +468,14 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a758ebc09b55ab171622f269dee3f9b1d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_texture</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a92c3c2944e4be77744de7586e451f4e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Middle</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6be6b2164722be93d90da835424741ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NodeBuilder</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7d64622abb2b73fe86b8ba2ecfae0ae4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Output</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa357267b8680c8c86c970b89d3bc45f9" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>SetStage</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a30a6885e4518d5f244968aa12027a167" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Stage</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a47223e89216a464dd784684d8a3e9c72" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>~NodeBuilder</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

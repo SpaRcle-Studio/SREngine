@@ -22,16 +22,9 @@
 #include <glm/gtx/matrix_decompose.hpp>
 
 namespace SR_MATH_NS {
-    class SR_DLL_EXPORT Matrix4x4 {
+    class SR_COMMON_DLL_API Matrix4x4 {
         SR_INLINE_STATIC constexpr glm::mat4 GLM_IDENTITY_MAT4X4 = glm::mat4(1); 
     public:
-        static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0) {
-            auto matrix = glm::rotate(glm::mat4(1), (float_t)pitch, { 1, 0, 0 });
-            matrix = glm::rotate(matrix,            (float_t)yaw,   { 0, 1, 0 });
-            matrix = glm::rotate(matrix,            (float_t)roll,  { 0, 0, 1 });
-            return Matrix4x4(glm::translate(matrix, { 0, 0, 0 }));
-        }
-
         union {
             SR_MATH_NS::Vector4<float_t> value[4];
             glm::mat4 self;
@@ -47,607 +40,95 @@ namespace SR_MATH_NS {
             };
         };
 
-        constexpr Matrix4x4() noexcept
-            : self(GLM_IDENTITY_MAT4X4)
-        { }
-
-        constexpr Matrix4x4(FVector4 rows[4]) noexcept { 
-            value[0] = rows[0];
-            value[1] = rows[1];
-            value[2] = rows[2];
-            value[3] = rows[3];
-        }
-
-        constexpr Matrix4x4(const Unit& scalar) noexcept 
-            : self(glm::mat4(static_cast<float_t>(scalar)))
-        { }
-
-        constexpr Matrix4x4(const glm::mat4& mat) noexcept 
-            : self(mat)
-        { }
-
-        Matrix4x4(glm::mat4&& mat) noexcept 
-            : self(mat)
-        { }
-
+        Matrix4x4() noexcept;
+        Matrix4x4(FVector4 rows[4]) noexcept; 
+        Matrix4x4(const Unit& scalar) noexcept; 
+        Matrix4x4(const glm::mat4& mat) noexcept; 
+        Matrix4x4(glm::mat4&& mat) noexcept; 
         Matrix4x4(const FVector3& translate, const Quaternion& rotation) noexcept;
         Matrix4x4(const FVector3& translate, const FVector3& scale) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept;
         Matrix4x4(const Quaternion& rotation, const FVector3& scale) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) noexcept;
 
-        static constexpr Matrix4x4 Identity() {
-            return Matrix4x4(1); 
-        }
-
-        static Matrix4x4 RotationYawPitchRoll(const FVector3& angles) {
-            return Matrix4x4(0.f, angles.ToQuat(), 1.f); 
-        }
-
-        static Matrix4x4 Perspective(float_t FOV, float_t aspect, float_t nearValue, float_t farValue) {
-            return Matrix4x4(glm::perspective(FOV, aspect, nearValue, farValue)); 
-        }
-
-        static Matrix4x4 FromEulers(const FVector3& eulers) {
-            return RotationYawPitchRoll(eulers.Radians());
-        }
-
-        static Matrix4x4 Ortho(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) {
-            Matrix4x4 Result(1);
-            Result[0][0] = static_cast<Unit>(2) / (right - left);
-            Result[1][1] = static_cast<Unit>(2) / (top - bottom);
-            Result[3][0] = - (right + left) / (right - left);
-            Result[3][1] = - (top + bottom) / (top - bottom);
-
-        #if GLM_DEPTH_CLIP_SPACE == GLM_DEPTH_ZERO_TO_ONE
-            Result[2][2] = - static_cast<Unit>(1) / (zFar - zNear);
-            Result[3][2] = - zNear / (zFar - zNear);
-        #else
-            Result[2][2] = - static_cast<T>(2) / (zFar - zNear);
-            Result[3][2] = - (zFar + zNear) / (zFar - zNear);
-        #endif
-
-            return Result;
-        }
-
-        static Matrix4x4 CreateTRS(const SR_MATH_NS::FVector3& translation, const SR_MATH_NS::Quaternion& rotation, const SR_MATH_NS::FVector3& scale) {
-            return Matrix4x4(translation, rotation, scale);
-        }
-
-        static Matrix4x4 LookAt(const SR_MATH_NS::FVector3& eye, const SR_MATH_NS::FVector3& center, const SR_MATH_NS::FVector3& up) {
-            return Matrix4x4(glm::lookAtRH(eye.ToGLM(), center.ToGLM(), up.ToGLM()));
-        }
-
-        SR_DEPRECATED_EX("FromQuaternion") static Matrix4x4 FromEulers(const Quaternion& quaternion) {
-            return Matrix4x4(0.f, quaternion, 1.f);
-        }
-
-        static Matrix4x4 FromQuaternion(const Quaternion& quaternion) {
-            return Matrix4x4(0.f, quaternion, 1.f);
-        }
-
-        static Matrix4x4 RotationAxis(const SR_MATH_NS::FVector4& axis, Unit angle) {
-            const Unit length2 = axis.SqrMagnitude();
-            if (length2 < FLT_EPSILON) {
-                return Matrix4x4::Identity();
-            }
-
-            const SR_MATH_NS::FVector4 n = axis * (1.f / sqrtf(length2));
-            const Unit s = sinf(angle);
-            const Unit c = cosf(angle);
-            const Unit k = 1.f - c;
-
-            const Unit xx = n.x * n.x * k + c;
-            const Unit yy = n.y * n.y * k + c;
-            const Unit zz = n.z * n.z * k + c;
-            const Unit xy = n.x * n.y * k;
-            const Unit yz = n.y * n.z * k;
-            const Unit zx = n.z * n.x * k;
-            const Unit xs = n.x * s;
-            const Unit ys = n.y * s;
-            const Unit zs = n.z * s;
-
-            Matrix4x4 m;
-
-            m.m[0][0] = xx;
-            m.m[0][1] = xy + zs;
-            m.m[0][2] = zx - ys;
-            m.m[0][3] = 0.f;
-            m.m[1][0] = xy - zs;
-            m.m[1][1] = yy;
-            m.m[1][2] = yz + xs;
-            m.m[1][3] = 0.f;
-            m.m[2][0] = zx + ys;
-            m.m[2][1] = yz - xs;
-            m.m[2][2] = zz;
-            m.m[2][3] = 0.f;
-            m.m[3][0] = 0.f;
-            m.m[3][1] = 0.f;
-            m.m[3][2] = 0.f;
-            m.m[3][3] = 1.f;
-
-            return m;
-        }
-
-        static Matrix4x4 RotationAxis(const SR_MATH_NS::FVector3& axis, Unit angle) {
-            const Unit length2 = axis.SqrMagnitude();
-            if (length2 < FLT_EPSILON) {
-                return Matrix4x4::Identity();
-            }
-
-            const SR_MATH_NS::FVector3 n = axis * (1.f / sqrtf(length2));
-            const Unit s = sinf(angle);
-            const Unit c = cosf(angle);
-            const Unit k = 1.f - c;
-
-            const Unit xx = n.x * n.x * k + c;
-            const Unit yy = n.y * n.y * k + c;
-            const Unit zz = n.z * n.z * k + c;
-            const Unit xy = n.x * n.y * k;
-            const Unit yz = n.y * n.z * k;
-            const Unit zx = n.z * n.x * k;
-            const Unit xs = n.x * s;
-            const Unit ys = n.y * s;
-            const Unit zs = n.z * s;
-
-            Matrix4x4 m;
-
-            m.m[0][0] = xx;
-            m.m[0][1] = xy + zs;
-            m.m[0][2] = zx - ys;
-            m.m[0][3] = 0.f;
-            m.m[1][0] = xy - zs;
-            m.m[1][1] = yy;
-            m.m[1][2] = yz + xs;
-            m.m[1][3] = 0.f;
-            m.m[2][0] = zx + ys;
-            m.m[2][1] = yz - xs;
-            m.m[2][2] = zz;
-            m.m[2][3] = 0.f;
-            m.m[3][0] = 0.f;
-            m.m[3][1] = 0.f;
-            m.m[3][2] = 0.f;
-            m.m[3][3] = 1.f;
-
-            return m;
-        }
-
-        static Matrix4x4 FromScale(const FVector3& scale) {
-            return Matrix4x4(glm::scale(glm::mat4x4(1), scale.ToGLM()));
-        }
-
-        static Matrix4x4 FromTranslate(const FVector3& translation) {
-            return Matrix4x4(translation, FVector3::Zero(), FVector3::One());
-        }
-
-        SR_NODISCARD Matrix4x4 Inverse() const {
-            return Matrix4x4(glm::inverse(self));
-        }
-
-        SR_NODISCARD Matrix4x4 RotateAxis(const FVector3& axis, const double& angle) const {
-            return Matrix4x4(glm::rotate(self, glm::radians((float)angle), axis.ToGLM()));
-        }
-
-        SR_NODISCARD Matrix4x4 Rotate(const FVector3& angle) const {
-            return Matrix4x4(self * mat4_cast(angle.ToQuat().ToGLM()));
-        }
-
-        SR_NODISCARD Matrix4x4 Rotate(const SR_MATH_NS::Quaternion& q) const {
-            return Matrix4x4(*this * q.ToMat4x4());
-        }
-
-        SR_NODISCARD Matrix4x4 OrthogonalNormalize() const {
-            Matrix4x4 copy = *this;
-            copy.v.right = copy.v.right.Normalize();
-            copy.v.up = copy.v.up.Normalize();
-            copy.v.dir = copy.v.dir.Normalize();
-            return copy;
-        }
-
-        SR_NODISCARD const glm::mat4& ToGLM() const {
-            return self;
-        }
-
-        SR_NODISCARD Matrix4x4 Translate(const FVector3& vec3) const {
-            return Matrix4x4(glm::translate(self, vec3.ToGLM()));
-        }
-
-        SR_NODISCARD FVector4 GetAxis(Axis axis) const {
-            switch (axis) {
-                case Axis::X: return value[0];
-                case Axis::Y: return value[1];
-                case Axis::Z: return value[2];
-                default:
-                    SRHalt("Wrong axis!");
-                    return SR_MATH_NS::FVector4();
-            }
-        }
-
-        SR_NODISCARD FVector3 GetTranslate() const {
-            return value[3].XYZ();
-        }
-
-        SR_NODISCARD FVector3 GetScale() const {
-            SR_MATH_NS::FVector3 scale;
-            scale.x = value[0].XYZ().Length();
-            scale.y = value[1].XYZ().Length();
-            scale.z = value[2].XYZ().Length();
-            return scale;
-        }
-
-        SR_NODISCARD bool IsFinite() const {
-            return value[0].IsFinite() && value[1].IsFinite() && value[2].IsFinite() && value[3].IsFinite();
-        }
-
-        bool Decompose(FVector3& translation, Quaternion& quaternion, FVector3& scale) const {
-            translation = glm::vec3(self[3]);
-
-            scale[0] = glm::length(glm::vec3(self[0]));
-            scale[1] = glm::length(glm::vec3(self[1]));
-            scale[2] = glm::length(glm::vec3(self[2]));
-
-            const glm::mat3 rotMtx(
-                    glm::vec3(self[0]) / static_cast<float>(scale[0]),
-                    glm::vec3(self[1]) / static_cast<float>(scale[1]),
-                    glm::vec3(self[2]) / static_cast<float>(scale[2]));
-
-            quaternion = glm::quat_cast(rotMtx);
-
-            return true;
-        }
-
-        bool Decompose(FVector3& translation, Quaternion& quaternion) const {
-            translation = glm::vec3(self[3]);
-
-            auto&& scaleX = glm::length(glm::vec3(self[0]));
-            auto&& scaleY = glm::length(glm::vec3(self[1]));
-            auto&& scaleZ = glm::length(glm::vec3(self[2]));
-
-            const glm::mat3 rotMtx(
-                    glm::vec3(self[0]) / static_cast<float_t>(scaleX),
-                    glm::vec3(self[1]) / static_cast<float_t>(scaleY),
-                    glm::vec3(self[2]) / static_cast<float_t>(scaleZ)
-            );
-
-            quaternion = glm::quat_cast(rotMtx);
-
-            return true;
-        }
-
-        bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale) const {
-            translation = glm::vec3(self[3]);
-
-            scale[0] = glm::length(glm::vec3(self[0]));
-            scale[1] = glm::length(glm::vec3(self[1]));
-            scale[2] = glm::length(glm::vec3(self[2]));
-
-            const glm::mat3 rotMtx(
-                    glm::vec3(self[0]) / static_cast<float>(scale[0]),
-                    glm::vec3(self[1]) / static_cast<float>(scale[1]),
-                    glm::vec3(self[2]) / static_cast<float>(scale[2]));
-
-            eulers = glm::eulerAngles(glm::normalize(glm::quat_cast(rotMtx)));
-            eulers = eulers.Degrees();
-
-            return true;
-        }
-
-        bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale, FVector3& skew) const {
-            //glm::vec3 _scale;
-            //glm::quat _rotation;
-            //glm::vec3 _translation;
-
-            //glm::vec3 _skew;
-            //glm::vec4 _perspective;
-
-            //if (glm::decompose(self, _scale, _rotation, _translation, _skew, _perspective)) {
-            //    translation = _translation;
-            //    eulers = Quaternion(_rotation).EulerAngle();
-            //    scale = scale;
-            //    skew = _skew;
-            //    return true;
-            //}
-
-            // return false
-
-            translation = glm::vec3(self[3]);
-
-            scale[0] = glm::length(glm::vec3(self[0]));
-            scale[1] = glm::length(glm::vec3(self[1]));
-            scale[2] = glm::length(glm::vec3(self[2]));
-
-            const glm::mat3 rotMtx(
-                    glm::vec3(self[0]) / static_cast<float>(scale[0]),
-                    glm::vec3(self[1]) / static_cast<float>(scale[1]),
-                    glm::vec3(self[2]) / static_cast<float>(scale[2]));
-
-            eulers = glm::eulerAngles(glm::normalize(glm::quat_cast(rotMtx)));
-            eulers = eulers.Degrees();
-
-            return true;
-        }
-
-        bool Decompose(FVector3& translation, Quaternion& rotation, FVector3& scale, FVector3& skew) const {
-            glm::vec3 _scale;
-            glm::quat _rotation;
-            glm::vec3 _translation;
-
-            glm::vec3 _skew;
-            glm::vec4 _perspective;
-
-            if (glm::decompose(self, _scale, _rotation, _translation, _skew, _perspective)) {
-                translation = _translation;
-                rotation = _rotation;
-                scale = _scale;
-                skew = _skew;
-                return true;
-            }
-
-            return false;
-        }
-
-        SR_NODISCARD FVector4 TransformPoint(const FVector3& point) const {
-            FVector4 out;
-            out.x = point.x * m00 + point.y * m10 + point.z * m20 + m30;
-            out.y = point.x * m01 + point.y * m11 + point.z * m21 + m31;
-            out.z = point.x * m02 + point.y * m12 + point.z * m22 + m32;
-            out.w = point.x * m03 + point.y * m13 + point.z * m23 + m33;
-            return out;
-        }
-
-        SR_NODISCARD FVector4 TransformVector(const FVector3& point) const {
-            FVector4 out;
-            out.x = point.x * m00 + point.y * m10 + point.z * m20;
-            out.y = point.x * m01 + point.y * m11 + point.z * m21;
-            out.z = point.x * m02 + point.y * m12 + point.z * m22;
-            out.w = point.x * m03 + point.y * m13 + point.z * m23;
-            return out;
-        }
-
-        SR_NODISCARD FVector4 TransformVector(const FVector4& point) const {
-            FVector4 out;
-            out.x = point.x * m00 + point.y * m10 + point.z * m20 + point.w * m30;
-            out.y = point.x * m01 + point.y * m11 + point.z * m21 + point.w * m31;
-            out.z = point.x * m02 + point.y * m12 + point.z * m22 + point.w * m32;
-            out.w = point.x * m03 + point.y * m13 + point.z * m23 + point.w * m33;
-            return out;
-        }
-
-        SR_NODISCARD SR_MATH_NS::Unit GetSegmentLengthClipSpace(
-            const SR_MATH_NS::FVector3& start,
-            const SR_MATH_NS::FVector3& end,
-            SR_MATH_NS::Unit displayRatio
-        ) const {
-            auto&& startOfSegment = TransformPoint(start);
-            if (fabsf(startOfSegment.w) > SR_FLT_EPSILON) {
-                startOfSegment *= 1.f / startOfSegment.w;
-            }
-
-            auto&& endOfSegment = TransformPoint(end);
-            if (fabsf(endOfSegment.w) > SR_FLT_EPSILON) {
-                endOfSegment *= 1.f / endOfSegment.w;
-            }
-
-            auto&& clipSpaceAxis = (endOfSegment - startOfSegment).XY();
-
-            if (displayRatio < 1.0) {
-                clipSpaceAxis.x *= displayRatio;
-            }
-            else {
-                clipSpaceAxis.y /= displayRatio;
-            }
-
-            const SR_MATH_NS::Unit segmentLengthInClipSpace = sqrtf(clipSpaceAxis.x * clipSpaceAxis.x + clipSpaceAxis.y * clipSpaceAxis.y);
-            return segmentLengthInClipSpace;
-        }
-
-        SR_NODISCARD Quaternion GetQuat() const {
-            auto&& upperLeft = glm::mat3(self);  // Верхний левый 3x3 подматрица матрицы
-
-            // Нормализация столбцов матрицы (избегаем влияния масштабирования)
-            glm::vec3 col1 = glm::normalize(upperLeft[0]);
-            glm::vec3 col2 = glm::normalize(upperLeft[1]);
-            glm::vec3 col3 = glm::normalize(upperLeft[2]);
-
-            // Создание кватерниона из верхней левой 3x3 подматрицы
-            return glm::quat_cast(glm::mat3(col1, col2, col3));
-        }
-
-        SR_NODISCARD FVector3 GetEulers() const {
-            return GetQuat().EulerAngle();
-        }
-
-        SR_FORCE_INLINE SR_CONSTEXPR const SR_MATH_NS::FVector4& operator[](int32_t row) const {
-            return value[row];
-        }
-
-        SR_FORCE_INLINE SR_CONSTEXPR SR_MATH_NS::FVector4& operator[](int32_t row) {
-            return value[row];
-        }
-
+        static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0);
+        static Matrix4x4 Identity();
+        static Matrix4x4 RotationYawPitchRoll(const FVector3& angles);
+        static Matrix4x4 Perspective(float_t FOV, float_t aspect, float_t nearValue, float_t farValue);
+        static Matrix4x4 FromEulers(const FVector3& eulers);
+        static Matrix4x4 Ortho(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar);
+        static Matrix4x4 CreateTRS(const SR_MATH_NS::FVector3& translation, const SR_MATH_NS::Quaternion& rotation, const SR_MATH_NS::FVector3& scale);
+        static Matrix4x4 LookAt(const SR_MATH_NS::FVector3& eye, const SR_MATH_NS::FVector3& center, const SR_MATH_NS::FVector3& up);
+        SR_DEPRECATED_EX("FromQuaternion") static Matrix4x4 FromEulers(const Quaternion& quaternion);
+        static Matrix4x4 FromQuaternion(const Quaternion& quaternion);
+        static Matrix4x4 RotationAxis(const SR_MATH_NS::FVector4& axis, Unit angle);
+        static Matrix4x4 RotationAxis(const SR_MATH_NS::FVector3& axis, Unit angle);
+        static Matrix4x4 FromScale(const FVector3& scale);
+        static Matrix4x4 FromTranslate(const FVector3& translation);
+
+        SR_NODISCARD Matrix4x4 Inverse() const;
+        SR_NODISCARD Matrix4x4 RotateAxis(const FVector3& axis, const double& angle) const;
+        SR_NODISCARD Matrix4x4 Rotate(const FVector3& angle) const;
+        SR_NODISCARD Matrix4x4 Rotate(const SR_MATH_NS::Quaternion& q) const;
+        SR_NODISCARD Matrix4x4 OrthogonalNormalize() const;
+        SR_NODISCARD const glm::mat4& ToGLM() const;
+        SR_NODISCARD Matrix4x4 Translate(const FVector3& vec3) const;
+        SR_NODISCARD FVector4 GetAxis(Axis axis) const;
+        SR_NODISCARD FVector3 GetTranslate() const;
+        SR_NODISCARD FVector3 GetScale() const;
+        SR_NODISCARD bool IsFinite() const;
+
+        bool Decompose(FVector3& translation, Quaternion& quaternion, FVector3& scale) const;
+        bool Decompose(FVector3& translation, Quaternion& quaternion) const;
+        bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale) const;
+        bool Decompose(FVector3& translation, FVector3& eulers, FVector3& scale, FVector3& skew) const;
+        bool Decompose(FVector3& translation, Quaternion& rotation, FVector3& scale, FVector3& skew) const;
+
+        SR_NODISCARD FVector4 TransformPoint(const FVector3& point) const;
+        SR_NODISCARD FVector4 TransformVector(const FVector3& point) const;
+        SR_NODISCARD FVector4 TransformVector(const FVector4& point) const;
+        SR_NODISCARD SR_MATH_NS::Unit GetSegmentLengthClipSpace(const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, SR_MATH_NS::Unit displayRatio) const;
+        SR_NODISCARD Quaternion GetQuat() const;
+        SR_NODISCARD FVector3 GetEulers() const;
+
+        const SR_MATH_NS::FVector4& operator[](int32_t row) const;
+        SR_MATH_NS::FVector4& operator[](int32_t row);
         Matrix4x4 operator*(const Matrix4x4& mat) const;
-        void operator*=(const Matrix4x4& right) {
-            *this = *this * right;
-        }
+        void operator*=(const Matrix4x4& right);
+        Matrix4x4 operator+(const Matrix4x4& mat) const;
+        void operator+=(const Matrix4x4& right);
+        Matrix4x4 operator*(const Unit& scalar) const;
+        void operator*=(const Unit& scalar);
+        template<typename U> Vector4<U> operator*(const Vector4<U>& vector4) const;
+        template<typename U> void operator*=(const Vector4<U>& vector4);
+        Matrix4x4 operator/(Matrix4x4 mat);
+        Matrix4x4 operator+(Matrix4x4 mat);
+        Matrix4x4 operator-(Matrix4x4 mat);
 
-        Matrix4x4 operator+(const Matrix4x4& mat) const {
-            return Matrix4x4(self + mat.self);
-        }
-        void operator+=(const Matrix4x4& right) {
-            *this = *this + right;
-        }
-
-        Matrix4x4 operator*(const Unit& scalar) const {
-            return Matrix4x4(self * static_cast<float>(scalar));
-        }
-        void operator*=(const Unit& scalar) {
-            *this = *this * static_cast<float>(scalar);
-        }
-
-        template<typename U> Vector4<U> operator*(const Vector4<U>& vector4) const {
-            const glm::vec4 v = self * glm::vec4(
-                    static_cast<float>(vector4.x),
-                    static_cast<float>(vector4.y),
-                    static_cast<float>(vector4.z),
-                    static_cast<float>(vector4.w)
-            );
-            return Vector4<U>(
-                    static_cast<U>(v.x),
-                    static_cast<U>(v.y),
-                    static_cast<U>(v.z),
-                    static_cast<U>(v.w)
-            );
-        }
-        template<typename U> void operator*=(const Vector4<U>& vector4) {
-            *this = *this * vector4;
-        }
-
-        Matrix4x4 operator/(Matrix4x4 mat) {
-            return Matrix4x4(this->self / mat.self);
-        }
-
-        Matrix4x4 operator+(Matrix4x4 mat) {
-            return Matrix4x4(this->self + mat.self);
-        }
-        Matrix4x4 operator-(Matrix4x4 mat) {
-            return Matrix4x4(this->self - mat.self);
-        }
     };
 
-    static FVector4 CalcTranslationPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraEye, const SR_MATH_NS::FVector3& cameraDir, Axis axis) {
-        SR_MATH_NS::FVector4 movePlanNormal[] = {
-            model.v.right, 
-            model.v.up,    
-            model.v.dir,   
-            model.v.right, 
-            model.v.up,    
-            model.v.dir,   
-            SR_MATH_NS::FVector4(-cameraDir, 0.f) 
-        };
+    SR_MAYBE_UNUSED FVector4 CalcTranslationPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraEye, const SR_MATH_NS::FVector3& cameraDir, Axis axis);
+    SR_MAYBE_UNUSED FVector4 CalcRotationPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraDir, Axis axis);
+    SR_MAYBE_UNUSED FVector4 CalcRotationPlanNormal(const SR_MATH_NS::FVector3& cameraDir, Axis axis);
+    SR_MAYBE_UNUSED bool DecomposeTransform(const glm::mat4& matrix, FVector3& translation, FVector3& rotation, FVector3& scale);
 
-        auto&& cameraToModelNormalized = SR_MATH_NS::FVector4((model.v.position.XYZ() - cameraEye).Normalize(), 0.f);
-
-        for (uint8_t i = 0; i < 3; ++i) {
-            auto&& orthogonalVector = movePlanNormal[i].Cross(cameraToModelNormalized);
-            movePlanNormal[i] = (movePlanNormal[i].Cross(orthogonalVector)).Normalize();
-        }
-
-        switch (axis) {
-            case Axis::XYZ: return movePlanNormal[6];
-            case Axis::YZ: return movePlanNormal[3];
-            case Axis::XZ: return movePlanNormal[4];
-            case Axis::XY: return movePlanNormal[5];
-            case Axis::X: return movePlanNormal[0];
-            case Axis::Y: return movePlanNormal[1];
-            case Axis::Z: return movePlanNormal[2];
-            default:
-                break;
-        }
-
-        SRHalt("Unknown axis!");
-
-        return SR_MATH_NS::FVector4();
+    template<typename U> Vector4<U> Matrix4x4::operator*(const Vector4<U>& vector4) const {
+        const glm::vec4 v = self * glm::vec4(
+                static_cast<float>(vector4.x),
+                static_cast<float>(vector4.y),
+                static_cast<float>(vector4.z),
+                static_cast<float>(vector4.w)
+        );
+        return Vector4<U>(
+                static_cast<U>(v.x),
+                static_cast<U>(v.y),
+                static_cast<U>(v.z),
+                static_cast<U>(v.w)
+        );
     }
 
-    static FVector4 CalcRotationPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraDir, Axis axis) {
-        SR_MATH_NS::FVector4 rotatePlanNormal[] = {
-            model.v.right, 
-            model.v.up,    
-            model.v.dir,   
-            SR_MATH_NS::FVector4(-cameraDir, 0.f) 
-        };
-
-        switch (axis) {
-            case Axis::X: return rotatePlanNormal[0];
-            case Axis::Y: return rotatePlanNormal[1];
-            case Axis::Z: return rotatePlanNormal[2];
-            case Axis::XYZ: return rotatePlanNormal[3];
-            default:
-                break;
-        }
-
-        SRHalt("Unknown axis!");
-
-        return SR_MATH_NS::FVector4();
-    }
-
-    static FVector4 CalcRotationPlanNormal(const SR_MATH_NS::FVector3& cameraDir, Axis axis) {
-        SR_MATH_NS::FVector4 rotatePlanNormal[] = {
-            SR_MATH_NS::FVector4(SR_MATH_NS::FVector3::Right(), 0.f), 
-            SR_MATH_NS::FVector4(SR_MATH_NS::FVector3::Up(), 0.f), 
-            SR_MATH_NS::FVector4(SR_MATH_NS::FVector3::Forward(), 0.f), 
-            SR_MATH_NS::FVector4(-cameraDir, 0.f) 
-        };
-
-        switch (axis) {
-            case Axis::X: return rotatePlanNormal[0];
-            case Axis::Y: return rotatePlanNormal[1];
-            case Axis::Z: return rotatePlanNormal[2];
-            case Axis::XYZ: return rotatePlanNormal[3];
-            default:
-                break;
-        }
-
-        SRHalt("Unknown axis!");
-
-        return SR_MATH_NS::FVector4();
-    }
-
-    static bool DecomposeTransform(const glm::mat4& matrix, FVector3& translation, FVector3& rotation, FVector3& scale);
-
-    SR_MAYBE_UNUSED bool DecomposeTransform(const glm::mat4 &matrix, FVector3 &translation, FVector3 &rotation, FVector3 &scale) {
-        // From glm::decompose in matrix_decompose.inl
-
-        using namespace glm;
-        using T = float;
-
-        mat4 LocalMatrix(matrix);
-
-        // Normalize the matrix.
-        if (epsilonEqual(LocalMatrix[3][3], static_cast<float>(0), epsilon<T>()))
-            return false;
-
-        // First, isolate perspective.  This is the messiest.
-        if (
-                epsilonNotEqual(LocalMatrix[0][3], static_cast<T>(0), epsilon<T>()) ||
-                epsilonNotEqual(LocalMatrix[1][3], static_cast<T>(0), epsilon<T>()) ||
-                epsilonNotEqual(LocalMatrix[2][3], static_cast<T>(0), epsilon<T>()))
-        {
-            // Clear the perspective partition
-            LocalMatrix[0][3] = LocalMatrix[1][3] = LocalMatrix[2][3] = static_cast<T>(0);
-            LocalMatrix[3][3] = static_cast<T>(1);
-        }
-
-        // Next take care of translation (easy).
-        translation = vec3(LocalMatrix[3]);
-        LocalMatrix[3] = vec4(0, 0, 0, LocalMatrix[3].w);
-
-        vec3 Row[3];
-
-        // Now get scale and shear.
-        for (length_t i = 0; i < 3; ++i)
-            for (length_t j = 0; j < 3; ++j)
-                Row[i][j] = LocalMatrix[i][j];
-
-        // Compute X scale factor and normalize first row.
-        scale.x = length(Row[0]);
-        Row[0] = detail::scale(Row[0], static_cast<T>(1));
-        scale.y = length(Row[1]);
-        Row[1] = detail::scale(Row[1], static_cast<T>(1));
-        scale.z = length(Row[2]);
-        Row[2] = detail::scale(Row[2], static_cast<T>(1));
-
-        rotation.y = asin(-Row[0][2]);
-        if (cos(rotation.y) != 0) {
-            rotation.x = atan2(Row[1][2], Row[2][2]);
-            rotation.z = atan2(Row[0][1], Row[0][0]);
-        }
-        else {
-            rotation.x = atan2(-Row[2][0], Row[1][1]);
-            rotation.z = 0;
-        }
-
-        return true;
+    template<typename U> void Matrix4x4::operator*=(const Vector4<U>& vector4) {
+        *this = *this * vector4;
     }
 }
 

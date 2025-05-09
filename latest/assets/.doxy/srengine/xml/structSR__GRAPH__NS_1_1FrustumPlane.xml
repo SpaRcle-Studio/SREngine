@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" line="13" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" bodystart="13" bodyend="13"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" line="15" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" bodystart="15" bodyend="15"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrustumPlane_1afeb65a370f4deda531579647bc350504" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -31,14 +31,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" line="14" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" line="16" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" bodystart="16" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" bodystart="12" bodyend="15"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/FrustumCulling.h" bodystart="14" bodyend="17"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1FrustumPlane_1afeb65a370f4deda531579647bc350504" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrustumPlane</scope><name>distance</name></member>
       <member refid="structSR__GRAPH__NS_1_1FrustumPlane_1ab4628e7769bfffb65bf8817882e6c8f1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrustumPlane</scope><name>normal</name></member>

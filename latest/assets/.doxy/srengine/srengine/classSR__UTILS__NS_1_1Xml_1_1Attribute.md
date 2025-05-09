@@ -70,6 +70,7 @@
 |  SR\_NODISCARD uint64\_t | [**ToUInt64**](#function-touint64-22) (uint64\_t def) const<br> |
 |  SR\_NODISCARD bool | [**Valid**](#function-valid) () const<br> |
 |   | [**operator bool**](#function-operator-bool) () const<br> |
+|   | [**~Attribute**](#function-attribute) () <br> |
 
 
 
@@ -106,7 +107,7 @@
 ### function Attribute [1/2]
 
 ```C++
-inline SR_UTILS_NS::Xml::Attribute::Attribute () 
+SR_UTILS_NS::Xml::Attribute::Attribute () 
 ```
 
 
@@ -119,7 +120,7 @@ inline SR_UTILS_NS::Xml::Attribute::Attribute ()
 ### function Attribute [2/2]
 
 ```C++
-inline explicit SR_UTILS_NS::Xml::Attribute::Attribute (
+explicit SR_UTILS_NS::Xml::Attribute::Attribute (
     const pugi::xml_attribute & attribute
 ) 
 ```
@@ -343,7 +344,7 @@ SR_NODISCARD uint64_t SR_UTILS_NS::Xml::Attribute::ToUInt64 (
 ### function Valid 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::Valid () const
+SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::Valid () const
 ```
 
 
@@ -356,7 +357,20 @@ inline SR_NODISCARD bool SR_UTILS_NS::Xml::Attribute::Valid () const
 ### function operator bool 
 
 ```C++
-inline explicit SR_UTILS_NS::Xml::Attribute::operator bool () const
+explicit SR_UTILS_NS::Xml::Attribute::operator bool () const
+```
+
+
+
+
+<hr>
+
+
+
+### function ~Attribute 
+
+```C++
+SR_UTILS_NS::Xml::Attribute::~Attribute () 
 ```
 
 

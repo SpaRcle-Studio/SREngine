@@ -458,9 +458,6 @@
         <childnode refid="9" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="8">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -475,18 +472,6 @@
       <node id="4">
         <label>SR_UTILS_NS::Path</label>
         <link refid="classSR__UTILS__NS_1_1Path"/>
-      </node>
-      <node id="11">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="9">
         <label>SR_WORLD_NS::Scene</label>
@@ -528,7 +513,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1ada14e567a9876f9f517ff71630a10f2b" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>m_parent</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraph_1ad693b3133039b7d0c0321d4bc49e3bae" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>m_path</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a644f640970bdda9479af7b1c5ab8e5bb" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>m_stringTable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>operator=</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a9fc86dd40c76eed20355a049067b9817" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>SetAnimationDataSetParent</name></member>
@@ -540,7 +525,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraph_1ab8c5a507bd22145597a96d7fd675c484" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>Update</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraph_1ad3674b037e775f053d53e8f875066551" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>~AnimationGraph</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1IAnimationDataSet_1a58fa101351f7dd3f658d83faa496f722" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>~IAnimationDataSet</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraph</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

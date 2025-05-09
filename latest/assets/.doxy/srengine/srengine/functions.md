@@ -17,11 +17,19 @@
 * **operator""\_atom\_hash** ([**StringAtomLiterals.h**](StringAtomLiterals_8h.md))
 * **operator""\_format** ([**StringAtomLiterals.h**](StringAtomLiterals_8h.md))
 * **operator""\_format\_atom** ([**StringAtomLiterals.h**](StringAtomLiterals_8h.md))
+* **operator delete** ([**Allocator.h**](Allocator_8h.md))
+* **operator delete[]** ([**Allocator.h**](Allocator_8h.md))
+* **operator new** ([**Allocator.h**](Allocator_8h.md))
+* **operator new[]** ([**Allocator.h**](Allocator_8h.md))
 
 
 ## s
 
-* **SRNew** ([**SRClass.h**](SRClass_8h.md))
+* **SRDelete** ([**Allocator.h**](Allocator_8h.md))
+* **SRFree** ([**Allocator.h**](Allocator_8h.md))
+* **SRMalloc** ([**Allocator.h**](Allocator_8h.md))
+* **SRNew** ([**Allocator.h**](Allocator_8h.md))
+* **SRReAlloc** ([**Allocator.h**](Allocator_8h.md))
 * **SRGetClassName** ([**stdInclude.h**](stdInclude_8h.md))
 
 

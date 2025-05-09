@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_IGRAHPICSRESOURCE_H
 #define SR_ENGINE_IGRAHPICSRESOURCE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Debug.h>
 
 namespace SR_GRAPH_NS {
@@ -28,7 +30,7 @@ namespace SR_GRAPH_NS::Memory {
         using RenderContextPtr = RenderContext*;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
     protected:
-        constexpr IGraphicsResource() = default;
+        IGraphicsResource() = default;
         virtual ~IGraphicsResource();
 
     public:

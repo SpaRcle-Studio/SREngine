@@ -24,8 +24,10 @@
     #pragma clang diagnostic ignored "-Wc++11-narrowing"
 #endif
 
-#include <sparsehash/dense_hash_map>
-#include <flat_hash_map/flat_hash_map.hpp>
+#ifndef SR_ENGINE_CODEGEN_CLANG_PARSE_MODE
+    #include <sparsehash/dense_hash_map>
+    #include <flat_hash_map/flat_hash_map.hpp>
+#endif
 
 #ifdef SR_ANDROID
     #pragma clang diagnostic pop

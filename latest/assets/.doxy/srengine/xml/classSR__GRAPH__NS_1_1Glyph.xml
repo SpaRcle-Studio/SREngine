@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="31" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Glyph_1aee5a4e817bc64e6395e5bb766fa24c9a" prot="public" static="no">
         <type>std::shared_ptr&lt; <ref refid="classSR__GRAPH__NS_1_1Glyph" kindref="compound">Glyph</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="32" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="34" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="49" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="51" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Glyph_1a08f620a2fcaad42202d761b256152a7a" prot="private" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1GlyphMetrics" kindref="compound">GlyphMetrics</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="50" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="52" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Glyph_1a4038e92012d0e9a895ddaeb3c4147b39" prot="private" static="no" mutable="no">
         <type>FT_Glyph</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="51" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="53" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="35" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="37" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1af568d52329f24874cee9b36e6154dd37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="36" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="38" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1a45801097709759b5df9446c17139ac76" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="39" column="30"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="41" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1a6d7f92ec2bfd2f6673bf5a412eee822a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="40" column="30"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="42" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1ac31377219abd1ae6eee938948965fb02" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="41" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="43" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1a8543dd1460f80ee161ec0bfd00569903" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="42" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="44" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1aae3c1cdcda704ddfb21ee475c3b5cca2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="43" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="45" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1a16530fc1b860974b06ecd0b4bcd416d2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="44" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="46" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1a6d4dc7d757412bdea365c697edf0beb8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD FT_Glyph</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="45" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="47" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Glyph_1a940aa38866a6509ecfe59b878b4634b3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1GlyphMetrics" kindref="compound">GlyphMetrics</ref> &amp;</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="46" column="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="48" column="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -257,7 +257,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="29" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="29" bodyend="53"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="31" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="31" bodyend="55"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1a6d4dc7d757412bdea365c697edf0beb8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>GetGlyph</name></member>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1aae3c1cdcda704ddfb21ee475c3b5cca2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>GetHeight</name></member>
@@ -271,13 +271,13 @@
       <member refid="classSR__GRAPH__NS_1_1Glyph_1a4038e92012d0e9a895ddaeb3c4147b39" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>m_glyph</name></member>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1a08f620a2fcaad42202d761b256152a7a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>m_metrics</name></member>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1af0702afcae5ec8c3c1db1f7459bf0cca" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>m_renderMode</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1aee5a4e817bc64e6395e5bb766fa24c9a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>Ptr</name></member>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1aa2dece04888d35a9ba6fdc471ace8868" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1Glyph_1af568d52329f24874cee9b36e6154dd37" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>~Glyph</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Glyph</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

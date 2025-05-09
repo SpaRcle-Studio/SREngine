@@ -18,7 +18,7 @@
 #include <Utils/ECS/Transform.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT Transform3D : public Transform {
+    class SR_COMMON_DLL_API Transform3D : public Transform {
         SR_CLASS()
         friend class GameObject;
         using Super = Transform;
@@ -71,9 +71,9 @@ namespace SR_UTILS_NS {
         void UpdateMatrix() const override;
 
     public:
-        SR_INLINE static constexpr SR_MATH_NS::FVector3 RIGHT   = SR_MATH_NS::FVector3(1, 0, 0);
-        SR_INLINE static constexpr SR_MATH_NS::FVector3 UP      = SR_MATH_NS::FVector3(0, 1, 0);
-        SR_INLINE static constexpr SR_MATH_NS::FVector3 FORWARD = SR_MATH_NS::FVector3(0, 0, 1);
+        SR_INLINE static SR_MATH_NS::FVector3 RIGHT   = SR_MATH_NS::FVector3(1, 0, 0);
+        SR_INLINE static SR_MATH_NS::FVector3 UP      = SR_MATH_NS::FVector3(0, 1, 0);
+        SR_INLINE static SR_MATH_NS::FVector3 FORWARD = SR_MATH_NS::FVector3(0, 0, 1);
 
     protected:
         mutable SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();

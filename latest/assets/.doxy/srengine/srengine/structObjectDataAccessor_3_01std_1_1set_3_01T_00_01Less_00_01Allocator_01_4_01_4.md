@@ -61,7 +61,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**Load**](#function-load) (IDeserializer & deserializer, SetT & value, const SerializationId & id) <br> |
+|  void | [**Load**](#function-load) (IDeserializer & deserializer, SetType & value, const SerializationId & id) <br> |
 |  void | [**Save**](#function-save) (ISerializer & serializer, const SetType & value, const SerializationId & id) <br> |
 
 
@@ -125,10 +125,9 @@ using ObjectDataAccessor< std::set< T, Less, Allocator > >::ValueType =  typenam
 ### function Load 
 
 ```C++
-template<typename SetT>
 static inline void ObjectDataAccessor< std::set< T, Less, Allocator > >::Load (
     IDeserializer & deserializer,
-    SetT & value,
+    SetType & value,
     const SerializationId & id
 ) 
 ```

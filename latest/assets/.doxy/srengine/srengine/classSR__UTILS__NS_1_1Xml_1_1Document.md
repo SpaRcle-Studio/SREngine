@@ -76,7 +76,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |   | [**Document**](#function-document-12) () <br> |
 |   | [**Document**](#function-document-22) ([**Document**](classSR__UTILS__NS_1_1Xml_1_1Document.md) && document) noexcept<br> |
 |  SR\_NODISCARD [**Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) | [**DocumentElement**](#function-documentelement) () const<br> |
-|  SR\_NODISCARD std::string | [**Dump**](#function-dump) () const<br> |
+|  SR\_NODISCARD std::string | [**Dump**](#function-dump) () const<br>_NOLINT._  |
 |  SR\_NODISCARD [**Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) | [**Root**](#function-root) () const<br> |
 |  bool | [**Save**](#function-save) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) const<br> |
 |  SR\_NODISCARD [**Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) | [**TryRoot**](#function-tryroot) () const<br> |
@@ -156,8 +156,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -172,7 +172,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 ### function AppendChild 
 
 ```C++
-inline Xml::Node SR_UTILS_NS::Xml::Document::AppendChild (
+Xml::Node SR_UTILS_NS::Xml::Document::AppendChild (
     const std::string & name
 ) 
 ```
@@ -187,7 +187,7 @@ inline Xml::Node SR_UTILS_NS::Xml::Document::AppendChild (
 ### function Document [1/2]
 
 ```C++
-inline SR_UTILS_NS::Xml::Document::Document () 
+SR_UTILS_NS::Xml::Document::Document () 
 ```
 
 
@@ -200,7 +200,7 @@ inline SR_UTILS_NS::Xml::Document::Document ()
 ### function Document [2/2]
 
 ```C++
-inline SR_UTILS_NS::Xml::Document::Document (
+SR_UTILS_NS::Xml::Document::Document (
     Document && document
 ) noexcept
 ```
@@ -215,7 +215,7 @@ inline SR_UTILS_NS::Xml::Document::Document (
 ### function DocumentElement 
 
 ```C++
-inline SR_NODISCARD Node SR_UTILS_NS::Xml::Document::DocumentElement () const
+SR_NODISCARD Node SR_UTILS_NS::Xml::Document::DocumentElement () const
 ```
 
 
@@ -227,6 +227,7 @@ inline SR_NODISCARD Node SR_UTILS_NS::Xml::Document::DocumentElement () const
 
 ### function Dump 
 
+_NOLINT._ 
 ```C++
 SR_NODISCARD std::string SR_UTILS_NS::Xml::Document::Dump () const
 ```
@@ -241,7 +242,7 @@ SR_NODISCARD std::string SR_UTILS_NS::Xml::Document::Dump () const
 ### function Root 
 
 ```C++
-inline SR_NODISCARD Node SR_UTILS_NS::Xml::Document::Root () const
+SR_NODISCARD Node SR_UTILS_NS::Xml::Document::Root () const
 ```
 
 
@@ -254,7 +255,7 @@ inline SR_NODISCARD Node SR_UTILS_NS::Xml::Document::Root () const
 ### function Save 
 
 ```C++
-inline bool SR_UTILS_NS::Xml::Document::Save (
+bool SR_UTILS_NS::Xml::Document::Save (
     const SR_UTILS_NS::Path & path
 ) const
 ```
@@ -269,7 +270,7 @@ inline bool SR_UTILS_NS::Xml::Document::Save (
 ### function TryRoot 
 
 ```C++
-inline SR_NODISCARD Node SR_UTILS_NS::Xml::Document::TryRoot () const
+SR_NODISCARD Node SR_UTILS_NS::Xml::Document::TryRoot () const
 ```
 
 
@@ -282,7 +283,7 @@ inline SR_NODISCARD Node SR_UTILS_NS::Xml::Document::TryRoot () const
 ### function Valid 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Xml::Document::Valid () const
+SR_NODISCARD bool SR_UTILS_NS::Xml::Document::Valid () const
 ```
 
 
@@ -295,7 +296,7 @@ inline SR_NODISCARD bool SR_UTILS_NS::Xml::Document::Valid () const
 ### function operator bool 
 
 ```C++
-inline SR_UTILS_NS::Xml::Document::operator bool () const
+SR_UTILS_NS::Xml::Document::operator bool () const
 ```
 
 
@@ -308,7 +309,7 @@ inline SR_UTILS_NS::Xml::Document::operator bool () const
 ### function operator= 
 
 ```C++
-inline Document & SR_UTILS_NS::Xml::Document::operator= (
+Document & SR_UTILS_NS::Xml::Document::operator= (
     Document && document
 ) noexcept
 ```
@@ -323,7 +324,7 @@ inline Document & SR_UTILS_NS::Xml::Document::operator= (
 ### function ~Document 
 
 ```C++
-inline SR_UTILS_NS::Xml::Document::~Document () override
+SR_UTILS_NS::Xml::Document::~Document () override
 ```
 
 
@@ -338,7 +339,7 @@ inline SR_UTILS_NS::Xml::Document::~Document () override
 ### function Empty 
 
 ```C++
-static inline Document SR_UTILS_NS::Xml::Document::Empty () 
+static Document SR_UTILS_NS::Xml::Document::Empty () 
 ```
 
 
@@ -351,7 +352,7 @@ static inline Document SR_UTILS_NS::Xml::Document::Empty ()
 ### function GetLastError 
 
 ```C++
-static inline int32_t SR_UTILS_NS::Xml::Document::GetLastError () 
+static int32_t SR_UTILS_NS::Xml::Document::GetLastError () 
 ```
 
 
@@ -379,7 +380,7 @@ static Document SR_UTILS_NS::Xml::Document::Load (
 ### function New 
 
 ```C++
-static inline Document SR_UTILS_NS::Xml::Document::New () 
+static Document SR_UTILS_NS::Xml::Document::New () 
 ```
 
 

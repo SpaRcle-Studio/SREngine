@@ -93,12 +93,12 @@
 |  SR\_NODISCARD [**FVector3**](structSR__MATH__NS_1_1Vector3.md) | [**GetTranslate**](#function-gettranslate) () const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Inverse**](#function-inverse) () const<br> |
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () const<br> |
-|  constexpr | [**Matrix4x4**](#function-matrix4x4-110) () noexcept<br> |
-|  constexpr | [**Matrix4x4**](#function-matrix4x4-210) ([**FVector4**](structSR__MATH__NS_1_1Vector4.md) rows) noexcept<br> |
-|  constexpr | [**Matrix4x4**](#function-matrix4x4-310) (const Unit & scalar) noexcept<br>_NOLINT._  |
-|  constexpr | [**Matrix4x4**](#function-matrix4x4-410) (const glm::mat4 & mat) noexcept<br>_NOLINT._  |
+|   | [**Matrix4x4**](#function-matrix4x4-110) () noexcept<br> |
+|   | [**Matrix4x4**](#function-matrix4x4-210) ([**FVector4**](structSR__MATH__NS_1_1Vector4.md) rows) noexcept<br> |
+|   | [**Matrix4x4**](#function-matrix4x4-310) (const Unit & scalar) noexcept<br>_NOLINT._  |
+|   | [**Matrix4x4**](#function-matrix4x4-410) (const glm::mat4 & mat) noexcept<br>_NOLINT._  |
 |   | [**Matrix4x4**](#function-matrix4x4-510) (glm::mat4 && mat) noexcept<br>_NOLINT._  |
-|   | [**Matrix4x4**](#function-matrix4x4-610) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translate, const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation) noexcept<br> |
+|   | [**Matrix4x4**](#function-matrix4x4-610) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translate, const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation) noexcept<br>_NOLINT._  |
 |   | [**Matrix4x4**](#function-matrix4x4-710) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translate, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) noexcept<br> |
 |   | [**Matrix4x4**](#function-matrix4x4-810) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translate, const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) noexcept<br> |
 |   | [**Matrix4x4**](#function-matrix4x4-910) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rotation, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) noexcept<br> |
@@ -124,8 +124,8 @@
 |  void | [**operator+=**](#function-operator_8) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & right) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator-**](#function-operator_9) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**operator/**](#function-operator_10) ([**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) mat) <br> |
-|  SR\_FORCE\_INLINE SR\_CONSTEXPR const SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_11) (int32\_t row) const<br> |
-|  SR\_FORCE\_INLINE SR\_CONSTEXPR SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_12) (int32\_t row) <br> |
+|  const SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_11) (int32\_t row) const<br> |
+|  SR\_MATH\_NS::FVector4 & | [**operator[]**](#function-operator_12) (int32\_t row) <br> |
 
 
 ## Public Static Functions
@@ -138,7 +138,7 @@
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**FromQuaternion**](#function-fromquaternion) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & quaternion) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**FromScale**](#function-fromscale) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**FromTranslate**](#function-fromtranslate) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation) <br> |
-|  constexpr [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Identity**](#function-identity) () <br> |
+|  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Identity**](#function-identity) () <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**LookAt**](#function-lookat) (const SR\_MATH\_NS::FVector3 & eye, const SR\_MATH\_NS::FVector3 & center, const SR\_MATH\_NS::FVector3 & up) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Ortho**](#function-ortho) (Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) <br> |
 |  [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**Perspective**](#function-perspective) (float\_t FOV, float\_t aspect, float\_t nearValue, float\_t farValue) <br> |
@@ -184,6 +184,10 @@ union SR_MATH_NS::Matrix4x4 SR_MATH_NS::Matrix4x4;
 
 
 
+NOLINT 
+
+
+        
 
 <hr>
 
@@ -506,7 +510,7 @@ SR_MATH_NS::Vector4<float_t> SR_MATH_NS::Matrix4x4::value[4];
 ### function Decompose [1/5]
 
 ```C++
-inline bool SR_MATH_NS::Matrix4x4::Decompose (
+bool SR_MATH_NS::Matrix4x4::Decompose (
     FVector3 & translation,
     Quaternion & quaternion,
     FVector3 & scale
@@ -523,7 +527,7 @@ inline bool SR_MATH_NS::Matrix4x4::Decompose (
 ### function Decompose [2/5]
 
 ```C++
-inline bool SR_MATH_NS::Matrix4x4::Decompose (
+bool SR_MATH_NS::Matrix4x4::Decompose (
     FVector3 & translation,
     Quaternion & quaternion
 ) const
@@ -539,7 +543,7 @@ inline bool SR_MATH_NS::Matrix4x4::Decompose (
 ### function Decompose [3/5]
 
 ```C++
-inline bool SR_MATH_NS::Matrix4x4::Decompose (
+bool SR_MATH_NS::Matrix4x4::Decompose (
     FVector3 & translation,
     FVector3 & eulers,
     FVector3 & scale
@@ -556,7 +560,7 @@ inline bool SR_MATH_NS::Matrix4x4::Decompose (
 ### function Decompose [4/5]
 
 ```C++
-inline bool SR_MATH_NS::Matrix4x4::Decompose (
+bool SR_MATH_NS::Matrix4x4::Decompose (
     FVector3 & translation,
     FVector3 & eulers,
     FVector3 & scale,
@@ -574,7 +578,7 @@ inline bool SR_MATH_NS::Matrix4x4::Decompose (
 ### function Decompose [5/5]
 
 ```C++
-inline bool SR_MATH_NS::Matrix4x4::Decompose (
+bool SR_MATH_NS::Matrix4x4::Decompose (
     FVector3 & translation,
     Quaternion & rotation,
     FVector3 & scale,
@@ -592,7 +596,7 @@ inline bool SR_MATH_NS::Matrix4x4::Decompose (
 ### function GetAxis 
 
 ```C++
-inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::GetAxis (
+SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::GetAxis (
     Axis axis
 ) const
 ```
@@ -607,7 +611,7 @@ inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::GetAxis (
 ### function GetEulers 
 
 ```C++
-inline SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetEulers () const
+SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetEulers () const
 ```
 
 
@@ -620,7 +624,7 @@ inline SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetEulers () const
 ### function GetQuat 
 
 ```C++
-inline SR_NODISCARD Quaternion SR_MATH_NS::Matrix4x4::GetQuat () const
+SR_NODISCARD Quaternion SR_MATH_NS::Matrix4x4::GetQuat () const
 ```
 
 
@@ -633,7 +637,7 @@ inline SR_NODISCARD Quaternion SR_MATH_NS::Matrix4x4::GetQuat () const
 ### function GetScale 
 
 ```C++
-inline SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetScale () const
+SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetScale () const
 ```
 
 
@@ -646,7 +650,7 @@ inline SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetScale () const
 ### function GetSegmentLengthClipSpace 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::Unit SR_MATH_NS::Matrix4x4::GetSegmentLengthClipSpace (
+SR_NODISCARD SR_MATH_NS::Unit SR_MATH_NS::Matrix4x4::GetSegmentLengthClipSpace (
     const SR_MATH_NS::FVector3 & start,
     const SR_MATH_NS::FVector3 & end,
     SR_MATH_NS::Unit displayRatio
@@ -663,7 +667,7 @@ inline SR_NODISCARD SR_MATH_NS::Unit SR_MATH_NS::Matrix4x4::GetSegmentLengthClip
 ### function GetTranslate 
 
 ```C++
-inline SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetTranslate () const
+SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetTranslate () const
 ```
 
 
@@ -676,7 +680,7 @@ inline SR_NODISCARD FVector3 SR_MATH_NS::Matrix4x4::GetTranslate () const
 ### function Inverse 
 
 ```C++
-inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Inverse () const
+SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Inverse () const
 ```
 
 
@@ -689,7 +693,7 @@ inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Inverse () const
 ### function IsFinite 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Matrix4x4::IsFinite () const
+SR_NODISCARD bool SR_MATH_NS::Matrix4x4::IsFinite () const
 ```
 
 
@@ -702,7 +706,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Matrix4x4::IsFinite () const
 ### function Matrix4x4 [1/10]
 
 ```C++
-inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 () noexcept
+SR_MATH_NS::Matrix4x4::Matrix4x4 () noexcept
 ```
 
 
@@ -715,7 +719,7 @@ inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 () noexcept
 ### function Matrix4x4 [2/10]
 
 ```C++
-inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 (
+SR_MATH_NS::Matrix4x4::Matrix4x4 (
     FVector4 rows
 ) noexcept
 ```
@@ -731,7 +735,7 @@ inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 (
 
 _NOLINT._ 
 ```C++
-inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 (
+SR_MATH_NS::Matrix4x4::Matrix4x4 (
     const Unit & scalar
 ) noexcept
 ```
@@ -747,7 +751,7 @@ inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 (
 
 _NOLINT._ 
 ```C++
-inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 (
+SR_MATH_NS::Matrix4x4::Matrix4x4 (
     const glm::mat4 & mat
 ) noexcept
 ```
@@ -763,7 +767,7 @@ inline constexpr SR_MATH_NS::Matrix4x4::Matrix4x4 (
 
 _NOLINT._ 
 ```C++
-inline SR_MATH_NS::Matrix4x4::Matrix4x4 (
+SR_MATH_NS::Matrix4x4::Matrix4x4 (
     glm::mat4 && mat
 ) noexcept
 ```
@@ -777,6 +781,7 @@ inline SR_MATH_NS::Matrix4x4::Matrix4x4 (
 
 ### function Matrix4x4 [6/10]
 
+_NOLINT._ 
 ```C++
 SR_MATH_NS::Matrix4x4::Matrix4x4 (
     const FVector3 & translate,
@@ -861,7 +866,7 @@ SR_MATH_NS::Matrix4x4::Matrix4x4 (
 ### function OrthogonalNormalize 
 
 ```C++
-inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::OrthogonalNormalize () const
+SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::OrthogonalNormalize () const
 ```
 
 
@@ -874,7 +879,7 @@ inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::OrthogonalNormalize () cons
 ### function Rotate [1/2]
 
 ```C++
-inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate (
+SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate (
     const FVector3 & angle
 ) const
 ```
@@ -889,7 +894,7 @@ inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate (
 ### function Rotate [2/2]
 
 ```C++
-inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate (
+SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate (
     const SR_MATH_NS::Quaternion & q
 ) const
 ```
@@ -904,7 +909,7 @@ inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Rotate (
 ### function RotateAxis 
 
 ```C++
-inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::RotateAxis (
+SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::RotateAxis (
     const FVector3 & axis,
     const double & angle
 ) const
@@ -920,7 +925,7 @@ inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::RotateAxis (
 ### function SR\_DEPRECATED\_EX 
 
 ```C++
-inline SR_MATH_NS::Matrix4x4::SR_DEPRECATED_EX (
+SR_MATH_NS::Matrix4x4::SR_DEPRECATED_EX (
     "FromQuaternion"
 ) const
 ```
@@ -935,7 +940,7 @@ inline SR_MATH_NS::Matrix4x4::SR_DEPRECATED_EX (
 ### function ToGLM 
 
 ```C++
-inline SR_NODISCARD const glm::mat4 & SR_MATH_NS::Matrix4x4::ToGLM () const
+SR_NODISCARD const glm::mat4 & SR_MATH_NS::Matrix4x4::ToGLM () const
 ```
 
 
@@ -948,7 +953,7 @@ inline SR_NODISCARD const glm::mat4 & SR_MATH_NS::Matrix4x4::ToGLM () const
 ### function TransformPoint 
 
 ```C++
-inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformPoint (
+SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformPoint (
     const FVector3 & point
 ) const
 ```
@@ -963,7 +968,7 @@ inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformPoint (
 ### function TransformVector [1/2]
 
 ```C++
-inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
+SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
     const FVector3 & point
 ) const
 ```
@@ -978,7 +983,7 @@ inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
 ### function TransformVector [2/2]
 
 ```C++
-inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
+SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
     const FVector4 & point
 ) const
 ```
@@ -993,7 +998,7 @@ inline SR_NODISCARD FVector4 SR_MATH_NS::Matrix4x4::TransformVector (
 ### function Translate 
 
 ```C++
-inline SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Translate (
+SR_NODISCARD Matrix4x4 SR_MATH_NS::Matrix4x4::Translate (
     const FVector3 & vec3
 ) const
 ```
@@ -1023,7 +1028,7 @@ Matrix4x4 SR_MATH_NS::Matrix4x4::operator* (
 ### function operator\* 
 
 ```C++
-inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator* (
+Matrix4x4 SR_MATH_NS::Matrix4x4::operator* (
     const Unit & scalar
 ) const
 ```
@@ -1039,7 +1044,7 @@ inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator* (
 
 ```C++
 template<typename U>
-inline Vector4 < U > SR_MATH_NS::Matrix4x4::operator* (
+Vector4 < U > SR_MATH_NS::Matrix4x4::operator* (
     const Vector4 < U > & vector4
 ) const
 ```
@@ -1054,7 +1059,7 @@ inline Vector4 < U > SR_MATH_NS::Matrix4x4::operator* (
 ### function operator\*= 
 
 ```C++
-inline void SR_MATH_NS::Matrix4x4::operator*= (
+void SR_MATH_NS::Matrix4x4::operator*= (
     const Matrix4x4 & right
 ) 
 ```
@@ -1069,7 +1074,7 @@ inline void SR_MATH_NS::Matrix4x4::operator*= (
 ### function operator\*= 
 
 ```C++
-inline void SR_MATH_NS::Matrix4x4::operator*= (
+void SR_MATH_NS::Matrix4x4::operator*= (
     const Unit & scalar
 ) 
 ```
@@ -1085,7 +1090,7 @@ inline void SR_MATH_NS::Matrix4x4::operator*= (
 
 ```C++
 template<typename U>
-inline void SR_MATH_NS::Matrix4x4::operator*= (
+void SR_MATH_NS::Matrix4x4::operator*= (
     const Vector4 < U > & vector4
 ) 
 ```
@@ -1100,7 +1105,7 @@ inline void SR_MATH_NS::Matrix4x4::operator*= (
 ### function operator+ 
 
 ```C++
-inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator+ (
+Matrix4x4 SR_MATH_NS::Matrix4x4::operator+ (
     const Matrix4x4 & mat
 ) const
 ```
@@ -1115,7 +1120,7 @@ inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator+ (
 ### function operator+ 
 
 ```C++
-inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator+ (
+Matrix4x4 SR_MATH_NS::Matrix4x4::operator+ (
     Matrix4x4 mat
 ) 
 ```
@@ -1130,7 +1135,7 @@ inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator+ (
 ### function operator+= 
 
 ```C++
-inline void SR_MATH_NS::Matrix4x4::operator+= (
+void SR_MATH_NS::Matrix4x4::operator+= (
     const Matrix4x4 & right
 ) 
 ```
@@ -1145,7 +1150,7 @@ inline void SR_MATH_NS::Matrix4x4::operator+= (
 ### function operator- 
 
 ```C++
-inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator- (
+Matrix4x4 SR_MATH_NS::Matrix4x4::operator- (
     Matrix4x4 mat
 ) 
 ```
@@ -1160,7 +1165,7 @@ inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator- (
 ### function operator/ 
 
 ```C++
-inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator/ (
+Matrix4x4 SR_MATH_NS::Matrix4x4::operator/ (
     Matrix4x4 mat
 ) 
 ```
@@ -1175,7 +1180,7 @@ inline Matrix4x4 SR_MATH_NS::Matrix4x4::operator/ (
 ### function operator[] 
 
 ```C++
-inline SR_FORCE_INLINE SR_CONSTEXPR const SR_MATH_NS::FVector4 & SR_MATH_NS::Matrix4x4::operator[] (
+const SR_MATH_NS::FVector4 & SR_MATH_NS::Matrix4x4::operator[] (
     int32_t row
 ) const
 ```
@@ -1190,7 +1195,7 @@ inline SR_FORCE_INLINE SR_CONSTEXPR const SR_MATH_NS::FVector4 & SR_MATH_NS::Mat
 ### function operator[] 
 
 ```C++
-inline SR_FORCE_INLINE SR_CONSTEXPR SR_MATH_NS::FVector4 & SR_MATH_NS::Matrix4x4::operator[] (
+SR_MATH_NS::FVector4 & SR_MATH_NS::Matrix4x4::operator[] (
     int32_t row
 ) 
 ```
@@ -1207,7 +1212,7 @@ inline SR_FORCE_INLINE SR_CONSTEXPR SR_MATH_NS::FVector4 & SR_MATH_NS::Matrix4x4
 ### function CreateTRS 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::CreateTRS (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::CreateTRS (
     const SR_MATH_NS::FVector3 & translation,
     const SR_MATH_NS::Quaternion & rotation,
     const SR_MATH_NS::FVector3 & scale
@@ -1224,7 +1229,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::CreateTRS (
 ### function CreateViewMat 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::CreateViewMat (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::CreateViewMat (
     Unit pitch=0,
     Unit yaw=0,
     Unit roll=0
@@ -1233,10 +1238,6 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::CreateViewMat (
 
 
 
-NOLINT 
-
-
-        
 
 <hr>
 
@@ -1245,7 +1246,7 @@ NOLINT
 ### function FromEulers 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromEulers (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::FromEulers (
     const FVector3 & eulers
 ) 
 ```
@@ -1260,7 +1261,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromEulers (
 ### function FromQuaternion 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromQuaternion (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::FromQuaternion (
     const Quaternion & quaternion
 ) 
 ```
@@ -1275,7 +1276,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromQuaternion (
 ### function FromScale 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromScale (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::FromScale (
     const FVector3 & scale
 ) 
 ```
@@ -1290,7 +1291,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromScale (
 ### function FromTranslate 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromTranslate (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::FromTranslate (
     const FVector3 & translation
 ) 
 ```
@@ -1305,7 +1306,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::FromTranslate (
 ### function Identity 
 
 ```C++
-static inline constexpr Matrix4x4 SR_MATH_NS::Matrix4x4::Identity () 
+static Matrix4x4 SR_MATH_NS::Matrix4x4::Identity () 
 ```
 
 
@@ -1318,7 +1319,7 @@ static inline constexpr Matrix4x4 SR_MATH_NS::Matrix4x4::Identity ()
 ### function LookAt 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::LookAt (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::LookAt (
     const SR_MATH_NS::FVector3 & eye,
     const SR_MATH_NS::FVector3 & center,
     const SR_MATH_NS::FVector3 & up
@@ -1335,7 +1336,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::LookAt (
 ### function Ortho 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::Ortho (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::Ortho (
     Unit left,
     Unit right,
     Unit bottom,
@@ -1355,7 +1356,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::Ortho (
 ### function Perspective 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::Perspective (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::Perspective (
     float_t FOV,
     float_t aspect,
     float_t nearValue,
@@ -1373,7 +1374,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::Perspective (
 ### function RotationAxis [1/2]
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis (
     const SR_MATH_NS::FVector4 & axis,
     Unit angle
 ) 
@@ -1389,7 +1390,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis (
 ### function RotationAxis [2/2]
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis (
     const SR_MATH_NS::FVector3 & axis,
     Unit angle
 ) 
@@ -1405,7 +1406,7 @@ static inline Matrix4x4 SR_MATH_NS::Matrix4x4::RotationAxis (
 ### function RotationYawPitchRoll 
 
 ```C++
-static inline Matrix4x4 SR_MATH_NS::Matrix4x4::RotationYawPitchRoll (
+static Matrix4x4 SR_MATH_NS::Matrix4x4::RotationYawPitchRoll (
     const FVector3 & angles
 ) 
 ```

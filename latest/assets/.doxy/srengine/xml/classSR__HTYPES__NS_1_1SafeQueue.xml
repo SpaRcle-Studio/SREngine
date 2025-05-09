@@ -183,14 +183,14 @@
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1a26492576afdfcbc261eca1fe9daa084e" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>m_accessMutex</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1a7d88f69e1121802b2e9cdeff8a4adba1" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>m_data</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1a2bced1dc286f229e0eaa0f47628b70d1" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>m_dataMutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1aee71092f0721fb696bd1fafc61b93903" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>Push</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1aab3a23d69bb73707da39e7cebacd58bb" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>ReadLock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1a55ba900c7f1426e04777756739c7b7c7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>Size</name></member>
       <member refid="classSR__HTYPES__NS_1_1SafeQueue_1ab51b86890d0748b21e16fec50042d99d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>WriteLock</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::SafeQueue</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

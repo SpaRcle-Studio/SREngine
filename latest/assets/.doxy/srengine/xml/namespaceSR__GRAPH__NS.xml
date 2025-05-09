@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="21" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="21" bodyend="23"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" line="23" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h" bodystart="23" bodyend="25"/>
       </memberdef>
       <memberdef kind="enum" id="Descriptors_8h_1ab4d7079c85da7d96afc756df4c227ad8" prot="public" static="no" strong="yes">
         <type></type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h" bodystart="11" bodyend="13"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Descriptors.h" bodystart="13" bodyend="15"/>
       </memberdef>
       <memberdef kind="enum" id="BasicWindowImpl_8h_1ac479aab0ea08f1e8e53d02c37dd1ca0d" prot="public" static="no" strong="yes">
         <type></type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="14" bodyend="16"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Window/BasicWindowImpl.h" bodystart="16" bodyend="18"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="31" column="2" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="33" column="2" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ShaderProperties_8h_1af59d4ba2aaaa54f83c1d8e8d343e0763" prot="public" static="no">
         <type>std::list&lt; ShaderProperty &gt;</type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="84" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="86" column="23" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ShaderProperties_8h_1a41bd7df3390015dc7cb3202df57e28bf" prot="public" static="no">
         <type>std::map&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>, <ref refid="structSR__GRAPH__NS_1_1ShaderSampler" kindref="compound">ShaderSampler</ref> &gt;</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="93" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="93" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="95" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ShaderProperties_8h_1a3ce09526ddf0e5907be9e5507b58b850" prot="public" static="no">
         <type>std::vector&lt; <ref refid="structSR__GRAPH__NS_1_1SSBOBinding" kindref="compound">SSBOBinding</ref> &gt;</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="100" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="100" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="102" column="25" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="BasePass_8h_1a5ba4e456f01edbfffc80498045fe58d4" prot="public" static="no">
         <type>std::map&lt; std::string, <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1BasePass" kindref="compound">BasePass</ref> *(const SR_XML_NS::Node &amp;, <ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">IRenderTechnique</ref> *)&gt; &gt;</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" line="15" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="PassQueue_8h_1a60eadbd4ed1391d2864b428830ed1ccd" prot="public" static="no">
         <type>std::vector&lt; PassQueue &gt;</type>
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/PassQueue.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="IShaderProgram_8h_1a30c402d3cecc6ca0ef68c47d618e848c" prot="public" static="no">
         <type>std::vector&lt; std::pair&lt; Vertices::Attribute, size_t &gt; &gt;</type>
@@ -428,7 +428,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="36" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MeshCluster_8h_1aa796cc0d477f02852672eed308174822" prot="public" static="no">
         <type>std::unordered_set&lt; <ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> * &gt;</type>
@@ -442,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="38" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="40" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MeshCluster_8h_1a7eca809f30f816af48fcc6bb0392e52e" prot="public" static="no">
         <type>std::unordered_map&lt; ClusterVBOId, MeshGroup &gt;</type>
@@ -456,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="39" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="41" column="32" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MeshQuickSort_8h_1a05cdfdec65debdc6b7e8a61687ed90f7" prot="public" static="no">
         <type>bool(*</type>
@@ -470,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" line="16" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" line="18" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -1241,7 +1241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="41" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="43" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="MeshUtils_8h_1a4693fdfc7e52635e1752713c6de011bb" prot="public" static="no" mutable="no">
         <type>SR_INLINE_STATIC <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
@@ -1256,7 +1256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="42" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="44" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -1276,7 +1276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="17" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" bodystart="17" bodyend="25"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="19" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" bodystart="19" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="FreeType_8h_1ae0e9584fa176b2c27dbaae5bd271a3d9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1290,7 +1290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="27" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" bodystart="27" bodyend="42"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" line="29" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/FreeType.h" bodystart="29" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="TextBuilder_8h_1a8478dc92a885118fbb413cd20d6778f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -1450,7 +1450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="33" bodyend="82"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="35" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="35" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a3b515f3675d8e349c207afed9e9a05d5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool SR_FASTCALL</type>
@@ -1468,7 +1468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="102" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="102" bodyend="114"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="104" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="104" bodyend="116"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1af2eaf6829bc696b6fef9001047e9c1c5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1486,7 +1486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="116" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="116" bodyend="126"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="118" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="118" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1ab76bac2e9d27a923f35eeefb95c47b40" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED std::string</type>
@@ -1504,7 +1504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="128" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="128" bodyend="140"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="130" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="130" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1ad4cacc3740be8a9692f7930dda606897" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED std::string</type>
@@ -1526,7 +1526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="142" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="142" bodyend="148"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="144" column="40" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="144" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a2e7010bb4052965b24a4e0f7343967d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED uint32_t</type>
@@ -1544,7 +1544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="150" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="150" bodyend="175"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="152" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="152" bodyend="177"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1acb2fca5f51fe781afd2c3917daffb16c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ShaderPropertyVariant</type>
@@ -1562,7 +1562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="177" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="177" bodyend="202"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="179" column="50" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="179" bodyend="204"/>
       </memberdef>
       <memberdef kind="function" id="ShaderProperties_8h_1a9a86036beda9df8f5528639675b796d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ShaderVarType</type>
@@ -1580,7 +1580,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="204" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="204" bodyend="210"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" line="206" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Loaders/ShaderProperties.h" bodystart="206" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="MaterialProperty_8h_1a9eaaa5acc46da23e2fee720736f502ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1653,7 +1653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialType.h" line="11" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialType.h" declline="11" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialType.h" line="13" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialType.h" declline="13" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="OverlayType_8h_1a745b74d88ecce36e364b5e6c9bd9d57a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -1688,7 +1688,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/OverlayType.h" line="12" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/OverlayType.h" declline="12" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/OverlayType.h" line="14" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/OverlayType.h" declline="14" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="BasePass_8h_1adc4f515979eb8b875d1f47a7d7b88423" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>RenderPassMap &amp;</type>
@@ -1731,7 +1731,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Device.h" line="11" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Device.h" declline="11" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Device.h" line="13" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/Device.h" declline="13" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="IShaderProgram_8h_1ae178a435b3ac68cbf8689aea8fdce7e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -1952,7 +1952,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h" line="13" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h" declline="13" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h" line="15" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/PipelineType.h" declline="15" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ad707112df97c2b5ce625e4ed30ff3c0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -1984,7 +1984,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="12" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="12" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="14" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="14" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ac720046f7e048616d098444d910e693d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2019,7 +2019,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="17" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="17" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="19" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="19" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ab27f4ce893ea4d1ecbc2fbf91a50db3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2057,7 +2057,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="32" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="32" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="34" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="34" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a5dc6057f12c6a0204ed4acf651d2f991" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2089,7 +2089,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="41" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="41" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="43" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="43" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ae51fbd6a4f5459a81414c019aef879e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2178,7 +2178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="45" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="45" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="47" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="47" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1aff0279fccad73cdb7d0637489c1db642" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE uint8_t</type>
@@ -2196,7 +2196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="80" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="80" bodyend="108"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="82" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="82" bodyend="110"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ad3467be90083ecbc5c0f979ce26feae8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2241,7 +2241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="130" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="130" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="132" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="132" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1aff490b109f1ced35ad0f6b7bdd1566fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2290,7 +2290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="135" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="135" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="137" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="137" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1ae4837a8957cc25acfe80fd4902e69a52" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE uint32_t</type>
@@ -2308,7 +2308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="139" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="139" bodyend="144"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="141" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="141" bodyend="146"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a74d5453e8d6bb6cd1a3f55f610889b06" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE auto</type>
@@ -2330,7 +2330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="146" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="146" bodyend="148"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="148" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="148" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1af75e9b5b3b6562f4f77209da25400e5e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_INLINE uint8_t *</type>
@@ -2364,7 +2364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="150" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="150" bodyend="159"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="152" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" bodystart="152" bodyend="161"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a56be377189a3a986a290a0648d34d23b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -2382,7 +2382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="161" column="14" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="161" declcolumn="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="163" column="14" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="163" declcolumn="14"/>
       </memberdef>
       <memberdef kind="function" id="TextureHelper_8h_1a0fec1eb029f4de8cb1c6aab6e58a93f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>uint8_t *</type>
@@ -2412,7 +2412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="163" column="13" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="163" declcolumn="13"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" line="165" column="13" declfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/TextureHelper.h" declline="165" declcolumn="13"/>
       </memberdef>
       <memberdef kind="function" id="MeshCluster_8h_1a446fcf34b08aaeaba975841b6192a8d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2452,7 +2452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="28" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" declline="28" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" line="30" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Render/MeshCluster.h" declline="30" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="RenderContext_8h_1a50f6f26fc05d7c858971992270d73562" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2494,7 +2494,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h" line="31" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h" declline="31" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h" line="33" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderContext.h" declline="33" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="RenderSettings_8h_1a360b0ad5c8c7c9184211a28f726dfc18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2532,7 +2532,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="11" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" declline="11" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" line="13" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderSettings.h" declline="13" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="Uniforms_8h_1a448825fa93ba361881b60da444ffaf1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2555,7 +2555,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="11" bodyend="17"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="13" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="Uniforms_8h_1abe6ca9972eee95659d35b7b0cc0d8193" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED uint64_t</type>
@@ -2573,7 +2573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="39" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="39" bodyend="51"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="41" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="41" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="MeshQuickSort_8h_1a557521d109224ffd7a5f40500575678e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool SR_FASTCALL</type>
@@ -2603,7 +2603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" line="27" column="10" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" bodystart="27" bodyend="29" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" declline="22" declcolumn="22"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" line="29" column="10" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" bodystart="29" bodyend="31" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" declline="24" declcolumn="22"/>
       </memberdef>
       <memberdef kind="function" id="MeshQuickSort_8h_1ae0656f49af55f7841774a20598a87353" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool SR_FASTCALL</type>
@@ -2643,7 +2643,7 @@
 <para>swap(i, j);</para>
 <para>recursion</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" line="31" column="10" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" bodystart="31" bodyend="65" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" declline="23" declcolumn="22"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" line="33" column="10" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" bodystart="33" bodyend="67" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshQuickSort.h" declline="25" declcolumn="22"/>
       </memberdef>
       <memberdef kind="function" id="MeshUtils_8h_1a26052e8477fdf358854ce6cbf9efa47d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2682,7 +2682,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="16" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" declline="16" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="18" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" declline="18" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="MeshUtils_8h_1a100ef03176a6cbc0a94301b405aef1e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> &gt;</type>
@@ -2700,13 +2700,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="44" column="29" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" declline="44" declcolumn="29"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" line="46" column="29" declfile="Engine/Core/libs/Graphics/inc/Graphics/Utils/MeshUtils.h" declline="46" declcolumn="29"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Engine.h" line="26" column="1"/>
+    <location file="Engine/Core/inc/Core/Engine.h" line="29" column="1"/>
   </compounddef>
 </doxygen>

@@ -11,6 +11,7 @@
     <innerdir refid="dir_64c7271ada2dca618cc461f22cf20f1f">Engine/Core/libs/Utils/inc/Utils/Input</innerdir>
     <innerdir refid="dir_a49f0db6b4130ce5cf0adc29f1f90718">Engine/Core/libs/Utils/inc/Utils/Localization</innerdir>
     <innerdir refid="dir_3900fe4b4d95d895210b9082ab5cdd34">Engine/Core/libs/Utils/inc/Utils/Math</innerdir>
+    <innerdir refid="dir_a7ee2ebe23408af25e9b8f5a8e783a39">Engine/Core/libs/Utils/inc/Utils/Memory</innerdir>
     <innerdir refid="dir_c7b83f1df097df65b63198ef53f0d275">Engine/Core/libs/Utils/inc/Utils/Network</innerdir>
     <innerdir refid="dir_dff07e13fcd57a959fed4d2a16791af6">Engine/Core/libs/Utils/inc/Utils/Platform</innerdir>
     <innerdir refid="dir_b706be1d480d06f38dfc9618c3aae1ad">Engine/Core/libs/Utils/inc/Utils/Profile</innerdir>
@@ -27,7 +28,7 @@
     <innerdir refid="dir_646ea3957657c91e40c16f5ff19dad51">Engine/Core/libs/Utils/inc/Utils/World</innerdir>
     <innerfile refid="Debug_8h">Debug.h</innerfile>
     <innerfile refid="DebugDraw_8h">DebugDraw.h</innerfile>
-    <innerfile refid="macros_8h">macros.h</innerfile>
+    <innerfile refid="Utils_2inc_2Utils_2macros_8h">macros.h</innerfile>
     <innerfile refid="Settings_8h">Settings.h</innerfile>
     <innerfile refid="stdInclude_8h">stdInclude.h</innerfile>
     <briefdescription>

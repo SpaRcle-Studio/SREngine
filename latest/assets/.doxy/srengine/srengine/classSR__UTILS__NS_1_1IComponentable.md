@@ -8,8 +8,9 @@
 
 
 
+_@scriptableClass_ 
 
-
+* `#include <IComponentable.h>`
 
 
 
@@ -77,6 +78,7 @@ Inherited by the following classes: [SR\_WORLD\_NS::Scene](classSR__WORLD__NS_1_
 | virtual Component::Ptr | [**GetOrCreateComponent**](#function-getorcreatecomponent-22) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 | virtual SR\_NODISCARD ScenePtr | [**GetScene**](#function-getscene) () const<br> |
 |  SR\_NODISCARD bool | [**HasComponent**](#function-hascomponent) (const Component::Ptr & pComponent) const<br> |
+|   | [**IComponentable**](#function-icomponentable) () = default<br> |
 | virtual SR\_NODISCARD bool | [**IsActive**](#function-isactive) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsDestroyed**](#function-isdestroyed) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsDirty**](#function-isdirty) () noexcept const<br> |
@@ -414,6 +416,19 @@ virtual SR_NODISCARD ScenePtr SR_UTILS_NS::IComponentable::GetScene () const
 SR_NODISCARD bool SR_UTILS_NS::IComponentable::HasComponent (
     const Component::Ptr & pComponent
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function IComponentable 
+
+```C++
+SR_UTILS_NS::IComponentable::IComponentable () = default
 ```
 
 

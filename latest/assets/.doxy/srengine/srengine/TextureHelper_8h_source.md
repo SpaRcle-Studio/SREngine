@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_TEXTUREHELPER_H
 #define SR_ENGINE_TEXTUREHELPER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Resources/Xml.h>
 

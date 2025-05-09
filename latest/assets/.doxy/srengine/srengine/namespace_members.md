@@ -5,6 +5,8 @@
 
 ## a
 
+* **AllocateMemoryFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **AwakeFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **AiQToQ** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
 * **AiV3ToFV3** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
 * **ALDistanceModelToDistanceModel** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
@@ -40,6 +42,7 @@
 
 ## b
 
+* **BackReadTo** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **BeginForceEnabled** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **BeginNodeCombo** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **Button** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
@@ -57,6 +60,9 @@
 
 ## c
 
+* **CastingType** ([**EvoScript**](namespaceEvoScript.md))
+* **CastingTypeToString** ([**EvoScript**](namespaceEvoScript.md))
+* **CloseFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **CalculateSoundFormat** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **CheckThreadId** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **CreateWaveDataProvider** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
@@ -128,6 +134,7 @@
 
 ## d
 
+* **DeleteSymbolsInStr** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **DistanceModelToALDistanceModel** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **DragDropTargetEntityRef** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
 * **DrawEnumProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
@@ -169,6 +176,7 @@
 * **DisableStacktrace** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **Distance** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **Delete** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
+* **DownloadFile** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **DEFAULT\_CSS\_BOX\_SIZING** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **DEFAULT\_CSS\_COLOR** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **DEFAULT\_CSS\_DISPLAY** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
@@ -178,6 +186,8 @@
 
 ## e
 
+* **ESAllocateMemory** ([**EvoScript**](namespaceEvoScript.md))
+* **ESFreeMemory** ([**EvoScript**](namespaceEvoScript.md))
 * **EndForceEnabled** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **EndNodeCombo** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **EnumCombo** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
@@ -188,12 +198,21 @@
 * **EntityId** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **EnumVariant** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **Exchange** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **EVENT\_ON\_SCRIPT\_MODULE\_RELOADED\_ID** ([**SR\_UTILS\_NS::Events**](namespaceSR__UTILS__NS_1_1Events.md))
 * **EncMethodType** ([**SR\_UTILS\_NS::Localization**](namespaceSR__UTILS__NS_1_1Localization.md))
 * **Encode** ([**SR\_UTILS\_NS::MarshalUtils**](namespaceSR__UTILS__NS_1_1MarshalUtils.md))
+* **ExecuteCommand** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 
 
 ## f
 
+* **FindMSVC** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **FindMSVCCompiler** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **FindMSVCInclude** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **FindMSVCVars64** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **FixPath** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **FixedUpdateFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **FreeMemoryFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **FV3ToALV3** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **FV6ToALV6** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **FTUnusedFunctions** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -218,6 +237,7 @@
 * **FNV1AAppendValue** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **ForEach** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **Format** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **Forward** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **FromUtf** ([**SR\_UTILS\_NS::Localization**](namespaceSR__UTILS__NS_1_1Localization.md))
 * **FileIsHidden** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **FixedHeight** ([**SR\_UTILS\_NS::UI**](namespaceSR__UTILS__NS_1_1UI.md))
@@ -228,6 +248,12 @@
 
 * **GetEnumItemsCount** ([**Codegen**](namespaceCodegen.md))
 * **GetEnumVariant** ([**Codegen**](namespaceCodegen.md))
+* **GetArgs** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **GetDate** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **GetFileHash** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **GetHashAllFilesInDir** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **GetPropertiesFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **GetPropertyFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **GetValueInspector** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
 * **GetImGuiDataType** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **GetBindingType** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -283,6 +309,7 @@
 * **GetFileMetadata** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **GetInDirectory** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **GetInstance** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
+* **GetLibraryFunctionAddress** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **GetMousePos** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **GetMouseState** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **GetProcessUsedMemory** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
@@ -298,11 +325,13 @@
 
 ## h
 
+* **HashEquals** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **HEXToBGR** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **HEXToRGB** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **HasCmdOption** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **HasMethodEmptyT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **HasNullptrComparison** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **HasPublicDestructor** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **HasTypeInPackV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **HashArrayRepresentation** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **HashCombine** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
@@ -318,6 +347,8 @@
 
 ## i
 
+* **InitBehaviourFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **InitFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **ImportSkeletonFromRawMesh** ([**SR\_CORE\_NS::Importers**](namespaceSR__CORE__NS_1_1Importers.md))
 * **InputInt** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **IsPinsCompatible** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
@@ -419,7 +450,7 @@
 * **InitSegmentationHandler** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **InitializePlatform** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **IsAbsolutePath** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
-* **IsConsoleFocused** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
+* **IsCompiledUnderMSVC** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **IsExists** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **IsFileDeletable** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **IsRunningUnderDebugger** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
@@ -437,6 +468,7 @@
 
 ## l
 
+* **LoadHashInfo** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **Less** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **LessOrEqual** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **LoadMaterialProperties** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -458,13 +490,21 @@
 * **LoadUnicodeString** ([**SR\_UTILS\_NS::MarshalUtils**](namespaceSR__UTILS__NS_1_1MarshalUtils.md))
 * **LoadValue** ([**SR\_UTILS\_NS::MarshalUtils**](namespaceSR__UTILS__NS_1_1MarshalUtils.md))
 * **LoadVector** ([**SR\_UTILS\_NS::MarshalUtils**](namespaceSR__UTILS__NS_1_1MarshalUtils.md))
+* **LoadLibraryModule** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **Load** ([**SR\_UTILS\_NS::Serialization**](namespaceSR__UTILS__NS_1_1Serialization.md))
 * **LimbType** ([**std**](namespacestd.md))
 
 
 ## m
 
-* **Merge** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
+* **MD5\_BYTE** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **MD5\_PADDING** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **MD5\_POINTER** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **MD5\_UINT2** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **MD5\_UINT4** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **Merge** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md), [**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
+* **MethodType** ([**EvoScript**](namespaceEvoScript.md))
+* **ModuleCopies** ([**EvoScript**](namespaceEvoScript.md))
 * **MakeDisableColor** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **MakeGoodSizes** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **MakeShaderVariable** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -474,11 +514,14 @@
 * **MeshQSortCmpFn** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **MessageBoxButton** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
 * **MessageBoxButtonBits** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
-* **MessageBoxType** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
+* **MessageBoxType** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md), [**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
 * **MeshMemoryType** ([**SR\_GRAPH\_NS::Memory**](namespaceSR__GRAPH__NS_1_1Memory.md))
 * **MerkleHash** ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * **MerklePath** ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * **MerkleTree** ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
+* **MessageBoxDefaultButtonType** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
+* **MessageBoxIconType** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
+* **MessageBoxResultType** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
 * **make\_hi** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **make\_large** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **make\_lo** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
@@ -521,6 +564,9 @@
 
 ## o
 
+* **OnDisableFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **OnEnableFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **OnGUIFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **operator!=** ([**SR\_TYPES\_NS::detail::array\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1array__detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md), [**util**](namespaceutil.md))
 * **operator&lt;** ([**SR\_TYPES\_NS::detail::array\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1array__detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md), [**util**](namespaceutil.md))
 * **operator&lt;=** ([**SR\_TYPES\_NS::detail::array\_detail**](namespaceSR__TYPES__NS_1_1detail_1_1array__detail.md), [**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md), [**util**](namespaceutil.md))
@@ -544,6 +590,9 @@
 
 ## p
 
+* **PrintSet** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **Publicity** ([**EvoScript**](namespaceEvoScript.md))
+* **PublicityToString** ([**EvoScript**](namespaceEvoScript.md))
 * **PassQueue** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **PassQueues** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **Parse** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
@@ -557,7 +606,6 @@
 * **PackOfSameTypeV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **Passkey** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **PolymorphicCast** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
-* **PostAllocationInitialize** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **PipeLine** ([**SR\_UTILS\_NS::Graph**](namespaceSR__UTILS__NS_1_1Graph.md))
 * **PasteFilesFromClipboard** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 
@@ -570,6 +618,12 @@
 
 ## r
 
+* **Read** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **ReadTo** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **ReadToLast** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **RemoveFirstSpaces** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **Replace** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **ReleaseBehaviourFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **RawSoundData** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **RawSoundDataPtr** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **RegisterResources** ([**SR\_CORE\_NS::Resources**](namespaceSR__CORE__NS_1_1Resources.md))
@@ -582,12 +636,12 @@
 * **ReferenceCastAbsDescriptorTypeToVk** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
 * **RGBToHEX** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **RBUpdShapeRes** ([**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md))
-* **RunMonoTest** ([**SR\_SCRIPTING\_NS**](namespaceSR__SCRIPTING__NS.md))
 * **rootk** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **RESOURCE\_ID\_SEPARATOR** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **RebindAllocT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **RemoveCVRefT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **RemoveQualifiersT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **RemoveReferenceT** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **ResourcesList** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **ResourcesSet** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **ResourcesTypes** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
@@ -602,7 +656,14 @@
 
 ## s
 
-* **SR\_ENUM\_NS\_CLASS\_T** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md), [**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md), [**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md), [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md), [**SR\_UTILS\_NS::EntityRefUtils**](namespaceSR__UTILS__NS_1_1EntityRefUtils.md), [**SR\_UTILS\_NS::UI**](namespaceSR__UTILS__NS_1_1UI.md))
+* **SaveHashInfo** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **Split** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **SetAllocateMemoryFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **SetFreeMemoryFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **SetPropertyFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **StartFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **SwitchContextFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
+* **SR\_ENUM\_NS\_CLASS\_T** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md), [**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md), [**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md), [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md), [**SR\_SCRIPTING\_NS**](namespaceSR__SCRIPTING__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md), [**SR\_UTILS\_NS::EntityRefUtils**](namespaceSR__UTILS__NS_1_1EntityRefUtils.md), [**SR\_UTILS\_NS::UI**](namespaceSR__UTILS__NS_1_1UI.md))
 * **SR\_SUPPORTED\_AUDIO\_FORMATS** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **SoundBuffer** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **SoundFormat** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
@@ -683,7 +744,7 @@
 * **SR\_COLOR\_PALETTE** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **Sign** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **StringToIPv4** ([**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md))
-* **ScriptType** ([**SR\_SCRIPTING\_NS**](namespaceSR__SCRIPTING__NS.md))
+* **ShowMessageBox** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
 * **SRSLSamplers** ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * **SRSL\_IDENTIFIER\_CHARS** ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * **SRSL\_SPACE\_CHARS** ([**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
@@ -735,11 +796,11 @@
 * **StringToCSSPosition** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **SerializationDataType** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SharedPtrPolicy** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **SizeType** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **StacktraceInit** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SupportsNullptrComparisonV** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SyncType** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **s2ws** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
-* **sha256** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **str\_hash** ([**s\_s**](namespaces__s.md))
 * **str\_hash\_for\_switch** ([**s\_s**](namespaces__s.md))
 * **str\_is\_correct** ([**s\_s**](namespaces__s.md))
@@ -748,6 +809,8 @@
 
 ## t
 
+* **TabString** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **ToUpper** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **TryMP3InsideWAV** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **Text** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **ToString** ([**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
@@ -755,7 +818,6 @@
 * **TableIndex3D** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **TableIndex4D** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **TCP** ([**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md))
-* **Time** ([**SR\_SCRIPTING\_NS**](namespaceSR__SCRIPTING__NS.md))
 * **to\_string** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **ToUtf** ([**SR\_UTILS\_NS::Localization**](namespaceSR__UTILS__NS_1_1Localization.md))
 * **TryLoadShortStr** ([**SR\_UTILS\_NS::MarshalUtils**](namespaceSR__UTILS__NS_1_1MarshalUtils.md))
@@ -772,6 +834,7 @@
 
 ## u
 
+* **UpdateFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **UInputInt32** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **UIVertices** ([**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md))
 * **UniformsToDescriptorLayoutBindings** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
@@ -804,6 +867,7 @@
 * **uint65536\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **uint8192\_t** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **UtfToUtf** ([**SR\_UTILS\_NS::Localization**](namespaceSR__UTILS__NS_1_1Localization.md))
+* **UnloadLibraryModule** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **Unzip** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **User** ([**SR\_UTILS\_NS::StoreUtils**](namespaceSR__UTILS__NS_1_1StoreUtils.md))
 * **UndefinedTag** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
@@ -813,6 +877,10 @@
 
 ## v
 
+* **VS\_PATHS** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **VS\_TYPES** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **VS\_YEARS** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
+* **VoidFnPtr** ([**EvoScript::Typedefs**](namespaceEvoScript_1_1Typedefs.md))
 * **Vec4Null** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **ViewportsTable** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
 * **VertexAttributeBits** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))

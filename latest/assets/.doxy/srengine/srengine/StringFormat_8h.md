@@ -16,9 +16,6 @@
 * `#include <Utils/Math/Vector4.h>`
 * `#include <Utils/Platform/Platform.h>`
 * `#include <Utils/Common/StringUtils.h>`
-* `#include <fmt/format.h>`
-* `#include <fmt/printf.h>`
-* `#include <fmt/color.h>`
 
 
 

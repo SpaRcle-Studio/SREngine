@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_RENDERSCENE_H
 #define SR_ENGINE_RENDERSCENE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/SafeVariable.h>

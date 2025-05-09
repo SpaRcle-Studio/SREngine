@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_RENDERSETTINGS_H
 #define SR_ENGINE_RENDERSETTINGS_H
 
+#include <Graphics/macros.h>
+
 #include <Graphics/Render/RenderSettings.h>
 
 namespace SR_GRAPH_NS {

@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="410" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="410" bodyend="424"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="412" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="412" bodyend="426"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="409" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="409" bodyend="425"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" line="411" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Vertices.h" bodystart="411" bodyend="427"/>
     <listofallmembers>
       <member refid="structstd_1_1hash_3_01SR__GRAPH__NS_1_1Vertices_1_1StaticMeshVertex_01_4_1a811da49a8fe3d81e269daec041a02aac" prot="public" virt="non-virtual"><scope>std::hash&lt; SR_GRAPH_NS::Vertices::StaticMeshVertex &gt;</scope><name>operator()</name></member>
     </listofallmembers>

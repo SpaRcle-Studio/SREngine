@@ -14,6 +14,8 @@
 #ifndef SR_ENGINE_ATLAS_BUILDER_H
 #define SR_ENGINE_ATLAS_BUILDER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/stdInclude.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Math/Vector2.h>

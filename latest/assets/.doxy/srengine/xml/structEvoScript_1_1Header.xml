@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structEvoScript_1_1Header" kind="struct" language="C++" prot="public">
+    <compoundname>EvoScript::Header</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1aead4fcf96feb9bed5a107dcc417eb584" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Header::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <qualifiedname>EvoScript::Header::m_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="37" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1a817230c3f907f7b862d3d6b3241e5b3f" prot="public" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; EvoScript::Header::m_includes</definition>
+        <argsstring></argsstring>
+        <name>m_includes</name>
+        <qualifiedname>EvoScript::Header::m_includes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="38" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1a0ddc0d620620e44f33b873d2eeae486f" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; EvoScript::Header::m_incompleteTypes</definition>
+        <argsstring></argsstring>
+        <name>m_incompleteTypes</name>
+        <qualifiedname>EvoScript::Header::m_incompleteTypes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="39" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1a199648c969c61c2c82d1c1f08e5e27ec" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; EvoScript::Header::m_typedefs</definition>
+        <argsstring></argsstring>
+        <name>m_typedefs</name>
+        <qualifiedname>EvoScript::Header::m_typedefs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="40" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1ab483890ec6caaf663bd1a6d05f29c418" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structEvoScript_1_1EvoEnum" kindref="compound">EvoEnum</ref> &gt;</type>
+        <definition>std::vector&lt;EvoEnum&gt; EvoScript::Header::m_enums</definition>
+        <argsstring></argsstring>
+        <name>m_enums</name>
+        <qualifiedname>EvoScript::Header::m_enums</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="41" column="25" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1ab946d5fd12873dddf4c7ce1de33a209e" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structEvoScript_1_1Class" kindref="compound">Class</ref> &gt;</type>
+        <definition>std::vector&lt;Class&gt; EvoScript::Header::m_classes</definition>
+        <argsstring></argsstring>
+        <name>m_classes</name>
+        <qualifiedname>EvoScript::Header::m_classes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="42" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structEvoScript_1_1Header_1a831da71fef39a9203eb6eeadd46177aa" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structEvoScript_1_1Method" kindref="compound">Method</ref> &gt;</type>
+        <definition>std::vector&lt;Method&gt; EvoScript::Header::m_functions</definition>
+        <argsstring></argsstring>
+        <name>m_functions</name>
+        <qualifiedname>EvoScript::Header::m_functions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="43" column="26" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structEvoScript_1_1Header_1aedbe207ac793424db953c647a8e99b08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structEvoScript_1_1Class" kindref="compound">Class</ref> *</type>
+        <definition>Class * EvoScript::Header::FindClass</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>FindClass</name>
+        <qualifiedname>EvoScript::Header::FindClass</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="45" column="15" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="45" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="structEvoScript_1_1Header_1a7d4937d52cf218f71f918191c95a6314" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Header::GetIncludes</definition>
+        <argsstring>() const</argsstring>
+        <name>GetIncludes</name>
+        <qualifiedname>EvoScript::Header::GetIncludes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="52" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="52" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="structEvoScript_1_1Header_1a3d6e8228d815dec253f6abc3cffea694" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Header::ToString</definition>
+        <argsstring>() const</argsstring>
+        <name>ToString</name>
+        <qualifiedname>EvoScript::Header::ToString</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="59" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="59" bodyend="119"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" line="36" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/AddressTableGen.h" bodystart="36" bodyend="120"/>
+    <listofallmembers>
+      <member refid="structEvoScript_1_1Header_1aedbe207ac793424db953c647a8e99b08" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>FindClass</name></member>
+      <member refid="structEvoScript_1_1Header_1a7d4937d52cf218f71f918191c95a6314" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>GetIncludes</name></member>
+      <member refid="structEvoScript_1_1Header_1ab946d5fd12873dddf4c7ce1de33a209e" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_classes</name></member>
+      <member refid="structEvoScript_1_1Header_1ab483890ec6caaf663bd1a6d05f29c418" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_enums</name></member>
+      <member refid="structEvoScript_1_1Header_1a831da71fef39a9203eb6eeadd46177aa" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_functions</name></member>
+      <member refid="structEvoScript_1_1Header_1a817230c3f907f7b862d3d6b3241e5b3f" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_includes</name></member>
+      <member refid="structEvoScript_1_1Header_1a0ddc0d620620e44f33b873d2eeae486f" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_incompleteTypes</name></member>
+      <member refid="structEvoScript_1_1Header_1aead4fcf96feb9bed5a107dcc417eb584" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_name</name></member>
+      <member refid="structEvoScript_1_1Header_1a199648c969c61c2c82d1c1f08e5e27ec" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>m_typedefs</name></member>
+      <member refid="structEvoScript_1_1Header_1a3d6e8228d815dec253f6abc3cffea694" prot="public" virt="non-virtual"><scope>EvoScript::Header</scope><name>ToString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

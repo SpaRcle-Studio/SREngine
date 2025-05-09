@@ -16,7 +16,7 @@
 Inherits the following classes: [SR\_UTILS\_NS::ResourceContainer](classSR__UTILS__NS_1_1ResourceContainer.md),  [SR\_UTILS\_NS::SubscriptionHolder](classSR__UTILS__NS_1_1SubscriptionHolder.md)
 
 
-Inherited by the following classes: [SR\_ANIMATIONS\_NS::AnimationClip](classSR__ANIMATIONS__NS_1_1AnimationClip.md),  [SR\_AUDIO\_NS::RawSound](classSR__AUDIO__NS_1_1RawSound.md),  [SR\_AUDIO\_NS::Sound](classSR__AUDIO__NS_1_1Sound.md),  [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_GTYPES\_NS::Font](classSR__GTYPES__NS_1_1Font.md),  [SR\_GTYPES\_NS::Framebuffer](classSR__GTYPES__NS_1_1Framebuffer.md),  [SR\_GTYPES\_NS::Shader](classSR__GTYPES__NS_1_1Shader.md),  [SR\_GTYPES\_NS::Skybox](classSR__GTYPES__NS_1_1Skybox.md),  [SR\_GTYPES\_NS::Texture](classSR__GTYPES__NS_1_1Texture.md),  [SR\_PTYPES\_NS::PhysicsMaterial](classSR__PTYPES__NS_1_1PhysicsMaterial.md),  [SR\_SCRIPTING\_NS::IRawBehaviour](classSR__SCRIPTING__NS_1_1IRawBehaviour.md),  [SR\_SRLM\_NS::LogicalMachine](classSR__SRLM__NS_1_1LogicalMachine.md),  [SR\_UTILS\_NS::Prefab](classSR__UTILS__NS_1_1Prefab.md)
+Inherited by the following classes: [SR\_ANIMATIONS\_NS::AnimationClip](classSR__ANIMATIONS__NS_1_1AnimationClip.md),  [SR\_AUDIO\_NS::RawSound](classSR__AUDIO__NS_1_1RawSound.md),  [SR\_AUDIO\_NS::Sound](classSR__AUDIO__NS_1_1Sound.md),  [SR\_GRAPH\_NS::FileMaterialResource](classSR__GRAPH__NS_1_1FileMaterialResource.md),  [SR\_GTYPES\_NS::Font](classSR__GTYPES__NS_1_1Font.md),  [SR\_GTYPES\_NS::Framebuffer](classSR__GTYPES__NS_1_1Framebuffer.md),  [SR\_GTYPES\_NS::Shader](classSR__GTYPES__NS_1_1Shader.md),  [SR\_GTYPES\_NS::Skybox](classSR__GTYPES__NS_1_1Skybox.md),  [SR\_GTYPES\_NS::Texture](classSR__GTYPES__NS_1_1Texture.md),  [SR\_PTYPES\_NS::PhysicsMaterial](classSR__PTYPES__NS_1_1PhysicsMaterial.md),  [SR\_SRLM\_NS::LogicalMachine](classSR__SRLM__NS_1_1LogicalMachine.md),  [SR\_UTILS\_NS::Prefab](classSR__UTILS__NS_1_1Prefab.md)
 
 
 
@@ -200,11 +200,16 @@ See [SR\_UTILS\_NS::SubscriptionHolder](classSR__UTILS__NS_1_1SubscriptionHolder
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**Broadcast**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-broadcast-12) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
-|  void | [**Broadcast**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-broadcast-22) (const [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) & message) <br> |
+|  void | [**Broadcast**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-broadcast-12) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id) <br> |
+|  void | [**Broadcast**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-broadcast-22) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) & message) <br> |
 |  SR\_NODISCARD bool | [**HasSubscriptions**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-hassubscriptions) () noexcept const<br> |
 |  SR\_NODISCARD [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) | [**Subscribe**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscribe) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void(const [**SubscriptionMessage**](classSR__UTILS__NS_1_1SubscriptionMessage.md) &)&gt; && callback) <br> |
+|   | [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder-13) () <br> |
+|   | [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder-23) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) & other) = delete<br> |
+|   | [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder-33) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) && other) = delete<br> |
 |  void | [**Unsubscribe**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-unsubscribe) (const [**SubscriptionInternalInfo**](classSR__UTILS__NS_1_1SubscriptionInternalInfo.md) \* pSubscription) <br> |
+|  [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) & | [**operator=**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-operator) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) & other) = delete<br> |
+|  [**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) & | [**operator=**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-operator_1) ([**SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md) && other) = delete<br> |
 | virtual  | [**~SubscriptionHolder**](classSR__UTILS__NS_1_1SubscriptionHolder.md#function-subscriptionholder) () <br> |
 
 
@@ -332,8 +337,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -595,7 +600,7 @@ inline SR_NODISCARD uint64_t SR_UTILS_NS::IResource::GetLifetime () noexcept con
 ### function GetReloadCount 
 
 ```C++
-inline SR_NODISCARD uint16_t SR_UTILS_NS::IResource::GetReloadCount () noexcept const
+SR_NODISCARD uint16_t SR_UTILS_NS::IResource::GetReloadCount () noexcept const
 ```
 
 
@@ -634,7 +639,7 @@ inline SR_NODISCARD uint64_t SR_UTILS_NS::IResource::GetResourceHashName () noex
 ### function GetResourceId 
 
 ```C++
-inline SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::IResource::GetResourceId () noexcept const
+SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::IResource::GetResourceId () noexcept const
 ```
 
 
@@ -738,7 +743,7 @@ inline virtual SR_NODISCARD bool SR_UTILS_NS::IResource::IsAllowedToRevive () co
 ### function IsDestroyed 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::IResource::IsDestroyed () noexcept const
+SR_NODISCARD bool SR_UTILS_NS::IResource::IsDestroyed () noexcept const
 ```
 
 
@@ -778,7 +783,7 @@ inline SR_NODISCARD bool SR_UTILS_NS::IResource::IsForceDestroyed () const
 ### function IsLoaded 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::IResource::IsLoaded () noexcept const
+SR_NODISCARD bool SR_UTILS_NS::IResource::IsLoaded () noexcept const
 ```
 
 

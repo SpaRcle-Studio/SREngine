@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="33" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="35" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="35" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="18" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="18" bodyend="25"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="20" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="20" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1a759524e8296a1613d7f4c8804c9e3d79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="27" bodyend="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="29" bodyend="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -82,15 +82,15 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="16" bodyend="34"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="18" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="18" bodyend="36"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1ae618f846d8b0dc1cf896e88163678d6c" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>ImGuiDisabledLockGuard</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1a10a55beb9bb8a45cf88859b0cf100b54" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>m_disabled</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1a759524e8296a1613d7f4c8804c9e3d79" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>~ImGuiDisabledLockGuard</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

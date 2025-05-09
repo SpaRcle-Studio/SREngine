@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="14" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="16" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1ac6b9d60bd433c4515975d5212d5ddff9" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="16" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="18" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a487a1d6f4170b09910d2167d3db04279" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="18" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="20" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1af7528005dea9b730618ae87e9d683db4" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="20" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="22" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a3cb924f7d6d673c5036856d8f67a26e9" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="22" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="24" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a7597880ea4426fa251f6e4f4080d78ac" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="23" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="25" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1ae9ca3beeb1897636d9ec5eaf8b6c9520" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="25" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="27" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1GlyphMetrics_1a1e25e4815becbe5da651a35ca4d53184" prot="public" static="no" mutable="no">
         <type>int32_t</type>
@@ -125,14 +125,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="26" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="28" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="12" bodyend="27"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="14" bodyend="29"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1ae9ca3beeb1897636d9ec5eaf8b6c9520" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>advanceX</name></member>
       <member refid="structSR__GRAPH__NS_1_1GlyphMetrics_1a1e25e4815becbe5da651a35ca4d53184" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphMetrics</scope><name>advanceY</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="30" column="17"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="32" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1ae41650b8f4d52af2b0a164681c7c463f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>SR_NODISCARD <ref refid="structSR__GRAPH__NS_1_1ShaderUseInfo" kindref="compound">SR_GRAPH_NS::ShaderUseInfo</ref></type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="31" column="57"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="33" column="57"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -78,7 +78,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="28" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="28" bodyend="32"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" line="30" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Render/RenderPredicates.h" bodystart="30" bodyend="34"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1ae41650b8f4d52af2b0a164681c7c463f" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::ShaderReplacePredicate</scope><name>ReplaceShader</name></member>
       <member refid="classSR__GRAPH__NS_1_1ShaderReplacePredicate_1a8c27d1b6d8ad022203f55c9bcf096d7e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ShaderReplacePredicate</scope><name>~ShaderReplacePredicate</name></member>

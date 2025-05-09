@@ -18,7 +18,7 @@
 #include <Utils/Debug.h>
 
 namespace SR_HTYPES_NS {
-    class SR_DLL_EXPORT SignalSemaphore {
+    class SR_COMMON_DLL_API SignalSemaphore {
     public:
         SignalSemaphore()
             : m_lock(false)

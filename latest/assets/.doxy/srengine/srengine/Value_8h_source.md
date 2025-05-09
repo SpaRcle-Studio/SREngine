@@ -65,7 +65,7 @@ namespace SR_UTILS_NS::Reflection {
 
     };
 
-    class SR_DLL_EXPORT SR_NODISCARD ValueSequenceContainer {
+    class SR_COMMON_DLL_API SR_NODISCARD ValueSequenceContainer {
         friend Value;
     private:
         explicit ValueSequenceContainer(entt::meta_sequence_container&& storage)
@@ -88,43 +88,19 @@ namespace SR_UTILS_NS::Reflection {
     };
 
 
-    class SR_DLL_EXPORT SR_NODISCARD Value {
+    class SR_COMMON_DLL_API SR_NODISCARD Value {
         friend ValueSequenceContainerIterator;
         using SRClassGetterFn = SRClass*(*)(const Value&);
         using SRClassSetterFn = void(*)(Value&, SRClass*);
     private:
-        explicit Value(entt::meta_any&& storage)
-            : m_storage(std::move(storage))
-        { }
+        explicit Value(entt::meta_any&& storage);
 
     public:
-        Value() = default;
-
-        Value(const Value& other) {
-            if (other.IsRef()) {
-                m_storage = const_cast<entt::meta_any*>(&other.m_storage)->as_ref();
-            } else {
-                m_storage = other.m_storage;
-            }
-        }
-
-        Value& operator=(const Value& other) noexcept {
-            if (this != &other) {
-                if (other.IsRef()) {
-                    m_storage = const_cast<entt::meta_any*>(&other.m_storage)->as_ref();
-                } else {
-                    m_storage = other.m_storage;
-                }
-            }
-            return *this;
-        }
-
-        Value& operator=(Value&& other) noexcept {
-            if (this != &other) {
-                m_storage = other.IsRef() ? other.m_storage.as_ref() : other.m_storage;
-            }
-            return *this;
-        }
+        Value();
+        Value(const Value& other);
+        Value& operator=(const Value& other) noexcept;
+        Value& operator=(Value&& other) noexcept;
+        ~Value();
 
         template<typename T> static Value Create(T&& value);
         template<typename T> static Value CreateRef(T& value);

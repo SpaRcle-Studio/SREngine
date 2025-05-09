@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="12" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="14" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1afa25fab7fbb024cc2db4360fe8a7e6b4" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="13" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="15" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1afe91d234e500967d63a076d398de944c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="14" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="16" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1a346f7965182978a299711aabf2d4b9ac" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="15" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="17" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1aea56ba78f928da3cb57622f2e21d84e8" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="16" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="18" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1a56ca9d800f4f131ccefeb6b14871661c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="17" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="19" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1a90f875ce20ae87c1750cb71bde8fdbfc" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="18" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="20" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1FrameBufferFeatures_1add355b6b9f6f7296de36c41ccd7b8562" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -121,14 +121,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="19" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="21" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="11" bodyend="20"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" line="13" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/FrameBufferFeatures.h" bodystart="13" bodyend="22"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1afa25fab7fbb024cc2db4360fe8a7e6b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>colorLoad</name></member>
       <member refid="structSR__GRAPH__NS_1_1FrameBufferFeatures_1add355b6b9f6f7296de36c41ccd7b8562" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::FrameBufferFeatures</scope><name>colorShaderRead</name></member>

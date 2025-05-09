@@ -3,10 +3,10 @@
   <compounddef id="classSR__UTILS__NS_1_1ICloneable" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>SR_UTILS_NS::ICloneable</compoundname>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ICloneable_1ab34aa998d37a441d69c99dc6fa9d6e58" prot="protected" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>constexpr SR_UTILS_NS::ICloneable::ICloneable</definition>
-        <argsstring>()=default</argsstring>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ICloneable_1a85dd1af63e29bc00b2913f25ded64751" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::ICloneable::ICloneable</definition>
+        <argsstring>()</argsstring>
         <name>ICloneable</name>
         <qualifiedname>SR_UTILS_NS::ICloneable::ICloneable</qualifiedname>
         <briefdescription>
@@ -15,9 +15,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="35" column="19"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="35" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ICloneable_1aee6f415aff52b86bd9dd2f019655af23" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ICloneable_1aee6f415aff52b86bd9dd2f019655af23" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void SR_UTILS_NS::ICloneable::OnCloned</definition>
         <argsstring>()</argsstring>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="36" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" bodystart="36" bodyend="36"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="36" column="22"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1ICloneable_1a524aa32da79ea61d1875fe7ce127869e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1ICloneable_1a2f068a6f2fb6dd3d53390f4461c7fcdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
         <definition>virtual SR_UTILS_NS::ICloneable::~ICloneable</definition>
-        <argsstring>()=default</argsstring>
+        <argsstring>()</argsstring>
         <name>~ICloneable</name>
         <qualifiedname>SR_UTILS_NS::ICloneable::~ICloneable</qualifiedname>
         <briefdescription>
@@ -69,9 +69,9 @@
     <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="33" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" bodystart="33" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ICloneable_1a5b3442d2f03515441a8e60ff3e796afb" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::ICloneable</scope><name>Clone</name></member>
-      <member refid="classSR__UTILS__NS_1_1ICloneable_1ab34aa998d37a441d69c99dc6fa9d6e58" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ICloneable</scope><name>ICloneable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ICloneable_1a85dd1af63e29bc00b2913f25ded64751" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::ICloneable</scope><name>ICloneable</name></member>
       <member refid="classSR__UTILS__NS_1_1ICloneable_1aee6f415aff52b86bd9dd2f019655af23" prot="protected" virt="virtual"><scope>SR_UTILS_NS::ICloneable</scope><name>OnCloned</name></member>
-      <member refid="classSR__UTILS__NS_1_1ICloneable_1a524aa32da79ea61d1875fe7ce127869e" prot="public" virt="virtual"><scope>SR_UTILS_NS::ICloneable</scope><name>~ICloneable</name></member>
+      <member refid="classSR__UTILS__NS_1_1ICloneable_1a2f068a6f2fb6dd3d53390f4461c7fcdf" prot="public" virt="virtual"><scope>SR_UTILS_NS::ICloneable</scope><name>~ICloneable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

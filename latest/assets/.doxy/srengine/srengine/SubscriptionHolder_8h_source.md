@@ -23,51 +23,54 @@
 namespace SR_UTILS_NS {
     class SubscriptionHolder;
 
-    class SubscriptionMessage final : SR_UTILS_NS::NonCopyable {
+    class SR_COMMON_DLL_API SubscriptionMessage final : SR_UTILS_NS::NonCopyable {
     public:
-        void SetInt(const StringAtom id, const uint64_t value) {
-            m_ints[id] = value;
-        }
+        SubscriptionMessage();
+        ~SubscriptionMessage() override;
 
-        void SetBool(const StringAtom id, const bool value) {
-            m_bools[id] = value;
-        }
+        void SetInt(StringAtom id, uint64_t value);
+        void SetBool(StringAtom id, bool value);
+        void SetString(StringAtom id, const std::string& value);
+        void SetPath(StringAtom id, const SR_UTILS_NS::Path& value);
 
-        SR_NODISCARD uint64_t GetInt(const StringAtom id, const std::optional<uint64_t> def = std::nullopt) const {
-            if (const auto it = m_ints.find(id); it != m_ints.end()) {
+        SR_NODISCARD uint64_t GetInt(StringAtom id, const std::optional<uint64_t>& def = std::nullopt) const;
+        SR_NODISCARD bool GetBool(StringAtom id, const std::optional<bool>& def = std::nullopt) const;
+        SR_NODISCARD std::string GetString(StringAtom id, const std::optional<std::string>& def = std::nullopt) const;
+        SR_NODISCARD SR_UTILS_NS::Path GetPath(StringAtom id, const std::optional<SR_UTILS_NS::Path>& def = std::nullopt) const;
+        SR_NODISCARD const SR_UTILS_NS::Path& GetPathRef(StringAtom id) const;
+
+    private:
+        template<typename T, typename Container> SR_NODISCARD T GetValue(const StringAtom id, const Container& container, const std::optional<T> def) const {
+            if (const auto it = container.find(id); it != container.end()) {
                 return it->second;
             }
             if (def.has_value()) {
                 return def.value();
             }
-            SRHalt("SubscriptionMessage::GetInt() : id \"{}\" not found!", id.ToStringView());
-            return 0;
+            SRHalt("SubscriptionMessage::GetValue() : id \"{}\" not found!", id);
+            return T();
         }
 
-        SR_NODISCARD bool GetBool(const StringAtom id, const std::optional<bool> def = std::nullopt) const {
-            if (const auto it = m_bools.find(id); it != m_bools.end()) {
+        template<typename T, typename Container> SR_NODISCARD const T& GetValueRef(const StringAtom id, const Container& container) const {
+            if (const auto it = container.find(id); it != container.end()) {
                 return it->second;
             }
-            if (def.has_value()) {
-                return def.value();
-            }
-            SRHalt("SubscriptionMessage::GetBool() : id \"{}\" not found!", id.ToStringView());
-            return false;
+            SRHalt("SubscriptionMessage::GetValueRef() : id \"{}\" not found!", id);
+            static T defaultValue;
+            return defaultValue;
         }
 
     private:
         std::map<StringAtom, uint64_t> m_ints;
         std::map<StringAtom, bool> m_bools;
+        std::map<StringAtom, std::string> m_strings;
+        std::map<StringAtom, SR_UTILS_NS::Path> m_paths;
 
     };
 
-    class SubscriptionInternalInfo : SR_UTILS_NS::NonCopyable {
+    class SR_COMMON_DLL_API SubscriptionInternalInfo : SR_UTILS_NS::NonCopyable {
     public:
-        explicit SubscriptionInternalInfo(SR_HTYPES_NS::Function<void(const SubscriptionMessage&)>&& callback, SubscriptionHolder* pHolder)
-            : SR_UTILS_NS::NonCopyable()
-            , callback(std::move(callback))
-            , pHolder(pHolder)
-        { }
+        explicit SubscriptionInternalInfo(SR_HTYPES_NS::Function<void(const SubscriptionMessage&)>&& callback, SubscriptionHolder* pHolder);
 
         uint32_t index = SR_ID_INVALID;
         SR_HTYPES_NS::Function<void(const SubscriptionMessage&)> callback;
@@ -75,24 +78,13 @@ namespace SR_UTILS_NS {
         StringAtom id;
     };
 
-    class Subscription final : SR_UTILS_NS::NonCopyable {
+    class SR_COMMON_DLL_API Subscription final : SR_UTILS_NS::NonCopyable {
     public:
-        Subscription() = default;
+        Subscription();
         ~Subscription() override;
-
-        explicit Subscription(SubscriptionInternalInfo* pInternalInfo)
-            : m_internalInfo(pInternalInfo)
-        { }
-
-        Subscription(Subscription&& other) noexcept
-            : m_internalInfo(SR_EXCHANGE(other.m_internalInfo, nullptr))
-        { }
-
-        Subscription& operator=(Subscription&& other) noexcept {
-            Reset();
-            m_internalInfo = SR_EXCHANGE(other.m_internalInfo, nullptr);
-            return *this;
-        }
+        explicit Subscription(SubscriptionInternalInfo* pInternalInfo);
+        Subscription(Subscription&& other) noexcept;
+        Subscription& operator=(Subscription&& other) noexcept;
 
         void Reset();
 
@@ -101,45 +93,22 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SubscriptionHolder {
+    class SR_COMMON_DLL_API SubscriptionHolder {
     public:
+        SubscriptionHolder();
+        SubscriptionHolder(SubscriptionHolder& other) = delete;
+        SubscriptionHolder(SubscriptionHolder&& other) = delete;
+        SubscriptionHolder& operator=(SubscriptionHolder& other) = delete;
+        SubscriptionHolder& operator=(SubscriptionHolder&& other) = delete;
         virtual ~SubscriptionHolder();
 
         SR_NODISCARD Subscription Subscribe(StringAtom id, SR_HTYPES_NS::Function<void(const SubscriptionMessage&)>&& callback);
+        SR_NODISCARD bool HasSubscriptions() const noexcept;
 
-        SR_NODISCARD bool HasSubscriptions() const noexcept {
-            return m_count > 0;
-        }
+        void Unsubscribe(const SubscriptionInternalInfo* pSubscription);
 
-        void Unsubscribe(const SubscriptionInternalInfo* pSubscription) {
-            if (auto it = m_subscriptions.find(pSubscription->id); it != m_subscriptions.end()) {
-                auto& pool = it->second;
-                pool.RemoveByIndex(pSubscription->index);
-                delete pSubscription;
-                SRAssert(m_count > 0);
-                --m_count;
-            }
-            else {
-                SRHalt("SubscriptionHolder::Unsubscribe() : subscription not found!");
-            }
-        }
-
-        void Broadcast(const StringAtom id) {
-            static SubscriptionMessage message;
-            if (const auto it = m_subscriptions.find(id); it != m_subscriptions.end()) {
-                it->second.ForEach([](uint32_t, auto&& pSubscription) {
-                    pSubscription->callback(message);
-                });
-            }
-        }
-
-        void Broadcast(const StringAtom id, const SubscriptionMessage& message) {
-            if (const auto it = m_subscriptions.find(id); it != m_subscriptions.end()) {
-                it->second.ForEach([&message](uint32_t, auto&& pSubscription) {
-                    pSubscription->callback(message);
-                });
-            }
-        }
+        void Broadcast(StringAtom id);
+        void Broadcast(StringAtom id, const SubscriptionMessage& message);
 
     private:
         std::map<StringAtom, SR_HTYPES_NS::ObjectPool<SubscriptionInternalInfo*, uint32_t>> m_subscriptions;

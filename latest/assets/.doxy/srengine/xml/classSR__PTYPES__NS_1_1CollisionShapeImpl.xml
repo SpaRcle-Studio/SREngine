@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="42" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="44" column="24" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="28" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="28" bodyend="28"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="30" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a7b2f43af9f82909f0e6f608e2e93ea13" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="29" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="31" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a82ac2293adc326fab0b9dbdbc06a7dbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="30" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="30" bodyend="30"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="32" column="22" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a76c2c0a950fbc551d69d8d108197f7df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="32" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="34" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a2225190aa1ab2a4ddf5b4202342c2b23" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="34" column="51" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="34" bodyend="36"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="36" column="51" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="36" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a923c7bb373a4217535c2443567c51244" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="38" column="35" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="38" bodyend="38"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="40" column="35" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="40" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a572967d0c46534df86bb63e2a4638de5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__PTYPES__NS_1_1CollisionShape" kindref="compound">CollisionShape</ref> *</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="39" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="39" bodyend="39"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="41" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="41" bodyend="41"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -170,20 +170,20 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="26" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="26" bodyend="44"/>
+    <location file="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" line="28" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/CollisionShape.h" bodystart="28" bodyend="46"/>
     <listofallmembers>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a2225190aa1ab2a4ddf5b4202342c2b23" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>CalculateLocalInertia</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a923c7bb373a4217535c2443567c51244" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>GetHandle</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a572967d0c46534df86bb63e2a4638de5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>GetShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1af85aa861fa8f740a9a4072fff2b59d81" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>m_shape</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>operator=</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a76c2c0a950fbc551d69d8d108197f7df" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>SetShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1ab8d07a5b987cbd7a50bf3ceb356b3d9f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>Update</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a82ac2293adc326fab0b9dbdbc06a7dbe" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a7b2f43af9f82909f0e6f608e2e93ea13" prot="public" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>UpdateShape</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::CollisionShapeImpl</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

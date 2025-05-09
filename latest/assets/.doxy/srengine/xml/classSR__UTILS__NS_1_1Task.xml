@@ -375,7 +375,7 @@
       <member refid="classSR__UTILS__NS_1_1Task_1ac2e80151eb920d556f1d9455b0ac18b8" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>m_id</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1acc2413cb8e473d51f15b4bdadcefc3cb" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>m_state</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1ad2301bd6abb0d26f4fae6975ad21b6c1" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>m_thread</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1a35b76a7bb16ed1c238d876cbd4c856f6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::Task</scope><name>operator=</name></member>
@@ -387,7 +387,7 @@
       <member refid="classSR__UTILS__NS_1_1Task_1a87bd92a1bc8f8d47a2a565e5dbdee16d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>Task</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1a0801cc43d1a3f348e17535b90f43acac" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>Task</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1a414ce1d120a1195fae48f8d26a1d7497" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>TaskFn</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Task</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Task</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Task_1a4ab64ac291e3600a6b680c282994cb4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Task</scope><name>~Task</name></member>
     </listofallmembers>
   </compounddef>

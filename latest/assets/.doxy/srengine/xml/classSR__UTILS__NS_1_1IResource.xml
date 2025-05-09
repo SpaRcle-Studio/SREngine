@@ -14,7 +14,6 @@
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Skybox" prot="public" virt="non-virtual">SR_GTYPES_NS::Skybox</derivedcompoundref>
     <derivedcompoundref refid="classSR__GTYPES__NS_1_1Texture" prot="public" virt="non-virtual">SR_GTYPES_NS::Texture</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1PhysicsMaterial" prot="public" virt="non-virtual">SR_PTYPES_NS::PhysicsMaterial</derivedcompoundref>
-    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1IRawBehaviour" prot="public" virt="non-virtual">SR_SCRIPTING_NS::IRawBehaviour</derivedcompoundref>
     <derivedcompoundref refid="classSR__SRLM__NS_1_1LogicalMachine" prot="public" virt="non-virtual">SR_SRLM_NS::LogicalMachine</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Prefab" prot="public" virt="non-virtual">SR_UTILS_NS::Prefab</derivedcompoundref>
     <sectiondef kind="public-type">
@@ -565,7 +564,6 @@
         <reimplementedby refid="classSR__AUDIO__NS_1_1Sound_1a5ada1ffad30820ae7a59c6b391b1e188">GetFileHash</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Framebuffer_1a7f4513af80dd3c1cfeb4c6211ea2df75">GetFileHash</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Skybox_1a90e25702787cbb6e1b2335eedd7c0043">GetFileHash</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ace544660c68fa3c49073c6c8eba6737e">GetFileHash</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -640,7 +638,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="60" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="60" bodyend="60"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a84c1674173da29d57d1528ccb9d9c1b9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
         <definition>SR_NODISCARD bool SR_UTILS_NS::IResource::IsLoaded</definition>
         <argsstring>() const noexcept</argsstring>
@@ -652,9 +650,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="61" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="61" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a47131cd914c3a6c8a7c03a4764559716" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
         <definition>SR_NODISCARD bool SR_UTILS_NS::IResource::IsDestroyed</definition>
         <argsstring>() const noexcept</argsstring>
@@ -666,7 +664,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="62" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="62" bodyend="62"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="62" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1a9276c48812f77bea62428fa4a59792d0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -696,7 +694,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="64" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="64" bodyend="64"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ab9a8347f2812fce37f53741a5865758c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint16_t</type>
         <definition>SR_NODISCARD uint16_t SR_UTILS_NS::IResource::GetReloadCount</definition>
         <argsstring>() const noexcept</argsstring>
@@ -708,7 +706,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="65" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="65" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ae6953f64e0856bd2ba3891c1a4529f73" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint64_t</type>
@@ -738,7 +736,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="67" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="67" bodyend="67"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac4d26a90ba1c28b82f71b28d1eb77dc9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
         <definition>SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::IResource::GetResourceId</definition>
         <argsstring>() const noexcept</argsstring>
@@ -750,7 +748,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="68" column="46" bodyfile="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" bodystart="68" bodyend="68"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Resources/IResource.h" line="68" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IResource_1ac663dc33feca74c372905c497dae10d0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD LoadState</type>
@@ -936,7 +934,6 @@
         <name>OnReloadDone</name>
         <qualifiedname>SR_UTILS_NS::IResource::OnReloadDone</qualifiedname>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1a969832da4bf63e53549fcd44dfa7f1f7">OnReloadDone</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a18a8fd04a9fe7705ec664083bcb1c649">OnReloadDone</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -998,7 +995,6 @@
         <qualifiedname>SR_UTILS_NS::IResource::Reload</qualifiedname>
         <reimplementedby refid="classSR__AUDIO__NS_1_1RawSound_1a5b8b791713f1d2b9999a9ea32fbb4c74">Reload</reimplementedby>
         <reimplementedby refid="classSR__AUDIO__NS_1_1Sound_1ad6b2231b5c871ac9e6e4f7ca2628212f">Reload</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1ad3be0e8218a8b2b4c6a922093a43df64">Reload</reimplementedby>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1021,8 +1017,6 @@
         <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1a6626d1907c9de6985f91015eb5e56a55">Unload</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Texture_1aa6df2ce4ebf931fddf271474a29aae80">Unload</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1ac8f715f54be0c9b7186d66f1cc60f8be">Unload</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a24eb129e303adba64c89c0c7a6453b9d">Unload</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1ab042ddc3d3c08d3c31685e634b96e2fd">Unload</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1Prefab_1a22864bb450c8b92a7b02bd775dca1861">Unload</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1a9865f9689a3291a70933bd0b4ea4c256">Unload</reimplementedby>
         <briefdescription>
@@ -1047,8 +1041,6 @@
         <reimplementedby refid="classSR__GTYPES__NS_1_1Shader_1a35e3d9350ffdad6bb90fe4715f3fc476">Load</reimplementedby>
         <reimplementedby refid="classSR__GTYPES__NS_1_1Texture_1aca045e656905ad2a6a68c646802e296c">Load</reimplementedby>
         <reimplementedby refid="classSR__PTYPES__NS_1_1PhysicsMaterial_1add639a8a30846a7d4f75e87f3e6a3fc6">Load</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1IRawBehaviour_1a8225920b0ced1a39f2a3c877e4fde5fe">Load</reimplementedby>
-        <reimplementedby refid="classSR__SCRIPTING__NS_1_1EvoBehaviour_1a1de8d943155a764da877740f115b20a1">Load</reimplementedby>
         <reimplementedby refid="classSR__UTILS__NS_1_1Prefab_1ae36898b43f196487e085a5a8dec23cae">Load</reimplementedby>
         <reimplementedby refid="classSR__SRLM__NS_1_1LogicalMachine_1aa1f3dbe4292a77ffd711b148ab2ebc10">Load</reimplementedby>
         <briefdescription>
@@ -1253,10 +1245,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="16">
         <label>SR_GRAPH_NS::ScriptableRenderTechnique</label>
         <link refid="classSR__GRAPH__NS_1_1ScriptableRenderTechnique"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
@@ -1295,19 +1287,7 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
-        <label>SR_SCRIPTING_NS::EvoBehaviour</label>
-        <link refid="classSR__SCRIPTING__NS_1_1EvoBehaviour"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="15">
-        <label>SR_SCRIPTING_NS::IRawBehaviour</label>
-        <link refid="classSR__SCRIPTING__NS_1_1IRawBehaviour"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="17">
         <label>SR_SRLM_NS::LogicalMachine</label>
         <link refid="classSR__SRLM__NS_1_1LogicalMachine"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1325,7 +1305,7 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="19">
+      <node id="17">
         <label>SR_UTILS_NS::Prefab</label>
         <link refid="classSR__UTILS__NS_1_1Prefab"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1378,8 +1358,8 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>AddUsePoint</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Broadcast</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>CheckResourceUsage</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>CopyResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>DeleteResource</name></member>
@@ -1432,12 +1412,14 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1ae146bd14fe7c055c46f7115880a2ade2" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>m_resourceInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ae45988894b6e7612c75927d2cb5bde48" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>m_resourcePath</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>m_watchers</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>OnReloadDone</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>OnResourceRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_UTILS_NS::IResource</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_UTILS_NS::IResource</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_UTILS_NS::IResource</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a49a0ec81c7a8b434b0c46d8df4c38661" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Ptr</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>Reload</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>RELOAD_BEGIN_EVENT</name></member>
@@ -1455,13 +1437,16 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a390fbb6e6cd4a4c42f5dc34c0d342e3c" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>StartWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>StopWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Subscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1af392415b85f9be9f8c7f0a2b7f30eb08" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Super</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>Unload</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>Unsubscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>UpdateResourceLifeTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>UpdateResources</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>~IResource</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::IResource</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_UTILS_NS::IResource</scope><name>~SubscriptionHolder</name></member>
     </listofallmembers>

@@ -15,6 +15,8 @@
 #ifndef SR_GRAPHICS_RENDER_I_RENDERER_H
 #define SR_GRAPHICS_RENDER_I_RENDERER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/TypeTraits/SRClass.h>
 

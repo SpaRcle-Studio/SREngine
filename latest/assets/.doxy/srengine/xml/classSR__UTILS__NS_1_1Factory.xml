@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="27" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="28" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1Factory_1ad415b85000df66c4e79b39e0e6476d43" prot="private" static="no">
         <type>const <ref refid="classSR__UTILS__NS_1_1SRClassMeta" kindref="compound">SRClassMeta</ref> *(*)()</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="28" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="29" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="29" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="140" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="140" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="89" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="36" column="37"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="38" column="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -88,9 +88,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="38" column="46"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="40" column="46"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1ac53d010b06ffccd1dabbe8d683a663ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a71ddf67dde2896204c693268f1291bc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class T</type>
@@ -98,16 +98,39 @@
         </templateparamlist>
         <type>bool</type>
         <definition>bool SR_UTILS_NS::Factory::Register</definition>
-        <argsstring>()</argsstring>
+        <argsstring>(SR_UTILS_NS::StringAtom moduleName)</argsstring>
         <name>Register</name>
         <qualifiedname>SR_UTILS_NS::Factory::Register</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>moduleName</declname>
+        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="40" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="40" bodyend="71"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="42" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="93" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a96869148b0bf9d48ba090d35fca41ec9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool SR_UTILS_NS::Factory::Unregister</definition>
+        <argsstring>()</argsstring>
+        <name>Unregister</name>
+        <qualifiedname>SR_UTILS_NS::Factory::Unregister</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="43" column="25" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="130" bodyend="147"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aaaae777f553140cc3aaad4afaf903da0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -135,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="73" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="73" bodyend="78"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="45" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="45" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a46126c4f01addcdce938bb69e401c70f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -154,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="80" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="80" bodyend="82"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="52" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="52" bodyend="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a92b042c9e5d6381a53f18f7028f31273" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -177,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="84" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="84" bodyend="99"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="56" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="56" bodyend="71"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a8ba1371f8fad7f7df981dd97bb637627" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -196,9 +219,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="101" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="101" bodyend="103"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="73" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="73" bodyend="75"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a1c4343507e9222623d73f64bf1c8dd32" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a1c4343507e9222623d73f64bf1c8dd32" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SRClass</ref> *</type>
         <definition>SR_NODISCARD SRClass * SR_UTILS_NS::Factory::CreateBase</definition>
         <argsstring>(SR_UTILS_NS::StringAtom name) const noexcept</argsstring>
@@ -214,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="105" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="105" bodyend="125"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="77" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1ad422a2e2f1f0ffdb801ff0c44c102a9a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -232,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="127" column="34"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="78" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aa407e8f279036bf0afbc7ff1074c3b28" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -250,9 +273,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="129" column="27"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="79" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aa43262d314840159b15320ab11bdc464" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1aa43262d314840159b15320ab11bdc464" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD const <ref refid="classSR__UTILS__NS_1_1SRClassMeta" kindref="compound">SRClassMeta</ref> *</type>
         <definition>SR_NODISCARD const SRClassMeta * SR_UTILS_NS::Factory::GetType</definition>
         <argsstring>(SR_UTILS_NS::StringAtom name) const noexcept override</argsstring>
@@ -269,7 +292,85 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="131" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="131" bodyend="137"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="80" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a8e1355ed93077eb307681239e84db8b3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD const TypeInfo *</type>
+        <definition>SR_NODISCARD const TypeInfo * SR_UTILS_NS::Factory::GetTypeInfo</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom name) const noexcept</argsstring>
+        <name>GetTypeInfo</name>
+        <qualifiedname>SR_UTILS_NS::Factory::GetTypeInfo</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="81" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1acaa2a0e7f867d3fd844510ef1322f822" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SR_NODISCARD void</type>
+        <definition>SR_NODISCARD void SR_UTILS_NS::Factory::ForEachClassInModule</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom moduleName, const std::function&lt; void(const SRClassMeta *)&gt; &amp;func) const noexcept</argsstring>
+        <name>ForEachClassInModule</name>
+        <qualifiedname>SR_UTILS_NS::Factory::ForEachClassInModule</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>moduleName</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; void(const <ref refid="classSR__UTILS__NS_1_1SRClassMeta" kindref="compound">SRClassMeta</ref> *)&gt; &amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="82" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a3e6c39e2adab7fb215dc703fe8224f74" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Factory::WriteLog</definition>
+        <argsstring>(const std::string &amp;message) const noexcept</argsstring>
+        <name>WriteLog</name>
+        <qualifiedname>SR_UTILS_NS::Factory::WriteLog</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Factory_1a67220e10d3697bc683dbd1f14d4df7e3" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_UTILS_NS::Factory::WriteError</definition>
+        <argsstring>(const std::string &amp;message) const noexcept</argsstring>
+        <name>WriteError</name>
+        <qualifiedname>SR_UTILS_NS::Factory::WriteError</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="86" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -300,23 +401,28 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="26" bodyend="142"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" line="27" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TypeTraits/Factory.h" bodystart="27" bodyend="91"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Factory_1ac3223e9e0b0c2cb7adc6569821cda82a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>AllocatorT</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1a92b042c9e5d6381a53f18f7028f31273" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Create</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1a8ba1371f8fad7f7df981dd97bb637627" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Create</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1a1c4343507e9222623d73f64bf1c8dd32" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>CreateBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Factory_1acaa2a0e7f867d3fd844510ef1322f822" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>ForEachClassInModule</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1ad422a2e2f1f0ffdb801ff0c44c102a9a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>GetInheritances</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1a72e3d03c46e55864eaa6657b910cf713" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1aaaae777f553140cc3aaad4afaf903da0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1a46126c4f01addcdce938bb69e401c70f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>GetName</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1aa43262d314840159b15320ab11bdc464" prot="public" virt="virtual"><scope>SR_UTILS_NS::Factory</scope><name>GetType</name></member>
+      <member refid="classSR__UTILS__NS_1_1Factory_1a8e1355ed93077eb307681239e84db8b3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>GetTypeInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1ab2276bed56f3ffa2ab8854adba8bde3f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1aa407e8f279036bf0afbc7ff1074c3b28" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>IsAbstract</name></member>
       <member refid="classSR__UTILS__NS_1_1BaseFactory_1ae486944718b0c40866b94b855ecb14a2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>IsRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1ac09abedb78d73dbaa1ca40ad042436b1" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>m_types</name></member>
       <member refid="classSR__UTILS__NS_1_1Factory_1ad415b85000df66c4e79b39e0e6476d43" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>MetaGetterT</name></member>
-      <member refid="classSR__UTILS__NS_1_1Factory_1ac53d010b06ffccd1dabbe8d683a663ab" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Register</name></member>
+      <member refid="classSR__UTILS__NS_1_1Factory_1a71ddf67dde2896204c693268f1291bc8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Register</name></member>
+      <member refid="classSR__UTILS__NS_1_1Factory_1a96869148b0bf9d48ba090d35fca41ec9" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>Unregister</name></member>
+      <member refid="classSR__UTILS__NS_1_1Factory_1a67220e10d3697bc683dbd1f14d4df7e3" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>WriteError</name></member>
+      <member refid="classSR__UTILS__NS_1_1Factory_1a3e6c39e2adab7fb215dc703fe8224f74" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Factory</scope><name>WriteLog</name></member>
       <member refid="classSR__UTILS__NS_1_1BaseFactory_1a9d5902f2d57031bcee08d789b3e92282" prot="public" virt="virtual"><scope>SR_UTILS_NS::Factory</scope><name>~BaseFactory</name></member>
     </listofallmembers>
   </compounddef>

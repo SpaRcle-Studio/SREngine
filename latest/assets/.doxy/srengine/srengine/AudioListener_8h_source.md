@@ -12,8 +12,10 @@
 // Created by Capitan_Slider on 16.09.2023.
 //
 
-#ifndef SR_ENGINE_AUDIOLSTENER_H
-#define SR_ENGINE_AUDIOLSTENER_H
+#ifndef SR_ENGINE_AUDIOLISTENER_H
+#define SR_ENGINE_AUDIOLISTENER_H
+
+#include <Audio/macros.h>
 
 #include <Audio/ListenerData.h>
 #include <Utils/ECS/Component.h>
@@ -49,7 +51,7 @@ namespace SR_AUDIO_NS
     };
 }
 
-#endif //SR_ENGINE_AUDIOLSTENER_H
+#endif //SR_ENGINE_AUDIOLISTENER_H
 ```
 
 

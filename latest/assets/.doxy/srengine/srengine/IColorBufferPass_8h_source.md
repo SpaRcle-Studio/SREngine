@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_I_COLOR_BUFFER_PASS_H
 #define SR_ENGINE_GRAPHICS_I_COLOR_BUFFER_PASS_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Math/Vector4.h>
 
 namespace SR_GTYPES_NS {

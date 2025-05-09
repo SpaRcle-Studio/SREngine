@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_UNIFORMS_H
 #define SR_ENGINE_UNIFORMS_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS {

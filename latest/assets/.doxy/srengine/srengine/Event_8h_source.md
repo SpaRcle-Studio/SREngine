@@ -18,17 +18,17 @@
 #include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT IEvent {
+    class SR_COMMON_DLL_API IEvent {
     protected:
-        IEvent() = default;
-        virtual ~IEvent() = default;
+        IEvent();
+        virtual ~IEvent();
 
     public:
         SR_NODISCARD virtual const std::string& GetEventName() const = 0;
 
     };
 
-    template <typename ..._args> class SR_DLL_EXPORT Event : public IEvent {
+    template <typename ..._args> class SR_COMMON_DLL_API Event : public IEvent {
         using CallBack = std::function<void(_args...)>;
     public:
         explicit Event(std::string name)
@@ -41,12 +41,18 @@ namespace SR_UTILS_NS {
         virtual void Trigger(_args... a) { }
 
     private:
-        SR_NODISCARD const std::string& GetEventName() const override { return m_name; }
+        SR_NODISCARD const std::string& GetEventName() const override;
 
     private:
         std::string m_name;
 
     };
+
+#ifdef SR_COMMON_DLL_EXPORTS
+    template<typename... _args> const std::string &Event<_args...>::GetEventName() const {
+        return m_name;
+    }
+#endif
 }
 
 #endif //SR_ENGINE_EVENT_H

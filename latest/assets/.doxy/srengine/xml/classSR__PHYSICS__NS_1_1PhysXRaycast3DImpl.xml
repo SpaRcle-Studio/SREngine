@@ -147,7 +147,7 @@
     <listofallmembers>
       <member refid="classSR__PHYSICS__NS_1_1PhysXRaycast3DImpl_1a93f9e342a15492aa4088e897ab33d9a9" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>Cast</name></member>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1a9d60b6513b7139e456732335e6c58c68" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>m_world</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>operator=</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXRaycast3DImpl_1abc10c467079b547ec76bc8b21b4f509a" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>PhysXRaycast3DImpl</name></member>
@@ -155,7 +155,7 @@
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1aad46f59907f00c14ddef9a9731b30e7b" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>RaycastHits</name></member>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1a3c6cda8bd18e0cae3d2c916514ff8126" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>RaycastImpl</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXRaycast3DImpl_1ad6b1eb02c283f5ee6658771d747fb064" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>Super</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>~NonCopyable</name></member>
       <member refid="classSR__PHYSICS__NS_1_1RaycastImpl_1a742e4cba46294b59f9534cc7b451b9a4" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXRaycast3DImpl</scope><name>~RaycastImpl</name></member>
     </listofallmembers>
   </compounddef>

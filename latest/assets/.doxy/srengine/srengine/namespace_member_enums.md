@@ -10,6 +10,7 @@
 
 ## c
 
+* **CastingType** ([**EvoScript**](namespaceEvoScript.md))
 * **CSSBoxSizing** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **CSSDisplay** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
 * **CSSGradientSide** ([**SR\_UTILS\_NS::Web**](namespaceSR__UTILS__NS_1_1Web.md))
@@ -40,16 +41,21 @@
 
 ## m
 
+* **MethodType** ([**EvoScript**](namespaceEvoScript.md))
 * **MaterialPropertyChangeResult** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **MessageBoxButtonBits** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
-* **MessageBoxType** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
+* **MessageBoxType** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md), [**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
 * **MeshMemoryType** ([**SR\_GRAPH\_NS::Memory**](namespaceSR__GRAPH__NS_1_1Memory.md))
+* **MessageBoxDefaultButtonType** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
+* **MessageBoxIconType** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
+* **MessageBoxResultType** ([**SR\_PLATFORM\_NS**](namespaceSR__PLATFORM__NS.md))
 * **MarshalSaveMode** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **MouseCode** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 
 
 ## p
 
+* **Publicity** ([**EvoScript**](namespaceEvoScript.md))
 * **PipeLine** ([**SR\_UTILS\_NS::Graph**](namespaceSR__UTILS__NS_1_1Graph.md))
 
 
@@ -62,7 +68,6 @@
 
 * **SoundFormat** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **StyleState** ([**SR\_GRAPH\_NS::WinAPI**](namespaceSR__GRAPH__NS_1_1WinAPI.md))
-* **ScriptType** ([**SR\_SCRIPTING\_NS**](namespaceSR__SCRIPTING__NS.md))
 * **SerializationDataType** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SharedPtrPolicy** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SyncType** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))

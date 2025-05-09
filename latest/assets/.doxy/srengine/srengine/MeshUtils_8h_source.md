@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_MESH_UTILS_H
 #define SR_ENGINE_MESH_UTILS_H
 
+#include <Graphics/macros.h>
+
 #include <Graphics/Utils/MeshTypes.h>
 
 namespace SR_GTYPES_NS {

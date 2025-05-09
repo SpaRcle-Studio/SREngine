@@ -202,14 +202,14 @@
       <member refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1a584fcdc1ea2cf9dadd203372bb7e36c9" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>IsShapeSupported</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1aef3ea6e1dd14497f3d7a47f6bd61d76b" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>IsVehicleSupported</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a3759f9c8e3bfd58b4e25f794a3877707" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>LibraryImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>operator=</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a9eacebf62880b4e50958f8224961eed4" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>Space</name></member>
       <member refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1aead9b46fc3f5347dfd589bd3195ffe46" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>Super</name></member>
       <member refid="classSR__PHYSICS__NS_1_1Box2DLibraryImpl_1afd33597070249202674014816df576db" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>~Box2DLibraryImpl</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a60e7fcdb1afbad64b55483d699445b72" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>~LibraryImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::Box2DLibraryImpl</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

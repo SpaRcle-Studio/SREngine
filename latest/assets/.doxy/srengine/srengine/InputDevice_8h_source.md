@@ -27,7 +27,7 @@ namespace SR_UTILS_NS {
         Joystick
     );
 
-    class SR_DLL_EXPORT InputDeviceData : public NonCopyable {
+    class SR_COMMON_DLL_API InputDeviceData : public NonCopyable {
     public:
         ~InputDeviceData() override = default;
 
@@ -36,7 +36,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT MouseInputData : public InputDeviceData {
+    class SR_COMMON_DLL_API MouseInputData : public InputDeviceData {
     public:
         ~MouseInputData() override = default;
 
@@ -72,7 +72,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT KeyboardInputData : public InputDeviceData {
+    class SR_COMMON_DLL_API KeyboardInputData : public InputDeviceData {
     public:
         KeyboardInputData(KeyCode code, KeyState state)
             : m_code(code)

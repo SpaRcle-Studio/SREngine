@@ -230,14 +230,14 @@
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8defe15a64304984ac5bbb4bec8bf13a" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>IsEndOfStream</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a372028ebebed211b3aa15210533f15d3" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>IsStreaming</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a520b48179b5c4a3d4e1f99bf6f72395f" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>IsValid</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>operator=</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a23590a109d5a88509df288eb48877ccb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>Ptr</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a6b4466d3ec1888197aa7b8502896a186" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>Seek</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1ae64cfd3e4df002b4b8f24032f3d2eec8" prot="public" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>StreamWaveData</name></member>
       <member refid="classSR__AUDIO__NS_1_1IWaveDataProvider_1a8931d5989f2b446efc900c6c75d00b27" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>~IWaveDataProvider</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::IWaveDataProvider</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

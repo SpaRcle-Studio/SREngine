@@ -198,20 +198,20 @@
       <node id="6">
         <label>Entity</label>
       </node>
-      <node id="13">
+      <node id="11">
         <label>SR_MATH_NS::Quaternion</label>
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
-      <node id="12">
+      <node id="10">
         <label>SR_PHYSICS_NS::LibraryImpl</label>
         <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="12">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="15" relation="public-inheritance">
+        <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
@@ -219,7 +219,7 @@
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="5" relation="public-inheritance">
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_center</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
@@ -227,13 +227,13 @@
         <childnode refid="2" relation="usage">
           <edgelabel>m_impl</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="10" relation="usage">
           <edgelabel>m_library</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_rotation</edgelabel>
         </childnode>
-        <childnode refid="14" relation="usage">
+        <childnode refid="12" relation="usage">
           <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
@@ -251,10 +251,10 @@
         <childnode refid="4" relation="usage">
           <edgelabel>m_rigidbody</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_rigidbodyRotation</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="9" relation="usage">
           <edgelabel>m_rigidbodyTranslation</edgelabel>
         </childnode>
       </node>
@@ -269,9 +269,6 @@
         <childnode refid="8" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="7">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -279,14 +276,14 @@
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="13">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -295,29 +292,17 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="10">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
+      <node id="14">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="16">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="17">
+      <node id="15">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
@@ -327,7 +312,7 @@
         <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="9">
         <label>SR_MATH_NS::Vector3&lt; Unit &gt;</label>
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
@@ -346,7 +331,7 @@
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a68329c322874647a5bdd1e359c29b24c" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_rigidbody</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1ac64e11b6b8d4d6808129b7d529d1ee03" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_rigidbodyRotation</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a08b7a98f60c575a9653846a364421d18" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>m_rigidbodyTranslation</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>operator=</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a6fc49788a6962100241d99ec120f3b9d" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>PhysicsScenePtr</name></member>
@@ -360,7 +345,7 @@
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1aaef6188500b24ed9e12254731132c56e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>UpdateInertia</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a3b3fcbd106764d6372e3180922ad129e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__PTYPES__NS_1_1RigidbodyImpl_1a8ff0f70440768bc847e834e589150c3d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>UpdateShapeInternal</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::Rigidbody3DImpl</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

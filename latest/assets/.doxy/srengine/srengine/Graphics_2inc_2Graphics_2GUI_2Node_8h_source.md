@@ -41,7 +41,7 @@ namespace SR_GRAPH_GUI_NS {
     public:
         Node();
         explicit Node(const std::string& name);
-        explicit Node(SR_SRLM_NS::LogicalNode* pNode);
+        //explicit Node(SR_SRLM_NS::LogicalNode* pNode);
         Node(const std::string& name, NodeType type);
         Node(const std::string& name, ImColor color);
         Node(std::string  name, NodeType type, ImColor color);
@@ -52,14 +52,14 @@ namespace SR_GRAPH_GUI_NS {
         Node& AddInput(Pin* pin);
         Node& AddOutput(Pin* pin);
 
-        Node& AddInput(PinType type);
+        /*Node& AddInput(PinType type);
         Node& AddOutput(PinType type);
 
         Node& AddInput(const std::string& name, PinType type);
         Node& AddOutput(const std::string& name, PinType type);
 
         Node& AddInput(const std::string& name, SR_SRLM_NS::DataType* pDataType);
-        Node& AddOutput(const std::string& name, SR_SRLM_NS::DataType* pDataType);
+        Node& AddOutput(const std::string& name, SR_SRLM_NS::DataType* pDataType);*/
 
         void RemoveInput(uint32_t index);
         void RemoveOutput(uint32_t index);
@@ -75,7 +75,7 @@ namespace SR_GRAPH_GUI_NS {
         SR_NODISCARD const std::vector<Pin*>& GetOutputs() const noexcept { return m_outputs; }
         SR_NODISCARD int32_t GetPinIndex(const Pin* pPin) const;
         SR_NODISCARD SR_MATH_NS::FVector2 GetPosition() const;
-        SR_NODISCARD SR_SRLM_NS::LogicalNode* GetLogicalNode() const { return m_logicalNode; }
+        //SR_NODISCARD SR_SRLM_NS::LogicalNode* GetLogicalNode() const { return m_logicalNode; }
 
         Node& SetName(std::string name);
         Node& SetPosition(const SR_MATH_NS::FVector2& pos);
@@ -85,7 +85,7 @@ namespace SR_GRAPH_GUI_NS {
         void PostDraw();
 
     private:
-        SR_SRLM_NS::LogicalNode* m_logicalNode = nullptr;
+        //SR_SRLM_NS::LogicalNode* m_logicalNode = nullptr;
         std::string m_name;
         std::vector<Pin*> m_inputs;
         std::vector<Pin*> m_outputs;

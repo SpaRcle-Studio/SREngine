@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_HTML_RENDERER_H
 #define SR_ENGINE_GRAPHICS_HTML_RENDERER_H
 
+#include <Graphics/macros.h>
+
 #include <Graphics/Render/HTML/HTMLDrawableElement.h>
 
 namespace SR_GRAPH_NS {

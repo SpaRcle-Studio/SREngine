@@ -19,7 +19,7 @@
 #include <Utils/Math/Vector3.h>
 
 namespace SR_MATH_NS {
-    class SR_DLL_EXPORT Matrix3x3 {
+    class SR_COMMON_DLL_API Matrix3x3 {
     public:
         FVector3 elements[3] = {
                 FVector3(1, 0, 0),

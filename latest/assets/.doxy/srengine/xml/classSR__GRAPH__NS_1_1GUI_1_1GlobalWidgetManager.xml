@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="89" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="91" column="9"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -124,31 +124,31 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="86" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="86" bodyend="90"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="88" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="88" bodyend="92"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>DestroySingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1acb4b1e5fc1d597452cfd3df1262c840e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Draw</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Event</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a433ccfe144da6e797b5745f1a97937cf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetContext</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetMutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a5d963bdbd14b708459be899f3c82648e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetRenderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab0adf93ab24e43acb1121265aea6bb29" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetWidget</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a6e22b3a3b9d93e10c986f61a09e38b94" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>GetWidgets</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ad427ee708a5ab503979b0daeefed883b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>HideAll</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a2e73cf16d0d7039bd0f1416ae0e17a9b" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>IEvent</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>InitSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>InputHandler</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>IsKeyPressed</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a048de7589000d8802ad5bd8918243ac3" prot="protected" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>m_mutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Singleton::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>m_mutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_GRAPH_NS::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Singleton::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Singleton::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::Singleton::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab37a4363e4174eb2f199ae804abcf337" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>OnKeyDown</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af6f3c2331cc123eee6e2ed01664a9bb9" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>OnKeyPress</name></member>
@@ -161,22 +161,22 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1ab9e0b2a47319e7406845648b7a5db4c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Register</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a35853d4777076550add2bf51a682eaaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Remove</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>ScopeLockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a321fbec288569bd9b51abe984807016d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SetRenderScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a845625c93c125fa99efb739de8af9bc3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SetScene</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1af81394b27a7b4630712c2c67d9e39c5f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>ShowAll</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>SingletonBase</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>Trigger</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>UnlockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a88fc6b23c80d0df1aa6376ce0b67b39d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>WidgetManager</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~Event</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1GlobalWidgetManager_1aea0b92c78c2d50cfab9b530c4ab99d9e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~GlobalWidgetManager</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~IEvent</name></member>
-      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~InputHandler</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~SingletonBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1WidgetManager_1a50932e5c8cd0abb5c3245384e0f2aeee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::GlobalWidgetManager</scope><name>~WidgetManager</name></member>
     </listofallmembers>
   </compounddef>

@@ -60,8 +60,12 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SerializationNode**](#function-serializationnode-12) () = default<br> |
-|   | [**SerializationNode**](#function-serializationnode-22) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id, SerializationDataType type) <br> |
+|   | [**SerializationNode**](#function-serializationnode-14) () = default<br> |
+|   | [**SerializationNode**](#function-serializationnode-24) (const [**SerializationId**](structSR__UTILS__NS_1_1SerializationId.md) & id, SerializationDataType type) <br> |
+|   | [**SerializationNode**](#function-serializationnode-34) ([**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) && other) noexcept<br> |
+|   | [**SerializationNode**](#function-serializationnode-44) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & other) <br> |
+|  [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**operator=**](#function-operator) ([**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) && other) noexcept<br> |
+|  [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & | [**operator=**](#function-operator_1) (const [**SerializationNode**](structSR__UTILS__NS_1_1SerializationNode.md) & other) <br> |
 
 
 
@@ -162,7 +166,7 @@ SerializationDataType SR_UTILS_NS::SerializationNode::type;
 
 
 
-### function SerializationNode [1/2]
+### function SerializationNode [1/4]
 
 ```C++
 SR_UTILS_NS::SerializationNode::SerializationNode () = default
@@ -175,12 +179,72 @@ SR_UTILS_NS::SerializationNode::SerializationNode () = default
 
 
 
-### function SerializationNode [2/2]
+### function SerializationNode [2/4]
 
 ```C++
 inline SR_UTILS_NS::SerializationNode::SerializationNode (
     const SerializationId & id,
     SerializationDataType type
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function SerializationNode [3/4]
+
+```C++
+inline SR_UTILS_NS::SerializationNode::SerializationNode (
+    SerializationNode && other
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function SerializationNode [4/4]
+
+```C++
+inline SR_UTILS_NS::SerializationNode::SerializationNode (
+    const SerializationNode & other
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator= 
+
+```C++
+inline SerializationNode & SR_UTILS_NS::SerializationNode::operator= (
+    SerializationNode && other
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function operator= 
+
+```C++
+inline SerializationNode & SR_UTILS_NS::SerializationNode::operator= (
+    const SerializationNode & other
 ) 
 ```
 

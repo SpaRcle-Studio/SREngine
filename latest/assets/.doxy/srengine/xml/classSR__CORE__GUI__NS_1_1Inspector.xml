@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="60" column="21" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="60" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="62" column="21" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a92b605d59b19b9e0a0e43ac6fa8c458a" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="61" column="14" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="61" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="63" column="14" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a0db8f79080b55eaebf8dca74085bd945" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="63" column="21" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="65" column="21" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1ab84813a5c3e9f3400e459677aea47263" prot="private" static="no" mutable="no">
         <type>ComponentCategory</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="64" column="27" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="66" column="27" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1acccaf3cab9de4a290a3e3977e8f79f5a" prot="private" static="no" mutable="no">
         <type>std::list&lt; SR_UTILS_NS::Component::Ptr &gt;</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="66" column="19" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="68" column="19" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1ab4b8c4a1c690e98127de3703b4eb428b" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::SceneObject::Ptr</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="67" column="39" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="69" column="39" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1ad95f42fafd020ff5c18ecf02bdd6b49d" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__CORE__GUI__NS_1_1Hierarchy" kindref="compound">Hierarchy</ref> *</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="68" column="19" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="68" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="70" column="19" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a68d62e74a8ac9e0ca671c263f943d293" prot="private" static="no" mutable="no">
         <type>SR_WORLD_NS::Scene::Ptr</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="69" column="33" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="69" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="71" column="33" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1abc9bf32f3bda46aeea7386bdb139900e" prot="private" static="no" mutable="no">
         <type>std::map&lt; SR_UTILS_NS::EntityId, ComponentContext &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="75" column="18" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="77" column="18" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aee79a8c533ef13efb96600b6e2137222" prot="private" static="no" mutable="no">
         <type>uint64_t</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="76" column="18" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="76" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="78" column="18" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a689ce4e73ee89bcc44949aeeb2e118ff" prot="private" static="no" mutable="no">
         <type>SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="78" column="52" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="78" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="80" column="52" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aed09ddc67d81f70275d1a423f832a732" prot="private" static="no" mutable="no">
         <type>float_t</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="80" column="17" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="80" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="82" column="17" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aff0a2530393b2b7d2d25a944f025de5d" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="82" column="14" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="82" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="84" column="14" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1abb5f789da766eb740e9599053341151e" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(bool drag)&gt;</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="83" column="32" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="83" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="85" column="32" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1aab163a3ff458fd8832d0fbfcf71ad1ad" prot="private" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="84" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="84" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="86" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a8002a8fd248ab6909e91c6e9d4f2ac42" prot="private" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="85" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="85" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="87" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a2ad69374d5366d017bd23e7cbb383028" prot="private" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classSR__UTILS__NS_1_1ISerializer" kindref="compound">SR_UTILS_NS::ISerializer</ref> &gt;</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="86" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="86" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="88" column="25" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a118986f00283e373d0323fbc163eea3b" prot="private" static="no" mutable="no">
         <type>SR_UTILS_NS::Component::Ptr</type>
@@ -261,7 +261,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="87" column="37" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="87" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="89" column="37" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1Inspector_1a31a865a0cc6b2feedb04cbb4d4cae98a" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">SR_UTILS_NS::Subscription</ref></type>
+        <definition>SR_UTILS_NS::Subscription SR_CORE_GUI_NS::Inspector::m_moduleReloadSubscription</definition>
+        <argsstring></argsstring>
+        <name>m_moduleReloadSubscription</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::m_moduleReloadSubscription</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="90" column="35" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="90" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -477,6 +491,20 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="52" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1ac7db74b38296421d6d6fa8beb4e0b5d3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_CORE_GUI_NS::Inspector::InitCategories</definition>
+        <argsstring>()</argsstring>
+        <name>InitCategories</name>
+        <qualifiedname>SR_CORE_GUI_NS::Inspector::InitCategories</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="54" column="14"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1a252868a6037c6272e0ae3d3696064420" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -503,7 +531,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="55" column="14"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="57" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__GUI__NS_1_1Inspector_1aefa9ce54f0181c271726e74c98648a7e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref></type>
@@ -521,7 +549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="57" column="44"/>
+        <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="59" column="44"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -600,7 +628,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="27" column="5" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="27" bodyend="89"/>
+    <location file="Engine/Core/inc/Core/GUI/Inspector.h" line="27" column="5" bodyfile="Engine/Core/inc/Core/GUI/Inspector.h" bodystart="27" bodyend="92"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4a04e0628b5729444eca1c24a9011fa2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>AddFlags</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1adb2cb15cb7a11b055f8659f1db8c5521" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>AddSubWidget</name></member>
@@ -622,8 +650,9 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a3209e5899cda24a44d5d034ad4bbd408" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetRenderScene</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetStrongStorage</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>GetWeakStorage</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a2e73cf16d0d7039bd0f1416ae0e17a9b" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>IEvent</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a1a44342ba62f3a35d4c4dfa2c4b16aab" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Init</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ac7db74b38296421d6d6fa8beb4e0b5d3" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InitCategories</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InputHandler</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a69a3e210a16dcb428b8b58bf690e61c4" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InspectGameObject</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a08f6061986fc3eb0ea8e22aaa9e48f33" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>InspectLayer</name></member>
@@ -644,6 +673,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1ad95f42fafd020ff5c18ecf02bdd6b49d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_hierarchy</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aff0a2530393b2b7d2d25a944f025de5d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_isDragMode</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aee79a8c533ef13efb96600b6e2137222" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_maxComponentContexts</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a31a865a0cc6b2feedb04cbb4d4cae98a" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_moduleReloadSubscription</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_mutex</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1abb5f789da766eb740e9599053341151e" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_onBeforeChangeCallback</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a2ad69374d5366d017bd23e7cbb383028" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_pComponentSerializer</name></member>
@@ -656,7 +686,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1aed09ddc67d81f70275d1a423f832a732" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_scrollBarWidth</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_subWidgets</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>m_widgetFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa49560b82a3fbb6982fb725e70b92ea8" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnClose</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac8fcf132f1cec281a572818e0faa9cae" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>OnKeyDown</name></member>
@@ -687,10 +717,10 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ac9672537e4ef15d539d53a1627cab259" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Widget</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>Widget</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~Event</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~IEvent</name></member>
-      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~InputHandler</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1Inspector_1a6067fb4e9e9c60dd847a50d0c114545e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~Inspector</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::Inspector</scope><name>~Widget</name></member>
     </listofallmembers>
   </compounddef>

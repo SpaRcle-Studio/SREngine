@@ -114,11 +114,11 @@
       <member refid="structSR__HTYPES__NS_1_1Stack_1_1Node_1a5d4e871f4ac3f9d595153ad4a17fc349" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>data</name></member>
       <member refid="structSR__HTYPES__NS_1_1Stack_1_1Node_1af9d5fd6f916c2605269798a583c1e740" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>Node</name></member>
       <member refid="structSR__HTYPES__NS_1_1Stack_1_1Node_1a45174f08297c9c9482678139f30cf879" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>Node</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>operator=</name></member>
       <member refid="structSR__HTYPES__NS_1_1Stack_1_1Node_1a48a368a27b3e0bcb67335a5678138894" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>pData</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::Stack::Node</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

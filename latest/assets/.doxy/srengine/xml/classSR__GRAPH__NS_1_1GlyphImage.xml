@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="57" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="59" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="59" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="74" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="74" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="76" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GlyphImage_1a0bc3b2b391c163e052d24e7664b08cff" prot="private" static="no" mutable="no">
         <type>Glyph::Ptr</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="75" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="77" column="20" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="60" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="62" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GlyphImage_1a04dd8502453c72983f26ff72267ff5e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="61" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="63" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GlyphImage_1aa89cb661fef10220207d001e8acfd3eb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD uint8_t *</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="65" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="65" bodyend="65"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="67" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="67" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GlyphImage_1ab9af28de53d883a36b75e6c01fdfc786" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="67" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="69" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GlyphImage_1ae37c1d7896ff287794f3a3d77d80eac3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="68" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="70" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="64" column="45"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="66" column="45"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="71" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="73" column="27"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -214,7 +214,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="55" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="55" bodyend="77"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" line="57" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Glyph.h" bodystart="57" bodyend="79"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1a793bfc68b5ee0b833da7daf9dec0a873" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>Create</name></member>
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1ae37c1d7896ff287794f3a3d77d80eac3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>Debug</name></member>
@@ -224,12 +224,12 @@
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1ab9af28de53d883a36b75e6c01fdfc786" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>InsertTo</name></member>
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1a1fe711fa50e017f0f5ef4c0c23c2b464" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1a0bc3b2b391c163e052d24e7664b08cff" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>m_glyph</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1a793858a300607a91aeaff158c184ba64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>Ptr</name></member>
       <member refid="classSR__GRAPH__NS_1_1GlyphImage_1a04dd8502453c72983f26ff72267ff5e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>~GlyphImage</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GlyphImage</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -84,7 +84,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1
 |  SR\_NODISCARD [**Marshal**](classSR__HTYPES__NS_1_1Marshal.md) | [**Copy**](#function-copy) () const<br> |
 |  SR\_NODISCARD [**Marshal::Ptr**](classSR__HTYPES__NS_1_1Marshal.md) | [**CopyPtr**](#function-copyptr) () const<br> |
 |  SR\_NODISCARD [**Marshal**](classSR__HTYPES__NS_1_1Marshal.md) | [**FullCopy**](#function-fullcopy) () const<br> |
-|   | [**Marshal**](#function-marshal-14) () = default<br> |
+|   | [**Marshal**](#function-marshal-14) () <br> |
 |   | [**Marshal**](#function-marshal-24) (std::ifstream & ifs) <br> |
 |   | [**Marshal**](#function-marshal-34) (const std::string & str) <br> |
 |   | [**Marshal**](#function-marshal-44) (const char \* pData, uint64\_t size) <br> |
@@ -99,6 +99,7 @@ Inherits the following classes: [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1
 |  void | [**Write**](#function-write-12) (const T & value) <br> |
 |  void | [**Write**](#function-write-22) (const T & value, const T & def) <br> |
 |  void | [**WriteBlock**](#function-writeblock) (void \* pData, uint64\_t size) <br> |
+|   | [**~Marshal**](#function-marshal) () <br> |
 
 
 ## Public Functions inherited from SR_HTYPES_NS::Stream
@@ -115,7 +116,7 @@ See [SR\_HTYPES\_NS::Stream](classSR__HTYPES__NS_1_1Stream.md)
 |  void | [**SetPosition**](classSR__HTYPES__NS_1_1Stream.md#function-setposition) (uint64\_t position) <br> |
 |  SR\_NODISCARD uint64\_t | [**Size**](classSR__HTYPES__NS_1_1Stream.md#function-size) () noexcept const<br> |
 |  void | [**Skip**](classSR__HTYPES__NS_1_1Stream.md#function-skip) (uint64\_t count) <br> |
-|   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-16) () = default<br> |
+|   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-16) () <br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-26) (std::ifstream & ifs) <br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-36) (const std::string & str) <br> |
 |   | [**Stream**](classSR__HTYPES__NS_1_1Stream.md#function-stream-46) (const char \* pData, uint64\_t size) <br> |
@@ -320,7 +321,7 @@ SR_NODISCARD Marshal SR_HTYPES_NS::Marshal::FullCopy () const
 ### function Marshal [1/4]
 
 ```C++
-SR_HTYPES_NS::Marshal::Marshal () = default
+SR_HTYPES_NS::Marshal::Marshal () 
 ```
 
 
@@ -388,7 +389,7 @@ NOLINT
 
 ```C++
 template<typename T>
-inline T SR_HTYPES_NS::Marshal::Read () 
+T SR_HTYPES_NS::Marshal::Read () 
 ```
 
 
@@ -402,7 +403,7 @@ inline T SR_HTYPES_NS::Marshal::Read ()
 
 ```C++
 template<typename T>
-inline T SR_HTYPES_NS::Marshal::Read (
+T SR_HTYPES_NS::Marshal::Read (
     const T & def
 ) 
 ```
@@ -417,7 +418,7 @@ inline T SR_HTYPES_NS::Marshal::Read (
 ### function ReadBlock 
 
 ```C++
-inline void SR_HTYPES_NS::Marshal::ReadBlock (
+void SR_HTYPES_NS::Marshal::ReadBlock (
     void * pDestination
 ) 
 ```
@@ -478,7 +479,7 @@ bool SR_HTYPES_NS::Marshal::Save (
 
 ```C++
 template<typename T>
-inline T SR_HTYPES_NS::Marshal::TryRead () 
+T SR_HTYPES_NS::Marshal::TryRead () 
 ```
 
 
@@ -492,7 +493,7 @@ inline T SR_HTYPES_NS::Marshal::TryRead ()
 
 ```C++
 template<typename T>
-inline T SR_HTYPES_NS::Marshal::View (
+T SR_HTYPES_NS::Marshal::View (
     uint64_t offset
 ) const
 ```
@@ -508,7 +509,7 @@ inline T SR_HTYPES_NS::Marshal::View (
 
 ```C++
 template<typename T>
-inline void SR_HTYPES_NS::Marshal::Write (
+void SR_HTYPES_NS::Marshal::Write (
     const T & value
 ) 
 ```
@@ -524,7 +525,7 @@ inline void SR_HTYPES_NS::Marshal::Write (
 
 ```C++
 template<typename T>
-inline void SR_HTYPES_NS::Marshal::Write (
+void SR_HTYPES_NS::Marshal::Write (
     const T & value,
     const T & def
 ) 
@@ -540,10 +541,23 @@ inline void SR_HTYPES_NS::Marshal::Write (
 ### function WriteBlock 
 
 ```C++
-inline void SR_HTYPES_NS::Marshal::WriteBlock (
+void SR_HTYPES_NS::Marshal::WriteBlock (
     void * pData,
     uint64_t size
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function ~Marshal 
+
+```C++
+SR_HTYPES_NS::Marshal::~Marshal () 
 ```
 
 

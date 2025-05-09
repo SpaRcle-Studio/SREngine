@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_BASE_MATERIAL_H
 #define SR_ENGINE_GRAPHICS_BASE_MATERIAL_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Resources/IResource.h>
 
 #include <Utils/Math/Vector3.h>
@@ -54,6 +56,7 @@ namespace SR_GRAPH_NS {
 
     public:
         void SR_FASTCALL SetVec4(SR_UTILS_NS::StringAtom id, const SR_MATH_NS::FVector4& v) noexcept;
+        void SR_FASTCALL SetColor(SR_UTILS_NS::StringAtom id, const SR_MATH_NS::FColor& v) noexcept;
         void SR_FASTCALL SetBool(SR_UTILS_NS::StringAtom id, bool v) noexcept;
         void SR_FASTCALL SetTexture(SR_UTILS_NS::StringAtom id, SR_GTYPES_NS::Texture* pTexture) noexcept;
 

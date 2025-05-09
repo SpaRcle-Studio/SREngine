@@ -875,7 +875,7 @@
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1adf7c74d8d467b036760ae527f1c153e7" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>m_type</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a356e66e8cfc1c36e5dc2badb82ee40e3" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>m_uniformBlocks</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1af0f67f12cec0761fdb381c5ac5f463ab" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>m_useStack</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>operator=</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1ae117773a6ecef26d177f4223e0f71b86" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>Prepare</name></member>
@@ -890,7 +890,7 @@
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a8c8a76fe92808222bdf5ffdf354f03c0" prot="public" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>ToString</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a4ab8eab308f5464ada994055700aafc5" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>UniformBlocks</name></member>
       <member refid="classSR__SRSL__NS_1_1SRSLShader_1a214906db1946e027c27e7063cfdc9df1" prot="private" virt="non-virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>VERSION</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SRSL_NS::SRSLShader</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

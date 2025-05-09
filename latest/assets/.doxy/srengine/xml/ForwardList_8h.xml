@@ -4,48 +4,62 @@
     <compoundname>ForwardList.h</compoundname>
     <includes refid="Platform_8h" local="no">Utils/Platform/Platform.h</includes>
     <incdepgraph>
-      <node id="73">
+      <node id="77">
         <label>Utils/Common/Breakpoint.h</label>
         <link refid="Breakpoint_8h_source"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="74">
         <label>Utils/Common/EnumReflector.h</label>
         <link refid="EnumReflector_8h_source"/>
-        <childnode refid="71" relation="include">
-        </childnode>
-        <childnode refid="85" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
         <childnode refid="75" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
         <childnode refid="87" relation="include">
         </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
       </node>
-      <node id="69">
+      <node id="73">
         <label>Utils/Common/Enumerations.h</label>
         <link refid="Enumerations_8h_source"/>
-        <childnode refid="70" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="86">
         <label>Utils/Common/HashManager.h</label>
         <link refid="HashManager_8h_source"/>
-        <childnode refid="76" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="80">
         <label>Utils/Common/Hashes.h</label>
         <link refid="Hashes_8h_source"/>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>Utils/Common/NonCopyable.h</label>
+        <link refid="NonCopyable_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>Utils/Common/Singleton.h</label>
+        <link refid="Singleton_8h_source"/>
+        <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
@@ -53,53 +67,35 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-      </node>
-      <node id="72">
-        <label>Utils/Common/NonCopyable.h</label>
-        <link refid="NonCopyable_8h_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="71">
-        <label>Utils/Common/Singleton.h</label>
-        <link refid="Singleton_8h_source"/>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="73" relation="include">
-        </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="75" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-      </node>
-      <node id="88">
-        <label>Utils/Common/ThreadUtils.h</label>
-        <link refid="ThreadUtils_8h_source"/>
-        <childnode refid="69" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="89">
+        <label>Utils/Common/ThreadUtils.h</label>
+        <link refid="ThreadUtils_8h_source"/>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
         <label>Utils/FileSystem/Path.h</label>
         <link refid="Path_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="75" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="73" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="72">
         <label>Utils/Math/Axis.h</label>
         <link refid="Axis_8h_source"/>
-        <childnode refid="69" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -107,16 +103,16 @@
         <link refid="Mathematics_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="64" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="69" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="93">
+      <node id="94">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="4" relation="include">
@@ -127,69 +123,73 @@
         <link refid="Vector2_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
       </node>
-      <node id="92">
+      <node id="93">
         <label>Utils/Math/Vector3.h</label>
         <link refid="Vector3_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="93" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="94">
+      <node id="95">
         <label>Utils/Math/Vector4.h</label>
         <link refid="Vector4_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="95">
+      <node id="96">
         <label>Utils/Math/Vector6.h</label>
         <link refid="Vector6_8h_source"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
+      </node>
+      <node id="8">
+        <label>Utils/Memory/Allocator.h</label>
+        <link refid="Allocator_8h_source"/>
       </node>
       <node id="2">
         <label>Utils/Platform/Platform.h</label>
         <link refid="Platform_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
-        </childnode>
         <childnode refid="89" relation="include">
         </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
       </node>
-      <node id="74">
+      <node id="78">
         <label>Utils/Platform/Stacktrace.h</label>
         <link refid="Stacktrace_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="90">
+      <node id="91">
         <label>Utils/Serialization/ObjectDataAccessor.h</label>
         <link refid="ObjectDataAccessor_8h_source"/>
-        <childnode refid="91" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
       </node>
-      <node id="91">
+      <node id="92">
         <label>Utils/TypeTraits/TypeTraits.h</label>
         <link refid="TypeTraits_8h_source"/>
-        <childnode refid="76" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -198,56 +198,54 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="87">
         <label>Utils/Types/Function.h</label>
         <link refid="Function_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="83">
         <label>Utils/Types/Map.h</label>
         <link refid="Map_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
         <childnode refid="84" relation="include">
         </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
       </node>
-      <node id="77">
+      <node id="81">
         <label>Utils/Types/MerkleTree.h</label>
         <link refid="MerkleTree_8h_source"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="82">
         <label>Utils/Types/SafePtrLockGuard.h</label>
         <link refid="SafePtrLockGuard_8h_source"/>
-        <childnode refid="72" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="79">
         <label>Utils/Types/StringAtom.h</label>
         <link refid="StringAtom_8h_source"/>
         <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
       </node>
       <node id="6">
         <label>Utils/macros.h</label>
-        <link refid="macros_8h_source"/>
+        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
       <node id="5">
         <label>Utils/stdInclude.h</label>
         <link refid="stdInclude_8h_source"/>
         <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
@@ -359,206 +357,214 @@
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
       </node>
-      <node id="87">
+      <node id="88">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
-      <node id="46">
+      <node id="49">
         <label>algorithm</label>
       </node>
-      <node id="47">
+      <node id="50">
         <label>any</label>
       </node>
-      <node id="40">
+      <node id="10">
         <label>array</label>
       </node>
-      <node id="38">
+      <node id="44">
         <label>atomic</label>
       </node>
-      <node id="35">
+      <node id="41">
         <label>cassert</label>
       </node>
-      <node id="23">
+      <node id="32">
         <label>cctype</label>
       </node>
-      <node id="7">
+      <node id="16">
         <label>cfloat</label>
       </node>
-      <node id="55">
+      <node id="57">
         <label>chrono</label>
       </node>
-      <node id="36">
+      <node id="42">
         <label>cmath</label>
       </node>
-      <node id="19">
+      <node id="28">
         <label>codecvt</label>
       </node>
-      <node id="59">
+      <node id="60">
         <label>concepts</label>
       </node>
-      <node id="60">
+      <node id="61">
         <label>condition_variable</label>
       </node>
-      <node id="17">
+      <node id="26">
         <label>cstdarg</label>
       </node>
-      <node id="20">
+      <node id="29">
         <label>cstddef</label>
       </node>
-      <node id="57">
+      <node id="13">
         <label>cstdint</label>
       </node>
-      <node id="11">
+      <node id="20">
         <label>cstdio</label>
       </node>
-      <node id="49">
+      <node id="7">
         <label>cstdlib</label>
       </node>
-      <node id="25">
+      <node id="34">
         <label>cstring</label>
       </node>
-      <node id="52">
+      <node id="54">
         <label>ctime</label>
       </node>
-      <node id="44">
+      <node id="47">
         <label>exception</label>
       </node>
-      <node id="84">
+      <node id="85">
         <label>flat_hash_map/flat_hash_map.hpp</label>
       </node>
-      <node id="80">
-        <label>fmt/format.h</label>
-      </node>
-      <node id="29">
-        <label>fstream</label>
-      </node>
-      <node id="42">
-        <label>functional</label>
-      </node>
-      <node id="64">
-        <label>glm/glm.hpp</label>
-      </node>
       <node id="67">
-        <label>glm/gtc/quaternion.hpp</label>
+        <label>fmt/color.h</label>
       </node>
       <node id="65">
-        <label>glm/gtc/type_ptr.hpp</label>
+        <label>fmt/format.h</label>
       </node>
       <node id="66">
-        <label>glm/gtx/string_cast.hpp</label>
-      </node>
-      <node id="18">
-        <label>initializer_list</label>
-      </node>
-      <node id="58">
-        <label>iomanip</label>
-      </node>
-      <node id="12">
-        <label>iosfwd</label>
-      </node>
-      <node id="53">
-        <label>iostream</label>
-      </node>
-      <node id="9">
-        <label>limits</label>
-      </node>
-      <node id="51">
-        <label>list</label>
-      </node>
-      <node id="24">
-        <label>locale</label>
-      </node>
-      <node id="41">
-        <label>map</label>
-      </node>
-      <node id="28">
-        <label>memory</label>
-      </node>
-      <node id="33">
-        <label>mutex</label>
-      </node>
-      <node id="62">
-        <label>numbers</label>
-      </node>
-      <node id="61">
-        <label>numeric</label>
-      </node>
-      <node id="78">
-        <label>openssl/sha.h</label>
-      </node>
-      <node id="27">
-        <label>optional</label>
-      </node>
-      <node id="31">
-        <label>ostream</label>
-      </node>
-      <node id="32">
-        <label>queue</label>
-      </node>
-      <node id="56">
-        <label>random</label>
+        <label>fmt/printf.h</label>
       </node>
       <node id="37">
-        <label>ranges</label>
+        <label>fstream</label>
       </node>
-      <node id="54">
-        <label>ratio</label>
+      <node id="46">
+        <label>functional</label>
       </node>
-      <node id="13">
-        <label>regex</label>
+      <node id="68">
+        <label>glm/glm.hpp</label>
       </node>
-      <node id="43">
-        <label>set</label>
+      <node id="71">
+        <label>glm/gtc/quaternion.hpp</label>
       </node>
-      <node id="16">
-        <label>shared_mutex</label>
+      <node id="69">
+        <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="8">
-        <label>span</label>
+      <node id="70">
+        <label>glm/gtx/string_cast.hpp</label>
       </node>
-      <node id="83">
-        <label>sparsehash/dense_hash_map</label>
+      <node id="27">
+        <label>initializer_list</label>
       </node>
-      <node id="50">
-        <label>sstream</label>
-      </node>
-      <node id="22">
-        <label>stack</label>
-      </node>
-      <node id="14">
-        <label>stdexcept</label>
-      </node>
-      <node id="34">
-        <label>string</label>
-      </node>
-      <node id="15">
-        <label>string_view</label>
-      </node>
-      <node id="48">
-        <label>thread</label>
-      </node>
-      <node id="10">
-        <label>type_traits</label>
-      </node>
-      <node id="45">
-        <label>unordered_map</label>
+      <node id="59">
+        <label>iomanip</label>
       </node>
       <node id="21">
-        <label>unordered_set</label>
+        <label>iosfwd</label>
       </node>
-      <node id="39">
-        <label>utility</label>
+      <node id="55">
+        <label>iostream</label>
       </node>
-      <node id="26">
-        <label>variant</label>
+      <node id="18">
+        <label>limits</label>
       </node>
-      <node id="30">
-        <label>vector</label>
+      <node id="53">
+        <label>list</label>
       </node>
-      <node id="79">
-        <label>xxHash/xxhash.h</label>
+      <node id="33">
+        <label>locale</label>
+      </node>
+      <node id="11">
+        <label>map</label>
+      </node>
+      <node id="36">
+        <label>memory</label>
+      </node>
+      <node id="40">
+        <label>mutex</label>
       </node>
       <node id="63">
+        <label>numbers</label>
+      </node>
+      <node id="62">
+        <label>numeric</label>
+      </node>
+      <node id="15">
+        <label>optional</label>
+      </node>
+      <node id="38">
+        <label>ostream</label>
+      </node>
+      <node id="39">
+        <label>queue</label>
+      </node>
+      <node id="58">
+        <label>random</label>
+      </node>
+      <node id="43">
+        <label>ranges</label>
+      </node>
+      <node id="56">
+        <label>ratio</label>
+      </node>
+      <node id="22">
+        <label>regex</label>
+      </node>
+      <node id="14">
+        <label>set</label>
+      </node>
+      <node id="25">
+        <label>shared_mutex</label>
+      </node>
+      <node id="17">
+        <label>span</label>
+      </node>
+      <node id="84">
+        <label>sparsehash/dense_hash_map</label>
+      </node>
+      <node id="52">
+        <label>sstream</label>
+      </node>
+      <node id="31">
+        <label>stack</label>
+      </node>
+      <node id="23">
+        <label>stdexcept</label>
+      </node>
+      <node id="9">
+        <label>string</label>
+      </node>
+      <node id="24">
+        <label>string_view</label>
+      </node>
+      <node id="51">
+        <label>thread</label>
+      </node>
+      <node id="19">
+        <label>type_traits</label>
+      </node>
+      <node id="48">
+        <label>unordered_map</label>
+      </node>
+      <node id="30">
+        <label>unordered_set</label>
+      </node>
+      <node id="45">
+        <label>utility</label>
+      </node>
+      <node id="35">
+        <label>variant</label>
+      </node>
+      <node id="12">
+        <label>vector</label>
+      </node>
+      <node id="64">
         <label>zlib.h</label>
       </node>
     </incdepgraph>

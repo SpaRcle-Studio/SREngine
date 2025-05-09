@@ -31,6 +31,7 @@ namespace SR_UTILS_NS {
         GameObject = 0
     )
 
+    
     class SceneObject : public IComponentable {
         SR_CLASS()
         using Super = IComponentable;
@@ -46,7 +47,7 @@ namespace SR_UTILS_NS {
         ~SceneObject() override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE const ObjectNameT& GetName() const { return m_name; }
+        SR_NODISCARD SR_FORCE_INLINE StringAtom GetName() const { return m_name; }
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetIdInScene() const noexcept { return m_idInScene; }
 

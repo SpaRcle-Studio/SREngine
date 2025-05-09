@@ -15,8 +15,11 @@
 #ifndef SR_ENGINE_ENGINE_H
 #define SR_ENGINE_ENGINE_H
 
-#include <Core/EvoScriptAPI.h>
 #include <Core/EngineResources.h>
+
+#include <Graphics/Window/Window.h>
+
+#include <Scripting/Cpp/ScriptSystem.h>
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/Types/Time.h>
@@ -34,7 +37,6 @@
 #include <Utils/CommandManager/CmdManager.h>
 
 namespace SR_GRAPH_NS {
-    class Window;
     class Render;
     class RenderScene;
     class RenderContext;
@@ -110,6 +112,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
         SR_NODISCARD bool IsApplicationFocused() const;
 
+        SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
+
     public:
         bool Create();
         bool Init();
@@ -118,7 +122,6 @@ namespace SR_CORE_NS {
 
     private:
         static WindowPtr CreateMainWindow();
-        void DrawCallback();
 
     private:
         mutable std::recursive_mutex m_mutex;
@@ -136,7 +139,7 @@ namespace SR_CORE_NS {
         float_t m_speed = 1.f;
         SR_UTILS_NS::TimePointType m_timeStart;
 
-        SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker = nullptr;
+        SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;

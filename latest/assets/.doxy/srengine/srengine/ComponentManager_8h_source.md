@@ -26,7 +26,7 @@
 #include <Utils/Serialization/SRASerialization.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT ComponentManager : public Singleton<ComponentManager> {
+    class SR_COMMON_DLL_API ComponentManager : public Singleton<ComponentManager> {
         SR_REGISTER_SINGLETON(ComponentManager)
     public:
         SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {

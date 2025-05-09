@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="31" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="31" bodyend="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="33" bodyend="37"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="29" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="31" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Widget_8h_1a2a94f490905349232b81e65b3e7c7dc0" prot="public" static="no">
         <type>uint32_t</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="36" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="19" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="19" declcolumn="10"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="21" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="21" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="ImNodeEditorUtils_8h_1a23d1e46e96a195c85e0d020565cda2a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="21" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="21" declcolumn="10"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" line="23" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImNodeEditorUtils.h" declline="23" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Node_8h_1a5d3cf45c7de47f13c53b08ead8d46f2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="36" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="36" bodyend="39"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="38" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="38" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1acea2c052f332313448439593a89add07" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED static void</type>
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="41" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="41" bodyend="53"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="43" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="43" bodyend="55"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aa602735175d5e726a72e41d5d518dc15" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED static void</type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="55" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="55" bodyend="79"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="57" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="57" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5ce57b2b7075c6643fbc8dce44f9e619" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED static void</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="81" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="81" bodyend="88"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="83" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="83" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a9b877a182eabff641481cc58b6bcb71d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="90" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="90" bodyend="102"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="92" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="92" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5d59228eb91edda38749b439788e0bec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -461,7 +461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="104" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="104" bodyend="117"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="106" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="106" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1add72ee6b61e0676899dd3b7ef4ed0b82" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -479,7 +479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="119" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="119" bodyend="119"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="121" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="121" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6036269a7c09ac3db4e637a6410e340d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -506,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="121" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="121" bodyend="130"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="123" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="123" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a1ace4f25ae990f446df4672690840e95" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -533,7 +533,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="132" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="132" bodyend="141"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="134" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="134" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a977644a2c34fc1237376ad85c89004fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -560,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="143" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="143" bodyend="152"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="145" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="145" bodyend="154"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a91cb2194a1aabc856927ecab72e89ab0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -587,7 +587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="154" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="154" bodyend="170"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="156" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="156" bodyend="172"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ac4718849b91ffe8ac38253f7e27a407d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -615,7 +615,7 @@
         <inbodydescription>
 <para>NOLINT</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="172" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="172" bodyend="191"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="174" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="174" bodyend="193"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af353fdb7ec3e09b6f7c6c41571ae17ff" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -647,7 +647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="193" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="193" bodyend="231"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="195" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="195" bodyend="233"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abf645494623ab6001f072a1da02b6d98" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -704,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="233" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="233" bodyend="284"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="235" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="235" bodyend="286"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abab5d7108083516ba4f55ceba3d4355a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -741,7 +741,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="286" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="286" bodyend="300"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="288" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="288" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abec115fcb61bf9194c0c710d73c584f3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -806,7 +806,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="302" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="302" bodyend="347"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="304" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="304" bodyend="349"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6a48d524015657f9236f884a1a7e7f81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -842,7 +842,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="349" column="26" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="349" declcolumn="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="351" column="26" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="351" declcolumn="26"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a8c1f08970aa504262a917e89b799d59f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -876,7 +876,7 @@
 <para><hruler/>
 </para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="351" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="351" bodyend="417"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="353" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="353" bodyend="419"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5348e27bd2b41938e9eb9b290536926b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -918,7 +918,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="419" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="419" bodyend="459"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="421" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="421" bodyend="461"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aa66ead40f21d2b6c3bd87e9dd334c6af" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -960,7 +960,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="461" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="461" bodyend="496"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="463" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="463" bodyend="498"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a0b5de189fc0ca30766aae090c82b4c62" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1009,7 +1009,7 @@
 <para><hruler/>
 </para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="498" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="498" bodyend="553"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="500" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="500" bodyend="555"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a4c63f87c176c2e11ef4ed3e18cb26a78" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1048,7 +1048,7 @@
 <para><hruler/>
 </para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="555" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="555" bodyend="600"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="557" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="557" bodyend="602"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5095ee015472537fc785edb77cb11113" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1081,7 +1081,7 @@
 <para><hruler/>
 </para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="602" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="602" bodyend="654"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="604" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="604" bodyend="656"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af079fc62a10b63fc114bbbcc6cfedc5d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1130,7 +1130,7 @@
 <para><hruler/>
 </para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="656" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="656" bodyend="703"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="658" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="658" bodyend="705"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6b7f0323feb7e44807fc354c3af2907f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1179,7 +1179,7 @@
 <para><hruler/>
 </para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="705" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="705" bodyend="760"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="707" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="707" bodyend="762"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a924b3f5b7e79460d9b726204116d9d42" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1197,7 +1197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="762" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="762" bodyend="765"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="764" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="764" bodyend="767"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aed3bf8b630e23cec79210c7a98d34714" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1219,7 +1219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="767" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="767" bodyend="770"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="769" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="769" bodyend="772"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab18a1671e240d13ee5d71c240b197eda" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1237,7 +1237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="772" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="772" bodyend="774"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="774" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="774" bodyend="776"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab0543f59616ecb8afad85bf851a68c3a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ImGuiDataType_</type>
@@ -1255,7 +1255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="776" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="776" bodyend="787"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="778" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="778" bodyend="789"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a37eb75beafad1086d7f51debf7f42a34" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED ImGuiDataType_</type>
@@ -1281,7 +1281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="789" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="789" bodyend="825"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="791" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="791" bodyend="827"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a062866ab2b8a022fa9eef1162c2b575f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED <ref refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion" kindref="compound">ImGuiDataTypeUnion</ref></type>
@@ -1303,7 +1303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="840" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="840" bodyend="856"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="842" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="842" bodyend="858"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5f9b63f89d85855f35967938cd77361c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1329,7 +1329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="858" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="858" bodyend="872"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="860" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="860" bodyend="874"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aef90a842724e07c189128d056f7f7645" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1351,7 +1351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="874" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="874" bodyend="878"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="876" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="876" bodyend="880"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a29ca8a53442fd3e1ce4273fa049a0cfe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1373,7 +1373,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="880" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="880" bodyend="884"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="882" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="882" bodyend="886"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a05696e973a8c333d8cc516a58fa7c27d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED uint32_t</type>
@@ -1387,7 +1387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="886" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="886" bodyend="892"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="888" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="888" bodyend="894"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a8164b025c1fd60aca994d7c34c0b05fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1405,7 +1405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="894" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="894" bodyend="898"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="896" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="896" bodyend="900"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af33de3ae3b4b61b070e50b1a45e72643" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1438,7 +1438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="900" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="900" bodyend="924"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="902" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="902" bodyend="926"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab56f09f70e5a9a9114e1b6d61bb94075" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1460,7 +1460,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="926" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="926" bodyend="928"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="928" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="928" bodyend="930"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abe406f7972f29e6bca7a628616184d08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1487,7 +1487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="930" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="930" declcolumn="10"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="932" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="932" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abc68da0b8e5d201bf2fe0ee6a981320c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1509,7 +1509,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="932" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="932" declcolumn="10"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="934" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="934" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a286b114624281e62e60b292fc5bfd828" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1544,7 +1544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="933" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="933" declcolumn="10"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="935" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="935" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ac3057deeee553cf0b79c7e37b6d674cb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED float</type>
@@ -1562,7 +1562,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="935" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="935" bodyend="941"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="937" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="937" bodyend="943"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1adb8b818f79aa27d557540378f14e18fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED bool</type>
@@ -1589,7 +1589,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="943" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="943" bodyend="1063"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="945" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="945" bodyend="1065"/>
       </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a621d795ee208676a0387a05649bed4f7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_MAYBE_UNUSED void</type>
@@ -1603,7 +1603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="1065" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="1065" bodyend="1071"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="1067" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="1067" bodyend="1073"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

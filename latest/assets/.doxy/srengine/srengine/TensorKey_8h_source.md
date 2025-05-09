@@ -20,7 +20,7 @@
 #include <Utils/Types/SharedPtr.h>
 
 namespace SR_WORLD_NS {
-    struct SR_DLL_EXPORT TensorKey {
+    struct SR_COMMON_DLL_API TensorKey {
         TensorKey() = default;
 
         TensorKey(const SR_MATH_NS::IVector3& _region, const SR_MATH_NS::IVector3& _chunk)

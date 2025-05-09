@@ -4,6 +4,7 @@
     <compoundname>SR_CORE_GUI_NS::PropertyDrawerBase</compoundname>
     <basecompoundref refid="classSR__UTILS__NS_1_1SRClass" prot="public" virt="non-virtual">SR_UTILS_NS::SRClass</basecompoundref>
     <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; PropertyDrawerBase &gt;</basecompoundref>
+    <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::BitMapPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::BoolPropertyDrawer</derivedcompoundref>
     <derivedcompoundref refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer" prot="public" virt="non-virtual">SR_CORE_GUI_NS::EnumPropertyDrawer</derivedcompoundref>
@@ -72,6 +73,7 @@
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer_1a1330fd47bed767f649e665059a3996b1">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer_1ac951443f89e4bb3a02fba83e787ef01a">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer_1aebea4c204fb79cb2b9d0490fc1ea04dd">Draw</reimplementedby>
+        <reimplementedby refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer_1ae24c1f074f440322d6422d318582b3a2">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer_1af6f37acdea46ba9e492b2b1852c544d9">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer_1a5bb6686ae5018a8556ea08739bf2063a">Draw</reimplementedby>
         <reimplementedby refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer_1a4af5ded91bd7bc629d76d9d47958d563">Draw</reimplementedby>
@@ -240,66 +242,78 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="5">
+        <label>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_CORE_GUI_NS::BehaviourPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
         <label>SR_CORE_GUI_NS::BitMapPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="7">
         <label>SR_CORE_GUI_NS::BoolPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="8">
         <label>SR_CORE_GUI_NS::EnumPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="14">
         <label>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="17">
         <label>SR_CORE_GUI_NS::MaterialPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer"/>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>SR_CORE_GUI_NS::MathSizePropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>SR_CORE_GUI_NS::MathVectorPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>SR_CORE_GUI_NS::NumericPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_GUI_NS::ObjectPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="15">
         <label>SR_CORE_GUI_NS::PathPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="16">
         <label>SR_CORE_GUI_NS::PointerPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
@@ -313,13 +327,13 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="18">
         <label>SR_CORE_GUI_NS::StringPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1StringPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="19">
         <label>SR_CORE_GUI_NS::VectorPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer"/>
         <childnode refid="1" relation="public-inheritance">
@@ -377,6 +391,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>AutoFree</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a88669cfadc3ca1f7bcabc8630be7a2c7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>CheckSearchMatch</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>DecrementPointer</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a5ad40029bdc31890f56d1f619c49c4c8" prot="public" virt="pure-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>Draw</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>Get</name></member>
@@ -394,7 +409,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>InitializeClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>IncrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>m_basicManually</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase_1a5fbfaab8c4966c85178501a8e7a14561" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>m_context</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>m_data</name></member>
@@ -424,14 +439,14 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>StaticCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::PropertyDrawerBase</scope><name>~SRClass</name></member>
     </listofallmembers>
   </compounddef>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="25" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="27" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo_1a600322093046661b9c7b987e6cc845d8" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1IRenderTechnique" kindref="compound">SR_GRAPH_NS::IRenderTechnique</ref> *</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="26" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="28" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -51,17 +51,17 @@
         <childnode refid="17" relation="usage">
           <edgelabel>m_camera</edgelabel>
         </childnode>
-        <childnode refid="24" relation="usage">
+        <childnode refid="22" relation="usage">
           <edgelabel>m_uboManager</edgelabel>
         </childnode>
-        <childnode refid="27" relation="usage">
+        <childnode refid="25" relation="usage">
           <edgelabel>m_descriptorManager</edgelabel>
         </childnode>
       </node>
-      <node id="27">
+      <node id="25">
         <label>SR_GRAPH_NS::DescriptorManager</label>
         <link refid="classSR__GRAPH__NS_1_1DescriptorManager"/>
-        <childnode refid="28" relation="public-inheritance">
+        <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
@@ -85,10 +85,10 @@
           <edgelabel>m_renderContext</edgelabel>
         </childnode>
       </node>
-      <node id="24">
+      <node id="22">
         <label>SR_GRAPH_NS::Memory::UBOManager</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1UBOManager"/>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="23" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
@@ -148,9 +148,6 @@
         <childnode refid="21" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="20">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -178,37 +175,25 @@
         <label>SR_UTILS_NS::Path</label>
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
-      <node id="23">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="23" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="9">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
         <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="26" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
-        <link refid="classSR__UTILS__NS_1_1Singleton"/>
-        <childnode refid="26" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="26">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>SR_UTILS_NS::Singleton&lt; T &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1Singleton"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
         <label>SR_UTILS_NS::SingletonBase</label>
         <link refid="classSR__UTILS__NS_1_1SingletonBase"/>
         <childnode refid="10" relation="public-inheritance">
@@ -229,7 +214,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="24" bodyend="27"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="26" bodyend="29"/>
     <listofallmembers>
       <member refid="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo_1a5476c81ec5e9514c8f44eda3d0a7f2d3" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera::RenderTechniqueInfo</scope><name>path</name></member>
       <member refid="structSR__GTYPES__NS_1_1Camera_1_1RenderTechniqueInfo_1a600322093046661b9c7b987e6cc845d8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera::RenderTechniqueInfo</scope><name>pTechnique</name></member>

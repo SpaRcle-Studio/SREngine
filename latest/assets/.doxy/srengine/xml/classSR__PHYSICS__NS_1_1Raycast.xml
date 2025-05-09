@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="15" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="17" column="9" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="23" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="25" column="37" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="25" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="18" column="17"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="20" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classSR__PHYSICS__NS_1_1Raycast_1aa0bc8adb0550b60d1fc9189289437b3f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="20" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="20" bodyend="20"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="22" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="22" bodyend="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -132,7 +132,7 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="13" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="13" bodyend="24"/>
+    <location file="Engine/Core/libs/Physics/inc/Physics/Raycast.h" line="15" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/Raycast.h" bodystart="15" bodyend="26"/>
     <listofallmembers>
       <member refid="classSR__PHYSICS__NS_1_1Raycast_1a4912d6d3c5add9dbb7b1dab883d2cd79" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::Raycast</scope><name>m_world</name></member>
       <member refid="classSR__PHYSICS__NS_1_1Raycast_1a3c29db22036a3cc5cbf2c920da8f1696" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::Raycast</scope><name>RaycastHits</name></member>

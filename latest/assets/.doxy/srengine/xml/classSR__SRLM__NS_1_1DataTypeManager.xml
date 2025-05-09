@@ -268,34 +268,34 @@
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1acc0f2bfdcfd2434604fa6b592fdffbee" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Clear</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a098914e37df29824576cba8b4c5d13b4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>CreateByName</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a0c5fdef0abc2398b59f7b9c2e36221af" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>CreateByName</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>DestroySingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1aa90292cf3a0ddcaa025f7271cbc93625" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetStruct</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a2578cf645fa5970815407f55f5d8d6f2" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>GetStructs</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1ad767fdc03d152d672d6d7a0aaed27658" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Hash</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a62ddcfa7ad17cf500a666beaae8dc800" prot="private" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsSingletonInitialized</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1ae581ed5691740ad7100a77d70df6c0db" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>IsStructExists</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>m_mutex</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a015dc3342dfd104658c8a3de3d2db877" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>m_structs</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a2c68e528b5b19da2f26ab9c8719937f7" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>m_watcher</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a1c914674606cd20a7a6181953615032e" prot="private" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>operator=</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1afc7e0b512da6be32e47a15836685021c" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>ReloadSettings</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>SingletonBase</name></member>
       <member refid="classSR__SRLM__NS_1_1DataTypeManager_1a4ba7970357eb3de88f224bb1393d3219" prot="private" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>Structs</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_SRLM_NS::DataTypeManager</scope><name>~SingletonBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

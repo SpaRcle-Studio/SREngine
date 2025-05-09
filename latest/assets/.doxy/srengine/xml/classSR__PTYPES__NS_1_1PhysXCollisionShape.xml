@@ -196,7 +196,7 @@
       <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a579531b9f85d581c58538d07114681cd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>GetMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a572967d0c46534df86bb63e2a4638de5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>GetShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1aee533307b0be731a7c671fad0df41afc" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>m_shape</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>operator=</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1a76c2c0a950fbc551d69d8d108197f7df" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>SetShape</name></member>
@@ -204,7 +204,7 @@
       <member refid="classSR__PTYPES__NS_1_1CollisionShapeImpl_1ab8d07a5b987cbd7a50bf3ceb356b3d9f" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>Update</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1ad58d722ffe208e003b309b233a9a33d9" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a51e27896fecccb6d81a2734b50781534" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>UpdateShape</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>~NonCopyable</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXCollisionShape_1a218673929a9d66683e4fa8f8e0b7aff9" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXCollisionShape</scope><name>~PhysXCollisionShape</name></member>
     </listofallmembers>
   </compounddef>

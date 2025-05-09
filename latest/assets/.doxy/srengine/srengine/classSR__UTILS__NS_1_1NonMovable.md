@@ -82,8 +82,8 @@ Inherited by the following classes: [SR\_UTILS\_NS::ClassDB](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonMovable**](#function-nonmovable-12) () = default<br> |
-| virtual  | [**~NonMovable**](#function-nonmovable) () = default<br> |
+|   | [**NonMovable**](#function-nonmovable-12) () <br> |
+| virtual  | [**~NonMovable**](#function-nonmovable) () <br> |
 
 
 
@@ -128,7 +128,7 @@ virtual NonMovable & SR_UTILS_NS::NonMovable::operator= (
 ### function NonMovable [1/2]
 
 ```C++
-constexpr SR_UTILS_NS::NonMovable::NonMovable () = default
+SR_UTILS_NS::NonMovable::NonMovable () 
 ```
 
 
@@ -141,7 +141,7 @@ constexpr SR_UTILS_NS::NonMovable::NonMovable () = default
 ### function ~NonMovable 
 
 ```C++
-virtual SR_UTILS_NS::NonMovable::~NonMovable () = default
+virtual SR_UTILS_NS::NonMovable::~NonMovable () 
 ```
 
 

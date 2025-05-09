@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="53" column="11" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="55" column="11" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1a9acfaa7555159376f38c7794872ba70b" prot="private" static="no" mutable="yes">
         <type>bool</type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="54" column="22" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="56" column="22" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1a3396ace6ac2bf8cd292103c049974406" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="55" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="55" bodyend="-1"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="57" column="14" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="25" column="9"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1ac9b708b7acd36103114fe2946b7fcdae" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="26" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="26" bodyend="30"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="28" column="18" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="28" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1aadb738d112a6b0844355860803476d08" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="32" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="34" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1a0c04553b7aa7be4859c067247977e28b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="33" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="35" column="43" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="35" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1a8736bd03a8833a64349c151b003a3c41" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const T &amp;</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="34" column="46" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="36" column="46" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1adabdf1f19acc7e9975fc90401211110f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE T &amp;</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="35" column="40" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="37" column="40" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1adb68cfdb517ff5ffa8b00220adac721d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker" kindref="compound">PlayParamChangeChecker</ref> &amp;</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="37" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="37" bodyend="42"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="39" column="32" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="39" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1abcd10553724dc477408d47b793a4cba6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE void</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="44" column="30" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="44" bodyend="46"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="46" column="30" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="46" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1adbf4413ce2469b69cc0e1ce6dd239b37" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE void</type>
@@ -186,14 +186,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="48" column="30" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="48" bodyend="50"/>
+        <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="50" column="30" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="50" bodyend="52"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="23" column="15" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="23" bodyend="57"/>
+    <location file="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" line="25" column="15" bodyfile="Engine/Core/libs/Audio/inc/Audio/PlayParams.h" bodystart="25" bodyend="59"/>
     <listofallmembers>
       <member refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1aadb738d112a6b0844355860803476d08" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParamChangeChecker</scope><name>has_value</name></member>
       <member refid="classSR__AUDIO__NS_1_1PlayParamChangeChecker_1a0c04553b7aa7be4859c067247977e28b" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::PlayParamChangeChecker</scope><name>is_changed</name></member>

@@ -16,9 +16,20 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
+      <node id="5">
+        <label>Utils/Memory/Allocator.h</label>
+        <link refid="Allocator_8h_source"/>
+      </node>
       <node id="3">
         <label>Utils/macros.h</label>
-        <link refid="macros_8h_source"/>
+        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cstdlib</label>
       </node>
     </incdepgraph>
     <innerclass refid="classSR__AUDIO__NS_1_1WAVDataProvider" prot="public">SR_AUDIO_NS::WAVDataProvider</innerclass>

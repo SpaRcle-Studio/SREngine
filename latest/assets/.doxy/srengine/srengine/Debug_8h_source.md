@@ -29,7 +29,7 @@ namespace SR_UTILS_NS {
 
     static fmt::text_style GetTextStyleColorByLogType(DebugLogType type);
 
-    class SR_DLL_EXPORT Debug : public Singleton<Debug> {
+    class Debug : public Singleton<Debug> {
         SR_REGISTER_SINGLETON(Debug);
     public:
         enum class Level {
@@ -41,16 +41,17 @@ namespace SR_UTILS_NS {
         };
 
     public:
-        ~Debug() override = default;
+        Debug();
+        ~Debug() override;
 
     private:
         void InitColorTheme();
 
     public:
-        void SetLevel(Level level) { m_level = level; }
+        void SetLevel(Level level);
 
-        SR_NODISCARD Level GetLevel() { return m_level; }
-        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
+        SR_NODISCARD Level GetLevel();
+        SR_NODISCARD bool IsInitialized() const;
 
         void MakeCrash();
         void TestPrint();
@@ -59,23 +60,23 @@ namespace SR_UTILS_NS {
         void OnSingletonDestroy() override;
 
     public:
-        void Log(const std::string& msg) { Print(msg, DebugLogType::Log); }
-        void Success(const std::string& msg) { Print(msg, DebugLogType::Success); }
-        void VulkanLog(const std::string& msg) { Print(msg, DebugLogType::VulkanLog); }
-        void Info(const std::string& msg) { Print(msg, DebugLogType::Info); }
-        void Graph(const std::string& msg) { Print(msg, DebugLogType::Graph); }
-        void Vulkan(const std::string& msg) { Print(msg, DebugLogType::Vulkan); }
-        void Shader(const std::string& msg) { Print(msg, DebugLogType::Shader); }
-        void Script(const std::string& msg) { Print(msg, DebugLogType::Script); }
-        void System(const std::string& msg) { Print(msg, DebugLogType::System); }
-        void Warn(const std::string& msg) { Print(msg, DebugLogType::Warn); m_countWarnings++; }
-        void Error(const std::string& msg) { Print(msg, DebugLogType::Error); m_countErrors++; }
-        void VulkanError(const std::string& msg) { Print(msg, DebugLogType::VulkanError); m_countErrors++; }
-        bool Assert(const std::string& msg) { Print(msg, DebugLogType::Assert); m_countErrors++; return false; }
+        void Log(const std::string& msg);
+        void Success(const std::string& msg);
+        void VulkanLog(const std::string& msg);
+        void Info(const std::string& msg);
+        void Graph(const std::string& msg);
+        void Vulkan(const std::string& msg);
+        void Shader(const std::string& msg);
+        void Script(const std::string& msg);
+        void System(const std::string& msg);
+        void Warn(const std::string& msg);
+        void Error(const std::string& msg);
+        void VulkanError(const std::string& msg);
+        bool Assert(const std::string& msg);
         bool AssertOnceCheck(const std::string& msg);
 
-        void ScriptLog(const std::string& msg) { Print(msg, DebugLogType::ScriptLog); }
-        void ScriptError(const std::string& msg) { Print(msg, DebugLogType::ScriptError); }
+        void ScriptLog(const std::string& msg);
+        void ScriptError(const std::string& msg);
 
         void Print(std::string msg, DebugLogType type);
 

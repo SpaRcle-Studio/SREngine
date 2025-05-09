@@ -900,6 +900,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>AutoFree</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a0e52dca69afb2d4db5da0170a8e07b1c" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>BuildUITree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a8d1072763a0b8b4b6e4ef9ab3c2469a0" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Forward</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a00df87c957d8f7ee0fc51f07a0542f4a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>GameObject</name></member>
@@ -938,7 +939,7 @@
       <member refid="classSR__UTILS__NS_1_1Transform_1aaa673ea75de87d78ab0f75bc42244cf8" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>GlobalSkew</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a21ae4c8e5f142ead1fac899a406c325a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>GlobalTranslate</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>HasSerializationFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>InitializeClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>IncrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a022430c488568f4d0fd8f60c608287a4" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>IsDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a2fdbeb851554abc43329223ecd620d9b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>IsRelativePriority</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Load</name></member>
@@ -984,13 +985,13 @@
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a8fb0975fa82c1206259a7273df4012d0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RemoveModifier</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Reset</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform_1a2f9cc4ce76921065064d77d116452f6a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Right</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1a8995989f020a6c93f29a7b6a1b626f75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RIGHT</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform_1a2f9cc4ce76921065064d77d116452f6a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Right</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1ad660e8b9679c804b9097c11fe348063e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Rotate</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a40e33942adff2c74db3a3cba199a8db4" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform2D</scope><name>Rotate</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a11614c784c280a68da9d6d291d3638a5" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform2D</scope><name>Rotate</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform_1a982f76b6c0ae914b05d9703062b4decd" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RotateAround</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform_1a7061af60e21f6bb2015e7317db0c8876" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RotateAroundParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform_1af9cd604ad5bc319782d6751b7eb7d63a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RotateAround</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform_1a893af8cad22e8da241936a4f86914df9" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>RotateAroundParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Save</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform2D_1afa072f05c3aa31c923632cdda6b5d1ba" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Scale</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1adea47f4c07064942aff43f93541162b1" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform2D</scope><name>Scale</name></member>
@@ -1018,7 +1019,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>StaticCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1ae71fc319ff552c1584009a66fbf83074" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Transform</name></member>
@@ -1035,7 +1036,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~SRClass</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a3feaf3a2aa4e02d67bcba8750f0a7ef5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform2D</scope><name>~Transform</name></member>
     </listofallmembers>

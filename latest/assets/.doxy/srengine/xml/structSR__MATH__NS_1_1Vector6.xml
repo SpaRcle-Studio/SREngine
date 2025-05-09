@@ -177,7 +177,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="34" column="37" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a1b7dce05a85ad0d80b71ff613b3f505d" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structSR__MATH__NS_1_1Vector6_1a26d76e82442efc958f4cb3d14f1dc80b" prot="public" static="no" mutable="no">
         <type>union <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">SR_MATH_NS::Vector6</ref></type>
         <definition>union SR_MATH_NS::Vector6 SR_MATH_NS::Vector6&lt; T &gt;</definition>
         <argsstring></argsstring>
@@ -193,9 +193,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ab316abffc8c9f50be9eaa084250f8943" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_FAST_CONSTRUCTOR</type>
-        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a6d936b56e9470e45c1350ec921083347" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
         <argsstring>()</argsstring>
         <name>Vector6</name>
         <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
@@ -205,137 +205,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="38" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="38" bodyend="40"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="38" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="51" bodyend="53"/>
       </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1aae10069b0df068cfdc68c386df748535" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_FAST_CONSTRUCTOR</type>
-        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
-        <argsstring>(SR_MATH_NS::Vector3&lt; T &gt; vec3d1, SR_MATH_NS::Vector3&lt; T &gt; vec3d2)</argsstring>
-        <name>Vector6</name>
-        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
-        <param>
-          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
-          <declname>vec3d1</declname>
-        </param>
-        <param>
-          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
-          <declname>vec3d2</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="42" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="42" bodyend="45"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1af2b20b9b7747dadbbc07ce7e8894e465" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_FAST_CONSTRUCTOR</type>
-        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
-        <argsstring>(T scalar)</argsstring>
-        <name>Vector6</name>
-        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
-        <param>
-          <type>T</type>
-          <declname>scalar</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="47" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="47" bodyend="49"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a44f1eec18a2af8dac5b0e43d89d96942" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_FORCE_INLINE bool</type>
-        <definition>SR_FORCE_INLINE bool SR_MATH_NS::Vector6&lt; T &gt;::operator==</definition>
-        <argsstring>(const Vector6 &amp;p_v) const</argsstring>
-        <name>operator==</name>
-        <qualifiedname>SR_MATH_NS::Vector6::operator==</qualifiedname>
-        <param>
-          <type>const <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref> &amp;</type>
-          <declname>p_v</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="51" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="51" bodyend="58"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a9cbaebbf749feebc4e406622c7f94a0b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_FORCE_INLINE bool</type>
-        <definition>SR_FORCE_INLINE bool SR_MATH_NS::Vector6&lt; T &gt;::operator!=</definition>
-        <argsstring>(const Vector6 &amp;p_v) const</argsstring>
-        <name>operator!=</name>
-        <qualifiedname>SR_MATH_NS::Vector6::operator!=</qualifiedname>
-        <param>
-          <type>const <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref> &amp;</type>
-          <declname>p_v</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="60" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="60" bodyend="62"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a910ded0b343a1f757e467376c38cb6bf" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename U</type>
-          </param>
-        </templateparamlist>
-        <type>SR_FAST_CONSTRUCTOR</type>
-        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
-        <argsstring>(const Vector3&lt; U &gt; &amp;vec)</argsstring>
-        <name>Vector6</name>
-        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
-        <param>
-          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; U &gt; &amp;</type>
-          <declname>vec</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="64" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="64" bodyend="71"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a1afbac44b79e1562c19acdd5e7e51469" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename U</type>
-          </param>
-        </templateparamlist>
-        <type>SR_FAST_CONSTRUCTOR</type>
-        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
-        <argsstring>(const Vector3&lt; U &gt; &amp;vec1, const Vector3&lt; U &gt; &amp;vec2)</argsstring>
-        <name>Vector6</name>
-        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
-        <param>
-          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; U &gt; &amp;</type>
-          <declname>vec1</declname>
-        </param>
-        <param>
-          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; U &gt; &amp;</type>
-          <declname>vec2</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="73" column="49" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="73" bodyend="80"/>
-      </memberdef>
-      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae4f51e0a66723d7c91b720ee78147200" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_FAST_CONSTRUCTOR</type>
-        <definition>SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a3492f1bd3ff9ca0a53a7f19f0f2354b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
         <argsstring>(T _x, T _y, T _z, T _w, T _v, T _u)</argsstring>
         <name>Vector6</name>
         <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
@@ -369,18 +243,162 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="82" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="82" bodyend="89"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="104" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae453798430d6cf17feeae4c5d76aea29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+        <argsstring>(const Vector6 &amp;p_v)</argsstring>
+        <name>Vector6</name>
+        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref> &amp;</type>
+          <declname>p_v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="40" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="55" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae978dccb4f3eb07d2ffb02c6e1f6fcf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+        <argsstring>(SR_MATH_NS::Vector3&lt; T &gt; vec3d1, SR_MATH_NS::Vector3&lt; T &gt; vec3d2)</argsstring>
+        <name>Vector6</name>
+        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
+          <declname>vec3d1</declname>
+        </param>
+        <param>
+          <type><ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">SR_MATH_NS::Vector3</ref>&lt; T &gt;</type>
+          <declname>vec3d2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="41" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a5cbef8db04703eef7808990234321e24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+        <argsstring>(T scalar)</argsstring>
+        <name>Vector6</name>
+        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="42" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="69" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1ae4cbce8f34ea14fea313204e159df462" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Vector6&lt; T &gt;::operator==</definition>
+        <argsstring>(const Vector6 &amp;p_v) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>SR_MATH_NS::Vector6::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref> &amp;</type>
+          <declname>p_v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="44" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="73" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1a69b77e11229b10188d0db9f64b1eb4f6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_MATH_NS::Vector6&lt; T &gt;::operator!=</definition>
+        <argsstring>(const Vector6 &amp;p_v) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>SR_MATH_NS::Vector6::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector6" kindref="compound">Vector6</ref> &amp;</type>
+          <declname>p_v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="45" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1aa8e54f263b75c98ce556d9207e5ec2f3" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+        <argsstring>(const Vector3&lt; U &gt; &amp;vec)</argsstring>
+        <name>Vector6</name>
+        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="47" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="86" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="structSR__MATH__NS_1_1Vector6_1afeb45026ad08cff5c0b1e23d77cd6c1e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SR_MATH_NS::Vector6&lt; T &gt;::Vector6</definition>
+        <argsstring>(const Vector3&lt; U &gt; &amp;vec1, const Vector3&lt; U &gt; &amp;vec2)</argsstring>
+        <name>Vector6</name>
+        <qualifiedname>SR_MATH_NS::Vector6::Vector6</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>vec1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structSR__MATH__NS_1_1Vector3" kindref="compound">Vector3</ref>&lt; U &gt; &amp;</type>
+          <declname>vec2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="48" column="29" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="95" bodyend="102"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="12" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="12" bodyend="90"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" line="12" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Math/Vector6.h" bodystart="12" bodyend="49"/>
     <listofallmembers>
       <member refid="structSR__MATH__NS_1_1Vector6_1a7e1bf4aab80cc26b161cdb55345a8a5c" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>coord</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1a9cbaebbf749feebc4e406622c7f94a0b" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>operator!=</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1a44f1eec18a2af8dac5b0e43d89d96942" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>operator==</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1a69b77e11229b10188d0db9f64b1eb4f6" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>operator!=</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1ae4cbce8f34ea14fea313204e159df462" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>operator==</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a2bde629c2df6d78c4508de3c51f6db78" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>u</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a7a71a336bd1ac85b5a309fed86be2715" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>v</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a826081ee0cf772e931c2d692414f0418" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>vec2d1</name></member>
@@ -388,12 +406,13 @@
       <member refid="structSR__MATH__NS_1_1Vector6_1a0dd89c54210647f8d7bd0e3977bb169a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>vec2d3</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a7ff408eec3611e912873923e9b51db25" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>vec3d1</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1ad6a9407282479ca51cd01fe9643a1ede" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>vec3d2</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1ab316abffc8c9f50be9eaa084250f8943" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1aae10069b0df068cfdc68c386df748535" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1af2b20b9b7747dadbbc07ce7e8894e465" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1a910ded0b343a1f757e467376c38cb6bf" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1a1afbac44b79e1562c19acdd5e7e51469" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
-      <member refid="structSR__MATH__NS_1_1Vector6_1ae4f51e0a66723d7c91b720ee78147200" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1a6d936b56e9470e45c1350ec921083347" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1a3492f1bd3ff9ca0a53a7f19f0f2354b4" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1ae453798430d6cf17feeae4c5d76aea29" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1ae978dccb4f3eb07d2ffb02c6e1f6fcf9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1a5cbef8db04703eef7808990234321e24" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1aa8e54f263b75c98ce556d9207e5ec2f3" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
+      <member refid="structSR__MATH__NS_1_1Vector6_1afeb45026ad08cff5c0b1e23d77cd6c1e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>Vector6</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a8d82071ad4684980262741919518ccfa" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>w</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a5b9b8ccf284f1c3f312478d3a125ae03" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>x</name></member>
       <member refid="structSR__MATH__NS_1_1Vector6_1a96eb9db303ad32bf48cafe0486181182" prot="public" virt="non-virtual"><scope>SR_MATH_NS::Vector6</scope><name>y</name></member>

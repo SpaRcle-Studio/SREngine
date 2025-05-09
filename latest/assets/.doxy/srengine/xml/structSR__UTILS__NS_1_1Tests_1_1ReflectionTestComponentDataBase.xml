@@ -77,7 +77,6 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>GetMeta</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>HasSerializationFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>InitializeClass</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>Load</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>OnPostLoad</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_UTILS_NS::Tests::ReflectionTestComponentDataBase</scope><name>OnPostSave</name></member>

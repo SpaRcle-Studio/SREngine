@@ -39,9 +39,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1aae824e755156fc149f36c25e1fb58e20" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>SR_INLINE constexpr SR_MATH_NS::FVector3</type>
-        <definition>SR_INLINE constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::Transform3D::RIGHT</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1ad7441fafbb031324ebb9f5e981405275" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::Transform3D::RIGHT</definition>
         <argsstring></argsstring>
         <name>RIGHT</name>
         <qualifiedname>SR_UTILS_NS::Transform3D::RIGHT</qualifiedname>
@@ -52,11 +52,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="65" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="65" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="65" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1ac7bd597920d1bb215a942cc1f31b5247" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>SR_INLINE constexpr SR_MATH_NS::FVector3</type>
-        <definition>SR_INLINE constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::Transform3D::UP</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a00e295def9660765e087fa00ac70758a" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::Transform3D::UP</definition>
         <argsstring></argsstring>
         <name>UP</name>
         <qualifiedname>SR_UTILS_NS::Transform3D::UP</qualifiedname>
@@ -67,11 +67,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="66" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="66" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="66" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1a214d5c59b57370c39b401a13503d3562" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>SR_INLINE constexpr SR_MATH_NS::FVector3</type>
-        <definition>SR_INLINE constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::Transform3D::FORWARD</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1Transform3D_1ab84b91e9821dab852d83e61dfe3cc81e" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::Transform3D::FORWARD</definition>
         <argsstring></argsstring>
         <name>FORWARD</name>
         <qualifiedname>SR_UTILS_NS::Transform3D::FORWARD</qualifiedname>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="67" column="57" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="67" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="67" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" bodystart="67" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -284,12 +284,13 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="19" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a8eec0af8064288633abce73f0d54528d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1a8eec0af8064288633abce73f0d54528d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::Transform3D::RotateAround</definition>
         <argsstring>(const SR_MATH_NS::FVector3 &amp;point, const SR_MATH_NS::FVector3 &amp;eulers) override</argsstring>
         <name>RotateAround</name>
         <qualifiedname>SR_UTILS_NS::Transform3D::RotateAround</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Transform_1af9cd604ad5bc319782d6751b7eb7d63a">RotateAround</reimplements>
         <param>
           <type>const SR_MATH_NS::FVector3 &amp;</type>
           <declname>point</declname>
@@ -306,12 +307,13 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/ECS/Transform3D.h" line="21" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1abbb8219a37559936437ddf85aac780e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Transform3D_1abbb8219a37559936437ddf85aac780e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>void SR_UTILS_NS::Transform3D::RotateAroundParent</definition>
         <argsstring>(const SR_MATH_NS::FVector3 &amp;eulers) override</argsstring>
         <name>RotateAroundParent</name>
         <qualifiedname>SR_UTILS_NS::Transform3D::RotateAroundParent</qualifiedname>
+        <reimplements refid="classSR__UTILS__NS_1_1Transform_1a893af8cad22e8da241936a4f86914df9">RotateAroundParent</reimplements>
         <param>
           <type>const SR_MATH_NS::FVector3 &amp;</type>
           <declname>eulers</declname>
@@ -817,8 +819,9 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>AllocateStatic</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>DynamicCast</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform3D_1a214d5c59b57370c39b401a13503d3562" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>FORWARD</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform3D_1ab84b91e9821dab852d83e61dfe3cc81e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>FORWARD</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a8d1072763a0b8b4b6e4ef9ab3c2469a0" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Forward</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1a00df87c957d8f7ee0fc51f07a0542f4a" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>GameObject</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Get</name></member>
@@ -853,7 +856,7 @@
       <member refid="classSR__UTILS__NS_1_1Transform_1aaa673ea75de87d78ab0f75bc42244cf8" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>GlobalSkew</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a21ae4c8e5f142ead1fac899a406c325a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>GlobalTranslate</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>HasSerializationFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>InitializeClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>IncrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a022430c488568f4d0fd8f60c608287a4" prot="protected" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>IsDirty</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Load</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1ae38cabb9c40887f69a04aa5ef287107b" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>LookAt</name></member>
@@ -891,15 +894,13 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>ReinterpretCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RemoveSerializationFlags</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform3D_1ad7441fafbb031324ebb9f5e981405275" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RIGHT</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a2f9cc4ce76921065064d77d116452f6a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Right</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform3D_1aae824e755156fc149f36c25e1fb58e20" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RIGHT</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1a258e587409bfa520d5a54a80f499d92a" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Rotate</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1add9935a473b87b23128b04c952c83900" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Rotate</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a11614c784c280a68da9d6d291d3638a5" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform3D</scope><name>Rotate</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform3D_1a8eec0af8064288633abce73f0d54528d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RotateAround</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform_1a982f76b6c0ae914b05d9703062b4decd" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform3D</scope><name>RotateAround</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform3D_1abbb8219a37559936437ddf85aac780e0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RotateAroundParent</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform_1a7061af60e21f6bb2015e7317db0c8876" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform3D</scope><name>RotateAroundParent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform3D_1a8eec0af8064288633abce73f0d54528d" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RotateAround</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform3D_1abbb8219a37559936437ddf85aac780e0" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>RotateAroundParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Save</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1a97989a5688025416db22f2b3ea88d2b5" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Scale</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1adea47f4c07064942aff43f93541162b1" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform3D</scope><name>Scale</name></member>
@@ -925,7 +926,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>StaticCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1a577768ac90cf8391f95b7adb7235b96e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Super</name></member>
@@ -935,14 +936,14 @@
       <member refid="classSR__UTILS__NS_1_1Transform_1a1055e8ce5f5effac26e150670f48e52c" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Transform::"><scope>SR_UTILS_NS::Transform3D</scope><name>Translate</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Unlock</name></member>
-      <member refid="classSR__UTILS__NS_1_1Transform3D_1ac7bd597920d1bb215a942cc1f31b5247" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>UP</name></member>
+      <member refid="classSR__UTILS__NS_1_1Transform3D_1a00e295def9660765e087fa00ac70758a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>UP</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1aa578cbae8eac7e80c5720d863299353b" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Up</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform3D_1a6e8e376afcd4d30cb6f95eaa9c05b7d4" prot="private" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>UpdateMatrix</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1aca6932ea6b4e30845d5651e9606df6f8" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>UpdateTree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>Valid</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>VerifyAfterLoad</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>~SRClass</name></member>
       <member refid="classSR__UTILS__NS_1_1Transform_1a3feaf3a2aa4e02d67bcba8750f0a7ef5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Transform3D</scope><name>~Transform</name></member>
     </listofallmembers>

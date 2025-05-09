@@ -14,7 +14,7 @@
 
 #ifndef SR_ENGINE_IMAGELOADER_H
 #define SR_ENGINE_IMAGELOADER_H
-
+//TODO: Я так понимаю, это место заброшено и забыто
 namespace SR_GRAPH_NS {
     class ImageLoader {
 

@@ -20,7 +20,7 @@
 #include <Utils/Types/Thread.h>
 
 namespace SR_HTYPES_NS {
-    template <typename T> class SR_DLL_EXPORT SafeQueue : public SR_UTILS_NS::NonCopyable {
+    template <typename T> class SR_COMMON_DLL_API SafeQueue : public SR_UTILS_NS::NonCopyable {
     public:
         SR_NODISCARD uint64_t Size() const noexcept;
         SR_NODISCARD bool Empty() const noexcept;

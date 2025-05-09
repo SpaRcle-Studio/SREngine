@@ -359,14 +359,14 @@
       <member refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1af147488ad29b0a5c271cd823bd9bee27" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>m_physics</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a1412331fa01e4feb3a398aea339050d0" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>m_pvd</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a469419201900f6a90ab5cdd5719a608d" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>m_pvdTransport</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>operator=</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1aebd12e7f5624dc05f9f89b409afe3f53" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>PhysXLibraryImpl</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a9eacebf62880b4e50958f8224961eed4" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>Space</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a5ad7cd9dcc03ecaa8237af460c5c01fc" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>Super</name></member>
       <member refid="classSR__PHYSICS__NS_1_1LibraryImpl_1a60e7fcdb1afbad64b55483d699445b72" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>~LibraryImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>~NonCopyable</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXLibraryImpl_1a6b0e642d322bebb44d38bca3dde4b718" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXLibraryImpl</scope><name>~PhysXLibraryImpl</name></member>
     </listofallmembers>
   </compounddef>

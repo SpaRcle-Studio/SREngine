@@ -398,7 +398,7 @@
       <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1aef7a3b975ecba3247bad54d1f7054dfc" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_scene</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1a5e071ad1151139fd6a6bf9fb2c97161c" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_space</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a0a6b70e3aff3e3e3ea08b0f1588c959f" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>m_staticActors</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>operator=</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1aaee900d577f523a843bca8e03986d18f" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>PhysicsWorld</name></member>
@@ -412,7 +412,7 @@
       <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1adf09f6b4333cc8b93bdca17ffa6aa8a7" prot="public" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>Synchronize</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a246e3596586fc59da51e02fea38e1b16" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>SynchronizeDynamic</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a34f993628753b0ce4f5ff051499d0934" prot="private" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>SynchronizeStatic</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~NonCopyable</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysicsWorld_1ae26315eed2d4979cb1786e8072ceaf69" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~PhysicsWorld</name></member>
       <member refid="classSR__PHYSICS__NS_1_1PhysXPhysicsWorld_1a6379289c8dbd596bba2b822015e7f976" prot="public" virt="non-virtual"><scope>SR_PHYSICS_NS::PhysXPhysicsWorld</scope><name>~PhysXPhysicsWorld</name></member>
     </listofallmembers>

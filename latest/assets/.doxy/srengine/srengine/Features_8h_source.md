@@ -21,11 +21,13 @@
 namespace SR_UTILS_NS {
     class Features;
 
-    class SR_DLL_EXPORT FeatureGroup {
+    class SR_COMMON_DLL_API FeatureGroup {
         friend class Features;
     public:
         SR_NODISCARD bool Enabled(const std::string& name) const;
         SR_NODISCARD bool Enabled(const std::string& name, bool def) const;
+
+        ~FeatureGroup();
 
     private:
         bool Register(const std::string& name, bool value);
@@ -35,7 +37,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT Features : public Singleton<Features> {
+    class Features : public Singleton<Features> {
         SR_REGISTER_SINGLETON(Features);
     private:
         ~Features() override = default;

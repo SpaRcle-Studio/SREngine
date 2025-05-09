@@ -18,7 +18,7 @@
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_HTYPES_NS {
-    template<typename T> class SR_DLL_EXPORT LockGuard : public NonCopyable {
+    template<typename T> class SR_COMMON_DLL_API LockGuard : public NonCopyable {
     public:
         explicit LockGuard(T& mutex)
             : m_mutex(mutex)

@@ -140,8 +140,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -156,7 +156,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 ### function CursorLock [1/2]
 
 ```C++
-inline SR_UTILS_NS::CursorLock::CursorLock () 
+SR_UTILS_NS::CursorLock::CursorLock () 
 ```
 
 
@@ -169,7 +169,7 @@ inline SR_UTILS_NS::CursorLock::CursorLock ()
 ### function CursorLock [2/2]
 
 ```C++
-inline SR_UTILS_NS::CursorLock::CursorLock (
+SR_UTILS_NS::CursorLock::CursorLock (
     CursorLock && ref
 ) noexcept
 ```
@@ -184,7 +184,7 @@ inline SR_UTILS_NS::CursorLock::CursorLock (
 ### function operator= 
 
 ```C++
-inline CursorLock & SR_UTILS_NS::CursorLock::operator= (
+CursorLock & SR_UTILS_NS::CursorLock::operator= (
     CursorLock && other
 ) noexcept
 ```
@@ -199,7 +199,7 @@ inline CursorLock & SR_UTILS_NS::CursorLock::operator= (
 ### function ~CursorLock 
 
 ```C++
-inline SR_UTILS_NS::CursorLock::~CursorLock () 
+SR_UTILS_NS::CursorLock::~CursorLock () 
 ```
 
 

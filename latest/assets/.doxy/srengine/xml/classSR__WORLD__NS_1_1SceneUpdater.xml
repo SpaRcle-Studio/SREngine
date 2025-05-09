@@ -323,7 +323,7 @@
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1a475c9438ae4d67028787f0848f5b16b1" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>m_mutex</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1af5430fa6d84334542f28c9a2a55034af" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>m_scene</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1a6dc684b7a7593e0111862d5cf07944cc" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>m_updatableComponents</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>operator=</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1a52f338aa3711d0744d834080a31670b2" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>RegisterComponent</name></member>
@@ -332,7 +332,7 @@
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1acda78de64b6a12edff27d5f00a40f14b" prot="private" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>Super</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1a101f80447db8f495734bbe00e404ff27" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>UnRegisterComponent</name></member>
       <member refid="classSR__WORLD__NS_1_1SceneUpdater_1aff0e8b7916b1fed36ef5f899de652f7b" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>Update</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_WORLD_NS::SceneUpdater</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

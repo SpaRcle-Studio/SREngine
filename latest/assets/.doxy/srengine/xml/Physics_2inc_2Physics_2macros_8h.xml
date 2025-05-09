@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="Physics_2inc_2Physics_2macros_8h" kind="file" language="C++">
+    <compoundname>macros.h</compoundname>
+    <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
+    <includedby refid="CollisionShape_8h" local="no">Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</includedby>
+    <includedby refid="LibraryImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h</includedby>
+    <includedby refid="PhysXUtils_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h</includedby>
+    <includedby refid="PhysicsLib_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h</includedby>
+    <includedby refid="PhysicsMaterial_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h</includedby>
+    <includedby refid="PhysicsMaterialImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsMaterialImpl.h</includedby>
+    <includedby refid="PhysicsScene_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</includedby>
+    <includedby refid="PhysicsWorld_8h" local="no">Engine/Core/libs/Physics/inc/Physics/PhysicsWorld.h</includedby>
+    <includedby refid="Raycast_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Raycast.h</includedby>
+    <includedby refid="RaycastImpl_8h" local="no">Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h</includedby>
+    <includedby refid="Rigidbody_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</includedby>
+    <includedby refid="Physics_2inc_2Physics_2Utils_2Utils_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h</includedby>
+    <includedby refid="Vehicle_8h" local="no">Engine/Core/libs/Physics/inc/Physics/Vehicle.h</includedby>
+    <includedby refid="VehicleInternalData_8h" local="no">Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h</includedby>
+    <includedby refid="WheelInternalData_8h" local="no">Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>Engine/Core/libs/Physics/inc/Physics/macros.h</label>
+        <link refid="Physics_2inc_2Physics_2macros_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/Memory/Allocator.h</label>
+        <link refid="Allocator_8h_source"/>
+      </node>
+      <node id="2">
+        <label>Utils/macros.h</label>
+        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cstdlib</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="26">
+        <label>Engine/Core/inc/Core/GUI/PhysicsMaterialEditor.h</label>
+        <link refid="PhysicsMaterialEditor_8h_source"/>
+      </node>
+      <node id="21">
+        <label>Engine/Core/inc/Core/World/EngineScene.h</label>
+        <link refid="EngineScene_8h_source"/>
+      </node>
+      <node id="6">
+        <label>Engine/Core/libs/Physics/inc/Physics/2D/Rigidbody2D.h</label>
+        <link refid="Rigidbody2D_8h_source"/>
+      </node>
+      <node id="31">
+        <label>Engine/Core/libs/Physics/inc/Physics/3D/Raycast3D.h</label>
+        <link refid="Raycast3D_8h_source"/>
+      </node>
+      <node id="33">
+        <label>Engine/Core/libs/Physics/inc/Physics/3D/Raycast3DImpl.h</label>
+        <link refid="Raycast3DImpl_8h_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>Engine/Core/libs/Physics/inc/Physics/3D/Rigidbody3D.h</label>
+        <link refid="Rigidbody3D_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>Engine/Core/libs/Physics/inc/Physics/3D/Vehicle4W3D.h</label>
+        <link refid="Vehicle4W3D_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Engine/Core/libs/Physics/inc/Physics/Box2D/Box2DLibraryImpl.h</label>
+        <link refid="Box2DLibraryImpl_8h_source"/>
+      </node>
+      <node id="3">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3CollisionShape.h</label>
+        <link refid="Bullet3CollisionShape_8h_source"/>
+      </node>
+      <node id="12">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3LibraryImpl.h</label>
+        <link refid="Bullet3LibraryImpl_8h_source"/>
+      </node>
+      <node id="18">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsLib.h</label>
+        <link refid="Bullet3PhysicsLib_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3PhysicsWorld.h</label>
+        <link refid="Bullet3PhysicsWorld_8h_source"/>
+      </node>
+      <node id="8">
+        <label>Engine/Core/libs/Physics/inc/Physics/Bullet3/Bullet3Rigidbody3D.h</label>
+        <link refid="Bullet3Rigidbody3D_8h_source"/>
+      </node>
+      <node id="2">
+        <label>Engine/Core/libs/Physics/inc/Physics/CollisionShape.h</label>
+        <link refid="CollisionShape_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>Engine/Core/libs/Physics/inc/Physics/LibraryImpl.h</label>
+        <link refid="LibraryImpl_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXCollisionShape.h</label>
+        <link refid="PhysXCollisionShape_8h_source"/>
+      </node>
+      <node id="13">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXLibraryImpl.h</label>
+        <link refid="PhysXLibraryImpl_8h_source"/>
+      </node>
+      <node id="28">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXMaterialImpl.h</label>
+        <link refid="PhysXMaterialImpl_8h_source"/>
+      </node>
+      <node id="15">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXPhysicsWorld.h</label>
+        <link refid="PhysXPhysicsWorld_8h_source"/>
+      </node>
+      <node id="34">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRaycast3DImpl.h</label>
+        <link refid="PhysXRaycast3DImpl_8h_source"/>
+      </node>
+      <node id="9">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXRigidbody3D.h</label>
+        <link refid="PhysXRigidbody3D_8h_source"/>
+      </node>
+      <node id="16">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXSimulationCallback.h</label>
+        <link refid="PhysXSimulationCallback_8h_source"/>
+      </node>
+      <node id="14">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXUtils.h</label>
+        <link refid="PhysXUtils_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysX/PhysXVehicle4W3D.h</label>
+        <link refid="PhysXVehicle4W3D_8h_source"/>
+      </node>
+      <node id="17">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsLib.h</label>
+        <link refid="PhysicsLib_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsMaterial.h</label>
+        <link refid="PhysicsMaterial_8h_source"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsMaterialImpl.h</label>
+        <link refid="PhysicsMaterialImpl_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsScene.h</label>
+        <link refid="PhysicsScene_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>Engine/Core/libs/Physics/inc/Physics/PhysicsWorld.h</label>
+        <link refid="PhysicsWorld_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>Engine/Core/libs/Physics/inc/Physics/Raycast.h</label>
+        <link refid="Raycast_8h_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>Engine/Core/libs/Physics/inc/Physics/RaycastImpl.h</label>
+        <link refid="RaycastImpl_8h_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Engine/Core/libs/Physics/inc/Physics/Rigidbody.h</label>
+        <link refid="Rigidbody_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>Engine/Core/libs/Physics/inc/Physics/Utils/Utils.h</label>
+        <link refid="Physics_2inc_2Physics_2Utils_2Utils_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>Engine/Core/libs/Physics/inc/Physics/Vehicle.h</label>
+        <link refid="Vehicle_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h</label>
+        <link refid="VehicleInternalData_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>Engine/Core/libs/Physics/inc/Physics/WheelInternalData.h</label>
+        <link refid="WheelInternalData_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Engine/Core/libs/Physics/inc/Physics/macros.h</label>
+        <link refid="Physics_2inc_2Physics_2macros_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="Physics_2inc_2Physics_2macros_8h_1a7ac73e5e845d9f4bf768233b3182f572" prot="public" static="no">
+        <name>SR_PHYSICS_DLL_API</name>
+        <initializer>SR_DLL_API_IMPORT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Physics/inc/Physics/macros.h" line="9" column="14" bodyfile="Engine/Core/libs/Physics/inc/Physics/macros.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SR_ENGINE_PHYSICS_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ENGINE_PHYSICS_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Utils/macros.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>SR_PHYSICS_DLL_EXPORTS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_PHYSICS_DLL_API<sp/>SR_DLL_API_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>SR_PHYSICS_DLL_API<sp/>SR_DLL_API_IMPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_PHYSICS_MACROS_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="Engine/Core/libs/Physics/inc/Physics/macros.h"/>
+  </compounddef>
+</doxygen>

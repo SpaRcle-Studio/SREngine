@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
     class IResourceReloader;
     class ResourceType;
 
-    struct SR_DLL_EXPORT ResourceInfo {
+    struct SR_COMMON_DLL_API ResourceInfo {
         using HardPtr = std::shared_ptr<ResourceInfo>;
         using WeakPtr = std::weak_ptr<ResourceInfo>;
 
@@ -50,7 +50,7 @@ namespace SR_UTILS_NS {
         ResourcesSet m_loaded;
     };
 
-    class SR_DLL_EXPORT ResourceType : public NonCopyable {
+    class SR_COMMON_DLL_API ResourceType : public NonCopyable {
         friend class ResourceManager;
         using ResourceId = SR_UTILS_NS::StringAtom;
         using ResourcePath = SR_UTILS_NS::StringAtom;

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_WIDGETMANAGER_H
 #define SR_ENGINE_WIDGETMANAGER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Input/InputHandler.h>

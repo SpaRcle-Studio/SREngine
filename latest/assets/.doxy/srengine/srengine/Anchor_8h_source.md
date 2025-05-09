@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_ANCHOR_H
 #define SR_ENGINE_ANCHOR_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/ECS/Component.h>
 
 namespace SR_GRAPH_NS::UI {

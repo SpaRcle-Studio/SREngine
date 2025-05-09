@@ -18,7 +18,7 @@
 #include <Utils/Resources/IResource.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT ResourcesHolder : public NonCopyable {
+    class SR_COMMON_DLL_API ResourcesHolder : public NonCopyable {
     public:
         ~ResourcesHolder() override = default;
 

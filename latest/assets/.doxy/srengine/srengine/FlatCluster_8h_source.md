@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_FLAT_CLUSTER_H
 #define SR_ENGINE_GRAPHICS_FLAT_CLUSTER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Debug.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/Map.h>

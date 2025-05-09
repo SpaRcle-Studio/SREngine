@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="OpenALTools_8h" kind="file" language="C++">
     <compoundname>OpenALTools.h</compoundname>
-    <includes refid="macros_8h" local="no">Utils/macros.h</includes>
+    <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
     <includes local="no">AL/al.h</includes>
     <includes local="no">AL/alc.h</includes>
     <incdepgraph>
@@ -11,20 +11,31 @@
         <link refid="OpenALTools_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Utils/Memory/Allocator.h</label>
+        <link refid="Allocator_8h_source"/>
+      </node>
+      <node id="2">
+        <label>Utils/macros.h</label>
+        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="2">
-        <label>Utils/macros.h</label>
-        <link refid="macros_8h_source"/>
-      </node>
-      <node id="3">
+      <node id="5">
         <label>AL/al.h</label>
       </node>
-      <node id="4">
+      <node id="6">
         <label>AL/alc.h</label>
+      </node>
+      <node id="3">
+        <label>cstdlib</label>
       </node>
     </incdepgraph>
     <innerclass refid="structSR__AUDIO__NS_1_1ALfVec3" prot="public">SR_AUDIO_NS::ALfVec3</innerclass>

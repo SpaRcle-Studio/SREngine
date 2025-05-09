@@ -604,45 +604,45 @@
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a05e42a474864d82c8f8be0db714e25b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>BakeMesh</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a2d4fa4d616854f0151ca7215a439d301" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>CopyIfExists</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a0b81f8e986ef2007fe1355b22d00e9e1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>CopyIfExists</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>DestroySingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a018277f97d7a28865a5cfed84888e1a9" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Find</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a78b7e03d568558bea1fb11c674293c45" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>FindById</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a5f22afe61c9e13f3115f05d76cb80b93" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>FindImpl</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a397ad9601f278ababc1d197d9cb41f78" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Free</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a59eec3c3899a3f142979709d4857bbe8" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>FreeImpl</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1aed4f3f2d89e5594adf40017609d9e897" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>FreeResult</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1aca2ae8f56696e7d49db43cec3056f9d9" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>HashTable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1ae720482f7c9da0d337503aed03d1a80d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>m_IBOs</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a63108e5d1d46d85dfdd73d7e18629190" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>m_IBOTable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>m_mutex</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1ace5e4e2024a03387ab05c15ce017df99" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>m_VBOs</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a423a9cf59a1fe7065b455597e5e5689a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>m_VBOTable</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a37eb4df2b59c37dadc64dcc4d7a5eac0" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>MeshManager</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1ae9fcf36f5c80c2ff8792253f0254f1a6" prot="private" virt="virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a48d37ebcca2f3478927e929233a8c721" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Register</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a1d2f120f4e776ec256aa42de6aca30c2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Register</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1acd02a75a388379fe182f003b5c8e23d4" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>RegisterImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>SingletonBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1aa54d3e2a882bd188afb7adad56de4e26" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>Size</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>UnlockSingleton</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1aee5008acb69310636df66974f67de943" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>VideoResources</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a167cccbe6179e9fccfd0fbfa794c1716" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>VideoResourcesIter</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1MeshManager_1a39bd199c0508ad849f9b407bfd083916" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>~MeshManager</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::MeshManager</scope><name>~SingletonBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

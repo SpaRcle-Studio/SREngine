@@ -20,7 +20,7 @@
 namespace SR_UTILS_NS {
     class CmdManager;
 
-    class SR_DLL_EXPORT ICommand {
+    class SR_COMMON_DLL_API ICommand {
     public:
         inline static auto DATA_ID = SR_UTILS_NS::SerializationId::Create("command");
 

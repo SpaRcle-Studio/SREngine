@@ -27,9 +27,15 @@
     <derivedcompoundref refid="classSR__NETWORK__NS_1_1Server" prot="public" virt="non-virtual">SR_NETWORK_NS::Server</derivedcompoundref>
     <derivedcompoundref refid="classSR__NETWORK__NS_1_1Socket" prot="public" virt="non-virtual">SR_NETWORK_NS::Socket</derivedcompoundref>
     <derivedcompoundref refid="classSR__PTYPES__NS_1_1CollisionShape" prot="public" virt="non-virtual">SR_PTYPES_NS::CollisionShape</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1CppBehaviour" prot="public" virt="non-virtual">SR_SCRIPTING_NS::CppBehaviour</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator" prot="public" virt="non-virtual">SR_SCRIPTING_NS::CppCodeGenerator</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1CppCompiler" prot="public" virt="non-virtual">SR_SCRIPTING_NS::CppCompiler</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1ModuleManager" prot="public" virt="non-virtual">SR_SCRIPTING_NS::ModuleManager</derivedcompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1ScriptHolder" prot="public" virt="non-virtual">SR_SCRIPTING_NS::ScriptHolder</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass" prot="public" virt="non-virtual">SR_UTILS_NS::AutoTests::AutomaticallySharedPtrTestClass</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass" prot="public" virt="non-virtual">SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClass</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1EntityController" prot="public" virt="non-virtual">SR_UTILS_NS::EntityController</derivedcompoundref>
+    <derivedcompoundref refid="classSR__UTILS__NS_1_1FileSystemWatcher" prot="public" virt="non-virtual">SR_UTILS_NS::FileSystemWatcher</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1FileWatcher" prot="public" virt="non-virtual">SR_UTILS_NS::FileWatcher</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1IMigrator" prot="public" virt="non-virtual">SR_UTILS_NS::IMigrator</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase" prot="public" virt="non-virtual">SR_UTILS_NS::Tests::ReflectionTestComponentLogicBase</derivedcompoundref>
@@ -41,6 +47,7 @@
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface" prot="public" virt="non-virtual">SR_UTILS_NS::Web::HTMLContainerInterface</derivedcompoundref>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage" prot="public" virt="non-virtual">SR_UTILS_NS::Web::HTMLPage</derivedcompoundref>
     <derivedcompoundref refid="classSR__WORLD__NS_1_1SceneLogic" prot="public" virt="non-virtual">SR_WORLD_NS::SceneLogic</derivedcompoundref>
+    <includes refid="SharedPtr_8h" local="no">SharedPtr.h</includes>
     <templateparamlist>
       <param>
         <type>class T</type>
@@ -59,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="128" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="128" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="131" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" static="no">
         <type>T</type>
@@ -73,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="129" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="129" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="132" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="132" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -90,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="271" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="271" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="310" column="11" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="310" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -106,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="131" column="9"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="134" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -132,7 +139,7 @@
 <para>valid</para>
 <para>policy</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="132" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="275" bodyend="316"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="135" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="314" bodyend="355"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -159,7 +166,7 @@
 <para>valid</para>
 <para>policy</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="133" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="318" bodyend="334"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="136" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="357" bodyend="373"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -177,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="134" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="336" bodyend="341"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="137" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="375" bodyend="380"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -195,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="135" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="135" bodyend="138"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="138" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="138" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -209,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="140" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="343" bodyend="349"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="143" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="382" bodyend="388"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE</type>
@@ -223,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="154" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="154" bodyend="154"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="157" column="38" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="157" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SharedPtr</ref>&lt; T &gt; &amp;</type>
@@ -242,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="155" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="351" bodyend="366"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="158" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="390" bodyend="405"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SharedPtr</ref>&lt; T &gt; &amp;</type>
@@ -268,7 +275,7 @@
 <para>valid</para>
 <para>policy</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="156" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="368" bodyend="415"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="159" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="407" bodyend="454"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SharedPtr</ref>&lt; T &gt; &amp;</type>
@@ -287,7 +294,7 @@
         <inbodydescription>
 <para>не делаем инкремент, так как переместили! if (m_data) { m_data-&gt;IncrementStrong(); }</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="157" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="157" bodyend="170"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="160" column="19" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="160" bodyend="173"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE T &amp;</type>
@@ -301,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="171" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="171" bodyend="171"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="174" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="174" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_FORCE_INLINE T *</type>
@@ -315,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="172" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="172" bodyend="172"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="175" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="175" bodyend="175"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_INLINE bool</type>
@@ -333,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="173" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="173" bodyend="175"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="176" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="176" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_INLINE bool</type>
@@ -351,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="176" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="176" bodyend="178"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="179" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="179" bodyend="181"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -370,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="180" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="180" bodyend="187"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="183" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="183" bodyend="190"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -389,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="189" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="189" bodyend="199"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="192" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="192" bodyend="202"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -408,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="201" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="201" bodyend="211"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="204" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="204" bodyend="214"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -427,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="213" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="213" bodyend="215"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="216" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="216" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -446,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="217" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="217" bodyend="231"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="220" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="220" bodyend="234"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const T *</type>
@@ -460,7 +467,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="233" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="233" bodyend="233"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="236" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="236" bodyend="236"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD T *</type>
@@ -474,7 +481,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="234" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="234" bodyend="234"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="237" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="237" bodyend="237"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const T &amp;SR_FASTCALL</type>
@@ -488,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="236" column="58" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="236" bodyend="236"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="239" column="58" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="239" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE T &amp;SR_FASTCALL</type>
@@ -502,7 +509,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="237" column="52" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="237" bodyend="237"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="240" column="52" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="240" bodyend="240"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD const void *</type>
@@ -516,7 +523,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="239" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="239" bodyend="239"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="242" column="33" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="242" bodyend="242"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD void *</type>
@@ -531,7 +538,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="240" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="240" bodyend="240"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="243" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="243" bodyend="243"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SharedPtr</ref>&lt; T &gt;</type>
@@ -545,7 +552,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="242" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="242" bodyend="244"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="245" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="245" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::SharedPtr&lt; T &gt;::IncrementPointer</definition>
+        <argsstring>() override</argsstring>
+        <name>IncrementPointer</name>
+        <qualifiedname>SR_HTYPES_NS::SharedPtr::IncrementPointer</qualifiedname>
+        <reimplements refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a1822445a2465c620e188ddc5bc99e129">IncrementPointer</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="249" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="249" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void SR_HTYPES_NS::SharedPtr&lt; T &gt;::DecrementPointer</definition>
+        <argsstring>() override</argsstring>
+        <name>DecrementPointer</name>
+        <qualifiedname>SR_HTYPES_NS::SharedPtr::DecrementPointer</qualifiedname>
+        <reimplements refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a2f5e696f2a7f9d1a363d9674fd59b21a">DecrementPointer</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="255" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="255" bodyend="283"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -559,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="246" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="246" bodyend="246"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="285" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="285" bodyend="285"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD SRClass *</type>
@@ -575,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="248" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="248" bodyend="256"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="287" column="30" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="287" bodyend="295"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -593,7 +630,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="258" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="417" bodyend="419"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="297" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="456" bodyend="458"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -607,7 +644,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="259" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="421" bodyend="423"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="298" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="460" bodyend="462"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -624,7 +661,7 @@
 <para>Делаем копию, так как в процессе удаления можем потярять this, а так же зануляем m_data, чтобы не войти в рекурсию</para>
 <para>тут может быть потенциально висячий указатель.</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="261" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="454" bodyend="486"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="300" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="493" bodyend="525"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -638,7 +675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="263" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="446" bodyend="448"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="302" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="485" bodyend="487"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -652,7 +689,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="264" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="450" bodyend="452"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="303" column="27" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="489" bodyend="491"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -667,7 +704,7 @@
         <inbodydescription>
 <para>nothing</para>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="265" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="265" bodyend="265"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="304" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="304" bodyend="304"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -702,7 +739,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="143" column="58" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="143" bodyend="152"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="146" column="58" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="146" bodyend="155"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -722,10 +759,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="268" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="425" bodyend="444"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="307" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="464" bodyend="483"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
+<para>SR_COMMON_DLL_API. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
@@ -737,66 +775,78 @@
         </childnode>
       </node>
       <node id="5">
+        <label>SR_CORE_GUI_NS::BehaviourNamePropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SR_CORE_GUI_NS::BehaviourPropertyDrawer</label>
+        <link refid="classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
         <label>SR_CORE_GUI_NS::BitMapPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="7">
         <label>SR_CORE_GUI_NS::BoolPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="8">
         <label>SR_CORE_GUI_NS::EnumPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1EnumPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="14">
         <label>SR_CORE_GUI_NS::MaterialDataPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialDataPropertyDrawer"/>
-        <childnode refid="11" relation="public-inheritance">
+        <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="15">
+      <node id="17">
         <label>SR_CORE_GUI_NS::MaterialPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MaterialPropertyDrawer"/>
-        <childnode refid="14" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>SR_CORE_GUI_NS::MathSizePropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>SR_CORE_GUI_NS::MathVectorPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>SR_CORE_GUI_NS::NumericPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>SR_CORE_GUI_NS::ObjectPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1ObjectPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="13">
+      <node id="15">
         <label>SR_CORE_GUI_NS::PathPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1PathPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="16">
         <label>SR_CORE_GUI_NS::PointerPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1PointerPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
@@ -808,193 +858,193 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="18">
         <label>SR_CORE_GUI_NS::StringPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1StringPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="19">
         <label>SR_CORE_GUI_NS::VectorPropertyDrawer</label>
         <link refid="classSR__CORE__GUI__NS_1_1VectorPropertyDrawer"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="20">
         <label>SR_CORE_NS::Application&lt; Application &gt;</label>
         <link refid="classSR__CORE__NS_1_1Application"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="63">
+      <node id="71">
         <label>SR_CORE_NS::ChunkSystemState</label>
         <link refid="classSR__CORE__NS_1_1ChunkSystemState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="64">
+      <node id="72">
         <label>SR_CORE_NS::DeltaTimeState</label>
         <link refid="classSR__CORE__NS_1_1DeltaTimeState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="65">
+      <node id="73">
         <label>SR_CORE_NS::DrawState</label>
         <link refid="classSR__CORE__NS_1_1DrawState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="19">
+      <node id="21">
         <label>SR_CORE_NS::Engine&lt; Engine &gt;</label>
         <link refid="classSR__CORE__NS_1_1Engine"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="66">
+      <node id="74">
         <label>SR_CORE_NS::InitializeState</label>
         <link refid="classSR__CORE__NS_1_1InitializeState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="67">
+      <node id="75">
         <label>SR_CORE_NS::PollEventsState</label>
         <link refid="classSR__CORE__NS_1_1PollEventsState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="68">
+      <node id="76">
         <label>SR_CORE_NS::PrepareState</label>
         <link refid="classSR__CORE__NS_1_1PrepareState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="69">
+      <node id="77">
         <label>SR_CORE_NS::SceneUpdateState</label>
         <link refid="classSR__CORE__NS_1_1SceneUpdateState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="70">
+      <node id="78">
         <label>SR_CORE_NS::StopState</label>
         <link refid="classSR__CORE__NS_1_1StopState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="71">
+      <node id="79">
         <label>SR_CORE_NS::SubmitState</label>
         <link refid="classSR__CORE__NS_1_1SubmitState"/>
-        <childnode refid="62" relation="public-inheritance">
+        <childnode refid="70" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="22">
         <label>SR_GRAPH_GUI_NS::WidgetContainerElement&lt; WidgetContainerElement &gt;</label>
         <link refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="21">
+      <node id="23">
         <label>SR_GRAPH_NS::BaseMaterial&lt; BaseMaterial &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1BaseMaterial"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="37">
         <label>SR_GRAPH_NS::ColorBufferRenderQueue</label>
         <link refid="classSR__GRAPH__NS_1_1ColorBufferRenderQueue"/>
-        <childnode refid="34" relation="public-inheritance">
+        <childnode refid="36" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="28">
         <label>SR_GRAPH_NS::DebugRenderer</label>
         <link refid="classSR__GRAPH__NS_1_1DebugRenderer"/>
-        <childnode refid="25" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>SR_GRAPH_NS::FileMaterial</label>
-        <link refid="classSR__GRAPH__NS_1_1FileMaterial"/>
-        <childnode refid="21" relation="public-inheritance">
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
       <node id="24">
+        <label>SR_GRAPH_NS::FileMaterial</label>
+        <link refid="classSR__GRAPH__NS_1_1FileMaterial"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
         <label>SR_GRAPH_NS::FrameBufferController&lt; FrameBufferController &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1FrameBufferController"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
+      <node id="27">
         <label>SR_GRAPH_NS::IRenderer&lt; IRenderer &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1IRenderer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="30">
+      <node id="32">
         <label>SR_GRAPH_NS::ImGuiOverlay</label>
         <link refid="classSR__GRAPH__NS_1_1ImGuiOverlay"/>
-        <childnode refid="29" relation="public-inheritance">
+        <childnode refid="31" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="27">
+      <node id="29">
         <label>SR_GRAPH_NS::MaterialData&lt; MaterialData &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1MaterialData"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
+      <node id="30">
         <label>SR_GRAPH_NS::Memory::BakedMesh&lt; BakedMesh &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="29">
+      <node id="31">
         <label>SR_GRAPH_NS::Overlay&lt; Overlay &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Overlay"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="34">
         <label>SR_GRAPH_NS::Pipeline&lt; Pipeline &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Pipeline"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="36">
         <label>SR_GRAPH_NS::RenderQueue&lt; RenderQueue &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1RenderQueue"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="38">
         <label>SR_GRAPH_NS::RenderScene&lt; RenderScene &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1RenderScene"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="39">
         <label>SR_GRAPH_NS::TextureData&lt; TextureData &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1TextureData"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="25">
         <label>SR_GRAPH_NS::UniqueMaterial</label>
         <link refid="classSR__GRAPH__NS_1_1UniqueMaterial"/>
-        <childnode refid="21" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
-        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
-        <childnode refid="30" relation="public-inheritance">
+        <childnode refid="23" relation="public-inheritance">
         </childnode>
       </node>
       <node id="33">
-        <label>SR_GRAPH_NS::VulkanPipeline</label>
-        <link refid="classSR__GRAPH__NS_1_1VulkanPipeline"/>
+        <label>SR_GRAPH_NS::VulkanImGuiOverlay</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay"/>
         <childnode refid="32" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="35">
+        <label>SR_GRAPH_NS::VulkanPipeline</label>
+        <link refid="classSR__GRAPH__NS_1_1VulkanPipeline"/>
+        <childnode refid="34" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
         <label>SR_GRAPH_NS::Window&lt; Window &gt;</label>
         <link refid="classSR__GRAPH__NS_1_1Window"/>
         <childnode refid="1" relation="public-inheritance">
@@ -1010,226 +1060,262 @@
         <label>SR_HTYPES_NS::SharedPtrBase</label>
         <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
       </node>
-      <node id="39">
+      <node id="41">
         <label>SR_NETWORK_NS::Acceptor&lt; Acceptor &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1Acceptor"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="43">
+      <node id="45">
         <label>SR_NETWORK_NS::AsioContext</label>
         <link refid="classSR__NETWORK__NS_1_1AsioContext"/>
-        <childnode refid="42" relation="public-inheritance">
+        <childnode refid="44" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>SR_NETWORK_NS::AsioICMPSocket</label>
         <link refid="classSR__NETWORK__NS_1_1AsioICMPSocket"/>
-        <childnode refid="47" relation="public-inheritance">
+        <childnode refid="49" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="42">
         <label>SR_NETWORK_NS::AsioTCPAcceptor</label>
         <link refid="classSR__NETWORK__NS_1_1AsioTCPAcceptor"/>
-        <childnode refid="39" relation="public-inheritance">
+        <childnode refid="41" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>SR_NETWORK_NS::AsioTCPSocket</label>
         <link refid="classSR__NETWORK__NS_1_1AsioTCPSocket"/>
-        <childnode refid="47" relation="public-inheritance">
+        <childnode refid="49" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="41">
+      <node id="43">
         <label>SR_NETWORK_NS::Client&lt; Client &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1Client"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="42">
+      <node id="44">
         <label>SR_NETWORK_NS::Context&lt; Context &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1Context"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="44">
+      <node id="46">
         <label>SR_NETWORK_NS::DataPackage&lt; DataPackage &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1DataPackage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>SR_NETWORK_NS::PeerToPeer&lt; PeerToPeer &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1PeerToPeer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>SR_NETWORK_NS::Server&lt; Server &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1Server"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>SR_NETWORK_NS::Socket&lt; Socket &gt;</label>
         <link refid="classSR__NETWORK__NS_1_1Socket"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="51">
+      <node id="53">
         <label>SR_PTYPES_NS::Bullet3CollisionShape</label>
         <link refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape"/>
-        <childnode refid="50" relation="public-inheritance">
+        <childnode refid="52" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="50">
+      <node id="52">
         <label>SR_PTYPES_NS::CollisionShape&lt; CollisionShape &gt;</label>
         <link refid="classSR__PTYPES__NS_1_1CollisionShape"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="52">
+      <node id="54">
+        <label>SR_SCRIPTING_NS::CppBehaviour&lt; CppBehaviour &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppBehaviour"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>SR_SCRIPTING_NS::CppCodeGenerator&lt; CppCodeGenerator &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppCodeGenerator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>SR_SCRIPTING_NS::CppCompiler&lt; CppCompiler &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppCompiler"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>SR_SCRIPTING_NS::ModuleManager&lt; ModuleManager &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ModuleManager"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>SR_SCRIPTING_NS::ScriptHolder&lt; ScriptHolder &gt;</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ScriptHolder"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
         <label>SR_UTILS_NS::AutoTests::AutomaticallySharedPtrTestClass&lt; AutomaticallySharedPtrTestClass &gt;</label>
         <link refid="classSR__UTILS__NS_1_1AutoTests_1_1AutomaticallySharedPtrTestClass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="53">
+      <node id="60">
         <label>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClass&lt; ManuallySharedPtrTestClass &gt;</label>
         <link refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClass"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="54">
+      <node id="61">
         <label>SR_UTILS_NS::AutoTests::ManuallySharedPtrTestClassInherit</label>
         <link refid="classSR__UTILS__NS_1_1AutoTests_1_1ManuallySharedPtrTestClassInherit"/>
-        <childnode refid="53" relation="public-inheritance">
+        <childnode refid="60" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="55">
+      <node id="62">
         <label>SR_UTILS_NS::EntityController&lt; EntityController &gt;</label>
         <link refid="classSR__UTILS__NS_1_1EntityController"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="56">
+      <node id="63">
+        <label>SR_UTILS_NS::FileSystemWatcher&lt; FileSystemWatcher &gt;</label>
+        <link refid="classSR__UTILS__NS_1_1FileSystemWatcher"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="64">
         <label>SR_UTILS_NS::FileWatcher&lt; FileWatcher &gt;</label>
         <link refid="classSR__UTILS__NS_1_1FileWatcher"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="57">
+      <node id="65">
         <label>SR_UTILS_NS::IMigrator&lt; IMigrator &gt;</label>
         <link refid="classSR__UTILS__NS_1_1IMigrator"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="58">
+      <node id="66">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicBase&lt; ReflectionTestComponentLogicBase &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicBase"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="59">
+      <node id="67">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicComplex</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicComplex"/>
-        <childnode refid="58" relation="public-inheritance">
+        <childnode refid="66" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="60">
+      <node id="68">
         <label>SR_UTILS_NS::Tests::ReflectionTestComponentLogicSimple</label>
         <link refid="classSR__UTILS__NS_1_1Tests_1_1ReflectionTestComponentLogicSimple"/>
-        <childnode refid="58" relation="public-inheritance">
+        <childnode refid="66" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="61">
+      <node id="69">
         <label>SR_UTILS_NS::ThreadWorker&lt; ThreadWorker &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadWorker"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="62">
+      <node id="70">
         <label>SR_UTILS_NS::ThreadWorkerStateBase&lt; ThreadWorkerStateBase &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadWorkerStateBase"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="72">
+      <node id="80">
         <label>SR_UTILS_NS::ThreadsWorker&lt; ThreadsWorker &gt;</label>
         <link refid="classSR__UTILS__NS_1_1ThreadsWorker"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="74">
+      <node id="82">
         <label>SR_UTILS_NS::Transform2D</label>
         <link refid="classSR__UTILS__NS_1_1Transform2D"/>
-        <childnode refid="73" relation="public-inheritance">
+        <childnode refid="81" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="75">
+      <node id="83">
         <label>SR_UTILS_NS::Transform3D</label>
         <link refid="classSR__UTILS__NS_1_1Transform3D"/>
-        <childnode refid="73" relation="public-inheritance">
+        <childnode refid="81" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="73">
+      <node id="81">
         <label>SR_UTILS_NS::Transform&lt; Transform &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Transform"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="76">
+      <node id="84">
         <label>SR_UTILS_NS::TransformHolder</label>
         <link refid="classSR__UTILS__NS_1_1TransformHolder"/>
-        <childnode refid="73" relation="public-inheritance">
+        <childnode refid="81" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="77">
+      <node id="85">
         <label>SR_UTILS_NS::TransformZero</label>
         <link refid="classSR__UTILS__NS_1_1TransformZero"/>
-        <childnode refid="73" relation="public-inheritance">
+        <childnode refid="81" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="78">
+      <node id="86">
         <label>SR_UTILS_NS::Web::CSS&lt; CSS &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1CSS"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="79">
+      <node id="87">
         <label>SR_UTILS_NS::Web::HTMLContainerInterface&lt; HTMLContainerInterface &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLContainerInterface"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="80">
+      <node id="88">
         <label>SR_UTILS_NS::Web::HTMLPage&lt; HTMLPage &gt;</label>
         <link refid="classSR__UTILS__NS_1_1Web_1_1HTMLPage"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="82">
+      <node id="90">
         <label>SR_WORLD_NS::SceneAssetLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneAssetLogic"/>
-        <childnode refid="81" relation="public-inheritance">
+        <childnode refid="89" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="83">
+      <node id="91">
         <label>SR_WORLD_NS::SceneCubeChunkLogic</label>
         <link refid="classSR__WORLD__NS_1_1SceneCubeChunkLogic"/>
-        <childnode refid="81" relation="public-inheritance">
+        <childnode refid="89" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="81">
+      <node id="89">
         <label>SR_WORLD_NS::SceneLogic&lt; SceneLogic &gt;</label>
         <link refid="classSR__WORLD__NS_1_1SceneLogic"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="84">
+      <node id="92">
         <label>SR_WORLD_NS::ScenePrefabLogic</label>
         <link refid="classSR__WORLD__NS_1_1ScenePrefabLogic"/>
-        <childnode refid="81" relation="public-inheritance">
+        <childnode refid="89" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
@@ -1252,10 +1338,11 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="126" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="126" bodyend="273"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" line="129" column="15" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/SharedPtr.h" bodystart="129" bodyend="312"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a25c4e886709bb9b08ed8baee292ea3c1" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>FreeImpl</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Get</name></member>
@@ -1268,6 +1355,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>IncrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>m_basicManually</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>m_data</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a06f931bcd7932c3428df2b24a5c73890" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>m_ptr</name></member>
@@ -1292,14 +1380,14 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>StaticCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>TryRecursiveLockIfValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_HTYPES_NS::SharedPtr</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -54,7 +54,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual const SR_UTILS_NS::SRClassMeta* GetMeta() const noexcept = 0;
 
-        virtual void InitializeClass() noexcept { }
+        //virtual void InitializeClass() noexcept { }
 
         static SR_UTILS_NS::StringAtom GetClassStaticName() noexcept;
         static const SR_UTILS_NS::SRClassMeta* GetMetaStatic() noexcept;
@@ -66,15 +66,17 @@ namespace SR_UTILS_NS {
 
     };
 
-    template<class T> static T* PostAllocationInitialize(T* pObject) {
-        pObject->InitializeClass();
-        return pObject;
-    }
+    //template<class T> static T* PostAllocationInitialize(T* pObject) {
+    //    if constexpr (std::is_base_of_v<SRClass, T>) {
+    //        pObject->InitializeClass();
+    //    }
+    //    return pObject;
+    //}
 }
 
-template<class T, typename ...Args> static T* SRNew(Args&& ...args) {
-     return PostAllocationInitialize(new T(std::forward<Args>(args)...));
-}
+//template<class T, typename ...Args> static T* SRNew(Args&& ...args) {
+//     return PostAllocationInitialize(new T(std::forward<Args>(args)...));
+//}
 
 #endif //SR_ENGINE_UTILS_TYPE_TRAITS_SR_CLASS_H
 ```

@@ -19,7 +19,7 @@
 #include <Utils/Input/InputDevice.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT InputDispatcher : public EventDispatcher {
+    class SR_COMMON_DLL_API InputDispatcher : public EventDispatcher {
         using Super = EventDispatcher;
     public:
         InputDispatcher();

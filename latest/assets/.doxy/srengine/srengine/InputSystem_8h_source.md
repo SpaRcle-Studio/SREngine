@@ -21,7 +21,7 @@
 #include <Utils/Common/SubscriptionHolder.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT Input : public Singleton<Input>, public SubscriptionHolder {
+    class Input : public Singleton<Input>, public SubscriptionHolder {
         SR_REGISTER_SINGLETON(Input)
 
         enum class State {
@@ -30,27 +30,25 @@ namespace SR_UTILS_NS {
         using CursorLockCallback = SR_HTYPES_NS::Function<void()>;
 
     protected:
-        ~Input() override = default;
+        ~Input() override;
 
     public:
-        void SetMouseScroll(double_t xOffset, double_t yOffset){
-            m_mouseScrollCurrent = { (float_t)xOffset, (float_t)yOffset };
-        }
+        void SetMouseScroll(double_t xOffset, double_t yOffset);
 
         void Check();
         void Reload();
         void ResetMouse();
 
         SR_NODISCARD SR_MATH_NS::FVector2 GetMouseDrag();
-        SR_NODISCARD SR_MATH_NS::FVector2 GetMousePos() const { return m_mouse; }
-        SR_NODISCARD SR_MATH_NS::FVector2 GetPrevMousePos() const { return m_mousePrev; }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetMousePos() const;
+        SR_NODISCARD SR_MATH_NS::FVector2 GetPrevMousePos() const;
         SR_NODISCARD bool IsMouseMoved() const;
 
         int32_t GetMouseWheel();
 
-        bool GetMouseDown(MouseCode code) { return GetKeyDown(static_cast<KeyCode>(code)); }
-        bool GetMouseUp(MouseCode code) { return GetKeyUp(static_cast<KeyCode>(code)); }
-        bool GetMouse(MouseCode code) { return GetKey(static_cast<KeyCode>(code)); }
+        bool GetMouseDown(MouseCode code);
+        bool GetMouseUp(MouseCode code);
+        bool GetMouse(MouseCode code);
 
         bool GetKeyDown(KeyCode key);
         bool GetKeyUp(KeyCode key);
@@ -86,32 +84,15 @@ namespace SR_UTILS_NS {
 
     class CursorLock : public NonCopyable {
     public:
-        CursorLock() {
-            m_isLock  = true;
-            Input::Instance().LockCursor();
-        };
-
-        ~CursorLock() {
-            if (m_isLock) {
-                m_isLock = false;
-                Input::Instance().UnlockCursor();
-            } };
-
-        CursorLock(CursorLock&& ref) noexcept {
-            m_isLock = SR_UTILS_NS::Exchange(ref.m_isLock, {});
-        }
-
-        CursorLock& operator=(CursorLock&& other) noexcept {
-            if (this != &other){
-                m_isLock = SR_UTILS_NS::Exchange(other.m_isLock, { });
-            }
-            return *this;
-        }
+        CursorLock();
+        ~CursorLock();
+        CursorLock(CursorLock&& ref) noexcept;
+        CursorLock& operator=(CursorLock&& other) noexcept;
 
     private:
         bool m_isLock = false;
-    };
 
+    };
 }
 
 #endif //SR_ENGINE_INPUTSYSTEM_H

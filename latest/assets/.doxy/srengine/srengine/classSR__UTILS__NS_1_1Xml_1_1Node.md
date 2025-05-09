@@ -78,6 +78,7 @@
 |  SR\_NODISCARD std::vector&lt; [**Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) &gt; | [**TryGetNodes**](#function-trygetnodes-22) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**Valid**](#function-valid) () const<br> |
 |   | [**operator bool**](#function-operator-bool) () const<br> |
+|   | [**~Node**](#function-node) () <br> |
 
 
 ## Public Static Functions
@@ -136,7 +137,7 @@ inline bool SR_UTILS_NS::Xml::Node::AppendAttribute (
 
 ```C++
 template<typename T>
-inline bool SR_UTILS_NS::Xml::Node::AppendAttribute (
+bool SR_UTILS_NS::Xml::Node::AppendAttribute (
     const std::string & name,
     const T & value
 ) 
@@ -153,7 +154,7 @@ inline bool SR_UTILS_NS::Xml::Node::AppendAttribute (
 
 ```C++
 template<typename T, typename U>
-inline bool SR_UTILS_NS::Xml::Node::AppendAttributeDef (
+bool SR_UTILS_NS::Xml::Node::AppendAttributeDef (
     const std::string & name,
     const T & value,
     const U & def
@@ -200,7 +201,7 @@ Node SR_UTILS_NS::Xml::Node::AppendChild (
 ### function AppendNode [1/2]
 
 ```C++
-inline Node SR_UTILS_NS::Xml::Node::AppendNode (
+Node SR_UTILS_NS::Xml::Node::AppendNode (
     const std::string & name
 ) 
 ```
@@ -215,7 +216,7 @@ inline Node SR_UTILS_NS::Xml::Node::AppendNode (
 ### function AppendNode [2/2]
 
 ```C++
-inline Node SR_UTILS_NS::Xml::Node::AppendNode (
+Node SR_UTILS_NS::Xml::Node::AppendNode (
     const Node & node
 ) 
 ```
@@ -230,7 +231,7 @@ inline Node SR_UTILS_NS::Xml::Node::AppendNode (
 ### function GetAttribute [1/2]
 
 ```C++
-inline SR_NODISCARD Attribute SR_UTILS_NS::Xml::Node::GetAttribute (
+SR_NODISCARD Attribute SR_UTILS_NS::Xml::Node::GetAttribute (
     const std::string & name
 ) const
 ```
@@ -259,7 +260,7 @@ inline T SR_UTILS_NS::Xml::Node::GetAttribute () const
 ### function GetNode 
 
 ```C++
-inline SR_NODISCARD Node SR_UTILS_NS::Xml::Node::GetNode (
+SR_NODISCARD Node SR_UTILS_NS::Xml::Node::GetNode (
     const std::string & name
 ) const
 ```
@@ -302,7 +303,7 @@ SR_NODISCARD std::vector< Node > SR_UTILS_NS::Xml::Node::GetNodes () const
 ### function HasAttribute 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Xml::Node::HasAttribute (
+SR_NODISCARD bool SR_UTILS_NS::Xml::Node::HasAttribute (
     const std::string & name
 ) const
 ```
@@ -352,7 +353,7 @@ inline Xml::Node SR_UTILS_NS::Xml::Node::NAppendAttributeDef (
 ### function Name 
 
 ```C++
-inline SR_NODISCARD std::string SR_UTILS_NS::Xml::Node::Name () const
+SR_NODISCARD std::string SR_UTILS_NS::Xml::Node::Name () const
 ```
 
 
@@ -365,7 +366,7 @@ inline SR_NODISCARD std::string SR_UTILS_NS::Xml::Node::Name () const
 ### function NameView 
 
 ```C++
-inline SR_NODISCARD std::string_view SR_UTILS_NS::Xml::Node::NameView () const
+SR_NODISCARD std::string_view SR_UTILS_NS::Xml::Node::NameView () const
 ```
 
 
@@ -391,7 +392,7 @@ SR_UTILS_NS::Xml::Node::Node ()
 ### function Node [2/2]
 
 ```C++
-inline explicit SR_UTILS_NS::Xml::Node::Node (
+explicit SR_UTILS_NS::Xml::Node::Node (
     pugi::xml_node node
 ) 
 ```
@@ -419,7 +420,7 @@ SR_NODISCARD Document SR_UTILS_NS::Xml::Node::ToDocument () const
 ### function TryGetAttribute [1/2]
 
 ```C++
-inline SR_NODISCARD Attribute SR_UTILS_NS::Xml::Node::TryGetAttribute (
+SR_NODISCARD Attribute SR_UTILS_NS::Xml::Node::TryGetAttribute (
     const std::string & name
 ) const
 ```
@@ -450,7 +451,7 @@ inline SR_NODISCARD T SR_UTILS_NS::Xml::Node::TryGetAttribute (
 ### function TryGetNode 
 
 ```C++
-inline SR_NODISCARD Node SR_UTILS_NS::Xml::Node::TryGetNode (
+SR_NODISCARD Node SR_UTILS_NS::Xml::Node::TryGetNode (
     const std::string & name
 ) const
 ```
@@ -493,7 +494,7 @@ SR_NODISCARD std::vector< Node > SR_UTILS_NS::Xml::Node::TryGetNodes (
 ### function Valid 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Xml::Node::Valid () const
+SR_NODISCARD bool SR_UTILS_NS::Xml::Node::Valid () const
 ```
 
 
@@ -506,7 +507,20 @@ inline SR_NODISCARD bool SR_UTILS_NS::Xml::Node::Valid () const
 ### function operator bool 
 
 ```C++
-inline explicit SR_UTILS_NS::Xml::Node::operator bool () const
+explicit SR_UTILS_NS::Xml::Node::operator bool () const
+```
+
+
+
+
+<hr>
+
+
+
+### function ~Node 
+
+```C++
+SR_UTILS_NS::Xml::Node::~Node () 
 ```
 
 
@@ -521,7 +535,7 @@ inline explicit SR_UTILS_NS::Xml::Node::operator bool () const
 ### function Empty 
 
 ```C++
-static inline Node SR_UTILS_NS::Xml::Node::Empty () 
+static Node SR_UTILS_NS::Xml::Node::Empty () 
 ```
 
 

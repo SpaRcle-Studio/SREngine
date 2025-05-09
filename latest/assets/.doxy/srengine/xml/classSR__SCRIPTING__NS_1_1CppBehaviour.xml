@@ -1,0 +1,648 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__SCRIPTING__NS_1_1CppBehaviour" kind="class" language="C++" prot="public">
+    <compoundname>SR_SCRIPTING_NS::CppBehaviour</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; CppBehaviour &gt;</basecompoundref>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ae8b89d4af0fa0a0b051912eac77e50ad" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__SCRIPTING__NS_1_1CppBehaviour" kindref="compound">CppBehaviour</ref> &gt;</type>
+        <definition>using SR_SCRIPTING_NS::CppBehaviour::Super =  SR_HTYPES_NS::SharedPtr&lt;CppBehaviour&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="18" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aed7449a15291fad0eede68a45a5d86fa" prot="public" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__SCRIPTING__NS_1_1CppBehaviour" kindref="compound">CppBehaviour</ref> &gt;</type>
+        <definition>using SR_SCRIPTING_NS::CppBehaviour::Ptr =  SR_HTYPES_NS::SharedPtr&lt;CppBehaviour&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ptr</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::Ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="20" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ae85e412d5a5202c9d11aa2fa3227fcc2" prot="public" static="no" mutable="no">
+        <type>SR_UTILS_NS::GameObject::Ptr</type>
+        <definition>SR_UTILS_NS::GameObject::Ptr SR_SCRIPTING_NS::CppBehaviour::gameObject</definition>
+        <argsstring></argsstring>
+        <name>gameObject</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::gameObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="59" column="38" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aab60389077b1fb07d740e430c2c7c960" prot="public" static="no" mutable="no">
+        <type>SR_UTILS_NS::SceneObject::Ptr</type>
+        <definition>SR_UTILS_NS::SceneObject::Ptr SR_SCRIPTING_NS::CppBehaviour::sceneObject</definition>
+        <argsstring></argsstring>
+        <name>sceneObject</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::sceneObject</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="60" column="39" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ac5d74f04e5e6f122b3e4634b34da9505" prot="public" static="no" mutable="no">
+        <type>SR_UTILS_NS::Transform::Ptr</type>
+        <definition>SR_UTILS_NS::Transform::Ptr SR_SCRIPTING_NS::CppBehaviour::transform</definition>
+        <argsstring></argsstring>
+        <name>transform</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::transform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="61" column="37" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ab146a02c5d2d8df8a7df539af1b4d869" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::CppBehaviour::CppBehaviour</definition>
+        <argsstring>()</argsstring>
+        <name>CppBehaviour</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::CppBehaviour</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ae176930c5c944a8524f530dda1ab952f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::CppBehaviour::~CppBehaviour</definition>
+        <argsstring>() override</argsstring>
+        <name>~CppBehaviour</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::~CppBehaviour</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="24" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a783a4f26e1b29f2a3269ea2faf3c46aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnMatrixDirty</definition>
+        <argsstring>()</argsstring>
+        <name>OnMatrixDirty</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnMatrixDirty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="27" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4ef5231fbf84ac4af1245c763f9ae882" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnPriorityChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnPriorityChanged</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnPriorityChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="28" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a2d0e493296adf1cb6bb79fdcf6799ff7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnTransformSet</definition>
+        <argsstring>()</argsstring>
+        <name>OnTransformSet</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnTransformSet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="29" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a89367110cb3603a59c8577efd7c9d0db" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnLoaded</definition>
+        <argsstring>()</argsstring>
+        <name>OnLoaded</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnLoaded</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="31" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1af2b763a7436ad6507d73ad01e293b199" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnAttached</definition>
+        <argsstring>()</argsstring>
+        <name>OnAttached</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnAttached</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="32" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aa348b9fe42b0bdeec06acb6895f6b78a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnDetached</definition>
+        <argsstring>()</argsstring>
+        <name>OnDetached</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnDetached</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="33" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a7091b2c4dc8061f1fb969d7f2c8e9ef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnDestroy</definition>
+        <argsstring>()</argsstring>
+        <name>OnDestroy</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnDestroy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="34" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4485f9f108c768bf90a89b5358246366" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnEnable</definition>
+        <argsstring>()</argsstring>
+        <name>OnEnable</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnEnable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="36" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a40a8e68bb9aaae4e7e6829c6dcdc1de1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnDisable</definition>
+        <argsstring>()</argsstring>
+        <name>OnDisable</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnDisable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="37" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aea0b8667a74b32721bb08d2a63e92034" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::Awake</definition>
+        <argsstring>()</argsstring>
+        <name>Awake</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::Awake</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="39" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a856c3f9be932735a7e8ca5428c212f66" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::Start</definition>
+        <argsstring>()</argsstring>
+        <name>Start</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::Start</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="40" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1abbbcfaa6ce024a6e023836a58107fda7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::Update</definition>
+        <argsstring>(float_t dt)</argsstring>
+        <name>Update</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::Update</qualifiedname>
+        <param>
+          <type>float_t</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="41" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a12f15b48223cfdf3f4201de353ec479f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::FixedUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>FixedUpdate</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::FixedUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="42" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1adde5996efe98752d7c684259f15c538d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::LateUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>LateUpdate</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::LateUpdate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="43" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ab8a66a1033356c4ea38e07ccc26d032a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnBeforeLayerChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnBeforeLayerChanged</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnBeforeLayerChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="45" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aee9627c72d6a18d49d840dcc68f54d13" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnLayerChanged</definition>
+        <argsstring>()</argsstring>
+        <name>OnLayerChanged</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnLayerChanged</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="46" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4854ec2d4497dead62ff9c3539ed793c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnCollisionEnter</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>OnCollisionEnter</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnCollisionEnter</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="48" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aa11905ed4412e88d3a1ded7ec5ea40c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnCollisionStay</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>OnCollisionStay</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnCollisionStay</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="49" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1ac01399a7a2263d1a5af11fd41a4405aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnCollisionExit</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>OnCollisionExit</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnCollisionExit</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="50" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4b91262b3fbd415f1815730aaee27f0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnTriggerEnter</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>OnTriggerEnter</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnTriggerEnter</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="52" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aaa602e3def3db296618ce7ca464b0481" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnTriggerStay</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>OnTriggerStay</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnTriggerStay</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="53" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aec98c7a95ff035ac96ac3438f2d6d237" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void SR_SCRIPTING_NS::CppBehaviour::OnTriggerExit</definition>
+        <argsstring>(const SR_UTILS_NS::CollisionData &amp;data)</argsstring>
+        <name>OnTriggerExit</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::OnTriggerExit</qualifiedname>
+        <param>
+          <type>const <ref refid="structSR__UTILS__NS_1_1CollisionData" kindref="compound">SR_UTILS_NS::CollisionData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="54" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1CppBehaviour_1aac5a378c5c2b4fe3e494466dac31a0c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>virtual SR_NODISCARD bool SR_SCRIPTING_NS::CppBehaviour::ExecuteInEditMode</definition>
+        <argsstring>() const</argsstring>
+        <name>ExecuteInEditMode</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppBehaviour::ExecuteInEditMode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="56" column="35" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::CppBehaviour</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppBehaviour"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::CppBehaviour</label>
+        <link refid="classSR__SCRIPTING__NS_1_1CppBehaviour"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" line="16" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/CppBehaviour.h" bodystart="16" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>AllocateStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>AutoFree</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aea0b8667a74b32721bb08d2a63e92034" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Awake</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ab146a02c5d2d8df8a7df539af1b4d869" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>CppBehaviour</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>DecrementPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>DynamicCast</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aac5a378c5c2b4fe3e494466dac31a0c5" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>ExecuteInEditMode</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a12f15b48223cfdf3f4201de353ec479f" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>FixedUpdate</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ae85e412d5a5202c9d11aa2fa3227fcc2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>gameObject</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Get</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>HasSerializationFlags</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>IncrementPointer</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1adde5996efe98752d7c684259f15c538d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>LateUpdate</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Load</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>m_basicManually</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>m_data</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>MakeShared</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>NonCopyable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1af2b763a7436ad6507d73ad01e293b199" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnAttached</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ab8a66a1033356c4ea38e07ccc26d032a" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnBeforeLayerChanged</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4854ec2d4497dead62ff9c3539ed793c" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnCollisionEnter</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ac01399a7a2263d1a5af11fd41a4405aa" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnCollisionExit</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aa11905ed4412e88d3a1ded7ec5ea40c5" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnCollisionStay</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a7091b2c4dc8061f1fb969d7f2c8e9ef4" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnDestroy</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aa348b9fe42b0bdeec06acb6895f6b78a" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnDetached</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a40a8e68bb9aaae4e7e6829c6dcdc1de1" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnDisable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4485f9f108c768bf90a89b5358246366" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnEnable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aee9627c72d6a18d49d840dcc68f54d13" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnLayerChanged</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a89367110cb3603a59c8577efd7c9d0db" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnLoaded</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a783a4f26e1b29f2a3269ea2faf3c46aa" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnMatrixDirty</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnPreSave</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4ef5231fbf84ac4af1245c763f9ae882" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnPriorityChanged</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a2d0e493296adf1cb6bb79fdcf6799ff7" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnTransformSet</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a4b91262b3fbd415f1815730aaee27f0e" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnTriggerEnter</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aec98c7a95ff035ac96ac3438f2d6d237" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnTriggerExit</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aaa602e3def3db296618ce7ca464b0481" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OnTriggerStay</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual" ambiguityscope="SR_HTYPES_NS::"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>operator==</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>OriginType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aed7449a15291fad0eede68a45a5d86fa" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Reset</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Save</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1aab60389077b1fb07d740e430c2c7c960" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>sceneObject</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1a856c3f9be932735a7e8ca5428c212f66" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Start</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>StaticCast</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ae8b89d4af0fa0a0b051912eac77e50ad" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Super</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ac5d74f04e5e6f122b3e4634b34da9505" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>transform</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Unlock</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1abbbcfaa6ce024a6e023836a58107fda7" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Update</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>Valid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1CppBehaviour_1ae176930c5c944a8524f530dda1ab952f" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>~CppBehaviour</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppBehaviour</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_CAMERA_H
 #define SR_ENGINE_CAMERA_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Math/Vector3.h>

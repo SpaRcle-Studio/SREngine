@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="39" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="39" bodyend="41"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="41" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="41" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1aa0bff1e62766d6edc299eb21860da2f9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="43" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="43" bodyend="45"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="45" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" bodystart="45" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1a925ac2de98c4f0ecae22616f38f240e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="47" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="47" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="49" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="49" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1a3a36652c9c885a64d39aa828712b62a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="51" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="51" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="53" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="53" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="AnimationCommon_8h_1aa8949fa6480c662dc998c4b15f66b3e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="68" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="68" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" line="70" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/AnimationCommon.h" declline="70" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="AnimationData_8h_1a1618de3e5d14ce505a6c016356f2ac67" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structSR__ANIMATIONS__NS_1_1AnimationGameObjectData" kindref="compound">AnimationGameObjectData</ref></type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="12" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" declline="12" declcolumn="5"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" line="14" column="5" declfile="Engine/Core/libs/Graphics/inc/Graphics/Animations/Interpolation.h" declline="14" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

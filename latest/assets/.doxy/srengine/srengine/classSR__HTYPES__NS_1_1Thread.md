@@ -72,7 +72,8 @@ Inherits the following classes: NonCopyable
 |  bool | [**HasId**](#function-hasid) () const<br> |
 |  void | [**Join**](#function-join) () <br> |
 |  SR\_NODISCARD bool | [**Joinable**](#function-joinable) () const<br> |
-|  SR\_NODISCARD bool | [**Run**](#function-run) (Functor && fn) <br> |
+|  SR\_NODISCARD bool | [**Run**](#function-run-12) (Functor && fn) <br> |
+|  bool | [**Run**](#function-run-22) (Functor && fn) <br> |
 |  void | [**SetName**](#function-setname) (const std::string & name) <br> |
 |  void | [**SetPriority**](#function-setpriority) (ThreadPriority priority) <br> |
 |  void | [**Synchronize**](#function-synchronize) () <br> |
@@ -83,7 +84,7 @@ Inherits the following classes: NonCopyable
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_FORCE\_INLINE ThreadId | [**EmptyThreadId**](#function-emptythreadid) () <br> |
+|  SR\_NODISCARD ThreadId | [**EmptyThreadId**](#function-emptythreadid) () <br> |
 |  void | [**Sleep**](#function-sleep) (uint64\_t milliseconds) <br> |
 
 
@@ -160,7 +161,7 @@ using SR_HTYPES_NS::Thread::ThreadsMap =  std::unordered_map<ThreadId, Thread::P
 ### function Detach 
 
 ```C++
-inline void SR_HTYPES_NS::Thread::Detach () 
+void SR_HTYPES_NS::Thread::Detach () 
 ```
 
 
@@ -201,7 +202,7 @@ void SR_HTYPES_NS::Thread::Free ()
 ### function GetContext 
 
 ```C++
-inline SR_NODISCARD DataStorage * SR_HTYPES_NS::Thread::GetContext () 
+SR_NODISCARD DataStorage * SR_HTYPES_NS::Thread::GetContext () 
 ```
 
 
@@ -227,7 +228,7 @@ SR_NODISCARD ThreadId SR_HTYPES_NS::Thread::GetId () const
 ### function HasId 
 
 ```C++
-inline bool SR_HTYPES_NS::Thread::HasId () const
+bool SR_HTYPES_NS::Thread::HasId () const
 ```
 
 
@@ -240,7 +241,7 @@ inline bool SR_HTYPES_NS::Thread::HasId () const
 ### function Join 
 
 ```C++
-inline void SR_HTYPES_NS::Thread::Join () 
+void SR_HTYPES_NS::Thread::Join () 
 ```
 
 
@@ -253,7 +254,7 @@ inline void SR_HTYPES_NS::Thread::Join ()
 ### function Joinable 
 
 ```C++
-inline SR_NODISCARD bool SR_HTYPES_NS::Thread::Joinable () const
+SR_NODISCARD bool SR_HTYPES_NS::Thread::Joinable () const
 ```
 
 
@@ -263,11 +264,27 @@ inline SR_NODISCARD bool SR_HTYPES_NS::Thread::Joinable () const
 
 
 
-### function Run 
+### function Run [1/2]
 
 ```C++
 template<class Functor, typename... Args>
-inline SR_NODISCARD bool SR_HTYPES_NS::Thread::Run (
+SR_NODISCARD bool SR_HTYPES_NS::Thread::Run (
+    Functor && fn
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Run [2/2]
+
+```C++
+template<class Functor, typename... Args>
+bool SR_HTYPES_NS::Thread::Run (
     Functor && fn
 ) 
 ```
@@ -340,7 +357,7 @@ bool SR_HTYPES_NS::Thread::TryJoin ()
 ### function EmptyThreadId 
 
 ```C++
-static inline SR_FORCE_INLINE ThreadId SR_HTYPES_NS::Thread::EmptyThreadId () 
+static SR_NODISCARD ThreadId SR_HTYPES_NS::Thread::EmptyThreadId () 
 ```
 
 

@@ -382,14 +382,14 @@
       <member refid="classSR__AUDIO__NS_1_1SoundContext_1a04b8e50fac4e2c6c0622f9506b08f7c7" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>m_listeners</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1ab9e01102edf86778a67578fc775ccb75" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>m_openALContext</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1afa3c7476940148888f045f6845960553" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>MakeContextCurrent</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>NonCopyable</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1a3f6abd4acd0aa02208a6db9217340200" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>OpenALSoundContext</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>operator=</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1aa4df63537ede047892d307bdc7e4666e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>Play</name></member>
       <member refid="classSR__AUDIO__NS_1_1SoundContext_1a818373f90c668db45287d8ce6230ba67" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>SoundContext</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1a5c3158a24fc00d968177186fa295e481" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>Super</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>~NonCopyable</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundContext_1a3d4cffa98f379d8f7b17688da67560e6" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>~OpenALSoundContext</name></member>
       <member refid="classSR__AUDIO__NS_1_1SoundContext_1a22e39ce3eb51b1c5859d6e56a3371ddb" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundContext</scope><name>~SoundContext</name></member>
     </listofallmembers>

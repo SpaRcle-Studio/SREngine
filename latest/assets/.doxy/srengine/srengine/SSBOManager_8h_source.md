@@ -15,6 +15,8 @@
 #ifndef SR_GRAPHICS_ENGINE_SSBO_MANAGER_H
 #define SR_GRAPHICS_ENGINE_SSBO_MANAGER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/ObjectPool.h>
 

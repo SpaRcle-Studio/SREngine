@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="62" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="65" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1a8ec62ab048d0d2d419078608ae3a5a55" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(const <ref refid="classSR__UTILS__NS_1_1SubscriptionMessage" kindref="compound">SubscriptionMessage</ref> &amp;)&gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="63" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="63" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="66" column="32" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1a65a5ff9f6c6e99cd10603fee0819bf5d" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1SubscriptionHolder" kindref="compound">SubscriptionHolder</ref> *</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="64" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="67" column="28" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1ae7327100c1a076ddf8bb5f9ab6cd5fa7" prot="public" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">StringAtom</ref></type>
@@ -60,11 +60,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="65" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="68" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="68" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1a00181121829b78a7672dc8cfef76d2ee" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1a00181121829b78a7672dc8cfef76d2ee" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::SubscriptionInternalInfo::SubscriptionInternalInfo</definition>
         <argsstring>(SR_HTYPES_NS::Function&lt; void(const SubscriptionMessage &amp;)&gt; &amp;&amp;callback, SubscriptionHolder *pHolder)</argsstring>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="56" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="56" bodyend="60"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="63" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -129,7 +129,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="54" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="54" bodyend="66"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="61" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="61" bodyend="69"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1a8ec62ab048d0d2d419078608ae3a5a55" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionInternalInfo</scope><name>callback</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionInternalInfo_1ae7327100c1a076ddf8bb5f9ab6cd5fa7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::SubscriptionInternalInfo</scope><name>id</name></member>

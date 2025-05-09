@@ -3,8 +3,6 @@
   <compounddef id="dir_4050116e84419e1b243298aae3c93869" kind="dir">
     <compoundname>Engine/Core/libs/Scripting/inc/Scripting/Base</compoundname>
     <innerfile refid="Behaviour_8h">Behaviour.h</innerfile>
-    <innerfile refid="Compiler_8h">Compiler.h</innerfile>
-    <innerfile refid="Script_8h">Script.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

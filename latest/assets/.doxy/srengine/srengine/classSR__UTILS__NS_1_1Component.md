@@ -66,12 +66,11 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Animator](classSR__ANIM
 |  SR\_NODISCARD [**Component**](classSR__UTILS__NS_1_1Component.md) \* | [**BaseComponent**](#function-basecomponent) () noexcept<br> |
 |  void | [**CheckActivity**](#function-checkactivity) () <br> |
 |  SR\_NODISCARD Component::Ptr | [**CloneComponent**](#function-clonecomponent) () const<br> |
+|   | [**Component**](#function-component) () <br> |
 |  void | [**Detach**](#function-detach) () <br> |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**ExecuteInEditMode**](#function-executeineditmode) () const<br> |
+| virtual SR\_NODISCARD bool | [**ExecuteInEditMode**](#function-executeineditmode) () const<br> |
 | virtual void | [**FixedUpdate**](#function-fixedupdate) () <br> |
 | virtual SR\_NODISCARD Math::FVector3 | [**GetBarycenter**](#function-getbarycenter) () const<br> |
-|  SR\_NODISCARD [**SR\_UTILS\_NS::PropertyContainer**](classSR__UTILS__NS_1_1PropertyContainer.md) & | [**GetComponentProperties**](#function-getcomponentproperties-12) () noexcept<br> |
-|  SR\_NODISCARD const [**SR\_UTILS\_NS::PropertyContainer**](classSR__UTILS__NS_1_1PropertyContainer.md) & | [**GetComponentProperties**](#function-getcomponentproperties-22) () noexcept const<br> |
 |  SR\_NODISCARD GameObjectPtr | [**GetGameObject**](#function-getgameobject) () const<br> |
 |  SR\_NODISCARD int32\_t | [**GetIndexInSceneUpdater**](#function-getindexinsceneupdater) () noexcept const<br> |
 |  SR\_NODISCARD [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* | [**GetParent**](#function-getparent) () const<br> |
@@ -81,15 +80,15 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Animator](classSR__ANIM
 |  SR\_NODISCARD [**Transform**](classSR__UTILS__NS_1_1Transform.md) \* | [**GetTransform**](#function-gettransform) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**HasParent**](#function-hasparent) () const<br> |
 |  SR\_NODISCARD bool | [**HasScene**](#function-hasscene) () const<br> |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsActive**](#function-isactive) () noexcept const<br>_Активен и компонент и его родительский объект_  |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsAttached**](#function-isattached) () noexcept const<br> |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsAwake**](#function-isawake) () noexcept const<br> |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsComponentLoaded**](#function-iscomponentloaded) () noexcept const<br> |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsComponentValid**](#function-iscomponentvalid) () noexcept const<br> |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsEnabled**](#function-isenabled) () noexcept const<br>_Активен сам компонент, независимо от объекта_  |
+| virtual SR\_NODISCARD bool | [**IsActive**](#function-isactive) () noexcept const<br>_Активен и компонент и его родительский объект_  |
+| virtual SR\_NODISCARD bool | [**IsAttached**](#function-isattached) () noexcept const<br> |
+| virtual SR\_NODISCARD bool | [**IsAwake**](#function-isawake) () noexcept const<br> |
+| virtual SR\_NODISCARD bool | [**IsComponentLoaded**](#function-iscomponentloaded) () noexcept const<br> |
+| virtual SR\_NODISCARD bool | [**IsComponentValid**](#function-iscomponentvalid) () noexcept const<br> |
+| virtual SR\_NODISCARD bool | [**IsEnabled**](#function-isenabled) () noexcept const<br>_Активен сам компонент, независимо от объекта_  |
 |  SR\_NODISCARD bool | [**IsPausedMode**](#function-ispausedmode) () const<br>_На паузе ли сцена (если запущена)_  |
 |  SR\_NODISCARD bool | [**IsPlayingMode**](#function-isplayingmode) () const<br>_Запущена ли сцена_  |
-| virtual SR\_NODISCARD virtual SR\_FORCE\_INLINE bool | [**IsStarted**](#function-isstarted) () noexcept const<br> |
+| virtual SR\_NODISCARD bool | [**IsStarted**](#function-isstarted) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsUpdatable**](#function-isupdatable) () noexcept const<br>_Активен и компонент и его родительский объект_  |
 | virtual void | [**LateUpdate**](#function-lateupdate) () <br> |
 | virtual void | [**OnAttached**](#function-onattached) () <br>_Вызывается после добавления компонента к игровому объекту_  |
@@ -136,7 +135,6 @@ Inherited by the following classes: [SR\_ANIMATIONS\_NS::Animator](classSR__ANIM
 |  bool | [**m\_isEnabled**](#variable-m_isenabled)   = `true`<br> |
 |  bool | [**m\_isStarted**](#variable-m_isstarted)   = `false`<br> |
 |  [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* | [**m\_parent**](#variable-m_parent)   = `nullptr`<br> |
-|  [**SR\_UTILS\_NS::PropertyContainer**](classSR__UTILS__NS_1_1PropertyContainer.md) | [**m\_properties**](#variable-m_properties)  <br> |
 |  [**SR\_WORLD\_NS::Scene**](classSR__WORLD__NS_1_1Scene.md) \* | [**m\_scene**](#variable-m_scene)   = `nullptr`<br> |
 |  SceneObjectPtr | [**m\_sceneObject**](#variable-m_sceneobject)   = `nullptr`<br> |
 
@@ -239,7 +237,7 @@ using SR_UTILS_NS::Component::ScenePtr =  SR_WORLD_NS::Scene*;
 ### function Awake 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::Awake () 
+virtual void SR_UTILS_NS::Component::Awake () 
 ```
 
 
@@ -252,7 +250,7 @@ inline virtual void SR_UTILS_NS::Component::Awake ()
 ### function BaseComponent 
 
 ```C++
-inline SR_NODISCARD Component * SR_UTILS_NS::Component::BaseComponent () noexcept
+SR_NODISCARD Component * SR_UTILS_NS::Component::BaseComponent () noexcept
 ```
 
 
@@ -288,6 +286,19 @@ SR_NODISCARD Component::Ptr SR_UTILS_NS::Component::CloneComponent () const
 
 
 
+### function Component 
+
+```C++
+SR_UTILS_NS::Component::Component () 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Detach 
 
 ```C++
@@ -304,7 +315,7 @@ void SR_UTILS_NS::Component::Detach ()
 ### function ExecuteInEditMode 
 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::ExecuteInEditMode () const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::ExecuteInEditMode () const
 ```
 
 
@@ -317,7 +328,7 @@ inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component:
 ### function FixedUpdate 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::FixedUpdate () 
+virtual void SR_UTILS_NS::Component::FixedUpdate () 
 ```
 
 
@@ -330,33 +341,7 @@ inline virtual void SR_UTILS_NS::Component::FixedUpdate ()
 ### function GetBarycenter 
 
 ```C++
-inline virtual SR_NODISCARD Math::FVector3 SR_UTILS_NS::Component::GetBarycenter () const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetComponentProperties [1/2]
-
-```C++
-inline SR_NODISCARD SR_UTILS_NS::PropertyContainer & SR_UTILS_NS::Component::GetComponentProperties () noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function GetComponentProperties [2/2]
-
-```C++
-inline SR_NODISCARD const SR_UTILS_NS::PropertyContainer & SR_UTILS_NS::Component::GetComponentProperties () noexcept const
+virtual SR_NODISCARD Math::FVector3 SR_UTILS_NS::Component::GetBarycenter () const
 ```
 
 
@@ -382,7 +367,7 @@ SR_NODISCARD GameObjectPtr SR_UTILS_NS::Component::GetGameObject () const
 ### function GetIndexInSceneUpdater 
 
 ```C++
-inline SR_NODISCARD int32_t SR_UTILS_NS::Component::GetIndexInSceneUpdater () noexcept const
+SR_NODISCARD int32_t SR_UTILS_NS::Component::GetIndexInSceneUpdater () noexcept const
 ```
 
 
@@ -460,7 +445,7 @@ SR_NODISCARD Transform * SR_UTILS_NS::Component::GetTransform () noexcept const
 ### function HasParent 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Component::HasParent () const
+SR_NODISCARD bool SR_UTILS_NS::Component::HasParent () const
 ```
 
 
@@ -473,7 +458,7 @@ inline SR_NODISCARD bool SR_UTILS_NS::Component::HasParent () const
 ### function HasScene 
 
 ```C++
-inline SR_NODISCARD bool SR_UTILS_NS::Component::HasScene () const
+SR_NODISCARD bool SR_UTILS_NS::Component::HasScene () const
 ```
 
 
@@ -487,7 +472,7 @@ inline SR_NODISCARD bool SR_UTILS_NS::Component::HasScene () const
 
 _Активен и компонент и его родительский объект_ 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsActive () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsActive () noexcept const
 ```
 
 
@@ -500,7 +485,7 @@ inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component:
 ### function IsAttached 
 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsAttached () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsAttached () noexcept const
 ```
 
 
@@ -513,7 +498,7 @@ inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component:
 ### function IsAwake 
 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsAwake () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsAwake () noexcept const
 ```
 
 
@@ -526,7 +511,7 @@ inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component:
 ### function IsComponentLoaded 
 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsComponentLoaded () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentLoaded () noexcept const
 ```
 
 
@@ -539,7 +524,7 @@ inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component:
 ### function IsComponentValid 
 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsComponentValid () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsComponentValid () noexcept const
 ```
 
 
@@ -553,7 +538,7 @@ inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component:
 
 _Активен сам компонент, независимо от объекта_ 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsEnabled () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsEnabled () noexcept const
 ```
 
 
@@ -594,7 +579,7 @@ SR_NODISCARD bool SR_UTILS_NS::Component::IsPlayingMode () const
 ### function IsStarted 
 
 ```C++
-inline virtual SR_NODISCARD virtual SR_FORCE_INLINE bool SR_UTILS_NS::Component::IsStarted () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsStarted () noexcept const
 ```
 
 
@@ -621,7 +606,7 @@ virtual SR_NODISCARD bool SR_UTILS_NS::Component::IsUpdatable () noexcept const
 ### function LateUpdate 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::LateUpdate () 
+virtual void SR_UTILS_NS::Component::LateUpdate () 
 ```
 
 
@@ -635,7 +620,7 @@ inline virtual void SR_UTILS_NS::Component::LateUpdate ()
 
 _Вызывается после добавления компонента к игровому объекту_ 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnAttached () 
+virtual void SR_UTILS_NS::Component::OnAttached () 
 ```
 
 
@@ -648,7 +633,7 @@ inline virtual void SR_UTILS_NS::Component::OnAttached ()
 ### function OnBeforeLayerChanged 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnBeforeLayerChanged () 
+virtual void SR_UTILS_NS::Component::OnBeforeLayerChanged () 
 ```
 
 
@@ -661,7 +646,7 @@ inline virtual void SR_UTILS_NS::Component::OnBeforeLayerChanged ()
 ### function OnCollisionEnter 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnCollisionEnter (
+virtual void SR_UTILS_NS::Component::OnCollisionEnter (
     const CollisionData & data
 ) 
 ```
@@ -676,7 +661,7 @@ inline virtual void SR_UTILS_NS::Component::OnCollisionEnter (
 ### function OnCollisionExit 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnCollisionExit (
+virtual void SR_UTILS_NS::Component::OnCollisionExit (
     const CollisionData & data
 ) 
 ```
@@ -691,7 +676,7 @@ inline virtual void SR_UTILS_NS::Component::OnCollisionExit (
 ### function OnCollisionStay 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnCollisionStay (
+virtual void SR_UTILS_NS::Component::OnCollisionStay (
     const CollisionData & data
 ) 
 ```
@@ -707,7 +692,7 @@ inline virtual void SR_UTILS_NS::Component::OnCollisionStay (
 
 _Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно._ 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnDestroy () 
+virtual void SR_UTILS_NS::Component::OnDestroy () 
 ```
 
 
@@ -760,7 +745,7 @@ virtual void SR_UTILS_NS::Component::OnEnable ()
 ### function OnLayerChanged 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnLayerChanged () 
+virtual void SR_UTILS_NS::Component::OnLayerChanged () 
 ```
 
 
@@ -774,7 +759,7 @@ inline virtual void SR_UTILS_NS::Component::OnLayerChanged ()
 
 _Вызывается при загрузке компонента на игровой объект_ 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnLoaded () 
+virtual void SR_UTILS_NS::Component::OnLoaded () 
 ```
 
 
@@ -787,7 +772,7 @@ inline virtual void SR_UTILS_NS::Component::OnLoaded ()
 ### function OnMatrixDirty 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnMatrixDirty () 
+virtual void SR_UTILS_NS::Component::OnMatrixDirty () 
 ```
 
 
@@ -800,7 +785,7 @@ inline virtual void SR_UTILS_NS::Component::OnMatrixDirty ()
 ### function OnPriorityChanged 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnPriorityChanged () 
+virtual void SR_UTILS_NS::Component::OnPriorityChanged () 
 ```
 
 
@@ -813,7 +798,7 @@ inline virtual void SR_UTILS_NS::Component::OnPriorityChanged ()
 ### function OnTransformSet 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnTransformSet () 
+virtual void SR_UTILS_NS::Component::OnTransformSet () 
 ```
 
 
@@ -826,7 +811,7 @@ inline virtual void SR_UTILS_NS::Component::OnTransformSet ()
 ### function OnTriggerEnter 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnTriggerEnter (
+virtual void SR_UTILS_NS::Component::OnTriggerEnter (
     const CollisionData & data
 ) 
 ```
@@ -841,7 +826,7 @@ inline virtual void SR_UTILS_NS::Component::OnTriggerEnter (
 ### function OnTriggerExit 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnTriggerExit (
+virtual void SR_UTILS_NS::Component::OnTriggerExit (
     const CollisionData & data
 ) 
 ```
@@ -856,7 +841,7 @@ inline virtual void SR_UTILS_NS::Component::OnTriggerExit (
 ### function OnTriggerStay 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::OnTriggerStay (
+virtual void SR_UTILS_NS::Component::OnTriggerStay (
     const CollisionData & data
 ) 
 ```
@@ -886,7 +871,7 @@ void SR_UTILS_NS::Component::SetEnabled (
 ### function SetIndexIdSceneUpdater 
 
 ```C++
-inline void SR_UTILS_NS::Component::SetIndexIdSceneUpdater (
+void SR_UTILS_NS::Component::SetIndexIdSceneUpdater (
     int32_t index
 ) 
 ```
@@ -914,7 +899,7 @@ virtual void SR_UTILS_NS::Component::Start ()
 ### function TryGetParent 
 
 ```C++
-inline SR_NODISCARD IComponentable * SR_UTILS_NS::Component::TryGetParent () const
+SR_NODISCARD IComponentable * SR_UTILS_NS::Component::TryGetParent () const
 ```
 
 
@@ -940,7 +925,7 @@ SR_NODISCARD ScenePtr SR_UTILS_NS::Component::TryGetScene () const
 ### function Update 
 
 ```C++
-inline virtual void SR_UTILS_NS::Component::Update (
+virtual void SR_UTILS_NS::Component::Update (
     float_t dt
 ) 
 ```
@@ -1062,19 +1047,6 @@ bool SR_UTILS_NS::Component::m_isStarted;
 
 ```C++
 IComponentable* SR_UTILS_NS::Component::m_parent;
-```
-
-
-
-
-<hr>
-
-
-
-### variable m\_properties 
-
-```C++
-SR_UTILS_NS::PropertyContainer SR_UTILS_NS::Component::m_properties;
 ```
 
 

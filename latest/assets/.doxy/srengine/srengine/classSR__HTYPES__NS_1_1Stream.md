@@ -60,7 +60,7 @@ Inherited by the following classes: [SR\_HTYPES\_NS::Marshal](classSR__HTYPES__N
 |  void | [**SetPosition**](#function-setposition) (uint64\_t position) <br> |
 |  SR\_NODISCARD uint64\_t | [**Size**](#function-size) () noexcept const<br> |
 |  void | [**Skip**](#function-skip) (uint64\_t count) <br> |
-|   | [**Stream**](#function-stream-16) () = default<br> |
+|   | [**Stream**](#function-stream-16) () <br> |
 |   | [**Stream**](#function-stream-26) (std::ifstream & ifs) <br> |
 |   | [**Stream**](#function-stream-36) (const std::string & str) <br> |
 |   | [**Stream**](#function-stream-46) (const char \* pData, uint64\_t size) <br> |
@@ -115,7 +115,7 @@ Inherited by the following classes: [SR\_HTYPES\_NS::Marshal](classSR__HTYPES__N
 ### function GetCapacity 
 
 ```C++
-inline SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetCapacity () noexcept const
+SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetCapacity () noexcept const
 ```
 
 
@@ -128,7 +128,7 @@ inline SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetCapacity () noexcept const
 ### function GetPosition 
 
 ```C++
-inline SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetPosition () noexcept const
+SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::GetPosition () noexcept const
 ```
 
 
@@ -203,7 +203,7 @@ void SR_HTYPES_NS::Stream::SetPosition (
 ### function Size 
 
 ```C++
-inline SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::Size () noexcept const
+SR_NODISCARD uint64_t SR_HTYPES_NS::Stream::Size () noexcept const
 ```
 
 
@@ -231,7 +231,7 @@ void SR_HTYPES_NS::Stream::Skip (
 ### function Stream [1/6]
 
 ```C++
-SR_HTYPES_NS::Stream::Stream () = default
+SR_HTYPES_NS::Stream::Stream () 
 ```
 
 
@@ -383,7 +383,7 @@ Stream &SR_FASTCALL SR_HTYPES_NS::Stream::TryRead (
 ### function Valid 
 
 ```C++
-inline SR_NODISCARD bool SR_HTYPES_NS::Stream::Valid () noexcept const
+SR_NODISCARD bool SR_HTYPES_NS::Stream::Valid () noexcept const
 ```
 
 
@@ -400,7 +400,7 @@ NOLINT
 ### function View 
 
 ```C++
-inline SR_NODISCARD const char * SR_HTYPES_NS::Stream::View () noexcept const
+SR_NODISCARD const char * SR_HTYPES_NS::Stream::View () noexcept const
 ```
 
 
@@ -472,7 +472,7 @@ Stream &SR_FASTCALL SR_HTYPES_NS::Stream::operator= (
 ### function read 
 
 ```C++
-inline Stream &SR_FASTCALL SR_HTYPES_NS::Stream::read (
+Stream &SR_FASTCALL SR_HTYPES_NS::Stream::read (
     void * pDst,
     uint64_t count
 ) noexcept
@@ -488,7 +488,7 @@ inline Stream &SR_FASTCALL SR_HTYPES_NS::Stream::read (
 ### function write 
 
 ```C++
-inline Stream &SR_FASTCALL SR_HTYPES_NS::Stream::write (
+Stream &SR_FASTCALL SR_HTYPES_NS::Stream::write (
     const void * pSrc,
     uint64_t count
 ) noexcept

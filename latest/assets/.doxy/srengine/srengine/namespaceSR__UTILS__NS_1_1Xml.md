@@ -59,13 +59,17 @@
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|  SR\_MAYBE\_UNUSED void | [**AppendColorNode**](#function-appendcolornode) ([**Xml::Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) & node, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & color) <br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_MAYBE\_UNUSED void | [**AppendColorNode**](#function-appendcolornode) ([**Xml::Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) & node, const [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) & color) <br> |
 |  [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**NodeToColor**](#function-nodetocolor) (const [**Xml::Node**](classSR__UTILS__NS_1_1Xml_1_1Node.md) & node) <br> |
 
 
@@ -108,7 +112,7 @@ int32_t SR_UTILS_NS::Xml::g_xml_last_error;
 
 
 <hr>
-## Public Static Functions Documentation
+## Public Functions Documentation
 
 
 
@@ -116,7 +120,7 @@ int32_t SR_UTILS_NS::Xml::g_xml_last_error;
 ### function AppendColorNode 
 
 ```C++
-static SR_MAYBE_UNUSED void SR_UTILS_NS::Xml::AppendColorNode (
+SR_MAYBE_UNUSED void SR_UTILS_NS::Xml::AppendColorNode (
     Xml::Node & node,
     const SR_MATH_NS::FColor & color
 ) 
@@ -126,6 +130,8 @@ static SR_MAYBE_UNUSED void SR_UTILS_NS::Xml::AppendColorNode (
 
 
 <hr>
+## Public Static Functions Documentation
+
 
 
 

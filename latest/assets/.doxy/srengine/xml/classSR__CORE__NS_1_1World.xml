@@ -202,6 +202,7 @@
       <member refid="classSR__WORLD__NS_1_1Scene_1aa6b496705c31af2eede3634e27ac6952" prot="public" virt="virtual"><scope>SR_CORE_NS::World</scope><name>GetScene</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a4b96699a74cdd9024381a51ca08b24c2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>GetSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1aeea19c294fe07e4f320334a15b0a81b5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>HasComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ab0e7db31ca69f3c02daa9b5e86d8e24c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>IComponentable</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1acb4d6e0610a449246b7c2511b81c6909" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>Init</name></member>
       <member refid="classSR__CORE__NS_1_1World_1a898c2da93d0aed4bd6369cda8950f28c" prot="public" virt="non-virtual"><scope>SR_CORE_NS::World</scope><name>Instance</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1af839836d0d6587fa8515470de4b37c12" prot="public" virt="virtual" ambiguityscope="SR_WORLD_NS::Scene::"><scope>SR_CORE_NS::World</scope><name>Instance</name></member>

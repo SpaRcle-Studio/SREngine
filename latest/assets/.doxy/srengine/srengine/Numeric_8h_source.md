@@ -18,53 +18,23 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT Random : public Singleton<Random> {
+    class Random : public Singleton<Random> {
         SR_REGISTER_SINGLETON(Random)
     private:
-        Random()
-            : m_generator(clock())
-            , m_randomDevice()
-            , m_e2(m_randomDevice())
-            , m_dist(std::llround(std::pow(2, 61))
-            , std::llround(std::pow(2, 62)))
-        { }
-
+        Random();
         ~Random() override = default;
 
     public:
-        static void Initialize() {
-            srand(time(NULL)); 
-        }
+        static void Initialize();
 
-        template<typename T> void Shuffle(std::vector<T>& vector) {
-            std::shuffle(std::begin(vector), std::end(vector), m_randomDevice);
-        }
+        template<typename T> void Shuffle(std::vector<T>& vector);
 
-        SR_NODISCARD float_t Float(float_t minimum, float_t maximum) {
-            std::uniform_real_distribution<float_t> distribution(minimum, maximum);
-            return distribution(m_generator);
-        }
-
-        SR_NODISCARD int32_t Int32Range(int32_t minimum, int32_t maximum) {
-            std::uniform_int_distribution<int32_t> distribution(minimum, maximum);
-            return distribution(m_generator);
-        }
-
-        SR_NODISCARD int64_t Int64() {
-            return m_dist(m_e2);
-        }
-
-        SR_NODISCARD uint64_t UInt64() {
-            return static_cast<uint64_t>(m_dist(m_e2));
-        }
-
-        SR_NODISCARD int32_t Int32() {
-            return static_cast<int32_t>(m_dist(m_e2));
-        }
-
-        SR_NODISCARD uint32_t UInt32() {
-            return static_cast<uint32_t>(m_dist(m_e2));
-        }
+        SR_NODISCARD float_t Float(float_t minimum, float_t maximum);
+        SR_NODISCARD int32_t Int32Range(int32_t minimum, int32_t maximum);
+        SR_NODISCARD int64_t Int64();
+        SR_NODISCARD uint64_t UInt64();
+        SR_NODISCARD int32_t Int32();
+        SR_NODISCARD uint32_t UInt32();
 
     private:
         std::default_random_engine m_generator;
@@ -74,6 +44,10 @@ namespace SR_UTILS_NS {
         std::uniform_int_distribution<int64_t> m_dist;
 
     };
+
+    template<typename T> void Random::Shuffle(std::vector<T>& vector) {
+        std::shuffle(std::begin(vector), std::end(vector), m_randomDevice);
+    }
 }
 
 #endif //SR_ENGINE_NUMERIC_H

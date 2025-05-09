@@ -282,7 +282,7 @@
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1a2d10153d943a72feeec7f81885bed816" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>Identifier</name></member>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1abbd76addd0d26d360ab738deb9a9cc28" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>m_createInfo</name></member>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1adc92c0a9bdf291c280a783ad841e959b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>m_data</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>NonCopyable</name></member>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1ac403a9cb2d83c0a23d77a83b30719d8f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>operator=</name></member>
@@ -291,7 +291,7 @@
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1ae6382d2a0f5679704a8b64db8dd99944" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>Valid</name></member>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1a69b40565dfbd18f425d08cfb00ed9ad3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>VirtualProgramInfo</name></member>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1a97a29d1934798a29c6c7aaa47adf9bec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>VirtualProgramInfo</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>~NonCopyable</name></member>
       <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1a78f53830bc96df1f8a8a51e52de7676b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::VirtualProgramInfo</scope><name>~VirtualProgramInfo</name></member>
     </listofallmembers>
   </compounddef>

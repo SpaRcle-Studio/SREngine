@@ -161,6 +161,7 @@ See [SR\_UTILS\_NS::IComponentable](classSR__UTILS__NS_1_1IComponentable.md)
 | virtual Component::Ptr | [**GetOrCreateComponent**](classSR__UTILS__NS_1_1IComponentable.md#function-getorcreatecomponent-22) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 | virtual SR\_NODISCARD ScenePtr | [**GetScene**](classSR__UTILS__NS_1_1IComponentable.md#function-getscene) () const<br> |
 |  SR\_NODISCARD bool | [**HasComponent**](classSR__UTILS__NS_1_1IComponentable.md#function-hascomponent) (const Component::Ptr & pComponent) const<br> |
+|   | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md#function-icomponentable) () = default<br> |
 | virtual SR\_NODISCARD bool | [**IsActive**](classSR__UTILS__NS_1_1IComponentable.md#function-isactive) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsDestroyed**](classSR__UTILS__NS_1_1IComponentable.md#function-isdestroyed) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsDirty**](classSR__UTILS__NS_1_1IComponentable.md#function-isdirty) () noexcept const<br> |
@@ -499,7 +500,7 @@ SR_NODISCARD Path SR_WORLD_NS::Scene::GetAbsPath () const
 ### function GetDataStorage [1/2]
 
 ```C++
-inline SR_NODISCARD SR_HTYPES_NS::DataStorage & SR_WORLD_NS::Scene::GetDataStorage () 
+SR_NODISCARD SR_HTYPES_NS::DataStorage & SR_WORLD_NS::Scene::GetDataStorage () 
 ```
 
 
@@ -512,7 +513,7 @@ inline SR_NODISCARD SR_HTYPES_NS::DataStorage & SR_WORLD_NS::Scene::GetDataStora
 ### function GetDataStorage [2/2]
 
 ```C++
-inline SR_NODISCARD const SR_HTYPES_NS::DataStorage & SR_WORLD_NS::Scene::GetDataStorage () const
+SR_NODISCARD const SR_HTYPES_NS::DataStorage & SR_WORLD_NS::Scene::GetDataStorage () const
 ```
 
 

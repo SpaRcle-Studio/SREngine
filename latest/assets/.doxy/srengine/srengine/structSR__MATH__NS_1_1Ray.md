@@ -62,7 +62,9 @@
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**IntersectPlane**](#function-intersectplane) (const SR\_MATH\_NS::FVector4 & plan) noexcept const<br> |
 |  SR\_NODISCARD Unit | [**IntersectPlaneDistance**](#function-intersectplanedistance) (const SR\_MATH\_NS::FVector4 & plane) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**Origin3D**](#function-origin3d) () const<br> |
+|   | [**Ray**](#function-ray) () <br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**RotationVector**](#function-rotationvector) (const SR\_MATH\_NS::FVector4 & plan, const SR\_MATH\_NS::FVector3 & position) noexcept const<br> |
+|   | [**~Ray**](#function-ray) () <br> |
 
 
 
@@ -127,7 +129,7 @@ FVector3 SR_MATH_NS::Ray::origin;
 ### function ComputeAngleOnPlan 
 
 ```C++
-inline SR_NODISCARD Unit SR_MATH_NS::Ray::ComputeAngleOnPlan (
+SR_NODISCARD Unit SR_MATH_NS::Ray::ComputeAngleOnPlan (
     const SR_MATH_NS::FVector4 & plan,
     const SR_MATH_NS::FVector3 & position,
     const SR_MATH_NS::FVector3 & sourceRotationVector
@@ -144,7 +146,7 @@ inline SR_NODISCARD Unit SR_MATH_NS::Ray::ComputeAngleOnPlan (
 ### function Direction3D 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::Direction3D () const
+SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::Direction3D () const
 ```
 
 
@@ -157,7 +159,7 @@ inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::Direction3D () const
 ### function IntersectPlane 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::IntersectPlane (
+SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::IntersectPlane (
     const SR_MATH_NS::FVector4 & plan
 ) noexcept const
 ```
@@ -172,7 +174,7 @@ inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::IntersectPlane (
 ### function IntersectPlaneDistance 
 
 ```C++
-inline SR_NODISCARD Unit SR_MATH_NS::Ray::IntersectPlaneDistance (
+SR_NODISCARD Unit SR_MATH_NS::Ray::IntersectPlaneDistance (
     const SR_MATH_NS::FVector4 & plane
 ) const
 ```
@@ -187,7 +189,20 @@ inline SR_NODISCARD Unit SR_MATH_NS::Ray::IntersectPlaneDistance (
 ### function Origin3D 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::Origin3D () const
+SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::Origin3D () const
+```
+
+
+
+
+<hr>
+
+
+
+### function Ray 
+
+```C++
+SR_MATH_NS::Ray::Ray () 
 ```
 
 
@@ -200,10 +215,23 @@ inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::Origin3D () const
 ### function RotationVector 
 
 ```C++
-inline SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::RotationVector (
+SR_NODISCARD SR_MATH_NS::FVector3 SR_MATH_NS::Ray::RotationVector (
     const SR_MATH_NS::FVector4 & plan,
     const SR_MATH_NS::FVector3 & position
 ) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function ~Ray 
+
+```C++
+SR_MATH_NS::Ray::~Ray () 
 ```
 
 

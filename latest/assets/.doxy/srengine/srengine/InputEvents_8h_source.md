@@ -20,7 +20,7 @@
 
 namespace SR_UTILS_NS {
     /*
-    class SR_DLL_EXPORT KeyPressEvent {
+    class SR_COMMON_DLL_API KeyPressEvent {
     public:
         KeyPressEvent(KeyCode code)
             : m_code(code)

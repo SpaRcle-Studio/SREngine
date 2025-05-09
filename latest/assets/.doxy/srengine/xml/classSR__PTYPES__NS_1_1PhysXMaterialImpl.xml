@@ -242,7 +242,7 @@
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1af7abf1cf8744da94c2b4a675045d4bd4" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>m_material</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1af3aef6e578790a4ad063b61c901ce1fc" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>m_physics</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a14b89817cbd9e470a9e95fa75d8f70c3" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>m_pxMaterial</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>operator=</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysicsMaterialImpl_1addc8870a93fcf1df319d49b3bd225e9e" prot="protected" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>PhysicsMaterialImpl</name></member>
@@ -250,7 +250,7 @@
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1ac82bad3551038fbf34939f111abe9a32" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>ReInit</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a9b75677c50f568bed0e6882eace9f840" prot="public" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>SetMaterial</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a157caae26294a8bf8f2938cb709d3a64" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>Super</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>~NonCopyable</name></member>
       <member refid="classSR__PTYPES__NS_1_1PhysXMaterialImpl_1a561c31b8867d4d2f7d81a4757d60a64d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::PhysXMaterialImpl</scope><name>~PhysXMaterialImpl</name></member>
     </listofallmembers>
   </compounddef>

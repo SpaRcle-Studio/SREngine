@@ -380,7 +380,7 @@
         <argsstring>() const override</argsstring>
         <name>ExecuteInEditMode</name>
         <qualifiedname>SR_CORE_UI_NS::IButton::ExecuteInEditMode</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1Component_1a18af2c953acad770e70af93a16882340">ExecuteInEditMode</reimplements>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a51e106ce1c788f4452dbee8ee484a51c">ExecuteInEditMode</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -464,30 +464,11 @@
         <childnode refid="6" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="7" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="5">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="9" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
@@ -506,14 +487,13 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>CheckActivity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>CloneComponent</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1a94464bf13a0da2621f197f3cedab0498" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>CompareObject</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a399c77c103e176a04ad7781b72c314ee" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>Component</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>Detach</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1a702ca467575b79a375333756cb3f8bec" prot="protected" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>ExecuteInEditMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1acae95de33825449f163ab99828593fd5" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>FixedUpdate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetCamera</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetComponentProperties</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetComponentProperties</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetGameObject</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a1bc2cbdfbcd251764907ebd0dddef009" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetIndexInSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae81e0c4dd084a7d3d4620e53c10ca2fc" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>GetParent</name></member>
@@ -527,18 +507,18 @@
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>HasScene</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1a627c3e73c85f070dbf0b6f5fd9ef0057" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IButton</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1a2abe8e6194b4538b4985dcbd607ecbd5" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>InitializeEntity</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsActive</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsAttached</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsAwake</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsComponentLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsComponentValid</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsEnabled</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1aead029c6e796b8a5d92142141374af4a" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsHovered</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1ad82d0e166cbbf09621beb14083700dcb" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsIdle</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsPausedMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsPlayingMode</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1aeb013e9ba7768470ad86a678fc09221f" prot="public" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsPressed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsStarted</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>IsUpdatable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>LateUpdate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1aa9adbbbd60ec4e4065d8a953778488df" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_indexInSceneUpdater</name></member>
@@ -554,7 +534,6 @@
       <member refid="classSR__CORE__UI__NS_1_1IButton_1ad2e29afc47c4f73ce8c2e3c5e87ad92a" prot="private" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_onKeyUp</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_parent</name></member>
       <member refid="classSR__CORE__UI__NS_1_1IButton_1af9e2e46022b14d0509013a6b98298635" prot="private" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_previousState</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_properties</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_renderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_scene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5bbd2e2f1ed3059025e390d428d4d6ac" prot="protected" virt="non-virtual"><scope>SR_CORE_UI_NS::IButton</scope><name>m_sceneObject</name></member>

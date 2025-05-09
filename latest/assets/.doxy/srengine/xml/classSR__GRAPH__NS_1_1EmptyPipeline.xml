@@ -6,7 +6,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h" bodystart="11" bodyend="13"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pipeline/EmptyPipeline.h" bodystart="14" bodyend="16"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

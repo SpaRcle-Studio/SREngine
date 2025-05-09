@@ -50,7 +50,7 @@
 | file | [**StoreUtils.h**](StoreUtils_8h.md) <br> |
 | file | [**StringAtomLiterals.h**](StringAtomLiterals_8h.md) <br> |
 | file | [**StringFormat.h**](StringFormat_8h.md) <br> |
-| file | [**StringUtils.h**](StringUtils_8h.md) <br> |
+| file | [**StringUtils.h**](Utils_2inc_2Utils_2Common_2StringUtils_8h.md) <br> |
 | file | [**SubscriptionHolder.h**](SubscriptionHolder_8h.md) <br> |
 | file | [**ThreadUtils.h**](ThreadUtils_8h.md) <br> |
 | file | [**ToString.h**](ToString_8h.md) <br> |

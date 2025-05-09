@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_INTERPOLATION_H
 #define SR_ENGINE_INTERPOLATION_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Math/Vector3.h>
 

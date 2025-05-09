@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_PIPELINE_TYPE_H
 #define SR_ENGINE_PIPELINE_TYPE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Debug.h>
 #include <Utils/Math/Matrix4x4.h>

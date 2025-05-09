@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="27" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="29" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a3d7e04de493316b7accadeaa49b55d9d" prot="public" static="no" mutable="no">
         <type>uint32_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="28" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="30" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1aa9e4c505f8bd4fe968be4324685dd77d" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__FrameRenderBuffers" kindref="compound">ImGui_ImplVulkanH_FrameRenderBuffers</ref> *</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="29" column="48" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="31" column="48" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="31" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -65,7 +65,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="25" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="26" bodyend="30"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="27" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="28" bodyend="32"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a3d7e04de493316b7accadeaa49b55d9d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</scope><name>Count</name></member>
       <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1aa9e4c505f8bd4fe968be4324685dd77d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkanH_WindowRenderBuffers</scope><name>FrameRenderBuffers</name></member>

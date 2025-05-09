@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_ee39d7974ea8a860c3bbba1b251e09d1" kind="dir">
     <compoundname>Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor</compoundname>
-    <innerfile refid="MessageBox_8h">MessageBox.h</innerfile>
+    <innerfile refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h">MessageBox.h</innerfile>
     <innerfile refid="Theme_8h">Theme.h</innerfile>
     <briefdescription>
     </briefdescription>

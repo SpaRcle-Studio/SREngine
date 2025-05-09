@@ -87,6 +87,7 @@ namespace SR_UTILS_NS::Tests {
         }
 
     private:
+        std::string m_string = "Hello world!";
         SR_UTILS_NS::PlatformType m_platformType = SR_UTILS_NS::PlatformType::Windows;
         ReflectionTestComponentData m_data;
         ReflectionTestComponentLogicBase::Ptr m_logic;

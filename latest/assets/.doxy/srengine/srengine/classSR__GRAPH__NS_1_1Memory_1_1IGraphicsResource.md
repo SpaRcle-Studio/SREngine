@@ -104,7 +104,7 @@ Inherited by the following classes: [SR\_GRAPH\_NS::IRenderTechnique](classSR__G
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**IGraphicsResource**](#function-igraphicsresource-12) () = default<br> |
+|   | [**IGraphicsResource**](#function-igraphicsresource-12) () = default<br> |
 | virtual  | [**~IGraphicsResource**](#function-igraphicsresource) () <br> |
 
 
@@ -329,7 +329,7 @@ RenderContextPtr SR_GRAPH_NS::Memory::IGraphicsResource::m_renderContext;
 ### function IGraphicsResource [1/2]
 
 ```C++
-constexpr SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource () = default
+SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource () = default
 ```
 
 

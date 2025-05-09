@@ -58,7 +58,7 @@ Inherits the following classes: NonCopyable
 | Type | Name |
 | ---: | :--- |
 |  void | [**Clear**](#function-clear) () <br> |
-|   | [**DataStorage**](#function-datastorage-12) () = default<br> |
+|   | [**DataStorage**](#function-datastorage-12) () <br> |
 |   | [**DataStorage**](#function-datastorage-22) ([**DataStorage**](classSR__HTYPES__NS_1_1DataStorage.md) && data) noexcept<br> |
 |  T \* | [**GetPointer**](#function-getpointer-13) (const std::string & name) const<br> |
 |  T \* | [**GetPointer**](#function-getpointer-23) () const<br> |
@@ -131,7 +131,7 @@ using SR_HTYPES_NS::DataStorage::Ptr =  DataStorage*;
 ### function Clear 
 
 ```C++
-inline void SR_HTYPES_NS::DataStorage::Clear () 
+void SR_HTYPES_NS::DataStorage::Clear () 
 ```
 
 
@@ -144,7 +144,7 @@ inline void SR_HTYPES_NS::DataStorage::Clear ()
 ### function DataStorage [1/2]
 
 ```C++
-SR_HTYPES_NS::DataStorage::DataStorage () = default
+SR_HTYPES_NS::DataStorage::DataStorage () 
 ```
 
 
@@ -157,7 +157,7 @@ SR_HTYPES_NS::DataStorage::DataStorage () = default
 ### function DataStorage [2/2]
 
 ```C++
-inline SR_HTYPES_NS::DataStorage::DataStorage (
+SR_HTYPES_NS::DataStorage::DataStorage (
     DataStorage && data
 ) noexcept
 ```
@@ -459,7 +459,7 @@ void SR_HTYPES_NS::DataStorage::SetValue (
 ### function operator= 
 
 ```C++
-inline DataStorage & SR_HTYPES_NS::DataStorage::operator= (
+DataStorage & SR_HTYPES_NS::DataStorage::operator= (
     DataStorage && data
 ) noexcept
 ```
@@ -474,7 +474,7 @@ inline DataStorage & SR_HTYPES_NS::DataStorage::operator= (
 ### function ~DataStorage 
 
 ```C++
-inline SR_HTYPES_NS::DataStorage::~DataStorage () override
+SR_HTYPES_NS::DataStorage::~DataStorage () override
 ```
 
 

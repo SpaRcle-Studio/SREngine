@@ -3,9 +3,9 @@
   <compounddef id="dir_1d502c2700a8bda2469c0cfc127e6ee9" kind="dir">
     <compoundname>Engine/Core/libs/Scripting/inc/Scripting</compoundname>
     <innerdir refid="dir_4050116e84419e1b243298aae3c93869">Engine/Core/libs/Scripting/inc/Scripting/Base</innerdir>
-    <innerdir refid="dir_24f2b9252cbd3f2e0c4afbfdbb5b103e">Engine/Core/libs/Scripting/inc/Scripting/Impl</innerdir>
-    <innerdir refid="dir_1554428c6196beacfc88f8b62d61c979">Engine/Core/libs/Scripting/inc/Scripting/Mono</innerdir>
-    <innerfile refid="ScriptHolder_8h">ScriptHolder.h</innerfile>
+    <innerdir refid="dir_5b4c9295b84b252e440361db0d67cd77">Engine/Core/libs/Scripting/inc/Scripting/Cpp</innerdir>
+    <innerdir refid="dir_7c26f9091b44a892879dd4e8d1d7c144">Engine/Core/libs/Scripting/inc/Scripting/Old</innerdir>
+    <innerfile refid="Scripting_2inc_2Scripting_2macros_8h">macros.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

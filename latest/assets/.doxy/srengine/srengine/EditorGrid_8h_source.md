@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_EDITORGRID_H
 #define SR_ENGINE_EDITORGRID_H
 
+//TODO: Это что? Может стоит убрать??
+#include <Graphics/macros.h>
 /*
 #include <Environment/Environment.h>
 

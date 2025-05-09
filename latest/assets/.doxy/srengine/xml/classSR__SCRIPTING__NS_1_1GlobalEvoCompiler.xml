@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="41" column="9"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="41" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler_1a7c8ce664820e66438f5784eff5925573" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="42" column="9"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="42" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler_1a5c9807edca1eb191bce6f83d19fa3caf" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="45" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" bodystart="45" bodyend="47"/>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="45" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="45" bodyend="47"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -56,6 +56,9 @@
     <inheritancegraph>
       <node id="7">
         <label>EvoScript::Compiler</label>
+        <link refid="classEvoScript_1_1Compiler"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="6">
         <label>SR_SCRIPTING_NS::Compiler</label>
@@ -99,6 +102,9 @@
     <collaborationgraph>
       <node id="7">
         <label>EvoScript::Compiler</label>
+        <link refid="classEvoScript_1_1Compiler"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="6">
         <label>SR_SCRIPTING_NS::Compiler</label>
@@ -139,38 +145,55 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" line="38" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoCompiler.h" bodystart="38" bodyend="49"/>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" line="38" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoCompiler.h" bodystart="38" bodyend="49"/>
     <listofallmembers>
-      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1a5b896296f456079de26058913edc65bd" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Compiler</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>DestroySingleton</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a5f5e8d05595ff1000f5bf985afb5f226" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>AddIncludePath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a87c02afb565fbe109c5e553f6935de0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>AllocateState</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a232ccce7928c38348d3e0c61dd510918" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Compile</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1a5b896296f456079de26058913edc65bd" prot="protected" virt="non-virtual" ambiguityscope="SR_SCRIPTING_NS::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Compiler</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a6624ad51e7d034f59076b7295571ede9" prot="public" virt="non-virtual" ambiguityscope="EvoScript::Compiler::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Compiler</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>DestroySingleton</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a67c4a9b5234135e06132f3b2fe362c37" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>EvoCompiler</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a2425362f71e3176d26742969b0ee9f45" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetAPIVersion</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a2cd92e173612c4aa323041fb3f5e9b75" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetCachePath</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a3a21f4e8179d3dfbfea2bfeb18ffe259" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetCasting</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a19af17b146e29bc52e2bac217d00aba9" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetCompilerPath</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a654e242a4f9012e9859740c7b4269a6a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetGenerator</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GetSingletonName</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler_1a84c75ab5131f2fe063cc9e3c109e01a0" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>GlobalEvoCompiler</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a5250ffac67e2a6eaa1fccb34660e116a" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Init</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a7c605adf07c73848a9934db0924065d4" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Load</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ad0722ae7a0fb5686b299ee9cc77fc64f" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>LoadState</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>LockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>m_mutex</name></member>
-      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1a8a1be2fa48571e9c1ff046c0a60230b4" prot="protected" virt="non-virtual" ambiguityscope="SR_SCRIPTING_NS::EvoCompiler::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>m_mutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>NonCopyable</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1a8a1be2fa48571e9c1ff046c0a60230b4" prot="protected" virt="non-virtual" ambiguityscope="SR_SCRIPTING_NS::EvoCompiler::SR_SCRIPTING_NS::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual" ambiguityscope="SR_SCRIPTING_NS::EvoCompiler::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual" ambiguityscope="EvoScript::Compiler::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>NonCopyable</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler_1a5c9807edca1eb191bce6f83d19fa3caf" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>SingletonBase</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1ac87d610421cd48d1137e97a02c3b0265" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~Compiler</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ad5c723829927cf2c504593dee673f204" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>SetApiVersion</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a2aeac6fa1e63a758da9c56075f51bbfa" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>SetCompilePDB</name></member>
+      <member refid="classEvoScript_1_1Compiler_1aea83e3724933bf7e3f9e707f33bcb9dd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>SetCompilerPath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a07d0afc3ef4148aea979638fe9b31d61" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>SetMultiInstances</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>SingletonBase</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a59fcbb2917170965a53ad439ba709ec4" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>TryLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1Compiler_1ac87d610421cd48d1137e97a02c3b0265" prot="public" virt="non-virtual" ambiguityscope="SR_SCRIPTING_NS::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~Compiler</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a79b78c49c56b981a76d0d429a23ddb5a" prot="public" virt="non-virtual" ambiguityscope="EvoScript::Compiler::"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~Compiler</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1EvoCompiler_1a17eee310493d6a969fdadd42db740511" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~EvoCompiler</name></member>
       <member refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler_1a7c8ce664820e66438f5784eff5925573" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~GlobalEvoCompiler</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::GlobalEvoCompiler</scope><name>~SingletonBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

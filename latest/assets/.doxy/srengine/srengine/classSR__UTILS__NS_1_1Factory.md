@@ -75,13 +75,16 @@ Inherits the following classes: [SR\_UTILS\_NS::BaseFactory](classSR__UTILS__NS_
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Create**](#function-create-12) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) noexcept const<br> |
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; T &gt; | [**Create**](#function-create-22) () noexcept const<br> |
 |  SR\_NODISCARD [**SRClass**](classSR__UTILS__NS_1_1SRClass.md) \* | [**CreateBase**](#function-createbase) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) noexcept const<br> |
+|  SR\_NODISCARD void | [**ForEachClassInModule**](#function-foreachclassinmodule) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) moduleName, const std::function&lt; void(const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \*)&gt; & func) noexcept const<br> |
 |  SR\_NODISCARD std::vector&lt; [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) &gt; | [**GetInheritances**](#function-getinheritances) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) baseClass) noexcept const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname-13) (const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* pMeta, bool isMustExists=true) const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname-23) (Y \* pObject, const bool isMustExists=true) const<br> |
 |  SR\_NODISCARD [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetName**](#function-getname-33) () const<br> |
 | virtual SR\_NODISCARD const [**SRClassMeta**](classSR__UTILS__NS_1_1SRClassMeta.md) \* | [**GetType**](#function-gettype) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) noexcept override const<br> |
+|  SR\_NODISCARD const TypeInfo \* | [**GetTypeInfo**](#function-gettypeinfo) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsAbstract**](#function-isabstract) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) noexcept const<br> |
-|  bool | [**Register**](#function-register) () <br> |
+|  bool | [**Register**](#function-register) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) moduleName) <br> |
+|  bool | [**Unregister**](#function-unregister) () <br> |
 
 
 ## Public Functions inherited from SR_UTILS_NS::BaseFactory
@@ -190,8 +193,24 @@ inline SR_NODISCARD SR_HTYPES_NS::SharedPtr < T > SR_UTILS_NS::Factory::Create (
 ### function CreateBase 
 
 ```C++
-inline SR_NODISCARD SRClass * SR_UTILS_NS::Factory::CreateBase (
+SR_NODISCARD SRClass * SR_UTILS_NS::Factory::CreateBase (
     SR_UTILS_NS::StringAtom name
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function ForEachClassInModule 
+
+```C++
+SR_NODISCARD void SR_UTILS_NS::Factory::ForEachClassInModule (
+    SR_UTILS_NS::StringAtom moduleName,
+    const std::function< void(const SRClassMeta *)> & func
 ) noexcept const
 ```
 
@@ -267,7 +286,7 @@ inline SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::Factory::GetName () con
 ### function GetType 
 
 ```C++
-inline virtual SR_NODISCARD const SRClassMeta * SR_UTILS_NS::Factory::GetType (
+virtual SR_NODISCARD const SRClassMeta * SR_UTILS_NS::Factory::GetType (
     SR_UTILS_NS::StringAtom name
 ) noexcept override const
 ```
@@ -275,6 +294,21 @@ inline virtual SR_NODISCARD const SRClassMeta * SR_UTILS_NS::Factory::GetType (
 
 
 Implements [*SR\_UTILS\_NS::BaseFactory::GetType*](classSR__UTILS__NS_1_1BaseFactory.md#function-gettype)
+
+
+<hr>
+
+
+
+### function GetTypeInfo 
+
+```C++
+SR_NODISCARD const TypeInfo * SR_UTILS_NS::Factory::GetTypeInfo (
+    SR_UTILS_NS::StringAtom name
+) noexcept const
+```
+
+
 
 
 <hr>
@@ -300,7 +334,23 @@ SR_NODISCARD bool SR_UTILS_NS::Factory::IsAbstract (
 
 ```C++
 template<class T>
-inline bool SR_UTILS_NS::Factory::Register () 
+bool SR_UTILS_NS::Factory::Register (
+    SR_UTILS_NS::StringAtom moduleName
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Unregister 
+
+```C++
+template<class T>
+bool SR_UTILS_NS::Factory::Unregister () 
 ```
 
 

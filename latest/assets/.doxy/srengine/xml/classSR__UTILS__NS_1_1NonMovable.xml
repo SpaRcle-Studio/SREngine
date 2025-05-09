@@ -4,10 +4,10 @@
     <compoundname>SR_UTILS_NS::NonMovable</compoundname>
     <derivedcompoundref refid="classSR__UTILS__NS_1_1ClassDB" prot="public" virt="non-virtual">SR_UTILS_NS::ClassDB</derivedcompoundref>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1NonMovable_1a25bb4f689b48fad2b2e493f9b2274c49" prot="protected" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>constexpr SR_UTILS_NS::NonMovable::NonMovable</definition>
-        <argsstring>()=default</argsstring>
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1NonMovable_1ae406899a3fa845993a32b8f1de7a6f18" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::NonMovable::NonMovable</definition>
+        <argsstring>()</argsstring>
         <name>NonMovable</name>
         <qualifiedname>SR_UTILS_NS::NonMovable::NonMovable</qualifiedname>
         <briefdescription>
@@ -16,12 +16,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="24" column="19"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="24" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1NonMovable_1ae0eaa729ca400949f6d5cf3bb94ea441" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1NonMovable_1a890edde24abfd71a81881284bf2bd561" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
         <definition>virtual SR_UTILS_NS::NonMovable::~NonMovable</definition>
-        <argsstring>()=default</argsstring>
+        <argsstring>()</argsstring>
         <name>~NonMovable</name>
         <qualifiedname>SR_UTILS_NS::NonMovable::~NonMovable</qualifiedname>
         <briefdescription>
@@ -87,10 +87,10 @@
     </inheritancegraph>
     <location file="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" line="22" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/NonCopyable.h" bodystart="22" bodyend="31"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1NonMovable_1a25bb4f689b48fad2b2e493f9b2274c49" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::NonMovable</scope><name>NonMovable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1ae406899a3fa845993a32b8f1de7a6f18" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::NonMovable</scope><name>NonMovable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonMovable_1a2d0d6428df71a6a554958c6de2fbed3b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::NonMovable</scope><name>NonMovable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonMovable_1a0e56b9081c63c4d8dcc688f7207e8bdb" prot="public" virt="virtual"><scope>SR_UTILS_NS::NonMovable</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonMovable_1ae0eaa729ca400949f6d5cf3bb94ea441" prot="protected" virt="virtual"><scope>SR_UTILS_NS::NonMovable</scope><name>~NonMovable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonMovable_1a890edde24abfd71a81881284bf2bd561" prot="protected" virt="virtual"><scope>SR_UTILS_NS::NonMovable</scope><name>~NonMovable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

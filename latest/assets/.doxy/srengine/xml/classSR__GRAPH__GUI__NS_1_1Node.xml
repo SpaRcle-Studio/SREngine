@@ -20,21 +20,6 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1afe7a74d91190edb52c7288f4722dbb2e" prot="private" static="no" mutable="no">
-        <type><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">SR_SRLM_NS::LogicalNode</ref> *</type>
-        <definition>SR_SRLM_NS::LogicalNode* SR_GRAPH_GUI_NS::Node::m_logicalNode</definition>
-        <argsstring></argsstring>
-        <name>m_logicalNode</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::m_logicalNode</qualifiedname>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="78" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="78" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Node_1a0b50c0eb1b53cbf8fb40c989b3154c55" prot="private" static="no" mutable="no">
         <type>std::string</type>
         <definition>std::string SR_GRAPH_GUI_NS::Node::m_name</definition>
@@ -171,24 +156,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="33" column="18"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a47d7e68a0621307494f83ee61d0fa1ea" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_GRAPH_GUI_NS::Node::Node</definition>
-        <argsstring>(SR_SRLM_NS::LogicalNode *pNode)</argsstring>
-        <name>Node</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::Node</qualifiedname>
-        <param>
-          <type><ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">SR_SRLM_NS::LogicalNode</ref> *</type>
-          <declname>pNode</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="34" column="18"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1ab18d29177f6b75fe1d09d48f4d89af8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_GRAPH_GUI_NS::Node::Node</definition>
@@ -308,130 +275,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="43" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a3c6574c5051ccbaf04a47810dc33f41b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
-        <definition>Node &amp; SR_GRAPH_GUI_NS::Node::AddInput</definition>
-        <argsstring>(PinType type)</argsstring>
-        <name>AddInput</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::AddInput</qualifiedname>
-        <param>
-          <type>PinType</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="45" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1aede9a4913813a76e3c3a6eac58732576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
-        <definition>Node &amp; SR_GRAPH_GUI_NS::Node::AddOutput</definition>
-        <argsstring>(PinType type)</argsstring>
-        <name>AddOutput</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::AddOutput</qualifiedname>
-        <param>
-          <type>PinType</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="46" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a874a5fc0bfc2bce18ad1cf77e05390dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
-        <definition>Node &amp; SR_GRAPH_GUI_NS::Node::AddInput</definition>
-        <argsstring>(const std::string &amp;name, PinType type)</argsstring>
-        <name>AddInput</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::AddInput</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>PinType</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="48" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1af9744386103277f765a2de090ca69e35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
-        <definition>Node &amp; SR_GRAPH_GUI_NS::Node::AddOutput</definition>
-        <argsstring>(const std::string &amp;name, PinType type)</argsstring>
-        <name>AddOutput</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::AddOutput</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>PinType</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="49" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a3442904828c3c4e276d7e3a08db9304d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
-        <definition>Node &amp; SR_GRAPH_GUI_NS::Node::AddInput</definition>
-        <argsstring>(const std::string &amp;name, SR_SRLM_NS::DataType *pDataType)</argsstring>
-        <name>AddInput</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::AddInput</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">SR_SRLM_NS::DataType</ref> *</type>
-          <declname>pDataType</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="51" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a382b31f75ca927cef03ad2bdb61c0ca1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
-        <definition>Node &amp; SR_GRAPH_GUI_NS::Node::AddOutput</definition>
-        <argsstring>(const std::string &amp;name, SR_SRLM_NS::DataType *pDataType)</argsstring>
-        <name>AddOutput</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::AddOutput</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">SR_SRLM_NS::DataType</ref> *</type>
-          <declname>pDataType</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="52" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1ac00f53fc7427c74e6b5cb97f2d7f307f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -621,20 +464,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="67" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1a97486f636424a23f187045abea61c01e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>SR_NODISCARD <ref refid="classSR__SRLM__NS_1_1LogicalNode" kindref="compound">SR_SRLM_NS::LogicalNode</ref> *</type>
-        <definition>SR_NODISCARD SR_SRLM_NS::LogicalNode * SR_GRAPH_GUI_NS::Node::GetLogicalNode</definition>
-        <argsstring>() const</argsstring>
-        <name>GetLogicalNode</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Node::GetLogicalNode</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="68" column="46" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="68" bodyend="68"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Node_1af19bac7eecd41182f4b76650db51c0f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__GUI__NS_1_1Node" kindref="compound">Node</ref> &amp;</type>
         <definition>Node &amp; SR_GRAPH_GUI_NS::Node::SetName</definition>
@@ -757,19 +586,12 @@
     <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" line="29" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h" bodystart="29" bodyend="87"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1acab81c34447f86284724c7800eb05966" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddInput</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a3c6574c5051ccbaf04a47810dc33f41b" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddInput</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a874a5fc0bfc2bce18ad1cf77e05390dd" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddInput</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a3442904828c3c4e276d7e3a08db9304d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddInput</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1acdc9aad544455cd1f9f98b32e6d85631" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddOutput</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1aede9a4913813a76e3c3a6eac58732576" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddOutput</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1af9744386103277f765a2de090ca69e35" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddOutput</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a382b31f75ca927cef03ad2bdb61c0ca1" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>AddOutput</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a94a7c853a2777e4d3fe75dc5b1955ea2" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Draw</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a8dfc82f16c2b3dd978c3bd64bbdeea46" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetHashName</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a33faed3479344c568785f53546e97e50" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetId</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ab27b1680a4d9cd949fe00b4473bff03b" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetInputPin</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a4b3248ee2b529a611934e253dfb03791" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetInputs</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a97486f636424a23f187045abea61c01e" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetLogicalNode</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a10b71c476be12a9de0c3b4754d75ccd8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetName</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a7558d7e81c897ffdf318782f4906f04a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetOutputPin</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a9a30f4cee332c80cffc1e94cd812521a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>GetOutputs</name></member>
@@ -779,18 +601,16 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a13211d868755098c511789d733631e7b" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_color</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a11c2ac2c131157f1d6fd98653261d231" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_hasOutputDelegates</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a09ba269c19262b737b32c5fe9e67d604" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_inputs</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1afe7a74d91190edb52c7288f4722dbb2e" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_logicalNode</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a6a69ff01625b70e5168144868b086de0" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_maxOutputWidth</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a0b50c0eb1b53cbf8fb40c989b3154c55" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_name</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1aea97141a61bc9b22710dea863b51e540" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_outputs</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ab8bcdf1132cd38b63600d4bc850887ae" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>m_type</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1aca07c4907c659a4d6f116058e9220ee5" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Node</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ae0227403fa4760a85bbc2de608598108" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Node</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a47d7e68a0621307494f83ee61d0fa1ea" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Node</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ab18d29177f6b75fe1d09d48f4d89af8a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Node</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a82e66422cfd7e2803919dcecb73b4382" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Node</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ae4db3a352e3d7bc6e4658373b2b07d80" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>Node</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1afec8caeed1d2763c5438d57840f88edd" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>PinType</name></member>
@@ -801,7 +621,7 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a12a5cd06de48cb60117abcd76874ebaf" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>SetPosition</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a3c59a15c73e11c657898d90721b04c7b" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>SetType</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Node_1af1721c4cd74c5c9d2cb4329ff2365f48" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>~Node</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::Node</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

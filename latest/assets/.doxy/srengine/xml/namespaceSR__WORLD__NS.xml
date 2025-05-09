@@ -75,9 +75,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="Observer_8h_1a259a176f0962867f4bb7aa16ae503841" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_DLL_EXPORT Math::IVector3</type>
-        <definition>SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::MakeChunk</definition>
+      <memberdef kind="function" id="Observer_8h_1a7a7bf8c6fcaf6c03457fce541c1e475a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API Math::IVector3</type>
+        <definition>SR_COMMON_DLL_API Math::IVector3 SR_WORLD_NS::MakeChunk</definition>
         <argsstring>(const Math::IVector3 &amp;rawChunkPos, int32_t width)</argsstring>
         <name>MakeChunk</name>
         <qualifiedname>SR_WORLD_NS::MakeChunk</qualifiedname>
@@ -95,11 +95,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="103" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="103" declcolumn="34"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="103" column="38" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="103" declcolumn="38"/>
       </memberdef>
-      <memberdef kind="function" id="Observer_8h_1a77be4f76674839c9ae483675d497376f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_DLL_EXPORT Math::Unit</type>
-        <definition>SR_DLL_EXPORT Math::Unit SR_WORLD_NS::AddOffset</definition>
+      <memberdef kind="function" id="Observer_8h_1a02f666f65e65abdc2deae276b4ad0d95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API Math::Unit</type>
+        <definition>SR_COMMON_DLL_API Math::Unit SR_WORLD_NS::AddOffset</definition>
         <argsstring>(const Math::Unit &amp;value, const Math::Unit &amp;offset)</argsstring>
         <name>AddOffset</name>
         <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
@@ -117,11 +117,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="104" column="30" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="104" declcolumn="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="104" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="104" declcolumn="34"/>
       </memberdef>
-      <memberdef kind="function" id="Observer_8h_1a1db586fe3a285da0afa4a87f78195879" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_DLL_EXPORT Math::FVector3</type>
-        <definition>SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset</definition>
+      <memberdef kind="function" id="Observer_8h_1a8e24414309ec14b398b6c8b6ba15ccc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API Math::FVector3</type>
+        <definition>SR_COMMON_DLL_API Math::FVector3 SR_WORLD_NS::AddOffset</definition>
         <argsstring>(const Math::FVector3 &amp;chunk, const Math::FVector3 &amp;offset)</argsstring>
         <name>AddOffset</name>
         <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
@@ -139,11 +139,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="105" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="105" declcolumn="34"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="105" column="38" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="105" declcolumn="38"/>
       </memberdef>
-      <memberdef kind="function" id="Observer_8h_1a216d308bfff8a7be469b4edd7e50541c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_DLL_EXPORT Math::IVector3</type>
-        <definition>SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::AddOffset</definition>
+      <memberdef kind="function" id="Observer_8h_1aa1a204f5f12c163d935338fe85efb251" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API Math::IVector3</type>
+        <definition>SR_COMMON_DLL_API Math::IVector3 SR_WORLD_NS::AddOffset</definition>
         <argsstring>(const Math::IVector3 &amp;chunk, const Math::IVector3 &amp;offset)</argsstring>
         <name>AddOffset</name>
         <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
@@ -161,11 +161,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="106" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="106" declcolumn="34"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="106" column="38" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="106" declcolumn="38"/>
       </memberdef>
-      <memberdef kind="function" id="Observer_8h_1a9fe6d4e8cb9565f888c3b0d251b312df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_DLL_EXPORT Math::FVector3</type>
-        <definition>SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset</definition>
+      <memberdef kind="function" id="Observer_8h_1ad563d87ee0c80837785a5313a97a792f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API Math::FVector3</type>
+        <definition>SR_COMMON_DLL_API Math::FVector3 SR_WORLD_NS::AddOffset</definition>
         <argsstring>(const Math::FVector3 &amp;region, const Math::IVector3 &amp;offset)</argsstring>
         <name>AddOffset</name>
         <qualifiedname>SR_WORLD_NS::AddOffset</qualifiedname>
@@ -183,13 +183,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="107" column="34" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="107" declcolumn="34"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" line="107" column="38" declfile="Engine/Core/libs/Utils/inc/Utils/World/Observer.h" declline="107" declcolumn="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/inc/Core/Engine.h" line="41" column="1"/>
+    <location file="Engine/Core/inc/Core/Engine.h" line="43" column="1"/>
   </compounddef>
 </doxygen>

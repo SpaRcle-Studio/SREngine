@@ -32,7 +32,7 @@ namespace SR_UTILS_NS {
 
     struct ResourceInfo;
 
-    class SR_DLL_EXPORT IResource : public ResourceContainer, public SubscriptionHolder {
+    class SR_COMMON_DLL_API IResource : public ResourceContainer, public SubscriptionHolder {
         friend class ResourceType;
         using Super = ResourceContainer;
         using ResourceInfoWeakPtr = std::weak_ptr<ResourceInfo>;
@@ -67,14 +67,14 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD bool IsResourceWillBeDeleted() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
-        SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
-        SR_NODISCARD bool IsDestroyed() const noexcept { return m_isDestroyed; }
+        SR_NODISCARD bool IsLoaded() const noexcept;
+        SR_NODISCARD bool IsDestroyed() const noexcept;
         SR_NODISCARD bool IsForceDestroyed() const { return m_isForceDestroyed; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
-        SR_NODISCARD uint16_t GetReloadCount() const noexcept { return m_reloadCount; }
+        SR_NODISCARD uint16_t GetReloadCount() const noexcept;
         SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
-        SR_NODISCARD SR_UTILS_NS::StringAtom GetResourceId() const noexcept { return m_resourceId; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetResourceId() const noexcept;
         SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
         SR_NODISCARD ResourceInfoWeakPtr GetResourceInfo() const noexcept { return m_resourceInfo; }

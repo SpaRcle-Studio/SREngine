@@ -42,7 +42,8 @@ namespace SR_HTYPES_NS {
     };
 
     // SR_DEPRECATED_EX("Use SharedPtr instead of this")
-    template<class T> class SR_DLL_EXPORT SafePtr {
+    // SR_COMMON_DLL_API
+    template<class T> class SafePtr {
     public:
         explicit SafePtr(const T *ptr);
         SafePtr(SafePtr const &ptr);

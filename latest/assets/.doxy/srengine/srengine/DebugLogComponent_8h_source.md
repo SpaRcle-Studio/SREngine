@@ -21,7 +21,7 @@
 #include <Utils/ECS/Transform.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT DebugLogComponent final : public Component {
+    class SR_COMMON_DLL_API DebugLogComponent final : public Component {
         SR_CLASS()
         using Super = Component;
     public:

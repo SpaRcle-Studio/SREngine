@@ -167,7 +167,6 @@
       <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>GetMetaStatic</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>HasSerializationFlags</name></member>
       <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a49ccafb9afad94a3d4ec633ee29491a6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>index</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>InitializeClass</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>Load</name></member>
       <member refid="structSR__UTILS__NS_1_1EntityRefUtils_1_1PathItem_1a2541b033982b941a7d7dcdf9b0ea0bb5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>name</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_UTILS_NS::EntityRefUtils::PathItem</scope><name>OnPostLoad</name></member>

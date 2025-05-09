@@ -70,14 +70,15 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector6**](#function-vector6-16) () <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector6**](#function-vector6-26) ([**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; vec3d1, [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; vec3d2) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector6**](#function-vector6-36) (T scalar) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector6**](#function-vector6-46) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector6**](#function-vector6-56) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec1, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec2) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector6**](#function-vector6-66) (T \_x, T \_y, T \_z, T \_w, T \_v, T \_u) <br> |
-|  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator) (const [**Vector6**](structSR__MATH__NS_1_1Vector6.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_1) (const [**Vector6**](structSR__MATH__NS_1_1Vector6.md) & p\_v) const<br> |
+|   | [**Vector6**](#function-vector6-17) () <br> |
+|   | [**Vector6**](#function-vector6-27) (T \_x, T \_y, T \_z, T \_w, T \_v, T \_u) <br> |
+|   | [**Vector6**](#function-vector6-37) (const [**Vector6**](structSR__MATH__NS_1_1Vector6.md) & p\_v) <br> |
+|   | [**Vector6**](#function-vector6-47) ([**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; vec3d1, [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; vec3d2) <br> |
+|   | [**Vector6**](#function-vector6-57) (T scalar) <br> |
+|   | [**Vector6**](#function-vector6-67) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec) <br> |
+|   | [**Vector6**](#function-vector6-77) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec1, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec2) <br> |
+|  bool | [**operator!=**](#function-operator) (const [**Vector6**](structSR__MATH__NS_1_1Vector6.md) & p\_v) const<br> |
+|  bool | [**operator==**](#function-operator_1) (const [**Vector6**](structSR__MATH__NS_1_1Vector6.md) & p\_v) const<br> |
 
 
 
@@ -282,10 +283,10 @@ T SR_MATH_NS::Vector6< T >::z;
 
 
 
-### function Vector6 [1/6]
+### function Vector6 [1/7]
 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 () 
+SR_MATH_NS::Vector6::Vector6 () 
 ```
 
 
@@ -295,74 +296,10 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 ()
 
 
 
-### function Vector6 [2/6]
+### function Vector6 [2/7]
 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 (
-    SR_MATH_NS::Vector3 < T > vec3d1,
-    SR_MATH_NS::Vector3 < T > vec3d2
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Vector6 [3/6]
-
-```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 (
-    T scalar
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Vector6 [4/6]
-
-```C++
-template<typename U>
-inline explicit SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 (
-    const Vector3 < U > & vec
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Vector6 [5/6]
-
-```C++
-template<typename U>
-inline explicit SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 (
-    const Vector3 < U > & vec1,
-    const Vector3 < U > & vec2
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Vector6 [6/6]
-
-```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 (
+SR_MATH_NS::Vector6::Vector6 (
     T _x,
     T _y,
     T _z,
@@ -379,10 +316,89 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector6::Vector6 (
 
 
 
+### function Vector6 [3/7]
+
+```C++
+SR_MATH_NS::Vector6::Vector6 (
+    const Vector6 & p_v
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Vector6 [4/7]
+
+```C++
+SR_MATH_NS::Vector6::Vector6 (
+    SR_MATH_NS::Vector3 < T > vec3d1,
+    SR_MATH_NS::Vector3 < T > vec3d2
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Vector6 [5/7]
+
+```C++
+SR_MATH_NS::Vector6::Vector6 (
+    T scalar
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Vector6 [6/7]
+
+```C++
+template<typename U>
+explicit SR_MATH_NS::Vector6::Vector6 (
+    const Vector3 < U > & vec
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Vector6 [7/7]
+
+```C++
+template<typename U>
+explicit SR_MATH_NS::Vector6::Vector6 (
+    const Vector3 < U > & vec1,
+    const Vector3 < U > & vec2
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function operator!= 
 
 ```C++
-inline SR_FORCE_INLINE bool SR_MATH_NS::Vector6::operator!= (
+bool SR_MATH_NS::Vector6::operator!= (
     const Vector6 & p_v
 ) const
 ```
@@ -397,7 +413,7 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector6::operator!= (
 ### function operator== 
 
 ```C++
-inline SR_FORCE_INLINE bool SR_MATH_NS::Vector6::operator== (
+bool SR_MATH_NS::Vector6::operator== (
     const Vector6 & p_v
 ) const
 ```

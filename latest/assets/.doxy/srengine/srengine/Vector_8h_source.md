@@ -19,7 +19,7 @@
 
 /*
 namespace SR_UTILS_NS {
-    template<typename T, class Alloc = std::allocator<T>> class SR_DLL_EXPORT Vector {
+    template<typename T, class Alloc = std::allocator<T>> class SR_COMMON_DLL_API Vector {
         using AllocType = RebindAllocT<Alloc, T>;
         using AllocTypeTraits = std::allocator_traits<AllocType>;
     public:

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="19" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6dc9bedad0df3df80fb9b4bdc0296873" prot="public" static="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__GRAPH__NS_1_1Pipeline" kindref="compound">Pipeline</ref> &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="22" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="54" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="56" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aab5b6b9c539f265beb0b86d683f7f924" prot="protected" static="no" mutable="no">
         <type>PipelinePtr</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="56" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="56" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="58" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aec3e5a7cc61a197bc507d0d26f239c04" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref></type>
@@ -77,13 +77,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="57" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="59" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="59" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aea07823cda84fd97ca230b9b9dbb3280" prot="protected" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>constexpr</type>
-        <definition>constexpr SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource</definition>
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a2674e73b6c08f0962a2036d6b37f8c0d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource</definition>
         <argsstring>()=default</argsstring>
         <name>IGraphicsResource</name>
         <qualifiedname>SR_GRAPH_NS::Memory::IGraphicsResource::IGraphicsResource</qualifiedname>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="22" column="19"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="24" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ada3d293778fe4fb07865aaf7eca8c8d9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="23" column="17"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="25" column="17"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="26" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a99a9f5fd64c904f5fee0a8c932b1c017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource" kindref="compound">IGraphicsResource</ref> &amp;</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="27" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="29" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab417478adc60452e564a0ec2ac2d7f2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="32" column="22"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="34" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6ca6f83374c1df29261ad60d1470dd26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="34" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="34" bodyend="36"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="36" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="36" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a798d0be5203c28d4754826bc95a25d82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="38" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a97892e608c168ea6f1937e19d4e6e685" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="40" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD PipelinePtr</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="42" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="42" bodyend="44"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="44" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="44" bodyend="46"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GRAPH__NS_1_1RenderContext" kindref="compound">RenderContextPtr</ref></type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="46" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="46" bodyend="48"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="48" column="39" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="48" bodyend="50"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aae869a130c9a754487b0d5dfa2bf3e38" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="50" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="50" bodyend="50"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="52" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="52" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a19797a20b2b1281e696e87082e302106" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE bool</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="51" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="51" bodyend="51"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="53" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="53" bodyend="53"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -312,13 +312,13 @@
         <link refid="classSR__HTYPES__NS_1_1SafePtr"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="17" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="17" bodyend="59"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" line="19" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h" bodystart="19" bodyend="61"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ab417478adc60452e564a0ec2ac2d7f2b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>DeInitGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a6ca6f83374c1df29261ad60d1470dd26" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>FreeVideoMemory</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ae8747567cc979bc69b84be32896e03b0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetPipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1ac6a1c5c4af59a5ad1764c67147ed6966" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>GetRenderContext</name></member>
-      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aea07823cda84fd97ca230b9b9dbb3280" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>
+      <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a2674e73b6c08f0962a2036d6b37f8c0d" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1afcc66f98c8ca1ccde9afaeb65fe6d9ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IGraphicsResource</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1aae869a130c9a754487b0d5dfa2bf3e38" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IsCalculated</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1IGraphicsResource_1a19797a20b2b1281e696e87082e302106" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::IGraphicsResource</scope><name>IsGraphicsResourceRegistered</name></member>

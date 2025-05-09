@@ -18,7 +18,7 @@
 #include <Utils/Types/Function.h>
 
 namespace SR_HTYPES_NS {
-    template<typename T> class SR_DLL_EXPORT SafeVar : public NonCopyable {
+    template<typename T> class SafeVar : public NonCopyable {
     public:
         SafeVar(const T& data);
         SafeVar() = default;
@@ -26,22 +26,17 @@ namespace SR_HTYPES_NS {
     public:
         SafeVar<T>& operator=(const T& data);
 
-        operator const T&() const noexcept { return m_data; } 
-        operator bool() const noexcept { return m_data; } 
+        operator const T&() const noexcept; 
+        operator bool() const noexcept; 
 
-        T &operator*() const noexcept { return *m_data; }
-        T operator->() const noexcept { return m_data; }
+        T &operator*() const noexcept;
+        T operator->() const noexcept;
 
-        SR_NODISCARD SR_INLINE bool operator==(const SafeVar<T> &right) const noexcept {
-            return m_data == right.m_data;
-        }
+        SR_NODISCARD bool operator==(const SafeVar<T> &right) const noexcept;
+        SR_NODISCARD bool operator!=(const SafeVar<T> &right) const noexcept;
 
-        SR_NODISCARD SR_INLINE bool operator!=(const SafeVar<T> &right) const noexcept {
-            return m_data != right.m_data;
-        }
-
-        SR_NODISCARD T& Get() noexcept { return m_data; }
-        SR_NODISCARD const T& Get() const noexcept { return m_data; }
+        SR_NODISCARD T& Get() noexcept;
+        SR_NODISCARD const T& Get() const noexcept;
 
         void Increment() noexcept;
 
@@ -62,6 +57,23 @@ namespace SR_HTYPES_NS {
         mutable std::atomic<std::thread::id> m_owner;
 
     };
+
+    template<typename T> SafeVar<T>::operator const T&() const noexcept { return m_data; } 
+    template<typename T> SafeVar<T>::operator bool() const noexcept { return m_data; } 
+
+    template<typename T> T& SafeVar<T>::operator*() const noexcept { return *m_data; }
+    template<typename T> T SafeVar<T>::operator->() const noexcept { return m_data; }
+
+    template<typename T> SR_NODISCARD bool SafeVar<T>::operator==(const SafeVar<T> &right) const noexcept {
+        return m_data == right.m_data;
+    }
+
+    template<typename T> SR_NODISCARD bool SafeVar<T>::operator!=(const SafeVar<T> &right) const noexcept {
+        return m_data != right.m_data;
+    }
+
+    template<typename T> SR_NODISCARD T& SafeVar<T>::Get() noexcept { return m_data; }
+    template<typename T> SR_NODISCARD const T& SafeVar<T>::Get() const noexcept { return m_data; }
 
     template<typename T> void SafeVar<T>::Increment() noexcept {
         RecursiveLock();

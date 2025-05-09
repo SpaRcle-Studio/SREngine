@@ -472,6 +472,7 @@
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a3ce083608ade0f294b3e74c9518fc5e3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Bake</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a5b9de280e3c5d2551629c64f620f006e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Bake</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1ab0978bce082dc9481d0bed49f57108f4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>BakedMesh</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a03e3a8639562176611a7b4a31af1a0f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Get</name></member>
@@ -492,6 +493,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a48a56f0ef077f238c59aca9c7f0d00ec" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>GetUsages</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1ae2f1926346e0cb422d52517b085f7419" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>GetVBO</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>IncrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>m_basicManually</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a41b5ca0e10c30012d9d1ac7d1d6a6e81" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>m_countIndices</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1a705992c6484ae2b3831723c3583962ab" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>m_countVertices</name></member>
@@ -525,7 +527,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1aef9d30db4c1e55731cd170a40c953c5f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Super</name></member>
@@ -534,7 +536,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1Memory_1_1BakedMesh_1aa1e10d5af32ee79fb0974432f7091963" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>~BakedMesh</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Memory::BakedMesh</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

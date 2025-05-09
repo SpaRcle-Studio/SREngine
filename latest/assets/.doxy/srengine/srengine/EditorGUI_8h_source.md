@@ -19,8 +19,8 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/ECS/SceneObject.h>
 
-#include <Scripting/Base/Script.h>
-#include <Scripting/Base/Compiler.h>
+//#include <Scripting/Base/Script.h>
+//#include <Scripting/Base/Compiler.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 

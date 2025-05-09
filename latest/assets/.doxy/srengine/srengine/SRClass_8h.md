@@ -63,11 +63,6 @@
 
 
 
-## Public Static Functions
-
-| Type | Name |
-| ---: | :--- |
-|  T \* | [**SRNew**](#function-srnew) (Args &&... args) <br> |
 
 
 
@@ -94,24 +89,6 @@
 
 
 
-## Public Static Functions Documentation
-
-
-
-
-### function SRNew 
-
-```C++
-template<class T, typename ... Args>
-static T * SRNew (
-    Args &&... args
-) 
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `Engine/Core/libs/Utils/inc/Utils/TypeTraits/SRClass.h`

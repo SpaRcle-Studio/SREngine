@@ -34,7 +34,7 @@ namespace SR_UTILS_NS {
 namespace SR_HTYPES_NS {
     class SharedPtrDynamicData;
 
-    class SR_DLL_EXPORT SharedPtrDynamicDataCounter : public Singleton<SharedPtrDynamicDataCounter> {
+    class SharedPtrDynamicDataCounter : public Singleton<SharedPtrDynamicDataCounter> {
         SR_REGISTER_SINGLETON(SharedPtrDynamicDataCounter);
     public:
         SR_NODISCARD uint64_t GetCount() const { return m_count; }
@@ -114,17 +114,19 @@ namespace SR_HTYPES_NS {
 
     };
 
-    class SR_DLL_EXPORT SharedPtrBase {
+    class SR_COMMON_DLL_API SharedPtrBase {
     public:
-        SharedPtrBase() = default;
-        explicit SharedPtrBase(SharedPtrDynamicData* data) : m_data(data) { }
-        virtual ~SharedPtrBase() = default;
+        SharedPtrBase();
+        explicit SharedPtrBase(SharedPtrDynamicData* data);
+        virtual ~SharedPtrBase();
 
     public:
-        const SharedPtrDynamicData* GetPtrData() const { return m_data; } 
-        SharedPtrDynamicData* GetPtrData() { return m_data; }
-        virtual SR_NODISCARD SRClass* GetSRClass() const = 0;
+        const SharedPtrDynamicData* GetPtrData() const; 
+        SharedPtrDynamicData* GetPtrData();
+        SR_NODISCARD virtual SRClass* GetSRClass() const = 0;
         virtual void Reset() = 0;
+        virtual void IncrementPointer() = 0;
+        virtual void DecrementPointer() = 0;
         virtual void SetPointerFromBase(SharedPtrBase* pBase) = 0;
 
     protected:
@@ -133,7 +135,7 @@ namespace SR_HTYPES_NS {
 
     };
 
-    template<class T> class SR_DLL_EXPORT SharedPtr : public SharedPtrBase {
+    template<class T> class SharedPtr : public SharedPtrBase {
     public:
         using Ptr = SharedPtr<T>;
         using SharedPointerType = T;
@@ -249,6 +251,42 @@ namespace SR_HTYPES_NS {
             return *this;
         }
 
+        void IncrementPointer() override {
+            if (m_data) {
+                m_data->IncrementStrong();
+            }
+        }
+
+        void DecrementPointer() override {
+            SharedPtrDynamicData* pData = m_data;
+
+            if (!pData) {
+                return;
+            }
+
+            SR_SAFE_PTR_ASSERT(pData->strongCount != 0, "SharedPtr is corrupted!");
+
+            if (pData->strongCount == 1) {
+                if (pData->policy == SR_UTILS_NS::SharedPtrPolicy::Manually) {
+                    SR_SAFE_PTR_ASSERT(pData->deallocated, "Ptr was not freed!");
+                }
+                else if (pData->policy == SR_UTILS_NS::SharedPtrPolicy::Automatic && pData->valid) {
+                    pData->valid = false;
+                    T* pPtr = m_ptr;
+                    m_ptr = nullptr;
+                    m_data = nullptr;
+                    delete pPtr;
+                }
+
+                if (pData->weakCount == 0) {
+                    delete pData;
+                }
+            }
+            else {
+                pData->DecrementStrong();
+            }
+        }
+
         bool Valid() const { return m_data && m_data->valid; } 
 
         SR_NODISCARD SRClass* GetSRClass() const override {
@@ -287,7 +325,7 @@ namespace SR_HTYPES_NS {
         m_ptr = ptr;
 
         if constexpr (!SR_UTILS_NS::IsCompleteTypeV<T>) {
-            SR_SAFE_PTR_ASSERT(ptr == nullptr, "Ptr is not nullptr!");
+            SR_SAFE_PTR_ASSERT(ptr == nullptr, "Ptr is not nullptr! But type is incomplete! Check includes.");
         }
         else if constexpr (SR_UTILS_NS::IsDerivedFrom<SharedPtr, T>::value) {
             if ((m_data = ptr->GetPtrData())) {

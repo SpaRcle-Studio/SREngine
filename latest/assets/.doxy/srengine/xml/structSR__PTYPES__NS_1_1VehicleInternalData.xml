@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="10" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="10" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="12" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="12" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1VehicleInternalData_1af9344efe78497e12237142247c968e52" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="11" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="11" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="13" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1VehicleInternalData_1a4c3eea5bac8d5b2b018963549d9c787c" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="12" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="14" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1VehicleInternalData_1a40bbb723265ee5f13839bb19c9598d29" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="13" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="15" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1VehicleInternalData_1ad6ea9f7f7c6b36b10d1802ff0a6725cb" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="14" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="16" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1VehicleInternalData_1af88a2a9afbcebef9b923ec1f20f7a834" prot="public" static="no" mutable="no">
         <type>float_t</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="15" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="17" column="17" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__PTYPES__NS_1_1VehicleInternalData_1a3ad99ff4d2617f16e5799df7abff9f6d" prot="public" static="no" mutable="no">
         <type>SR_MATH_NS::FVector3</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="17" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="19" column="30" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="19" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -125,7 +125,7 @@
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="9" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="9" bodyend="18"/>
+    <location file="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" line="11" column="5" bodyfile="Engine/Core/libs/Physics/inc/Physics/VehicleInternalData.h" bodystart="11" bodyend="20"/>
     <listofallmembers>
       <member refid="structSR__PTYPES__NS_1_1VehicleInternalData_1ad6ea9f7f7c6b36b10d1802ff0a6725cb" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::VehicleInternalData</scope><name>m_accuracy</name></member>
       <member refid="structSR__PTYPES__NS_1_1VehicleInternalData_1a3ad99ff4d2617f16e5799df7abff9f6d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::VehicleInternalData</scope><name>m_chassisCMOffset</name></member>

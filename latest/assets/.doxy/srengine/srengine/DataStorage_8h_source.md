@@ -20,25 +20,15 @@
 #include <Utils/Debug.h>
 
 namespace SR_HTYPES_NS {
-    class SR_DLL_EXPORT DataStorage : public NonCopyable {
+    class SR_COMMON_DLL_API DataStorage : public NonCopyable {
     public:
         using Ptr = DataStorage*;
 
-        DataStorage() = default;
-        ~DataStorage() override {
-            Clear();
-        }
+        DataStorage();
+        ~DataStorage() override;
 
-        DataStorage(DataStorage &&data) noexcept {
-            m_pointers = std::exchange(data.m_pointers, {});
-            m_values = std::exchange(data.m_values, {});
-        }
-
-        DataStorage &operator=(DataStorage &&data) noexcept {
-            m_pointers = std::exchange(data.m_pointers, {});
-            m_values = std::exchange(data.m_values, {});
-            return *this;
-        }
+        DataStorage(DataStorage &&data) noexcept;
+        DataStorage &operator=(DataStorage &&data) noexcept;
 
     public:
         template<typename T> void SetPointer(const std::string& name, T* pointer);
@@ -69,10 +59,7 @@ namespace SR_HTYPES_NS {
 
         template<typename T> std::vector<std::pair<std::string, T>> GetValues();
 
-        void Clear() {
-            m_pointers.clear();
-            m_values.clear();
-        }
+        void Clear();
 
     private:
         template<typename T> void SetPointer(uint64_t hashCode, T* pointer);

@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
     class ResourceInfo;
     class IResource;
 
-    class SR_DLL_EXPORT IResourceReloader : public SR_UTILS_NS::NonCopyable {
+    class SR_COMMON_DLL_API IResourceReloader : public SR_UTILS_NS::NonCopyable {
     public:
         SR_NODISCARD virtual bool IsResourceSuitableForReload(IResource* pResource) const;
         SR_NODISCARD virtual bool Reload(const SR_UTILS_NS::Path& path, ResourceInfo* pResourceInfo) = 0;
@@ -32,7 +32,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT DefaultResourceReloader final : public IResourceReloader {
+    class SR_COMMON_DLL_API DefaultResourceReloader final : public IResourceReloader {
     public:
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, ResourceInfo* pResourceInfo) override;
 

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="17" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="36" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1a83517e59edd7d744af608afb0a2ae049" prot="protected" static="no" mutable="no">
         <type>ImFont *</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="37" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="39" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1a89263cf3f8a80e5b5244d815f011d1aa" prot="protected" static="no" mutable="no">
         <type>ImFont *</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="38" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="40" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1aa62e33f562522c9263ec74c7df78b98e" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="40" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="42" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1af2b6737175a3b61d45fa930f1b240ab9" prot="protected" static="no" mutable="no">
         <type>float_t</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="41" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="43" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1acf71bed33b451160693a76a086a30ebb" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="43" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="45" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac7798722b0ad1637a456b0bbc5ad11e4" prot="protected" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="44" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="46" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="17" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="17" bodyend="19"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="19" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="19" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac0baff0eada4fe683541bd2a9f06a31e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="22" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="24" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1ae10700545e1c77349689168f4fd7a622" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="23" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="25" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1a9a08f77658d6c7c2e9cb78041515bc77" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="24" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="26" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1aab06dd953554f04abda13d386cb150a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ImFont *</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="26" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="26" bodyend="26"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="28" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1a7e41a01ab30c165687a590f70030692c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD ImFont *</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="27" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="27" bodyend="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="29" column="29" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="29" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1a8dee6af18f237bad8b49808a9ac42292" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="29" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1ImGuiOverlay_1a855b9a4ec2cfc575b08d5c77ef318f63" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="30" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="32" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="33" column="22"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="35" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -339,11 +339,12 @@
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="14" bodyend="46"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiOverlay.h" bodystart="16" bodyend="48"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1af85a65ce57f12ae2f386ff87534f1519" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>BeginDraw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a855b9a4ec2cfc575b08d5c77ef318f63" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>Destroy</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1a5a89233a625be99783864dd3a0d9e8be" prot="public" virt="pure-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>EndDraw</name></member>
@@ -363,6 +364,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a62a20cefd39e02b306088e37da90db9e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>ImGuiOverlay</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac0baff0eada4fe683541bd2a9f06a31e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>Init</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1ad93fbafb17b027685d36f683468f38d7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>IsEnabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1a95e321c5c5b43220012af9d3565e5ecf" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>IsSurfaceDirty</name></member>
@@ -410,7 +412,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a286f30463aaea1a3dac88473049f426e" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>Super</name></member>
@@ -418,7 +420,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>Unlock</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>Valid</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::ImGuiOverlay</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -397,7 +397,7 @@ static inline SR_NODISCARD std::string SR_UTILS_NS::StringUtils::FromCharVector 
 ### function GetBetween [1/3]
 
 ```C++
-static inline std::string SR_UTILS_NS::StringUtils::GetBetween (
+static std::string SR_UTILS_NS::StringUtils::GetBetween (
     const std::string & source,
     int64_t begin,
     uint64_t end
@@ -414,7 +414,7 @@ static inline std::string SR_UTILS_NS::StringUtils::GetBetween (
 ### function GetBetween [2/3]
 
 ```C++
-static inline std::string_view SR_UTILS_NS::StringUtils::GetBetween (
+static std::string_view SR_UTILS_NS::StringUtils::GetBetween (
     std::string_view source,
     char begin,
     char end,
@@ -432,7 +432,7 @@ static inline std::string_view SR_UTILS_NS::StringUtils::GetBetween (
 ### function GetBetween [3/3]
 
 ```C++
-static inline std::string SR_UTILS_NS::StringUtils::GetBetween (
+static std::string SR_UTILS_NS::StringUtils::GetBetween (
     const std::string & source,
     const std::string & begin,
     const std::string & end
@@ -772,7 +772,7 @@ static inline SR_NODISCARD stringType SR_UTILS_NS::StringUtils::ReplaceAll (
 ### function ReplaceAllRecursive 
 
 ```C++
-static inline SR_NODISCARD std::string SR_UTILS_NS::StringUtils::ReplaceAllRecursive (
+static SR_NODISCARD std::string SR_UTILS_NS::StringUtils::ReplaceAllRecursive (
     const std::string & original,
     const std::vector< std::string > & fromList,
     const std::string & to
@@ -872,7 +872,7 @@ static inline SR_NODISCARD float * SR_UTILS_NS::StringUtils::SplitFloats (
 ### function SplitTwo 
 
 ```C++
-static inline SR_NODISCARD std::pair< std::string, std::string > SR_UTILS_NS::StringUtils::SplitTwo (
+static SR_NODISCARD std::pair< std::string, std::string > SR_UTILS_NS::StringUtils::SplitTwo (
     std::string source,
     const std::string & delimiter
 ) 
@@ -970,7 +970,7 @@ static inline std::string SR_UTILS_NS::StringUtils::Substring (
 ### function SubstringView [1/2]
 
 ```C++
-static inline std::string_view SR_UTILS_NS::StringUtils::SubstringView (
+static std::string_view SR_UTILS_NS::StringUtils::SubstringView (
     const std::string_view & source,
     char symbol,
     uint32_t offset=0
@@ -987,7 +987,7 @@ static inline std::string_view SR_UTILS_NS::StringUtils::SubstringView (
 ### function SubstringView [2/2]
 
 ```C++
-static inline std::string_view SR_UTILS_NS::StringUtils::SubstringView (
+static std::string_view SR_UTILS_NS::StringUtils::SubstringView (
     const std::string_view & source,
     StringAtom substr,
     uint32_t offset=0

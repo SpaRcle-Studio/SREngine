@@ -21,7 +21,7 @@
 #define SR_DEL_MULTI_THREAD_PTR() { }
 
 namespace SR_HTYPES_NS {
-    template<class T> class SR_DLL_EXPORT MultiThreadPtr {
+    template<class T> class SR_COMMON_DLL_API MultiThreadPtr {
     public:
         explicit MultiThreadPtr(T *ptr);
         MultiThreadPtr(MultiThreadPtr const& ptr);

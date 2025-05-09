@@ -19,24 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="41" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="friend" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad65c08dfe4e139823932dd5f935830f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>class</type>
-        <definition>friend class Thread::Factory</definition>
-        <argsstring></argsstring>
-        <name>Thread::Factory</name>
-        <qualifiedname>SR_HTYPES_NS::Thread::Factory::Factory</qualifiedname>
-        <param>
-          <type><ref refid="classSR__HTYPES__NS_1_1Thread_1_1Factory" kindref="compound">Thread::Factory</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="90" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="38" column="26" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-attrib">
@@ -52,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="57" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="57" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="52" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -69,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="95" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="95" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="62" column="24" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad341e152e836310a9d802b30c02bd179" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Thread</ref> *</type>
@@ -84,11 +67,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="96" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="96" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="63" column="20" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="63" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a8266175a219b9402ddefa1368a36a599" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a8266175a219b9402ddefa1368a36a599" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_HTYPES_NS::Thread::Factory::Factory</definition>
         <argsstring>()</argsstring>
@@ -100,12 +83,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="43" column="13" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="43" bodyend="45"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="40" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a128a42c682f24b2afc828c527a203172" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a049c8d1bfdcb50e2fdd28e9f906fa774" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_HTYPES_NS::Thread::Factory::~Factory</definition>
-        <argsstring>() override=default</argsstring>
+        <argsstring>() override</argsstring>
         <name>~Factory</name>
         <qualifiedname>SR_HTYPES_NS::Thread::Factory::~Factory</qualifiedname>
         <briefdescription>
@@ -114,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="46" column="13"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="41" column="13"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -130,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="49" column="18"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="44" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1add7157af0d2b1f88007ff24eff82733d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -144,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="50" column="18"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="45" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a21814e8c45b606dcf33622d523ca731f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -158,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="52" column="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="47" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a246dc300ee941bd96c0a487012414ab7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -172,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="53" column="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="48" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ae8555f5cdb69090e1be967631b05f49c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -186,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="54" column="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="49" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ab821f58b44d7f2023f3efacfdfb32795" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1Thread" kindref="compound">Ptr</ref></type>
@@ -200,9 +183,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="59" column="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="54" column="30"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a465ba0d1196f11310269294edc04ba77" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a465ba0d1196f11310269294edc04ba77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Functor</type>
@@ -236,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="61" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="61" bodyend="87"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="56" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="114" bodyend="140"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -256,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="92" column="18"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="59" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -297,7 +280,7 @@
         <label>Singleton&lt; Factory &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="39" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="39" bodyend="98"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" line="36" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Types/Thread.h" bodystart="36" bodyend="65"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a465ba0d1196f11310269294edc04ba77" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Create</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ab821f58b44d7f2023f3efacfdfb32795" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>CreateEmpty</name></member>
@@ -311,9 +294,8 @@
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a9e7f2ed084204b8de3605c2fbd958231" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Remove</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ac0a3e54295d43f5f1a68c1a29ae0527b" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>SetMainThread</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1adbc148eaddd341d7ae4d07c9e9e33bfd" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Thread</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ad65c08dfe4e139823932dd5f935830f2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>Thread::Factory</name></member>
       <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1ae8555f5cdb69090e1be967631b05f49c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>TryGetThisThread</name></member>
-      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a128a42c682f24b2afc828c527a203172" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>~Factory</name></member>
+      <member refid="classSR__HTYPES__NS_1_1Thread_1_1Factory_1a049c8d1bfdcb50e2fdd28e9f906fa774" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::Thread::Factory</scope><name>~Factory</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -53,6 +53,7 @@
 | ---: | :--- |
 |  SR\_NODISCARD bool | [**Enabled**](#function-enabled-12) (const std::string & name) const<br> |
 |  SR\_NODISCARD bool | [**Enabled**](#function-enabled-22) (const std::string & name, bool def) const<br> |
+|   | [**~FeatureGroup**](#function-featuregroup) () <br> |
 
 
 
@@ -108,6 +109,19 @@ SR_NODISCARD bool SR_UTILS_NS::FeatureGroup::Enabled (
     const std::string & name,
     bool def
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function ~FeatureGroup 
+
+```C++
+SR_UTILS_NS::FeatureGroup::~FeatureGroup () 
 ```
 
 

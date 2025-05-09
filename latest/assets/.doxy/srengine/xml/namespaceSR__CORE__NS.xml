@@ -15,6 +15,7 @@
     <innerclass refid="classSR__CORE__NS_1_1PollEventsState" prot="public">SR_CORE_NS::PollEventsState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1PrepareState" prot="public">SR_CORE_NS::PrepareState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1SceneUpdateState" prot="public">SR_CORE_NS::SceneUpdateState</innerclass>
+    <innerclass refid="structSR__CORE__NS_1_1ScriptableContext" prot="public">SR_CORE_NS::ScriptableContext</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1StopState" prot="public">SR_CORE_NS::StopState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1SubmitState" prot="public">SR_CORE_NS::SubmitState</innerclass>
     <innerclass refid="classSR__CORE__NS_1_1TestManager" prot="public">SR_CORE_NS::TestManager</innerclass>
@@ -57,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/CLIManager.h" line="9" column="5" declfile="Engine/Core/inc/Core/CLIManager.h" declline="9" declcolumn="5"/>
+        <location file="Engine/Core/inc/Core/CLIManager.h" line="12" column="5" declfile="Engine/Core/inc/Core/CLIManager.h" declline="12" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__CORE__NS_1af675ea75d8844e2a4221c98f61d22f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -83,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/CLIManager.h" line="15" column="5" declfile="Engine/Core/inc/Core/CLIManager.h" declline="15" declcolumn="5"/>
+        <location file="Engine/Core/inc/Core/CLIManager.h" line="18" column="5" declfile="Engine/Core/inc/Core/CLIManager.h" declline="18" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="namespaceSR__CORE__NS_1a1b7065090cb28cddf59270370fc79aa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

@@ -32,7 +32,7 @@
     <innerfile refid="str__switch_8h">str_switch.h</innerfile>
     <innerfile refid="StringAtomLiterals_8h">StringAtomLiterals.h</innerfile>
     <innerfile refid="StringFormat_8h">StringFormat.h</innerfile>
-    <innerfile refid="StringUtils_8h">StringUtils.h</innerfile>
+    <innerfile refid="Utils_2inc_2Utils_2Common_2StringUtils_8h">StringUtils.h</innerfile>
     <innerfile refid="SubscriptionHolder_8h">SubscriptionHolder.h</innerfile>
     <innerfile refid="ThreadUtils_8h">ThreadUtils.h</innerfile>
     <innerfile refid="ToString_8h">ToString.h</innerfile>

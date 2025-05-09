@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="35" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="37" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a3534ec96ce344eaa3128b94927472555" prot="public" static="no" mutable="no">
         <type>VkDeviceSize</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="36" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="38" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a98ef06e00d7a69db014216afd14c36a0" prot="public" static="no" mutable="no">
         <type>VkPipelineCreateFlags</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="37" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="39" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a2af3979f645093148e37f9d367a4bd27" prot="public" static="no" mutable="no">
         <type>VkDescriptorSetLayout</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="38" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="40" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a33b3a4197b3261afe9317a9bc9e8ff0a" prot="public" static="no" mutable="no">
         <type>VkPipelineLayout</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="39" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="41" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a079dd2fdc945304136948495af8d1aa1" prot="public" static="no" mutable="no">
         <type>VkPipeline</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="40" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="42" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a7470b0ce7c6c571ea96bab4475331c67" prot="public" static="no" mutable="no">
         <type>VkShaderModule</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="41" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="43" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a41d144a24ea77086292786a7b1791b6c" prot="public" static="no" mutable="no">
         <type>VkShaderModule</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="42" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="44" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1ae1ae75b0c7265ed9d4de8e90fd2e4166" prot="public" static="no" mutable="no">
         <type>VkSampler</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="45" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="47" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1af8efd7d49c35cbeba76fa408798e8c5c" prot="public" static="no" mutable="no">
         <type>VkDeviceMemory</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="46" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="48" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1accbbced4e655a5cedcdd12985ff317b4" prot="public" static="no" mutable="no">
         <type>VkImage</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="47" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="49" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a742fef933abc380f1545b950cc1a8cc6" prot="public" static="no" mutable="no">
         <type>VkImageView</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="48" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="50" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1aff59d2a917dd60754f09de20913e4dc6" prot="public" static="no" mutable="no">
         <type>VkDescriptorSet</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="49" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="51" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1aab776178edf4a859c5acab080ab0c35a" prot="public" static="no" mutable="no">
         <type>VkCommandPool</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="50" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="52" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a87053135d7f327ea5fb691cd4ce58ddc" prot="public" static="no" mutable="no">
         <type>VkCommandBuffer</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="51" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="53" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a026df8403a121a5b79b8bf1db16f9fa0" prot="public" static="no" mutable="no">
         <type><ref refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers" kindref="compound">ImGui_ImplVulkanH_WindowRenderBuffers</ref></type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="54" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="56" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="56" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="56" bodyend="60"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="58" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="58" bodyend="62"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -271,7 +271,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="34" bodyend="61"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" line="35" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/ImGuiInternal.h" bodystart="36" bodyend="63"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a3534ec96ce344eaa3128b94927472555" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkan_Data</scope><name>BufferMemoryAlignment</name></member>
       <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkan__Data_1a2af3979f645093148e37f9d367a4bd27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::ImGui_ImplVulkan_Data</scope><name>DescriptorSetLayout</name></member>

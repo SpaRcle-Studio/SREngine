@@ -281,37 +281,37 @@
     </collaborationgraph>
     <location file="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" line="51" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/TaskManager/TaskManager.h" bodystart="51" bodyend="79"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>DestroySingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1ac36456c4735b93b185cbb0cc317d32f3" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>Execute</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a77f0826cecd1b75e64ecafc6bc91b0ea" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>Execute</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a3fa19e530f0d98f715239ac560ef7825" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>GetResult</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a42a35d24f8f7549aa8c4afe32930ecf2" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>GetUniqueId</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1aa3d93ee02048ba53a15a8546219a4cf0" prot="private" virt="virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>LockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a002af5a47c42e1d0c527c0e37359649c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>m_ids</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a7f11ee9466266e7972eb6621b912a7c6" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>m_isRun</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>m_mutex</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a92d026350a3830fb71fa9f1118812290" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>m_results</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1aa39bd0b7bc5dfc1d48d8eb42be179429" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>m_tasks</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a290c6146f6bac80ef7b92f3e84fbaf18" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>m_thread</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a5fbaa1a12f55e0088640958a71fc5d7b" prot="private" virt="virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>operator=</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>ScopeLockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>SingletonBase</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a9d87361b95928786f30f1ed73bb79e25" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>TaskFn</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a696650f82f353552e7be3d700d42687c" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>TaskId</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>~SingletonBase</name></member>
       <member refid="classSR__UTILS__NS_1_1TaskManager_1a69d85a09b71f7e1058ffc76907e31b9e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::TaskManager</scope><name>~TaskManager</name></member>
     </listofallmembers>
   </compounddef>

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_BASICWINDOW_IMPL_H
 #define SR_ENGINE_BASICWINDOW_IMPL_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/Function.h>
 

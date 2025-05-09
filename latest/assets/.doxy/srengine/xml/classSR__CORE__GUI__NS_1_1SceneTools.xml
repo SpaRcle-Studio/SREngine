@@ -367,7 +367,7 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1af19cbdf7545915b8da48e009896e99c8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>GetStrongStorage</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneTools_1ae0ff189809aea5606e88569d36f6585a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>GetViewMode</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a92ff8fa719f572e4a37877d1186ba6de" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>GetWeakStorage</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a2e73cf16d0d7039bd0f1416ae0e17a9b" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>IEvent</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneTools_1aee93ba2d49709a7cc1fe818bc04252fd" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>Init</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>InputHandler</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1ab9dde2f2f151ebf9d0a532437509e809" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>IsFocused</name></member>
@@ -383,7 +383,7 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a4cea7673a9a29502c407f76cf2da6550" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>m_subWidgets</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneTools_1aec85b1f8bf9624fff47e948d5022c7ce" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>m_viewMode</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a55e8701e527dd9134c8349540b951295" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>m_widgetFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aa49560b82a3fbb6982fb725e70b92ea8" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>OnClose</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneTools_1a28693a7004d8e26efac489c84b12972f" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>OnKeyDown</name></member>
@@ -418,9 +418,9 @@
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1aec9e9fb6de083548c0149a76d6ed0043" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>Widget</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainer_1a870264c407c79c9d76eaf8ffca3d3016" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>WidgetContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~Event</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~IEvent</name></member>
-      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~InputHandler</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~NonCopyable</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a24f551a86adf83d2b1059fb8a3fd7c59" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneTools</scope><name>~Widget</name></member>
     </listofallmembers>
   </compounddef>

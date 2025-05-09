@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_MESHQUICKSORT_H
 #define SR_ENGINE_MESHQUICKSORT_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
 

@@ -22,6 +22,7 @@
 | Type | Name |
 | ---: | :--- |
 | file | [**AndroidNativeAppGlue.h**](AndroidNativeAppGlue_8h.md) <br> |
+| file | [**MessageBox.h**](Utils_2inc_2Utils_2Platform_2MessageBox_8h.md) <br> |
 | file | [**Platform.h**](Platform_8h.md) <br> |
 | file | [**Stacktrace.h**](Stacktrace_8h.md) <br> |
 | file | [**XKeySymToKeyCode.h**](XKeySymToKeyCode_8h.md) <br> |

@@ -1,0 +1,543 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classEvoScript_1_1Compiler" kind="class" language="C++" prot="public">
+    <compoundname>EvoScript::Compiler</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1NonCopyable" prot="public" virt="non-virtual">SR_UTILS_NS::NonCopyable</basecompoundref>
+    <derivedcompoundref refid="classSR__SCRIPTING__NS_1_1EvoCompiler" prot="public" virt="non-virtual">SR_SCRIPTING_NS::EvoCompiler</derivedcompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1a0fc5e45b67274bc6fa3c5fa34233c98c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; EvoScript::Compiler::m_includes</definition>
+        <argsstring></argsstring>
+        <name>m_includes</name>
+        <qualifiedname>EvoScript::Compiler::m_includes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="50" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1a76845420a03a3b661431bd2eb3c31c87" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::m_compilePDB</definition>
+        <argsstring></argsstring>
+        <name>m_compilePDB</name>
+        <qualifiedname>EvoScript::Compiler::m_compilePDB</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="52" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1a4142d61a04ae3636a8d69ea533154684" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::m_multiInstances</definition>
+        <argsstring></argsstring>
+        <name>m_multiInstances</name>
+        <qualifiedname>EvoScript::Compiler::m_multiInstances</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="53" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1ae578bc8c4546b7013729d0be1a7daf49" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Compiler::m_apiVersion</definition>
+        <argsstring></argsstring>
+        <name>m_apiVersion</name>
+        <qualifiedname>EvoScript::Compiler::m_apiVersion</qualifiedname>
+        <initializer>= &quot;None&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="55" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1a6133bb9159ece73c3e95f8ce46c76c0c" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Compiler::m_cachePath</definition>
+        <argsstring></argsstring>
+        <name>m_cachePath</name>
+        <qualifiedname>EvoScript::Compiler::m_cachePath</qualifiedname>
+        <initializer>= &quot;None&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="56" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1ab1e8a119ba5b0c97e49671f2d9c3a73f" prot="private" static="no" mutable="no">
+        <type>std::recursive_mutex</type>
+        <definition>std::recursive_mutex EvoScript::Compiler::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <qualifiedname>EvoScript::Compiler::m_mutex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="58" column="30" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1a6d66b8b22fb6016b19c1573505566a5e" prot="private" static="no" mutable="no">
+        <type>ModuleCopies</type>
+        <definition>ModuleCopies EvoScript::Compiler::m_moduleCopies</definition>
+        <argsstring></argsstring>
+        <name>m_moduleCopies</name>
+        <qualifiedname>EvoScript::Compiler::m_moduleCopies</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="59" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEvoScript_1_1Compiler_1a530bef847e0bae316cc13aec9ad3d9ea" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string EvoScript::Compiler::m_compilerPath</definition>
+        <argsstring></argsstring>
+        <name>m_compilerPath</name>
+        <qualifiedname>EvoScript::Compiler::m_compilerPath</qualifiedname>
+        <initializer>= &quot;&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="61" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a6624ad51e7d034f59076b7295571ede9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EvoScript::Compiler::Compiler</definition>
+        <argsstring>(std::string cachePath)</argsstring>
+        <name>Compiler</name>
+        <qualifiedname>EvoScript::Compiler::Compiler</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>cachePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="17" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a79b78c49c56b981a76d0d429a23ddb5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EvoScript::Compiler::~Compiler</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~Compiler</name>
+        <qualifiedname>EvoScript::Compiler::~Compiler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="18" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a2cd92e173612c4aa323041fb3f5e9b75" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string EvoScript::Compiler::GetCachePath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCachePath</name>
+        <qualifiedname>EvoScript::Compiler::GetCachePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="21" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a2425362f71e3176d26742969b0ee9f45" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string EvoScript::Compiler::GetAPIVersion</definition>
+        <argsstring>() const</argsstring>
+        <name>GetAPIVersion</name>
+        <qualifiedname>EvoScript::Compiler::GetAPIVersion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="22" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a19af17b146e29bc52e2bac217d00aba9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD std::string</type>
+        <definition>SR_NODISCARD std::string EvoScript::Compiler::GetCompilerPath</definition>
+        <argsstring>() const</argsstring>
+        <name>GetCompilerPath</name>
+        <qualifiedname>EvoScript::Compiler::GetCompilerPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="24" column="34" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1aea83e3724933bf7e3f9e707f33bcb9dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EvoScript::Compiler::SetCompilerPath</definition>
+        <argsstring>(const std::string &amp;compilerPath)</argsstring>
+        <name>SetCompilerPath</name>
+        <qualifiedname>EvoScript::Compiler::SetCompilerPath</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>compilerPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="25" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a87c02afb565fbe109c5e553f6935de0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classEvoScript_1_1IState" kindref="compound">IState</ref> *</type>
+        <definition>IState * EvoScript::Compiler::AllocateState</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>AllocateState</name>
+        <qualifiedname>EvoScript::Compiler::AllocateState</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="27" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1ad5c723829927cf2c504593dee673f204" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EvoScript::Compiler::SetApiVersion</definition>
+        <argsstring>(std::string version)</argsstring>
+        <name>SetApiVersion</name>
+        <qualifiedname>EvoScript::Compiler::SetApiVersion</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>version</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a07d0afc3ef4148aea979638fe9b31d61" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EvoScript::Compiler::SetMultiInstances</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>SetMultiInstances</name>
+        <qualifiedname>EvoScript::Compiler::SetMultiInstances</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="30" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a5f5e8d05595ff1000f5bf985afb5f226" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EvoScript::Compiler::AddIncludePath</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>AddIncludePath</name>
+        <qualifiedname>EvoScript::Compiler::AddIncludePath</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="32" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a232ccce7928c38348d3e0c61dd510918" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::Compile</definition>
+        <argsstring>(Script *script)</argsstring>
+        <name>Compile</name>
+        <qualifiedname>EvoScript::Compiler::Compile</qualifiedname>
+        <param>
+          <type><ref refid="classEvoScript_1_1Script" kindref="compound">Script</ref> *</type>
+          <declname>script</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a2aeac6fa1e63a758da9c56075f51bbfa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EvoScript::Compiler::SetCompilePDB</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>SetCompilePDB</name>
+        <qualifiedname>EvoScript::Compiler::SetCompilePDB</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="36" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a59fcbb2917170965a53ad439ba709ec4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::TryLoad</definition>
+        <argsstring>(Script *script)</argsstring>
+        <name>TryLoad</name>
+        <qualifiedname>EvoScript::Compiler::TryLoad</qualifiedname>
+        <param>
+          <type><ref refid="classEvoScript_1_1Script" kindref="compound">Script</ref> *</type>
+          <declname>script</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1a7c605adf07c73848a9934db0924065d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::Load</definition>
+        <argsstring>(Script *script)</argsstring>
+        <name>Load</name>
+        <qualifiedname>EvoScript::Compiler::Load</qualifiedname>
+        <param>
+          <type><ref refid="classEvoScript_1_1Script" kindref="compound">Script</ref> *</type>
+          <declname>script</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1ad0722ae7a0fb5686b299ee9cc77fc64f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::LoadState</definition>
+        <argsstring>(IState *state)</argsstring>
+        <name>LoadState</name>
+        <qualifiedname>EvoScript::Compiler::LoadState</qualifiedname>
+        <param>
+          <type><ref refid="classEvoScript_1_1IState" kindref="compound">IState</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="41" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1aa153300ea93261b19501a7d1199834e5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::ClearModulesCache</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>ClearModulesCache</name>
+        <qualifiedname>EvoScript::Compiler::ClearModulesCache</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1ac3077ef4430e92481ef590874f825c32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t EvoScript::Compiler::FindFreeID</definition>
+        <argsstring>(const std::string &amp;pathToModule)</argsstring>
+        <name>FindFreeID</name>
+        <qualifiedname>EvoScript::Compiler::FindFreeID</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>pathToModule</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="45" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1ab577e2d13193737a6a226f3f3cbaf3d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::CheckSourceHash</definition>
+        <argsstring>(const std::string &amp;source, const std::string &amp;pathToScript, bool debug)</argsstring>
+        <name>CheckSourceHash</name>
+        <qualifiedname>EvoScript::Compiler::CheckSourceHash</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>pathToScript</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>debug</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classEvoScript_1_1Compiler_1acbd822fe02d65cded1d410da61ec126b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool EvoScript::Compiler::CheckApiHash</definition>
+        <argsstring>(const std::string &amp;pathToScript, bool debug)</argsstring>
+        <name>CheckApiHash</name>
+        <qualifiedname>EvoScript::Compiler::CheckApiHash</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>pathToScript</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>debug</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="47" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>EvoScript::Compiler</label>
+        <link refid="classEvoScript_1_1Compiler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_SCRIPTING_NS::EvoCompiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1EvoCompiler"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_SCRIPTING_NS::GlobalEvoCompiler</label>
+        <link refid="classSR__SCRIPTING__NS_1_1GlobalEvoCompiler"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>EvoScript::Compiler</label>
+        <link refid="classEvoScript_1_1Compiler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::NonCopyable</label>
+        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" line="15" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Old/Compilation/Compiler.h" bodystart="15" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classEvoScript_1_1Compiler_1a5f5e8d05595ff1000f5bf985afb5f226" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>AddIncludePath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a87c02afb565fbe109c5e553f6935de0d" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>AllocateState</name></member>
+      <member refid="classEvoScript_1_1Compiler_1acbd822fe02d65cded1d410da61ec126b" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>CheckApiHash</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ab577e2d13193737a6a226f3f3cbaf3d9" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>CheckSourceHash</name></member>
+      <member refid="classEvoScript_1_1Compiler_1aa153300ea93261b19501a7d1199834e5" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>ClearModulesCache</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a232ccce7928c38348d3e0c61dd510918" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>Compile</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a6624ad51e7d034f59076b7295571ede9" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>Compiler</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ac3077ef4430e92481ef590874f825c32" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>FindFreeID</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a2425362f71e3176d26742969b0ee9f45" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>GetAPIVersion</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a2cd92e173612c4aa323041fb3f5e9b75" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>GetCachePath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a19af17b146e29bc52e2bac217d00aba9" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>GetCompilerPath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a7c605adf07c73848a9934db0924065d4" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>Load</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ad0722ae7a0fb5686b299ee9cc77fc64f" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>LoadState</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ae578bc8c4546b7013729d0be1a7daf49" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_apiVersion</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a6133bb9159ece73c3e95f8ce46c76c0c" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_cachePath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a76845420a03a3b661431bd2eb3c31c87" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_compilePDB</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a530bef847e0bae316cc13aec9ad3d9ea" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_compilerPath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a0fc5e45b67274bc6fa3c5fa34233c98c" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_includes</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a6d66b8b22fb6016b19c1573505566a5e" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_moduleCopies</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a4142d61a04ae3636a8d69ea533154684" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_multiInstances</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ab1e8a119ba5b0c97e49671f2d9c3a73f" prot="private" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>m_mutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>EvoScript::Compiler</scope><name>operator=</name></member>
+      <member refid="classEvoScript_1_1Compiler_1ad5c723829927cf2c504593dee673f204" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>SetApiVersion</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a2aeac6fa1e63a758da9c56075f51bbfa" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>SetCompilePDB</name></member>
+      <member refid="classEvoScript_1_1Compiler_1aea83e3724933bf7e3f9e707f33bcb9dd" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>SetCompilerPath</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a07d0afc3ef4148aea979638fe9b31d61" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>SetMultiInstances</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a59fcbb2917170965a53ad439ba709ec4" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>TryLoad</name></member>
+      <member refid="classEvoScript_1_1Compiler_1a79b78c49c56b981a76d0d429a23ddb5a" prot="public" virt="non-virtual"><scope>EvoScript::Compiler</scope><name>~Compiler</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>EvoScript::Compiler</scope><name>~NonCopyable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

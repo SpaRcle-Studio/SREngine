@@ -21,7 +21,7 @@
 namespace SR_UTILS_NS {
     class CmdManager;
 
-    class SR_DLL_EXPORT ReversibleCommand : public ICommand {
+    class SR_COMMON_DLL_API ReversibleCommand : public ICommand {
         friend class CmdManager;
     public:
         ReversibleCommand() = default;
@@ -38,7 +38,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT GroupCommand : public ReversibleCommand {
+    class SR_COMMON_DLL_API GroupCommand : public ReversibleCommand {
         friend class CmdManager;
     public:
         GroupCommand(std::vector<ReversibleCommand*>&& commands);

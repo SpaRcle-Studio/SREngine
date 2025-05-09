@@ -20,7 +20,7 @@
 #include <Utils/Math/Vector3.h>
 
 namespace SR_MATH_NS {
-    template<typename T> struct SR_DLL_EXPORT Rect {
+    template<typename T> struct Rect {
     public:
         union {
             struct {
@@ -36,143 +36,187 @@ namespace SR_MATH_NS {
         };
 
     public:
-        constexpr Rect(T _x, T _y, T _w, T _h)
-            : x(_x)
-            , y(_y)
-            , w(_w)
-            , h(_h)
-        { }
-
-        constexpr Rect(const Vector2<T>& position, const Vector2<T>& size)
-            : x(position.x)
-            , y(position.y)
-            , w(size.x)
-            , h(size.y)
-        { }
-
-        constexpr Rect(const Vector2<T>& position, T width, T height)
-            : x(position.x)
-            , y(position.y)
-            , w(width)
-            , h(height)
-        { }
-
-        constexpr Rect(T x, T y, const Vector2<T>& size)
-            : x(x)
-            , y(y)
-            , w(size.x)
-            , h(size.y)
-        { }
-
-        constexpr Rect()
-            : Rect(T(), T(), T(), T())
-        { }
+        Rect(T _x, T _y, T _w, T _h);
+        Rect(const Vector2<T>& position, const Vector2<T>& size);
+        Rect(const Vector2<T>& position, T width, T height);
+        Rect(T x, T y, const Vector2<T>& size);
+        Rect();
 
     public:
-        SR_NODISCARD constexpr T X() const noexcept { return x; }
-        SR_NODISCARD constexpr T Y() const noexcept { return y; }
+        SR_NODISCARD T X() const noexcept;
+        SR_NODISCARD T Y() const noexcept;
 
-        SR_NODISCARD constexpr T Width() const noexcept { return w; }
-        SR_NODISCARD constexpr T Height() const noexcept { return h; }
+        SR_NODISCARD T Width() const noexcept;
+        SR_NODISCARD T Height() const noexcept;
 
-        SR_NODISCARD constexpr T Left() const noexcept { return x; }
-        SR_NODISCARD constexpr T Right() const noexcept { return Left() + Width(); }
+        SR_NODISCARD T Left() const noexcept;
+        SR_NODISCARD T Right() const noexcept;
 
-        SR_NODISCARD constexpr T Bottom() const noexcept { return y;  }
-        SR_NODISCARD constexpr T Top() const noexcept { return Bottom() + Height(); }
+        SR_NODISCARD T Bottom() const noexcept;
+        SR_NODISCARD T Top() const noexcept;
 
-        SR_NODISCARD constexpr SR_MATH_NS::Vector2<T> XY() const noexcept { return SR_MATH_NS::Vector2<T>(x, y); }
-        SR_NODISCARD constexpr SR_MATH_NS::Vector2<T> WH() const noexcept { return SR_MATH_NS::Vector2<T>(w, h); }
+        SR_NODISCARD SR_MATH_NS::Vector2<T> XY() const noexcept;
+        SR_NODISCARD SR_MATH_NS::Vector2<T> WH() const noexcept;
 
-        SR_NODISCARD constexpr SR_MATH_NS::Vector3<T> XY0() const noexcept { return SR_MATH_NS::Vector3<T>(x, y, 0); }
-        SR_NODISCARD constexpr SR_MATH_NS::Vector3<T> WH0() const noexcept { return SR_MATH_NS::Vector3<T>(w, h, 0); }
-        SR_NODISCARD constexpr SR_MATH_NS::Vector3<T> WH1() const noexcept { return SR_MATH_NS::Vector3<T>(w, h, 1); }
+        SR_NODISCARD SR_MATH_NS::Vector3<T> XY0() const noexcept;
+        SR_NODISCARD SR_MATH_NS::Vector3<T> WH0() const noexcept;
+        SR_NODISCARD SR_MATH_NS::Vector3<T> WH1() const noexcept;
 
-        template<typename U> SR_NODISCARD constexpr bool IsInside(const SR_MATH_NS::Vector2<U>& point) const noexcept {
-            return point.x >= static_cast<U>(x) && point.x <= static_cast<U>(x + w) &&
-                   point.y >= static_cast<U>(y) && point.y <= static_cast<U>(y + h);
-        }
-
-        SR_NODISCARD bool operator==(const Rect& other) const noexcept {
-            return SR_MATH_NS::IsEquals(x, other.x) && SR_MATH_NS::IsEquals(y, other.y) &&
-                   SR_MATH_NS::IsEquals(w, other.w) && SR_MATH_NS::IsEquals(h, other.h);
-        }
-
-        SR_NODISCARD bool operator!=(const Rect& other) const noexcept {
-            return !(*this == other);
-        }
-
-        SR_NODISCARD Rect operator+(const SR_MATH_NS::Rect<T>& other) const noexcept {
-            return Rect(x + other.x, y + other.y, w + other.w, h + other.h);
-        }
-
-        SR_NODISCARD Rect operator-(const SR_MATH_NS::Rect<T>& other) const noexcept {
-            return Rect(x - other.x, y - other.y, w - other.w, h - other.h);
-        }
-
-        SR_NODISCARD Rect operator*(const SR_MATH_NS::Rect<T>& other) const noexcept {
-            return Rect(x * other.x, y * other.y, w * other.w, h * other.h);
-        }
-
-        SR_NODISCARD Rect operator/(const SR_MATH_NS::Rect<T>& other) const noexcept {
-            return Rect(x / other.x, y / other.y, w / other.w, h / other.h);
-        }
-
-        void operator+=(const SR_MATH_NS::Rect<T>& other) noexcept {
-            x += other.x;
-            y += other.y;
-            w += other.w;
-            h += other.h;
-        }
-
-        void operator-=(const SR_MATH_NS::Rect<T>& other) noexcept {
-            x -= other.x;
-            y -= other.y;
-            w -= other.w;
-            h -= other.h;
-        }
-
-        void operator*=(const SR_MATH_NS::Rect<T>& other) noexcept {
-            x *= other.x;
-            y *= other.y;
-            w *= other.w;
-            h *= other.h;
-        }
-
-        void operator/=(const SR_MATH_NS::Rect<T>& other) noexcept {
-            x /= other.x;
-            y /= other.y;
-            w /= other.w;
-            h /= other.h;
-        }
+        template<typename U> SR_NODISCARD bool IsInside(const SR_MATH_NS::Vector2<U>& point) const noexcept;
+        SR_NODISCARD bool operator==(const Rect& other) const noexcept;
+        SR_NODISCARD bool operator!=(const Rect& other) const noexcept;
+        SR_NODISCARD Rect operator+(const SR_MATH_NS::Rect<T>& other) const noexcept;
+        SR_NODISCARD Rect operator-(const SR_MATH_NS::Rect<T>& other) const noexcept;
+        SR_NODISCARD Rect operator*(const SR_MATH_NS::Rect<T>& other) const noexcept;
+        SR_NODISCARD Rect operator/(const SR_MATH_NS::Rect<T>& other) const noexcept;
+        void operator+=(const SR_MATH_NS::Rect<T>& other) noexcept;
+        void operator-=(const SR_MATH_NS::Rect<T>& other) noexcept;
+        void operator*=(const SR_MATH_NS::Rect<T>& other) noexcept;
+        void operator/=(const SR_MATH_NS::Rect<T>& other) noexcept;
 
     public:
         SR_NODISCARD static Rect<Unit> FromTranslationAndScale(const SR_MATH_NS::FVector2& translation, const SR_MATH_NS::FVector2& scale);
 
-        SR_NODISCARD bool Contains(const SR_MATH_NS::Vector2<T>& point) const noexcept {
-            return point.x >= Left() && point.x <= Right() && point.y <= Top() && point.y >= Bottom();
-        }
-
+        SR_NODISCARD bool Contains(const SR_MATH_NS::Vector2<T>& point) const noexcept;
 
     public:
-        constexpr void SetLeft(const T& value) {
-            w -= value - x;
-            x = value;
-        }
-
-        constexpr void SetBottom(const T& value) {
-            h -= value - y;
-            y = value;
-        }
-
-        constexpr void SetRight(const T& value) {
-            w = value - x;
-        }
-
-        constexpr void SetTop(const T& value) {
-            h = value - y;
-        }
+        void SetLeft(const T& value);
+        void SetBottom(const T& value);
+        void SetRight(const T& value);
+        void SetTop(const T& value);
     };
+
+
+    template<typename T> void Rect<T>::SetLeft(const T& value) {
+        w -= value - x;
+        x = value;
+    }
+
+    template<typename T> void Rect<T>::SetBottom(const T& value) {
+        h -= value - y;
+        y = value;
+    }
+
+    template<typename T> void Rect<T>::SetRight(const T& value) {
+        w = value - x;
+    }
+
+    template<typename T> void Rect<T>::SetTop(const T& value) {
+        h = value - y;
+    }
+
+    template<typename T> bool Rect<T>::Contains(const Vector2<T> &point) const noexcept {
+        return point.x >= Left() && point.x <= Right() && point.y <= Top() && point.y >= Bottom();
+    }
+
+    template<typename T> Rect<T>::Rect(T _x, T _y, T _w, T _h)
+        : x(_x)
+        , y(_y)
+        , w(_w)
+        , h(_h)
+    { }
+
+    template<typename T> Rect<T>::Rect(const Vector2<T>& position, const Vector2<T>& size)
+        : x(position.x)
+        , y(position.y)
+        , w(size.x)
+        , h(size.y)
+    { }
+
+    template<typename T> Rect<T>::Rect(const Vector2<T>& position, T width, T height)
+        : x(position.x)
+        , y(position.y)
+        , w(width)
+        , h(height)
+    { }
+
+    template<typename T> Rect<T>::Rect(T x, T y, const Vector2<T>& size)
+        : x(x)
+        , y(y)
+        , w(size.x)
+        , h(size.y)
+    { }
+
+    template<typename T> Rect<T>::Rect()
+        : Rect(T(), T(), T(), T())
+    { }
+
+    template<typename T> SR_NODISCARD T Rect<T>::X() const noexcept { return x; }
+    template<typename T> SR_NODISCARD T Rect<T>::Y() const noexcept { return y; }
+
+    template<typename T> SR_NODISCARD T Rect<T>::Width() const noexcept { return w; }
+    template<typename T> SR_NODISCARD T Rect<T>::Height() const noexcept { return h; }
+
+    template<typename T> SR_NODISCARD T Rect<T>::Left() const noexcept { return x; }
+    template<typename T> SR_NODISCARD T Rect<T>::Right() const noexcept { return Left() + Width(); }
+
+    template<typename T> SR_NODISCARD T Rect<T>::Bottom() const noexcept { return y;  }
+    template<typename T> SR_NODISCARD T Rect<T>::Top() const noexcept { return Bottom() + Height(); }
+
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::XY() const noexcept { return SR_MATH_NS::Vector2<T>(x, y); }
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector2<T> Rect<T>::WH() const noexcept { return SR_MATH_NS::Vector2<T>(w, h); }
+
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector3<T> Rect<T>::XY0() const noexcept { return SR_MATH_NS::Vector3<T>(x, y, 0); }
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector3<T> Rect<T>::WH0() const noexcept { return SR_MATH_NS::Vector3<T>(w, h, 0); }
+    template<typename T> SR_NODISCARD SR_MATH_NS::Vector3<T> Rect<T>::WH1() const noexcept { return SR_MATH_NS::Vector3<T>(w, h, 1); }
+
+    template<typename T> template<typename U> SR_NODISCARD bool Rect<T>::IsInside(const SR_MATH_NS::Vector2<U>& point) const noexcept {
+        return point.x >= static_cast<U>(x) && point.x <= static_cast<U>(x + w) &&
+               point.y >= static_cast<U>(y) && point.y <= static_cast<U>(y + h);
+    }
+
+    template<typename T> SR_NODISCARD bool Rect<T>::operator==(const Rect& other) const noexcept {
+        return SR_MATH_NS::IsEquals(x, other.x) && SR_MATH_NS::IsEquals(y, other.y) &&
+               SR_MATH_NS::IsEquals(w, other.w) && SR_MATH_NS::IsEquals(h, other.h);
+    }
+
+    template<typename T> SR_NODISCARD bool Rect<T>::operator!=(const Rect& other) const noexcept {
+        return !(*this == other);
+    }
+
+    template<typename T> SR_NODISCARD Rect<T> Rect<T>::operator+(const SR_MATH_NS::Rect<T>& other) const noexcept {
+        return Rect(x + other.x, y + other.y, w + other.w, h + other.h);
+    }
+
+    template<typename T> SR_NODISCARD Rect<T> Rect<T>::operator-(const SR_MATH_NS::Rect<T>& other) const noexcept {
+        return Rect(x - other.x, y - other.y, w - other.w, h - other.h);
+    }
+
+    template<typename T> SR_NODISCARD Rect<T> Rect<T>::operator*(const SR_MATH_NS::Rect<T>& other) const noexcept {
+        return Rect(x * other.x, y * other.y, w * other.w, h * other.h);
+    }
+
+    template<typename T> SR_NODISCARD Rect<T> Rect<T>::operator/(const SR_MATH_NS::Rect<T>& other) const noexcept {
+        return Rect(x / other.x, y / other.y, w / other.w, h / other.h);
+    }
+
+    template<typename T> void Rect<T>::operator+=(const SR_MATH_NS::Rect<T>& other) noexcept {
+        x += other.x;
+        y += other.y;
+        w += other.w;
+        h += other.h;
+    }
+
+    template<typename T> void Rect<T>::operator-=(const SR_MATH_NS::Rect<T>& other) noexcept {
+        x -= other.x;
+        y -= other.y;
+        w -= other.w;
+        h -= other.h;
+    }
+
+    template<typename T> void Rect<T>::operator*=(const SR_MATH_NS::Rect<T>& other) noexcept {
+        x *= other.x;
+        y *= other.y;
+        w *= other.w;
+        h *= other.h;
+    }
+
+    template<typename T> void Rect<T>::operator/=(const SR_MATH_NS::Rect<T>& other) noexcept {
+        x /= other.x;
+        y /= other.y;
+        w /= other.w;
+        h /= other.h;
+    }
 
     template<typename T> Rect<Unit> Rect<T>::FromTranslationAndScale(const FVector2& translation, const FVector2& scale) {
         return Rect<Unit>(translation.x, translation.y, scale.x * 2, scale.y * 2);

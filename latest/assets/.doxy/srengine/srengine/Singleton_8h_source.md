@@ -47,40 +47,33 @@ namespace SR_UTILS_NS {
     class SingletonManager;
     template<typename T> class Singleton;
 
-    class SR_DLL_EXPORT SingletonBase : public NonCopyable  {
+    class SR_COMMON_DLL_API SingletonBase : public NonCopyable  {
         friend class SingletonManager;
     public:
-        ~SingletonBase() override = default;
+        ~SingletonBase() override;
 
     protected:
-        SingletonBase() = default;
+        SingletonBase();
 
     protected:
         virtual StringAtom GetSingletonName() const noexcept = 0;
-        virtual void OnSingletonDestroy() { }
-        virtual void InitSingleton() { }
-        virtual bool IsSingletonCanBeDestroyed() const { return true; }
+        virtual void OnSingletonDestroy();
+        virtual void InitSingleton();
+        virtual bool IsSingletonCanBeDestroyed() const;
 
     protected:
         mutable std::recursive_mutex m_mutex;
 
     };
 
-    class SR_DLL_EXPORT SingletonManager : public NonCopyable {
+    class SR_COMMON_DLL_API SingletonManager : public NonCopyable {
     public:
         void* GetSingleton(StringAtom name) noexcept;
         std::recursive_mutex& GetCreationMutex(StringAtom name);
         void DestroyAll();
         void Remove(StringAtom name);
 
-        template<typename T> void Register(Singleton<T>* pSingleton) {
-            std::lock_guard lock(m_mutex);
-            auto&& name = pSingleton->GetSingletonName();
-
-            m_singletons[name].pSingleton = (void*)pSingleton;
-            m_singletons[name].pSingletonBase = dynamic_cast<SingletonBase*>(pSingleton);
-            m_singletons[name].name = name;
-        }
+        template<typename T> void Register(Singleton<T>* pSingleton);
 
     private:
         struct SingletonInfo {
@@ -94,87 +87,111 @@ namespace SR_UTILS_NS {
 
     };
 
-    SR_DLL_EXPORT SingletonManager* GetSingletonManager() noexcept;
+    SR_COMMON_DLL_API SingletonManager* GetSingletonManager() noexcept;
 
-    template<typename T> class SR_DLL_EXPORT Singleton : public SingletonBase {
+    template<typename T> class Singleton : public SingletonBase {
     protected:
-        Singleton()
-            : SingletonBase()
-        {
-            if (GetSingleton()) {
-                std::cerr << "Singleton already exists!\n";
-                std::cerr << GetStacktrace() << std::endl;
-                SR_MAKE_BREAKPOINT;
-            }
-        }
-
+        Singleton();
         ~Singleton() override = default;
 
     public:
-        SR_MAYBE_UNUSED SR_NODISCARD static SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*> ScopeLockSingleton() {
-            return SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*>(&Instance());
-        }
+        SR_MAYBE_UNUSED static T& Instance() noexcept;
 
-        SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept {
-            return GetSingleton();
-        }
-
-        SR_MAYBE_UNUSED static void DestroySingleton() {
-            if (auto&& pSingleton = GetSingleton()) {
-                if (!pSingleton->IsSingletonCanBeDestroyed()) {
-                    return;
-                }
-
-                pSingleton->OnSingletonDestroy();
-                GetSingletonManager()->Remove(T::GetStaticSingletonName());
-                delete pSingleton;
-            }
-        }
-
-        SR_MAYBE_UNUSED static T& Instance() noexcept {
-            auto&& pSingleton = GetSingleton();
-
-            if (!pSingleton) {
-                std::lock_guard lock(GetSingletonManager()->GetCreationMutex(T::GetStaticSingletonName()));
-
-                pSingleton = GetSingleton();
-
-                if (!pSingleton) {
-                    pSingleton = new T();
-                    GetSingletonManager()->Register<T>(pSingleton);
-                    pSingleton->InitSingleton();
-                    return *static_cast<T*>(pSingleton);
-                }
-            }
-
-            return *static_cast<T*>(pSingleton);
-        }
-
-        SR_MAYBE_UNUSED static void LockSingleton() noexcept {
-            GetMutex().lock();
-        }
-
-        SR_MAYBE_UNUSED static void UnlockSingleton() noexcept {
-            if (auto&& pSingleton = GetSingleton()) {
-                pSingleton->m_mutex.unlock();
-            }
-            else {
-                std::cerr << "Singleton isn't initialized!\n";
-                std::cerr << GetStacktrace() << std::endl;
-                SR_MAKE_BREAKPOINT;
-            }
-        }
-
-        SR_MAYBE_UNUSED static std::recursive_mutex& GetMutex() noexcept {
-            return Instance().m_mutex;
-        }
+        SR_MAYBE_UNUSED SR_NODISCARD static SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*> ScopeLockSingleton();
+        SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept;
+        SR_MAYBE_UNUSED static void DestroySingleton();
+        SR_MAYBE_UNUSED static void LockSingleton() noexcept;
+        SR_MAYBE_UNUSED static void UnlockSingleton() noexcept;
+        SR_MAYBE_UNUSED static std::recursive_mutex& GetMutex() noexcept;
 
     private:
-        static Singleton<T>* GetSingleton() noexcept {
-            void* p = GetSingletonManager()->GetSingleton(T::GetStaticSingletonName());
-            return reinterpret_cast<Singleton<T>*>(p);
-        }
+        static Singleton<T>* GetSingleton() noexcept;
+
     };
+
+
+    template<typename T> Singleton<T> *Singleton<T>::GetSingleton() noexcept {
+        void* p = GetSingletonManager()->GetSingleton(T::GetStaticSingletonName());
+        return reinterpret_cast<Singleton<T>*>(p);
+    }
+
+    template<typename T> std::recursive_mutex &Singleton<T>::GetMutex() noexcept {
+        return Instance().m_mutex;
+    }
+
+    template<typename T> void Singleton<T>::UnlockSingleton() noexcept {
+        if (auto&& pSingleton = GetSingleton()) {
+            pSingleton->m_mutex.unlock();
+        }
+        else {
+            std::cerr << "Singleton isn't initialized!\n";
+            std::cerr << GetStacktrace() << std::endl;
+            SR_MAKE_BREAKPOINT;
+        }
+    }
+
+    template<typename T> void Singleton<T>::LockSingleton() noexcept {
+        GetMutex().lock();
+    }
+
+    template<typename T> T &Singleton<T>::Instance() noexcept {
+        auto&& pSingleton = GetSingleton();
+
+        if (!pSingleton) {
+            std::lock_guard lock(GetSingletonManager()->GetCreationMutex(T::GetStaticSingletonName()));
+
+            pSingleton = GetSingleton();
+
+            if (!pSingleton) {
+                pSingleton = new T();
+                GetSingletonManager()->Register<T>(pSingleton);
+                pSingleton->InitSingleton();
+                return *static_cast<T*>(pSingleton);
+            }
+        }
+
+        return *static_cast<T*>(pSingleton);
+    }
+
+    template<typename T> void Singleton<T>::DestroySingleton() {
+        if (auto&& pSingleton = GetSingleton()) {
+            if (!pSingleton->IsSingletonCanBeDestroyed()) {
+                return;
+            }
+
+            pSingleton->OnSingletonDestroy();
+            GetSingletonManager()->Remove(T::GetStaticSingletonName());
+            delete pSingleton;
+        }
+    }
+
+    template<typename T> bool Singleton<T>::IsSingletonInitialized() noexcept {
+        return GetSingleton();
+    }
+
+    template<typename T>
+    Types::SingletonRecursiveLockGuard<Singleton<T> *> Singleton<T>::ScopeLockSingleton() {
+        return SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*>(&Instance());
+    }
+
+    template<typename T> Singleton<T>::Singleton()
+        : SingletonBase()
+    {
+        if (GetSingleton()) {
+            std::cerr << "Singleton already exists!\n";
+            std::cerr << GetStacktrace() << std::endl;
+            SR_MAKE_BREAKPOINT;
+        }
+    }
+
+    template<typename T> void SingletonManager::Register(Singleton<T> *pSingleton) {
+        std::lock_guard lock(m_mutex);
+        auto&& name = pSingleton->GetSingletonName();
+
+        m_singletons[name].pSingleton = (void*)pSingleton;
+        m_singletons[name].pSingletonBase = dynamic_cast<SingletonBase*>(pSingleton);
+        m_singletons[name].name = name;
+    }
 }
 
 #endif //SR_ENGINE_SINGLETON_H

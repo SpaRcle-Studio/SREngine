@@ -142,7 +142,7 @@ namespace SR_GRAPH_NS {
         GreaterOrEqual,
         Always)
 
-    struct SR_DLL_EXPORT Uniform {
+    struct SR_RENDERER_DLL_API Uniform {
         LayoutBinding type = LayoutBinding::Unknown;
         ShaderStage stage = ShaderStage::Unknown;
         uint64_t binding = 0;
@@ -151,19 +151,19 @@ namespace SR_GRAPH_NS {
 
     typedef std::vector<Uniform> UBOInfo;
 
-    struct SR_DLL_EXPORT SRShaderPushConstant {
+    struct SR_RENDERER_DLL_API SRShaderPushConstant {
         uint64_t size = 0;
         uint64_t offset = 0;
     };
 
-    struct SR_DLL_EXPORT SRShaderStageInfo {
+    struct SR_RENDERER_DLL_API SRShaderStageInfo {
     public:
         SR_UTILS_NS::Path path;
         std::vector<SRShaderPushConstant> pushConstants;
 
     };
 
-    struct SR_DLL_EXPORT SRShaderCreateInfo {
+    struct SR_RENDERER_DLL_API SRShaderCreateInfo {
     public:
         SR_NODISCARD bool Validate() const noexcept {
             return polygonMode       != PolygonMode::Unknown

@@ -89,11 +89,12 @@
 |  SR\_NODISCARD uint64\_t | [**SizeOf**](#function-sizeof) () const<br> |
 |  const T \* | [**TryCast**](#function-trycast-12) () const<br> |
 |  T \* | [**TryCast**](#function-trycast-22) () <br> |
-|   | [**Value**](#function-value-23) () = default<br> |
+|   | [**Value**](#function-value-23) () <br> |
 |   | [**Value**](#function-value-33) (const [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & other) <br> |
 |  SR\_NODISCARD | [**operator bool**](#function-operator-bool) () noexcept const<br> |
 |  [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & | [**operator=**](#function-operator) (const [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & other) noexcept<br> |
 |  [**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & | [**operator=**](#function-operator_1) ([**Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) && other) noexcept<br> |
+|   | [**~Value**](#function-value) () <br> |
 
 
 ## Public Static Functions
@@ -628,7 +629,7 @@ inline T * SR_UTILS_NS::Reflection::Value::TryCast ()
 ### function Value [2/3]
 
 ```C++
-SR_UTILS_NS::Reflection::Value::Value () = default
+SR_UTILS_NS::Reflection::Value::Value () 
 ```
 
 
@@ -641,7 +642,7 @@ SR_UTILS_NS::Reflection::Value::Value () = default
 ### function Value [3/3]
 
 ```C++
-inline SR_UTILS_NS::Reflection::Value::Value (
+SR_UTILS_NS::Reflection::Value::Value (
     const Value & other
 ) 
 ```
@@ -669,7 +670,7 @@ SR_NODISCARD SR_UTILS_NS::Reflection::Value::operator bool () noexcept const
 ### function operator= 
 
 ```C++
-inline Value & SR_UTILS_NS::Reflection::Value::operator= (
+Value & SR_UTILS_NS::Reflection::Value::operator= (
     const Value & other
 ) noexcept
 ```
@@ -684,9 +685,22 @@ inline Value & SR_UTILS_NS::Reflection::Value::operator= (
 ### function operator= 
 
 ```C++
-inline Value & SR_UTILS_NS::Reflection::Value::operator= (
+Value & SR_UTILS_NS::Reflection::Value::operator= (
     Value && other
 ) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function ~Value 
+
+```C++
+SR_UTILS_NS::Reflection::Value::~Value () 
 ```
 
 

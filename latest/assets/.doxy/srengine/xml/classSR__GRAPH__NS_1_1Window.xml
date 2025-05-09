@@ -669,6 +669,7 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1afc0a7c91c6bc5c43dd294e4842872188" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>ClientToScreen</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a804d57f4ce2bfa02977b2398598ca20f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Close</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a6ddfd94a4af285c4ae0067b1dff267c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>CloseCallback</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a2992f0f791479ec6f391e21db7d562bb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DrawCallback</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>DynamicCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1aad6e9f0a012d94382d77d9ee110ce304" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>FocusCallback</name></member>
@@ -687,6 +688,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1ab473adb8d653616b048a67b55f53a7e9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Initialize</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a6d15bad712cb09164e6339af05ea0adb" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>IsFullScreen</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a7ccff6cbdc6a30720cb5f6b948ce612f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>IsMaximized</name></member>
@@ -735,7 +737,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1af9f26136dee904860f27155af657f6c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Super</name></member>
@@ -745,7 +747,7 @@
       <member refid="classSR__GRAPH__NS_1_1Window_1afbd9febd591d4946750a0643dd850874" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>Window</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a89638d41a2b71259a1105ab7fc63544b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>WindowHandle</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Window</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1Window_1a5342f3e70b453731f51f4eb4ae0b2ad4" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Window</scope><name>~Window</name></member>
     </listofallmembers>
   </compounddef>

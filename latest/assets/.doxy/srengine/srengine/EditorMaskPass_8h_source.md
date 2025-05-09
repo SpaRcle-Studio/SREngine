@@ -14,7 +14,7 @@
 
 #ifndef SR_ENGINE_EDITORMASKPASS_H
 #define SR_ENGINE_EDITORMASKPASS_H
-
+//TODO: Это что?? Может надо убрать???
 #endif //SR_ENGINE_EDITORMASKPASS_H
 ```
 

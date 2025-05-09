@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="36" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="38" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IColorBufferPass_1af081e02dad11b408e567babaf982fc95" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="37" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="39" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1IColorBufferPass_1aeb69362397cb7aa937c0f43fad2a7f0f" prot="private" static="no" mutable="no">
         <type>uint32_t</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="38" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="40" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="19" column="56"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="21" column="56"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a2aac9e3be17fc169b907faee19b91095" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="21" column="41"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="23" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a7d835f132fb3d0f228b286d4ec853024" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__GTYPES__NS_1_1Mesh" kindref="compound">SR_GTYPES_NS::Mesh</ref> *</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="22" column="41"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="24" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a6ea4f557fe4fb26b980fded60ab3257a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="23" column="41"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="25" column="41"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1aa178dd891387862bd92326831babb453" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="24" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="26" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a7c72eb10ce46fbcbee1b86d490bc66bf" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="25" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="27" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a21f6cab7b3f8146d6879625b60d03d07" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="26" column="43"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="28" column="43"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="29" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a091ed9638d7ef847cbbfd7ada5e2bbd5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="30" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a53e5ad748d00a1ae5853991d491839a2" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -223,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="31" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1a28bb1904478ef26ca3dc5b38e3361db9" prot="protected" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="32" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="32" bodyend="32"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="34" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="34" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1IColorBufferPass_1adb0b4f098607c3822bb87755e8c0330b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="33" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="33" bodyend="33"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="35" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="35" bodyend="35"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -274,7 +274,7 @@
         <link refid="classSR__GRAPH__NS_1_1IColorBufferPass"/>
       </node>
     </inheritancegraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="17" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="17" bodyend="40"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" line="19" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Pass/IColorBufferPass.h" bodystart="19" bodyend="42"/>
     <listofallmembers>
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1aa6b97beb22a75bab5a73a74c9ae24180" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::IColorBufferPass</scope><name>ClearTable</name></member>
       <member refid="classSR__GRAPH__NS_1_1IColorBufferPass_1a6ea4f557fe4fb26b980fded60ab3257a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::IColorBufferPass</scope><name>GetColor</name></member>

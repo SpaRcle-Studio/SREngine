@@ -38,6 +38,7 @@
 |  AllocatorT | [**allocator**](#variable-allocator)  <br> |
 |  bool | [**isAbstract**](#variable-isabstract)   = `false`<br> |
 |  MetaGetterT | [**metaGetter**](#variable-metagetter)   = `nullptr`<br> |
+|  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**moduleName**](#variable-modulename)  <br> |
 |  uint64\_t | [**version**](#variable-version)   = `0`<br> |
 
 
@@ -118,6 +119,19 @@ bool SR_UTILS_NS::Factory::TypeInfo::isAbstract;
 
 ```C++
 MetaGetterT SR_UTILS_NS::Factory::TypeInfo::metaGetter;
+```
+
+
+
+
+<hr>
+
+
+
+### variable moduleName 
+
+```C++
+SR_UTILS_NS::StringAtom SR_UTILS_NS::Factory::TypeInfo::moduleName;
 ```
 
 

@@ -2,11 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="IWaveDataProvider_8h" kind="file" language="C++">
     <compoundname>IWaveDataProvider.h</compoundname>
-    <includes refid="macros_8h" local="no">Utils/macros.h</includes>
+    <includes refid="Utils_2inc_2Utils_2macros_8h" local="no">Utils/macros.h</includes>
     <includedby refid="MP3DataProvider_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Decoders/MP3DataProvider.h</includedby>
     <includedby refid="ModPlugDataProvider_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Decoders/ModPlugDataProvider.h</includedby>
     <includedby refid="WAVDataProvider_8h" local="no">Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h</includedby>
-    <includedby refid="RawSound_8h" local="no">Engine/Core/libs/Audio/inc/Audio/RawSound.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>Engine/Core/libs/Audio/inc/Audio/Decoders/IWaveDataProvider.h</label>
@@ -14,9 +13,20 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
+      <node id="4">
+        <label>Utils/Memory/Allocator.h</label>
+        <link refid="Allocator_8h_source"/>
+      </node>
       <node id="2">
         <label>Utils/macros.h</label>
-        <link refid="macros_8h_source"/>
+        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cstdlib</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -28,8 +38,6 @@
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -43,10 +51,6 @@
       <node id="4">
         <label>Engine/Core/libs/Audio/inc/Audio/Decoders/WAVDataProvider.h</label>
         <link refid="WAVDataProvider_8h_source"/>
-      </node>
-      <node id="5">
-        <label>Engine/Core/libs/Audio/inc/Audio/RawSound.h</label>
-        <link refid="RawSound_8h_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classSR__AUDIO__NS_1_1WaveDataFormat" prot="public">SR_AUDIO_NS::WaveDataFormat</innerclass>

@@ -124,6 +124,13 @@
 
 | Type | Name |
 | ---: | :--- |
+|  uint32\_t | [**BGRToHEX**](#function-bgrtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
+|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**BuildPlan**](#function-buildplan) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & point, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & normal) <br> |
+|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**BuildPlan**](#function-buildplan) (const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & point, const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & p\_normal) <br> |
+|  SR\_MAYBE\_UNUSED [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
+|  SR\_MAYBE\_UNUSED [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
+|  SR\_MAYBE\_UNUSED [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcTranslationPlanNormal**](#function-calctranslationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraEye, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
+|  SR\_MAYBE\_UNUSED bool | [**DecomposeTransform**](#function-decomposetransform) (const glm::mat4 & matrix, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & rotation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMMultiplyMat4x4**](#function-glmmultiplymat4x4) (glm::mat4 & result, const glm::mat4 & m1, const glm::mat4 & m2) noexcept<br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMMultiplyMat4x4**](#function-glmmultiplymat4x4) (glm::mat4 & result, const glm::mat4 & m1, const glm::mat3 & m2) noexcept<br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC glm::mat4 SR\_FASTCALL | [**GLMMultiplyMat4x4**](#function-glmmultiplymat4x4) (const glm::mat4 & m1, const glm::mat4 & m2) noexcept<br> |
@@ -132,6 +139,8 @@
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMScaleMat4x4**](#function-glmscalemat4x4) (glm::mat4 & matrix, const SR\_MATH\_NS::FVector3 & v) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMTranslateMat4x4**](#function-glmtranslatemat4x4) (glm::mat4 & matrix, const glm::vec3 & v) <br> |
 |  SR\_INLINE\_STATIC void SR\_FASTCALL | [**GLMTranslateMat4x4**](#function-glmtranslatemat4x4) (glm::mat4 & matrix, const SR\_MATH\_NS::FVector3 & v) <br> |
+|  [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToBGR**](#function-hextobgr) (uint32\_t hex) <br> |
+|  [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToRGB**](#function-hextorgb) (uint32\_t hex) <br> |
 |  constexpr bool | [**IsBool**](#function-isbool) () <br> |
 |  constexpr bool | [**IsFloat**](#function-isfloat) () <br> |
 |  constexpr bool | [**IsInt**](#function-isint) () <br> |
@@ -139,6 +148,7 @@
 |  double\_t | [**NoiseTemplate**](#function-noisetemplate) (T\_IndexFunc idxfunc, double\_t x, double\_t y) <br> |
 |  double\_t | [**NoiseTemplate**](#function-noisetemplate) (T\_IndexFunc idxfunc, double\_t x, double\_t y, double\_t z) <br> |
 |  double\_t | [**NoiseTemplate**](#function-noisetemplate) (T\_IndexFunc idxfunc, double\_t x, double\_t y, double\_t z, double\_t t) <br> |
+|  uint32\_t | [**RGBToHEX**](#function-rgbtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
 |  double\_t | [**SNoise**](#function-snoise) (double\_t x, double\_t y) <br> |
 |  double\_t | [**SNoise**](#function-snoise) (double\_t x, double\_t y, double\_t z) <br> |
 |  double\_t | [**SNoise**](#function-snoise) (double\_t x, double\_t y, double\_t z, double\_t t) <br> |
@@ -151,16 +161,7 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD static SR\_FORCE\_INLINE constexpr T | [**Abs**](#function-abs) (T value) <br> |
-|  constexpr uint32\_t | [**BGRToHEX**](#function-bgrtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
-|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**BuildPlan**](#function-buildplan) (const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & point, const [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & normal) <br> |
-|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**BuildPlan**](#function-buildplan) (const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & point, const [**FVector4**](structSR__MATH__NS_1_1Vector4.md) & p\_normal) <br> |
-|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
-|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcRotationPlanNormal**](#function-calcrotationplannormal) (const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
-|  [**FVector4**](structSR__MATH__NS_1_1Vector4.md) | [**CalcTranslationPlanNormal**](#function-calctranslationplannormal) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & model, const SR\_MATH\_NS::FVector3 & cameraEye, const SR\_MATH\_NS::FVector3 & cameraDir, Axis axis) <br> |
-|  bool | [**DecomposeTransform**](#function-decomposetransform) (const glm::mat4 & matrix, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & translation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & rotation, [**FVector3**](structSR__MATH__NS_1_1Vector3.md) & scale) <br> |
 |  SR\_FORCE\_INLINE double\_t SR\_FASTCALL | [**FastSqrt**](#function-fastsqrt) (double\_t value) <br> |
-|  constexpr [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToBGR**](#function-hextobgr) (uint32\_t hex) <br> |
-|  constexpr [**IVector3**](structSR__MATH__NS_1_1Vector3.md) | [**HEXToRGB**](#function-hextorgb) (uint32\_t hex) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsAnyMaskIncludedSubMask**](#function-isanymaskincludedsubmask) (MaskLeft mask, std::initializer\_list&lt; MakeRight &gt; subMasks) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsEquals**](#function-isequals) (const T & a, const Y & b) noexcept<br> |
 |  SR\_FORCE\_INLINE bool | [**IsEquals**](#function-isequals) (const T & a, const Y & b, const Z & tolerance) noexcept<br> |
@@ -168,7 +169,6 @@
 |  SR\_FORCE\_INLINE bool | [**IsMaskIncludedSubMask**](#function-ismaskincludedsubmask) (MaskLeft mask, MakeRight subMask) <br> |
 |  SR\_FORCE\_INLINE bool | [**IsNumber**](#function-isnumber) (std::string\_view str) <br> |
 |  SR\_FORCE\_INLINE double\_t | [**Lerp**](#function-lerp) (double\_t t, double\_t a, double\_t b) <br> |
-|  constexpr uint32\_t | [**RGBToHEX**](#function-rgbtohex) (const [**IVector3**](structSR__MATH__NS_1_1Vector3.md) & color) <br> |
 |  SR\_FORCE\_INLINE Unit | [**Sign**](#function-sign) (Unit value) <br> |
 |  uint8\_t | [**TableIndex2D**](#function-tableindex2d) (int32\_t ix, int32\_t iy) <br> |
 |  uint8\_t | [**TableIndex3D**](#function-tableindex3d) (int32\_t ix, int32\_t iy, int32\_t iz) <br> |
@@ -731,6 +731,122 @@ const Quaternion SR_MATH_NS::InfinityQuaternion;
 
 
 
+### function BGRToHEX 
+
+```C++
+uint32_t SR_MATH_NS::BGRToHEX (
+    const IVector3 & color
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function BuildPlan 
+
+```C++
+FVector4 SR_MATH_NS::BuildPlan (
+    const FVector3 & point,
+    const FVector3 & normal
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function BuildPlan 
+
+```C++
+FVector4 SR_MATH_NS::BuildPlan (
+    const FVector4 & point,
+    const FVector4 & p_normal
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function CalcRotationPlanNormal 
+
+```C++
+SR_MAYBE_UNUSED FVector4 SR_MATH_NS::CalcRotationPlanNormal (
+    const Matrix4x4 & model,
+    const SR_MATH_NS::FVector3 & cameraDir,
+    Axis axis
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function CalcRotationPlanNormal 
+
+```C++
+SR_MAYBE_UNUSED FVector4 SR_MATH_NS::CalcRotationPlanNormal (
+    const SR_MATH_NS::FVector3 & cameraDir,
+    Axis axis
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function CalcTranslationPlanNormal 
+
+```C++
+SR_MAYBE_UNUSED FVector4 SR_MATH_NS::CalcTranslationPlanNormal (
+    const Matrix4x4 & model,
+    const SR_MATH_NS::FVector3 & cameraEye,
+    const SR_MATH_NS::FVector3 & cameraDir,
+    Axis axis
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function DecomposeTransform 
+
+```C++
+SR_MAYBE_UNUSED bool SR_MATH_NS::DecomposeTransform (
+    const glm::mat4 & matrix,
+    FVector3 & translation,
+    FVector3 & rotation,
+    FVector3 & scale
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function GLMMultiplyMat4x4 
 
 ```C++
@@ -861,6 +977,36 @@ SR_INLINE_STATIC void SR_FASTCALL SR_MATH_NS::GLMTranslateMat4x4 (
 
 
 
+### function HEXToBGR 
+
+```C++
+IVector3 SR_MATH_NS::HEXToBGR (
+    uint32_t hex
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function HEXToRGB 
+
+```C++
+IVector3 SR_MATH_NS::HEXToRGB (
+    uint32_t hex
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function IsBool 
 
 ```C++
@@ -964,6 +1110,21 @@ double_t SR_MATH_NS::NoiseTemplate (
     double_t y,
     double_t z,
     double_t t
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function RGBToHEX 
+
+```C++
+uint32_t SR_MATH_NS::RGBToHEX (
+    const IVector3 & color
 ) 
 ```
 
@@ -1085,157 +1246,11 @@ static SR_NODISCARD static SR_FORCE_INLINE constexpr T SR_MATH_NS::Abs (
 
 
 
-### function BGRToHEX 
-
-```C++
-static constexpr uint32_t SR_MATH_NS::BGRToHEX (
-    const IVector3 & color
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function BuildPlan 
-
-```C++
-static FVector4 SR_MATH_NS::BuildPlan (
-    const FVector3 & point,
-    const FVector3 & normal
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function BuildPlan 
-
-```C++
-static FVector4 SR_MATH_NS::BuildPlan (
-    const FVector4 & point,
-    const FVector4 & p_normal
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function CalcRotationPlanNormal 
-
-```C++
-static FVector4 SR_MATH_NS::CalcRotationPlanNormal (
-    const Matrix4x4 & model,
-    const SR_MATH_NS::FVector3 & cameraDir,
-    Axis axis
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function CalcRotationPlanNormal 
-
-```C++
-static FVector4 SR_MATH_NS::CalcRotationPlanNormal (
-    const SR_MATH_NS::FVector3 & cameraDir,
-    Axis axis
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function CalcTranslationPlanNormal 
-
-```C++
-static FVector4 SR_MATH_NS::CalcTranslationPlanNormal (
-    const Matrix4x4 & model,
-    const SR_MATH_NS::FVector3 & cameraEye,
-    const SR_MATH_NS::FVector3 & cameraDir,
-    Axis axis
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DecomposeTransform 
-
-```C++
-static bool SR_MATH_NS::DecomposeTransform (
-    const glm::mat4 & matrix,
-    FVector3 & translation,
-    FVector3 & rotation,
-    FVector3 & scale
-) 
-```
-
-
-
-
-<hr>
-
-
-
 ### function FastSqrt 
 
 ```C++
 static SR_FORCE_INLINE double_t SR_FASTCALL SR_MATH_NS::FastSqrt (
     double_t value
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function HEXToBGR 
-
-```C++
-static constexpr IVector3 SR_MATH_NS::HEXToBGR (
-    uint32_t hex
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function HEXToRGB 
-
-```C++
-static constexpr IVector3 SR_MATH_NS::HEXToRGB (
-    uint32_t hex
 ) 
 ```
 
@@ -1352,21 +1367,6 @@ static SR_FORCE_INLINE double_t SR_MATH_NS::Lerp (
     double_t t,
     double_t a,
     double_t b
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function RGBToHEX 
-
-```C++
-static constexpr uint32_t SR_MATH_NS::RGBToHEX (
-    const IVector3 & color
 ) 
 ```
 

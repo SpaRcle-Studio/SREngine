@@ -444,6 +444,7 @@
       <member refid="classSR__NETWORK__NS_1_1AsioICMPSocket_1a763f93cc765f613c347f42523657d134" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Bind</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioICMPSocket_1ae9a5e23562f66176483d6868570d494b" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Close</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioICMPSocket_1a070ae81a0d89a962dea559c1fe518fd6" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Connect</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Get</name></member>
@@ -464,6 +465,7 @@
       <member refid="classSR__NETWORK__NS_1_1Socket_1ae14cb0800b4213d9bf1b0b2c0f6ea994" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>GetType</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>IncrementPointer</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioICMPSocket_1a03b6c1ad24050d551bca742c70472448" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>IsOpen</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a856b84796c861b03e9808171be3d00f8" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>IsReceiveRepeated</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioICMPSocket_1a63bc44d30228c5249b3668da66151a76" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Listen</name></member>
@@ -506,7 +508,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a55e6b26a43d61ce395dbfa08b04e06bb" prot="protected" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Socket</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>StaticCast</name></member>
@@ -516,7 +518,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>Valid</name></member>
       <member refid="classSR__NETWORK__NS_1_1AsioICMPSocket_1a908929feafa616987f9ae73e0a5119db" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>~AsioICMPSocket</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__NETWORK__NS_1_1Socket_1a905725f102756695a727036015d81972" prot="public" virt="virtual"><scope>SR_NETWORK_NS::AsioICMPSocket</scope><name>~Socket</name></member>
     </listofallmembers>
   </compounddef>

@@ -20,7 +20,7 @@
 <codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Region;</highlight></codeline>
 <codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Chunk;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12" refid="classSR__WORLD__NS_1_1WorldGen" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SR_DLL_EXPORT<sp/><ref refid="classSR__WORLD__NS_1_1WorldGen" kindref="compound">WorldGen</ref><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="classSR__WORLD__NS_1_1WorldGen" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SR_COMMON_DLL_API<sp/><ref refid="classSR__WORLD__NS_1_1WorldGen" kindref="compound">WorldGen</ref><sp/>{</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="15"><highlight class="normal">}</highlight></codeline>

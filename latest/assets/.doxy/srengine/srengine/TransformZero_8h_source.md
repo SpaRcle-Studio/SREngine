@@ -20,7 +20,7 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
-    class SR_DLL_EXPORT TransformZero : public Transform {
+    class SR_COMMON_DLL_API TransformZero : public Transform {
         SR_CLASS()
         friend class GameObject;
     public:
@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT TransformHolder : public Transform {
+    class SR_COMMON_DLL_API TransformHolder : public Transform {
         SR_CLASS()
         friend class GameObject;
     public:

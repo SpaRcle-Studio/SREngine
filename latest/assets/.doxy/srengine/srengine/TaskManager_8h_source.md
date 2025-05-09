@@ -21,7 +21,7 @@
 #include <Utils/Types/Function.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT Task : public NonCopyable {
+    class SR_COMMON_DLL_API Task : public NonCopyable {
     public:
         enum class State {
             Unknown, Waiting, Launched, Stopped, Completed, Failed
@@ -57,7 +57,7 @@ namespace SR_UTILS_NS {
 
     };
 
-    class SR_DLL_EXPORT TaskManager : public Singleton<TaskManager> {
+    class SR_COMMON_DLL_API TaskManager : public Singleton<TaskManager> {
         SR_REGISTER_SINGLETON(TaskManager)
         using TaskFn = SR_HTYPES_NS::Function<void(std::atomic<Task::State>*)>;
         using TaskId = uint64_t;

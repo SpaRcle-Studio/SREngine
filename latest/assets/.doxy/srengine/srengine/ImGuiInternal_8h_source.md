@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_IMGUI_INTERNAL_H
 #define SR_ENGINE_GRAPHICS_IMGUI_INTERNAL_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/stdInclude.h>
 
 namespace SR_GRAPH_NS {

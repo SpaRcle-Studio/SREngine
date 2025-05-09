@@ -20,7 +20,7 @@
 #include <Utils/Common/StringFormat.h>
 
 namespace SR_HTYPES_NS {
-    template<typename T, typename Index = uint64_t> class ObjectPool : SR_UTILS_NS::NonCopyable {
+    template<typename T, typename Index = uint64_t> class ObjectPool : public SR_UTILS_NS::NonCopyable {
     public:
         ObjectPool() = default;
 

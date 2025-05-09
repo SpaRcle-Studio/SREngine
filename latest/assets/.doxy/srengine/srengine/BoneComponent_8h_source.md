@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_BONECOMPONENT_H
 #define SR_ENGINE_BONECOMPONENT_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/Component.h>
 

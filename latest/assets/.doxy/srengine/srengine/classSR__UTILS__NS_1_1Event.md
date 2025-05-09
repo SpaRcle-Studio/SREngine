@@ -141,8 +141,8 @@ See [SR\_UTILS\_NS::IEvent](classSR__UTILS__NS_1_1IEvent.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () = default<br> |
-| virtual  | [**~IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () = default<br> |
+|   | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () <br> |
+| virtual  | [**~IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () <br> |
 
 
 

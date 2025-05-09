@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_IMNODEEDITORUTILS_H
 #define SR_ENGINE_IMNODEEDITORUTILS_H
 
+#include <Graphics/macros.h>
+
 #ifdef SR_USE_IMGUI_NODE_EDITOR
     #include <imgui-node-editor/imgui_node_editor.h>
 #endif

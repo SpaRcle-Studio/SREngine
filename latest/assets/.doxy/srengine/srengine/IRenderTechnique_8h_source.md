@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_I_RENDER_TECHNIQUE_H
 #define SR_ENGINE_GRAPHICS_I_RENDER_TECHNIQUE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Settings.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/SafePointer.h>

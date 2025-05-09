@@ -11,6 +11,13 @@
 
 
 * `#include <Utils/macros.h>`
+* `#include <string>`
+* `#include <array>`
+* `#include <map>`
+* `#include <vector>`
+* `#include <cstdint>`
+* `#include <set>`
+* `#include <optional>`
 * `#include <cfloat>`
 * `#include <span>`
 * `#include <limits>`
@@ -31,29 +38,22 @@
 * `#include <locale>`
 * `#include <cstring>`
 * `#include <variant>`
-* `#include <optional>`
 * `#include <memory>`
 * `#include <fstream>`
-* `#include <vector>`
 * `#include <ostream>`
 * `#include <queue>`
 * `#include <mutex>`
-* `#include <string>`
 * `#include <cassert>`
 * `#include <cmath>`
 * `#include <ranges>`
 * `#include <atomic>`
 * `#include <utility>`
-* `#include <array>`
-* `#include <map>`
 * `#include <functional>`
-* `#include <set>`
 * `#include <exception>`
 * `#include <unordered_map>`
 * `#include <algorithm>`
 * `#include <any>`
 * `#include <thread>`
-* `#include <cstdlib>`
 * `#include <sstream>`
 * `#include <list>`
 * `#include <ctime>`
@@ -61,13 +61,15 @@
 * `#include <ratio>`
 * `#include <chrono>`
 * `#include <random>`
-* `#include <cstdint>`
 * `#include <iomanip>`
 * `#include <concepts>`
 * `#include <condition_variable>`
 * `#include <numeric>`
 * `#include <numbers>`
 * `#include <zlib.h>`
+* `#include <fmt/format.h>`
+* `#include <fmt/printf.h>`
+* `#include <fmt/color.h>`
 
 
 

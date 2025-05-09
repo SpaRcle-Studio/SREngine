@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_MESHTYPES_H
 #define SR_ENGINE_MESHTYPES_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_GRAPH_NS {

@@ -20,7 +20,7 @@
 namespace SR_WORLD_NS {
     class Scene;
 
-    class SR_DLL_EXPORT SceneAllocator : public SR_UTILS_NS::Singleton<SceneAllocator> {
+    class SR_COMMON_DLL_API SceneAllocator : public SR_UTILS_NS::Singleton<SceneAllocator> {
         SR_REGISTER_SINGLETON(SceneAllocator)
         using ScenePtr = SR_HTYPES_NS::SharedPtr<Scene>;
         typedef std::function<ScenePtr(void)> Allocator;

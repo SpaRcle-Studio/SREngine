@@ -14,7 +14,7 @@
 
 #ifndef SR_ENGINE_OBJLOADER_H
 #define SR_ENGINE_OBJLOADER_H
-
+//TODO: Тоже заброшено и забыто, как понимаю
 /*
 #include <string>
 #include <vector>

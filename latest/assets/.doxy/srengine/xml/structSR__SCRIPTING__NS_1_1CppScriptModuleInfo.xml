@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo" kind="struct" language="C++" prot="public">
+    <compoundname>SR_SCRIPTING_NS::CppScriptModuleInfo</compoundname>
+    <basecompoundref refid="classSR__UTILS__NS_1_1Serializable" prot="public" virt="non-virtual">SR_UTILS_NS::Serializable</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a446658f19ce389b7540706ec8b1a3ff8" prot="public" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+        <definition>SR_UTILS_NS::StringAtom SR_SCRIPTING_NS::CppScriptModuleInfo::moduleName</definition>
+        <argsstring></argsstring>
+        <name>moduleName</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppScriptModuleInfo::moduleName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" line="21" column="33" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a50524083e3612a2d052144bdb88955f7" prot="public" static="no" mutable="no">
+        <type>ScriptLinkMode</type>
+        <definition>ScriptLinkMode SR_SCRIPTING_NS::CppScriptModuleInfo::linkMode</definition>
+        <argsstring></argsstring>
+        <name>linkMode</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppScriptModuleInfo::linkMode</qualifiedname>
+        <initializer>= ScriptLinkMode::Unknown</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" line="23" column="24" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a45b4e72ca7f814bf92a3469338c9521a" prot="public" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt;</type>
+        <definition>std::set&lt;SR_UTILS_NS::StringAtom&gt; SR_SCRIPTING_NS::CppScriptModuleInfo::dependencies</definition>
+        <argsstring></argsstring>
+        <name>dependencies</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppScriptModuleInfo::dependencies</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" line="25" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a6d902c6aafd916b6a9d8b63cd0b856e3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::CppScriptModuleInfo::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>SR_SCRIPTING_NS::CppScriptModuleInfo::enabled</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" line="27" column="14" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::CppScriptModuleInfo</label>
+        <link refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::CppScriptModuleInfo</label>
+        <link refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>moduleName</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_UTILS_NS::SRClass</label>
+        <link refid="classSR__UTILS__NS_1_1SRClass"/>
+      </node>
+      <node id="2">
+        <label>SR_UTILS_NS::Serializable</label>
+        <link refid="classSR__UTILS__NS_1_1Serializable"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_UTILS_NS::StringAtom</label>
+        <link refid="classSR__UTILS__NS_1_1StringAtom"/>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" line="17" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ScriptModuleInfo.h" bodystart="17" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a07406a96567ac2874737bd53df6b1f66" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>AddSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a9beaff0437af793af9cf20bb0bcefcc0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>AllocateStatic</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a45b4e72ca7f814bf92a3469338c9521a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>dependencies</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a6d902c6aafd916b6a9d8b63cd0b856e3" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>enabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a7734143f7ae123a6088320486af89283" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>GetBaseMetas</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a97a0919298e9d1d53220613bded5ba69" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>GetClassStaticName</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16a351eac01dde110e273cfd05f1f7ed" prot="public" virt="pure-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>GetMeta</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1a16837ff730fb4e276450a124d70eb2e4" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>GetMetaStatic</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>HasSerializationFlags</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a50524083e3612a2d052144bdb88955f7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>linkMode</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbc9947b694481f8478c1a75a2fc465e" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>Load</name></member>
+      <member refid="structSR__SCRIPTING__NS_1_1CppScriptModuleInfo_1a446658f19ce389b7540706ec8b1a3ff8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>moduleName</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a27569f8d47ee0c52ed5e385253e14460" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>OnPostLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1afbe2a50f0f69bc0f52b51151058830d8" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>OnPostSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2978d969c09702719b2ed5c84453b02d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>OnPreLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a8281e1a68416fd493dce2a48fa8ea660" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>OnPreSave</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ac8b16fec8d4003ae41fd3fe294595b36" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>OriginType</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1afed952eb55d7441a18c4d3381d315fcf" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>RegisterPropertiesCodegen</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1ab5d15ff431f7405c8ad940333e6417a5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>RemoveSerializationFlags</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a2a48f22ef15cf46a9dc523da28f7d0d9" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>Save</name></member>
+      <member refid="classSR__UTILS__NS_1_1Serializable_1a5aab0756802a67de9cb45b83b3e73c70" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>VerifyAfterLoad</name></member>
+      <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::CppScriptModuleInfo</scope><name>~SRClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

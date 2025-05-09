@@ -18,6 +18,7 @@
     <innerdir refid="dir_4db2cc8eada578aa57e9f12bf4119b9f">Engine/Core/libs/Graphics/inc/Graphics/UI</innerdir>
     <innerdir refid="dir_08379350d528ecfd47c79c18ec259ee8">Engine/Core/libs/Graphics/inc/Graphics/Utils</innerdir>
     <innerdir refid="dir_eceba3be4a9ee281baac1dc94ed42c6c">Engine/Core/libs/Graphics/inc/Graphics/Window</innerdir>
+    <innerfile refid="Graphics_2inc_2Graphics_2macros_8h">macros.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

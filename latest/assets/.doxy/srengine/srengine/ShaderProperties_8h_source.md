@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_SHADERPROPERTIES_H
 #define SR_ENGINE_SHADERPROPERTIES_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/Enumerations.h>

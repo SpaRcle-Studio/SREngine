@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_GRAPHICS_MATERIAL_DATA_H
 #define SR_ENGINE_GRAPHICS_MATERIAL_DATA_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Serialization/Serializable.h>
 
 namespace SR_GRAPH_NS {

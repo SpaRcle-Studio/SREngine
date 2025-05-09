@@ -10,6 +10,7 @@
 
 
 
+* `#include <Scripting/Cpp/ModuleManager.h>`
 * `#include <Utils/ECS/Component.h>`
 * `#include <Utils/Resources/IResource.h>`
 
@@ -38,7 +39,6 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**Behaviour**](classSR__SCRIPTING__NS_1_1Behaviour.md) <br> |
-| class | [**IRawBehaviour**](classSR__SCRIPTING__NS_1_1IRawBehaviour.md) <br> |
 
 
 

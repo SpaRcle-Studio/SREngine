@@ -72,32 +72,24 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 
 | Type | Name |
 | ---: | :--- |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddInput**](#function-addinput-14) (Pin \* pin) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddInput**](#function-addinput-24) (PinType type) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddInput**](#function-addinput-34) (const std::string & name, PinType type) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddInput**](#function-addinput-44) (const std::string & name, [**SR\_SRLM\_NS::DataType**](classSR__SRLM__NS_1_1DataType.md) \* pDataType) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddOutput**](#function-addoutput-14) (Pin \* pin) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddOutput**](#function-addoutput-24) (PinType type) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddOutput**](#function-addoutput-34) (const std::string & name, PinType type) <br> |
-|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddOutput**](#function-addoutput-44) (const std::string & name, [**SR\_SRLM\_NS::DataType**](classSR__SRLM__NS_1_1DataType.md) \* pDataType) <br> |
+|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddInput**](#function-addinput) (Pin \* pin) <br> |
+|  [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md) & | [**AddOutput**](#function-addoutput) (Pin \* pin) <br> |
 |  void | [**Draw**](#function-draw) (NodeBuilder \* pBuilder, Pin \* pNewLinkPin) <br> |
 |  SR\_NODISCARD uint64\_t | [**GetHashName**](#function-gethashname) () const<br> |
 |  SR\_NODISCARD uintptr\_t | [**GetId**](#function-getid) () const<br> |
 |  SR\_NODISCARD Pin \* | [**GetInputPin**](#function-getinputpin) (uint32\_t index) <br> |
 |  SR\_NODISCARD const std::vector&lt; Pin \* &gt; & | [**GetInputs**](#function-getinputs) () noexcept const<br> |
-|  SR\_NODISCARD [**SR\_SRLM\_NS::LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* | [**GetLogicalNode**](#function-getlogicalnode) () const<br> |
 |  SR\_NODISCARD std::string | [**GetName**](#function-getname) () const<br> |
 |  SR\_NODISCARD Pin \* | [**GetOutputPin**](#function-getoutputpin) (uint32\_t index) <br> |
 |  SR\_NODISCARD const std::vector&lt; Pin \* &gt; & | [**GetOutputs**](#function-getoutputs) () noexcept const<br> |
 |  SR\_NODISCARD int32\_t | [**GetPinIndex**](#function-getpinindex) (const Pin \* pPin) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetPosition**](#function-getposition) () const<br> |
 |  SR\_NODISCARD bool | [**IsConnector**](#function-isconnector) () const<br> |
-|   | [**Node**](#function-node-16) () <br> |
-|   | [**Node**](#function-node-26) (const std::string & name) <br> |
-|   | [**Node**](#function-node-36) ([**SR\_SRLM\_NS::LogicalNode**](classSR__SRLM__NS_1_1LogicalNode.md) \* pNode) <br> |
-|   | [**Node**](#function-node-46) (const std::string & name, NodeType type) <br> |
-|   | [**Node**](#function-node-56) (const std::string & name, ImColor color) <br> |
-|   | [**Node**](#function-node-66) (std::string name, NodeType type, ImColor color) <br> |
+|   | [**Node**](#function-node-15) () <br> |
+|   | [**Node**](#function-node-25) (const std::string & name) <br> |
+|   | [**Node**](#function-node-35) (const std::string & name, NodeType type) <br> |
+|   | [**Node**](#function-node-45) (const std::string & name, ImColor color) <br> |
+|   | [**Node**](#function-node-55) (std::string name, NodeType type, ImColor color) <br> |
 |  void | [**PostDraw**](#function-postdraw) () <br> |
 |  void | [**RemoveInput**](#function-removeinput) (uint32\_t index) <br> |
 |  void | [**RemoveOutput**](#function-removeoutput) (uint32\_t index) <br> |
@@ -169,8 +161,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -182,7 +174,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 
 
-### function AddInput [1/4]
+### function AddInput 
 
 ```C++
 Node & SR_GRAPH_GUI_NS::Node::AddInput (
@@ -197,105 +189,11 @@ Node & SR_GRAPH_GUI_NS::Node::AddInput (
 
 
 
-### function AddInput [2/4]
-
-```C++
-Node & SR_GRAPH_GUI_NS::Node::AddInput (
-    PinType type
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddInput [3/4]
-
-```C++
-Node & SR_GRAPH_GUI_NS::Node::AddInput (
-    const std::string & name,
-    PinType type
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddInput [4/4]
-
-```C++
-Node & SR_GRAPH_GUI_NS::Node::AddInput (
-    const std::string & name,
-    SR_SRLM_NS::DataType * pDataType
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddOutput [1/4]
+### function AddOutput 
 
 ```C++
 Node & SR_GRAPH_GUI_NS::Node::AddOutput (
     Pin * pin
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddOutput [2/4]
-
-```C++
-Node & SR_GRAPH_GUI_NS::Node::AddOutput (
-    PinType type
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddOutput [3/4]
-
-```C++
-Node & SR_GRAPH_GUI_NS::Node::AddOutput (
-    const std::string & name,
-    PinType type
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function AddOutput [4/4]
-
-```C++
-Node & SR_GRAPH_GUI_NS::Node::AddOutput (
-    const std::string & name,
-    SR_SRLM_NS::DataType * pDataType
 ) 
 ```
 
@@ -367,19 +265,6 @@ SR_NODISCARD Pin * SR_GRAPH_GUI_NS::Node::GetInputPin (
 
 ```C++
 inline SR_NODISCARD const std::vector< Pin * > & SR_GRAPH_GUI_NS::Node::GetInputs () noexcept const
-```
-
-
-
-
-<hr>
-
-
-
-### function GetLogicalNode 
-
-```C++
-inline SR_NODISCARD SR_SRLM_NS::LogicalNode * SR_GRAPH_GUI_NS::Node::GetLogicalNode () const
 ```
 
 
@@ -471,7 +356,7 @@ inline SR_NODISCARD bool SR_GRAPH_GUI_NS::Node::IsConnector () const
 
 
 
-### function Node [1/6]
+### function Node [1/5]
 
 ```C++
 SR_GRAPH_GUI_NS::Node::Node () 
@@ -484,7 +369,7 @@ SR_GRAPH_GUI_NS::Node::Node ()
 
 
 
-### function Node [2/6]
+### function Node [2/5]
 
 ```C++
 explicit SR_GRAPH_GUI_NS::Node::Node (
@@ -499,22 +384,7 @@ explicit SR_GRAPH_GUI_NS::Node::Node (
 
 
 
-### function Node [3/6]
-
-```C++
-explicit SR_GRAPH_GUI_NS::Node::Node (
-    SR_SRLM_NS::LogicalNode * pNode
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Node [4/6]
+### function Node [3/5]
 
 ```C++
 SR_GRAPH_GUI_NS::Node::Node (
@@ -530,7 +400,7 @@ SR_GRAPH_GUI_NS::Node::Node (
 
 
 
-### function Node [5/6]
+### function Node [4/5]
 
 ```C++
 SR_GRAPH_GUI_NS::Node::Node (
@@ -546,7 +416,7 @@ SR_GRAPH_GUI_NS::Node::Node (
 
 
 
-### function Node [6/6]
+### function Node [5/5]
 
 ```C++
 SR_GRAPH_GUI_NS::Node::Node (

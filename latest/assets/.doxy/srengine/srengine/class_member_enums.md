@@ -25,6 +25,7 @@
 ## e
 
 * **Event** ([**SR\_UTILS\_NS::EventManager**](classSR__UTILS__NS_1_1EventManager.md))
+* **EventType** ([**SR\_UTILS\_NS::FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md))
 
 
 ## f
@@ -62,7 +63,7 @@
 
 ## s
 
-* **State** ([**SR\_AUDIO\_NS::SoundManager**](classSR__AUDIO__NS_1_1SoundManager.md), [**SR\_UTILS\_NS::Input**](classSR__UTILS__NS_1_1Input.md), [**SR\_UTILS\_NS::Task**](classSR__UTILS__NS_1_1Task.md))
+* **State** ([**SR\_AUDIO\_NS::SoundManager**](classSR__AUDIO__NS_1_1SoundManager.md), [**SR\_SCRIPTING\_NS::ScriptSystem**](classSR__SCRIPTING__NS_1_1ScriptSystem.md), [**SR\_UTILS\_NS::Input**](classSR__UTILS__NS_1_1Input.md), [**SR\_UTILS\_NS::Task**](classSR__UTILS__NS_1_1Task.md))
 * **Stage** ([**SR\_GRAPH\_NS::GUI::NodeBuilder**](classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder.md))
 * **StorageType** ([**SR\_UTILS\_NS::StoreUtils::Storage**](classSR__UTILS__NS_1_1StoreUtils_1_1Storage.md))
 * **Shape** ([**SR\_UTILS\_NS::Web::CSSRadialGradient**](structSR__UTILS__NS_1_1Web_1_1CSSRadialGradient.md))

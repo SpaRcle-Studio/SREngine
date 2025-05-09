@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_UTILS_GUI_H
 #define SR_ENGINE_UTILS_GUI_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Debug.h>
 #include <Utils/Math/Vector2.h>
 
@@ -83,24 +85,24 @@ namespace SR_GRAPH_NS {
 
 namespace SR_GRAPH_GUI_NS {
 #ifdef SR_USE_IMGUI
-    SR_DLL_EXPORT extern bool Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size = -1.0f);
-    SR_DLL_EXPORT extern bool IsVec4Null(const ImVec4& v1);
-    SR_DLL_EXPORT extern bool IsVec2Null(const ImVec2& v1);
-    SR_DLL_EXPORT extern bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding);
-    SR_DLL_EXPORT extern bool ImageButtonDouble(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding);
-    SR_DLL_EXPORT extern bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding);
-    SR_DLL_EXPORT extern bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size);
-    SR_DLL_EXPORT extern bool BeginDragDropTargetWindow(const std::string& payloadType);
-    SR_DLL_EXPORT extern bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2 &size, float_t framePadding, ImGuiButtonFlags flags);
-    SR_DLL_EXPORT extern bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ImGuiButtonFlags flags);
-    SR_DLL_EXPORT extern bool CollapsingHeader(const std::string& label, ImGuiTreeNodeFlags flags);
-    SR_DLL_EXPORT extern void DrawMultiLineTextOnCenter(const std::string& text);
-    SR_DLL_EXPORT extern void DrawMultiLineTextOnCenter(const std::string& text, ImVec4 color);
-    SR_DLL_EXPORT extern void DrawTextOnCenter(const std::string& text, ImVec4 color = ImVec4(1.f, 1.f, 1.f, 1.f));
-    SR_DLL_EXPORT extern int ImTextCharToUtf8(char* buf, int32_t bufSize, uint32_t c);
-    SR_DLL_EXPORT extern ImVec2 DrawTexture(const void* pDescriptor, const SR_MATH_NS::FVector2& size, SR_GRAPH_NS::PipelineType pipelineType, bool imposition);
-    SR_DLL_EXPORT extern ImVec2 DrawTexture(const SR_GRAPH_NS::Pipeline* pPipeline, uint32_t textureId, const SR_MATH_NS::FVector2& size, bool imposition);
-    SR_DLL_EXPORT extern ImVec2 DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
+    SR_RENDERER_DLL_API extern bool Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size = -1.0f);
+    SR_RENDERER_DLL_API extern bool IsVec4Null(const ImVec4& v1);
+    SR_RENDERER_DLL_API extern bool IsVec2Null(const ImVec2& v1);
+    SR_RENDERER_DLL_API extern bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding);
+    SR_RENDERER_DLL_API extern bool ImageButtonDouble(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding);
+    SR_RENDERER_DLL_API extern bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding);
+    SR_RENDERER_DLL_API extern bool ImageButton(void* pDescriptor, const SR_MATH_NS::FVector2& size);
+    SR_RENDERER_DLL_API extern bool BeginDragDropTargetWindow(const std::string& payloadType);
+    SR_RENDERER_DLL_API extern bool ImageButtonInternal(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2 &size, float_t framePadding, ImGuiButtonFlags flags);
+    SR_RENDERER_DLL_API extern bool ImageButton(std::string_view&& imageId, void* pDescriptor, const SR_MATH_NS::FVector2& size, float_t framePadding, ImGuiButtonFlags flags);
+    SR_RENDERER_DLL_API extern bool CollapsingHeader(const std::string& label, ImGuiTreeNodeFlags flags);
+    SR_RENDERER_DLL_API extern void DrawMultiLineTextOnCenter(const std::string& text);
+    SR_RENDERER_DLL_API extern void DrawMultiLineTextOnCenter(const std::string& text, ImVec4 color);
+    SR_RENDERER_DLL_API extern void DrawTextOnCenter(const std::string& text, ImVec4 color = ImVec4(1.f, 1.f, 1.f, 1.f));
+    SR_RENDERER_DLL_API extern int ImTextCharToUtf8(char* buf, int32_t bufSize, uint32_t c);
+    SR_RENDERER_DLL_API extern ImVec2 DrawTexture(const void* pDescriptor, const SR_MATH_NS::FVector2& size, SR_GRAPH_NS::PipelineType pipelineType, bool imposition);
+    SR_RENDERER_DLL_API extern ImVec2 DrawTexture(const SR_GRAPH_NS::Pipeline* pPipeline, uint32_t textureId, const SR_MATH_NS::FVector2& size, bool imposition);
+    SR_RENDERER_DLL_API extern ImVec2 DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
 #endif
 }
 

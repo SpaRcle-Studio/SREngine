@@ -57,7 +57,7 @@
         <argsstring>() const override</argsstring>
         <name>ExecuteInEditMode</name>
         <qualifiedname>SR_CORE_GUI_NS::EditorGizmo::ExecuteInEditMode</qualifiedname>
-        <reimplements refid="classSR__UTILS__NS_1_1Component_1a18af2c953acad770e70af93a16882340">ExecuteInEditMode</reimplements>
+        <reimplements refid="classSR__UTILS__NS_1_1Component_1a51e106ce1c788f4452dbee8ee484a51c">ExecuteInEditMode</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -313,30 +313,11 @@
         <childnode refid="7" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="6">
         <label>SR_UTILS_NS::IComponentable</label>
         <link refid="classSR__UTILS__NS_1_1IComponentable"/>
         <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>SR_UTILS_NS::NonCopyable</label>
-        <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
-      </node>
-      <node id="9">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
@@ -354,6 +335,7 @@
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a95e88410ef4fd3374845724623f6cf55" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>CameraPtr</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad595cda1bf5fd49695826b348848bea7" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>CheckActivity</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae178f96f84ede2be45870eab162e794d" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>CloneComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a399c77c103e176a04ad7781b72c314ee" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>Component</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af21012e67de013634a8e25e8900f4f7c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>Detach</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGizmo_1a50b32ef7991410c4e610b0cf902c0569" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>EndGizmo</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGizmo_1a89dc51a667ce45403c7d21ed346270bc" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>ExecuteInEditMode</name></member>
@@ -363,8 +345,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetBarycenter</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1a8ffc0a7bba083f7d2703dd38752c7405" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetCamera</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a04a9ebf962f0456b9f62a2c3b9e4f3bb" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetColorByOperation</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a49953c5c04c8d807af191818af8e476e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetComponentProperties</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a60b510b980e374e7f13d4e7b7be8e8d3" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetComponentProperties</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetGameObject</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a77f8ff5ce61d879d54626897b750c57a" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetGameObjectByOperation</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGizmo_1aeb586875c417499674325a0373f9a21b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetGizmoMatrix</name></member>
@@ -379,12 +359,12 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ab6d313e3075c5dabf5b41189b10f236e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>GetTransform</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>HasScene</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a1746025f3290ae3f75e7f0040c0f2e98" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsActive</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a71e906ffc4c73b5e97f8ba6e5ff2c879" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsAttached</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a9c732192bdee59755da5941c451f3817" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsAwake</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ab46411766a10bc411c5718024c2f6c59" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsComponentLoaded</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a96bc5ca44b2b19d5cb565a9947e195d2" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsComponentValid</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1ac612d4e6a0314b19a7dfb7590e28063b" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsEnabled</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1601529fb5946634c4e4d235769b4b80" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsActive</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a1d7984f57df2fb1519bca8e2346cbcdd" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsAttached</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1aaa40b9cae6a7b9c771bcf20671f80455" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsAwake</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1abf90394b84e3af5e16c18d992de38d41" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsComponentLoaded</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a34593c73db55cbd4c58e983b23190c56" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsComponentValid</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a8f95ff169b8df189b211b036ba06def5" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsEnabled</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a5f8fd1896be6e01120c737b9db7f5f26" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsGizmo2DSpace</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1afccad0e103c60649debfa00b3b75d0f2" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsGizmoActive</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGizmo_1aaeef37ffd030076638d951cb8cfa90be" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsGizmoAvailable</name></member>
@@ -394,7 +374,7 @@
       <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a8d910d76f8c02f8db67d4e84867cd742" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsLocal</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af9ad40b9b09d748d7e0b591f4b78b60f" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsPausedMode</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a3d09e0388a5a982e6fe71cbf59f8c813" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsPlayingMode</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a320e950e4b4c3e35791006d30486e858" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsStarted</name></member>
+      <member refid="classSR__UTILS__NS_1_1Component_1a547028a4a9ab2b115832b2000259e127" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsStarted</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ace675f265b886fef357651e43c29c5d4" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>IsUpdatable</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1af7cb379e3802c66b0a864bf1178bfda8" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>LateUpdate</name></member>
       <member refid="classSR__GRAPH__UI__NS_1_1Gizmo_1a9d94c58d1224035f94a01a5c553e61d4" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>LoadGizmo</name></member>
@@ -408,7 +388,6 @@
       <member refid="classSR__UTILS__NS_1_1Component_1ad9e404095f004e707f755beb764ab8e7" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_isEnabled</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a4a854563851b2106daf5d678e3a4b3a6" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_isStarted</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9dddd30253cd78eb28f504e1afb66514" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_parent</name></member>
-      <member refid="classSR__UTILS__NS_1_1Component_1a84cacd523bf1c43b78beea306d66114f" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_properties</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1EditorGizmo_1a665100b7419957185ae6c82d61f07d39" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_pSerializer</name></member>
       <member refid="classSR__GTYPES__NS_1_1IRenderComponent_1adf98d6531d11ca6c8946df21461446b7" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_renderScene</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ae7b09faaab768e65bf45cef6d3a84666" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorGizmo</scope><name>m_scene</name></member>

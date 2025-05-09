@@ -201,11 +201,11 @@
         <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
-      <node id="20">
+      <node id="18">
         <label>SR_MATH_NS::Quaternion</label>
         <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
-      <node id="21">
+      <node id="19">
         <label>SR_PHYSICS_NS::LibraryImpl</label>
         <link refid="classSR__PHYSICS__NS_1_1LibraryImpl"/>
         <childnode refid="10" relation="public-inheritance">
@@ -232,7 +232,7 @@
         <childnode refid="11" relation="usage">
           <edgelabel>m_rigidbody</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>m_bounds</edgelabel>
         </childnode>
       </node>
@@ -242,10 +242,10 @@
         <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="20">
         <label>SR_PTYPES_NS::PhysicsMaterial</label>
         <link refid="classSR__PTYPES__NS_1_1PhysicsMaterial"/>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
@@ -253,25 +253,25 @@
         <link refid="classSR__PTYPES__NS_1_1Rigidbody"/>
         <childnode refid="12" relation="public-inheritance">
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>m_center</edgelabel>
           <edgelabel>m_scale</edgelabel>
           <edgelabel>m_translation</edgelabel>
         </childnode>
-        <childnode refid="19" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>m_impl</edgelabel>
         </childnode>
-        <childnode refid="21" relation="usage">
+        <childnode refid="19" relation="usage">
           <edgelabel>m_library</edgelabel>
         </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="18" relation="usage">
           <edgelabel>m_rotation</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>m_material</edgelabel>
         </childnode>
       </node>
-      <node id="19">
+      <node id="17">
         <label>SR_PTYPES_NS::RigidbodyImpl</label>
         <link refid="classSR__PTYPES__NS_1_1RigidbodyImpl"/>
         <childnode refid="10" relation="public-inheritance">
@@ -279,10 +279,10 @@
         <childnode refid="11" relation="usage">
           <edgelabel>m_rigidbody</edgelabel>
         </childnode>
-        <childnode refid="20" relation="usage">
+        <childnode refid="18" relation="usage">
           <edgelabel>m_rigidbodyRotation</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>m_rigidbodyTranslation</edgelabel>
         </childnode>
       </node>
@@ -297,9 +297,6 @@
         <childnode refid="15" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="16" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="14">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -307,14 +304,14 @@
         <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="23">
+      <node id="21">
         <label>SR_UTILS_NS::IResource</label>
         <link refid="classSR__UTILS__NS_1_1IResource"/>
-        <childnode refid="24" relation="public-inheritance">
+        <childnode refid="22" relation="public-inheritance">
         </childnode>
-        <childnode refid="25" relation="public-inheritance">
+        <childnode refid="23" relation="public-inheritance">
         </childnode>
-        <childnode refid="26" relation="usage">
+        <childnode refid="24" relation="usage">
           <edgelabel>RELOAD_BEGIN_EVENT</edgelabel>
           <edgelabel>RELOAD_DONE_EVENT</edgelabel>
         </childnode>
@@ -323,19 +320,7 @@
         <label>SR_UTILS_NS::NonCopyable</label>
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
-      <node id="17">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="17" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="24">
+      <node id="22">
         <label>SR_UTILS_NS::ResourceContainer</label>
         <link refid="classSR__UTILS__NS_1_1ResourceContainer"/>
         <childnode refid="10" relation="public-inheritance">
@@ -351,11 +336,11 @@
         <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="24">
         <label>SR_UTILS_NS::StringAtom</label>
         <link refid="classSR__UTILS__NS_1_1StringAtom"/>
       </node>
-      <node id="25">
+      <node id="23">
         <label>SR_UTILS_NS::SubscriptionHolder</label>
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
@@ -365,7 +350,7 @@
         <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="16">
         <label>SR_MATH_NS::Vector3&lt; Unit &gt;</label>
         <link refid="structSR__MATH__NS_1_1Vector3"/>
       </node>
@@ -379,6 +364,7 @@
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1ad3ac24931c4f7064fc21a9b71795156e" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Bullet3CollisionShape</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1a7a18cb9c7f5c96e35e0400596537d56d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CalculateLocalInertia</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a63e9f8d59e7d9f25345409c1dffc0e2a" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>CollisionShape</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Get</name></member>
@@ -410,7 +396,7 @@
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a5b9e46a96d1f3ffdcd128f071e6934ac" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>GetVertices</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1a230b13e649bcde0823986aca025651e0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>HasGeometry</name></member>
       <member refid="classSR__UTILS__NS_1_1Serializable_1af5c00e9391fad105c30570cbda1a6285" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>HasSerializationFlags</name></member>
-      <member refid="classSR__UTILS__NS_1_1SRClass_1a314a5da84f64931f5ba7281b4992bc15" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>InitializeClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IncrementPointer</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1af766ddc2bbffee81c0c5591e41ddcae1" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsShapeValid</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a38601beec7f801e569e00c1236d9e487" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>IsValidMeshId</name></member>
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1aae603ade2ab137101c2bf623738b111d" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>LibraryPtr</name></member>
@@ -468,7 +454,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>StaticCast</name></member>
       <member refid="classSR__PTYPES__NS_1_1Bullet3CollisionShape_1ac56371ff2d87d429ed48fa0474ccde2f" prot="private" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>Super</name></member>
@@ -484,7 +470,7 @@
       <member refid="classSR__PTYPES__NS_1_1CollisionShape_1ad7531680cdb928bd184c69186f92a966" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~CollisionShape</name></member>
       <member refid="classSR__HTYPES__NS_1_1IRawMeshHolder_1a13569cf849ebce2239302bf23a63690a" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~IRawMeshHolder</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__UTILS__NS_1_1SRClass_1ad88a80732713966d7759d768bd65bbe5" prot="public" virt="virtual"><scope>SR_PTYPES_NS::Bullet3CollisionShape</scope><name>~SRClass</name></member>
     </listofallmembers>
   </compounddef>

@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSR__SCRIPTING__NS_1_1ModuleManager" kind="class" language="C++" prot="public">
+    <compoundname>SR_SCRIPTING_NS::ModuleManager</compoundname>
+    <basecompoundref refid="classSR__HTYPES__NS_1_1SharedPtr" prot="public" virt="non-virtual">SR_HTYPES_NS::SharedPtr&lt; ModuleManager &gt;</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ae746de75ab03db934e7f7a8ac80cfba0" prot="private" static="no">
+        <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__SCRIPTING__NS_1_1ModuleManager" kindref="compound">ModuleManager</ref> &gt;</type>
+        <definition>using SR_SCRIPTING_NS::ModuleManager::Super =  SR_HTYPES_NS::SharedPtr&lt;ModuleManager&gt;</definition>
+        <argsstring></argsstring>
+        <name>Super</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::Super</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="86" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a01df2895216d3aae1455d4eaefd47df9" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ModuleManager::m_resourcesPath</definition>
+        <argsstring></argsstring>
+        <name>m_resourcesPath</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_resourcesPath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="114" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a4d0b34bbfdedd690bdc037702969538f" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
+        <definition>SR_UTILS_NS::Path SR_SCRIPTING_NS::ModuleManager::m_cachePath</definition>
+        <argsstring></argsstring>
+        <name>m_cachePath</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_cachePath</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="115" column="27" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a6adaece4f0ed481bb04f47d07ca16f85" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string SR_SCRIPTING_NS::ModuleManager::m_lastCompilerVersion</definition>
+        <argsstring></argsstring>
+        <name>m_lastCompilerVersion</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_lastCompilerVersion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="117" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a5d4f5f3a208a0f41b72d963029ed3a7b" prot="private" static="no" mutable="no">
+        <type>std::set&lt; <ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> * &gt;</type>
+        <definition>std::set&lt;CppBehaviourInstance*&gt; SR_SCRIPTING_NS::ModuleManager::m_behaviourInstances</definition>
+        <argsstring></argsstring>
+        <name>m_behaviourInstances</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_behaviourInstances</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="119" column="18" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a027c1c957089b380f6b7a0d5e1fca4d7" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classSR__SCRIPTING__NS_1_1ScriptModule" kindref="compound">ScriptModule</ref> &gt;</type>
+        <definition>std::vector&lt;ScriptModule&gt; SR_SCRIPTING_NS::ModuleManager::m_modules</definition>
+        <argsstring></argsstring>
+        <name>m_modules</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_modules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="121" column="21" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a026b02e6f879fbb70b88515c4a11652c" prot="private" static="no" mutable="no">
+        <type>std::recursive_mutex</type>
+        <definition>std::recursive_mutex SR_SCRIPTING_NS::ModuleManager::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_mutex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="122" column="30" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ab460bb08282b332a31ab577e5806acd5" prot="private" static="no" mutable="no">
+        <type><ref refid="classSR__SCRIPTING__NS_1_1ScriptSystem" kindref="compound">ScriptSystem</ref> *</type>
+        <definition>ScriptSystem* SR_SCRIPTING_NS::ModuleManager::m_pScriptSystem</definition>
+        <argsstring></argsstring>
+        <name>m_pScriptSystem</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::m_pScriptSystem</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="123" column="22" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a46fdd83d94ff2ce3ee6023a988f5be47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::ModuleManager::ModuleManager</definition>
+        <argsstring>(ScriptSystem *pScriptSystem)</argsstring>
+        <name>ModuleManager</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::ModuleManager</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1ScriptSystem" kindref="compound">ScriptSystem</ref> *</type>
+          <declname>pScriptSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="88" column="9" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1af51897c1400eade13a707951f1dcf11d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_SCRIPTING_NS::ModuleManager::~ModuleManager</definition>
+        <argsstring>() override</argsstring>
+        <name>~ModuleManager</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::~ModuleManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="93" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a66aa67865098251d903720ba31b27823" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::ModuleManager::Init</definition>
+        <argsstring>()</argsstring>
+        <name>Init</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::Init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="96" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a97b918658085ca0900e39e73c632f11e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD bool</type>
+        <definition>SR_NODISCARD bool SR_SCRIPTING_NS::ModuleManager::ReloadModule</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>ReloadModule</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::ReloadModule</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="98" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a4c7be700ceb3071e5038563718522438" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> *</type>
+        <definition>SR_NODISCARD CppBehaviourInstance * SR_SCRIPTING_NS::ModuleManager::AllocateBehaviourInstance</definition>
+        <argsstring>(const SR_UTILS_NS::StringAtom &amp;behaviourName)</argsstring>
+        <name>AllocateBehaviourInstance</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::AllocateBehaviourInstance</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;</type>
+          <declname>behaviourName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="100" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1a812ddd62c8a2c4d91b64698cde68e377" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ModuleManager::FreeBehaviourInstance</definition>
+        <argsstring>(CppBehaviourInstance *pInstance)</argsstring>
+        <name>FreeBehaviourInstance</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::FreeBehaviourInstance</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> *</type>
+          <declname>pInstance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="101" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ac8f1103d81a76c7453a5b52007e9b426" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::ModuleManager::AllocateBehaviourInternalInstance</definition>
+        <argsstring>(CppBehaviourInstance *pInstance)</argsstring>
+        <name>AllocateBehaviourInternalInstance</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::AllocateBehaviourInternalInstance</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> *</type>
+          <declname>pInstance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1aafab614a83636026eacad8667e17e7f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ModuleManager::FreeBehaviourInternalInstance</definition>
+        <argsstring>(CppBehaviourInstance *pInstance)</argsstring>
+        <name>FreeBehaviourInternalInstance</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::FreeBehaviourInternalInstance</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1CppBehaviourInstance" kindref="compound">CppBehaviourInstance</ref> *</type>
+          <declname>pInstance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="105" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1afd3065ef1c39434193221dc7c1704a0f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD void *</type>
+        <definition>SR_NODISCARD void * SR_SCRIPTING_NS::ModuleManager::LoadModule</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;modulePath)</argsstring>
+        <name>LoadModule</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::LoadModule</qualifiedname>
+        <param>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
+          <declname>modulePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="107" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1acf1a36e84dafa1b45ba3a0b71788d4cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SR_SCRIPTING_NS::ModuleManager::UnloadModule</definition>
+        <argsstring>(ScriptModule &amp;module, bool willBeReloaded)</argsstring>
+        <name>UnloadModule</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::UnloadModule</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1ScriptModule" kindref="compound">ScriptModule</ref> &amp;</type>
+          <declname>module</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>willBeReloaded</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="108" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ab22cad59fade7f16e09c4a4b6b68be95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SR_SCRIPTING_NS::ModuleManager::OnModuleLoaded</definition>
+        <argsstring>(ScriptModule &amp;module)</argsstring>
+        <name>OnModuleLoaded</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::OnModuleLoaded</qualifiedname>
+        <param>
+          <type><ref refid="classSR__SCRIPTING__NS_1_1ScriptModule" kindref="compound">ScriptModule</ref> &amp;</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="109" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__SCRIPTING__NS_1_1ModuleManager_1ab66b5d0b9bd5eb73de8f228ea8bfd649" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__SCRIPTING__NS_1_1ScriptModule" kindref="compound">ScriptModule</ref> *</type>
+        <definition>SR_NODISCARD ScriptModule * SR_SCRIPTING_NS::ModuleManager::FindModule</definition>
+        <argsstring>(SR_UTILS_NS::StringAtom moduleName)</argsstring>
+        <name>FindModule</name>
+        <qualifiedname>SR_SCRIPTING_NS::ModuleManager::FindModule</qualifiedname>
+        <param>
+          <type><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref></type>
+          <declname>moduleName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="111" column="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::ModuleManager</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ModuleManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>SR_HTYPES_NS::SharedPtr&lt; T &gt;</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtr"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SR_HTYPES_NS::SharedPtrBase</label>
+        <link refid="classSR__HTYPES__NS_1_1SharedPtrBase"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_data</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>SR_HTYPES_NS::SharedPtrDynamicData</label>
+        <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
+      </node>
+      <node id="1">
+        <label>SR_SCRIPTING_NS::ModuleManager</label>
+        <link refid="classSR__SCRIPTING__NS_1_1ModuleManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" line="85" column="5" bodyfile="Engine/Core/libs/Scripting/inc/Scripting/Cpp/ModuleManager.h" bodystart="85" bodyend="125"/>
+    <listofallmembers>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a4c7be700ceb3071e5038563718522438" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>AllocateBehaviourInstance</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1ac8f1103d81a76c7453a5b52007e9b426" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>AllocateBehaviourInternalInstance</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>AutoFree</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>DecrementPointer</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>DynamicCast</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1ab66b5d0b9bd5eb73de8f228ea8bfd649" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>FindModule</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a812ddd62c8a2c4d91b64698cde68e377" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>FreeBehaviourInstance</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1aafab614a83636026eacad8667e17e7f4" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>FreeBehaviourInternalInstance</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Get</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetPtrData</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a0712664462c373dca70a9cd905fbee39" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetRawPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a09a4343fa4b324bae576676be00df2fc" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetSRClass</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetThis</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>IncrementPointer</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a66aa67865098251d903720ba31b27823" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Init</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1afd3065ef1c39434193221dc7c1704a0f" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>LoadModule</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a697cb41e7cdcdfbc3a22fe3fd66890c2" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_basicManually</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a5d4f5f3a208a0f41b72d963029ed3a7b" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_behaviourInstances</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a4d0b34bbfdedd690bdc037702969538f" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_cachePath</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_data</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a6adaece4f0ed481bb04f47d07ca16f85" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_lastCompilerVersion</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a027c1c957089b380f6b7a0d5e1fca4d7" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_modules</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a026b02e6f879fbb70b88515c4a11652c" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_mutex</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1ab460bb08282b332a31ab577e5806acd5" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_pScriptSystem</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a01df2895216d3aae1455d4eaefd47df9" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>m_resourcesPath</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a30521eff178fb2ce5a88134bc2163b56" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>MakeShared</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a46fdd83d94ff2ce3ee6023a988f5be47" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>ModuleManager</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1ab22cad59fade7f16e09c4a4b6b68be95" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>OnModuleLoaded</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aaf6b9b47bec67e64d6b7911d66161dc7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator bool</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac0aae28fcdaabb1522224ce81aef881d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator!=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a3b5aeb383ac80389fd334b5c06a7eb65" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator*</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4e1cf4a45dab4d836578c586adb59fbb" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator-&gt;</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a899ac95bec4b5a9618256760fbf5eb6a" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ab07b09fbbe828576031c392157f2d0e2" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1add975548a62ed3f1f148386c4dc93713" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator=</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a10baf424ef09c291e7d8e9117e3f6748" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>operator==</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac8440ee7805a7f41959e4d9ed74ce70b" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>PolymorphicCast</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2694ac2452f173c80120ab6028d71543" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Ptr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a8936a888491ee5f49dca904084aece85" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>RecursiveLockIfValid</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a34a5bf991fc48291c8a00429c46037db" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>ReinterpretCast</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1a97b918658085ca0900e39e73c632f11e" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>ReloadModule</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aec2977c38beb8bd5bb6954e8ab046b11" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Reset</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a96ad2650ea19854e30dbd1e1c77f3f25" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SetPointerFromBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a38c5ff771cdddb2e3e88588ba3d6a2b6" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPointerType</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aef1497486c0d80bbf60f70d1b6dd07c8" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a52911d048b93955a86ade9a5cd435eaf" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>StaticCast</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1ae746de75ab03db934e7f7a8ac80cfba0" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Super</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aadd354e61990091700a838b1b05ca433" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>TryRecursiveLockIfValid</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1acf1a36e84dafa1b45ba3a0b71788d4cc" prot="private" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>UnloadModule</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a5e3f5d6f9288aa6e41b102d2e1d0594d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Unlock</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>Valid</name></member>
+      <member refid="classSR__SCRIPTING__NS_1_1ModuleManager_1af51897c1400eade13a707951f1dcf11d" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>~ModuleManager</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>~SharedPtr</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_SCRIPTING_NS::ModuleManager</scope><name>~SharedPtrBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

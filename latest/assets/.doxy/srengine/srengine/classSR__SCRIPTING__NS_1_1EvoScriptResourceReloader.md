@@ -198,8 +198,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -230,5 +230,5 @@ Implements [*SR\_UTILS\_NS::IResourceReloader::Reload*](classSR__UTILS__NS_1_1IR
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Impl/EvoScriptResourceReloader.h`
+The documentation for this class was generated from the following file `Engine/Core/libs/Scripting/inc/Scripting/Old/Impl/EvoScriptResourceReloader.h`
 

@@ -7,6 +7,7 @@
     <innerfile refid="Acceptor_8h">Acceptor.h</innerfile>
     <innerfile refid="Client_8h">Client.h</innerfile>
     <innerfile refid="Context_8h">Context.h</innerfile>
+    <innerfile refid="FileDownloader_8h">FileDownloader.h</innerfile>
     <innerfile refid="Message_8h">Message.h</innerfile>
     <innerfile refid="PeerToPeer_8h">PeerToPeer.h</innerfile>
     <innerfile refid="Pinger_8h">Pinger.h</innerfile>

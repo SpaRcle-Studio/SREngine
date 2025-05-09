@@ -17,14 +17,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="90" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="90" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="82" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="82" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1a201406d7ce030cd23162a3a45932d544" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1a75c22bdbfee5663aa10212d58f5e5531" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::Subscription::Subscription</definition>
-        <argsstring>()=default</argsstring>
+        <argsstring>()</argsstring>
         <name>Subscription</name>
         <qualifiedname>SR_UTILS_NS::Subscription::Subscription</qualifiedname>
         <briefdescription>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="70" column="9"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="73" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1af9d25c29ee40f41e48c56b36680b8568" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -47,9 +47,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="71" column="9"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="74" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1afdd2bfc7c723c28d2bbec9126198489c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1afdd2bfc7c723c28d2bbec9126198489c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::Subscription::Subscription</definition>
         <argsstring>(SubscriptionInternalInfo *pInternalInfo)</argsstring>
@@ -65,9 +65,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="73" column="18" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="73" bodyend="75"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="75" column="18"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1ab958c3a56f4da428bd86500aa4de8c29" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1ab958c3a56f4da428bd86500aa4de8c29" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::Subscription::Subscription</definition>
         <argsstring>(Subscription &amp;&amp;other) noexcept</argsstring>
@@ -83,9 +83,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="77" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="77" bodyend="79"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="76" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1ae887bb61f8e30102d08e8691d7c72402" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1ae887bb61f8e30102d08e8691d7c72402" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classSR__UTILS__NS_1_1Subscription" kindref="compound">Subscription</ref> &amp;</type>
         <definition>Subscription &amp; SR_UTILS_NS::Subscription::operator=</definition>
         <argsstring>(Subscription &amp;&amp;other) noexcept</argsstring>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="81" column="22" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="81" bodyend="85"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="77" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1Subscription_1aed433439d85413526c460a3801ba9129" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="87" column="14"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="79" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -146,13 +146,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="68" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="68" bodyend="92"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" line="71" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Common/SubscriptionHolder.h" bodystart="71" bodyend="84"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Subscription_1aa87aacabba1e48200aa48f2f1d8b2dc7" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>m_internalInfo</name></member>
       <member refid="classSR__UTILS__NS_1_1Subscription_1ae887bb61f8e30102d08e8691d7c72402" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="private" virt="virtual" ambiguityscope="SR_UTILS_NS::NonCopyable::"><scope>SR_UTILS_NS::Subscription</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1Subscription_1aed433439d85413526c460a3801ba9129" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>Reset</name></member>
-      <member refid="classSR__UTILS__NS_1_1Subscription_1a201406d7ce030cd23162a3a45932d544" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>Subscription</name></member>
+      <member refid="classSR__UTILS__NS_1_1Subscription_1a75c22bdbfee5663aa10212d58f5e5531" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>Subscription</name></member>
       <member refid="classSR__UTILS__NS_1_1Subscription_1afdd2bfc7c723c28d2bbec9126198489c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>Subscription</name></member>
       <member refid="classSR__UTILS__NS_1_1Subscription_1ab958c3a56f4da428bd86500aa4de8c29" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>Subscription</name></member>
       <member refid="classSR__UTILS__NS_1_1Subscription_1af9d25c29ee40f41e48c56b36680b8568" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::Subscription</scope><name>~Subscription</name></member>

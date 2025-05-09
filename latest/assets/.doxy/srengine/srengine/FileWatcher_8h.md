@@ -13,6 +13,7 @@
 * `#include <Utils/Debug.h>`
 * `#include <Utils/FileSystem/Path.h>`
 * `#include <Utils/Common/Hashes.h>`
+* `#include <Utils/Common/SubscriptionHolder.h>`
 * `#include <Utils/Types/Function.h>`
 * `#include <Utils/Types/SharedPtr.h>`
 

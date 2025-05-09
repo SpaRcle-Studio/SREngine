@@ -65,19 +65,19 @@
 |  SR\_NODISCARD Unit SR\_FASTCALL | [**Distance**](#function-distance) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**EulerAngle**](#function-eulerangle) () const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Inverse**](#function-inverse) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE bool SR\_FASTCALL | [**IsEquals**](#function-isequals) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q, Unit tolerance) noexcept const<br> |
+|  SR\_NODISCARD bool SR\_FASTCALL | [**IsEquals**](#function-isequals) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q, Unit tolerance) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsIdentity**](#function-isidentity) () noexcept const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Normalize**](#function-normalize) () const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Normalized**](#function-normalized) () const<br> |
 |  SR\_NODISCARD Unit | [**Pitch**](#function-pitch) () noexcept const<br> |
-|  constexpr | [**Quaternion**](#function-quaternion-17) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
-|  constexpr | [**Quaternion**](#function-quaternion-27) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & matrix) <br> |
-|  constexpr | [**Quaternion**](#function-quaternion-37) () <br> |
-|   | [**Quaternion**](#function-quaternion-47) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & p\_euler) <br> |
-|   | [**Quaternion**](#function-quaternion-57) (const glm::quat & q) <br> |
-|   | [**Quaternion**](#function-quaternion-67) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & axis, Unit angle) <br> |
-|  constexpr | [**Quaternion**](#function-quaternion-77) (T x, T y, T z, T w) <br> |
+|   | [**Quaternion**](#function-quaternion-17) () <br> |
+|   | [**Quaternion**](#function-quaternion-27) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
+|   | [**Quaternion**](#function-quaternion-37) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & p\_euler) <br> |
+|   | [**Quaternion**](#function-quaternion-47) (const glm::quat & q) <br> |
+|   | [**Quaternion**](#function-quaternion-57) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & axis, Unit angle) <br> |
+|   | [**Quaternion**](#function-quaternion-67) (const [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & matrix) <br> |
+|   | [**Quaternion**](#function-quaternion-77) (T x, T y, T z, T w) <br> |
 |  SR\_NODISCARD Unit | [**Roll**](#function-roll) () noexcept const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Rotate**](#function-rotate) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & v) const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**RotateX**](#function-rotatex) (Unit angle) const<br> |
@@ -85,9 +85,9 @@
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**RotateZ**](#function-rotatez) (Unit angle) const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Slerp**](#function-slerp) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q, Unit t) const<br> |
 |  SR\_NODISCARD Unit | [**SquaredNorm**](#function-squarednorm) () noexcept const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE glm::quat | [**ToGLM**](#function-toglm) () noexcept const<br> |
+|  SR\_NODISCARD glm::quat | [**ToGLM**](#function-toglm) () noexcept const<br> |
 |  SR\_NODISCARD [**Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) | [**ToMat4x4**](#function-tomat4x4) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE glm::mat4 | [**ToMat4x4GLM**](#function-tomat4x4glm) () noexcept const<br> |
+|  SR\_NODISCARD glm::mat4 | [**ToMat4x4GLM**](#function-tomat4x4glm) () noexcept const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
 |  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; Unit &gt; | [**Vector**](#function-vector) () noexcept const<br> |
 |  SR\_NODISCARD T | [**W**](#function-w) () noexcept const<br> |
@@ -95,21 +95,21 @@
 |  SR\_NODISCARD T | [**Y**](#function-y) () noexcept const<br> |
 |  SR\_NODISCARD Unit | [**Yaw**](#function-yaw) () noexcept const<br> |
 |  SR\_NODISCARD T | [**Z**](#function-z) () noexcept const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) noexcept const<br> |
-|  SR\_FORCE\_INLINE [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator\***](#function-operator_1) (const double & s) const<br> |
+|  bool | [**operator!=**](#function-operator) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) noexcept const<br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator\***](#function-operator_1) (const double & s) const<br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; | [**operator\***](#function-operator_2) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & v) noexcept const<br> |
 |  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator\***](#function-operator_3) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & rhs) const<br> |
-|  SR\_FORCE\_INLINE void | [**operator\*=**](#function-operator_4) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
-|  SR\_FORCE\_INLINE void | [**operator\*=**](#function-operator_5) (const double & s) <br> |
-|  SR\_FORCE\_INLINE [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator+**](#function-operator_6) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
-|  SR\_FORCE\_INLINE void | [**operator+=**](#function-operator_7) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
-|  SR\_FORCE\_INLINE [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator_8) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
-|  SR\_FORCE\_INLINE [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator_9) () const<br> |
-|  SR\_FORCE\_INLINE void | [**operator-=**](#function-operator_10) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
-|  SR\_FORCE\_INLINE [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator/**](#function-operator_11) (const double & s) const<br> |
+|  void | [**operator\*=**](#function-operator_4) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
+|  void | [**operator\*=**](#function-operator_5) (const double & s) <br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator+**](#function-operator_6) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
+|  void | [**operator+=**](#function-operator_7) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator_8) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q2) const<br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator-**](#function-operator_9) () const<br> |
+|  void | [**operator-=**](#function-operator_10) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & p\_q) <br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**operator/**](#function-operator_11) (const double & s) const<br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; | [**operator/**](#function-operator_12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & v) const<br> |
-|  SR\_FORCE\_INLINE void | [**operator/=**](#function-operator_13) (const double & s) <br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_14) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) noexcept const<br> |
+|  void | [**operator/=**](#function-operator_13) (const double & s) <br> |
+|  bool | [**operator==**](#function-operator_14) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) noexcept const<br> |
 
 
 ## Public Static Functions
@@ -117,7 +117,7 @@
 | Type | Name |
 | ---: | :--- |
 |  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**FromEuler**](#function-fromeuler) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & euler) <br> |
-|  constexpr [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Identity**](#function-identity) () <br> |
+|  [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**Identity**](#function-identity) () <br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & direction) <br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & direction, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; Unit &gt; & up) <br> |
 
@@ -234,7 +234,7 @@ float_t SR_MATH_NS::Quaternion::z;
 ### function Angle 
 
 ```C++
-inline SR_NODISCARD Unit SR_FASTCALL SR_MATH_NS::Quaternion::Angle (
+SR_NODISCARD Unit SR_FASTCALL SR_MATH_NS::Quaternion::Angle (
     const Quaternion & q
 ) const
 ```
@@ -277,7 +277,7 @@ SR_NODISCARD Vector3 < T > SR_MATH_NS::Quaternion::EulerAngle () const
 ### function Inverse 
 
 ```C++
-inline SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Inverse () const
+SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Inverse () const
 ```
 
 
@@ -290,7 +290,7 @@ inline SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Inverse () const
 ### function IsEquals 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE bool SR_FASTCALL SR_MATH_NS::Quaternion::IsEquals (
+SR_NODISCARD bool SR_FASTCALL SR_MATH_NS::Quaternion::IsEquals (
     const Quaternion & q,
     Unit tolerance
 ) noexcept const
@@ -306,7 +306,7 @@ inline SR_NODISCARD SR_FORCE_INLINE bool SR_FASTCALL SR_MATH_NS::Quaternion::IsE
 ### function IsFinite 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Quaternion::IsFinite () noexcept const
+SR_NODISCARD bool SR_MATH_NS::Quaternion::IsFinite () noexcept const
 ```
 
 
@@ -319,7 +319,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Quaternion::IsFinite () noexcept const
 ### function IsIdentity 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Quaternion::IsIdentity () noexcept const
+SR_NODISCARD bool SR_MATH_NS::Quaternion::IsIdentity () noexcept const
 ```
 
 
@@ -332,7 +332,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Quaternion::IsIdentity () noexcept const
 ### function Normalize 
 
 ```C++
-inline SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalize () const
+SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalize () const
 ```
 
 
@@ -345,7 +345,7 @@ inline SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalize () const
 ### function Normalized 
 
 ```C++
-inline SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalized () const
+SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Normalized () const
 ```
 
 
@@ -371,9 +371,7 @@ SR_NODISCARD Unit SR_MATH_NS::Quaternion::Pitch () noexcept const
 ### function Quaternion [1/7]
 
 ```C++
-inline constexpr SR_MATH_NS::Quaternion::Quaternion (
-    const Quaternion & p_q
-) 
+SR_MATH_NS::Quaternion::Quaternion () 
 ```
 
 
@@ -386,8 +384,8 @@ inline constexpr SR_MATH_NS::Quaternion::Quaternion (
 ### function Quaternion [2/7]
 
 ```C++
-explicit constexpr SR_MATH_NS::Quaternion::Quaternion (
-    const Matrix4x4 & matrix
+SR_MATH_NS::Quaternion::Quaternion (
+    const Quaternion & p_q
 ) 
 ```
 
@@ -399,19 +397,6 @@ explicit constexpr SR_MATH_NS::Quaternion::Quaternion (
 
 
 ### function Quaternion [3/7]
-
-```C++
-inline constexpr SR_MATH_NS::Quaternion::Quaternion () 
-```
-
-
-
-
-<hr>
-
-
-
-### function Quaternion [4/7]
 
 ```C++
 SR_MATH_NS::Quaternion::Quaternion (
@@ -426,10 +411,10 @@ SR_MATH_NS::Quaternion::Quaternion (
 
 
 
-### function Quaternion [5/7]
+### function Quaternion [4/7]
 
 ```C++
-inline SR_MATH_NS::Quaternion::Quaternion (
+SR_MATH_NS::Quaternion::Quaternion (
     const glm::quat & q
 ) 
 ```
@@ -441,7 +426,7 @@ inline SR_MATH_NS::Quaternion::Quaternion (
 
 
 
-### function Quaternion [6/7]
+### function Quaternion [5/7]
 
 ```C++
 SR_MATH_NS::Quaternion::Quaternion (
@@ -457,10 +442,25 @@ SR_MATH_NS::Quaternion::Quaternion (
 
 
 
+### function Quaternion [6/7]
+
+```C++
+explicit SR_MATH_NS::Quaternion::Quaternion (
+    const Matrix4x4 & matrix
+) 
+```
+
+
+
+
+<hr>
+
+
+
 ### function Quaternion [7/7]
 
 ```C++
-inline explicit constexpr SR_MATH_NS::Quaternion::Quaternion (
+explicit SR_MATH_NS::Quaternion::Quaternion (
     T x,
     T y,
     T z,
@@ -478,7 +478,7 @@ inline explicit constexpr SR_MATH_NS::Quaternion::Quaternion (
 ### function Roll 
 
 ```C++
-inline SR_NODISCARD Unit SR_MATH_NS::Quaternion::Roll () noexcept const
+SR_NODISCARD Unit SR_MATH_NS::Quaternion::Roll () noexcept const
 ```
 
 
@@ -551,7 +551,7 @@ SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::RotateZ (
 ### function Slerp 
 
 ```C++
-inline SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Slerp (
+SR_NODISCARD Quaternion SR_MATH_NS::Quaternion::Slerp (
     const Quaternion & q,
     Unit t
 ) const
@@ -580,7 +580,7 @@ SR_NODISCARD Unit SR_MATH_NS::Quaternion::SquaredNorm () noexcept const
 ### function ToGLM 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE glm::quat SR_MATH_NS::Quaternion::ToGLM () noexcept const
+SR_NODISCARD glm::quat SR_MATH_NS::Quaternion::ToGLM () noexcept const
 ```
 
 
@@ -606,7 +606,7 @@ SR_NODISCARD Matrix4x4 SR_MATH_NS::Quaternion::ToMat4x4 () const
 ### function ToMat4x4GLM 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE glm::mat4 SR_MATH_NS::Quaternion::ToMat4x4GLM () noexcept const
+SR_NODISCARD glm::mat4 SR_MATH_NS::Quaternion::ToMat4x4GLM () noexcept const
 ```
 
 
@@ -619,7 +619,7 @@ inline SR_NODISCARD SR_FORCE_INLINE glm::mat4 SR_MATH_NS::Quaternion::ToMat4x4GL
 ### function ToString 
 
 ```C++
-inline SR_NODISCARD std::string SR_MATH_NS::Quaternion::ToString () const
+SR_NODISCARD std::string SR_MATH_NS::Quaternion::ToString () const
 ```
 
 
@@ -645,7 +645,7 @@ SR_NODISCARD Vector4 < Unit > SR_MATH_NS::Quaternion::Vector () noexcept const
 ### function W 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Quaternion::W () noexcept const
+SR_NODISCARD T SR_MATH_NS::Quaternion::W () noexcept const
 ```
 
 
@@ -658,7 +658,7 @@ inline SR_NODISCARD T SR_MATH_NS::Quaternion::W () noexcept const
 ### function X 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Quaternion::X () noexcept const
+SR_NODISCARD T SR_MATH_NS::Quaternion::X () noexcept const
 ```
 
 
@@ -671,7 +671,7 @@ inline SR_NODISCARD T SR_MATH_NS::Quaternion::X () noexcept const
 ### function Y 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Quaternion::Y () noexcept const
+SR_NODISCARD T SR_MATH_NS::Quaternion::Y () noexcept const
 ```
 
 
@@ -684,7 +684,7 @@ inline SR_NODISCARD T SR_MATH_NS::Quaternion::Y () noexcept const
 ### function Yaw 
 
 ```C++
-inline SR_NODISCARD Unit SR_MATH_NS::Quaternion::Yaw () noexcept const
+SR_NODISCARD Unit SR_MATH_NS::Quaternion::Yaw () noexcept const
 ```
 
 
@@ -697,7 +697,7 @@ inline SR_NODISCARD Unit SR_MATH_NS::Quaternion::Yaw () noexcept const
 ### function Z 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Quaternion::Z () noexcept const
+SR_NODISCARD T SR_MATH_NS::Quaternion::Z () noexcept const
 ```
 
 
@@ -710,7 +710,7 @@ inline SR_NODISCARD T SR_MATH_NS::Quaternion::Z () noexcept const
 ### function operator!= 
 
 ```C++
-inline SR_FORCE_INLINE bool SR_MATH_NS::Quaternion::operator!= (
+bool SR_MATH_NS::Quaternion::operator!= (
     const Quaternion & q
 ) noexcept const
 ```
@@ -725,7 +725,7 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Quaternion::operator!= (
 ### function operator\* 
 
 ```C++
-inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator* (
+Quaternion SR_MATH_NS::Quaternion::operator* (
     const double & s
 ) const
 ```
@@ -755,7 +755,7 @@ Vector3 < Unit > SR_MATH_NS::Quaternion::operator* (
 ### function operator\* 
 
 ```C++
-inline Quaternion SR_MATH_NS::Quaternion::operator* (
+Quaternion SR_MATH_NS::Quaternion::operator* (
     const Quaternion & rhs
 ) const
 ```
@@ -770,7 +770,7 @@ inline Quaternion SR_MATH_NS::Quaternion::operator* (
 ### function operator\*= 
 
 ```C++
-inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator*= (
+void SR_MATH_NS::Quaternion::operator*= (
     const Quaternion & p_q
 ) 
 ```
@@ -785,7 +785,7 @@ inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator*= (
 ### function operator\*= 
 
 ```C++
-inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator*= (
+void SR_MATH_NS::Quaternion::operator*= (
     const double & s
 ) 
 ```
@@ -800,7 +800,7 @@ inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator*= (
 ### function operator+ 
 
 ```C++
-inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator+ (
+Quaternion SR_MATH_NS::Quaternion::operator+ (
     const Quaternion & q2
 ) const
 ```
@@ -815,7 +815,7 @@ inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator+ (
 ### function operator+= 
 
 ```C++
-inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator+= (
+void SR_MATH_NS::Quaternion::operator+= (
     const Quaternion & p_q
 ) 
 ```
@@ -830,7 +830,7 @@ inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator+= (
 ### function operator- 
 
 ```C++
-inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator- (
+Quaternion SR_MATH_NS::Quaternion::operator- (
     const Quaternion & q2
 ) const
 ```
@@ -845,7 +845,7 @@ inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator- (
 ### function operator- 
 
 ```C++
-inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator- () const
+Quaternion SR_MATH_NS::Quaternion::operator- () const
 ```
 
 
@@ -858,7 +858,7 @@ inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator- () const
 ### function operator-= 
 
 ```C++
-inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator-= (
+void SR_MATH_NS::Quaternion::operator-= (
     const Quaternion & p_q
 ) 
 ```
@@ -873,7 +873,7 @@ inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator-= (
 ### function operator/ 
 
 ```C++
-inline SR_FORCE_INLINE Quaternion SR_MATH_NS::Quaternion::operator/ (
+Quaternion SR_MATH_NS::Quaternion::operator/ (
     const double & s
 ) const
 ```
@@ -903,7 +903,7 @@ Vector3 < Unit > SR_MATH_NS::Quaternion::operator/ (
 ### function operator/= 
 
 ```C++
-inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator/= (
+void SR_MATH_NS::Quaternion::operator/= (
     const double & s
 ) 
 ```
@@ -918,7 +918,7 @@ inline SR_FORCE_INLINE void SR_MATH_NS::Quaternion::operator/= (
 ### function operator== 
 
 ```C++
-inline SR_FORCE_INLINE bool SR_MATH_NS::Quaternion::operator== (
+bool SR_MATH_NS::Quaternion::operator== (
     const Quaternion & q
 ) noexcept const
 ```
@@ -950,7 +950,7 @@ static Quaternion SR_MATH_NS::Quaternion::FromEuler (
 ### function Identity 
 
 ```C++
-static inline constexpr Quaternion SR_MATH_NS::Quaternion::Identity () 
+static Quaternion SR_MATH_NS::Quaternion::Identity () 
 ```
 
 

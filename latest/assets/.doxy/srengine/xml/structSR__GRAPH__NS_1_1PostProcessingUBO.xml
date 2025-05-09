@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="35" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="37" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structSR__GRAPH__NS_1_1PostProcessingUBO_1a6a58678b2e4072af45dd7edcf67c0ca1" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="36" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="38" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="38" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="34" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="34" bodyend="37"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" line="36" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Uniforms.h" bodystart="36" bodyend="39"/>
     <listofallmembers>
       <member refid="structSR__GRAPH__NS_1_1PostProcessingUBO_1a0f08d6be5c8410fe4ed52363fba01cdd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PostProcessingUBO</scope><name>gamma</name></member>
       <member refid="structSR__GRAPH__NS_1_1PostProcessingUBO_1a6a58678b2e4072af45dd7edcf67c0ca1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::PostProcessingUBO</scope><name>saturation</name></member>

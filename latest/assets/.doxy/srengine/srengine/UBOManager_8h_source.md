@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_UBO_MANAGER_H
 #define SR_ENGINE_UBO_MANAGER_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
 #include <Utils/Types/ObjectPool.h>
@@ -29,7 +31,7 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_GRAPH_NS::Memory {
-    struct SR_DLL_EXPORT VirtualUBOInfo : public SR_UTILS_NS::NonCopyable {
+    struct SR_RENDERER_DLL_API VirtualUBOInfo : public SR_UTILS_NS::NonCopyable {
         using UBO = int32_t;
 
         struct Data {
@@ -72,7 +74,7 @@ namespace SR_GRAPH_NS::Memory {
 
     };
 
-    class SR_DLL_EXPORT UBOManager : public SR_UTILS_NS::Singleton<UBOManager> {
+    class SR_RENDERER_DLL_API UBOManager : public SR_UTILS_NS::Singleton<UBOManager> {
         SR_REGISTER_SINGLETON(UBOManager)
         using Super = SR_UTILS_NS::Singleton<UBOManager>;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;

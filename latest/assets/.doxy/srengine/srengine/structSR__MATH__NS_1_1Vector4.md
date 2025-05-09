@@ -17,7 +17,6 @@
 
 
 
-Inherited by the following classes: [SR\_MATH\_NS::FColor](classSR__MATH__NS_1_1FColor.md)
 
 
 
@@ -74,48 +73,59 @@ Inherited by the following classes: [SR\_MATH\_NS::FColor](classSR__MATH__NS_1_1
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; SR\_FASTCALL | [**Cast**](#function-cast) () noexcept const<br> |
-|  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**Clamp**](#function-clamp) (U \_max, Y \_min) const<br> |
+|  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**Clamp**](#function-clamp-12) (U \_max, Y \_min) const<br> |
+|  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**Clamp**](#function-clamp-22) (U \_max, Y \_min) const<br> |
 |  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**Cross**](#function-cross) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
 |  SR\_NODISCARD Unit | [**DistanceToPlane**](#function-distancetoplane) (const SR\_MATH\_NS::FVector3 & point) const<br> |
 |  SR\_NODISCARD T | [**Dot**](#function-dot) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & v) const<br> |
 |  SR\_NODISCARD T | [**Dot3**](#function-dot3) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & v) const<br> |
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE T | [**Length**](#function-length) () const<br> |
+|  SR\_NODISCARD T | [**Length**](#function-length) () const<br> |
 |  SR\_NODISCARD [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**Normalize**](#function-normalize) () const<br> |
 |  SR\_NODISCARD T | [**SqrMagnitude**](#function-sqrmagnitude) () const<br> |
 |  SR\_NODISCARD glm::vec4 | [**ToGLM**](#function-toglm) () const<br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector4**](#function-vector4-15) () <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector4**](#function-vector4-25) (T scalar) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector4**](#function-vector4-35) (const glm::vec4 & vec4) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector4**](#function-vector4-45) (T \_x, T \_y, T \_z, T \_w) <br> |
-|  SR\_FAST\_CONSTRUCTOR | [**Vector4**](#function-vector4-55) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & v, T w) <br> |
-|  SR\_NODISCARD constexpr [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**XY**](#function-xy) () noexcept const<br> |
-|  SR\_NODISCARD constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XYZ**](#function-xyz) () noexcept const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator%=**](#function-operator_1) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator\***](#function-operator_2) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator\***](#function-operator_3) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator\*=**](#function-operator_4) (U p\_scalar) <br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator\*=**](#function-operator_5) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator+**](#function-operator_6) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator_7) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator_8) () const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator/**](#function-operator_9) (const U & v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_10) (U p\_scalar) <br> |
-|  SR\_FORCE\_INLINE [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_11) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_12) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
-|  SR\_FORCE\_INLINE const T & | [**operator[]**](#function-operator_13) (int32\_t axis) const<br> |
-|  SR\_FORCE\_INLINE T & | [**operator[]**](#function-operator_14) (int32\_t axis) <br> |
+|   | [**Vector4**](#function-vector4-15) () <br>_=========================================== IMPLEMENTATION =====================================================_  |
+|   | [**Vector4**](#function-vector4-25) (T scalar) <br> |
+|   | [**Vector4**](#function-vector4-35) (const glm::vec4 & vec4) <br> |
+|   | [**Vector4**](#function-vector4-45) (T \_x, T \_y, T \_z, T \_w) <br> |
+|   | [**Vector4**](#function-vector4-55) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & v, T w) <br> |
+|  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**XY**](#function-xy) () noexcept const<br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XYZ**](#function-xyz) () noexcept const<br> |
+|  bool | [**operator!=**](#function-operator) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator%=**](#function-operator_1) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator%=**](#function-operator_2) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator\***](#function-operator_3) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator\***](#function-operator_4) (U p\_scalar) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator\***](#function-operator_5) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator\***](#function-operator_6) (U p\_scalar) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator\*=**](#function-operator_7) (U p\_scalar) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator\*=**](#function-operator_8) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator\*=**](#function-operator_9) (U p\_scalar) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator\*=**](#function-operator_10) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator+**](#function-operator_11) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator+**](#function-operator_12) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator_13) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator-**](#function-operator_14) () const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator-**](#function-operator_15) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) | [**operator/**](#function-operator_16) (const U & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**operator/**](#function-operator_17) (const U & v) const<br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_18) (U p\_scalar) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & | [**operator/=**](#function-operator_19) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator/=**](#function-operator_20) (U p\_scalar) <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; & | [**operator/=**](#function-operator_21) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; U &gt; & p\_v) <br> |
+|  bool | [**operator==**](#function-operator_22) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md) & v) const<br> |
+|  const T & | [**operator[]**](#function-operator_23) (int32\_t axis) const<br> |
+|  T & | [**operator[]**](#function-operator_24) (int32\_t axis) <br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitW**](#function-unitw) () <br> |
-|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
-|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
-|  constexpr [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitW**](#function-unitw) () <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
+|  [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
 
 
 
@@ -298,7 +308,7 @@ T SR_MATH_NS::Vector4< T >::z;
 
 ```C++
 template<typename U>
-inline SR_NODISCARD Vector4 < U > SR_FASTCALL SR_MATH_NS::Vector4::Cast () noexcept const
+SR_NODISCARD Vector4 < U > SR_FASTCALL SR_MATH_NS::Vector4::Cast () noexcept const
 ```
 
 
@@ -308,11 +318,28 @@ inline SR_NODISCARD Vector4 < U > SR_FASTCALL SR_MATH_NS::Vector4::Cast () noexc
 
 
 
-### function Clamp 
+### function Clamp [1/2]
 
 ```C++
 template<typename U, typename Y>
-inline SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Clamp (
+SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Clamp (
+    U _max,
+    Y _min
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function Clamp [2/2]
+
+```C++
+template<typename U, typename Y>
+SR_NODISCARD Vector4 < T > SR_MATH_NS::Vector4::Clamp (
     U _max,
     Y _min
 ) const
@@ -328,7 +355,7 @@ inline SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Clamp (
 ### function Cross 
 
 ```C++
-inline SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Cross (
+SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Cross (
     const Vector4 & v
 ) const
 ```
@@ -343,7 +370,7 @@ inline SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Cross (
 ### function DistanceToPlane 
 
 ```C++
-inline SR_NODISCARD Unit SR_MATH_NS::Vector4::DistanceToPlane (
+SR_NODISCARD Unit SR_MATH_NS::Vector4::DistanceToPlane (
     const SR_MATH_NS::FVector3 & point
 ) const
 ```
@@ -358,7 +385,7 @@ inline SR_NODISCARD Unit SR_MATH_NS::Vector4::DistanceToPlane (
 ### function Dot 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Vector4::Dot (
+SR_NODISCARD T SR_MATH_NS::Vector4::Dot (
     const Vector4 < T > & v
 ) const
 ```
@@ -373,7 +400,7 @@ inline SR_NODISCARD T SR_MATH_NS::Vector4::Dot (
 ### function Dot3 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Vector4::Dot3 (
+SR_NODISCARD T SR_MATH_NS::Vector4::Dot3 (
     const Vector3 < T > & v
 ) const
 ```
@@ -388,7 +415,7 @@ inline SR_NODISCARD T SR_MATH_NS::Vector4::Dot3 (
 ### function IsFinite 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Vector4::IsFinite () noexcept const
+SR_NODISCARD bool SR_MATH_NS::Vector4::IsFinite () noexcept const
 ```
 
 
@@ -401,7 +428,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Vector4::IsFinite () noexcept const
 ### function Length 
 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE T SR_MATH_NS::Vector4::Length () const
+SR_NODISCARD T SR_MATH_NS::Vector4::Length () const
 ```
 
 
@@ -414,7 +441,7 @@ inline SR_NODISCARD SR_FORCE_INLINE T SR_MATH_NS::Vector4::Length () const
 ### function Normalize 
 
 ```C++
-inline SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Normalize () const
+SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Normalize () const
 ```
 
 
@@ -427,7 +454,7 @@ inline SR_NODISCARD Vector4 SR_MATH_NS::Vector4::Normalize () const
 ### function SqrMagnitude 
 
 ```C++
-inline SR_NODISCARD T SR_MATH_NS::Vector4::SqrMagnitude () const
+SR_NODISCARD T SR_MATH_NS::Vector4::SqrMagnitude () const
 ```
 
 
@@ -452,8 +479,9 @@ inline SR_NODISCARD glm::vec4 SR_MATH_NS::Vector4::ToGLM () const
 
 ### function Vector4 [1/5]
 
+_=========================================== IMPLEMENTATION =====================================================_ 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 () 
+SR_MATH_NS::Vector4::Vector4 () 
 ```
 
 
@@ -466,7 +494,7 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 ()
 ### function Vector4 [2/5]
 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
+SR_MATH_NS::Vector4::Vector4 (
     T scalar
 ) 
 ```
@@ -481,7 +509,7 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
 ### function Vector4 [3/5]
 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
+SR_MATH_NS::Vector4::Vector4 (
     const glm::vec4 & vec4
 ) 
 ```
@@ -496,7 +524,7 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
 ### function Vector4 [4/5]
 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
+SR_MATH_NS::Vector4::Vector4 (
     T _x,
     T _y,
     T _z,
@@ -514,7 +542,7 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
 ### function Vector4 [5/5]
 
 ```C++
-inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
+SR_MATH_NS::Vector4::Vector4 (
     const Vector3 < T > & v,
     T w
 ) 
@@ -530,7 +558,7 @@ inline SR_FAST_CONSTRUCTOR SR_MATH_NS::Vector4::Vector4 (
 ### function XY 
 
 ```C++
-inline SR_NODISCARD constexpr Vector2 < T > SR_MATH_NS::Vector4::XY () noexcept const
+SR_NODISCARD Vector2 < T > SR_MATH_NS::Vector4::XY () noexcept const
 ```
 
 
@@ -543,7 +571,7 @@ inline SR_NODISCARD constexpr Vector2 < T > SR_MATH_NS::Vector4::XY () noexcept 
 ### function XYZ 
 
 ```C++
-inline SR_NODISCARD constexpr Vector3 < T > SR_MATH_NS::Vector4::XYZ () noexcept const
+SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector4::XYZ () noexcept const
 ```
 
 
@@ -556,7 +584,7 @@ inline SR_NODISCARD constexpr Vector3 < T > SR_MATH_NS::Vector4::XYZ () noexcept
 ### function operator!= 
 
 ```C++
-inline SR_FORCE_INLINE bool SR_MATH_NS::Vector4::operator!= (
+bool SR_MATH_NS::Vector4::operator!= (
     const Vector4 & v
 ) const
 ```
@@ -572,7 +600,23 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector4::operator!= (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator%= (
+Vector4 & SR_MATH_NS::Vector4::operator%= (
+    const Vector4 < U > & p_v
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator%= 
+
+```C++
+template<typename U>
+Vector4 < T > & SR_MATH_NS::Vector4::operator%= (
     const Vector4 < U > & p_v
 ) 
 ```
@@ -588,7 +632,7 @@ inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator%= (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator* (
+Vector4 SR_MATH_NS::Vector4::operator* (
     const Vector4 < U > & p_v
 ) const
 ```
@@ -604,7 +648,39 @@ inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator* (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator* (
+Vector4 SR_MATH_NS::Vector4::operator* (
+    U p_scalar
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator\* 
+
+```C++
+template<typename U>
+Vector4 < T > SR_MATH_NS::Vector4::operator* (
+    const Vector4 < U > & p_v
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator\* 
+
+```C++
+template<typename U>
+Vector4 < T > SR_MATH_NS::Vector4::operator* (
     U p_scalar
 ) const
 ```
@@ -620,7 +696,7 @@ inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator* (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator*= (
+Vector4 & SR_MATH_NS::Vector4::operator*= (
     U p_scalar
 ) 
 ```
@@ -636,7 +712,39 @@ inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator*= (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator*= (
+Vector4 & SR_MATH_NS::Vector4::operator*= (
+    const Vector4 < U > & p_v
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator\*= 
+
+```C++
+template<typename U>
+Vector4 < T > & SR_MATH_NS::Vector4::operator*= (
+    U p_scalar
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator\*= 
+
+```C++
+template<typename U>
+Vector4 < T > & SR_MATH_NS::Vector4::operator*= (
     const Vector4 < U > & p_v
 ) 
 ```
@@ -652,7 +760,23 @@ inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator*= (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator+ (
+Vector4 SR_MATH_NS::Vector4::operator+ (
+    const Vector4 < U > & v
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator+ 
+
+```C++
+template<typename U>
+Vector4 < T > SR_MATH_NS::Vector4::operator+ (
     const Vector4 < U > & v
 ) const
 ```
@@ -668,7 +792,7 @@ inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator+ (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator- (
+Vector4 SR_MATH_NS::Vector4::operator- (
     const Vector4 < U > & p_v
 ) const
 ```
@@ -683,7 +807,23 @@ inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator- (
 ### function operator- 
 
 ```C++
-inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator- () const
+Vector4 SR_MATH_NS::Vector4::operator- () const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator- 
+
+```C++
+template<typename U>
+Vector4 < T > SR_MATH_NS::Vector4::operator- (
+    const Vector4 < U > & p_v
+) const
 ```
 
 
@@ -697,7 +837,23 @@ inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator- () const
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator/ (
+Vector4 SR_MATH_NS::Vector4::operator/ (
+    const U & v
+) const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator/ 
+
+```C++
+template<typename U>
+Vector4 < T > SR_MATH_NS::Vector4::operator/ (
     const U & v
 ) const
 ```
@@ -713,7 +869,7 @@ inline SR_FORCE_INLINE Vector4 SR_MATH_NS::Vector4::operator/ (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator/= (
+Vector4 & SR_MATH_NS::Vector4::operator/= (
     U p_scalar
 ) 
 ```
@@ -729,7 +885,39 @@ inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator/= (
 
 ```C++
 template<typename U>
-inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator/= (
+Vector4 & SR_MATH_NS::Vector4::operator/= (
+    const Vector4 < U > & p_v
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator/= 
+
+```C++
+template<typename U>
+Vector4 < T > & SR_MATH_NS::Vector4::operator/= (
+    U p_scalar
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator/= 
+
+```C++
+template<typename U>
+Vector4 < T > & SR_MATH_NS::Vector4::operator/= (
     const Vector4 < U > & p_v
 ) 
 ```
@@ -744,7 +932,7 @@ inline SR_FORCE_INLINE Vector4 & SR_MATH_NS::Vector4::operator/= (
 ### function operator== 
 
 ```C++
-inline SR_FORCE_INLINE bool SR_MATH_NS::Vector4::operator== (
+bool SR_MATH_NS::Vector4::operator== (
     const Vector4 & v
 ) const
 ```
@@ -759,7 +947,7 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector4::operator== (
 ### function operator[] 
 
 ```C++
-inline SR_FORCE_INLINE const T & SR_MATH_NS::Vector4::operator[] (
+const T & SR_MATH_NS::Vector4::operator[] (
     int32_t axis
 ) const
 ```
@@ -774,7 +962,7 @@ inline SR_FORCE_INLINE const T & SR_MATH_NS::Vector4::operator[] (
 ### function operator[] 
 
 ```C++
-inline SR_FORCE_INLINE T & SR_MATH_NS::Vector4::operator[] (
+T & SR_MATH_NS::Vector4::operator[] (
     int32_t axis
 ) 
 ```
@@ -791,7 +979,7 @@ inline SR_FORCE_INLINE T & SR_MATH_NS::Vector4::operator[] (
 ### function UnitW 
 
 ```C++
-static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitW () 
+static Vector4 < T > SR_MATH_NS::Vector4::UnitW () 
 ```
 
 
@@ -804,7 +992,7 @@ static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitW ()
 ### function UnitX 
 
 ```C++
-static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitX () 
+static Vector4 < T > SR_MATH_NS::Vector4::UnitX () 
 ```
 
 
@@ -817,7 +1005,7 @@ static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitX ()
 ### function UnitY 
 
 ```C++
-static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitY () 
+static Vector4 < T > SR_MATH_NS::Vector4::UnitY () 
 ```
 
 
@@ -830,7 +1018,7 @@ static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitY ()
 ### function UnitZ 
 
 ```C++
-static inline constexpr Vector4 < T > SR_MATH_NS::Vector4::UnitZ () 
+static Vector4 < T > SR_MATH_NS::Vector4::UnitZ () 
 ```
 
 

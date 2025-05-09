@@ -362,11 +362,11 @@
         <childnode refid="3" relation="usage">
           <edgelabel>m_graph</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>m_pose</edgelabel>
         </childnode>
       </node>
-      <node id="13">
+      <node id="11">
         <label>SR_ANIMATIONS_NS::AnimationPose</label>
         <link refid="classSR__ANIMATIONS__NS_1_1AnimationPose"/>
         <childnode refid="2" relation="public-inheritance">
@@ -396,9 +396,6 @@
         <childnode refid="10" relation="usage">
           <edgelabel>m_scene</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>m_properties</edgelabel>
-        </childnode>
       </node>
       <node id="9">
         <label>SR_UTILS_NS::IComponentable</label>
@@ -413,18 +410,6 @@
       <node id="5">
         <label>SR_UTILS_NS::Path</label>
         <link refid="classSR__UTILS__NS_1_1Path"/>
-      </node>
-      <node id="12">
-        <label>SR_UTILS_NS::Property</label>
-        <link refid="classSR__UTILS__NS_1_1Property"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>SR_UTILS_NS::PropertyContainer</label>
-        <link refid="classSR__UTILS__NS_1_1PropertyContainer"/>
-        <childnode refid="12" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="10">
         <label>SR_WORLD_NS::Scene</label>
@@ -448,13 +433,13 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1af7f3a78d6b0bb03a52e661ca5a45bab4" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>m_inputPins</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a9ce274254fc20557051d1441fd65c7a3" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>m_outputPins</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a06c148aad06c2bec159933325ffb86a8" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>m_pose</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>operator=</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1ade5e8529b80b34d7a28bdfcd4a323320" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>SetGraph</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a6bb150752fe838747b567110d9f6e086" prot="public" virt="pure-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>Update</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationGraphNode_1a2314026f75ade68bc0bc4fbf2bfa7a73" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>~AnimationGraphNode</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationGraphNode</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

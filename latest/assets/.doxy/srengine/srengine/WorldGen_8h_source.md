@@ -19,7 +19,7 @@ namespace SR_WORLD_NS {
     class Region;
     class Chunk;
 
-    class SR_DLL_EXPORT WorldGen {
+    class SR_COMMON_DLL_API WorldGen {
 
     };
 }

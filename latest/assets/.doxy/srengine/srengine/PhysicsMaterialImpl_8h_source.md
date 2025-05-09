@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_PHYSICSMATERIALIMPL_H
 #define SR_ENGINE_PHYSICSMATERIALIMPL_H
 
+#include <Physics/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_PHYSICS_NS {

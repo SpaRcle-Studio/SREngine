@@ -377,6 +377,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1af209b6a5f9270db78b261afa7d1f5ae6" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Callback</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1aea464c46c1f034338a99a1bc741724f5" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>CustomDrawCallback</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a66e0558480edc132a5ca2f6c85ce138d" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Draw</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>DynamicCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a583e75807829d0eeae4b8def1d73eb19" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Event</name></member>
@@ -391,7 +392,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>GetUncheckedRef</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1a8e7f827ce12cde77b7e90d8fc4fb2731" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a2e73cf16d0d7039bd0f1416ae0e17a9b" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IEvent</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IncrementPointer</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1a0f186dcfab2d26eeced90d670b98fb63" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>InputHandler</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1a2bcbb6d0b759f55d49b973bcb90c2030" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IsActiveFn</name></member>
       <member refid="classSR__UTILS__NS_1_1InputHandler_1ac2e6a409a38ca80df3a3eb7418490182" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>IsKeyPressed</name></member>
@@ -437,7 +439,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>StaticCast</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1abd0c24f64093df0ec6e43569eae8d236" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::Event::"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Trigger</name></member>
@@ -446,10 +448,10 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1WidgetContainerElement_1accadb531c21503ec6910b62b26c1949c" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>WidgetContainerElement</name></member>
       <member refid="classSR__UTILS__NS_1_1Event_1a0d08312b78abd09b06ed69b1820d1605" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~Event</name></member>
-      <member refid="classSR__UTILS__NS_1_1IEvent_1ad5abfdb988e1ee0cd10c892dbf2d977c" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~IEvent</name></member>
-      <member refid="classSR__UTILS__NS_1_1InputHandler_1a52421b9a194941c028eeb2009633182e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~InputHandler</name></member>
+      <member refid="classSR__UTILS__NS_1_1IEvent_1a900ba41fdab52a6162b903b476120a7a" prot="protected" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~IEvent</name></member>
+      <member refid="classSR__UTILS__NS_1_1InputHandler_1ad0111971be1665c6d0f0e3fef067e7e6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~InputHandler</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::WidgetContainerElement</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

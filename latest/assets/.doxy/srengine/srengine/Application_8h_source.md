@@ -40,6 +40,8 @@ namespace SR_CORE_NS {
         virtual bool InitializeResourcesFolder();
 
         SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
+        SR_NODISCARD const SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() const { return m_engine; }
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<Engine>& GetEngine() { return m_engine; }
 
     private:
         bool InitResourceTypes();

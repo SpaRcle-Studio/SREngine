@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="15" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="53" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="55" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="55" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="56" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="56" bodyend="56"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="58" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8cb70843af2758db24f6d43226ecaa83" prot="private" static="no" mutable="no">
         <type>VkSemaphore</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="58" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="58" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="60" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aa6dcbc4e0de35e5286bb2b5ae9c92220" prot="private" static="no" mutable="no">
         <type>VkCommandBufferBeginInfo</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="60" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="60" bodyend="60"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="62" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="62" bodyend="62"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a732ad3bf0ac70e0f0724633e1f06fe86" prot="private" static="no" mutable="no">
         <type>VkRenderPassBeginInfo</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="61" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="61" bodyend="61"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="63" column="31" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="63" bodyend="63"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab11c961d548e415abc3f4930d568f0d2" prot="private" static="no" mutable="no">
         <type>std::vector&lt; VkClearValue &gt;</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="62" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="62" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="64" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6c3891ef7cc91a45c7b596afbca8f2aa" prot="private" static="no" mutable="no">
         <type>std::vector&lt; VkFramebuffer &gt;</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="64" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="64" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="66" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a4243f7daa0c77d02ff4a9a969f8f24d3" prot="private" static="no" mutable="no">
         <type>std::vector&lt; VkCommandPool &gt;</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="65" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="65" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="67" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8596339debd927115070a7c0545d41af" prot="private" static="no" mutable="no">
         <type>std::vector&lt; VkCommandBuffer &gt;</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="66" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="66" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="68" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aadd40d41dd9793e416476b93ec0b4e4c" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::RenderPass</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="68" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="68" bodyend="68"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="70" column="38" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="70" bodyend="70"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a56e6ebfde08e201419c63af000bb09cc" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::DescriptorPool *</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="70" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="72" column="42" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a13cf18f097fdb5821d1adcbbac84e0ba" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::Device *</type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="71" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="71" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="73" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad4b1959cf221650b9927a31c685422d7" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::Swapchain *</type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="72" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="72" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="74" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab89dc2642a0444d70b71833e19c7b7c6" prot="private" static="no" mutable="no">
         <type>EvoVulkan::Types::MultisampleTarget *</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="73" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="73" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="75" column="45" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a767757efbc63213f69d964d0c632d211" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="75" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="75" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="77" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="15" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="15" bodyend="17"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="17" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="17" bodyend="19"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad27e79e15a83caa09afd271d672d1839" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="19" bodyend="23"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="21" bodyend="25"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a2268d5e7a2866916b52e4c2cfe6fdbda" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="26" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="28" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a29af9adf09ce0334fca42037aec188a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="27" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="29" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afffd7360632c6dd73f4f56bb2ecde9be" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>SR_NODISCARD std::string</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="29" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="29" bodyend="29"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="31" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="31" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab53ad32ab0aa553c8826614589f9dd81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::SubmitInfo &amp;</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="31" column="44"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="33" column="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a55c7d7e654e6df5e1efa739871c91d1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD void *</type>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="32" column="27"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="34" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a344243133dc873a6e28547fadaf31620" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD VkSemaphore</type>
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="34" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="34" bodyend="34"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="36" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="36" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a827c2b04e4fd5257b6341728dc84c462" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD EvoVulkan::SubmitInfo &amp;</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="35" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="35" bodyend="35"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="37" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab5c11677e2224e6cc625d6fabdb10929" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="37" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ae0137bc70bacf4ec07e09c91d8a731e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="38" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a0673d04eef665d0d0fb30008b92f1953" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -428,7 +428,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="40" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="42" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6925f74283d0554d75706d4311c00a11" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="42" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1af450a77cb6fa903e5848706801ae3341" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="43" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="45" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -474,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="46" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="48" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a95f36e110f0fd4efaeb76a55912d9991" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="47" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="49" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a5873ac6ac505a16f4a9134fe085fc6f3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -502,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="48" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afb490a657a7d9332181ca7b3319bf24f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -516,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="50" column="18"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="52" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -598,11 +598,12 @@
         <link refid="classSR__UTILS__NS_1_1Path"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="12" bodyend="77"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Overlay/VulkanImGuiOverlay.h" bodystart="14" bodyend="79"/>
     <listofallmembers>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>AutoFree</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6925f74283d0554d75706d4311c00a11" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>BeginDraw</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DecrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a95f36e110f0fd4efaeb76a55912d9991" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DeInitializeRenderer</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a0673d04eef665d0d0fb30008b92f1953" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Destroy</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a5873ac6ac505a16f4a9134fe085fc6f3" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>DestroyBuffers</name></member>
@@ -627,6 +628,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a62a20cefd39e02b306088e37da90db9e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>ImGuiOverlay</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>IncrementPointer</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a2268d5e7a2866916b52e4c2cfe6fdbda" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Init</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ada97d278f1454505f3e992f60594c92a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>InitializeRenderer</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1ad93fbafb17b027685d36f683468f38d7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>IsEnabled</name></member>
@@ -692,7 +694,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>StaticCast</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a3b04538b468d1f74132eeeaab0648217" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Super</name></member>
@@ -701,7 +703,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Valid</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a3449d621adff6dc846ece113e943fa28" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>VulkanImGuiOverlay</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~SharedPtrBase</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ad27e79e15a83caa09afd271d672d1839" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>~VulkanImGuiOverlay</name></member>
     </listofallmembers>
   </compounddef>

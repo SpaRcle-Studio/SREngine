@@ -8,8 +8,9 @@
 
 
 
+_@scriptableClass_ 
 
-
+* `#include <GameObject.h>`
 
 
 
@@ -58,6 +59,7 @@ Inherits the following classes: SceneObject
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD GameObject::Ptr | [**CreateChild**](#function-createchild) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
+|   | [**GameObject**](#function-gameobject) () = default<br> |
 |  SR\_NODISCARD GameObject::Ptr | [**GetOrCreateChild**](#function-getorcreatechild) ([**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) name) <br> |
 |  SR\_NODISCARD [**SR\_HTYPES\_NS::SharedPtr**](classSR__HTYPES__NS_1_1SharedPtr.md)&lt; [**Transform**](classSR__UTILS__NS_1_1Transform.md) &gt; | [**GetParentTransform**](#function-getparenttransform) () noexcept const<br> |
 |  SR\_NODISCARD SceneObjectType | [**GetSceneObjectType**](#function-getsceneobjecttype) () noexcept override const<br> |
@@ -124,6 +126,19 @@ using SR_UTILS_NS::GameObject::Ptr =  SR_HTYPES_NS::SharedPtr<GameObject>;
 SR_NODISCARD GameObject::Ptr SR_UTILS_NS::GameObject::CreateChild (
     StringAtom name
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function GameObject 
+
+```C++
+SR_UTILS_NS::GameObject::GameObject () = default
 ```
 
 

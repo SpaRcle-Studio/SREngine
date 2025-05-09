@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_44d7275059ecd594487e039c74bc8965" kind="dir">
     <compoundname>Engine/Core/libs/Utils/inc/Utils/Events</compoundname>
+    <innerfile refid="Broadcaster_8h">Broadcaster.h</innerfile>
     <innerfile refid="Event_8h">Event.h</innerfile>
     <innerfile refid="EventDispatcher_8h">EventDispatcher.h</innerfile>
     <innerfile refid="EventManager_8h">EventManager.h</innerfile>

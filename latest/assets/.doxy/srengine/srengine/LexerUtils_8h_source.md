@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_SRSL_LEXERUTILS_H
 #define SR_ENGINE_SRSL_LEXERUTILS_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Common/StringFormat.h>

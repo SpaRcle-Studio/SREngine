@@ -395,6 +395,7 @@ See [SR\_GRAPH\_GUI\_NS::Widget](classSR__GRAPH__GUI__NS_1_1Widget.md)
 | virtual void | [**Draw**](#function-draw) () override<br> |
 |  void | [**DrawComponent**](#function-drawcomponent) ([**SR\_UTILS\_NS::Component**](classSR__UTILS__NS_1_1Component.md) \* pComponent, uint32\_t & index) <br> |
 |  void | [**DrawComponents**](#function-drawcomponents) ([**SR\_UTILS\_NS::IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) \* pIComponentable) <br> |
+|  void | [**InitCategories**](#function-initcategories) () <br> |
 |  void | [**InspectGameObject**](#function-inspectgameobject) () <br> |
 |  void | [**InspectLayer**](#function-inspectlayer) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) layer, const [**SR\_HTYPES\_NS::Function**](classSR__HTYPES__NS_1_1Function.md)&lt; void([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md))&gt; & callback) <br> |
 |  void | [**InspectScene**](#function-inspectscene) () <br> |
@@ -427,8 +428,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 ## Protected Functions inherited from SR_UTILS_NS::InputHandler
@@ -450,8 +451,8 @@ See [SR\_UTILS\_NS::IEvent](classSR__UTILS__NS_1_1IEvent.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () = default<br> |
-| virtual  | [**~IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () = default<br> |
+|   | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () <br> |
+| virtual  | [**~IEvent**](classSR__UTILS__NS_1_1IEvent.md#function-ievent) () <br> |
 
 
 
@@ -583,6 +584,19 @@ void SR_CORE_GUI_NS::Inspector::DrawComponent (
 void SR_CORE_GUI_NS::Inspector::DrawComponents (
     SR_UTILS_NS::IComponentable * pIComponentable
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function InitCategories 
+
+```C++
+void SR_CORE_GUI_NS::Inspector::InitCategories () 
 ```
 
 

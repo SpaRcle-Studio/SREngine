@@ -22,26 +22,23 @@
 
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS(SettingsVarType,
-          Unknown,
-          Bool,
-          Int32,
-          UInt32,
-          Float,
-          FVec2,
-          FVec3,
-          FVec4,
-          IVec2,
-          IVec3,
-          IVec4
+        Unknown,
+        Bool,
+        Int32,
+        UInt32,
+        Float,
+        FVec2,
+        FVec3,
+        FVec4,
+        IVec2,
+        IVec3,
+        IVec4
     )
 
-    class SR_DLL_EXPORT Settings : public IResource {
+    class SR_COMMON_DLL_API Settings : public IResource {
     protected:
-        Settings()
-            : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Settings))
-        { }
-
-        ~Settings() override = default;
+        Settings();
+        ~Settings() override;
 
     public:
         bool Destroy() final;
@@ -49,8 +46,8 @@ namespace SR_UTILS_NS {
         void Do(const SR_HTYPES_NS::Function<void(Settings*)>& fun);
 
     protected:
-        virtual void ClearSettings() { }
-        virtual bool LoadSettings(const Xml::Node& node) { return true; }
+        virtual void ClearSettings();
+        virtual bool LoadSettings(const Xml::Node& node);
 
         bool Reload() final;
 
@@ -64,28 +61,10 @@ namespace SR_UTILS_NS {
 
     };
 
-    template<typename T> class SR_DLL_EXPORT GlobalSettings : public Settings, public Singleton<T> {
+    template<typename T> class GlobalSettings : public Settings, public Singleton<T> {
         friend class Singleton<T>;
     public:
-        SR_MAYBE_UNUSED static void DestroySettings() {
-            if (!Singleton<T>::IsSingletonInitialized()) {
-                return;
-            }
-
-            auto&& pSettings = &Singleton<T>::Instance();
-
-            GetSingletonManager()->Remove(T::GetStaticSingletonName());
-
-            if (!pSettings->IsRegistered()) {
-                return;
-            }
-
-            if (pSettings->RemoveUsePoint() == IResource::RemoveUPResult::Success) {
-                pSettings->ForceDestroy();
-            }
-
-            ResourceManager::Instance().Synchronize(true);
-        }
+        SR_MAYBE_UNUSED static void DestroySettings();
 
     protected:
         ~GlobalSettings() override = default;
@@ -93,10 +72,33 @@ namespace SR_UTILS_NS {
     private:
         void OnSingletonDestroy() final;
         void InitSingleton() final;
-        bool IsSingletonCanBeDestroyed() const final { return false; }
+        bool IsSingletonCanBeDestroyed() const final;
         IResource::RemoveUPResult RemoveUsePoint() final;
 
     };
+
+#ifdef SR_COMMON_DLL_EXPORTS
+    template<typename T> bool GlobalSettings<T>::IsSingletonCanBeDestroyed() const { return false; }
+
+    template<typename T> SR_MAYBE_UNUSED void GlobalSettings<T>::DestroySettings() {
+        if (!Singleton<T>::IsSingletonInitialized()) {
+            return;
+        }
+
+        auto&& pSettings = &Singleton<T>::Instance();
+
+        GetSingletonManager()->Remove(T::GetStaticSingletonName());
+
+        if (!pSettings->IsRegistered()) {
+            return;
+        }
+
+        if (pSettings->RemoveUsePoint() == IResource::RemoveUPResult::Success) {
+            pSettings->ForceDestroy();
+        }
+
+        ResourceManager::Instance().Synchronize(true);
+    }
 
     template<typename T> void GlobalSettings<T>::OnSingletonDestroy() {
         Singleton<T>::OnSingletonDestroy();
@@ -119,6 +121,7 @@ namespace SR_UTILS_NS {
         --m_countUses;
         return IResource::RemoveUPResult::Success;
     }
+#endif
 }
 
 #endif //SR_ENGINE_SETTINGS_H

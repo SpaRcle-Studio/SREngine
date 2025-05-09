@@ -23,7 +23,9 @@
 #include <Utils/Types/Map.h>
 #include <Utils/Debug.h>
 
-#include <Tracy.hpp>
+#ifndef SR_ENGINE_CODEGEN_CLANG_PARSE_MODE
+    #include <Tracy.hpp>
+#endif
 
 namespace SR_UTILS_NS {
     SR_ENUM_NS_STRUCT_T(TracyType, uint8_t,

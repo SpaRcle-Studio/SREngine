@@ -522,8 +522,8 @@
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>AddUsePoint</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Broadcast</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Broadcast</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a417e3c9fb6ed1555aa9fc1ab48b58afb" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Calculate</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>CheckResourceUsage</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>CopyResource</name></member>
@@ -587,12 +587,14 @@
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a36f56b63a24f54b9486e86dcba9b6617" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_virtualUBO</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_watchers</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1ab5c92f0799411c36f22bc7db2234d5f6" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>m_width</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>OnReloadDone</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>OnResourceRegistered</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a74816c9d996dbfbae5b18f61445e0e8d" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Skybox</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Skybox</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Skybox</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a49a0ec81c7a8b434b0c46d8df4c38661" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Ptr</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Reload</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>RELOAD_BEGIN_EVENT</name></member>
@@ -610,12 +612,15 @@
       <member refid="classSR__GTYPES__NS_1_1Skybox_1a14067cdde836d48bd1a8bd2d34a201ab" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>StartWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>StopWatch</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Subscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1aace2e1cee108563a8d9fa93adadade9b" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Unload</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>Unsubscribe</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8374f937e659f29170b1db2b81ba2594" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>UpdateResourceLifeTime</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>UpdateResources</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>~IResource</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__GTYPES__NS_1_1Skybox_1ac02acc25b21317d74304bf206e95f0f3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>~Skybox</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Skybox</scope><name>~SubscriptionHolder</name></member>

@@ -15,6 +15,9 @@
 #ifndef SR_ENGINE_CORE_CLI_MANAGER_H
 #define SR_ENGINE_CORE_CLI_MANAGER_H
 
+#include <Utils/Common/Singleton.h>
+#include <Utils/Common/Enumerations.h>
+
 namespace SR_CORE_NS {
     SR_ENUM_NS_STRUCT_T(CLIFlags, uint32_t,
         None = 0,

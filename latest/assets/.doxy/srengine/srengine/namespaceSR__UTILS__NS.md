@@ -31,6 +31,7 @@
 | namespace | [**Base64**](namespaceSR__UTILS__NS_1_1Base64.md) <br> |
 | namespace | [**Details**](namespaceSR__UTILS__NS_1_1Details.md) <br> |
 | namespace | [**EntityRefUtils**](namespaceSR__UTILS__NS_1_1EntityRefUtils.md) <br> |
+| namespace | [**Events**](namespaceSR__UTILS__NS_1_1Events.md) <br> |
 | namespace | [**Graph**](namespaceSR__UTILS__NS_1_1Graph.md) <br> |
 | namespace | [**Hash**](namespaceSR__UTILS__NS_1_1Hash.md) <br> |
 | namespace | [**Localization**](namespaceSR__UTILS__NS_1_1Localization.md) <br> |
@@ -59,6 +60,7 @@
 | class | [**ArrayReferenceProperty**](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) <br>_---------------------------------------_  __[_**ArrayReferenceProperty**_](classSR__UTILS__NS_1_1ArrayReferenceProperty.md) _-------------------------------------------_ __ |
 | class | [**AtlasBuilderTest**](classSR__UTILS__NS_1_1AtlasBuilderTest.md) <br> |
 | class | [**BaseFactory**](classSR__UTILS__NS_1_1BaseFactory.md) <br> |
+| class | [**Broadcaster**](classSR__UTILS__NS_1_1Broadcaster.md) <br> |
 | class | [**CameraFlyMover**](classSR__UTILS__NS_1_1CameraFlyMover.md) <br> |
 | struct | [**CheckOperatorUsable**](structSR__UTILS__NS_1_1CheckOperatorUsable.md) &lt;Op, class X, class Y, typename&gt;<br> |
 | struct | [**CheckOperatorUsable&lt; CheckerEqualityComparable, std::optional&lt; T &gt;, std::optional&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1CheckOperatorUsable_3_01CheckerEqualityComparable_00_01std_1_1optional_3_835c32e76e2a52d0e0f22fbe39d31aa3.md) &lt;typename T&gt;<br> |
@@ -72,7 +74,7 @@
 | class | [**Compression**](classSR__UTILS__NS_1_1Compression.md) <br> |
 | struct | [**ConstexprStringHashEntry**](structSR__UTILS__NS_1_1ConstexprStringHashEntry.md) <br> |
 | class | [**CursorLock**](classSR__UTILS__NS_1_1CursorLock.md) <br> |
-| class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br> |
+| class | [**Debug**](classSR__UTILS__NS_1_1Debug.md) <br>_@scriptableClass_  |
 | class | [**DebugDraw**](classSR__UTILS__NS_1_1DebugDraw.md) <br> |
 | class | [**DebugLogComponent**](classSR__UTILS__NS_1_1DebugLogComponent.md) <br> |
 | struct | [**DefaultChecker**](structSR__UTILS__NS_1_1DefaultChecker.md) &lt;typename T, typename Enable&gt;<br> |
@@ -95,8 +97,9 @@
 | class | [**Features**](classSR__UTILS__NS_1_1Features.md) <br> |
 | class | [**FileDialog**](classSR__UTILS__NS_1_1FileDialog.md) <br> |
 | class | [**FileSystem**](classSR__UTILS__NS_1_1FileSystem.md) <br> |
+| class | [**FileSystemWatcher**](classSR__UTILS__NS_1_1FileSystemWatcher.md) <br> |
 | class | [**FileWatcher**](classSR__UTILS__NS_1_1FileWatcher.md) <br> |
-| class | [**GameObject**](classSR__UTILS__NS_1_1GameObject.md) <br> |
+| class | [**GameObject**](classSR__UTILS__NS_1_1GameObject.md) <br>_@scriptableClass_  |
 | struct | [**GetFirstOfTypeFromSequence**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence.md) &lt;class T, class Pair, Pairs&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequence&lt; T, Pair &gt;**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequence_3_01T_00_01Pair_01_4.md) &lt;class T, class Pair&gt;<br> |
 | struct | [**GetFirstOfTypeFromSequenceAssert**](structSR__UTILS__NS_1_1GetFirstOfTypeFromSequenceAssert.md) &lt;class T&gt;<br> |
@@ -109,7 +112,7 @@
 | class | [**IBaseSerializer**](classSR__UTILS__NS_1_1IBaseSerializer.md) <br> |
 | class | [**ICloneable**](classSR__UTILS__NS_1_1ICloneable.md) <br> |
 | class | [**ICommand**](classSR__UTILS__NS_1_1ICommand.md) <br> |
-| class | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) <br> |
+| class | [**IComponentable**](classSR__UTILS__NS_1_1IComponentable.md) <br>_@scriptableClass_  |
 | class | [**IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) <br> |
 | class | [**IEvent**](classSR__UTILS__NS_1_1IEvent.md) <br> |
 | class | [**IMigrator**](classSR__UTILS__NS_1_1IMigrator.md) <br> |
@@ -163,6 +166,9 @@
 | class | [**Random**](classSR__UTILS__NS_1_1Random.md) <br> |
 | struct | [**RaycastHit**](structSR__UTILS__NS_1_1RaycastHit.md) <br> |
 | struct | [**RemoveCVRef**](structSR__UTILS__NS_1_1RemoveCVRef.md) &lt;class T&gt;<br> |
+| struct | [**RemoveReference**](structSR__UTILS__NS_1_1RemoveReference.md) &lt;typename T&gt;<br> |
+| struct | [**RemoveReference&lt; T & &gt;**](structSR__UTILS__NS_1_1RemoveReference_3_01T_01_6_01_4.md) &lt;typename T&gt;<br> |
+| struct | [**RemoveReference&lt; T && &gt;**](structSR__UTILS__NS_1_1RemoveReference_3_01T_01_6_6_01_4.md) &lt;typename T&gt;<br> |
 | class | [**ResourceContainer**](classSR__UTILS__NS_1_1ResourceContainer.md) <br> |
 | class | [**ResourceEmbedder**](classSR__UTILS__NS_1_1ResourceEmbedder.md) <br> |
 | struct | [**ResourceInfo**](structSR__UTILS__NS_1_1ResourceInfo.md) <br> |
@@ -197,7 +203,7 @@
 | class | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md) <br> |
 | class | [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) <br> |
 | class | [**StandardProperty**](classSR__UTILS__NS_1_1StandardProperty.md) <br>_-------------------------------------_  __[_**StandardProperty**_](classSR__UTILS__NS_1_1StandardProperty.md) _---------------------------------------------------_ __ |
-| class | [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) <br> |
+| class | [**StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) <br>_@scriptableClass_  |
 | struct | [**StringHashInfo**](structSR__UTILS__NS_1_1StringHashInfo.md) <br> |
 | class | [**StringUtils**](classSR__UTILS__NS_1_1StringUtils.md) <br> |
 | class | [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) <br> |
@@ -209,6 +215,7 @@
 | struct | [**SupportsNullptrComparison&lt; SR\_MATH\_NS::Vector3&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector3_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**SupportsNullptrComparison&lt; SR\_MATH\_NS::Vector4&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector4_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
 | struct | [**SupportsNullptrComparison&lt; SR\_MATH\_NS::Vector6&lt; T &gt; &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__MATH__NS_1_1Vector6_3_01T_01_4_01_4.md) &lt;typename T&gt;<br> |
+| struct | [**SupportsNullptrComparison&lt; SR\_UTILS\_NS::StringAtom &gt;**](structSR__UTILS__NS_1_1SupportsNullptrComparison_3_01SR__UTILS__NS_1_1StringAtom_01_4.md) &lt;&gt;<br> |
 | class | [**TagManager**](classSR__UTILS__NS_1_1TagManager.md) <br> |
 | class | [**Task**](classSR__UTILS__NS_1_1Task.md) <br> |
 | class | [**TaskManager**](classSR__UTILS__NS_1_1TaskManager.md) <br> |
@@ -249,6 +256,7 @@
 | typedef typename std::allocator\_traits&lt; Alloc &gt;::template rebind\_alloc&lt; ValueType &gt; | [**RebindAllocT**](#typedef-rebindalloct)  <br> |
 | typedef typename [**RemoveCVRef**](structSR__UTILS__NS_1_1RemoveCVRef.md)&lt; T &gt;::type | [**RemoveCVRefT**](#typedef-removecvreft)  <br> |
 | typedef std::remove\_const\_t&lt; std::remove\_reference\_t&lt; std::remove\_const\_t&lt; std::remove\_volatile\_t&lt; T &gt; &gt; &gt; &gt; | [**RemoveQualifiersT**](#typedef-removequalifierst)  <br> |
+| typedef typename [**RemoveReference**](structSR__UTILS__NS_1_1RemoveReference.md)&lt; T &gt;::Type | [**RemoveReferenceT**](#typedef-removereferencet)  <br> |
 | typedef std::list&lt; [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* &gt; | [**ResourcesList**](#typedef-resourceslist)  <br> |
 | typedef std::unordered\_set&lt; [**IResource**](classSR__UTILS__NS_1_1IResource.md) \* &gt; | [**ResourcesSet**](#typedef-resourcesset)  <br> |
 | typedef ska::flat\_hash\_map&lt; uint64\_t, [**ResourceType**](classSR__UTILS__NS_1_1ResourceType.md) \* &gt; | [**ResourcesTypes**](#typedef-resourcestypes)  <br> |
@@ -257,6 +265,7 @@
 | union  | [**StandardData**](#union-standarddata)  <br> |
 | enum uint8\_t | [**SerializationDataType**](#enum-serializationdatatype)  <br> |
 | enum uint8\_t | [**SharedPtrPolicy**](#enum-sharedptrpolicy)  <br> |
+| typedef unsigned long long int | [**SizeType**](#typedef-sizetype)  <br> |
 | enum  | [**SyncType**](#enum-synctype)  <br> |
 | typedef std::chrono::time\_point&lt; std::chrono::steady\_clock &gt; | [**TimePointType**](#typedef-timepointtype)  <br> |
 | typedef typename [**TypeValuePair**](structSR__UTILS__NS_1_1TypeValuePair.md)&lt; T, val &gt;::type | [**TypeValuePairT**](#typedef-typevaluepairt)  <br> |
@@ -325,7 +334,7 @@
 |  SR\_NODISCARD SR\_INLINE\_STATIC uint8\_t | [**CharToInt**](#function-chartoint) (const char c) <br> |
 |  constexpr auto | [**CompileTimeConcatStrings**](#function-compiletimeconcatstrings) (const char(&) s1, const char(&) s2) <br> |
 |  std::vector&lt; [**Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; | [**ComputeConvexHull**](#function-computeconvexhull) (const std::vector&lt; [**Vertex**](structSR__UTILS__NS_1_1Vertex.md) &gt; & vertices) <br> |
-|  SR\_DLL\_EXPORT void | [**DisableStacktrace**](#function-disablestacktrace) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**DisableStacktrace**](#function-disablestacktrace) () <br> |
 |  SR\_NODISCARD SR\_CONSTEXPR uint64\_t | [**Distance**](#function-distance) (InIt pFirst, InIt pLast) <br> |
 |  SR\_NODISCARD constexpr SR\_INLINE\_STATIC uint64\_t | [**FNV1AAppendBytes**](#function-fnv1aappendbytes) (uint64\_t value, const unsigned char \*const first, const uint64\_t count) noexcept<br> |
 |  SR\_NODISCARD SR\_INLINE\_STATIC constexpr uint64\_t | [**FNV1AAppendValue**](#function-fnv1aappendvalue) (const uint64\_t value, const T & keyValue) noexcept<br> |
@@ -335,6 +344,8 @@
 |  bool | [**ForEach**](#function-foreach) (const std::function&lt; bool(const T &type, const uint32\_t &index)&gt; & fn, const std::list&lt; U &gt; & vector) <br> |
 |  SR\_NODISCARD std::string | [**Format**](#function-format) (const char \* fmt, Args &&... args) <br> |
 |  SR\_NODISCARD std::string | [**Format**](#function-format) (const std::string & fmt, Args &&... args) <br> |
+|  constexpr T && | [**Forward**](#function-forward) (RemoveReferenceT&lt; T &gt; & t) noexcept<br> |
+|  constexpr T && | [**Forward**](#function-forward) (RemoveReferenceT&lt; T &gt; && t) noexcept<br> |
 |  std::string | [**GetCmdOption**](#function-getcmdoption) (char \*\* begin, char \*\* end, const std::string & option) <br> |
 |  constexpr const char \* | [**GetCompileTimeTypeName**](#function-getcompiletimetypename) () <br> |
 |  [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetEnumReflectorName**](#function-getenumreflectorname) () <br> |
@@ -347,12 +358,13 @@
 |  constexpr StandardType | [**GetMathVectorType**](#function-getmathvectortype) (const StandardType type) <br> |
 |  constexpr StandardType | [**GetMathVectorType**](#function-getmathvectortype) () <br> |
 |  std::optional&lt; [**Path**](classSR__UTILS__NS_1_1Path.md) &gt; | [**GetResourceFolder**](#function-getresourcefolder) (const [**Path**](classSR__UTILS__NS_1_1Path.md) & appFolder) <br> |
-|  SR\_DLL\_EXPORT [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) \* | [**GetSingletonManager**](#function-getsingletonmanager) () noexcept<br> |
-|  SR\_DLL\_EXPORT std::string | [**GetStacktrace**](#function-getstacktrace) () <br> |
+|  SR\_COMMON\_DLL\_API [**SingletonManager**](classSR__UTILS__NS_1_1SingletonManager.md) \* | [**GetSingletonManager**](#function-getsingletonmanager) () noexcept<br> |
+|  SR\_COMMON\_DLL\_API std::string | [**GetStacktrace**](#function-getstacktrace) () <br> |
 |  constexpr StandardType | [**GetStandardType**](#function-getstandardtype) () <br> |
 |  SR\_INLINE [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetThisThreadId**](#function-getthisthreadid) () <br> |
 |  SR\_INLINE std::string | [**GetThreadId**](#function-getthreadid) (const std::thread & thread) <br> |
 |  bool | [**HasCmdOption**](#function-hascmdoption) (char \*\* begin, char \*\* end, const std::string & option) <br> |
+|  constexpr bool | [**HasPublicDestructor**](#function-haspublicdestructor) () <br> |
 |  SR\_NODISCARD constexpr uint64\_t | [**HashArrayRepresentation**](#function-hasharrayrepresentation) (const T \*const first, const size\_t count) noexcept<br> |
 |  constexpr uint64\_t | [**HashCombine**](#function-hashcombine) (const T & value, uint64\_t hash=0) <br> |
 |  SR\_NODISCARD constexpr uint64\_t | [**HashRepresentation**](#function-hashrepresentation) (const T & keyVal) noexcept<br> |
@@ -389,10 +401,8 @@
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ThreadWorkerResult, uint8\_t, Success, Working, Repeat, Break) <br> |
 |   | [**SR\_ENUM\_NS\_STRUCT\_T**](#function-sr_enum_ns_struct_t) (SerializationFlags, uint64\_t, None=1&lt;&lt; 0, Compress=1&lt;&lt; 1, NoUID=1&lt;&lt; 2, DontSave=1&lt;&lt; 3) <br>_Флаги для сериализатора объектов_  |
 |   | [**SR\_ENUM\_NS\_T**](#function-sr_enum_ns_t) (ThreadPriority, int8\_t, SR\_THREAD\_PRIORITY\_ABOVE\_NORMAL, SR\_THREAD\_PRIORITY\_BELOW\_NORMAL, SR\_THREAD\_PRIORITY\_HIGHEST, SR\_THREAD\_PRIORITY\_IDLE, SR\_THREAD\_PRIORITY\_LOWEST, SR\_THREAD\_PRIORITY\_NORMAL, SR\_THREAD\_PRIORITY\_TIME\_CRITICAL) <br> |
-|  SR\_DLL\_EXPORT void | [**StacktraceInit**](#function-stacktraceinit) () <br> |
+|  SR\_COMMON\_DLL\_API void | [**StacktraceInit**](#function-stacktraceinit) () <br> |
 |  std::string | [**ToString**](#function-tostring) (const T & value) <br> |
-|  HashType | [**sha256**](#function-sha256) (const DataTypePtr data, uint32\_t size) <br> |
-|  T | [**sha256**](#function-sha256) (const std::string & msg) <br> |
 
 
 ## Public Static Functions
@@ -409,7 +419,6 @@
 |  SR\_MAYBE\_UNUSED uint64\_t | [**GetTypeSize**](#function-gettypesize) (const StandardType & type) <br> |
 |  std::vector&lt; T &gt; | [**IndexedVerticesToNonIndexed**](#function-indexedverticestononindexed) (const std::vector&lt; T &gt; & vertices, const std::vector&lt; uint32\_t &gt; & indices) <br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsNumber**](#function-isnumber) (const StandardType & type) <br> |
-|  T \* | [**PostAllocationInitialize**](#function-postallocationinitialize) (T \* pObject) <br> |
 |  bool | [**RunTestSharedPtr**](#function-runtestsharedptr) () <br> |
 |  SR\_MAYBE\_UNUSED std::wstring | [**s2ws**](#function-s2ws) (const std::string & str) <br> |
 |  SR\_MAYBE\_UNUSED std::string | [**ws2s**](#function-ws2s) (const std::wstring & wstr) <br> |
@@ -696,6 +705,19 @@ using SR_UTILS_NS::RemoveQualifiersT = typedef std::remove_const_t<std::remove_r
 
 
 
+### typedef RemoveReferenceT 
+
+```C++
+using SR_UTILS_NS::RemoveReferenceT = typedef typename RemoveReference<T>::Type;
+```
+
+
+
+
+<hr>
+
+
+
 ### typedef ResourcesList 
 
 ```C++
@@ -804,6 +826,19 @@ enum SR_UTILS_NS::SharedPtrPolicy {
     Automatic,
     Manually
 };
+```
+
+
+
+
+<hr>
+
+
+
+### typedef SizeType 
+
+```C++
+using SR_UTILS_NS::SizeType = typedef unsigned long long int;
 ```
 
 
@@ -1355,7 +1390,7 @@ std::vector< Vertex > SR_UTILS_NS::ComputeConvexHull (
 ### function DisableStacktrace 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::DisableStacktrace () 
+SR_COMMON_DLL_API void SR_UTILS_NS::DisableStacktrace () 
 ```
 
 
@@ -1509,6 +1544,38 @@ SR_NODISCARD std::string SR_UTILS_NS::Format (
     const std::string & fmt,
     Args &&... args
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Forward 
+
+```C++
+template<typename T>
+constexpr T && SR_UTILS_NS::Forward (
+    RemoveReferenceT< T > & t
+) noexcept
+```
+
+
+
+
+<hr>
+
+
+
+### function Forward 
+
+```C++
+template<typename T>
+constexpr T && SR_UTILS_NS::Forward (
+    RemoveReferenceT< T > && t
+) noexcept
 ```
 
 
@@ -1697,7 +1764,7 @@ std::optional< Path > SR_UTILS_NS::GetResourceFolder (
 ### function GetSingletonManager 
 
 ```C++
-SR_DLL_EXPORT SingletonManager * SR_UTILS_NS::GetSingletonManager () noexcept
+SR_COMMON_DLL_API SingletonManager * SR_UTILS_NS::GetSingletonManager () noexcept
 ```
 
 
@@ -1710,7 +1777,7 @@ SR_DLL_EXPORT SingletonManager * SR_UTILS_NS::GetSingletonManager () noexcept
 ### function GetStacktrace 
 
 ```C++
-SR_DLL_EXPORT std::string SR_UTILS_NS::GetStacktrace () 
+SR_COMMON_DLL_API std::string SR_UTILS_NS::GetStacktrace () 
 ```
 
 
@@ -1770,6 +1837,20 @@ bool SR_UTILS_NS::HasCmdOption (
     char ** end,
     const std::string & option
 ) 
+```
+
+
+
+
+<hr>
+
+
+
+### function HasPublicDestructor 
+
+```C++
+template<typename T>
+constexpr bool SR_UTILS_NS::HasPublicDestructor () 
 ```
 
 
@@ -2538,7 +2619,7 @@ SR_UTILS_NS::SR_ENUM_NS_T (
 ### function StacktraceInit 
 
 ```C++
-SR_DLL_EXPORT void SR_UTILS_NS::StacktraceInit () 
+SR_COMMON_DLL_API void SR_UTILS_NS::StacktraceInit () 
 ```
 
 
@@ -2554,39 +2635,6 @@ SR_DLL_EXPORT void SR_UTILS_NS::StacktraceInit ()
 template<typename T>
 std::string SR_UTILS_NS::ToString (
     const T & value
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function sha256 
-
-```C++
-template<Hash::Detail::SHA256HashType HashType, typename DataTypePtr>
-HashType SR_UTILS_NS::sha256 (
-    const DataTypePtr data,
-    uint32_t size
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function sha256 
-
-```C++
-template<Hash::Detail::SHA256HashType T>
-T SR_UTILS_NS::sha256 (
-    const std::string & msg
 ) 
 ```
 
@@ -2746,22 +2794,6 @@ static std::vector< T > SR_UTILS_NS::IndexedVerticesToNonIndexed (
 ```C++
 static SR_MAYBE_UNUSED bool SR_UTILS_NS::IsNumber (
     const StandardType & type
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function PostAllocationInitialize 
-
-```C++
-template<class T>
-static T * SR_UTILS_NS::PostAllocationInitialize (
-    T * pObject
 ) 
 ```
 

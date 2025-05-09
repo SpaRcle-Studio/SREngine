@@ -11,6 +11,10 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
+      <node id="7">
+        <label>Utils/Memory/Allocator.h</label>
+        <link refid="Allocator_8h_source"/>
+      </node>
       <node id="1">
         <label>Engine/Core/libs/Utils/inc/Utils/Types/BinarySearchTree.h</label>
         <link refid="BinarySearchTree_8h"/>
@@ -25,16 +29,16 @@
       </node>
       <node id="5">
         <label>Utils/macros.h</label>
-        <link refid="macros_8h_source"/>
+        <link refid="Utils_2inc_2Utils_2macros_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
       </node>
       <node id="4">
         <label>Utils/stdInclude.h</label>
         <link refid="stdInclude_8h_source"/>
         <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
@@ -146,176 +150,193 @@
         </childnode>
         <childnode refid="62" relation="include">
         </childnode>
-      </node>
-      <node id="45">
-        <label>algorithm</label>
-      </node>
-      <node id="46">
-        <label>any</label>
-      </node>
-      <node id="39">
-        <label>array</label>
-      </node>
-      <node id="37">
-        <label>atomic</label>
-      </node>
-      <node id="34">
-        <label>cassert</label>
-      </node>
-      <node id="22">
-        <label>cctype</label>
-      </node>
-      <node id="6">
-        <label>cfloat</label>
-      </node>
-      <node id="54">
-        <label>chrono</label>
-      </node>
-      <node id="35">
-        <label>cmath</label>
-      </node>
-      <node id="18">
-        <label>codecvt</label>
-      </node>
-      <node id="58">
-        <label>concepts</label>
-      </node>
-      <node id="59">
-        <label>condition_variable</label>
-      </node>
-      <node id="16">
-        <label>cstdarg</label>
-      </node>
-      <node id="19">
-        <label>cstddef</label>
-      </node>
-      <node id="56">
-        <label>cstdint</label>
-      </node>
-      <node id="10">
-        <label>cstdio</label>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
       </node>
       <node id="48">
-        <label>cstdlib</label>
-      </node>
-      <node id="24">
-        <label>cstring</label>
-      </node>
-      <node id="51">
-        <label>ctime</label>
-      </node>
-      <node id="43">
-        <label>exception</label>
-      </node>
-      <node id="28">
-        <label>fstream</label>
-      </node>
-      <node id="41">
-        <label>functional</label>
-      </node>
-      <node id="17">
-        <label>initializer_list</label>
-      </node>
-      <node id="57">
-        <label>iomanip</label>
-      </node>
-      <node id="11">
-        <label>iosfwd</label>
-      </node>
-      <node id="52">
-        <label>iostream</label>
-      </node>
-      <node id="8">
-        <label>limits</label>
-      </node>
-      <node id="50">
-        <label>list</label>
-      </node>
-      <node id="23">
-        <label>locale</label>
-      </node>
-      <node id="40">
-        <label>map</label>
-      </node>
-      <node id="27">
-        <label>memory</label>
-      </node>
-      <node id="32">
-        <label>mutex</label>
-      </node>
-      <node id="61">
-        <label>numbers</label>
-      </node>
-      <node id="60">
-        <label>numeric</label>
-      </node>
-      <node id="26">
-        <label>optional</label>
-      </node>
-      <node id="30">
-        <label>ostream</label>
-      </node>
-      <node id="31">
-        <label>queue</label>
-      </node>
-      <node id="55">
-        <label>random</label>
-      </node>
-      <node id="36">
-        <label>ranges</label>
-      </node>
-      <node id="53">
-        <label>ratio</label>
-      </node>
-      <node id="12">
-        <label>regex</label>
-      </node>
-      <node id="42">
-        <label>set</label>
-      </node>
-      <node id="15">
-        <label>shared_mutex</label>
-      </node>
-      <node id="7">
-        <label>span</label>
+        <label>algorithm</label>
       </node>
       <node id="49">
-        <label>sstream</label>
-      </node>
-      <node id="21">
-        <label>stack</label>
-      </node>
-      <node id="13">
-        <label>stdexcept</label>
-      </node>
-      <node id="33">
-        <label>string</label>
-      </node>
-      <node id="14">
-        <label>string_view</label>
-      </node>
-      <node id="47">
-        <label>thread</label>
+        <label>any</label>
       </node>
       <node id="9">
-        <label>type_traits</label>
+        <label>array</label>
       </node>
-      <node id="44">
-        <label>unordered_map</label>
+      <node id="43">
+        <label>atomic</label>
       </node>
-      <node id="20">
-        <label>unordered_set</label>
+      <node id="40">
+        <label>cassert</label>
       </node>
-      <node id="38">
-        <label>utility</label>
+      <node id="31">
+        <label>cctype</label>
+      </node>
+      <node id="15">
+        <label>cfloat</label>
+      </node>
+      <node id="56">
+        <label>chrono</label>
+      </node>
+      <node id="41">
+        <label>cmath</label>
+      </node>
+      <node id="27">
+        <label>codecvt</label>
+      </node>
+      <node id="59">
+        <label>concepts</label>
+      </node>
+      <node id="60">
+        <label>condition_variable</label>
       </node>
       <node id="25">
-        <label>variant</label>
+        <label>cstdarg</label>
       </node>
-      <node id="29">
-        <label>vector</label>
+      <node id="28">
+        <label>cstddef</label>
+      </node>
+      <node id="12">
+        <label>cstdint</label>
+      </node>
+      <node id="19">
+        <label>cstdio</label>
+      </node>
+      <node id="6">
+        <label>cstdlib</label>
+      </node>
+      <node id="33">
+        <label>cstring</label>
+      </node>
+      <node id="53">
+        <label>ctime</label>
+      </node>
+      <node id="46">
+        <label>exception</label>
+      </node>
+      <node id="66">
+        <label>fmt/color.h</label>
+      </node>
+      <node id="64">
+        <label>fmt/format.h</label>
+      </node>
+      <node id="65">
+        <label>fmt/printf.h</label>
+      </node>
+      <node id="36">
+        <label>fstream</label>
+      </node>
+      <node id="45">
+        <label>functional</label>
+      </node>
+      <node id="26">
+        <label>initializer_list</label>
+      </node>
+      <node id="58">
+        <label>iomanip</label>
+      </node>
+      <node id="20">
+        <label>iosfwd</label>
+      </node>
+      <node id="54">
+        <label>iostream</label>
+      </node>
+      <node id="17">
+        <label>limits</label>
+      </node>
+      <node id="52">
+        <label>list</label>
+      </node>
+      <node id="32">
+        <label>locale</label>
+      </node>
+      <node id="10">
+        <label>map</label>
+      </node>
+      <node id="35">
+        <label>memory</label>
+      </node>
+      <node id="39">
+        <label>mutex</label>
       </node>
       <node id="62">
+        <label>numbers</label>
+      </node>
+      <node id="61">
+        <label>numeric</label>
+      </node>
+      <node id="14">
+        <label>optional</label>
+      </node>
+      <node id="37">
+        <label>ostream</label>
+      </node>
+      <node id="38">
+        <label>queue</label>
+      </node>
+      <node id="57">
+        <label>random</label>
+      </node>
+      <node id="42">
+        <label>ranges</label>
+      </node>
+      <node id="55">
+        <label>ratio</label>
+      </node>
+      <node id="21">
+        <label>regex</label>
+      </node>
+      <node id="13">
+        <label>set</label>
+      </node>
+      <node id="24">
+        <label>shared_mutex</label>
+      </node>
+      <node id="16">
+        <label>span</label>
+      </node>
+      <node id="51">
+        <label>sstream</label>
+      </node>
+      <node id="30">
+        <label>stack</label>
+      </node>
+      <node id="22">
+        <label>stdexcept</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="23">
+        <label>string_view</label>
+      </node>
+      <node id="50">
+        <label>thread</label>
+      </node>
+      <node id="18">
+        <label>type_traits</label>
+      </node>
+      <node id="47">
+        <label>unordered_map</label>
+      </node>
+      <node id="29">
+        <label>unordered_set</label>
+      </node>
+      <node id="44">
+        <label>utility</label>
+      </node>
+      <node id="34">
+        <label>variant</label>
+      </node>
+      <node id="11">
+        <label>vector</label>
+      </node>
+      <node id="63">
         <label>zlib.h</label>
       </node>
     </incdepgraph>

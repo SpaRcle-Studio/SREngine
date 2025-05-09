@@ -122,7 +122,7 @@ bool SR_HTYPES_NS::RawMeshParams::convexHull;
 ### function operator== 
 
 ```C++
-inline bool SR_HTYPES_NS::RawMeshParams::operator== (
+bool SR_HTYPES_NS::RawMeshParams::operator== (
     const RawMeshParams & rhs
 ) const
 ```

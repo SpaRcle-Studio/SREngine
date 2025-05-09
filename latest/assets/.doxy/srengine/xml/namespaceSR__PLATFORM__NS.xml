@@ -2,6 +2,157 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="namespaceSR__PLATFORM__NS" kind="namespace" language="C++">
     <compoundname>SR_PLATFORM_NS</compoundname>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ae84950bab3cb702f1fbc68baf6e243e5" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>MessageBoxType</name>
+        <qualifiedname>SR_PLATFORM_NS::MessageBoxType</qualifiedname>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ae84950bab3cb702f1fbc68baf6e243e5aa60852f204ed8028c1c58808b746d115" prot="public">
+          <name>Ok</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ae84950bab3cb702f1fbc68baf6e243e5a4b116999b87115628973f2e30b59fd08" prot="public">
+          <name>OkCancel</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ae84950bab3cb702f1fbc68baf6e243e5ab65ffbcb4dcfb93ecdc257d6e4ba42c4" prot="public">
+          <name>YesNo</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ae84950bab3cb702f1fbc68baf6e243e5a71fc7b7aece69111c0b6967de4b101c5" prot="public">
+          <name>YesNoCancel</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" line="11" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" bodystart="11" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="enum" id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a98abbfa14ea875879c4c4eb8f20134b1" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>MessageBoxDefaultButtonType</name>
+        <qualifiedname>SR_PLATFORM_NS::MessageBoxDefaultButtonType</qualifiedname>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a98abbfa14ea875879c4c4eb8f20134b1a85579a7d9fc14598dae7a12296a8c414" prot="public">
+          <name>YesOk</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a98abbfa14ea875879c4c4eb8f20134b1abafd7322c6e97d25b6299b5d6fe8920b" prot="public">
+          <name>No</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a98abbfa14ea875879c4c4eb8f20134b1aea4788705e6873b424c65e91c2846b19" prot="public">
+          <name>Cancel</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" line="15" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="enum" id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a8c10d43efa48004aea90337470ca9493" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>MessageBoxIconType</name>
+        <qualifiedname>SR_PLATFORM_NS::MessageBoxIconType</qualifiedname>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a8c10d43efa48004aea90337470ca9493a4059b0251f66a18cb56f544728796875" prot="public">
+          <name>Info</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a8c10d43efa48004aea90337470ca9493a0eaadb4fcb48a0a0ed7bc9868be9fbaa" prot="public">
+          <name>Warning</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a8c10d43efa48004aea90337470ca9493a902b0d55fddef6f8d651fe1035b7d4bd" prot="public">
+          <name>Error</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1a8c10d43efa48004aea90337470ca9493aa97ea56b0e00b2379736ae60869ff66a" prot="public">
+          <name>Question</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" line="19" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" bodystart="19" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="enum" id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ad2cda1e9aac5f01aa1afbe0d63c1c028" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>MessageBoxResultType</name>
+        <qualifiedname>SR_PLATFORM_NS::MessageBoxResultType</qualifiedname>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ad2cda1e9aac5f01aa1afbe0d63c1c028a85579a7d9fc14598dae7a12296a8c414" prot="public">
+          <name>YesOk</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ad2cda1e9aac5f01aa1afbe0d63c1c028abafd7322c6e97d25b6299b5d6fe8920b" prot="public">
+          <name>No</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ad2cda1e9aac5f01aa1afbe0d63c1c028aea4788705e6873b424c65e91c2846b19" prot="public">
+          <name>Cancel</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" line="26" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" bodystart="26" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="var">
       <memberdef kind="variable" id="XKeySymToKeyCode_8h_1a92709de542575809b56dd0e761baee5b" prot="public" static="yes" mutable="no">
         <type>std::map&lt; KeySym, uint8_t &gt;</type>
@@ -19,10 +170,46 @@
         <location file="Engine/Core/libs/Utils/inc/Utils/Platform/XKeySymToKeyCode.h" line="10" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/Platform/XKeySymToKeyCode.h" bodystart="10" bodyend="102"/>
       </memberdef>
     </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="Utils_2inc_2Utils_2Platform_2MessageBox_8h_1ae89d8aaa527dce7a6f7bdd68935ee107" prot="public" static="no" extern="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_COMMON_DLL_API MessageBoxResultType</type>
+        <definition>SR_COMMON_DLL_API MessageBoxResultType SR_PLATFORM_NS::ShowMessageBox</definition>
+        <argsstring>(const std::string_view &amp;title, const std::string_view &amp;message, MessageBoxType type, MessageBoxIconType iconType, MessageBoxDefaultButtonType defaultButtonType)</argsstring>
+        <name>ShowMessageBox</name>
+        <qualifiedname>SR_PLATFORM_NS::ShowMessageBox</qualifiedname>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>const std::string_view &amp;</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>MessageBoxType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>MessageBoxIconType</type>
+          <declname>iconType</declname>
+        </param>
+        <param>
+          <type>MessageBoxDefaultButtonType</type>
+          <declname>defaultButtonType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" line="32" column="51" declfile="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" declline="32" declcolumn="51"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Utils/inc/Utils/Platform/XKeySymToKeyCode.h" line="8" column="1"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/Platform/MessageBox.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

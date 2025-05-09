@@ -35,6 +35,7 @@ namespace SR_UTILS_NS {
         using OriginType = IComponentable;
 
     public:
+        IComponentable() = default;
         ~IComponentable() override;
 
     public:

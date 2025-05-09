@@ -53,6 +53,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="21" column="1"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Memory/CameraManager.h" line="23" column="1"/>
   </compounddef>
 </doxygen>

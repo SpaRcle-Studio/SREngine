@@ -398,7 +398,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a74902f97b1c2cc5dddbba7cba8677e62" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_destinationState</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a488c2ffc90c05b4f01b9fd0e9e3673d9" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_isActive</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a04b7c6cbba5899d340469f6f00e3608e" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>m_sourceState</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>NonCopyable</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a25407aa294c49a2576751771c54d638b" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>OnTransitionBegin</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>operator=</name></member>
@@ -406,7 +406,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a54f36c6405e2a07e3ca1dd4bf3d848e0" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>Super</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1aad63ad4651e5792d004857d3c30314af" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>Update</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationStateTransition_1a4d741e53af8edc334e9fbffdbea400a5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>~AnimationStateTransition</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationStateTransition</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

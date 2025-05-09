@@ -42,7 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**GameObject**](classSR__UTILS__NS_1_1GameObject.md) <br> |
+| class | [**GameObject**](classSR__UTILS__NS_1_1GameObject.md) <br>_@scriptableClass_  |
 
 
 

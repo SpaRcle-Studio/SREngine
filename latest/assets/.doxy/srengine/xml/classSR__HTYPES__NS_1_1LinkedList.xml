@@ -243,7 +243,7 @@
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1a153befbf6a796c2809bdc865088e47d7" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>LinkedList</name></member>
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1a04952e28939ec03fc82dde1961abac53" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>m_head</name></member>
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1aafabe596ceb22ec7edc1f09cf7609878" prot="private" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>m_length</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>operator=</name></member>
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1a8101b20d52d3dcd7f1f4686b3040c2b5" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Remove</name></member>
@@ -251,7 +251,7 @@
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1ac5014b202cfc7f6b7ef6decf78dbd44c" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Search</name></member>
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1aa1fec827c8ab0e888d71f4c53d03a0a2" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>Sort</name></member>
       <member refid="classSR__HTYPES__NS_1_1LinkedList_1ac8a220a74bc20cc4454ef4da7bc97ea1" prot="public" virt="non-virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>~LinkedList</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_HTYPES_NS::LinkedList</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

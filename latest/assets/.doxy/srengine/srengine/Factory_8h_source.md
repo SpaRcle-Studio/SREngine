@@ -16,6 +16,7 @@
 #define SR_COMMON_TYPE_TRAITS_FACTORY_H
 
 #include <Utils/Common/Singleton.h>
+#include <Utils/Common/StringAtomLiterals.h>
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/TypeTraits/SRClassMeta.h>
 
@@ -37,6 +38,7 @@ namespace SR_UTILS_NS {
         using AllocatorT = std::function<SRClass*()>;
         using MetaGetterT = const SRClassMeta*(*)();
         struct TypeInfo {
+            SR_UTILS_NS::StringAtom moduleName;
             AllocatorT allocator;
             MetaGetterT metaGetter = nullptr;
             bool isAbstract = false;
@@ -47,38 +49,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName(const SRClassMeta* pMeta, bool isMustExists = true) const;
 
-        template<class T> bool Register() {
-            if constexpr (std::is_abstract_v<T>) {
-                if (auto&& pMeta = T::GetMetaStatic()) {
-                    auto&& name = pMeta->GetFactoryName();
-                    TypeInfo& info = m_types[name];
-                    info.isAbstract = true;
-                    info.metaGetter = T::GetMetaStatic;
-                    info.version = pMeta->GetVersion();
-                }
-                else {
-                    SR_PLATFORM_NS::WriteConsoleError("Failed to get meta for abstract class!");
-                }
-                return false;
-            }
-            else if constexpr (std::is_same_v<T, void>) {
-                static_assert(AlwaysFalseV<T>, "Type must be specified!");
-            }
-            else if constexpr (!std::is_default_constructible_v<T>) {
-                static_assert(AlwaysFalseV<T>, "Type must be default constructible!");
-            }
-            else if (auto&& pMeta = T::GetMetaStatic()) {
-                auto&& name = pMeta->GetFactoryName();
-                TypeInfo& info = m_types[name];
-                info.allocator = []() -> SRClass* {
-                    return static_cast<SRClass*>(SRNew<T>());
-                };
-                info.metaGetter = T::GetMetaStatic;
-                info.version = pMeta->GetVersion();
-                return true;
-            }
-            return false;
-        }
+        template<class T> bool Register(SR_UTILS_NS::StringAtom moduleName);
+        template<class T> bool Unregister();
 
         template<class Y> SR_NODISCARD SR_UTILS_NS::StringAtom GetName(Y* pObject, const bool isMustExists = true) const {
             if (SRVerify(pObject)) {
@@ -112,44 +84,77 @@ namespace SR_UTILS_NS {
             return Create<T>(T::GetClassStaticName());
         }
 
-        SR_NODISCARD SRClass* CreateBase(SR_UTILS_NS::StringAtom name) const noexcept {
-            auto&& pIt = m_types.find(name);
-
-            if (pIt != m_types.end()) {
-                if (pIt->second.isAbstract) {
-                    SR_ERROR("Factory::CreateBase() : type \"{}\" is abstract!", name);
-                    return nullptr;
-                }
-
-                auto&& pClass = pIt->second.allocator();
-                if (pClass) {
-                    return pClass;
-                }
-
-                SRHalt("Failed to create object \"{}\"!", name);
-                return nullptr;
-            }
-
-            SRHalt("Type \"{}\" is not registered!", name);
-            return nullptr;
-        }
-
+        SR_NODISCARD SRClass* CreateBase(SR_UTILS_NS::StringAtom name) const noexcept;
         SR_NODISCARD std::vector<SR_UTILS_NS::StringAtom> GetInheritances(SR_UTILS_NS::StringAtom baseClass) const noexcept;
-
         SR_NODISCARD bool IsAbstract(SR_UTILS_NS::StringAtom name) const noexcept;
+        SR_NODISCARD const SRClassMeta* GetType(SR_UTILS_NS::StringAtom name) const noexcept override;
+        SR_NODISCARD const TypeInfo* GetTypeInfo(SR_UTILS_NS::StringAtom name) const noexcept;
+        SR_NODISCARD void ForEachClassInModule(SR_UTILS_NS::StringAtom moduleName, const std::function<void(const SRClassMeta*)>& func) const noexcept;
 
-        SR_NODISCARD const SRClassMeta* GetType(SR_UTILS_NS::StringAtom name) const noexcept override {
-            auto&& pIt = m_types.find(name);
-            if (pIt != m_types.end()) {
-                return pIt->second.metaGetter();
-            }
-            return nullptr;
-        }
+    private:
+        void WriteLog(const std::string& message) const noexcept;
+        void WriteError(const std::string& message) const noexcept;
 
     private:
         std::unordered_map<SR_UTILS_NS::StringAtom, TypeInfo> m_types;
 
     };
+
+    template<class T> bool Factory::Register(SR_UTILS_NS::StringAtom moduleName) {
+        if constexpr (std::is_same_v<T, void>) {
+            static_assert(AlwaysFalseV<T>, "Type must be specified!");
+        }
+        else if constexpr (!std::is_default_constructible_v<T> && !std::is_abstract_v<T>) {
+            static_assert(AlwaysFalseV<T>, "Non abstract type must be default constructible!");
+        }
+        else if (auto&& pMeta = T::GetMetaStatic()) {
+            auto&& name = pMeta->GetFactoryName();
+
+            if (m_types.count(name) > 0) {
+                WriteError("Factory::Register() : type \"{}\" is already registered!\n"_format(name));
+                return false;
+            }
+
+            WriteLog("Factory::Register() : registering type \"{}\"\n"_format(name));
+
+            TypeInfo& info = m_types[name];
+
+            if constexpr (std::is_abstract_v<T>) {
+                info.isAbstract = true;
+            }
+            else {
+                info.allocator = []() -> SRClass * {
+                    return static_cast<SRClass *>(SRNew<T>());
+                };
+            }
+
+            info.moduleName = moduleName;
+            info.metaGetter = T::GetMetaStatic;
+            info.version = pMeta->GetVersion();
+            return true;
+        }
+
+        return false;
+    }
+
+    template<class T> bool Factory::Unregister() {
+        if (auto&& pMeta = T::GetMetaStatic()) {
+            auto&& name = pMeta->GetFactoryName();
+
+            auto&& pIt = m_types.find(name);
+            if (pIt == m_types.end()) {
+                WriteError("Factory::Register() : type \"{}\" is not registered!\n"_format(name));
+                return false;
+            }
+
+            WriteLog("Factory::Unregister() : unregistering type \"{}\"\n"_format(name));
+
+            m_types.erase(pIt);
+            return true;
+        }
+
+        return false;
+    }
 }
 
 #endif //SR_COMMON_TYPE_TRAITS_FACTORY_H

@@ -73,11 +73,11 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**DEFAULT\_COLOR**](#variable-default_color)   = `[**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md)(255, 255, 255, 255)`<br> |
+|  SR\_INLINE [**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md) | [**DEFAULT\_COLOR**](#variable-default_color)   = `[**SR\_MATH\_NS::FColor**](classSR__MATH__NS_1_1FColor.md)(255, 255, 255, 255)`<br> |
 |  constexpr float\_t | [**DEFAULT\_DURATION**](#variable-default_duration)   = `10.f`<br> |
-|  constexpr SR\_MATH\_NS::FVector3 | [**DEFAULT\_POSITION**](#variable-default_position)   = `SR\_MATH\_NS::FVector3::Zero()`<br> |
-|  constexpr [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**DEFAULT\_QUATERNION**](#variable-default_quaternion)   = `SR\_MATH\_NS::Quaternion::Identity()`<br> |
-|  constexpr SR\_MATH\_NS::FVector3 | [**DEFAULT\_SCALE**](#variable-default_scale)   = `SR\_MATH\_NS::FVector3::One()`<br> |
+|  SR\_INLINE SR\_MATH\_NS::FVector3 | [**DEFAULT\_POSITION**](#variable-default_position)   = `SR\_MATH\_NS::FVector3::Zero()`<br> |
+|  SR\_INLINE [**SR\_MATH\_NS::Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**DEFAULT\_QUATERNION**](#variable-default_quaternion)   = `SR\_MATH\_NS::Quaternion::Identity()`<br> |
+|  SR\_INLINE SR\_MATH\_NS::FVector3 | [**DEFAULT\_SCALE**](#variable-default_scale)   = `SR\_MATH\_NS::FVector3::One()`<br> |
 
 
 
@@ -277,7 +277,7 @@ See [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_1Singleton.md)
 | ---: | :--- |
 |  SR\_MAYBE\_UNUSED void | [**DestroySingleton**](classSR__UTILS__NS_1_1Singleton.md#function-destroysingleton) () <br> |
 |  SR\_MAYBE\_UNUSED std::recursive\_mutex & | [**GetMutex**](classSR__UTILS__NS_1_1Singleton.md#function-getmutex) () noexcept<br> |
-|  SR\_MAYBE\_UNUSED T & | [**Instance**](classSR__UTILS__NS_1_1Singleton.md#function-instance) () noexcept<br>_TODO: (Multi-threading) Refactor Singleton::Instance()._  |
+|  SR\_MAYBE\_UNUSED T & | [**Instance**](classSR__UTILS__NS_1_1Singleton.md#function-instance) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED bool | [**IsSingletonInitialized**](classSR__UTILS__NS_1_1Singleton.md#function-issingletoninitialized) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED void | [**LockSingleton**](classSR__UTILS__NS_1_1Singleton.md#function-locksingleton) () noexcept<br> |
 |  SR\_MAYBE\_UNUSED static SR\_NODISCARD [**SR\_HTYPES\_NS::SingletonRecursiveLockGuard**](classSR__HTYPES__NS_1_1SingletonRecursiveLockGuard.md)&lt; [**Singleton**](classSR__UTILS__NS_1_1Singleton.md)&lt; T &gt; \* &gt; | [**ScopeLockSingleton**](classSR__UTILS__NS_1_1Singleton.md#function-scopelocksingleton) () <br> |
@@ -397,7 +397,7 @@ See [SR\_UTILS\_NS::SingletonBase](classSR__UTILS__NS_1_1SingletonBase.md)
 | virtual void | [**InitSingleton**](classSR__UTILS__NS_1_1SingletonBase.md#function-initsingleton) () <br> |
 | virtual bool | [**IsSingletonCanBeDestroyed**](classSR__UTILS__NS_1_1SingletonBase.md#function-issingletoncanbedestroyed) () const<br> |
 | virtual void | [**OnSingletonDestroy**](classSR__UTILS__NS_1_1SingletonBase.md#function-onsingletondestroy) () <br> |
-|   | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md#function-singletonbase) () = default<br> |
+|   | [**SingletonBase**](classSR__UTILS__NS_1_1SingletonBase.md#function-singletonbase) () <br> |
 
 
 ## Protected Functions inherited from SR_UTILS_NS::NonCopyable
@@ -406,8 +406,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -532,7 +532,7 @@ using SR_UTILS_NS::DebugDraw::RemoveCallback =  SR_HTYPES_NS::Function<void(uint
 ### variable DEFAULT\_COLOR 
 
 ```C++
-constexpr SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR;
+SR_INLINE SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR;
 ```
 
 
@@ -558,7 +558,7 @@ constexpr float_t SR_UTILS_NS::DebugDraw::DEFAULT_DURATION;
 ### variable DEFAULT\_POSITION 
 
 ```C++
-constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION;
+SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION;
 ```
 
 
@@ -571,7 +571,7 @@ constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION;
 ### variable DEFAULT\_QUATERNION 
 
 ```C++
-constexpr SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION;
+SR_INLINE SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION;
 ```
 
 
@@ -584,7 +584,7 @@ constexpr SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION;
 ### variable DEFAULT\_SCALE 
 
 ```C++
-constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_SCALE;
+SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_SCALE;
 ```
 
 

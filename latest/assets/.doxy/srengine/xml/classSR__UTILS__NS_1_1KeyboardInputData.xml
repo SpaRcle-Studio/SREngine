@@ -148,11 +148,11 @@
       <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1acc4c3966cae835e6518cd8a201c9e8a4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>KeyboardInputData</name></member>
       <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1a668ac344b0715f365a0b989b1bdaf1e0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>m_code</name></member>
       <member refid="classSR__UTILS__NS_1_1KeyboardInputData_1af9a787a0d703bc1359692a296111b5a7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>m_state</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1InputDeviceData_1a8aece90496fec8d190ab95a206a1ef8c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>~InputDeviceData</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::KeyboardInputData</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -10,8 +10,9 @@
 
 
 
+[More...](#detailed-description)
 
-
+* `#include <Vector3.h>`
 
 
 
@@ -67,126 +68,138 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Abs**](#function-abs) () const<br> |
-|  SR\_NODISCARD T | [**Angle**](#function-angle-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & to) const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Angle**](#function-angle-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & vector3) <br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Abs**](#function-abs) () const<br>_@method_  |
+|  SR\_NODISCARD T | [**Angle**](#function-angle) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & to) const<br>_@method_  |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**AngleAxis**](#function-angleaxis) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & target, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & axis=Vector3::UnitZ()) const<br> |
 |  SR\_NODISCARD T | [**AngleCoefficient**](#function-anglecoefficient) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & vector3) const<br> |
 |  SR\_NODISCARD T | [**AngleCoefficientEuler**](#function-anglecoefficienteuler) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & vector3) const<br> |
 |  SR\_NODISCARD T | [**AngleCoefficientRadians**](#function-anglecoefficientradians) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & vector3) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; SR\_FASTCALL | [**Cast**](#function-cast) () noexcept const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Clamp**](#function-clamp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & upper, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & lover) const<br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; float\_t &gt; | [**CastToFloat**](#function-casttofloat) () noexcept const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; int32\_t &gt; | [**CastToInt**](#function-casttoint) () noexcept const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; uint32\_t &gt; | [**CastToUInt**](#function-casttouint) () noexcept const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Clamp**](#function-clamp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & upper, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & lover) const<br>_@method_  |
 |  SR\_NODISCARD bool | [**ContainsNaN**](#function-containsnan) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Cos**](#function-cos) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Cross**](#function-cross-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_b) const<br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Cos**](#function-cos) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Cross**](#function-cross-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_b) const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**DeSingular**](#function-desingular) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & segment) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Degrees**](#function-degrees) () noexcept const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Direction**](#function-direction) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & point) const<br> |
 |  SR\_NODISCARD T SR\_FASTCALL | [**Distance**](#function-distance) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & point) const<br> |
-|  SR\_NODISCARD T | [**Dot**](#function-dot-12) ([**Vector3**](structSR__MATH__NS_1_1Vector3.md) p\_b) const<br> |
+|  SR\_NODISCARD T | [**Dot**](#function-dot-12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_b) const<br>_@method_  |
 |  SR\_NODISCARD bool | [**Empty**](#function-empty) () const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**FixEulerAngles**](#function-fixeulerangles) () const<br> |
 |  SR\_NODISCARD bool | [**HasZero**](#function-haszero) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Inverse**](#function-inverse) () const<br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Inverse**](#function-inverse) () const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) SR\_FASTCALL | [**InverseAxis**](#function-inverseaxis) (Axis axis) const<br> |
 |  SR\_NODISCARD bool | [**IsEquals**](#function-isequals) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & value, Unit tolerance) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsEqualsLikely**](#function-isequalslikely) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & value, Unit tolerance) noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsFinite**](#function-isfinite) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**IsInfinity**](#function-isinfinity) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE T | [**Length**](#function-length) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) SR\_FASTCALL | [**Lerp**](#function-lerp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & vector3, Unit t) noexcept const<br> |
+|  SR\_NODISCARD SR\_FORCE\_INLINE T | [**Length**](#function-length) () const<br>_@method_  |
+|  SR\_NODISCARD SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**Lerp**](#function-lerp) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & vector3, float\_t t) noexcept const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Limits**](#function-limits) (int lim) const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**LookAt**](#function-lookat) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & target) const<br> |
-|  SR\_NODISCARD T | [**Max**](#function-max) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Max3**](#function-max3) () const<br> |
-|  SR\_NODISCARD T | [**Min**](#function-min) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Min3**](#function-min3) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Normalize**](#function-normalize) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Normalized**](#function-normalized) () const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**ProjectOnPlane**](#function-projectonplane) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & planeNormal) const<br> |
+|  SR\_NODISCARD T | [**Max**](#function-max) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Max3**](#function-max3) () const<br>_@method_  |
+|  SR\_NODISCARD T | [**Min**](#function-min) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Min3**](#function-min3) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Normalize**](#function-normalize) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Normalized**](#function-normalized) () const<br>_@method_  |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**ProjectOnPlane**](#function-projectonplane) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & planeNormal) const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Radians**](#function-radians) () noexcept const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Replace**](#function-replace) (int from, int to) const<br> |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Rotate**](#function-rotate) (const [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) & q) const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Round**](#function-round) () const<br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Round**](#function-round) () const<br>_@method_  |
 |  SR\_NODISCARD T | [**SignedAngle**](#function-signedangle) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & to, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & axis) const<br> |
-|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Sin**](#function-sin) () const<br> |
+|  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Sin**](#function-sin) () const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Singular**](#function-singular) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & segment) const<br> |
 |  SR\_NODISCARD T | [**SqrMagnitude**](#function-sqrmagnitude) () const<br> |
-|  SR\_NODISCARD T | [**SquaredNorm**](#function-squarednorm) () noexcept const<br> |
+|  SR\_NODISCARD T | [**SquaredNorm**](#function-squarednorm) () noexcept const<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) SR\_FASTCALL | [**Swap**](#function-swap) (Axis axis) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**TemplateOperatorPlus**](#function-templateoperatorplus) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) noexcept const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**TemplateOperatorPlusAssign**](#function-templateoperatorplusassign) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
 |  SR\_NODISCARD glm::vec3 | [**ToGLM**](#function-toglm) () noexcept const<br> |
 |  SR\_NODISCARD [**Quaternion**](classSR__MATH__NS_1_1Quaternion.md) | [**ToQuat**](#function-toquat) () const<br> |
 |  SR\_NODISCARD std::string | [**ToString**](#function-tostring) () const<br> |
-|  constexpr SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-18) () <br> |
-|  constexpr SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-28) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec) <br> |
-|  constexpr SR\_FORCE\_INLINE | [**Vector3**](#function-vector3-38) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & vec, U value) <br> |
-|  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-48) (const float \* vec) <br> |
-|  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-58) (const uint8\_t \* axis) <br> |
-|  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-68) (T p\_x, T p\_y, T p\_z) <br> |
-|  SR\_FORCE\_INLINE constexpr | [**Vector3**](#function-vector3-78) (T p) <br> |
-|   | [**Vector3**](#function-vector3-88) (const glm::vec3 & v) <br> |
-|  SR\_NODISCARD T | [**X**](#function-x) () noexcept const<br> |
+|   | [**Vector3**](#function-vector3-19) () <br>_@constructor_  |
+|   | [**Vector3**](#function-vector3-29) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & vec) <br> |
+|   | [**Vector3**](#function-vector3-39) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & vec) <br> |
+|   | [**Vector3**](#function-vector3-49) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & vec, U value) <br> |
+|   | [**Vector3**](#function-vector3-59) (const float \* vec) <br> |
+|   | [**Vector3**](#function-vector3-69) (const uint8\_t \* axis) <br> |
+|   | [**Vector3**](#function-vector3-79) (T p\_x, T p\_y, T p\_z) <br>_@constructor_  |
+|   | [**Vector3**](#function-vector3-89) (T p) <br>_@constructor_  |
+|   | [**Vector3**](#function-vector3-99) (const glm::vec3 & v) <br> |
+|  SR\_NODISCARD T | [**X**](#function-x-12) () noexcept const<br>_@method_  |
+|  SR\_NODISCARD T & | [**X**](#function-x-22) () noexcept<br>_@method_  |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**XY**](#function-xy-13) () const<br> |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**XZ**](#function-xz-13) () const<br> |
-|  SR\_NODISCARD T | [**Y**](#function-y) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Y**](#function-y-12) () noexcept const<br>_@method_  |
+|  SR\_NODISCARD T & | [**Y**](#function-y-22) () noexcept<br>_@method_  |
 |  SR\_NODISCARD [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**YZ**](#function-yz-13) () const<br> |
-|  SR\_NODISCARD T | [**Z**](#function-z) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Z**](#function-z-12) () noexcept const<br>_@method_  |
+|  SR\_NODISCARD T & | [**Z**](#function-z-22) () noexcept<br>_@method_  |
 |  SR\_NODISCARD [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**ZeroAxis**](#function-zeroaxis) (Axis axis) const<br> |
 |  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator_1) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_v) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator!=**](#function-operator_1) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator%**](#function-operator_2) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator%=**](#function-operator_3) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator\***](#function-operator_4) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator\***](#function-operator_5) (U p\_scalar) const<br> |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator\*=**](#function-operator_6) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
 |  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator\*=**](#function-operator_7) (U p\_scalar) <br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) SR\_FASTCALL | [**operator+**](#function-operator_8) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) noexcept const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator+**](#function-operator_9) () const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator+=**](#function-operator_10) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator-**](#function-operator_11) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator-**](#function-operator_12) () const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator-=**](#function-operator_13) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_14) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_15) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_16) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
-|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_17) (U p\_scalar) <br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_18) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_19) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_20) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_21) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_22) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_23) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_24) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_25) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_26) (U p\_scalar) const<br> |
-|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_27) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_v) const<br> |
-|  SR\_FORCE\_INLINE constexpr const T & | [**operator[]**](#function-operator_28) (int p\_axis) const<br> |
-|  SR\_FORCE\_INLINE constexpr T & | [**operator[]**](#function-operator_29) (int p\_axis) <br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**operator+**](#function-operator_8) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; float\_t &gt; & p\_v) noexcept const<br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**operator+**](#function-operator_9) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; int32\_t &gt; & p\_v) noexcept const<br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; SR\_FASTCALL | [**operator+**](#function-operator_10) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; uint32\_t &gt; & p\_v) noexcept const<br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**operator+**](#function-operator_11) () const<br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**operator+=**](#function-operator_12) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; float\_t &gt; & p\_v) <br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**operator+=**](#function-operator_13) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; int32\_t &gt; & p\_v) <br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; &SR\_FASTCALL | [**operator+=**](#function-operator_14) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; uint32\_t &gt; & p\_v) <br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator-**](#function-operator_15) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**operator-**](#function-operator_16) () const<br>_@operator_  |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator-=**](#function-operator_17) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_18) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**operator/**](#function-operator_19) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_20) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; U &gt; & p\_v) <br> |
+|  SR\_FORCE\_INLINE [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & | [**operator/=**](#function-operator_21) (U p\_scalar) <br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_22) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;**](#function-operator_23) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_24) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&lt;=**](#function-operator_25) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_26) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator==**](#function-operator_27) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_28) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;**](#function-operator_29) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_30) (U p\_scalar) const<br> |
+|  SR\_FORCE\_INLINE bool | [**operator&gt;=**](#function-operator_31) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; & p\_v) const<br>_@operator_  |
+|  SR\_FORCE\_INLINE const T & | [**operator[]**](#function-operator_32) (int p\_axis) const<br> |
+|  SR\_FORCE\_INLINE T & | [**operator[]**](#function-operator_33) (int p\_axis) <br> |
 
 
 ## Public Static Functions
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**AxisByIndex**](#function-axisbyindex) (uint8\_t axis) <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**AxisByIndex**](#function-axisbyindex) (uint8\_t axis) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md) | [**Cross**](#function-cross-22) (const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_a, const [**Vector3**](structSR__MATH__NS_1_1Vector3.md) & p\_b) <br> |
 |  T | [**Dot**](#function-dot-22) ([**Vector3**](structSR__MATH__NS_1_1Vector3.md) lhs, [**Vector3**](structSR__MATH__NS_1_1Vector3.md) rhs) <br> |
 |  T | [**FixAxis**](#function-fixaxis) (T axis) <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Forward**](#function-forward) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Forward**](#function-forward) () <br> |
 |  Unit | [**Magnitude**](#function-magnitude) ([**Vector3**](structSR__MATH__NS_1_1Vector3.md) vec) <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**One**](#function-one) () <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Right**](#function-right) () <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Up**](#function-up) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**One**](#function-one) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Right**](#function-right) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitX**](#function-unitx) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitY**](#function-unity) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**UnitZ**](#function-unitz) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Up**](#function-up) () <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XY**](#function-xy-23) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v, U value) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XY**](#function-xy-33) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XZ**](#function-xz-23) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v, U value) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XZ**](#function-xz-33) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**YZ**](#function-yz-23) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v, U value) <br> |
 |  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**YZ**](#function-yz-33) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & v) <br> |
-|  constexpr [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Zero**](#function-zero) () <br> |
+|  [**Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**Zero**](#function-zero) () <br> |
 
 
 
@@ -213,6 +226,13 @@
 
 
 
+## Detailed Description
+
+
+@scriptableClass @templateImpl(FVector3, T = float\_t) @templateImpl(IVector3, T = int32\_t) @templateImpl(UVector3, T = uint32\_t) @templateImpl(BVector3, T = bool) 
+
+
+    
 ## Public Types Documentation
 
 
@@ -302,8 +322,9 @@ T SR_MATH_NS::Vector3< T >::z;
 
 ### function Abs 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Abs () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Abs () const
 ```
 
 
@@ -313,27 +334,13 @@ inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Abs () const
 
 
 
-### function Angle [1/2]
+### function Angle 
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Angle (
-    const Vector3 & to
+    const Vector3 < T > & to
 ) const
-```
-
-
-
-
-<hr>
-
-
-
-### function Angle [2/2]
-
-```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Angle (
-    const Vector3 & vector3
-) 
 ```
 
 
@@ -418,8 +425,51 @@ inline SR_NODISCARD Vector3 < U > SR_FASTCALL SR_MATH_NS::Vector3::Cast () noexc
 
 
 
+### function CastToFloat 
+
+_@method_ 
+```C++
+inline SR_NODISCARD Vector3 < float_t > SR_MATH_NS::Vector3::CastToFloat () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function CastToInt 
+
+_@method_ 
+```C++
+inline SR_NODISCARD Vector3 < int32_t > SR_MATH_NS::Vector3::CastToInt () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function CastToUInt 
+
+_@method_ 
+```C++
+inline SR_NODISCARD Vector3 < uint32_t > SR_MATH_NS::Vector3::CastToUInt () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
 ### function Clamp 
 
+_@method_ 
 ```C++
 inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Clamp (
     const Vector3 < T > & upper,
@@ -449,8 +499,9 @@ inline SR_NODISCARD bool SR_MATH_NS::Vector3::ContainsNaN () const
 
 ### function Cos 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Cos () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Cos () const
 ```
 
 
@@ -462,9 +513,10 @@ inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Cos () const
 
 ### function Cross [1/2]
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Cross (
-    const Vector3 & p_b
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Cross (
+    const Vector3 < T > & p_b
 ) const
 ```
 
@@ -535,9 +587,10 @@ inline SR_NODISCARD T SR_FASTCALL SR_MATH_NS::Vector3::Distance (
 
 ### function Dot [1/2]
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Dot (
-    Vector3 p_b
+    const Vector3 < T > & p_b
 ) const
 ```
 
@@ -589,8 +642,9 @@ inline SR_NODISCARD bool SR_MATH_NS::Vector3::HasZero () const
 
 ### function Inverse 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Inverse () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Inverse () const
 ```
 
 
@@ -675,6 +729,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Vector3::IsInfinity () const
 
 ### function Length 
 
+_@method_ 
 ```C++
 inline SR_NODISCARD SR_FORCE_INLINE T SR_MATH_NS::Vector3::Length () const
 ```
@@ -688,10 +743,11 @@ inline SR_NODISCARD SR_FORCE_INLINE T SR_MATH_NS::Vector3::Length () const
 
 ### function Lerp 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD SR_FORCE_INLINE Vector3 SR_FASTCALL SR_MATH_NS::Vector3::Lerp (
-    const Vector3 & vector3,
-    Unit t
+inline SR_NODISCARD SR_FORCE_INLINE Vector3 < T > SR_FASTCALL SR_MATH_NS::Vector3::Lerp (
+    const Vector3 < T > & vector3,
+    float_t t
 ) noexcept const
 ```
 
@@ -734,6 +790,7 @@ inline SR_NODISCARD Quaternion SR_MATH_NS::Vector3::LookAt (
 
 ### function Max 
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Max () const
 ```
@@ -747,8 +804,9 @@ inline SR_NODISCARD T SR_MATH_NS::Vector3::Max () const
 
 ### function Max3 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Max3 () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Max3 () const
 ```
 
 
@@ -760,6 +818,7 @@ inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Max3 () const
 
 ### function Min 
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Min () const
 ```
@@ -773,8 +832,9 @@ inline SR_NODISCARD T SR_MATH_NS::Vector3::Min () const
 
 ### function Min3 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Min3 () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Min3 () const
 ```
 
 
@@ -786,8 +846,9 @@ inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Min3 () const
 
 ### function Normalize 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Normalize () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Normalize () const
 ```
 
 
@@ -799,8 +860,9 @@ inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Normalize () const
 
 ### function Normalized 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Normalized () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Normalized () const
 ```
 
 
@@ -812,9 +874,10 @@ inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Normalized () const
 
 ### function ProjectOnPlane 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::ProjectOnPlane (
-    const Vector3 & planeNormal
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::ProjectOnPlane (
+    const Vector3 < T > & planeNormal
 ) const
 ```
 
@@ -871,8 +934,9 @@ SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Rotate (
 
 ### function Round 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Round () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Round () const
 ```
 
 
@@ -900,8 +964,9 @@ inline SR_NODISCARD T SR_MATH_NS::Vector3::SignedAngle (
 
 ### function Sin 
 
+_@method_ 
 ```C++
-inline SR_NODISCARD Vector3 SR_MATH_NS::Vector3::Sin () const
+inline SR_NODISCARD Vector3 < T > SR_MATH_NS::Vector3::Sin () const
 ```
 
 
@@ -941,6 +1006,7 @@ inline SR_NODISCARD T SR_MATH_NS::Vector3::SqrMagnitude () const
 
 ### function SquaredNorm 
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::SquaredNorm () noexcept const
 ```
@@ -958,6 +1024,38 @@ inline SR_NODISCARD T SR_MATH_NS::Vector3::SquaredNorm () noexcept const
 inline SR_NODISCARD Vector3 SR_FASTCALL SR_MATH_NS::Vector3::Swap (
     Axis axis
 ) const
+```
+
+
+
+
+<hr>
+
+
+
+### function TemplateOperatorPlus 
+
+```C++
+template<typename U>
+inline SR_FORCE_INLINE Vector3 < T > SR_FASTCALL SR_MATH_NS::Vector3::TemplateOperatorPlus (
+    const Vector3 < U > & p_v
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function TemplateOperatorPlusAssign 
+
+```C++
+template<typename U>
+inline SR_FORCE_INLINE Vector3 < T > &SR_FASTCALL SR_MATH_NS::Vector3::TemplateOperatorPlusAssign (
+    const Vector3 < U > & p_v
+) 
 ```
 
 
@@ -1006,10 +1104,11 @@ inline SR_NODISCARD std::string SR_MATH_NS::Vector3::ToString () const
 
 
 
-### function Vector3 [1/8]
+### function Vector3 [1/9]
 
+_@constructor_ 
 ```C++
-inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 () 
+SR_MATH_NS::Vector3::Vector3 () 
 ```
 
 
@@ -1019,11 +1118,26 @@ inline constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 ()
 
 
 
-### function Vector3 [2/8]
+### function Vector3 [2/9]
+
+```C++
+inline SR_MATH_NS::Vector3::Vector3 (
+    const Vector3 < T > & vec
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function Vector3 [3/9]
 
 ```C++
 template<typename U>
-inline explicit constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
+inline explicit SR_MATH_NS::Vector3::Vector3 (
     const Vector3 < U > & vec
 ) 
 ```
@@ -1035,11 +1149,11 @@ inline explicit constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function Vector3 [3/8]
+### function Vector3 [4/9]
 
 ```C++
 template<typename U>
-inline explicit constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
+inline explicit SR_MATH_NS::Vector3::Vector3 (
     const Vector2 < U > & vec,
     U value
 ) 
@@ -1052,10 +1166,10 @@ inline explicit constexpr SR_FORCE_INLINE SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function Vector3 [4/8]
+### function Vector3 [5/9]
 
 ```C++
-inline explicit SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
+inline explicit SR_MATH_NS::Vector3::Vector3 (
     const float * vec
 ) 
 ```
@@ -1067,10 +1181,10 @@ inline explicit SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function Vector3 [5/8]
+### function Vector3 [6/9]
 
 ```C++
-inline explicit SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
+inline explicit SR_MATH_NS::Vector3::Vector3 (
     const uint8_t * axis
 ) 
 ```
@@ -1082,10 +1196,11 @@ inline explicit SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function Vector3 [6/8]
+### function Vector3 [7/9]
 
+_@constructor_ 
 ```C++
-inline SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
+inline SR_MATH_NS::Vector3::Vector3 (
     T p_x,
     T p_y,
     T p_z
@@ -1099,10 +1214,11 @@ inline SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function Vector3 [7/8]
+### function Vector3 [8/9]
 
+_@constructor_ 
 ```C++
-inline SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
+inline SR_MATH_NS::Vector3::Vector3 (
     T p
 ) 
 ```
@@ -1114,7 +1230,7 @@ inline SR_FORCE_INLINE constexpr SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function Vector3 [8/8]
+### function Vector3 [9/9]
 
 ```C++
 inline SR_MATH_NS::Vector3::Vector3 (
@@ -1129,10 +1245,25 @@ inline SR_MATH_NS::Vector3::Vector3 (
 
 
 
-### function X 
+### function X [1/2]
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::X () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function X [2/2]
+
+_@method_ 
+```C++
+inline SR_NODISCARD T & SR_MATH_NS::Vector3::X () noexcept
 ```
 
 
@@ -1168,10 +1299,25 @@ inline SR_NODISCARD Vector2 < T > SR_MATH_NS::Vector3::XZ () const
 
 
 
-### function Y 
+### function Y [1/2]
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Y () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function Y [2/2]
+
+_@method_ 
+```C++
+inline SR_NODISCARD T & SR_MATH_NS::Vector3::Y () noexcept
 ```
 
 
@@ -1194,10 +1340,25 @@ inline SR_NODISCARD Vector2 < T > SR_MATH_NS::Vector3::YZ () const
 
 
 
-### function Z 
+### function Z [1/2]
 
+_@method_ 
 ```C++
 inline SR_NODISCARD T SR_MATH_NS::Vector3::Z () noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function Z [2/2]
+
+_@method_ 
+```C++
+inline SR_NODISCARD T & SR_MATH_NS::Vector3::Z () noexcept
 ```
 
 
@@ -1240,9 +1401,10 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator!= (
 
 ### function operator!= 
 
+_@operator_ 
 ```C++
 inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator!= (
-    const Vector3 & p_v
+    const Vector3 < T > & p_v
 ) const
 ```
 
@@ -1351,10 +1513,10 @@ inline SR_FORCE_INLINE Vector3 & SR_MATH_NS::Vector3::operator*= (
 
 ### function operator+ 
 
+_@operator_ 
 ```C++
-template<typename U>
-inline SR_FORCE_INLINE Vector3 SR_FASTCALL SR_MATH_NS::Vector3::operator+ (
-    const Vector3 < U > & p_v
+inline SR_FORCE_INLINE Vector3 < T > SR_FASTCALL SR_MATH_NS::Vector3::operator+ (
+    const Vector3 < float_t > & p_v
 ) noexcept const
 ```
 
@@ -1367,8 +1529,41 @@ inline SR_FORCE_INLINE Vector3 SR_FASTCALL SR_MATH_NS::Vector3::operator+ (
 
 ### function operator+ 
 
+_@operator_ 
 ```C++
-inline SR_FORCE_INLINE Vector3 SR_MATH_NS::Vector3::operator+ () const
+inline SR_FORCE_INLINE Vector3 < T > SR_FASTCALL SR_MATH_NS::Vector3::operator+ (
+    const Vector3 < int32_t > & p_v
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator+ 
+
+_@operator_ 
+```C++
+inline SR_FORCE_INLINE Vector3 < T > SR_FASTCALL SR_MATH_NS::Vector3::operator+ (
+    const Vector3 < uint32_t > & p_v
+) noexcept const
+```
+
+
+
+
+<hr>
+
+
+
+### function operator+ 
+
+_@operator_ 
+```C++
+inline SR_FORCE_INLINE Vector3 < T > SR_MATH_NS::Vector3::operator+ () const
 ```
 
 
@@ -1380,10 +1575,42 @@ inline SR_FORCE_INLINE Vector3 SR_MATH_NS::Vector3::operator+ () const
 
 ### function operator+= 
 
+_@operator_ 
 ```C++
-template<typename U>
-inline SR_FORCE_INLINE Vector3 & SR_MATH_NS::Vector3::operator+= (
-    const Vector3 < U > & p_v
+inline SR_FORCE_INLINE Vector3 < T > &SR_FASTCALL SR_MATH_NS::Vector3::operator+= (
+    const Vector3 < float_t > & p_v
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator+= 
+
+_@operator_ 
+```C++
+inline SR_FORCE_INLINE Vector3 < T > &SR_FASTCALL SR_MATH_NS::Vector3::operator+= (
+    const Vector3 < int32_t > & p_v
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function operator+= 
+
+_@operator_ 
+```C++
+inline SR_FORCE_INLINE Vector3 < T > &SR_FASTCALL SR_MATH_NS::Vector3::operator+= (
+    const Vector3 < uint32_t > & p_v
 ) 
 ```
 
@@ -1412,8 +1639,9 @@ inline SR_FORCE_INLINE Vector3 SR_MATH_NS::Vector3::operator- (
 
 ### function operator- 
 
+_@operator_ 
 ```C++
-inline SR_FORCE_INLINE Vector3 SR_MATH_NS::Vector3::operator- () const
+inline SR_FORCE_INLINE Vector3 < T > SR_MATH_NS::Vector3::operator- () const
 ```
 
 
@@ -1521,9 +1749,10 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator< (
 
 ### function operator&lt; 
 
+_@operator_ 
 ```C++
 inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator< (
-    const Vector3 & p_v
+    const Vector3 < T > & p_v
 ) const
 ```
 
@@ -1552,9 +1781,10 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator<= (
 
 ### function operator&lt;= 
 
+_@operator_ 
 ```C++
 inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator<= (
-    const Vector3 & p_v
+    const Vector3 < T > & p_v
 ) const
 ```
 
@@ -1583,9 +1813,10 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator== (
 
 ### function operator== 
 
+_@operator_ 
 ```C++
 inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator== (
-    const Vector3 & p_v
+    const Vector3 < T > & p_v
 ) const
 ```
 
@@ -1614,9 +1845,10 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator> (
 
 ### function operator&gt; 
 
+_@operator_ 
 ```C++
 inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator> (
-    const Vector3 & p_v
+    const Vector3 < T > & p_v
 ) const
 ```
 
@@ -1645,9 +1877,10 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator>= (
 
 ### function operator&gt;= 
 
+_@operator_ 
 ```C++
 inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator>= (
-    const Vector3 & p_v
+    const Vector3 < T > & p_v
 ) const
 ```
 
@@ -1661,7 +1894,7 @@ inline SR_FORCE_INLINE bool SR_MATH_NS::Vector3::operator>= (
 ### function operator[] 
 
 ```C++
-inline SR_FORCE_INLINE constexpr const T & SR_MATH_NS::Vector3::operator[] (
+inline SR_FORCE_INLINE const T & SR_MATH_NS::Vector3::operator[] (
     int p_axis
 ) const
 ```
@@ -1676,7 +1909,7 @@ inline SR_FORCE_INLINE constexpr const T & SR_MATH_NS::Vector3::operator[] (
 ### function operator[] 
 
 ```C++
-inline SR_FORCE_INLINE constexpr T & SR_MATH_NS::Vector3::operator[] (
+inline SR_FORCE_INLINE T & SR_MATH_NS::Vector3::operator[] (
     int p_axis
 ) 
 ```
@@ -1693,7 +1926,7 @@ inline SR_FORCE_INLINE constexpr T & SR_MATH_NS::Vector3::operator[] (
 ### function AxisByIndex 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::AxisByIndex (
+static inline Vector3 < T > SR_MATH_NS::Vector3::AxisByIndex (
     uint8_t axis
 ) 
 ```
@@ -1755,7 +1988,7 @@ static inline T SR_MATH_NS::Vector3::FixAxis (
 ### function Forward 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Forward () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::Forward () 
 ```
 
 
@@ -1783,7 +2016,7 @@ static inline Unit SR_MATH_NS::Vector3::Magnitude (
 ### function One 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::One () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::One () 
 ```
 
 
@@ -1796,7 +2029,7 @@ static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::One ()
 ### function Right 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Right () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::Right () 
 ```
 
 
@@ -1809,7 +2042,7 @@ static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Right ()
 ### function UnitX 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitX () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::UnitX () 
 ```
 
 
@@ -1822,7 +2055,7 @@ static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitX ()
 ### function UnitY 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitY () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::UnitY () 
 ```
 
 
@@ -1835,7 +2068,7 @@ static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitY ()
 ### function UnitZ 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitZ () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::UnitZ () 
 ```
 
 
@@ -1848,7 +2081,7 @@ static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::UnitZ ()
 ### function Up 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Up () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::Up () 
 ```
 
 
@@ -1960,7 +2193,7 @@ static inline Vector3 < T > SR_MATH_NS::Vector3::YZ (
 ### function Zero 
 
 ```C++
-static inline constexpr Vector3 < T > SR_MATH_NS::Vector3::Zero () 
+static inline Vector3 < T > SR_MATH_NS::Vector3::Zero () 
 ```
 
 

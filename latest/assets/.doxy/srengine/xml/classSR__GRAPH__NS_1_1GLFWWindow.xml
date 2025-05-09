@@ -371,7 +371,7 @@
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1affa097f0124993cb7f8315125003b120" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>Move</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7efe4e9db15c11e68120d7d3aba4889e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>MoveCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a490e214ff849ee59cc8b0aa8aac9ee04" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>NextFrameGUI</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>NonCopyable</name></member>
       <member refid="classSR__GRAPH__NS_1_1GLFWWindow_1a7c3b94f2c4a47bd8ffeeac96d5bd056a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>OnFocusChangedCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1GLFWWindow_1ab60ca960a2b0e028fa42e0b9b66db0f5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>OnFramebufferSizeChangedCallback</name></member>
@@ -399,7 +399,7 @@
       <member refid="classSR__GRAPH__NS_1_1GLFWWindow_1abecb362fb7356c5bb1110efbe5f8caae" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>Super</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a3cf55463636601f123fcb60cf7e6eb28" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>SwapBuffers</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ae4ddf1769856b64dfdc1ca1a08da8002" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>~BasicWindowImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GLFWWindow</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

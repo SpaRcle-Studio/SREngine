@@ -197,8 +197,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 ## Protected Functions inherited from SR_UTILS_NS::NonMovable
@@ -207,8 +207,8 @@ See [SR\_UTILS\_NS::NonMovable](classSR__UTILS__NS_1_1NonMovable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonMovable**](classSR__UTILS__NS_1_1NonMovable.md#function-nonmovable-12) () = default<br> |
-| virtual  | [**~NonMovable**](classSR__UTILS__NS_1_1NonMovable.md#function-nonmovable) () = default<br> |
+|   | [**NonMovable**](classSR__UTILS__NS_1_1NonMovable.md#function-nonmovable-12) () <br> |
+| virtual  | [**~NonMovable**](classSR__UTILS__NS_1_1NonMovable.md#function-nonmovable) () <br> |
 
 
 

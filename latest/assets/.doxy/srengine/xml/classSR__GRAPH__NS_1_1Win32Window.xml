@@ -701,7 +701,7 @@
       <member refid="classSR__GRAPH__NS_1_1Win32Window_1a513c942c514d09e5cc52e1df8c40574b" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>Move</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a7efe4e9db15c11e68120d7d3aba4889e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>MoveCallback</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1a490e214ff849ee59cc8b0aa8aac9ee04" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>NextFrameGUI</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>operator=</name></member>
       <member refid="classSR__GRAPH__NS_1_1Win32Window_1a690f5f5c45cf8247956974b7e7069fdb" prot="public" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>PollEvents</name></member>
@@ -727,7 +727,7 @@
       <member refid="classSR__GRAPH__NS_1_1Win32Window_1a9db3bbea740425b8edecbd7c489cce7b" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>Win32Window</name></member>
       <member refid="classSR__GRAPH__NS_1_1Win32Window_1a227aa771893e8a2384b1b28c482235da" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>WndProcedure</name></member>
       <member refid="classSR__GRAPH__NS_1_1BasicWindowImpl_1ae4ddf1769856b64dfdc1ca1a08da8002" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>~BasicWindowImpl</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::Win32Window</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

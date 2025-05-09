@@ -587,6 +587,7 @@
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a9cad5487c5dcc24cbcc18c637a8db385" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Connect</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1afd00868c6f1ee799b3bc5a0795d6b5e3" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ConnectInternal</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1ac26c806e60ca4a0547680edb68f6e39b" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Context</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>DynamicCast</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Get</name></member>
@@ -602,6 +603,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a598d833978b3000cbeae4876617524bf" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>HasConnection</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>IncrementPointer</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a2e27cd70b0fbb2fbcb2467dc9d04df64" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>IsOpen</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a6996acc2803b7d73540a907ae0bb17c9" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>ListerPeer</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a4a7d015f33fd66131283a4cff7a7cc97" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>m_acceptor</name></member>
@@ -642,7 +644,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1accc3bf1652e31e510ad5c73d18ee3e24" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharePeer</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a4184c6875fae929a1f667b062b3082cc" prot="private" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>SharePeer</name></member>
@@ -653,7 +655,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>Valid</name></member>
       <member refid="classSR__NETWORK__NS_1_1PeerToPeer_1a01ab204ede5c86e3425f3e0131a13b93" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~PeerToPeer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_NETWORK_NS::PeerToPeer</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

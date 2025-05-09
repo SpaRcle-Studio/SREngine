@@ -4,6 +4,7 @@
     <compoundname>SR_UTILS_NS::IComponentable</compoundname>
     <basecompoundref prot="public" virt="non-virtual">Entity</basecompoundref>
     <derivedcompoundref refid="classSR__WORLD__NS_1_1Scene" prot="public" virt="non-virtual">SR_WORLD_NS::Scene</derivedcompoundref>
+    <includes refid="IComponentable_8h" local="no">IComponentable.h</includes>
     <sectiondef kind="private-type">
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1IComponentable_1ae8cf197cb7e8afaa429fa9ac9acc6d18" prot="private" static="no">
         <type>Entity</type>
@@ -17,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="20" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="21" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="21" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -33,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="23" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="24" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1IComponentable_1ab2e4a5ecd74802ea355a47da7f52e779" prot="public" static="no">
         <type><ref refid="classSR__WORLD__NS_1_1Scene" kindref="compound">SR_WORLD_NS::Scene</ref> *</type>
@@ -47,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="24" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="25" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__UTILS__NS_1_1IComponentable_1a56f03c38e25da17b09c4f0c3df9762da" prot="public" static="no">
         <type><ref refid="classSR__UTILS__NS_1_1IComponentable" kindref="compound">IComponentable</ref></type>
@@ -61,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="25" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="26" column="9" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="26" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-attrib">
@@ -77,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="99" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="99" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="101" column="21" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="101" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -94,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="102" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="102" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="104" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__UTILS__NS_1_1IComponentable_1a7f87c6c804ba81fa057d447043063477" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -109,10 +110,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="103" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="105" column="14" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="105" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ab0e7db31ca69f3c02daa9b5e86d8e24c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_UTILS_NS::IComponentable::IComponentable</definition>
+        <argsstring>()=default</argsstring>
+        <name>IComponentable</name>
+        <qualifiedname>SR_UTILS_NS::IComponentable::IComponentable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="29" column="9"/>
+      </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1afaa14bf26317df3a48747dd9e5fb54f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_UTILS_NS::IComponentable::~IComponentable</definition>
@@ -125,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="28" column="9"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a98c049c3e64fa32fbe3822fe7b702ff1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -139,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="31" column="27"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="33" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a20802bdf40bd79aa69847a0b4b62d9cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -158,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="35" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="37" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1abe335ee2e09aebe4d47244adb523e184" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -176,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="37" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="39" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a669c7585ff6436b989dd01c8f5b0c2c8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -198,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="39" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="41" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ac734a48925eb4351b4b9da801c1f518a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -216,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="40" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="42" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a44a51766ea071204eafe913039419251" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -230,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="42" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="42" bodyend="42"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="44" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a195b390d15d3ba67b868c93040a90dda" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -244,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="43" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="43" bodyend="43"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="45" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a33139248be9fd09bf03ed27dc485c2a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -263,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="45" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="47" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a213ac205606cbc0ff0ed66ba2238f357" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>Component::Ptr</type>
@@ -281,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="47" column="32"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="49" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a96d8cf98278e875d28450aada24c4e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>Component::Ptr</type>
@@ -299,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="48" column="32"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="50" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1aa61e5a4b3ebdae8af7091c6e677624e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>Component::Ptr</type>
@@ -317,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="49" column="32"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="51" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a522d0a7ca81ad1cc7b9d869271b7eacb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>Component::Ptr</type>
@@ -335,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="50" column="32"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="52" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ab3f1833b432e0e56baa9b41570d70a18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -357,7 +372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="51" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="53" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1aeea19c294fe07e4f320334a15b0a81b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -375,7 +390,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="53" column="27"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="55" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1afb05818099e50470df3fb9781fe29726" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD int32_t</type>
@@ -393,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="54" column="30"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="56" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a45518f12f65774d4c57dafbb5b0a3102" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD uint32_t</type>
@@ -407,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="55" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="55" bodyend="55"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="57" column="31" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="57" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ad4a814f3df9a1448b3860bdb09698e42" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD const std::vector&lt; Component::Ptr &gt; &amp;</type>
@@ -421,7 +436,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="56" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="56" bodyend="56"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="58" column="40" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="58" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ae35fb0df155f53c85555ba954c56aa75" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -439,7 +454,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="58" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="60" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ad01a80b3546df658202d432bd6994c25" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -458,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="60" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="60" bodyend="71"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="62" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="62" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a9c34d51144cb0644ade645c87ceb37de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -472,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="73" column="14"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="75" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a34e59c939961077ffe67e725f03ae899" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -490,7 +505,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="74" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="76" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a1b5d40b01248c5e1fcdc544854d03ae0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -508,7 +523,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="75" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="77" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a313e6ad308c7daf22f63022d31077e34" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -526,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="77" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="79" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a58123acc71d0dfdafd44206699ab8a70" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -544,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="78" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="80" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ab6cb5e51cade5bdbfd24f293218c671e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -563,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="80" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="80" bodyend="82"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="82" column="44" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="82" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a4a262fde588f59c76ae3343e74b49918" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -577,7 +592,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="84" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="86" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a7ff4e1e74755db1bbb5369212d17698b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -591,7 +606,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="85" column="22"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="87" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1a97cf19f07ba85868e91bdb14de07bb5c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>SR_NODISCARD bool</type>
@@ -606,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="87" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="87" bodyend="87"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="89" column="35" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="89" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ad609b52897182000186bf3ee3f15cbaf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD ScenePtr</type>
@@ -621,7 +636,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="89" column="39"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="91" column="39"/>
       </memberdef>
       <memberdef kind="function" id="classSR__UTILS__NS_1_1IComponentable_1ad6836fd7047633f0ef1f68f9a3e7b749" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -635,7 +650,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="91" column="14"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="93" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -655,10 +670,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="94" column="14"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="96" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
+<para>@scriptableClass </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
@@ -696,7 +712,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="19" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="19" bodyend="105"/>
+    <location file="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" line="20" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/ECS/IComponentable.h" bodystart="20" bodyend="107"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1ae35fb0df155f53c85555ba954c56aa75" prot="public" virt="virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>AddComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1ad01a80b3546df658202d432bd6994c25" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>AddComponent</name></member>
@@ -716,6 +732,7 @@
       <member refid="classSR__UTILS__NS_1_1IComponentable_1a96d8cf98278e875d28450aada24c4e46" prot="public" virt="virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>GetOrCreateComponent</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1ad609b52897182000186bf3ee3f15cbaf" prot="public" virt="virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>GetScene</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1aeea19c294fe07e4f320334a15b0a81b5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>HasComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ab0e7db31ca69f3c02daa9b5e86d8e24c" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>IComponentable</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1a44a51766ea071204eafe913039419251" prot="public" virt="virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>IsActive</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1a195b390d15d3ba67b868c93040a90dda" prot="public" virt="virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>IsDestroyed</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1a98c049c3e64fa32fbe3822fe7b702ff1" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::IComponentable</scope><name>IsDirty</name></member>

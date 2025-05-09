@@ -12,6 +12,7 @@
 
 * `#include <Utils/FileSystem/Path.h>`
 * `#include <Utils/Common/StringUtils.h>`
+* `#include <Utils/Types/Function.h>`
 
 
 

@@ -107,6 +107,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
         void SR_FASTCALL SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
         void SR_FASTCALL SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept;
+        void SR_FASTCALL SetColor(uint64_t hashId, const SR_MATH_NS::FColor& v) noexcept;
         void SR_FASTCALL SetRect(uint64_t hashId, const SR_MATH_NS::FRect& v) noexcept;
         void SR_FASTCALL SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
@@ -116,6 +117,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetConstInt(uint64_t hashId, int32_t v) noexcept;
         void SR_FASTCALL SetConstMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
         void SR_FASTCALL SetConstVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept;
+        void SR_FASTCALL SetConstColor(uint64_t hashId, const SR_MATH_NS::FColor& v) noexcept;
         void SR_FASTCALL SetConstVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
         void SR_FASTCALL SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;

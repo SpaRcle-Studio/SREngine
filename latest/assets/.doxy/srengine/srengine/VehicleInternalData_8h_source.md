@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_VEHICLEINTERNALDATA_H
 #define SR_ENGINE_VEHICLEINTERNALDATA_H
 
+#include <Physics/macros.h>
+
 namespace SR_PTYPES_NS {
     struct VehicleInternalData {
         float_t m_peakTorque = 500.0f;

@@ -269,7 +269,7 @@
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1aae78d774544c6d78ec58b0bfb6bdc6ca" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>GetVelocity</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a992fa99d1b2cb50d7aa6d6785534a8f0" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Init</name></member>
       <member refid="classSR__AUDIO__NS_1_1SoundListener_1a4ceb746073a118ab576bdcadc757a722" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>m_data</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>NonCopyable</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a1f0c320136f40998603991d1d3e128a1" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>OpenALSoundListener</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>operator=</name></member>
@@ -280,7 +280,7 @@
       <member refid="classSR__AUDIO__NS_1_1SoundListener_1aca13e98dce3305911659e90039d737f9" prot="public" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>SoundListener</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1afde409f1cde825da8e7be8fb1595227d" prot="private" virt="non-virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Super</name></member>
       <member refid="classSR__AUDIO__NS_1_1OpenALSoundListener_1a7dded343c1c8ce4148e89a073d7dc7a5" prot="public" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>Update</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_AUDIO_NS::OpenALSoundListener</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

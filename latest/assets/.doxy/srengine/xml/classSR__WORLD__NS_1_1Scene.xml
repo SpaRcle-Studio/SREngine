@@ -596,7 +596,7 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="73" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a77a71524af38f4e43270dbfc61d1a244" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a77a71524af38f4e43270dbfc61d1a244" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> &amp;</type>
         <definition>SR_NODISCARD SR_HTYPES_NS::DataStorage &amp; SR_WORLD_NS::Scene::GetDataStorage</definition>
         <argsstring>()</argsstring>
@@ -608,9 +608,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="74" column="48" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="74" bodyend="74"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="74" column="48"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6555eae70f319b82ffef8cb7e51400c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a6555eae70f319b82ffef8cb7e51400c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> &amp;</type>
         <definition>SR_NODISCARD const SR_HTYPES_NS::DataStorage &amp; SR_WORLD_NS::Scene::GetDataStorage</definition>
         <argsstring>() const</argsstring>
@@ -622,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="75" column="54" bodyfile="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" bodystart="75" bodyend="75"/>
+        <location file="Engine/Core/libs/Utils/inc/Utils/World/Scene.h" line="75" column="54"/>
       </memberdef>
       <memberdef kind="function" id="classSR__WORLD__NS_1_1Scene_1a4b96699a74cdd9024381a51ca08b24c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_INLINE <ref refid="classSR__WORLD__NS_1_1SceneUpdater" kindref="compound">SceneUpdater</ref> *</type>
@@ -1197,6 +1197,7 @@
       <member refid="classSR__WORLD__NS_1_1Scene_1aa6b496705c31af2eede3634e27ac6952" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetScene</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1a4b96699a74cdd9024381a51ca08b24c2" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>GetSceneUpdater</name></member>
       <member refid="classSR__UTILS__NS_1_1IComponentable_1aeea19c294fe07e4f320334a15b0a81b5" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>HasComponent</name></member>
+      <member refid="classSR__UTILS__NS_1_1IComponentable_1ab0e7db31ca69f3c02daa9b5e86d8e24c" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>IComponentable</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1acb4d6e0610a449246b7c2511b81c6909" prot="public" virt="non-virtual"><scope>SR_WORLD_NS::Scene</scope><name>Init</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1af839836d0d6587fa8515470de4b37c12" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>Instance</name></member>
       <member refid="classSR__WORLD__NS_1_1Scene_1ab8fa24da1cf2182889ec2596341069b3" prot="public" virt="virtual"><scope>SR_WORLD_NS::Scene</scope><name>InstanceFromFile</name></member>

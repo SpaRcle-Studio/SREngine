@@ -18,7 +18,7 @@
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_UTILS_NS::Yaml {
-    class SR_DLL_EXPORT Node {
+    class SR_COMMON_DLL_API Node {
         friend class Document;
 
     public:
@@ -63,7 +63,7 @@ namespace SR_UTILS_NS::Yaml {
         size_t m_id = -1;
     };
 
-    class SR_DLL_EXPORT Document final : public NonCopyable {
+    class SR_COMMON_DLL_API Document final : public NonCopyable {
     public:
         Document() = default;
         ~Document() override;

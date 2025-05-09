@@ -65,7 +65,7 @@
 |  SR\_NODISCARD bool | [**IsInherited**](#function-isinherited) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) baseClass) noexcept const<br> |
 | virtual bool | [**Load**](#function-load) ([**SR\_UTILS\_NS::IDeserializer**](classSR__UTILS__NS_1_1IDeserializer.md) & deserializer, [**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md) & obj) const<br> |
 | virtual void | [**Save**](#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer, const [**SR\_UTILS\_NS::Serializable**](classSR__UTILS__NS_1_1Serializable.md) & obj) const<br> |
-| virtual  | [**~SRClassMeta**](#function-srclassmeta) () = default<br> |
+| virtual  | [**~SRClassMeta**](#function-srclassmeta) () <br> |
 
 
 
@@ -107,7 +107,7 @@
 ### function Allocate 
 
 ```C++
-inline virtual SR_NODISCARD SRClass * SR_UTILS_NS::SRClassMeta::Allocate () noexcept const
+virtual SR_NODISCARD SRClass * SR_UTILS_NS::SRClassMeta::Allocate () noexcept const
 ```
 
 
@@ -136,7 +136,7 @@ void SR_UTILS_NS::SRClassMeta::ForEachProperty (
 ### function GetBaseMetas 
 
 ```C++
-inline virtual SR_NODISCARD std::span< const SRClassMeta * > SR_UTILS_NS::SRClassMeta::GetBaseMetas () noexcept const
+virtual SR_NODISCARD std::span< const SRClassMeta * > SR_UTILS_NS::SRClassMeta::GetBaseMetas () noexcept const
 ```
 
 
@@ -162,7 +162,7 @@ virtual SR_NODISCARD std::span< const SR_UTILS_NS::StringAtom > SR_UTILS_NS::SRC
 ### function GetFactoryName 
 
 ```C++
-inline virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::GetFactoryName () noexcept const
+virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::GetFactoryName () noexcept const
 ```
 
 
@@ -175,7 +175,7 @@ inline virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::Ge
 ### function GetInspectorName 
 
 ```C++
-inline virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::GetInspectorName () noexcept const
+virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::GetInspectorName () noexcept const
 ```
 
 
@@ -188,7 +188,7 @@ inline virtual SR_NODISCARD SR_UTILS_NS::StringAtom SR_UTILS_NS::SRClassMeta::Ge
 ### function GetProperties 
 
 ```C++
-inline virtual SR_NODISCARD std::span< const SR_UTILS_NS::Reflection::Property > SR_UTILS_NS::SRClassMeta::GetProperties () noexcept const
+virtual SR_NODISCARD std::span< const SR_UTILS_NS::Reflection::Property > SR_UTILS_NS::SRClassMeta::GetProperties () noexcept const
 ```
 
 
@@ -214,7 +214,7 @@ SR_NODISCARD uint64_t SR_UTILS_NS::SRClassMeta::GetVersion () noexcept const
 ### function IsAbstract 
 
 ```C++
-inline virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsAbstract () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsAbstract () noexcept const
 ```
 
 
@@ -227,7 +227,7 @@ inline virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsAbstract () noexcep
 ### function IsEditorOnly 
 
 ```C++
-inline virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsEditorOnly () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsEditorOnly () noexcept const
 ```
 
 
@@ -240,7 +240,7 @@ inline virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsEditorOnly () noexc
 ### function IsHidden 
 
 ```C++
-inline virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsHidden () noexcept const
+virtual SR_NODISCARD bool SR_UTILS_NS::SRClassMeta::IsHidden () noexcept const
 ```
 
 
@@ -300,7 +300,7 @@ virtual void SR_UTILS_NS::SRClassMeta::Save (
 ### function ~SRClassMeta 
 
 ```C++
-virtual SR_UTILS_NS::SRClassMeta::~SRClassMeta () = default
+virtual SR_UTILS_NS::SRClassMeta::~SRClassMeta () 
 ```
 
 
@@ -315,7 +315,7 @@ virtual SR_UTILS_NS::SRClassMeta::~SRClassMeta () = default
 ### function GetVersionImpl 
 
 ```C++
-inline virtual SR_NODISCARD uint64_t SR_UTILS_NS::SRClassMeta::GetVersionImpl () noexcept const
+virtual SR_NODISCARD uint64_t SR_UTILS_NS::SRClassMeta::GetVersionImpl () noexcept const
 ```
 
 

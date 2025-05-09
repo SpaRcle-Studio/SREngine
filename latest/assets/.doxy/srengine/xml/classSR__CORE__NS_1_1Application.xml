@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="42" column="27" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="44" column="27" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Application_1aa1aa847a32be788607fa6d8192a56de1" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="44" column="27" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="46" column="27" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Application_1a5ced4ed9e4d84acd64f73e25ccc1f236" prot="private" static="no" mutable="no">
         <type>std::atomic&lt; bool &gt;</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="47" column="21" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="49" column="21" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__NS_1_1Application_1add69171ec556c00ec2972be8fd210d6f" prot="private" static="no" mutable="no">
         <type><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">Engine</ref> &gt;</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="49" column="33" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="51" column="33" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="51" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -237,6 +237,34 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/Application.h" line="32" column="46" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="32" bodyend="32"/>
       </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a23d58bfc090ba72d69d439dcc72b8db2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD const <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">Engine</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD const SR_HTYPES_NS::SharedPtr&lt; Engine &gt; &amp; SR_CORE_NS::Application::GetEngine</definition>
+        <argsstring>() const</argsstring>
+        <name>GetEngine</name>
+        <qualifiedname>SR_CORE_NS::Application::GetEngine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Application.h" line="33" column="52" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a7f96884faa28ef03576dff9f664c74dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>SR_NODISCARD <ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt; <ref refid="classSR__CORE__NS_1_1Engine" kindref="compound">Engine</ref> &gt; &amp;</type>
+        <definition>SR_NODISCARD SR_HTYPES_NS::SharedPtr&lt; Engine &gt; &amp; SR_CORE_NS::Application::GetEngine</definition>
+        <argsstring>()</argsstring>
+        <name>GetEngine</name>
+        <qualifiedname>SR_CORE_NS::Application::GetEngine</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/inc/Core/Application.h" line="34" column="46" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="34" bodyend="34"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a6a769d0c294e35d7a0b890fc8756273d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -251,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="35" column="14"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a558ad35e83ba8c64731808d9f8b77643" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -269,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="36" column="14"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__CORE__NS_1_1Application_1a189397a0c207563a2456173dadace063" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -283,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/Application.h" line="37" column="14"/>
+        <location file="Engine/Core/inc/Core/Application.h" line="39" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -333,18 +361,21 @@
         <link refid="structSR__HTYPES__NS_1_1SharedPtrDynamicData"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/inc/Core/Application.h" line="14" column="5" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="14" bodyend="51"/>
+    <location file="Engine/Core/inc/Core/Application.h" line="14" column="5" bodyfile="Engine/Core/inc/Core/Application.h" bodystart="14" bodyend="53"/>
     <listofallmembers>
       <member refid="classSR__CORE__NS_1_1Application_1af85f31252d1349b8a520a785d95f8e99" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Application</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a2b6e74384e9a2821e23004268ac5eee2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>AutoFree</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a489a0ca0545baf39524d0006e04ae9b8" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>AutoFree</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1aa42b8160f77905ef454f505d2ac07626" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Close</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1486318fef2c8a5ea78d70b0ced5c37d" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>DecrementPointer</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ad2895807071f3aadc07ac7d8dbcf8b0d" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>DynamicCast</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a89007c2cdb2d6e5e2005fb172e916866" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>EarlyInit</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a760502cfa2fc0410344bd635c5ca10bb" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Execute</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a189397a0c207563a2456173dadace063" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>FindResourcesFolder</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Get</name></member>
+      <member refid="classSR__CORE__NS_1_1Application_1a23d58bfc090ba72d69d439dcc72b8db2" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetEngine</name></member>
+      <member refid="classSR__CORE__NS_1_1Application_1a7f96884faa28ef03576dff9f664c74dd" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetEngine</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a4d75cba9e4f98014b95e9107a06fd601" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetPtrData</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1af81615122e7f7b917e3e9e0efb93fecc" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetRawPtr</name></member>
@@ -354,6 +385,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abedd084dcfb3c93068b4c5c9ce16e39e" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetThis</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a9d4ec2812d665c46d045b09bd867f28a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetUncheckedRef</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a00f58f9d8581fe5b60642005e6fd2945" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>GetUncheckedRef</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtr_1abc5c62a699dc811babbaa57ddfcdca14" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>IncrementPointer</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a049d443ca8eda9edfb95d35eacffc69a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Init</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1af11788fe8ed9084d885de749dc78614e" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>InitializeResourcesFolder</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a558ad35e83ba8c64731808d9f8b77643" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>InitLogger</name></member>
@@ -387,7 +419,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a98f9a90b67c06bf84fb42ce80b605d75" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1acd3ff052179e572a953095f6904ca845" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>SharedPtr</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1aae84a99ef342a49b2f6af16b9f407b07" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad583b9fb6a4e956f8867ba2d01907b27" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1afc3c958bc4a0ac65b5f5362512545035" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a76e2fedf8a1ea3d76c6d4d806b6826f0" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>SharedPtrBase</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1ac4201771b476372bf614b44d481071a5" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>StaticCast</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a185ee674671dc64febc79bb671ed13b5" prot="private" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Super</name></member>
@@ -397,7 +429,7 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a880a3f1ee3c35437d24ed841c3a78463" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>Valid</name></member>
       <member refid="classSR__CORE__NS_1_1Application_1a3b54ac854218deb82364ef38598f531a" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>~Application</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a887bbda6f7dd0609431712be26b9cdb7" prot="public" virt="non-virtual"><scope>SR_CORE_NS::Application</scope><name>~SharedPtr</name></member>
-      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a9b4d418f268622cfa64238f37b8ff171" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>~SharedPtrBase</name></member>
+      <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ad1fa84fda06c277e64873fbf32c39c81" prot="public" virt="virtual"><scope>SR_CORE_NS::Application</scope><name>~SharedPtrBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

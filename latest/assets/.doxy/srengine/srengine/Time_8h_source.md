@@ -20,7 +20,7 @@
 #include <Utils/Profile/TracyContext.h>
 
 namespace SR_HTYPES_NS {
-    class SR_DLL_EXPORT Time : public Singleton<Time> {
+    class Time : public Singleton<Time> {
         SR_REGISTER_SINGLETON(Time)
     public:
         using ClockT = std::chrono::high_resolution_clock;

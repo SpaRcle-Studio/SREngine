@@ -81,8 +81,8 @@ Inherited by the following classes: [SR\_UTILS\_NS::Event](classSR__UTILS__NS_1_
 
 | Type | Name |
 | ---: | :--- |
-|   | [**IEvent**](#function-ievent) () = default<br> |
-| virtual  | [**~IEvent**](#function-ievent) () = default<br> |
+|   | [**IEvent**](#function-ievent) () <br> |
+| virtual  | [**~IEvent**](#function-ievent) () <br> |
 
 
 
@@ -110,7 +110,7 @@ virtual SR_NODISCARD const std::string & SR_UTILS_NS::IEvent::GetEventName () co
 ### function IEvent 
 
 ```C++
-SR_UTILS_NS::IEvent::IEvent () = default
+SR_UTILS_NS::IEvent::IEvent () 
 ```
 
 
@@ -123,7 +123,7 @@ SR_UTILS_NS::IEvent::IEvent () = default
 ### function ~IEvent 
 
 ```C++
-virtual SR_UTILS_NS::IEvent::~IEvent () = default
+virtual SR_UTILS_NS::IEvent::~IEvent () 
 ```
 
 

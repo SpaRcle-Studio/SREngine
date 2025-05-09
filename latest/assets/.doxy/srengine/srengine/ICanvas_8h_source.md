@@ -14,7 +14,7 @@
 
 #ifndef SR_ENGINE_ICANVAS_H
 #define SR_ENGINE_ICANVAS_H
-
+//TODO: Может стоит убрать??
 namespace SR_GRAPH_GUI_NS {
 
 }

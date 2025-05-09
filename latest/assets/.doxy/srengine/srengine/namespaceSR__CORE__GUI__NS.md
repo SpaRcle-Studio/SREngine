@@ -31,6 +31,8 @@
 | ---: | :--- |
 | class | [**About**](classSR__CORE__GUI__NS_1_1About.md) <br> |
 | class | [**AnimatorEditor**](classSR__CORE__GUI__NS_1_1AnimatorEditor.md) <br> |
+| class | [**BehaviourNamePropertyDrawer**](classSR__CORE__GUI__NS_1_1BehaviourNamePropertyDrawer.md) <br> |
+| class | [**BehaviourPropertyDrawer**](classSR__CORE__GUI__NS_1_1BehaviourPropertyDrawer.md) <br> |
 | class | [**BitMapPropertyDrawer**](classSR__CORE__GUI__NS_1_1BitMapPropertyDrawer.md) <br> |
 | class | [**BoolPropertyDrawer**](classSR__CORE__GUI__NS_1_1BoolPropertyDrawer.md) <br> |
 | struct | [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) <br> |

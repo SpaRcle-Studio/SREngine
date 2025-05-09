@@ -10,6 +10,7 @@
     <innerdir refid="dir_dd1b3b4f1ed2be15b5dc9d2255b7a6aa">Engine/Core/libs/Physics/inc/Physics/Utils</innerdir>
     <innerfile refid="CollisionShape_8h">CollisionShape.h</innerfile>
     <innerfile refid="LibraryImpl_8h">LibraryImpl.h</innerfile>
+    <innerfile refid="Physics_2inc_2Physics_2macros_8h">macros.h</innerfile>
     <innerfile refid="PhysicsLib_8h">PhysicsLib.h</innerfile>
     <innerfile refid="PhysicsMaterial_8h">PhysicsMaterial.h</innerfile>
     <innerfile refid="PhysicsMaterialImpl_8h">PhysicsMaterialImpl.h</innerfile>

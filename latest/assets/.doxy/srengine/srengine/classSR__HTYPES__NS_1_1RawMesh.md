@@ -203,7 +203,7 @@ SR_NODISCARD const SR_MATH_NS::Matrix4x4 & SR_HTYPES_NS::RawMesh::GetBoneOffset 
 ### function GetBoneOffsets 
 
 ```C++
-inline SR_NODISCARD const std::vector< SR_MATH_NS::Matrix4x4 > & SR_HTYPES_NS::RawMesh::GetBoneOffsets () const
+SR_NODISCARD const std::vector< SR_MATH_NS::Matrix4x4 > & SR_HTYPES_NS::RawMesh::GetBoneOffsets () const
 ```
 
 
@@ -334,7 +334,7 @@ SR_NODISCARD uint32_t SR_HTYPES_NS::RawMesh::GetMeshesCount () const
 ### function GetOptimizedBones 
 
 ```C++
-inline SR_NODISCARD const ska::flat_hash_map< SR_UTILS_NS::StringAtom , uint16_t > & SR_HTYPES_NS::RawMesh::GetOptimizedBones () const
+SR_NODISCARD const ska::flat_hash_map< SR_UTILS_NS::StringAtom , uint16_t > & SR_HTYPES_NS::RawMesh::GetOptimizedBones () const
 ```
 
 
@@ -403,7 +403,7 @@ SR_UTILS_NS::Path SR_HTYPES_NS::RawMesh::InitializeResourcePath () override cons
 ### function IsAllowedToRevive 
 
 ```C++
-inline SR_NODISCARD bool SR_HTYPES_NS::RawMesh::IsAllowedToRevive () override const
+SR_NODISCARD bool SR_HTYPES_NS::RawMesh::IsAllowedToRevive () override const
 ```
 
 

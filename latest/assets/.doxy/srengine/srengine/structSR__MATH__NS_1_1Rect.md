@@ -64,30 +64,30 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_NODISCARD constexpr T | [**Bottom**](#function-bottom) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Bottom**](#function-bottom) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**Contains**](#function-contains) (const [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & point) noexcept const<br> |
-|  SR\_NODISCARD constexpr T | [**Height**](#function-height) () noexcept const<br> |
-|  SR\_NODISCARD constexpr bool | [**IsInside**](#function-isinside) (const [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & point) noexcept const<br> |
-|  SR\_NODISCARD constexpr T | [**Left**](#function-left) () noexcept const<br> |
-|  constexpr | [**Rect**](#function-rect-15) (T \_x, T \_y, T \_w, T \_h) <br> |
-|  constexpr | [**Rect**](#function-rect-25) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & position, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
-|  constexpr | [**Rect**](#function-rect-35) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & position, T width, T height) <br> |
-|  constexpr | [**Rect**](#function-rect-45) (T x, T y, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
-|  constexpr | [**Rect**](#function-rect-55) () <br> |
-|  SR\_NODISCARD constexpr T | [**Right**](#function-right) () noexcept const<br> |
-|  constexpr void | [**SetBottom**](#function-setbottom) (const T & value) <br> |
-|  constexpr void | [**SetLeft**](#function-setleft) (const T & value) <br> |
-|  constexpr void | [**SetRight**](#function-setright) (const T & value) <br> |
-|  constexpr void | [**SetTop**](#function-settop) (const T & value) <br> |
-|  SR\_NODISCARD constexpr T | [**Top**](#function-top) () noexcept const<br> |
-|  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**WH**](#function-wh) () noexcept const<br> |
-|  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH0**](#function-wh0) () noexcept const<br> |
-|  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH1**](#function-wh1) () noexcept const<br> |
-|  SR\_NODISCARD constexpr T | [**Width**](#function-width) () noexcept const<br> |
-|  SR\_NODISCARD constexpr T | [**X**](#function-x) () noexcept const<br> |
-|  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**XY**](#function-xy) () noexcept const<br> |
-|  SR\_NODISCARD constexpr [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XY0**](#function-xy0) () noexcept const<br> |
-|  SR\_NODISCARD constexpr T | [**Y**](#function-y) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Height**](#function-height) () noexcept const<br> |
+|  SR\_NODISCARD bool | [**IsInside**](#function-isinside) (const [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; U &gt; & point) noexcept const<br> |
+|  SR\_NODISCARD T | [**Left**](#function-left) () noexcept const<br> |
+|   | [**Rect**](#function-rect-15) (T \_x, T \_y, T \_w, T \_h) <br> |
+|   | [**Rect**](#function-rect-25) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & position, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
+|   | [**Rect**](#function-rect-35) (const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & position, T width, T height) <br> |
+|   | [**Rect**](#function-rect-45) (T x, T y, const [**Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; & size) <br> |
+|   | [**Rect**](#function-rect-55) () <br> |
+|  SR\_NODISCARD T | [**Right**](#function-right) () noexcept const<br> |
+|  void | [**SetBottom**](#function-setbottom) (const T & value) <br> |
+|  void | [**SetLeft**](#function-setleft) (const T & value) <br>_============================================== Rect&lt;T&gt; =========================================================_  |
+|  void | [**SetRight**](#function-setright) (const T & value) <br> |
+|  void | [**SetTop**](#function-settop) (const T & value) <br> |
+|  SR\_NODISCARD T | [**Top**](#function-top) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**WH**](#function-wh) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH0**](#function-wh0) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**WH1**](#function-wh1) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Width**](#function-width) () noexcept const<br> |
+|  SR\_NODISCARD T | [**X**](#function-x) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector2**](structSR__MATH__NS_1_1Vector2.md)&lt; T &gt; | [**XY**](#function-xy) () noexcept const<br> |
+|  SR\_NODISCARD [**SR\_MATH\_NS::Vector3**](structSR__MATH__NS_1_1Vector3.md)&lt; T &gt; | [**XY0**](#function-xy0) () noexcept const<br> |
+|  SR\_NODISCARD T | [**Y**](#function-y) () noexcept const<br> |
 |  SR\_NODISCARD bool | [**operator!=**](#function-operator) (const [**Rect**](structSR__MATH__NS_1_1Rect.md) & other) noexcept const<br> |
 |  SR\_NODISCARD [**Rect**](structSR__MATH__NS_1_1Rect.md) | [**operator\***](#function-operator_1) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept const<br> |
 |  void | [**operator\*=**](#function-operator_2) (const [**SR\_MATH\_NS::Rect**](structSR__MATH__NS_1_1Rect.md)&lt; T &gt; & other) noexcept<br> |
@@ -232,7 +232,7 @@ T SR_MATH_NS::Rect< T >::y;
 ### function Bottom 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Bottom () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Bottom () noexcept const
 ```
 
 
@@ -245,7 +245,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Bottom () noexcept const
 ### function Contains 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Rect::Contains (
+SR_NODISCARD bool SR_MATH_NS::Rect::Contains (
     const SR_MATH_NS::Vector2 < T > & point
 ) noexcept const
 ```
@@ -260,7 +260,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Rect::Contains (
 ### function Height 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Height () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Height () noexcept const
 ```
 
 
@@ -274,7 +274,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Height () noexcept const
 
 ```C++
 template<typename U>
-inline SR_NODISCARD constexpr bool SR_MATH_NS::Rect::IsInside (
+SR_NODISCARD bool SR_MATH_NS::Rect::IsInside (
     const SR_MATH_NS::Vector2 < U > & point
 ) noexcept const
 ```
@@ -289,7 +289,7 @@ inline SR_NODISCARD constexpr bool SR_MATH_NS::Rect::IsInside (
 ### function Left 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Left () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Left () noexcept const
 ```
 
 
@@ -302,7 +302,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Left () noexcept const
 ### function Rect [1/5]
 
 ```C++
-inline constexpr SR_MATH_NS::Rect::Rect (
+SR_MATH_NS::Rect::Rect (
     T _x,
     T _y,
     T _w,
@@ -320,7 +320,7 @@ inline constexpr SR_MATH_NS::Rect::Rect (
 ### function Rect [2/5]
 
 ```C++
-inline constexpr SR_MATH_NS::Rect::Rect (
+SR_MATH_NS::Rect::Rect (
     const Vector2 < T > & position,
     const Vector2 < T > & size
 ) 
@@ -336,7 +336,7 @@ inline constexpr SR_MATH_NS::Rect::Rect (
 ### function Rect [3/5]
 
 ```C++
-inline constexpr SR_MATH_NS::Rect::Rect (
+SR_MATH_NS::Rect::Rect (
     const Vector2 < T > & position,
     T width,
     T height
@@ -353,7 +353,7 @@ inline constexpr SR_MATH_NS::Rect::Rect (
 ### function Rect [4/5]
 
 ```C++
-inline constexpr SR_MATH_NS::Rect::Rect (
+SR_MATH_NS::Rect::Rect (
     T x,
     T y,
     const Vector2 < T > & size
@@ -370,7 +370,7 @@ inline constexpr SR_MATH_NS::Rect::Rect (
 ### function Rect [5/5]
 
 ```C++
-inline constexpr SR_MATH_NS::Rect::Rect () 
+SR_MATH_NS::Rect::Rect () 
 ```
 
 
@@ -383,7 +383,7 @@ inline constexpr SR_MATH_NS::Rect::Rect ()
 ### function Right 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Right () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Right () noexcept const
 ```
 
 
@@ -396,7 +396,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Right () noexcept const
 ### function SetBottom 
 
 ```C++
-inline constexpr void SR_MATH_NS::Rect::SetBottom (
+void SR_MATH_NS::Rect::SetBottom (
     const T & value
 ) 
 ```
@@ -410,8 +410,9 @@ inline constexpr void SR_MATH_NS::Rect::SetBottom (
 
 ### function SetLeft 
 
+_============================================== Rect&lt;T&gt; =========================================================_ 
 ```C++
-inline constexpr void SR_MATH_NS::Rect::SetLeft (
+void SR_MATH_NS::Rect::SetLeft (
     const T & value
 ) 
 ```
@@ -426,7 +427,7 @@ inline constexpr void SR_MATH_NS::Rect::SetLeft (
 ### function SetRight 
 
 ```C++
-inline constexpr void SR_MATH_NS::Rect::SetRight (
+void SR_MATH_NS::Rect::SetRight (
     const T & value
 ) 
 ```
@@ -441,7 +442,7 @@ inline constexpr void SR_MATH_NS::Rect::SetRight (
 ### function SetTop 
 
 ```C++
-inline constexpr void SR_MATH_NS::Rect::SetTop (
+void SR_MATH_NS::Rect::SetTop (
     const T & value
 ) 
 ```
@@ -456,7 +457,7 @@ inline constexpr void SR_MATH_NS::Rect::SetTop (
 ### function Top 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Top () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Top () noexcept const
 ```
 
 
@@ -469,7 +470,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Top () noexcept const
 ### function WH 
 
 ```C++
-inline SR_NODISCARD constexpr SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::WH () noexcept const
+SR_NODISCARD SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::WH () noexcept const
 ```
 
 
@@ -482,7 +483,7 @@ inline SR_NODISCARD constexpr SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::WH () 
 ### function WH0 
 
 ```C++
-inline SR_NODISCARD constexpr SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::WH0 () noexcept const
+SR_NODISCARD SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::WH0 () noexcept const
 ```
 
 
@@ -495,7 +496,7 @@ inline SR_NODISCARD constexpr SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::WH0 ()
 ### function WH1 
 
 ```C++
-inline SR_NODISCARD constexpr SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::WH1 () noexcept const
+SR_NODISCARD SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::WH1 () noexcept const
 ```
 
 
@@ -508,7 +509,7 @@ inline SR_NODISCARD constexpr SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::WH1 ()
 ### function Width 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Width () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Width () noexcept const
 ```
 
 
@@ -521,7 +522,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Width () noexcept const
 ### function X 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::X () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::X () noexcept const
 ```
 
 
@@ -534,7 +535,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::X () noexcept const
 ### function XY 
 
 ```C++
-inline SR_NODISCARD constexpr SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::XY () noexcept const
+SR_NODISCARD SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::XY () noexcept const
 ```
 
 
@@ -547,7 +548,7 @@ inline SR_NODISCARD constexpr SR_MATH_NS::Vector2 < T > SR_MATH_NS::Rect::XY () 
 ### function XY0 
 
 ```C++
-inline SR_NODISCARD constexpr SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::XY0 () noexcept const
+SR_NODISCARD SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::XY0 () noexcept const
 ```
 
 
@@ -560,7 +561,7 @@ inline SR_NODISCARD constexpr SR_MATH_NS::Vector3 < T > SR_MATH_NS::Rect::XY0 ()
 ### function Y 
 
 ```C++
-inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Y () noexcept const
+SR_NODISCARD T SR_MATH_NS::Rect::Y () noexcept const
 ```
 
 
@@ -573,7 +574,7 @@ inline SR_NODISCARD constexpr T SR_MATH_NS::Rect::Y () noexcept const
 ### function operator!= 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Rect::operator!= (
+SR_NODISCARD bool SR_MATH_NS::Rect::operator!= (
     const Rect & other
 ) noexcept const
 ```
@@ -588,7 +589,7 @@ inline SR_NODISCARD bool SR_MATH_NS::Rect::operator!= (
 ### function operator\* 
 
 ```C++
-inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator* (
+SR_NODISCARD Rect SR_MATH_NS::Rect::operator* (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept const
 ```
@@ -603,7 +604,7 @@ inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator* (
 ### function operator\*= 
 
 ```C++
-inline void SR_MATH_NS::Rect::operator*= (
+void SR_MATH_NS::Rect::operator*= (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept
 ```
@@ -618,7 +619,7 @@ inline void SR_MATH_NS::Rect::operator*= (
 ### function operator+ 
 
 ```C++
-inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator+ (
+SR_NODISCARD Rect SR_MATH_NS::Rect::operator+ (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept const
 ```
@@ -633,7 +634,7 @@ inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator+ (
 ### function operator+= 
 
 ```C++
-inline void SR_MATH_NS::Rect::operator+= (
+void SR_MATH_NS::Rect::operator+= (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept
 ```
@@ -648,7 +649,7 @@ inline void SR_MATH_NS::Rect::operator+= (
 ### function operator- 
 
 ```C++
-inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator- (
+SR_NODISCARD Rect SR_MATH_NS::Rect::operator- (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept const
 ```
@@ -663,7 +664,7 @@ inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator- (
 ### function operator-= 
 
 ```C++
-inline void SR_MATH_NS::Rect::operator-= (
+void SR_MATH_NS::Rect::operator-= (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept
 ```
@@ -678,7 +679,7 @@ inline void SR_MATH_NS::Rect::operator-= (
 ### function operator/ 
 
 ```C++
-inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator/ (
+SR_NODISCARD Rect SR_MATH_NS::Rect::operator/ (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept const
 ```
@@ -693,7 +694,7 @@ inline SR_NODISCARD Rect SR_MATH_NS::Rect::operator/ (
 ### function operator/= 
 
 ```C++
-inline void SR_MATH_NS::Rect::operator/= (
+void SR_MATH_NS::Rect::operator/= (
     const SR_MATH_NS::Rect < T > & other
 ) noexcept
 ```
@@ -708,7 +709,7 @@ inline void SR_MATH_NS::Rect::operator/= (
 ### function operator== 
 
 ```C++
-inline SR_NODISCARD bool SR_MATH_NS::Rect::operator== (
+SR_NODISCARD bool SR_MATH_NS::Rect::operator== (
     const Rect & other
 ) noexcept const
 ```

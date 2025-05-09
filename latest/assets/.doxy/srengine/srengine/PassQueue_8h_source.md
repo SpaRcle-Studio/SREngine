@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_PASSQUEUE_H
 #define SR_ENGINE_PASSQUEUE_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_GRAPH_NS {

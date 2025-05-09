@@ -29,7 +29,7 @@ namespace SR_UTILS_NS {
 namespace SR_WORLD_NS {
     class Scene;
 
-    struct SR_DLL_EXPORT Offset {
+    struct SR_COMMON_DLL_API Offset {
         Offset(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk)
             : m_region(region)
             , m_chunk(chunk)
@@ -64,7 +64,7 @@ namespace SR_WORLD_NS {
         Math::IVector3 m_chunk;
     };
 
-    class SR_DLL_EXPORT Observer : public NonCopyable {
+    class SR_COMMON_DLL_API Observer : public NonCopyable {
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SceneObject>;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<Scene>;
     public:
@@ -110,11 +110,11 @@ namespace SR_WORLD_NS {
         GameObjectPtr m_target;
     };
 
-    SR_DLL_EXPORT Math::IVector3 MakeChunk(const Math::IVector3& rawChunkPos, int32_t width);
-    SR_DLL_EXPORT Math::Unit AddOffset(const Math::Unit& value, const Math::Unit& offset);
-    SR_DLL_EXPORT Math::FVector3 AddOffset(const Math::FVector3& chunk, const Math::FVector3& offset);
-    SR_DLL_EXPORT Math::IVector3 AddOffset(const Math::IVector3& chunk, const Math::IVector3& offset);
-    SR_DLL_EXPORT Math::FVector3 AddOffset(const Math::FVector3& region, const Math::IVector3& offset);
+    SR_COMMON_DLL_API Math::IVector3 MakeChunk(const Math::IVector3& rawChunkPos, int32_t width);
+    SR_COMMON_DLL_API Math::Unit AddOffset(const Math::Unit& value, const Math::Unit& offset);
+    SR_COMMON_DLL_API Math::FVector3 AddOffset(const Math::FVector3& chunk, const Math::FVector3& offset);
+    SR_COMMON_DLL_API Math::IVector3 AddOffset(const Math::IVector3& chunk, const Math::IVector3& offset);
+    SR_COMMON_DLL_API Math::FVector3 AddOffset(const Math::FVector3& region, const Math::IVector3& offset);
 }
 
 #endif //SR_ENGINE_OBSERVER_H

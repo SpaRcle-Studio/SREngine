@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS {
 }
 
 namespace SR_CORE_NS {
-    class SR_DLL_EXPORT World : public SR_WORLD_NS::Scene {
+    class SR_CORE_DLL_API World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;

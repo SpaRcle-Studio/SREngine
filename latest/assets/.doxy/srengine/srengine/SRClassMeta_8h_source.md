@@ -26,9 +26,9 @@ namespace SR_UTILS_NS {
 
     class Serializable;
 
-    class SRClassMeta {
+    class SR_COMMON_DLL_API SRClassMeta {
     public:
-        virtual ~SRClassMeta() = default;
+        virtual ~SRClassMeta();
 
         virtual void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const;
         virtual bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const;
@@ -37,24 +37,21 @@ namespace SR_UTILS_NS {
 
         void ForEachProperty(const std::function<void(const SR_UTILS_NS::Reflection::Property& property, uint64_t index)>& func, uint64_t* pIndex = nullptr) const;
 
-        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetInspectorName() const noexcept {
-            static const SR_UTILS_NS::StringAtom def = "ObjectPropertyDrawer";
-            return def;
-        }
+        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetInspectorName() const noexcept;
 
         SR_NODISCARD uint64_t GetVersion() const noexcept;
 
         SR_NODISCARD virtual std::span<const SR_UTILS_NS::StringAtom> GetCategory() const noexcept;
-        SR_NODISCARD virtual bool IsAbstract() const noexcept { return false; }
-        SR_NODISCARD virtual bool IsHidden() const noexcept { return false; }
-        SR_NODISCARD virtual bool IsEditorOnly() const noexcept { return false; }
-        SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept { return {}; }
-        SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept { return {}; }
-        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept { return {}; }
-        SR_NODISCARD virtual SRClass* Allocate() const noexcept { return nullptr; }
+        SR_NODISCARD virtual bool IsAbstract() const noexcept;
+        SR_NODISCARD virtual bool IsHidden() const noexcept;
+        SR_NODISCARD virtual bool IsEditorOnly() const noexcept;
+        SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept;
+        SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept;
+        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept;
+        SR_NODISCARD virtual SRClass* Allocate() const noexcept;
 
     protected:
-        SR_NODISCARD virtual uint64_t GetVersionImpl() const noexcept { return 0; }
+        SR_NODISCARD virtual uint64_t GetVersionImpl() const noexcept;
 
     private:
         mutable uint64_t m_versionCached = SR_UINT64_MAX;
@@ -65,7 +62,6 @@ namespace SR_UTILS_NS {
 namespace Codegen {
     template<class T> struct SRClassMetaTemplate : public SR_UTILS_NS::SRClassMeta { };
 }
-
 
 #define SR_CLASS_BASE()                                                                                                 \
     public:                                                                                                             \

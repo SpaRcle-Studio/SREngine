@@ -73,7 +73,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 | Type | Name |
 | ---: | :--- |
 |  void | [**Reset**](#function-reset) () <br> |
-|   | [**Subscription**](#function-subscription-13) () = default<br> |
+|   | [**Subscription**](#function-subscription-13) () <br> |
 |   | [**Subscription**](#function-subscription-23) ([**SubscriptionInternalInfo**](classSR__UTILS__NS_1_1SubscriptionInternalInfo.md) \* pInternalInfo) <br> |
 |   | [**Subscription**](#function-subscription-33) ([**Subscription**](classSR__UTILS__NS_1_1Subscription.md) && other) noexcept<br> |
 |  [**Subscription**](classSR__UTILS__NS_1_1Subscription.md) & | [**operator=**](#function-operator) ([**Subscription**](classSR__UTILS__NS_1_1Subscription.md) && other) noexcept<br> |
@@ -142,8 +142,8 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () = default<br> |
-| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () = default<br> |
+|   | [**NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable-12) () <br> |
+| virtual  | [**~NonCopyable**](classSR__UTILS__NS_1_1NonCopyable.md#function-noncopyable) () <br> |
 
 
 
@@ -171,7 +171,7 @@ void SR_UTILS_NS::Subscription::Reset ()
 ### function Subscription [1/3]
 
 ```C++
-SR_UTILS_NS::Subscription::Subscription () = default
+SR_UTILS_NS::Subscription::Subscription () 
 ```
 
 
@@ -184,7 +184,7 @@ SR_UTILS_NS::Subscription::Subscription () = default
 ### function Subscription [2/3]
 
 ```C++
-inline explicit SR_UTILS_NS::Subscription::Subscription (
+explicit SR_UTILS_NS::Subscription::Subscription (
     SubscriptionInternalInfo * pInternalInfo
 ) 
 ```
@@ -199,7 +199,7 @@ inline explicit SR_UTILS_NS::Subscription::Subscription (
 ### function Subscription [3/3]
 
 ```C++
-inline SR_UTILS_NS::Subscription::Subscription (
+SR_UTILS_NS::Subscription::Subscription (
     Subscription && other
 ) noexcept
 ```
@@ -214,7 +214,7 @@ inline SR_UTILS_NS::Subscription::Subscription (
 ### function operator= 
 
 ```C++
-inline Subscription & SR_UTILS_NS::Subscription::operator= (
+Subscription & SR_UTILS_NS::Subscription::operator= (
     Subscription && other
 ) noexcept
 ```

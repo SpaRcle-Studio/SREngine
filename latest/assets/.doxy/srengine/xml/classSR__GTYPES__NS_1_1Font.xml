@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Font_1a8ef1d137b0ecd6aa270437306a217e5d" prot="private" static="no">
         <type>FT_Library</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="14" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Font_1a2b4e9967772c84e9aa78946fbc08d71f" prot="private" static="no">
         <type>FT_Face</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSR__GTYPES__NS_1_1Font_1a93a83f26f47d8a04465a165c1e038e41" prot="private" static="no">
         <type>std::u32string</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="18" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="42" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="44" column="21" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Font_1a0726ee33ee7210882e3213b3d6f6b97c" prot="private" static="no" mutable="no">
         <type>FontFace</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="43" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="43" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="45" column="18" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Font_1a0dcdcceae76801eeb96abc1d2be37102" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="45" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="47" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GTYPES__NS_1_1Font_1a773c7c445b979b9ebd997db68ae6bdf6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="46" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="48" column="14" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="18" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="20" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a60f37db41f862036be605c0e1ec47086" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="19" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="21" column="9"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="22" column="21"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="24" column="21"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="24" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="24" bodyend="24"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="26" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="26" bodyend="26"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a6407e27781cee155c7d5d97ba29b5ab1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>SR_NODISCARD bool</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="25" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="25" bodyend="25"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="27" column="27" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1ae96f022bc6b631115afad5373544145c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD FT_Glyph</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="27" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="29" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a9660cd17293451245a767de774cc2d29" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD FT_Glyph</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="28" column="31"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="30" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a85fe47089c907f59704491a8cd6eb6f1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD FT_Pos</type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="30" column="29"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="32" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a10ecefe5f1c5572c7668bb59e4894949" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SR_NODISCARD <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref></type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="32" column="40"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="34" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a03758c8e16e6de80e261a4ebf8a0fd2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="34" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="36" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a18be7a6a92e2c496bac11ac7d25b05e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="35" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="37" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="38" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="40" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Font_1a7d8e81c045b95456ae5478ee9c2e3bf9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -373,7 +373,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="39" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="41" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -448,12 +448,12 @@
         <link refid="classSR__UTILS__NS_1_1SubscriptionHolder"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="12" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="12" bodyend="48"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" line="14" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Font/Font.h" bodystart="14" bodyend="50"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a941f9fcb89e4daef547de51174674d41" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>AddDependency</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1abcf6bc4fde8bd87a0f1d72d0183af0cf" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>AddUsePoint</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a76ee323bb380f6175b1e8ee8de138a76" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Broadcast</name></member>
-      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a796ab2a0f45d6a1c32e645c2a8c6fe89" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a459ed22e0064b69639129562ea9aad38" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Broadcast</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a543a91c5e997ad287249110180f9cea2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Broadcast</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a6aad227ccd12d3dd92ac9010ba6ac404" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>CheckResourceUsage</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a8d8a3783594a705609284b2d94121de2" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>CopyResource</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a1321f66c455d7f59eebb314fe2c83062" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>DeleteResource</name></member>
@@ -509,12 +509,14 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a8600327689c36a9c20b5ae589acd4cfa" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>m_loadState</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1af0144fd07d3ddcf76669ebe112a597ca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>m_resourceHashName</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afb7bbbb99bc610ce2ec7c9eeefffca59" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>m_watchers</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a5b375df8373037b2e3a8d4d824bed858" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>OnReloadDone</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a2a19e0855b7bbd67d6a964c08191cdce" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>OnResourceRegistered</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a833f3da55449659aeb8df7992155dd69" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>OnResourceUpdated</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual" ambiguityscope="SR_UTILS_NS::"><scope>SR_GTYPES_NS::Font</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a0823f7c426d7757297b991c63c4a674d" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Font</scope><name>operator=</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a142ac6c73a3e99175210848dec991313" prot="public" virt="non-virtual" ambiguityscope="SR_UTILS_NS::SubscriptionHolder::"><scope>SR_GTYPES_NS::Font</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1a49a0ec81c7a8b434b0c46d8df4c38661" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Ptr</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1afbba2810b28b1d82a121eeb91c6f247c" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>Reload</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ab44f094d50d755e9872b7373881d5c05" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>RELOAD_BEGIN_EVENT</name></member>
@@ -533,6 +535,9 @@
       <member refid="classSR__UTILS__NS_1_1IResource_1a73e9141c84030a503c6a1e51efe33b09" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>StopWatch</name></member>
       <member refid="classSR__GTYPES__NS_1_1Font_1a93a83f26f47d8a04465a165c1e038e41" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>StringType</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a6e28623e3665ee8d0e153c59497be1f2" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Subscribe</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a974c352e7a7fa0786b9b5caa886d96c0" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a1308e9577474f509d5d70ec6e025f22a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>SubscriptionHolder</name></member>
+      <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1add12e4faa76ffece1b1df5ca31da4218" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>SubscriptionHolder</name></member>
       <member refid="classSR__GTYPES__NS_1_1Font_1a2c76b92145e5271ce391e096a7a5c0e3" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Super</name></member>
       <member refid="classSR__GTYPES__NS_1_1Font_1a7f7a5c4b12e85c2c66485ea8555e11b2" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>Unload</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a9020c161e4bc8453d005eb5fab808490" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>Unsubscribe</name></member>
@@ -540,7 +545,7 @@
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1ac84a44cf058fa5cb53715e250ae7157c" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>UpdateResources</name></member>
       <member refid="classSR__GTYPES__NS_1_1Font_1a60f37db41f862036be605c0e1ec47086" prot="private" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>~Font</name></member>
       <member refid="classSR__UTILS__NS_1_1IResource_1ac4450e90e1fbd14d29931a362b9c05eb" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>~IResource</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1ResourceContainer_1a25f84a35792474f3b2e2eff6431695d3" prot="protected" virt="non-virtual"><scope>SR_GTYPES_NS::Font</scope><name>~ResourceContainer</name></member>
       <member refid="classSR__UTILS__NS_1_1SubscriptionHolder_1a4ae7f1f1d739e95f4a1c7216e1e07586" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Font</scope><name>~SubscriptionHolder</name></member>
     </listofallmembers>

@@ -77,11 +77,11 @@
 
 | Type | Name |
 | ---: | :--- |
-|  SR\_DLL\_EXPORT Math::Unit | [**AddOffset**](#function-addoffset) (const Math::Unit & value, const Math::Unit & offset) <br> |
-|  SR\_DLL\_EXPORT Math::FVector3 | [**AddOffset**](#function-addoffset) (const Math::FVector3 & chunk, const Math::FVector3 & offset) <br> |
-|  SR\_DLL\_EXPORT Math::IVector3 | [**AddOffset**](#function-addoffset) (const Math::IVector3 & chunk, const Math::IVector3 & offset) <br> |
-|  SR\_DLL\_EXPORT Math::FVector3 | [**AddOffset**](#function-addoffset) (const Math::FVector3 & region, const Math::IVector3 & offset) <br> |
-|  SR\_DLL\_EXPORT Math::IVector3 | [**MakeChunk**](#function-makechunk) (const Math::IVector3 & rawChunkPos, int32\_t width) <br> |
+|  SR\_COMMON\_DLL\_API Math::Unit | [**AddOffset**](#function-addoffset) (const Math::Unit & value, const Math::Unit & offset) <br> |
+|  SR\_COMMON\_DLL\_API Math::FVector3 | [**AddOffset**](#function-addoffset) (const Math::FVector3 & chunk, const Math::FVector3 & offset) <br> |
+|  SR\_COMMON\_DLL\_API Math::IVector3 | [**AddOffset**](#function-addoffset) (const Math::IVector3 & chunk, const Math::IVector3 & offset) <br> |
+|  SR\_COMMON\_DLL\_API Math::FVector3 | [**AddOffset**](#function-addoffset) (const Math::FVector3 & region, const Math::IVector3 & offset) <br> |
+|  SR\_COMMON\_DLL\_API Math::IVector3 | [**MakeChunk**](#function-makechunk) (const Math::IVector3 & rawChunkPos, int32\_t width) <br> |
 
 
 
@@ -172,7 +172,7 @@ typedef std::unordered_map<TensorKey, std::vector<SR_HTYPES_NS::SharedPtr<SceneO
 ### function AddOffset 
 
 ```C++
-SR_DLL_EXPORT Math::Unit SR_WORLD_NS::AddOffset (
+SR_COMMON_DLL_API Math::Unit SR_WORLD_NS::AddOffset (
     const Math::Unit & value,
     const Math::Unit & offset
 ) 
@@ -188,7 +188,7 @@ SR_DLL_EXPORT Math::Unit SR_WORLD_NS::AddOffset (
 ### function AddOffset 
 
 ```C++
-SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset (
+SR_COMMON_DLL_API Math::FVector3 SR_WORLD_NS::AddOffset (
     const Math::FVector3 & chunk,
     const Math::FVector3 & offset
 ) 
@@ -204,7 +204,7 @@ SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset (
 ### function AddOffset 
 
 ```C++
-SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::AddOffset (
+SR_COMMON_DLL_API Math::IVector3 SR_WORLD_NS::AddOffset (
     const Math::IVector3 & chunk,
     const Math::IVector3 & offset
 ) 
@@ -220,7 +220,7 @@ SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::AddOffset (
 ### function AddOffset 
 
 ```C++
-SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset (
+SR_COMMON_DLL_API Math::FVector3 SR_WORLD_NS::AddOffset (
     const Math::FVector3 & region,
     const Math::IVector3 & offset
 ) 
@@ -236,7 +236,7 @@ SR_DLL_EXPORT Math::FVector3 SR_WORLD_NS::AddOffset (
 ### function MakeChunk 
 
 ```C++
-SR_DLL_EXPORT Math::IVector3 SR_WORLD_NS::MakeChunk (
+SR_COMMON_DLL_API Math::IVector3 SR_WORLD_NS::MakeChunk (
     const Math::IVector3 & rawChunkPos,
     int32_t width
 ) 

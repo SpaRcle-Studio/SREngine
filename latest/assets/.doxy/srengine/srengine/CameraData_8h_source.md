@@ -20,7 +20,7 @@
 #include <Utils/Types/Marshal.h>
 
 namespace SR_WORLD_NS {
-    class SR_DLL_EXPORT CameraData : public NonCopyable {
+    class SR_COMMON_DLL_API CameraData : public NonCopyable {
         ~CameraData() override = default;
     public:
         static CameraData* Load(SR_HTYPES_NS::Marshal& marshal) {

@@ -345,7 +345,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1abb7fedb115a811728210cb2dfac17d14" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>m_boneIndex</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a796ee079f1d33b1ccae6eea7834f9765" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>m_keys</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a27618607269bd0057ea087187cb802d7" prot="private" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>m_name</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>operator=</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a381690a3a3c67cf923343e7813f88f72" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>SetBoneIndex</name></member>
@@ -353,7 +353,7 @@
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a092f6604239fad97d7b96c2303ecc0f5" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>UpdateChannel</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1ac097e26ff0b6238a0b85a58cf5524b97" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>UpdateChannelWithWeight</name></member>
       <member refid="classSR__ANIMATIONS__NS_1_1AnimationChannel_1a25623e79613a270f73cca756dec05172" prot="public" virt="non-virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>~AnimationChannel</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_ANIMATIONS_NS::AnimationChannel</scope><name>~NonCopyable</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_RIGIDBODY_H
 #define SR_ENGINE_RIGIDBODY_H
 
+#include <Physics/macros.h>
+
 #include <Physics/PhysicsLib.h>
 #include <Physics/CollisionShape.h>
 

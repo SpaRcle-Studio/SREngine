@@ -15,6 +15,8 @@
 #ifndef SR_ENGINE_ANIMATION_COMMON_H
 #define SR_ENGINE_ANIMATION_COMMON_H
 
+#include <Graphics/macros.h>
+
 #include <Utils/Types/Map.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Common/NonCopyable.h>

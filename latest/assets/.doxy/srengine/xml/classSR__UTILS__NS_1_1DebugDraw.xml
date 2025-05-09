@@ -121,9 +121,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" line="46" column="34" bodyfile="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" bodystart="46" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1a889902b2103b5f15d06254619a9b5eaf" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
-        <definition>constexpr SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1af590786dfa2e069051d11ad3c647bcb0" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE <ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
+        <definition>SR_INLINE SR_MATH_NS::FColor SR_UTILS_NS::DebugDraw::DEFAULT_COLOR</definition>
         <argsstring></argsstring>
         <name>DEFAULT_COLOR</name>
         <qualifiedname>SR_UTILS_NS::DebugDraw::DEFAULT_COLOR</qualifiedname>
@@ -136,9 +136,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" line="47" column="45" bodyfile="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" bodystart="47" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1a9dd20ee09f0da4f29c37dbf497965466" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr SR_MATH_NS::FVector3</type>
-        <definition>constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1a222faa6fe52e1ddfba2ebfb551d26b30" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_POSITION</definition>
         <argsstring></argsstring>
         <name>DEFAULT_POSITION</name>
         <qualifiedname>SR_UTILS_NS::DebugDraw::DEFAULT_POSITION</qualifiedname>
@@ -151,9 +151,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" line="48" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" bodystart="48" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1a334a5c290c955d3727b2cbdceda8b40d" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr SR_MATH_NS::FVector3</type>
-        <definition>constexpr SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_SCALE</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1ae82c480f7445ca70b13536449b06df88" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE SR_MATH_NS::FVector3</type>
+        <definition>SR_INLINE SR_MATH_NS::FVector3 SR_UTILS_NS::DebugDraw::DEFAULT_SCALE</definition>
         <argsstring></argsstring>
         <name>DEFAULT_SCALE</name>
         <qualifiedname>SR_UTILS_NS::DebugDraw::DEFAULT_SCALE</qualifiedname>
@@ -166,9 +166,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" line="49" column="47" bodyfile="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" bodystart="49" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1a440edf41bbd0e20d5ab8315d729265c7" prot="public" static="yes" constexpr="yes" mutable="no">
-        <type>constexpr <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
-        <definition>constexpr SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION</definition>
+      <memberdef kind="variable" id="classSR__UTILS__NS_1_1DebugDraw_1ade8c0b68e5633cb60b4f5e60f784dad0" prot="public" static="yes" mutable="no">
+        <type>SR_INLINE <ref refid="classSR__MATH__NS_1_1Quaternion" kindref="compound">SR_MATH_NS::Quaternion</ref></type>
+        <definition>SR_INLINE SR_MATH_NS::Quaternion SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION</definition>
         <argsstring></argsstring>
         <name>DEFAULT_QUATERNION</name>
         <qualifiedname>SR_UTILS_NS::DebugDraw::DEFAULT_QUATERNION</qualifiedname>
@@ -3111,16 +3111,10 @@
       <node id="5">
         <label>SR_MATH_NS::FColor</label>
         <link refid="classSR__MATH__NS_1_1FColor"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>SR_MATH_NS::Quaternion</label>
-        <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
       <node id="6">
-        <label>SR_MATH_NS::Vector4&lt; T &gt;</label>
-        <link refid="structSR__MATH__NS_1_1Vector4"/>
+        <label>SR_MATH_NS::Quaternion</label>
+        <link refid="classSR__MATH__NS_1_1Quaternion"/>
       </node>
       <node id="1">
         <label>SR_UTILS_NS::DebugDraw</label>
@@ -3130,7 +3124,7 @@
         <childnode refid="5" relation="usage">
           <edgelabel>DEFAULT_COLOR</edgelabel>
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>DEFAULT_QUATERNION</edgelabel>
         </childnode>
       </node>
@@ -3153,12 +3147,12 @@
     </collaborationgraph>
     <location file="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" line="25" column="5" bodyfile="Engine/Core/libs/Utils/inc/Utils/DebugDraw.h" bodystart="25" bodyend="175"/>
     <listofallmembers>
-      <member refid="classSR__UTILS__NS_1_1DebugDraw_1a889902b2103b5f15d06254619a9b5eaf" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_COLOR</name></member>
+      <member refid="classSR__UTILS__NS_1_1DebugDraw_1af590786dfa2e069051d11ad3c647bcb0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_COLOR</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1ad7e0cb34cfc8fa4917cce05227047c35" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_DURATION</name></member>
-      <member refid="classSR__UTILS__NS_1_1DebugDraw_1a9dd20ee09f0da4f29c37dbf497965466" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_POSITION</name></member>
-      <member refid="classSR__UTILS__NS_1_1DebugDraw_1a440edf41bbd0e20d5ab8315d729265c7" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_QUATERNION</name></member>
-      <member refid="classSR__UTILS__NS_1_1DebugDraw_1a334a5c290c955d3727b2cbdceda8b40d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_SCALE</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a77378177a785d40f2e0c2f92d8f48a12" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DestroySingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1DebugDraw_1a222faa6fe52e1ddfba2ebfb551d26b30" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_POSITION</name></member>
+      <member refid="classSR__UTILS__NS_1_1DebugDraw_1ade8c0b68e5633cb60b4f5e60f784dad0" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_QUATERNION</name></member>
+      <member refid="classSR__UTILS__NS_1_1DebugDraw_1ae82c480f7445ca70b13536449b06df88" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DEFAULT_SCALE</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DestroySingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a48589928ad9295bb8da3073e105d723e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DrawCapsule</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a6bf1f95445796fb4bb61f7d74eb4fe53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DrawCapsule</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1ab215a3ee0f2a6fc133346a76d16457c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DrawCapsule</name></member>
@@ -3266,34 +3260,34 @@
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a6f4339d8c52bde071ebf142bbe17b777" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DrawSphere</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a154cdce5ef81ce44070371db06abd83d" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DrawSphere</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a43fdacfdb744398ef7c83a0ead469fff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>DrawSphereCallback</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a3a2b563a733ea0cfc30c3c7a5e6439b4" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>GetMutex</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>GetSingletonName</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1ae37b21c97c5c5de0cc3f731fff421e2f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>GetUserIdentifier</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>InitSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1ab19240563fb04d7fcbb3bcd815ee0215" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>Instance</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>IsSingletonCanBeDestroyed</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1aaffbd47a49ea330c8cf0172af6d09b4e" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>IsSingletonInitialized</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a857c40793e582e5bb53a423cfaff08e6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>LockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a31931d2cbc17f064e27db243b971e202" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>IsSingletonInitialized</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1adab1931732d186e76c89e282c748f253" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>LockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a234efacb6657a3f6dfdb8a98e49f7b57" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>m_callbacks</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a35cfdd0fad45b46c53d0a0ad6ee0727f" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>m_currentCallbacks</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a2b2a6d814d400ae09d18e7fedeb2181e" prot="private" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>m_currentSwitcher</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1a38d28fddc83cb3a403821554ea65dd" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>m_mutex</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a655ab664e1c25c97445a85e7b8efbce1" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>operator=</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1ab60e5f8f1e5bd5157ba94b34c57433e5" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>Remove</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1afcfcd92a936a82408b7797f6979d961b" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>RemoveCallback</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a70da62668c02a94c390b51885bbc439f" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>RemoveCallbacks</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a908d485b05f332c8b7be51b1f4d121ad" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>ScopeLockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>ScopeLockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1abc96e505fdab6fb46e25f0f254001192" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>SetCallbacks</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a4f8e579085c0bde3120868e048f758ac" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a362458bd34fd4fb91cd139d7ac9fbf62" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>Singleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>SingletonBase</name></member>
       <member refid="classSR__UTILS__NS_1_1DebugDraw_1a655b6eb046f709e3f4daeca7ca70c910" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>SwitchCallbacks</name></member>
-      <member refid="classSR__UTILS__NS_1_1Singleton_1a9c1e4f63c3951ad900fcfad9a465fcce" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>UnlockSingleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1NonCopyable_1abbdf1c3f3ddd729004edba3122175bcc" prot="protected" virt="virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>~NonCopyable</name></member>
+      <member refid="classSR__UTILS__NS_1_1Singleton_1a0338ed248f78e467760d3095f4a4a71a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>UnlockSingleton</name></member>
+      <member refid="classSR__UTILS__NS_1_1NonCopyable_1a261eb779fef954db25e978d388c88df6" prot="protected" virt="virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>~NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1aacd91d355a037b260f6cec7ca30ad314" prot="protected" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>~Singleton</name></member>
-      <member refid="classSR__UTILS__NS_1_1SingletonBase_1a92de43bf675def1bc66162cac26e73c6" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>~SingletonBase</name></member>
+      <member refid="classSR__UTILS__NS_1_1SingletonBase_1ab3d1604202974d9417c0ddc7da807d4a" prot="public" virt="non-virtual"><scope>SR_UTILS_NS::DebugDraw</scope><name>~SingletonBase</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>
