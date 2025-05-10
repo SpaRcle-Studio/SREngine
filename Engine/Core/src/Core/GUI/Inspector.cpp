@@ -46,55 +46,55 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.0f);
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::FrameRounding, 0.0f);
 
-        if (ImGui::BeginTabBar("Inspector#TabBar")) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("Inspector#TabBar")) {
             std::string_view gameObjectPage = "GameObject";
-            ImVec4 color = ImVec4(1, 1, 1, 1);
+            SR_MATH_NS::FColor color = SR_MATH_NS::FColor(1, 1, 1, 1);
 
             if (m_sceneObject) {
                 if (m_sceneObject->IsPrefab()) {
-                    color = ImVec4(0, 1, 1, 1);
+                    color = SR_MATH_NS::FColor(0, 1, 1, 1);
                     gameObjectPage = "GameObject (Changes won't be saved)";
                 }
 
                 if (m_sceneObject->IsDirty()) {
-                    color = ImVec4(1, 1, 0, 1);
+                    color = SR_MATH_NS::FColor(1, 1, 0, 1);
                     gameObjectPage = "GameObject (Is dirty)";
                 }
 
                 if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
-                    color = ImVec4(1, 1, 0, 1);
+                    color = SR_MATH_NS::FColor(1, 1, 0, 1);
                     gameObjectPage = "GameObject (Dont Save)";
                 }
             }
 
-            ImGui::PushStyleColor(ImGuiCol_Text, color);
-            if (ImGui::BeginTabItem(gameObjectPage.data())) {
-                ImGui::PopStyleColor();
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text, color);
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem(gameObjectPage.data())) {
+                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                 InspectGameObject();
-                ImGui::EndTabItem();
+                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
             }
             else {
-                ImGui::PopStyleColor();
+                SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
             }
 
-            if (ImGui::BeginTabItem("Scene")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Scene")) {
                 InspectScene();
-                ImGui::EndTabItem();
+                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
             }
 
-            ImGui::EndTabBar();
+            SR_GRAPH_GUI_NS::Immediate::EndTabBar();
         }
 
-        if (ImGui::GetScrollMaxY() > 0) {
-            m_scrollBarWidth = ImGui::GetStyle().ScrollbarSize;
+        if (SR_GRAPH_GUI_NS::Immediate::GetScrollMaxY() > 0) {
+            m_scrollBarWidth = SR_GRAPH_GUI_NS::Immediate::GetScrollbarSize();
         }
         else {
             m_scrollBarWidth = 0;
         }
 
-        ImGui::PopStyleVar();
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
     }
 
     void Inspector::InspectGameObject() {
@@ -104,47 +104,47 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
-        if (bool enabled = m_sceneObject->IsEnabled(); ImGui::Checkbox("##Enabled", &enabled)) {
+        if (bool enabled = m_sceneObject->IsEnabled(); SR_GRAPH_GUI_NS::Immediate::Checkbox("##Enabled", &enabled)) {
             auto&& cmd = new SR_CORE_NS::Commands::EntityEnable(pEngine, m_sceneObject.Get(), enabled);
             pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
         }
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x + 2.f);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x + 2.f);
         std::string name = m_sceneObject->GetName();
-        ImGui::InputText("##Name", &name);
-        if (ImGui::IsItemDeactivatedAfterEdit()) {
+        SR_GRAPH_GUI_NS::Immediate::InputText("##Name", &name);
+        if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
             pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, name);
         }
-        ImGui::PopItemWidth();
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
         if (SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false)) {
-            ImGui::Text("Entity id: %llu", m_sceneObject->GetEntityId());
+            SR_GRAPH_GUI_NS::Immediate::Text("Entity id: %llu", m_sceneObject->GetEntityId());
         }
 
         /// --------------------------------------------------------------------------------------------------------
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const float_t layerAndTagWidth = ImGui::GetContentRegionAvail().x - lineHeight;
+        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        const float_t layerAndTagWidth = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail().x - lineHeight;
 
-        ImGui::PushItemWidth(layerAndTagWidth / 2.f - ImGui::CalcTextSize("Tag").x);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Tag").x);
         InspectTag(m_sceneObject->GetTag(), [&](auto&& tag) {
             pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectTag>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, tag);
         });
-        ImGui::PopItemWidth();
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        ImGui::PushItemWidth(layerAndTagWidth / 2.f - ImGui::CalcTextSize("Layer").x);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(layerAndTagWidth / 2.f - SR_GRAPH_GUI_NS::Immediate::CalcTextSize("Layer").x);
         InspectLayer(m_sceneObject->GetLocalLayer(), [&](auto&& layer) {
             pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectLayer>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, layer);
         });
-        ImGui::PopItemWidth();
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
         /// --------------------------------------------------------------------------------------------------------
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
             SR_UTILS_NS::Transform::Ptr pTransform = pGameObject->GetTransform();
@@ -189,9 +189,9 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::InspectScene() {
         std::string name = m_scene->GetName();
-        ImGui::InputText("Name", &name, ImGuiInputTextFlags_ReadOnly);
+        SR_GRAPH_GUI_NS::Immediate::InputText("Name", &name, SR_GRAPH_GUI_NS::Immediate::InputTextFlags::ReadOnly);
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_scene.Get()));
     }
@@ -235,19 +235,19 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
-        ImGui::BeginDisabled();
-        ImGui::CollapsingHeader("##header",  ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen);
-        ImGui::EndDisabled();
+        SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+        SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("##header", SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::Leaf | SR_GRAPH_GUI_NS::Immediate::TreeNodeFlags::NoTreePushOnOpen);
+        SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
         static const char* text = "Components";
-        const ImVec2 headerSize = ImGui::GetItemRectSize();
-        const ImVec2 headerPos = ImGui::GetItemRectMin();
-        const ImVec2 textSize = ImGui::CalcTextSize(text);
-        const ImVec2 textPos = ImVec2(
+        const SR_MATH_NS::FVector2 headerSize = SR_GRAPH_GUI_NS::Immediate::GetItemRectSize();
+        const SR_MATH_NS::FVector2 headerPos = SR_GRAPH_GUI_NS::Immediate::GetItemRectMin();
+        const SR_MATH_NS::FVector2 textSize = SR_GRAPH_GUI_NS::Immediate::CalcTextSize(text);
+        const SR_MATH_NS::FVector2 textPos = SR_MATH_NS::FVector2(
             headerPos.x + (headerSize.x - textSize.x) * 0.5f,
             headerPos.y + (headerSize.y - textSize.y) * 0.5f
         );
-        ImGui::GetWindowDrawList()->AddText(textPos, ImGui::GetColorU32(ImGuiCol_Text), text);
+        SR_GRAPH_GUI_NS::Immediate::AddText(SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(), textPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), text);
 
         uint32_t index = 0;
 
@@ -256,16 +256,16 @@ namespace SR_CORE_GUI_NS {
             return true;
         });
 
-        const ImVec2 dummySize = ImGui::GetContentRegionAvail();
-        ImGui::Dummy(ImVec2(dummySize.x, dummySize.y > 0 ? dummySize.y : 200));
+        const SR_MATH_NS::FVector2 dummySize = SR_GRAPH_GUI_NS::Immediate::GetContentRegionAvail();
+        SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(dummySize.x, dummySize.y > 0 ? dummySize.y : 200));
 
-        if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+        if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
             m_componentSearchBuffer.clear();
             m_componentSearchOpened = false;
-            ImGui::OpenPopup("InspectorAddComponentPopup");
+            SR_GRAPH_GUI_NS::Immediate::OpenPopup("InspectorAddComponentPopup");
         }
 
-        if (ImGui::BeginPopup("InspectorAddComponentPopup")) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginPopup("InspectorAddComponentPopup")) {
             m_onBeforeChangeCallback = [&](bool drag) {
                 if (!m_pComponentsSerializer) {
                     m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
@@ -273,14 +273,14 @@ namespace SR_CORE_GUI_NS {
                 }
             };
 
-            const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+            const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
 
-            ImGui::PushItemWidth(lineHeight * 5.f);
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(lineHeight * 5.f);
 
             static const auto&& serializeId = SR_UTILS_NS::SerializationId::Create("SREngineComponentClipboard");
 
             if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
-                if (ImGui::Button("Paste", ImVec2(lineHeight * 5.f, 0))) {
+                if (SR_GRAPH_GUI_NS::Immediate::Button("Paste", SR_MATH_NS::FVector2(lineHeight * 5.f, 0))) {
                     clipboard.erase(0, strlen(serializeId.GetName()));
                     SR_UTILS_NS::SRADeserializer deserializer;
                     if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
@@ -291,21 +291,21 @@ namespace SR_CORE_GUI_NS {
                             pIComponentable->AddComponent(pPastedComponent);
                         }
                     }
-                    ImGui::CloseCurrentPopup();
+                    SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
                 }
             }
 
             if (!m_componentSearchOpened) {
-                ImGui::SetKeyboardFocusHere();
+                SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
                 m_componentSearchOpened = true;
             }
 
-            ImGui::InputText("##search", &m_componentSearchBuffer);
-            ImGui::PopItemWidth();
+            SR_GRAPH_GUI_NS::Immediate::InputText("##search", &m_componentSearchBuffer);
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
             DrawComponentCategory(pIComponentable, m_componentsCategories, "Misc");
-            ImGui::EndPopup();
+            SR_GRAPH_GUI_NS::Immediate::EndPopup();
 
             if (m_pComponentsSerializer) {
                 auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
@@ -323,7 +323,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        ImGui::PushID(std::to_string(pComponent->GetEntityId()).c_str());
+        SR_GRAPH_GUI_NS::Immediate::PushID(std::to_string(pComponent->GetEntityId()).c_str());
 
         SRAssert1Once(pComponent->Valid());
 
@@ -332,55 +332,46 @@ namespace SR_CORE_GUI_NS {
         const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetFactoryName());
 
         bool enabled = pComponent->IsEnabled();
-        if (ImGui::Checkbox("##componentEnabled", &enabled)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("##componentEnabled", &enabled)) {
             auto&& cmd = new SR_CORE_NS::Commands::EntityEnable(pEngine, pComponent, enabled);
             pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
         }
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        const bool isOpened = ImGui::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
+        const bool isOpened = SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
 
-        if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
-            ImGui::OpenPopup(headerName.c_str());
+        if (SR_GRAPH_GUI_NS::Immediate::IsItemClicked(SR_GRAPH_GUI_NS::Immediate::MouseButton::Right)) {
+            SR_GRAPH_GUI_NS::Immediate::OpenPopup(headerName.c_str());
         }
 
-        if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+        if (!SR_GRAPH_GUI_NS::Immediate::GetDragDropPayload() && SR_GRAPH_GUI_NS::Immediate::BeginDragDropSource(SR_GRAPH_GUI_NS::Immediate::DragDropFlags::SourceAllowNullID)) {
             m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
-            ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
-            ImGui::Text("%s ->", pComponent->GetMeta()->GetFactoryName().c_str());
-            ImGui::EndDragDropSource();
+            SR_GRAPH_GUI_NS::Immediate::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), SR_GRAPH_GUI_NS::Immediate::Condition::Once);
+            SR_GRAPH_GUI_NS::Immediate::Text("%s ->", pComponent->GetMeta()->GetFactoryName().c_str());
+            SR_GRAPH_GUI_NS::Immediate::EndDragDropSource();
         }
 
-        ImGui::SameLine(); ImGui::Text(" ");
+        SR_GRAPH_GUI_NS::Immediate::SameLine(); SR_GRAPH_GUI_NS::Immediate::Text(" ");
 
         if (pComponent->ExecuteInEditMode()) {
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0, 1, 0, 1), "[Editor mode]");
         }
 
         if (pComponent->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 1, 0, 1), "[Dont save]");
         }
 
         if (!pComponent->IsAttached()) {
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Loaded]");
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 1, 0, 1), "[Loaded]");
         }
 
         if (SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false)) {
-            ImGui::SameLine();
-            ImGui::Text("[Entity id: %llu]", pComponent->GetEntityId());
-        }
-
-        if (isOpened) {
-            SR_CORE_GUI_NS::DrawPropertyContext context;
-            context.pEditor = pContext;
-
-            if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
-                ImGui::Separator();
-            }
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::Text("[Entity id: %llu]", pComponent->GetEntityId());
         }
 
         if (isOpened) {
@@ -421,7 +412,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (ImGui::BeginPopup(headerName.c_str())) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginPopup(headerName.c_str())) {
             auto&& pParent = pComponent->GetParent();
             const int32_t componentIndex = pParent->GetComponentIndex(pComponent);
             const auto componentsCount = static_cast<int32_t>(pParent->GetComponentsCount());
@@ -435,27 +426,27 @@ namespace SR_CORE_GUI_NS {
 
             static const auto&& serializeId = SR_UTILS_NS::SerializationId::Create("SREngineComponentClipboard");
 
-            if (ImGui::MenuItem("Remove")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Remove")) {
                 m_onBeforeChangeCallback(false);
                 pParent->RemoveComponent(pComponent);
             }
-            if (componentIndex != 0 && ImGui::MenuItem("Move up")) {
+            if (componentIndex != 0 && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move up")) {
                 m_onBeforeChangeCallback(false);
                 pParent->MoveComponent(pComponent, -1);
             }
-            if ((componentIndex + 1) != componentsCount && ImGui::MenuItem("Move down")) {
+            if ((componentIndex + 1) != componentsCount && SR_GRAPH_GUI_NS::Immediate::MenuItem("Move down")) {
                 m_onBeforeChangeCallback(false);
                 pParent->MoveComponent(pComponent, 1);
             }
 
-            if (ImGui::MenuItem("Copy")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Copy")) {
                 SR_UTILS_NS::SRASerializer serializer;
                 SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
                 std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
                 SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
             }
 
-            if (ImGui::MenuItem("Cut")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cut")) {
                 SR_UTILS_NS::SRASerializer serializer;
                 SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
                 std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
@@ -466,7 +457,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
-                if (ImGui::MenuItem("Paste (replace)")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Paste (replace)")) {
                     clipboard.erase(0, strlen(serializeId.GetName()));
                     SR_UTILS_NS::SRADeserializer deserializer;
                     if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
@@ -485,7 +476,7 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            if (ImGui::MenuItem("Duplicate")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Duplicate")) {
                 m_onBeforeChangeCallback(false);
                 auto&& pCopiedComponent = pComponent->CloneComponent();
                 pParent->AddComponent(pCopiedComponent);
@@ -504,15 +495,15 @@ namespace SR_CORE_GUI_NS {
                 m_pComponentsSerializer = nullptr;
             }
 
-            ImGui::EndPopup();
+            SR_GRAPH_GUI_NS::Immediate::EndPopup();
         }
 
-        ImGui::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
     }
 
     void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {
         static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name) {
-            if (ImGui::Selectable(name.c_str(), false)) {
+            if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str(), false)) {
                 if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
                     pInspector->m_onBeforeChangeCallback(false);
                     pComponentable->AddComponent(pComponent);
@@ -521,7 +512,7 @@ namespace SR_CORE_GUI_NS {
                     SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
                 }
             }
-            if (ImGui::IsItemFocused()) {
+            if (SR_GRAPH_GUI_NS::Immediate::IsItemFocused()) {
                 if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Enter)) {
                     if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
                         pInspector->m_onBeforeChangeCallback(false);
@@ -530,10 +521,10 @@ namespace SR_CORE_GUI_NS {
                     else {
                         SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
                     }
-                    ImGui::CloseCurrentPopup();
+                    SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
                 }
             }
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
         };
 
         std::function<bool(const ComponentCategory&, std::string_view)> checkMatch;
@@ -548,7 +539,7 @@ namespace SR_CORE_GUI_NS {
         };
 
         if (m_componentSearchBuffer.empty() || checkMatch(category, m_componentSearchBuffer)) {
-            if (category.components.empty() || ImGui::BeginMenu(categoryName.c_str())) {
+            if (category.components.empty() || SR_GRAPH_GUI_NS::Immediate::BeginMenu(categoryName.c_str())) {
                 for (auto&& [name, subCategory] : category.categories) {
                     DrawComponentCategory(pComponentable, subCategory, name);
                 }
@@ -561,20 +552,20 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (!category.components.empty()) {
-                    ImGui::EndMenu();
+                    SR_GRAPH_GUI_NS::Immediate::EndMenu();
                 }
             }
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
     }
 
     PropertyDrawerContext Inspector::CreateDrawerContext(SR_UTILS_NS::Reflection::Value* pValue) {
         PropertyDrawerContext context(pValue);
         context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        float_t windowWidth = ImGui::GetWindowWidth() - m_scrollBarWidth;
+        const float_t lineHeight = SR_GRAPH_GUI_NS::Immediate::GetFontSize() + SR_GRAPH_GUI_NS::Immediate::GetFramePadding().y * 2.0f;
+        float_t windowWidth = SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - m_scrollBarWidth;
         context.lineHeight = lineHeight;
         context.axisButtonWidth = context.lineHeight;
         context.spaceWidth = windowWidth;
@@ -596,7 +587,7 @@ namespace SR_CORE_GUI_NS {
             auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag));
             auto&& pTags = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&tags);
 
-            if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
+            if (SR_GRAPH_GUI_NS::Immediate::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
                 auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
                 if (idx < 0 || idx >= vector->size())
                     return false;
@@ -618,7 +609,7 @@ namespace SR_CORE_GUI_NS {
             auto&& layerIndex = static_cast<int>(pLayerManager->GetLayerIndex(layer));
             auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
 
-            if (ImGui::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
+            if (SR_GRAPH_GUI_NS::Immediate::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
                 auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
                 if (idx < 0 || idx >= vector->size())
                     return false;

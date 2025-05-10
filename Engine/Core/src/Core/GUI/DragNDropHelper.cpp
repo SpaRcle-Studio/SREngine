@@ -23,48 +23,52 @@ namespace SR_CORE_GUI_NS {
 
         bool changed = false;
 
-        ImGui::PushStyleColor(ImGuiCol_Border, (ImVec4)ImColor(247, 84, 225));
+        SR_GRAPH_GUI_NS::Immediate::PushStyleColor(SR_GRAPH_GUI_NS::Immediate::StyleColor::Border, SR_MATH_NS::FColor(247, 84, 225, 255) / 255.f);
 
-        if (ImGui::BeginChild(SR_FORMAT_C("{}-{}", id, (void*)&entityRef), ImVec2(width, 50), true)) {
-            ImGui::PopStyleColor();
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild(SR_FORMAT_C("{}-{}", id, (void*)&entityRef), SR_MATH_NS::FVector2(width, 50), true)) {
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
 
-            ImGui::Text("%s:", id);
+            SR_GRAPH_GUI_NS::Immediate::Text("%s:", id);
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            if (ImGui::BeginChild(SR_FORMAT_C("{}-{}-1", id, (void*)&entityRef), ImVec2(200, 20), true)) {
-                ImGui::Text("%s", preview.c_str());
+            if (SR_GRAPH_GUI_NS::Immediate::BeginChild(SR_FORMAT_C("{}-{}-1", id, (void*)&entityRef), SR_MATH_NS::FVector2(200, 20), true)) {
+                SR_GRAPH_GUI_NS::Immediate::Text("%s", preview.c_str());
 
-                if (ImGui::BeginDragDropTarget()) {
-                    if (auto&& payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != nullptr && payload->Data) {
-                        std::list<SR_UTILS_NS::SceneObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(payload->Data);
-                        if (!gameObjects.empty()) {
-                            entityRef.SetPathTo(gameObjects.front().DynamicCast<SR_UTILS_NS::Entity>());
-                            changed = true;
+                if (SR_GRAPH_GUI_NS::Immediate::BeginDragDropTarget()) {
+                    if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("Hierarchy##Payload")) {
+                        if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
+                            std::list<SR_UTILS_NS::SceneObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pData);
+                            if (!gameObjects.empty()) {
+                                entityRef.SetPathTo(gameObjects.front().DynamicCast<SR_UTILS_NS::Entity>());
+                                changed = true;
+                            }
                         }
                     }
 
-                    if (auto&& payload = ImGui::AcceptDragDropPayload("InspectorComponent##Payload"); payload != nullptr && payload->Data) {
-                        std::list<SR_UTILS_NS::Component::Ptr> components = *(std::list<SR_UTILS_NS::Component::Ptr>*)(payload->Data);
-                        if (!components.empty()) {
-                            entityRef.SetPathTo(components.front()->DynamicCast<SR_UTILS_NS::Entity>());
-                            changed = true;
+                    if (auto&& payload = SR_GRAPH_GUI_NS::Immediate::AcceptDragDropPayload("InspectorComponent##Payload")) {
+                        if (auto&& pData = SR_GRAPH_GUI_NS::Immediate::GetDataFromDragDropPayload(payload)) {
+                            std::list<SR_UTILS_NS::Component::Ptr> components = *(std::list<SR_UTILS_NS::Component::Ptr> *)(pData);
+                            if (!components.empty()) {
+                                entityRef.SetPathTo(components.front()->DynamicCast<SR_UTILS_NS::Entity>());
+                                changed = true;
+                            }
                         }
                     }
 
-                    ImGui::EndDragDropTarget();
+                    SR_GRAPH_GUI_NS::Immediate::EndDragDropTarget();
                 }
 
-                ImGui::EndChild();
+                SR_GRAPH_GUI_NS::Immediate::EndChild();
             }
 
-            if (ImGui::Button("Reset")) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Reset")) {
                 entityRef.SetPathTo(nullptr);
             }
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            if (ImGui::Button("Show")) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Show")) {
                 auto&& pHierarchy = pContext->GetWidget<Hierarchy>();
 
                 if (auto&& pSceneObject = entityRef.GetSceneObject(); pSceneObject && pHierarchy) {
@@ -72,25 +76,25 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            if (ImGui::Button("Update")) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Update")) {
                 entityRef.UpdateTarget();
             }
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             bool relative = entityRef.IsRelative();
-            if (ImGui::Checkbox(SR_FORMAT_C("Relative##{}-{}", id, (void*)&entityRef), &relative)) {
+            if (SR_GRAPH_GUI_NS::Immediate::Checkbox(SR_FORMAT_C("Relative##{}-{}", id, (void*)&entityRef), &relative)) {
                 entityRef.SetRelative(relative);
                 entityRef.UpdateTarget();
                 changed = true;
             }
 
-            ImGui::EndChild();
+            SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
         else {
-            ImGui::PopStyleColor();
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
         }
 
         return changed;

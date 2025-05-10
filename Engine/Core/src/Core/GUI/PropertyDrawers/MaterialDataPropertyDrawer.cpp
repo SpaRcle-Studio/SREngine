@@ -27,7 +27,7 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback MaterialDataPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        ImGui::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
 
         m_stagesToRemove.clear();
 
@@ -43,7 +43,7 @@ namespace SR_CORE_GUI_NS {
             materialData.RemoveStage(stage);
         }
 
-        ImGui::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
 
         return feedback;
     }
@@ -51,38 +51,40 @@ namespace SR_CORE_GUI_NS {
     bool MaterialDataPropertyDrawer::DrawShaderData(bool isDefault, SR_UTILS_NS::StringAtom name, SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
         bool isChanged = false;
 
-        ImGui::PushID(&shaderData);
-        ImGui::PushID(name.c_str());
+        SR_GRAPH_GUI_NS::Immediate::PushID(&shaderData);
+        SR_GRAPH_GUI_NS::Immediate::PushID(name.c_str());
 
         bool& opened = m_shaderDataOpened[name];
 
         {
-            auto&& pWindow = ImGui::GetCurrentWindow();
+            auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
+            auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
+            auto&& cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
 
-            const ImGuiDir_ dir = opened ? ImGuiDir_Down : ImGuiDir_Right;
-            const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(0, 5);
-            ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
+            const auto dir = opened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            ImGui::Dummy(ImVec2(context.GetArrowWidth(), 0));
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             const float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
             const float_t removeWidth = SR_MAX(context.lineHeight * 2.5f, 0);
 
-            const ImVec2 mainButtonSize = { SR_MAX(totalWidth - removeWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(totalWidth - removeWidth, 0), context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
-            if (ImGui::Button(name.c_str(), mainButtonSize)) {
+            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
+            if (SR_GRAPH_GUI_NS::Immediate::Button(name.c_str(), mainButtonSize)) {
                 opened = !opened;
             }
-            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
+            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            const ImVec2 removeButtonSize = { SR_MAX(removeWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 removeButtonSize = { SR_MAX(removeWidth, 0), context.fieldHeight };
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(isDefault);
-            if (ImGui::Button("Delete", removeButtonSize)) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button("Delete", removeButtonSize)) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
                 }
@@ -92,9 +94,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (opened) {
-            ImGui::Dummy(ImVec2(context.GetArrowWidth(), 0));
-            ImGui::SameLine();
-            ImGui::BeginGroup();
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 0));
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
             isChanged |= DrawShaderPath(name, shaderData, context);
 
@@ -125,16 +127,16 @@ namespace SR_CORE_GUI_NS {
                     continue;
                 }
 
-                ImGui::PushID(i);
+                SR_GRAPH_GUI_NS::Immediate::PushID(i);
                 isChanged |= DrawShaderProperty(shaderData, *pProperty, context);
-                ImGui::PopID();
+                SR_GRAPH_GUI_NS::Immediate::PopID();
             }
 
-            ImGui::EndGroup();
+            SR_GRAPH_GUI_NS::Immediate::EndGroup();
         }
 
-        ImGui::PopID();
-        ImGui::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
 
         return isChanged;
     }
@@ -153,11 +155,11 @@ namespace SR_CORE_GUI_NS {
         propertyContext.fieldWidth -= context.GetArrowWidth();
         propertyContext.fieldTitleWidth = 0.f;
 
-        const ImVec2 propertyButtonSize = { SR_MAX(propertyContext.fieldWidth * 0.25f, 0), context.fieldHeight };
+        const SR_MATH_NS::FVector2 propertyButtonSize = { SR_MAX(propertyContext.fieldWidth * 0.25f, 0), context.fieldHeight };
 
         propertyContext.fieldWidth -= propertyButtonSize.x;
 
-        if (ImGui::Button(property.displayName.c_str(), propertyButtonSize)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button(property.displayName.c_str(), propertyButtonSize)) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -187,7 +189,7 @@ namespace SR_CORE_GUI_NS {
                 feedback = m_numericDrawer->Draw(propertyContext);
                 break;
             case SR_GRAPH_NS::ShaderVarType::Bool: {
-                ImGui::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
                 bool boolean = std::get<int32_t>(property.data) != 0;
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(boolean);
                 feedback = m_boolDrawer->Draw(propertyContext);
@@ -195,7 +197,7 @@ namespace SR_CORE_GUI_NS {
                 break;
             }
             case SR_GRAPH_NS::ShaderVarType::Sampler2D: {
-                ImGui::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
                 SR_UTILS_NS::Path path;
                 if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture*>(property.data)) {
                     path = pTexture->GetResourcePath();
@@ -211,15 +213,15 @@ namespace SR_CORE_GUI_NS {
                 if (void* pDescriptor = pTexture ? pTexture->GetDescriptor() : nullptr) {
                     const float_t imageSize = context.lineHeight * 2.5f;
 
-                    SR_GRAPH_GUI_NS::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight);
+                    SR_GRAPH_GUI_NS::Immediate::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight);
 
-                    ImGui::SameLine();
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
 
                     const SR_GRAPH_NS::Memory::TextureConfig& config = pTexture->GetTextureConfig();
 
-                    ImGui::BeginGroup();
+                    SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
-                    ImGui::Text("%s", "Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format(
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", "Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format(
                         pTexture->GetWidth(),
                         pTexture->GetHeight(),
                         pTexture->GetChannels(),
@@ -227,30 +229,32 @@ namespace SR_CORE_GUI_NS {
                         config.GetFilter()).c_str()
                     );
 
-                    ImGui::EndGroup();
+                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
-                    ImGui::SameLine();
-                    ImGui::Dummy(ImVec2(context.lineHeight, 0));
-                    ImGui::SameLine();
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.lineHeight, 0));
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-                    ImGui::BeginGroup();
+                    SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
-                    ImGui::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
                         config.GetCompression(),
                         config.GetMipLevels(),
                         config.GetCpuUsage(),
                         config.GetAlpha()).c_str()
                     );
 
-                    ImGui::EndGroup();
+                    SR_GRAPH_GUI_NS::Immediate::EndGroup();
                 }
 
                 break;
             }
-            default:
-                ImGui::SameLine();
-                SR_GRAPH_GUI_NS::ColoredText("Unsupported type! Type: {}"_format(property.type), ImColor(255, 0, 0));
+            default: {
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                auto&& msg = "Unsupported type! Type: {}"_format(property.type);
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), msg.c_str());
                 return false;
+            }
         }
 
         if (feedback.isChanged || wasReset) {

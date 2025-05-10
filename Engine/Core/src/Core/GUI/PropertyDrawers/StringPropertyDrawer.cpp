@@ -12,38 +12,38 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().c_str());
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().c_str());
 
-        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         if (!context.pValue) {
-            const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+            const SR_MATH_NS::FVector2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
                 SetReflectedValue(context, feedback, value);
             }
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
         }
 
-        ImGui::PushItemWidth(context.fieldWidth);
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
         const bool isTextBox = context.pProperty && context.pProperty->GetEditorParams().GetCustomArg("text-box") == "enabled";
 
         if (value.IsString()) {
             if (auto&& pString = value.TryCast<std::string>()) {
                 std::string copy = *pString;
-                ImGui::InputText("##Input", &copy);
+                SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &copy);
 
-                if (ImGui::IsItemDeactivatedAfterEdit()) {
+                if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
                     SetMappedValue(context, feedback, pString, copy);
                 }
             }
             else {
-                SR_GRAPH_GUI_NS::ColoredText("Failed to map string value!", ImColor(1.f, 0.f, 0.f, 1.f));
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string value!");
             }
         }
         else if (value.IsStringView()) {
@@ -51,27 +51,27 @@ namespace SR_CORE_GUI_NS {
                 /// read only
                 if (pStringView->empty()) {
                     static std::string emptyString = " "; /// imgui will assert if empty string is passed
-                    ImGui::InputText("##Input", emptyString.data(), emptyString.size(), ImGuiInputTextFlags_ReadOnly);
+                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", emptyString.data(), emptyString.size(), SR_GRAPH_GUI_NS::Immediate::InputTextFlags::ReadOnly);
                 }
                 else {
-                    ImGui::InputText("##Input", const_cast<char*>(pStringView->data()), pStringView->size(), ImGuiInputTextFlags_ReadOnly);
+                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", const_cast<char*>(pStringView->data()), pStringView->size(), SR_GRAPH_GUI_NS::Immediate::InputTextFlags::ReadOnly);
                 }
             }
             else {
-                SR_GRAPH_GUI_NS::ColoredText("Failed to map string view value!", ImColor(1.f, 0.f, 0.f, 1.f));
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string view value!");
             }
         }
         else if (value.IsStringAtom()) {
             if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
                 std::string str = pStringAtom->ToString();
-                ImGui::InputText("##Input", &str);
+                SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &str);
 
-                if (ImGui::IsItemDeactivatedAfterEdit()) {
+                if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
                     SetMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));
                 }
             }
             else {
-                SR_GRAPH_GUI_NS::ColoredText("Failed to map string atom value!", ImColor(1.f, 0.f, 0.f, 1.f));
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
             }
         }
         else if (value.IsUnicodeString()) {
@@ -79,30 +79,30 @@ namespace SR_CORE_GUI_NS {
                 std::string text = SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(pUnicodeString->View());
 
                 if (isTextBox) {
-                    ImGui::InputTextMultiline("##Input", &text, ImVec2(context.fieldWidth, 100));
+                    SR_GRAPH_GUI_NS::Immediate::InputTextMultiline("##Input", &text, SR_MATH_NS::FVector2(context.fieldWidth, 100));
                 }
                 else {
-                    ImGui::InputText("##Input", &text);
+                    SR_GRAPH_GUI_NS::Immediate::InputText("##Input", &text);
                 }
 
-                if (ImGui::IsItemDeactivatedAfterEdit()) {
+                if (SR_GRAPH_GUI_NS::Immediate::IsItemDeactivatedAfterEdit()) {
                     SetMappedValue(context, feedback, pUnicodeString, SR_HTYPES_NS::UnicodeString(SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(text)));
                 }
             }
             else {
-                SR_GRAPH_GUI_NS::ColoredText("Failed to map string atom value!", ImColor(1.f, 0.f, 0.f, 1.f));
+                SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Failed to map string atom value!");
             }
         }
         else {
-            SR_GRAPH_GUI_NS::ColoredText("Invalid string type!", ImColor(1.f, 0.f, 0.f, 1.f));
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Invalid string type!");
         }
 
-        ImGui::PopItemWidth();
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
-        ImGui::PopStyleVar();
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
-        ImGui::PopID();
-        ImGui::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
 
         return feedback;
     }

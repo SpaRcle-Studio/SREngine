@@ -21,14 +21,14 @@ namespace SR_CORE_GUI_NS {
 
     void PhysicsMaterialEditor::Draw() {
         if (m_materialPath.GetExtensionView() == "physmat") {
-            ImGui::Text("%s", m_materialPath.c_str());
+            SR_GRAPH_GUI_NS::Immediate::Text("%s", m_materialPath.c_str());
         }
         else {
             DrawButton(ButtonType::ChooseMaterial);
             return;
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         SetMaterialProperty("Dynamic Friction", &m_materialData.dynamicFriction, 0.01f,
                             [this](){ SetDynamicFriction(m_materialData.dynamicFriction); });
@@ -39,47 +39,47 @@ namespace SR_CORE_GUI_NS {
         SetMaterialProperty("Bounciness", &m_materialData.bounciness, 0.01f,
                             [this](){ SetBounciness(m_materialData.bounciness); });
 
-        if (ImGui::BeginCombo("Friction Combine",
+        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Friction Combine",
                               SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.frictionCombine).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
-                if (ImGui::Selectable(selectable.c_str())) {
-                    ImGui::SetItemDefaultFocus();
+                if (SR_GRAPH_GUI_NS::Immediate::Selectable(selectable.c_str())) {
+                    SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
                     SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(selectable));
                 }
             }
 
-            ImGui::EndCombo();
+            SR_GRAPH_GUI_NS::Immediate::EndCombo();
         }
 
-        if (ImGui::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.bounceCombine).c_str())) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.bounceCombine).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
-                if (ImGui::Selectable(selectable.c_str())) {
-                    ImGui::SetItemDefaultFocus();
+                if (SR_GRAPH_GUI_NS::Immediate::Selectable(selectable.c_str())) {
+                    SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
                     SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(selectable));
                 }
             }
 
-            ImGui::EndCombo();
+            SR_GRAPH_GUI_NS::Immediate::EndCombo();
         }
 
         DrawButton(ButtonType::Save);
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
         DrawButton(ButtonType::Discard);
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
         DrawButton(ButtonType::ChooseMaterial);
     }
 
     void PhysicsMaterialEditor::DrawButton(ButtonType buttonType) {
         const SR_UTILS_NS::StringAtom& name = SR_UTILS_NS::EnumReflector::ToStringAtom(buttonType);
-        if (ImGui::Button(name.c_str())) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button(name.c_str())) {
             m_buttonActions[static_cast<uint32_t>(buttonType)]();
         }
     }
 
      void PhysicsMaterialEditor::SetMaterialProperty(const std::string &label, float_t* value, float speed, const std::function<void()>& func) {
-        if (ImGui::DragFloat(label.c_str(), value, speed)) {
+        if (SR_GRAPH_GUI_NS::Immediate::DragFloat(label.c_str(), value, speed)) {
             func();
         }
     }

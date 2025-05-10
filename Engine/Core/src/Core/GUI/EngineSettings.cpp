@@ -14,11 +14,11 @@ namespace SR_CORE_GUI_NS {
 
     void EngineSettings::Draw() {
         DrawMultiSampling();
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
         DrawVSync();
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
         DrawLighting();
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
         DrawEditorSettings();
     }
 
@@ -50,21 +50,21 @@ namespace SR_CORE_GUI_NS {
         auto&& pPipeline = GetContext()->GetPipeline();
         int32_t currentItem = SR_SAMPLE_COUNT_KEY_LIST.at(pPipeline->GetSamplesCount());
 
-        if (ImGui::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
             pPipeline->SetSampleCount(SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
         }
 
         bool optimizedRenderUpdate = GetContext()->IsOptimizedRenderUpdateEnabled();
-        if (ImGui::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
             GetContext()->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
         }
     }
 
     void EngineSettings::DrawLighting() {
         SR_MATH_NS::FVector3 position = GetRenderScene()->GetLightSystem()->GetDirectionalLightPosition();
-        if (SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position)) {
-            GetRenderScene()->GetLightSystem()->SetDirectionalLightPosition(position);
-        }
+        //if (SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position)) {
+        //    GetRenderScene()->GetLightSystem()->SetDirectionalLightPosition(position);
+        //}
     }
 
     void EngineSettings::DrawVSync() {
@@ -74,7 +74,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         bool vsync = pPipeline->IsVSyncEnabled();
-        if (ImGui::Checkbox("VSync", &vsync)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("VSync", &vsync)) {
             pPipeline->SetVSyncEnabled(vsync);
         }
     }
@@ -85,29 +85,29 @@ namespace SR_CORE_GUI_NS {
         bool showEntityId = SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false);
         bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool("ShowHiddenEntities", false);
 
-        if (ImGui::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", ImGuiInputTextFlags_EnterReturnsTrue)) {
+        if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
             SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiFontSize", fontSize);
         }
 
-        if (ImGui::InputFloat("Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f", ImGuiInputTextFlags_EnterReturnsTrue)) {
+        if (SR_GRAPH_GUI_NS::Immediate::InputFloat("Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f", SR_GRAPH_GUI_NS::Immediate::InputTextFlags::EnterReturnsTrue)) {
             SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiIconFontSize", iconFontSize);
         }
 
-        if (ImGui::Checkbox("Show entity id", &showEntityId)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show entity id", &showEntityId)) {
             SR_UTILS_NS::StoreUtils::User::SetBool("ShowEntityId", showEntityId);
         }
 
-        if (ImGui::Checkbox("Show hidden entities", &showHiddenEntities)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Checkbox("Show hidden entities", &showHiddenEntities)) {
             SR_UTILS_NS::StoreUtils::User::SetBool("ShowHiddenEntities", showHiddenEntities);
         }
 
-        if (ImGui::Button("Save")) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Save")) {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
         }
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        if (ImGui::Button("Load")) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Load")) {
             SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
         }
     }

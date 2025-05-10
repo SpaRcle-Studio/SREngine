@@ -161,7 +161,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_imGuiDemo) {
-            ImGui::ShowDemoWindow(&m_imGuiDemo);
+            //ImGui::ShowDemoWindow(&m_imGuiDemo);
         }
 
         WidgetManager::Draw();
@@ -170,89 +170,56 @@ namespace SR_CORE_GUI_NS {
     void EditorGUI::DrawDockingSpace() {
         m_dragWindow = false;
 
-        ImGuiViewport* pViewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(pViewport->Pos);
-        ImGui::SetNextWindowSize(pViewport->Size);
-        ImGui::SetNextWindowViewport(pViewport->ID);
+        SR_GRAPH_GUI_NS::Immediate::BeginDocking();
 
-        static constexpr ImGuiWindowFlags windowFlags = 0
-            | ImGuiWindowFlags_NoCollapse
-            | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking
-            | ImGuiWindowFlags_NoTitleBar
-            | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
-            | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMainMenuBar()) {
+            auto&& pMenuBarWindow = SR_GRAPH_GUI_NS::Immediate::FindWindowByName("##MainMenuBar");
 
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-
-        ImGui::Begin("SpaRcle Engine", nullptr, windowFlags);
-        ImGuiID dockMain = ImGui::GetID("Dockspace");
-
-        if (ImGui::BeginMainMenuBar()) {
-            ImGuiWindow* pMenuBarWindow = ImGui::FindWindowByName("##MainMenuBar");
-
-            if (m_click == Click::None && ImGui::IsMouseDragging(ImGuiMouseButton_Left)) {
-                m_click = pMenuBarWindow->Rect().Contains(ImGui::GetMousePos()) ? Click::Drag : Click::Miss;
+            if (m_click == Click::None && SR_GRAPH_GUI_NS::Immediate::IsMouseDragging(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
+                m_click = SR_GRAPH_GUI_NS::Immediate::GetWindowRect(pMenuBarWindow).Contains(SR_GRAPH_GUI_NS::Immediate::GetMousePos()) ? Click::Drag : Click::Miss;
             }
-            else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+            else if (SR_GRAPH_GUI_NS::Immediate::IsMouseReleased(SR_GRAPH_GUI_NS::Immediate::MouseButton::Left)) {
                 m_click = Click::None;
             }
 
             m_dragWindow = m_click == Click::Drag;
 
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
-
-            ImGui::PopStyleVar();
-
-            ImGui::Text(" | ");
-
-            ImGui::Text("%s", "SpaRcle Engine");
-
-            ImGui::Text(" | ");
+            SR_GRAPH_GUI_NS::Immediate::Text(" | ");
+            SR_GRAPH_GUI_NS::Immediate::Text("%s", "SpaRcle Engine");
+            SR_GRAPH_GUI_NS::Immediate::Text(" | ");
 
             DrawMenuBar();
 
-            ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 20);
-            ImGui::SetCursorPosY(0);
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 20);
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(0);
 
             auto&& pWindow = m_engine->GetMainWindow()->GetBaseWindow();
 
-            if (ImGui::SmallButton("×")) {
+            if (SR_GRAPH_GUI_NS::Immediate::SmallButton("×")) {
                 pWindow->Close();
             }
 
-            ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 45);
-            ImGui::SetCursorPosY(0);
-            if (pWindow->GetState() == Graphics::WindowState::Default && ImGui::SmallButton("[ ]")) {
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 45);
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(0);
+            if (pWindow->GetState() == Graphics::WindowState::Default && SR_GRAPH_GUI_NS::Immediate::SmallButton("[ ]")) {
                 pWindow->Maximize();
             }
 
-            if (pWindow->GetState() == Graphics::WindowState::Maximized && ImGui::SmallButton("[=]")) {
+            if (pWindow->GetState() == Graphics::WindowState::Maximized && SR_GRAPH_GUI_NS::Immediate::SmallButton("[=]")) {
                 pWindow->Restore();
             }
-            ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 70);
-            ImGui::SetCursorPosY(0);
-            if (ImGui::SmallButton("_")) {
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosX(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x - 70);
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPosY(0);
+            if (SR_GRAPH_GUI_NS::Immediate::SmallButton("_")) {
                 pWindow->Collapse();
             }
 
-            {
-                ImGui::EndMenuBar();
-
-                ImGuiContext& g = *GImGui;
-                if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest) {
-                    ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr);
-                    //ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr, nullptr, ImGuiFocusedFlags_None);
-                }
-
-                ImGui::End();
-            }
+            SR_GRAPH_GUI_NS::Immediate::EndMenuBar();
+            SR_GRAPH_GUI_NS::Immediate::FocusTopMostWindowUnderOne();
+            SR_GRAPH_GUI_NS::Immediate::End();
         }
 
-        ImGui::DockSpace(dockMain, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
-        ImGui::End();
-        ImGui::PopStyleVar(3);
+        SR_GRAPH_GUI_NS::Immediate::EndDocking();
     }
 
     void EditorGUI::Save() {
@@ -485,24 +452,21 @@ namespace SR_CORE_GUI_NS {
         ReloadWindows();
         ShowAll();
 
-        ImGuiContext& g = *GImGui;
-        if (g.IO.IniFilename)
-            ImGui::LoadIniSettingsFromDisk(g.IO.IniFilename);
-        g.SettingsLoaded = true;
+        SR_GRAPH_GUI_NS::Immediate::LoadIniSettingsFromDisk();
     }
 
     void EditorGUI::DrawMenuBar() {
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::WindowPadding, SR_MATH_NS::FVector2(8, 8));
 
-        if (ImGui::BeginMenu("File")) {
-            if (ImGui::MenuItem("New scene")) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("File")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New scene")) {
                 m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewScenePath(), SR_WORLD_NS::SceneLogicType::Asset));
                 CacheScenePath(m_engine->GetScene()->GetPath());
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("New prefab")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("New prefab")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
                     pScene->SaveScene();
@@ -513,44 +477,34 @@ namespace SR_CORE_GUI_NS {
                 m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Load")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Load")) {
                 auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
                 if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-                    /*if (path.GetExtensionView() == "scene") {
-                        auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
-
-                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(folder)) {
-                            m_engine->SetScene(pScene);
-                            CacheScenePath(folder);
-                        }
-                    }
-                    else {*/
                     if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
                         m_engine->AddSceneToQueue(pScene);
                         CacheScenePath(path);
                     }
-                    //}
                 }
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Save")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     pScene->SaveScene();
                     pScene.Unlock();
                 }
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Save at")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Save at")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid())
                 {
                     const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
@@ -580,9 +534,9 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Close scene")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close scene")) {
                 if (auto&& pScene = m_engine->GetScene()) {
                     pScene->SaveScene();
                 }
@@ -590,29 +544,29 @@ namespace SR_CORE_GUI_NS {
                 CacheScenePath("NONE");
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Clear shaders cache")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Clear shaders cache")) {
                 SR_SRSL_NS::SRSLShader::ClearShadersCache();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Reload")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reload")) {
                 m_engine->Reload();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Exit")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Exit")) {
                 m_engine->GetMainWindow()->GetBaseWindow()->Close();
             }
 
-            ImGui::EndMenu();
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
 
-        if (ImGui::BeginMenu("Editor")) {
-            if (ImGui::MenuItem("Instance from file")) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Editor")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Instance from file")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
@@ -625,18 +579,18 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::BeginMenu("Instantiate")) {
-                if (ImGui::MenuItem("Empty")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Instantiate")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Empty")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         InstantiateSO(pScene->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Cube")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cube")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -652,9 +606,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Sphere")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sphere")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -670,9 +624,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Capsule")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Capsule")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -688,9 +642,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Cylinder")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Cylinder")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -706,9 +660,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Plane")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Plane")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -724,9 +678,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Statue")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Statue")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Statue"_atom);
                         pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
@@ -744,9 +698,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::Separator();
+                SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                if (ImGui::MenuItem("Monkey")) {
+                if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Monkey")) {
                     if (auto&& pScene = m_engine->GetScene()) {
                         auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
@@ -763,27 +717,26 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
-                ImGui::EndMenu();
+                SR_GRAPH_GUI_NS::Immediate::EndMenu();
             }
 
-            ImGui::EndMenu();
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
 
         DrawWindowPage();
 
-        if (ImGui::MenuItem("About")) {
+        if (SR_GRAPH_GUI_NS::Immediate::MenuItem("About")) {
             OpenWidget<About>();
         }
 
-        ImGui::PopStyleVar();
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
-        auto&& io = ImGui::GetIO();
+        SR_GRAPH_GUI_NS::Immediate::PushItemWidth(115);
 
-        ImGui::PushItemWidth(115);
+        const float_t framerate = SR_GRAPH_GUI_NS::Immediate::GetFramerate();
+        SR_GRAPH_GUI_NS::Immediate::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", framerate, framerate > 0.f ? 1000.0f / framerate : 0.0f);
 
-        ImGui::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", io.Framerate, io.Framerate > 0.f ? 1000.0f / io.Framerate : 0.0f);
-
-        ImGui::PopItemWidth();
+        SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
         auto&& pBuilder = m_engine->GetSceneBuilder();
         if (pBuilder) {
@@ -794,60 +747,60 @@ namespace SR_CORE_GUI_NS {
 
             const float_t timeLeft = (float_t)std::chrono::duration_cast<ms>(time).count() / (float_t)SR_CLOCKS_PER_SEC;
 
-            ImGui::Text("|   Last scene build: %.2f sec", timeLeft);
+            SR_GRAPH_GUI_NS::Immediate::Text("|   Last scene build: %.2f sec", timeLeft);
         }
     }
 
     void EditorGUI::DrawWindowPage() {
-        if (ImGui::BeginMenu("Window")) {
-            if (ImGui::MenuItem("Assets")) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginMenu("Window")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Assets")) {
                 OpenWidget<FileBrowser>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Hierarchy")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Hierarchy")) {
                 OpenWidget<Hierarchy>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Inspector")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Inspector")) {
                 OpenWidget<Inspector>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Scene")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Scene")) {
                 OpenWidget<SceneViewer>();
             }
 
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Sound debug")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Sound debug")) {
                 OpenWidget<SoundDebug>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Render Technique")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Render Technique")) {
                 OpenWidget<RenderTechniqueEditor>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Animator")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Animator")) {
                 OpenWidget<AnimatorEditor>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("ImGui Demo Window")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("ImGui Demo Window")) {
                 m_imGuiDemo = true;
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
             /// if (ImGui::MenuItem("Animator")) {
             ///    OpenWidget<AnimatorEditor>();
@@ -855,41 +808,41 @@ namespace SR_CORE_GUI_NS {
 
             /// ImGui::Separator();
 
-            if (ImGui::MenuItem("World edit")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("World edit")) {
                OpenWidget<WorldEdit>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Physics material editor")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Physics material editor")) {
                 OpenWidget<PhysicsMaterialEditor>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Settings")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Settings")) {
                 OpenWidget<EngineSettings>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Statistics")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Statistics")) {
                 OpenWidget<EngineStatistics>();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Reset to default")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Reset to default")) {
                 ResetToDefault();
             }
 
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            if (ImGui::MenuItem("Close all")) {
+            if (SR_GRAPH_GUI_NS::Immediate::MenuItem("Close all")) {
                 CloseAllWidgets();
             }
 
-            ImGui::EndMenu();
+            SR_GRAPH_GUI_NS::Immediate::EndMenu();
         }
     }
 

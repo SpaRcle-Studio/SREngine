@@ -16,10 +16,11 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderScene.h>
-#include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
-#include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
-#include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 #include <Graphics/Render/RenderQueue.h>
+
+// #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
+// #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
+// #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
@@ -27,8 +28,8 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void EngineStatistics::Draw() {
-        if (ImGui::BeginTabBar("EngineStatsTabBar")) {
-            ImGui::Separator();
+        if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("EngineStatsTabBar")) {
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
             ResourcesPage();
             ThreadsPage();
@@ -38,19 +39,19 @@ namespace SR_CORE_GUI_NS {
             RenderStrategyPage();
             StringAtoms();
 
-            ImGui::EndTabBar();
+            SR_GRAPH_GUI_NS::Immediate::EndTabBar();
         }
     }
 
     void EngineStatistics::ResourcesPage() {
-        if (ImGui::BeginTabItem("Resources manager")) {
+        /*if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Resources manager")) {
             auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
                 const bool isDestroyed = pRes->IsDestroyed();
 
                 std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
                 if (isDestroyed) {
-                    ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
+                    SR_GRAPH_GUI_NS::Immediate::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
 
                     std::stringstream stream;
                     stream << std::fixed << std::setprecision(3) << static_cast<float>(SR_MAX(pRes->GetLifetime(), 0) / SR_CLOCKS_PER_SEC);
@@ -58,14 +59,14 @@ namespace SR_CORE_GUI_NS {
                     node.append(" (").append(stream.str()).append(")");
                 }
 
-                ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithoutChild);
+                SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(node.c_str(), m_nodeFlagsWithoutChild);
 
                 if (isDestroyed) {
-                    if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && ImGui::IsItemHovered()) {
+                    if (SR_GRAPH_GUI_NS::Immediate::IsMouseDoubleClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && SR_GRAPH_GUI_NS::Immediate::IsItemHovered()) {
                         pRes->Kill();
                     }
 
-                    ImGui::PopStyleColor();
+                    SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
                 }
             };
 
@@ -74,16 +75,16 @@ namespace SR_CORE_GUI_NS {
 
                 const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
-                if (ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithChild)) {
+                if (SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(node.c_str(), m_nodeFlagsWithChild)) {
                     for (auto &&pRes : resources)
                         drawResource(pRes, subIndex++);
-                    ImGui::TreePop();
+                    SR_GRAPH_GUI_NS::Immediate::TreePop();
                 }
             };
 
             SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](const auto &groups) {
                 for (const auto& [groupHashName, pResourceType] : groups) {
-                    if (ImGui::TreeNodeEx(pResourceType->GetName().data(), m_nodeFlagsWithChild)) {
+                    if (SR_GRAPH_GUI_NS::Immediate::TreeNodeEx(pResourceType->GetName().data(), m_nodeFlagsWithChild)) {
                         uint32_t index = 0;
 
                         for (const auto&[resourceName, pResources] : pResourceType->GetCopiesRef()) {
@@ -95,54 +96,54 @@ namespace SR_CORE_GUI_NS {
                             }
                         }
 
-                        ImGui::TreePop();
+                        SR_GRAPH_GUI_NS::Immediate::TreePop();
                     }
                 }
             });
 
-            ImGui::EndTabItem();
-        }
+            SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+        }*/
     }
 
     void EngineStatistics::ThreadsPage() {
-        if (ImGui::BeginTabItem("Threads")) {
-            ImGui::EndTabItem();
+        if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Threads")) {
+            SR_GRAPH_GUI_NS::Immediate::EndTabItem();
         }
     }
 
     void EngineStatistics::WidgetsPage() {
-        if (ImGui::BeginTabItem("Widgets")) {
-            if (ImGui::BeginTable("##WidgetsTable", 4))
+        /*if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Widgets")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##WidgetsTable", 4))
             {
                 for (auto&& [name, pWidget] : GetManager()->GetWidgets()) {
-                    ImGui::TableNextRow();
+                    SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                    ImGui::TableSetColumnIndex(0);
-                    ImGui::Text("%s", name.c_str());
-                    ImGui::Separator();
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", name.c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                    ImGui::TableSetColumnIndex(1);
-                    ImGui::Text("%s", pWidget->IsOpen() ? "Opened" : "Closed");
-                    ImGui::Separator();
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(1);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", pWidget->IsOpen() ? "Opened" : "Closed");
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                    ImGui::TableSetColumnIndex(2);
-                    ImGui::Text("%s", pWidget->IsFocused() ? "Focused" : "Unfocused");
-                    ImGui::Separator();
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(2);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", pWidget->IsFocused() ? "Focused" : "Unfocused");
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
 
-                    ImGui::TableSetColumnIndex(3);
-                    ImGui::Text("%s", pWidget->IsHovered() ? "Hovered" : "Not hovered");
-                    ImGui::Separator();
+                    SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(3);
+                    SR_GRAPH_GUI_NS::Immediate::Text("%s", pWidget->IsHovered() ? "Hovered" : "Not hovered");
+                    SR_GRAPH_GUI_NS::Immediate::Separator();
                 }
 
-                ImGui::EndTable();
+                SR_GRAPH_GUI_NS::Immediate::EndTable();
             }
 
-            ImGui::EndTabItem();
-        }
+            SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+        }*/
     }
  
     void EngineStatistics::VideoMemoryPage() {
-        if (ImGui::BeginTabItem("Video memory")) {
+        /*if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Video memory")) {
             auto&& pContext = GetContext();
 
             auto&& framebuffers = pContext->GetFramebuffers();
@@ -150,83 +151,83 @@ namespace SR_CORE_GUI_NS {
             auto&& techniques = pContext->GetRenderTechniques();
             auto&& skyboxes = pContext->GetSkyboxes();
 
-            if (ImGui::CollapsingHeader("Shaders")) {
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Shaders")) {
                 auto&& shaders = pContext->GetShaders();
 
                 auto&& shadersManager = SR_GRAPH_NS::Memory::ShaderProgramManager::Instance();
 
-                if (ImGui::BeginTable("##ShadersTable", 1)) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##ShadersTable", 1)) {
                     for (auto&& pShader : shaders) {
-                        ImGui::TableNextRow();
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
                         auto&& virtualProgram = pShader->GetVirtualProgram();
 
-                        ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s [%i]", pShader->GetResourceId().c_str(), virtualProgram);
+                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
+                        SR_GRAPH_GUI_NS::Immediate::Text("%s [%i]", pShader->GetResourceId().c_str(), virtualProgram);
 
                         if (shadersManager.HasProgram(virtualProgram)) {
                             auto&& pVirtualInfo = shadersManager.GetInfo(virtualProgram);
 
                             for (auto&& [identifier, program] : pVirtualInfo->m_data) {
-                                ImGui::Text("\t[%llu] = %i", identifier, program.id);
+                                SR_GRAPH_GUI_NS::Immediate::Text("\t[%llu] = %i", identifier, program.id);
                             }
                         }
 
-                        ImGui::Separator();
+                        SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
 
-                    ImGui::EndTable();
+                    SR_GRAPH_GUI_NS::Immediate::EndTable();
                 }
             }
 
-            if (ImGui::CollapsingHeader("Framebuffers")) {
-                if (ImGui::BeginTable("##FramebuffersTable", 1)) {
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Framebuffers")) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##FramebuffersTable", 1)) {
                     for (auto&& pFramebuffer : framebuffers) {
-                        ImGui::TableNextRow();
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                        ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%i", pFramebuffer->GetId());
-                        ImGui::Separator();
+                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
+                        SR_GRAPH_GUI_NS::Immediate::Text("%i", pFramebuffer->GetId());
+                        SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
 
-                    ImGui::EndTable();
+                    SR_GRAPH_GUI_NS::Immediate::EndTable();
                 }
             }
 
-            if (ImGui::CollapsingHeader("Textures")) {
-                if (ImGui::BeginTable("##TexturesTable", 1)) {
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Textures")) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##TexturesTable", 1)) {
                     for (auto&& pTexture : textures) {
-                        ImGui::TableNextRow();
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                        ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pTexture->GetResourceId().c_str());
-                        ImGui::Separator();
+                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
+                        SR_GRAPH_GUI_NS::Immediate::Text("%s", pTexture->GetResourceId().c_str());
+                        SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
 
-                    ImGui::EndTable();
+                    SR_GRAPH_GUI_NS::Immediate::EndTable();
                 }
             }
 
-            if (ImGui::CollapsingHeader("Render Techniques")) {
-                if (ImGui::BeginTable("##RenderTechniquesTable", 1)) {
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Render Techniques")) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##RenderTechniquesTable", 1)) {
                     for (auto&& pRenderTechnique : techniques) {
-                        ImGui::TableNextRow();
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                        ImGui::TableSetColumnIndex(0);
+                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
 
                         if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(pRenderTechnique)) {
-                            ImGui::Text("%s", pResource->GetResourceId().c_str());
+                            SR_GRAPH_GUI_NS::Immediate::Text("%s", pResource->GetResourceId().c_str());
                         }
                         else {
-                            ImGui::Text("%s", pRenderTechnique->GetName().data());
+                            SR_GRAPH_GUI_NS::Immediate::Text("%s", pRenderTechnique->GetName().data());
                         }
 
                         DrawRenderTechnique(pRenderTechnique);
 
-                        ImGui::Separator();
+                        SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
 
-                    ImGui::EndTable();
+                    SR_GRAPH_GUI_NS::Immediate::EndTable();
                 }
             }
 
@@ -244,88 +245,88 @@ namespace SR_CORE_GUI_NS {
             //    }
             //}
 
-            if (ImGui::CollapsingHeader("Skyboxes")) {
-                if (ImGui::BeginTable("##SkyboxesTable", 1)) {
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Skyboxes")) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginTable("##SkyboxesTable", 1)) {
                     for (auto&& pSkybox : skyboxes) {
-                        ImGui::TableNextRow();
+                        SR_GRAPH_GUI_NS::Immediate::TableNextRow();
 
-                        ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pSkybox->GetResourceId().c_str());
-                        ImGui::Separator();
+                        SR_GRAPH_GUI_NS::Immediate::TableSetColumnIndex(0);
+                        SR_GRAPH_GUI_NS::Immediate::Text("%s", pSkybox->GetResourceId().c_str());
+                        SR_GRAPH_GUI_NS::Immediate::Separator();
                     }
 
-                    ImGui::EndTable();
+                    SR_GRAPH_GUI_NS::Immediate::EndTable();
                 }
             }
 
-            ImGui::EndTabItem();
-        }
+            SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+        }*/
     }
 
     void EngineStatistics::SubmitQueuePage() {
-        if (ImGui::BeginTabItem("Submit queue")) {
+        /*if (SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Submit queue")) {
             auto&& pVulkan = GetContext()->GetPipeline().DynamicCast<SR_GRAPH_NS::VulkanPipeline>();
             if (!pVulkan) {
-                ImGui::Text("Not supported!");
-                ImGui::EndTabItem();
+                SR_GRAPH_GUI_NS::Immediate::Text("Not supported!");
+                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
                 return;
             }
 
             auto&& pKernel = pVulkan->GetKernel();
             if (!pKernel) {
-                ImGui::Text("Kernel invalid!");
-                ImGui::EndTabItem();
+                SR_GRAPH_GUI_NS::Immediate::Text("Kernel invalid!");
+                SR_GRAPH_GUI_NS::Immediate::EndTabItem();
                 return;
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [{}]", (void*)pKernel->GetPresentCompleteSemaphore()));
+            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [{}]", (void*)pKernel->GetPresentCompleteSemaphore()));
 
             auto&& queue = pKernel->GetSubmitQueue();
 
             uint32_t index = 0;
             for (auto&& submitInfo : queue) {
-                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue {}", index))) {
+                if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Queue {}", index))) {
                     DrawSubmitInfo(submitInfo);
                 }
                 ++index;
             }
 
-            if (ImGui::CollapsingHeader("Graphics queue")) {
+            if (SR_GRAPH_GUI_NS::Immediate::CollapsingHeader("Graphics queue")) {
                 DrawSubmitInfo(pKernel->GetSubmitInfo());
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [{}]", (void*)pKernel->GetRenderCompleteSemaphore()));
+            SR_GRAPH_GUI_NS::Immediate::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [{}]", (void*)pKernel->GetRenderCompleteSemaphore()));
 
-            ImGui::EndTabItem();
-        }
+            SR_GRAPH_GUI_NS::Immediate::EndTabItem();
+        }*/
     }
 
     void EngineStatistics::DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo) {
-        ImGui::Separator();
+        /*SR_GRAPH_GUI_NS::Immediate::Separator();
 
         uint32_t waitIndex = 0;
         for (auto&& pSemaphore : submitInfo.waitSemaphores) {
-            ImGui::Text("Wait semaphore %i [%p]", waitIndex, pSemaphore);
+            SR_GRAPH_GUI_NS::Immediate::Text("Wait semaphore %i [%p]", waitIndex, pSemaphore);
             ++waitIndex;
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         uint32_t cmdIndex = 0;
         for (auto&& pCmd : submitInfo.commandBuffers) {
-            ImGui::Text("Cmd buffer %i [%p]", cmdIndex, pCmd);
+            SR_GRAPH_GUI_NS::Immediate::Text("Cmd buffer %i [%p]", cmdIndex, pCmd);
             ++cmdIndex;
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         uint32_t signalIndex = 0;
         for (auto&& pSemaphore : submitInfo.signalSemaphores) {
-            ImGui::Text("Signal semaphore %i [%p]", signalIndex, pSemaphore);
+            SR_GRAPH_GUI_NS::Immediate::Text("Signal semaphore %i [%p]", signalIndex, pSemaphore);
             ++signalIndex;
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();*/
     }
 
     void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {
@@ -347,7 +348,7 @@ namespace SR_CORE_GUI_NS {
             for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
                 if (auto&& textureId = pFramebuffer->GetColorTexture(i); textureId != SR_ID_INVALID) {
                     auto&& pPipeline = GetContext()->GetPipeline();
-                    SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                    SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), textureId, 256, false);
                 }
             }
 
@@ -355,7 +356,7 @@ namespace SR_CORE_GUI_NS {
                 for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
                     if (auto&& textureId = pFramebuffer->GetDepthTexture(i); textureId != SR_ID_INVALID) {
                         auto&& pPipeline = GetContext()->GetPipeline();
-                        SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                        SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), textureId, 256, false);
                     }
                 }
             }
@@ -376,65 +377,65 @@ namespace SR_CORE_GUI_NS {
         int64_t priority = 0;
         SR_GTYPES_NS::Shader* pShader = nullptr;
 
-        ImGui::Separator();
-        ImGui::Text("Queue:");
+        SR_GRAPH_GUI_NS::Immediate::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Text("Queue:");
 
         for (auto&& [layer, queue] : pRenderQueue->GetQueues()) {
-            ImGui::Text("* Layer: %s", layer.c_str());
+            SR_GRAPH_GUI_NS::Immediate::Text("* Layer: %s", layer.c_str());
 
             for (auto&& meshInfo : queue) {
                 if (first || priority != meshInfo.priority) {
                     priority = meshInfo.priority;
-                    ImGui::Text("\t* Priority: %lli", priority);
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t* Priority: %lli", priority);
                 }
 
                 if (first || pShader != meshInfo.shaderUseInfo.pShader) {
                     pShader = meshInfo.shaderUseInfo.pShader;
                     if (meshInfo.shaderUseInfo.pShader) {
-                        ImGui::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
+                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
                     }
                     else {
-                        ImGui::Text("\t\t* Shader: [no shader]");
+                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t* Shader: [no shader]");
                     }
                 }
 
                 if (first || vbo != meshInfo.vbo) {
                     vbo = meshInfo.vbo;
-                    ImGui::Text("\t\t\t* VBO: %i", vbo);
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t* VBO: %i", vbo);
                 }
 
                 if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::Mesh*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
-                    ImGui::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
                 }
                 else {
-                    ImGui::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str());
                 }
 
-                ImGui::SameLine();
-                ImGui::Text(" : ");
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Text(" : ");
 
                 const bool vboError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_VBO_ERROR);
                 const bool shaderError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_SHADER_ERROR);
 
                 if (vboError || shaderError) {
                     if (vboError) {
-                        ImGui::SameLine();
-                        ImGui::TextColored(ImVec4(1, 0, 0, 1), "VBO");
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "VBO");
                     }
 
                     if (shaderError) {
-                        ImGui::SameLine();
-                        ImGui::TextColored(ImVec4(1, 0, 0, 1), "Shader");
+                        SR_GRAPH_GUI_NS::Immediate::SameLine();
+                        SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 0, 1), "Shader");
                     }
                 }
                 else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(1, 0, 1, 1), "Inactive");
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1, 0, 1, 1), "Inactive");
                 }
 
                 if (meshInfo.state == SR_GRAPH_NS::RenderQueue::QUEUE_STATE_OK) {
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(0, 1, 0, 1), "Ok");
+                    SR_GRAPH_GUI_NS::Immediate::SameLine();
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(0, 1, 0, 1), "Ok");
                 }
 
                 first = false;
@@ -443,39 +444,39 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineStatistics::RenderStrategyPage() {
-        auto&& pRenderScene = GetRenderScene();
+        /*auto&& pRenderScene = GetRenderScene();
         if (!pRenderScene) {
             return;
         }
 
-        if (!ImGui::BeginTabItem("Render strategy")) {
+        if (!SR_GRAPH_GUI_NS::Immediate::BeginTabItem("Render strategy")) {
             return;
         }
 
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
         auto&& pPipeline = pRenderScene->GetPipeline();
 
-        ImGui::Text("Cameras:");
+        SR_GRAPH_GUI_NS::Immediate::Text("Cameras:");
         auto&& pMainCamera = pRenderScene->GetMainCamera();
         for (auto&& cameraInfo : pRenderScene->GetCameras()) {
             if (!cameraInfo.pCamera) {
-                ImGui::Text("* Invalid camera");
+                SR_GRAPH_GUI_NS::Immediate::Text("* Invalid camera");
                 continue;
             }
 
             if (cameraInfo.pCamera == pMainCamera) {
-                ImGui::Text("* Main camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
+                SR_GRAPH_GUI_NS::Immediate::Text("* Main camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
             }
             else {
-                ImGui::Text("* Offscreen camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
+                SR_GRAPH_GUI_NS::Immediate::Text("* Offscreen camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
             }
 
-            if (ImGui::Button(SR_FORMAT_C("Raycast test##{}", cameraInfo.pCamera.GetRawPtr()))) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button(SR_FORMAT_C("Raycast test##{}", cameraInfo.pCamera.GetRawPtr()))) {
                 SR_UTILS_NS::DebugDraw::Instance().DrawLine(SR_ID_INVALID, cameraInfo.pCamera->GetPosition(), SR_MATH_NS::FVector3::Zero(), SR_MATH_NS::FColor::Red(), 5.0f);
             }
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Pipeline use count: {}", pPipeline->GetPtrData()->strongCount));
 
@@ -490,7 +491,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
         SR_GRAPH_GUI_NS::Text("Draw info:");
 
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
@@ -504,13 +505,13 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pDebugRenderer->GetEmptyIdsPoolSize()));
         }
         else {
-            ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(1, 0, 0, 1));
+            SR_GRAPH_GUI_NS::Immediate::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(1, 0, 0, 1));
             SR_GRAPH_GUI_NS::Text("Debug renderer not found!");
-            ImGui::PopStyleColor();
+            SR_GRAPH_GUI_NS::Immediate::PopStyleColor();
         }
 
         if (auto&& pVulkanPipeline = pPipeline.DynamicCast<SR_GRAPH_NS::VulkanPipeline>()) {
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
             SR_GRAPH_GUI_NS::Text("Vulkan memory:");
             SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Descriptor sets count: {}", pVulkanPipeline->GetMemoryManager()->GetDescriptorSetsCount()));
             SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Shader programs count: {}", pVulkanPipeline->GetMemoryManager()->GetShaderProgramsCount()));
@@ -522,23 +523,23 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Textures count: {}", pVulkanPipeline->GetMemoryManager()->GetTexturesCount()));
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         SR_GRAPH_GUI_NS::Text("Status:");
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
         if (!pRenderStrategy->GetErrors().empty()) {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Error");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(ImVec4(1, 0, 0, 1), "Error");
 
-            if (ImGui::BeginListBox("Render errors")) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginListBox("Render errors")) {
                 for (auto&& error : pRenderScene->GetRenderStrategy()->GetErrors()) {
-                    ImGui::Selectable(error.c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Selectable(error.c_str());
                 }
-                ImGui::EndListBox();
+                SR_GRAPH_GUI_NS::Immediate::EndListBox();
             }
         }
         else {
-            ImGui::TextColored(ImVec4(0, 1, 0, 1), "Ok");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(ImVec4(0, 1, 0, 1), "Ok");
         }
 
         bool debugMode = pRenderStrategy->IsDebugModeEnabled();
@@ -548,7 +549,7 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pHierarchy = GetManager()->GetWidget<Hierarchy>();
 
-        if (ImGui::BeginListBox("Invalid meshes")) {
+        if (SR_GRAPH_GUI_NS::Immediate::BeginListBox("Invalid meshes")) {
             for (auto&& pMesh : pRenderStrategy->GetProblemMeshes()) {
                 auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh);
                 auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh);
@@ -571,58 +572,21 @@ namespace SR_CORE_GUI_NS {
                     name = SR_UTILS_NS::EnumReflector::ToStringAtom(pMesh->GetMeshType());
                 }
 
-                if (ImGui::Selectable(name.c_str())) {
+                if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {
                     if (pHierarchy && pRenderComponent) {
                         pHierarchy->SelectGameObject(pRenderComponent->GetSceneObject());
                     }
                 }
             }
 
-            ImGui::EndListBox();
+            SR_GRAPH_GUI_NS::Immediate::EndListBox();
         }
-        /*if (ImGui::BeginTable("##FlatCluster", 4))
-        {
-            uint32_t index = 0;
 
-            for (auto&& pMesh : pRenderScene->GetFlatCluster()) {
-                ++index;
-
-                if (!pMesh) {
-                    continue;
-                }
-
-                ImGui::TableNextRow();
-
-                ImGui::TableSetColumnIndex(0);
-                ImGui::Text("Index: %i", index);
-                ImGui::Separator();
-
-                ImGui::TableSetColumnIndex(1);
-                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
-                    ImGui::Text("GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
-                }
-                else {
-                    ImGui::Text("Geometry: %s", pMesh->GetGeometryName().c_str());
-                }
-                ImGui::Separator();
-
-                ImGui::TableSetColumnIndex(2);
-                ImGui::Text("Priority: %lli", pMesh->GetSortingPriority());
-                ImGui::Separator();
-
-                ImGui::TableSetColumnIndex(3);
-                ImGui::Text("%s", pMesh->GetShader() ? pMesh->GetShader()->GetResourceId().data() : "[no shader]");
-                ImGui::Separator();
-            }
-
-            ImGui::EndTable();
-        }*/
-
-        ImGui::EndTabItem();
+        SR_GRAPH_GUI_NS::Immediate::EndTabItem();*/
     }
 
     void EngineStatistics::StringAtoms() {
-        if (!ImGui::BeginTabItem("String atoms")) {
+        if (!SR_GRAPH_GUI_NS::Immediate::BeginTabItem("String atoms")) {
             return;
         }
 
@@ -630,16 +594,16 @@ namespace SR_CORE_GUI_NS {
 
         hashManager.Lock();
 
-        ImGui::Text("String atoms count: %llu", hashManager.GetStorage().size());
+        SR_GRAPH_GUI_NS::Immediate::Text("String atoms count: %llu", hashManager.GetStorage().size());
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         for (auto&& [hash, pStringInfo] : hashManager.GetStorage()) {
-            ImGui::Text("%s", pStringInfo->data.c_str());
+            SR_GRAPH_GUI_NS::Immediate::Text("%s", pStringInfo->data.c_str());
         }
 
         hashManager.Unlock();
 
-        ImGui::EndTabItem();
+        SR_GRAPH_GUI_NS::Immediate::EndTabItem();
     }
 }

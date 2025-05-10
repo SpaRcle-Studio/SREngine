@@ -405,6 +405,25 @@ sra format
 									9-v:platformType
 										10-s:Windows
 									9-o:data
+										10-a:test
+											11-k:i
+												12-v:d
+													13-f:0.000000
+											11-k:i
+												12-v:d
+													13-f:115.000000
+											11-k:i
+												12-v:d
+													13-f:-184.000000
+											11-k:i
+												12-v:d
+													13-f:130.000000
+									9-o:logic
+										10-v:type
+											11-s:ReflectionTestComponentLogicBase
+										10-o:ptr
+											11-v:baseBoolValue
+												12-b:true
 									9-o:size
 									9-o:size2
 										10-o:width
@@ -427,11 +446,18 @@ sra format
 						6-o:ptr
 							7-o:translation
 								8-v:x
-									9-f:3.155170
+									9-f:3.224905
 								8-v:y
 									9-f:1.769462
 								8-v:z
 									9-f:5.010290
+							7-o:skew
+								8-v:x
+									9-f:1.820000
+								8-v:y
+									9-f:1.000000
+								8-v:z
+									9-f:1.000000
 		2-k:i
 			3-o:d
 				4-v:type
@@ -698,12 +724,6 @@ sra format
 									9-v:behaviourName
 										10-s:TestBehaviour
 									9-o:data
-										10-v:privateInt
-											11-i:111
-										10-v:privateInt2
-											11-i:222
-										10-v:privateInt32
-											11-i:333
 						6-k:i
 							7-o:d
 								8-v:type
@@ -714,12 +734,6 @@ sra format
 									9-v:behaviourName
 										10-s:TestBehaviour
 									9-o:data
-										10-v:privateInt
-											11-i:111
-										10-v:privateInt2
-											11-i:222
-										10-v:privateInt32
-											11-i:21
 						6-k:i
 							7-o:d
 								8-v:type
@@ -730,12 +744,6 @@ sra format
 									9-v:behaviourName
 										10-s:TestBehaviour
 									9-o:data
-										10-v:privateInt
-											11-i:111
-										10-v:privateInt2
-											11-i:316
-										10-v:privateInt32
-											11-i:333
 					5-v:name
 						6-s:Cube
 					5-o:transform

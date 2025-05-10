@@ -25,34 +25,34 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!m_pAnimator) {
-            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "No animator selected!");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "No animator selected!");
             return;
         }
 
         auto&& pGraph = m_pAnimator->GetGraph();
         if (!pGraph) {
-            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "Animator has no graph!");
+            SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "Animator has no graph!");
             return;
         }
 
         for (auto&& pNode : pGraph->GetNodes()) {
-            ImGui::Separator();
-            ImGui::Text("Node: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(pNode->GetType()).c_str());
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Text("Node: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(pNode->GetType()).c_str());
 
             if (auto&& pStateMachineNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pNode)) {
                 auto&& pStateMachine = pStateMachineNode->GetMachine();
                 if (!pStateMachine) {
-                    ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "State machine is null!");
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f), "State machine is null!");
                     continue;
                 }
 
                 for (auto&& pState : pStateMachine->GetStates()) {
-                    ImGui::Text("\tState: %s", pState->GetName().c_str());
-                    ImGui::Text("\t\tProgress: %f", pState->GetProgress());
+                    SR_GRAPH_GUI_NS::Immediate::Text("\tState: %s", pState->GetName().c_str());
+                    SR_GRAPH_GUI_NS::Immediate::Text("\t\tProgress: %f", pState->GetProgress());
 
                     for (auto&& pTransition : pState->GetTransitions()) {
-                        ImGui::Text("\t\tTransition from %s to %s", pTransition->GetSource()->GetName().c_str(), pTransition->GetDestination()->GetName().c_str());
-                        ImGui::Text("\t\t\tProgress: %f", pTransition->GetProgress());
+                        SR_GRAPH_GUI_NS::Immediate::Text("\t\tTransition from %s to %s", pTransition->GetSource()->GetName().c_str(), pTransition->GetDestination()->GetName().c_str());
+                        SR_GRAPH_GUI_NS::Immediate::Text("\t\t\tProgress: %f", pTransition->GetProgress());
                     }
                 }
             }

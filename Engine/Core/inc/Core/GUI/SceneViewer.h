@@ -67,7 +67,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         SR_MATH_NS::FVector2 m_textureSize;
-        ImVec2 m_imagePosition;
+        SR_MATH_NS::FVector2 m_imagePosition;
 
         WindowPtr m_window;
         EnginePtr m_engine;

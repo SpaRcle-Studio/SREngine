@@ -11,25 +11,6 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void RenderTechniqueEditor::OnOpen() {
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
-        ax::NodeEditor::Config config;
-
-        static const SR_UTILS_NS::Path settings = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/RenderTechniqueEditor.json");
-        config.SettingsFile = settings.c_str();
-
-        config.UserPointer = this;
-
-        config.LoadNodeSettings = [](ax::NodeEditor::NodeId nodeId, char* data, void* userPointer) -> size_t {
-            return 0;
-        };
-
-        config.SaveNodeSettings = [](ax::NodeEditor::NodeId nodeId, const char* data, size_t size, ax::NodeEditor::SaveReasonFlags reason, void* userPointer) -> bool {
-            return true;
-        };
-
-        m_editor = ax::NodeEditor::CreateEditor(&config);
-    #endif
-
         Super::OnOpen();
     }
 

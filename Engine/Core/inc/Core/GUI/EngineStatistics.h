@@ -7,11 +7,13 @@
 
 #include <Graphics/GUI/Widget.h>
 
-#include <EvoVulkan/Tools/SubmitInfo.h>
-
 namespace SR_GRAPH_NS {
     class IRenderTechnique;
     class MeshDrawerPass;
+}
+
+namespace EvoVulkan {
+    struct SubmitInfo;
 }
 
 namespace SR_CORE_NS::GUI {
@@ -36,10 +38,6 @@ namespace SR_CORE_NS::GUI {
         void DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique);
         void DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass);
         void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
-
-    private:
-        const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        const ImGuiTreeNodeFlags m_nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
 
     };
 }

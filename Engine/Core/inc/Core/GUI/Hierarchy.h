@@ -14,8 +14,6 @@
 
 namespace SR_CORE_GUI_NS {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
-        static constexpr ImVec4 SR_PREFAB_COLOR_FIRST = ImVec4(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
-        static constexpr ImVec4 SR_PREFAB_COLOR_SECOND = ImVec4(1.f, 140.f / 255.f, 0, 1.f);
     public:
         Hierarchy();
         ~Hierarchy() override;
@@ -47,9 +45,6 @@ namespace SR_CORE_GUI_NS {
         void SR_INLINE Delete();
 
     private:
-        const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        const ImGuiTreeNodeFlags m_nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
-
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::list<SR_UTILS_NS::SceneObject::Ptr> m_pointersHolder;
         std::set<SR_UTILS_NS::SceneObject::Ptr> m_selected;

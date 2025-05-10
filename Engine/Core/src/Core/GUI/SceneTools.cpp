@@ -38,13 +38,13 @@ namespace SR_CORE_GUI_NS {
 
         AddElement()
             .SetCustomDraw([this](auto&& pElement) {
-                ImGui::Text("Camera Speed");
-                ImGui::SameLine();
-                ImGui::Dummy(ImVec2(10, 0));
-                ImGui::SameLine();
-                ImGui::PushItemWidth(200.f);
-                ImGui::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
-                ImGui::PopItemWidth();
+                SR_GRAPH_GUI_NS::Immediate::Text("Camera Speed");
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(10, 0));
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(200.f);
+                SR_GRAPH_GUI_NS::Immediate::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
+                SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
             })
             .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
@@ -61,18 +61,18 @@ namespace SR_CORE_GUI_NS {
 
         AddElement()
             .SetCustomDraw([this](auto&& pElement) {
-                ImGui::PushItemWidth(150.f);
+                SR_GRAPH_GUI_NS::Immediate::PushItemWidth(150.f);
 
-                if (ImGui::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToStringAtom(m_viewMode).c_str())) {
+                if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToStringAtom(m_viewMode).c_str())) {
                     auto&& names = SR_UTILS_NS::EnumReflector::GetNames<EditorSceneViewMode>();
                     for (auto&& name : names) {
-                        if (ImGui::Selectable(name.c_str())) {
-                            ImGui::SetItemDefaultFocus();
+                        if (SR_GRAPH_GUI_NS::Immediate::Selectable(name.c_str())) {
+                            SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
                             m_viewMode = SR_UTILS_NS::EnumReflector::FromString<EditorSceneViewMode>(name);
                         }
                     }
 
-                    ImGui::EndCombo();
+                    SR_GRAPH_GUI_NS::Immediate::EndCombo();
                 }
             })
             .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));

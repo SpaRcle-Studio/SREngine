@@ -14,13 +14,16 @@ namespace SR_CORE_GUI_NS {
 
         auto&& editorParams = context.GetEditorParams();
 
-        ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetPropertyName().ToCStr());
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetPropertyName().ToCStr());
 
-        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
-        auto&& pWindow = ImGui::GetCurrentWindow();
-        const ImGuiDir_ dir = m_isOpened ? ImGuiDir_Down : ImGuiDir_Right;
+        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
+        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
+        const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
+
+        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
         std::string_view typeName = value.GetSharedPtrType();
         if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
@@ -35,34 +38,34 @@ namespace SR_CORE_GUI_NS {
         m_isOpened |= context.noHeader;
 
         if (context.pValue && !context.noHeader) {
-            const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(5, 5);
-            ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            const ImVec2 mainButtonSize = { 30, context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
 
-            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
-            if (ImGui::Button("", mainButtonSize)) {
+            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
+            if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
+            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
         else if (!context.noHeader) {
-            const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(0, 5);
-            ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
             const float_t arrowWidth = context.lineHeight * 0.75f;
-            ImGui::Dummy(ImVec2(arrowWidth, 0));
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            const ImVec2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
 
             SR_UTILS_NS::StringAtom displayName = editorParams.GetDisplayName();
-            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
-            if (ImGui::Button(displayName.c_str(), mainButtonSize)) {
+            auto&& stackSize = SR_GRAPH_GUI_NS::Immediate::BeginForceEnabled();
+            if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
-            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
+            SR_GRAPH_GUI_NS::Immediate::EndForceEnabled(stackSize);
         }
 
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
@@ -71,7 +74,7 @@ namespace SR_CORE_GUI_NS {
         SRAssert(pSharedPtrBase);
 
         if (!context.noHeader) {
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
             if (m_default.empty()) {
                 m_default = "{} (nullptr)"_format(typeName);
@@ -104,19 +107,19 @@ namespace SR_CORE_GUI_NS {
 
             const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
 
-            ImGui::PushItemWidth(context.fieldWidth);
+            SR_GRAPH_GUI_NS::Immediate::PushItemWidth(context.fieldWidth);
 
             if (m_typeNames.size() <= 1) {
-                ImGui::BeginDisabled();
+                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
             }
 
-            if (ImGui::BeginCombo("##Combo", pPrevValue, ImGuiComboFlags_NoArrowButton)) {
+            if (SR_GRAPH_GUI_NS::Immediate::BeginCombo("##Combo", pPrevValue, SR_GRAPH_GUI_NS::Immediate::ComboFlags::NoArrowButton)) {
                 if (!m_comboOpened) {
-                    ImGui::SetKeyboardFocusHere();
+                    SR_GRAPH_GUI_NS::Immediate::SetKeyboardFocusHere();
                     m_comboOpened = true;
                 }
 
-                if (ImGui::InputText("##Search", &m_searchBuffer)) {
+                if (SR_GRAPH_GUI_NS::Immediate::InputText("##Search", &m_searchBuffer)) {
                     SR_NOOP;
                 }
 
@@ -126,18 +129,18 @@ namespace SR_CORE_GUI_NS {
                     }
 
                     bool isSelected = (selectedIndex == i);
-                    if (ImGui::Selectable(m_typeNames[i].data(), isSelected))
+                    if (SR_GRAPH_GUI_NS::Immediate::Selectable(m_typeNames[i].data(), isSelected))
                     {
                         selectedIndex = i;
                         m_searchBuffer = m_typeNames[i];
-                        ImGui::CloseCurrentPopup();
+                        SR_GRAPH_GUI_NS::Immediate::CloseCurrentPopup();
                     }
 
                     if (isSelected) {
-                        ImGui::SetItemDefaultFocus();
+                        SR_GRAPH_GUI_NS::Immediate::SetItemDefaultFocus();
                     }
                 }
-                ImGui::EndCombo();
+                SR_GRAPH_GUI_NS::Immediate::EndCombo();
             }
             else {
                 m_comboOpened = false;
@@ -145,10 +148,10 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (m_typeNames.size() <= 1) {
-                ImGui::EndDisabled();
+                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
             }
 
-            ImGui::PopItemWidth();
+            SR_GRAPH_GUI_NS::Immediate::PopItemWidth();
 
             if (selectedIndex) {
                 SRClass* pNew = nullptr;
@@ -201,8 +204,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (!context.pValue && !context.noHeader) {
-                ImGui::Dummy(ImVec2(context.GetArrowWidth(), 5.0f));
-                ImGui::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(context.GetArrowWidth(), 5.0f));
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
             }
 
             PropertyDrawerContext propertyContext = context;
@@ -216,19 +219,19 @@ namespace SR_CORE_GUI_NS {
             propertyContext.pOwner = pClassValue;
             propertyContext.noHeader = true;
 
-            ImGui::BeginGroup();
+            SR_GRAPH_GUI_NS::Immediate::BeginGroup();
             PropertyDrawerFeedback propertyFeedback = m_objectDrawer->Draw(propertyContext);
-            ImGui::EndGroup();
+            SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
             if (propertyFeedback.isChanged) {
                 feedback.isChanged = true;
             }
         }
 
-        ImGui::PopStyleVar();
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
-        ImGui::PopID();
-        ImGui::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
 
         SetValue(context, feedback, value);
 

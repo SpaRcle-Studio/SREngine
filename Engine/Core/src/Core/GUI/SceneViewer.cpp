@@ -84,21 +84,21 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        ImGui::BeginGroup();
+        SR_GRAPH_GUI_NS::Immediate::BeginGroup();
 
         for (auto&& pSubWidget : m_subWidgets) {
             pSubWidget->DrawAsSubWindow();
         }
 
-        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Immediate::Separator();
 
         if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera.Get())) {
             m_id = pFrameBuffer->GetColorTexture(0);
         }
 
-        if (ImGui::BeginChild("ViewerTexture"))
+        if (SR_GRAPH_GUI_NS::Immediate::BeginChild("ViewerTexture"))
         {
-            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
+            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().x), static_cast<int32_t>(SR_GRAPH_GUI_NS::Immediate::GetWindowSize().y));
 
             if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
             {
@@ -112,10 +112,10 @@ namespace SR_CORE_GUI_NS {
                 CheckFocused();
                 CheckHovered();
             }
-            ImGui::EndChild();
+            SR_GRAPH_GUI_NS::Immediate::EndChild();
         }
 
-        ImGui::EndGroup();
+        SR_GRAPH_GUI_NS::Immediate::EndGroup();
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -177,15 +177,15 @@ namespace SR_CORE_GUI_NS {
         m_textureSize = texSize.Cast<float_t>();
 
         if (centralize) {
-            auto windowPosition = ImGui::GetCursorPos();
+            auto windowPosition = SR_GRAPH_GUI_NS::Immediate::GetCursorPos();
             auto res = (winSize - m_textureSize) * 0.5f;
-            ImVec2 centralizedCursorPos = { (float)res.x, (float)res.y };
-            centralizedCursorPos = ImClamp(centralizedCursorPos, windowPosition, centralizedCursorPos);
-            ImGui::SetCursorPos(centralizedCursorPos);
+            SR_MATH_NS::FVector2 centralizedCursorPos = { (float)res.x, (float)res.y };
+            centralizedCursorPos = centralizedCursorPos.Clamp(windowPosition, centralizedCursorPos);
+            SR_GRAPH_GUI_NS::Immediate::SetCursorPos(centralizedCursorPos);
         }
 
         auto&& pPipeline = GetContext()->GetPipeline();
-        m_imagePosition = SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), id, m_textureSize, false);
+        m_imagePosition = SR_GRAPH_GUI_NS::Immediate::DrawTexture(pPipeline.Get(), id, m_textureSize, false);
     }
 
     void SceneViewer::SetCameraEnabled(bool enabled) {

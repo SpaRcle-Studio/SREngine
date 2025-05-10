@@ -14,25 +14,25 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void About::Draw() {
-        if (ImGui::BeginTabBar("About")) {
-            ImGui::Text("SpaRcle Engine v0.0.7");
+        if (SR_GRAPH_GUI_NS::Immediate::BeginTabBar("About")) {
+            SR_GRAPH_GUI_NS::Immediate::Text("SpaRcle Engine v0.0.7");
 
-            ImGui::Separator();
-            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Separator();
 
-            ImGui::Text("Author: ");
-            ImGui::Text("   Monika0000");
-            ImGui::Separator();
-            ImGui::Text("Member contributors: ");
-            ImGui::Text("   * innerviewer");
-            ImGui::Text("   * Drakeme");
-            ImGui::Text("   * CaptainSlider");
-            ImGui::Text("   * GitHub Copilot");
-            ImGui::Separator();
-            ImGui::Text("Made thanks to the following libraries: ");
-            ImGui::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, ImGuizmo, tinyobjloader, imgui-node-editor, stbi, json, Assimp");
-            ImGui::Separator();
-            ImGui::Text("Build Version: 0.0.7");
+            SR_GRAPH_GUI_NS::Immediate::Text("Author: ");
+            SR_GRAPH_GUI_NS::Immediate::Text("   Monika0000");
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Text("Member contributors: ");
+            SR_GRAPH_GUI_NS::Immediate::Text("   * innerviewer");
+            SR_GRAPH_GUI_NS::Immediate::Text("   * Drakeme");
+            SR_GRAPH_GUI_NS::Immediate::Text("   * CaptainSlider");
+            SR_GRAPH_GUI_NS::Immediate::Text("   * GitHub Copilot");
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Text("Made thanks to the following libraries: ");
+            SR_GRAPH_GUI_NS::Immediate::TextWrapped("    glm, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, tinyobjloader, stbi, json, Assimp");
+            SR_GRAPH_GUI_NS::Immediate::Separator();
+            SR_GRAPH_GUI_NS::Immediate::Text("Build Version: 0.0.7");
     #ifdef SR_COMMON_GIT_METADATA
             static std::string metadata;
             if (metadata.empty()) {
@@ -43,11 +43,11 @@ namespace SR_CORE_GUI_NS {
                     + git_AuthorName() + "' on\n\t" + std::asctime(timeUTC);
             }
 
-            ImGui::Text(metadata.c_str());
+            SR_GRAPH_GUI_NS::Immediate::Text(metadata.c_str());
     #endif
-            ImGui::Text("Licensed under the MIT License");
+            SR_GRAPH_GUI_NS::Immediate::Text("Licensed under the MIT License");
 
-            ImGui::EndTabBar();
+            SR_GRAPH_GUI_NS::Immediate::EndTabBar();
         }
     }
 }

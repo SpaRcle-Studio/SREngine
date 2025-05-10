@@ -17,59 +17,62 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.pOwner);
+        SR_GRAPH_GUI_NS::Immediate::PushID(context.GetProperty().GetName().ToCStr());
 
-        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
+        SR_GRAPH_GUI_NS::Immediate::PushStyleVar(SR_GRAPH_GUI_NS::Immediate::StyleVar::ItemSpacing, SR_MATH_NS::FVector2());
 
         SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetEditorParams().GetDisplayName();
 
         auto&& container = value.AsSequenceContainer();
 
-        const ImVec2 counterButtonWidth = { 40, context.fieldHeight };
-        ImVec2 buttonSize;
+        const SR_MATH_NS::FVector2 counterButtonWidth = { 40, context.fieldHeight };
+        SR_MATH_NS::FVector2 buttonSize;
 
-        auto&& pWindow = ImGui::GetCurrentWindow();
-        const ImGuiDir_ dir = m_isOpened ? ImGuiDir_Down : ImGuiDir_Right;
+        auto&& pWindow = SR_GRAPH_GUI_NS::Immediate::GetCurrentWindow();
+        auto&& pDrawList = SR_GRAPH_GUI_NS::Immediate::GetWindowDrawList(pWindow);
+        const auto cursorPos = SR_GRAPH_GUI_NS::Immediate::GetWindowCursorPos(pWindow);
+
+        const auto dir = m_isOpened ? SR_GRAPH_GUI_NS::Immediate::Direction::Down : SR_GRAPH_GUI_NS::Immediate::Direction::Right;
 
         if (context.pValue) {
-            const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(5, 5);
-            ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(5, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
-            const ImVec2 mainButtonSize = { 30, context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { 30, context.fieldHeight };
             buttonSize = { (context.fieldWidth - (counterButtonWidth.x + mainButtonSize.x)) / 3, context.fieldHeight };
-            if (ImGui::Button("", mainButtonSize)) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
         }
         else {
-            const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(0, 5);
-            ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
+            const SR_MATH_NS::FVector2 arrowPos = cursorPos + SR_MATH_NS::FVector2(0, 5);
+            SR_GRAPH_GUI_NS::Immediate::RenderArrow(pDrawList, arrowPos, SR_GRAPH_GUI_NS::Immediate::GetColorU32(SR_GRAPH_GUI_NS::Immediate::StyleColor::Text), dir, 1.f);
 
             const float_t arrowWidth = context.lineHeight * 0.75f;
-            ImGui::Dummy(ImVec2(arrowWidth, 0));
+            SR_GRAPH_GUI_NS::Immediate::Dummy(SR_MATH_NS::FVector2(arrowWidth, 0));
 
-            ImGui::SameLine();
+            SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-            const ImVec2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            const SR_MATH_NS::FVector2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
             const float_t titleTotalWidth = context.fieldTitleWidth + counterButtonWidth.x;
             const float_t partItemWidth = ((context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth) / 3;
             buttonSize = { partItemWidth, context.fieldHeight };
 
-            if (ImGui::Button(displayName.c_str(), mainButtonSize)) {
+            if (SR_GRAPH_GUI_NS::Immediate::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
         }
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        ImGui::BeginDisabled();
-        ImGui::Button("{}"_format(container.Size()).c_str(), counterButtonWidth);
-        ImGui::EndDisabled();
+        SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+        SR_GRAPH_GUI_NS::Immediate::Button("{}"_format(container.Size()).c_str(), counterButtonWidth);
+        SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        if (ImGui::Button("Add", buttonSize)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Add", buttonSize)) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -77,9 +80,9 @@ namespace SR_CORE_GUI_NS {
             feedback.isChanged = true;
         }
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        if (ImGui::Button("Remove", buttonSize)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Remove", buttonSize)) {
             if (!container.Empty()) {
                 if (context.onBeforeChangeCallback) {
                     context.onBeforeChangeCallback(false);
@@ -89,9 +92,9 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        ImGui::SameLine();
+        SR_GRAPH_GUI_NS::Immediate::SameLine();
 
-        if (ImGui::Button("Clear", buttonSize)) {
+        if (SR_GRAPH_GUI_NS::Immediate::Button("Clear", buttonSize)) {
             if (context.onBeforeChangeCallback) {
                 context.onBeforeChangeCallback(false);
             }
@@ -107,14 +110,14 @@ namespace SR_CORE_GUI_NS {
             for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
                 SR_UTILS_NS::Reflection::Value element = *pIt;
                 uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
-                ImGui::PushID(index);
+                SR_GRAPH_GUI_NS::Immediate::PushID(index);
 
-                ImVec2 itemButtonSize = { 40, context.fieldHeight };
-                ImGui::BeginDisabled();
-                ImGui::Button("[{}] "_format(index).c_str(), itemButtonSize);
-                ImGui::EndDisabled();
+                SR_MATH_NS::FVector2 itemButtonSize = { 40, context.fieldHeight };
+                SR_GRAPH_GUI_NS::Immediate::BeginDisabled();
+                SR_GRAPH_GUI_NS::Immediate::Button("[{}] "_format(index).c_str(), itemButtonSize);
+                SR_GRAPH_GUI_NS::Immediate::EndDisabled();
 
-                ImGui::SameLine();
+                SR_GRAPH_GUI_NS::Immediate::SameLine();
 
                 if (index >= m_drawers.size()) {
                     m_drawers.emplace_back();
@@ -127,8 +130,8 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (!m_drawers[index]) {
-                    SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
-                    ImGui::PopID();
+                    SR_GRAPH_GUI_NS::Immediate::TextColored(SR_MATH_NS::FColor(1.f, 0.f, 0.f), "Missing inspector for element!");
+                    SR_GRAPH_GUI_NS::Immediate::PopID();
                     continue;
                 }
 
@@ -139,22 +142,22 @@ namespace SR_CORE_GUI_NS {
                 elementContext.fieldTitleWidth = 0.f;
                 elementContext.noHeader = false;
 
-                ImGui::BeginGroup();
+                SR_GRAPH_GUI_NS::Immediate::BeginGroup();
                 PropertyDrawerFeedback elementFeedback = m_drawers[index]->Draw(elementContext);
-                ImGui::EndGroup();
+                SR_GRAPH_GUI_NS::Immediate::EndGroup();
 
                 if (elementFeedback.isChanged) {
                     feedback.isChanged = true;
                 }
 
-                ImGui::PopID();
+                SR_GRAPH_GUI_NS::Immediate::PopID();
             }
         }
 
-        ImGui::PopStyleVar();
+        SR_GRAPH_GUI_NS::Immediate::PopStyleVar();
 
-        ImGui::PopID();
-        ImGui::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
+        SR_GRAPH_GUI_NS::Immediate::PopID();
 
         SetValue(context, feedback, value);
 
