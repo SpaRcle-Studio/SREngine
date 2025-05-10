@@ -32,13 +32,11 @@ namespace SR_GRAPH_NS {
     class RenderContext;
 }
 
-struct ImGuiViewport;
-
 namespace SR_GRAPH_NS::GUI {
     class Widget;
 
     typedef ska::flat_hash_map<std::string, Widget*> Widgets;
-    typedef ska::flat_hash_map<ImGuiViewport*, Widget*> ViewportsTable;
+    typedef ska::flat_hash_map<void*, Widget*> ViewportsTable;
 
     class WidgetManager : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<RenderScene>;
@@ -105,9 +103,9 @@ namespace SR_GRAPH_NS::GUI {
         SR_REGISTER_SINGLETON(ViewportsTableManager)
     public:
         SR_NODISCARD ViewportsTable& GetViewportsTable() { return m_viewports; }
-        SR_NODISCARD Widget* GetWidgetByViewport(ImGuiViewport* viewport) const;
+        SR_NODISCARD Widget* GetWidgetByViewport(void* viewport) const;
 
-        void RegisterWidget(Widget* widget, ImGuiViewport* viewport);
+        void RegisterWidget(Widget* widget, void* viewport);
 
     private:
         ViewportsTable m_viewports;

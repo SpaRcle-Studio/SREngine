@@ -612,8 +612,8 @@
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a4938033b31bad6742701fe95e3f1f8fd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Get</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtr_1a1a89a5ee0cb7131dcb8766b8580b63ab" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>Get</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afb490a657a7d9332181ca7b3319bf24f" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetCountImages</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aab06dd953554f04abda13d386cb150a0" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetIconFont</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a7e41a01ab30c165687a590f70030692c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetMainFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aed032662e04fb64568068582681acd88" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetIconFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aafcde9a316b798ae5347d559ab1f0556" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetMainFont</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1afffd7360632c6dd73f4f56bb2ecde9be" prot="public" virt="virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetName</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1a285f4f021256056338f3684bbcf46cd6" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetPipeline</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1a87178b07232eaf00c0803b19cb664a6a" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>GetPtrData</name></member>
@@ -640,18 +640,18 @@
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1aa6dcbc4e0de35e5286bb2b5ae9c92220" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_cmdBuffBI</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a8596339debd927115070a7c0545d41af" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_cmdBuffs</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a4243f7daa0c77d02ff4a9a969f8f24d3" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_cmdPools</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a3b08b9deb9fa10215e843df10e6dd29f" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_context</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a22e8eab47e3157978223b3d483c034ab" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_context</name></member>
       <member refid="classSR__HTYPES__NS_1_1SharedPtrBase_1ae60fcfe7b4dde728d4d39c3d8c20bd85" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_data</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a13cf18f097fdb5821d1adcbbac84e0ba" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_device</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1ad7954977e8dfd35db1e5fe05b35ed6ec" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_enabled</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aa62e33f562522c9263ec74c7df78b98e" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_fontSize</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a6c3891ef7cc91a45c7b596afbca8f2aa" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_frameBuffs</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a89263cf3f8a80e5b5244d815f011d1aa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iconFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a30a4bf40c1607b30b3ecba545a78969a" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iconFont</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1af2b6737175a3b61d45fa930f1b240ab9" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iconFontSize</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1acf71bed33b451160693a76a086a30ebb" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iniPathEditor</name></member>
       <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac7798722b0ad1637a456b0bbc5ad11e4" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_iniPathWidgets</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1a89569b0bd54e8a8eed05ff82ecf905bc" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_initialized</name></member>
-      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a83517e59edd7d744af608afb0a2ae049" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_mainFont</name></member>
+      <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a245183158de0ee8be042e547f725a4fa" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_mainFont</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1ab89dc2642a0444d70b71833e19c7b7c6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_multiSample</name></member>
       <member refid="classSR__GRAPH__NS_1_1Overlay_1a1051f1ceeaa65a990b161534c7cebeae" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_pipeline</name></member>
       <member refid="classSR__GRAPH__NS_1_1VulkanImGuiOverlay_1a56e6ebfde08e201419c63af000bb09cc" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::VulkanImGuiOverlay</scope><name>m_pool</name></member>

@@ -16,8 +16,6 @@
 
 #include <Graphics/Types/IRenderComponent.h>
 
-#include <utility>
-
 namespace SR_GRAPH_NS {
     class RenderScene;
     class IColorBufferPass;

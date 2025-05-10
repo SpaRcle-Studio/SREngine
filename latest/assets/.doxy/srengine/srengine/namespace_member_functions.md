@@ -34,10 +34,6 @@
 ## b
 
 * **BackReadTo** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
-* **BeginForceEnabled** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **BeginNodeCombo** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **Button** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **ButtonBehaviorNoNavFocus** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **Barycenter** ([**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md))
 * **BGRToHEX** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **BuildPlan** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
@@ -55,11 +51,7 @@
 * **check\_al\_errors** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **check\_alc\_errors** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **CreateSerializer** ([**SR\_CORE\_NS::Commands**](namespaceSR__CORE__NS_1_1Commands.md))
-* **CalcMaxPopupHeightFromItemCount** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **CanCreateLink** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **CheckBox** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **CheckboxNoNavFocus** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **ColoredText** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **CreateNode** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **Compress** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **CreateMeshByType** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -106,30 +98,6 @@
 * **DeleteSymbolsInStr** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **DistanceModelToALDistanceModel** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
 * **DragDropTargetEntityRef** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawEnumProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawLabelProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawMaterialProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawPathProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawPropertyContainer** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DrawStandardProperty** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **DragInt32** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DragUInt32** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DragUnit** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawBVec3Control** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawColorControl** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawDataType** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawEditableSlider** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawFRect** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawIVec3Control** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawSlider** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawUVec2Control** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawValue** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawValueControl** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawValueSlider** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawVec2Control** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawVec3Control** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **DrawIcon** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
 * **DFCalculate** ([**SR\_GRAPH\_NS::SDF**](namespaceSR__GRAPH__NS_1_1SDF.md))
 * **deserialise\_uint64\_t** ([**SR\_HTYPES\_NS**](namespaceSR__HTYPES__NS.md))
 * **DecomposeTransform** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
@@ -146,9 +114,6 @@
 
 * **ESAllocateMemory** ([**EvoScript**](namespaceEvoScript.md))
 * **ESFreeMemory** ([**EvoScript**](namespaceEvoScript.md))
-* **EndForceEnabled** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **EndNodeCombo** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **EnumCombo** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **equal\_unsafe** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
 * **export\_bits** ([**SR\_TYPES\_NS**](namespaceSR__TYPES__NS.md))
 * **Exchange** ([**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
@@ -192,7 +157,6 @@
 * **GetFileHash** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **GetHashAllFilesInDir** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **GetValueInspector** ([**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md))
-* **GetImGuiDataType** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **GetBindingType** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **GetChannelCount** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **GetPixelSize** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
@@ -272,12 +236,10 @@
 ## i
 
 * **ImportSkeletonFromRawMesh** ([**SR\_CORE\_NS::Importers**](namespaceSR__CORE__NS_1_1Importers.md))
-* **InputInt** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **IsPinsCompatible** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **InverseCullMode** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **IsMatrixType** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **IsSamplerType** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
-* **Icon** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
 * **IsAnyMaskIncludedSubMask** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **IsBool** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **IsEquals** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
@@ -361,7 +323,6 @@
 ## m
 
 * **Merge** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md), [**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md))
-* **MakeDisableColor** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **MakeGoodSizes** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **MakeShaderVariable** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **make\_hi** ([**SR\_TYPES\_NS::detail**](namespaceSR__TYPES__NS_1_1detail.md))
@@ -443,7 +404,6 @@
 * **Replace** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **RegisterResources** ([**SR\_CORE\_NS::Resources**](namespaceSR__CORE__NS_1_1Resources.md))
 * **RadioButton** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **ReadImGuiDataType** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **ResizeToLess** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **RemoveComments** ([**SR\_GRAPH\_NS::SRSL**](namespaceSR__GRAPH__NS_1_1SRSL.md))
 * **ReferenceCastAbsDescriptorTypeToVk** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
@@ -460,7 +420,7 @@
 * **SaveHashInfo** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **Split** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **SR\_ENUM\_NS\_CLASS\_T** ([**SR\_ANIMATIONS\_NS**](namespaceSR__ANIMATIONS__NS.md), [**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md), [**SR\_CORE\_GUI\_NS**](namespaceSR__CORE__GUI__NS.md), [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_NETWORK\_NS**](namespaceSR__NETWORK__NS.md), [**SR\_SCRIPTING\_NS**](namespaceSR__SCRIPTING__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md), [**SR\_UTILS\_NS::EntityRefUtils**](namespaceSR__UTILS__NS_1_1EntityRefUtils.md), [**SR\_UTILS\_NS::UI**](namespaceSR__UTILS__NS_1_1UI.md))
-* **SR\_ENUM\_NS\_STRUCT\_T** ([**SR\_CORE\_NS**](namespaceSR__CORE__NS.md), [**SR\_CORE\_UI\_NS**](namespaceSR__CORE__UI__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_PTYPES\_NS**](namespaceSR__PTYPES__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
+* **SR\_ENUM\_NS\_STRUCT\_T** ([**SR\_CORE\_NS**](namespaceSR__CORE__NS.md), [**SR\_CORE\_UI\_NS**](namespaceSR__CORE__UI__NS.md), [**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_UI\_NS**](namespaceSR__GRAPH__UI__NS.md), [**SR\_MATH\_NS**](namespaceSR__MATH__NS.md), [**SR\_PTYPES\_NS**](namespaceSR__PTYPES__NS.md), [**SR\_SRLM\_NS**](namespaceSR__SRLM__NS.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **SR\_ENUM\_NS\_CLASS** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md), [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md), [**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md), [**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md), [**SR\_PHYSICS\_NS**](namespaceSR__PHYSICS__NS.md), [**SR\_SRSL\_NS**](namespaceSR__SRSL__NS.md))
 * **ShaderVarTypeToString** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHA256InitialVector** ([**SR\_HTYPES\_NS::SHA256::Details**](namespaceSR__HTYPES__NS_1_1SHA256_1_1Details.md))
@@ -512,7 +472,6 @@
 * **TabString** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **ToUpper** ([**EvoScript::Tools**](namespaceEvoScript_1_1Tools.md))
 * **TryMP3InsideWAV** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
-* **Text** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **ToString** ([**SR\_GRAPH\_NS::Vertices**](namespaceSR__GRAPH__NS_1_1Vertices.md), [**SR\_UTILS\_NS**](namespaceSR__UTILS__NS.md))
 * **TableIndex2D** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
 * **TableIndex3D** ([**SR\_MATH\_NS**](namespaceSR__MATH__NS.md))
@@ -528,7 +487,6 @@
 
 ## u
 
-* **UInputInt32** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **UniformsToDescriptorLayoutBindings** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
 * **UtfToUtf** ([**SR\_UTILS\_NS::Localization**](namespaceSR__UTILS__NS_1_1Localization.md))
 * **UnloadLibraryModule** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
@@ -537,7 +495,6 @@
 
 ## v
 
-* **Vec4Null** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **VkModulesToAbstractModules** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
 * **VkShaderShaderTypeToStage** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
 * **VkShaderStageToShaderType** ([**SR\_GRAPH\_NS::VulkanTools**](namespaceSR__GRAPH__NS_1_1VulkanTools.md))
@@ -545,7 +502,6 @@
 
 ## w
 
-* **WriteImGuiDataType** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **WaitAndDelete** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **WriteConsoleError** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))
 * **WriteConsoleLog** ([**SR\_UTILS\_NS::Platform**](namespaceSR__UTILS__NS_1_1Platform.md))

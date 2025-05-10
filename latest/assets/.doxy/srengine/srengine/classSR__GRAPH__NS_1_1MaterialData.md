@@ -215,7 +215,6 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 |  void | [**RemoveStage**](#function-removestage) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage) <br> |
 | virtual void | [**Save**](#function-save) ([**SR\_UTILS\_NS::ISerializer**](classSR__UTILS__NS_1_1ISerializer.md) & serializer) override const<br> |
 |  void SR\_FASTCALL | [**SetData**](#function-setdata) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const ShaderPropertyVariant & v, ShaderVarType type) noexcept<br> |
-|  void | [**SetOwnedMaterial**](#function-setownedmaterial) ([**BaseMaterial**](classSR__GRAPH__NS_1_1BaseMaterial.md) \* pOwnedMaterial) <br> |
 |  void SR\_FASTCALL | [**SetSampler**](#function-setsampler) ([**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) id, const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path) noexcept<br> |
 |  void SR\_FASTCALL | [**SetShader**](#function-setshader-12) (const [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) & path, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
 |  void SR\_FASTCALL | [**SetShader**](#function-setshader-22) ([**SR\_GTYPES\_NS::Shader**](classSR__GTYPES__NS_1_1Shader.md) \* pShader, [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) stage=[**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md)()) <br> |
@@ -831,21 +830,6 @@ void SR_FASTCALL SR_GRAPH_NS::MaterialData::SetData (
     const ShaderPropertyVariant & v,
     ShaderVarType type
 ) noexcept
-```
-
-
-
-
-<hr>
-
-
-
-### function SetOwnedMaterial 
-
-```C++
-void SR_GRAPH_NS::MaterialData::SetOwnedMaterial (
-    BaseMaterial * pOwnedMaterial
-) 
 ```
 
 

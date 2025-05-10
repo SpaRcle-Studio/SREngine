@@ -14,73 +14,61 @@
         </childnode>
         <childnode refid="117" relation="include">
         </childnode>
-        <childnode refid="138" relation="include">
+        <childnode refid="143" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
+        <childnode refid="151" relation="include">
         </childnode>
       </node>
-      <node id="149">
+      <node id="153">
         <label>Graphics/Animations/AnimationCommon.h</label>
         <link refid="AnimationCommon_8h_source"/>
         <childnode refid="120" relation="include">
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="150" relation="include">
+        <childnode refid="154" relation="include">
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
-        </childnode>
-        <childnode refid="152" relation="include">
-        </childnode>
-      </node>
-      <node id="153">
-        <label>Graphics/Animations/AnimationContext.h</label>
-        <link refid="AnimationContext_8h_source"/>
-        <childnode refid="154" relation="include">
-        </childnode>
         <childnode refid="155" relation="include">
         </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
       </node>
-      <node id="154">
+      <node id="157">
+        <label>Graphics/Animations/AnimationContext.h</label>
+        <link refid="AnimationContext_8h_source"/>
+        <childnode refid="158" relation="include">
+        </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+      </node>
+      <node id="158">
         <label>Graphics/Animations/AnimationData.h</label>
         <link refid="AnimationData_8h_source"/>
-        <childnode refid="149" relation="include">
-        </childnode>
-      </node>
-      <node id="147">
-        <label>Graphics/Animations/AnimationGraph.h</label>
-        <link refid="AnimationGraph_8h_source"/>
-        <childnode refid="148" relation="include">
-        </childnode>
-      </node>
-      <node id="148">
-        <label>Graphics/Animations/AnimationGraphNode.h</label>
-        <link refid="AnimationGraphNode_8h_source"/>
-        <childnode refid="149" relation="include">
-        </childnode>
         <childnode refid="153" relation="include">
         </childnode>
       </node>
-      <node id="145">
+      <node id="151">
+        <label>Graphics/Animations/AnimationGraph.h</label>
+        <link refid="AnimationGraph_8h_source"/>
+        <childnode refid="152" relation="include">
+        </childnode>
+      </node>
+      <node id="152">
+        <label>Graphics/Animations/AnimationGraphNode.h</label>
+        <link refid="AnimationGraphNode_8h_source"/>
+        <childnode refid="153" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+      </node>
+      <node id="150">
         <label>Graphics/GUI/Icons.h</label>
         <link refid="Icons_8h_source"/>
         <childnode refid="120" relation="include">
-        </childnode>
-        <childnode refid="146" relation="include">
-        </childnode>
-      </node>
-      <node id="134">
-        <label>Graphics/GUI/ImGUI.h</label>
-        <link refid="ImGUI_8h_source"/>
-        <childnode refid="120" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="78" relation="include">
         </childnode>
       </node>
       <node id="119">
@@ -89,14 +77,22 @@
         <childnode refid="120" relation="include">
         </childnode>
       </node>
-      <node id="138">
+      <node id="134">
+        <label>Graphics/GUI/ImmediateGUI.h</label>
+        <link refid="ImmediateGUI_8h_source"/>
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+      </node>
+      <node id="143">
         <label>Graphics/GUI/Node.h</label>
         <link refid="Graphics_2inc_2Graphics_2GUI_2Node_8h_source"/>
-        <childnode refid="139" relation="include">
+        <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="142" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
-        <childnode refid="145" relation="include">
+        <childnode refid="150" relation="include">
         </childnode>
       </node>
       <node id="118">
@@ -112,17 +108,15 @@
         </childnode>
         <childnode refid="121" relation="include">
         </childnode>
-        <childnode refid="135" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="135">
+      <node id="140">
         <label>Graphics/GUI/PopupMenu.h</label>
         <link refid="PopupMenu_8h_source"/>
         <childnode refid="120" relation="include">
-        </childnode>
-        <childnode refid="134" relation="include">
         </childnode>
       </node>
       <node id="121">
@@ -145,6 +139,20 @@
         <childnode refid="130" relation="include">
         </childnode>
         <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+      </node>
+      <node id="135">
+        <label>Graphics/Pipeline/PipelineType.h</label>
+        <link refid="PipelineType_8h_source"/>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
         </childnode>
       </node>
       <node id="120">
@@ -315,7 +323,7 @@
         <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="143">
+      <node id="148">
         <label>Utils/Common/ToString.h</label>
         <link refid="ToString_8h_source"/>
         <childnode refid="80" relation="include">
@@ -445,10 +453,32 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
+      <node id="136">
+        <label>Utils/Math/Matrix4x4.h</label>
+        <link refid="Matrix4x4_8h_source"/>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+      </node>
       <node id="92">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="138">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
         </childnode>
       </node>
       <node id="102">
@@ -515,7 +545,7 @@
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="141">
+      <node id="146">
         <label>Utils/Resources/FileWatcher.h</label>
         <link refid="FileWatcher_8h_source"/>
         <childnode refid="104" relation="include">
@@ -531,7 +561,7 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="136">
+      <node id="141">
         <label>Utils/Resources/Xml.h</label>
         <link refid="Xml_8h_source"/>
         <childnode refid="104" relation="include">
@@ -546,18 +576,18 @@
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="137" relation="include">
+        <childnode refid="142" relation="include">
         </childnode>
       </node>
-      <node id="139">
+      <node id="144">
         <label>Utils/SRLM/DataType.h</label>
         <link refid="DataType_8h_source"/>
-        <childnode refid="140" relation="include">
+        <childnode refid="145" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
       </node>
-      <node id="142">
+      <node id="147">
         <label>Utils/SRLM/LogicalNode.h</label>
         <link refid="LogicalNode_8h_source"/>
         <childnode refid="83" relation="include">
@@ -566,14 +596,14 @@
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="143" relation="include">
+        <childnode refid="148" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
-        <childnode refid="144" relation="include">
+        <childnode refid="149" relation="include">
         </childnode>
       </node>
-      <node id="140">
+      <node id="145">
         <label>Utils/SRLM/Utils.h</label>
         <link refid="Utils_2inc_2Utils_2SRLM_2Utils_8h_source"/>
         <childnode refid="89" relation="include">
@@ -584,7 +614,7 @@
         </childnode>
         <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="146" relation="include">
         </childnode>
       </node>
       <node id="116">
@@ -755,7 +785,7 @@
         <childnode refid="97" relation="include">
         </childnode>
       </node>
-      <node id="155">
+      <node id="159">
         <label>Utils/Types/SortedVector.h</label>
         <link refid="SortedVector_8h_source"/>
         <childnode refid="129" relation="include">
@@ -785,7 +815,7 @@
         <childnode refid="73" relation="include">
         </childnode>
       </node>
-      <node id="150">
+      <node id="154">
         <label>Utils/Types/Time.h</label>
         <link refid="Time_8h_source"/>
         <childnode refid="104" relation="include">
@@ -933,11 +963,14 @@
         <childnode refid="67" relation="include">
         </childnode>
       </node>
-      <node id="144">
+      <node id="149">
         <label>Codegen/Enums.generated.hpp</label>
       </node>
       <node id="91">
         <label>Codegen/EnumsFwd.generated.hpp</label>
+      </node>
+      <node id="139">
+        <label>Enum/WindowFlags.hpp</label>
       </node>
       <node id="49">
         <label>algorithm</label>
@@ -948,13 +981,13 @@
       <node id="10">
         <label>array</label>
       </node>
-      <node id="137">
+      <node id="142">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
-      <node id="152">
+      <node id="156">
         <label>assimp/quaternion.h</label>
       </node>
-      <node id="151">
+      <node id="155">
         <label>assimp/vector3.h</label>
       </node>
       <node id="44">
@@ -1035,11 +1068,11 @@
       <node id="69">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
+      <node id="137">
+        <label>glm/gtx/matrix_decompose.hpp</label>
+      </node>
       <node id="70">
         <label>glm/gtx/string_cast.hpp</label>
-      </node>
-      <node id="146">
-        <label>imgui.h</label>
       </node>
       <node id="27">
         <label>initializer_list</label>

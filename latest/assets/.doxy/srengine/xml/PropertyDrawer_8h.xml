@@ -21,11 +21,33 @@
         <link refid="PropertyDrawer_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="156" relation="include">
+        <childnode refid="165" relation="include">
         </childnode>
         <childnode refid="112" relation="include">
         </childnode>
-        <childnode refid="183" relation="include">
+        <childnode refid="191" relation="include">
+        </childnode>
+      </node>
+      <node id="158">
+        <label>Graphics/Loaders/SRSL.h</label>
+        <link refid="SRSL_8h_source"/>
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
+      </node>
+      <node id="159">
+        <label>Graphics/Loaders/SRSLParser.h</label>
+        <link refid="SRSLParser_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
         </childnode>
       </node>
       <node id="134">
@@ -67,18 +89,18 @@
         </childnode>
         <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
       <node id="154">
         <label>Graphics/Material/MaterialData.h</label>
         <link refid="MaterialData_8h_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="125" relation="include">
         </childnode>
+        <childnode refid="155" relation="include">
+        </childnode>
       </node>
-      <node id="155">
+      <node id="164">
         <label>Graphics/Material/MaterialProperty.h</label>
         <link refid="MaterialProperty_8h_source"/>
         <childnode refid="134" relation="include">
@@ -94,12 +116,48 @@
         <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="179">
+      <node id="162">
         <label>Graphics/Memory/IGraphicsResource.h</label>
         <link refid="IGraphicsResource_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="161">
+        <label>Graphics/Memory/ShaderProgramManager.h</label>
+        <link refid="ShaderProgramManager_8h_source"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+      </node>
+      <node id="157">
+        <label>Graphics/Memory/ShaderUBOBlock.h</label>
+        <link refid="ShaderUBOBlock_8h_source"/>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+      </node>
+      <node id="163">
+        <label>Graphics/Memory/UBOManager.h</label>
+        <link refid="UBOManager_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
       <node id="144">
@@ -120,7 +178,7 @@
         <childnode refid="151" relation="include">
         </childnode>
       </node>
-      <node id="180">
+      <node id="188">
         <label>Graphics/Pipeline/PipelineType.h</label>
         <link refid="PipelineType_8h_source"/>
         <childnode refid="3" relation="include">
@@ -129,10 +187,10 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="181" relation="include">
+        <childnode refid="189" relation="include">
         </childnode>
       </node>
-      <node id="178">
+      <node id="187">
         <label>Graphics/Render/MeshCluster.h</label>
         <link refid="MeshCluster_8h_source"/>
         <childnode refid="3" relation="include">
@@ -146,22 +204,54 @@
         <childnode refid="90" relation="include">
         </childnode>
       </node>
-      <node id="156">
+      <node id="165">
         <label>Graphics/Render/RenderContext.h</label>
         <link refid="RenderContext_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="157" relation="include">
+        <childnode refid="166" relation="include">
         </childnode>
         <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
-        <childnode refid="178" relation="include">
+        <childnode refid="187" relation="include">
         </childnode>
-        <childnode refid="179" relation="include">
+        <childnode refid="162" relation="include">
         </childnode>
-        <childnode refid="180" relation="include">
+        <childnode refid="188" relation="include">
+        </childnode>
+      </node>
+      <node id="160">
+        <label>Graphics/SRSL/ShaderType.h</label>
+        <link refid="ShaderType_8h_source"/>
+        <childnode refid="134" relation="include">
+        </childnode>
+      </node>
+      <node id="155">
+        <label>Graphics/Types/Shader.h</label>
+        <link refid="Types_2Shader_8h_source"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="156" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
+        <childnode refid="157" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
+        </childnode>
+        <childnode refid="161" relation="include">
+        </childnode>
+        <childnode refid="162" relation="include">
+        </childnode>
+        <childnode refid="163" relation="include">
         </childnode>
       </node>
       <node id="150">
@@ -242,7 +332,7 @@
         <childnode refid="100" relation="include">
         </childnode>
       </node>
-      <node id="164">
+      <node id="173">
         <label>Utils/Common/CollisionData.h</label>
         <link refid="CollisionData_8h_source"/>
         <childnode refid="95" relation="include">
@@ -310,7 +400,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="161">
+      <node id="170">
         <label>Utils/Common/Numeric.h</label>
         <link refid="Numeric_8h_source"/>
         <childnode refid="82" relation="include">
@@ -418,10 +508,10 @@
         <childnode refid="103" relation="include">
         </childnode>
       </node>
-      <node id="162">
+      <node id="171">
         <label>Utils/ECS/Component.h</label>
         <link refid="Component_8h_source"/>
-        <childnode refid="160" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
         <childnode refid="95" relation="include">
         </childnode>
@@ -437,25 +527,25 @@
         </childnode>
         <childnode refid="113" relation="include">
         </childnode>
-        <childnode refid="163" relation="include">
+        <childnode refid="172" relation="include">
         </childnode>
-        <childnode refid="164" relation="include">
+        <childnode refid="173" relation="include">
         </childnode>
         <childnode refid="137" relation="include">
         </childnode>
       </node>
-      <node id="165">
+      <node id="174">
         <label>Utils/ECS/ComponentManager.h</label>
         <link refid="ComponentManager_8h_source"/>
-        <childnode refid="166" relation="include">
+        <childnode refid="175" relation="include">
         </childnode>
-        <childnode refid="162" relation="include">
+        <childnode refid="171" relation="include">
         </childnode>
         <childnode refid="147" relation="include">
         </childnode>
         <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="167" relation="include">
+        <childnode refid="176" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
@@ -463,17 +553,17 @@
         </childnode>
         <childnode refid="102" relation="include">
         </childnode>
-        <childnode refid="168" relation="include">
+        <childnode refid="177" relation="include">
         </childnode>
       </node>
-      <node id="160">
+      <node id="169">
         <label>Utils/ECS/Entity.h</label>
         <link refid="Entity_8h_source"/>
         <childnode refid="125" relation="include">
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
-        <childnode refid="161" relation="include">
+        <childnode refid="170" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
@@ -482,10 +572,10 @@
         <childnode refid="112" relation="include">
         </childnode>
       </node>
-      <node id="166">
+      <node id="175">
         <label>Utils/ECS/EntityController.h</label>
         <link refid="EntityController_8h_source"/>
-        <childnode refid="160" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
       </node>
       <node id="140">
@@ -508,18 +598,18 @@
         <childnode refid="107" relation="include">
         </childnode>
       </node>
-      <node id="158">
+      <node id="167">
         <label>Utils/ECS/IComponentable.h</label>
         <link refid="IComponentable_8h_source"/>
         <childnode refid="113" relation="include">
         </childnode>
-        <childnode refid="159" relation="include">
+        <childnode refid="168" relation="include">
         </childnode>
-        <childnode refid="160" relation="include">
+        <childnode refid="169" relation="include">
         </childnode>
-        <childnode refid="162" relation="include">
+        <childnode refid="171" relation="include">
         </childnode>
-        <childnode refid="165" relation="include">
+        <childnode refid="174" relation="include">
         </childnode>
       </node>
       <node id="145">
@@ -546,27 +636,27 @@
         <childnode refid="79" relation="include">
         </childnode>
       </node>
-      <node id="171">
+      <node id="180">
         <label>Utils/Localization/Convert.h</label>
         <link refid="Convert_8h_source"/>
-        <childnode refid="172" relation="include">
+        <childnode refid="181" relation="include">
         </childnode>
       </node>
-      <node id="170">
+      <node id="179">
         <label>Utils/Localization/Encoding.h</label>
         <link refid="Encoding_8h_source"/>
-        <childnode refid="171" relation="include">
+        <childnode refid="180" relation="include">
         </childnode>
-        <childnode refid="173" relation="include">
+        <childnode refid="182" relation="include">
         </childnode>
       </node>
-      <node id="172">
+      <node id="181">
         <label>Utils/Localization/Icu.h</label>
         <link refid="Icu_8h_source"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="173">
+      <node id="182">
         <label>Utils/Localization/UTF.h</label>
         <link refid="UTF_8h_source"/>
         <childnode refid="10" relation="include">
@@ -592,7 +682,7 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="181">
+      <node id="189">
         <label>Utils/Math/Matrix4x4.h</label>
         <link refid="Matrix4x4_8h_source"/>
         <childnode refid="96" relation="include">
@@ -601,13 +691,23 @@
         </childnode>
         <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="182" relation="include">
+        <childnode refid="190" relation="include">
         </childnode>
       </node>
       <node id="96">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="156">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
         </childnode>
       </node>
       <node id="110">
@@ -674,25 +774,25 @@
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="183">
+      <node id="191">
         <label>Utils/Reflection/Property.h</label>
         <link refid="Reflection_2Property_8h_source"/>
-        <childnode refid="184" relation="include">
+        <childnode refid="192" relation="include">
         </childnode>
         <childnode refid="127" relation="include">
         </childnode>
       </node>
-      <node id="184">
+      <node id="192">
         <label>Utils/Reflection/Value.h</label>
         <link refid="Value_8h_source"/>
-        <childnode refid="185" relation="include">
+        <childnode refid="193" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
-        <childnode refid="186" relation="include">
+        <childnode refid="194" relation="include">
         </childnode>
       </node>
-      <node id="185">
+      <node id="193">
         <label>Utils/Reflection/ValueImpl.h</label>
         <link refid="ValueImpl_8h_source"/>
         <childnode refid="94" relation="include">
@@ -804,14 +904,14 @@
         <childnode refid="136" relation="include">
         </childnode>
       </node>
-      <node id="169">
+      <node id="178">
         <label>Utils/Serialization/BaseSerialization.h</label>
         <link refid="BaseSerialization_8h_source"/>
         <childnode refid="121" relation="include">
         </childnode>
         <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="170" relation="include">
+        <childnode refid="179" relation="include">
         </childnode>
       </node>
       <node id="132">
@@ -838,10 +938,10 @@
         <label>Utils/Serialization/ObjectDataAccessors.inl.h</label>
         <link refid="ObjectDataAccessors_8inl_8h_source"/>
       </node>
-      <node id="168">
+      <node id="177">
         <label>Utils/Serialization/SRASerialization.h</label>
         <link refid="SRASerialization_8h_source"/>
-        <childnode refid="169" relation="include">
+        <childnode refid="178" relation="include">
         </childnode>
       </node>
       <node id="131">
@@ -986,7 +1086,7 @@
         <childnode refid="98" relation="include">
         </childnode>
       </node>
-      <node id="167">
+      <node id="176">
         <label>Utils/Types/DataStorage.h</label>
         <link refid="DataStorage_8h_source"/>
         <childnode refid="83" relation="include">
@@ -1070,7 +1170,7 @@
         <childnode refid="83" relation="include">
         </childnode>
       </node>
-      <node id="163">
+      <node id="172">
         <label>Utils/Types/SafeVariable.h</label>
         <link refid="SafeVariable_8h_source"/>
         <childnode refid="90" relation="include">
@@ -1134,13 +1234,13 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="159">
+      <node id="168">
         <label>Utils/Types/Vector.h</label>
         <link refid="Vector_8h_source"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="177">
+      <node id="186">
         <label>Utils/World/CameraData.h</label>
         <link refid="CameraData_8h_source"/>
         <childnode refid="92" relation="include">
@@ -1150,7 +1250,7 @@
         <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="175">
+      <node id="184">
         <label>Utils/World/Observer.h</label>
         <link refid="Observer_8h_source"/>
         <childnode refid="142" relation="include">
@@ -1164,10 +1264,10 @@
         <childnode refid="83" relation="include">
         </childnode>
       </node>
-      <node id="157">
+      <node id="166">
         <label>Utils/World/Scene.h</label>
         <link refid="Scene_8h_source"/>
-        <childnode refid="158" relation="include">
+        <childnode refid="167" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
@@ -1177,24 +1277,24 @@
         </childnode>
         <childnode refid="113" relation="include">
         </childnode>
-        <childnode refid="167" relation="include">
-        </childnode>
-        <childnode refid="174" relation="include">
-        </childnode>
-        <childnode refid="175" relation="include">
-        </childnode>
         <childnode refid="176" relation="include">
         </childnode>
-        <childnode refid="177" relation="include">
+        <childnode refid="183" relation="include">
+        </childnode>
+        <childnode refid="184" relation="include">
+        </childnode>
+        <childnode refid="185" relation="include">
+        </childnode>
+        <childnode refid="186" relation="include">
         </childnode>
       </node>
-      <node id="176">
+      <node id="185">
         <label>Utils/World/SceneLogicType.h</label>
         <link refid="SceneLogicType_8h_source"/>
         <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="174">
+      <node id="183">
         <label>Utils/World/TensorKey.h</label>
         <link refid="TensorKey_8h_source"/>
         <childnode refid="92" relation="include">
@@ -1402,7 +1502,7 @@
       <node id="56">
         <label>ctime</label>
       </node>
-      <node id="186">
+      <node id="194">
         <label>entt/entt.hpp</label>
       </node>
       <node id="49">
@@ -1435,7 +1535,7 @@
       <node id="72">
         <label>glm/gtc/type_ptr.hpp</label>
       </node>
-      <node id="182">
+      <node id="190">
         <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="73">
@@ -1668,185 +1768,177 @@
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>GetValueInspector(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>&amp;<sp/>value);</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/><ref refid="classSR__UTILS__NS_1_1Property" kindref="compound">SR_UTILS_NS::Property</ref>*<sp/>pProperty);</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawStandardProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/><ref refid="classSR__UTILS__NS_1_1StandardProperty" kindref="compound">SR_UTILS_NS::StandardProperty</ref>*<sp/>pProperty);</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawEnumProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/><ref refid="classSR__UTILS__NS_1_1EnumProperty" kindref="compound">SR_UTILS_NS::EnumProperty</ref>*<sp/>pProperty);</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawPathProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/><ref refid="classSR__UTILS__NS_1_1PathProperty" kindref="compound">SR_UTILS_NS::PathProperty</ref>*<sp/>pProperty);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawPropertyContainer(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1PropertyContainer" kindref="compound">SR_UTILS_NS::PropertyContainer</ref>*<sp/>pProperties);</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawLabelProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/><ref refid="classSR__UTILS__NS_1_1LabelProperty" kindref="compound">SR_UTILS_NS::LabelProperty</ref>*<sp/>pProperty);</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_MAYBE_UNUSED<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DrawMaterialProperty(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1DrawPropertyContext" kindref="compound">DrawPropertyContext</ref>&amp;<sp/>context,<sp/><ref refid="classSR__GRAPH__NS_1_1MaterialProperty" kindref="compound">SR_GRAPH_NS::MaterialProperty</ref>*<sp/>pProperty);</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref><sp/>{</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref>&amp;<sp/>property)</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>pProperty(&amp;property)</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>(<ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>*<sp/>pValue)</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>pValue(pValue)</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>noHeader<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>openedByDefault<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>lineHeight<sp/>=<sp/>1.f;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>spaceWidth<sp/>=<sp/>1.f;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>axisButtonWidth<sp/>=<sp/>30.f;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>maxPartsInLine<sp/>=<sp/>3;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>fieldTitleWidth<sp/>=<sp/>90.f;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>fieldWidth<sp/>=<sp/>250.f;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>fieldHeight<sp/>=<sp/>0.f;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>float_t<sp/>GetArrowWidth()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lineHeight<sp/>*<sp/>0.75f;<sp/>}</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>GetProperty()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>SRAssert(pProperty);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*pProperty;<sp/>}</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>GetPropertyName()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>?<sp/>pProperty-&gt;GetName()<sp/>:<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>GetPropertyDisplayName()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>?<sp/>pProperty-&gt;GetEditorParams().GetDisplayName()<sp/>:<sp/>customDisplayName;<sp/>}</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref>&amp;<sp/>GetEditorParams()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>?<sp/>pProperty-&gt;GetEditorParams()<sp/>:<sp/>editorPropertyParams;<sp/>}</highlight></codeline>
+<codeline lineno="23" refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref>&amp;<sp/>property)</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>pProperty(&amp;property)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>(<ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>*<sp/>pValue)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>pValue(pValue)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>noHeader<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>openedByDefault<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>lineHeight<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>spaceWidth<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>axisButtonWidth<sp/>=<sp/>30.f;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>maxPartsInLine<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>fieldTitleWidth<sp/>=<sp/>90.f;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>fieldWidth<sp/>=<sp/>250.f;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/>fieldHeight<sp/>=<sp/>0.f;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>float_t<sp/>GetArrowWidth()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lineHeight<sp/>*<sp/>0.75f;<sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>GetProperty()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>SRAssert(pProperty);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*pProperty;<sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>GetPropertyName()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>?<sp/>pProperty-&gt;GetName()<sp/>:<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>GetPropertyDisplayName()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>?<sp/>pProperty-&gt;GetEditorParams().GetDisplayName()<sp/>:<sp/>customDisplayName;<sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref>&amp;<sp/>GetEditorParams()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>?<sp/>pProperty-&gt;GetEditorParams()<sp/>:<sp/>editorPropertyParams;<sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref><sp/>GetValue()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pValue)<sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*pValue;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty-&gt;Get(pOwner).DetachIfConst();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref><sp/>GetValue()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pValue)<sp/>{</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*pValue;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty-&gt;Get(pOwner).DetachIfConst();</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasExplicitSetter()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>&amp;&amp;<sp/>pProperty-&gt;HasExplicitSetter();</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt;void(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>drag)&gt;<sp/>onBeforeChangeCallback;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref><sp/>editorPropertyParams;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::Component::Ptr<sp/>pComponent;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>propertyIndex<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>customDisplayName;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>*<sp/>pValue<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">*<sp/>pProperty<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">EditorGUI</ref>*<sp/>pEditor<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SR_UTILS_NS::SRClass</ref>*<sp/>pOwner<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83" refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>{</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isChanged<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isDrag<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88" refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SR_UTILS_NS::SRClass</ref>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt;PropertyDrawerBase&gt;<sp/>{</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;PropertyDrawerBase&gt;</ref>;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref>()</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Ptr(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>SR_UTILS_NS::SharedPtrPolicy::Automatic)</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>CheckSearchMatch(std::string_view<sp/>searchBuffer,<sp/>std::string_view<sp/>text)<sp/>{</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>textStartPos<sp/>=<sp/>0;<sp/>textStartPos<sp/>&lt;<sp/>text.size();<sp/>++textStartPos)<sp/>{</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isMatch<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>searchPos<sp/>=<sp/>0;<sp/>searchPos<sp/>&lt;<sp/>searchBuffer.size();<sp/>++searchPos)<sp/>{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(textStartPos<sp/>+<sp/>searchPos<sp/>&gt;=<sp/>text.size())<sp/>{</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>isMatch<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::tolower(searchBuffer[searchPos])<sp/>!=<sp/>std::tolower(text[textStartPos<sp/>+<sp/>searchPos]))<sp/>{</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>isMatch<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isMatch)<sp/>{</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>HasExplicitSetter()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pProperty<sp/>&amp;&amp;<sp/>pProperty-&gt;HasExplicitSetter();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt;void(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>drag)&gt;<sp/>onBeforeChangeCallback;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1EditorPropertyParams" kindref="compound">SR_UTILS_NS::Reflection::EditorPropertyParams</ref><sp/>editorPropertyParams;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::Component::Ptr<sp/>pComponent;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>propertyIndex<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref><sp/>customDisplayName;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>*<sp/>pValue<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Property" kindref="compound">SR_UTILS_NS::Reflection::Property</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">*<sp/>pProperty<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__CORE__GUI__NS_1_1EditorGUI" kindref="compound">EditorGUI</ref>*<sp/>pEditor<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SR_UTILS_NS::SRClass</ref>*<sp/>pOwner<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isChanged<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isDrag<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1SRClass" kindref="compound">SR_UTILS_NS::SRClass</ref>,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr</ref>&lt;PropertyDrawerBase&gt;<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;PropertyDrawerBase&gt;</ref>;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref>()</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Ptr(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>SR_UTILS_NS::SharedPtrPolicy::Automatic)</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>CheckSearchMatch(std::string_view<sp/>searchBuffer,<sp/>std::string_view<sp/>text)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>textStartPos<sp/>=<sp/>0;<sp/>textStartPos<sp/>&lt;<sp/>text.size();<sp/>++textStartPos)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isMatch<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint64_t<sp/>searchPos<sp/>=<sp/>0;<sp/>searchPos<sp/>&lt;<sp/>searchBuffer.size();<sp/>++searchPos)<sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(textStartPos<sp/>+<sp/>searchPos<sp/>&gt;=<sp/>text.size())<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>isMatch<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::tolower(searchBuffer[searchPos])<sp/>!=<sp/>std::tolower(text[textStartPos<sp/>+<sp/>searchPos]))<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>isMatch<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isMatch)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref>&amp;<sp/>feedback,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!context.pValue<sp/>&amp;&amp;<sp/>feedback.isChanged<sp/>&amp;&amp;<sp/>(!value.IsRef()<sp/>||<sp/>context.HasExplicitSetter()))<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.GetProperty().Set(context.pOwner,<sp/>value);</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref>&amp;<sp/>feedback,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>&amp;<sp/>value)<sp/>{</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!context.pValue<sp/>&amp;&amp;<sp/>feedback.isChanged<sp/>&amp;&amp;<sp/>(!value.IsRef()<sp/>||<sp/>context.HasExplicitSetter()))<sp/>{</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.GetProperty().Set(context.pOwner,<sp/>value);</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetReflectedValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context,<sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref>&amp;<sp/>feedback,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>&amp;<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>drag<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(context.onBeforeChangeCallback)<sp/>{</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.onBeforeChangeCallback(drag);</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feedback.isChanged<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!context.pValue)<sp/>{</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.GetProperty().Set(context.pOwner,<sp/>value);</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRAssert2(value.SizeOf()<sp/>==<sp/>context.pValue-&gt;SizeOf(),<sp/></highlight><highlight class="stringliteral">&quot;PropertyDrawerBase::SetReflectedValue()<sp/>:<sp/>size<sp/>mismatch!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(context.pValue-&gt;Data(),<sp/>value.Data(),<sp/>value.SizeOf());</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MappedVal,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>NewVal&gt;<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetMappedValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context,<sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref>&amp;<sp/>feedback,<sp/>MappedVal<sp/>pMapped,<sp/>NewVal<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>drag<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(context.onBeforeChangeCallback)<sp/>{</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.onBeforeChangeCallback(drag);</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feedback.isChanged<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetReflectedValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context,<sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref>&amp;<sp/>feedback,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classSR__UTILS__NS_1_1Reflection_1_1Value" kindref="compound">SR_UTILS_NS::Reflection::Value</ref>&amp;<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>drag<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(context.onBeforeChangeCallback)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.onBeforeChangeCallback(drag);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feedback.isChanged<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!context.pValue)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.GetProperty().Set(context.pOwner,<sp/>value);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SRAssert2(value.SizeOf()<sp/>==<sp/>context.pValue-&gt;SizeOf(),<sp/></highlight><highlight class="stringliteral">&quot;PropertyDrawerBase::SetReflectedValue()<sp/>:<sp/>size<sp/>mismatch!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::memcpy(context.pValue-&gt;Data(),<sp/>value.Data(),<sp/>value.SizeOf());</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>MappedVal,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>NewVal&gt;<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetMappedValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context,<sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref>&amp;<sp/>feedback,<sp/>MappedVal<sp/>pMapped,<sp/>NewVal<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>drag<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(context.onBeforeChangeCallback)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.onBeforeChangeCallback(drag);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feedback.isChanged<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!context.pValue)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.GetProperty().Set(context.pOwner,<sp/>SR_UTILS_NS::Reflection::Value::Create(value));</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pMapped<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!context.pValue)<sp/>{</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>context.GetProperty().Set(context.pOwner,<sp/>SR_UTILS_NS::Reflection::Value::Create(value));</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pMapped<sp/>=<sp/>value;</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_GRAPH_NS::RenderContext::Ptr<sp/>GetRenderContext()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>SR_GRAPH_NS::RenderContext::Ptr<sp/>m_context;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>SR_GRAPH_NS::RenderContext::Ptr<sp/>GetRenderContext()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>SR_GRAPH_NS::RenderContext::Ptr<sp/>m_context;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" kindref="compound">BoolPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;BoolPropertyDrawer&gt;</ref>;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166" refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1BoolPropertyDrawer" kindref="compound">BoolPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="166" refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" kindref="compound">NumericPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;BoolPropertyDrawer&gt;</ref>;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;NumericPropertyDrawer&gt;</ref>;</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174" refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1NumericPropertyDrawer" kindref="compound">NumericPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="174" refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" kindref="compound">MathVectorPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;NumericPropertyDrawer&gt;</ref>;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;MathVectorPropertyDrawer&gt;</ref>;</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight></codeline>
-<codeline lineno="182" refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MathVectorPropertyDrawer" kindref="compound">MathVectorPropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ptr<sp/>=<sp/><ref refid="classSR__HTYPES__NS_1_1SharedPtr" kindref="compound">SR_HTYPES_NS::SharedPtr&lt;MathVectorPropertyDrawer&gt;</ref>;</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>m_numberTempData<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194" refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" kindref="compound">MathSizePropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="199"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint64_t<sp/>m_numberTempData<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186" refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSR__CORE__GUI__NS_1_1MathSizePropertyDrawer" kindref="compound">MathSizePropertyDrawer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classSR__CORE__GUI__NS_1_1PropertyDrawerBase" kindref="compound">PropertyDrawerBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_CLASS()</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerFeedback" kindref="compound">PropertyDrawerFeedback</ref><sp/>Draw(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structSR__CORE__GUI__NS_1_1PropertyDrawerContext" kindref="compound">PropertyDrawerContext</ref>&amp;<sp/>context)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="191"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_CORE_PROPERTY_DRAWER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/Core/inc/Core/GUI/PropertyDrawer.h"/>
   </compounddef>

@@ -71,9 +71,9 @@
 |   | [**FColor**](#function-fcolor-49) (const [**Vector4**](structSR__MATH__NS_1_1Vector4.md)&lt; Unit &gt; & v) <br> |
 |   | [**FColor**](#function-fcolor-59) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & color) <br> |
 |   | [**FColor**](#function-fcolor-69) ([**FColor**](classSR__MATH__NS_1_1FColor.md) && color) <br> |
-|   | [**FColor**](#function-fcolor-79) (double\_t \_x, double\_t \_y, double\_t \_z, double\_t \_w) <br> |
-|   | [**FColor**](#function-fcolor-89) (float\_t \_x, float\_t \_y, float\_t \_z, float\_t \_w) <br> |
-|   | [**FColor**](#function-fcolor-99) (int32\_t \_x, int32\_t \_y, int32\_t \_z, int32\_t \_w) <br> |
+|   | [**FColor**](#function-fcolor-79) (double\_t \_x, double\_t \_y, double\_t \_z, double\_t \_w=1.0) <br> |
+|   | [**FColor**](#function-fcolor-89) (float\_t \_x, float\_t \_y, float\_t \_z, float\_t \_w=1.f) <br> |
+|   | [**FColor**](#function-fcolor-99) (int32\_t \_x, int32\_t \_y, int32\_t \_z, int32\_t \_w=1) <br> |
 |  bool | [**operator!=**](#function-operator) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & v) const<br> |
 |  [**FColor**](classSR__MATH__NS_1_1FColor.md) & | [**operator%=**](#function-operator_1) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) <br> |
 |  [**FColor**](classSR__MATH__NS_1_1FColor.md) | [**operator\***](#function-operator_2) (const [**FColor**](classSR__MATH__NS_1_1FColor.md) & p\_v) const<br> |
@@ -360,7 +360,7 @@ SR_MATH_NS::FColor::FColor (
     double_t _x,
     double_t _y,
     double_t _z,
-    double_t _w
+    double_t _w=1.0
 ) 
 ```
 
@@ -378,7 +378,7 @@ SR_MATH_NS::FColor::FColor (
     float_t _x,
     float_t _y,
     float_t _z,
-    float_t _w
+    float_t _w=1.f
 ) 
 ```
 
@@ -396,7 +396,7 @@ SR_MATH_NS::FColor::FColor (
     int32_t _x,
     int32_t _y,
     int32_t _z,
-    int32_t _w
+    int32_t _w=1
 ) 
 ```
 

@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/UI/IButton.h" line="17" column="5" declfile="Engine/Core/inc/Core/UI/IButton.h" declline="17" declcolumn="5"/>
+        <location file="Engine/Core/inc/Core/UI/IButton.h" line="15" column="5" declfile="Engine/Core/inc/Core/UI/IButton.h" declline="15" declcolumn="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

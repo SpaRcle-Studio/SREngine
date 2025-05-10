@@ -46,7 +46,7 @@
 | typedef uint32\_t | [**MessageBoxButton**](#typedef-messageboxbutton)  <br> |
 | enum  | [**MessageBoxButtonBits**](#enum-messageboxbuttonbits)  <br> |
 | enum uint8\_t | [**MessageBoxType**](#enum-messageboxtype)  <br> |
-| typedef ska::flat\_hash\_map&lt; ImGuiViewport \*, Widget \* &gt; | [**ViewportsTable**](#typedef-viewportstable)  <br> |
+| typedef ska::flat\_hash\_map&lt; void \*, Widget \* &gt; | [**ViewportsTable**](#typedef-viewportstable)  <br> |
 | typedef ska::flat\_hash\_map&lt; std::string, Widget \* &gt; | [**Widgets**](#typedef-widgets)  <br> |
 
 
@@ -72,8 +72,6 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**DrawIcon**](#function-drawicon) (ImDrawList \* drawList, const ImVec2 & a, const ImVec2 & b, IconType type, bool filled, ImU32 color, ImU32 innerColor) <br> |
-|  void | [**Icon**](#function-icon) (const ImVec2 & size, IconType type, bool filled, const ImVec4 & color=ImVec4(1, 1, 1, 1), const ImVec4 & innerColor=ImVec4(0, 0, 0, 0)) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS**](#function-sr_enum_ns_class) (IconType, Flow, Circle, Square, Grid, RoundSquare, Diamond) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS**](#function-sr_enum_ns_class) (PinKind, None, Output, Input) <br> |
 
@@ -160,7 +158,7 @@ enum SR_GRAPH_NS::GUI::MessageBoxType {
 ### typedef ViewportsTable 
 
 ```C++
-typedef ska::flat_hash_map<ImGuiViewport*, Widget*> SR_GRAPH_NS::GUI::ViewportsTable;
+typedef ska::flat_hash_map<void*, Widget*> SR_GRAPH_NS::GUI::ViewportsTable;
 ```
 
 
@@ -182,46 +180,6 @@ typedef ska::flat_hash_map<std::string, Widget*> SR_GRAPH_NS::GUI::Widgets;
 <hr>
 ## Public Functions Documentation
 
-
-
-
-### function DrawIcon 
-
-```C++
-void SR_GRAPH_NS::GUI::DrawIcon (
-    ImDrawList * drawList,
-    const ImVec2 & a,
-    const ImVec2 & b,
-    IconType type,
-    bool filled,
-    ImU32 color,
-    ImU32 innerColor
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Icon 
-
-```C++
-void SR_GRAPH_NS::GUI::Icon (
-    const ImVec2 & size,
-    IconType type,
-    bool filled,
-    const ImVec4 & color=ImVec4(1, 1, 1, 1),
-    const ImVec4 & innerColor=ImVec4(0, 0, 0, 0)
-) 
-```
-
-
-
-
-<hr>
 
 
 

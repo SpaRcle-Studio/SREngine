@@ -3,7 +3,6 @@
   <compounddef id="namespaceSR__GRAPH__GUI__NS" kind="namespace" language="C++">
     <compoundname>SR_GRAPH_GUI_NS</compoundname>
     <innerclass refid="structSR__GRAPH__GUI__NS_1_1DrawPopupContext" prot="public">SR_GRAPH_GUI_NS::DrawPopupContext</innerclass>
-    <innerclass refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion" prot="public">SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</innerclass>
     <innerclass refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard" prot="public">SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</innerclass>
     <innerclass refid="classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget" prot="public">SR_GRAPH_GUI_NS::MenuItemSubWidget</innerclass>
     <innerclass refid="classSR__GRAPH__GUI__NS_1_1Node" prot="public">SR_GRAPH_GUI_NS::Node</innerclass>
@@ -51,24 +50,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="33" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="33" bodyend="37"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="34" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="34" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="Widget_8h_1a5e0774210d7f3bff26801ae8d5c90d52" prot="public" static="no">
-        <type>ImGuiWindowFlags</type>
-        <definition>typedef ImGuiWindowFlags SR_GRAPH_GUI_NS::WindowFlags</definition>
-        <argsstring></argsstring>
-        <name>WindowFlags</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::WindowFlags</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="31" column="30" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="31" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="typedef" id="Widget_8h_1a2a94f490905349232b81e65b3e7c7dc0" prot="public" static="no">
         <type>uint32_t</type>
         <definition>typedef uint32_t SR_GRAPH_GUI_NS::WidgetFlagBits</definition>
@@ -81,110 +66,158 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="38" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="38" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="var">
-      <memberdef kind="variable" id="Theme_8h_1a655c8cef6bde4b61a299a7502325bf14" prot="public" static="yes" mutable="no">
-        <type>const std::unordered_map&lt; std::string, float ImGuiStyle::* &gt;</type>
-        <definition>const std::unordered_map&lt;std::string, float ImGuiStyle::*&gt; SR_GRAPH_GUI_NS::STYLE_FLOAT_VALUES</definition>
-        <argsstring></argsstring>
-        <name>STYLE_FLOAT_VALUES</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::STYLE_FLOAT_VALUES</qualifiedname>
-        <initializer>= {
-            { &quot;Alpha&quot;, &amp;ImGuiStyle::Alpha },
-            { &quot;WindowRounding&quot;, &amp;ImGuiStyle::WindowRounding },
-            { &quot;WindowBorderSize&quot;, &amp;ImGuiStyle::WindowBorderSize },
-            { &quot;ChildRounding&quot;, &amp;ImGuiStyle::ChildRounding },
-            { &quot;ChildBorderSize&quot;, &amp;ImGuiStyle::ChildBorderSize },
-            { &quot;PopupRounding&quot;, &amp;ImGuiStyle::PopupRounding },
-            { &quot;PopupBorderSize&quot;, &amp;ImGuiStyle::PopupBorderSize },
-            { &quot;FrameRounding&quot;, &amp;ImGuiStyle::FrameRounding },
-            { &quot;FrameBorderSize&quot;, &amp;ImGuiStyle::FrameBorderSize },
-            { &quot;IndentSpacing&quot;, &amp;ImGuiStyle::IndentSpacing },
-            { &quot;ColumnsMinSpacing&quot;, &amp;ImGuiStyle::ColumnsMinSpacing },
-            { &quot;ScrollbarSize&quot;, &amp;ImGuiStyle::ScrollbarSize },
-            { &quot;ScrollbarRounding&quot;, &amp;ImGuiStyle::ScrollbarRounding },
-            { &quot;GrabMinSize&quot;, &amp;ImGuiStyle::GrabMinSize },
-            { &quot;GrabRounding&quot;, &amp;ImGuiStyle::GrabRounding },
-            { &quot;LogSliderDeadzone&quot;, &amp;ImGuiStyle::LogSliderDeadzone },
-            { &quot;TabRounding&quot;, &amp;ImGuiStyle::TabRounding },
-            { &quot;TabBorderSize&quot;, &amp;ImGuiStyle::TabBorderSize },
-            { &quot;TabMinWidthForCloseButton&quot;, &amp;ImGuiStyle::TabMinWidthForCloseButton },
-            { &quot;MouseCursorScale&quot;, &amp;ImGuiStyle::MouseCursorScale },
-            { &quot;CurveTessellationTol&quot;, &amp;ImGuiStyle::CurveTessellationTol },
-            
-    }</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="12" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="12" bodyend="35"/>
-      </memberdef>
-      <memberdef kind="variable" id="Theme_8h_1a10a2483913220a04023b7f37b1767c50" prot="public" static="yes" mutable="no">
-        <type>const std::unordered_map&lt; std::string, bool ImGuiStyle::* &gt;</type>
-        <definition>const std::unordered_map&lt;std::string, bool ImGuiStyle::*&gt; SR_GRAPH_GUI_NS::STYLE_BOOL_VALUES</definition>
-        <argsstring></argsstring>
-        <name>STYLE_BOOL_VALUES</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::STYLE_BOOL_VALUES</qualifiedname>
-        <initializer>= {
-            { &quot;AntiAliasedLines&quot;, &amp;ImGuiStyle::AntiAliasedLines },
-            { &quot;AntiAliasedLinesUseTex&quot;, &amp;ImGuiStyle::AntiAliasedLinesUseTex },
-            { &quot;AntiAliasedFill&quot;, &amp;ImGuiStyle::AntiAliasedFill },
-    }</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="37" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="37" bodyend="41"/>
-      </memberdef>
-      <memberdef kind="variable" id="Theme_8h_1ada7eff8cdb8c947d874d783e026bcbaf" prot="public" static="yes" mutable="no">
-        <type>const std::unordered_map&lt; std::string, ImVec2 ImGuiStyle::* &gt;</type>
-        <definition>const std::unordered_map&lt;std::string, ImVec2 ImGuiStyle::*&gt; SR_GRAPH_GUI_NS::STYLE_SIZE_VALUES</definition>
-        <argsstring></argsstring>
-        <name>STYLE_SIZE_VALUES</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::STYLE_SIZE_VALUES</qualifiedname>
-        <initializer>= {
-            { &quot;WindowPadding&quot;, &amp;ImGuiStyle::WindowPadding },
-            { &quot;WindowMinSize&quot;, &amp;ImGuiStyle::WindowMinSize },
-            { &quot;WindowTitleAlign&quot;, &amp;ImGuiStyle::WindowTitleAlign },
-            { &quot;FramePadding&quot;, &amp;ImGuiStyle::FramePadding },
-            { &quot;ItemSpacing&quot;, &amp;ImGuiStyle::ItemSpacing },
-            { &quot;ItemInnerSpacing&quot;, &amp;ImGuiStyle::ItemInnerSpacing },
-            { &quot;TouchExtraPadding&quot;, &amp;ImGuiStyle::TouchExtraPadding },
-            { &quot;ButtonTextAlign&quot;, &amp;ImGuiStyle::ButtonTextAlign },
-            { &quot;SelectableTextAlign&quot;, &amp;ImGuiStyle::SelectableTextAlign },
-            { &quot;DisplayWindowPadding&quot;, &amp;ImGuiStyle::DisplayWindowPadding },
-            { &quot;DisplaySafeAreaPadding&quot;, &amp;ImGuiStyle::DisplaySafeAreaPadding },
-    }</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="43" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="43" bodyend="55"/>
-      </memberdef>
-      <memberdef kind="variable" id="Theme_8h_1a79f3a8d20e6dd78131c59928194a15f2" prot="public" static="yes" mutable="no">
-        <type>const std::unordered_map&lt; std::string, ImGuiCol_ &gt;</type>
-        <definition>const std::unordered_map&lt;std::string, ImGuiCol_&gt; SR_GRAPH_GUI_NS::STYLE_COLORS</definition>
-        <argsstring></argsstring>
-        <name>STYLE_COLORS</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::STYLE_COLORS</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="57" column="44" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="57" bodyend="109"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" line="39" column="22" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Widget.h" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
+      <memberdef kind="function" id="ImmediateGUI_8h_1a1cc326f2878fe63a3b3afc1d6afc4337" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SR_GRAPH_GUI_NS::SR_ENUM_NS_STRUCT_T</definition>
+        <argsstring>(WindowFlags, uint32_t, None=0, NoTitleBar=1&lt;&lt; 0, NoResize=1&lt;&lt; 1, NoMove=1&lt;&lt; 2, NoScrollbar=1&lt;&lt; 3, NoScrollWithMouse=1&lt;&lt; 4, NoCollapse=1&lt;&lt; 5, AlwaysAutoResize=1&lt;&lt; 6, NoBackground=1&lt;&lt; 7, NoSavedSettings=1&lt;&lt; 8, NoMouseInputs=1&lt;&lt; 9, MenuBar=1&lt;&lt; 10, HorizontalScrollbar=1&lt;&lt; 11, NoFocusOnAppearing=1&lt;&lt; 12, NoBringToFrontOnFocus=1&lt;&lt; 13, AlwaysVerticalScrollbar=1&lt;&lt; 14, AlwaysHorizontalScrollbar=1&lt;&lt; 15, AlwaysUseWindowPadding=1&lt;&lt; 16, NoNavInputs=1&lt;&lt; 18, NoNavFocus=1&lt;&lt; 19, UnsavedDocument=1&lt;&lt; 20, NoDocking=1&lt;&lt; 21, NoNav=NoNavInputs|NoNavFocus, NoDecoration=NoTitleBar|NoResize|NoScrollbar|NoCollapse, NoInputs=NoMouseInputs|NoNavInputs|NoNavFocus, NavFlattened=1&lt;&lt; 23, ChildWindow=1&lt;&lt; 24, Tooltip=1&lt;&lt; 25, Popup=1&lt;&lt; 26, Modal=1&lt;&lt; 27, ChildMenu=1&lt;&lt; 28, DockNodeHost=1&lt;&lt; 29) namespace Immediate</argsstring>
+        <name>SR_ENUM_NS_STRUCT_T</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::SR_ENUM_NS_STRUCT_T</qualifiedname>
+        <param>
+          <type>WindowFlags</type>
+        </param>
+        <param>
+          <type>uint32_t</type>
+        </param>
+        <param>
+          <type>None</type>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>NoTitleBar</type>
+          <defval>1&lt;&lt; 0</defval>
+        </param>
+        <param>
+          <type>NoResize</type>
+          <defval>1&lt;&lt; 1</defval>
+        </param>
+        <param>
+          <type>NoMove</type>
+          <defval>1&lt;&lt; 2</defval>
+        </param>
+        <param>
+          <type>NoScrollbar</type>
+          <defval>1&lt;&lt; 3</defval>
+        </param>
+        <param>
+          <type>NoScrollWithMouse</type>
+          <defval>1&lt;&lt; 4</defval>
+        </param>
+        <param>
+          <type>NoCollapse</type>
+          <defval>1&lt;&lt; 5</defval>
+        </param>
+        <param>
+          <type>AlwaysAutoResize</type>
+          <defval>1&lt;&lt; 6</defval>
+        </param>
+        <param>
+          <type>NoBackground</type>
+          <defval>1&lt;&lt; 7</defval>
+        </param>
+        <param>
+          <type>NoSavedSettings</type>
+          <defval>1&lt;&lt; 8</defval>
+        </param>
+        <param>
+          <type>NoMouseInputs</type>
+          <defval>1&lt;&lt; 9</defval>
+        </param>
+        <param>
+          <type>MenuBar</type>
+          <defval>1&lt;&lt; 10</defval>
+        </param>
+        <param>
+          <type>HorizontalScrollbar</type>
+          <defval>1&lt;&lt; 11</defval>
+        </param>
+        <param>
+          <type>NoFocusOnAppearing</type>
+          <defval>1&lt;&lt; 12</defval>
+        </param>
+        <param>
+          <type>NoBringToFrontOnFocus</type>
+          <defval>1&lt;&lt; 13</defval>
+        </param>
+        <param>
+          <type>AlwaysVerticalScrollbar</type>
+          <defval>1&lt;&lt; 14</defval>
+        </param>
+        <param>
+          <type>AlwaysHorizontalScrollbar</type>
+          <defval>1&lt;&lt; 15</defval>
+        </param>
+        <param>
+          <type>AlwaysUseWindowPadding</type>
+          <defval>1&lt;&lt; 16</defval>
+        </param>
+        <param>
+          <type>NoNavInputs</type>
+          <defval>1&lt;&lt; 18</defval>
+        </param>
+        <param>
+          <type>NoNavFocus</type>
+          <defval>1&lt;&lt; 19</defval>
+        </param>
+        <param>
+          <type>UnsavedDocument</type>
+          <defval>1&lt;&lt; 20</defval>
+        </param>
+        <param>
+          <type>NoDocking</type>
+          <defval>1&lt;&lt; 21</defval>
+        </param>
+        <param>
+          <type>NoNav</type>
+          <defval>NoNavInputs|NoNavFocus</defval>
+        </param>
+        <param>
+          <type>NoDecoration</type>
+          <defval>NoTitleBar|NoResize|NoScrollbar|NoCollapse</defval>
+        </param>
+        <param>
+          <type>NoInputs</type>
+          <defval>NoMouseInputs|NoNavInputs|NoNavFocus</defval>
+        </param>
+        <param>
+          <type>NavFlattened</type>
+          <defval>1&lt;&lt; 23</defval>
+        </param>
+        <param>
+          <type>ChildWindow</type>
+          <defval>1&lt;&lt; 24</defval>
+        </param>
+        <param>
+          <type>Tooltip</type>
+          <defval>1&lt;&lt; 25</defval>
+        </param>
+        <param>
+          <type>Popup</type>
+          <defval>1&lt;&lt; 26</defval>
+        </param>
+        <param>
+          <type>Modal</type>
+          <defval>1&lt;&lt; 27</defval>
+        </param>
+        <param>
+          <type>ChildMenu</type>
+          <defval>1&lt;&lt; 28</defval>
+        </param>
+        <param>
+          <type>DockNodeHost</type>
+          <defval>1&lt;&lt; 29</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h" line="16" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/ImmediateGUI.h" bodystart="16" bodyend="418"/>
+      </memberdef>
       <memberdef kind="function" id="ImNodeEditorUtils_8h_1a9af30789be4fa58d696559e8226fb4b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_GRAPH_GUI_NS::IsPinsCompatible</definition>
@@ -289,1179 +322,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeCreation.h" line="15" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeCreation.h" declline="15" declcolumn="10"/>
       </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ae90c5ef6f6d22a4f4ddf5f9f1390e39f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED ImVec4</type>
-        <definition>static SR_MAYBE_UNUSED ImVec4 SR_GRAPH_GUI_NS::MakeDisableColor</definition>
-        <argsstring>(ImVec4 color)</argsstring>
-        <name>MakeDisableColor</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::MakeDisableColor</qualifiedname>
-        <param>
-          <type>ImVec4</type>
-          <declname>color</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="38" column="35" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="38" bodyend="41"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1acea2c052f332313448439593a89add07" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED static void</type>
-        <definition>SR_MAYBE_UNUSED static void SR_GRAPH_GUI_NS::EnumCombo</definition>
-        <argsstring>(const std::string &amp;label, SR_UTILS_NS::EnumReflector *pReflector, const SR_HTYPES_NS::Function&lt; void(SR_UTILS_NS::EnumReflector *pReflector)&gt; &amp;callback)</argsstring>
-        <name>EnumCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EnumCombo</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1EnumReflector" kindref="compound">SR_UTILS_NS::EnumReflector</ref> *</type>
-          <declname>pReflector</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__UTILS__NS_1_1EnumReflector" kindref="compound">SR_UTILS_NS::EnumReflector</ref> *pReflector)&gt; &amp;</type>
-          <declname>callback</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="43" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="43" bodyend="55"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aa602735175d5e726a72e41d5d518dc15" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED static void</type>
-        <definition>SR_MAYBE_UNUSED static void SR_GRAPH_GUI_NS::EnumCombo</definition>
-        <argsstring>(const std::string &amp;label, SR_UTILS_NS::EnumReflector *pReflector, const std::optional&lt; SR_UTILS_NS::StringAtom &gt; &amp;value, const SR_HTYPES_NS::Function&lt; void(SR_UTILS_NS::StringAtom)&gt; &amp;callback, const SR_HTYPES_NS::Function&lt; bool(const SR_UTILS_NS::StringAtom &amp;)&gt; &amp;filter)</argsstring>
-        <name>EnumCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EnumCombo</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1EnumReflector" kindref="compound">SR_UTILS_NS::EnumReflector</ref> *</type>
-          <declname>pReflector</declname>
-        </param>
-        <param>
-          <type>const std::optional&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt; &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>)&gt; &amp;</type>
-          <declname>callback</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; bool(const <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &amp;)&gt; &amp;</type>
-          <declname>filter</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="57" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="57" bodyend="81"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5ce57b2b7075c6643fbc8dce44f9e619" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED static void</type>
-        <definition>SR_MAYBE_UNUSED static void SR_GRAPH_GUI_NS::EnumCombo</definition>
-        <argsstring>(const std::string &amp;label, SR_UTILS_NS::EnumReflector *pReflector, const std::optional&lt; SR_UTILS_NS::StringAtom &gt; &amp;value, const SR_HTYPES_NS::Function&lt; void(SR_UTILS_NS::StringAtom)&gt; &amp;callback)</argsstring>
-        <name>EnumCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EnumCombo</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type><ref refid="classSR__UTILS__NS_1_1EnumReflector" kindref="compound">SR_UTILS_NS::EnumReflector</ref> *</type>
-          <declname>pReflector</declname>
-        </param>
-        <param>
-          <type>const std::optional&lt; <ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref> &gt; &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(<ref refid="classSR__UTILS__NS_1_1StringAtom" kindref="compound">SR_UTILS_NS::StringAtom</ref>)&gt; &amp;</type>
-          <declname>callback</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="83" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="83" bodyend="90"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a9b877a182eabff641481cc58b6bcb71d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>static void SR_GRAPH_GUI_NS::EnumCombo</definition>
-        <argsstring>(const std::string &amp;label, T value, const SR_HTYPES_NS::Function&lt; void(T)&gt; &amp;callback)</argsstring>
-        <name>EnumCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EnumCombo</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(T)&gt; &amp;</type>
-          <declname>callback</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="92" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="92" bodyend="104"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5d59228eb91edda38749b439788e0bec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>static void SR_GRAPH_GUI_NS::EnumCombo</definition>
-        <argsstring>(const std::string &amp;label, T value, const SR_HTYPES_NS::Function&lt; void(T)&gt; &amp;callback, void *pIdentifier)</argsstring>
-        <name>EnumCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EnumCombo</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classSR__HTYPES__NS_1_1Function" kindref="compound">SR_HTYPES_NS::Function</ref>&lt; void(T)&gt; &amp;</type>
-          <declname>callback</declname>
-        </param>
-        <param>
-          <type>void *</type>
-          <declname>pIdentifier</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="106" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="106" bodyend="119"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1add72ee6b61e0676899dd3b7ef4ed0b82" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::Vec4Null</definition>
-        <argsstring>(const ImVec4 &amp;v1)</argsstring>
-        <name>Vec4Null</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Vec4Null</qualifiedname>
-        <param>
-          <type>const ImVec4 &amp;</type>
-          <declname>v1</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="121" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="121" bodyend="121"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6036269a7c09ac3db4e637a6410e340d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DragUnit</definition>
-        <argsstring>(const std::string &amp;name, SR_MATH_NS::Unit &amp;value, float_t drag=0.1f)</argsstring>
-        <name>DragUnit</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DragUnit</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::Unit &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>drag</declname>
-          <defval>0.1f</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="123" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="123" bodyend="132"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a1ace4f25ae990f446df4672690840e95" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DragInt32</definition>
-        <argsstring>(const std::string &amp;name, int32_t &amp;value, int32_t drag=1)</argsstring>
-        <name>DragInt32</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DragInt32</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>int32_t &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>int32_t</type>
-          <declname>drag</declname>
-          <defval>1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="134" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="134" bodyend="143"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a977644a2c34fc1237376ad85c89004fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DragUInt32</definition>
-        <argsstring>(const std::string &amp;name, uint32_t &amp;value, uint32_t drag=1)</argsstring>
-        <name>DragUInt32</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DragUInt32</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>uint32_t &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>drag</declname>
-          <defval>1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="145" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="145" bodyend="154"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a91cb2194a1aabc856927ecab72e89ab0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::InputInt</definition>
-        <argsstring>(const std::string &amp;name, int32_t &amp;value, int32_t step=1)</argsstring>
-        <name>InputInt</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::InputInt</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>int32_t &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>int32_t</type>
-          <declname>step</declname>
-          <defval>1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="156" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="156" bodyend="172"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ac4718849b91ffe8ac38253f7e27a407d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::UInputInt32</definition>
-        <argsstring>(const std::string &amp;name, uint32_t &amp;value, uint32_t step=1)</argsstring>
-        <name>UInputInt32</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::UInputInt32</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>uint32_t &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>step</declname>
-          <defval>1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para>NOLINT</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="174" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="174" bodyend="193"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af353fdb7ec3e09b6f7c6c41571ae17ff" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>static void SR_GRAPH_GUI_NS::DrawValue</definition>
-        <argsstring>(const std::string &amp;label, const T &amp;value, uint32_t index=0)</argsstring>
-        <name>DrawValue</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawValue</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>const T &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>index</declname>
-          <defval>0</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="195" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="195" bodyend="233"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abf645494623ab6001f072a1da02b6d98" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>bool</type>
-        <definition>static bool SR_GRAPH_GUI_NS::DrawValueControl</definition>
-        <argsstring>(const char *label, T &amp;value, T reset, ImVec2 btnSize, ImVec4 btn, ImVec4 hovered, ImVec4 activeCol, ImFont *font=nullptr, T drag=static_cast&lt; T &gt;(0.1f))</argsstring>
-        <name>DrawValueControl</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawValueControl</qualifiedname>
-        <param>
-          <type>const char *</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>T &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>reset</declname>
-        </param>
-        <param>
-          <type>ImVec2</type>
-          <declname>btnSize</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>btn</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>hovered</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>activeCol</declname>
-        </param>
-        <param>
-          <type>ImFont *</type>
-          <declname>font</declname>
-          <defval>nullptr</defval>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>drag</declname>
-          <defval>static_cast&lt; T &gt;(0.1f)</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="235" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="235" bodyend="286"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abab5d7108083516ba4f55ceba3d4355a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawSlider</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::Unit &amp;value, float_t min=0.0f, float_t max=0.0f, uint32_t index=0)</argsstring>
-        <name>DrawSlider</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawSlider</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::Unit &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>min</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>max</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>index</declname>
-          <defval>0</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="288" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="288" bodyend="302"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abec115fcb61bf9194c0c710d73c584f3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename T</type>
-          </param>
-        </templateparamlist>
-        <type>bool</type>
-        <definition>static bool SR_GRAPH_GUI_NS::DrawValueSlider</definition>
-        <argsstring>(const std::string &amp;label, T &amp;value, T reset, T min, T max, ImVec2 btnSize, ImVec4 btn, ImVec4 hovered, ImVec4 activeCol, ImFont *font=nullptr, bool active=true)</argsstring>
-        <name>DrawValueSlider</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawValueSlider</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>T &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>reset</declname>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>min</declname>
-        </param>
-        <param>
-          <type>T</type>
-          <declname>max</declname>
-        </param>
-        <param>
-          <type>ImVec2</type>
-          <declname>btnSize</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>btn</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>hovered</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>activeCol</declname>
-        </param>
-        <param>
-          <type>ImFont *</type>
-          <declname>font</declname>
-          <defval>nullptr</defval>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>active</declname>
-          <defval>true</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="304" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="304" bodyend="349"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6a48d524015657f9236f884a1a7e7f81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawDataType</definition>
-        <argsstring>(SR_SRLM_NS::DataType *pData, bool *pIsEnum, void *pProvider, float_t width=0, uint32_t deep=0)</argsstring>
-        <name>DrawDataType</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawDataType</qualifiedname>
-        <param>
-          <type><ref refid="classSR__SRLM__NS_1_1DataType" kindref="compound">SR_SRLM_NS::DataType</ref> *</type>
-          <declname>pData</declname>
-        </param>
-        <param>
-          <type>bool *</type>
-          <declname>pIsEnum</declname>
-        </param>
-        <param>
-          <type>void *</type>
-          <declname>pProvider</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>width</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>deep</declname>
-          <defval>0</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="351" column="26" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="351" declcolumn="26"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a8c1f08970aa504262a917e89b799d59f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawColorControl</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::FVector4 &amp;values, float_t resetValue=0.0f, float_t columnWidth=40.0f)</argsstring>
-        <name>DrawColorControl</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawColorControl</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::FVector4 &amp;</type>
-          <declname>values</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>resetValue</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>columnWidth</declname>
-          <defval>40.0f</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para><hruler/>
-</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="353" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="353" bodyend="419"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5348e27bd2b41938e9eb9b290536926b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawEditableSlider</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::Unit &amp;value, float_t min=0.0f, float_t max=0.0f, float_t power=0.1, SR_HTYPES_NS::DataStorage *storage=nullptr)</argsstring>
-        <name>DrawEditableSlider</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawEditableSlider</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::Unit &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>min</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>max</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>power</declname>
-          <defval>0.1</defval>
-        </param>
-        <param>
-          <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> *</type>
-          <declname>storage</declname>
-          <defval>nullptr</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="421" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="421" bodyend="461"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aa66ead40f21d2b6c3bd87e9dd334c6af" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawFRect</definition>
-        <argsstring>(const std::array&lt; std::string, 4 &gt; &amp;names, SR_MATH_NS::FRect &amp;value, float_t min=0.0f, float_t max=0.0f, float_t power=0.1, SR_HTYPES_NS::DataStorage *storage=nullptr)</argsstring>
-        <name>DrawFRect</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawFRect</qualifiedname>
-        <param>
-          <type>const std::array&lt; std::string, 4 &gt; &amp;</type>
-          <declname>names</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::FRect &amp;</type>
-          <declname>value</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>min</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>max</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>power</declname>
-          <defval>0.1</defval>
-        </param>
-        <param>
-          <type><ref refid="classSR__HTYPES__NS_1_1DataStorage" kindref="compound">SR_HTYPES_NS::DataStorage</ref> *</type>
-          <declname>storage</declname>
-          <defval>nullptr</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="463" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="463" bodyend="498"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a0b5de189fc0ca30766aae090c82b4c62" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawVec3Control</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::FVector3 &amp;values, float_t resetValue=0.0f, float_t drag=0.1, float_t columnWidth=70.0f, uint32_t index=0, bool active=true)</argsstring>
-        <name>DrawVec3Control</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawVec3Control</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::FVector3 &amp;</type>
-          <declname>values</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>resetValue</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>drag</declname>
-          <defval>0.1</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>columnWidth</declname>
-          <defval>70.0f</defval>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>index</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>active</declname>
-          <defval>true</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para><hruler/>
-</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="500" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="500" bodyend="555"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a4c63f87c176c2e11ef4ed3e18cb26a78" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawVec2Control</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::FVector2 &amp;values, float_t resetValue=0.0f, float_t columnWidth=70.0f, float_t drag=0.1)</argsstring>
-        <name>DrawVec2Control</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawVec2Control</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::FVector2 &amp;</type>
-          <declname>values</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>resetValue</declname>
-          <defval>0.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>columnWidth</declname>
-          <defval>70.0f</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>drag</declname>
-          <defval>0.1</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para><hruler/>
-</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="557" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="557" bodyend="602"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5095ee015472537fc785edb77cb11113" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawBVec3Control</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::BVector3 &amp;values, bool resetValue, float_t columnWidth=70.0f)</argsstring>
-        <name>DrawBVec3Control</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawBVec3Control</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::BVector3 &amp;</type>
-          <declname>values</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>resetValue</declname>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>columnWidth</declname>
-          <defval>70.0f</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para><hruler/>
-</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="604" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="604" bodyend="656"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af079fc62a10b63fc114bbbcc6cfedc5d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawUVec2Control</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::UVector2 &amp;values, uint32_t resetValue=0, float_t columnWidth=70.0f, uint32_t drag=1, uint32_t index=0, bool active=true)</argsstring>
-        <name>DrawUVec2Control</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawUVec2Control</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::UVector2 &amp;</type>
-          <declname>values</declname>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>resetValue</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>columnWidth</declname>
-          <defval>70.0f</defval>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>drag</declname>
-          <defval>1</defval>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>index</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>active</declname>
-          <defval>true</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para><hruler/>
-</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="658" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="658" bodyend="705"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6b7f0323feb7e44807fc354c3af2907f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::DrawIVec3Control</definition>
-        <argsstring>(const std::string &amp;label, SR_MATH_NS::IVector3 &amp;values, int32_t resetValue=0, float_t columnWidth=70.0f, int32_t drag=1, uint32_t index=0, bool active=true)</argsstring>
-        <name>DrawIVec3Control</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::DrawIVec3Control</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>SR_MATH_NS::IVector3 &amp;</type>
-          <declname>values</declname>
-        </param>
-        <param>
-          <type>int32_t</type>
-          <declname>resetValue</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>float_t</type>
-          <declname>columnWidth</declname>
-          <defval>70.0f</defval>
-        </param>
-        <param>
-          <type>int32_t</type>
-          <declname>drag</declname>
-          <defval>1</defval>
-        </param>
-        <param>
-          <type>uint32_t</type>
-          <declname>index</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>active</declname>
-          <defval>true</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-<para><hruler/>
-</para>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="707" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="707" bodyend="762"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a924b3f5b7e79460d9b726204116d9d42" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::CheckBox</definition>
-        <argsstring>(bool &amp;value)</argsstring>
-        <name>CheckBox</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::CheckBox</qualifiedname>
-        <param>
-          <type>bool &amp;</type>
-          <declname>value</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="764" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="764" bodyend="767"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aed3bf8b630e23cec79210c7a98d34714" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::CheckBox</definition>
-        <argsstring>(const std::string &amp;name, bool &amp;value)</argsstring>
-        <name>CheckBox</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::CheckBox</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>name</declname>
-        </param>
-        <param>
-          <type>bool &amp;</type>
-          <declname>value</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="769" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="769" bodyend="772"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab18a1671e240d13ee5d71c240b197eda" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED void</type>
-        <definition>static SR_MAYBE_UNUSED void SR_GRAPH_GUI_NS::Text</definition>
-        <argsstring>(const char *text)</argsstring>
-        <name>Text</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Text</qualifiedname>
-        <param>
-          <type>const char *</type>
-          <declname>text</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="774" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="774" bodyend="776"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab0543f59616ecb8afad85bf851a68c3a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED ImGuiDataType_</type>
-        <definition>static SR_MAYBE_UNUSED ImGuiDataType_ SR_GRAPH_GUI_NS::GetImGuiDataType</definition>
-        <argsstring>(std::string_view type)</argsstring>
-        <name>GetImGuiDataType</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::GetImGuiDataType</qualifiedname>
-        <param>
-          <type>std::string_view</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="778" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="778" bodyend="789"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a37eb75beafad1086d7f51debf7f42a34" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED ImGuiDataType_</type>
-        <definition>static SR_MAYBE_UNUSED ImGuiDataType_ SR_GRAPH_GUI_NS::GetImGuiDataType</definition>
-        <argsstring>(uint64_t size, bool isSigned, bool isIntegral)</argsstring>
-        <name>GetImGuiDataType</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::GetImGuiDataType</qualifiedname>
-        <param>
-          <type>uint64_t</type>
-          <declname>size</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>isSigned</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>isIntegral</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="791" column="43" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="791" bodyend="827"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a062866ab2b8a022fa9eef1162c2b575f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED <ref refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion" kindref="compound">ImGuiDataTypeUnion</ref></type>
-        <definition>static SR_MAYBE_UNUSED ImGuiDataTypeUnion SR_GRAPH_GUI_NS::ReadImGuiDataType</definition>
-        <argsstring>(void *pData, ImGuiDataType_ type)</argsstring>
-        <name>ReadImGuiDataType</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::ReadImGuiDataType</qualifiedname>
-        <param>
-          <type>void *</type>
-          <declname>pData</declname>
-        </param>
-        <param>
-          <type>ImGuiDataType_</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="842" column="47" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="842" bodyend="858"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5f9b63f89d85855f35967938cd77361c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED void</type>
-        <definition>static SR_MAYBE_UNUSED void SR_GRAPH_GUI_NS::WriteImGuiDataType</definition>
-        <argsstring>(void *pData, ImGuiDataType_ type, ImGuiDataTypeUnion value)</argsstring>
-        <name>WriteImGuiDataType</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::WriteImGuiDataType</qualifiedname>
-        <param>
-          <type>void *</type>
-          <declname>pData</declname>
-        </param>
-        <param>
-          <type>ImGuiDataType_</type>
-          <declname>type</declname>
-        </param>
-        <param>
-          <type><ref refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion" kindref="compound">ImGuiDataTypeUnion</ref></type>
-          <declname>value</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="860" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="860" bodyend="874"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aef90a842724e07c189128d056f7f7645" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED void</type>
-        <definition>static SR_MAYBE_UNUSED void SR_GRAPH_GUI_NS::ColoredText</definition>
-        <argsstring>(const char *text, const ImVec4 &amp;color)</argsstring>
-        <name>ColoredText</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::ColoredText</qualifiedname>
-        <param>
-          <type>const char *</type>
-          <declname>text</declname>
-        </param>
-        <param>
-          <type>const ImVec4 &amp;</type>
-          <declname>color</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="876" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="876" bodyend="880"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a29ca8a53442fd3e1ce4273fa049a0cfe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED void</type>
-        <definition>static SR_MAYBE_UNUSED void SR_GRAPH_GUI_NS::ColoredText</definition>
-        <argsstring>(const std::string &amp;text, const ImVec4 &amp;color)</argsstring>
-        <name>ColoredText</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::ColoredText</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>text</declname>
-        </param>
-        <param>
-          <type>const ImVec4 &amp;</type>
-          <declname>color</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="882" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="882" bodyend="886"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a05696e973a8c333d8cc516a58fa7c27d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED uint32_t</type>
-        <definition>static SR_MAYBE_UNUSED uint32_t SR_GRAPH_GUI_NS::BeginForceEnabled</definition>
-        <argsstring>()</argsstring>
-        <name>BeginForceEnabled</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::BeginForceEnabled</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="888" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="888" bodyend="894"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a8164b025c1fd60aca994d7c34c0b05fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED void</type>
-        <definition>static SR_MAYBE_UNUSED void SR_GRAPH_GUI_NS::EndForceEnabled</definition>
-        <argsstring>(uint32_t stackSize)</argsstring>
-        <name>EndForceEnabled</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EndForceEnabled</qualifiedname>
-        <param>
-          <type>uint32_t</type>
-          <declname>stackSize</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="896" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="896" bodyend="900"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af33de3ae3b4b61b070e50b1a45e72643" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::Button</definition>
-        <argsstring>(const std::string &amp;label, ImVec4 color=ImVec4(0, 0, 0, 0), ImVec4 hovered=ImVec4(0, 0, 0, 0), void *pIdentifier=nullptr)</argsstring>
-        <name>Button</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Button</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>color</declname>
-          <defval>ImVec4(0, 0, 0, 0)</defval>
-        </param>
-        <param>
-          <type>ImVec4</type>
-          <declname>hovered</declname>
-          <defval>ImVec4(0, 0, 0, 0)</defval>
-        </param>
-        <param>
-          <type>void *</type>
-          <declname>pIdentifier</declname>
-          <defval>nullptr</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="902" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="902" bodyend="926"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab56f09f70e5a9a9114e1b6d61bb94075" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::Button</definition>
-        <argsstring>(const std::string &amp;label, void *pIdentifier)</argsstring>
-        <name>Button</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Button</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>void *</type>
-          <declname>pIdentifier</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="928" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="928" bodyend="930"/>
-      </memberdef>
       <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abe406f7972f29e6bca7a628616184d08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_GRAPH_GUI_NS::RadioButton</definition>
@@ -1487,129 +347,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="932" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="932" declcolumn="10"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abc68da0b8e5d201bf2fe0ee6a981320c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_GUI_NS::CheckboxNoNavFocus</definition>
-        <argsstring>(const char *label, bool *v)</argsstring>
-        <name>CheckboxNoNavFocus</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::CheckboxNoNavFocus</qualifiedname>
-        <param>
-          <type>const char *</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>bool *</type>
-          <declname>v</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="934" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="934" declcolumn="10"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a286b114624281e62e60b292fc5bfd828" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SR_GRAPH_GUI_NS::ButtonBehaviorNoNavFocus</definition>
-        <argsstring>(const ImRect &amp;bb, ImGuiID id, bool *out_hovered, bool *out_held, ImGuiButtonFlags flags=0)</argsstring>
-        <name>ButtonBehaviorNoNavFocus</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::ButtonBehaviorNoNavFocus</qualifiedname>
-        <param>
-          <type>const ImRect &amp;</type>
-          <declname>bb</declname>
-        </param>
-        <param>
-          <type>ImGuiID</type>
-          <declname>id</declname>
-        </param>
-        <param>
-          <type>bool *</type>
-          <declname>out_hovered</declname>
-        </param>
-        <param>
-          <type>bool *</type>
-          <declname>out_held</declname>
-        </param>
-        <param>
-          <type>ImGuiButtonFlags</type>
-          <declname>flags</declname>
-          <defval>0</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="935" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="935" declcolumn="10"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ac3057deeee553cf0b79c7e37b6d674cb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED float</type>
-        <definition>static SR_MAYBE_UNUSED float SR_GRAPH_GUI_NS::CalcMaxPopupHeightFromItemCount</definition>
-        <argsstring>(int items_count)</argsstring>
-        <name>CalcMaxPopupHeightFromItemCount</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::CalcMaxPopupHeightFromItemCount</qualifiedname>
-        <param>
-          <type>int</type>
-          <declname>items_count</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="937" column="34" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="937" bodyend="943"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1adb8b818f79aa27d557540378f14e18fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED bool</type>
-        <definition>static SR_MAYBE_UNUSED bool SR_GRAPH_GUI_NS::BeginNodeCombo</definition>
-        <argsstring>(const char *label, const char *preview_value, ImGuiComboFlags flags=0)</argsstring>
-        <name>BeginNodeCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::BeginNodeCombo</qualifiedname>
-        <param>
-          <type>const char *</type>
-          <declname>label</declname>
-        </param>
-        <param>
-          <type>const char *</type>
-          <declname>preview_value</declname>
-        </param>
-        <param>
-          <type>ImGuiComboFlags</type>
-          <declname>flags</declname>
-          <defval>0</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="945" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="945" bodyend="1065"/>
-      </memberdef>
-      <memberdef kind="function" id="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a621d795ee208676a0387a05649bed4f7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MAYBE_UNUSED void</type>
-        <definition>static SR_MAYBE_UNUSED void SR_GRAPH_GUI_NS::EndNodeCombo</definition>
-        <argsstring>()</argsstring>
-        <name>EndNodeCombo</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::EndNodeCombo</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="1067" column="33" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" bodystart="1067" bodyend="1073"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" line="28" column="10" declfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h" declline="28" declcolumn="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="11" column="1"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="10" column="1"/>
   </compounddef>
 </doxygen>

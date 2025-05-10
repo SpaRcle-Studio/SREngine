@@ -126,9 +126,9 @@ namespace SR_MATH_NS {
         FColor(const Vector4<Unit>& v);
         FColor(const FColor& color);
         FColor(FColor&& color);
-        FColor(double_t _x, double_t _y, double_t _z, double_t _w);
-        FColor(float_t _x, float_t _y, float_t _z, float_t _w);
-        FColor(int32_t _x, int32_t _y, int32_t _z, int32_t _w);
+        FColor(double_t _x, double_t _y, double_t _z, double_t _w = 1.0);
+        FColor(float_t _x, float_t _y, float_t _z, float_t _w = 1.f);
+        FColor(int32_t _x, int32_t _y, int32_t _z, int32_t _w = 1);
 
         FColor& operator=(const FColor& color);
         FColor& operator=(FColor&& color);

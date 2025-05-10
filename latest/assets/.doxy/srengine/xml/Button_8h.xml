@@ -15,8 +15,6 @@
         <link refid="IButton_8h_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
-        </childnode>
       </node>
       <node id="3">
         <label>Graphics/Types/IRenderComponent.h</label>

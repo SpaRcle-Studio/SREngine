@@ -406,7 +406,7 @@ namespace SR_UTILS_NS {
         if (SR_UTILS_NS::EnumReflectorManager::Instance()                                                               \
             .GetReflector(SR_CODEGEN_GET_ENUM_HASH_NAME_BY_TYPE(enumName())))                                           \
         {                                                                                                               \
-            return true;                                                                                                \
+            return false;                                                                                               \
         }                                                                                                               \
         SR_UTILS_NS::EnumReflectorManager::Instance()                                                                   \
                 .RegisterReflector(SR_CODEGEN_ALLOCATE_ENUM_REFLECTOR(enumName()));                                     \

@@ -18,7 +18,8 @@
 * `#include <Utils/Types/Function.h>`
 * `#include <Utils/Input/InputSystem.h>`
 * `#include <Utils/Input/InputHandler.h>`
-* `#include <Graphics/GUI/ImGUI.h>`
+* `#include <Graphics/GUI/ImmediateGUI.h>`
+* `#include <Enum/WindowFlags.hpp>`
 
 
 

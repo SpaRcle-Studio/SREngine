@@ -220,6 +220,13 @@ namespace SR_MATH_NS {
             return (x > 0 || y > 0);
         }
 
+        SR_NODISCARD Vector2 Clamp(const Vector2& min, const Vector2& max) const {
+            return Vector2(
+                SR_CLAMP(x, min.x, max.x),
+                SR_CLAMP(y, min.y, max.y)
+            );
+        }
+
         template<typename U> SR_NODISCARD bool Contains(U value) const {
             return x == static_cast<T>(value) || y == static_cast<T>(value);
         }

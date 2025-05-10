@@ -40,11 +40,11 @@ namespace SR_GRAPH_GUI_NS {
         using PinType = SR_SRLM_NS::DataTypeClass;
     public:
         Node();
-        explicit Node(const std::string& name);
+        //explicit Node(const std::string& name);
         //explicit Node(SR_SRLM_NS::LogicalNode* pNode);
-        Node(const std::string& name, NodeType type);
-        Node(const std::string& name, ImColor color);
-        Node(std::string  name, NodeType type, ImColor color);
+        //Node(const std::string& name, NodeType type);
+      // Node(const std::string& name, ImColor color);
+      // Node(std::string  name, NodeType type, ImColor color);
 
         ~Node() override;
 
@@ -89,7 +89,7 @@ namespace SR_GRAPH_GUI_NS {
         std::string m_name;
         std::vector<Pin*> m_inputs;
         std::vector<Pin*> m_outputs;
-        ImColor m_color = ImColor(255, 255, 255, 255);
+       // ImColor m_color = ImColor(255, 255, 255, 255);
         NodeType m_type = NodeType::None;
         float_t m_maxOutputWidth = 0.f;
         bool m_hasOutputDelegates = false;

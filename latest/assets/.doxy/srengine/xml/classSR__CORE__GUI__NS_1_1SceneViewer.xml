@@ -91,9 +91,9 @@
         </inbodydescription>
         <location file="Engine/Core/inc/Core/GUI/SceneViewer.h" line="69" column="30" bodyfile="Engine/Core/inc/Core/GUI/SceneViewer.h" bodystart="69" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneViewer_1a34b23c91cba969107118ee366ca68f84" prot="private" static="no" mutable="no">
-        <type>ImVec2</type>
-        <definition>ImVec2 SR_CORE_GUI_NS::SceneViewer::m_imagePosition</definition>
+      <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneViewer_1a5d1e5b2e9ec372d7554b95823fae5e9d" prot="private" static="no" mutable="no">
+        <type>SR_MATH_NS::FVector2</type>
+        <definition>SR_MATH_NS::FVector2 SR_CORE_GUI_NS::SceneViewer::m_imagePosition</definition>
         <argsstring></argsstring>
         <name>m_imagePosition</name>
         <qualifiedname>SR_CORE_GUI_NS::SceneViewer::m_imagePosition</qualifiedname>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/inc/Core/GUI/SceneViewer.h" line="70" column="16" bodyfile="Engine/Core/inc/Core/GUI/SceneViewer.h" bodystart="70" bodyend="-1"/>
+        <location file="Engine/Core/inc/Core/GUI/SceneViewer.h" line="70" column="30" bodyfile="Engine/Core/inc/Core/GUI/SceneViewer.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__CORE__GUI__NS_1_1SceneViewer_1a9a354b9745b4300b47c33c666b9c7cec" prot="private" static="no" mutable="no">
         <type>WindowPtr</type>
@@ -866,7 +866,7 @@
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1abeb3023d53be0dda6983476e68427134" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_gizmo</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1afea6dc96acea20899a151e20f619d8ad" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_hierarchy</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1adea3d3ea595462ffd07969dc6d08782c" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_id</name></member>
-      <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a34b23c91cba969107118ee366ca68f84" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_imagePosition</name></member>
+      <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a5d1e5b2e9ec372d7554b95823fae5e9d" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_imagePosition</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ae90cdde77b8d1e1393dca3804931f8f6" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_isPrefab</name></member>
       <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a078a3633e33b1c60a186062f1932417b" prot="private" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_mousePos</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Widget_1a97257c8a73c16a33020b1bdda27f054e" prot="protected" virt="non-virtual"><scope>SR_CORE_GUI_NS::SceneViewer</scope><name>m_mutex</name></member>

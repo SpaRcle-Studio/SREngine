@@ -3174,8 +3174,6 @@
     <member refid="classSR__CORE__GUI__NS_1_1EngineSettings_1abd6fabdeda3f62dc1ff897b7090547f2" kind="function"><name>DrawEditorSettings</name></member>
   </compound>
   <compound refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics" kind="class"><name>SR_CORE_NS::GUI::EngineStatistics</name>
-    <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a498fdb7725159adc3e317d9a32a65c2a" kind="variable"><name>m_nodeFlagsWithChild</name></member>
-    <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4ac85bed22c4e57f272fba3cec94df9a" kind="variable"><name>m_nodeFlagsWithoutChild</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1af0fd71fb613f9622c250adb9f56fe026" kind="function"><name>EngineStatistics</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a503dcea7efdf4db771623bb9e9551a29" kind="function"><name>~EngineStatistics</name></member>
     <member refid="classSR__CORE__NS_1_1GUI_1_1EngineStatistics_1a4e3e6e73b001338101a0fb76ba6de98c" kind="function"><name>Draw</name></member>
@@ -3572,9 +3570,9 @@
     <member refid="classSR__MATH__NS_1_1FColor_1a581552e7c0125eadef43f2b097227922" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1a83f9f354190051b144d8893c881d78ef" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1ad02de94e4d7a9d32ce4dd156de761b9a" kind="function"><name>FColor</name></member>
-    <member refid="classSR__MATH__NS_1_1FColor_1a99963865295c514541fab589b7885e8e" kind="function"><name>FColor</name></member>
-    <member refid="classSR__MATH__NS_1_1FColor_1a033f326db3181f06ef11d2b33bf6de08" kind="function"><name>FColor</name></member>
-    <member refid="classSR__MATH__NS_1_1FColor_1a7e0e7e8ab90522d66664a98b20afdf42" kind="function"><name>FColor</name></member>
+    <member refid="classSR__MATH__NS_1_1FColor_1a38472ff5915aa0ea8b23880127b863c9" kind="function"><name>FColor</name></member>
+    <member refid="classSR__MATH__NS_1_1FColor_1a26df06c6752a236329e577e5a3950e22" kind="function"><name>FColor</name></member>
+    <member refid="classSR__MATH__NS_1_1FColor_1aebae8b22049b6d6fc3d778f88be46698" kind="function"><name>FColor</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1acf4193febf48960d11f93a6a8f73ad55" kind="function"><name>operator=</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1a45517e2ec13c5b243c7ec22c3fd14736" kind="function"><name>operator=</name></member>
     <member refid="classSR__MATH__NS_1_1FColor_1aabca4c8ff5647fc5da286b6d7efb4cf1" kind="function"><name>operator==</name></member>
@@ -4425,10 +4423,6 @@
     <member refid="structEvoScript_1_1Header_1a3d6e8228d815dec253f6abc3cffea694" kind="function"><name>ToString</name></member>
   </compound>
   <compound refid="classSR__CORE__GUI__NS_1_1Hierarchy" kind="class"><name>SR_CORE_GUI_NS::Hierarchy</name>
-    <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a51b48dd360db44fff29a46aed31b5b67" kind="variable"><name>SR_PREFAB_COLOR_FIRST</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ae6d836cd0570a9a215ab51fe6f3cbe5b" kind="variable"><name>SR_PREFAB_COLOR_SECOND</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a01276bbc75e83719c2b6e402bf0c77a0" kind="variable"><name>m_nodeFlagsWithChild</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1acc32c67b3b08915d90b309edf0e8573b" kind="variable"><name>m_nodeFlagsWithoutChild</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1aa87072ea55fd69d87164f5da18ed13e3" kind="variable"><name>m_scene</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1ab78d66a50cb4fb66c63950ef3668bff9" kind="variable"><name>m_pointersHolder</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1Hierarchy_1a9bda454833af0943f4e392f88df454e7" kind="variable"><name>m_selected</name></member>
@@ -4892,18 +4886,6 @@
     <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1a3d7e04de493316b7accadeaa49b55d9d" kind="variable"><name>Count</name></member>
     <member refid="structSR__GRAPH__NS_1_1ImGui__ImplVulkanH__WindowRenderBuffers_1aa9e4c505f8bd4fe968be4324685dd77d" kind="variable"><name>FrameRenderBuffers</name></member>
   </compound>
-  <compound refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion" kind="union"><name>SR_GRAPH_GUI_NS::ImGuiDataTypeUnion</name>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a316d910684be9279f202d623779dd763" kind="variable"><name>s8</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a8e24d23c927f84248bc243ac173a88a2" kind="variable"><name>u8</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a3fc45ebcab88678c6404167fb217129f" kind="variable"><name>s16</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a0a148b29e8e503d92b2385f7a9369f1f" kind="variable"><name>u16</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1a1e04b672e2cf5cf3e6addf5f10f79808" kind="variable"><name>s32</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1afee2d520cbfc1342ba9ff1bbb8832ee8" kind="variable"><name>u32</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ae9b1b8af3039a5bbbcb730d50f3e827d" kind="variable"><name>s64</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ad35d484ea3964d7b69abdebd280b576a" kind="variable"><name>u64</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1acca2583438dfddf28f07b8e2cc2db3f6" kind="variable"><name>f32</name></member>
-    <member refid="unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion_1ae462fb3b097ebb8db72ea52b096746c6" kind="variable"><name>f64</name></member>
-  </compound>
   <compound refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard" kind="class"><name>SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard</name>
     <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1a10a55beb9bb8a45cf88859b0cf100b54" kind="variable"><name>m_disabled</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard_1ae618f846d8b0dc1cf896e88163678d6c" kind="function"><name>ImGuiDisabledLockGuard</name></member>
@@ -4911,9 +4893,9 @@
   </compound>
   <compound refid="classSR__GRAPH__NS_1_1ImGuiOverlay" kind="class"><name>SR_GRAPH_NS::ImGuiOverlay</name>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a286f30463aaea1a3dac88473049f426e" kind="typedef"><name>Super</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a3b08b9deb9fa10215e843df10e6dd29f" kind="variable"><name>m_context</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a83517e59edd7d744af608afb0a2ae049" kind="variable"><name>m_mainFont</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a89263cf3f8a80e5b5244d815f011d1aa" kind="variable"><name>m_iconFont</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a22e8eab47e3157978223b3d483c034ab" kind="variable"><name>m_context</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a245183158de0ee8be042e547f725a4fa" kind="variable"><name>m_mainFont</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a30a4bf40c1607b30b3ecba545a78969a" kind="variable"><name>m_iconFont</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aa62e33f562522c9263ec74c7df78b98e" kind="variable"><name>m_fontSize</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1af2b6737175a3b61d45fa930f1b240ab9" kind="variable"><name>m_iconFontSize</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1acf71bed33b451160693a76a086a30ebb" kind="variable"><name>m_iniPathEditor</name></member>
@@ -4922,8 +4904,8 @@
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ac0baff0eada4fe683541bd2a9f06a31e" kind="function"><name>Init</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1ae10700545e1c77349689168f4fd7a622" kind="function"><name>IsUndockingActive</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a9a08f77658d6c7c2e9cb78041515bc77" kind="function"><name>IsViewportsEnabled</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aab06dd953554f04abda13d386cb150a0" kind="function"><name>GetIconFont</name></member>
-    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a7e41a01ab30c165687a590f70030692c" kind="function"><name>GetMainFont</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aed032662e04fb64568068582681acd88" kind="function"><name>GetIconFont</name></member>
+    <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1aafcde9a316b798ae5347d559ab1f0556" kind="function"><name>GetMainFont</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a8dee6af18f237bad8b49808a9ac42292" kind="function"><name>Prepare</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a855b9a4ec2cfc575b08d5c77ef318f63" kind="function"><name>Destroy</name></member>
     <member refid="classSR__GRAPH__NS_1_1ImGuiOverlay_1a75610c97f59a2b12c857a450710fb3d8" kind="function"><name>ReloadFonts</name></member>
@@ -5571,10 +5553,8 @@
   <compound refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kind="class"><name>SR_GRAPH_NS::GUI::Link</name>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a95cebdab53a63f1f6a22fd34373b3674" kind="variable"><name>m_startPin</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a7b6268dbf7c607fe7dc3c69cdf9f9974" kind="variable"><name>m_endPin</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1ac6dce82345c3e35da67c507c1b4510c6" kind="variable"><name>m_color</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a00697d0323a206e5d26a8544ca270a8f" kind="function"><name>Link</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1af6b5981e30f48cdbce10fb73e2edfedd" kind="function"><name>Link</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a75f733c6790ad2bfc59e917e59e31c70" kind="function"><name>Link</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a8cc1a5d905aaf2f407aea861aa832224" kind="function"><name>~Link</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a0a4d52650633ec2cd3c0e8b8afedf1f3" kind="function"><name>GetId</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a89956522f37dd1b001939da92ec8fd9b" kind="function"><name>IsLinked</name></member>
@@ -5836,7 +5816,6 @@
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a51c37cb2d054e0deda3b11bb87b06301" kind="function"><name>Finalize</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aa69dab7b5cefb44e538578318429af6a" kind="function"><name>UseUniforms</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1ae13251bf9847eb3c754f3ec0de776182" kind="function"><name>UseSamplers</name></member>
-    <member refid="classSR__GRAPH__NS_1_1MaterialData_1ac3ed00ce2c287682d7f916ac81e7623b" kind="function"><name>SetOwnedMaterial</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1a40b6fc6e023ad0071d3a0cd34b60c067" kind="function"><name>GetDefaultShaderData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1ab704be2cb81ff691dd3f823f0695a350" kind="function"><name>GetDefaultShaderData</name></member>
     <member refid="classSR__GRAPH__NS_1_1MaterialData_1aac9f67e5d24ecca0cd89b69c2975a7a6" kind="function"><name>GetShadersData</name></member>
@@ -6571,15 +6550,10 @@
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a0b50c0eb1b53cbf8fb40c989b3154c55" kind="variable"><name>m_name</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a09ba269c19262b737b32c5fe9e67d604" kind="variable"><name>m_inputs</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1aea97141a61bc9b22710dea863b51e540" kind="variable"><name>m_outputs</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a13211d868755098c511789d733631e7b" kind="variable"><name>m_color</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ab8bcdf1132cd38b63600d4bc850887ae" kind="variable"><name>m_type</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a6a69ff01625b70e5168144868b086de0" kind="variable"><name>m_maxOutputWidth</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a11c2ac2c131157f1d6fd98653261d231" kind="variable"><name>m_hasOutputDelegates</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1aca07c4907c659a4d6f116058e9220ee5" kind="function"><name>Node</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ae0227403fa4760a85bbc2de608598108" kind="function"><name>Node</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ab18d29177f6b75fe1d09d48f4d89af8a" kind="function"><name>Node</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Node_1a82e66422cfd7e2803919dcecb73b4382" kind="function"><name>Node</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Node_1ae4db3a352e3d7bc6e4658373b2b07d80" kind="function"><name>Node</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1af1721c4cd74c5c9d2cb4329ff2365f48" kind="function"><name>~Node</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1acab81c34447f86284724c7800eb05966" kind="function"><name>AddInput</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Node_1acdc9aad544455cd1f9f98b32e6d85631" kind="function"><name>AddOutput</name></member>
@@ -6710,15 +6684,11 @@
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ac4dafb35d01d34c364201d85428d8878" kind="variable"><name>m_currentNode</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae2682e5910d3ba5285c5e8b5afb1549d" kind="variable"><name>m_currentPin</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae09f47eb8fcc1838e0dad285e891e726" kind="variable"><name>m_currentStage</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a474de23ab4347c7a35157b8e6b31289a" kind="variable"><name>m_headerColor</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a757308d3f45fb60411476ce3265be0c2" kind="variable"><name>m_headerMin</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a73a3b433b020b75622c36f0aa51a1f44" kind="variable"><name>m_headerMax</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae3f2bce2f05af7a20594c51bcf467e70" kind="variable"><name>m_hasHeader</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6be6b2164722be93d90da835424741ee" kind="function"><name>NodeBuilder</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a47223e89216a464dd784684d8a3e9c72" kind="function"><name>~NodeBuilder</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a3b6d535c3044bd47dd9a3164b5b00d15" kind="function"><name>Begin</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7f740b5d0b701ddb0025e4c3d283eafd" kind="function"><name>End</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a0a68b8d3585f332eeb3f76c8ab41a543" kind="function"><name>Header</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a75cd670eb7d489b6185d24e74a2e8b7d" kind="function"><name>EndHeader</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa0409a84d4d648c0c14fb991d2fffc87" kind="function"><name>Input</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a992864431d1a812a7ac685ef8563fd54" kind="function"><name>EndInput</name></member>
@@ -6726,7 +6696,6 @@
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a7d64622abb2b73fe86b8ba2ecfae0ae4" kind="function"><name>Output</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1af4f5bd5eaf79515dcdc62d3b4c160663" kind="function"><name>EndOutput</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa357267b8680c8c86c970b89d3bc45f9" kind="function"><name>SetStage</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae5ca76f9e44fc8c519d0e5af22103460" kind="function"><name>GetTextureId</name></member>
   </compound>
   <compound refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodeConnect" kind="struct"><name>SR_SRLM_NS::LogicalNode::NodeConnect</name>
     <member refid="structSR__SRLM__NS_1_1LogicalNode_1_1NodeConnect_1a776a394bfc6e6975332410b500b88d84" kind="variable"><name>pNode</name></member>
@@ -7656,7 +7625,6 @@
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a0a81d2d31d15aa888c21ee8dbf4a5e5c" kind="function"><name>GetName</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1aa25b5ad5c2af3aa66e1d31a07ca9e644" kind="function"><name>Begin</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a18057decb2c147c3880afebb252b7ff1" kind="function"><name>End</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adb26ac8f303222021b1381ee2d8a3a8c" kind="function"><name>GetIconColor</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a81dafbaf272de88350c12d7bd2893315" kind="function"><name>GetIconType</name></member>
   </compound>
   <compound refid="classSR__NETWORK__NS_1_1Pinger" kind="class"><name>SR_NETWORK_NS::Pinger</name>
@@ -9604,7 +9572,7 @@
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ae85cf628c834de01ced199c4c0b2f50e" kind="typedef"><name>EnginePtr</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a3cddeae2f37ecc44ad206da1432ed985" kind="variable"><name>CAMERA_XML</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a02106c565ce279d3d376f452d6bfcacf" kind="variable"><name>m_textureSize</name></member>
-    <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a34b23c91cba969107118ee366ca68f84" kind="variable"><name>m_imagePosition</name></member>
+    <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a5d1e5b2e9ec372d7554b95823fae5e9d" kind="variable"><name>m_imagePosition</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a9a354b9745b4300b47c33c666b9c7cec" kind="variable"><name>m_window</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1a994fc6bcc9a92fe58bcb5e0cae4113b3" kind="variable"><name>m_engine</name></member>
     <member refid="classSR__CORE__GUI__NS_1_1SceneViewer_1ab9a4bc3615ab2d0c1ed1b2440cfbd591" kind="variable"><name>m_cameraRotation</name></member>
@@ -11930,15 +11898,13 @@
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a0a67eb4bce4fab2a75605bc35f1e29cc" kind="variable"><name>m_booleans</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a58dee0b602eb7f8ee06a3cd327440e26" kind="function"><name>~Theme</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a6ba20384aa240ef16ccc75f243d26d28" kind="function"><name>Save</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a02e6e8bf86dace3cb92a395b3b3745c1" kind="function"><name>Apply</name></member>
+    <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1ad34882db9108f0d7381adf5ed6ad5395" kind="function"><name>Apply</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a0357d8d87ee9b1ffa499a01784b291ae" kind="function"><name>SetColor</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1abd900de81cb9f165134ac2d3895206f0" kind="function"><name>SetSize</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a5aa4375a001a474f402737e4fedab3f9" kind="function"><name>SetFloat</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a5627df7fabe3092eb732b3cb143cc627" kind="function"><name>SetBool</name></member>
     <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a7ccb3ec8f8c2b54e75d6d0cd9fd616da" kind="function"><name>Load</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1aab32aadf1ecc4f04b6b56af83cab6642" kind="function"><name>Save</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1aa0b4e4bc30d009b9a14e13cf28b515c8" kind="function"><name>ImVec4ToColor</name></member>
-    <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1abf29af98cb1745b27348d0b1ef0377a9" kind="function"><name>ImVec2ToFVector2</name></member>
+    <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a0d178969ed1ec4afb8813653ff4ce350" kind="function"><name>SaveGlobal</name></member>
   </compound>
   <compound refid="classSR__HTYPES__NS_1_1Thread" kind="class"><name>SR_HTYPES_NS::Thread</name>
     <member refid="classSR__HTYPES__NS_1_1Thread_1a3fdf431934199abae6da5b77dff80f41" kind="typedef"><name>Ptr</name></member>
@@ -12849,6 +12815,7 @@
     <member refid="structSR__MATH__NS_1_1Vector2_1ac8517e62ae137a32f9925dd0f6c476f6" kind="function"><name>IsNull</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a4ecefeca4c44ec68d88e250cb2cad1dc" kind="function"><name>HasNegative</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1a22ec8587ef252959d450546eb40c6a2d" kind="function"><name>HasPositive</name></member>
+    <member refid="structSR__MATH__NS_1_1Vector2_1ae241aaf157a5faf8c29ce9a38e619e29" kind="function"><name>Clamp</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1ad51a06323fabb28a0116f60aa07ae6d8" kind="function"><name>Contains</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1ade01e1e78c648726e4bcdb9990d358ec" kind="function"><name>ToGLM</name></member>
     <member refid="structSR__MATH__NS_1_1Vector2_1ab462019c6ebf2c616a3ab9c0edb4d6ee" kind="function"><name>operator[]</name></member>
@@ -13146,8 +13113,8 @@
   <compound refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager" kind="class"><name>SR_GRAPH_NS::GUI::ViewportsTableManager</name>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a1624bbf06b9393bb373db9360f481bfc" kind="variable"><name>m_viewports</name></member>
     <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a4d6a8de7da5dd0339f3a5ce6f1f925e5" kind="function"><name>GetViewportsTable</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a2d0218bfcfb4ef79d199b912a45a3194" kind="function"><name>GetWidgetByViewport</name></member>
-    <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a0f14790ee07d55f5c9642924b02575c9" kind="function"><name>RegisterWidget</name></member>
+    <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a7e853e3fe02f3c29eefa818da5804968" kind="function"><name>GetWidgetByViewport</name></member>
+    <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a1d9943da444b147171254ec4294cbcf3" kind="function"><name>RegisterWidget</name></member>
   </compound>
   <compound refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo" kind="struct"><name>SR_GRAPH_NS::Memory::VirtualProgramInfo</name>
     <member refid="structSR__GRAPH__NS_1_1Memory_1_1VirtualProgramInfo_1a2d10153d943a72feeec7f81885bed816" kind="typedef"><name>Identifier</name></member>
@@ -13809,13 +13776,6 @@
     <member refid="DragNDropHelper_8h_1a8f583e598c3ad9bcd8b97d5a4981a2f9" kind="function"><name>DragDropTargetEntityRef</name></member>
     <member refid="PhysicsMaterialEditor_8h_1a19dda9907fb9a2faa8dff99405a07e5c" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
     <member refid="PropertyDrawer_8h_1ad3c5e0379a5a9e2e3ae9bc8d5f9f22cb" kind="function"><name>GetValueInspector</name></member>
-    <member refid="PropertyDrawer_8h_1ae272b292eb0eaea06dd1449029ad1b75" kind="function"><name>DrawProperty</name></member>
-    <member refid="PropertyDrawer_8h_1a4b51b7f810382c60b2078feaf805108a" kind="function"><name>DrawStandardProperty</name></member>
-    <member refid="PropertyDrawer_8h_1a4c67413f54291fe22dd20548a4bf0730" kind="function"><name>DrawEnumProperty</name></member>
-    <member refid="PropertyDrawer_8h_1aa2244f82d814e66573c43a44368744d3" kind="function"><name>DrawPathProperty</name></member>
-    <member refid="PropertyDrawer_8h_1a98139089957f3d78122bfcf9d884d330" kind="function"><name>DrawPropertyContainer</name></member>
-    <member refid="PropertyDrawer_8h_1a7a5b313f1eaeb7e1aec81e94f37a46e6" kind="function"><name>DrawLabelProperty</name></member>
-    <member refid="PropertyDrawer_8h_1ace27ea4ed8a3d8d2e716374c37e69efc" kind="function"><name>DrawMaterialProperty</name></member>
     <member refid="SceneTools_8h_1aa8b2ff84ec70c0ece49bc053c93d89de" kind="function"><name>SR_ENUM_NS_CLASS_T</name></member>
   </compound>
   <compound refid="namespaceSR__CORE__NS" kind="namespace"><name>SR_CORE_NS</name>
@@ -13845,60 +13805,13 @@
     <member refid="Widget_8h_1a9f5920fd0841539e0befb02657562517a28af6601830d2729f2fc2bc84b4a990b" kind="enumvalue"><name>WIDGET_FLAG_NONE</name></member>
     <member refid="Widget_8h_1a9f5920fd0841539e0befb02657562517ae1490db93af918bff9183199389e9e67" kind="enumvalue"><name>WIDGET_FLAG_HOVERED</name></member>
     <member refid="Widget_8h_1a9f5920fd0841539e0befb02657562517ae292d8be0792d91e396d94f8ce530735" kind="enumvalue"><name>WIDGET_FLAG_FOCUSED</name></member>
-    <member refid="Widget_8h_1a5e0774210d7f3bff26801ae8d5c90d52" kind="typedef"><name>WindowFlags</name></member>
     <member refid="Widget_8h_1a2a94f490905349232b81e65b3e7c7dc0" kind="typedef"><name>WidgetFlagBits</name></member>
-    <member refid="Theme_8h_1a655c8cef6bde4b61a299a7502325bf14" kind="variable"><name>STYLE_FLOAT_VALUES</name></member>
-    <member refid="Theme_8h_1a10a2483913220a04023b7f37b1767c50" kind="variable"><name>STYLE_BOOL_VALUES</name></member>
-    <member refid="Theme_8h_1ada7eff8cdb8c947d874d783e026bcbaf" kind="variable"><name>STYLE_SIZE_VALUES</name></member>
-    <member refid="Theme_8h_1a79f3a8d20e6dd78131c59928194a15f2" kind="variable"><name>STYLE_COLORS</name></member>
+    <member refid="ImmediateGUI_8h_1a1cc326f2878fe63a3b3afc1d6afc4337" kind="function"><name>SR_ENUM_NS_STRUCT_T</name></member>
     <member refid="ImNodeEditorUtils_8h_1a9af30789be4fa58d696559e8226fb4b9" kind="function"><name>IsPinsCompatible</name></member>
     <member refid="ImNodeEditorUtils_8h_1a23d1e46e96a195c85e0d020565cda2a5" kind="function"><name>CanCreateLink</name></member>
     <member refid="Graphics_2inc_2Graphics_2GUI_2Node_8h_1a5d3cf45c7de47f13c53b08ead8d46f2c" kind="function"><name>SR_ENUM_NS_CLASS</name></member>
     <member refid="NodeCreation_8h_1a140794b0e783b160bc16a29414971ac2" kind="function"><name>CreateNode</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ae90c5ef6f6d22a4f4ddf5f9f1390e39f" kind="function"><name>MakeDisableColor</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1acea2c052f332313448439593a89add07" kind="function"><name>EnumCombo</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aa602735175d5e726a72e41d5d518dc15" kind="function"><name>EnumCombo</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5ce57b2b7075c6643fbc8dce44f9e619" kind="function"><name>EnumCombo</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a9b877a182eabff641481cc58b6bcb71d" kind="function"><name>EnumCombo</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5d59228eb91edda38749b439788e0bec" kind="function"><name>EnumCombo</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1add72ee6b61e0676899dd3b7ef4ed0b82" kind="function"><name>Vec4Null</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6036269a7c09ac3db4e637a6410e340d" kind="function"><name>DragUnit</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a1ace4f25ae990f446df4672690840e95" kind="function"><name>DragInt32</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a977644a2c34fc1237376ad85c89004fd" kind="function"><name>DragUInt32</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a91cb2194a1aabc856927ecab72e89ab0" kind="function"><name>InputInt</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ac4718849b91ffe8ac38253f7e27a407d" kind="function"><name>UInputInt32</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af353fdb7ec3e09b6f7c6c41571ae17ff" kind="function"><name>DrawValue</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abf645494623ab6001f072a1da02b6d98" kind="function"><name>DrawValueControl</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abab5d7108083516ba4f55ceba3d4355a" kind="function"><name>DrawSlider</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abec115fcb61bf9194c0c710d73c584f3" kind="function"><name>DrawValueSlider</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6a48d524015657f9236f884a1a7e7f81" kind="function"><name>DrawDataType</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a8c1f08970aa504262a917e89b799d59f" kind="function"><name>DrawColorControl</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5348e27bd2b41938e9eb9b290536926b" kind="function"><name>DrawEditableSlider</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aa66ead40f21d2b6c3bd87e9dd334c6af" kind="function"><name>DrawFRect</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a0b5de189fc0ca30766aae090c82b4c62" kind="function"><name>DrawVec3Control</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a4c63f87c176c2e11ef4ed3e18cb26a78" kind="function"><name>DrawVec2Control</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5095ee015472537fc785edb77cb11113" kind="function"><name>DrawBVec3Control</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af079fc62a10b63fc114bbbcc6cfedc5d" kind="function"><name>DrawUVec2Control</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a6b7f0323feb7e44807fc354c3af2907f" kind="function"><name>DrawIVec3Control</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a924b3f5b7e79460d9b726204116d9d42" kind="function"><name>CheckBox</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aed3bf8b630e23cec79210c7a98d34714" kind="function"><name>CheckBox</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab18a1671e240d13ee5d71c240b197eda" kind="function"><name>Text</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab0543f59616ecb8afad85bf851a68c3a" kind="function"><name>GetImGuiDataType</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a37eb75beafad1086d7f51debf7f42a34" kind="function"><name>GetImGuiDataType</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a062866ab2b8a022fa9eef1162c2b575f" kind="function"><name>ReadImGuiDataType</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a5f9b63f89d85855f35967938cd77361c" kind="function"><name>WriteImGuiDataType</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1aef90a842724e07c189128d056f7f7645" kind="function"><name>ColoredText</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a29ca8a53442fd3e1ce4273fa049a0cfe" kind="function"><name>ColoredText</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a05696e973a8c333d8cc516a58fa7c27d" kind="function"><name>BeginForceEnabled</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a8164b025c1fd60aca994d7c34c0b05fc" kind="function"><name>EndForceEnabled</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1af33de3ae3b4b61b070e50b1a45e72643" kind="function"><name>Button</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ab56f09f70e5a9a9114e1b6d61bb94075" kind="function"><name>Button</name></member>
     <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abe406f7972f29e6bca7a628616184d08" kind="function"><name>RadioButton</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1abc68da0b8e5d201bf2fe0ee6a981320c" kind="function"><name>CheckboxNoNavFocus</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a286b114624281e62e60b292fc5bfd828" kind="function"><name>ButtonBehaviorNoNavFocus</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1ac3057deeee553cf0b79c7e37b6d674cb" kind="function"><name>CalcMaxPopupHeightFromItemCount</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1adb8b818f79aa27d557540378f14e18fd" kind="function"><name>BeginNodeCombo</name></member>
-    <member refid="Graphics_2inc_2Graphics_2GUI_2Utils_8h_1a621d795ee208676a0387a05649bed4f7" kind="function"><name>EndNodeCombo</name></member>
   </compound>
   <compound refid="namespaceSR__GRAPH__NS" kind="namespace"><name>SR_GRAPH_NS</name>
     <member refid="MaterialData_8h_1a098e84cc6eb1cc56ac6e85af61aa02eb" kind="enum"><name>MaterialPropertyChangeResult</name></member>
@@ -14043,10 +13956,8 @@
     <member refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_1adf6c7115c6f3d9252b81a3d0afb3c5f6aebd527eb8d96172ef234f5af561fc22f" kind="enumvalue"><name>MESSAGE_BOX_CANCEL</name></member>
     <member refid="Graphics_2inc_2Graphics_2GUI_2Editor_2MessageBox_8h_1ae8f79e582dcf58edc6a0a97df65f4af1" kind="typedef"><name>MessageBoxButton</name></member>
     <member refid="WidgetManager_8h_1a89ad2c44c7d87160a6db056aea99b76a" kind="typedef"><name>Widgets</name></member>
-    <member refid="WidgetManager_8h_1a7e030ecee6b676f3fe290df435a457bd" kind="typedef"><name>ViewportsTable</name></member>
+    <member refid="WidgetManager_8h_1a648280d3801cc9839758d5d88c2d1b2c" kind="typedef"><name>ViewportsTable</name></member>
     <member refid="Icons_8h_1a9486b33e6b46856ea388768a7ef39363" kind="function"><name>SR_ENUM_NS_CLASS</name></member>
-    <member refid="Icons_8h_1a6b1ab3ccb6e98e4e38675425a8b7f05e" kind="function"><name>DrawIcon</name></member>
-    <member refid="Icons_8h_1a753bc9f21a41b35b2609b7676375e56a" kind="function"><name>Icon</name></member>
     <member refid="Pin_8h_1ae7452f372f1a5073afa73d607d90a7f2" kind="function"><name>SR_ENUM_NS_CLASS</name></member>
   </compound>
   <compound refid="namespaceSR__GRAPH__NS_1_1Memory" kind="namespace"><name>SR_GRAPH_NS::Memory</name>
@@ -15310,8 +15221,6 @@
   </compound>
   <compound refid="Theme_8h" kind="file"><name>Theme.h</name>
   </compound>
-  <compound refid="ICanvas_8h" kind="file"><name>ICanvas.h</name>
-  </compound>
   <compound refid="Icons_8h" kind="file"><name>Icons.h</name>
     <member refid="Icons_8h_1aa94318e528411bbb116d0f47bffc1f14" kind="define"><name>SR_ICON_MIN</name></member>
     <member refid="Icons_8h_1a4157344dea4d6a9795317de31c91e3fb" kind="define"><name>SR_ICON_MAX</name></member>
@@ -15355,6 +15264,8 @@
     <member refid="Icons_8h_1a916b962c3f999d6dfae60c0ae9899244" kind="variable"><name>SR_ICONS</name></member>
   </compound>
   <compound refid="ImGUI_8h" kind="file"><name>ImGUI.h</name>
+  </compound>
+  <compound refid="ImmediateGUI_8h" kind="file"><name>ImmediateGUI.h</name>
   </compound>
   <compound refid="ImNodeEditorUtils_8h" kind="file"><name>ImNodeEditorUtils.h</name>
   </compound>

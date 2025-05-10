@@ -113,8 +113,8 @@ Inherits the following classes: [SR\_UTILS\_NS::Singleton](classSR__UTILS__NS_1_
 | Type | Name |
 | ---: | :--- |
 |  SR\_NODISCARD ViewportsTable & | [**GetViewportsTable**](#function-getviewportstable) () <br> |
-|  SR\_NODISCARD Widget \* | [**GetWidgetByViewport**](#function-getwidgetbyviewport) (ImGuiViewport \* viewport) const<br> |
-|  void | [**RegisterWidget**](#function-registerwidget) (Widget \* widget, ImGuiViewport \* viewport) <br> |
+|  SR\_NODISCARD Widget \* | [**GetWidgetByViewport**](#function-getwidgetbyviewport) (void \* viewport) const<br> |
+|  void | [**RegisterWidget**](#function-registerwidget) (Widget \* widget, void \* viewport) <br> |
 
 
 
@@ -311,7 +311,7 @@ inline SR_NODISCARD ViewportsTable & SR_GRAPH_NS::GUI::ViewportsTableManager::Ge
 
 ```C++
 SR_NODISCARD Widget * SR_GRAPH_NS::GUI::ViewportsTableManager::GetWidgetByViewport (
-    ImGuiViewport * viewport
+    void * viewport
 ) const
 ```
 
@@ -327,7 +327,7 @@ SR_NODISCARD Widget * SR_GRAPH_NS::GUI::ViewportsTableManager::GetWidgetByViewpo
 ```C++
 void SR_GRAPH_NS::GUI::ViewportsTableManager::RegisterWidget (
     Widget * widget,
-    ImGuiViewport * viewport
+    void * viewport
 ) 
 ```
 

@@ -149,49 +149,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="61" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="61" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a474de23ab4347c7a35157b8e6b31289a" prot="private" static="no" mutable="no">
-        <type>ImU32</type>
-        <definition>ImU32 SR_GRAPH_NS::GUI::NodeBuilder::m_headerColor</definition>
-        <argsstring></argsstring>
-        <name>m_headerColor</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_headerColor</qualifiedname>
-        <initializer>= 0</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="62" column="15" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="62" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a757308d3f45fb60411476ce3265be0c2" prot="private" static="no" mutable="no">
-        <type>ImVec2</type>
-        <definition>ImVec2 SR_GRAPH_NS::GUI::NodeBuilder::m_headerMin</definition>
-        <argsstring></argsstring>
-        <name>m_headerMin</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_headerMin</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="64" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="64" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a73a3b433b020b75622c36f0aa51a1f44" prot="private" static="no" mutable="no">
-        <type>ImVec2</type>
-        <definition>ImVec2 SR_GRAPH_NS::GUI::NodeBuilder::m_headerMax</definition>
-        <argsstring></argsstring>
-        <name>m_headerMax</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::m_headerMax</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="65" column="16" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" bodystart="65" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae3f2bce2f05af7a20594c51bcf467e70" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool SR_GRAPH_NS::GUI::NodeBuilder::m_hasHeader</definition>
@@ -272,25 +229,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="35" column="14"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a0a68b8d3585f332eeb3f76c8ab41a543" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SR_GRAPH_NS::GUI::NodeBuilder::Header</definition>
-        <argsstring>(const ImVec4 &amp;color=ImVec4(1, 1, 1, 1))</argsstring>
-        <name>Header</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::Header</qualifiedname>
-        <param>
-          <type>const ImVec4 &amp;</type>
-          <declname>color</declname>
-          <defval>ImVec4(1, 1, 1, 1)</defval>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="37" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a75cd670eb7d489b6185d24e74a2e8b7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -404,20 +342,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="49" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae5ca76f9e44fc8c519d0e5af22103460" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD ImTextureID</type>
-        <definition>SR_NODISCARD ImTextureID SR_GRAPH_NS::GUI::NodeBuilder::GetTextureId</definition>
-        <argsstring>() const</argsstring>
-        <name>GetTextureId</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::NodeBuilder::GetTextureId</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/NodeBuilder.h" line="51" column="34"/>
-      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -454,17 +378,12 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a75cd670eb7d489b6185d24e74a2e8b7d" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>EndHeader</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a992864431d1a812a7ac685ef8563fd54" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>EndInput</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1af4f5bd5eaf79515dcdc62d3b4c160663" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>EndOutput</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae5ca76f9e44fc8c519d0e5af22103460" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>GetTextureId</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a0a68b8d3585f332eeb3f76c8ab41a543" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Header</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1aa0409a84d4d648c0c14fb991d2fffc87" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Input</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ac4dafb35d01d34c364201d85428d8878" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentNode</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6d33ec119c71986fc40157842b0d80c5" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentNodeId</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae2682e5910d3ba5285c5e8b5afb1549d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentPin</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae09f47eb8fcc1838e0dad285e891e726" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_currentStage</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1ae3f2bce2f05af7a20594c51bcf467e70" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_hasHeader</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a474de23ab4347c7a35157b8e6b31289a" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_headerColor</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a73a3b433b020b75622c36f0aa51a1f44" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_headerMax</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a757308d3f45fb60411476ce3265be0c2" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_headerMin</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a758ebc09b55ab171622f269dee3f9b1d" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>m_texture</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a92c3c2944e4be77744de7586e451f4e2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>Middle</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1NodeBuilder_1a6be6b2164722be93d90da835424741ee" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::NodeBuilder</scope><name>NodeBuilder</name></member>

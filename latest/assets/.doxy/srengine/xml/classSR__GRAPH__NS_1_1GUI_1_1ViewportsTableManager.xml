@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="103" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="103" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="101" column="24" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="101" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -32,16 +32,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="97" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="97" bodyend="97"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="95" column="37" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="95" bodyend="95"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a2d0218bfcfb4ef79d199b912a45a3194" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a7e853e3fe02f3c29eefa818da5804968" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>SR_NODISCARD Widget *</type>
         <definition>SR_NODISCARD Widget * SR_GRAPH_NS::GUI::ViewportsTableManager::GetWidgetByViewport</definition>
-        <argsstring>(ImGuiViewport *viewport) const</argsstring>
+        <argsstring>(void *viewport) const</argsstring>
         <name>GetWidgetByViewport</name>
         <qualifiedname>SR_GRAPH_NS::GUI::ViewportsTableManager::GetWidgetByViewport</qualifiedname>
         <param>
-          <type>ImGuiViewport *</type>
+          <type>void *</type>
           <declname>viewport</declname>
         </param>
         <briefdescription>
@@ -50,12 +50,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="98" column="29"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="96" column="29"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a0f14790ee07d55f5c9642924b02575c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a1d9943da444b147171254ec4294cbcf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SR_GRAPH_NS::GUI::ViewportsTableManager::RegisterWidget</definition>
-        <argsstring>(Widget *widget, ImGuiViewport *viewport)</argsstring>
+        <argsstring>(Widget *widget, void *viewport)</argsstring>
         <name>RegisterWidget</name>
         <qualifiedname>SR_GRAPH_NS::GUI::ViewportsTableManager::RegisterWidget</qualifiedname>
         <param>
@@ -63,7 +63,7 @@
           <declname>widget</declname>
         </param>
         <param>
-          <type>ImGuiViewport *</type>
+          <type>void *</type>
           <declname>viewport</declname>
         </param>
         <briefdescription>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="100" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="98" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -127,13 +127,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="94" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="94" bodyend="104"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" line="92" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/WidgetManager.h" bodystart="92" bodyend="102"/>
     <listofallmembers>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a29df1fb30e5193314521751c849d4015" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>DestroySingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a6f131e2fa1b2641f7e9ea8662ba8da53" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>GetMutex</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a1d7307e4951c10421c21733f6fdc8977" prot="protected" virt="pure-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>GetSingletonName</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a4d6a8de7da5dd0339f3a5ce6f1f925e5" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>GetViewportsTable</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a2d0218bfcfb4ef79d199b912a45a3194" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>GetWidgetByViewport</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a7e853e3fe02f3c29eefa818da5804968" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>GetWidgetByViewport</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a539c67296b5f3dc3c99f0a3970ad9332" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>InitSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1ad6f59c12e431ce503ac7316ceaa4a5f2" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>Instance</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1aec4b20fa9410d3b3ffb866ad2307a3cc" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>IsSingletonCanBeDestroyed</name></member>
@@ -145,7 +145,7 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8d801220802e887b834edb520b1bf342" prot="protected" virt="virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>OnSingletonDestroy</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>operator=</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a0f14790ee07d55f5c9642924b02575c9" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>RegisterWidget</name></member>
+      <member refid="classSR__GRAPH__NS_1_1GUI_1_1ViewportsTableManager_1a1d9943da444b147171254ec4294cbcf3" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>RegisterWidget</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a2e34219de0ab53d51b60dd970d07c6ff" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>ScopeLockSingleton</name></member>
       <member refid="classSR__UTILS__NS_1_1Singleton_1a0e21dfc9afab45b0a6a70f6665ce5819" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>Singleton</name></member>
       <member refid="classSR__UTILS__NS_1_1SingletonBase_1a8ae4876316f0fa28dc67547db6f64ec6" prot="protected" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::ViewportsTableManager</scope><name>SingletonBase</name></member>

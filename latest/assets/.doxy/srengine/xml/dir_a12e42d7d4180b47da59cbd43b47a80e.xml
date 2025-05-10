@@ -3,9 +3,9 @@
   <compounddef id="dir_a12e42d7d4180b47da59cbd43b47a80e" kind="dir">
     <compoundname>Engine/Core/libs/Graphics/inc/Graphics/GUI</compoundname>
     <innerdir refid="dir_ee39d7974ea8a860c3bbba1b251e09d1">Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor</innerdir>
-    <innerfile refid="ICanvas_8h">ICanvas.h</innerfile>
     <innerfile refid="Icons_8h">Icons.h</innerfile>
     <innerfile refid="ImGUI_8h">ImGUI.h</innerfile>
+    <innerfile refid="ImmediateGUI_8h">ImmediateGUI.h</innerfile>
     <innerfile refid="ImNodeEditorUtils_8h">ImNodeEditorUtils.h</innerfile>
     <innerfile refid="Link_8h">Link.h</innerfile>
     <innerfile refid="Graphics_2inc_2Graphics_2GUI_2Node_8h">Node.h</innerfile>

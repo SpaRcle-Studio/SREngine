@@ -250,10 +250,10 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="118" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a99963865295c514541fab589b7885e8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a38472ff5915aa0ea8b23880127b863c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_MATH_NS::FColor::FColor</definition>
-        <argsstring>(double_t _x, double_t _y, double_t _z, double_t _w)</argsstring>
+        <argsstring>(double_t _x, double_t _y, double_t _z, double_t _w=1.0)</argsstring>
         <name>FColor</name>
         <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
         <param>
@@ -271,6 +271,7 @@
         <param>
           <type>double_t</type>
           <declname>_w</declname>
+          <defval>1.0</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -280,10 +281,10 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="119" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a033f326db3181f06ef11d2b33bf6de08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a26df06c6752a236329e577e5a3950e22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_MATH_NS::FColor::FColor</definition>
-        <argsstring>(float_t _x, float_t _y, float_t _z, float_t _w)</argsstring>
+        <argsstring>(float_t _x, float_t _y, float_t _z, float_t _w=1.f)</argsstring>
         <name>FColor</name>
         <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
         <param>
@@ -301,6 +302,7 @@
         <param>
           <type>float_t</type>
           <declname>_w</declname>
+          <defval>1.f</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -310,10 +312,10 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Utils/inc/Utils/Math/Vector4.h" line="120" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1a7e0e7e8ab90522d66664a98b20afdf42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__MATH__NS_1_1FColor_1aebae8b22049b6d6fc3d778f88be46698" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SR_MATH_NS::FColor::FColor</definition>
-        <argsstring>(int32_t _x, int32_t _y, int32_t _z, int32_t _w)</argsstring>
+        <argsstring>(int32_t _x, int32_t _y, int32_t _z, int32_t _w=1)</argsstring>
         <name>FColor</name>
         <qualifiedname>SR_MATH_NS::FColor::FColor</qualifiedname>
         <param>
@@ -331,6 +333,7 @@
         <param>
           <type>int32_t</type>
           <declname>_w</declname>
+          <defval>1</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -722,9 +725,9 @@
       <member refid="classSR__MATH__NS_1_1FColor_1a581552e7c0125eadef43f2b097227922" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
       <member refid="classSR__MATH__NS_1_1FColor_1a83f9f354190051b144d8893c881d78ef" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
       <member refid="classSR__MATH__NS_1_1FColor_1ad02de94e4d7a9d32ce4dd156de761b9a" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
-      <member refid="classSR__MATH__NS_1_1FColor_1a99963865295c514541fab589b7885e8e" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
-      <member refid="classSR__MATH__NS_1_1FColor_1a033f326db3181f06ef11d2b33bf6de08" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
-      <member refid="classSR__MATH__NS_1_1FColor_1a7e0e7e8ab90522d66664a98b20afdf42" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a38472ff5915aa0ea8b23880127b863c9" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1a26df06c6752a236329e577e5a3950e22" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
+      <member refid="classSR__MATH__NS_1_1FColor_1aebae8b22049b6d6fc3d778f88be46698" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>FColor</name></member>
       <member refid="classSR__MATH__NS_1_1FColor_1aec007a6df491225f77870d7280c3ecef" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>g</name></member>
       <member refid="classSR__MATH__NS_1_1FColor_1a585bb9b87e7280967818dfe1c7aab423" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Green</name></member>
       <member refid="classSR__MATH__NS_1_1FColor_1a7d8b339ba8726813a820ef5f814538ef" prot="public" virt="non-virtual"><scope>SR_MATH_NS::FColor</scope><name>Magenta</name></member>

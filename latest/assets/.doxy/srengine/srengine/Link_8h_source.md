@@ -25,7 +25,7 @@ namespace SR_GRAPH_NS::GUI {
     public:
         Link();
         Link(Pin* start, Pin* end);
-        Link(Pin* start, Pin* end, ImColor color);
+//        Link(Pin* start, Pin* end, ImColor color);
         ~Link() override;
 
     public:
@@ -45,7 +45,7 @@ namespace SR_GRAPH_NS::GUI {
         Pin* m_startPin = nullptr;
         Pin* m_endPin = nullptr;
 
-        ImColor m_color;
+       // ImColor m_color;
 
     };
 }

@@ -17,8 +17,6 @@
 
 #include <Graphics/macros.h>
 
-#include <Graphics/GUI/ImGUI.h>
-
 namespace SR_GRAPH_GUI_NS {
     class MenuItemSubWidget;
     class NodeWidget;

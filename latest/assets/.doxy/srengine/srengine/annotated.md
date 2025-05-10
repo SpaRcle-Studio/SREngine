@@ -238,7 +238,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**IButton**](classSR__CORE__UI__NS_1_1IButton.md)     
 * **namespace** [**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md)     
     * **struct** [**DrawPopupContext**](structSR__GRAPH__GUI__NS_1_1DrawPopupContext.md)     
-    * **union** [**ImGuiDataTypeUnion**](unionSR__GRAPH__GUI__NS_1_1ImGuiDataTypeUnion.md)     
     * **class** [**ImGuiDisabledLockGuard**](classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard.md)     
     * **class** [**MenuItemSubWidget**](classSR__GRAPH__GUI__NS_1_1MenuItemSubWidget.md)     
     * **class** [**Node**](classSR__GRAPH__GUI__NS_1_1Node.md)     

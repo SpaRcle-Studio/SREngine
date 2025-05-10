@@ -9,20 +9,18 @@
     <includedby refid="AnimatorEditor_8h" local="no">Engine/Core/inc/Core/GUI/AnimatorEditor.h</includedby>
     <includedby refid="RenderTechniqueEditor_8h" local="no">Engine/Core/inc/Core/GUI/RenderTechniqueEditor.h</includedby>
     <incdepgraph>
-      <node id="133">
-        <label>Graphics/GUI/ImGUI.h</label>
-        <link refid="ImGUI_8h_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
-        </childnode>
-      </node>
       <node id="3">
         <label>Graphics/GUI/ImNodeEditorUtils.h</label>
         <link refid="ImNodeEditorUtils_8h_source"/>
         <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="133">
+        <label>Graphics/GUI/ImmediateGUI.h</label>
+        <link refid="ImmediateGUI_8h_source"/>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -38,17 +36,15 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="134" relation="include">
+        <childnode refid="139" relation="include">
         </childnode>
-        <childnode refid="135" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
-      <node id="134">
+      <node id="139">
         <label>Graphics/GUI/PopupMenu.h</label>
         <link refid="PopupMenu_8h_source"/>
         <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="133" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -71,6 +67,20 @@
         <childnode refid="129" relation="include">
         </childnode>
         <childnode refid="133" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>Graphics/Pipeline/PipelineType.h</label>
+        <link refid="PipelineType_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -363,10 +373,32 @@
         <childnode refid="88" relation="include">
         </childnode>
       </node>
+      <node id="135">
+        <label>Utils/Math/Matrix4x4.h</label>
+        <link refid="Matrix4x4_8h_source"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+      </node>
       <node id="98">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="137">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
       <node id="111">
@@ -433,7 +465,7 @@
         <label>Utils/Profile/TracyContext.h</label>
         <link refid="TracyContext_8h_source"/>
       </node>
-      <node id="135">
+      <node id="140">
         <label>Utils/Resources/Xml.h</label>
         <link refid="Xml_8h_source"/>
         <childnode refid="82" relation="include">
@@ -448,7 +480,7 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="136" relation="include">
+        <childnode refid="141" relation="include">
         </childnode>
       </node>
       <node id="123">
@@ -782,6 +814,9 @@
       <node id="93">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
+      <node id="138">
+        <label>Enum/WindowFlags.hpp</label>
+      </node>
       <node id="51">
         <label>algorithm</label>
       </node>
@@ -791,7 +826,7 @@
       <node id="12">
         <label>array</label>
       </node>
-      <node id="136">
+      <node id="141">
         <label>assimp/contrib/pugixml/src/pugixml.hpp</label>
       </node>
       <node id="46">
@@ -871,6 +906,9 @@
       </node>
       <node id="86">
         <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="136">
+        <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="87">
         <label>glm/gtx/string_cast.hpp</label>

@@ -138,10 +138,6 @@
 ## s
 
 * **SR\_SUPPORTED\_AUDIO\_FORMATS** ([**SR\_AUDIO\_NS**](namespaceSR__AUDIO__NS.md))
-* **STYLE\_BOOL\_VALUES** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **STYLE\_COLORS** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **STYLE\_FLOAT\_VALUES** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **STYLE\_SIZE\_VALUES** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **SHADER\_ASPECT** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_CASCADE\_LIGHT\_SPACE\_MATRICES** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))
 * **SHADER\_CASCADE\_SPLITS** ([**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md))

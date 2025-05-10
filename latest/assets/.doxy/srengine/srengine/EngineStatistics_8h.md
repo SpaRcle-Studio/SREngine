@@ -11,7 +11,6 @@
 
 
 * `#include <Graphics/GUI/Widget.h>`
-* `#include <EvoVulkan/Tools/SubmitInfo.h>`
 
 
 
@@ -29,6 +28,7 @@
 
 | Type | Name |
 | ---: | :--- |
+| namespace | [**EvoVulkan**](namespaceEvoVulkan.md) <br> |
 | namespace | [**SR\_CORE\_NS**](namespaceSR__CORE__NS.md) <br> |
 | namespace | [**GUI**](namespaceSR__CORE__NS_1_1GUI.md) <br> |
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |

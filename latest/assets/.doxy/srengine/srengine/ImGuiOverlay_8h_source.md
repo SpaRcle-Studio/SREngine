@@ -19,9 +19,6 @@
 
 #include <Graphics/Overlay/Overlay.h>
 
-struct ImFont;
-struct ImGuiContext;
-
 namespace SR_GRAPH_NS {
     class ImGuiOverlay : public Overlay {
         using Super = Overlay;
@@ -35,8 +32,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsUndockingActive() const override;
         SR_NODISCARD bool IsViewportsEnabled() const;
 
-        SR_NODISCARD ImFont* GetIconFont() const { return m_iconFont; }
-        SR_NODISCARD ImFont* GetMainFont() const { return m_mainFont; }
+        SR_NODISCARD void* GetIconFont() const { return m_iconFont; }
+        SR_NODISCARD void* GetMainFont() const { return m_mainFont; }
 
         void Prepare() override;
         void Destroy() override;
@@ -45,9 +42,9 @@ namespace SR_GRAPH_NS {
         virtual void ReloadFonts();
 
     protected:
-        ImGuiContext* m_context = nullptr;
-        ImFont* m_mainFont = nullptr;
-        ImFont* m_iconFont = nullptr;
+        void* m_context = nullptr;
+        void* m_mainFont = nullptr;
+        void* m_iconFont = nullptr;
 
         float_t m_fontSize = 12.0f;
         float_t m_iconFontSize = 40.0f;

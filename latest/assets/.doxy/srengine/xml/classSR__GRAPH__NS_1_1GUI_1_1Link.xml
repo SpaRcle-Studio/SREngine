@@ -34,20 +34,6 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="36" column="13" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1ac6dce82345c3e35da67c507c1b4510c6" prot="private" static="no" mutable="no">
-        <type>ImColor</type>
-        <definition>ImColor SR_GRAPH_NS::GUI::Link::m_color</definition>
-        <argsstring></argsstring>
-        <name>m_color</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::Link::m_color</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="38" column="17" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" bodystart="38" bodyend="-1"/>
-      </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a00697d0323a206e5d26a8544ca270a8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -85,32 +71,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="17" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a75f733c6790ad2bfc59e917e59e31c70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>SR_GRAPH_NS::GUI::Link::Link</definition>
-        <argsstring>(Pin *start, Pin *end, ImColor color)</argsstring>
-        <name>Link</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::Link::Link</qualifiedname>
-        <param>
-          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
-          <declname>start</declname>
-        </param>
-        <param>
-          <type><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref> *</type>
-          <declname>end</declname>
-        </param>
-        <param>
-          <type>ImColor</type>
-          <declname>color</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h" line="18" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Link_1a8cc1a5d905aaf2f407aea861aa832224" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -308,8 +268,6 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a4f7d31094b35134601c371b123fb9e15" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>IsLinked</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a00697d0323a206e5d26a8544ca270a8f" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>Link</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1af6b5981e30f48cdbce10fb73e2edfedd" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>Link</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a75f733c6790ad2bfc59e917e59e31c70" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>Link</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1ac6dce82345c3e35da67c507c1b4510c6" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>m_color</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a7b6268dbf7c607fe7dc3c69cdf9f9974" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>m_endPin</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1a95cebdab53a63f1f6a22fd34373b3674" prot="private" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>m_startPin</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Link_1ac6667ba2c919f155d8d0cfb9ece00783" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Link</scope><name>SetEnd</name></member>

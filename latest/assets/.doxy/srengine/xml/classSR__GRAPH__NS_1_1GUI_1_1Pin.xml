@@ -571,24 +571,6 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adb26ac8f303222021b1381ee2d8a3a8c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>ImColor</type>
-        <definition>static ImColor SR_GRAPH_NS::GUI::Pin::GetIconColor</definition>
-        <argsstring>(const PinType &amp;type)</argsstring>
-        <name>GetIconColor</name>
-        <qualifiedname>SR_GRAPH_NS::GUI::Pin::GetIconColor</qualifiedname>
-        <param>
-          <type>const PinType &amp;</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h" line="45" column="24"/>
-      </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a81dafbaf272de88350c12d7bd2893315" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>IconType</type>
         <definition>static IconType SR_GRAPH_NS::GUI::Pin::GetIconType</definition>
@@ -646,7 +628,6 @@
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a6f40966c4a5ab52a4cb9164b31482f47" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>DrawPinIcon</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a18057decb2c147c3880afebb252b7ff1" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>End</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a2551494142152a42f9b91fb9809a907e" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetDataType</name></member>
-      <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1adb26ac8f303222021b1381ee2d8a3a8c" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetIconColor</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a81dafbaf272de88350c12d7bd2893315" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetIconType</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a4d851b213922b38cedd4e0870fa48341" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetId</name></member>
       <member refid="classSR__GRAPH__NS_1_1GUI_1_1Pin_1a004c537eaf6f61e9b18b840df448fe64" prot="public" virt="non-virtual"><scope>SR_GRAPH_NS::GUI::Pin</scope><name>GetIndex</name></member>

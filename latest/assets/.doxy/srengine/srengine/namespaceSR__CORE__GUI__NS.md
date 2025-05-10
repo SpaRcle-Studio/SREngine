@@ -91,13 +91,6 @@
 | Type | Name |
 | ---: | :--- |
 |  SR\_MAYBE\_UNUSED bool | [**DragDropTargetEntityRef**](#function-dragdroptargetentityref) ([**EditorGUI**](classSR__CORE__GUI__NS_1_1EditorGUI.md) \* pContext, [**SR\_UTILS\_NS::EntityRef**](classSR__UTILS__NS_1_1EntityRef.md) & entityRef, const char \* id, float\_t width=300.f) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawEnumProperty**](#function-drawenumproperty) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, [**SR\_UTILS\_NS::EnumProperty**](classSR__UTILS__NS_1_1EnumProperty.md) \* pProperty) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawLabelProperty**](#function-drawlabelproperty) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, [**SR\_UTILS\_NS::LabelProperty**](classSR__UTILS__NS_1_1LabelProperty.md) \* pProperty) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawMaterialProperty**](#function-drawmaterialproperty) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, [**SR\_GRAPH\_NS::MaterialProperty**](classSR__GRAPH__NS_1_1MaterialProperty.md) \* pProperty) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawPathProperty**](#function-drawpathproperty) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, [**SR\_UTILS\_NS::PathProperty**](classSR__UTILS__NS_1_1PathProperty.md) \* pProperty) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawProperty**](#function-drawproperty) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, [**SR\_UTILS\_NS::Property**](classSR__UTILS__NS_1_1Property.md) \* pProperty) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawPropertyContainer**](#function-drawpropertycontainer) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, const [**SR\_UTILS\_NS::PropertyContainer**](classSR__UTILS__NS_1_1PropertyContainer.md) \* pProperties) <br> |
-|  SR\_MAYBE\_UNUSED bool | [**DrawStandardProperty**](#function-drawstandardproperty) (const [**DrawPropertyContext**](structSR__CORE__GUI__NS_1_1DrawPropertyContext.md) & context, [**SR\_UTILS\_NS::StandardProperty**](classSR__UTILS__NS_1_1StandardProperty.md) \* pProperty) <br> |
 |  SR\_MAYBE\_UNUSED [**SR\_UTILS\_NS::StringAtom**](classSR__UTILS__NS_1_1StringAtom.md) | [**GetValueInspector**](#function-getvalueinspector) (const [**SR\_UTILS\_NS::Reflection::Value**](classSR__UTILS__NS_1_1Reflection_1_1Value.md) & value) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (ButtonType, uint8\_t, ChooseMaterial, Discard, Save) <br> |
 |   | [**SR\_ENUM\_NS\_CLASS\_T**](#function-sr_enum_ns_class_t) (EditorSceneViewMode, uint8\_t, FreeAspect, WindowSize) <br> |
@@ -142,118 +135,6 @@ SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DragDropTargetEntityRef (
     SR_UTILS_NS::EntityRef & entityRef,
     const char * id,
     float_t width=300.f
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawEnumProperty 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawEnumProperty (
-    const DrawPropertyContext & context,
-    SR_UTILS_NS::EnumProperty * pProperty
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawLabelProperty 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawLabelProperty (
-    const DrawPropertyContext & context,
-    SR_UTILS_NS::LabelProperty * pProperty
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawMaterialProperty 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawMaterialProperty (
-    const DrawPropertyContext & context,
-    SR_GRAPH_NS::MaterialProperty * pProperty
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawPathProperty 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawPathProperty (
-    const DrawPropertyContext & context,
-    SR_UTILS_NS::PathProperty * pProperty
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawProperty 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawProperty (
-    const DrawPropertyContext & context,
-    SR_UTILS_NS::Property * pProperty
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawPropertyContainer 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawPropertyContainer (
-    const DrawPropertyContext & context,
-    const SR_UTILS_NS::PropertyContainer * pProperties
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function DrawStandardProperty 
-
-```C++
-SR_MAYBE_UNUSED bool SR_CORE_GUI_NS::DrawStandardProperty (
-    const DrawPropertyContext & context,
-    SR_UTILS_NS::StandardProperty * pProperty
 ) 
 ```
 

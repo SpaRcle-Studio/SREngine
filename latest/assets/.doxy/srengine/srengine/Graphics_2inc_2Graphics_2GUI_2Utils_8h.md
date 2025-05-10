@@ -44,11 +44,6 @@
 | class | [**ImGuiDisabledLockGuard**](classSR__GRAPH__GUI__NS_1_1ImGuiDisabledLockGuard.md) <br> |
 
 
-## Public Types
-
-| Type | Name |
-| ---: | :--- |
-| union  | [**ImGuiDataTypeUnion**](#union-imguidatatypeunion)  <br> |
 
 
 
@@ -97,21 +92,6 @@
 
 
 
-## Public Types Documentation
-
-
-
-
-### union ImGuiDataTypeUnion 
-
-```C++
-
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `Engine/Core/libs/Graphics/inc/Graphics/GUI/Utils.h`

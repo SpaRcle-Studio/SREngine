@@ -30,7 +30,6 @@
 
 | Type | Name |
 | ---: | :--- |
-| namespace | [**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md) <br> |
 | namespace | [**SR\_GRAPH\_NS**](namespaceSR__GRAPH__NS.md) <br> |
 
 

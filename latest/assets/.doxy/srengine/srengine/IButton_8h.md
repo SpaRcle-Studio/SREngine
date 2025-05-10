@@ -11,7 +11,6 @@
 
 
 * `#include <Graphics/Types/IRenderComponent.h>`
-* `#include <utility>`
 
 
 

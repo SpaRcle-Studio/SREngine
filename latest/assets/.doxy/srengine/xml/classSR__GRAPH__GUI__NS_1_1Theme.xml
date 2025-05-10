@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="132" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="132" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="30" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Theme_1aab504159461dbd861552f4fca0d3e926" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, SR_MATH_NS::FVector2 &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="133" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="133" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="31" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Theme_1a46b0967e659dd76c439c6c085c08697e" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, float_t &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="134" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="134" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="32" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSR__GRAPH__GUI__NS_1_1Theme_1a0a67eb4bce4fab2a75605bc35f1e29cc" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, float_t &gt;</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="135" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="135" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="33" column="28" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="33" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="113" column="9"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="13" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1a6ba20384aa240ef16ccc75f243d26d28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -92,25 +92,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="122" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="20" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1a02e6e8bf86dace3cb92a395b3b3745c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1ad34882db9108f0d7381adf5ed6ad5395" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool SR_GRAPH_GUI_NS::Theme::Apply</definition>
-        <argsstring>(ImGuiStyle &amp;style) const</argsstring>
+        <argsstring>() const</argsstring>
         <name>Apply</name>
         <qualifiedname>SR_GRAPH_GUI_NS::Theme::Apply</qualifiedname>
-        <param>
-          <type>ImGuiStyle &amp;</type>
-          <declname>style</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="124" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="22" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1a0357d8d87ee9b1ffa499a01784b291ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -132,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="126" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1abd900de81cb9f165134ac2d3895206f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -154,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="127" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1a5aa4375a001a474f402737e4fedab3f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -176,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="128" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1a5627df7fabe3092eb732b3cb143cc627" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -198,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="129" column="14"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="27" column="14"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -218,65 +214,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="116" column="22"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="16" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1aab32aadf1ecc4f04b6b56af83cab6642" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1a0d178969ed1ec4afb8813653ff4ce350" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
-        <definition>static bool SR_GRAPH_GUI_NS::Theme::Save</definition>
-        <argsstring>(const std::string &amp;path, const ImGuiStyle &amp;style)</argsstring>
-        <name>Save</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Theme::Save</qualifiedname>
+        <definition>static bool SR_GRAPH_GUI_NS::Theme::SaveGlobal</definition>
+        <argsstring>(const SR_UTILS_NS::Path &amp;path)</argsstring>
+        <name>SaveGlobal</name>
+        <qualifiedname>SR_GRAPH_GUI_NS::Theme::SaveGlobal</qualifiedname>
         <param>
-          <type>const std::string &amp;</type>
+          <type>const <ref refid="classSR__UTILS__NS_1_1Path" kindref="compound">SR_UTILS_NS::Path</ref> &amp;</type>
           <declname>path</declname>
         </param>
-        <param>
-          <type>const ImGuiStyle &amp;</type>
-          <declname>style</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="117" column="21"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1aa0b4e4bc30d009b9a14e13cf28b515c8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classSR__MATH__NS_1_1FColor" kindref="compound">SR_MATH_NS::FColor</ref></type>
-        <definition>static SR_MATH_NS::FColor SR_GRAPH_GUI_NS::Theme::ImVec4ToColor</definition>
-        <argsstring>(ImVec4 imVec4)</argsstring>
-        <name>ImVec4ToColor</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Theme::ImVec4ToColor</qualifiedname>
-        <param>
-          <type>ImVec4</type>
-          <declname>imVec4</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="118" column="35"/>
-      </memberdef>
-      <memberdef kind="function" id="classSR__GRAPH__GUI__NS_1_1Theme_1abf29af98cb1745b27348d0b1ef0377a9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_MATH_NS::FVector2</type>
-        <definition>static SR_MATH_NS::FVector2 SR_GRAPH_GUI_NS::Theme::ImVec2ToFVector2</definition>
-        <argsstring>(ImVec2 imVec2)</argsstring>
-        <name>ImVec2ToFVector2</name>
-        <qualifiedname>SR_GRAPH_GUI_NS::Theme::ImVec2ToFVector2</qualifiedname>
-        <param>
-          <type>ImVec2</type>
-          <declname>imVec2</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="119" column="37"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="17" column="21"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -307,11 +263,9 @@
         <link refid="classSR__UTILS__NS_1_1NonCopyable"/>
       </node>
     </collaborationgraph>
-    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="111" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="111" bodyend="137"/>
+    <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" line="11" column="5" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Editor/Theme.h" bodystart="11" bodyend="35"/>
     <listofallmembers>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a02e6e8bf86dace3cb92a395b3b3745c1" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>Apply</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1abf29af98cb1745b27348d0b1ef0377a9" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>ImVec2ToFVector2</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1aa0b4e4bc30d009b9a14e13cf28b515c8" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>ImVec4ToColor</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1ad34882db9108f0d7381adf5ed6ad5395" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>Apply</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a7ccb3ec8f8c2b54e75d6d0cd9fd616da" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>Load</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a0a67eb4bce4fab2a75605bc35f1e29cc" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>m_booleans</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a572f600b93d378060f62fd2edb95a1af" prot="private" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>m_colors</name></member>
@@ -320,8 +274,8 @@
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2dad2972ececb1b8aaad17a2d3bdaaca" prot="protected" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a2b5d670a618c1a7186f9e426ab379742" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>NonCopyable</name></member>
       <member refid="classSR__UTILS__NS_1_1NonCopyable_1a322954d055f132add7a8873cec21f00e" prot="public" virt="virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>operator=</name></member>
-      <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1aab32aadf1ecc4f04b6b56af83cab6642" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>Save</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a6ba20384aa240ef16ccc75f243d26d28" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>Save</name></member>
+      <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a0d178969ed1ec4afb8813653ff4ce350" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>SaveGlobal</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a5627df7fabe3092eb732b3cb143cc627" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>SetBool</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a0357d8d87ee9b1ffa499a01784b291ae" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>SetColor</name></member>
       <member refid="classSR__GRAPH__GUI__NS_1_1Theme_1a5aa4375a001a474f402737e4fedab3f9" prot="public" virt="non-virtual"><scope>SR_GRAPH_GUI_NS::Theme</scope><name>SetFloat</name></member>

@@ -1436,80 +1436,10 @@
 <codeline lineno="16"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_CORE_GUI_NS<sp/>{</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*enum<sp/>class<sp/>EditorSceneViewMode<sp/>:<sp/>uint8_t;</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"></highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/>class<sp/>Guizmo<sp/>:<sp/>public<sp/>SR_UTILS_NS::NonCopyable,<sp/>public<sp/>SR_UTILS_NS::InputHandler<sp/>{</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>using<sp/>GameObjectPtr<sp/>=<sp/>SR_UTILS_NS::GameObject::Ptr;</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>using<sp/>EnginePtr<sp/>=<sp/>SR_HTYPES_NS::SharedPtr&lt;Engine&gt;;</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/>public:</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>explicit<sp/>Guizmo(const<sp/>EnginePtr&amp;<sp/>pEngine);</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>~Guizmo()<sp/>override;</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"></highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/>public:</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>Draw(const<sp/>GameObjectPtr&amp;<sp/>gameObject,<sp/>const<sp/>GameObjectPtr&amp;<sp/>camera);</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>DrawTools();</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"></highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>OnKeyDown(const<sp/>SR_UTILS_NS::KeyboardInputData*<sp/>data)<sp/>override;</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>OnKeyPress(const<sp/>SR_UTILS_NS::KeyboardInputData*<sp/>data)<sp/>override;</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"></highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsTranslate()<sp/>const<sp/>{<sp/>return<sp/><sp/>m_operation<sp/>==<sp/>ImGuizmo::OPERATION::TRANSLATE;<sp/>}</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsRotate()<sp/>const<sp/>{<sp/>return<sp/>m_operation<sp/>==<sp/>ImGuizmo::OPERATION::ROTATE;<sp/>}</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsScale()<sp/>const<sp/>{<sp/>return<sp/>m_operation<sp/>==<sp/>ImGuizmo::OPERATION::SCALE;<sp/>}</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsBounds()<sp/>const<sp/>{<sp/>return<sp/>m_operation<sp/>==<sp/>ImGuizmo::OPERATION::BOUNDS;<sp/>}</highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsUniversal()<sp/>const<sp/>{<sp/>return<sp/>m_operation<sp/>==<sp/>ImGuizmo::OPERATION::UNIVERSAL;<sp/>}</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsLocal()<sp/>const<sp/>{<sp/>return<sp/>m_mode<sp/>==<sp/>ImGuizmo::MODE::LOCAL;<sp/>}</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsCenter()<sp/>const<sp/>{<sp/>return<sp/>m_center;<sp/>}</highlight></codeline>
-<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>bool<sp/>IsUse()<sp/>const<sp/>{<sp/>return<sp/>m_isUse;<sp/>}</highlight></codeline>
-<codeline lineno="43"><highlight class="comment"></highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>SetMode(ImGuizmo::MODE<sp/>mode)<sp/>{</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_mode<sp/>=<sp/>mode;</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_active<sp/>=<sp/>true;</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="48"><highlight class="comment"></highlight></codeline>
-<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>SetOperation(ImGuizmo::OPERATION<sp/>operation)<sp/>{</highlight></codeline>
-<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_operation<sp/>=<sp/>operation;</highlight></codeline>
-<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_active<sp/>=<sp/>true;</highlight></codeline>
-<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="53"><highlight class="comment"></highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>EditorSceneViewMode<sp/>GetViewMode()<sp/>const<sp/>noexcept<sp/>{<sp/>return<sp/>m_viewMode;<sp/>}</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_NODISCARD<sp/>float_t<sp/>GetCameraVelocityFactor()<sp/>const<sp/>noexcept<sp/>{<sp/>return<sp/>m_cameraVelocityFactor;<sp/>};</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"></highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/>private:</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glm::mat4<sp/>GetMatrix();</highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>SetRect(SR_GRAPH_NS::Types::Camera*<sp/>camera);</highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>void<sp/>DrawManipulation(SR_GRAPH_NS::Types::Camera*<sp/>camera);</highlight></codeline>
-<codeline lineno="61"><highlight class="comment"></highlight></codeline>
-<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/>private:</highlight></codeline>
-<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_HTYPES_NS::Marshal*<sp/><sp/><sp/><sp/>m_marshal<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>nullptr;</highlight></codeline>
-<codeline lineno="64"><highlight class="comment"></highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SR_UTILS_NS::Transform*<sp/><sp/><sp/>m_transform<sp/><sp/><sp/><sp/><sp/>=<sp/>nullptr;</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"></highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bool<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_isUse<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bool<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_isEnabled<sp/><sp/><sp/><sp/><sp/>=<sp/>true;</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"></highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_cameraVelocityFactor<sp/>=<sp/>1.f;</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"></highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_snapValue<sp/><sp/><sp/><sp/><sp/>=<sp/>100;</highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_boundsSnap[3]<sp/>=<sp/>{<sp/>0.1f,<sp/>0.1f,<sp/>0.1f<sp/>};</highlight></codeline>
-<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_snap[3]<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>{<sp/>1.f,<sp/>1.f,<sp/>1.f<sp/>};</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_bounds[6]<sp/><sp/><sp/><sp/><sp/>=<sp/>{<sp/>-0.5f,<sp/>-0.5f,<sp/>-0.5f,<sp/>0.5f,<sp/>0.5f,<sp/>0.5f<sp/>};</highlight></codeline>
-<codeline lineno="76"><highlight class="comment"></highlight></codeline>
-<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;bool&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_boundsActive<sp/><sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;bool&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_snapActive<sp/><sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;bool&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_center<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>false;</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;bool&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_active<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>true;</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"></highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImGuizmo::OPERATION<sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_operation<sp/><sp/><sp/><sp/><sp/>=<sp/>ImGuizmo::OPERATION::TRANSLATE;</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImGuizmo::MODE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_mode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ImGuizmo::MODE::LOCAL;</highlight></codeline>
-<codeline lineno="84"><highlight class="comment"></highlight></codeline>
-<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EditorSceneViewMode<sp/>m_viewMode;</highlight></codeline>
-<codeline lineno="86"><highlight class="comment"></highlight></codeline>
-<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EnginePtr<sp/>m_engine;</highlight></codeline>
-<codeline lineno="88"><highlight class="comment"></highlight></codeline>
-<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/>};*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUIZMO_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_GUIZMO_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/Core/inc/Core/GUI/Guizmo.h"/>
   </compounddef>

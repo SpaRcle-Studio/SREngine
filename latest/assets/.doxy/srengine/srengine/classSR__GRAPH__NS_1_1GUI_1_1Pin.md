@@ -113,7 +113,6 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 
 | Type | Name |
 | ---: | :--- |
-|  ImColor | [**GetIconColor**](#function-geticoncolor) (const PinType & type) <br> |
 |  IconType | [**GetIconType**](#function-geticontype) (const PinType & type) <br> |
 
 
@@ -529,21 +528,6 @@ SR_GRAPH_NS::GUI::Pin::~Pin () override
 <hr>
 ## Public Static Functions Documentation
 
-
-
-
-### function GetIconColor 
-
-```C++
-static ImColor SR_GRAPH_NS::GUI::Pin::GetIconColor (
-    const PinType & type
-) 
-```
-
-
-
-
-<hr>
 
 
 

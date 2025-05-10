@@ -11,8 +11,6 @@
         <link refid="Icons_8h_source"/>
         <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h</label>
@@ -397,9 +395,6 @@
       <node id="85">
         <label>glm/gtx/string_cast.hpp</label>
       </node>
-      <node id="90">
-        <label>imgui.h</label>
-      </node>
       <node id="28">
         <label>initializer_list</label>
       </node>
@@ -564,7 +559,7 @@
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">~Pin</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>ImColor<sp/>GetIconColor(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PinType&amp;<sp/>type);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//static<sp/>ImColor<sp/>GetIconColor(const<sp/>PinType&amp;<sp/>type);</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>IconType<sp/>GetIconType(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PinType&amp;<sp/>type);</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawPinIcon(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>connected,<sp/>uint32_t<sp/>alpha);</highlight></codeline>

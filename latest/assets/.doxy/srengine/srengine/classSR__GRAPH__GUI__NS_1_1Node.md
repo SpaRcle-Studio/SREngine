@@ -85,11 +85,7 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD int32\_t | [**GetPinIndex**](#function-getpinindex) (const Pin \* pPin) const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector2 | [**GetPosition**](#function-getposition) () const<br> |
 |  SR\_NODISCARD bool | [**IsConnector**](#function-isconnector) () const<br> |
-|   | [**Node**](#function-node-15) () <br> |
-|   | [**Node**](#function-node-25) (const std::string & name) <br> |
-|   | [**Node**](#function-node-35) (const std::string & name, NodeType type) <br> |
-|   | [**Node**](#function-node-45) (const std::string & name, ImColor color) <br> |
-|   | [**Node**](#function-node-55) (std::string name, NodeType type, ImColor color) <br> |
+|   | [**Node**](#function-node) () <br> |
 |  void | [**PostDraw**](#function-postdraw) () <br> |
 |  void | [**RemoveInput**](#function-removeinput) (uint32\_t index) <br> |
 |  void | [**RemoveOutput**](#function-removeoutput) (uint32\_t index) <br> |
@@ -356,74 +352,10 @@ inline SR_NODISCARD bool SR_GRAPH_GUI_NS::Node::IsConnector () const
 
 
 
-### function Node [1/5]
+### function Node 
 
 ```C++
 SR_GRAPH_GUI_NS::Node::Node () 
-```
-
-
-
-
-<hr>
-
-
-
-### function Node [2/5]
-
-```C++
-explicit SR_GRAPH_GUI_NS::Node::Node (
-    const std::string & name
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Node [3/5]
-
-```C++
-SR_GRAPH_GUI_NS::Node::Node (
-    const std::string & name,
-    NodeType type
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Node [4/5]
-
-```C++
-SR_GRAPH_GUI_NS::Node::Node (
-    const std::string & name,
-    ImColor color
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Node [5/5]
-
-```C++
-SR_GRAPH_GUI_NS::Node::Node (
-    std::string name,
-    NodeType type,
-    ImColor color
-) 
 ```
 
 

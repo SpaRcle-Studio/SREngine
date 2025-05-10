@@ -154,7 +154,7 @@ See [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_1_1NonCopyable.md)
 ### function ImGuiDisabledLockGuard 
 
 ```C++
-inline explicit SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard::ImGuiDisabledLockGuard (
+explicit SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard::ImGuiDisabledLockGuard (
     bool disabled
 ) 
 ```
@@ -169,7 +169,7 @@ inline explicit SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard::ImGuiDisabledLockGuard 
 ### function ~ImGuiDisabledLockGuard 
 
 ```C++
-inline SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard::~ImGuiDisabledLockGuard () override
+SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard::~ImGuiDisabledLockGuard () override
 ```
 
 

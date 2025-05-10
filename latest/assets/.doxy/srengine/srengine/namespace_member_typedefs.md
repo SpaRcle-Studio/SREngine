@@ -235,7 +235,6 @@
 ## w
 
 * **WidgetFlagBits** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
-* **WindowFlags** ([**SR\_GRAPH\_GUI\_NS**](namespaceSR__GRAPH__GUI__NS.md))
 * **Widgets** ([**SR\_GRAPH\_NS::GUI**](namespaceSR__GRAPH__NS_1_1GUI.md))
 
 

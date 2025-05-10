@@ -131,8 +131,8 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 | Type | Name |
 | ---: | :--- |
 | virtual void | [**Destroy**](#function-destroy) () override<br> |
-|  SR\_NODISCARD ImFont \* | [**GetIconFont**](#function-geticonfont) () const<br> |
-|  SR\_NODISCARD ImFont \* | [**GetMainFont**](#function-getmainfont) () const<br> |
+|  SR\_NODISCARD void \* | [**GetIconFont**](#function-geticonfont) () const<br> |
+|  SR\_NODISCARD void \* | [**GetMainFont**](#function-getmainfont) () const<br> |
 |   | [**ImGuiOverlay**](#function-imguioverlay) (PipelinePtr pPipeline) <br> |
 | virtual SR\_NODISCARD bool | [**Init**](#function-init) () override<br> |
 | virtual SR\_NODISCARD bool | [**IsUndockingActive**](#function-isundockingactive) () override const<br> |
@@ -260,13 +260,13 @@ See [SR\_HTYPES\_NS::SharedPtr](classSR__HTYPES__NS_1_1SharedPtr.md)
 
 | Type | Name |
 | ---: | :--- |
-|  ImGuiContext \* | [**m\_context**](#variable-m_context)   = `nullptr`<br> |
+|  void \* | [**m\_context**](#variable-m_context)   = `nullptr`<br> |
 |  float\_t | [**m\_fontSize**](#variable-m_fontsize)   = `12.0f`<br> |
-|  ImFont \* | [**m\_iconFont**](#variable-m_iconfont)   = `nullptr`<br> |
+|  void \* | [**m\_iconFont**](#variable-m_iconfont)   = `nullptr`<br> |
 |  float\_t | [**m\_iconFontSize**](#variable-m_iconfontsize)   = `40.0f`<br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_iniPathEditor**](#variable-m_inipatheditor)  <br> |
 |  [**SR\_UTILS\_NS::Path**](classSR__UTILS__NS_1_1Path.md) | [**m\_iniPathWidgets**](#variable-m_inipathwidgets)  <br> |
-|  ImFont \* | [**m\_mainFont**](#variable-m_mainfont)   = `nullptr`<br> |
+|  void \* | [**m\_mainFont**](#variable-m_mainfont)   = `nullptr`<br> |
 
 
 ## Protected Attributes inherited from SR_GRAPH_NS::Overlay
@@ -394,7 +394,7 @@ Implements [*SR\_GRAPH\_NS::Overlay::Destroy*](classSR__GRAPH__NS_1_1Overlay.md#
 ### function GetIconFont 
 
 ```C++
-inline SR_NODISCARD ImFont * SR_GRAPH_NS::ImGuiOverlay::GetIconFont () const
+inline SR_NODISCARD void * SR_GRAPH_NS::ImGuiOverlay::GetIconFont () const
 ```
 
 
@@ -407,7 +407,7 @@ inline SR_NODISCARD ImFont * SR_GRAPH_NS::ImGuiOverlay::GetIconFont () const
 ### function GetMainFont 
 
 ```C++
-inline SR_NODISCARD ImFont * SR_GRAPH_NS::ImGuiOverlay::GetMainFont () const
+inline SR_NODISCARD void * SR_GRAPH_NS::ImGuiOverlay::GetMainFont () const
 ```
 
 
@@ -495,7 +495,7 @@ Implements [*SR\_GRAPH\_NS::Overlay::Prepare*](classSR__GRAPH__NS_1_1Overlay.md#
 ### variable m\_context 
 
 ```C++
-ImGuiContext* SR_GRAPH_NS::ImGuiOverlay::m_context;
+void* SR_GRAPH_NS::ImGuiOverlay::m_context;
 ```
 
 
@@ -521,7 +521,7 @@ float_t SR_GRAPH_NS::ImGuiOverlay::m_fontSize;
 ### variable m\_iconFont 
 
 ```C++
-ImFont* SR_GRAPH_NS::ImGuiOverlay::m_iconFont;
+void* SR_GRAPH_NS::ImGuiOverlay::m_iconFont;
 ```
 
 
@@ -573,7 +573,7 @@ SR_UTILS_NS::Path SR_GRAPH_NS::ImGuiOverlay::m_iniPathWidgets;
 ### variable m\_mainFont 
 
 ```C++
-ImFont* SR_GRAPH_NS::ImGuiOverlay::m_mainFont;
+void* SR_GRAPH_NS::ImGuiOverlay::m_mainFont;
 ```
 
 

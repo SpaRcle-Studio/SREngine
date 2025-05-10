@@ -15,9 +15,9 @@
 #ifndef SR_ENGINE_GRAPHICS_MATERIAL_DATA_H
 #define SR_ENGINE_GRAPHICS_MATERIAL_DATA_H
 
-#include <Graphics/macros.h>
-
 #include <Utils/Serialization/Serializable.h>
+
+#include <Graphics/Types/Shader.h>
 
 namespace SR_GRAPH_NS {
     /*SR_ENUM_NS_CLASS_T(MaterialShader, uint16_t,
@@ -98,8 +98,6 @@ namespace SR_GRAPH_NS {
 
         void UseUniforms(const Pipeline* pPipeline);
         void UseSamplers(const Pipeline* pPipeline);
-
-        void SetOwnedMaterial(BaseMaterial* pOwnedMaterial);
 
         SR_NODISCARD MaterialShaderData& GetDefaultShaderData() noexcept { return m_defaultShader; }
         SR_NODISCARD const MaterialShaderData& GetDefaultShaderData() const noexcept { return m_defaultShader; }

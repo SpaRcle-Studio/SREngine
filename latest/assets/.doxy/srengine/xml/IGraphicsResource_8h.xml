@@ -743,6 +743,30 @@
         <label>Engine/Core/libs/Graphics/inc/Graphics/Font/Text.h</label>
         <link refid="Text_8h_source"/>
       </node>
+      <node id="39">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/BaseMaterial.h</label>
+        <link refid="BaseMaterial_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/FileMaterial.h</label>
+        <link refid="FileMaterial_8h_source"/>
+      </node>
+      <node id="38">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/MaterialData.h</label>
+        <link refid="MaterialData_8h_source"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Material/UniqueMaterial.h</label>
+        <link refid="UniqueMaterial_8h_source"/>
+      </node>
       <node id="1">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Memory/IGraphicsResource.h</label>
         <link refid="IGraphicsResource_8h"/>
@@ -756,69 +780,69 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="52">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/CascadedShadowMapPass.h</label>
         <link refid="CascadedShadowMapPass_8h_source"/>
-        <childnode refid="49" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="54">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ColorBufferPass.h</label>
         <link refid="ColorBufferPass_8h_source"/>
       </node>
-      <node id="39">
+      <node id="43">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/DebugPass.h</label>
         <link refid="DebugPass_8h_source"/>
       </node>
-      <node id="42">
+      <node id="46">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/HTMLDrawerPass.h</label>
         <link refid="HTMLDrawerPass_8h_source"/>
       </node>
-      <node id="45">
+      <node id="49">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/ISamplersPass.h</label>
         <link refid="ISamplersPass_8h_source"/>
-        <childnode refid="46" relation="include">
-        </childnode>
-      </node>
-      <node id="46">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
-        <link refid="MeshDrawerPass_8h_source"/>
-        <childnode refid="47" relation="include">
-        </childnode>
-      </node>
-      <node id="47">
-        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
-        <link refid="OffScreenMeshDrawerPass_8h_source"/>
-        <childnode refid="48" relation="include">
-        </childnode>
         <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="50">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/MeshDrawerPass.h</label>
+        <link refid="MeshDrawerPass_8h_source"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/OffScreenMeshDrawerPass.h</label>
+        <link refid="OffScreenMeshDrawerPass_8h_source"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Pass/VarianceShadowMapPass.h</label>
         <link refid="VarianceShadowMapPass_8h_source"/>
       </node>
-      <node id="38">
+      <node id="42">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Render/DebugRenderer.h</label>
         <link refid="DebugRenderer_8h_source"/>
-        <childnode refid="39" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="44">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTML/HTMLDrawableElement.h</label>
         <link refid="HTMLDrawableElement_8h_source"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="45">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Render/HTMLRenderer.h</label>
         <link refid="HTMLRenderer_8h_source"/>
-        <childnode refid="42" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -914,19 +938,21 @@
         <link refid="Types_2Shader_8h_source"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="47">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Skybox.h</label>
         <link refid="Skybox_8h_source"/>
       </node>
-      <node id="44">
+      <node id="48">
         <label>Engine/Core/libs/Graphics/inc/Graphics/Types/Texture.h</label>
         <link refid="Texture_8h_source"/>
-        <childnode refid="45" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
       </node>
       <node id="34">

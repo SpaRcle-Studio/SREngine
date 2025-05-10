@@ -79,9 +79,8 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  SR\_NODISCARD [**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* | [**GetStart**](#function-getstart) () const<br> |
 |  SR\_NODISCARD bool | [**IsLinked**](#function-islinked-12) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* pPin) const<br> |
 |  SR\_NODISCARD bool | [**IsLinked**](#function-islinked-22) () const<br> |
-|   | [**Link**](#function-link-13) () <br> |
-|   | [**Link**](#function-link-23) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* start, [**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* end) <br> |
-|   | [**Link**](#function-link-33) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* start, [**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* end, ImColor color) <br> |
+|   | [**Link**](#function-link-12) () <br> |
+|   | [**Link**](#function-link-22) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* start, [**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* end) <br> |
 |  void | [**SetEnd**](#function-setend) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* pPin) <br> |
 |  void | [**SetStart**](#function-setstart) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* pPin) <br> |
 |   | [**~Link**](#function-link) () override<br> |
@@ -257,7 +256,7 @@ inline SR_NODISCARD bool SR_GRAPH_NS::GUI::Link::IsLinked () const
 
 
 
-### function Link [1/3]
+### function Link [1/2]
 
 ```C++
 SR_GRAPH_NS::GUI::Link::Link () 
@@ -270,29 +269,12 @@ SR_GRAPH_NS::GUI::Link::Link ()
 
 
 
-### function Link [2/3]
+### function Link [2/2]
 
 ```C++
 SR_GRAPH_NS::GUI::Link::Link (
     Pin * start,
     Pin * end
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function Link [3/3]
-
-```C++
-SR_GRAPH_NS::GUI::Link::Link (
-    Pin * start,
-    Pin * end,
-    ImColor color
 ) 
 ```
 

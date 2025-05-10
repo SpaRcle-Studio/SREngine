@@ -77,7 +77,6 @@ Inherits the following classes: [SR\_UTILS\_NS::NonCopyable](classSR__UTILS__NS_
 |  void | [**EndHeader**](#function-endheader) () <br> |
 |  void | [**EndInput**](#function-endinput) () <br> |
 |  void | [**EndOutput**](#function-endoutput) () <br> |
-|  void | [**Header**](#function-header) (const ImVec4 & color=ImVec4(1, 1, 1, 1)) <br> |
 |  void | [**Input**](#function-input) ([**Pin**](classSR__GRAPH__NS_1_1GUI_1_1Pin.md) \* pPin) <br> |
 |  void | [**Middle**](#function-middle) () <br> |
 |   | [**NodeBuilder**](#function-nodebuilder) ([**SR\_GTYPES\_NS::Texture**](classSR__GTYPES__NS_1_1Texture.md) \* pTexture) <br> |
@@ -218,21 +217,6 @@ void SR_GRAPH_NS::GUI::NodeBuilder::EndInput ()
 
 ```C++
 void SR_GRAPH_NS::GUI::NodeBuilder::EndOutput () 
-```
-
-
-
-
-<hr>
-
-
-
-### function Header 
-
-```C++
-void SR_GRAPH_NS::GUI::NodeBuilder::Header (
-    const ImVec4 & color=ImVec4(1, 1, 1, 1)
-) 
 ```
 
 

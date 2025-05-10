@@ -10,8 +10,6 @@
         <link refid="Icons_8h_source"/>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h</label>
@@ -354,9 +352,6 @@
       <node id="47">
         <label>functional</label>
       </node>
-      <node id="83">
-        <label>imgui.h</label>
-      </node>
       <node id="28">
         <label>initializer_list</label>
       </node>
@@ -491,7 +486,7 @@
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref>();</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref>(<ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref>*<sp/>start,<sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref>*<sp/>end);</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">Link</ref>(<ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref>*<sp/>start,<sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref>*<sp/>end,<sp/>ImColor<sp/>color);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Link(Pin*<sp/>start,<sp/>Pin*<sp/>end,<sp/>ImColor<sp/>color);</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Link" kindref="compound">~Link</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
@@ -511,7 +506,7 @@
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref>*<sp/>m_startPin<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSR__GRAPH__NS_1_1GUI_1_1Pin" kindref="compound">Pin</ref>*<sp/>m_endPin<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ImColor<sp/>m_color;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ImColor<sp/>m_color;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="41"><highlight class="normal">}</highlight></codeline>

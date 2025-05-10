@@ -3,7 +3,6 @@
   <compounddef id="Icons_8h" kind="file" language="C++">
     <compoundname>Icons.h</compoundname>
     <includes refid="Graphics_2inc_2Graphics_2macros_8h" local="no">Graphics/macros.h</includes>
-    <includes local="no">imgui.h</includes>
     <includedby refid="Link_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/Link.h</includedby>
     <includedby refid="Graphics_2inc_2Graphics_2GUI_2Node_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/Node.h</includedby>
     <includedby refid="Pin_8h" local="no">Engine/Core/libs/Graphics/inc/Graphics/GUI/Pin.h</includedby>
@@ -12,8 +11,6 @@
         <label>Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h</label>
         <link refid="Icons_8h"/>
         <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -36,9 +33,6 @@
       </node>
       <node id="4">
         <label>cstdlib</label>
-      </node>
-      <node id="6">
-        <label>imgui.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -83,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="12" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="12" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="10" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="10" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a4157344dea4d6a9795317de31c91e3fb" prot="public" static="no">
         <name>SR_ICON_MAX</name>
@@ -94,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="13" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="11" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="11" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a309ca2d1635296f7c924a6e5cd69d7c6" prot="public" static="no">
         <name>SR_ICON_FOLDER</name>
@@ -105,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="15" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="13" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="13" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a379835a68cc64c89dc5f5d133c1c5789" prot="public" static="no">
         <name>SR_ICON_FOLDER_MINUS</name>
@@ -116,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="16" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="14" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1abae76a8800519217759639bbb9ba2696" prot="public" static="no">
         <name>SR_ICON_FOLDER_OPEN</name>
@@ -127,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="17" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="17" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="15" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a7e9fe8210c08ce3246f9d28446c68876" prot="public" static="no">
         <name>SR_ICON_FOLDER_PLUS</name>
@@ -138,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="18" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="16" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1af8d734f1a9de1d0861380183bdac6bd9" prot="public" static="no">
         <name>SR_ICON_FILE</name>
@@ -149,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="20" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="18" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a040bcc78f96645e249764bf1186a6b67" prot="public" static="no">
         <name>SR_ICON_FILE_ALT</name>
@@ -160,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="21" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="19" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a35109ae226948ef45d786baf5a53691f" prot="public" static="no">
         <name>SR_ICON_FILE_ARCHIVE</name>
@@ -171,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="22" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="20" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a4753a1ec6a3b27c009a10d66b710e54b" prot="public" static="no">
         <name>SR_ICON_FILE_AUDIO</name>
@@ -182,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="23" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="21" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a21ee9888c1a0ea30e90c0968d10b83fe" prot="public" static="no">
         <name>SR_ICON_FILE_CODE</name>
@@ -193,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="24" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="22" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a56c4fd735a12fc7d3e7a870ccf66ee1f" prot="public" static="no">
         <name>SR_ICON_FILE_CONTRACT</name>
@@ -204,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="25" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="23" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1abbd8b4fbac80d96f78460364e612bdf7" prot="public" static="no">
         <name>SR_ICON_FILE_CSV</name>
@@ -215,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="26" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="24" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a743300cb7d0f74add11f43076db6b66f" prot="public" static="no">
         <name>SR_ICON_FILE_DOWNLOAD</name>
@@ -226,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="27" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="25" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1aba87aa2298ef23db591330c58b55a80c" prot="public" static="no">
         <name>SR_ICON_FILE_EXCEL</name>
@@ -237,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="28" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="26" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a72e0874242146fb3ed8f4281256ce4fb" prot="public" static="no">
         <name>SR_ICON_FILE_EXPORT</name>
@@ -248,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="29" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="27" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a3db25838929bd766d257674bcdca5968" prot="public" static="no">
         <name>SR_ICON_FILE_IMAGE</name>
@@ -259,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="30" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="28" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a57d2c801453b585acab2ea543f968438" prot="public" static="no">
         <name>SR_ICON_FILE_IMPORT</name>
@@ -270,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="31" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="31" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="29" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1ac49fd45eed447004fc27cb2843344459" prot="public" static="no">
         <name>SR_ICON_FILE_INVOICE</name>
@@ -281,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="32" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="32" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="30" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1adb9889d2e95e5dcde89c8fbeb63699a1" prot="public" static="no">
         <name>SR_ICON_FILE_INVOICE_DOLLAR</name>
@@ -292,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="33" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="31" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1ae64e0a1fa75e5846b0fe492d9323b433" prot="public" static="no">
         <name>SR_ICON_FILE_MEDICAL</name>
@@ -303,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="34" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="34" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="32" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1aeb1c1d748fe6eafd095da47eb9322f6c" prot="public" static="no">
         <name>SR_ICON_FILE_MEDICAL_ALT</name>
@@ -314,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="35" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="35" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="33" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1ac3b4513702f5bbc7ea61fa0d041bf859" prot="public" static="no">
         <name>SR_ICON_FILE_PDF</name>
@@ -325,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="36" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="36" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="34" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a62be2586d6611a5e7cc937628b508903" prot="public" static="no">
         <name>SR_ICON_FILE_POWERPOINT</name>
@@ -336,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="37" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="37" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="35" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a993f8fd0391054b0bdbcefb5914cc7dd" prot="public" static="no">
         <name>SR_ICON_FILE_PRESCRIPTION</name>
@@ -347,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="38" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="38" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="36" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a62eeee7371fd47f92e2c2655109ecc01" prot="public" static="no">
         <name>SR_ICON_FILE_SIGNATURE</name>
@@ -358,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="39" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="39" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="37" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1ad123349880af483725526fb18fb1fa95" prot="public" static="no">
         <name>SR_ICON_FILE_UPLOAD</name>
@@ -369,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="40" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="40" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="38" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a52209368b25b89783516dd442a4f01a6" prot="public" static="no">
         <name>SR_ICON_FILE_VIDEO</name>
@@ -380,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="41" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="41" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="39" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1af71cbe248d7592b2bc8c67c6ebddb72e" prot="public" static="no">
         <name>SR_ICON_FILE_WORD</name>
@@ -391,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="42" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="42" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="40" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a43ec6de3057adc9684c8e1ee68a1a2db" prot="public" static="no">
         <name>SR_ICON_PLAY</name>
@@ -402,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="44" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="44" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="42" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a95b1253d09376e627e25d69852338927" prot="public" static="no">
         <name>SR_ICON_PLAY_CIRCLE</name>
@@ -413,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="45" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="45" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="43" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a279cc6e596e5a5ae4520e04892f40b33" prot="public" static="no">
         <name>SR_ICON_PAUSE</name>
@@ -424,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="46" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="46" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="44" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a064e4b1f33a001f7f95e75ff42409006" prot="public" static="no">
         <name>SR_ICON_PAUSE_CIRCLE</name>
@@ -435,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="47" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="47" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="45" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1abbfa63a74ae61d4eed89ae7474b10e2c" prot="public" static="no">
         <name>SR_ICON_STOP</name>
@@ -446,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="48" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="48" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="46" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a75e8ab8a2109e0a69713c19a86cb2d7d" prot="public" static="no">
         <name>SR_ICON_STOP_CIRCLE</name>
@@ -457,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="49" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="49" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="47" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a94282a60e5fc5dd6cc84ebe1e3602dfe" prot="public" static="no">
         <name>SR_ICON_STOPWATCH</name>
@@ -468,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="50" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="50" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="48" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1abf658b1922fd9a1a19fbd25138e10a18" prot="public" static="no">
         <name>SR_ICON_STOPWATCH_20</name>
@@ -479,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="51" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="51" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="49" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a561f907a9c9f7fd11b58e90abf9a7b0c" prot="public" static="no">
         <name>SR_ICON_BACKSPACE</name>
@@ -490,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="53" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="53" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="51" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Icons_8h_1a8d910dc012a424f02e13335fdff558f8" prot="public" static="no">
         <name>SR_ICON_UNDO</name>
@@ -501,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="54" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="54" bodyend="-1"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="52" column="9" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="52" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -516,7 +510,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="57" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="57" bodyend="95"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" line="55" column="26" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h" bodystart="55" bodyend="93"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -533,108 +527,103 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Graphics/macros.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;imgui.h&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_MIN<sp/>0xe005</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_MAX<sp/>0xf8ff</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER<sp/>&quot;\xef\x81\xbb&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f07b</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER_MINUS<sp/>&quot;\xef\x99\x9d&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f65d</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER_OPEN<sp/>&quot;\xef\x81\xbc&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f07c</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER_PLUS<sp/>&quot;\xef\x99\x9e&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f65e</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE<sp/>&quot;\xef\x85\x9b&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f15b</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_ALT<sp/>&quot;\xef\x85\x9c&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f15c</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_ARCHIVE<sp/>&quot;\xef\x87\x86&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f1c6</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_AUDIO<sp/>&quot;\xef\x87\x87&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c7</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_CODE<sp/>&quot;\xef\x87\x89&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c9</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_CONTRACT<sp/>&quot;\xef\x95\xac&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56c</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_CSV<sp/>&quot;\xef\x9b\x9d&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f6dd</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_DOWNLOAD<sp/>&quot;\xef\x95\xad&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56d</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_EXCEL<sp/>&quot;\xef\x87\x83&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c3</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_EXPORT<sp/>&quot;\xef\x95\xae&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56e</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_IMAGE<sp/>&quot;\xef\x87\x85&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c5</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_IMPORT<sp/>&quot;\xef\x95\xaf&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56f</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_INVOICE<sp/>&quot;\xef\x95\xb0&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f570</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_INVOICE_DOLLAR<sp/>&quot;\xef\x95\xb1&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f571</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_MEDICAL<sp/>&quot;\xef\x91\xb7&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f477</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_MEDICAL_ALT<sp/>&quot;\xef\x91\xb8&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f478</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_PDF<sp/>&quot;\xef\x87\x81&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f1c1</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_POWERPOINT<sp/>&quot;\xef\x87\x84&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c4</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_PRESCRIPTION<sp/>&quot;\xef\x95\xb2&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f572</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_SIGNATURE<sp/>&quot;\xef\x95\xb3&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f573</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_UPLOAD<sp/>&quot;\xef\x95\xb4&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f574</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_VIDEO<sp/>&quot;\xef\x87\x88&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c8</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_WORD<sp/>&quot;\xef\x87\x82&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c2</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PLAY<sp/>&quot;\xef\x81\x8b&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f04b</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PLAY_CIRCLE<sp/>&quot;\xef\x85\x84&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f144</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PAUSE<sp/>&quot;\xef\x81\x8c&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f04c</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PAUSE_CIRCLE<sp/>&quot;\xef\x8a\x8b&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f28b</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOP<sp/>&quot;\xef\x81\x8d&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f04d</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOP_CIRCLE<sp/>&quot;\xef\x8a\x8d&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f28d</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOPWATCH<sp/>&quot;\xef\x8b\xb2&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f2f2</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOPWATCH_20<sp/>&quot;\xee\x81\xaf&quot;<sp/></highlight><highlight class="comment">//<sp/>U+e06f</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_BACKSPACE<sp/>&quot;\xef\x95\x9a&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f55a</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_UNDO<sp/>&quot;\xef\x83\xa2&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>SR_ICONS[]<sp/>=<sp/>{</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER,</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER_MINUS,</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER_OPEN,</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER_PLUS,</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE,</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_ALT,</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_ARCHIVE,</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_AUDIO,</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_CODE,</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_CONTRACT,</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_CSV,</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_DOWNLOAD,</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_EXCEL,</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_EXPORT,</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_IMAGE,</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_IMPORT,</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_INVOICE,</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_INVOICE_DOLLAR,</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_MEDICAL,</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_MEDICAL_ALT,</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_PDF,</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_POWERPOINT,</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_PRESCRIPTION,</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_SIGNATURE,</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_UPLOAD,</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_VIDEO,</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_WORD,</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PLAY,</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PLAY_CIRCLE,</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PAUSE,</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PAUSE_CIRCLE,</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOP,</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOP_CIRCLE,</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOPWATCH,</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOPWATCH_20,</highlight></codeline>
-<codeline lineno="95"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS::GUI<sp/>{</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(IconType,</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Flow,</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Circle,</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Square,</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Grid,</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RoundSquare,</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Diamond</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawIcon(ImDrawList*<sp/>drawList,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ImVec2&amp;<sp/>a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ImVec2&amp;<sp/>b,<sp/>IconType<sp/>type,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>filled,<sp/>ImU32<sp/>color,<sp/>ImU32<sp/>innerColor);</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Icon(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ImVec2&amp;<sp/>size,<sp/>IconType<sp/>type,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>filled,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ImVec4&amp;<sp/>color<sp/>=<sp/>ImVec4(1,<sp/>1,<sp/>1,<sp/>1),<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ImVec4&amp;<sp/>innerColor<sp/>=<sp/>ImVec4(0,<sp/>0,<sp/>0,<sp/>0));</highlight></codeline>
-<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ICONS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_MIN<sp/>0xe005</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_MAX<sp/>0xf8ff</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER<sp/>&quot;\xef\x81\xbb&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f07b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER_MINUS<sp/>&quot;\xef\x99\x9d&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f65d</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER_OPEN<sp/>&quot;\xef\x81\xbc&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f07c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FOLDER_PLUS<sp/>&quot;\xef\x99\x9e&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f65e</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE<sp/>&quot;\xef\x85\x9b&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f15b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_ALT<sp/>&quot;\xef\x85\x9c&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f15c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_ARCHIVE<sp/>&quot;\xef\x87\x86&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f1c6</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_AUDIO<sp/>&quot;\xef\x87\x87&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_CODE<sp/>&quot;\xef\x87\x89&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c9</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_CONTRACT<sp/>&quot;\xef\x95\xac&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_CSV<sp/>&quot;\xef\x9b\x9d&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f6dd</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_DOWNLOAD<sp/>&quot;\xef\x95\xad&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56d</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_EXCEL<sp/>&quot;\xef\x87\x83&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_EXPORT<sp/>&quot;\xef\x95\xae&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56e</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_IMAGE<sp/>&quot;\xef\x87\x85&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_IMPORT<sp/>&quot;\xef\x95\xaf&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f56f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_INVOICE<sp/>&quot;\xef\x95\xb0&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f570</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_INVOICE_DOLLAR<sp/>&quot;\xef\x95\xb1&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f571</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_MEDICAL<sp/>&quot;\xef\x91\xb7&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f477</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_MEDICAL_ALT<sp/>&quot;\xef\x91\xb8&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f478</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_PDF<sp/>&quot;\xef\x87\x81&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f1c1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_POWERPOINT<sp/>&quot;\xef\x87\x84&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_PRESCRIPTION<sp/>&quot;\xef\x95\xb2&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f572</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_SIGNATURE<sp/>&quot;\xef\x95\xb3&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f573</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_UPLOAD<sp/>&quot;\xef\x95\xb4&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f574</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_VIDEO<sp/>&quot;\xef\x87\x88&quot;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_FILE_WORD<sp/>&quot;\xef\x87\x82&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f1c2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PLAY<sp/>&quot;\xef\x81\x8b&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f04b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PLAY_CIRCLE<sp/>&quot;\xef\x85\x84&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f144</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PAUSE<sp/>&quot;\xef\x81\x8c&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f04c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_PAUSE_CIRCLE<sp/>&quot;\xef\x8a\x8b&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f28b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOP<sp/>&quot;\xef\x81\x8d&quot;<sp/></highlight><highlight class="comment">//<sp/>U+f04d</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOP_CIRCLE<sp/>&quot;\xef\x8a\x8d&quot;<sp/><sp/></highlight><highlight class="comment">//<sp/>U+f28d</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOPWATCH<sp/>&quot;\xef\x8b\xb2&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f2f2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_STOPWATCH_20<sp/>&quot;\xee\x81\xaf&quot;<sp/></highlight><highlight class="comment">//<sp/>U+e06f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_BACKSPACE<sp/>&quot;\xef\x95\x9a&quot;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>U+f55a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SR_ICON_UNDO<sp/>&quot;\xef\x83\xa2&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>SR_ICONS[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER_MINUS,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER_OPEN,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FOLDER_PLUS,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_ALT,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_ARCHIVE,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_AUDIO,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_CODE,</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_CONTRACT,</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_CSV,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_DOWNLOAD,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_EXCEL,</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_EXPORT,</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_IMAGE,</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_IMPORT,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_INVOICE,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_INVOICE_DOLLAR,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_MEDICAL,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_MEDICAL_ALT,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_PDF,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_POWERPOINT,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_PRESCRIPTION,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_SIGNATURE,</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_UPLOAD,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_VIDEO,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_FILE_WORD,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PLAY,</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PLAY_CIRCLE,</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PAUSE,</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_PAUSE_CIRCLE,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOP,</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOP_CIRCLE,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOPWATCH,</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ICON_STOPWATCH_20,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">SR_GRAPH_NS::GUI<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>SR_ENUM_NS_CLASS(IconType,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Flow,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Circle,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Square,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Grid,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RoundSquare,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Diamond</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SR_ENGINE_ICONS_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="Engine/Core/libs/Graphics/inc/Graphics/GUI/Icons.h"/>
   </compounddef>

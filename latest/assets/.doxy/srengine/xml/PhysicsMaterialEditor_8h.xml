@@ -14,13 +14,11 @@
         </childnode>
       </node>
       <node id="138">
-        <label>Graphics/GUI/ImGUI.h</label>
-        <link refid="ImGUI_8h_source"/>
-        <childnode refid="128" relation="include">
+        <label>Graphics/GUI/ImmediateGUI.h</label>
+        <link refid="ImmediateGUI_8h_source"/>
+        <childnode refid="139" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="142" relation="include">
         </childnode>
       </node>
       <node id="127">
@@ -43,6 +41,20 @@
         <childnode refid="134" relation="include">
         </childnode>
         <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>Graphics/Pipeline/PipelineType.h</label>
+        <link refid="PipelineType_8h_source"/>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
       <node id="128">
@@ -367,10 +379,32 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
+      <node id="140">
+        <label>Utils/Math/Matrix4x4.h</label>
+        <link refid="Matrix4x4_8h_source"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="141" relation="include">
+        </childnode>
+      </node>
       <node id="96">
         <label>Utils/Math/Quaternion.h</label>
         <link refid="Quaternion_8h_source"/>
         <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="142">
+        <label>Utils/Math/Rect.h</label>
+        <link refid="Rect_8h_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
         </childnode>
       </node>
       <node id="110">
@@ -812,6 +846,9 @@
       <node id="91">
         <label>Codegen/EnumsFwd.generated.hpp</label>
       </node>
+      <node id="143">
+        <label>Enum/WindowFlags.hpp</label>
+      </node>
       <node id="51">
         <label>algorithm</label>
       </node>
@@ -898,6 +935,9 @@
       </node>
       <node id="72">
         <label>glm/gtc/type_ptr.hpp</label>
+      </node>
+      <node id="141">
+        <label>glm/gtx/matrix_decompose.hpp</label>
       </node>
       <node id="73">
         <label>glm/gtx/string_cast.hpp</label>
