@@ -11,6 +11,7 @@
 
 
 * `#include <Graphics/Window/BasicWindowImpl.h>`
+* `#include <GLFW/glfw3.h>`
 
 
 

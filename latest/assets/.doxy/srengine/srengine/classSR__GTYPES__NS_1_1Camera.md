@@ -93,8 +93,8 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD float\_t | [**CalculateScreenFactor**](#function-calculatescreenfactor-22) (const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & modelMatrix, const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & viewMatrix, float\_t sizeClipSpace, bool orthogonal) const<br> |
 |   | [**Camera**](#function-camera) () <br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetAspect**](#function-getaspect) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE SR\_MATH\_NS::FVector3 | [**GetCameraDir**](#function-getcameradir) () const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE SR\_MATH\_NS::FVector3 | [**GetCameraEye**](#function-getcameraeye) () const<br> |
+|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCameraDir**](#function-getcameradir) () const<br> |
+|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetCameraEye**](#function-getcameraeye) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFOV**](#function-getfov) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE float\_t | [**GetFar**](#function-getfar) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE glm::vec3 | [**GetGLPosition**](#function-getglposition) () const<br> |
@@ -116,7 +116,7 @@ See [SR\_UTILS\_NS::Component](classSR__UTILS__NS_1_1Component.md)
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetView**](#function-getview) () noexcept const<br> |
 |  SR\_NODISCARD const SR\_MATH\_NS::FVector3 & | [**GetViewDirection**](#function-getviewdirection-12) () const<br> |
 |  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewDirection**](#function-getviewdirection-22) (const SR\_MATH\_NS::FVector3 & pos) noexcept const<br> |
-|  SR\_NODISCARD SR\_FORCE\_INLINE SR\_MATH\_NS::FVector3 | [**GetViewPosition**](#function-getviewposition) () const<br> |
+|  SR\_NODISCARD SR\_MATH\_NS::FVector3 | [**GetViewPosition**](#function-getviewposition) () const<br> |
 |  SR\_NODISCARD SR\_FORCE\_INLINE const [**SR\_MATH\_NS::Matrix4x4**](classSR__MATH__NS_1_1Matrix4x4.md) & | [**GetViewTranslate**](#function-getviewtranslate) () noexcept const<br> |
 | virtual SR\_NODISCARD bool | [**IsEditorCamera**](#function-iseditorcamera) () noexcept const<br> |
 | virtual void | [**OnAttached**](#function-onattached) () override<br>_Вызывается после добавления компонента к игровому объекту_  |
@@ -365,7 +365,7 @@ inline SR_NODISCARD SR_FORCE_INLINE float_t SR_GTYPES_NS::Camera::GetAspect () c
 ### function GetCameraDir 
 
 ```C++
-SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraDir () const
+SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraDir () const
 ```
 
 
@@ -378,7 +378,7 @@ SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCamer
 ### function GetCameraEye 
 
 ```C++
-SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraEye () const
+SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraEye () const
 ```
 
 
@@ -673,7 +673,7 @@ SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewDirection (
 ### function GetViewPosition 
 
 ```C++
-SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewPosition () const
+SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewPosition () const
 ```
 
 

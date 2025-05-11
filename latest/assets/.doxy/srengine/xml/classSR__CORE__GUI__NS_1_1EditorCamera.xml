@@ -185,8 +185,8 @@
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetAspect</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetBarycenter</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraDir</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraEye</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aaeac6e6c7b9560a49cf7b6ed22234c5a" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraDir</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1af47099ba966e1e925987e7084d78379b" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetCameraEye</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetFar</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetFOV</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetGameObject</name></member>
@@ -215,7 +215,7 @@
       <member refid="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetView</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewDirection</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewDirection</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a9beac6ee9a3a369748d20c573c2c03b8" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewPosition</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>GetViewTranslate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_CORE_GUI_NS::EditorCamera</scope><name>HasScene</name></member>

@@ -1180,9 +1180,9 @@
     <member refid="classSR__GTYPES__NS_1_1Camera_1a887736d7f50d77c5f8b133614f300448" kind="function"><name>GetProjectionNoFOV</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a418836a2a691249d942b88437b58d33c" kind="function"><name>GetRotation</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1ae677337d7264a0b069d02bf136d89570" kind="function"><name>GetSize</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" kind="function"><name>GetViewPosition</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" kind="function"><name>GetCameraEye</name></member>
-    <member refid="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" kind="function"><name>GetCameraDir</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1a9beac6ee9a3a369748d20c573c2c03b8" kind="function"><name>GetViewPosition</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1af47099ba966e1e925987e7084d78379b" kind="function"><name>GetCameraEye</name></member>
+    <member refid="classSR__GTYPES__NS_1_1Camera_1aaeac6e6c7b9560a49cf7b6ed22234c5a" kind="function"><name>GetCameraDir</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1ad7904a1e9902362f3c720999538c276d" kind="function"><name>GetPosition</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a6e080a7fd94c6139d5ae4cee2df26d12" kind="function"><name>GetGLPosition</name></member>
     <member refid="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" kind="function"><name>GetFar</name></member>

@@ -16,6 +16,7 @@
 #define SR_ENGINE_GLFW_WINDOW_H
 
 #include <Graphics/Window/BasicWindowImpl.h>
+#include <GLFW/glfw3.h>
 
 namespace SR_GRAPH_NS {
     class GLFWWindow : public BasicWindowImpl {

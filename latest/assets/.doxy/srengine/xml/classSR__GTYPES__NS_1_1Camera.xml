@@ -528,9 +528,9 @@
         </inbodydescription>
         <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="55" column="59" bodyfile="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" bodystart="55" bodyend="55"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewPosition</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a9beac6ee9a3a369748d20c573c2c03b8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetViewPosition</definition>
         <argsstring>() const</argsstring>
         <name>GetViewPosition</name>
         <qualifiedname>SR_GTYPES_NS::Camera::GetViewPosition</qualifiedname>
@@ -540,11 +540,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="56" column="59"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="56" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraEye</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1af47099ba966e1e925987e7084d78379b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraEye</definition>
         <argsstring>() const</argsstring>
         <name>GetCameraEye</name>
         <qualifiedname>SR_GTYPES_NS::Camera::GetCameraEye</qualifiedname>
@@ -554,11 +554,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="57" column="59"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="57" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3</type>
-        <definition>SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraDir</definition>
+      <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1aaeac6e6c7b9560a49cf7b6ed22234c5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SR_NODISCARD SR_MATH_NS::FVector3</type>
+        <definition>SR_NODISCARD SR_MATH_NS::FVector3 SR_GTYPES_NS::Camera::GetCameraDir</definition>
         <argsstring>() const</argsstring>
         <name>GetCameraDir</name>
         <qualifiedname>SR_GTYPES_NS::Camera::GetCameraDir</qualifiedname>
@@ -568,7 +568,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="58" column="59"/>
+        <location file="Engine/Core/libs/Graphics/inc/Graphics/Types/Camera.h" line="58" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classSR__GTYPES__NS_1_1Camera_1ad7904a1e9902362f3c720999538c276d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3 &amp;</type>
@@ -1192,8 +1192,8 @@
       <member refid="classSR__UTILS__NS_1_1Component_1aebb43fee7f75dd142ad299853208ee1e" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GameObjectPtr</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a59e725361492b0c90c1103d41a6c7f85" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetAspect</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1ad0630357a7ef40b1c526565323c1cea0" prot="public" virt="virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetBarycenter</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Camera_1ac1b7d088d8848bacf850f24b5f2096c4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetCameraDir</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Camera_1a61749a636479354b4000add652778e1c" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetCameraEye</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1aaeac6e6c7b9560a49cf7b6ed22234c5a" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetCameraDir</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1af47099ba966e1e925987e7084d78379b" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetCameraEye</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a491365285fecd62019ca1c5aaa9c8910" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetFar</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a21584738fd44c76be964931a576a61ac" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetFOV</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a9d72186be6f9c2f138a8ad989b440c01" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetGameObject</name></member>
@@ -1222,7 +1222,7 @@
       <member refid="classSR__GTYPES__NS_1_1Camera_1ac043be8e33d3e1bf2c08b06466f187dd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetView</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1a217a05198270499cef2c71e0d53007bd" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewDirection</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ad1c14a9ef337688e881bcb172c82d4d4" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewDirection</name></member>
-      <member refid="classSR__GTYPES__NS_1_1Camera_1a7bf42612c9c4113411032a1d0f2578d8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewPosition</name></member>
+      <member refid="classSR__GTYPES__NS_1_1Camera_1a9beac6ee9a3a369748d20c573c2c03b8" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewPosition</name></member>
       <member refid="classSR__GTYPES__NS_1_1Camera_1ad5c03a0932eaa69b6693771c1d0076cb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>GetViewTranslate</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a0255fd473a25f237c833df1d507bdbfb" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>HasParent</name></member>
       <member refid="classSR__UTILS__NS_1_1Component_1a5dc93a6f5bb2867f7a20476c569451ed" prot="public" virt="non-virtual"><scope>SR_GTYPES_NS::Camera</scope><name>HasScene</name></member>
