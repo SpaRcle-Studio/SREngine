@@ -12,7 +12,7 @@
 
 #include <android/sensor.h>
 
-#include <Core/Application.h>
+#include <Engine/Application.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/AndroidNativeAppGlue.h>
 #include <Utils/Debug.h>
@@ -23,8 +23,8 @@
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/World/Scene.h>
 
-#include <Core/Engine.h>
-#include <Core/World/World.h>
+#include <Engine/Engine.h>
+#include <Engine/World/World.h>
 
 #include <android/log.h>
 
