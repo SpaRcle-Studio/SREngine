@@ -327,25 +327,33 @@ namespace SR_SCRIPTING_NS {
             return true;
         }
 
-        static std::vector<std::pair<std::string, std::string>> libs = {
-            //{"Engine/Core", "Core"},
-            //{"Engine/Core/libs/Graphics", "Graphics"},
-            {"Engine/Core/libs/Utils", "Utils"},
-            {"Engine/Core/libs/Scripting", "Scripting"},
-            {"Engine/Core/libs/Audio", "Audio"},
-            //{"Engine/Core/libs/Utils/libs/fmt", "fmt"},
-            {"Engine/Core/libs/Physics", "Physics"}
+        const static std::vector<std::string> libs = {
+        #ifndef SR_COMMON_STATIC_LIBRARY
+            "Utils",
+        #endif
+        #ifndef SR_GRAPHICS_STATIC_LIBRARY
+            "Graphics",
+        #endif
+        #ifndef SR_SCRIPTING_STATIC_LIBRARY
+            "Scripting",
+        #endif
+        #ifndef SR_AUDIO_STATIC_LIBRARY
+            "Audio",
+        #endif
+        #ifndef SR_PHYSICS_STATIC_LIBRARY
+            "Physics",
+        #endif
         };
 
-        auto&& buildDir = m_pScriptSystem->GetBuildFolderPath();
+        auto&& buildDir = m_pScriptSystem->GetBuildFolderPath().Concat("Lib");
 
-        for (auto&& [libPath, libName] : libs) {
+        for (auto&& libName : libs) {
         #ifdef SR_WIN32
-            auto&& pathDebug = buildDir.Concat(libPath).Concat("{}d.lib"_format(libName));
-            auto&& pathRelease = buildDir.Concat(libPath).Concat("{}.lib"_format(libName));
+            auto&& pathDebug = buildDir.Concat("{}d.lib"_format(libName));
+            auto&& pathRelease = buildDir.Concat("{}.lib"_format(libName));
         #else
-            auto&& pathDebug = buildDir.Concat(libPath).Concat("lib{}d.a"_format(libName));
-            auto&& pathRelease = buildDir.Concat(libPath).Concat("lib{}.a"_format(libName));
+            auto&& pathDebug = buildDir.Concat("lib{}d.a"_format(libName));
+            auto&& pathRelease = buildDir.Concat("lib{}.a"_format(libName));
         #endif
 
             if (SR_PLATFORM_NS::IsExists(pathRelease)) {

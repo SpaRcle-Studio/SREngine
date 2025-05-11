@@ -158,6 +158,7 @@ else()
     target_link_libraries(Physics PUBLIC Utils)
 
     SR_COPY_SHARED_MODULE_TO_EXECUTABLE_FOLDER(Physics)
+    SR_COPY_STATIC_LIBRARY_TO_LIBRARY_FOLDER(Physics)
 endif()
 
 if (SR_PHYSICS_DLL_EXPORTS)

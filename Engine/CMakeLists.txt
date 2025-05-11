@@ -1,15 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(SpaRcleEngine)
 
-if (ANDROID_NDK)
-    set(SR_EXECUTABLE_NAME "sparcle")
-else()
-    set(SR_EXECUTABLE_DIR "${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Bin")
-    set(SR_EXECUTABLE_NAME "SREngine")
-endif()
-
-set(SR_EXECUTABLE_OUTPUT_FOLDER ${CMAKE_CURRENT_BINARY_DIR}/bin)
-
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TargetArchitecture.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/InstallPython.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Codegen.cmake)
@@ -30,16 +21,6 @@ message(STATUS "SpaRcle Engine: C compiler is '${CMAKE_C_COMPILER}'")
 message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
 
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
-
-option(SR_ENGINE_USE_MONO_PREBUILD "" ON)
-option(SR_ENGINE_MONO_SUPPORT "" OFF)
-
-if (WIN32 OR (UNIX AND NOT ANDROID_NDK))
-    option(SR_ENGINE_MONO_SUPPORT "" OFF)
-    add_compile_definitions(SR_ENGINE_MONO_SUPPORT)
-else()
-    #option(SR_ENGINE_MONO_SUPPORT "" OFF)
-endif()
 
 if (SR_ENGINE_FLATPAK_BUILD)
     add_compile_definitions(SR_ENGINE_FLATPAK_BUILD)
@@ -128,7 +109,6 @@ endif()
 #    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 #)
 
-#target_link_libraries(${SR_EXECUTABLE_NAME} Scripts)
 target_link_libraries(${SR_EXECUTABLE_NAME} Core)
 
 target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/SpaRcleAPI)
