@@ -1,0 +1,41 @@
+//
+// Created by Monika on 27.01.2024.
+//
+
+#include <Utils/macros.h>
+
+#include "../src/Engine/GUI/SoundDebug.cpp"
+#include "../src/Engine/GUI/ComponentDrawer.cpp"
+#include "../src/Engine/GUI/EditorGUI.cpp"
+#include "../src/Engine/GUI/Inspector.cpp"
+#include "../src/Engine/GUI/WorldEdit.cpp"
+#include "../src/Engine/GUI/Hierarchy.cpp"
+#include "../src/Engine/GUI/VisualScriptEditor.cpp"
+#include "../src/Engine/GUI/EngineSettings.cpp"
+#include "../src/Engine/GUI/EngineStatistics.cpp"
+#include "../src/Engine/GUI/SceneViewer.cpp"
+#include "../src/Engine/GUI/FileBrowser.cpp"
+#include "../src/Engine/GUI/SceneRunner.cpp"
+#include "../src/Engine/GUI/Guizmo.cpp"
+#include "../src/Engine/GUI/AnimatorEditor.cpp"
+#include "../src/Engine/GUI/DragNDropHelper.cpp"
+#include "../src/Engine/GUI/PhysicsMaterialEditor.cpp"
+#include "../src/Engine/GUI/MaterialEditor.cpp"
+#include "../src/Engine/GUI/About.cpp"
+#include "../src/Engine/GUI/RenderTechniqueEditor.cpp"
+#include "../src/Engine/GUI/PropertyDrawer.cpp"
+#include "../src/Engine/GUI/EditorCamera.cpp"
+#include "../src/Engine/GUI/EditorGizmo.cpp"
+#include "../src/Engine/GUI/SceneTools.cpp"
+
+#include "../src/Engine/GUI/PropertyDrawers/EnumPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/VectorPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/BitMapPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/ObjectPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/PointerPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/StringPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/PathPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/MaterialDataPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/MaterialPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/BehaviourPropertyDrawer.cpp"
+#include "../src/Engine/GUI/PropertyDrawers/BehaviourNamePropertyDrawer.cpp"

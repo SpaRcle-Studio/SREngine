@@ -1,33 +1,21 @@
-[submodule "Engine/Core/Dependences/Framework/Depends/imgui"]
-	path = Engine/Core/libs/Graphics/libs/imgui
-	url = https://github.com/Monika0000/imgui
-[submodule "Engine/Core/libs/Audio/libs/OpenAL"]
-	path = Engine/Core/libs/Audio/libs/OpenAL
-	url = https://github.com/SpaRcle-Studio/openal-soft
-[submodule "Engine/Core/libs/Audio/libs/minimp3"]
-	path = Engine/Core/libs/Audio/libs/minimp3
-	url = https://github.com/lieff/minimp3
-[submodule "Engine/Core/libs/Physics/libs/bullet3"]
-	path = Engine/Core/libs/Physics/libs/bullet3
-	url = https://github.com/bulletphysics/bullet3
-[submodule "Engine/Core/libs/Utils/libs/icu"]
-	path = Engine/Core/libs/Utils/libs/icu
-	url = https://github.com/Monika0000/icu-cmake
-[submodule "Engine/Core/libs/Physics/libs/PhysX"]
-	path = Engine/Core/libs/Physics/libs/PhysX
-	url = https://github.com/Monika0000/PhysX
-[submodule "Engine/Core/libs/Physics/libs/box2d"]
-	path = Engine/Core/libs/Physics/libs/box2d
-	url = https://github.com/Monika0000/box2d
-[submodule "Engine/Core/libs/Utils/libs/libpng"]
-	path = Engine/Core/libs/Utils/libs/libpng
-	url = https://github.com/libpng/libpng
-[submodule "Engine/Core/libs/Utils"]
-	path = Engine/Core/libs/Utils
-	url = https://github.com/SpaRcle-Studio/SRCommon.git
-[submodule "Engine/Core/libs/Graphics"]
-	path = Engine/Core/libs/Graphics
+[submodule "Engine/libs/Graphics"]
+	path = Engine/libs/Graphics
 	url = https://github.com/SpaRcle-Studio/SRRender
-[submodule "Engine/Core/libs/Audio/libs/libmodplug"]
-	path = Engine/Core/libs/Audio/libs/libmodplug
-	url = https://github.com/SpaRcle-Studio/libmodplug.git
+[submodule "Engine/libs/Utils"]
+	path = Engine/libs/Utils
+	url = https://github.com/SpaRcle-Studio/SRCommon
+[submodule "Engine/libs/Physics/libs/PhysX"]
+	path = Engine/libs/Physics/libs/PhysX
+	url = https://github.com/SpaRcle-Studio/PhysX
+[submodule "Engine/libs/Physics/libs/box2d"]
+	path = Engine/libs/Physics/libs/box2d
+	url = https://github.com/SpaRcle-Studio/box2d
+[submodule "Engine/libs/Audio/libs/OpenAL"]
+	path = Engine/libs/Audio/libs/OpenAL
+	url = https://github.com/SpaRcle-Studio/openal-soft
+[submodule "Engine/libs/Audio/libs/libmodplug"]
+	path = Engine/libs/Audio/libs/libmodplug
+	url = https://github.com/SpaRcle-Studio/libmodplug
+[submodule "Engine/libs/Audio/libs/minimp3"]
+	path = Engine/libs/Audio/libs/minimp3
+	url = https://github.com/SpaRcle-Studio/minimp3

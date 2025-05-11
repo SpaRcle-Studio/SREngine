@@ -103,12 +103,12 @@ def get_engine_include_args(context: codegen_context.CodegenContext):
         engine_root = context.analyze_dir + '/Engine'
 
     includes = [
-        f'{engine_root}/Core/inc',
-        f'{engine_root}/Core/libs/Utils/inc',
-        f'{engine_root}/Core/libs/Scripting/inc',
-        f'{engine_root}/Core/libs/Audio/inc',
-        f'{engine_root}/Core/libs/Physics/inc',
-        f'{engine_root}/Core/libs/Graphics/inc',
+        f'{engine_root}/inc',
+        f'{engine_root}/libs/Utils/inc',
+        f'{engine_root}/libs/Scripting/inc',
+        f'{engine_root}/libs/Audio/inc',
+        f'{engine_root}/libs/Physics/inc',
+        f'{engine_root}/libs/Graphics/inc',
     ]
 
     include_args = [f'-I{ sparcle_utils.normalize_path(os.path.abspath(inc))}' for inc in includes]

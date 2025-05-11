@@ -85,8 +85,8 @@ plugins:
           doxy-cfg:
             FILE_PATTERNS: "*.h"
             RECURSIVE: True
-            EXCLUDE_PATTERNS: "**/Core/libs/*/libs/**"
-            #EXCLUDE_PATTERNS: "**/Core/libs/**"
+            EXCLUDE_PATTERNS: "**/libs/*/libs/**"
+            #EXCLUDE_PATTERNS: "**/libs/**"
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
