@@ -5,15 +5,15 @@
 // Approved and improved by innerviewer on 2023-03-09.
 //
 
-#include <Core/Launcher.h>
-#include <Core/Tests/TestManager.h>
-#include <Core/CLIManager.h>
+#include <Engine/Launcher.h>
+#include <Engine/Tests/TestManager.h>
+#include <Engine/CLIManager.h>
 
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
 
-#include <Core/Tests/AtlasBuilderTest.h>
-#include <Core/Tests/HTMLTest.h>
+#include <Engine/Tests/AtlasBuilderTest.h>
+#include <Engine/Tests/HTMLTest.h>
 
 #include <Codegen/SpaRcleModuleApplicationCore.generated.hpp>
 

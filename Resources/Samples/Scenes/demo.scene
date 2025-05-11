@@ -730,16 +730,6 @@ sra format
 									9-s:Behaviour
 								8-o:ptr
 									9-v:entityId
-										10-i:2306302067828062668
-									9-v:behaviourName
-										10-s:TestBehaviour
-									9-o:data
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:Behaviour
-								8-o:ptr
-									9-v:entityId
 										10-i:3943996598505795885
 									9-v:behaviourName
 										10-s:TestBehaviour

@@ -1,1 +1,1 @@
-MONO_DLL RCDATA "C:/Work/SREngine/cmake-build-debug/Engine/Core/libs/Scripting/Mono/bin/mono-2.0-sgen.dll"
+MONO_DLL RCDATA "C:/Work/SREngine/cmake-build-debug/Engine/libs/Scripting/Mono/bin/mono-2.0-sgen.dll"

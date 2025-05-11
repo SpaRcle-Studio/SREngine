@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(SpaRcleEngine)
 
+set(CMAKE_CXX_STANDARD 20)
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TargetArchitecture.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/InstallPython.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Codegen.cmake)
@@ -26,18 +28,14 @@ if (SR_ENGINE_FLATPAK_BUILD)
     add_compile_definitions(SR_ENGINE_FLATPAK_BUILD)
 endif()
 
-if (ANDROID_NDK)
-    add_compile_options(-femulated-tls)
-    add_link_options(-femulated-tls)
-endif()
-
 if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     set(SR_ENGINE_EXTENDED_NAME ON)
 endif()
 
-# TODO!
-#add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
-#add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)
+if (ANDROID_NDK)
+    add_compile_options(-femulated-tls)
+    add_link_options(-femulated-tls)
+endif()
 
 set(SR_UTILS_ASSIMP ON CACHE INTERNAL "" FORCE)
 set(SR_UTILS_DLL_EXPORTS ON CACHE INTERNAL "" FORCE)
@@ -50,7 +48,7 @@ if (SR_TRACY_ENABLE)
     )
 endif()
 
-add_subdirectory(Core)
+include(cmake/EngineCore.cmake)
 
 define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS
     BRIEF_DOCS "Executable arguments"
@@ -77,16 +75,6 @@ if (ANDROID_NDK)
 else()
     set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "main.cpp")
 
-    if (WIN32)
-        #add_custom_command(
-        #    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/resource.res
-        #    COMMAND windres ${CMAKE_CURRENT_SOURCE_DIR}/resource.rc -O coff -o ${CMAKE_CURRENT_BINARY_DIR}/resource.res
-        #    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/resource.rc
-        #)
-        #set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${CMAKE_CURRENT_BINARY_DIR}/resource.res")
-        #set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/resource.rc")
-    endif()
-
     if (NOT CMAKE_GENERATOR MATCHES "Visual Studio")
         set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
     endif()
@@ -95,21 +83,9 @@ else()
     message(STATUS "SpaRcle Engine: adding executable arguments: ${SR_EXECUTABLE_ARGS_CONTENT}")
     add_executable(${SR_EXECUTABLE_NAME} ${SR_EXECUTABLE_ARGS_CONTENT})
     set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SR_EXECUTABLE_DIR})
-
-    #target_sources(${SR_EXECUTABLE_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/resource.rc")
 endif()
 
-#add_custom_command(TARGET ${SR_EXECUTABLE_NAME}
-#    POST_BUILD
-#    COMMAND ${CMAKE_COMMAND}
-#    -DTARGET_NAME=Engine
-#    -DTARGET_PATH=${CMAKE_BINARY_DIR}
-#    -P ${CMAKE_SOURCE_DIR}/Engine/cmake/PostBuild.cmake
-#    COMMENT "Running SpaRcle engine post-build script..."
-#    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-#)
-
-target_link_libraries(${SR_EXECUTABLE_NAME} Core)
+target_link_libraries(${SR_EXECUTABLE_NAME} Engine)
 
 target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/SpaRcleAPI)
 
